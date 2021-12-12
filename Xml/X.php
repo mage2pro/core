@@ -491,7 +491,7 @@ class X extends MX {
 	 * @return X
 	 */
 	private function importString($key, $value, $wrapInCData = []) {
-		$wrapInCDataAll = !is_array($wrapInCData) && !!$wrapInCData; /** @var bool $wrapInCDataAll */
+		$needWrapInCData = !is_array($wrapInCData) && !!$wrapInCData; /** @var bool $needWrapInCData */
 		$wrapInCData = df_eta($wrapInCData);
 		# `null` означает, что метод `importString` не должен создавать дочерний тэг `$key`,
 		# а должен добавить текст в качестве единственного содержимого текущего тэга.
@@ -514,7 +514,6 @@ class X extends MX {
 		$valueAsString = null; /** @var string $valueAsString */
 		try {$valueAsString = $valueIsString ? $value : df_string($value);}
 		catch (E $e) {df_error("Unable to convert the value of the key «{$keyAsString}» to a string.\n%s", df_ets($e));}
-		$needWrapInCData = $wrapInCDataAll; /** @var bool $needWrapInCData */
 		if ($valueIsString && $valueAsString) {
 			/**
 			 * 1) Поддержка синтаксиса
@@ -526,7 +525,7 @@ class X extends MX {
 			 * проверке на принадлежность ключа $keyAsString в массиве $wrapInCData,
 			 * потому что при соответствии синтаксису[[]] нам надо удалить из значения символы[[]].
 			 * Обратите внимание, что нам нужно выполнить проверку на синтаксис df_cdata ([[]])
-			 * даже при $wrapInCDataAll = true, потому что маркеры [[ и ]] из данных надо удалять.
+			 * даже при $needWrapInCData = true, потому что маркеры [[ и ]] из данных надо удалять.
 			 * 2) Перед вызовом медленной функции @uses preg_match()
 			 * выполняем более быструю и простую проверку @uses df_contains()
 			 */
@@ -534,7 +533,7 @@ class X extends MX {
 				$valueAsString = self::marker()->unmark($valueAsString);
 				$needWrapInCData = true;
 			}
-			$needWrapInCData = $needWrapInCData || in_array($keyAsString, $wrapInCData);
+			$needWrapInCData = $needWrapInCData || in_array($keyAsString, $wrapInCData) || df_needs_cdata($valueAsString);
 		}
 		/** @var X $r */
 		$r =

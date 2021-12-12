@@ -14,6 +14,7 @@ function df_assert_leaf(CX $e) {return df_check_leaf($e) ? $e : df_error(
 );}
 
 /**
+ * @see df_needs_cdata()
  * @used-by df_clean_xml()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param string $s
@@ -221,6 +222,19 @@ function df_leaf_sne(CX $e = null, $d = '') {/** @var string $r */
 		df_error('Лист дерева XML должен быть непуст, однако он пуст.');
 	}
 	return $r;
+}
+
+/**
+ * 2021-12-12 https://3v4l.org/3SDsT
+ * @see df_cdata()
+ * @used-by \Df\Xml\X::importString()
+ * @param string $s
+ * @return bool
+ */
+function df_needs_cdata($s) {
+	$s1 = htmlspecialchars_decode($s, ENT_XML1 | ENT_QUOTES);
+    $s2 = htmlspecialchars($s1, ENT_XML1 | ENT_NOQUOTES);
+	return $s !== $s2 && $s1 !== $s2;
 }
 
 /**
