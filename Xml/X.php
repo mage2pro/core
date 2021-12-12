@@ -516,7 +516,7 @@ class X extends MX {
 			$valueAsString = $valueIsString ? $value : df_string($value);
 		}
 		catch (E $e) {
-			df_error("Не могу сконвертировать значение ключа «%s» в строку.\n%s", $keyAsString, df_ets($e));
+			df_error("Unable to convert the value of the key «{$keyAsString}» to a string.\n%s", df_ets($e));
 		}
 		$needWrapInCData = $wrapInCDataAll; /** @var bool $needWrapInCData */
 		if ($valueIsString && $valueAsString) {
