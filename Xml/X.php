@@ -150,11 +150,17 @@ class X extends MX {
 	 * Однако этот алгоритм неверен: ведь в заголовке XML может присутствовать указание кодировки, например:
 	 * 		<?xml version='1.0' encoding='utf-8'?>
 	 * Новый алгоритм взят отсюда: http://stackoverflow.com/a/5947858
-	 * @return string|false
+	 * @used-by \Df\Xml\G::_p()
+	 * @return string
 	 */
 	function asXMLPart() {
 		$dom = dom_import_simplexml($this); /** @var \DOMElement $dom */
-		return $dom->ownerDocument->saveXML($dom->ownerDocument->documentElement);
+		/**
+		 * 2021-12-13
+		 * @uses \DOMDocument::saveXML() can return `false`:
+		 * https://www.php.net/manual/domdocument.savexml.php#refsect1-domdocument.savexml-returnvalues
+		 */
+		return df_assert_nef($dom->ownerDocument->saveXML($dom->ownerDocument->documentElement));
 	}
 
 	/**

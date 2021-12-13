@@ -149,7 +149,7 @@ function df_assert_in($v, array $a, $m = null) {
  * @used-by \Df\GoogleFont\Fonts\Png::colorAllocateAlpha()
  * @used-by \Df\GoogleFont\Fonts\Png::image()
  * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
- * @used-by \Df\Xml\G::_p()
+ * @used-by \Df\Xml\X::asXMLPart()
  * @param mixed $v
  * @param string|E $m [optional]
  * @return mixed

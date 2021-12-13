@@ -50,8 +50,7 @@ final class G extends \Df\Core\O {
 		$x = df_xml_parse("$header\n<{$this[self::$P__TAG]}/>"); /** @var X $x */
 		$x->addAttributes($this[self::P__ATTRIBUTES]);
 		$x->importArray($this[self::$P__CONTENTS]);
-		# Убеждаемся, что asXML вернуло строку, а не false.
-		$result = df_assert_nef($this[self::P__SKIP_HEADER] ? $x->asXMLPart() : df_cc_n($header, $x->asNiceXml()));
+		$result = $this[self::P__SKIP_HEADER] ? $x->asXMLPart() : df_cc_n($header, $x->asNiceXml());
 		# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML: http://stackoverflow.com/a/10095901
 		$result = str_replace("\x0B", "&#x0B;", $result);
 		if ($this[self::P__DECODE_ENTITIES]) {
