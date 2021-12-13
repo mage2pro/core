@@ -97,48 +97,49 @@ class X extends MX {
 		if (is_numeric($level)) {
 			$pad = str_pad('', $level * 1, "\t", STR_PAD_LEFT);
 			$nl = "\n";
-		} else {
+		} 
+		else {
 			$pad = '';
 			$nl = '';
 		}
-		$out = $pad . '<' . $this->getName();
+		$r = $pad . '<' . $this->getName(); /** @var string $r */
 		$attributes = $this->attributes();
 		if ($attributes) {
 			foreach ($attributes as $key => $value) {
-				$out .= ' ' . $key . '="' . str_replace('"', '\"', (string)$value) . '"';
+				$r .= ' ' . $key . '="' . str_replace('"', '\"', (string)$value) . '"';
 			}
 		}
 		$attributes = $this->attributes('xsi', true);
 		if ($attributes) {
 			foreach ($attributes as $key => $value) {
-				$out .= ' xsi:' . $key . '="' . str_replace('"', '\"', (string)$value) . '"';
+				$r .= ' xsi:' . $key . '="' . str_replace('"', '\"', (string)$value) . '"';
 			}
 		}
 		if ($this->hasChildren()) {
-			$out .= '>';
+			$r .= '>';
 			$value = trim((string)$this);
 			if (strlen($value)) {
-				$out .= $this->xmlentities($value);
+				$r .= $this->xmlentities($value);
 			}
-			$out .= $nl;
+			$r .= $nl;
 			foreach ($this->children() as $child) {/** @var X $child */
-				$out .= $child->asNiceXml('', is_numeric($level) ? $level + 1 : true);
+				$r .= $child->asNiceXml('', is_numeric($level) ? $level + 1 : true);
 			}
-			$out .= $pad . '</' . $this->getName() . '>' . $nl;
+			$r .= $pad . '</' . $this->getName() . '>' . $nl;
 		}
 		else {
 			$value = (string)$this;
 			if (strlen($value)) {
-				$out .= '>' . $this->xmlentities($value) . '</' . $this->getName() . '>' . $nl;
+				$r .= '>' . $this->xmlentities($value) . '</' . $this->getName() . '>' . $nl;
 			}
 			else {
-				$out .= '/>' . $nl;
+				$r .= '/>' . $nl;
 			}
 		}
 		if ((0 === $level || false === $level) && !empty($filename)) {
-			file_put_contents($filename, $out);
+			file_put_contents($filename, $r);
 		}
-		return $out;
+		return $r;
 	}
 
 	/**
