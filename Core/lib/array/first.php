@@ -16,7 +16,6 @@
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Catalog\Model\Product::afterGetPreconfiguredValues() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/83)
  * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Df\Payment\TM::response()
- * @used-by \Df\Xml\X::addAttribute()
  * @used-by \Dfe\Color\Image::dist()
  * @used-by \Inkifi\Consolidation\Processor::pid()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()

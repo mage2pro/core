@@ -11,6 +11,7 @@ class X extends MX {
 	/**
 	 * 2021-12-13
 	 * https://www.php.net/manual/en/simplexmlelement.addattribute.php
+	 * https://stackoverflow.com/a/9391673
 	 * https://stackoverflow.com/a/43566078
 	 * @override
 	 * @see \SimpleXMLElement::addAttribute()
@@ -20,9 +21,7 @@ class X extends MX {
 	 * @param string|null $v [optional]
 	 * @param string|null $ns [optional]
 	 */
-	function addAttribute($k, $v = null, $ns = null) {parent::addAttribute(
-		$k, $v, $ns ?: (!df_contains($k, ':') ? null : df_first(explode(':', $k)))
-	);}
+	function addAttribute($k, $v = null, $ns = null) {parent::addAttribute(!df_contains($k, ':') ? $k : "xmlns:$k", $v, $ns);}
 
 	/**
 	 * @used-by df_xml_node()
