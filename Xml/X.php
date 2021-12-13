@@ -150,7 +150,7 @@ class X extends MX {
 	 * Однако этот алгоритм неверен: ведь в заголовке XML может присутствовать указание кодировки, например:
 	 * 		<?xml version='1.0' encoding='utf-8'?>
 	 * Новый алгоритм взят отсюда: http://stackoverflow.com/a/5947858
-	 * @return string
+	 * @return string|false
 	 */
 	function asXMLPart() {
 		$dom = dom_import_simplexml($this); /** @var \DOMElement $dom */
