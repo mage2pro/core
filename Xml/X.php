@@ -9,6 +9,9 @@ class X extends MX {
 	function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}
 
 	/**
+	 * @used-by df_xml_node()
+	 * @used-by importArray()
+	 * @used-by \Df\Xml\G::_p()
 	 * @param array(string => string) $attributes
 	 * @return $this
 	 */
@@ -274,8 +277,7 @@ class X extends MX {
 				if (!is_null($attributes)) {
 					$childNode->addAttributes(df_assert_array($attributes));
 					# Если $value содержит атрибуты,
-					# то дочерние значения должны содержаться
-					# не непосредственно в $value, а в подмассиве с ключём self::CONTENT
+					# то дочерние значения должны содержаться не непосредственно в $value, а в подмассиве с ключём self::CONTENT.
 					$childData = dfa($value, self::CONTENT);
 				}
 				if (!is_null($childData)) {
