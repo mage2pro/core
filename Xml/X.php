@@ -9,6 +9,22 @@ class X extends MX {
 	function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}
 
 	/**
+	 * 2021-12-13
+	 * https://www.php.net/manual/en/simplexmlelement.addattribute.php
+	 * https://stackoverflow.com/a/43566078
+	 * @override
+	 * @see \SimpleXMLElement::addAttribute()
+	 * @used-by addAttributes()
+	 * @used-by addChildX()
+	 * @param string $k
+	 * @param string|null $v [optional]
+	 * @param string|null $ns [optional]
+	 */
+	function addAttribute($k, $v = null, $ns = null) {parent::addAttribute(
+		$k, $v, $ns ?: (!df_contains($k, ':') ? null : df_first(explode(':', $k)))
+	);}
+
+	/**
 	 * @used-by df_xml_node()
 	 * @used-by importArray()
 	 * @used-by \Df\Xml\G::_p()
