@@ -18,11 +18,11 @@ class X extends MX {
 	function addAttributes(array $attributes) {
 		foreach ($attributes as $k => $v) {/** @var string $k */ /** @var mixed $v */
 			df_assert_sne($k);
-			# убрал strval($value) для ускорения системы
+			# убрал strval($v) для ускорения системы
 			if (is_object($v) || is_array($v)) {
 				df_log($attributes);
 				df_error(
-					'Значение поля «{$k}» должно быть строкой, однако является %s.'
+					"Значение поля «{$k}» должно быть строкой, однако является %s."
 					,is_object($v) ? sprintf('объектом класса %s', get_class($v)) : 'массивом'
 				);
 			}
