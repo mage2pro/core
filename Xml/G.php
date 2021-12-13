@@ -8,7 +8,6 @@ final class G extends \Df\Core\O {
 	 * @return string
 	 */
 	private function _p() {
-		/** @var string $result */
 		/**
 		 * 1) Метод ядра Magento CE @see \Magento\Framework\Simplexml\Element::asNiceXml()
 		 * не сохраняет в документе XML блоки CDATA,
@@ -50,13 +49,8 @@ final class G extends \Df\Core\O {
 		$x = df_xml_parse("$header\n<{$this[self::$P__TAG]}/>"); /** @var X $x */
 		$x->addAttributes($this[self::P__ATTRIBUTES]);
 		$x->importArray($this[self::$P__CONTENTS]);
-		$result = $this[self::P__SKIP_HEADER] ? $x->asXMLPart() : df_cc_n($header, $x->asNiceXml());
 		# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML: http://stackoverflow.com/a/10095901
-		$result = str_replace("\x0B", "&#x0B;", $result);
-		if ($this[self::P__DECODE_ENTITIES]) {
-			$result = html_entity_decode($result, ENT_NOQUOTES, 'UTF-8');
-		}
-		return $result;
+		return str_replace("\x0B", "&#x0B;", $this[self::P__SKIP_HEADER] ? $x->asXMLPart() : df_cc_n($header, $x->asNiceXml()));
 	}
 
 	/** @var string */
@@ -82,7 +76,6 @@ final class G extends \Df\Core\O {
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t04()
 	 */
 	const P__ATTRIBUTES = 'attributes';
-	const P__DECODE_ENTITIES = 'need_decode_entities';
 
 	/**
 	 * @used-by _p()
