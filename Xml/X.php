@@ -65,21 +65,6 @@ class X extends MX {
 	}
 
 	/**
-	 * @param string $tagName
-	 * @param string $valueAsText
-	 * @return X
-	 */
-	function addChildText($tagName, $valueAsText) {
-		$r = $this->addChild($tagName); /** @var X $r */
-		/**
-		 * @uses CX::addChild() создаёт и возвращает не просто CX, как говорит документация, а объект класса родителя.
-		 * Поэтому в нашем случае addChild создаст объект E.
-		 */
-		$r->setCData($valueAsText);
-		return $r;
-	}
-
-	/**
 	 * Отличия от родительского метода:
 	 * 1) гарантия, что результат — массив
 	 * 2) кэширование результата
@@ -452,6 +437,22 @@ class X extends MX {
 			/** @var X $node */
 			$r[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
+		return $r;
+	}
+
+	/**
+	 * @used-by importString()
+	 * @param string $tagName
+	 * @param string $valueAsText
+	 * @return X
+	 */
+	private function addChildText($tagName, $valueAsText) {
+		$r = $this->addChild($tagName); /** @var X $r */
+		/**
+		 * @uses CX::addChild() создаёт и возвращает не просто CX, как говорит документация, а объект класса родителя.
+		 * Поэтому в нашем случае addChild создаст объект E.
+		 */
+		$r->setCData($valueAsText);
 		return $r;
 	}
 
