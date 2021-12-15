@@ -180,17 +180,6 @@ class X extends MX {
 		 */
 		return df_assert_nef($dom->ownerDocument->saveXML($dom->ownerDocument->documentElement));
 	}
-
-	/** @return string[] */
-	function childrenNames() {
-		$r = []; /** @var string $r */
-		if ($this->children()) {
-			foreach ($this->children() as $name => $value) { /** @var string $name */ /** @var X $value */
-				$r[]= $name;
-			}
-		}
-		return $r;
-	}	
 	
 	/**
 	 * Этот метод отличается от родительского только возвращением null вместо false в случае отсутствия значения.
