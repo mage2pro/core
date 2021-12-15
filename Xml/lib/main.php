@@ -238,6 +238,7 @@ function df_needs_cdata($s) {
 }
 
 /**
+ * @deprecated It is unused.
  * @param CX $e
  * @param string $name
  * @param bool $req [optional]
