@@ -359,13 +359,6 @@ class X extends MX {
 	}
 
 	/**
-	 * 2015-08-16
-	 * @param string $child
-	 * @return string
-	 */
-	function leafSne($child) {return df_leaf_sne($this->{$child});}
-
-	/**
 	 * 2015-08-08
 	 * Преобразует структуру вида:
 	 *	<СтавкиНалогов>
