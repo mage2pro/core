@@ -181,14 +181,6 @@ class X extends MX {
 		return df_assert_nef($dom->ownerDocument->saveXML($dom->ownerDocument->documentElement));
 	}
 
-	/**
-	 * 2015-08-15
-	 * @param string $name
-	 * @param bool $required [optional]
-	 * @return X|null
-	 */
-	function child($name, $required = false) {return df_xml_child($this, $name, $required);}
-
 	/** @return string[] */
 	function childrenNames() {
 		$r = []; /** @var string $r */

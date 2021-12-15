@@ -238,7 +238,6 @@ function df_needs_cdata($s) {
 }
 
 /**
- * @used-by \Df\Xml\X::child()
  * @param CX $e
  * @param string $name
  * @param bool $req [optional]
