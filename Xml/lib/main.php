@@ -116,6 +116,11 @@ function df_check_xml($v) {return is_string($v) && df_starts_with($v, '<?xml');}
  * без дополнительных проверок, имеется ли в наличии запрашиваемый лист дерева XML
  * (если лист отсутствует, то @see df_config_node() вернёт null)
  *
+ * @used-by df_leaf_b()
+ * @used-by df_leaf_child()
+ * @used-by df_leaf_f()
+ * @used-by df_leaf_i()
+ * @used-by df_leaf_s()
  * @param CX|null $e [optional]
  * @param string|null|callable $d [optional]
  * @return string|null
