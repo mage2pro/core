@@ -122,7 +122,12 @@ class X extends MX {
 			$r .= '>';
 			$value = trim((string)$this);
 			if (strlen($value)) {
-				$r .= $this->xmlentities($value);
+				/**
+				 * 2021-12-16
+				 * The previous code was: `$this->xmlentities($value)`
+				 * @see \Magento\Framework\Simplexml\Element::xmlentities()
+				 */
+				$r .= df_cdata_raw_if_needed($value);
 			}
 			$r .= $nl;
 			foreach ($this->children() as $child) {/** @var X $child */
@@ -133,7 +138,12 @@ class X extends MX {
 		else {
 			$value = (string)$this;
 			if (strlen($value)) {
-				$r .= '>' . $this->xmlentities($value) . '</' . $this->getName() . '>' . $nl;
+				/**
+				 * 2021-12-16
+				 * The previous code was: `$this->xmlentities($value)`
+				 * @see \Magento\Framework\Simplexml\Element::xmlentities()
+				 */
+				$r .= '>' . df_cdata_raw_if_needed($value) . '</' . $this->getName() . '>' . $nl;
 			}
 			else {
 				$r .= '/>' . $nl;

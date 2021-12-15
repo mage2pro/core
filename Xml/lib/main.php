@@ -23,6 +23,14 @@ function df_assert_leaf(CX $e) {return df_check_leaf($e) ? $e : df_error(
 function df_cdata($s) {return X::markAsCData($s);}
 
 /**
+ * 2021-12-16
+ * @used-by \Df\Xml\X::asNiceXml()
+ * @param string $s
+ * @return string
+ */
+function df_cdata_raw_if_needed($s) {return !df_needs_cdata($s) ? $s : "<![CDATA[$s]]>";}
+
+/**
  * 2015-02-27
  * Обратите внимание,
  * что метод @see \SimpleXMLElement::count() появился только в PHP 5.3,
@@ -232,6 +240,7 @@ function df_leaf_sne(CX $e = null, $d = '') {/** @var string $r */
 /**
  * 2021-12-12 https://3v4l.org/3SDsT
  * @see df_cdata()
+ * @used-by df_cdata_raw_if_needed()
  * @used-by \Df\Xml\X::importString()
  * @param string $s
  * @return bool
