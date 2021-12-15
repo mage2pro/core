@@ -215,7 +215,6 @@ function df_leaf_i(CX $e = null) {return df_int(df_leaf($e));}
 function df_leaf_s(CX $e = null, $d = '') {return (string)df_leaf($e, $d);}
 
 /**
- * @used-by \Df\Xml\X::leafSne()
  * @used-by \Df\Xml\X::map()
  * @used-by \Df\Xml\X::xpathMap()
  * @used-by \Dfe\SecurePay\Refund::process()
