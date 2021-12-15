@@ -359,13 +359,6 @@ class X extends MX {
 	}
 
 	/**
-	 * 2015-08-16
-	 * @param string $child
-	 * @return bool
-	 */
-	function leafB($child) {return df_leaf_b($this->{$child});}
-
-	/**
 	 * 2015-08-15
 	 * @used-by Df_1C_Cml2_Import_Data_Collection_ProductPart_AttributeValues_Custom::itemClassAdvanced()
 	 * @param string $child

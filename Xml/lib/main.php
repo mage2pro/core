@@ -168,6 +168,7 @@ function df_leaf(CX $e = null, $d = null) {/** @var string $r */
 }
 
 /**
+ * @deprecated It is unused.
  * @param CX|null $e [optional]
  * @param bool $default|callable [optional]
  * @return bool
