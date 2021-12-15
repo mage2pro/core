@@ -444,7 +444,6 @@ class X extends MX {
 	 * @used-by importString()
 	 * @param string $tagName
 	 * @param string $valueAsText
-	 * @return X
 	 */
 	private function addChildText($tagName, $valueAsText) {
 		$r = $this->addChild($tagName); /** @var X $r */
@@ -452,8 +451,7 @@ class X extends MX {
 		 * @uses CX::addChild() создаёт и возвращает не просто CX, как говорит документация, а объект класса родителя.
 		 * Поэтому в нашем случае addChild создаст объект E.
 		 */
-		$r->setCData($valueAsText);
-		return $r;
+		$r->cdata($valueAsText);
 	}
 
 	/**
@@ -473,11 +471,19 @@ class X extends MX {
 	}
 
 	/**
+	 * http://stackoverflow.com/a/6260295
+	 * @param string $s
+	 */
+	private function cdata($s) {
+		$e = dom_import_simplexml($this); /** @var \DOMElement $e */
+		$e->appendChild($e->ownerDocument->createCDATASection($s));
+	}
+
+	/**
 	 * @used-by importArray()
 	 * @param string|null $key
 	 * @param mixed $value
 	 * @param string[]|bool $wrapInCData [optional]
-	 * @return X
 	 */
 	private function importString($key, $value, $wrapInCData = []) {
 		$needWrapInCData = !is_array($wrapInCData) && !!$wrapInCData; /** @var bool $needWrapInCData */
@@ -524,47 +530,23 @@ class X extends MX {
 			}
 			$needWrapInCData = $needWrapInCData || in_array($keyAsString, $wrapInCData) || df_needs_cdata($valueAsString);
 		}
-		/** @var X $r */
-		$r =
-				$needWrapInCData
-			?
-				(
-					is_null($key)
-					? $this->setCData($valueAsString)
-					: $this->addChildText($keyAsString, $valueAsString)
+		$needWrapInCData
+			? (is_null($key) ? $this->cdata($valueAsString) : $this->addChildText($keyAsString, $valueAsString))
+			: (
+				is_null($key)
+				? $this->setValue($valueAsString)
+				: $this->addChild(
+					$keyAsString
+					/**
+					 * Обратите внимание, что мы намеренно не добавляем htmlspecialchars:
+					 * пусть вместо этого источник данных помечает те даннные, которые
+					 * могут содержать неразрешённые в качестве содержимого тегов XML
+					 * значения посредством @see df_cdata()
+					 */
+					,$valueAsString
 				)
-			:
-				(
-						is_null($key)
-					?
-						$this->setValue($valueAsString)
-					:
-						$this->addChild(
-							$keyAsString
-							/**
-							 * Обратите внимание, что мы намеренно не добавляем htmlspecialchars:
-							 * пусть вместо этого источник данных помечает те даннные, которые
-							 * могут содержать неразрешённые в качестве содержимого тегов XML
-							 * значения посредством @see df_cdata()
-							 */
-							,$valueAsString
-						)
-				)
+			)
 		;
-		df_assert($r instanceof X);
-		return $r;
-	}
-
-	/**
-	 * http://stackoverflow.com/a/6260295
-	 * @param string $text
-	 * @return $this
-	 */
-	function setCData($text) {
-		/** @var \DOMElement $domElement */
-		$domElement = dom_import_simplexml($this);
-		$domElement->appendChild($domElement->ownerDocument->createCDATASection($text));
-		return $this;
 	}
 
 	const ATTR = '_attr';
