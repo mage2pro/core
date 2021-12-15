@@ -511,7 +511,7 @@ class X extends MX {
 		catch (E $e) {df_error("Unable to convert the value of the key «{$keyAsString}» to a string.\n%s", df_ets($e));}
 		if ($valueIsString && $valueAsString) {
 			/**
-			 * 1) Поддержка синтаксиса
+			 * Поддержка синтаксиса
 			 *	 [
 			 *		'Представление' =>
 			 *			df_cdata($this->getAddress()->format(Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT))
@@ -521,8 +521,6 @@ class X extends MX {
 			 * потому что при соответствии синтаксису[[]] нам надо удалить из значения символы[[]].
 			 * Обратите внимание, что нам нужно выполнить проверку на синтаксис df_cdata ([[]])
 			 * даже при $needWrapInCData = true, потому что маркеры [[ и ]] из данных надо удалять.
-			 * 2) Перед вызовом медленной функции @uses preg_match()
-			 * выполняем более быструю и простую проверку @uses df_contains()
 			 */
 			if (self::marker()->marked($valueAsString)) {
 				$valueAsString = self::marker()->unmark($valueAsString);
