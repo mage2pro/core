@@ -472,6 +472,8 @@ class X extends MX {
 
 	/**
 	 * http://stackoverflow.com/a/6260295
+	 * @used-by addChildText()
+	 * @used-by importString()
 	 * @param string $s
 	 */
 	private function cdata($s) {
