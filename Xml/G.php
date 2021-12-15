@@ -3,11 +3,7 @@
 namespace Df\Xml;
 final class G extends \Df\Core\O {
 	/**
-	 * 1) Метод ядра Magento CE @see \Magento\Framework\Simplexml\Element::asNiceXml()
-	 * не сохраняет в документе XML блоки CDATA,
-	 * а вместо этого заменяет недопустимые для XML символы их допустимыми кодами, например: & => &amp;
-	 * 2) @see \Magento\Framework\Simplexml\Element::asNiceXml()
-	 * не добавляет к документу заголовок XML: его надо добавить вручную.
+	 * @see \Magento\Framework\Simplexml\Element::asNiceXml() не добавляет к документу заголовок XML: его надо добавить вручную.
 	 *
 	 * 2015-02-27
 	 * Для конвертации объекта класса @see SimpleXMLElement в строку
