@@ -21,7 +21,7 @@ class X extends MX {
 	 * @param string|null $v [optional]
 	 * @param string|null $ns [optional]
 	 */
-	function addAttribute($k, $v = null, $ns = null) {parent::addAttribute(!df_contains($k, ':') ? $k : "xmlns:$k", $v, $ns);}
+	function addAttribute($k, $v = null, $ns = null) {parent::addAttribute($this->k($k), $v, $ns);}
 
 	/**
 	 * @used-by df_xml_node()
@@ -60,7 +60,7 @@ class X extends MX {
 	 * @throws E
 	 */
 	function addChild($name, $value = null, $namespace = null) {/** @var CX $r */
-		try {$r = parent::addChild($name, $value, $namespace);}
+		try {$r = parent::addChild($this->k($name), $value, $namespace);}
 		catch (E $e) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_ets($e));}
 		return $r;
 	}
@@ -559,6 +559,18 @@ class X extends MX {
 			)
 		;
 	}
+
+	/**
+	 * 2021-12-16
+	 * https://stackoverflow.com/a/9391673
+	 * https://stackoverflow.com/a/43566078
+	 * https://stackoverflow.com/a/6928183
+	 * @used-by addAttribute()
+	 * @used-by addChild()
+	 * @param string $s
+	 * @return string
+	 */
+	private function k($s) {return !df_contains($s, ':') ? $s : "xmlns:$s";}
 
 	const ATTR = '_attr';
 	const CONTENT = '_content';

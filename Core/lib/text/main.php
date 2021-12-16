@@ -55,7 +55,7 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
  * @used-by \CanadaSatellite\Core\Plugin\Mageplaza\Blog\Helper\Data::afterGetBlogUrl() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
  * @used-by \Df\Cron\Model\LoggerHandler::p()
  * @used-by \Df\Sentry\Trace::get_frame_context()
- * @used-by \Df\Xml\X::addAttribute()
+ * @used-by \Df\Xml\X::k()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::parse()
  * @used-by \DxMoto\Core\Observer\CanLog::execute()
  * @used-by \RWCandy\Captcha\Assert::name()
