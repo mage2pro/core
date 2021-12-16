@@ -47,6 +47,7 @@ class X extends MX {
 	}
 
 	/**
+	 * @override
 	 * @see \SimpleXMLElement::addChild()
 	 * @used-by addChildText()
 	 * @used-by addChildX()
