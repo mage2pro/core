@@ -1,6 +1,4 @@
 <?php
-use Df\Core\Exception as DFE;
-
 /**
  * 2015-02-07
  * Аналог @see array_change_key_case() с поддержкой UTF-8.
