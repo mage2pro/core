@@ -61,5 +61,11 @@ function df_product_image_url(P $p, $type = null, $attrs = []) {/** @var string|
 			}
 		}
 	}
-	return $r;
+	/**
+	 * 2021-12-17
+	 * 1) I use @uses df_path_n() to correct such URLs in Windows:
+	 * https://localhost.com:2197/pub/media/catalog/product\cache\1a71b601d00b50184472f9cf7e7475a3\/c/u/cuba-nest-c14_compressed.jpg
+	 * 2) https://3v4l.org/8iP17
+	 */
+	return df_path_n($r);
 }
