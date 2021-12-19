@@ -179,6 +179,7 @@ function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
  * @used-by \Dfe\PostFinance\Source\Hash\Algorithm::map()
  * @used-by \Dfe\Spryng\Source\Account::fetch()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
+ * @used-by \TFC\GoogleShopping\Products::atts() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param array|callable|\Traversable $a1
  * @param array|callable|\Traversable $a2
  * @return array(int|string => mixed)

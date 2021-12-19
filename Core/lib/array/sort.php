@@ -9,6 +9,7 @@
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @used-by \Dfe\Qiwi\Signer::sign()
  * @used-by \Dfe\Robokassa\Api\Options::p()
+ * @used-by \TFC\GoogleShopping\Products::_p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param array(int|string => mixed) $a
  * @param callable|null $f [optional]
  * @return array(int|string => mixed)

@@ -20,11 +20,12 @@ function df_product_images_additional(P $p, $limit = null) {
  * 2016-04-23
  * How to get an image URL for a product programmatically? https://mage2.pro/t/1313
  * How is @uses \Magento\Catalog\Helper\Image::getUrl() implemented and used? https://mage2.pro/t/1316
- * @used-by df_oqi_image()
- * @used-by df_product_image_url() Recursion
  * @see df_media_path2url()
  * @see df_product_image_path()
  * @see df_product_images_additional()
+ * @used-by df_oqi_image()
+ * @used-by df_product_image_url() Recursion
+ * @used-by \TFC\GoogleShopping\Att\ImageLink::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param P $p
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]
