@@ -41,8 +41,8 @@
  * Today I have changed «?=[A-Z0-9]» => «?=[A-Z0-9]», so now it handles the cases with digits, e.g.:
  * «Dynamics365» => [«Dynamics», «365»]
  *
+ * @used-by df_api_name()
  * @used-by df_explode_class_camel()
- * @used-by \Df\API\Client::p()
  * @param string ...$args
  * @return string[]|string[][]
  */
@@ -54,6 +54,7 @@ function df_explode_camel(...$args) {return df_call_a(function($name) {return pr
  * 2016-08-10
  * REFUND_ISSUED => RefundIssued
  * refund_issuED => RefundIssued
+ * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string ...$args
  * @return string|string[]
  */
