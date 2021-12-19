@@ -103,7 +103,7 @@ function df_class_l($c) {return df_last(df_explode_class($c));}
 
 /**
  * 2018-01-30
- * @used-by \TFC\GoogleShopping\Products::atts() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
+ * 2021-10-27 @deprecared It is unused.
  * @param string|object $c
  * @return string
  */
