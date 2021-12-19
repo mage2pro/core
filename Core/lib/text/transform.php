@@ -1,11 +1,5 @@
 <?php
 /**
- * @param string $s
- * @return string
- */
-function df_camelize($s) {return implode(df_ucfirst(df_explode_class(df_trim($s))));}
-
-/**
  * 2016-01-14 Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see lcfirst()
  * @see df_ucfirst() 
  * @used-by df_class_second_lc() 
@@ -38,7 +32,6 @@ function df_strtoupper(...$args) {return df_call_a(function($s) {return mb_strto
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
  * @see df_lcfirst
  * @used-by df_assert_gd()
- * @used-by df_camelize()
  * @used-by df_cc_class_uc()
  * @used-by df_underscore_to_camel()
  * @used-by \Dfe\TwoCheckout\LineItem::name()
