@@ -54,14 +54,3 @@ function df_ucfirst(...$args) {return df_call_a(function($s) {return
 function df_ucwords(...$args) {return df_call_a(function($s) {return mb_convert_case(
 	$s, MB_CASE_TITLE, 'UTF-8'
 );}, $args);}
-
-/**
- * 2016-08-10
- * REFUND_ISSUED => RefundIssued
- * refund_issuED => RefundIssued
- * @param string ...$args
- * @return string|string[]
- */
-function df_underscore_to_camel(...$args) {return df_call_a(function($s) {return implode(
-	df_ucfirst(explode('_', mb_strtolower($s)))
-);}, $args);}
