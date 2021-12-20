@@ -2,6 +2,7 @@
 /**
  * 2021-12-20
  * @see df_underscore_to_camel()
+ * @used-by \TFC\GoogleShopping\Products::atts() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param string|string[] ...$args
  * @return string|string[]
  */
