@@ -1,5 +1,15 @@
 <?php
 /**
+ * 2021-12-20
+ * @see df_underscore_to_camel()
+ * @param string ...$args
+ * @return string|string[]
+ */
+function df_camel_to_underscore(...$args) {return df_call_a(function($s) {return implode(
+	'_', df_lcfirst(df_explode_camel($s))
+);}, $args);}
+
+/**
  * «YandexMarket» => array(«Yandex», «Market»)
  * «NewNASAModule» => array(«New», «NASA», «Module»)
  * http://stackoverflow.com/a/17122207
@@ -42,6 +52,7 @@
  * «Dynamics365» => [«Dynamics», «365»]
  *
  * @used-by df_api_name()
+ * @used-by df_camel_to_underscore()
  * @used-by df_explode_class_camel()
  * @param string ...$args
  * @return string[]|string[][]
@@ -54,6 +65,7 @@ function df_explode_camel(...$args) {return df_call_a(function($name) {return pr
  * 2016-08-10
  * REFUND_ISSUED => RefundIssued
  * refund_issuED => RefundIssued
+ * @see df_camel_to_underscore()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string ...$args
  * @return string|string[]

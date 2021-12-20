@@ -1,11 +1,12 @@
 <?php
 /**
  * 2016-01-14 Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see lcfirst()
- * @see df_ucfirst() 
+ * @see df_ucfirst()
+ * @used-by df_camel_to_underscore()
  * @used-by df_class_second_lc() 
  * @used-by df_explode_class_lc() 
  * @used-by df_explode_class_lc_camel()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string|string[]
  */
 function df_lcfirst(...$args) {return df_call_a(function($s) {return
