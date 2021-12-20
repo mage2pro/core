@@ -88,7 +88,7 @@ function df_prepend($s, $head) {return df_starts_with($s, $head) ? $s : $head . 
 
 /**
  * @used-by df_tab_multiline()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string|string[]|array(string => string)
  */
 function df_tab(...$args) {return df_call_a(function($text) {return "\t" . $text;}, $args);}

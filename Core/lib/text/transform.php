@@ -15,7 +15,7 @@ function df_lcfirst(...$args) {return df_call_a(function($s) {return
 
 /**
  * 2016-05-22
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string|string[]
  */
 function df_strtolower(...$args) {return df_call_a(function($s) {return mb_strtolower($s);}, $args);}
@@ -24,7 +24,7 @@ function df_strtolower(...$args) {return df_call_a(function($s) {return mb_strto
  * 2016-05-19
  * @see df_lcfirst
  * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string|string[]
  */
 function df_strtoupper(...$args) {return df_call_a(function($s) {return mb_strtoupper($s);}, $args);}
@@ -37,7 +37,7 @@ function df_strtoupper(...$args) {return df_call_a(function($s) {return mb_strto
  * @used-by df_underscore_to_camel()
  * @used-by \Dfe\TwoCheckout\LineItem::name()
  * @used-by \Df\Config\Source\LetterCase::apply()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string|string[]
  */
 function df_ucfirst(...$args) {return df_call_a(function($s) {return
@@ -49,7 +49,7 @@ function df_ucfirst(...$args) {return df_call_a(function($s) {return
  * http://php.net/manual/function.mb-convert-case.php
  * http://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
  * @see df_ucfirst
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string|string[]
  */
 function df_ucwords(...$args) {return df_call_a(function($s) {return mb_convert_case(

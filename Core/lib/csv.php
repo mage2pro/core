@@ -10,7 +10,7 @@ use Magento\Framework\File\Csv;
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()
  * @used-by \Dfe\FacebookLogin\Customer::responseA()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_csv(...$args) {return implode(',', df_args($args));}
@@ -59,13 +59,13 @@ function df_csv_parse_int($s) {return df_int(df_csv_parse($s));}
  * @used-by \Df\Sentry\Client::send()
  * @used-by \Dfe\Moip\P\Reg::ga()
  * @used-by \Dfe\Sift\Payload\OQI::p()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_csv_pretty(...$args) {return implode(', ', dfa_flatten($args));}
 
 /**
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_csv_pretty_quote(...$args) {return df_csv_pretty(df_quote_russian(df_args($args)));}

@@ -204,7 +204,7 @@ function df_error_create($m = null) {return
 
 /**
  * 2016-08-02
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return DFE
  */
 function df_error_create_html(...$args) {return df_error_create(...$args)->markMessageAsHtml(true);}
@@ -216,7 +216,7 @@ function df_error_create_html(...$args) {return df_error_create(...$args)->markM
  * @used-by df_should_not_be_here()
  * @used-by \Df\OAuth\App::validateResponse()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @throws DFE
  */
 function df_error_html(...$args) {df_header_utf(); throw df_error_create_html(...$args);}

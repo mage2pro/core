@@ -8,7 +8,7 @@ use ReflectionClass as RC;
  * Применение @uses dfa_flatten() делает возможным вызовы типа:
  * df_cc_class_uc('Aa', ['Bb', 'Cb']) => Aa\Bb\Cb
  * @see df_cc_class_uc()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_cc_class(...$args) {return implode('\\', df_clean(dfa_flatten($args)));}
@@ -19,7 +19,7 @@ function df_cc_class(...$args) {return implode('\\', df_clean(dfa_flatten($args)
  * df_cc_class_uc('aa', ['bb', 'cc']) => Aa\Bb\Cc
  * Мы используем это в модулях Stripe и Checkout.com.
  * @see df_cc_class()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_cc_class_uc(...$args) {return df_cc_class(df_ucfirst(dfa_flatten($args)));}

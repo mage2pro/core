@@ -4,7 +4,7 @@ use Df\Core\Format\Html\ListT;
 /**
  * 2016-11-13
  * @used-by df_quote_russian()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string|string[]
  */
 function df_html_b(...$args) {return df_call_a(function($s) {return df_tag('b', [], $s);}, $args);}
@@ -20,7 +20,7 @@ function df_html_b(...$args) {return df_call_a(function($s) {return df_tag('b', 
  * @used-by \Dfe\Markdown\FormElement::css()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string
  */
 function df_link_inline(...$args) {return df_call_a(function($res) {return df_resource_inline(

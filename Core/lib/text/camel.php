@@ -2,7 +2,7 @@
 /**
  * 2021-12-20
  * @see df_underscore_to_camel()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string|string[]
  */
 function df_camel_to_underscore(...$args) {return df_call_a(function($s) {return implode(
@@ -54,7 +54,7 @@ function df_camel_to_underscore(...$args) {return df_call_a(function($s) {return
  * @used-by df_api_name()
  * @used-by df_camel_to_underscore()
  * @used-by df_explode_class_camel()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string[]|string[][]
  */
 function df_explode_camel(...$args) {return df_call_a(function($name) {return preg_split(
@@ -67,7 +67,7 @@ function df_explode_camel(...$args) {return df_call_a(function($name) {return pr
  * refund_issuED => RefundIssued
  * @see df_camel_to_underscore()
  * @used-by \Dfe\TwoCheckout\Handler::p()
- * @param string ...$args
+ * @param string|string[] ...$args
  * @return string|string[]
  */
 function df_underscore_to_camel(...$args) {return df_call_a(function($s) {return implode(
