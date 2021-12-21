@@ -9,16 +9,15 @@
  * 3.333 => 3.33
  * 3.300 => 3.30
  * https://3v4l.org/AUTCA
- *
  * @used-by dff_2f()
  * @used-by dff_2i()
  * @used-by \Dfe\Qiwi\Method::amountFormat()
  * @used-by \Dfe\Robokassa\Method::amountFormat()
  * @used-by \Dfe\SecurePay\Charge::amountFormat()
  * @used-by \Dfe\TwoCheckout\Method::amountFormat()
- * @used-by \Dfe\YandexKassa\Method::amountFormat()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
- *
+ * @used-by \Dfe\YandexKassa\Method::amountFormat()
+ * @used-by \TFC\GoogleShopping\Att\Price::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param float $v
  * @param int $prec [optional]
  * @return string
