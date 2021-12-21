@@ -11,12 +11,15 @@ use Magento\Framework\Logger\Handler\Base as _P;
 class LoggerHandler extends _P {
 	/**
 	 * 2019-10-13
+	 * 2021-12-21
+	 * "«Declaration of Df\Cron\Model\LoggerHandler::handle(array $d)
+	 * must be compatible with Monolog\Handler\AbstractProcessingHandler::handle(array $record): bool»
+	 * in Magento 2.4.3": https://github.com/mage2pro/core/issues/164
 	 * @override
 	 * @see \Monolog\Handler\AbstractProcessingHandler::handle()
 	 * @param array(string => mixed) $d
-	 * @return bool
 	 */
-	function handle(array $d) {return self::p($d) || parent::handle($d);}
+	function handle(array $d): bool {return self::p($d) || parent::handle($d);}
 
 	/**
 	 * 2020-02-08
