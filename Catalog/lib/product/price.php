@@ -3,6 +3,18 @@ use Magento\Catalog\Model\Product as P;
 use Magento\Framework\Pricing\Price\PriceInterface as IPrice;
 /**
  * 2021-12-21
+ * I do not use @see \Magento\Catalog\Model\Product::getSpecialPrice()
+ * because it can return an outdated or a future special price:
+ * the current time could be not between @see \Magento\Catalog\Model\Product::getSpecialFromDate()
+ * and @see \Magento\Catalog\Model\Product::getSpecialToDate()
+ * `df_prices($p)['special_price']` returns `false` in this case.
+ * @param P $p
+ * @return float|false
+ */
+function df_price_special(P $p) {return df_prices($p)['special_price'];}
+
+/**
+ * 2021-12-21
  * 1) A simple product with a special price:
  *	{
  *		"base_price": 39.95,
@@ -31,6 +43,9 @@ use Magento\Framework\Pricing\Price\PriceInterface as IPrice;
  *		"tier_price": false,
  *		"wishlist_configured_price": 609.95
  *	}
+ * @uses \Magento\Framework\Pricing\Price\PriceInterface::getValue()
+ * @uses \Magento\Framework\Pricing\Price\AbstractPrice::getValue()
+ * @used-by df_price_special()
  * @param P $p
  * @return array(string => IPrice)
  */
