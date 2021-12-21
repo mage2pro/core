@@ -37,12 +37,17 @@ use Monolog\Logger as L;
 class Dispatcher extends _P {
 	/**
 	 * 2019-10-13
+	 * 2021-21-21
+	 * 1) "«Declaration of Df\Framework\Log\Dispatcher::handle(array $d)
+	 * must be compatible with Monolog\Handler\AbstractProcessingHandler::handle(array $record): bool» in Magento 2.4.3":
+	 * https://github.com/mage2pro/core/issues/166
+	 * 2) @see \Df\Cron\Model\LoggerHandler::handle()
 	 * @override
 	 * @see \Monolog\Handler\AbstractProcessingHandler::handle()
 	 * @param array(string => mixed) $d
 	 * @return bool
 	 */
-	function handle(array $d) {
+	function handle(array $d): bool {
 		$rc = new Record($d); /** @var Record $rc */
 		if (!($r = CronH::p($d) || CookieH::p($rc) || NoSuchEntityH::p($rc) || PayPalH::p($rc))) {
 			# 2020-08-30

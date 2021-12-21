@@ -12,9 +12,10 @@ class LoggerHandler extends _P {
 	/**
 	 * 2019-10-13
 	 * 2021-12-21
-	 * "«Declaration of Df\Cron\Model\LoggerHandler::handle(array $d)
+	 * 1) "«Declaration of Df\Cron\Model\LoggerHandler::handle(array $d)
 	 * must be compatible with Monolog\Handler\AbstractProcessingHandler::handle(array $record): bool»
 	 * in Magento 2.4.3": https://github.com/mage2pro/core/issues/164
+	 * 2) @see \Df\Framework\Log\Dispatcher::handle()
 	 * @override
 	 * @see \Monolog\Handler\AbstractProcessingHandler::handle()
 	 * @param array(string => mixed) $d
