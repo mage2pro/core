@@ -1,8 +1,15 @@
 <?php
 use Df\Core\Exception as DFE;
+use Magento\Catalog\Helper\Data as H;
 use Magento\Catalog\Helper\Output as OutputH;
 use Magento\Catalog\Model\Locator\LocatorInterface as ILocator;
 use Magento\Catalog\Model\Locator\RegistryLocator;
+/**
+ * 2021-12-21 @deprecated It is unused.
+ * @return H
+ */
+function df_catalog_h() {return df_o(H::class);}
+
 /**
  * 2016-02-25 https://github.com/magento/magento2/blob/e0ed4bad/app/code/Magento/Catalog/etc/adminhtml/di.xml#L10-L10
  * @used-by df_product_current()
