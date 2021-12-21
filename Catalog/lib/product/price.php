@@ -3,6 +3,7 @@ use Magento\Catalog\Model\Product as P;
 use Magento\Framework\Pricing\Price\PriceInterface as IPrice;
 /**
  * 2021-12-21
+ * 1) A simple product with a special price:
  *	{
  *		"base_price": 39.95,
  *		"catalog_rule_price": false,
@@ -15,6 +16,20 @@ use Magento\Framework\Pricing\Price\PriceInterface as IPrice;
  *		"special_price": 39.95,
  *		"tier_price": false,
  *		"wishlist_configured_price": 39.95
+ *	}
+ * 2) A configurable product withot a special price:
+ *	{
+ *		"base_price": 0,
+ *		"catalog_rule_price": false,
+ *		"configured_price": 0,
+ *		"configured_regular_price": 0,
+ *		"custom_option_price": [],
+ *		"final_price": 609.95,
+ *		"msrp_price": 0,
+ *		"regular_price": 609.95,
+ *		"special_price": false,
+ *		"tier_price": false,
+ *		"wishlist_configured_price": 609.95
  *	}
  * @param P $p
  * @return array(string => IPrice)
