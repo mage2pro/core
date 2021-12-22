@@ -17,7 +17,7 @@
  * @used-by \Dfe\TwoCheckout\Method::amountFormat()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @used-by \Dfe\YandexKassa\Method::amountFormat()
- * @used-by \TFC\GoogleShopping\Att\Price::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
+ * @used-by \TFC\GoogleShopping\Att\Price::format() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/6)
  * @param float $v
  * @param int $prec [optional]
  * @return string

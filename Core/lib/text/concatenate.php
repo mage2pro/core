@@ -119,6 +119,7 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
  * @used-by \KingPalm\B2B\Block\Registration::e()
  * @used-by \KingPalm\B2B\Block\Registration::region()
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
+ * @used-by \TFC\GoogleShopping\Att\Price::format() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/6)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param string|string[] ...$args
  * @return string
