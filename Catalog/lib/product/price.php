@@ -15,6 +15,7 @@ function df_price_regular(P $p) {return df_prices($p)['regular_price'];}
  * the current time could be not between @see \Magento\Catalog\Model\Product::getSpecialFromDate()
  * and @see \Magento\Catalog\Model\Product::getSpecialToDate()
  * `df_prices($p)['special_price']` returns `false` in this case.
+ * @used-by \TFC\GoogleShopping\Att\SalePrice::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/4)
  * @param P $p
  * @return float|false
  */
