@@ -8,6 +8,7 @@ use Df\Zf\Validate\StringT\IntT;
  * @used-by dfa_key_int()
  * @used-by \Dfe\Color\Image::palette()
  * @used-by \Inkifi\Pwinty\API\Entity\Shipment::items()
+ * @used-by \TFC\GoogleShopping\Att\Brand::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/8)
  * @param mixed|mixed[] $v
  * @param bool $allowNull [optional]
  * @return int|int[]

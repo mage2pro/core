@@ -93,6 +93,7 @@ function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) u
  * @used-by \Mageside\CanadaPostShipping\Model\Carrier::_doRatesRequest() (canadasatellite.ca)
  * @used-by \Mangoit\MediaclipHub\Helper\Data::getMediaClipProjects()
  * @used-by \TFC\Core\Observer\CanLog::execute()
+ * @used-by \TFC\GoogleShopping\Att\Brand::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/8)
  * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
  * @param array(int|string => mixed) $a
  * @param string|string[]|int|null $k
