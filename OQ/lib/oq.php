@@ -3,10 +3,12 @@ use Df\Core\Exception as DFE;
 use Df\Quote\Model\Quote as DfQ;
 use Magento\Customer\Model\Customer as C;
 use Magento\Payment\Model\InfoInterface as II;
+use Magento\Quote\Api\Data\CartInterface as IQ;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Address as QA;
 use Magento\Quote\Model\Quote\Item as QI;
 use Magento\Quote\Model\Quote\Payment as QP;
+use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Item as OI;
@@ -29,13 +31,14 @@ function df_assert_oq($v) {return df_is_oq($v) ? $v : df_error('Expected an orde
  * @used-by df_oq_sa()
  * @used-by df_oqi_leafs()
  * @used-by df_order()
+ * @used-by df_quote_id()
  * @used-by df_visitor()
- * @used-by dfp_due() 
+ * @used-by dfp_due()
  * @used-by \Df\Payment\Operation::__construct()
  * @param mixed $v
  * @return bool
  */
-function df_is_o($v) {return $v instanceof O;}
+function df_is_o($v) {return $v instanceof IO;}
 
 /**
  * 2017-04-20
@@ -76,12 +79,13 @@ function df_is_oqi($v) {return df_is_oi($v) || df_is_qi($v);}
  * @used-by df_is_oq()
  * @used-by df_oq_currency_c()
  * @used-by df_oq_sa()
+ * @used-by df_quote_id()
  * @used-by dfp_due()
  * @used-by \Df\Quote\Model\Quote::runOnFreshAC()
  * @param mixed $v
  * @return bool
  */
-function df_is_q($v) {return $v instanceof Q;}
+function df_is_q($v) {return $v instanceof IQ;}
 
 /**
  * 2017-04-20

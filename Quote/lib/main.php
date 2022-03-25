@@ -8,6 +8,7 @@ use Magento\Quote\Api\Data\CartInterface as IQ;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\QuoteManagement as QM;
 use Magento\Quote\Model\QuoteRepository as QR;
+use Magento\Sales\Api\Data\OrderInterface as IO;
 
 /**
  * 2016-07-18
@@ -24,11 +25,13 @@ use Magento\Quote\Model\QuoteRepository as QR;
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @used-by \Yaman\Ordermotion\ItemBuilder\SpecialOffer::p()
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/128)
- * @param IQ|Q|int|null $q [optional]
+ * @param IQ|Q|IO|int|null $q [optional]
  * @return IQ|Q
  * @throws NSE
  */
-function df_quote($q = null) {return $q instanceof IQ ? $q : ($q ? df_quote_r()->get($q) : df_checkout_session()->getQuote());}
+function df_quote($q = null) {return $q instanceof IQ ? $q : (
+	$q ? df_quote_r()->get(df_quote_id($q)) : df_checkout_session()->getQuote()
+);}
 
 /**
  * 2021-05-26
@@ -39,10 +42,13 @@ function df_quote_customer_m() {return df_o(CustomerM::class);}
 
 /**
  * 2020-01-25
- * 2020-01-26 @deprecated It is unused.
+ * @used-by df_quote()
+ * @param IQ|Q|IO|null $q [optional]
  * @return int
  */
-function df_quote_id() {return df_quote()->getId();}
+function df_quote_id($q = null) {return !$q ? df_quote()->getId() : (
+	df_is_o($q) ? $q->getQuoteId() : (df_is_q($q) ? $q->getId() : df_error())
+);}
 
 /**         
  * 2017-03-20

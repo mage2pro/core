@@ -83,6 +83,7 @@ function df_abstract($caller) {
  * @used-by df_oro_get_list()
  * @used-by df_pad()
  * @used-by df_product_current()
+ * @used-by df_quote_id()
  * @used-by df_route()
  * @used-by df_sentry_m()
  * @used-by df_sprintf_strict()
