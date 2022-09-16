@@ -76,6 +76,7 @@ function df_checkout_session() {return df_o(Session::class);}
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p() 
  * @used-by \Justuno\M2\Block\Js::_toHtml()
+ * @used-by \TFC\Core\B\Checkout\Success::_toHtml() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/42)
  * @param bool $required [optional]
  * @return O|null
  * @throws DFE
