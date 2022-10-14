@@ -44,6 +44,7 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
 
 /**
  * 2015-04-17 Добавлена возможность указывать в качестве $needle массив.
+ * 2022-10-14 @see str_contains() has been added to PHP 8: https://www.php.net/manual/function.str-contains.php
  * @used-by df_block_output()
  * @used-by df_is_bin_magento()
  * @used-by df_request_ua()
