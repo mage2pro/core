@@ -1,4 +1,5 @@
 <?php
+use Df\Zf\Filter\StringTrim as Trim;
 /**
  * 2017-06-09
  * @used-by df_oqi_desc()
@@ -65,8 +66,7 @@ function df_trim($s, $charlist = null, $throw = false) {return df_try(function()
 		 * Поэтому мой класс @see \Df\Zf\Filter\StringTrim дополняет решение по ссылке выше
 		 * программным кодом из Zend Framework 2.0.
 		 */
-		/** @var \Df\Zf\Filter\StringTrim $filter */
-		$filter = new \Df\Zf\Filter\StringTrim($charlist);
+		$filter = new Trim($charlist); /** @var Trim $filter */
 		$r = $filter->filter($s);
 		/**
 		 * @see Zend_Filter_StringTrim::filter() теоретически может вернуть null,
