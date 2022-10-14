@@ -82,9 +82,9 @@ class StringTrim extends \Zend_Filter_StringTrim {
 			$r = str_split(iconv('UTF-8', 'UTF-32BE', $v), 4);
 		}
 		catch (\Exception $e) {
-			df_error('The value is not encoded in UTF-8: «%s».', $v);
+			df_error("The value is not encoded in UTF-8: «{$v}».");
 		}
-		array_walk($r, create_function('&$char', '$char = iconv("UTF-32BE", "UTF-8", $char);'));
+		array_walk($r, function(&$c) {$c = iconv('UTF-32BE', 'UTF-8', $c);});
 		return $r;
 	}
 }
