@@ -83,8 +83,10 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * @throws DFE
  */
 function df_json_decode($s, $throw = true) {/** @var mixed|bool|null $r */
-	# 2015-12-19
-	# У PHP 7.0.1 декодировании пустой строки почему-то приводит к сбою: «Decoding failed: Syntax error».
+	# 2015-12-19 У PHP 7.0.1 декодировании пустой строки почему-то приводит к сбою: «Decoding failed: Syntax error».
+	# 2022-10-14
+	# «an empty string is no longer considered valid JSON»:
+	# https://www.php.net/manual/migration70.incompatible.php#migration70.incompatible.other.json-to-jsond
 	if ('' === $s || is_null($s)) {
 		$r = $s;
 	}
