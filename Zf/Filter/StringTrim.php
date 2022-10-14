@@ -55,6 +55,7 @@ class StringTrim extends \Zend_Filter_StringTrim {
 	}
 
 	/**
+	 * @used-by _unicodeTrim()
 	 * @param $value
 	 * @param $chars
 	 * @return string
@@ -72,17 +73,18 @@ class StringTrim extends \Zend_Filter_StringTrim {
 	}
 
 	/**
-	 * @param $value
+	 * @used-by _slowUnicodeTrim()
+	 * @param $v
 	 * @return array|bool
 	 */
-	private function _splitUtf8($value) {
+	private function _splitUtf8($v) {
 		try {
-			$utfChars = str_split(iconv('UTF-8', 'UTF-32BE', $value), 4);
+			$r = str_split(iconv('UTF-8', 'UTF-32BE', $v), 4);
 		}
 		catch (\Exception $e) {
-			df_error('The value is not encoded in UTF-8: «%s».', $value);
+			df_error('The value is not encoded in UTF-8: «%s».', $v);
 		}
-		array_walk($utfChars, create_function('&$char', '$char = iconv("UTF-32BE", "UTF-8", $char);'));
-		return $utfChars;
+		array_walk($r, create_function('&$char', '$char = iconv("UTF-32BE", "UTF-8", $char);'));
+		return $r;
 	}
 }
