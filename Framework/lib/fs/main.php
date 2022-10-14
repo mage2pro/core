@@ -23,19 +23,27 @@ use Magento\Framework\Filesystem\Io\Sftp;
 function df_file() {return df_o(File::class);}
 
 /**
- * 2015-12-08
+ * 2022-10-14
+ * file_get_contents() could generate @see E_WARNING: e.g.:
+ * 	*) if the file is absent
+ * 	*)  in the case of network errors:
+ * 			«failed to open stream: A connection attempt failed
+ * 			because the connected party did not properly respond after a period of time,
+ * 			or established connection failed because connected host has failed to respond.»
+ * https://www.php.net/manual/function.file-get-contents.php#refsect1-function.file-get-contents-errors
+ * That is why I use the silence operator.
+ * @used-by df_http_get()
+ * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
  * @param string $p
- * @param string $relativeFileName
+ * @param bool $use_include_path [optional]
+ * @param ?resource $context [optional]
+ * @param int $offset [optional]
+ * @param ?int $length [optional]
  * @return string
  */
-function df_file_read($p, $relativeFileName) {
-	$reader = df_fs_r($p); /** @var DirectoryRead|IDirectoryRead $reader */
-	$file = $reader->openFile($relativeFileName, 'r'); /** @var IFileRead|FileRead $file */
-	try {$r = $file->readAll();} /** @var string $r */
-	finally {$file->close();}
-	return $r;
-}
-
+function df_file_read($p, $use_include_path = false, $context = null, $offset = 0, $length = null) {return @file_get_contents(
+	$p, $use_include_path, $context, $offset, $length
+);}
 /**
  * 2015-11-29
  * 2015-11-30

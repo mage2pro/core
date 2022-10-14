@@ -82,8 +82,7 @@ function df_path_n($p) {return str_replace(['\/', '\\'], '/', $p);}
 function df_path_n_real($p) {return str_replace(['\/', '\\', '/'], DS, $p);}
 
 /**
- * 2015-12-06
- * It trims the ending «/».
+ * 2015-12-06 It trims the ending «/».
  * @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() produces a result with a trailing «/».
  * @used-by df_file_write()
  * @used-by df_media_path_relative
@@ -94,6 +93,6 @@ function df_path_n_real($p) {return str_replace(['\/', '\\', '/'], DS, $p);}
  * @param string $b [optional]
  * @return string
  */
-function df_path_relative($p, $b = DL::ROOT) {return df_trim_text_left(df_trim_ds_left(
-	df_path_n($p)), df_trim_ds_left(df_fs_r($b)->getAbsolutePath()
-));}
+function df_path_relative($p, $b = DL::ROOT) {return df_trim_text_left(
+	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_fs_r($b)->getAbsolutePath())
+);}

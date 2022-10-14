@@ -88,7 +88,7 @@ function df_http_get($urlBase, array $params = [], $timeout = null) {
 	 * because the connected party did not properly respond after a period of time,
 	 * or established connection failed because connected host has failed to respond.»
 	 */
-	return @file_get_contents($url, null, stream_context_create(['http' => df_clean([
+	return df_file_read($url, null, stream_context_create(['http' => df_clean([
 		'ignore_errors' => true, 'timeout' => $timeout
 	])]));
 }

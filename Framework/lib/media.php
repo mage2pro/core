@@ -75,19 +75,10 @@ function df_media_path_absolute($path = '') {return df_path_absolute(DL::MEDIA, 
 /**
  * 2015-11-30 Левый «/» мы убираем.
  * @used-by df_media_path2url()
- * @used-by df_media_read()
  * @param string $path
  * @return string
  */
 function df_media_path_relative($path) {return df_path_relative($path, DL::MEDIA);}
-
-/**
- * 2015-12-08
- * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
- * @param string $mediaPath
- * @return string
- */
-function df_media_read($mediaPath) {return df_file_read(DL::MEDIA, df_media_path_relative($mediaPath));}
 
 /**
  * 2015-11-30
