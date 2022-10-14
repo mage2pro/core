@@ -39,6 +39,7 @@ function df_ends_with($haystack, $needle) {return is_array($needle)
  * @see df_ends_with()
  * @see df_prepend()
  * @see df_trim_text_left()
+ * 2022-10-14 @see str_starts_with() has been added to PHP 8: https://www.php.net/manual/function.str-starts-with.php
  * @used-by df_action_prefix()
  * @used-by df_check_https()
  * @used-by df_check_json_complex()
