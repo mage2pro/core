@@ -5,6 +5,7 @@
  * @see df_append()
  * @see df_starts_with()
  * @see df_trim_text_right()
+ * 2022-10-14 @see str_ends_with() has been added to PHP 8: https://www.php.net/manual/function.str-ends-with.php
  * @used-by df_append()
  * @used-by df_ends_with()
  * @used-by df_is_bin_magento()
