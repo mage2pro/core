@@ -27,6 +27,7 @@ function df_dump($v) {return Dumper::i()->dump($v);}
 
 /**
  * 2015-04-05
+ * 2022-10-14 @see get_debug_type() has been added to PHP 8: https://www.php.net/manual/function.get-debug-type.php
  * @see df_dump()
  * @used-by df_ar()        
  * @used-by df_assert_gd()
