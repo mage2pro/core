@@ -162,21 +162,17 @@ function df_class_second_lc($c) {return df_lcfirst(df_class_second($c));}
  * @param string|object $c
  * @return string
  */
-function df_class_suffix($c) {
-	/** @var string $result */
-	$result = implode(df_cld($c), array_slice(df_explode_class($c), 2));
+function df_class_suffix($c) {/** @var string $r */
+	$r = implode(df_cld($c), array_slice(df_explode_class($c), 2));
 	if (interface_exists($c)) {
-		/** @var string[] $a */
-		if ($a = df_explode_class($result)) {
-			/** @var int $len */
-			$len = count($a);
-			/** @var string $last */
-			$last = $a[$len - 1];
+		if ($a = df_explode_class($r)) {/** @var string[] $a */
+			$len = count($a); /** @var int $len */
+			$last = $a[$len - 1]; /** @var string $last */
 			$a[$len - 1] = 'I' !== $last[0] ? $last : substr($last, 1);
-			$result =  df_cc_class($a);
+			$r = df_cc_class($a);
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
