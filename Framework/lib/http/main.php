@@ -44,8 +44,8 @@ function df_http_context() {return df_o(Context::class);}
  * 2015-11-27
  * Note 1.
  * Google API в случае сбоя возвращает корректный JSON, но с кодом HTTP 403,
- * что приводит к тому, что @see file_get_contents() не просто возвращает JSON,
- * а создаёт при этом warning.
+ * что приводит к тому, что @uses file_get_contents() не просто возвращает JSON,
+ * а создаёт при этом @see E_WARNING.
  * Чтобы при коде 403 warning не создавался, использую ключ «ignore_errors»:
  * https://php.net/manual/context.http.php#context.http.ignore-errors
  * http://stackoverflow.com/a/21976746
@@ -55,9 +55,7 @@ function df_http_context() {return df_o(Context::class);}
  * однако оно является системным требованием Magento 2:
  * http://devdocs.magento.com/guides/v2.0/install-gde/system-requirements.html#required-php-extensions
  * Поэтому мы вправе использовать здесь @uses file_get_contents
- * Note 3.
- * The function returns the read data or FALSE on failure.
- * http://php.net/manual/function.file-get-contents.php
+ * Note 3. The function returns the read data or FALSE on failure. http://php.net/manual/function.file-get-contents.php
  *
  * 2016-05-31
  * Стандартное время ожидание ответа сервера задаётся опцией default_socket_timeout:
@@ -83,12 +81,12 @@ function df_http_get($urlBase, array $params = [], $timeout = null) {
 	$url = !$params ? $urlBase : $urlBase . '?' . http_build_query($params);
 	/**
 	 * 2016-05-31
-	 * @uses file_get_contents() может возбудить Warning:
+	 * file_get_contents() может возбудить @see E_WARNING:
 	 * «failed to open stream: A connection attempt failed
 	 * because the connected party did not properly respond after a period of time,
 	 * or established connection failed because connected host has failed to respond.»
 	 */
-	return df_file_read($url, null, stream_context_create(['http' => df_clean([
+	return @file_get_contents($url, null, stream_context_create(['http' => df_clean([
 		'ignore_errors' => true, 'timeout' => $timeout
 	])]));
 }

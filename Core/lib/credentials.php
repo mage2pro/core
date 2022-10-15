@@ -5,6 +5,6 @@
  * @param string|null $k [optional]
  * @return string|null|array(string => mixed)
  */
-function df_credentials($k = null) {return dfac(function() {return df_json_decode(file_get_contents(
+function df_credentials($k = null) {return dfac(function() {return df_json_file_read(
 	(df_my_local() ? 'C:/tools/shell/home' : '/var/www') . '/.credentials/credentials.json'
-));}, $k);}
+);}, $k);}

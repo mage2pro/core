@@ -64,6 +64,15 @@ function df_etn($v) {return $v ?: null;}
 function df_ftn($v) {return (false === $v) ? null : $v;}
 
 /**
+ * 2022-10-15
+ * @see df_nts()
+ * @used-by df_file_read()
+ * @param mixed|false $v
+ * @return mixed|string
+ */
+function df_fts($v) {return (false === $v) ? '' : $v;}
+
+/**
  * 2016-08-04
  * @used-by dfa_deep()
  * @used-by \Df\Payment\Block\Info::si()
@@ -73,6 +82,7 @@ function df_ftn($v) {return (false === $v) ? null : $v;}
 function df_nes($v) {return is_null($v) || '' === $v;}
 
 /**
+ * @see df_fts()
  * @used-by df_trim()
  * @used-by sift_prefix()
  * @used-by \Df\Qa\Trace\Frame::class_()

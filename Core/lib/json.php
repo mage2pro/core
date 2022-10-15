@@ -29,9 +29,9 @@ function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '
  * http://php.net/manual/function.json-decode.php
  * @used-by df_cache_get_simple()
  * @used-by df_ci_get()
- * @used-by df_credentials()
  * @used-by df_github_request()
  * @used-by df_http_json()
+ * @used-by df_json_file_read()
  * @used-by df_json_prettify()
  * @used-by df_module_json()
  * @used-by df_oi_get()
@@ -180,6 +180,19 @@ function df_json_encode($v, $flags = 0) {return json_encode(df_json_sort($v),
  * @return string
  */
 function df_json_encode_partial($v) {return df_json_encode($v, JSON_PARTIAL_OUTPUT_ON_ERROR);}
+
+/**
+ * 2022-10-15
+ * @used-by df_credentials()
+ * @used-by df_module_json()
+ * @used-by \Df\Payment\W\Reader::testData()
+ * @used-by \Dfe\TwoCheckout\Controller\Index\Index::execute()
+ * @used-by \Dfe\Vantiv\Test\CaseT\Charge::j()
+ * @param string $p
+ * @return array|bool|mixed|null
+ * @throws DFE
+ */
+function df_json_file_read($p) {return df_json_decode(df_file_read($p));}
 
 /**
  * 2017-07-05

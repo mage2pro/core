@@ -32,18 +32,23 @@ function df_file() {return df_o(File::class);}
  * 			or established connection failed because connected host has failed to respond.»
  * https://www.php.net/manual/function.file-get-contents.php#refsect1-function.file-get-contents-errors
  * That is why I use the silence operator.
- * @used-by df_http_get()
+ * @used-by df_json_file_read()
+ * @used-by df_magento_version_remote()
+ * @used-by df_package()
  * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
+ * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
+ * @used-by \Dfe\Color\Image::dominant()
  * @param string $p
- * @param bool $use_include_path [optional]
- * @param ?resource $context [optional]
- * @param int $offset [optional]
- * @param ?int $length [optional]
+ * @param bool $req [optional]
  * @return string
  */
-function df_file_read($p, $use_include_path = false, $context = null, $offset = 0, $length = null) {return @file_get_contents(
-	$p, $use_include_path, $context, $offset, $length
-);}
+function df_file_read($p, $req = true) {/** @var string $r */
+	if (false === ($r = @file_get_contents($p)) && $req) {
+		df_error("Unable to read the file «{$p}».");
+	}
+	return df_fts($r);
+}
+
 /**
  * 2015-11-29
  * 2015-11-30

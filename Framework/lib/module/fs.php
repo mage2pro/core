@@ -162,8 +162,8 @@ function df_module_file($m, $name, $ext = '', $req = true, \Closure $parser = nu
  * @return array(string => mixed)
  */
 function df_module_json($m, $name, $req = true) {return df_module_file($m, $name, 'json', $req, function($f) {return
-	df_json_decode(file_get_contents($f)
-);});}
+	df_json_file_read($f)
+;});}
 
 /**
  * 2015-11-15

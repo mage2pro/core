@@ -42,7 +42,7 @@ function df_package($m = null, $k = null, $d = null) {
 			$packagePath = dirname($packagePath);
 		}
 		$filePath = "$packagePath/composer.json"; /** @var string $filePath */
-		$cache[$m] = !file_exists($filePath) ? [] : df_eta(df_json_decode(file_get_contents($filePath)));
+		$cache[$m] = df_eta(df_json_decode(df_file_read($filePath)));
 	}
 	return dfa($cache[$m], $k, $d);
 }

@@ -208,14 +208,13 @@ class Reader implements IEvent {
 		if (!array_key_exists('type', $this->_test)) {
 			$this->errorP('df-type');
 		}
-		/** @var string $baseName */
-		$baseName = df_ccc('-', $this->_test['type'], $this->test('case')) ?: 'default';
+		$baseName = df_ccc('-', $this->_test['type'], $this->test('case')) ?: 'default'; /** @var string $baseName */
 		$m = df_module_name_short($this->_m); /** @var string $m */
-		/** @var string $file */
-		if (!file_exists($file = BP . df_path_n_real("/_my/test/{$m}/{$baseName}.json"))) {
-			df_error("Place your test data to the «{$file}» file.");
+		/** @var string $f */
+		if (!file_exists($f = BP . df_path_n_real("/_my/test/{$m}/{$baseName}.json"))) {
+			df_error("Place your test data to the «{$f}» file.");
 		}
-		return df_json_decode(file_get_contents($file));
+		return df_json_file_read($f);
 	}
 
 	/**
