@@ -57,31 +57,29 @@ function df_file_name($directory, $template, $ds = '-') { /** @var string $r */
 			$r = $fileFullPath;
 			break;
 		}
+		elseif ($counter > 999) {
+			df_error("The counter has exceeded the $counter limit.");
+		}
 		else {
-			if ($counter > 999) {
-				df_error("The counter has exceeded the $counter limit.");
-			}
-			else {
-				$counter++;
-				/**
-				 * Если в шаблоне имени файла нет переменной «{ordering}» — значит, надо добавить её,
-				 * чтобы в следующей интерации имя файла стало уникальным.
-				 * Вставляем «{ordering}» непосредственно перед расширением файла.
-				 * Например, rm.shipping.log преобразуем в rm.shipping-{ordering}.log
-				 */
-				if (!$hasOrderingPosition && (2 === $counter)) {
-					/** @var string[] $fileNameTemplateExploded */
-					$fileNameTemplateExploded = explode('.', $template);
-					/** @var int $secondFromLastPartIndex*/
-					$secondFromLastPartIndex =  max(0, count($fileNameTemplateExploded) - 2);
-					/** @var string $secondFromLastPart */
-					$secondFromLastPart = dfa($fileNameTemplateExploded, $secondFromLastPartIndex);
-					df_assert_sne($secondFromLastPart);
-					$fileNameTemplateExploded[$secondFromLastPartIndex] =
-						implode('--', [$secondFromLastPart, '{ordering}'])
-					;
-					$template = df_assert_ne($template, implode('.', $fileNameTemplateExploded));
-				}
+			$counter++;
+			/**
+			 * Если в шаблоне имени файла нет переменной «{ordering}» — значит, надо добавить её,
+			 * чтобы в следующей интерации имя файла стало уникальным.
+			 * Вставляем «{ordering}» непосредственно перед расширением файла.
+			 * Например, rm.shipping.log преобразуем в rm.shipping-{ordering}.log
+			 */
+			if (!$hasOrderingPosition && (2 === $counter)) {
+				/** @var string[] $fileNameTemplateExploded */
+				$fileNameTemplateExploded = explode('.', $template);
+				/** @var int $secondFromLastPartIndex*/
+				$secondFromLastPartIndex =  max(0, count($fileNameTemplateExploded) - 2);
+				/** @var string $secondFromLastPart */
+				$secondFromLastPart = dfa($fileNameTemplateExploded, $secondFromLastPartIndex);
+				df_assert_sne($secondFromLastPart);
+				$fileNameTemplateExploded[$secondFromLastPartIndex] =
+					implode('--', [$secondFromLastPart, '{ordering}'])
+				;
+				$template = df_assert_ne($template, implode('.', $fileNameTemplateExploded));
 			}
 		}
 	}
