@@ -83,8 +83,8 @@ function dfaf($a, $b) {
 		$r = $ca ? [df_assert_traversable($b), $a] : [df_assert_traversable($a), $b];
 	}
 	else {
-		$ta = df_check_traversable($a); /** @var bool $ta */
-		$tb = df_check_traversable($b); /** @var bool $tb */
+		$ta = is_iterable($a); /** @var bool $ta */
+		$tb = is_iterable($b); /** @var bool $tb */
 		if ($ta && $tb) {
 			df_error('dfaf(): both arguments are callable and traversable: %s and %s.', df_type($a), df_type($b));
 		}
