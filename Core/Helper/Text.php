@@ -60,14 +60,6 @@ class Text {
 	}
 
 	/**
-	 * Удаляет с начала каждой строки текста заданное количество пробелов
-	 * @param string $s
-	 * @param int $numSpaces
-	 * @return string
-	 */
-	function removeLeadingSpacesMultiline($s, $numSpaces) {return implode(explode(str_repeat(' ', $numSpaces), $s));}
-
-	/**
 	 * 2015-03-03 Алгоритм аналогичен @see singleLine()
 	 * 2015-07-07
 	 * 1) Раньше алгоритм был таким: `strtr($text, "\r\n", '  ')`.
