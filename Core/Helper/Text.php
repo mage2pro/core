@@ -131,7 +131,7 @@ class Text {
 		else {
 			foreach (array_keys($search) as $k ) {
 				if (is_array($replace)) {
-					if (array_key_exists($k,$replace)) {
+					if (array_key_exists($k, $replace)) {
 						$subject = $this->replaceCI($search[$k], $replace[$k], $subject, $count);
 					}
 					else {
