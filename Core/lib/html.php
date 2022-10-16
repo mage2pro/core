@@ -1,6 +1,5 @@
 <?php
 use Df\Core\Format\Html\Tag;
-use Df\Core\Format\Html\ListT;
 /**
  * 2016-11-13
  * @used-by df_quote_russian()
@@ -82,6 +81,7 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @used-by df_js_data()
  * @used-by df_js_x()
  * @used-by df_kv_table()
+ * @used-by df_tag_list()
  * @used-by \AlbumEnvy\Popup\Content::_toHtml()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Framework\Console\Command::execute()
@@ -140,6 +140,8 @@ function df_tag_if($content, $condition, $tag, $attributes = [], $multiline = nu
  * @param string|null $cssItem [optional]
  * @return string
  */
-function df_tag_list(array $items, $isOrdered = false, $cssList = null, $cssItem = null) {return ListT::render(
-	$items, $isOrdered, $cssList, $cssItem
+function df_tag_list(array $items, $isOrdered = false, $cssList = null, $cssItem = null) {return df_tag(
+	$isOrdered ? 'ol' : 'ul'
+	,array_filter(['class' => $cssList])
+	,df_cc_n(array_map(function($i) use($cssItem) {return df_tag('li', array_filter(['class' => $cssItem]), $i);}, $items))
 );}

@@ -6,7 +6,6 @@ namespace Df\Core;
  * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element
  * @see \Df\Config\A
  * @see \Df\Config\O
- * @see \Df\Core\Format\Html\ListT
  * @see \Df\Core\Format\Html\Tag
  * @see \Df\Core\Text\Regex
  * @see \Df\Core\Visitor
@@ -40,7 +39,6 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::render()
 	 * @used-by \Df\Config\A::i()
-	 * @used-by \Df\Core\Format\Html\ListT::render()
 	 * @used-by \Df\Core\Text\Regex::i()
 	 * @used-by \Df\Framework\Log\Record::__construct()
 	 * @used-by \Df\GoogleFont\Font\Variant::i()
