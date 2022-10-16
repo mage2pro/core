@@ -269,28 +269,22 @@ function df_oqi_roots_m($oq, \Closure $f) {return array_map($f, df_oqi_roots($oq
 
 /**
  * 2016-03-09
- * @param O|Q $oq
- *
  * 2016-03-24
  * Если товар является настраиваемым, то @uses \Magento\Sales\Model\Order::getItems()
  * будет содержать как настраиваемый товар, так и его простой вариант.
  * Простые варианты игнорируем (у них имена типа «New Very Prive-36-Almond»,
  * а нам удобнее видеть имена простыми, как у настраиваемого товара: «New Very Prive»).
- *
  * @used-by \Df\Payment\Metadata::vars()
  * @used-by \Dfe\AllPay\Charge::pCharge()
  * @used-by \Dfe\IPay88\Charge::pCharge()
- *
- * 2016-07-04
- * Добавил этот параметр для модуля AllPay, где разделителем должен быть символ #.
- * @param string $separator [optional]
+ * @param O|Q $oq
+ * @param string $sep [optional] 2016-07-04 Добавил этот параметр для модуля AllPay,
+ * где разделителем должен быть символ #.
  * @return string
  */
-function df_oqi_s($oq, $separator = ', ') {return
-	df_ccc($separator, df_oqi_roots_m($oq, function($i) {/** @var OI|QI $i */return df_cc_s(
-		$i->getName(), 1 >= ($qty = df_oqi_qty($i)) ? null : "({$qty})"
-	);}))
-;}
+function df_oqi_s($oq, $sep = ', ') {return df_ccc($sep, df_oqi_roots_m($oq, function($i) {/** @var OI|QI $i */return df_cc_s(
+	$i->getName(), 1 >= ($qty = df_oqi_qty($i)) ? null : "({$qty})"
+);}));}
 
 /**
  * 2017-03-06
