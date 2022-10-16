@@ -102,8 +102,7 @@ function df_sort(array $a, $f = null) {
 	}
 	else {
 		if (!$f instanceof \Closure) {
-			$m = $f ?: 'getId'; /** @var string $m */ /** @uses \Magento\Framework\Model\AbstractModel::getId() */
-			$f = function($a, $b) use($m) {return !is_object($a) ? $a - $b : $a->$m() - $b->$m();};
+			$f = function($a, $b) use($f) {return !is_object($a) ? $a - $b : $a->$f() - $b->$f();};
 		}
 		/** @noinspection PhpUsageOfSilenceOperatorInspection */
 		$isAssoc ? @uasort($a, $f) : @usort($a, $f);
