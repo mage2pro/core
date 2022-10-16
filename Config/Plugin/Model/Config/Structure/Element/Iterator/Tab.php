@@ -3,9 +3,7 @@ namespace Df\Config\Plugin\Model\Config\Structure\Element\Iterator;
 use Magento\Config\Model\Config\Structure\Element\Iterator\Tab as Sb;
 final class Tab {
 	/**
-	 * 2015-11-14
-	 * Цель плагина — алфавитное упорядочивание моих модулей
-	 * в разделе административных настроек модулей.
+	 * 2015-11-14 Цель плагина — алфавитное упорядочивание моих модулей в разделе административных настроек модулей.
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator\Tab::setElements()
 	 * @param Sb $sb
 	 * @param array(string => array(string => string)) $elements
@@ -13,8 +11,7 @@ final class Tab {
 	 * @return array
 	 */
 	function beforeSetElements(Sb $sb, array $elements, $scope) {
-		/** @var array(string => string)|null $sections */
-		if ($sections = dfa_deep($elements, '_df/children')) {
+		if ($sections = dfa_deep($elements, '_df/children')) {/** @var array(string => string)|null $sections */
 			uasort($sections,
 				/**
 				 * @param array(string => string) $a
