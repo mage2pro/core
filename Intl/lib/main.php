@@ -33,6 +33,7 @@ function df_intl_dic_read($m, $locale = null, $folder = null) {
  * But it also makes the single-word dictionary entries quoted:
  * https://stackoverflow.com/questions/2489553
  * https://gist.github.com/anonymous/223ea7353626bc6a6a9e#file-csvenclosed-php
+ * 2022-10-16 @deprecated It is unused.
  * @param string|object $m
  * @param array(string => string) $data
  * @param string|null $folder [optional]
