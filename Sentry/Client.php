@@ -270,7 +270,8 @@ final class Client {
 	 * @param array $headers
 	 */
 	private function send_http($url, $data, $headers = []) {
-		$c = curl_init($url); /** @var resource $c */
+		# 2022-10-16 https://www.php.net/manual/migration80.incompatible.php#migration80.incompatible.resource2object
+		$c = curl_init($url); /** @var resource|\CurlHandle $c */
 		try {
 			curl_setopt($c, CURLOPT_HTTPHEADER, df_map_k(
 				# 2020-06-28 The `Expect` headers prevents the `100-continue` response form server (Fixes GH-216)
