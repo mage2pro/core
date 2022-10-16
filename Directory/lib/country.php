@@ -15,6 +15,7 @@ function df_countries($allowedOnly = false, $s = null) {return !$allowedOnly ? C
 
 /**
  * 2016-05-20
+ * @used-by df_countries()
  * @param int|string|null|bool|IStore $s [optional]
  * @return CC
  */
@@ -86,6 +87,7 @@ function df_country_3_to_2($iso3) {return df_result_sne(dfa(CC::s()->mapFrom3To2
 
 /**
  * 2017-01-29
+ * @used-by df_locale_by_country()
  * @param string|C $c
  * @return string
  */
@@ -104,7 +106,6 @@ function df_country_codes_allowed($s = null) {return df_csv_parse(df_cfg('genera
  * 2016-05-20
  * It returns the country name name for an ISO 3166-1 alpha-2 2-characher code and locale
  * (or the default system locale) given: https://ru.wikipedia.org/wiki/ISO_3166-1
- * @used-by df_country_ctn_ru()
  * @used-by \Df\StripeClone\CardFormatter::country()
  * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
  * @used-by \Dfe\IPay88\Block\Info::prepare()
@@ -120,14 +121,6 @@ function df_country_ctn($iso2, $locale = null) {df_param_iso2($iso2, 0); return
 		$iso2 ,df_locale($locale)
 	)
 ;}
-
-/** 
- * 2016-05-20
- * @uses df_country_ctn()
- * @param string $iso2
- * @return string
- */
-function df_country_ctn_ru($iso2) {return df_country_ctn($iso2, 'ru_RU');}
 
 /**
  * 2018-04-13
