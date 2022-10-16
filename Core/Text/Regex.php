@@ -13,15 +13,14 @@ final class Regex extends \Df\Core\O {
 	 * @throws \Exception
 	 * @return string|string[]|null|bool
 	 */
-	function match() {return dfc($this, function() {
-		/** @var string|null|bool $result */
+	function match() {return dfc($this, function() {/** @var string|null|bool $r */
 		/** @var int|bool $matchResult */ /** @var string[] $matches */
 		# Собачка нужна, чтобы подавить warning.
 		$matchResult = @preg_match($this->getPattern(), $this->getSubject(), $matches);
 		if (false !== $matchResult) {
 			if (1 === $matchResult) {
 				# Раньше тут стояло:
-				# 	$result = dfa($matchResult, 1);
+				# 	$r = dfa($matchResult, 1);
 				# что не совсем правильно, потому что если регулярное выражение не содержит круглые скобки,
 				# то результирующий массив будет содержать всего один элемент.
 				# ПРИМЕР
@@ -29,22 +28,22 @@ final class Regex extends \Df\Core\O {
 				# 	исходный текст: Категория Яндекс.Маркета
 				# 	результат: Array([0] => К)
 				# 2015-03-23 Добавил поддержку нескольких пар круглых скобок.
-				$result = count($matches) < 3 ? df_last($matches) : df_tail($matches);
+				$r = count($matches) < 3 ? df_last($matches) : df_tail($matches);
 			}
 			else {
 				if ($this->needThrowOnNotMatch()) {
 					$this->throwNotMatch();
 				}
-				$result = null;
+				$r = null;
 			}
 		}
 		else {
 			if ($this->needThrowOnError()) {
 				$this->throwInternalError();
 			}
-			$result = false;
+			$r = false;
 		}
-		return $result;
+		return $r;
 	});}
 
 	/** @return int|null|bool */
