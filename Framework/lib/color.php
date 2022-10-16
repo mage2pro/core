@@ -1,6 +1,7 @@
 <?php
 /**
  * 2019-08-21 https://stackoverflow.com/a/15202130
+ * @used-by \Dfe\Color\Image::palette()
  * @param string $hex #ff9900
  * @return int[]
  */
