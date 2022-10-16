@@ -30,6 +30,7 @@ function df_ksort(array $a, $f = null) {
  * 2017-09-07 Be careful! If the $a array is not associative,
  * then ksort($a, SORT_FLAG_CASE|SORT_STRING) will convert the numeric arrays to associative ones,
  * and their numeric keys will be ordered as strings.
+ * 2022-10-16 @deprecated It is unused.
  * @see df_ksort_r_ci()
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
