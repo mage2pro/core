@@ -5,13 +5,13 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 
 /**
  * 2016-05-20
+ * @used-by df_countries_ctn()
+ * @used-by df_country()
  * @param bool $allowedOnly [optional]
  * @param int|string|null|bool|IStore $s [optional]
  * @return CC
  */
-function df_countries($allowedOnly = false, $s = null) {return
-	!$allowedOnly ? CC::s() : df_countries_allowed($s)
-;}
+function df_countries($allowedOnly = false, $s = null) {return !$allowedOnly ? CC::s() : df_countries_allowed($s);}
 
 /**
  * 2016-05-20
@@ -33,83 +33,12 @@ function df_countries_allowed($s = null) {return dfcf(function($id) {return
  *		'AU' => 'Австралия'
  *		,'AT' => 'Австрия'
  *	)
+ * @used-by df_countries_options()
+ * @used-by df_country_ctn()
  * @param string|null $locale [optional]
  * @return array(string => string)
  */
 function df_countries_ctn($locale = null) {return df_countries()->mapFromCodeToName($locale);}
-
-/**          
- * 2016-05-20
- * @uses df_countries_ctn()
- * @return array(string => string)
- */
-function df_countries_ctn_ru() {return df_countries_ctn('ru_RU');}
-
-/**           
- * 2016-05-20
- * Возвращает массив,
- * в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
- * а значениями — названия стран в верхнем регистре для заданной локали
- * (или системной локали по умолчанию).
- * https://ru.wikipedia.org/wiki/ISO_3166-1
- * Например:
- *	array(
- *		'AU' => 'АВСТРАЛИЯ'
- *		,'AT' => 'АВСТРИЯ'
- *	)
- * @param string|null $locale [optional]
- * @return array(string => string)
- */
-function df_countries_ctn_uc($locale = null) {return df_countries()->mapFromCodeToNameUc($locale);}
-
-/**         
- * 2016-05-20
- * @uses df_countries_ctn_uc()
- * @return array(string => string)
- */
-function df_countries_ctn_uc_ru() {return df_countries_ctn_uc('ru_RU');}
-
-/**
- * 2016-05-20
- * Возвращает массив, в котором ключами являются названия стран для заданной локали (или системной локали по умолчанию),
- * а значениями — 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2
- * https://ru.wikipedia.org/wiki/ISO_3166-1
- * Например: ['Австралия' => 'AU', 'Австрия' => 'AT'].
- * @param string|null $locale [optional]
- * @return array(string => string)
- */
-function df_countries_ntc($locale = null) {return df_countries()->mapFromNameToCode($locale);}
-
-/**          
- * 2016-05-20
- * @uses df_countries_ntc()
- * @return array(string => string)
- */
-function df_countries_ntc_ru() {return df_countries_ntc('ru_RU');}
-
-/**      
- * 2016-05-20
- * Возвращает массив,
- * в котором ключами являются
- * названия стран в верхнем регистре для заданной локали (или системной локали по умолчанию)
- * а значениями — 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2.
- * https://ru.wikipedia.org/wiki/ISO_3166-1
- * Например:
- *	array(
- *		'АВСТРАЛИЯ' => 'AU'
- *		,'АВСТРИЯ' => 'AT'
- *	)
- * @param string|null $locale [optional]
- * @return array(string => string)
- */
-function df_countries_ntc_uc($locale = null) {return df_countries()->mapFromNameToCodeUc($locale);}
-
-/**           
- * 2016-05-20
- * @uses df_countries_ntc_uc()
- * @return array(string => string)
- */
-function df_countries_ntc_uc_ru() {return df_countries_ntc_uc('ru_RU');}
 
 /**
  * 2017-01-21
@@ -199,28 +128,6 @@ function df_country_ctn($iso2, $locale = null) {df_param_iso2($iso2, 0); return
  * @return string
  */
 function df_country_ctn_ru($iso2) {return df_country_ctn($iso2, 'ru_RU');}
-
-/**      
- * 2016-05-20
- * Возвращает 2-буквенный код страны по стандарту ISO 3166-1 alpha-2
- * по названию страны для заданной локали (или системной локали по умолчанию)
- * https://ru.wikipedia.org/wiki/ISO_3166-1
- * @param string $name
- * @param string|null $locale [optional]
- * @return string|null
- */
-function df_country_ntc($name, $locale = null) {
-	df_param_sne($name, 0);
-	return dfa(df_countries_ntc($locale), mb_strtoupper(df_trim($name)));
-}
-
-/**        
- * 2016-05-20
- * @uses df_country_ntc()
- * @param string $name
- * @return string|null
- */
-function df_country_ntc_ru($name) {return df_country_ntc($name, 'ru_RU');}
 
 /**
  * 2018-04-13

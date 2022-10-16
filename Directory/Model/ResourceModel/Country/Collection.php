@@ -39,8 +39,6 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	/**
 	 * 2016-05-19
 	 * @used-by df_countries_ctn()
-	 * @used-by self::mapFromCodeToNameUc()
-	 * @used-by self::mapFromNameToCode()
 	 * Возвращает массив,
 	 * в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
 	 * а значениями — названия стран для заданной локали (или системной локали по умолчанию).
@@ -80,54 +78,6 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 */
 	function mapFromCodeToNameUc($l = null) {return dfc($this, function($l) {return df_strtoupper(
 		$this->mapFromCodeToName($l)
-	);}, [df_locale($l)]);}
-
-	/**
-	 * 2016-05-19
-	 * Возвращает массив,
-	 * в котором ключами являются
-	 * названия стран для заданной локали (или системной локали по умолчанию)
-	 * а значениями — 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2.
-	 * https://ru.wikipedia.org/wiki/ISO_3166-1
-	 * Например:
-	 *	array(
-	 *		'Австралия' => 'AU'
-	 *		,'Австрия' => 'AT'
-	 *	)
-	 * @used-by df_countries_ntc()
-	 * @param string|null $l [optional]
-	 * @return array(string => string)
-	 */
-	function mapFromNameToCode($l = null) {
-		$l = df_locale($l);
-		if (!isset($this->{__METHOD__}[$l])) {
-			/** @var \Magento\Framework\Stdlib\ArrayUtils $au */
-			$au = df_o(\Magento\Framework\Stdlib\ArrayUtils::class);
-			$this->{__METHOD__}[$l] =
-				$au->ksortMultibyte(array_flip($this->mapFromCodeToName($l)), $l)
-			;
-		}
-		return $this->{__METHOD__}[$l];
-	}
-
-	/**
-	 * 2016-05-19
-	 * @used-by rm_countries_ntc_uc()
-	 * Возвращает массив,
-	 * в котором ключами являются
-	 * названия стран в верхнем регистре для заданной локали (или системной локали по умолчанию)
-	 * а значениями — 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2.
-	 * https://ru.wikipedia.org/wiki/ISO_3166-1
-	 * Например:
-	 *	array(
-	 *		'АВСТРАЛИЯ' => 'AU'
-	 *		,'АВСТРИЯ' => 'AT'
-	 *	)
-	 * @param string|null $l [optional]
-	 * @return array(string => string)
-	 */
-	function mapFromNameToCodeUc($l = null) {return dfc($this, function($l) {return array_flip(
-		$this->mapFromCodeToNameUc($l)
 	);}, [df_locale($l)]);}
 
 	/**

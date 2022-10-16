@@ -59,8 +59,6 @@ function df_lang_zh_en() {return df_lang_zh('zh', 'en');}
  * @used-by df_lang_ru()  
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToNameUc()
- * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromNameToCode()
- * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromNameToCodeUc()
  * @used-by \Df\Geo\Client::s()
  * @used-by \Df\Intl\Js::_toHtml()
  * @used-by \Dfe\CurrencyFormat\O::postProcess()
