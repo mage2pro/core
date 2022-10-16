@@ -84,7 +84,6 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 
 	/**
 	 * 2016-05-19
-	 * @used-by rm_countries_ntc()
 	 * Возвращает массив,
 	 * в котором ключами являются
 	 * названия стран для заданной локали (или системной локали по умолчанию)
@@ -95,6 +94,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 *		'Австралия' => 'AU'
 	 *		,'Австрия' => 'AT'
 	 *	)
+	 * @used-by df_countries_ntc()
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
