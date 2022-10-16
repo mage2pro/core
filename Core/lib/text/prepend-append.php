@@ -69,6 +69,7 @@ function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {/*
  * 2015-12-01
  * Строковое представление может быть 16-ричным (код цвета), поэтому убрал @see df_int()
  * http://stackoverflow.com/a/1699980
+ * @used-by df_rgb2hex()
  * @param int $length
  * @param int|string $number
  * @return string
