@@ -62,26 +62,6 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 
 	/**
 	 * 2016-05-19
-	 * @used-by rm_countries_ctn_uc()
-	 * Возвращает массив,
-	 * в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
-	 * а значениями — названия стран в верхнем регистре для заданной локали
-	 * (или системной локали по умолчанию).
-	 * https://ru.wikipedia.org/wiki/ISO_3166-1
-	 * Например:
-	 *	array(
-	 *		'AU' => 'АВСТРАЛИЯ'
-	 *		,'AT' => 'АВСТРИЯ'
-	 *	)
-	 * @param string|null $l [optional]
-	 * @return array(string => string)
-	 */
-	function mapFromCodeToNameUc($l = null) {return dfc($this, function($l) {return df_strtoupper(
-		$this->mapFromCodeToName($l)
-	);}, [df_locale($l)]);}
-
-	/**
-	 * 2016-05-19
 	 * @override
 	 * @see \Magento\Directory\Model\ResourceModel\Country\Collection::_construct
 	 */
