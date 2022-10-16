@@ -20,13 +20,6 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	}
 
 	/**
-	 * 2016-05-19
-	 * @param string $iso2
-	 * @return bool
-	 */
-	function isIso2CodePresent($iso2) {return !!$this->getItemById($iso2);}
-
-	/**
 	 * 2016-05-20
 	 * @return array(string => string)
 	 */
