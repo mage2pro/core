@@ -21,12 +21,15 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 
 	/**
 	 * 2016-05-20
+	 * @used-by df_country_2_to_3()
 	 * @return array(string => string)
 	 */
 	function mapFrom2To3() {return dfc($this, function() {return array_flip($this->mapFrom3To2());});}
 
 	/**
 	 * 2016-05-20
+	 * @used-by df_country_3_to_2()
+	 * @used-by self::mapFrom2To3()
 	 * @return array(string => string)
 	 */
 	function mapFrom3To2() {return dfc($this, function() {return df_map_r($this, function(C $c) {return [
@@ -35,9 +38,9 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 
 	/**
 	 * 2016-05-19
-	 * @used-by mapFromCodeToNameUc()
-	 * @used-by mapFromNameToCode()
 	 * @used-by df_countries_ctn()
+	 * @used-by self::mapFromCodeToNameUc()
+	 * @used-by self::mapFromNameToCode()
 	 * Возвращает массив,
 	 * в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
 	 * а значениями — названия стран для заданной локали (или системной локали по умолчанию).
