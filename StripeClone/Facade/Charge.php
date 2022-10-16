@@ -166,10 +166,8 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @param object|array(string => mixed) $c
 	 * @return object|array(string => string)
 	 */
-	final protected function cardData($c) {$p = $this->pathToCard(); return
-		/** @var object|array(string => string) $r */
-		/** @var string $p */
-		($r = (is_array($c) || $c instanceof \ArrayAccess) ? $c[$p] : (
+	final protected function cardData($c) {$p = $this->pathToCard(); /** @var string $p */ return
+		((is_array($c) || $c instanceof \ArrayAccess) ? $c[$p] : (
 			!is_object($c) ? null : (
 				/**
 				 * 2017-10-08
