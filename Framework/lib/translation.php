@@ -10,12 +10,13 @@ function df_phrase($s) {return $s instanceof P ? $s : __($s);}
 /**
  * 2015-09-29
  * @used-by df_map_to_options_t()
- * @param string[] $strings
+ * @uses __()
+ * @param string[] $s
  * @param bool $now [optional]
  * @return string[]
  */
-function df_translate_a($strings, $now = false) {
-	$r = array_map('__', $strings); /** @var string[] $r */
+function df_translate_a($s, $now = false) {
+	$r = array_map('__', $s); /** @var string[] $r */
 	return !$now ? $r : array_map('strval', $r);
 }
 
