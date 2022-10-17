@@ -25,16 +25,16 @@ final class ReprSerializer extends Serializer {
 			$r = 'true';
 		}
 		elseif (is_float($v) && (int) $v == $v) {
-			$r = $v.'.0';
+			$r = "$v.0";
 		}
 		elseif (is_integer($v) || is_float($v)) {
 			$r = (string) $v;
 		}
 		elseif (is_object($v) || gettype($v) == 'object') {
-			$r = 'Object '.get_class($v);
+			$r = 'Object '. get_class($v);
 		}
 		elseif (is_resource($v)) {
-			$r = 'Resource '.get_resource_type($v);
+			$r = 'Resource '. get_resource_type($v);
 		}
 		elseif (is_array($v)) {
 			$r = 'Array of length ' . count($v);
