@@ -18,15 +18,12 @@ use Df\Core\RAM;
  * 2.1) Если Ваш метод содержит несколько вызовов dfc() для разных Closure.
  * 2.2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
  * и поэтому Closure не уникальна.
- * 2017-01-02
- * Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно.
- * Например, так делает @see dfaoc().
  * @used-by dfaoc()
  * @param object $o
  * @param \Closure $m
  * @param mixed[] $a [optional]
  * @param bool $unique [optional]
- * @param int $offset [optional]
+ * @param int $offset [optional] 2017-01-02 Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно. Например, так делает @see dfaoc().
  * @return mixed
  */
 function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
