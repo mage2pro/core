@@ -18,7 +18,7 @@
  * @return mixed[]
  */
 function dfa_insert(array $a, $pos, $add) {
-	if (!is_array($add) || !df_is_assoc($add)) {
+	if (!is_array($add) || array_is_list($add)) {
 		array_splice($a, $pos, 0, $add);
 	}
 	else {

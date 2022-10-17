@@ -1285,18 +1285,15 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-02-15
 	 * @override
 	 * How is a payment method's isAvailable() used? https://mage2.pro/t/721
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::isAvailable()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L343-L350
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::isAvailable()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L805-L825
-	 *
 	 * @used-by \Magento\Payment\Block\Form\Container::getMethods()
 	 * @used-by \Magento\Payment\Helper\Data::getStoreMethods()
 	 * @used-by \Magento\Payment\Model\MethodList::getAvailableMethods()
 	 * @used-by \Magento\Quote\Model\Quote\Payment::importData()
 	 * @used-by \Magento\Sales\Model\AdminOrder\Create::_validate()
-	 *
 	 * @param ICart|Q $q [optional]
 	 * @return bool
 	 */
@@ -1366,7 +1363,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			$cc = $c->oq($q); /** @var string $cc */
 			/** @var null|array(int|float|null) $limitsForCurrency */
 			if ($limitsForCurrency = $limits instanceof \Closure ? $limits($cc) : (
-				!df_is_assoc($limits) ? $limits : dfa($limits, $cc, dfa($limits, '*'))
+				array_is_list($limits) ? $limits : dfa($limits, $cc, dfa($limits, '*'))
 			)) {
 				# 2020-03-02
 				# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:

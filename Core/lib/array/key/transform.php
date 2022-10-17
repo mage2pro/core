@@ -79,9 +79,9 @@ function dfak_transform($a1, $a2, $req = false) {
 	# We should support PHP 7.0.
 	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
 	$a = df_ita($a);
-	$as = df_is_assoc($a); /** @var bool $as */
-	return df_map_kr($a, function($k, $v) use($f, $req, $as) {return [
-		!$as ? $k : $f($k), !$req || !is_array($v) ? $v : dfak_transform($v, $f, $req)
+	$l = array_is_list($a); /** @var bool $l */
+	return df_map_kr($a, function($k, $v) use($f, $req, $l) {return [
+		$l ? $k : $f($k), !$req || !is_array($v) ? $v : dfak_transform($v, $f, $req)
 	];});
 }
 

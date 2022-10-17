@@ -107,7 +107,7 @@ function dfa_deep_set(array &$array, $path, $value) {
  * @param int $l
  * @return array
  */
-function dfa_deep_slice(array $a, $l) {return 1 === $l ? (!df_is_assoc($a) ? $a : array_keys($a)) : array_map(
+function dfa_deep_slice(array $a, $l) {return 1 === $l ? (array_is_list($a) ? $a : array_keys($a)) : array_map(
 	function($v) use($l) {return !is_array($v) ? $v : dfa_deep_slice($v, $l - 1);}, $a
 );}
 

@@ -58,7 +58,7 @@ function df_ksort_r(array $a, $f = null) {return df_ksort(df_map_k(function($k, 
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
  */
-function df_ksort_r_ci(array $a) {return !df_is_assoc($a)
+function df_ksort_r_ci(array $a) {return array_is_list($a)
 	/**
 	 * 2017-09-08
 	 * @todo It would be nice to use df_sort($a) here,
@@ -97,16 +97,16 @@ function df_ksort_r_ci(array $a) {return !df_is_assoc($a)
  * @return array(int|string => mixed)
  */
 function df_sort(array $a, $f = null) {
-	$isAssoc = df_is_assoc($a); /** @var bool $isAssoc */
+	$isList = array_is_list($a); /** @var bool $isList */
 	if (!$f) {
-		$isAssoc ? asort($a) : sort($a);
+		$isList ? sort($a) : asort($a);
 	}
 	else {
 		if (!$f instanceof \Closure) {
 			$f = function($a, $b) use($f) {return !is_object($a) ? $a - $b : $a->$f() - $b->$f();};
 		}
 		/** @noinspection PhpUsageOfSilenceOperatorInspection */
-		$isAssoc ? @uasort($a, $f) : @usort($a, $f);
+		$isList ? @usort($a, $f) : @uasort($a, $f);
 	}
 	return $a;
 }

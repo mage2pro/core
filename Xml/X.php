@@ -217,8 +217,8 @@ class X extends MX {
 	 * @return X
 	 */
 	function importArray(array $array, $wrapInCData = []) {
-		foreach ($array as $key => $value) { /** @var string $key */ /** @var mixed $value */
-			if ($value instanceof X) {
+		foreach ($array as $key => $v) { /** @var string $key */ /** @var mixed $v */
+			if ($v instanceof X) {
 				/**
 				 * 2016-08-31
 				 * Случай, который отсутствовал в Российской сборке Magento:
@@ -245,12 +245,12 @@ class X extends MX {
 				 *		</TxnList>
 				 *	</Payment>
 				 */
-				$this->addChildX($value);
+				$this->addChildX($v);
 			}
-			elseif (!is_array($value)) {
-				$this->importString($key, $value, $wrapInCData);
+			elseif (!is_array($v)) {
+				$this->importString($key, $v, $wrapInCData);
 			}
-			elseif (df_is_assoc($value) || array_filter($value, function($i) {return $i instanceof X;})) {
+			elseif (df_is_assoc($v) || array_filter($v, function($i) {return $i instanceof X;})) {
 				/** @var X $childNode */
 				$childNode =
 					$this->addChild(
@@ -262,15 +262,15 @@ class X extends MX {
 						$key
 					)
 				;
-				$childData = $value; /** @var array|null $childData */
+				$childData = $v; /** @var array|null $childData */
 				# Данный программный код позволяет импортировать атрибуты тэгов
 				/** @var array(string => string)|null $attributes $attributes */
-				$attributes = dfa($value, self::ATTR);
+				$attributes = dfa($v, self::ATTR);
 				if (!is_null($attributes)) {
 					$childNode->addAttributes(df_assert_array($attributes));
-					# Если $value содержит атрибуты,
-					# то дочерние значения должны содержаться не непосредственно в $value, а в подмассиве с ключём self::CONTENT.
-					$childData = dfa($value, self::CONTENT);
+					# Если $v содержит атрибуты,
+					# то дочерние значения должны содержаться не непосредственно в $v, а в подмассиве с ключём self::CONTENT.
+					$childData = dfa($v, self::CONTENT);
 				}
 				if (!is_null($childData)) {
 					/**
@@ -333,11 +333,11 @@ class X extends MX {
 				#			)
 				#		)
 				#	;
-				foreach ($value as $valueItem) {
-					/** @var array(string => mixed)|string $valueItem */
+				foreach ($v as $vItem) {
+					/** @var array(string => mixed)|string $vItem */
 					/**
 					 * 2015-01-20
-					 * Обратите внимание, что $valueItem может быть не только массивом, но и строкой.
+					 * Обратите внимание, что $vItem может быть не только массивом, но и строкой.
 					 * Например, такая структура:
 					 *	<Группы>
 					 *		<Ид>1</Ид>
@@ -347,7 +347,7 @@ class X extends MX {
 					 * кодируется так:
 					 * array('Группы' => array('Ид' => array(1, 2, 3)))
 					 */
-					$this->importArray([$key => $valueItem], $wrapInCData);
+					$this->importArray([$key => $vItem], $wrapInCData);
 				}
 			}
 		}

@@ -229,7 +229,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 		 * It is important to use @uses array_values()
 		 * for the result to be interpreted as an array? not object, on the client side.
 		 */
-		,'options' => !df_is_assoc($oo = $o->options()) ? $oo : /**
+		,'options' => array_is_list($oo = $o->options()) ? $oo : /**
 		 *
 		 */
 			array_values(df_map_k($oo, function($v, $l) {return ['label' => $l, 'value' => $v];}))
