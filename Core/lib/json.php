@@ -204,7 +204,7 @@ function df_json_prettify($j) {return df_json_encode(df_json_decode($j));}
 
 /**
  * 2017-09-07
- * I use the @uses df_is_assoc() check,
+ * I use @uses df_is_assoc() check,
  * because otherwise @uses df_ksort_r_ci() will convert the numeric arrays to associative ones,
  * and their numeric keys will be ordered as strings.
  * @used-by df_json_decode()

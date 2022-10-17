@@ -9,7 +9,7 @@ if (!function_exists('array_is_list')) {
 	 * Пока он меня устраивает, да и сама задача такой проверки возникает у меня в Российской сборке Magento редко,
 	 * и не замечал её особого влияния на производительность системы.
 	 * Возможно, другие алгоритмы лучше, лень разбираться.
-	 * 2017-10-29 It returns `true` for an empty array
+	 * 2017-10-29 It returns `true` for an empty array.
 	 * @used-by df_is_assoc()
 	 * @used-by df_ksort_r_ci()
 	 * @used-by df_sort()
@@ -46,13 +46,7 @@ if (!function_exists('array_is_list')) {
 
 /**
  * 2015-02-07
- * Обратите внимание, что алгоритмов проверки массива на ассоциативность найдено очень много:
- * http://stackoverflow.com/questions/173400/how-to-check-if-php-array-is-associative-or-sequential
- * Я уже давно (несколько лет) использую приведённый ниже.
- * Пока он меня устраивает, да и сама задача такой проверки возникает у меня в Российской сборке Magento редко,
- * и не замечал её особого влияния на производительность системы.
- * Возможно, другие алгоритмы лучше, лень разбираться.
- * 2017-10-29 It returns `true` for an empty array
+ * 2017-10-29 It returns `true` for an empty array.
  * 2022-10-17 @uses array_is_list() has been added to PHP 8.1: https://www.php.net/manual/function.array-is-list.php
  * @used-by df_assert_assoc()
  * @used-by df_call()
@@ -63,23 +57,3 @@ if (!function_exists('array_is_list')) {
  * @return bool
  */
 function df_is_assoc(array $a) {return !$a || !array_is_list($a);}
-
-/**
- * 2015-04-17
- * Проверяет, является ли массив многомерным.
- * http://stackoverflow.com/a/145348
- * Пока никем не используется.
- * @param array(int|string => mixed) $a
- * @return bool
- */
-function df_is_multi(array $a) {
-	$r = false; /** @var bool $r */
-	foreach ($a as $v) {
-		/** @var mixed $v */
-		if (is_array($v)) {
-			$r = true;
-			break;
-		}
-	}
-	return $r;
-}
