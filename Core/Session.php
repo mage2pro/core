@@ -34,9 +34,8 @@ abstract class Session implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetGet()
 	 * @used-by df_prop()
 	 * @param string $k
-	 * @return mixed
 	 */
-	final function offsetGet($k) {return $this->_st->offsetGet($this->k($k));}
+	final function offsetGet($k): mixed {return $this->_st->offsetGet($this->k($k));}
 
 	/**
 	 * 2021-10-26
@@ -46,7 +45,7 @@ abstract class Session implements \ArrayAccess {
 	 * @param string $k
 	 * @param mixed $v
 	 */
-	final function offsetSet($k, $v) {$this->_st->offsetSet($this->k($k), $v);}
+	final function offsetSet($k, $v): void {$this->_st->offsetSet($this->k($k), $v);}
 
 	/**
 	 * 2021-10-26
@@ -54,7 +53,7 @@ abstract class Session implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetUnset()
 	 * @param string $k
 	 */
-	final function offsetUnset($k) {$this->_st->offsetUnset($this->k($k));}
+	final function offsetUnset($k): void {$this->_st->offsetUnset($this->k($k));}
 
 	/**
 	 * 2021-10-26

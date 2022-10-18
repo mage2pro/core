@@ -54,9 +54,8 @@ final class Operation implements \ArrayAccess {
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
 	 * @param string $k
-	 * @return array(string => mixed)|mixed|null
 	 */
-	function offsetGet($k) {return $this->_res->offsetGet($k);}
+	function offsetGet($k): mixed {return $this->_res->offsetGet($k);}
 
 	/**
 	 * 2017-07-13
@@ -65,7 +64,7 @@ final class Operation implements \ArrayAccess {
 	 * @param string $k
 	 * @param mixed $v
 	 */
-	function offsetSet($k, $v) {$this->_res->offsetSet($k, $v);}
+	function offsetSet($k, $v): void {$this->_res->offsetSet($k, $v);}
 
 	/**
 	 * 2017-07-13
@@ -73,7 +72,7 @@ final class Operation implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetUnset()
 	 * @param string $k
 	 */
-	function offsetUnset($k) {$this->_res->offsetUnset($k);}
+	function offsetUnset($k): void {$this->_res->offsetUnset($k);}
 
 	/**
 	 * 2017-07-13

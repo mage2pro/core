@@ -125,9 +125,8 @@ class O implements \ArrayAccess {
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::pAvailableForDownload()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param string $k
-	 * @return array(string => mixed)|mixed|null
 	 */
-	function offsetGet($k) {return dfa_deep($this->_a, $k);}
+	function offsetGet($k): mixed {return dfa_deep($this->_a, $k);}
 
 	/**
 	 * 2017-07-13
@@ -137,7 +136,7 @@ class O implements \ArrayAccess {
 	 * @param string $k
 	 * @param mixed $v
 	 */
-	function offsetSet($k, $v) {dfa_deep_set($this->_a, $k, $v);}
+	function offsetSet($k, $v): void {dfa_deep_set($this->_a, $k, $v);}
 
 	/**
 	 * 2017-07-13
@@ -145,7 +144,7 @@ class O implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetUnset()
 	 * @param string $k
 	 */
-	function offsetUnset($k) {dfa_deep_unset($this->_a, $k);}
+	function offsetUnset($k): void {dfa_deep_unset($this->_a, $k);}
 
 	/**
 	 * 2017-07-13
