@@ -126,7 +126,7 @@ function df_prop($o, $v = DF_N, $d = null, $type = null) {/** @var object|mixed|
 				$r = dfa($o->$a, $k, $d);
 			}
 			else {
-				$prop = &$o->$a;
+				$prop =& $o->$a;
 				$prop[$k] = $v;
 				$r = $o;
 			}
