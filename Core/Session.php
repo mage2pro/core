@@ -25,9 +25,8 @@ abstract class Session implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetExists()
 	 * @used-by df_prop()
 	 * @param string $k
-	 * @return bool
 	 */
-	final function offsetExists($k) {return $this->_st->offsetExists($this->k($k));}
+	final function offsetExists($k): bool {return $this->_st->offsetExists($this->k($k));}
 
 	/**
 	 * 2021-10-26

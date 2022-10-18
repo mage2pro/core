@@ -46,9 +46,8 @@ final class Operation implements \ArrayAccess {
 	 * @override
 	 * @see \ArrayAccess::offsetExists()
 	 * @param string $k
-	 * @return bool
 	 */
-	function offsetExists($k) {return $this->_res->offsetExists($k);}
+	function offsetExists($k): bool {return $this->_res->offsetExists($k);}
 
 	/**
 	 * 2017-07-13

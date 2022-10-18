@@ -105,9 +105,8 @@ class O implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetExists()
 	 * @used-by df_prop()
 	 * @param string $k
-	 * @return bool
 	 */
-	function offsetExists($k) {return !is_null(dfa_deep($this->_a, $k));}
+	function offsetExists($k): bool {return !is_null(dfa_deep($this->_a, $k));}
 
 	/**
 	 * 2017-07-13
