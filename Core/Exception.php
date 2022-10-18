@@ -204,9 +204,8 @@ class Exception extends LE implements \ArrayAccess {
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
 	 * @param string $offset
-	 * @return mixed
 	 */
-	function offsetGet($offset) {return dfa($this->_data, $offset);}
+	function offsetGet($offset): mixed {return dfa($this->_data, $offset);}
 
 	/**
 	 * 2015-10-10
