@@ -46,9 +46,8 @@ abstract class Client {
 	 * @see \Inkifi\Pwinty\API\Client::urlBase()
 	 * @see \Stock2Shop\OrderExport\API\Client::urlBase()
 	 * @used-by \Dfe\Sift\API\Client::urlBase()
-	 * @return string
 	 */
-	abstract protected function urlBase();
+	abstract protected function urlBase(): string;
 
 	/**
 	 * 2017-07-02
