@@ -90,9 +90,8 @@ abstract class Client {
 	/**
 	 * 2020-02-29
 	 * @used-by \Dfe\Sift\API\Facade\GetDecisions::adjustClient()
-	 * @return C
 	 */
-	final function c() {return $this->_c;}
+	final function c(): C {return $this->_c;}
 
 	/**
 	 * 2019-04-24
@@ -165,9 +164,7 @@ abstract class Client {
 	 * @param callable|IFilter $f
 	 * @param int $p
 	 */
-	final protected function addFilterReq($f, $p = FilterChain::DEFAULT_PRIORITY) {
-		$this->_filtersReq->attach($f, $p);
-	}
+	final protected function addFilterReq($f, $p = FilterChain::DEFAULT_PRIORITY) {$this->_filtersReq->attach($f, $p);}
 
 	/**
 	 * 2017-07-06
@@ -177,9 +174,7 @@ abstract class Client {
 	 * @param callable|IFilter $f
 	 * @param int $p
 	 */
-	final protected function addFilterResBV($f, $p = FilterChain::DEFAULT_PRIORITY) {
-		$this->_filtersResBV->attach($f, $p);
-	}
+	final protected function addFilterResBV($f, $p = FilterChain::DEFAULT_PRIORITY) {$this->_filtersResBV->attach($f, $p);}
 
 	/**
 	 * 2017-07-08
