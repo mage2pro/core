@@ -19,9 +19,8 @@ final class HTTP extends \Df\API\Exception {
 	 * @see \Df\API\Exception::long()
 	 * @used-by \Df\API\Client::_p()
 	 * @used-by \Df\API\Exception::short()
-	 * @return string
 	 */
-	function long() {return "{$this->_r->getStatus()} {$this->_r->getMessage()}";}
+	function long():string {return "{$this->_r->getStatus()} {$this->_r->getMessage()}";}
 
 	/**
 	 * 2017-08-08

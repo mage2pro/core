@@ -25,7 +25,7 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @see \Inkifi\Pwinty\API\Validator::long()
 	 * @return string
 	 */
-	abstract function long();
+	abstract function long():string;
 
 	/**
 	 * 2017-07-09
