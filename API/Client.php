@@ -184,7 +184,7 @@ abstract class Client {
 	 * @param string $path
 	 * @return array(string => mixed)
 	 */
-	protected function commonParams($path) {return [];}
+	protected function commonParams($path): array {return [];}
 
 	/**
 	 * 2017-07-05
@@ -201,7 +201,7 @@ abstract class Client {
 	 * @see \Inkifi\Pwinty\API\Client::headers()
 	 * @return array(string => string)
 	 */
-	protected function headers() {return [];}
+	protected function headers(): array {return [];}
 
 	/**
 	 * 2017-08-10
