@@ -94,9 +94,8 @@ abstract class Result implements ResultInterface {
 	 * @param string $name
 	 * @param string $value
 	 * @param boolean $replace
-	 * @return $this
 	 */
-	function setHeader($name, $value, $replace = false) {
+	function setHeader($name, $value, $replace = false):self {
 		$this->_headers[] = ['name' => $name, 'replace' => $replace, 'value' => $value]; return $this;
 	}
 
@@ -107,9 +106,8 @@ abstract class Result implements ResultInterface {
 	 * @see \Magento\Framework\Controller\ResultInterface::setHttpResponseCode()
 	 * @see \Magento\Framework\Controller\AbstractResult::setHttpResponseCode()
 	 * @param int $v
-	 * @return $this
 	 */
-	function setHttpResponseCode($v) {$this->_code = $v; return $this;}
+	function setHttpResponseCode($v):self {$this->_code = $v; return $this;}
 
 	/**
 	 * 2016-08-24

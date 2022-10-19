@@ -35,7 +35,7 @@ abstract class Session implements \ArrayAccess {
 	 * @used-by df_prop()
 	 * @param string $k
 	 */
-	final function offsetGet($k): mixed {return $this->_st->offsetGet($this->k($k));}
+	final function offsetGet($k):mixed {return $this->_st->offsetGet($this->k($k));}
 
 	/**
 	 * 2021-10-26

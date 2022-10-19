@@ -39,6 +39,7 @@ use Magento\Framework\Phrase;
 class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-12-12
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * Важно инициализировать дочерний филдсет именно здесь,
 	 * а не в методе @see \Df\Framework\Form\Element\Fieldset::addField(),
 	 * потому что к моменту завершения вызова @see \Df\Framework\Form\Element\Fieldset::addField()
@@ -51,9 +52,8 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @used-by \Magento\Framework\Data\Form\AbstractForm::addField()
 	 * @param AE $element
 	 * @param bool $after [optional]
-	 * @return $this
 	 */
-	function addElement(AE $element, $after = false) {
+	function addElement(AE $element, $after = false):self {
 		# 2015-12-12 An exotic expression «instanceof self» is totally valid: https://3v4l.org/nWA6U
 		if ($element instanceof self) {
 			/**
@@ -115,9 +115,9 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-11-23
-	 * @return $this
+	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 */
-	function hide() {df_hide($this); return $this;}
+	final function hide():self {df_hide($this); return $this;}
 
 	/**
 	 * 2015-11-19

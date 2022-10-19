@@ -126,7 +126,7 @@ class O implements \ArrayAccess {
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param string $k
 	 */
-	function offsetGet($k): mixed {return dfa_deep($this->_a, $k);}
+	function offsetGet($k):mixed {return dfa_deep($this->_a, $k);}
 
 	/**
 	 * 2017-07-13

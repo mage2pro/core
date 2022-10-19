@@ -18,7 +18,7 @@ final class DataProvider {
 	 * @param F $f
 	 * @return array(string => mixed)
 	 */
-	function aroundGetData(Sb $sb, F $f): array {return
+	function aroundGetData(Sb $sb, F $f):array {return
 		df_cfg('adobe_stock/integration/enabled') ? $f() : ['items' => [], 'totalRecords' => 0]
 	;}
 }

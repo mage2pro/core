@@ -49,10 +49,9 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @see \Magento\Config\Model\Config::save():
 	 * 		$saveTransaction->save();
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Model/Config.php#L151
-	 * @return $this
 	 * @throws \Exception
 	 */
-	function save() {
+	function save():self {
 		try {$this->dfSaveBefore(); parent::save();}
 		catch (\Exception $e) {
 			df_log($e);

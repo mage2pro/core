@@ -7,7 +7,7 @@ final class Session extends SessionBase {
 	 * 2021-10-26
 	 * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
 	 * @param array(string => mixed)|string $v [optional]
-	 * @return $this|array(string => mixed)
+	 * @return self|array(string => mixed)
 	 */
 	function customer($v = DF_N) {return df_prop($this, $v, []);}
 

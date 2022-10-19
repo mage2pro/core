@@ -98,7 +98,7 @@ abstract class Client {
 	 * @used-by _p()
 	 * @used-by \Inkifi\Pwinty\API\Facade\Order::adjustClient()
 	 * @param bool|null|string $v [optional]
-	 * @return $this|bool
+	 * @return self|bool
 	 */
 	final function logging($v = DF_N) {return df_prop($this, $v, false);}
 
@@ -108,9 +108,8 @@ abstract class Client {
 	 * @used-by \Dfe\Dynamics365\API\Facade::p()
 	 * @used-by \Dfe\ZohoBooks\API\R::p()
 	 * @throws DFE
-	 * @return mixed|null
 	 */
-	final function p() {
+	final function p():mixed {
 		$tag = df_cts($this, '_'); /** @var string $tag */
 		if ($d = $this->destructive()) { /** @var bool $d */
 			df_cache_clean_tag($tag);
@@ -138,7 +137,7 @@ abstract class Client {
 	 * 2019-01-12 It is used by the Inkifi_Mediaclip module.
 	 * @used-by \Df\API\Facade::p()
 	 */
-	final function silent() {$this->_silent = true;}
+	final function silent():void {$this->_silent = true;}
 
 	/**
 	 * 2017-07-06
@@ -164,7 +163,7 @@ abstract class Client {
 	 * @param callable|IFilter $f
 	 * @param int $p
 	 */
-	final protected function addFilterReq($f, $p = FilterChain::DEFAULT_PRIORITY) {$this->_filtersReq->attach($f, $p);}
+	final protected function addFilterReq($f, $p = FilterChain::DEFAULT_PRIORITY):void {$this->_filtersReq->attach($f, $p);}
 
 	/**
 	 * 2017-07-06
@@ -174,7 +173,7 @@ abstract class Client {
 	 * @param callable|IFilter $f
 	 * @param int $p
 	 */
-	final protected function addFilterResBV($f, $p = FilterChain::DEFAULT_PRIORITY) {$this->_filtersResBV->attach($f, $p);}
+	final protected function addFilterResBV($f, $p = FilterChain::DEFAULT_PRIORITY):void {$this->_filtersResBV->attach($f, $p);}
 
 	/**
 	 * 2017-07-08
@@ -184,7 +183,7 @@ abstract class Client {
 	 * @param string $path
 	 * @return array(string => mixed)
 	 */
-	protected function commonParams($path): array {return [];}
+	protected function commonParams($path):array {return [];}
 
 	/**
 	 * 2017-07-05
@@ -201,20 +200,20 @@ abstract class Client {
 	 * @see \Inkifi\Pwinty\API\Client::headers()
 	 * @return array(string => string)
 	 */
-	protected function headers(): array {return [];}
+	protected function headers():array {return [];}
 
 	/**
 	 * 2017-08-10
 	 * @used-by \Dfe\Square\API\Client::headers()
 	 * @used-by \Inkifi\Mediaclip\API\Client::headers()
 	 */
-	final protected function method(): string {return $this->_method;}
+	final protected function method():string {return $this->_method;}
 
 	/**
 	 * 2017-12-02
 	 * @used-by \Dfe\AlphaCommerceHub\API\Client::commonParams()
 	 */
-	final protected function path(): string {return $this->_path;}
+	final protected function path():string {return $this->_path;}
 
 	/**
 	 * 2019-01-14
@@ -234,7 +233,7 @@ abstract class Client {
 	 * @used-by \Inkifi\Pwinty\API\Client::_construct()
 	 * @used-by \Stock2Shop\OrderExport\API\Client::_construct()
 	 */
-	final protected function reqJson() {$this->addFilterReq('df_json_encode');}
+	final protected function reqJson():void {$this->addFilterReq('df_json_encode');}
 
 	/**
 	 * 2018-12-18
@@ -242,7 +241,7 @@ abstract class Client {
 	 * @param string $tag
 	 * @param array(string => mixed) $p [optional]
 	 */
-	final protected function reqXml($tag, array $p = []) {$this->addFilterReq(
+	final protected function reqXml($tag, array $p = []):void {$this->addFilterReq(
 		function(array $a) use($tag, $p) {return df_xml_g($tag, $a, $p);}
 	);}
 
@@ -258,7 +257,7 @@ abstract class Client {
 	 * @used-by \Inkifi\Mediaclip\API\Client::_construct()
 	 * @used-by \Inkifi\Pwinty\API\Client::_construct()
 	 */
-	final protected function resJson() {$this->addFilterResBV('df_json_decode');}
+	final protected function resJson():void {$this->addFilterResBV('df_json_decode');}
 
 	/**
 	 * 2017-07-05 A descendant class can return null if it does not need to validate the responses.
@@ -272,14 +271,14 @@ abstract class Client {
 	 * @see \Inkifi\Mediaclip\API\Client::responseValidatorC()
 	 * @see \Inkifi\Pwinty\API\Client::responseValidatorC()
 	 */
-	protected function responseValidatorC(): string {return '';}
+	protected function responseValidatorC():string {return '';}
 
 	/**
 	 * 2019-04-04
 	 * @used-by \Inkifi\Pwinty\API\Client::_construct()
 	 * @param string $k
 	 */
-	final protected function resPath($k) {$this->addFilterResAV(function(array $a) use($k) {return
+	final protected function resPath($k):void {$this->addFilterResAV(function(array $a) use($k) {return
 		dfa_deep($a, $k, $a)
 	;});}
 
@@ -294,15 +293,14 @@ abstract class Client {
 	 * @uses df_first()
 	 * @used-by \Dfe\Square\API\Client::_construct()
 	 */
-	final protected function resStripRoot() {$this->addFilterResAV('df_first');}
+	final protected function resStripRoot():void {$this->addFilterResAV('df_first');}
 
 	/**
 	 * 2019-01-11
 	 * @used-by \Inkifi\Mediaclip\API\Client::s()
 	 * @used-by \Inkifi\Pwinty\API\Client::urlBase()
-	 * @return Store
 	 */
-	final protected function store() {return $this->_store;}
+	final protected function store():Store {return $this->_store;}
 
 	/**
 	 * 2017-12-02
@@ -311,16 +309,15 @@ abstract class Client {
 	 * what is why we use @uses df_cc_path().
 	 * @used-by _p()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::url()
-	 * @return string
 	 */
-	protected function url() {return df_cc_path($this->urlBase(), $this->_path);}
+	protected function url():string {return df_cc_path($this->urlBase(), $this->_path);}
 
 	/**
 	 * 2018-11-11
 	 * @used-by setup()
 	 * @see \Dfe\TBCBank\API\Client::verifyCertificate()
 	 */
-	protected function verifyCertificate() {return true;}
+	protected function verifyCertificate(): bool {return true;}
 
 	/**
 	 * 2018-11-11
@@ -334,15 +331,14 @@ abstract class Client {
 	 * @see \Dfe\Vantiv\API\Client::zfConfig()
 	 * @return array(string => mixed)
 	 */
-	protected function zfConfig(): array {return [];}
+	protected function zfConfig():array {return [];}
 
 	/**
 	 * 2017-08-10
 	 * @used-by p()
 	 * @throws DFE
-	 * @return mixed|null
 	 */
-	private function _p() {
+	private function _p():mixed {
 		$c = $this->_c; /** @var C $c */
 		$c->setHeaders($this->headers());
 		$c->setUri($this->url());
@@ -421,14 +417,14 @@ abstract class Client {
 	 * @param callable|IFilter $f
 	 * @param int $p
 	 */
-	private function addFilterResAV($f, $p = FilterChain::DEFAULT_PRIORITY) {$this->_filtersResAV->attach($f, $p);}
+	private function addFilterResAV($f, $p = FilterChain::DEFAULT_PRIORITY): void {$this->_filtersResAV->attach($f, $p);}
 
 	/**
 	 * 2017-10-08 Adds $f at the lowest priority (it will be applied after all other filters).
 	 * @deprecated It is unused.
 	 * @param callable|IFilter $f
 	 */
-	private function appendFilterResAV($f) {$this->_filtersResAV->attach(
+	private function appendFilterResAV($f): void {$this->_filtersResAV->attach(
 		$f, df_zf_pq_min($this->_filtersResAV->getFilters()) - 1
 	);}
 
@@ -437,7 +433,7 @@ abstract class Client {
 	 * @deprecated It is unused.
 	 * @param callable|IFilter $f
 	 */
-	private function appendFilterResBV($f) {$this->_filtersResBV->attach(
+	private function appendFilterResBV($f): void {$this->_filtersResBV->attach(
 		$f, df_zf_pq_min($this->_filtersResBV->getFilters()) - 1
 	);}
 
@@ -445,17 +441,15 @@ abstract class Client {
 	 * 2017-08-10
 	 * @used-by __construct()
 	 * @used-by p()
-	 * @return bool
 	 */
-	private function destructive() {return C::GET !== $this->_method;}
+	private function destructive(): bool {return C::GET !== $this->_method;}
 
 	/**
 	 * 2019-01-14
 	 * @used-by __construct()
 	 * @param array(string => mixed) $config
-	 * @return C
 	 */
-	private function setup(array $config) {
+	private function setup(array $config): C {
 		$r = new C(null, $config + [
 			'timeout' => 120
 			/**

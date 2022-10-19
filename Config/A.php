@@ -54,10 +54,9 @@ final class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @used-by \Df\Config\Settings::_a()
 	 * @param string $itemClass
 	 * @param mixed[] $itemsA
-	 * @return $this
 	 * @throws DFE
 	 */
-	static function i($itemClass, array $itemsA) {
+	static function i($itemClass, array $itemsA):self {
 		df_assert(!isset($itemsA[self::FAKE]));
 		return new self([self::$P__ITEM_CLASS => $itemClass, self::$P__ITEMS_A => $itemsA]);
 	}

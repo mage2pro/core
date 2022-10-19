@@ -67,9 +67,8 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Block/System/Config/Form.php#L436-L444
 	 * @see \Dfe\SalesSequence\Config\Next\Backend::afterLoad()
-	 * @return $this
 	 */
-	function afterLoad() {df_abstract($this); return $this;}
+	function afterLoad():self {df_abstract($this); return $this;}
 
 	/**
 	 * 2016-01-14    
@@ -78,9 +77,8 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/DB/Transaction.php#L166-L166
 	 * @see \Magento\Framework\Model\AbstractModel::delete() 
 	 * @see \Dfe\SalesSequence\Config\Next\Backend::delete()
-	 * @return $this
 	 */
-	function delete() {df_abstract($this); return $this;}
+	function delete():self {df_abstract($this); return $this;}
 
 	/**
 	 * 2015-01-14
@@ -154,9 +152,8 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * 		$this->addCommitCallback([$object, 'afterCommitCallback'])->commit();
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Model/ResourceModel/Db/AbstractDb.php#L388-L416
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/Model/ResourceModel/Db/AbstractDb.php#L398-L430
-	 * @return $this
 	 */
-	function save() {
+	function save():self {
 		/**
 		 * 2017-12-04
 		 * @uses \Magento\Framework\Model\AbstractModel::afterCommitCallback()

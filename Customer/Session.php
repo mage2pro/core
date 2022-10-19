@@ -7,7 +7,7 @@ final class Session extends SessionBase {
 	 * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
 	 * @used-by \Df\Sso\Css::isAccConfirmation()
 	 * @param bool|string $v [optional]
-	 * @return $this|bool
+	 * @return self|bool
 	 */
 	function needConfirm($v = DF_N) {return df_prop($this, $v, []);}
 
@@ -16,7 +16,7 @@ final class Session extends SessionBase {
 	 * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
 	 * @used-by \Df\Sso\CustomerReturn::_execute()
 	 * @param string $v [optional]
-	 * @return $this|string
+	 * @return self|string
 	 */
 	function ssoId($v = DF_N) {return df_prop($this, $v, []);}
 
@@ -26,7 +26,7 @@ final class Session extends SessionBase {
 	 * @used-by \Df\Sso\Css::isRegCompletion()
 	 * @used-by \Df\Sso\CustomerReturn::_execute()
 	 * @param string $v [optional]
-	 * @return $this|string
+	 * @return self|string
 	 */
 	function ssoProvider($v = DF_N) {return df_prop($this, $v, []);}
 
@@ -36,7 +36,7 @@ final class Session extends SessionBase {
 	 * @used-by \Df\Customer\Plugin\Block\Form\Register::afterGetFormData()
 	 * @used-by \Df\Sso\CustomerReturn::_execute()
 	 * @param array(string => mixed)|string $v [optional]
-	 * @return $this|array(string => mixed)
+	 * @return self|array(string => mixed)
 	 */
 	function ssoRegistrationData($v = DF_N) {return df_prop($this, $v, []);}
 }

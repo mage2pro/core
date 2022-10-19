@@ -209,7 +209,7 @@ function df_error_create($m = null) {return
  * @param string|string[] ...$args
  * @return DFE
  */
-function df_error_create_html(...$args) {return df_error_create(...$args)->markMessageAsHtml(true);}
+function df_error_create_html(...$args) {return df_error_create(...$args)->markMessageAsHtml();}
 
 /**
  * 2016-07-31

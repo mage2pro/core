@@ -246,23 +246,22 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-02-15
 	 * @override
 	 * How is a payment method's assignData() used? https://mage2.pro/t/718
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::assignData()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L304-L312
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::assignData()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L762-L797
-	 *
 	 * ISSUES with @see \Magento\Payment\Model\Method\AbstractMethod::assignData():
 	 * 1) The @see \Magento\Payment\Model\Method\AbstractMethod::assignData() method
 	 * can be simplified: https://mage2.pro/t/719
 	 * 2) The @see \Magento\Payment\Model\Method\AbstractMethod::assignData() method
 	 * has a wrong PHPDoc declaration: https://mage2.pro/t/720
-	 *
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @used-by isAvailable()
 	 * @param _DO $o
-	 * @return $this
 	 */
-	final function assignData(_DO $o) {
+	final function assignData(_DO $o):self {
 		/**
 		 * 2016-05-03
 		 * https://mage2.pro/t/718/3
@@ -377,13 +376,16 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 		$amount = $payment->formatAmount($amount, true);
 	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L36
 	 *
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
+	 *
 	 * @param II $i
 	 * @param string|float $a
-	 * @return $this
 	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
 	 * но реально возвращаемое значение ядром не используется.
 	 */
-	final function authorize(II $i, $a) {return $this->action(function() use($i) {
+	final function authorize(II $i, $a):self {return $this->action(function() use($i) {
 		if ($i instanceof OP) {
 			$i->setIsFraudDetected(false);
 		}
@@ -546,15 +548,16 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-02-15
 	 * @override
 	 * How is a payment method's cancel() used? https://mage2.pro/t/710
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::cancel()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L279-L286
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::cancel()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L658-L669
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @param II $payment
-	 * @return $this
 	 */
-	final function cancel(II $payment) {return $this;}
+	final function cancel(II $payment):self {return $this;}
 
 	/**
 	 * 2016-02-10
@@ -855,15 +858,17 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 		$amountToCapture = $payment->formatAmount($invoice->getBaseGrandTotal());
 	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Sales/Model/Order/Payment/Operations/CaptureOperation.php#L37
 	 *
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
+	 *
 	 * @param II|I|OP $payment
 	 * @param string|float $a
-	 * @return $this
 	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
 	 * но реально возвращаемое значение ядром не используется.
-	 *
 	 * @uses charge()
 	 */
-	final function capture(II $payment, $a) {$this->action('charge'); return $this;}
+	final function capture(II $payment, $a):self {$this->action('charge'); return $this;}
 
 	/**
 	 * 2016-08-20
@@ -1591,9 +1596,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Sales/Model/Order/Payment.php#L701
 	 * @param II|I|OP $payment
 	 * @param string|float $a
-	 * @return $this
 	 */
-	final function refund(II $payment, $a) {
+	final function refund(II $payment, $a):self {
 		df_cm_set_increment_id($this->ii()->getCreditmemo());
 		$this->action(function() use($a) {$this->_refund($this->cFromBase($a));});
 		return $this;
@@ -1817,9 +1821,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Magento\Sales\Model\Order\Payment::place()
 	 * 		$methodInstance->validate();
 	 * @throws LE
-	 * @return $this
 	 */
-	final function validate() {
+	final function validate():self {
 		if (!$this->canUseForCountry(dfp_oq($this->ii())->getBillingAddress()->getCountryId())) {
 			throw new LE(__(
 				'You can\'t use the payment type you selected to make payments to the billing country.'
@@ -1841,10 +1844,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::void()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L671-L686
 	 * @param II|I|OP $payment
-	 * @return $this
 	 * @uses _void()
 	 */
-	final function void(II $payment) {
+	final function void(II $payment):self {
 		$this->action('_void');
 		/**
 		 * 2017-01-17

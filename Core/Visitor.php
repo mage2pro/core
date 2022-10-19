@@ -103,9 +103,9 @@ final class Visitor extends O {
 	/**
 	 * 2016-05-20
 	 * @param string|null $ip [optional]
-	 * @return $this
+	 * @return self
 	 */
-	static function sp($ip = null) {return dfcf(function($ip = null) {return new self([
+	final static function sp($ip = null):self {return dfcf(function($ip = null) {return new self([
 		self::$P__IP => $ip ?: df_visitor_ip()
 	]);}, [$ip]);}
 }

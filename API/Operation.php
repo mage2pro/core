@@ -55,7 +55,7 @@ final class Operation implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetGet()
 	 * @param string $k
 	 */
-	function offsetGet($k): mixed {return $this->_res->offsetGet($k);}
+	function offsetGet($k):mixed {return $this->_res->offsetGet($k);}
 
 	/**
 	 * 2017-07-13

@@ -11,6 +11,7 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface as IRenderer;
 class Select2 extends Select {
 	/**
 	 * 2016-09-03
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * Неправильно вызывать @uses df_fe_init() в методе
 	 * @see \Df\Framework\Form\Element\Select2::onFormInitialized(),
@@ -33,9 +34,8 @@ class Select2 extends Select {
 	 * @used-by \Magento\Config\Block\System\Config\Form::_initElement()
 	 * https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Config/Block/System/Config/Form.php#L379
 	 * @param IRenderer $renderer
-	 * @return $this
 	 */
-	function setRenderer(IRenderer $renderer) {
+	function setRenderer(IRenderer $renderer):self {
 		/**
 		 * 2016-09-03
 		 * В первый раз мы попадаем сюда отсюда:

@@ -99,9 +99,8 @@ class Exception extends LE implements \ArrayAccess {
 	/**
 	 * 2016-07-31
 	 * @used-by df_error_create_html()
-	 * @return $this
 	 */
-	function markMessageAsHtml() {$this->_messageIsHtml = true; return $this;}
+	final function markMessageAsHtml():self {$this->_messageIsHtml = true; return $this;}
 
 	/**
 	 * Стандартный метод @see \Exception::getMessage() объявлен как final.
@@ -205,7 +204,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetGet()
 	 * @param string $offset
 	 */
-	function offsetGet($offset): mixed {return dfa($this->_data, $offset);}
+	function offsetGet($offset):mixed {return dfa($this->_data, $offset);}
 
 	/**
 	 * 2015-10-10
@@ -298,7 +297,6 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by df_error_create()
 	 * @used-by \Df\Qa\Failure\Exception::i()
 	 * @param \Exception $e
-	 * @return $this
 	 */
-	static function wrap(E $e) {return $e instanceof self ? $e : new self($e);}
+	final static function wrap(E $e):self {return $e instanceof self ? $e : new self($e);}
 }
