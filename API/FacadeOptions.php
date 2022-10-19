@@ -11,7 +11,7 @@ final class FacadeOptions {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @param string|null|string $v [optional]
-	 * @return string|$this
+	 * @return string|self
 	 */
 	function resC($v = DF_N) {return df_prop($this, $v, O::class);}
 
@@ -20,7 +20,7 @@ final class FacadeOptions {
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
 	 * @param bool|null|string $v [optional]
-	 * @return bool|$this
+	 * @return bool|self
 	 */
 	function silent($v = DF_N) {return df_prop($this, $v);}
 
@@ -37,7 +37,6 @@ final class FacadeOptions {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
-	 * @return FacadeOptions
 	 */
-	static function i() {return new self;}
+	static function i():self {return new self;}
 }
