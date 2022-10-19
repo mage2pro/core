@@ -28,9 +28,8 @@ class X extends MX {
 	 * @used-by importArray()
 	 * @used-by \Df\Xml\G::_p()
 	 * @param array(string => string) $attributes
-	 * @return $this
 	 */
-	function addAttributes(array $attributes) {
+	function addAttributes(array $attributes):self {
 		foreach ($attributes as $k => $v) {/** @var string $k */ /** @var mixed $v */
 			df_assert_sne($k);
 			# убрал strval($v) для ускорения системы
@@ -382,16 +381,6 @@ class X extends MX {
 	}
 
 	/**
-	 * http://stackoverflow.com/a/3153704
-	 * @param mixed $value
-	 * @return $this
-	 */
-	function setValue($value) {
-		$this->{0} = $value;
-		return $this;
-	}
-
-	/**
 	 * @override
 	 * @param string|string[] $path
 	 * @return X[]
@@ -571,6 +560,13 @@ class X extends MX {
 	 * @return string
 	 */
 	private function k($s) {return !df_contains($s, ':') ? $s : "xmlns:$s";}
+
+	/**
+	 * http://stackoverflow.com/a/3153704
+	 * @used-by importString()
+	 * @param mixed $v
+	 */
+	private function setValue($v):self {$this[0] = $v; return $v;}
 
 	const ATTR = '_attr';
 	const CONTENT = '_content';

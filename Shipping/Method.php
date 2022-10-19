@@ -1,6 +1,7 @@
 <?php
 namespace Df\Shipping;
 use Magento\Framework\DataObject as _DO;
+use Magento\Framework\ObjectManager\NoninterceptableInterface as INonInterceptable;
 use Magento\Quote\Model\Quote\Address\RateRequest as Req;
 use Magento\Quote\Model\Quote\Address\RateResult\Error;
 use Magento\Shipping\Model\Carrier\AbstractCarrier as AC; # 2018-04-17 It is used by PHPDoc.
@@ -12,7 +13,7 @@ use Magento\Shipping\Model\Rate\Result as Res;
  * @see \Doormall\Shipping\Method
  * @see \Frugue\Shipping\Method
  */
-abstract class Method implements IC, IAC {
+abstract class Method implements IC, IAC, INonInterceptable {
 	/**
 	 * 2018-04-17
 	 * @override
@@ -90,6 +91,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::checkAvailableShipCountries()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L79-L84
@@ -128,12 +132,15 @@ abstract class Method implements IC, IAC {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L279-L323
 	 * @param _DO $r
-	 * @return $this|false|Error
+	 * @return self|false|Error
 	 */
 	final function checkAvailableShipCountries(_DO $r) {return $this;}
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::debugData()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L178-L185
@@ -149,6 +156,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::getCarrierCode()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L187-L193
@@ -165,6 +175,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::getConfigData()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L15-L22
@@ -236,6 +249,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::getContainerTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L53-L60
@@ -251,6 +267,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::getContentTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L195-L202
@@ -266,6 +285,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::getCustomizableContainerTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L62-L68
@@ -280,6 +302,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::getDeliveryConfirmationTypes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L70-L77
@@ -303,6 +328,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::getFinalPriceWithHandlingFee()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L135-L142
@@ -334,7 +362,9 @@ abstract class Method implements IC, IAC {
 	final function getFinalPriceWithHandlingFee($cost) {return $cost;}
 
 	/**
-	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::getSortOrder()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L127-L133
@@ -349,6 +379,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::getTotalNumOfBoxes()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L144-L151
@@ -370,6 +403,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::isActive()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L95-L101
@@ -386,6 +422,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::isCityRequired()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L161-L167
@@ -400,6 +439,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::isFixed()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L95-L101
@@ -423,6 +465,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::isShippingLabelsAvailable()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L119-L125
@@ -440,6 +485,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::isStateProvinceRequired()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L153-L159
@@ -454,6 +502,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IC::isTrackingAvailable()
 	 * @used-by \Magento\Shipping\Block\Adminhtml\Order\Tracking::getCarriers():
@@ -469,6 +520,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::isZipCodeRequired()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L169-L176
@@ -484,6 +538,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::proccessAdditionalValidation()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L86-L93
@@ -512,6 +569,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::requestToShipment()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L33-L41
@@ -527,6 +587,9 @@ abstract class Method implements IC, IAC {
 
 	/**
 	 * 2018-04-17
+	 * 2022-10-19
+	 * We can use `final` in the method's signature despite if M2 code generation
+	 * because the class implements @see INonInterceptable.
 	 * @override
 	 * @see IAC::returnOfShipment()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L42-L51

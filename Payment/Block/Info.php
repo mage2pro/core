@@ -128,9 +128,8 @@ abstract class Info extends _P {
 	 * `Invoice PDF priting leads to the «Call to a member function toPdf() on null
 	 * in magento/module-sales/Model/Order/Pdf/AbstractPdf.php:428» failure`: https://mage2.pro/t/4336
 	 * @param bool $v
-	 * @return $this
 	 */
-	final function setIsSecureMode($v) {$this->_secureMode = $v; return $this;}
+	final function setIsSecureMode($v):self {$this->_secureMode = $v; return $this;}
 
 	/**
 	 * 2017-03-25
