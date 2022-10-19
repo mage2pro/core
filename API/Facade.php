@@ -41,9 +41,8 @@ abstract class Facade {
 	 * @used-by \Dfe\Moip\API\Facade\Notification::targets()
 	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t01_all()
 	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t04_delete_all()
-	 * @return Op
 	 */
-	final function all() {return $this->p();}
+	final function all():Op {return $this->p();}
 
 	/**
 	 * 2017-07-13
@@ -54,19 +53,17 @@ abstract class Facade {
 	 * @used-by \Dfe\Moip\Test\CaseT\Notification::create()
 	 * @used-by \Dfe\Moip\Test\Order::create()
 	 * @param array(string => mixed) $a
-	 * @return Op
 	 * @throws DFE
 	 */
-	final function create(array $a) {return $this->p($a, Z::POST);}
+	final function create(array $a):Op {return $this->p($a, Z::POST);}
 
 	/**
 	 * 2017-08-08
 	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t03_delete()
 	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t04_delete_all()
 	 * @param string $id
-	 * @return Op
 	 */
-	final function delete($id) {return $this->p($id);}
+	final function delete($id):Op {return $this->p($id);}
 
 	/**
 	 * 2017-07-13
@@ -84,17 +81,15 @@ abstract class Facade {
 	 * @param int|string $id
 	 * @param string|null $suffix [optional]
 	 * @param FacadeOptions|null $opt [optional]
-	 * @return Op
 	 */
-	final function get($id, $suffix = null, FacadeOptions $opt = null) {return $this->p($id, null, $suffix, $opt);}
+	final function get($id, $suffix = null, FacadeOptions $opt = null):Op {return $this->p($id, null, $suffix, $opt);}
 
 	/**
 	 * 2017-09-04 @deprecated It is unused.
 	 * @param int|string|array(string => mixed) $p
-	 * @return Op
 	 * @throws DFE
 	 */
-	final function patch($p) {return $this->p($p);}
+	final function patch($p):Op {return $this->p($p);}
 
 	/**
 	 * 2017-10-08
@@ -115,20 +110,18 @@ abstract class Facade {
 	 * @param int|string|array(string => mixed) $p
 	 * @param string|null $suffix [optional]
 	 * @param FacadeOptions|null $opt [optional]
-	 * @return Op
 	 * @throws DFE
 	 */
-	final function post($p, $suffix = null, FacadeOptions $opt = null) {return $this->p($p, null, $suffix, $opt);}
+	final function post($p, $suffix = null, FacadeOptions $opt = null):Op {return $this->p($p, null, $suffix, $opt);}
 
 	/**
 	 * 2017-09-03
 	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
 	 * @param array(string => mixed) $p
 	 * @param string|null $suffix [optional]
-	 * @return Op
 	 * @throws DFE
 	 */
-	final function put(array $p, $suffix = null) {return $this->p($p, null, $suffix);}
+	final function put(array $p, $suffix = null):Op {return $this->p($p, null, $suffix);}
 
 	/**
 	 * 2019-03-04
@@ -138,7 +131,7 @@ abstract class Facade {
 	 * @see \Inkifi\Pwinty\API\Facade\Order::adjustClient()
 	 * @param Client $c
 	 */
-	protected function adjustClient(Client $c) {}
+	protected function adjustClient(Client $c):void {}
 
 	/**
 	 * 2017-07-13
@@ -158,10 +151,9 @@ abstract class Facade {
 	 * @param string|null $method [optional]
 	 * @param string|null $suffix [optional]
 	 * @param FacadeOptions|null $opt [optional]
-	 * @return Op
 	 * @throws DFE
 	 */
-	final protected function p($p = [], $method = null, $suffix = null, FacadeOptions $opt = null) {
+	final protected function p($p = [], $method = null, $suffix = null, FacadeOptions $opt = null):Op {
 		$opt = $opt ?: $this->opts();
 		$methodF = strtoupper(df_caller_f()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
@@ -230,9 +222,8 @@ abstract class Facade {
 	 * @see \Inkifi\Mediaclip\API\Facade\User::path()
 	 * @param int|string|null $id
 	 * @param string|null $suffix
-	 * @return string
 	 */
-	protected function path($id, $suffix) {return df_cc_path(
+	protected function path($id, $suffix):string {return df_cc_path(
 		$this->prefix(), strtolower(df_class_l($this)) . 's', urlencode($id), $suffix
 	);}
 
@@ -242,9 +233,8 @@ abstract class Facade {
 	 * @see \Dfe\Moip\API\Facade\Notification::prefix()
 	 * @see \Dfe\Square\API\Facade\Card::prefix()
 	 * @see \Dfe\Square\API\Facade\LocationBased::prefix()
-	 * @return string
 	 */
-	protected function prefix() {return '';}
+	protected function prefix():string {return '';}
 
 	/**
 	 * 2019-02-26
