@@ -36,7 +36,6 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @see \Dfe\Moip\API\Validator::short()
 	 * @see \Dfe\Sift\API\Validator\GetDecisions::short()
 	 * @see \Dfe\Square\API\Validator::short()
-	 * @return string
 	 */
-	function short() {return $this->long();}
+	function short():string {return $this->long();}
 }

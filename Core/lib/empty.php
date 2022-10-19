@@ -92,6 +92,7 @@ function df_nes($v) {return is_null($v) || '' === $v;}
  * @used-by \Dfe\SalesSequence\Settings::affix()
  * @used-by \Dfe\Sift\API\Validator\Event::long()
  * @used-by \Dfe\Sift\API\Validator\GetDecisions::long()
+ * @used-by \Dfe\Sift\API\Validator\GetDecisions::short()
  * @used-by \Dfe\Sift\Payload\Payment\PayPal::p()
  * @used-by \Dfe\Sift\Test\CaseT\PayPal::t01()
  * @used-by \Dfe\TBCBank\API\Validator::long()
