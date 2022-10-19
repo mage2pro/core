@@ -317,7 +317,7 @@ abstract class Client {
 	 * @used-by setup()
 	 * @see \Dfe\TBCBank\API\Client::verifyCertificate()
 	 */
-	protected function verifyCertificate(): bool {return true;}
+	protected function verifyCertificate():bool {return true;}
 
 	/**
 	 * 2018-11-11
@@ -417,14 +417,14 @@ abstract class Client {
 	 * @param callable|IFilter $f
 	 * @param int $p
 	 */
-	private function addFilterResAV($f, $p = FilterChain::DEFAULT_PRIORITY): void {$this->_filtersResAV->attach($f, $p);}
+	private function addFilterResAV($f, $p = FilterChain::DEFAULT_PRIORITY):void {$this->_filtersResAV->attach($f, $p);}
 
 	/**
 	 * 2017-10-08 Adds $f at the lowest priority (it will be applied after all other filters).
 	 * @deprecated It is unused.
 	 * @param callable|IFilter $f
 	 */
-	private function appendFilterResAV($f): void {$this->_filtersResAV->attach(
+	private function appendFilterResAV($f):void {$this->_filtersResAV->attach(
 		$f, df_zf_pq_min($this->_filtersResAV->getFilters()) - 1
 	);}
 
@@ -433,7 +433,7 @@ abstract class Client {
 	 * @deprecated It is unused.
 	 * @param callable|IFilter $f
 	 */
-	private function appendFilterResBV($f): void {$this->_filtersResBV->attach(
+	private function appendFilterResBV($f):void {$this->_filtersResBV->attach(
 		$f, df_zf_pq_min($this->_filtersResBV->getFilters()) - 1
 	);}
 
@@ -442,7 +442,7 @@ abstract class Client {
 	 * @used-by __construct()
 	 * @used-by p()
 	 */
-	private function destructive(): bool {return C::GET !== $this->_method;}
+	private function destructive():bool {return C::GET !== $this->_method;}
 
 	/**
 	 * 2019-01-14

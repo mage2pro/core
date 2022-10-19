@@ -106,7 +106,7 @@ class O implements \ArrayAccess {
 	 * @used-by df_prop()
 	 * @param string $k
 	 */
-	function offsetExists($k): bool {return !is_null(dfa_deep($this->_a, $k));}
+	function offsetExists($k):bool {return !is_null(dfa_deep($this->_a, $k));}
 
 	/**
 	 * 2017-07-13
@@ -136,7 +136,7 @@ class O implements \ArrayAccess {
 	 * @param string $k
 	 * @param mixed $v
 	 */
-	function offsetSet($k, $v): void {dfa_deep_set($this->_a, $k, $v);}
+	function offsetSet($k, $v):void {dfa_deep_set($this->_a, $k, $v);}
 
 	/**
 	 * 2017-07-13
@@ -144,7 +144,7 @@ class O implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetUnset()
 	 * @param string $k
 	 */
-	function offsetUnset($k): void {dfa_deep_unset($this->_a, $k);}
+	function offsetUnset($k):void {dfa_deep_unset($this->_a, $k);}
 
 	/**
 	 * 2017-07-13

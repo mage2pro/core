@@ -47,7 +47,7 @@ class Dispatcher extends _P {
 	 * @param array(string => mixed) $d
 	 * @return bool
 	 */
-	function handle(array $d): bool {
+	function handle(array $d):bool {
 		$rc = new Record($d); /** @var Record $rc */
 		if (!($r = CronH::p($d) || CookieH::p($rc) || NoSuchEntityH::p($rc) || PayPalH::p($rc))) {
 			# 2020-08-30

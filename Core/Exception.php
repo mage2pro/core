@@ -196,7 +196,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetExists()
 	 * @param string $offset
 	 */
-	function offsetExists($offset): bool {return isset($this->_data[$offset]);}
+	function offsetExists($offset):bool {return isset($this->_data[$offset]);}
 
 	/**
 	 * 2015-10-10
@@ -213,7 +213,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @param string $offset
 	 * @param mixed $value
 	 */
-	function offsetSet($offset, $value): void {$this->_data[$offset] = $value;}
+	function offsetSet($offset, $value):void {$this->_data[$offset] = $value;}
 
 	/**
 	 * 2015-10-10
@@ -221,7 +221,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetUnset()
 	 * @param string $offset
 	 */
-	function offsetUnset($offset): void {unset($this->_data[$offset]);}
+	function offsetUnset($offset):void {unset($this->_data[$offset]);}
 
 	/**
 	 * 2017-01-09

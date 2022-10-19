@@ -10,7 +10,7 @@ final class QuoteAddressValidator {
 	/**
 	 * 2021-05-07 «Invalid customer address id <…>»: https://github.com/canadasatellite-ca/site/issues/49
 	 * @see \Magento\Quote\Model\QuoteAddressValidator::validateForCart():
-	 *	public function validateForCart(CartInterface $cart, AddressInterface $address): void {
+	 *	public function validateForCart(CartInterface $cart, AddressInterface $address):void {
 	 *		$this->doValidate($address, $cart->getCustomerIsGuest() ? null : $cart->getCustomer()->getId());
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Quote/Model/QuoteAddressValidator.php#L119-L131

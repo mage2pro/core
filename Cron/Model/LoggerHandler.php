@@ -20,7 +20,7 @@ class LoggerHandler extends _P {
 	 * @see \Monolog\Handler\AbstractProcessingHandler::handle()
 	 * @param array(string => mixed) $d
 	 */
-	function handle(array $d): bool {return self::p($d) || parent::handle($d);}
+	function handle(array $d):bool {return self::p($d) || parent::handle($d);}
 
 	/**
 	 * 2020-02-08

@@ -37,9 +37,8 @@ final class Operation implements \ArrayAccess {
 	/**
 	 * 2017-07-13
 	 * @used-by \Dfe\Sift\Test\CaseT\API\Account\Decisions::t01()
-	 * @return string
 	 */
-	function j() {return $this->_res->j();}
+	function j():string {return $this->_res->j();}
 
 	/**
 	 * 2017-07-13
@@ -47,7 +46,7 @@ final class Operation implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetExists()
 	 * @param string $k
 	 */
-	function offsetExists($k): bool {return $this->_res->offsetExists($k);}
+	function offsetExists($k):bool {return $this->_res->offsetExists($k);}
 
 	/**
 	 * 2017-07-13
@@ -64,7 +63,7 @@ final class Operation implements \ArrayAccess {
 	 * @param string $k
 	 * @param mixed $v
 	 */
-	function offsetSet($k, $v): void {$this->_res->offsetSet($k, $v);}
+	function offsetSet($k, $v):void {$this->_res->offsetSet($k, $v);}
 
 	/**
 	 * 2017-07-13
@@ -72,7 +71,7 @@ final class Operation implements \ArrayAccess {
 	 * @see \ArrayAccess::offsetUnset()
 	 * @param string $k
 	 */
-	function offsetUnset($k): void {$this->_res->offsetUnset($k);}
+	function offsetUnset($k):void {$this->_res->offsetUnset($k);}
 
 	/**
 	 * 2017-07-13
@@ -93,9 +92,8 @@ final class Operation implements \ArrayAccess {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Submit::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
-	 * @return O
 	 */
-	function res() {return $this->_res;}
+	function res():O {return $this->_res;}
 
 	/**
 	 * 2017-07-13
