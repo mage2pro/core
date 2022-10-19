@@ -14,9 +14,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2019-03-13
 	 * @used-by key()
 	 * @see \Df\Payment\Settings::titleB()
-	 * @return string
 	 */
-	protected function titleB() {return df_class_second($this);}
+	protected function titleB():string {return df_class_second($this);}
 
 	/**
 	 * 2017-04-12
@@ -37,9 +36,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @used-by \Inkifi\Pwinty\API\Client::headers()
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return string
 	 */
-	final function merchantID($s = null) {return df_result_sne($this->probablyTestable(null, $s));}
+	final function merchantID($s = null):string {return df_result_sne($this->probablyTestable(null, $s));}
 
 	/**
 	 * 2017-02-08
@@ -78,9 +76,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @uses probablyTestable()
 	 * @see \Dfe\Square\Settings::publicKey()
 	 * @see \Dfe\TBCBank\Settings::publicKey()
-	 * @return string
 	 */
-	function publicKey() {return $this->key('probablyTestable', 'public', 'publishable');}
+	function publicKey():string {return $this->key('probablyTestable', 'public', 'publishable');}
 
 	/**
 	 * 2016-03-02
@@ -99,9 +96,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @used-by \Inkifi\Pwinty\API\Client::urlBase()
 	 * @param null|string|int|S $s [optional]
-	 * @return bool
 	 */
-	final function test($s = null) {return $this->b(null, $s);}
+	final function test($s = null):bool {return $this->b(null, $s);}
 
 	/**
 	 * 2016-11-12
@@ -117,9 +113,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Square\Settings::publicKey()
 	 * @used-by \Dfe\TwoCheckout\Settings::accountNumber()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
-	 * @return mixed
 	 */
-	final protected function testable($k = null, $s = null, $d = null) {return $this->testableGeneric(
+	final protected function testable($k = null, $s = null, $d = null):mixed {return $this->testableGeneric(
 		$k ?: df_caller_f(), 'v', $s, $d
 	);}
 
@@ -129,9 +124,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses b()
-	 * @return bool
 	 */
-	final protected function testableB($k = null, $s = null, $d = null) {return $this->testableGeneric(
+	final protected function testableB($k = null, $s = null, $d = null):bool {return $this->testableGeneric(
 		$k ?: df_caller_f(), 'b', $s, $d
 	);}
 
@@ -155,9 +149,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses \Df\Payment\Settings::p()
-	 * @return mixed
 	 */
-	final protected function testableP($k = null, $s = null, $d = null) {return $this->testableGeneric(
+	final protected function testableP($k = null, $s = null, $d = null):mixed {return $this->testableGeneric(
 		$k ?: df_caller_f(), 'p', $s, $d
 	);}
 
@@ -174,9 +167,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses p()
-	 * @return mixed
 	 */
-	final protected function testablePV($k = null, $s = null, $d = null) {return $this->testableGeneric(
+	final protected function testablePV($k = null, $s = null, $d = null):mixed {return $this->testableGeneric(
 		$k ?: df_caller_f(), ['p', 'v'], $s, $d
 	);}
 
@@ -210,9 +202,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses v()
-	 * @return mixed
 	 */
-	private function probablyTestable($k = null, $s = null, $d = null) {
+	private function probablyTestable($k = null, $s = null, $d = null):mixed {
 		$k = $k ?: df_caller_f();
 		return $this->testableGeneric($k, 'v', $s, function() use($k, $s, $d) {return $this->v($k, $s, $d);});
 	}
@@ -224,9 +215,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses v()
-	 * @return mixed
 	 */
-	private function probablyTestableP($k = null, $s = null, $d = null) {
+	private function probablyTestableP($k = null, $s = null, $d = null):mixed {
 		$k = $k ?: df_caller_f();
 		return $this->testableGeneric($k, 'p', $s, function() use($k, $s, $d) {return $this->p($k, $s, $d);});
 	}
@@ -247,9 +237,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * а второе значение — метод для тестового режима.
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
-	 * @return mixed
 	 */
-	private function testableGeneric($k = null, $f = 'v', $s = null, $d = null) {return call_user_func(
+	private function testableGeneric($k = null, $f = 'v', $s = null, $d = null):mixed {return call_user_func(
 		[$this, is_string($f) ? $f : $f[intval($this->test($s))]]
 		,($this->test($s) ? 'test' : 'live') . self::phpNameToKey(ucfirst($k ?: df_caller_f()))
 		,$s, $d

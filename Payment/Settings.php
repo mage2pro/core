@@ -232,9 +232,8 @@ abstract class Settings extends \Df\API\Settings {
 	 * @see \Df\API\Settings::titleB()
 	 * @used-by \Df\API\Settings::key()
 	 * @used-by \Df\GingerPaymentsBase\Settings::api()
-	 * @return string
 	 */
-	final protected function titleB() {return dfpm_title($this);}
+	final protected function titleB():string {return dfpm_title($this);}
 
 	/**
 	 * 2017-03-27
