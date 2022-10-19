@@ -207,16 +207,14 @@ abstract class Client {
 	 * 2017-08-10
 	 * @used-by \Dfe\Square\API\Client::headers()
 	 * @used-by \Inkifi\Mediaclip\API\Client::headers()
-	 * @return string
 	 */
-	final protected function method() {return $this->_method;}
+	final protected function method(): string {return $this->_method;}
 
 	/**
 	 * 2017-12-02
 	 * @used-by \Dfe\AlphaCommerceHub\API\Client::commonParams()
-	 * @return string
 	 */
-	final protected function path() {return $this->_path;}
+	final protected function path(): string {return $this->_path;}
 
 	/**
 	 * 2019-01-14
@@ -273,9 +271,8 @@ abstract class Client {
 	 * @see \Dfe\Vantiv\API\Client::responseValidatorC()
 	 * @see \Inkifi\Mediaclip\API\Client::responseValidatorC()
 	 * @see \Inkifi\Pwinty\API\Client::responseValidatorC()
-	 * @return string
 	 */
-	protected function responseValidatorC() {return null;}
+	protected function responseValidatorC(): string {return '';}
 
 	/**
 	 * 2019-04-04
@@ -334,9 +331,10 @@ abstract class Client {
 	 * if you need to provide a custom configuration for an API request group.
 	 * @used-by __construct()
 	 * @see \Dfe\TBCBank\API\Client::zfConfig()
+	 * @see \Dfe\Vantiv\API\Client::zfConfig()
 	 * @return array(string => mixed)
 	 */
-	protected function zfConfig() {return [];}
+	protected function zfConfig(): array {return [];}
 
 	/**
 	 * 2017-08-10
@@ -502,14 +500,6 @@ abstract class Client {
 	 * @var C
 	 */
 	private $_c;
-
-	/**
-	 * 2017-07-02
-	 * @used-by __construct()
-	 * @used-by p()
-	 * @var string
-	 */
-	private $_ckey;
 
 	/**
 	 * 2017-07-13
