@@ -26,7 +26,6 @@ abstract class Validator extends Exception {
 	 * @see \Dfe\Moip\API\Validator::valid()
 	 * @see \Dfe\Qiwi\API\Validator::valid()
 	 * @see \Dfe\Sift\API\Validator\Event::valid()
-	 * @see \Dfe\Sift\API\Validator\Event::valid()
 	 * @see \Dfe\Square\API\Validator::valid()
 	 * @see \Dfe\TBCBank\API\Validator::valid()
 	 * @see \Dfe\Vantiv\API\Validator::valid()
@@ -34,7 +33,7 @@ abstract class Validator extends Exception {
 	 * @see \Inkifi\Pwinty\API\Validator::valid()
 	 * @return bool
 	 */
-	abstract function valid();
+	abstract function valid():bool;
 
 	/**
 	 * 2017-07-06

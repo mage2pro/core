@@ -6,9 +6,8 @@
  * @used-by \Df\OAuth\App::validateResponse()
  * @used-by \Df\OAuth\FE\Button::getCommentText()
  * @param string|object $m
- * @return string
  */
-function df_api_name($m) {return is_string($m) && !df_contains($m, '\\', '_', '::') ? $m :
+function df_api_name($m):string {return is_string($m) && !df_contains($m, '\\', '_', '::') ? $m :
 	df_cc_s(df_explode_camel(df_class_second($m)))
 ;}
 
@@ -22,8 +21,7 @@ function df_api_name($m) {return is_string($m) && !df_contains($m, '\\', '_', ':
  * @param string|object $m
  * @param mixed $res
  * @param mixed $req [optional]
- * @return string
  */
-function df_api_rr_failed($m, $res, $req = null) {$m = df_api_name($m); return df_cc_n(
+function df_api_rr_failed($m, $res, $req = null):string {$m = df_api_name($m); return df_cc_n(
 	"The $m API request is failed.\n", df_kv(['Response' => $res, 'Request' => $req])
 );}
