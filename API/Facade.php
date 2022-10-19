@@ -255,15 +255,14 @@ abstract class Facade {
 	 * @see \Dfe\Moip\API\Facade\Notification::zfConfig()
 	 * @return array(string => mixed)
 	 */
-	protected function zfConfig() {return [];}
+	protected function zfConfig():array {return [];}
 
 	/**
 	 * 2019-04-05
 	 * @used-by p()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
-	 * @return FacadeOptions
 	 */
-	final protected function opts() {return FacadeOptions::i();}
+	final protected function opts():FacadeOptions {return FacadeOptions::i();}
 
 	/**
 	 * 2019-01-11
@@ -295,7 +294,7 @@ abstract class Facade {
 	 * @param Store|Order $s [optional]
 	 * @return self
 	 */
-	static function s($s = null) {return dfcf(
+	static function s($s = null):self {return dfcf(
 		function($c, Store $s) {return new $c($s);}, [static::class, df_store($s)]
 	);}
 }
