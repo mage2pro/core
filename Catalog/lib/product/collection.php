@@ -11,9 +11,8 @@ use Magento\Catalog\Model\ResourceModel\Product\Collection as C;
  * @used-by df_product_c()
  * @used-by \TFC\Image\Command\C3::pc()
  * @used-by \TFC\Image\Command\C3::pcL()
- * @return C
  */
-function df_pc() {return df_new_om(C::class);}
+function df_pc():C {return df_new_om(C::class);}
 
 /**
  * 2020-11-24
@@ -55,9 +54,8 @@ function df_pc_disable_flat(F $f = null) {
  * then the products collection is loaded directly from a `catalog_product_flat_<store>` table,
  * and such tables do not contain disabled products at least in Magento 2.4.0.
  * @param C $c
- * @return C
  */
-function df_pc_preserve_absent(C $c) {return $c->setFlag(PAddStock::PRESERVE_ABSENT, true);}
+function df_pc_preserve_absent(C $c):C {return $c->setFlag(PAddStock::PRESERVE_ABSENT, true);}
 
 /**
  * 2020-11-23
@@ -78,9 +76,8 @@ function df_pc_preserve_absent(C $c) {return $c->setFlag(PAddStock::PRESERVE_ABS
  * then the products collection is loaded directly from a `catalog_product_flat_<store>` table,
  * and such tables do not contain disabled products at least in Magento 2.4.0.
  * @param F $f
- * @return mixed
  */
-function df_pc_preserve_absent_f(F $f) {
+function df_pc_preserve_absent_f(F $f):mixed {
 	try {
 		$prev = PAddStock::$PRESERVE_ABSENT_F;
 		PAddStock::$PRESERVE_ABSENT_F = true;
@@ -95,6 +92,5 @@ function df_pc_preserve_absent_f(F $f) {
  * 2020-11-23 @deprecated
  * @see df_category_c()
  * @used-by \BlushMe\Checkout\Block\Extra::items()
- * @return C
  */
-function df_product_c() {return df_pc();}
+function df_product_c():C {return df_pc();}
