@@ -7,10 +7,10 @@ final class ConT {
 	 * @used-by dfpm_c()  
 	 * @used-by dfsm_c()
 	 * @param bool $allowAbstract
-	 * @param Closure $f
+	 * @param \Closure $f
 	 * @return mixed
 	 */
-	static function p($allowAbstract, Closure $f) {
+	static function p($allowAbstract,\Closure $f) {
 		/** @var bool $prev */
 		$prev = self::$allow_abstract;
 		self::$allow_abstract = $allowAbstract;
