@@ -29,9 +29,8 @@ function df_qty($p):float {
 /**
  * 2020-06-05
  * @used-by \BlushMe\Checkout\Block\Extra::items()
- * @return StockH
  */
-function df_stock_h() {return df_o(StockH::class);}
+function df_stock_h():StockH {return df_o(StockH::class);}
 
 /**
  * 2018-06-04

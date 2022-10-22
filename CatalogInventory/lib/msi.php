@@ -9,9 +9,8 @@ use Magento\Store\Model\Website as W;
  * 2019-11-22
  * @used-by df_pt_has_qty()
  * @used-by df_qty()
- * @return bool
  */
-function df_msi() {return dfcf(function() {return df_module_enabled('Magento_Inventory');});}
+function df_msi():bool {return dfcf(function() {return df_module_enabled('Magento_Inventory');});}
 
 /**
  * 2019-11-22
@@ -20,7 +19,9 @@ function df_msi() {return dfcf(function() {return df_module_enabled('Magento_Inv
  * @param P $p
  * @return int[]
  */
-function df_msi_stock_ids(P $p) {return array_filter(array_unique(array_map('df_msi_website2stockId', $p->getWebsiteIds())));}
+function df_msi_stock_ids(P $p):array {return array_filter(array_unique(array_map(
+	'df_msi_website2stockId', $p->getWebsiteIds()
+)));}
 
 /**
  * 2019-11-22
