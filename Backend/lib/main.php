@@ -7,17 +7,16 @@ use Magento\User\Model\User;
 
 /**
  * 2016-01-07
- * @return Auth
+ * @used-by \Dfe\GoogleBackendLogin\Plugin\Backend\App\AbstractAction::beforeDispatch()
  */
-function df_backend_auth() {return df_o(Auth::class);}
+function df_backend_auth():Auth {return df_o(Auth::class);}
 
 /**
  * 2016-12-23
  * @used-by df_backend_user()
  * @used-by df_session()
- * @return SessionB
  */
-function df_backend_session() {return df_o(SessionB::class);}
+function df_backend_session():SessionB {return df_o(SessionB::class);}
 
 /**
  * 2016-12-23

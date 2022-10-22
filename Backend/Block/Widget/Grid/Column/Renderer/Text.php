@@ -5,6 +5,7 @@ use Magento\Framework\DataObject as _DO;
 /**
  * 2016-08-19
  * 2017-01-13
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * Этот класс используется в сценарии отображения информации о платёжной транзакции
  * в административном интерфейсе Magento:
  * https://site.com/admin/sales/transactions/view/txn_id/347/order_id/354/
@@ -35,14 +36,14 @@ class Text extends AbstractRenderer {
 	 * 3) @see \Df\Payment\W\Handler::addTransaction()
 	 * https://github.com/mage2pro/core/blob/1.11.11/Payment/Webhook.php?ts=4#L150
 	 *
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer::render()
 	 * @used-by \Magento\Backend\Block\Widget\Grid\Column::getRowField()
 	 * @used-by \Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail\Grid::beforeAddColumn()
 	 * @param _DO $row
-	 * @return string
 	 */
-	function render(_DO $row) {
+	function render(_DO $row):string {
 		$v = $this->_getValue($row); /** @var string|array(string => mixed)|null $v */
 		# 2017-01-13
 		# Раньше я выполнял такое кодирование при записи информации в транзакцию.
