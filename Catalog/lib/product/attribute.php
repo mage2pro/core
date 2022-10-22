@@ -8,9 +8,8 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
 /**
  * 2019-08-21
  * @used-by df_product_att()
- * @return R
  */
-function df_product_atts_r() {return df_o(R::class);}
+function df_product_atts_r():R {return df_o(R::class);}
 
 /**
  * 2019-08-21                   
@@ -21,18 +20,15 @@ function df_product_atts_r() {return df_o(R::class);}
  * @return A|null
  * @throws NSE
  */
-function df_product_att($c, $onE = true) {return df_try(
-	function() use($c) {return df_product_atts_r()->get($c);}, $onE
-);}
+function df_product_att($c, $onE = true) {return df_try(function() use($c) {return df_product_atts_r()->get($c);}, $onE);}
 
 /**
  * 2021-04-24
  * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @param P $p
  * @param string $k
- * @return bool
  */
-function df_product_att_changed(P $p, $k) {return $p->getStoreId() ? !is_null($p[$k]) : $p->dataHasChangedFor($k);}
+function df_product_att_changed(P $p, $k):bool {return $p->getStoreId() ? !is_null($p[$k]) : $p->dataHasChangedFor($k);}
 
 /**      
  * 2019-10-22
@@ -52,14 +48,13 @@ function df_product_att_options($c) {return dfcf(function($c) {return
  * @param string $c
  * @return array(array(string => int|string))
  */
-function df_product_att_options_m($c) {return df_options_to_map(df_product_att_options($c));}
+function df_product_att_options_m($c):array {return df_options_to_map(df_product_att_options($c));}
 
 /**              
  * 2019-09-22
  * @param string $sku
- * @return int
  */
-function df_product_sku2id($sku) {return (int)df_product_res()->getIdBySku($sku);}
+function df_product_sku2id($sku):int {return (int)df_product_res()->getIdBySku($sku);}
 
 /**
  * 2020-01-31
