@@ -6,9 +6,8 @@ use Magento\Catalog\Model\Locator\LocatorInterface as ILocator;
 use Magento\Catalog\Model\Locator\RegistryLocator;
 /**
  * 2021-12-21 @deprecated It is unused.
- * @return H
  */
-function df_catalog_h() {return df_o(H::class);}
+function df_catalog_h():H {return df_o(H::class);}
 
 /**
  * 2016-02-25 https://github.com/magento/magento2/blob/e0ed4bad/app/code/Magento/Catalog/etc/adminhtml/di.xml#L10-L10
@@ -26,4 +25,4 @@ function df_catalog_locator() {
  * @used-by app/design/frontend/TradeFurnitureCompany/default/Magento_Catalog/templates/category/description.phtml
  * @return OutputH
  */
-function df_catalog_output() {return df_o(OutputH::class);}
+function df_catalog_output():OutputH {return df_o(OutputH::class);}
