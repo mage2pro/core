@@ -38,10 +38,9 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @param int|string|P|OI|QI $p
  * @param int|string|null|bool|IStore $s [optional]
- * @return P
  * @throws NSE
  */
-function df_product($p, $s = false) {return $p instanceof P ? $p : df_product_r()->getById(
+function df_product($p, $s = false):P {return $p instanceof P ? $p : df_product_r()->getById(
 	/**
 	 * 2020-02-05
 	 * 1) I do not use @see \Magento\Sales\Model\Order\Item::getProduct()
@@ -57,14 +56,14 @@ function df_product($p, $s = false) {return $p instanceof P ? $p : df_product_r(
 
 /**
  * 2019-09-22 «Best way to update product's attribute value»: https://magento.stackexchange.com/a/157446
- * @return Action
+ * @used-by \Dfe\Color\Observer\ProductImportBunchSaveAfter::execute()
  */
-function df_product_action() {return df_o(Action::class);}
+function df_product_action():Action {return df_o(Action::class);}
 
 /**
  * 2018-09-27
  * @used-by df_product_current_id()
- * @param \Closure|bool|mixed $onError
+ * @param Closure|bool|mixed $onError
  * @return P|null
  * @throws NotFound|\Exception
  */

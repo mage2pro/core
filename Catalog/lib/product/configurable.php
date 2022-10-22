@@ -9,9 +9,8 @@ use Magento\ConfigurableProduct\Model\Product\Type\Configurable as T;
  * @used-by df_not_configurable()
  * @used-by \Justuno\M2\Controller\Cart\Add::execute()
  * @param P $p
- * @return bool
  */
-function df_configurable(P $p) {return T::TYPE_CODE === $p->getTypeId();}
+function df_configurable(P $p):bool {return T::TYPE_CODE === $p->getTypeId();}
 
 /**
  * 2019-09-18
