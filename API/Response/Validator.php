@@ -71,9 +71,8 @@ abstract class Validator extends Exception {
 	 * @used-by \Inkifi\Pwinty\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::valid()
 	 * @param string|null $k [optional]
-	 * @return mixed
 	 */
-	final protected function r($k = null) {return is_null($k) ? $this->_r : dfa($this->_r, $k);}
+	final protected function r($k = null):mixed {return is_null($k) ? $this->_r : dfa($this->_r, $k);}
 
 	/**
 	 * 2017-07-06
