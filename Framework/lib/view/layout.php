@@ -102,7 +102,7 @@ function df_layout() {return df_o(ILayout::class);}
  * 2017-10-16
  * @used-by df_handles()
  * @used-by \Df\Framework\Plugin\App\Action\AbstractAction::beforeExecute() 
- * @param \Closure|bool|mixed $onError [optional]
+ * @param Closure|bool|mixed $onError [optional]
  * @return IProcessor|Merge
  */
 function df_layout_update($onError = true) {return df_try(function() {

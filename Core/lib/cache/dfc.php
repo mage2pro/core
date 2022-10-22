@@ -20,13 +20,13 @@ use Df\Core\RAM;
  * и поэтому Closure не уникальна.
  * @used-by dfaoc()
  * @param object $o
- * @param \Closure $m
+ * @param Closure $m
  * @param mixed[] $a [optional]
  * @param bool $unique [optional]
  * @param int $offset [optional] 2017-01-02 Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно. Например, так делает @see dfaoc().
  * @return mixed
  */
-function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
+function dfc($o, Closure $m, array $a = [], $unique = true, $offset = 0) {
 	/**
 	 * 2021-10-05
 	 * I do not use @see df_bt() to make the implementation faster. An implementation via df_bt() is:
@@ -71,9 +71,9 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
 /**
  * 2016-09-04
  * Не используем решения типа такого: http://stackoverflow.com/a/34711505
- * потому что они возвращают @see \Closure, и тогда кэшируемая функция становится переменной,
+ * потому что они возвращают @see Closure, и тогда кэшируемая функция становится переменной,
  * что неудобно (неунифицировано и засоряет глобальную область видимости переменными).
- * @param \Closure $f
+ * @param Closure $f
  * Используем именно array $a = [], а не ...$a,
  * чтобы кэшируемая функция не перечисляла свои аргументы при передачи их сюда,
  * а просто вызывала @see func_get_args()
@@ -107,7 +107,7 @@ function dfc($o, \Closure $m, array $a = [], $unique = true, $offset = 0) {
  * @used-by \Df\Qa\Trace\Formatter::p()
  * @return mixed
  */
-function dfcf(\Closure $f, array $a = [], array $tags = [], $unique = true, $offset = 0) {
+function dfcf(Closure $f, array $a = [], array $tags = [], $unique = true, $offset = 0) {
 	/**
 	 * 2021-10-05
 	 * I do not use @see df_bt() to make the implementation faster. An implementation via df_bt() is:

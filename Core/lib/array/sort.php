@@ -93,7 +93,7 @@ function df_ksort_r_ci(array $a) {return array_is_list($a)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @param array(int|string => mixed) $a
- * @param \Closure|string|null $f [optional]
+ * @param Closure|string|null $f [optional]
  * @return array(int|string => mixed)
  */
 function df_sort(array $a, $f = null) {
@@ -102,7 +102,7 @@ function df_sort(array $a, $f = null) {
 		$isList ? sort($a) : asort($a);
 	}
 	else {
-		if (!$f instanceof \Closure) {
+		if (!$f instanceof Closure) {
 			$f = function($a, $b) use($f) {return !is_object($a) ? $a - $b : $a->$f() - $b->$f();};
 		}
 		/** @noinspection PhpUsageOfSilenceOperatorInspection */

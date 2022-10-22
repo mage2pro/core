@@ -39,10 +39,10 @@ function df_link_inline(...$args) {return df_call_a(function($res) {return df_re
  * @used-by df_js_inline_url()
  * @used-by df_link_inline()
  * @param string $r
- * @param \Closure $f
+ * @param Closure $f
  * @return string
  */
-function df_resource_inline($r, \Closure $f) {
+function df_resource_inline($r, Closure $f) {
 	static $c; /** @var array(string => bool) $c */
 	if (!$r || isset($c[$r])) {$result = '';}
 	else {$c[$r] = true; $result = $f(df_asset_create($r)->getUrl());}

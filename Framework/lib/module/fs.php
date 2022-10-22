@@ -126,11 +126,11 @@ function df_module_enum($m, $name, $req = true) {return df_module_file($m, $name
  * @param string $name
  * @param string $ext [optional]
  * @param bool $req [optional]
- * @param \Closure|null $parser [optional]
+ * @param Closure|null $parser [optional]
  * @return array(string => mixed)
  */
-function df_module_file($m, $name, $ext = '', $req = true, \Closure $parser = null) {return dfcf(
-	function($m, $name, $ext = '', $req = true, \Closure $parser = null) {return
+function df_module_file($m, $name, $ext = '', $req = true, Closure $parser = null) {return dfcf(
+	function($m, $name, $ext = '', $req = true, Closure $parser = null) {return
 		file_exists($f = df_module_path_etc($m, df_file_ext_add($name, $ext)))
 			? (!$parser ? $f : $parser($f))
 			: (!$req ? [] : df_error('The required file «%1» is absent.', $f))

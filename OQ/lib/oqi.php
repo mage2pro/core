@@ -114,11 +114,11 @@ function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  *
  * @param O|Q $oq
- * @param \Closure|null $f [optional]
+ * @param Closure|null $f [optional]
  * @param string|null $locale [optional] Используется для упорядочивания элементов.
  * @return array(int => mixed)|OI[]|QI[]
  */
-function df_oqi_leafs($oq, \Closure $f = null, $locale = null) {
+function df_oqi_leafs($oq, Closure $f = null, $locale = null) {
 	$r = df_sort_names(array_values(array_filter(
 		$oq->getItems(), function($i) {/** @var OI|QI $i */ return df_oqi_is_leaf($i);}
 	)), $locale, function($i) {/** @var OI|QI $i */ return $i->getName();}); /** @var OI[]|QI[] $r */
@@ -261,10 +261,10 @@ function df_oqi_roots($oq) {return $oq->getAllVisibleItems();}
  * 2016-09-07
  * @used-by df_oqi_s()
  * @param O|Q $oq
- * @param \Closure $f
+ * @param Closure $f
  * @return mixed[]
  */
-function df_oqi_roots_m($oq, \Closure $f) {return array_map($f, df_oqi_roots($oq));}
+function df_oqi_roots_m($oq, Closure $f) {return array_map($f, df_oqi_roots($oq));}
 
 /**
  * 2016-03-09
