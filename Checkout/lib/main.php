@@ -33,9 +33,8 @@ function df_checkout_error(...$a) {df_checkout_message(df_format($a), false);}
 /**
  * 2021-05-26
  * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
- * @return DataH
  */
-function df_checkout_h() {return df_o(DataH::class);}
+function df_checkout_h():DataH {return df_o(DataH::class);}
 
 /**
  * 2016-07-14 Сообщение показывается всего на 5 секунд, а затем скрывается: https://mage2.pro/t/1871
@@ -89,6 +88,5 @@ function df_order_last($required = true) {
  * В настоящее время эта функция никем не используется.
  * Раньше она использовалась модулем allPay, но теперь там намного лучше обработка возвращаения покупателя в магазин:
  * https://github.com/mage2pro/allpay/blob/1.1.31/Charge.php?ts=4#L365-L378
- * @return string
  */
-function df_url_checkout_success() {return df_url('checkout/onepage/success');}
+function df_url_checkout_success():string {return df_url('checkout/onepage/success');}
