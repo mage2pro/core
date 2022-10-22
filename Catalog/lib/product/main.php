@@ -82,28 +82,25 @@ function df_product_current_id() {return !($p = df_product_current() /** @var P 
 /**
  * 2018-06-04
  * @used-by \Frugue\Configurable\Plugin\Swatches\Block\Product\Renderer\Configurable::aroundGetAllowProducts()
- * @return ProductH
  */
-function df_product_h() {return df_o(ProductH::class);}
+function df_product_h():ProductH {return df_o(ProductH::class);}
 
 /**             
  * 2019-11-18
  * @see df_category_id()
  * @used-by df_qty()
  * @used-by df_review_summary()
- * @param P|int $p                                                    
- * @return int
+ * @param P|int $p
  */
-function df_product_id($p) {return df_int($p instanceof P ? $p->getId() : $p);}
+function df_product_id($p):int {return df_int($p instanceof P ? $p->getId() : $p);}
 
 /**
  * 2018-06-04
  * @see df_product()
  * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
  * @param int $id
- * @return P
  */
-function df_product_load($id) {return df_product_r()->getById($id, false, null, true);}
+function df_product_load($id):P {return df_product_r()->getById($id, false, null, true);}
 
 /**
  * 2019-02-26                
@@ -119,6 +116,5 @@ function df_product_r() {return df_o(IProductRepository::class);}
 /**
  * 2019-09-22
  * @used-by df_product_sku2id()
- * @return Res
  */
-function df_product_res() {return df_o(Res::class);}
+function df_product_res():Res {return df_o(Res::class);}
