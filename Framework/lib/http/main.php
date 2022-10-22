@@ -156,11 +156,6 @@ function df_post_h() {return df_o(PostHelper::class);}
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
  * @used-by \Inkifi\Consolidation\Processor::s()
- * @used-by \Justuno\M2\Controller\Cart\Add::execute()
- * @used-by \Justuno\M2\Controller\Cart\Add::product()
- * @used-by \Justuno\M2\Filter::byDate()
- * @used-by \Justuno\M2\Filter::byProduct()
- * @used-by \Justuno\M2\Filter::p()
  * @used-by \MageWorx\OptionInventory\Controller\StockMessage\Update::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/125)
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Controller\Adminhtml\Product\MassUpdateProducts::beforeExecute()
@@ -200,7 +195,6 @@ function df_request_body_json() {return !($j = df_request_body()) ? [] : df_json
  * @used-by df_request_ua()
  * @used-by \Dfe\Qiwi\W\Reader::http()
  * @used-by \Dfe\Sift\Controller\Index\Index::checkSignature()
- * @used-by \Justuno\M2\Response::p()
  * @param string $k
  * @return string|false
  */

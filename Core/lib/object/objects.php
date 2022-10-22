@@ -77,8 +77,7 @@ function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $a
 
 /**
  * 2017-01-12
- * 1) PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса:
- * https://3v4l.org/U6TJR
+ * 1) PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса: https://3v4l.org/U6TJR
  * Поэтому и создал эту небольшую функцию.
  * В отличие от @see df_new_om(), она не использует Object Manager.
  * 2) Впервые использую в своём коде возможность argument unpacking, появившуюся в PHP 5.6:

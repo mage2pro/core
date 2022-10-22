@@ -148,7 +148,6 @@ abstract class Upgrade {
 	 * @used-by \Df\OAuth\Setup\UpgradeSchema::_process()
 	 * @used-by \Dfe\Color\Setup\UpgradeSchema::_process()
 	 * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
-	 * @used-by \Justuno\M2\Setup\UpgradeSchema::_process()
 	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
 	 * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()

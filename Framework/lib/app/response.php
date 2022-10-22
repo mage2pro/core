@@ -114,7 +114,6 @@ function df_response_cache_max() {df_response_headers([
  * @used-by \Df\Framework\App\Action\Image::execute()
  * @used-by \Df\Framework\W\Result\Text::render()
  * @used-by \Df\Framework\W\Result\Xml::render()
- * @used-by \Justuno\M2\W\Result\Js::render()
  * @param string $contentType
  * @param IResult|wResult|IHttpResponse|HttpResponse|null $r [optional]
  */

@@ -34,7 +34,6 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by \Inkifi\Mediaclip\Event::product()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by \Inkifi\Mediaclip\T\CaseT\Product::t02()
- * @used-by \Justuno\M2\Controller\Cart\Add::product()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @param int|string|P|OI|QI $p
  * @param int|string|null|bool|IStore $s [optional]
@@ -74,7 +73,6 @@ function df_product_current($onError = null) {return df_try(function() {return
 /**
  * 2019-11-15
  * @used-by \Dfe\Markdown\Modifier::modifyData()
- * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @return int|null
  */
 function df_product_current_id() {return !($p = df_product_current() /** @var P $p */) ? null : $p->getId();}

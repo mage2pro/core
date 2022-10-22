@@ -11,7 +11,6 @@ use Magento\Framework\Phrase;
 use Magento\Sales\Model\Order as O;
 /**
  * 2019-04-17
- * @used-by \Justuno\M2\Controller\Cart\Add::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  * @return Cart
  */
@@ -74,8 +73,7 @@ function df_checkout_session() {return df_o(Session::class);}
  * @used-by \Df\Payment\Block\Info::ii()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p() 
- * @used-by \Justuno\M2\Block\Js::_toHtml()
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by \TFC\Core\B\Checkout\Success::_toHtml() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/42)
  * @param bool $required [optional]
  * @return O|null

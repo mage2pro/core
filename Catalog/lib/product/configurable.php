@@ -7,7 +7,6 @@ use Magento\ConfigurableProduct\Model\Product\Type\Configurable as T;
  * @see df_product_is_bundle()
  * @see df_product_type_composite()
  * @used-by df_not_configurable()
- * @used-by \Justuno\M2\Controller\Cart\Add::execute()
  * @param P $p
  */
 function df_configurable(P $p):bool {return T::TYPE_CODE === $p->getTypeId();}

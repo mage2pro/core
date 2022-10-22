@@ -30,9 +30,8 @@ function df_product_images_additional(P $p, $limit = null) {
  * @param P $p
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]
- * @return string
  */
-function df_product_image_url(P $p, $type = null, $attrs = []) {/** @var string|null $r */
+function df_product_image_url(P $p, $type = null, $attrs = []):string {/** @var string|null $r */
 	if ($type) {
 		$r = df_catalog_image_h()
 			->init($p, $type, ['type' => $type] + $attrs + df_view_config()->getMediaAttributes(

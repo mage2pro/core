@@ -40,7 +40,6 @@ function df_ejs($v) {return !is_string($v) ? df_json_encode($v) : df_quote_singl
  * @used-by \Dfe\Markdown\FormElement::getAfterElementHtml()
  * @used-by \Dfe\Sift\Js::_toHtml()
  * @used-by \Dfe\Stripe\Block\Js::_toHtml()
- * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @used-by \KingPalm\B2B\Block\RegionJS\Backend::_toHtml()
  * @used-by \RWCandy\Captcha\Js()
  * @param string|object|null $m

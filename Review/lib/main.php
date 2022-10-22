@@ -2,8 +2,8 @@
 use Magento\Catalog\Model\Product as P;
 use Magento\Review\Model\Review\Summary as RS;
 /**
- * 2019-11-20    
- * @used-by \Justuno\M2\Controller\Response\Catalog::execute()
+ * 2019-11-20
+ * 2022-10-22 @deprecated It is unused.
  * @param P|int $p
  * @return RS
  */

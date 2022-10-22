@@ -25,7 +25,6 @@ function df_e(...$args) {return df_call_a(function($text) {return htmlspecialcha
  * 2019-01-11
  * 2019-11-15 https://stackoverflow.com/a/1253417
  * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
- * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @param string $s
  * @return bool
  */

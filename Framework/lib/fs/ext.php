@@ -38,7 +38,6 @@ function df_file_ext_def($f, $ext) {return ($e = df_file_ext($f)) ? $f : df_trim
  * strips the full path and returns the base name only.
  * @see df_file_ext_add()
  * @used-by wolf_u2n()
- * @used-by \Justuno\M2\Controller\Js::execute()
  * @param string $s
  * @return mixed
  */

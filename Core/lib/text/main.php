@@ -17,7 +17,6 @@ const DF_THIN_SPACE = ' ';
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
- * @used-by \Justuno\M2\Catalog\Variants::variant()
  * @param boolean $v
  * @return string
  */

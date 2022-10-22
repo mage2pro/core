@@ -22,7 +22,6 @@
  * @used-by \Df\Sentry\Trace::get_frame_context()
  * @used-by \Df\Zf\Validate\StringT\FloatT::isValid()
  * @used-by \Dfe\TBCBank\Facade\Charge::tokenIsNew()
- * @used-by \Justuno\M2\Plugin\App\Router\ActionList::aroundGet()
  * @used-by \RWCandy\Captcha\Assert::email()       
  * @param string $haystack
  * @param string|string[] $needle

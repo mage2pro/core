@@ -53,7 +53,6 @@ function df_oqi_desc($i, $max = null) {
  * @see df_oqi_discount_b()
  * @used-by df_oqi_price()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
- * @used-by \Justuno\M2\Controller\Response\Orders::execute()
  * @param OI|QI $i
  * @return float
  */
@@ -323,7 +322,6 @@ function df_oqi_tax_percent($i) {return floatval(df_oqi_top($i)->getTaxPercent()
  * @used-by df_oqi_url()
  * @used-by omx_parse_sku()
  * @used-by \Dfe\TwoCheckout\LineItem\Product::top()
- * @used-by \Justuno\M2\Controller\Response\Orders::execute()
  * @used-by \Yaman\Ordermotion\Observer::BuildOrderDetail()
  * @param OI|QI $i
  * @return OI|QI

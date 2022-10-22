@@ -3,7 +3,6 @@ use Magento\Framework\DB\Select as S;
 
 /**
  * 2019-11-15
- * @used-by \Justuno\M2\Source\Brand::map()
  * @param string $t
  * @param string|string[] $cols [optional]
  * @param string|null|array(string => mixed) $compareK [optional]

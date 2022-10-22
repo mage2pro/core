@@ -34,7 +34,7 @@ function df_select() {return df_conn()->select();}
 
 /**
  * 2019-11-22
- * @used-by \Justuno\M2\Setup\UpgradeSchema::tr()
+ * 2022-10-22 @deprecated It is unused.
  * @return Trigger
  */
 function df_trigger() {return df_new_om(Trigger::class);}

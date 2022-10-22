@@ -41,7 +41,7 @@ function df_table_delete($t, $columnName, $values, $not = false) {
 
 /**
  * 2015-04-12
- * 2019-01-12 It is never used.
+ * 2019-01-12 @deprecated It is unused.
  * @param string $t
  * @param string $column
  * @param int|string|int[]|string[] $values
@@ -50,7 +50,7 @@ function df_table_delete_not($t, $column, $values) {df_table_delete($t, $column,
 
 /**
  * 2019-11-30
- * @used-by \Justuno\M2\Setup\UpgradeSchema::tr()
+ * 2022-10-22 @deprecated It is unused.
  * @param string $t
  * @return bool
  */

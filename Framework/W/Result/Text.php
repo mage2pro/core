@@ -105,7 +105,6 @@ class Text extends \Df\Framework\W\Result {
 	 * @used-by \Dfe\Sift\Controller\Index\Index::execute()
 	 * @used-by \Doormall\Shipping\Controller\Index\Index::execute()
 	 * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
-	 * @used-by \Justuno\M2\Response::p()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
 	 * @used-by \Wolf\Filter\Controller\Garage\Clean::execute()

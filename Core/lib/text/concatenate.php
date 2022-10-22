@@ -129,7 +129,6 @@ function df_cc_s(...$args) {return df_ccc(' ', dfa_flatten($args));}
 /**
  * @see df_cc()
  * @used-by df_cc_method()
- * @used-by \Justuno\M2\Setup\UpgradeSchema::tr()
  * @param string $glue
  * @param string|string[] ...$elements
  * @return string

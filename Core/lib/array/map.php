@@ -75,9 +75,6 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by \Inkifi\Pwinty\Event::shipments()
- * @used-by \Justuno\M2\Controller\Response\Catalog::execute()
- * @used-by \Justuno\M2\Controller\Response\Inventory::execute()
- * @used-by \Justuno\M2\Inventory\Variants::p()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
@@ -155,8 +152,6 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
- * @used-by \Justuno\M2\Catalog\Images::p()
- * @used-by \Justuno\M2\Catalog\Variants::variant()
  * @param array|callable|\Traversable $a1
  * @param array|callable|\Traversable $a2
  * @return array(int|string => mixed)

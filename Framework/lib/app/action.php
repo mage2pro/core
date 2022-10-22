@@ -44,7 +44,6 @@ function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a,
  * @used-by df_sentry()
  * @used-by \Dfe\Markdown\CatalogAction::entityType()
  * @used-by \Dfe\Markdown\FormElement::config()
- * @used-by \Justuno\M2\Block\Js::_toHtml()
  * @return string|null
  * @throws DFE
  */

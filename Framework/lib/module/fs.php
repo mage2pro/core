@@ -122,7 +122,6 @@ function df_module_enum($m, $name, $req = true) {return df_module_file($m, $name
  * @used-by df_module_csv2()
  * @used-by df_module_json()  
  * @used-by \Df\Sentry\Client::send_http()
- * @used-by \Justuno\M2\W\Result\Js::i()
  * @param string|object|null $m
  * @param string $name
  * @param string $ext [optional]

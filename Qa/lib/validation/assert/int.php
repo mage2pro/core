@@ -52,9 +52,10 @@ function df_int($v, $allowNull = true) {/** @var int|int[] $r */
 function df_int_simple(array $v) {return array_map('intval', $v);}
 
 /**
- * @used-by \Justuno\M2\Controller\Cart\Add::execute()
- * @used-by \Justuno\M2\Controller\Cart\Add::product()
  * @see df_is_nat()
+ * @used-by df_idn()
+ * @used-by \Df\Config\O::nat()
+ * @used-by \Df\Config\Settings::nat()
  * @param mixed $v
  * @param bool $allow0 [optional]
  * @return int

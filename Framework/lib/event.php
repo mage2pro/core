@@ -17,7 +17,6 @@ use Magento\Framework\Event\ManagerInterface as IManager;
  * @used-by \Df\Sso\CustomerReturn::register()
  * @used-by \Df\Ui\Plugin\Component\Listing\Columns\Column::beforePrepare()
  * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
- * @used-by \Justuno\M2\Controller\Cart\Add::execute()
  * @param string $ev
  * @param array(string => mixed) $d
  */

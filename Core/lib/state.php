@@ -117,7 +117,6 @@ function df_my() {return isset($_SERVER['DF_DEVELOPER']);}
  * @used-by \Df\Cron\Model\LoggerHandler::p()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
  * @used-by \Inkifi\Pwinty\Event::s()
- * @used-by \Justuno\M2\Response::p()
  * @used-by \Magento\Framework\View\Asset\Bundle::fillContent() (Frugue)
  * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
  * @return bool

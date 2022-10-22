@@ -14,21 +14,17 @@ use Magento\Framework\View\Model\Layout\Merge;
  * @used-by \BlushMe\Checkout\Block\Extra\Item::part()
  * @used-by \Dfe\Dynamics365\Button::getElementHtml()
  * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
- * @used-by \Justuno\M2\Block\GenerateToken::getElementHtml()
- *
  * @param string|O|null $c
  * 2015-12-14
  * $c может быть как объектом, так и строкой: https://3v4l.org/udMMH
  * @param string|array(string => mixed) $data [optional]
  * @param string|null $template [optional]
- *
  * 2016-11-22
  * @param array $vars [optional]
  * Параметры $vars будут доступны в шаблоне в качестве переменных:
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
  *		extract($dictionary, EXTR_SKIP);
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
- *
  * @return AbstractBlock|BlockInterface|Template
  */
 function df_block($c, $data = [], $template = null, array $vars = []) {
