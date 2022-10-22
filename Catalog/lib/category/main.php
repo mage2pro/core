@@ -19,7 +19,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @param int|string|null|bool|IStore $s [optional]
  * @return C
  */
-function df_category($c, $s = false) {return $c instanceof C ? $c : df_category_r()->get(
+function df_category($c, $s = false):C {return $c instanceof C ? $c : df_category_r()->get(
 	$c, false === $s ? null : df_store_id(true === $s ? null : $s)
 );}
 
@@ -29,7 +29,7 @@ function df_category($c, $s = false) {return $c instanceof C ? $c : df_category_
  * @param C|int $c
  * @return int
  */
-function df_category_id($c) {return df_int($c instanceof C ? $c->getId() : $c);}
+function df_category_id($c):int {return df_int($c instanceof C ? $c->getId() : $c);}
 
 /**
  * 2020-02-05
@@ -39,7 +39,7 @@ function df_category_id($c) {return df_int($c instanceof C ? $c->getId() : $c);}
  * @param int|string|null|bool|IStore $s [optional]
  * @return string[]
  */
-function df_category_names($p, $s = false) {return df_each(
+function df_category_names($p, $s = false):array {return df_each(
 	df_product($p, $s)->getCategoryCollection()->addAttributeToSelect($k = 'name'), $k
 );}
 

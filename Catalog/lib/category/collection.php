@@ -6,9 +6,8 @@ use Magento\Catalog\Model\ResourceModel\Category\Collection as CC;
  * @see df_pc()
  * @see df_product_c()
  * @used-by df_category_children()
- * @return CC
  */
-function df_category_c() {return df_new_om(CC::class);}
+function df_category_c():CC {return df_new_om(CC::class);}
 
 /**
  * 2021-11-30
@@ -17,9 +16,8 @@ function df_category_c() {return df_new_om(CC::class);}
  * @used-by df_category_children_map()
  * @param C|int $c
  * @param string|string[] $a [optional]
- * @return CC
  */
-function df_category_children($c, $a = '*') {return
+function df_category_children($c, $a = '*'):CC {return
 	df_category_c()->addIsActiveFilter()->addIdFilter(df_category($c)->getChildren())->addAttributeToSelect($a)
 ;}
 
@@ -29,6 +27,6 @@ function df_category_children($c, $a = '*') {return
  * @param C|int $c
  * @return array(int => string)
  */
-function df_category_children_map($c) {return dfcf(function(C $c) {return df_map_r(
+function df_category_children_map($c):array {return dfcf(function(C $c) {return df_map_r(
 	df_category_children($c, 'name'), function(C $c) {return [$c->getId(), $c->getName()];}
 );}, [df_category($c)]);}
