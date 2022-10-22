@@ -12,25 +12,23 @@ use Magento\Sales\Model\Order as O;
 /**
  * 2019-04-17
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
- * @return Cart
  */
-function df_cart() {return df_o(Cart::class);}
+function df_cart():Cart {return df_o(Cart::class);}
 
 /**
  * 2020-05-29
  * @used-by app/design/frontend/Codazon/fastest/seavus/Magento_Checkout/templates/cart/item/default.phtml (blushme.se)
- * @return CartH
  */
-function df_cart_h() {return df_o(CartH::class);}
+function df_cart_h():CartH {return df_o(CartH::class);}
 
 /**
  * 2016-07-14
  * @used-by dfp_error()
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @param string|Phrase ...$args
+ * @param string|Phrase ...$a
  */
-function df_checkout_error(...$args) {df_checkout_message(df_format($args), false);}
+function df_checkout_error(...$a) {df_checkout_message(df_format($a), false);}
 
 /**
  * 2021-05-26
