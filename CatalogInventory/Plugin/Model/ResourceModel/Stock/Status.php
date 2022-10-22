@@ -30,7 +30,7 @@ final class Status {
 	 * @param bool $skipAbsent
 	 * @return mixed[]
 	 */
-	function beforeAddStockDataToCollection(Sb $sb, C $c, $skipAbsent) {return [
+	function beforeAddStockDataToCollection(Sb $sb, C $c, $skipAbsent):array {return [
 		$c, $skipAbsent && !AddStockData::$PRESERVE_ABSENT_F && !$c->getFlag(AddStockData::PRESERVE_ABSENT)
 	];}
 }

@@ -16,7 +16,7 @@ final class Session extends SessionBase {
 	 * @used-by df_checkout_message()
 	 * @used-by \Df\Checkout\B\Messages::_toHtml()
 	 * @param array(array(string => bool|Phrase))|string $v [optional]
-	 * @return $this|array(array(string => bool|Phrase))
+	 * @return self|array(array(string => bool|Phrase))
 	 */
 	function messages($v = DF_N) {return df_prop($this, $v, []);}
 }
