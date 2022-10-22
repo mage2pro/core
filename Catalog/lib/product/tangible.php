@@ -24,6 +24,5 @@ use Magento\Quote\Model\Quote as Q;
  * @uses \Magento\Catalog\Model\Product::isVirtual()
  * @uses \Magento\Quote\Model\Quote::isVirtual()
  * @param P|Q|null $v [optional]
- * @return bool
  */
-function df_tangible($v = null) {$v = $v ?: df_quote(); return !$v->isVirtual();}
+function df_tangible($v = null):bool {$v = $v ?: df_quote(); return !$v->isVirtual();}
