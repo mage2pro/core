@@ -6,7 +6,6 @@ use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
 /**
  * 2015-11-22
  * @used-by \Df\Framework\Form\Element\Fieldset::addField()
- *
  * Этот класс я разработал на основе класса
  * @see \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/Block/Widget/Form.php
@@ -69,16 +68,14 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Renderer\RendererInterface::render()
 	 * @param AE $element
-	 * @return string
 	 */
-	function render(AE $element) {return (new self([self::$P__E => $element]))->_render();}
+	function render(AE $element):string {return (new self([self::$P__E => $element]))->_render();}
 
 	/**
 	 * 2015-11-22
 	 * @used-by render()
-	 * @return string
 	 */
-	private function _render() {return $this->e()->getNoDisplay() ? '' : (
+	private function _render():string {return $this->e()->getNoDisplay() ? '' : (
 		'hidden' === $this->e()->getType()
 		? $this->elementHtml()
 		: df_tag('div', ['class' => $this->outerCssClasses()], $this->inner())
@@ -90,9 +87,8 @@ class Element extends \Df\Core\O implements RendererInterface {
 	/**
 	 * 2015-11-22
 	 * @used-by _render()
-	 * @return string
 	 */
-	private function elementHtml() {return dfc($this, function() {
+	private function elementHtml():string {return dfc($this, function() {
 		/**
 		 * 2015-12-11
 		 * Класс .df-label-sibling означает: элемент рядом с label.
@@ -118,16 +114,14 @@ class Element extends \Df\Core\O implements RendererInterface {
 	/**
 	 * 2015-11-22
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
-	 * @return string
 	 */
-	private function inner() {return $this->innerRow($this->inner1()) . $this->innerRow($this->note());}
+	private function inner():string {return $this->innerRow($this->inner1()) . $this->innerRow($this->note());}
 
 	/**
 	 * 2015-11-22
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
-	 * @return string
 	 */
-	private function inner1() {
+	private function inner1():string {
 		$e = $this->e(); /** @var AE|E $e */
 		$resultA = [$e->getLabelHtml(), $this->elementHtml()]; /** @var string[] $resultA */
 		if ($this->shouldLabelBeAtRight()) {
@@ -142,25 +136,22 @@ class Element extends \Df\Core\O implements RendererInterface {
 	/**
 	 * 2015-12-28
 	 * @param string $s
-	 * @return string
 	 */
-	private function innerRow($s) {return !$s ? '' : df_tag('div', 'df-element-row', $s);}
+	private function innerRow($s):string {return !$s ? '' : df_tag('div', 'df-element-row', $s);}
 
 	/**
 	 * 2015-11-22
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
-	 * @return string
 	 */
-	private function note() {return dfc($this, function() {return
+	private function note():string {return dfc($this, function() {return
 		!($n = $this->e()->getNote()) ? '' : df_tag('p', 'note', df_tag('span', [], $n))
 	;});}
 
 	/**
 	 * 2015-11-22
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
-	 * @return string
 	 */
-	private function outerCssClasses() {
+	private function outerCssClasses():string {
 		if (!isset($this->{__METHOD__})) {
 			/** @var string[] $resultA */
 			$resultA = [
@@ -208,15 +199,11 @@ class Element extends \Df\Core\O implements RendererInterface {
 
 	/**
 	 * 2015-11-22
-	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
-	 * @return bool
+	 * @used-by self::_render()
+	 * @used-by self::elementHtml()
+	 * @used-by self::inner1()
 	 */
-	private function shouldLabelBeAtRight() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = E::shouldLabelBeAtRight($this->e());
-		}
-		return $this->{__METHOD__};
-	}
+	private function shouldLabelBeAtRight():bool {return dfc($this, function() {return E::shouldLabelBeAtRight($this->e());});}
 
 	/** @var string */
 	private static $P__E = 'element';
@@ -224,7 +211,6 @@ class Element extends \Df\Core\O implements RendererInterface {
 	/**
 	 * 2020-10-31
 	 * @used-by \Df\Framework\Form\Element\Fieldset::addField()
-	 * @return self
 	 */
-	static function s() {static $r; return $r ? $r : $r = new self;}
+	static function s():self {static $r; return $r ? $r : $r = new self;}
 }
