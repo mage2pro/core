@@ -4,9 +4,8 @@ use Magento\Framework\Pricing\Price\PriceInterface as IPrice;
 /**
  * 2021-12-21
  * @param P $p
- * @return float
  */
-function df_price_regular(P $p) {return df_prices($p)['regular_price'];}
+function df_price_regular(P $p):float {return df_prices($p)['regular_price'];}
 
 /**
  * 2021-12-21
@@ -58,4 +57,4 @@ function df_price_special(P $p) {return df_prices($p)['special_price'];}
  * @param P $p
  * @return array(string => IPrice)
  */
-function df_prices(P $p) {return df_map($p->getPriceInfo()->getPrices(), function(IPrice $p) {return $p->getValue();});}
+function df_prices(P $p):array {return df_map($p->getPriceInfo()->getPrices(), function(IPrice $p) {return $p->getValue();});}
