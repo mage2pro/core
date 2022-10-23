@@ -39,7 +39,6 @@ namespace Df\Config;
  * @see \Dfe\PostFinance\Source\Hash\Algorithm
  * @see \Dfe\SecurePay\Source\ForceResult
  * @see \Dfe\Spryng\Source\Prefill
- * @see \Dfe\Square\Source\Location
  * @see \Dfe\TwoCheckout\Source\Prefill
  * @see \Dfe\Vantiv\Source\Environment
  * @see \Dfe\YandexKassa\Source\Option
@@ -79,6 +78,11 @@ abstract class Source extends SourceBase {
 	 * @see \Dfe\Portal\Source\Content::map()
 	 * @see \Dfe\PostFinance\Source\Hash\Algorithm::map()
 	 * @see \Dfe\SecurePay\Source\ForceResult::map()
+	 * @see \Dfe\Spryng\Source\Prefill::map()
+	 * @see \Dfe\TwoCheckout\Source\Prefill::map()
+	 * @see \Dfe\Vantiv\Source\Environment::map()
+	 * @see \Dfe\YandexKassa\Source\Option::map()
+	 * @see \Dfe\ZohoCRM\Source\Domain::map()
 	 * @return array(<value> => <label>)
 	 */
 	abstract protected function map():array;
