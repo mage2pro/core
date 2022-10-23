@@ -27,13 +27,11 @@ function df_cms_block_content($id, $onError = null) {return df_try(function() us
 /**
  * 2018-05-21
  * @used-by df_cms_block()
- * @return BR
  */
-function df_cms_block_r() {return df_o(BR::class);}
+function df_cms_block_r():BR {return df_o(BR::class);}
 
 /**
  * 2018-05-21
  * @used-by \Df\Config\Source\Block::map()
- * @return C
  */
-function df_cms_blocks() {return df_new_om(C::class);}
+function df_cms_blocks():C {return df_new_om(C::class);}
