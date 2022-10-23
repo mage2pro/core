@@ -10,7 +10,7 @@ final class UNL extends UL {
 	 * @see \Df\Sso\Settings\Button::type()
 	 * @return array(string => string)
 	 */
-	protected function map() {return dfa_insert(parent::map(), 1, [self::$N => 'native button']);}
+	protected function map():array {return dfa_insert(parent::map(), 1, [self::$N => 'native button']);}
 
 	/**
 	 * 2016-11-29

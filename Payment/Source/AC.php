@@ -16,7 +16,7 @@ class AC extends \Df\Config\Source {
 	 * @see \Df\Payment\Source\ACR::map()
 	 * @return array(string => string)
 	 */
-	protected function map() {return [self::A => 'Authorize', self::C => 'Capture'];}
+	protected function map():array {return [self::A => 'Authorize', self::C => 'Capture'];}
 
 	/**
 	 * 2017-03-21

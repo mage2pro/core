@@ -61,7 +61,17 @@ abstract class Source extends SourceBase {
 	 * @see \Df\Config\Source\WaitPeriodType::map()
 	 * @see \Df\GingerPaymentsBase\Source\Option::map()
 	 * @see \Df\Payment\Metadata::map()
+	 * @see \Df\Payment\Source\AC::map()
+	 * @see \Df\Payment\Source\Identification::map()
+	 * @see \Df\Payment\Source\Options\DisplayMode::map()
 	 * @see \Df\Payment\Source\Options\Location::map()
+	 * @see \Df\Sso\Source\Button\Type\UL::map()
+	 * @see \Df\Sso\Source\Button\Type\UNL::map()
+	 * @see \Dfe\AllPay\Source\Option::map()
+	 * @see \Dfe\AmazonLogin\Source\Button\Native\Color::map()
+	 * @see \Dfe\AmazonLogin\Source\Button\Native\Size::map()
+	 * @see \Dfe\AmazonLogin\Source\Button\Native\Type::map()
+	 * @see \Dfe\CheckoutCom\Source\Prefill::map()
 	 * @return array(<value> => <label>)
 	 */
 	abstract protected function map():array;

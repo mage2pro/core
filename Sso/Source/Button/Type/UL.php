@@ -11,10 +11,10 @@ class UL extends \Df\Config\Source {
 	 * @override
 	 * @see \Df\Config\Source::map()
 	 * @used-by \Df\Config\Source::toOptionArray()
-	 * @see \Df\Sso\Settings\Button::type()
+	 * @see \Df\Sso\Source\Button\Type\UNL::map()
 	 * @return array(string => string)
 	 */
-	protected function map() {return [self::$U => 'unified button', self::$L => 'link'];}
+	protected function map():array {return [self::$U => 'unified button', self::$L => 'link'];}
 
 	/**
 	 * 2016-11-30

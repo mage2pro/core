@@ -29,7 +29,7 @@ final class Identification extends \Df\Config\Source {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	protected function map() {return [
+	protected function map():array {return [
 		'increment_id' => 'Visible ID (like «10000365»)', self::$ID => 'Internal ID (like «365»)'
 	];}
 
