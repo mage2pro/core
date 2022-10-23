@@ -81,7 +81,7 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	function delete():self {df_abstract($this); return $this;}
 
 	/**
-	 * 2015-01-14
+	 * 2016-01-14
 	 * https://mage2.pro/t/520
 	 * «The method @see \Magento\Framework\App\Config\ValueInterface::getFieldsetDataValue()
 	 * should be removed from the interface because it is used only internally
@@ -89,21 +89,19 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * @override
 	 * @see \Magento\Framework\App\Config\ValueInterface::getFieldsetDataValue()
 	 * @param string $key
-	 * @return string
 	 */
-	function getFieldsetDataValue($key) {df_abstract($this);}
+	function getFieldsetDataValue($key):string {df_abstract($this); return '';}
 
 	/**
-	 * 2015-01-14
+	 * 2016-01-14
 	 * https://mage2.pro/t/522
 	 * «The method @see \Magento\Framework\App\Config\ValueInterface::getOldValue()
 	 * should be removed from the interface because it is used only internally
 	 * by a particular interface implementation: @see \Magento\Framework\App\Config\Value »
 	 * @override
 	 * @see \Magento\Framework\App\Config\ValueInterface::getOldValue()
-	 * @return string
 	 */
-	function getOldValue() {df_abstract($this);}
+	function getOldValue():string {df_abstract($this); return '';}
 
 	/**
 	 * 2016-01-26
@@ -116,21 +114,19 @@ abstract class Model extends AbstractModel implements ValueInterface {
 	 * https://github.com/magento/magento2/blob/720667e/lib/internal/Magento/Framework/DB/Transaction.php#L57
 	 * @used-by \Magento\Framework\DB\Transaction::_rollbackTransaction()
 	 * https://github.com/magento/magento2/blob/720667e/lib/internal/Magento/Framework/DB/Transaction.php#L70
-	 * @return ResourceModel
 	 */
-	function getResource() {return ResourceModel::s();}
+	function getResource():ResourceModel {return ResourceModel::s();}
 
 	/**
-	 * 2015-01-14
+	 * 2016-01-14
 	 * https://mage2.pro/t/521
 	 * «The method @see \Magento\Framework\App\Config\ValueInterface::isValueChanged()
 	 * should be removed from the interface because it is used only internally
 	 * by a particular interface implementation: @see \Magento\Framework\App\Config\Value »
 	 * @override
 	 * @see \Magento\Framework\App\Config\ValueInterface::isValueChanged()
-	 * @return bool
 	 */
-	function isValueChanged() {df_abstract($this); return null;}
+	function isValueChanged():bool {df_abstract($this); return false;}
 
 	/**
 	 * 2016-01-14
@@ -177,5 +173,3 @@ abstract class Model extends AbstractModel implements ValueInterface {
 		return $this;
 	}
 }
-
-
