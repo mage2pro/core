@@ -12,10 +12,9 @@ final class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * 2015-12-30
 	 * @override
 	 * @see \Countable::count()
-	 * @return int
 	 * @throws DFE
 	 */
-	function count() {return count($this->get());}
+	function count():int {return count($this->get());}
 	
 	/**
 	 * 2015-12-30
@@ -43,10 +42,9 @@ final class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @override
 	 * @see \IteratorAggregate::getIterator()
 	 * https://www.php.net/manual/iteratoraggregate.getiterator.php
-	 * @return AI
 	 * @throws DFE
 	 */
-	function getIterator() {return new AI($this->get());}
+	function getIterator():AI {return new AI($this->get());}
 
 	/**
 	 * 2015-12-30
