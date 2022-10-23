@@ -53,7 +53,7 @@ abstract class API extends \Df\Config\Source {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	final protected function map() {
+	final protected function map():array {
 		/** @var array(string => string) $r */ /** @var bool $met */
 		$r = df_map_0([], ($met = $this->isRequirementMet()) ? null : $this->requirement());
 		if ($met) {

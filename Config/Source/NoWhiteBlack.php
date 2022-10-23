@@ -12,7 +12,7 @@ class NoWhiteBlack extends \Df\Config\Source {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	final protected function map() {return [0 => 'No'] + $this->titles();}
+	final protected function map():array {return [0 => 'No'] + $this->titles();}
 
 	/**
 	 * 2016-05-13

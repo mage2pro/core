@@ -11,9 +11,7 @@ final class Metadata extends \Df\Config\Source {
 	 * @see \Df\Config\Source::keys()
 	 * @return string[]
 	 */
-	function keys() {return [
-		'customer.name', 'order.id', 'order.items', 'store.domain', 'store.name', 'store.url'
-	];}
+	function keys() {return ['customer.name', 'order.id', 'order.items', 'store.domain', 'store.name', 'store.url'];}
 
 	/**
 	 * 2016-03-09
@@ -24,14 +22,13 @@ final class Metadata extends \Df\Config\Source {
 	 * @used-by \Dfe\CheckoutCom\Method::charge()
 	 * @return array(string => string)
 	 */
-	function map() {return array_combine($this->keys(), [
+	function map():array {return array_combine($this->keys(), [
 		'Customer Name', 'Order ID', 'Order Items', 'Store Domain', 'Store Name', 'Store URL'
 	]);}
 
 	/**
 	 * 2016-03-14
-	 * 2017-03-06
-	 * Ключами результата являются системные имена переменных.
+	 * 2017-03-06 Ключами результата являются системные имена переменных.
 	 * @used-by \Df\Payment\Charge::vars()
 	 * @param Store $s
 	 * @param O|Q $oq

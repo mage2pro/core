@@ -53,9 +53,18 @@ abstract class Source extends SourceBase {
 	/**
 	 * 2015-11-14
 	 * @used-by toOptionArray()
+	 * @see \Df\Config\Source\API::map()
+	 * @see \Df\Config\Source\Block::map()
+	 * @see \Df\Config\Source\LetterCase::map()
+	 * @see \Df\Config\Source\NoWhiteBlack::map()
+	 * @see \Df\Config\Source\SizeUnit::map()
+	 * @see \Df\Config\Source\WaitPeriodType::map()
+	 * @see \Df\GingerPaymentsBase\Source\Option::map()
+	 * @see \Df\Payment\Metadata::map()
+	 * @see \Df\Payment\Source\Options\Location::map()
 	 * @return array(<value> => <label>)
 	 */
-	abstract protected function map();
+	abstract protected function map():array;
 	/**
 	 * 2016-07-05
 	 * @used-by \Df\Payment\Settings\Options::denied()

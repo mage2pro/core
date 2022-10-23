@@ -14,7 +14,7 @@ final class Block extends \Df\Config\Source {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	protected function map() {return df_map_0(df_sort_a(df_map_r(df_cms_blocks(), function(B $b) {return [
+	protected function map():array {return df_map_0(df_sort_a(df_map_r(df_cms_blocks(), function(B $b) {return [
 		$b->getId(), $b->getTitle()
 	];})), '-- select a CMS block --');}
 }

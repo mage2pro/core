@@ -1,7 +1,6 @@
 <?php
 namespace Df\Config\Source;
 use Df\Config\Settings as S;
-use Magento\Sales\Model\Order as O;
 use Zend_Date as ZD;
 # 2016-07-19
 /** @method static WaitPeriodType s() */
@@ -13,9 +12,7 @@ final class WaitPeriodType extends \Df\Config\Source {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	protected function map() {return [
-		'calendar_days' => 'Calendar Days', self::$WORKING_DAYS => 'Working Days'
-	];}
+	protected function map():array {return ['calendar_days' => 'Calendar Days', self::$WORKING_DAYS => 'Working Days'];}
 
 	/**
 	 * 2017-07-30       

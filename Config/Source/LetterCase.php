@@ -9,9 +9,8 @@ final class LetterCase extends \Df\Config\Source {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	protected function map() {
-		/** @var string[] $vv */
-		$vv = [self::_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE];
+	protected function map():array {
+		$vv = [self::_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE]; /** @var string[] $vv */
 		/** @var string[] $ll */
 		$ll = ['As Is', 'Uppercase first letter', 'Uppercase Each Word\'s First Letter', 'UPPERCASE', 'lowercase'];
 		/** @var string|null $s */
