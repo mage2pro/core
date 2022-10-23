@@ -18,9 +18,8 @@ abstract class ArrayItem extends O {
 	 * @see \Dfe\Sift\PM\Entity::id()
 	 * @see \Doormall\Shipping\Partner\Entity::id()
 	 * https://github.com/mage2pro/core/blob/dcc75ea95/Config/A.php?ts=4#L26
-	 * @return string
 	 */
-	abstract function id();
+	abstract function id():string;
 
 	/**
 	 * 2016-08-07
@@ -28,7 +27,6 @@ abstract class ArrayItem extends O {
 	 * @see \Dfe\AllPay\InstallmentSales\Plan\Entity::sortWeight()
 	 * @see \Dfe\CurrencyFormat\O::sortWeight()
 	 * @see \Doormall\Shipping\Partner\Entity::sortWeight()
-	 * @return int
 	 */
-	function sortWeight() {return 0;}
+	function sortWeight():int {return 0;}
 }
