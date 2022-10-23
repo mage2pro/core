@@ -94,6 +94,10 @@ abstract class Settings {
 	 * @see \Dfe\Portal\Settings\General::prefix()
 	 * @see \Dfe\SMTP\Settings::prefix()
 	 * @see \Dfe\SMTP\Settings\Mailgun::prefix()
+	 * @see \Dfe\SalesSequence\Settings::prefix()
+	 * @see \Dfe\Salesforce\Settings\General::prefix()
+	 * @see \Dfe\Salesforce\Settings\General\OAuth::prefix()
+	 * @see \Dfe\Sift\Settings::prefix()
 	 * @see \Doormall\Shipping\Settings::prefix()
 	 */
 	abstract protected function prefix():string;
