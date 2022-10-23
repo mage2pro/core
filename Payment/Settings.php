@@ -205,14 +205,11 @@ abstract class Settings extends \Df\API\Settings {
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
-	 * @used-by \Df\Payment\Settings\_3DS::prefix()
-	 * @see \Df\Payment\Settings\_3DS::prefix()
 	 * @see \Df\Payment\Settings\Proxy::prefix()
 	 * @see \Dfe\AlphaCommerceHub\Settings\Card::prefix()
 	 * @see \Dfe\Moip\Settings\Boleto::prefix()
-	 * @return string
 	 */
-	protected function prefix() {return dfc($this, function() {return
+	protected function prefix():string {return dfc($this, function() {return
 		'df_payment/' . dfpm_code_short($this->_m)
 	;});}
 
@@ -221,7 +218,6 @@ abstract class Settings extends \Df\API\Settings {
 	 * @override
 	 * @see \Df\Config\Settings::scopeDefault()
 	 * @used-by \Df\Config\Settings::scope()
-	 * @used-by \Df\Payment\Settings\_3DS::scopeDefault()
 	 * @return int|S|Store|null|string
 	 */
 	protected function scopeDefault() {return $this->_m->getStore();}

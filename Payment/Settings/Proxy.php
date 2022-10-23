@@ -47,7 +47,6 @@ final class Proxy extends \Df\Payment\Settings implements \Df\Config\Settings\IP
 	 * @override
 	 * @see \Df\Payment\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
-	 * @return string
 	 */
-	protected function prefix() {return dfc($this, function() {return parent::prefix() . '/proxy';});}
+	protected function prefix():string {return dfc($this, function() {return parent::prefix() . '/proxy';});}
 }

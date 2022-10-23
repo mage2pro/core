@@ -19,9 +19,8 @@ class Configurable extends \Df\Config\Settings {
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
-	 * @return string
 	 */
-	final protected function prefix() {return $this->_prefix;}
+	final protected function prefix():string {return $this->_prefix;}
 
 	/**
 	 * 2017-01-27

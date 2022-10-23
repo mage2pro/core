@@ -51,9 +51,8 @@ final class _3DS extends \Df\Config\Settings {
 	 * @override
 	 * @see \Df\Config\Settings::prefix()
 	 * @used-by \Df\Config\Settings::v()
-	 * @return string
 	 */
-	protected function prefix() {return "{$this->_s->prefix()}/3ds";}
+	protected function prefix():string {return "{$this->_s->prefix()}/3ds";}
 
 	/**
 	 * 2017-03-27

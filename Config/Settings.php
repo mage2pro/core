@@ -57,19 +57,39 @@ abstract class Settings {
 	 * @used-by \Df\Config\Settings::v()
 	 * @see \AlbumEnvy\Popup\Settings::prefix()
 	 * @see \CanadaSatellite\Amelia\Settings::prefix() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
-	 * @see \Dfe\CurrencyConvert\Settings::prefix()
+	 * @see \Df\Amazon\Settings::prefix()
+	 * @see \Df\Config\Settings\Configurable::prefix()
+	 * @see \Df\Facebook\Settings::prefix()
 	 * @see \Df\Payment\Settings::prefix()
+	 * @see \Df\Payment\Settings\_3DS::prefix()
+	 * @see \Df\Shipping\Settings::prefix()
 	 * @see \Df\Zoho\Settings::prefix::prefix()
+	 * @see \Dfe\AllPay\InstallmentSales\Settings::prefix()
+	 * @see \Dfe\AmazonLogin\Settings::prefix()
+	 * @see \Dfe\AmazonLogin\Settings\Credentials::prefix()
+	 * @see \Dfe\BackendLoginAutocomplete\Settings::prefix()
+	 * @see \Dfe\BlackbaudNetCommunity\Settings::prefix()
+	 * @see \Dfe\CurrencyConvert\Settings::prefix()
+	 * @see \Dfe\CurrencyFormat\Settings::prefix()
+	 * @see \Dfe\Customer\Settings\Address::prefix()
+	 * @see \Dfe\Customer\Settings\Common::prefix()
 	 * @see \Dfe\Dynamics365\Settings\General::prefix()
+	 * @see \Dfe\Dynamics365\Settings\General\OAuth::prefix()
 	 * @see \Dfe\Dynamics365\Settings\Products::prefix()
+	 * @see \Dfe\FacebookLogin\Settings::prefix()
+	 * @see \Dfe\Frontend\Settings\Common\Header::prefix()
+	 * @see \Dfe\Frontend\Settings\ProductView\Compare::prefix()
+	 * @see \Dfe\Frontend\Settings\ProductView\Price::prefix()
+	 * @see \Dfe\Frontend\Settings\ProductView\Reviews::prefix()
+	 * @see \Dfe\Frontend\Settings\ProductView\ShortDescription::prefix()
+	 * @see \Dfe\Frontend\Settings\ProductView\Sku::prefix()
 	 * @see \Dfe\Mailgun\Settings::prefix()
 	 * @see \Dfe\Portal\Settings\General::prefix()
 	 * @see \Dfe\SMTP\Settings::prefix()
 	 * @see \Dfe\SMTP\Settings\Mailgun::prefix()
 	 * @see \Doormall\Shipping\Settings::prefix()
-	 * @return string
 	 */
-	abstract protected function prefix();
+	abstract protected function prefix():string;
 
 	/**
 	 * 2015-11-09
@@ -88,9 +108,8 @@ abstract class Settings {
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param bool $d [optional]
-	 * @return int
 	 */
-	final function b($k = null, $s = null, $d = false) {return df_bool($this->v($k ?: df_caller_f(), $s, $d));}
+	final function b($k = null, $s = null, $d = false):int {return df_bool($this->v($k ?: df_caller_f(), $s, $d));}
 
 	/**
 	 * 2016-03-09
@@ -109,11 +128,12 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	final function csv($k = null, $s = null) {return df_csv_parse($this->v($k ?: df_caller_f(), $s));}
+	final function csv($k = null, $s = null):array {return df_csv_parse($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2016-08-04
 	 * 2017-02-05
+	 * @see \Df\Shipping\Settings::enable()
 	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()
 	 * @used-by \AlbumEnvy\Popup\Content::_toHtml()
 	 * @used-by \CanadaSatellite\Amelia\Block::_toHtml() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
@@ -127,9 +147,8 @@ abstract class Settings {
 	 * @used-by \Dfe\Vantiv\API\Client::proxy()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param null|string|int|S $s [optional]
-	 * @return bool
 	 */
-	function enable($s = null) {return $this->b(null, $s);}
+	function enable($s = null):bool {return $this->b(null, $s);}
 
 	/**
 	 * 2015-11-09
@@ -142,25 +161,22 @@ abstract class Settings {
 	 * @used-by \Dfe\YandexKassa\Settings::scid()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return int
 	 */
-	final function i($k = null, $s = null) {return df_int($this->v($k ?: df_caller_f(), $s));}
+	final function i($k = null, $s = null):int {return df_int($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-26
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return int
 	 */
-	final function nat($k = null, $s = null) {return df_nat($this->v($k ?: df_caller_f(), $s));}
+	final function nat($k = null, $s = null):int {return df_nat($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-26
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return int
 	 */
-	final function nat0($k = null, $s = null) {return df_nat0($this->v($k ?: df_caller_f(), $s));}
+	final function nat0($k = null, $s = null):int {return df_nat0($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-07
@@ -170,7 +186,8 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * 2017-02-08
-	 * Параметр $d нужен обязательно, потому что этот метод с этим параметром вызывается из @used-by \Df\Payment\Settings::testableGeneric()
+	 * Параметр $d нужен обязательно,
+	 * потому что этот метод с этим параметром вызывается из @used-by \Df\Payment\Settings::testableGeneric()
 	 * @used-by \Df\Config\Source\API\Key::apiKey()
 	 * @used-by \Df\Payment\Settings::testableGeneric()
 	 * @used-by \Df\Payment\Settings\Proxy::password()
@@ -302,9 +319,8 @@ abstract class Settings {
 	 * @param string|null $k [optional]
 	 * @param string $itemClass
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return ConfigA
 	 */
-	final protected function _a($itemClass, $k = null, $s = null) {return dfcf(
+	final protected function _a($itemClass, $k = null, $s = null):ConfigA {return dfcf(
 		function($itemClass, $k, $s) {return
 			ConfigA::i($itemClass, !$this->enable($s) ? [] : $this->json($k, $s))
 		;}, [$itemClass, $k ?: df_caller_f(), df_scope_code($this->scope($s))]
@@ -312,11 +328,19 @@ abstract class Settings {
 
 	/**
 	 * 2015-12-16
+	 * @used-by \Dfe\Frontend\Settings\ProductView\Compare::font()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\Price::font()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\Reviews::font()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\ShortDescription::font()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\Sku::fontL()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\Sku::fontV()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\StockStatus::font()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\Title::font()
+	 * @used-by \Dfe\Frontend\Settings\ProductView\Wishlist::font()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return Font
 	 */
-	final protected function _font($k = null, $s = null) {return dfc($this, function($k, $s) {return
+	final protected function _font($k = null, $s = null):Font {return dfc($this, function($k, $s) {return
 		new Font($this->json($k, $s))
 	;}, [$k ?: df_caller_f(), df_scope_code($this->scope($s))]);}
 

@@ -29,9 +29,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @see \Df\Config\Settings::enable()
 	 * @used-by \Df\Shipping\ConfigProvider::getConfig()
 	 * @param null|string|int|S $s [optional]
-	 * @return bool
 	 */
-	final function enable($s = null) {return df_bool(df_cfg(['carriers', dfsm_code($this), 'active'], $s));}
+	final function enable($s = null):bool {return df_bool(df_cfg(['carriers', dfsm_code($this), 'active'], $s));}
 
 	/**
 	 * 2016-08-25
@@ -40,11 +39,8 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Df\Config\Settings::v()
 	 * @see \Frugue\Shipping\Settings::prefix()
 	 * @see \Doormall\Shipping\Settings::prefix()
-	 * @return string
 	 */
-	protected function prefix() {return dfc($this, function() {return
-		'df_shipping/' . dfsm_code_short($this->_m)
-	;});}
+	protected function prefix():string {return dfc($this, function() {return 'df_shipping/' . dfsm_code_short($this->_m);});}
 
 	/**
 	 * 2018-04-21
