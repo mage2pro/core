@@ -17,9 +17,8 @@ abstract class FrontendModel extends AbstractBlock implements RendererInterface 
 	/**
 	 * 2015-12-15
 	 * @used-by FrontendModel::render()
-	 * @return string
 	 */
-	abstract protected function _render();
+	abstract protected function _render():string;
 
 	/**
 	 * 2015-12-15
@@ -27,22 +26,21 @@ abstract class FrontendModel extends AbstractBlock implements RendererInterface 
 	 * @see RendererInterface::render()
 	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getHtml()
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L465
-	 * @param AE $element
-	 * @return string
+	 * @param AE $e
 	 */
-	function render(AE $element) {
+	function render(AE $e):string {
 		/**
 		 * Система использует frontend_model как одиночки:
 		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L319
 		 * А нам удобнее для каждого рисования создавать отдельный экземпляр.
 		 */
 		$i = clone $this;
-		$i->_element = $element;
+		$i->_element = $e;
 		return $i->_render();
 	}
 
 	/** @return AE */
-	protected function e() {return $this->_element;}
+	protected function e():AE {return $this->_element;}
 
 	/**
 	 * 2015-12-15

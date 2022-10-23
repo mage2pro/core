@@ -20,9 +20,8 @@ class Fieldset extends _P {
 	 * @used-by \Magento\Config\Block\System\Config\Form\Fieldset::_getHeaderHtml()
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form/Fieldset.php#L121
 	 * @param AE|EF $e
-	 * @return string
 	 */
-	protected function _getHeaderCommentHtml($e) {return !($m = df_fe_m($e, false))
+	protected function _getHeaderCommentHtml($e):string {return !($m = df_fe_m($e, false))
 		? parent::_getHeaderCommentHtml($e)
 		: df_tag('div', 'comment', df_tag_ab(__('Have a question?'), df_package($m, 'homepage')))
 	;}
