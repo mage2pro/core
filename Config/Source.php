@@ -30,7 +30,6 @@ namespace Df\Config;
  * @see \Dfe\AmazonLogin\Source\Button\Native\Size
  * @see \Dfe\AmazonLogin\Source\Button\Native\Type
  * @see \Dfe\CheckoutCom\Source\Prefill
- * @see \Dfe\Dynamics365\Source\PriceList
  * @see \Dfe\FacebookLogin\Source\Button\Size
  * @see \Dfe\IPay88\Source\Option
  * @see \Dfe\Moip\Source\Prefill
@@ -72,6 +71,14 @@ abstract class Source extends SourceBase {
 	 * @see \Dfe\AmazonLogin\Source\Button\Native\Size::map()
 	 * @see \Dfe\AmazonLogin\Source\Button\Native\Type::map()
 	 * @see \Dfe\CheckoutCom\Source\Prefill::map()
+	 * @see \Dfe\FacebookLogin\Source\Button\Size::map()
+	 * @see \Dfe\IPay88\Source\Option::map()
+	 * @see \Dfe\Moip\Source\Prefill::map()
+	 * @see \Dfe\Omise\Source\Prefill::map()
+	 * @see \Dfe\Paymill\Source\Prefill\With3DS::map()
+	 * @see \Dfe\Paymill\Source\Prefill\Without3DS::map()
+	 * @see \Dfe\Portal\Source\Content::map()
+	 * @see \Dfe\PostFinance\Source\Hash\Algorithm::map()
 	 * @return array(<value> => <label>)
 	 */
 	abstract protected function map():array;
