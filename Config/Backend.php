@@ -114,9 +114,8 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	/**
 	 * 2016-08-02
 	 * @used-by \Df\Config\Backend\Serialized::processA()
-	 * @return string
 	 */
-	final protected function label() {return dfc($this, function() {
+	final protected function label():string {return dfc($this, function() {
 		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
 		$pathA = explode('/', $this->getPath()); /** @var string[] $pathA */
 		$resultA = []; /** @var Phrase[] $resultA */
@@ -178,9 +177,8 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * 2016-07-31
 	 * @see \Df\Config\Backend::fc()
 	 * @used-by \Df\Config\Backend\Serialized::processA()
-	 * @return bool
 	 */
-	final protected function isSaving() {return isset($this->_data['field_config']);}
+	final protected function isSaving():bool {return isset($this->_data['field_config']);}
 
 	/**
 	 * 2015-12-07
@@ -192,7 +190,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @used-by \Df\Config\Backend\Serialized::valueSerialize()
 	 * @return array(string => mixed)
 	 */
-	final protected function value() {return dfc($this, function() {
+	final protected function value():array {return dfc($this, function() {
 		# 2020-02-02
 		# This code supports a custom `config_path` for a field.
 		# "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value":
@@ -213,10 +211,9 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	/**
 	 * 2016-08-03
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
-	 * @param string $path
-	 * @return bool
+	 * @param string $p
 	 */
-	final static function processed($path) {return isset(self::$_processed[$path]);}
+	final static function processed($p):bool {return isset(self::$_processed[$p]);}
 
 	/**
 	 * 2016-08-03
