@@ -44,8 +44,6 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Portal\Settings\General
  * @see \Dfe\Salesforce\Settings\General
  * @see \Dfe\SalesSequence\Settings
- * @see \Dfe\SMTP\Settings
- * @see \Dfe\SMTP\Settings\Mailgun
  * @see \Dfe\TwitterTimeline\Settings
  * @see \Inkifi\Map\Settings
  * @see \Inkifi\Mediaclip\Settings
@@ -92,8 +90,6 @@ abstract class Settings {
 	 * @see \Dfe\Mailgun\Settings::prefix()
 	 * @see \Dfe\Markdown\Settings::prefix()
 	 * @see \Dfe\Portal\Settings\General::prefix()
-	 * @see \Dfe\SMTP\Settings::prefix()
-	 * @see \Dfe\SMTP\Settings\Mailgun::prefix()
 	 * @see \Dfe\SalesSequence\Settings::prefix()
 	 * @see \Dfe\Salesforce\Settings\General::prefix()
 	 * @see \Dfe\Salesforce\Settings\General\OAuth::prefix()
@@ -206,7 +202,6 @@ abstract class Settings {
 	 * @used-by \Df\Payment\Settings\Proxy::password()
 	 * @used-by \Dfe\CurrencyConvert\Settings::accessKey()
 	 * @used-by \Dfe\Sift\Settings::signatureKey()
-	 * @used-by \Dfe\SMTP\Settings\Mailgun::password()
 	 * @used-by \Inkifi\Map\Settings::keyGoogle()
 	 * @used-by \Inkifi\Map\Settings::keyMapBox()
 	 * @used-by \Inkifi\Map\Settings::keyOpenCage()
@@ -304,8 +299,6 @@ abstract class Settings {
 	 * @used-by \Dfe\Salesforce\Settings\General::domain()
 	 * @used-by \Dfe\SecurePay\Settings::forceResult()
 	 * @used-by \Dfe\SecurePay\Settings::merchantID_3DS()
-	 * @used-by \Dfe\SMTP\Settings::service()
-	 * @used-by \Dfe\SMTP\Settings\Mailgun::login()
 	 * @used-by \Dfe\TBCBank\Settings::certificate()
 	 * @used-by \Dfe\TwitterTimeline\Settings::html()
 	 * @used-by \Dfe\ZohoCRM\Settings::domain()

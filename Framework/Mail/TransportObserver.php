@@ -6,7 +6,6 @@ use Magento\Framework\Event\ObserverInterface as IOb;
 /**
  * 2018-01-28
  * @see \Dfe\Mailgun\Observer
- * @see \Dfe\SMTP\Observer
  */
 abstract class TransportObserver implements IOb {
 	/**

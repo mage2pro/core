@@ -154,7 +154,6 @@ function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length
  * @used-by \Dfe\AmazonLogin\Source\Button\Native\Size::map()
  * @used-by \Dfe\CheckoutCom\Source\Prefill::map()
  * @used-by \Dfe\FacebookLogin\Source\Button\Size::map()
- * @used-by \Dfe\SMTP\Source\Service::map()
  * @used-by \Dfe\ZohoCRM\Source\Domain::map() 
  * @used-by \KingPalm\B2B\Source\Type::map()
  * @used-by df_a_to_options()

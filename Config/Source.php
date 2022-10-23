@@ -38,7 +38,6 @@ namespace Df\Config;
  * @see \Dfe\Portal\Source\Content
  * @see \Dfe\PostFinance\Source\Hash\Algorithm
  * @see \Dfe\SecurePay\Source\ForceResult
- * @see \Dfe\SMTP\Source\Service
  * @see \Dfe\Spryng\Source\Prefill
  * @see \Dfe\Square\Source\Location
  * @see \Dfe\TwoCheckout\Source\Prefill
@@ -79,6 +78,7 @@ abstract class Source extends SourceBase {
 	 * @see \Dfe\Paymill\Source\Prefill\Without3DS::map()
 	 * @see \Dfe\Portal\Source\Content::map()
 	 * @see \Dfe\PostFinance\Source\Hash\Algorithm::map()
+	 * @see \Dfe\SecurePay\Source\ForceResult::map()
 	 * @return array(<value> => <label>)
 	 */
 	abstract protected function map():array;

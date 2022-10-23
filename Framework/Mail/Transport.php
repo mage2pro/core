@@ -7,7 +7,6 @@ use Magento\Framework\Mail\TransportInterface as ITransport;
  * 2018-01-28
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * @see \Dfe\Mailgun\Transport
- * @see \Dfe\SMTP\Transport
  */
 abstract class Transport implements ITransport {
 	/**
@@ -27,7 +26,6 @@ abstract class Transport implements ITransport {
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see ITransport::getMessage()
-	 * @used-by \Dfe\SMTP\Transport::sendMessage()
 	 * @return IMessage|Message
 	 */
 	function getMessage() {return $this->_message;}

@@ -97,7 +97,6 @@ function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $a
  * @used-by \Df\StripeClone\P\Reg::request()
  * @used-by \Df\Zoho\API\Client::i()
  * @used-by \Dfe\CheckoutCom\Handler::p()
- * @used-by \Dfe\SMTP\Strategy::options()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string $c
  * @param mixed ...$args
