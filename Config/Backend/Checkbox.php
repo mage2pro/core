@@ -15,7 +15,7 @@ class Checkbox extends Backend {
 	 * @see \Df\Config\Backend::dfSaveBefore()
 	 * @used-by \Df\Config\Backend::save()
 	 */
-	final protected function dfSaveBefore() {
+	final protected function dfSaveBefore():void {
 		if ('' === $this->getValue()) {
 			$this->setValue(true);
 		}

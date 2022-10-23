@@ -41,7 +41,7 @@ class ArrayT extends Serialized {
 	 * @return array(array(string => mixed))
 	 * @throws \Exception
 	 */
-	final protected function processI(array $a) {
+	final protected function processI(array $a):array {
 		$a = array_values(dfa_unset($a, A::FAKE)); /** @var array(array(string => mixed)) $a */
 		$e = iterator_to_array(A::i($this->entityC(), $a)); /** @var I[] $e */
 		df_each($e, 'validate'); /** @uses \Df\Config\ArrayItem::validate() */

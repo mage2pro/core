@@ -27,7 +27,7 @@ class Serialized extends Backend {
 	 * @see \Df\Config\Backend::_afterLoad()
 	 * @used-by \Magento\Framework\Model\AbstractModel::load()
 	 */
-	protected function _afterLoad() {
+	protected function _afterLoad():void {
 		$this->valueUnserialize();
 		parent::_afterLoad();
 	}
@@ -38,7 +38,7 @@ class Serialized extends Backend {
 	 * @see \Df\Config\Backend::dfSaveAfter()
 	 * @used-by \Df\Config\Backend::save()
 	 */
-	protected function dfSaveAfter() {
+	protected function dfSaveAfter():void {
 		$this->valueUnserialize();
 		parent::dfSaveAfter();
 	}
@@ -49,7 +49,7 @@ class Serialized extends Backend {
 	 * @see \Df\Config\Backend::dfSaveBefore()
 	 * @used-by \Df\Config\Backend::save()
 	 */
-	protected function dfSaveBefore() {
+	protected function dfSaveBefore():void {
 		parent::dfSaveBefore();
 		$this->valueSerialize();
 	}
@@ -60,7 +60,9 @@ class Serialized extends Backend {
 	 * @used-by \Df\Config\Backend\ArrayT::processI()
 	 * @return string
 	 */
-	final protected function entityC() {return dfc($this, function() {return df_assert_class_exists($this->fc('dfEntity'));});}
+	final protected function entityC():string {return dfc($this, function() {return df_assert_class_exists(
+		$this->fc('dfEntity')
+	);});}
 
 	/**
 	 * 2016-08-07     
@@ -69,10 +71,47 @@ class Serialized extends Backend {
 	 * @param array(string => mixed) $r
 	 * @return array(string => mixed)
 	 */
-	protected function processI(array $r) {
+	protected function processI(array $r):array {
 		$e = df_ic($this->entityC(), E::class, $r); /** @var E $e */
 		$e->validate();
 		return $r;
+	}
+
+	/**
+	 * 2015-12-07
+	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::dfSaveBefore()
+	 */
+	final protected function valueSerialize():void {$this->setValue(df_json_encode($this->processA(
+		$this->value()
+	)));}
+
+	/**
+	 * 2015-12-07
+	 * Сначала пробовал здесь код:
+	 *		$value = json_decode($this->getValue(), $assoc = true);
+	 *		dfa_deep_set($this->_data, $this->valuePathA(), $value);
+	 *		$this->setValue(null);
+	 * Однако этот код неверен,
+	 * потому что нам нужно установить данные именно в поле value:
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L344
+	 * $data = $backendModel->getValue();
+	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L362
+	 * 'value' => $data
+	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::_afterLoad()
+	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::dfSaveAfter()
+	 */
+	final protected function valueUnserialize():void {
+		/**
+		 * 2016-07-31
+		 * Добавил проверку !is_array($this->getValue()),
+		 * потому что родительский метод @see \Df\Config\Backend::save()
+		 * будет вызывать нас даже если при сериализации произошёл сбой
+		 * (и она не была завершена успешно):
+		 * https://github.com/mage2pro/core/blob/1.5.7/Config/Backend.php?ts=4#L29-L35
+		 */
+		if (!is_array($this->getValue())) {
+			$this->setValue($this->processA(df_eta(df_json_decode($this->getValue()))));
+		}
 	}
 
 	/**
@@ -83,7 +122,7 @@ class Serialized extends Backend {
 	 * @return array(string => mixed)
 	 * @throws \Exception
 	 */
-	private function processA(array $r) {
+	private function processA(array $r):array {
 		try {
 			$r = $this->processI($r);
 		}
@@ -128,42 +167,5 @@ class Serialized extends Backend {
 			));
 		}
 		return $r;
-	}
-
-	/**
-	 * 2015-12-07
-	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::dfSaveBefore()
-	 */
-	protected function valueSerialize() {$this->setValue(df_json_encode($this->processA(
-		$this->value()
-	)));}
-
-	/**
-	 * 2015-12-07
-	 * Сначала пробовал здесь код:
-	 *		$value = json_decode($this->getValue(), $assoc = true);
-	 *		dfa_deep_set($this->_data, $this->valuePathA(), $value);
-	 *		$this->setValue(null);
-	 * Однако этот код неверен,
-	 * потому что нам нужно установить данные именно в поле value:
-	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L344
-	 * $data = $backendModel->getValue();
-	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L362
-	 * 'value' => $data
-	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::_afterLoad()
-	 * @used-by \Df\Framework\Form\Element\FieldsetBackend::dfSaveAfter()
-	 */
-	protected function valueUnserialize() {
-		/**
-		 * 2016-07-31
-		 * Добавил проверку !is_array($this->getValue()),
-		 * потому что родительский метод @see \Df\Config\Backend::save()
-		 * будет вызывать нас даже если при сериализации произошёл сбой
-		 * (и она не была завершена успешно):
-		 * https://github.com/mage2pro/core/blob/1.5.7/Config/Backend.php?ts=4#L29-L35
-		 */
-		if (!is_array($this->getValue())) {
-			$this->setValue($this->processA(df_eta(df_json_decode($this->getValue()))));
-		}
 	}
 }

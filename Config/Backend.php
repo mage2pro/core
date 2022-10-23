@@ -105,7 +105,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @used-by \Magento\Framework\Model\AbstractModel::load()
 	 * @see \Df\Config\Backend\Serialized::_afterLoad()
 	 */
-	protected function _afterLoad() {
+	protected function _afterLoad():void {
 		parent::_afterLoad();
 		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
 		self::$_processed[$this->getPath()] = true;
@@ -137,7 +137,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @see \Df\Config\Backend\Serialized::dfSaveAfter()
 	 * @see \Dfe\Moip\Backend\Enable::dfSaveAfter()
 	 */
-	protected function dfSaveAfter() {}
+	protected function dfSaveAfter():void {}
 
 	/**
 	 * 2015-12-07
@@ -147,7 +147,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @see \Df\Config\Backend\Checkbox::dfSaveBefore()
 	 * @see \Df\Config\Backend\Serialized::dfSaveBefore()
 	 */
-	protected function dfSaveBefore() {}
+	protected function dfSaveBefore():void {}
 
 	/**
 	 * 2016-07-31

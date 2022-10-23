@@ -36,5 +36,5 @@ abstract class SourceBase extends _P implements ArrayInterface {
 	 * @param bool $withEmpty [optional]
 	 * @return array(array('label' => string, 'value' => int|string))
 	 */
-	final function getAllOptions($withEmpty = true) {return $this->toOptionArray();}
+	final function getAllOptions($withEmpty = true):array {return $this->toOptionArray();}
 }
