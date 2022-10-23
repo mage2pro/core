@@ -231,6 +231,7 @@ abstract class Facade {
 	 * 2017-08-07
 	 * @used-by path()
 	 * @see \Dfe\Moip\API\Facade\Notification::prefix()
+	 * @see \Dfe\Sift\API\Facade::prefix()
 	 * @see \Dfe\Square\API\Facade\Card::prefix()
 	 * @see \Dfe\Square\API\Facade\LocationBased::prefix()
 	 */

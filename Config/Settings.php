@@ -65,7 +65,7 @@ abstract class Settings {
 	 * @see \Df\Payment\Settings::prefix()
 	 * @see \Df\Payment\Settings\_3DS::prefix()
 	 * @see \Df\Shipping\Settings::prefix()
-	 * @see \Df\Zoho\Settings::prefix::prefix()
+	 * @see \Df\Zoho\Settings::prefix()
 	 * @see \Dfe\AllPay\InstallmentSales\Settings::prefix()
 	 * @see \Dfe\AmazonLogin\Settings::prefix()
 	 * @see \Dfe\AmazonLogin\Settings\Credentials::prefix()
@@ -98,6 +98,8 @@ abstract class Settings {
 	 * @see \Dfe\Salesforce\Settings\General::prefix()
 	 * @see \Dfe\Salesforce\Settings\General\OAuth::prefix()
 	 * @see \Dfe\Sift\Settings::prefix()
+	 * @see \Dfe\TBCBank\Settings::prefix()
+	 * @see \Dfe\TwitterTimeline\Settings::prefix()
 	 * @see \Doormall\Shipping\Settings::prefix()
 	 */
 	abstract protected function prefix():string;
