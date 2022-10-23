@@ -359,12 +359,13 @@ abstract class Settings {
 
 	/**
 	 * 2016-01-29
+	 * @used-by \Dfe\SalesSequence\Settings::affix()
 	 * @param int $i Номер строки
 	 * @param int $j Номер столбца
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param string|null $d [optonal]
-	 * @return Font
+	 * @return string|null
 	 */
 	final protected function _matrix($i, $j, $k = null, $s = null, $d = null) {return
 		dfa(dfa(dfc($this, function($k, $s) {return
@@ -380,9 +381,8 @@ abstract class Settings {
 	 * ему достаточно быть наследником @see \Df\Config\Settings
 	 * @used-by \Dfe\AllPay\Settings::installmentSales()
 	 * @param string $c
-	 * @return Settings
 	 */
-	final protected function child($c) {return self::s($this->_scope, $c);}
+	final protected function child($c):Settings {return self::s($this->_scope, $c);}
 
 	/**
 	 * 2016-05-13
@@ -393,9 +393,8 @@ abstract class Settings {
 	 * @param string $v
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return bool
 	 */
-	final protected function nwb($suf, $v, $k = null, $s = null) {return NWB::is(
+	final protected function nwb($suf, $v, $k = null, $s = null):bool {return NWB::is(
 		$this->v($k = $k ?: df_caller_f(), $s), $v, $this->csv("{$k}_$suf", $s)
 	);}
 
@@ -409,9 +408,8 @@ abstract class Settings {
 	 * @param string|null $v
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return bool
 	 */
-	final protected function nwbn($suf, $v, $k = null, $s = null) {return
+	final protected function nwbn($suf, $v, $k = null, $s = null):bool {return
 		!is_null($v) && NWB::isNegative($this->v($k = $k ?: df_caller_f(), $s), $v, $this->csv("{$k}_$suf", $s))
 	;}
 
@@ -441,7 +439,7 @@ abstract class Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return mixed[]
 	 */
-	private function json($k = null, $s = null) {return df_eta(@df_json_decode($this->v($k ?: df_caller_f(), $s)));}
+	private function json($k = null, $s = null):array {return df_eta(@df_json_decode($this->v($k ?: df_caller_f(), $s)));}
 
 	/**
 	 * 2019-01-11
@@ -469,9 +467,8 @@ abstract class Settings {
 	 * @used-by dfs()
 	 * @used-by \Df\Sso\Button::sModule()
 	 * @param object|string $c
-	 * @return self
 	 */
-	final static function convention($c) {return dfcf(function($c, $def) {return self::s(null, df_con_hier(
+	final static function convention($c):self {return dfcf(function($c, $def) {return self::s(null, df_con_hier(
 		$c, $def
 	));}, [df_cts($c), static::class]);}
 
@@ -495,9 +492,8 @@ abstract class Settings {
 	 * @used-by \Mangoit\MediaclipHub\Helper\Data::GetStoreAuthorizationHeader()
 	 * @param Store|int|null $s [optional]
 	 * @param string $c [optional]
-	 * @return self
 	 */
-	static function s($s = null, $c = null) {return dfcf(
+	static function s($s = null, $c = null):self {return dfcf(
 		function($s, $c) {return new $c($s);}, [df_store($s), $c ?: static::class]
 	);}
 
@@ -508,8 +504,7 @@ abstract class Settings {
 	 * E.g., the @see \Dfe\Omise\Settings::_3DS() method handles the «test3DS» and «live3DS» keys.
 	 * @used-by v()
 	 * @used-by \Df\API\Settings::testableGeneric()
-	 * @param string $name
-	 * @return string
+	 * @param string $n
 	 */
-	final protected static function phpNameToKey($name) {return df_trim_left($name, '_');}
+	final protected static function phpNameToKey($n):string {return df_trim_left($n, '_');}
 }
