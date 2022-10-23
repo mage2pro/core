@@ -11,7 +11,7 @@ final class Metadata extends \Df\Config\Source {
 	 * @see \Df\Config\Source::keys()
 	 * @return string[]
 	 */
-	function keys() {return ['customer.name', 'order.id', 'order.items', 'store.domain', 'store.name', 'store.url'];}
+	function keys():array {return ['customer.name', 'order.id', 'order.items', 'store.domain', 'store.name', 'store.url'];}
 
 	/**
 	 * 2016-03-09

@@ -93,7 +93,7 @@ abstract class Source extends SourceBase {
 	 * @see \Df\Payment\Metadata::keys()
 	 * @return string[]
 	 */
-	function keys() {return dfc($this, function() {return array_keys($this->map());});}
+	function keys():array {return dfc($this, function() {return array_keys($this->map());});}
 
 	/**
 	 * 2016-08-07
@@ -102,7 +102,7 @@ abstract class Source extends SourceBase {
 	 * @param string[]|null $k [optional]
 	 * @return array(<value> => <label>)
 	 */
-	final function options($k = null) {return df_translate_a(dfa($this->map(), $k));}
+	final function options($k = null):array {return df_translate_a(dfa($this->map(), $k));}
 
 	/**
 	 * 2017-03-28
@@ -124,7 +124,7 @@ abstract class Source extends SourceBase {
 	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
 	 * @return array(array('label' => string, 'value' => int|string))
 	 */
-	final function toOptionArray() {return df_map_to_options_t($this->map());}
+	final function toOptionArray():array {return df_map_to_options_t($this->map());}
 
 	/**
 	 * 2015-11-14
@@ -171,7 +171,7 @@ abstract class Source extends SourceBase {
 	 * @param string $k
 	 * @return string
 	 */
-	final protected function sibling($k) {return df_cfg(df_cc_path(df_head($this->pathA()), $k), df_scope());}
+	final protected function sibling($k):string {return df_cfg(df_cc_path(df_head($this->pathA()), $k), df_scope());}
 
 	/**
 	 * 2017-03-28
@@ -180,7 +180,7 @@ abstract class Source extends SourceBase {
 	 * @used-by \Df\ZohoBI\Source\Organization::app()
 	 * @return string[]
 	 */
-	final protected function pathA() {return dfc($this, function() {return df_explode_path($this->_path);});}
+	final protected function pathA():array {return dfc($this, function() {return df_explode_path($this->_path);});}
 
 	/**
 	 * 2016-07-12
@@ -188,9 +188,8 @@ abstract class Source extends SourceBase {
 	 * @used-by \Dfe\IPay88\ConfigProvider::options()
 	 * @used-by \Dfe\IPay88\W\Event::optionTitle()
 	 * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
-	 * @return self
 	 */
-	static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}
+	static function s():self {return dfcf(function($c) {return new $c;}, [static::class]);}
 
 	/**
 	 * 2017-02-05
@@ -200,7 +199,7 @@ abstract class Source extends SourceBase {
 	 * @param array(string => string) $a
 	 * @return array(string => string)
 	 */
-	final protected static function addKeysToValues(array $a) {return df_map_k($a, function($k, $v) {return "$v: $k";});}
+	final protected static function addKeysToValues(array $a):array {return df_map_k($a, function($k, $v) {return "$v: $k";});}
 
 	/**
 	 * 2017-03-28
