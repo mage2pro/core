@@ -18,7 +18,7 @@ class O extends \Df\Core\O {
 	 * @see \Dfe\AllPay\InstallmentSales\Plan\Entity::validate()
 	 * @throws DFE
 	 */
-	function validate() {}
+	function validate():void {}
 
 	/**
 	 * 2015-12-30
@@ -30,9 +30,8 @@ class O extends \Df\Core\O {
 	 * @used-by \Dfe\CurrencyFormat\O::showDecimals()
 	 * @param bool|callable $d [optional]
 	 * @param string|null $k [optional]
-	 * @return bool
 	 */
-	final protected function b($d = false, $k = null) {return $this->filter(
+	final protected function b($d = false, $k = null):bool {return $this->filter(
 		function($v) use($d) {return Checkbox::b($v, $d);}, $d, $k
 	);}
 
@@ -46,36 +45,32 @@ class O extends \Df\Core\O {
 	 * @uses df_float()
 	 * @param float|callable $d [optional]
 	 * @param string|null $k [optional]
-	 * @return float
 	 */
-	final protected function f($d = 0.0, $k = null) {return $this->filter('df_float', $d, $k);}
+	final protected function f($d = 0.0, $k = null):float {return $this->filter('df_float', $d, $k);}
 
 	/**
 	 * 2016-08-10
 	 * @uses df_int()
 	 * @param int|callable $d [optional]
 	 * @param string|null $k [optional]
-	 * @return int
 	 */
-	final protected function i($d = 0, $k = null) {return $this->filter('df_int', $d, $k);}
+	final protected function i($d = 0, $k = null):int {return $this->filter('df_int', $d, $k);}
 
 	/**
 	 * 2016-08-10
 	 * @uses df_nat()
 	 * @param int|callable $d [optional]
 	 * @param string|null $k [optional]
-	 * @return int
 	 */
-	final protected function nat($d = null, $k = null) {return $this->filter('df_nat', $d, $k);}
+	final protected function nat($d = null, $k = null):int {return $this->filter('df_nat', $d, $k);}
 
 	/**
 	 * 2016-08-10
 	 * @uses df_nat0()
 	 * @param int|callable $d [optional]
 	 * @param string|null $k [optional]
-	 * @return int
 	 */
-	final protected function nat0($d = 0, $k = null) {return $this->filter('df_nat0', $d, $k);}
+	final protected function nat0($d = 0, $k = null):int {return $this->filter('df_nat0', $d, $k);}
 
 	/**
 	 * 2015-12-30
@@ -93,9 +88,8 @@ class O extends \Df\Core\O {
 	 * @used-by \Doormall\Shipping\Partner\Entity::title()
 	 * @param mixed|callable $d [optional]
 	 * @param string|null $k [optional]
-	 * @return mixed
 	 */
-	final protected function v($d = null, $k = null) {
+	final protected function v($d = null, $k = null):mixed {
 		$k = $k ?: df_caller_f();
 		return $this->a(df_const($this, $k, $k), $d);
 	}
@@ -123,9 +117,8 @@ class O extends \Df\Core\O {
 	 * @param callable $f
 	 * @param mixed|null $d [optional]
 	 * @param string|null $k [optional]
-	 * @return mixed
 	 */
-	private function filter(callable $f, $d = null, $k = null) {return 
+	private function filter(callable $f, $d = null, $k = null):mixed {return
 		dfc($this, function($f, $d, $k) {return
 			call_user_func($f, $this->v($d, $k))
 		;}, [$f, $d, $k ?: df_caller_f(1)])

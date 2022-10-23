@@ -10,7 +10,6 @@ interface ISettings {
 	/**
 	 * 2017-09-18   
 	 * @used-by \Df\Payment\ConfigProvider::configOptions()
-	 * @return Settings
 	 */
-	function s();
+	function s():Settings;
 }

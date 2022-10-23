@@ -10,7 +10,7 @@ final class Font extends \Df\Config\O {
 	 * @used-by \Df\Config\Backend\Serialized::validate()
 	 * @throws DFE
 	 */
-	function validate() {df_assert(!is_array($this['scale_horizontal']));}
+	function validate():void {df_assert(!is_array($this['scale_horizontal']));}
 
 	/**
 	 * 2015-12-17
