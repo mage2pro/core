@@ -65,7 +65,7 @@ class Exception extends LE implements \ArrayAccess {
 	}
 
 	/**
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @param mixed ...$args
 	 */
 	function comment(...$args) {$this->_comments[]= df_format($args);}
@@ -156,8 +156,8 @@ class Exception extends LE implements \ArrayAccess {
 	/**
 	 * Сообщение для разработчика.
 	 * @used-by df_etsd()
-	 * @used-by messageL()
-	 * @used-by messageSentry()
+	 * @used-by self::messageL()
+	 * @used-by self::messageSentry()
 	 * @used-by \Df\Payment\PlaceOrderInternal::message()
 	 * @see \Df\PaypalClone\W\Exception\InvalidSignature::messageD()
 	 * @return string
@@ -272,7 +272,7 @@ class Exception extends LE implements \ArrayAccess {
 	protected function prev() {return $this->getPrevious();}
 
 	/**
-	 * @used-by comments()
+	 * @used-by self::comments()
 	 * @var string[]
 	 */
 	private $_comments = [];
@@ -289,8 +289,8 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * 2016-07-31
-	 * @used-by isMessageHtml()
-	 * @used-by markMessageAsHtml()
+	 * @used-by self::isMessageHtml()
+	 * @used-by self::markMessageAsHtml()
 	 * @var bool
 	 */
 	private $_messageIsHtml = false;
