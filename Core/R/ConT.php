@@ -42,8 +42,8 @@ final class ConT {
 
 	/**         
 	 * 2017-04-01  
-	 * @used-by generic()
-	 * @used-by p()
+	 * @used-by self::generic()
+	 * @used-by self::p()
 	 * @var bool
 	 */
 	private static $allow_abstract = false;

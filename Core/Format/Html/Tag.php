@@ -12,7 +12,7 @@ final class Tag extends \Df\Core\O {
 	private function attributes() {return $this->a(self::$P__ATTRIBUTES, []);}
 	
 	/**
-	 * @used-by _render()
+	 * @used-by self::_render()
 	 * @return string
 	 */
 	private function content() {return dfc($this, function() {
