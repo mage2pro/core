@@ -79,7 +79,7 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-07-04
-	 * @used-by description()
+	 * @used-by self::description()
 	 * @used-by \Dfe\AllPay\Charge::descriptionOnKiosk()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItem()
@@ -102,7 +102,7 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2017-11-13
-	 * @used-by text()
+	 * @used-by self::text()
 	 * @see \Dfe\AlphaCommerceHub\Charge::textFilter()
 	 * @see \Dfe\TBCBank\Charge::textFilter()
 	 * @param string $s
@@ -112,8 +112,8 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-05-06
-	 * @used-by text()
-	 * @used-by metadata()
+	 * @used-by self::text()
+	 * @used-by self::metadata()
 	 * @return array(string => string)
 	 */
 	private function vars() {return dfc($this, function() {return Metadata::vars(
