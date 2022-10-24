@@ -9,7 +9,6 @@ final class PathValidator {
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Model/Config/PathValidator.php
 	 * But it does not break the compilation process, I have checked it in Magento 2.1.15.
 	 * @see \Magento\Config\Model\Config\PathValidator::validate()
-	 * @return bool
 	 */
-	function aroundValidate() {return true;}
+	function aroundValidate():bool {return true;}
 }
