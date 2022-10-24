@@ -1,9 +1,7 @@
 <?php
 namespace Df\Config\Settings;
-/**
- * 2016-11-24
- * @see \Df\Sso\Settings\Button
- */
+# 2016-11-24
+/** @see \Df\Sso\Settings\Button */
 class Configurable extends \Df\Config\Settings {
 	/**
 	 * 2017-01-27

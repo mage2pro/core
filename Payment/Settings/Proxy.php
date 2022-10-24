@@ -11,36 +11,32 @@ final class Proxy extends \Df\Payment\Settings implements \Df\Config\Settings\IP
 	 * @override
 	 * @see \Df\Config\Settings\IProxy::host()
 	 * @used-by \Df\API\Client::setup()
-	 * @return string
 	 */
-	function host() {return $this->v();}
+	function host():string {return $this->v();}
 
 	/**
 	 * 2019-01-14
 	 * @override
 	 * @see \Df\Config\Settings\IProxy::password()
 	 * @used-by \Df\API\Client::setup()
-	 * @return string
 	 */
-	function password() {return $this->p();}
+	function password():string {return $this->p();}
 	
 	/**
 	 * 2019-01-14
 	 * @override
 	 * @see \Df\Config\Settings\IProxy::port()
 	 * @used-by \Df\API\Client::setup()
-	 * @return string
 	 */
-	function port() {return $this->v();}
+	function port():string {return $this->v();}
 
 	/**
 	 * 2019-01-14
 	 * @override
 	 * @see \Df\Config\Settings\IProxy::username()
 	 * @used-by \Df\API\Client::setup()
-	 * @return string
 	 */
-	function username() {return $this->v();}
+	function username():string {return $this->v();}
 
 	/**
 	 * 2019-01-14

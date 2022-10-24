@@ -10,31 +10,27 @@ interface IProxy {
 	 * 2019-01-14
 	 * @used-by \Df\API\Client::setup()
 	 * @see \Df\Payment\Settings\Proxy::host()
-	 * @return string
 	 */
-	function host();
+	function host():string;
 
 	/**
 	 * 2019-01-14
 	 * @used-by \Df\API\Client::setup()
 	 * @see \Df\Payment\Settings\Proxy::password()
-	 * @return string
 	 */
-	function password();
+	function password():string;
 
 	/**
 	 * 2019-01-14
 	 * @used-by \Df\API\Client::setup()
 	 * @see \Df\Payment\Settings\Proxy::port()
-	 * @return string
 	 */
-	function port();
+	function port():string;
 
 	/**
 	 * 2019-01-14
 	 * @used-by \Df\API\Client::setup()
 	 * @see \Df\Payment\Settings\Proxy::username()
-	 * @return string
 	 */
-	function username();
+	function username():string;
 }
