@@ -30,9 +30,8 @@ class Fieldset extends Sb {
 	 * @param Sb|F $sb
 	 * @param \Closure $f
 	 * @param AE $e
-	 * @return string
 	 */
-	function aroundRender(Sb $sb, \Closure $f, AE $e) {/** @var string $r */
+	function aroundRender(Sb $sb, \Closure $f, AE $e):string {/** @var string $r */
 		/**
 		 * 2016-01-01
 		 * Потомки @see \Magento\Config\Block\System\Config\Form\Fieldset могли перекрыть метод
