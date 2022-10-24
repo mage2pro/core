@@ -10,7 +10,7 @@ use Magento\Framework\Session\Storage;
 abstract class Session implements \ArrayAccess {
 	/**
 	 * 2021-10-22
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @see \Df\Checkout\SessionBase::c()
 	 * @see \Df\Customer\SessionBase::c()
 	 * @see \Dfe\TBCBank\Session::c()
@@ -64,7 +64,7 @@ abstract class Session implements \ArrayAccess {
 
 	/**
 	 * 2021-10-26
-	 * @used-by s()
+	 * @used-by self::s()
 	 */
 	private function __construct() {
 		$this->_prefix = df_module_name($this) . '_';
@@ -73,10 +73,10 @@ abstract class Session implements \ArrayAccess {
 
 	/**
 	 * 2021-10-26
-	 * @used-by offsetExists()
-	 * @used-by offsetGet()
-	 * @used-by offsetSet()
-	 * @used-by offsetUnset()
+	 * @used-by self::offsetExists()
+	 * @used-by self::offsetGet()
+	 * @used-by self::offsetSet()
+	 * @used-by self::offsetUnset()
 	 * @param string $k [optional]
 	 * @return string
 	 */
@@ -84,19 +84,19 @@ abstract class Session implements \ArrayAccess {
 
 	/**
 	 * 2021-10-27
-	 * @used-by __construct()
-	 * @used-by k()
+	 * @used-by self::__construct()
+	 * @used-by self::k()
 	 * @var string
 	 */
 	private $_prefix;
 
 	/**
 	 * 2021-10-26
-	 * @used-by __construct()
-	 * @used-by offsetExists()
-	 * @used-by offsetGet()
-	 * @used-by offsetSet()
-	 * @used-by offsetUnset()
+	 * @used-by self::__construct()
+	 * @used-by self::offsetExists()
+	 * @used-by self::offsetGet()
+	 * @used-by self::offsetSet()
+	 * @used-by self::offsetUnset()
 	 * @var Storage
 	 */
 	private $_st;
