@@ -21,7 +21,7 @@ class Number extends Text {
 
 	/**
 	 * 2016-08-02
-	 * @used-by \Df\Framework\Form\Element\Number::onFormInitialized()
+	 * @used-by self::onFormInitialized()
 	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
 	 */
 	const LABEL_RIGHT = 'label_right';

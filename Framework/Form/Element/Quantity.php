@@ -31,7 +31,7 @@ class Quantity extends Fieldset\Inline {
 
 	/**
 	 * 2016-07-30
-	 * @used-by onFormInitialized()
+	 * @used-by self::onFormInitialized()
 	 * @used-by \Df\Framework\Form\Element\Fieldset::size()
 	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 */

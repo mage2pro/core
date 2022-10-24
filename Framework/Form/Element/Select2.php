@@ -98,7 +98,7 @@ class Select2 extends Select {
 	 * если наш элемент управления был создан внутри нашего нестандартного филдсета,
 	 * и осутствует, если наш элемент управления является элементом управления вернхнего уровня
 	 * (то есть, указан в атрибуте «type» тега <field>).
-	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
+	 * @used-by self::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Select2\Number::customCssClass()
 	 * @return string
 	 */
@@ -106,7 +106,7 @@ class Select2 extends Select {
 
 	/**
 	 * 2017-10-15
-	 * @used-by setRenderer()
+	 * @used-by self::setRenderer()
 	 * @see \Dfe\Stripe\FE\Currency::disabled()
 	 * @return bool
 	 */
@@ -114,7 +114,7 @@ class Select2 extends Select {
 
 	/**
 	 * 2016-08-12
-	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
+	 * @used-by self::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Select2\Number::width()
 	 * @return string
 	 */
@@ -122,7 +122,7 @@ class Select2 extends Select {
 
 	/**
 	 * 2019-06-02
-	 * @used-by setRenderer()
+	 * @used-by self::setRenderer()
 	 * @used-by \KingPalm\B2B\Block\Registration::region()
 	 * @used-by \KingPalm\B2B\Block\Registration::select()
 	 */

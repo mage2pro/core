@@ -127,12 +127,10 @@ class Multiselect extends _Multiselect implements ElementI {
 
 	/**
 	 * 2017-09-23
-	 * @used-by getElementHtml()
-	 * @used-by onFormInitialized()
+	 * @used-by self::getElementHtml()
+	 * @used-by self::onFormInitialized()
 	 * @return bool
 	 */
-	private function ordered() {return dfc($this, function() {return df_fe_fc_b($this,
-		'dfMultiselect_ordered'
-	);});}
+	private function ordered() {return dfc($this, function() {return df_fe_fc_b($this, 'dfMultiselect_ordered');});}
 }
 
