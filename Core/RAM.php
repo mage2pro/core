@@ -81,8 +81,8 @@ final class RAM {
 
 	/**
 	 * 2017-08-10
-	 * @used-by clean()
-	 * @used-by set()
+	 * @used-by self::clean()
+	 * @used-by self::set()
 	 * @var array(string => string[])  «Tag ID => Cache Keys»
 	 */
 	private $_tags = [];
