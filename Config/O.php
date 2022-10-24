@@ -74,6 +74,8 @@ class O extends \Df\Core\O {
 
 	/**
 	 * 2015-12-30
+	 * 2022-10-24
+	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @used-by v0()
 	 * @used-by \Df\Typography\Font::color()
 	 * @used-by \Df\Typography\Font::letter_case()
@@ -88,8 +90,9 @@ class O extends \Df\Core\O {
 	 * @used-by \Doormall\Shipping\Partner\Entity::title()
 	 * @param mixed|callable $d [optional]
 	 * @param string|null $k [optional]
+	 * @return mixed
 	 */
-	final protected function v($d = null, $k = null):mixed {
+	final protected function v($d = null, $k = null) {
 		$k = $k ?: df_caller_f();
 		return $this->a(df_const($this, $k, $k), $d);
 	}
@@ -109,16 +112,19 @@ class O extends \Df\Core\O {
 
 	/**
 	 * 2016-08-10
-	 * @used-by b()
-	 * @used-by f()
-	 * @used-by i()
-	 * @used-by nat()
-	 * @used-by nat0()
+	 * 2022-10-24
+	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
+	 * @used-by self::b()
+	 * @used-by self::f()
+	 * @used-by self::i()
+	 * @used-by self::nat()
+	 * @used-by self::nat0()
 	 * @param callable $f
 	 * @param mixed|null $d [optional]
 	 * @param string|null $k [optional]
+	 * @return mixed
 	 */
-	private function filter(callable $f, $d = null, $k = null):mixed {return
+	private function filter(callable $f, $d = null, $k = null) {return
 		dfc($this, function($f, $d, $k) {return
 			call_user_func($f, $this->v($d, $k))
 		;}, [$f, $d, $k ?: df_caller_f(1)])

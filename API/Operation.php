@@ -50,11 +50,19 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
+	 * 2022-10-24
+	 * 1) `mixed` as a return type is not supported by PHP < 8:
+	 * https://github.com/mage2pro/core/issues/168#user-content-mixed
+	 * 2) `ReturnTypeWillChange` allows us to suppress the return type absence notice:
+	 * https://github.com/mage2pro/core/issues/168#user-content-absent-return-type-deprecation
+	 * https://github.com/mage2pro/core/issues/168#user-content-returntypewillchange
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
 	 * @param string $k
+	 * @return mixed
 	 */
-	function offsetGet($k):mixed {return $this->_res->offsetGet($k);}
+	#[\ReturnTypeWillChange]
+	function offsetGet($k) {return $this->_res->offsetGet($k);}
 
 	/**
 	 * 2017-07-13

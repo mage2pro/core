@@ -75,9 +75,12 @@ function df_pc_preserve_absent(C $c):C {return $c->setFlag(PAddStock::PRESERVE_A
  * If the the «Use Flat Catalog Product» option is enabled,
  * then the products collection is loaded directly from a `catalog_product_flat_<store>` table,
  * and such tables do not contain disabled products at least in Magento 2.4.0.
+ * 2022-10-24
+ * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
  * @param F $f
+ * @return mixed
  */
-function df_pc_preserve_absent_f(F $f):mixed {
+function df_pc_preserve_absent_f(F $f) {
 	try {
 		$prev = PAddStock::$PRESERVE_ABSENT_F;
 		PAddStock::$PRESERVE_ABSENT_F = true;

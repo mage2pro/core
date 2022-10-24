@@ -110,6 +110,12 @@ class O implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
+	 * 2022-10-24
+	 * 1) `mixed` as a return type is not supported by PHP < 8:
+	 * https://github.com/mage2pro/core/issues/168#user-content-mixed
+	 * 2) `ReturnTypeWillChange` allows us to suppress the return type absence notice:
+	 * https://github.com/mage2pro/core/issues/168#user-content-absent-return-type-deprecation
+	 * https://github.com/mage2pro/core/issues/168#user-content-returntypewillchange
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
 	 * @used-by df_prop()
@@ -125,8 +131,10 @@ class O implements \ArrayAccess {
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::pAvailableForDownload()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param string $k
+	 * @return mixed
 	 */
-	function offsetGet($k):mixed {return dfa_deep($this->_a, $k);}
+	#[\ReturnTypeWillChange]
+	function offsetGet($k) {return dfa_deep($this->_a, $k);}
 
 	/**
 	 * 2017-07-13

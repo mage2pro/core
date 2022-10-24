@@ -30,12 +30,19 @@ abstract class Session implements \ArrayAccess {
 
 	/**
 	 * 2021-10-26
+	 * 2022-10-24
+	 * 1) `mixed` as a return type is not supported by PHP < 8:
+	 * https://github.com/mage2pro/core/issues/168#user-content-mixed
+	 * 2) `ReturnTypeWillChange` allows us to suppress the return type absence notice:
+	 * https://github.com/mage2pro/core/issues/168#user-content-absent-return-type-deprecation
+	 * https://github.com/mage2pro/core/issues/168#user-content-returntypewillchange
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
 	 * @used-by df_prop()
 	 * @param string $k
 	 */
-	final function offsetGet($k):mixed {return $this->_st->offsetGet($this->k($k));}
+	#[\ReturnTypeWillChange]
+	final function offsetGet($k) {return $this->_st->offsetGet($this->k($k));}
 
 	/**
 	 * 2021-10-26

@@ -54,6 +54,8 @@ abstract class Validator extends Exception {
 
 	/**
 	 * 2017-07-06
+	 * 2022-10-24
+	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @used-by \Df\ZohoBI\API\Validator::message()
 	 * @used-by \Df\ZohoBI\API\Validator::rs()
 	 * @used-by \Df\ZohoBI\API\Validator::valid()
@@ -71,8 +73,9 @@ abstract class Validator extends Exception {
 	 * @used-by \Inkifi\Pwinty\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::valid()
 	 * @param string|null $k [optional]
+	 * @return mixed
 	 */
-	final protected function r($k = null):mixed {return is_null($k) ? $this->_r : dfa($this->_r, $k);}
+	final protected function r($k = null) {return is_null($k) ? $this->_r : dfa($this->_r, $k);}
 
 	/**
 	 * 2017-07-06

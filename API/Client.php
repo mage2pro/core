@@ -104,12 +104,15 @@ abstract class Client {
 
 	/**
 	 * 2017-06-30
+	 * 2022-10-24
+	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Dfe\Dynamics365\API\Facade::p()
 	 * @used-by \Dfe\ZohoBooks\API\R::p()
 	 * @throws DFE
+	 * @return mixed
 	 */
-	final function p():mixed {
+	final function p() {
 		$tag = df_cts($this, '_'); /** @var string $tag */
 		if ($d = $this->destructive()) { /** @var bool $d */
 			df_cache_clean_tag($tag);
@@ -336,10 +339,13 @@ abstract class Client {
 
 	/**
 	 * 2017-08-10
+	 * 2022-10-24
+	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @used-by p()
 	 * @throws DFE
+	 * @return mixed
 	 */
-	private function _p():mixed {
+	private function _p() {
 		$c = $this->_c; /** @var C $c */
 		$c->setHeaders($this->headers());
 		$c->setUri($this->url());

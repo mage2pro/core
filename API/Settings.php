@@ -101,6 +101,8 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-11-12
+	 * 2022-10-24
+	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
@@ -113,8 +115,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Square\Settings::publicKey()
 	 * @used-by \Dfe\TwoCheckout\Settings::accountNumber()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
+	 * @return mixed
 	 */
-	final protected function testable($k = null, $s = null, $d = null):mixed {return $this->testableGeneric(
+	final protected function testable($k = null, $s = null, $d = null) {return $this->testableGeneric(
 		$k ?: df_caller_f(), 'v', $s, $d
 	);}
 
@@ -132,8 +135,10 @@ abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2016-11-12
 	 * 2017-02-08
-	 * Используйте этот метод в том случае,
-	 * когда значение шифруется как в промышленном, так и в тестовом режимах.
+	 * Используйте этот метод в том случае, когда значение шифруется как в промышленном, так и в тестовом режимах.
+	 * Если значение шифруется только в промышленном режиме, то используйте @see self::testablePV().
+	 * 2022-10-24
+	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @used-by \Df\StripeClone\Settings::privateKey()
 	 * @used-by \Dfe\Klarna\Settings::sharedSecret()
 	 * @used-by \Dfe\Moip\Settings::privateToken()
@@ -144,31 +149,31 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Square\Settings::accessToken()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @used-by \Dfe\TwoCheckout\Settings::secretWord()
-	 * Если значение шифруется только в промышленном режиме, то используйте @see testablePV()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses \Df\Payment\Settings::p()
+	 * @return mixed
 	 */
-	final protected function testableP($k = null, $s = null, $d = null):mixed {return $this->testableGeneric(
+	final protected function testableP($k = null, $s = null, $d = null) {return $this->testableGeneric(
 		$k ?: df_caller_f(), 'p', $s, $d
 	);}
 
 	/**
 	 * 2016-11-12
 	 * 2017-02-08
-	 * Используйте этот метод в том случае,
-	 * когда значение шифруется в промышленном режиме, но не шифруется в тестовом.
+	 * Используйте этот метод в том случае, когда значение шифруется в промышленном режиме, но не шифруется в тестовом.
+	 * Если значение шифруется в обоих режимах, то используйте @see self::testableP().
 	 * @used-by \Dfe\AllPay\Settings::hashIV()
 	 * @used-by \Dfe\AllPay\Settings::hashKey()
 	 * @used-by \Dfe\SecurePay\Settings::transactionPassword()
-	 * Если значение шифруется в обоих режимах, то используйте @see testableP()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses p()
+	 * @return mixed
 	 */
-	final protected function testablePV($k = null, $s = null, $d = null):mixed {return $this->testableGeneric(
+	final protected function testablePV($k = null, $s = null, $d = null) {return $this->testableGeneric(
 		$k ?: df_caller_f(), ['p', 'v'], $s, $d
 	);}
 
@@ -196,33 +201,41 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-04-16
 	 * Cначала мы пробуем найти значение с приставкой test/live, а затем без приставки.
 	 * https://english.stackexchange.com/a/200637
+	 * 2022-10-24
+	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @used-by merchantID()
 	 * @used-by publicKey()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses v()
+	 * @return mixed
 	 */
-	private function probablyTestable($k = null, $s = null, $d = null):mixed {
+	private function probablyTestable($k = null, $s = null, $d = null) {
 		$k = $k ?: df_caller_f();
 		return $this->testableGeneric($k, 'v', $s, function() use($k, $s, $d) {return $this->v($k, $s, $d);});
 	}
 
 	/**
 	 * 2017-10-02
+	 * 2022-10-24
+	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @used-by privateKey()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses v()
+	 * @return mixed
 	 */
-	private function probablyTestableP($k = null, $s = null, $d = null):mixed {
+	private function probablyTestableP($k = null, $s = null, $d = null) {
 		$k = $k ?: df_caller_f();
 		return $this->testableGeneric($k, 'p', $s, function() use($k, $s, $d) {return $this->p($k, $s, $d);});
 	}
 
 	/**
 	 * 2016-11-12
+	 * 2022-10-24
+	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @used-by probablyTestable()
 	 * @used-by testable()
 	 * @used-by testableB()
@@ -233,12 +246,12 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param string|null $k [optional]
 	 * @param string|string[] $f [optional]
 	 * $f может быть массивом,
-	 * и тогда первое значение его — метод для промышленного режима,
-	 * а второе значение — метод для тестового режима.
+	 * и тогда первое значение его — метод для промышленного режима, а второе значение — метод для тестового режима.
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
+	 * @return mixed
 	 */
-	private function testableGeneric($k = null, $f = 'v', $s = null, $d = null):mixed {return call_user_func(
+	private function testableGeneric($k = null, $f = 'v', $s = null, $d = null) {return call_user_func(
 		[$this, is_string($f) ? $f : $f[intval($this->test($s))]]
 		,($this->test($s) ? 'test' : 'live') . self::phpNameToKey(ucfirst($k ?: df_caller_f()))
 		,$s, $d

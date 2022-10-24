@@ -200,11 +200,19 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * 2015-10-10
+	 * 2022-10-24
+	 * 1) `mixed` as a return type is not supported by PHP < 8:
+	 * https://github.com/mage2pro/core/issues/168#user-content-mixed
+	 * 2) `ReturnTypeWillChange` allows us to suppress the return type absence notice:
+	 * https://github.com/mage2pro/core/issues/168#user-content-absent-return-type-deprecation
+	 * https://github.com/mage2pro/core/issues/168#user-content-returntypewillchange
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
 	 * @param string $offset
+	 * @return mixed
 	 */
-	function offsetGet($offset):mixed {return dfa($this->_data, $offset);}
+	#[\ReturnTypeWillChange]
+	function offsetGet($offset) {return dfa($this->_data, $offset);}
 
 	/**
 	 * 2015-10-10
@@ -271,6 +279,10 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * 2015-10-10
+	 * @used-by self::__construct()
+	 * @used-by self::offsetExists()
+	 * @used-by self::offsetGet()
+	 * @used-by self::offsetUnset()
 	 * @var array(string => mixed)
 	 */
 	private $_data = [];
