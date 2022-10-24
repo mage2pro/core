@@ -72,16 +72,15 @@ function df_cfg($k, $scope = null, $d = null) {
  * @param string $scope		E.g.: «default»
  * @param int $scopeId		E.g.: «0»
  */
-function df_cfg_delete($path, $scope, $scopeId) {df_cfg_r()->deleteConfig($path, $scope, $scopeId);}
+function df_cfg_delete($path, $scope, $scopeId):void {df_cfg_r()->deleteConfig($path, $scope, $scopeId);}
 
 /**
  * 2016-11-12
  * @used-by df_cfg()
  * @used-by \Df\Config\Settings::vv()
  * @param array|string|null|mixed $v
- * @return bool
  */
-function df_cfg_empty($v) {return is_null($v) || '' === $v;}
+function df_cfg_empty($v):bool {return is_null($v) || '' === $v;}
 
 /**
  * 2016-02-09
@@ -95,9 +94,10 @@ function df_cfg_m() {return df_o(IConfig::class);}
 
 /**
  * 2016-08-03
- * @return RConfig
+ * @used-by df_cfg_delete()
+ * @used-by df_cfg_save()
  */
-function df_cfg_r() {return df_o(RConfig::class);}
+function df_cfg_r():RConfig {return df_o(RConfig::class);}
 
 /**
  * 2016-08-03 How to save a config option programmatically? https://mage2.pro/t/289    
