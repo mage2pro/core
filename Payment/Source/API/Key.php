@@ -9,7 +9,7 @@ abstract class Key extends \Df\Config\Source\API\Key {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Config\Source\API\Key::ss()
-	 * @used-by \Df\Config\Source\API\Key::apiKey()
+	 * @used-by \Df\Config\Source\API\Key::isRequirementMet()
 	 * @return S
 	 */
 	protected function ss() {return dfps($this);}
