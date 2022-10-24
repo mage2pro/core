@@ -76,7 +76,7 @@ class O extends \Df\Core\O {
 	 * 2015-12-30
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
-	 * @used-by v0()
+	 * @used-by self::v0()
 	 * @used-by \Df\Typography\Font::color()
 	 * @used-by \Df\Typography\Font::letter_case()
 	 * @used-by \Dfe\CurrencyFormat\O::code()

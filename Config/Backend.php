@@ -132,7 +132,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 
 	/**
 	 * 2015-12-07
-	 * @used-by save()
+	 * @used-by self::save()
 	 * @used-by \Df\Config\Backend\Serialized::dfSaveAfter()
 	 * @see \Df\Config\Backend\Serialized::dfSaveAfter()
 	 * @see \Dfe\Moip\Backend\Enable::dfSaveAfter()
@@ -141,7 +141,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 
 	/**
 	 * 2015-12-07
-	 * @used-by save()
+	 * @used-by self::save()
 	 * @used-by \Df\Config\Backend\Checkbox::dfSaveBefore()
 	 * @used-by \Df\Config\Backend\Serialized::dfSaveBefore()
 	 * @see \Df\Config\Backend\Checkbox::dfSaveBefore()
@@ -155,7 +155,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * I have implemented a workaround for a custom config path in @uses df_config_field()
 	 * "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value"
 	 * https://mage2.pro/t/5148
-	 * @used-by \Df\Config\Backend::label()
+	 * @used-by self::label()
 	 * @used-by \Df\Config\Backend\Serialized::entityC()
 	 * @param string $k
 	 * @param bool $req [optional]
@@ -217,8 +217,8 @@ class Backend extends \Magento\Framework\App\Config\Value {
 
 	/**
 	 * 2016-08-03
-	 * @used-by _afterLoad()
-	 * @used-by processed()
+	 * @used-by self::_afterLoad()
+	 * @used-by self::processed()
 	 * @var array(string => bool)
 	 */
 	private static $_processed = [];
