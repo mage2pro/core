@@ -48,48 +48,48 @@ final class BankCardNetworkDetector {
 
 	/**
 	 * 2018-12-18
-	 * @used-by label()
-	 * @used-by p()
+	 * @used-by self::label()
+	 * @used-by self::p()
 	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::type()
 	 */
 	const AE = 'amex';
 	/**
 	 * 2018-12-18
-	 * @used-by label()
-	 * @used-by p()
+	 * @used-by self::label()
+	 * @used-by self::p()
 	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::type()
 	 */
 	const DN = 'diners';
 	/**
 	 * 2018-12-18
-	 * @used-by label()
-	 * @used-by p()
+	 * @used-by self::label()
+	 * @used-by self::p()
 	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::type()
 	 */
 	const DS = 'discover';
 	/**
 	 * 2018-12-18
-	 * @used-by label()
-	 * @used-by p()
+	 * @used-by self::label()
+	 * @used-by self::p()
 	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::type()
 	 */
 	const JC = 'jcb';
 	/**
 	 * 2018-12-18
-	 * @used-by label()
-	 * @used-by p()
+	 * @used-by self::label()
+	 * @used-by self::p()
 	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::type()
 	 */
 	const MC = 'mastercard';
 	/**
 	 * 2018-12-18
-	 * @used-by label()
-	 * @used-by p()
+	 * @used-by self::label()
+	 * @used-by self::p()
 	 * @used-by \Dfe\Vantiv\Facade\Card::brandCodeE()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::type()
 	 */
