@@ -16,14 +16,25 @@ class NoWhiteBlack extends \Df\Config\Source {
 
 	/**
 	 * 2016-05-13
-	 * @used-by \Df\Config\Source\NoWhiteBlack::map()
+	 * @used-by self::map()
+	 * @see \Df\Config\Source\NoWhiteBlack\Specified::titles()
 	 * @return string[]
 	 */
 	protected function titles() {return [self::$W => 'Whitelist', self::$B => 'Blacklist'];}
 
-	/** @var string */
+	/**
+	 * @used-by self::is()
+	 * @used-by self::isNegative()
+	 * @used-by self::titles()
+	 * @used-by \Df\Config\Source\NoWhiteBlack\Specified::titles()
+	 * @var string
+	 */
 	protected static $B = 'blacklist';
-	/** @var string */
+	/**
+	 * @used-by self::titles()
+	 * @used-by \Df\Config\Source\NoWhiteBlack\Specified::titles()
+	 * @var string
+	 */
 	protected static $W = 'whitelist';
 
 	/**
