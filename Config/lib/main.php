@@ -124,7 +124,7 @@ function df_cfg_r():RConfig {return df_o(RConfig::class);}
  * @param string $scope [optional]		«default», «websites», «website», «stores», «store»
  * @param int $scopeId [optional]		E.g.: «0»
  */
-function df_cfg_save($path, $v, $scope = 'default', $scopeId = 0) {df_cfg_r()->saveConfig($path, $v, dftr($scope, [
+function df_cfg_save($path, $v, $scope = 'default', $scopeId = 0):void {df_cfg_r()->saveConfig($path, $v, dftr($scope, [
 	SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES
 ]), $scopeId);}
 
@@ -136,7 +136,7 @@ function df_cfg_save($path, $v, $scope = 'default', $scopeId = 0) {df_cfg_r()->s
  * @param string $scope [optional]
  * @param int $scopeId [optional]
  */
-function df_cfg_save_cc($path, $v, $scope = 'default', $scopeId = 0) {
+function df_cfg_save_cc($path, $v, $scope = 'default', $scopeId = 0):void {
 	df_cfg_save($path, $v, $scope, $scopeId);
 	df_cache_clean_cfg();
 }
@@ -149,6 +149,5 @@ function df_cfg_save_cc($path, $v, $scope = 'default', $scopeId = 0) {
  * @used-by \Df\Zoho\App::ss()
  * @used-by \Df\Framework\Mail\TransportObserver::execute()
  * @param object|string $m
- * @return Settings
  */
-function dfs($m) {return Settings::convention(df_module_name_c($m));}
+function dfs($m):Settings {return Settings::convention(df_module_name_c($m));}
