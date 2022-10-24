@@ -222,10 +222,10 @@ abstract class Settings {
 	 * https://github.com/mage2pro/portal/blob/0.4.4/Plugin/Theme/Model/View/Design.php#L13-L33
 	 * Maybe @see \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath() is also an offender...
 	 * https://github.com/mage2pro/portal/blob/0.4.4/Plugin/Store/Model/PathConfig.php#L7-L17
-	 * @used-by _a()
-	 * @used-by _font()
-	 * @used-by _matrix()
-	 * @used-by v()
+	 * @used-by self::_a()
+	 * @used-by self::_font()
+	 * @used-by self::_matrix()
+	 * @used-by self::v()
 	 * @used-by \Df\Config\Source\WaitPeriodType::calculate()
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @return null|string|int|S|Store|array(string, int)
@@ -235,16 +235,16 @@ abstract class Settings {
 	);}
 
 	/**
-	 * @used-by b()
-	 * @used-by bv()
-	 * @used-by csv()
-	 * @used-by i()
-	 * @used-by json()
-	 * @used-by nat()
-	 * @used-by nat0()
-	 * @used-by nwb()
-	 * @used-by nwbn()
-	 * @used-by p()
+	 * @used-by self::b()
+	 * @used-by self::bv()
+	 * @used-by self::csv()
+	 * @used-by self::i()
+	 * @used-by self::json()
+	 * @used-by self::nat()
+	 * @used-by self::nat0()
+	 * @used-by self::nwb()
+	 * @used-by self::nwbn()
+	 * @used-by self::p()
 	 * @used-by \CanadaSatellite\Amelia\Settings::url()  (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
 	 * @used-by \Df\Amazon\Settings::merchantId()
 	 * @used-by \Df\API\Settings::probablyTestable()
@@ -408,7 +408,7 @@ abstract class Settings {
 
 	/**
 	 * 2017-03-27
-	 * @used-by scope()
+	 * @used-by self::scope()
 	 * @see \Df\Payment\Settings::scopeDefault()
 	 * @see \Df\Payment\Settings\_3DS::scopeDefault()
 	 * @return int|S|Store|null|string
@@ -417,7 +417,7 @@ abstract class Settings {
 
 	/**
 	 * 2019-01-12
-	 * @used-by s()
+	 * @used-by self::s()
 	 * @see \Df\Config\Settings\Configurable::__construct()
 	 * @see \Df\Payment\Settings::__construct()
 	 * @see \Df\Payment\Settings\_3DS::__construct()
@@ -428,6 +428,9 @@ abstract class Settings {
 
 	/**
 	 * 2015-12-16
+	 * @used-by self::_a()
+	 * @used-by self::_font()
+	 * @used-by self::_matrix()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return mixed[]
@@ -436,8 +439,8 @@ abstract class Settings {
 
 	/**
 	 * 2019-01-11
-	 * @used-by child()
-	 * @used-by scopeDefault()
+	 * @used-by self::child()
+	 * @used-by self::scopeDefault()
 	 * @var int|S|Store|null|string
 	 */
 	private $_scope;
@@ -467,9 +470,9 @@ abstract class Settings {
 
 	/**
 	 * 2016-07-12 http://php.net/manual/function.get-called-class.php#115790
-	 * @used-by child()
-	 * @used-by convention()
 	 * @used-by ikf_pw_api()
+	 * @used-by self::child()
+	 * @used-by self::convention()
 	 * @used-by \CanadaSatellite\Amelia\Block::_toHtml() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
 	 * @used-by \Dfe\Sift\API\B\Event::p()
 	 * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
@@ -495,7 +498,7 @@ abstract class Settings {
 	 * From now on, keys can have a leading digit (e.g.: «3DS»).
 	 * PHP methods for such keys should be prefixed with «_».
 	 * E.g., the @see \Dfe\Omise\Settings::_3DS() method handles the «test3DS» and «live3DS» keys.
-	 * @used-by v()
+	 * @used-by self::v()
 	 * @used-by \Df\API\Settings::testableGeneric()
 	 * @param string $n
 	 */
