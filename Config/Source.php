@@ -49,7 +49,7 @@ namespace Df\Config;
 abstract class Source extends SourceBase {
 	/**
 	 * 2015-11-14
-	 * @used-by toOptionArray()
+	 * @used-by self::toOptionArray()
 	 * @see \Df\Config\Source\API::map()
 	 * @see \Df\Config\Source\Block::map()
 	 * @see \Df\Config\Source\LetterCase::map()
@@ -120,7 +120,7 @@ abstract class Source extends SourceBase {
 	 * 2015-11-27
 	 * @override
 	 * @see \Magento\Framework\Option\ArrayInterface::toOptionArray()                             
-	 * @used-by getAllOptions()
+	 * @used-by self::getAllOptions()
 	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
 	 * @return array(array('label' => string, 'value' => int|string))
 	 */
@@ -175,7 +175,7 @@ abstract class Source extends SourceBase {
 
 	/**
 	 * 2017-03-28
-	 * @used-by sibling()
+	 * @used-by self::sibling()
 	 * @used-by \Df\Payment\Source\API\Key\Testable::_test()
 	 * @used-by \Df\ZohoBI\Source\Organization::app()
 	 * @return string[]
@@ -203,8 +203,8 @@ abstract class Source extends SourceBase {
 
 	/**
 	 * 2017-03-28
-	 * @used-by pathA()
-	 * @used-by setPath()
+	 * @used-by self::pathA()
+	 * @used-by self::setPath()
 	 * @var string
 	 */
 	private $_path;
