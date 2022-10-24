@@ -61,13 +61,11 @@ final class Regex extends \Df\Core\O {
 	}
 
 	/**
-	 * @used-by matchInt()
 	 * @used-by df_preg_test()
+	 * @used-by self::matchInt()
 	 * @return bool
 	 */
-	function test() {return dfc($this, function() {return
-		!is_null($this->match()) && (false !== $this->match())
-	;});}
+	function test() {return dfc($this, function() {return !is_null($this->match()) && (false !== $this->match());});}
 
 	/** @return string */
 	private function getPattern() {return $this[self::$P__PATTERN];}
