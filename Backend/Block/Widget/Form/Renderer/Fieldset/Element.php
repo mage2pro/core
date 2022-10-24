@@ -73,7 +73,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 
 	/**
 	 * 2015-11-22
-	 * @used-by render()
+	 * @used-by self::render()
 	 */
 	private function _render():string {return $this->e()->getNoDisplay() ? '' : (
 		'hidden' === $this->e()->getType()
@@ -86,7 +86,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 
 	/**
 	 * 2015-11-22
-	 * @used-by _render()
+	 * @used-by self::_render()
 	 */
 	private function elementHtml():string {return dfc($this, function() {
 		/**
@@ -113,13 +113,13 @@ class Element extends \Df\Core\O implements RendererInterface {
 
 	/**
 	 * 2015-11-22
-	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
+	 * @used-by self::_render()
 	 */
 	private function inner():string {return $this->innerRow($this->inner1()) . $this->innerRow($this->note());}
 
 	/**
 	 * 2015-11-22
-	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
+	 * @used-by self::_render()
 	 */
 	private function inner1():string {
 		$e = $this->e(); /** @var AE|E $e */
@@ -141,7 +141,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 
 	/**
 	 * 2015-11-22
-	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
+	 * @used-by self::_render()
 	 */
 	private function note():string {return dfc($this, function() {return
 		!($n = $this->e()->getNote()) ? '' : df_tag('p', 'note', df_tag('span', [], $n))
@@ -149,7 +149,7 @@ class Element extends \Df\Core\O implements RendererInterface {
 
 	/**
 	 * 2015-11-22
-	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
+	 * @used-by self::_render()
 	 */
 	private function outerCssClasses():string {
 		if (!isset($this->{__METHOD__})) {

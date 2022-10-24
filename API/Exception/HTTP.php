@@ -24,8 +24,8 @@ final class HTTP extends \Df\API\Exception {
 
 	/**
 	 * 2017-08-08
-	 * @used-by __construct()
-	 * @used-by long()
+	 * @used-by self::__construct()
+	 * @used-by self::long()
 	 * @var R
 	 */
 	private $_r;

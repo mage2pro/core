@@ -79,9 +79,9 @@ abstract class Validator extends Exception {
 
 	/**
 	 * 2017-07-06
-	 * @used-by __construct()
-	 * @used-by long()
-	 * @used-by r()
+	 * @used-by self::__construct()
+	 * @used-by self::long()
+	 * @used-by self::r()
 	 * @var mixed
 	 */
 	private $_r;
