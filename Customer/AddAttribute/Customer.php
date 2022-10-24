@@ -74,14 +74,14 @@ final class Customer {
 
 	/**
 	 * 2019-06-03
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 */
 	const VISIBLE_IN_BACKEND = 'visible_in_backend';
 
 	/**
 	 * 2019-06-12
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 * @used-by \Df\Sso\Upgrade\Data::att()
 	 */
@@ -91,9 +91,9 @@ final class Customer {
 	 * 2019-06-03
 	 * Magento does not have a separate table for customer address attributes
 	 * and stores them in the same table as customer attributes: `customer_eav_attribute`.
-	 * @used-by checkbox()
-	 * @used-by select()
-	 * @used-by text()
+	 * @used-by self::checkbox()
+	 * @used-by self::select()
+	 * @used-by self::text()
 	 * @param string $input
 	 * @param string $name
 	 * @param string $label

@@ -86,7 +86,7 @@ class Currency extends Dropdown {
 
 	/**
 	 * 2016-09-05
-	 * @used-by v()
+	 * @used-by self::v()
 	 * @param null|string|int|S|Store $store [optional]
 	 * @param string|null $orderCurrency [optional]
 	 * @return array(string => string|null)

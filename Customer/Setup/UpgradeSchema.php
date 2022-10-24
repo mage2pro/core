@@ -19,9 +19,9 @@ class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 
 	/**
 	 * 2016-08-21
-	 * @used-by _process()
 	 * @used-by df_ci_add()
 	 * @used-by df_ci_get()
+	 * @used-by self::_process()
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 * @used-by \Df\Framework\Plugin\Reflection\DataObjectProcessor::aroundBuildOutputDataArray()
 	 * @var string

@@ -34,9 +34,9 @@ class BillingAddress {
 	}
 	/**       
 	 * 2016-07-27
-	 * @used-by disable()
-	 * @used-by disabled()
-	 * @used-by restore()
+	 * @used-by self::disable()
+	 * @used-by self::disabled()
+	 * @used-by self::restore()
 	 * @var bool[] 
 	 */
 	private static $_stack = [false];

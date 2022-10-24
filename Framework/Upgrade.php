@@ -30,7 +30,7 @@ use Magento\Setup\Module\Setup as SSetup;
 abstract class Upgrade {
 	/**
 	 * 2016-12-08
-	 * @used-by process()
+	 * @used-by self::process()
 	 * @see \Df\API\Setup\UpgradeSchema::_process()
 	 * @see \Df\Customer\Setup\UpgradeSchema::_process()
 	 * @see \Df\OAuth\Setup\UpgradeSchema::_process()
@@ -50,7 +50,7 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-12-08
-	 * @used-by column()
+	 * @used-by self::column()
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::createTableEav()
 	 * @return Adapter|IAdapter
 	 */
@@ -61,7 +61,7 @@ abstract class Upgrade {
 	 * 2017-08-01
 	 * Override this method if the initially installed module has not included this class.
 	 * In this case provide here the number of the version when the class has been added.
-	 * @used-by isInitial()
+	 * @used-by self::isInitial()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeData::initial()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeSchema::initial()
 	 * @see \Dfe\IPay88\Setup\UpgradeData::initial()
@@ -141,7 +141,7 @@ abstract class Upgrade {
 	/**
 	 * 2016-08-21
 	 * 2017-08-01 It checks whether the installed version of the current module is lower than $v.
-	 * @used-by isInitial()
+	 * @used-by self::isInitial()
 	 * @used-by \Df\API\Setup\UpgradeSchema::_process()
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
@@ -158,19 +158,19 @@ abstract class Upgrade {
 
 	/**
 	 * 2016-12-02
-	 * @used-by process()
-	 * @used-by v()
+	 * @used-by self::process()
+	 * @used-by self::v()
 	 * @var IModuleContext|ModuleContext
 	 */
 	private $_context;
 
 	/**
 	 * 2016-12-02
-	 * @used-by c()
-	 * @used-by process()
-	 * @used-by sEav()
-	 * @used-by setup()
-	 * @used-by t()
+	 * @used-by self::c()
+	 * @used-by self::process()
+	 * @used-by self::sEav()
+	 * @used-by self::setup()
+	 * @used-by self::t()
 	 * @var FSetup|SSetup
 	 */
 	private $_setup;

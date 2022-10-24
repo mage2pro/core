@@ -27,8 +27,8 @@ class Request {
 
 	/**
 	 * 2017-01-01
-	 * @used-by clean()
-	 * @used-by extra()
+	 * @used-by self::clean()
+	 * @used-by self::extra()
 	 * @return array(string => mixed)
 	 */
 	private static function extraKeysRaw() {return dfcf(function() {return array_filter(
