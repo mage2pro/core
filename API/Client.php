@@ -30,8 +30,8 @@ use Zend_Http_Client_Adapter_Socket as aSocket;
 abstract class Client {
 	/**
 	 * 2017-07-05
-	 * @used-by __construct()
-	 * @used-by url()
+	 * @used-by self::__construct()
+	 * @used-by self::url()
 	 * @see \Df\ZohoBI\API\Client::urlBase()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::urlBase()
 	 * @see \Dfe\Dynamics365\API\Client::urlBase()
@@ -95,7 +95,7 @@ abstract class Client {
 
 	/**
 	 * 2019-04-24
-	 * @used-by _p()
+	 * @used-by self::_p()
 	 * @used-by \Inkifi\Pwinty\API\Facade\Order::adjustClient()
 	 * @param bool|null|string $v [optional]
 	 * @return self|bool
@@ -144,7 +144,7 @@ abstract class Client {
 
 	/**
 	 * 2017-07-06
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @see \Df\Zoho\API\Client::_construct()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::_construct()
 	 * @see \Dfe\Dynamics365\API\Client\JSON::_construct()
@@ -161,7 +161,7 @@ abstract class Client {
 
 	/**
 	 * 2017-07-13
-	 * @used-by reqJson()
+	 * @used-by self::reqJson()
 	 * @used-by \Dfe\Sift\API\Client::_construct()
 	 * @param callable|IFilter $f
 	 * @param int $p
@@ -170,7 +170,7 @@ abstract class Client {
 
 	/**
 	 * 2017-07-06
-	 * @used-by resJson()
+	 * @used-by self::resJson()
 	 * @used-by \Dfe\Qiwi\API\Client::_construct()
 	 * @used-by \Dfe\Vantiv\API\Client::_construct()
 	 * @param callable|IFilter $f
@@ -180,7 +180,7 @@ abstract class Client {
 
 	/**
 	 * 2017-07-08
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @see \Df\ZohoBI\API\Client::commonParams()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::commonParams()
 	 * @param string $path
@@ -190,8 +190,8 @@ abstract class Client {
 
 	/**
 	 * 2017-07-05
-	 * @used-by __construct()
-	 * @used-by _p()
+	 * @used-by self::__construct()
+	 * @used-by self::_p()
 	 * @see \Df\ZohoBI\API\Client::headers()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::headers()
 	 * @see \Dfe\Dynamics365\API\Client::headers()
@@ -220,7 +220,7 @@ abstract class Client {
 
 	/**
 	 * 2019-01-14
-	 * @used-by setup()
+	 * @used-by self::setup()
 	 * @see \Dfe\TBCBank\API\Client::proxy()
 	 * @see \Dfe\Vantiv\API\Client::proxy()
 	 * @return IProxy|null
@@ -264,7 +264,7 @@ abstract class Client {
 
 	/**
 	 * 2017-07-05 A descendant class can return null if it does not need to validate the responses.
-	 * @used-by _p()
+	 * @used-by self::_p()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::responseValidatorC()
 	 * @see \Df\ZohoBI\API\Client::responseValidatorC()
 	 * @see \Dfe\Dynamics365\API\Client\JSON::responseValidatorC()
@@ -309,16 +309,15 @@ abstract class Client {
 	/**
 	 * 2017-12-02
 	 * 2018-11-11
-	 * $this->_path can be empty, and we do not want an ending slash in this case,
-	 * what is why we use @uses df_cc_path().
-	 * @used-by _p()
+	 * $this->_path can be empty, and we do not want an ending slash in this case, what is why we use @uses df_cc_path().
+	 * @used-by self::_p()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::url()
 	 */
 	protected function url():string {return df_cc_path($this->urlBase(), $this->_path);}
 
 	/**
 	 * 2018-11-11
-	 * @used-by setup()
+	 * @used-by self::setup()
 	 * @see \Dfe\TBCBank\API\Client::verifyCertificate()
 	 */
 	protected function verifyCertificate():bool {return true;}
@@ -326,11 +325,9 @@ abstract class Client {
 	/**
 	 * 2018-11-11
 	 * We have also @see \Df\API\Facade::zfConfig()
-	 * *) Use \Df\API\Client::zfConfig()
-	 * if you need to provide a common configuration for all API requests.
-	 * *) Use \Df\API\Facade::zfConfig()
-	 * if you need to provide a custom configuration for an API request group.
-	 * @used-by __construct()
+	 * *) Use @see self::zfConfig() if you need to provide a common configuration for all API requests.
+	 * *) Use @see \Df\API\Facade::zfConfig() if you need to provide a custom configuration for an API request group.
+	 * @used-by self::__construct()
 	 * @see \Dfe\TBCBank\API\Client::zfConfig()
 	 * @see \Dfe\Vantiv\API\Client::zfConfig()
 	 * @return array(string => mixed)
@@ -341,7 +338,7 @@ abstract class Client {
 	 * 2017-08-10
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @throws DFE
 	 * @return mixed
 	 */
@@ -419,8 +416,8 @@ abstract class Client {
 
 	/**
 	 * 2017-10-08
-	 * @used-by resPath()
-	 * @used-by resStripRoot()
+	 * @used-by self::resPath()
+	 * @used-by self::resStripRoot()
 	 * @param callable|IFilter $f
 	 * @param int $p
 	 */
@@ -446,14 +443,14 @@ abstract class Client {
 
 	/**
 	 * 2017-08-10
-	 * @used-by __construct()
-	 * @used-by p()
+	 * @used-by self::__construct()
+	 * @used-by self::p()
 	 */
 	private function destructive():bool {return C::GET !== $this->_method;}
 
 	/**
 	 * 2019-01-14
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @param array(string => mixed) $config
 	 */
 	private function setup(array $config): C {
@@ -495,28 +492,28 @@ abstract class Client {
 
 	/**
 	 * 2017-07-02
-	 * @used-by __construct()
-	 * @used-by c()
-	 * @used-by p()
+	 * @used-by self::__construct()
+	 * @used-by self::c()
+	 * @used-by self::p()
 	 * @var C
 	 */
 	private $_c;
 
 	/**
 	 * 2017-07-13
-	 * @used-by __construct()
-	 * @used-by addFilterReq()
-	 * @used-by p()
+	 * @used-by self::__construct()
+	 * @used-by self::addFilterReq()
+	 * @used-by self::p()
 	 * @var FilterChain
 	 */
 	private $_filtersReq;
 
 	/**
 	 * 2017-10-08 This filter chain is applied to a result after the result validation.
-	 * @used-by __construct()
-	 * @used-by addFilterResAV()
-	 * @used-by appendFilterResAV()
-	 * @used-by p()
+	 * @used-by self::__construct()
+	 * @used-by self::addFilterResAV()
+	 * @used-by self::appendFilterResAV()
+	 * @used-by self::p()
 	 * @var FilterChain
 	 */
 	private $_filtersResAV;
@@ -524,19 +521,19 @@ abstract class Client {
 	/**
 	 * 2017-07-06
 	 * 2017-10-08 This filter chain is applied to a result before the result validation.
-	 * @used-by __construct()
-	 * @used-by addFilterResBV()
-	 * @used-by appendFilterResBV()
-	 * @used-by p()
+	 * @used-by self::__construct()
+	 * @used-by self::addFilterResBV()
+	 * @used-by self::appendFilterResBV()
+	 * @used-by self::p()
 	 * @var FilterChain
 	 */
 	private $_filtersResBV;
 
 	/**
 	 * 2017-08-10
-	 * @used-by __construct()
-	 * @used-by destructive()
-	 * @used-by method()
+	 * @used-by self::__construct()
+	 * @used-by self::destructive()
+	 * @used-by self::method()
 	 * @var string
 	 */
 	private $_method;
@@ -547,33 +544,33 @@ abstract class Client {
 	 * Previously, I calculated the cache key in @see __construct(),
 	 * but @see \Df\API\Facade::adjustClient() can modify the \Df\API\Client object,
 	 * so now I calculate the cache key right before its usage in @see p().
-	 * @used-by __construct()
-	 * @used-by p()
+	 * @used-by self::__construct()
+	 * @used-by self::p()
 	 * @var string
 	 */
 	private $_p;
 
 	/**
 	 * 2017-07-02
-	 * @used-by __construct()
-	 * @used-by path()
-	 * @used-by url()
+	 * @used-by self::__construct()
+	 * @used-by self::path()
+	 * @used-by self::url()
 	 * @var string
 	 */
 	private $_path;
 
 	/**
 	 * 2019-01-12
-	 * @used-by _p()
-	 * @used-by silent()
+	 * @used-by self::_p()
+	 * @used-by self::silent()
 	 * @var bool
 	 */
 	private $_silent = false;
 
 	/**
 	 * 2019-01-11
-	 * @used-by __construct()
-	 * @used-by store()
+	 * @used-by self::__construct()
+	 * @used-by self::store()
 	 * @var Store
 	 */
 	private $_store;
