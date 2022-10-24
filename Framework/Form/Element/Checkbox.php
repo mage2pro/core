@@ -1,6 +1,6 @@
 <?php
 namespace Df\Framework\Form\Element;
-use Magento\Framework\Data\Form\Element\Checkbox as _Checkbox;
+use Magento\Framework\Data\Form\Element\Checkbox as _P;
 /**
  * 2015-12-21
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -8,14 +8,14 @@ use Magento\Framework\Data\Form\Element\Checkbox as _Checkbox;
  * в разделе «Stores» → «Configuration».
  * @used-by \KingPalm\B2B\Block\Registration::cb()
  */
-class Checkbox extends _Checkbox {
+class Checkbox extends _P {
 	/**
 	 * 2015-12-21 Перекрываем магический метод.
 	 * 2017-08-09 We can safely mark this method as «final» because this method is magic in the parent class.
 	 * https://github.com/mage2pro/core/issues/20
 	 * @override
-	 * @see _Checkbox::getChecked() It is a magic method.
-	 * @used-by _Checkbox::getElementHtml():
+	 * @see _P::getChecked() It is a magic method.
+	 * @used-by _P::getElementHtml():
 	 *		public function getElementHtml() {
 	 *			if ($checked = $this->getChecked()) {
 	 *				$this->setData('checked', true);
@@ -36,7 +36,7 @@ class Checkbox extends _Checkbox {
 	 * потому что к магическим методам не применяются плагины, а нам надо применить плагин.
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
-	 * @see _Checkbox::getComment() It is a magic method.
+	 * @see _P::getComment() It is a magic method.
 	 * @see \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
 	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Block/System/Config/Form/Field.php#L79-L81
@@ -51,7 +51,7 @@ class Checkbox extends _Checkbox {
 	 * 2015-12-21
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
-	 * @see _Checkbox::getElementHtml()
+	 * @see _P::getElementHtml()
 	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getDefaultHtml():
 	 *		public function getDefaultHtml() {
 	 *			$html = $this->getData('default_html');
@@ -128,14 +128,14 @@ class Checkbox extends _Checkbox {
 	 *			$html = '';
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.3.1/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L417-L439
-	 * @used-by getElementHtml()
+	 * @used-by self::getElementHtml()
 	 * @used-by vendor/kingpalm/b2b/view/frontend/templates/registration.phtml
 	 */
 	const LABEL = 'df_label';
 
 	/**
 	 * 2019-05-30
-	 * @used-by getElementHtml()
+	 * @used-by self::getElementHtml()
 	 */
 	const LABEL_POSITION_BEFORE = 'label_position_before';
 

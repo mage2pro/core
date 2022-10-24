@@ -47,7 +47,7 @@ final class ColumnType {
 	/**
 	 * 2019-06-05
 	 * @used-by df_db_column_add()
-	 * @used-by textLong()
+	 * @used-by self::textLong()
 	 * @param string $c
 	 * @param array(string => string|int) $o [optional]
 	 * @return array(string => string|int)

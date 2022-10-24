@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface as O;
 abstract class Command extends _P implements INonInterceptable {
 	/**
 	 * 2020-10-25
-	 * @used-by execute()
+	 * @used-by self::execute()
 	 * @see \TFC\GoogleShopping\Command\C1::p()
 	 * @see \TFC\Image\Command\C1::p()
 	 * @see \TFC\Image\Command\C2::p()
@@ -57,16 +57,16 @@ abstract class Command extends _P implements INonInterceptable {
 
 	/**
 	 * 2020-20-25
-	 * @used-by execute()
-	 * @used-by input()
+	 * @used-by self::execute()
+	 * @used-by self::input()
 	 * @var I
 	 */
 	private $_i;
 
 	/**
-	 * 2020-20-25
-	 * @used-by execute()
-	 * @used-by output()
+	 * 2020-10-25
+	 * @used-by self::execute()
+	 * @used-by self::output()
 	 * @var O
 	 */
 	private $_o;

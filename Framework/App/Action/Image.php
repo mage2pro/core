@@ -6,14 +6,14 @@ abstract class Image extends \Magento\Framework\App\Action\Action {
 	/**
 	 * 2015-11-29 Содержимое файла картинки. Например, его можно получить посредством @see file_get_contents()
 	 * @see \Df\GoogleFont\Controller\Index\Preview::contents()
-	 * @used-by execute()
+	 * @used-by self::execute()
 	 * @return string
 	 */
 	abstract protected function contents();
 	/**
 	 * 2015-11-29 E.g.: 'png'
 	 * @see \Df\GoogleFont\Controller\Index\Preview::type()
-	 * @used-by execute()
+	 * @used-by self::execute()
 	 * @return string
 	 */
 	abstract protected function type();

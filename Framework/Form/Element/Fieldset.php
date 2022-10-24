@@ -393,8 +393,8 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2016-08-02
-	 * @used-by money()
-	 * @used-by percent()
+	 * @used-by self::money()
+	 * @used-by self::percent()
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
@@ -448,9 +448,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-12-28
 	 * Добавил возможность передачи в качестве $values простого одномерного массива,
 	 * например: $this->select('decimalSeparator', 'Decimal Separator', ['.', ',']);
-	 * @used-by select2()
-	 * @used-by select2Number()
-	 * @used-by yesNo()
+	 * @used-by self::select2()
+	 * @used-by self::select2Number()
+	 * @used-by self::yesNo()
 	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @used-by \Df\Framework\Form\Element\Quantity::onFormInitialized()
 	 * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
@@ -652,7 +652,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
-	 * @used-by select()
+	 * @used-by self::select()
 	 * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
 	 */
 	const EMPTY = 'empty';
