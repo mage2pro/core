@@ -11,10 +11,10 @@ use Zend_Http_Client as C;
 abstract class App {
 	/**
 	 * 2017-07-10
-	 * @used-by getAndSaveTheRefreshToken()
-	 * @used-by pCommon()
-	 * @used-by requestToken()
-	 * @used-by token()
+	 * @used-by self::getAndSaveTheRefreshToken()
+	 * @used-by self::pCommon()
+	 * @used-by self::requestToken()
+	 * @used-by self::token()
 	 * @used-by \Df\OAuth\FE\Button::s()
 	 * @see \Dfe\Dynamics365\OAuth\App::ss()
 	 * @see \Dfe\Salesforce\OAuth\App::ss()
@@ -32,9 +32,8 @@ abstract class App {
 	abstract function urlAuth();
 
 	/**
-	 * 2017-06-30
-	 * «OAuth authorization endpoints» https://msdn.microsoft.com/en-us/library/dn531009.aspx#bkmk_oauthurl
-	 * @used-by requestToken()
+	 * 2017-06-30 «OAuth authorization endpoints» https://msdn.microsoft.com/en-us/library/dn531009.aspx#bkmk_oauthurl
+	 * @used-by self::requestToken()
 	 * @see \Dfe\Dynamics365\OAuth\App::urlToken()
 	 * @see \Dfe\Salesforce\OAuth\App::urlToken()
 	 * @return string
@@ -123,7 +122,7 @@ abstract class App {
 	 * 2017-07-10 Salesforce:
 	 * «Understanding the Web Server OAuth Authentication Flow - Force.com REST API Developer Guide»
 	 * https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_web_server_oauth_flow.htm#d15809e72
-	 * @used-by requestToken()
+	 * @used-by self::requestToken()
 	 * @used-by \Df\OAuth\FE\Button::onFormInitialized()
 	 * @see \Dfe\Dynamics365\OAuth\App::pCommon()
 	 * @return array(string => string)
@@ -233,7 +232,7 @@ abstract class App {
 
 	/**
 	 * 2017-07-11
-	 * @used-by token()
+	 * @used-by self::token()
 	 * @see \Dfe\Dynamics365\Button::kExpiration()
 	 * @return string|null
 	 */
@@ -241,8 +240,8 @@ abstract class App {
 
 	/**
 	 * 2017-06-30
-	 * @used-by getAndSaveTheRefreshToken()
-	 * @used-by token()
+	 * @used-by self::getAndSaveTheRefreshToken()
+	 * @used-by self::token()
 	 * @param array(string => string) $key
 	 * @return array(string => mixed)
 	 * @throws DFE
@@ -311,8 +310,8 @@ abstract class App {
 	 *	}
 	 *
 	 * @override
-	 * @used-by getAndSaveTheRefreshToken()
-	 * @used-by requestToken()
+	 * @used-by self::getAndSaveTheRefreshToken()
+	 * @used-by self::requestToken()
 	 * @param array(string => mixed) $r
 	 * @throws DFE
 	 */
@@ -333,7 +332,7 @@ abstract class App {
 	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#successful-response
 	 * Salesforce «The state value that was passed in as part of the initial request, if applicable».
 	 * https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_web_server_oauth_flow.htm#state_return_parameter_description
-	 * @used-by getAndSaveTheRefreshToken()
+	 * @used-by self::getAndSaveTheRefreshToken()
 	 * @used-by \Df\OAuth\ReturnT\GeneralPurpose::_execute()
 	 * @used-by \Df\OAuth\ReturnT\GeneralPurpose::redirectUrl()
 	 * @param string $k
