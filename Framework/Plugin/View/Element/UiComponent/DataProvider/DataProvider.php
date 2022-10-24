@@ -48,14 +48,14 @@ class DataProvider {
 
 	/**
 	 * 2016-07-28
+	 * @used-by self::afterGetSearchResult()
 	 * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
-	 * @used-by \Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider::afterGetSearchResult()
 	 */
 	const PROVIDER = 'provider';
 	/**
 	 * 2016-07-28
+	 * @used-by self::afterGetSearchResult()
 	 * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
-	 * @used-by \Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider::afterGetSearchResult()
 	 */
 	const RESULT = 'result';
 }

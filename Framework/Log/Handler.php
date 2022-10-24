@@ -9,7 +9,7 @@ namespace Df\Framework\Log;
 abstract class Handler {
 	/**
 	 * 2021-09-08
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @see \Df\Framework\Log\Handler\Cookie::_p()
 	 * @see \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @return bool
@@ -27,15 +27,15 @@ abstract class Handler {
 
 	/**
 	 * 2021-09-08
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @param Record $r
 	 */
 	private function __construct(Record $r) {$this->_r = $r;}
 
 	/**
 	 * 2021-09-08
-	 * @used-by __construct()
-	 * @used-by r()
+	 * @used-by self::__construct()
+	 * @used-by self::r()
 	 * @var Record
 	 */
 	private $_r;

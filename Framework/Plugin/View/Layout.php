@@ -154,7 +154,7 @@ class Layout extends UiComponent {
 	
 	/**
 	 * 2016-11-21
-	 * @used-by afterIsCacheable()
+	 * @used-by self::afterIsCacheable()
 	 * @used-by \Dfe\AmazonLogin\Controller\Index\Index::postProcess()
 	 * @used-by https://github.com/mage2pro/amazon/blob/654bbbbc/view/frontend/web/invalidate.js#L10
 	 */

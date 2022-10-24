@@ -16,8 +16,8 @@ final class ResourceConnection {
 
 	/**
 	 * 2020-11-22
-	 * @used-by beforeGetConnection()
 	 * @used-by df_with_conn()
+	 * @used-by self::beforeGetConnection()
 	 * @var string|null
 	 */
 	static $CUSTOM;

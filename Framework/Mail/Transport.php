@@ -32,8 +32,8 @@ abstract class Transport implements ITransport {
 
 	/**
 	 * 2018-01-28
-	 * @used-by __construct()
-	 * @used-by getMessage()
+	 * @used-by self::__construct()
+	 * @used-by self::getMessage()
 	 * @var IMessage|Message
 	 */
     private $_message;

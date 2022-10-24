@@ -37,8 +37,8 @@ final class Record {
 
 	/**
 	 * 2021-09-08
-	 * @used-by e()
-	 * @used-by msg()
+	 * @used-by self::e()
+	 * @used-by self::msg()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
@@ -48,8 +48,8 @@ final class Record {
 
 	/**
 	 * 2021-09-08
-	 * @used-by __construct()
-	 * @used-by d()
+	 * @used-by self::__construct()
+	 * @used-by self::d()
 	 * @var O
 	 */
 	private $_d;
