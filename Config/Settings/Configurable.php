@@ -22,8 +22,8 @@ class Configurable extends \Df\Config\Settings {
 
 	/**
 	 * 2017-01-27
-	 * @used-by __construct()
-	 * @used-by prefix()
+	 * @used-by self::__construct()
+	 * @used-by self::prefix()
 	 * @var string
 	 */
 	private $_prefix;
