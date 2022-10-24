@@ -11,5 +11,5 @@ class EnableYN extends Sb {
 	 * @see Sb::toOptionArray()
 	 * @return array(array(string => string|\Magento\Framework\Phrase))
 	 */
-	function toOptionArray() {return !df_lang_ru() ? parent::toOptionArray() : df_yes_no();}
+	function toOptionArray():array {return !df_lang_ru() ? parent::toOptionArray() : df_yes_no();}
 }

@@ -161,12 +161,10 @@ final class Font extends \Df\Config\O {
 					$css->rule('text-transform', 'lowercase');
 					break;
 				case LetterCase::$UCFIRST:
-					/**
-					 * 2015-11-14
-					 * .link { text-transform: lowercase; }
-					 * .link:first-letter {text-transform: uppercase;}
-					 * http://stackoverflow.com/a/10256138
-					 */
+					# 2015-11-14
+					#		.link { text-transform: lowercase; }
+					#		.link:first-letter {text-transform: uppercase;}
+					# http://stackoverflow.com/a/10256138
 					$css->rule('text-transform', 'lowercase');
 					$css->rule('text-transform', 'uppercase', ':first-letter');
 					break;

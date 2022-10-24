@@ -10,7 +10,7 @@ final class LetterCase extends \Df\Config\Source {
 	 * @return array(string => string)
 	 */
 	protected function map():array {
-		$vv = [self::_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE]; /** @var string[] $vv */
+		$vv = [self::$_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE]; /** @var string[] $vv */
 		/** @var string[] $ll */
 		$ll = ['As Is', 'Uppercase first letter', 'Uppercase Each Word\'s First Letter', 'UPPERCASE', 'lowercase'];
 		/** @var string|null $s */
@@ -20,94 +20,63 @@ final class LetterCase extends \Df\Config\Source {
 	}
 
 	/**
-	 * @used-by convertToCss()
-	 * @used-by isDefault()
-	 * @used-by toOptionArrayInternal()
-	 * @used-by Df_Admin_Config_Font::getLetterCase()
+	 * @used-by self::map()
+	 * @used-by \Df\Typography\Font::css()
+	 * @var string
 	 */
-	const _DEFAULT = 'default';
+	static $LOWERCASE = 'lowercase';
+	/**
+	 * @used-by self::map()
+	 * @used-by \Df\Typography\Font::css()
+	 * @var string
+	 */
+	static $UCFIRST = 'ucfirst';
+	/**
+	 * @used-by self::map()
+	 * @used-by \Df\Typography\Font::css()
+	 * @var string
+	 */
+	static $UCWORDS = 'ucwords';
+	/**
+	 * @used-by self::map()
+	 * @used-by \Df\Typography\Font::css()
+	 * @var string
+	 */
+	static $UPPERCASE = 'uppercase';
 
 	/**
-	 * @used-by Df_Admin_Config_Font::getLetterCaseCss()
-	 * @param string $value
-	 * @return string
-	 */
-	static function css($value) {
-		return dfa([
-			self::_DEFAULT => 'none'
-			,self::$UPPERCASE => self::$UPPERCASE
-			,self::$LOWERCASE => self::$LOWERCASE
-			,self::$UCFIRST => 'capitalize'
-			/**
-			 * 2015-11-14
-			 * Одним правилом тут не сделаешь, надо так:
-			 * .link { text-transform: lowercase; }
-			 * .link:first-letter {text-transform: uppercase;}
-			 * http://stackoverflow.com/a/10256138
-			 */
-			,self::$UCWORDS => 'lowercase'
-		], $value);
-	}
-
-	/**
-	 * @param string $text
+	 * @used-by map()
+	 * @param string $s
 	 * @param string $format
-	 * @return string
 	 */
-	static function apply($text, $format) {/** @var string $r */
+	private static function apply($s, $format):string {/** @var string $r */
 		switch($format) {
 			case self::$LOWERCASE:
-				$r = mb_strtolower($text);
+				$r = mb_strtolower($s);
 				break;
 			case self::$UPPERCASE:
-				$r = mb_strtoupper($text);
+				$r = mb_strtoupper($s);
 				break;
 			case self::$UCFIRST:
-				$r = df_ucfirst(mb_strtolower(df_trim($text)));
+				$r = df_ucfirst(mb_strtolower(df_trim($s)));
 				break;
 			case self::$UCWORDS:
-				$r = df_ucwords($text);
+				$r = df_ucwords($s);
 				break;
 			default:
-				$r = $text;
+				$r = $s;
 		}
-		/**
-		 * Убрал валидацию результата намеренно: сам метод безобиден,
-		 * и даже если он как-то неправильно будет работать — ничего страшного.
-		 * Пока метод дал сбой только один раз, в магазине laap.ru
-		 * при форматировании заголовков административной таблицы товаров
-		 * (видимо, сбой произошёл из-за влияния некоего стороннего модуля).
-		 */
+		# Убрал валидацию результата намеренно: сам метод безобиден,
+		# и даже если он как-то неправильно будет работать — ничего страшного.
+		# Пока метод дал сбой только один раз, в магазине laap.ru
+		# при форматировании заголовков административной таблицы товаров
+		# (видимо, сбой произошёл из-за влияния некоего стороннего модуля).
 		return $r;
 	}
 
 	/**
-	 * @used-by Df_Admin_Config_Font::isDefault()
-	 * @param bool $value
-	 * @return bool
+	 * @used-by self::css()
+	 * @used-by self::map()
 	 */
-	static function isDefault($value) {return self::_DEFAULT === $value;}
-
-	/**
-	 * @used-by Df_Admin_Config_Font::isUcFirst()
-	 * @param bool $value
-	 * @return bool
-	 */
-	static function isUcFirst($value) {return self::$UCFIRST === $value;}
-
-	/**
-	 * @used-by Df_Admin_Config_Font::isUcFirst()
-	 * @param bool $value
-	 * @return bool
-	 */
-	static function isUcWords($value) {return self::$UCWORDS === $value;}
-
-	/** @var string */
-	static $LOWERCASE = 'lowercase';
-	/** @var string */
-	static $UCFIRST = 'ucfirst';
-	/** @var string */
-	static $UCWORDS = 'ucwords';
-	/** @var string */
-	static $UPPERCASE = 'uppercase';
+	private static $_DEFAULT = 'default';
 }
