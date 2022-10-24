@@ -9,7 +9,7 @@ namespace Df\Config\Source;
 abstract class API extends \Df\Config\Source {
 	/**
 	 * 2017-07-02
-	 * @used-by map()
+	 * @used-by self::map()
 	 * @see \Df\ZohoBI\Source\Organization::fetch()
 	 * @see \Dfe\Dynamics365\Source\PriceList::fetch()
 	 * @see \Dfe\Spryng\Source\Account::fetch()
@@ -20,7 +20,7 @@ abstract class API extends \Df\Config\Source {
 
 	/**
 	 * 2017-07-02
-	 * @used-by map()
+	 * @used-by self::map()
 	 * @see \Df\Config\Source\API\Key::isRequirementMet()
 	 * @see \Df\ZohoBI\Source\Organization::isRequirementMet()
 	 * @see \Dfe\Dynamics365\Source\PriceList::isRequirementMet()
@@ -39,7 +39,7 @@ abstract class API extends \Df\Config\Source {
 
 	/**
 	 * 2017-02-15
-	 * @used-by map()
+	 * @used-by self::map()
 	 * @see \Dfe\Square\Source\Location::exception()
 	 * @param \Exception $e
 	 * @return array(string => string)
