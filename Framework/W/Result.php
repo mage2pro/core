@@ -47,7 +47,7 @@ abstract class Result implements ResultInterface {
 	/**
 	 * 2016-08-24
 	 * @see \Magento\Framework\Controller\AbstractResult::render()
-	 * @used-by renderResult()
+	 * @used-by self::renderResult()
 	 * @see \Df\Framework\W\Result\Text::render()
 	 * @see \Justuno\M2\W\Result\Js::render()
 	 * @param IHttpResponse|HttpResponse $r
@@ -111,8 +111,8 @@ abstract class Result implements ResultInterface {
 
 	/**
 	 * 2016-08-24
-	 * @used-by renderResult()
-	 * @used-by setHeader()
+	 * @used-by self::renderResult()
+	 * @used-by self::setHeader()
 	 * @see \Magento\Framework\Controller\AbstractResult::$headers
 	 * @var array
 	 */
@@ -120,8 +120,8 @@ abstract class Result implements ResultInterface {
 
 	/**
 	 * 2016-08-24
-	 * @used-by renderResult()
-	 * @used-by setStatusHeader()
+	 * @used-by self::renderResult()
+	 * @used-by self::setStatusHeader()
 	 * @see \Magento\Framework\Controller\AbstractResult::$httpResponseCode
 	 * @var int
 	 */

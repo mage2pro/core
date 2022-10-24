@@ -12,7 +12,7 @@ use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
 abstract class Xml extends \Df\Framework\W\Result {
 	/**
 	 * 2021-12-03
-	 * @used-by __toString()
+	 * @used-by self::__toString()
 	 * @see \Dfe\Qiwi\Result::tag()
 	 * @see \Dfe\YandexKassa\Result::tag()
 	 * @see \TFC\GoogleShopping\Result::tag()
@@ -26,7 +26,7 @@ abstract class Xml extends \Df\Framework\W\Result {
 	 * because the method is absent in @see \Magento\Framework\Controller\ResultInterface
 	 * @override
 	 * @see \Df\Framework\W\Result::__toString()
-	 * @used-by render()
+	 * @used-by self::render()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @return string
 	 */
@@ -34,7 +34,7 @@ abstract class Xml extends \Df\Framework\W\Result {
 
 	/**
 	 * 2021-12-03
-	 * @used-by __toString()
+	 * @used-by self::__toString()
 	 * @see \Dfe\YandexKassa\Result::attributes()
 	 * @see \TFC\GoogleShopping\Result::attributes()
 	 * @return array(string => mixed)
@@ -43,7 +43,7 @@ abstract class Xml extends \Df\Framework\W\Result {
 
 	/**
 	 * 2021-12-03
-	 * @used-by __toString()
+	 * @used-by self::__toString()
 	 * @see \Dfe\Qiwi\Result::contents()
 	 * @see \TFC\GoogleShopping\Result::contents()
 	 * @return array(string => mixed)
@@ -56,7 +56,7 @@ abstract class Xml extends \Df\Framework\W\Result {
 	 * https://tech.yandex.com/money/doc/payment-solution/payment-notifications/payment-notifications-http-docpage
 	 * In Russian: «MIME-тип: application/xml».
 	 * https://tech.yandex.ru/money/doc/payment-solution/payment-notifications/payment-notifications-http-docpage
-	 * @used-by render()
+	 * @used-by self::render()
 	 * @see \Dfe\Qiwi\Result::contentType()
 	 * @return string
 	 */

@@ -8,8 +8,8 @@ class Composite implements IV {
 	 * 2016-06-30
 	 * @override
 	 * @see \Df\Framework\IValidator::check()
+	 * @used-by self::check()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
-	 * @used-by check()
 	 * @param AE $e
 	 * @return true|Phrase|Phrase[]
 	 */

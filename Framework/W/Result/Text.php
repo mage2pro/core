@@ -54,7 +54,7 @@ class Text extends \Df\Framework\W\Result {
 
 	/**
 	 * 2016-08-24
-	 * @used-by render()
+	 * @used-by self::render()
 	 * @see \Df\Framework\W\Result\Json::contentType()
 	 * @return string
 	 */
@@ -62,7 +62,7 @@ class Text extends \Df\Framework\W\Result {
 
 	/**
 	 * 2016-08-24
-	 * @used-by i()
+	 * @used-by self::i()
 	 * @see \Df\Framework\W\Result\Json::prepare()
 	 * @param mixed $s
 	 * @return string
@@ -83,9 +83,9 @@ class Text extends \Df\Framework\W\Result {
 
 	/**
 	 * 2016-07-04
-	 * @used-by __toString()
-	 * @used-by i()
-	 * @used-by render()
+	 * @used-by self::__toString()
+	 * @used-by self::i()
+	 * @used-by self::render()
 	 * @var string
 	 */
 	private $_body;
