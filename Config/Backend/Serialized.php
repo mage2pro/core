@@ -56,7 +56,7 @@ class Serialized extends Backend {
 
 	/**
 	 * 2016-08-03   
-	 * @used-by processI() 
+	 * @used-by self::processI()
 	 * @used-by \Df\Config\Backend\ArrayT::processI()
 	 * @return string
 	 */
@@ -66,7 +66,7 @@ class Serialized extends Backend {
 
 	/**
 	 * 2016-08-07     
-	 * @used-by processA()  
+	 * @used-by self::processA()
 	 * @see \Df\Config\Backend\ArrayT::processI()
 	 * @param array(string => mixed) $r
 	 * @return array(string => mixed)
@@ -116,8 +116,8 @@ class Serialized extends Backend {
 
 	/**
 	 * 2016-07-30
-	 * @used-by valueSerialize()
-	 * @used-by valueUnserialize()
+	 * @used-by self::valueSerialize()
+	 * @used-by self::valueUnserialize()
 	 * @param array(string => mixed) $result
 	 * @return array(string => mixed)
 	 * @throws \Exception
