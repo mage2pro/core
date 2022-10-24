@@ -9,7 +9,7 @@ namespace Df\API;
 abstract class Exception extends \Df\Core\Exception {
 	/**
 	 * 2017-07-09
-	 * @used-by short()
+	 * @used-by self::short()
 	 * @used-by \Df\API\Client::_p()
 	 * @see \Df\API\Exception\HTTP::long()
 	 * @see \Df\API\Response\Validator::long()

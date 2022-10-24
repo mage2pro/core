@@ -28,7 +28,7 @@ use Zend_Http_Client as Z;
 abstract class Facade {
 	/**
 	 * 2019-01-11
-	 * @used-by s()
+	 * @used-by self::s()
 	 * @see \Dfe\Square\API\Facade\Card::__construct()
 	 * @see \Inkifi\Mediaclip\API\Facade\User::__construct()
 	 * @see \Inkifi\Mediaclip\API\Facade\Order\Item::__construct()
@@ -125,7 +125,7 @@ abstract class Facade {
 
 	/**
 	 * 2019-03-04
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @see \Dfe\Sift\API\Facade::adjustClient()
 	 * @see \Inkifi\Mediaclip\API\Facade\Order\Item::adjustClient()
 	 * @see \Inkifi\Pwinty\API\Facade\Order::adjustClient()
@@ -135,12 +135,12 @@ abstract class Facade {
 
 	/**
 	 * 2017-07-13
-	 * @used-by all()
-	 * @used-by create()
-	 * @used-by delete()
-	 * @used-by get()
-	 * @used-by patch()
-	 * @used-by put()
+	 * @used-by self::all()
+	 * @used-by self::create()
+	 * @used-by self::delete()
+	 * @used-by self::get()
+	 * @used-by self::patch()
+	 * @used-by self::put()
 	 * @used-by \Dfe\Moip\API\Facade\Customer::addCard()
 	 * @used-by \Dfe\Moip\API\Facade\Order::payment()
 	 * @used-by \Dfe\Qiwi\API\Bill::refund()
@@ -214,7 +214,7 @@ abstract class Facade {
 
 	/**
 	 * 2017-12-03
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @see \Dfe\AlphaCommerceHub\API\Facade::path()
 	 * @see \Dfe\Sift\API\Facade\Event::path()
 	 * @see \Dfe\TBCBank\API\Facade::path()
@@ -229,7 +229,7 @@ abstract class Facade {
 
 	/**
 	 * 2017-08-07
-	 * @used-by path()
+	 * @used-by self::path()
 	 * @see \Dfe\Moip\API\Facade\Notification::prefix()
 	 * @see \Dfe\Sift\API\Facade::prefix()
 	 * @see \Dfe\Square\API\Facade\Card::prefix()
@@ -239,7 +239,7 @@ abstract class Facade {
 
 	/**
 	 * 2019-02-26
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @see \Inkifi\Mediaclip\API\Facade\Order::storeByP()
 	 * @param int|string|array(string => mixed)|array(int|string, array(int|string => mixed)) $p
 	 * @return Store|null
@@ -250,9 +250,9 @@ abstract class Facade {
 	 * 2017-10-19
 	 * 2018-11-11
 	 * Now we have also @see \Df\API\Client::zfConfig()
-	 * 		*) Use \Df\API\Client::zfConfig() if you need to provide a common configuration for all API requests.
-	 * 		*) Use \Df\API\Facade::zfConfig() if you need to provide a custom configuration for an API request group.
-	 * @used-by p()
+	 * 	*) Use @see \Df\API\Client::zfConfig() if you need to provide a common configuration for all API requests.
+	 * 	*) Use @see self::zfConfig() if you need to provide a custom configuration for an API request group.
+	 * @used-by self::p()
 	 * @see \Dfe\Moip\API\Facade\Notification::zfConfig()
 	 * @return array(string => mixed)
 	 */
@@ -260,15 +260,15 @@ abstract class Facade {
 
 	/**
 	 * 2019-04-05
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
 	 */
 	final protected function opts():FacadeOptions {return FacadeOptions::i();}
 
 	/**
 	 * 2019-01-11
-	 * @used-by __construct()
-	 * @used-by p()
+	 * @used-by self::__construct()
+	 * @used-by self::p()
 	 * @var Store
 	 */
 	private $_store;
