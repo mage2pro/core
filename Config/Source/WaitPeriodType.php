@@ -33,8 +33,8 @@ final class WaitPeriodType extends \Df\Config\Source {
 	
 	/**
 	 * 2017-07-30
-	 * @used-by calculate()
-	 * @used-by \Df\Config\Source\WaitPeriodType::map()
+	 * @used-by self::calculate()
+	 * @used-by self::map()
 	 * @var string
 	 */
 	private static $WORKING_DAYS = 'working_days';	
