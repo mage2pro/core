@@ -300,55 +300,12 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
-	 * 2015-12-29
-	 * @todo Видимо, от этого метода надо избавляться.
-	 * Обратите внимание, как работает, например,
-	 * @see \Df\Framework\Form\Element\Fieldset::size()
-	 * Этот метод использует способ, который кажется мне более оптимальным:
-	 * https://github.com/mage2pro/core/tree/e7fcbd9c04a904e9e0d196c56e6a60d6eab0835a/Framework/Data/Form/Element/Fieldset.php#L443
-	 * @param string|null $class [optional]
-	 * @param string|null $cssClass [optional]
-	 * @return Fieldset
-	 */
-	protected function fieldset($class = null, $cssClass = null) {
-		if (!$class) {
-			$class = __CLASS__;
-		}
-		/** @var Fieldset $result */
-		# 2015-12-29
-		# Раньше имя создавалось так: df_uid(4, 'fs')
-		$result = $this->addField($this->cn('fs' . $this->_childFieldsetNextId++), $class, [
-			/**
-			 * 2015-12-07
-			 * Важно скопировать значения опций сюда,
-			 * чтобы дочерний филдсет мог создавать свои элементы
-			 * типа $fsCheckboxes->checkbox('bold', 'B');
-			 * Что интересно, добавление вместо этого метода getValue
-			 * почему-то не работает:
-			 *	function getValue() {return $this->top()->getData('value');}
-			 */
-			'value' => $this['value']
-		]);
-		/**
-		 * 2015-12-12
-		 * Флаг анонимности филдсета.
-		 * Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
-		 */
-		$result->_anonymous = true;
-		if ($cssClass) {
-			$result->addClass($cssClass);
-		}
-		return $result;
-	}
-
-	/**
 	 * 2015-11-17
+	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @param string|null $cssClass [optional]
 	 * @return Fieldset\Inline
 	 */
-	protected function fieldsetInline($cssClass = null) {return $this->fieldset(
-		Fieldset\Inline::class, $cssClass
-	);}
+	protected function fieldsetInline($cssClass = null) {return $this->fieldset(Fieldset\Inline::class, $cssClass);}
 
 	/**
 	 * 2015-12-28
@@ -358,9 +315,9 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @return Hidden
 	 */
 	protected function hidden($name, $value, $label = null) {
-		$result = $this->field($name, Hidden::class, $label, ['value' => $value]);
-		$result->setAfterElementHtml($label);
-		return $result;
+		$r = $this->field($name, Hidden::class, $label, ['value' => $value]); /** @var Hidden $r */
+		$r->setAfterElementHtml($label);
+		return $r;
 	}
 
 	/**
@@ -579,6 +536,41 @@ class Fieldset extends _Fieldset implements ElementI {
 	protected function yesNo($name, $label) {return $this->select($name, $label, df_yes_no());}
 
 	/**
+	 * 2015-12-29
+	 * @todo Видимо, от этого метода надо избавляться.
+	 * Обратите внимание, как работает, например,
+	 * @see \Df\Framework\Form\Element\Fieldset::size()
+	 * Этот метод использует способ, который кажется мне более оптимальным:
+	 * https://github.com/mage2pro/core/tree/e7fcbd9c04a904e9e0d196c56e6a60d6eab0835a/Framework/Data/Form/Element/Fieldset.php#L443
+	 * @used-by self::fieldsetInline()
+	 * @param string|null $class [optional]
+	 * @param string|null $cssClass [optional]
+	 * @return self
+	 */
+	private function fieldset($class = null, $cssClass = null) {
+		if (!$class) {
+			$class = __CLASS__;
+		}
+		# 2015-12-29 Раньше имя создавалось так: df_uid(4, 'fs')
+		$r = $this->addField($this->cn('fs' . $this->_childFieldsetNextId++), $class, [
+			 # 2015-12-07
+			 # Важно скопировать значения опций сюда,
+			 # чтобы дочерний филдсет мог создавать свои элементы типа $fsCheckboxes->checkbox('bold', 'B');
+			 # Что интересно, добавление вместо этого метода getValue почему-то не работает:
+			 #		function getValue() {return $this->top()->getData('value');}
+			'value' => $this['value']
+		]); /** @var self $r */
+		# 2015-12-12
+		# Флаг анонимности филдсета.
+		# Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
+		$r->_anonymous = true;
+		if ($cssClass) {
+			$r->addClass($cssClass);
+		}
+		return $r;
+	}
+
+	/**
 	 * 2015-12-12
 	 * @return bool
 	 */
@@ -611,14 +603,14 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2015-12-29
-	 * @used-by \Df\Framework\Form\Element\Fieldset::fieldset()
+	 * @used-by self::fieldset()
 	 * @var int
 	 */
 	private $_childFieldsetNextId = 0;
 	/**
 	 * 2015-12-12
-	 * @used-by \Df\Framework\Form\Element\Fieldset::addElement()
-	 * @used-by \Df\Framework\Form\Element\Fieldset::top()
+	 * @used-by self::addElement()
+	 * @used-by self::top()
 	 * @var Fieldset|null
 	 */
 	private $_parent;
@@ -626,14 +618,14 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * 2015-12-12
 	 * Флаг анонимности филдсета.
 	 * Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
-	 * @used-by \Df\Framework\Form\Element\Fieldset::fieldsetInline()
+	 * @used-by self::fieldsetInline()
 	 * @var bool
 	 */
 	private $_anonymous;
 
 	/**
 	 * 2016-08-10
-	 * @used-by \Df\Framework\Form\Element\Fieldset::field()
+	 * @used-by self::field()
 	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
 	 * @param string $name
 	 * @return string
@@ -659,8 +651,8 @@ class Fieldset extends _Fieldset implements ElementI {
 
 	/**
 	 * 2016-07-30
-	 * @used-by \Df\Framework\Form\Element\Fieldset::fdCssClass()
-	 * @used-by \Df\Framework\Form\Element\Fieldset::field()
+	 * @used-by self::fdCssClass()
+	 * @used-by self::field()
 	 * @var string
 	 */
 	private static $FD__CSS_CLASS = 'df-css-class';
