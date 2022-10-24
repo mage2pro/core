@@ -40,7 +40,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * because it is used only with the @see clientPassword(),
 	 * which is encrypted in the database.
 	 * @see \Df\OAuth\App::requestToken()
-	 * @used-by authenticatedB()
+	 * @used-by self::authenticatedB()
 	 * @used-by \Df\OAuth\App::token()
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @return string|null

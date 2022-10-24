@@ -9,7 +9,7 @@ use Magento\Framework\App\Action\Action as _P;
 abstract class ReturnT extends _P {
 	/**
 	 * 2017-06-27
-	 * @used-by execute()
+	 * @used-by self::execute()
 	 * @see \Df\Sso\CustomerReturn::_execute()
 	 */
 	abstract protected function _execute();
@@ -33,7 +33,7 @@ abstract class ReturnT extends _P {
 	
 	/**
 	 * 2016-06-06
-	 * @used-by execute()
+	 * @used-by self::execute()
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index::postProcess()
 	 */
 	protected function postProcess() {}
@@ -44,7 +44,7 @@ abstract class ReturnT extends _P {
 	 * Если адрес для перенаправления покупателя передётся в адресе возврата,
 	 * то адрес для перенаправления там може быть закодирован посредством @see base64_encode()
 	 * @see \Dfe\BlackbaudNetCommunity\Url::get()
-	 * @used-by execute()
+	 * @used-by self::execute()
 	 * @used-by \Df\Sso\CustomerReturn::redirectUrl()
 	 * @see \Df\OAuth\ReturnT\GeneralPurpose::redirectUrl()
 	 * @see \Df\Sso\CustomerReturn::redirectUrl()
@@ -56,7 +56,7 @@ abstract class ReturnT extends _P {
 
 	/**
 	 * 2016-06-04
-	 * @used-by redirectUrl()
+	 * @used-by self::redirectUrl()
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index::redirectUrlKey()
 	 * @return string
 	 */
@@ -64,7 +64,7 @@ abstract class ReturnT extends _P {
 
 	/**
 	 * 2016-12-02
-	 * @used-by redirectUrlKey()
+	 * @used-by self::redirectUrlKey()
 	 * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
 	 */
 	const REDIRECT_URL_KEY = 'url';

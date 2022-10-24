@@ -69,7 +69,7 @@ abstract class Button extends AE implements ElementI, IComment {
 
 	/**
 	 * 2017-07-10
-	 * @used-by onFormInitialized()
+	 * @used-by self::onFormInitialized()
 	 * @see \Dfe\Dynamics365\Button::pExtra()
 	 * @see \Dfe\Salesforce\Button::pExtra()
 	 * @return array(string => mixed)
@@ -178,8 +178,8 @@ abstract class Button extends AE implements ElementI, IComment {
 
 	/**
 	 * 2017-07-10
-	 * @used-by getCommentText()
-	 * @used-by getElementHtml()
+	 * @used-by self::getCommentText()
+	 * @used-by self::getElementHtml()
 	 * @used-by \Dfe\Dynamics365\Button::url()
 	 * @return Settings
 	 */
@@ -187,36 +187,36 @@ abstract class Button extends AE implements ElementI, IComment {
 
 	/**
 	 * 2017-07-10
-	 * @used-by onFormInitialized()
-	 * @used-by s()
+	 * @used-by self::onFormInitialized()
+	 * @used-by self::s()
 	 * @return App
 	 */
 	private function app() {return df_oauth_app($this->m());}
 
 	/**
 	 * 2017-07-11
-	 * @used-by app()
-	 * @used-by getCommentText()
-	 * @used-by onFormInitialized()
+	 * @used-by self::app()
+	 * @used-by self::getCommentText()
+	 * @used-by self::onFormInitialized()
 	 * @return string
 	 */
 	private function m() {return dfc($this, function() {return df_module_name_c($this);});}
 
 	/**
 	 * 2017-07-11
-	 * @used-by onFormInitialized()
+	 * @used-by self::onFormInitialized()
 	 * @used-by \Df\OAuth\ReturnT\GeneralPurpose::_execute()
 	 */
 	const MODULE = 'module';
 	/**
 	 * 2017-06-29
-	 * @used-by onFormInitialized()
+	 * @used-by self::onFormInitialized()
 	 * @used-by \Df\OAuth\App::getAndSaveTheRefreshToken()
 	 */
 	const SCOPE = 'scope';
 	/**
 	 * 2017-06-29
-	 * @used-by onFormInitialized()
+	 * @used-by self::onFormInitialized()
 	 * @used-by \Df\OAuth\ReturnT\GeneralPurpose::redirectUrl()
 	 */
 	const URL = 'url';
