@@ -35,18 +35,14 @@ abstract class Key extends \Df\Config\Source\API {
 	 * @override
 	 * @see \Df\Config\Source\API::isRequirementMet
 	 * @used-by \Df\Config\Source\API::map()
-	 * @return bool
 	 */
-	final protected function isRequirementMet() {return !!$this->apiKey();}
+	final protected function isRequirementMet():bool {return !!$this->apiKey();}
 
 	/**
 	 * 2017-07-02
 	 * @used-by \Df\Config\Source\API::map()
-	 * @return string
 	 */
-	final protected function requirement() {return
-		"Specify {$this->apiKeyTitle()} first, and then save the settings."
-	;}
+	final protected function requirement():string {return "Specify {$this->apiKeyTitle()} first, and then save the settings.";}
 
 	/**
 	 * 2017-07-02

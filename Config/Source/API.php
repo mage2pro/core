@@ -16,16 +16,16 @@ abstract class API extends \Df\Config\Source {
 	 * @see \Dfe\Square\Source\Location::fetch()
 	 * @return array(string => string)
 	 */
-	abstract protected function fetch();
+	abstract protected function fetch():array;
 
 	/**
 	 * 2017-07-02
 	 * @used-by map()
 	 * @see \Df\Config\Source\API\Key::isRequirementMet()
+	 * @see \Df\ZohoBI\Source\Organization::isRequirementMet()
 	 * @see \Dfe\Dynamics365\Source\PriceList::isRequirementMet()
-	 * @return bool
 	 */
-	abstract protected function isRequirementMet();
+	abstract protected function isRequirementMet():bool;
 
 	/**
 	 * 2017-07-02
@@ -35,7 +35,7 @@ abstract class API extends \Df\Config\Source {
 	 * @see \Dfe\Dynamics365\Source\PriceList::requirement()
 	 * @return string
 	 */
-	abstract protected function requirement();
+	abstract protected function requirement():string;
 
 	/**
 	 * 2017-02-15
@@ -44,7 +44,7 @@ abstract class API extends \Df\Config\Source {
 	 * @param \Exception $e
 	 * @return array(string => string)
 	 */
-	protected function exception(\Exception $e) {return ['error' => $e->getMessage()];}
+	protected function exception(\Exception $e):array {return ['error' => $e->getMessage()];}
 
 	/**
 	 * 2017-07-02
