@@ -20,11 +20,9 @@ use Magento\Store\Model\Store;
  * The @see \Magento\Store\Model\ScopeInterface::SCOPE_STORES constant exists in all the Magento 2 versions:
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L13
  * Note 5.
- * Please note that the @see \Magento\Store\Model\ScopeInterface::SCOPE_GROUPS constant
- * is absent in Magento <= 2.2.0:
+ * The @see \Magento\Store\Model\ScopeInterface::SCOPE_GROUPS constant is absent in Magento <= 2.2.0:
  * https://github.com/magento/magento2/blob/2.1.9/app/code/Magento/Store/Model/ScopeInterface.php#L8-L21
  * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Store/Model/ScopeInterface.php#L18
- *
  * @used-by df_scope_stores()
  * @used-by \Df\Config\Comment::sibling()
  * @used-by \Df\Config\Settings::scope()
@@ -33,7 +31,7 @@ use Magento\Store\Model\Store;
  * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
  * @return array(string, int)
  */
-function df_scope() {
+function df_scope():array {
 	$r = null; /** @var array(string, int) $r */
 	foreach ([SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES] as $s => $ss) {
 		if (!is_null($id = df_request($s))) { /** @var int|null $id */
@@ -50,7 +48,6 @@ function df_scope() {
 	 * 2) @see \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT
 	 * 		const SCOPE_TYPE_DEFAULT = 'default';
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/App/Config/ScopeConfigInterface.php#L16-L19
-	 *
 	 * 2017-10-22
 	 * Note 1.
 	 * The @see \Magento\Framework\App\ScopeInterface::SCOPE_DEFAULT constant is absent in Magento <= 2.2.0:
@@ -60,14 +57,12 @@ function df_scope() {
 	 * https://github.com/mage2pro/core/issues/39
 	 * The bug was introduced at 2017-08-10 in the 2.10.12 release:
 	 * https://github.com/mage2pro/core/releases/tag/2.10.12
-	 *
 	 * Note 2.
 	 * The @see \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT constant
 	 * exists in all the Magento 2 versions:
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Config/ScopeConfigInterface.php#L16-L19
 	 * It is not deprecated in Magento 2.2.0:
 	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/App/Config/ScopeConfigInterface.php#L16-L19
-	 *
 	 * Note 3.
 	 * The @see \Magento\Config\Block\System\Config\Form::SCOPE_DEFAULT constant exists in all the Magento 2 versions:
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L16
@@ -83,13 +78,11 @@ function df_scope() {
  * «Propose to make the @see \Magento\Framework\App\Config\ScopePool::_getScopeCode() public
  * because it is useful to calculate cache keys based on a scope
  * (like @see \Magento\Framework\App\Config\ScopePool::getScope() does)».
- *
  * 2015-12-26
  * I use @see \Magento\Store\Model\ScopeInterface::SCOPE_STORE as the default value for $scopeType
  * for compatibility with @see \Df\Config\Settings::v()
  * https://mage2.pro/t/128
  * https://github.com/magento/magento2/issues/2064
- *
  * 2017-10-22
  * Note 1.
  * The @see \Magento\Framework\App\ScopeInterface::SCOPE_DEFAULT constant is absent in Magento <= 2.2.0:
@@ -97,45 +90,39 @@ function df_scope() {
  * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/App/ScopeInterface.php#L13-L16
  * «Undefined class constant 'SCOPE_DEFAULT' in mage2pro/core/Config/lib/scope.php on line 36»:
  * https://github.com/mage2pro/core/issues/39
- *
  * Note 2.
  * The @see \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT constant
  * exists in all the Magento 2 versions:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Config/ScopeConfigInterface.php#L16-L19
  * It is not deprecated in Magento 2.2.0:
  * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/App/Config/ScopeConfigInterface.php#L16-L19
- *
  * Note 3.
  * The @see \Magento\Config\Block\System\Config\Form::SCOPE_DEFAULT constant exists in all the Magento 2 versions:
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L16
  * It is not deprecated in Magento 2.2.0:
  * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Config/Block/System/Config/Form.php#L26
- *
  * Note 4.
  * The @see \Magento\Store\Model\ScopeInterface::SCOPE_STORE constant exists in all the Magento 2 versions:
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L17
- *
  * @used-by df_store_code()
  * @used-by \Df\Config\Settings::_a()
  * @used-by \Df\Config\Settings::_font()
  * @used-by \Df\Config\Settings::_matrix()
- * @param null|string|int|ScopeA|Store $scope [optional]
- * @param string $scopeType [optional]
- * @return string
+ * @param null|string|int|ScopeA|Store $s [optional]
+ * @param string $type [optional]
  */
-function df_scope_code($scope = null, $scopeType = SS::SCOPE_STORE) {
-	if (($scope === null || is_numeric($scope)) && $scopeType !== IScopeConfig::SCOPE_TYPE_DEFAULT) {
-		$scope = df_scope_resolver_pool()->get($scopeType)->getScope($scope);
+function df_scope_code($s = null, $type = SS::SCOPE_STORE):string {
+	if (($s === null || is_numeric($s)) && $type !== IScopeConfig::SCOPE_TYPE_DEFAULT) {
+		$s = df_scope_resolver_pool()->get($type)->getScope($s);
 	}
-	return $scope instanceof ScopeA ? $scope->getCode() : $scope;
+	return $s instanceof ScopeA ? $s->getCode() : $s;
 }
 
 /**
  * 2016-12-16
  * @used-by df_scope_code()
- * @return ScopeResolverPool
  */
-function df_scope_resolver_pool() {return df_o(ScopeResolverPool::class);}
+function df_scope_resolver_pool():ScopeResolverPool {return df_o(ScopeResolverPool::class);}
 
 /**
  * 2017-08-10
@@ -146,27 +133,23 @@ function df_scope_resolver_pool() {return df_o(ScopeResolverPool::class);}
  * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/App/ScopeInterface.php#L13-L16
  * «Undefined class constant 'SCOPE_DEFAULT' in mage2pro/core/Config/lib/scope.php on line 36»:
  * https://github.com/mage2pro/core/issues/39
- *
  * Note 2.
  * The @see \Magento\Framework\App\Config\ScopeConfigInterface::SCOPE_TYPE_DEFAULT constant
  * exists in all the Magento 2 versions:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/App/Config/ScopeConfigInterface.php#L16-L19
  * It is not deprecated in Magento 2.2.0:
  * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/App/Config/ScopeConfigInterface.php#L16-L19
- *
  * Note 3.
  * The @see \Magento\Config\Block\System\Config\Form::SCOPE_DEFAULT constant exists in all the Magento 2 versions:
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Config/Block/System/Config/Form.php#L16
  * It is not deprecated in Magento 2.2.0:
  * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Config/Block/System/Config/Form.php#L26
- *
  * Note 4.
  * The @see \Magento\Store\Model\ScopeInterface::SCOPE_STORES constant exists in all the Magento 2 versions:
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L13
- *
  * @return Store[]
  */
-function df_scope_stores() {
+function df_scope_stores():array {
 	# 2020-03-02
 	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
