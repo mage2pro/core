@@ -36,20 +36,20 @@ final class Marker {
 
 	/**
 	 * 2021-12-12
-	 * @used-by __construct()
-	 * @used-by mark()
-	 * @used-by marked()
-	 * @used-by unmark()
+	 * @used-by self::__construct()
+	 * @used-by self::mark()
+	 * @used-by self::marked()
+	 * @used-by self::unmark()
 	 * @var string
 	 */
 	private $_begin;
 
 	/**
 	 * 2021-12-12
-	 * @used-by __construct()
-	 * @used-by mark()
-	 * @used-by marked()
-	 * @used-by unmark()
+	 * @used-by self::__construct()
+	 * @used-by self::mark()
+	 * @used-by self::marked()
+	 * @used-by self::unmark()
 	 * @var string
 	 */
 	private $_end;
