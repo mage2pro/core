@@ -26,7 +26,7 @@ final class FacadeOptions {
 
 	/**
 	 * 2019-04-05
-	 * @used-by i()
+	 * @used-by self::i()
 	 */
 	private function __construct() {}
 

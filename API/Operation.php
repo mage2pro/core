@@ -105,22 +105,22 @@ final class Operation implements \ArrayAccess {
 
 	/**
 	 * 2017-07-13
-	 * @used-by __construct()
-	 * @used-by req()
+	 * @used-by self::__construct()
+	 * @used-by self::req()
 	 * @var O
 	 */
 	private $_req;
 
 	/**
 	 * 2017-07-13
-	 * @used-by __construct()
-	 * @used-by a()
-	 * @used-by j()
-	 * @used-by offsetExists()
-	 * @used-by offsetGet()
-	 * @used-by offsetSet()
-	 * @used-by offsetUnset()
-	 * @used-by res()
+	 * @used-by self::__construct()
+	 * @used-by self::a()
+	 * @used-by self::j()
+	 * @used-by self::offsetExists()
+	 * @used-by self::offsetGet()
+	 * @used-by self::offsetSet()
+	 * @used-by self::offsetUnset()
+	 * @used-by self::res()
 	 * @var O
 	 */
 	private $_res;
