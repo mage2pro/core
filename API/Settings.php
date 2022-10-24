@@ -12,7 +12,7 @@ use Magento\Store\Model\Store;
 abstract class Settings extends \Df\Config\Settings {
 	/**
 	 * 2019-03-13
-	 * @used-by key()
+	 * @used-by self::key()
 	 * @see \Df\Payment\Settings::titleB()
 	 */
 	protected function titleB():string {return df_class_second($this);}
@@ -73,7 +73,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
-	 * @uses probablyTestable()
+	 * @uses self::probablyTestable()
 	 * @see \Dfe\Square\Settings::publicKey()
 	 * @see \Dfe\TBCBank\Settings::publicKey()
 	 */
@@ -81,8 +81,8 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-03-02
-	 * @used-by testableGeneric()
 	 * @used-by ikf_pw_api()
+	 * @used-by self::testableGeneric()
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Method::test()
@@ -103,10 +103,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-11-12
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
-	 * @param string|null $k [optional]
-	 * @param null|string|int|S|Store $s [optional]
-	 * @param mixed|callable $d [optional]
-	 * @uses v()
+	 * @uses self::v()
 	 * @used-by \Dfe\AlphaCommerceHub\Settings::apiDomain()
 	 * @used-by \Dfe\AlphaCommerceHub\Settings::payPagePath()
 	 * @used-by \Dfe\PostFinance\Settings::hashAlgorithm()
@@ -115,6 +112,9 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Square\Settings::publicKey()
 	 * @used-by \Dfe\TwoCheckout\Settings::accountNumber()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
+	 * @param string|null $k [optional]
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $d [optional]
 	 * @return mixed
 	 */
 	final protected function testable($k = null, $s = null, $d = null) {return $this->testableGeneric(
@@ -170,7 +170,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
-	 * @uses p()
+	 * @uses self::p()
 	 * @return mixed
 	 */
 	final protected function testablePV($k = null, $s = null, $d = null) {return $this->testableGeneric(
@@ -179,10 +179,10 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2017-02-08
-	 * @used-by privateKey()
-	 * @used-by publicKey()
-	 * @uses testable()
-	 * @uses testableP()
+	 * @used-by self::privateKey()
+	 * @used-by self::publicKey()
+	 * @uses self::testable()
+	 * @uses self::testableP()
 	 * @param string $method
 	 * @param string $type
 	 * @param string $alt
@@ -203,12 +203,12 @@ abstract class Settings extends \Df\Config\Settings {
 	 * https://english.stackexchange.com/a/200637
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
-	 * @used-by merchantID()
-	 * @used-by publicKey()
+	 * @used-by self::merchantID()
+	 * @used-by self::publicKey()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
-	 * @uses v()
+	 * @uses self::v()
 	 * @return mixed
 	 */
 	private function probablyTestable($k = null, $s = null, $d = null) {
@@ -220,11 +220,11 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-10-02
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
-	 * @used-by privateKey()
+	 * @used-by self::privateKey()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
-	 * @uses v()
+	 * @uses self::v()
 	 * @return mixed
 	 */
 	private function probablyTestableP($k = null, $s = null, $d = null) {
@@ -236,11 +236,11 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-11-12
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
-	 * @used-by probablyTestable()
-	 * @used-by testable()
-	 * @used-by testableB()
-	 * @used-by testableP()
-	 * @used-by testablePV()
+	 * @used-by self::probablyTestable()
+	 * @used-by self::testable()
+	 * @used-by self::testableB()
+	 * @used-by self::testableP()
+	 * @used-by self::testablePV()
 	 * @uses \Df\Config\Settings::p()
 	 * @uses \Df\Config\Settings::v()
 	 * @param string|null $k [optional]
