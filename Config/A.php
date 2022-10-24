@@ -18,7 +18,7 @@ final class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	
 	/**
 	 * 2015-12-30
-	 * @used-by getIterator()
+	 * @used-by self::getIterator()
 	 * @used-by \Df\Config\A::count()
 	 * @used-by \Dfe\AllPay\ConfigProvider::config()
 	 * @used-by \Dfe\AllPay\InstallmentSales\Settings::plans()
@@ -61,20 +61,20 @@ final class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 
 	/**
 	 * 2015-12-30
-	 * @used-by \Df\Config\A::itemsA()
+	 * @used-by self::i()
 	 * @used-by \Df\Config\Backend\ArrayT::processA()
 	 */
 	const FAKE = 'fake';
 
 	/**
-	 * @used-by get()
-	 * @used-by i()
+	 * @used-by self::get()
+	 * @used-by self::i()
 	 * @var string
 	 */
 	private static $P__ITEM_CLASS = 'item_class';
 	/**
-	 * @used-by get()
-	 * @used-by i()
+	 * @used-by self::get()
+	 * @used-by self::i()
 	 * @var string
 	 */
 	private static $P__ITEMS_A = 'items_a';
