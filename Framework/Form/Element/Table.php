@@ -16,7 +16,7 @@ abstract class Table extends Hidden {
 	/**
 	 * 2015-12-16
 	 * @override
-	 * @see \Df\Framework\Form\Element\Hidden::onFormInitialized()
+	 * @see self::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
 	final function onFormInitialized() {df_fe_init(

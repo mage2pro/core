@@ -51,7 +51,7 @@ abstract class Url extends Element {
 	
 	/**
 	 * 2016-05-31
-	 * @used-by getElementHtml()  
+	 * @used-by self::getElementHtml()
 	 * @see \Df\Framework\Form\Element\Webhook::messageForThirdPartyLocalhost()
 	 * @return string
 	 */
@@ -88,7 +88,7 @@ abstract class Url extends Element {
 	 *		<...>
 	 *	</field>
 	 * https://github.com/mage2pro/yandex-kassa/blob/0.1.9/etc/adminhtml/system.xml#L106-L131
-	 * @used-by messageForOthers()
+	 * @used-by self::messageForOthers()
 	 * @see \Df\Amazon\FE\JsOrigin::url() 
 	 * @see \Df\Payment\FE\CustomerReturn::url()
 	 * @see \Df\Sso\FE\CustomerReturn::url()
@@ -100,8 +100,8 @@ abstract class Url extends Element {
 
 	/**
 	 * 2016-05-30
-	 * @used-by messageForOthers()
-	 * @used-by url()
+	 * @used-by self::messageForOthers()
+	 * @used-by self::url()
 	 * @used-by \Df\Amazon\FE\JsOrigin::url()
 	 * @return bool
 	 */
@@ -119,8 +119,8 @@ abstract class Url extends Element {
 
 	/**
 	 * 2016-05-31
-	 * @used-by getElementHtml()
-	 * @used-by messageForThirdPartyLocalhost()
+	 * @used-by self::getElementHtml()
+	 * @used-by self::messageForThirdPartyLocalhost()
 	 * @return string
 	 */
 	private function messageForOthers() {$url = $this->url(); return
@@ -133,11 +133,9 @@ abstract class Url extends Element {
 
 	/**
 	 * 2016-05-30
-	 * @used-by getComment()
-	 * @used-by getElementHtml()
+	 * @used-by self::getComment()
+	 * @used-by self::getElementHtml()
 	 * @return bool
 	 */
-	private function thirdPartyLocalhost() {return dfc($this, function() {return
-		df_is_localhost() && !df_my()
-	;});}
+	private function thirdPartyLocalhost() {return dfc($this, function() {return df_is_localhost() && !df_my();});}
 }
