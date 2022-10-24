@@ -7,7 +7,7 @@ use Magento\Framework\View\Asset\File;
 final class BankCardNetworks {
 	/**
 	 * 2017-07-19
-	 * @used-by url()
+	 * @used-by self::url()
 	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
 	 * @return string[]
 	 */
@@ -71,21 +71,21 @@ final class BankCardNetworks {
 	
 	/**
 	 * 2017-07-19
-	 * @used-by custom()
+	 * @used-by self::custom()
 	 * @used-by \Dfe\Moip\Facade\Card::logoId()
 	 */
 	const Elo = 'Elo';
 
 	/**
 	 * 2017-07-19
-	 * @used-by custom()
+	 * @used-by self::custom()
 	 * @used-by \Dfe\Moip\Facade\Card::logoId()
 	 */	
 	const Hiper = 'Hiper';
 
 	/**
 	 * 2017-07-19
-	 * @used-by custom()
+	 * @used-by self::custom()
 	 * @used-by \Dfe\Moip\Facade\Card::logoId()
 	 */	
 	const Hipercard = 'Hipercard';
@@ -106,7 +106,7 @@ final class BankCardNetworks {
 
 	/**
 	 * 2020-02-20
-	 * @used-by custom()
+	 * @used-by self::custom()
 	 */
 	const UnionPayForBraintree = 'CUP';
 }
