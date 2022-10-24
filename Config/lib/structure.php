@@ -24,12 +24,10 @@ use Magento\Framework\Phrase;
  * @return IElement|F|Group|Section|null
  */
 function df_config_e($path, $throw = true, $expectedClass = null) { /** @var IElement|F|Group|Section|null $r */
-	/**
-	 * 2020-02-02
-	 * 1) It correctly handles a custom `config_path` value.
-	 * 2) "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value"
-	 * https://mage2.pro/t/5148
-	 */
+	# 2020-02-02
+	# 1) It correctly handles a custom `config_path` value.
+	# 2) "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value"
+	# https://mage2.pro/t/5148
 	if ($path instanceof V) {
 		$c = $path['field_config']; /** @var array(string => mixed) $c */
 		$path = df_cc_path($c['path'], $c['id']);
@@ -53,18 +51,15 @@ function df_config_e($path, $throw = true, $expectedClass = null) { /** @var IEl
  * @used-by \Df\Config\Backend::fc()
  * @used-by \Df\Config\Source::f()
  * @param V|null $v [optional]
- * @return F
  */
-function df_config_field(V $v = null) {/** @var F $r */
+function df_config_field(V $v = null):F {/** @var F $r */
 	/**
 	 * 2015-11-14
 	 * Очень красивое и неожиданное решение.
-	 * Оказывается, Magento 2 использует для настроечных полей
-	 * шаблон проектирования «Приспособленец»:
+	 * Оказывается, Magento 2 использует для настроечных полей шаблон проектирования «Приспособленец»:
 	 * https://ru.wikipedia.org/wiki/Приспособленец_(шаблон_проектирования)
 	 * Поэтому настроечное поле является объектом-одиночкой, и мы можем получить его из реестра.
 	 * https://mage2.pro/t/212
-	 *
 	 * 1)
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator\Field::__construct()
 	 *	function __construct(
@@ -75,7 +70,6 @@ function df_config_field(V $v = null) {/** @var F $r */
 	 *		$this->_fieldFlyweight = $fieldFlyweight;
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.1/app/code/Magento/Config/Model/Config/Structure/Element/Iterator/Field.php#L30
-	 *
 	 * 2)
 	 * @see \Magento\Config\Model\Config\Structure\Element\Group::__construct()
 	 *	function __construct(
@@ -87,18 +81,12 @@ function df_config_field(V $v = null) {/** @var F $r */
 	 *		(...)
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.1/app/code/Magento/Config/Model/Config/Structure/Element/Group.php#L40
-	 *
 	 * 3)
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator::current()
-	 *	function current()
-	 *	{
-	 *	return $this->_flyweight;
-	 *	}
+	 * 		function current() {return $this->_flyweight;}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.1/app/code/Magento/Config/Model/Config/Structure/Element/Iterator.php#L71-L74
-	 *
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator::next()
-	 *	function next()
-	 *	{
+	 *	function next() {
 	 *		next($this->_elements);
 	 *		if (current($this->_elements)) {
 	 *			$this->_initFlyweight(current($this->_elements));
@@ -151,9 +139,8 @@ function df_config_field(V $v = null) {/** @var F $r */
  * ignores a custom `config_path` value": https://mage2.pro/t/5148
  * 2) @uses df_config_field() returns a flyweight: https://en.wikipedia.org/wiki/Flyweight_pattern
  * @used-by \Df\Config\Comment::groupPath()
- * @return string
  */
-function df_config_field_path() {
+function df_config_field_path():string {
 	$f = df_config_field(); /** @var F $f */
 	return $f->getConfigPath() ?: $f->getPath();
 }
@@ -177,11 +164,12 @@ function df_config_group($path, $throw = true) {return df_config_e($path, $throw
 function df_config_section($path, $throw = true) {return df_config_e($path, $throw, Section::class);}
 
 /**
- * 2016-08-02
- * By analogy with @see \Magento\Config\Block\System\Config\Form::__construct()
- * @return Structure
+ * 2016-08-02 By analogy with @see \Magento\Config\Block\System\Config\Form::__construct()
+ * @used-by df_config_e()
+ * @used-by \Df\Config\Backend::label()
+ * @used-by \Df\Config\Model\Config\Structure::tab()
  */
-function df_config_structure() {return df_o(Structure::class);}
+function df_config_structure():Structure {return df_o(Structure::class);}
 
 /**
  * 2016-08-02
