@@ -37,7 +37,7 @@ class Choice {
 	/**
 	 * 2017-04-17
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by tm()
+	 * @used-by self::tm()
 	 * @used-by \Df\GingerPaymentsBase\Choice::optionCodeI()
 	 * @used-by \Dfe\AllPay\Choice::title()
 	 * @used-by \Dfe\AlphaCommerceHub\Choice::title()
@@ -88,24 +88,24 @@ class Choice {
 
 	/**
 	 * 2017-04-17
-	 * @used-by s()
+	 * @used-by self::s()
 	 * @param M $m
 	 */
 	private function __construct(M $m) {$this->_m = $m;}
 
 	/**
 	 * 2017-04-17
-	 * @used-by req()
-	 * @used-by responseF()
+	 * @used-by self::req()
+	 * @used-by self::responseF()
 	 * @return \Df\Payment\TM
 	 */
 	private function tm() {return df_tm($this->m());}
 
 	/**
 	 * 2017-04-17
-	 * @used-by __construct()
-	 * @used-by s()
-	 * @used-by tm()
+	 * @used-by self::__construct()
+	 * @used-by self::s()
+	 * @used-by self::tm()
 	 * @var M
 	 */
 	private $_m;
