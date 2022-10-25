@@ -40,11 +40,11 @@ final class Exception extends \Df\Qa\Failure {
 
 	/**
 	 * 2021-10-04
-	 * @used-by i()
-	 * @used-by main()
-	 * @used-by postface()
-	 * @used-by stackLevel()
-	 * @used-by trace()
+	 * @used-by self::i()
+	 * @used-by self::main()
+	 * @used-by self::postface()
+	 * @used-by self::stackLevel()
+	 * @used-by self::trace()
 	 * @var DFE
 	 */
 	private $_e;

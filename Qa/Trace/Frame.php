@@ -19,7 +19,7 @@ final class Frame extends \Df\Core\O {
 
 	/**
 	 * 2015-04-03 Для простых функций (не методов) вернёт название функции.
-	 * @used-by methodParameter()
+	 * @used-by self::methodParameter()
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @used-by \Df\Qa\Method::raiseErrorResult()
 	 * @used-by \Df\Qa\Method::raiseErrorVariable()
@@ -40,7 +40,7 @@ final class Frame extends \Df\Core\O {
 	 * «Function include() does not exist»: https://github.com/tradefurniturecompany/site/issues/60
 	 * https://www.php.net/manual/reflectionfunction.construct.php
 	 * https://www.php.net/manual/class.reflectionexception.php
-	 * @used-by methodParameter()
+	 * @used-by self::methodParameter()
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @return RM|null
 	 */
@@ -71,22 +71,22 @@ final class Frame extends \Df\Core\O {
 	}, [$ordering]);}
 
 	/**
-	 * @used-by methodR()
-	 * @used-by method()
+	 * @used-by self::methodR()
+	 * @used-by self::method()
 	 * @return string
 	 */
 	private function class_() {return df_nts($this['class']);}
 	
 	/**
-	 * @used-by methodR()
-	 * @used-by method()
+	 * @used-by self::methodR()
+	 * @used-by self::method()
 	 * @return string
 	 */
 	private function function_() {return df_nts($this['function']);}
 
 	/**
 	 * 2016-07-31
-	 * @used-by methodR()
+	 * @used-by self::methodR()
 	 * @return bool
 	 */
 	private function isClosure() {return df_ends_with($this->function_(), '{closure}');}

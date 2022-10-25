@@ -20,7 +20,7 @@ final class Error extends \Df\Qa\Failure {
 	 * @override
 	 * @see \Df\Qa\Failure::preface()
 	 * @used-by \Df\Qa\Failure::report()
-	 * @used-by report()
+	 * @used-by self::report()
 	 * @return string
 	 */
 	protected function preface() {return df_json_encode(df_context());}
@@ -45,7 +45,7 @@ final class Error extends \Df\Qa\Failure {
 	protected function trace() {return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];}
 
 	/**
-	 * @used-by check()
+	 * @used-by self::check()
 	 * @throws \Exception
 	 */
 	private function log() {
@@ -97,23 +97,23 @@ final class Error extends \Df\Qa\Failure {
 	}
 
 	/**
-	 * @used-by check()
-	 * @used-by throwLast()
+	 * @used-by self::check()
+	 * @used-by self::throwLast()
 	 * @return self
 	 */
 	private static function i() {return new self;}
 
 	/**
-	 * @used-by main()
-	 * @used-by type()
+	 * @used-by self::main()
+	 * @used-by self::type()
 	 * @param string $key
 	 * @return string|int
 	 */
 	private static function info($key) {return dfa(error_get_last(), $key);}
 
 	/**
-	 * @used-by check()
-	 * @return bool
+	 * @used-by self::check()
+	 * @return self::bool
 	 * @return int[]
 	 */
 	private static function isFatal() {
@@ -130,7 +130,7 @@ final class Error extends \Df\Qa\Failure {
 	}
 
 	/**
-	 * @used-by type()
+	 * @used-by self::type()
 	 * @return array(int => string)
 	 */
 	private static function map() {
@@ -158,8 +158,8 @@ final class Error extends \Df\Qa\Failure {
 	}
 
 	/**
-	 * @used-by isFatal()
-	 * @used-by main()
+	 * @used-by self::isFatal()
+	 * @used-by self::main()
 	 * @param bool $asString [optional]
 	 * @return int|string
 	 */
@@ -169,8 +169,8 @@ final class Error extends \Df\Qa\Failure {
 	}
 
 	/**
-	 * @used-by isFatal()
-	 * @used-by trace()
+	 * @used-by self::isFatal()
+	 * @used-by self::trace()
 	 * @return bool
 	 */
 	private static function xdebug() {static $r; return $r ? $r : $r = extension_loaded('xdebug');}

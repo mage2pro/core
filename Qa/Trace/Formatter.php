@@ -31,7 +31,7 @@ final class Formatter {
 
 	/**     
 	 * 2020-02-27          
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @param Frame $f 
 	 * @return string
 	 */
@@ -39,7 +39,7 @@ final class Formatter {
 		try {
 			$resultA = array_filter(array_map([__CLASS__, 'param'], [
 				['Location', df_cc(':', df_path_relative($f->filePath()), $f->line())], ['Callee', $f->method()]
-			])); /** @var string[] $resultA */ /** @uses param() */
+			])); /** @var string[] $resultA */ /** @uses self::param() */
 			$r = df_cc_n($resultA);
 		}
 		catch (\Exception $e) {
@@ -66,7 +66,7 @@ final class Formatter {
 	/**
 	 * Этот метод может быть приватным, несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
-	 * @used-by p()
+	 * @used-by self::p()
 	 * http://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP: http://3v4l.org/OipEQ
 	 * @param array $p
