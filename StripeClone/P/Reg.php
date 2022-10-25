@@ -14,7 +14,7 @@ class Reg extends \Df\Payment\Operation {
 	/**
 	 * 2017-06-11
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by k_CardId()
+	 * @used-by self::k_CardId()
 	 * @used-by \Dfe\Moip\P\Reg::v_CardId()
 	 * @return Charge
 	 */
@@ -26,7 +26,7 @@ class Reg extends \Df\Payment\Operation {
 	 * Этот ключ передаётся как параметр в запросе на сохранение банковской карты
 	 * для будущего повторного использования при регистрации нового покупателя.
 	 * 2017-10-09 The key name of a bank card token.
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Reg::k_CardId()
 	 * @see \Dfe\Spryng\P\Reg::k_CardId()
 	 * @see \Dfe\Square\P\Reg::k_CardId()
@@ -36,7 +36,7 @@ class Reg extends \Df\Payment\Operation {
 
 	/**
 	 * 2017-10-10
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Square\P\Reg::k_Description()
 	 * @return string
 	 */
@@ -44,7 +44,7 @@ class Reg extends \Df\Payment\Operation {
 
 	/**
 	 * 2017-06-11
-	 * @used-by newCard()
+	 * @used-by self::newCard()
 	 * @see \Dfe\Spryng\P\Reg::k_Email()
 	 * @see \Dfe\Square\P\Reg::k_Email()
 	 * @return string
@@ -53,7 +53,7 @@ class Reg extends \Df\Payment\Operation {
 
 	/**
 	 * 2017-06-11
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Spryng\P\Reg::k_Excluded()
 	 * @return string[]
 	 */
@@ -61,7 +61,7 @@ class Reg extends \Df\Payment\Operation {
 
 	/**
 	 * 2017-06-11
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Reg::p()
 	 * @see \Dfe\Spryng\P\Reg::p()
 	 * @see \Dfe\Square\P\Reg::p()
@@ -72,7 +72,7 @@ class Reg extends \Df\Payment\Operation {
 
 	/**
 	 * 2017-06-11
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Reg::v_CardId()
 	 * @see \Dfe\Stripe\P\Reg::v_CardId()
 	 * @param string $id
@@ -105,7 +105,7 @@ class Reg extends \Df\Payment\Operation {
 
 	/**
 	 * 2017-06-11
-	 * @used-by k_Description()
+	 * @used-by self::k_Description()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
 	 * @used-by \Dfe\Spryng\P\Reg::k_Excluded()
 	 */
@@ -113,8 +113,8 @@ class Reg extends \Df\Payment\Operation {
 
 	/**
 	 * 2017-06-11
-	 * @used-by k_Email()
-	 * @used-by request()
+	 * @used-by self::k_Email()
+	 * @used-by self::request()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
 	 */
 	const K_EMAIL = 'email';

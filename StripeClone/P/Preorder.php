@@ -9,7 +9,7 @@ use Df\StripeClone\Method as M;
 abstract class Preorder extends \Df\Payment\Operation {
 	/**
 	 * 2017-06-12
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Preorder::p()
 	 * @return array(string => mixed)
 	 */
