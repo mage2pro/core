@@ -63,7 +63,7 @@ abstract class Button extends _P {
 
 	/**
 	 * 2016-11-26
-	 * @used-by loggedOut()
+	 * @used-by self::loggedOut()
 	 * @see \Df\Sso\Button\Js::attributes()
 	 * @see \Dfe\FacebookLogin\Button::attributes()
 	 * @return array(string => string)
@@ -83,10 +83,11 @@ abstract class Button extends _P {
 
 	/**
 	 * 2016-11-29
-	 * @used-by attributes()
+	 * @used-by self::attributes()
+	 * @see \Df\Sso\Button\Js::attributesN()
 	 * @return array(string => string)
 	 */
-	protected function attributesN() {return [];}
+	protected function attributesN():array {return [];}
 
 	/**
 	 * 2016-11-25

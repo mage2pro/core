@@ -31,9 +31,10 @@ abstract class Js extends \Df\Sso\Button {
 	 * @override
 	 * @see \Df\Sso\Button::attributesN()
 	 * @used-by \Df\Sso\Button::attributes()
+	 * @see \Dfe\FacebookLogin\Button::attributesN()
 	 * @return array(string => string)
 	 */
-	protected function attributesN() {return ['style' => 'display:none'];}
+	protected function attributesN():array {return ['style' => 'display:none'];}
 
 	/**
 	 * 2016-11-26
