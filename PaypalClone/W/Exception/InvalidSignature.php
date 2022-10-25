@@ -52,8 +52,8 @@ final class InvalidSignature extends \Df\Payment\W\Exception\Critical {
 
 	/**
 	 * 2017-10-03
-	 * @used-by message()
-	 * @used-by messageD()
+	 * @used-by self::message()
+	 * @used-by self::messageD()
 	 * @param bool $full
 	 * @return string
 	 */
@@ -63,14 +63,14 @@ final class InvalidSignature extends \Df\Payment\W\Exception\Critical {
 
 	/**
 	 * 2017-10-03
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @var string
 	 */
 	private $_expected;
 
 	/**
 	 * 2017-10-03
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @var string
 	 */
 	private $_provided;
