@@ -48,7 +48,7 @@ abstract class Handler implements IMA {
 	 * Для реализации такой системы из двух параллельных иерархий
 	 * я вынес в стратегию иерархию обработчиков разных типов платежей.
 	 * 
-	 * @used-by handle()
+	 * @used-by self::handle()
 	 * @see \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @see \Df\PaypalClone\W\Handler::strategyC()
 	 * @see \Dfe\Dragonpay\W\Handler::strategyC()
@@ -130,7 +130,7 @@ abstract class Handler implements IMA {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Payment\IMA::m()
-	 * @used-by handle()
+	 * @used-by self::handle()
 	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Df\Payment\W\Strategy::m()
@@ -158,9 +158,9 @@ abstract class Handler implements IMA {
 	/**
 	 * 2016-07-10
 	 * 2017-01-04
-	 * @used-by m()
-	 * @used-by o()
-	 * @used-by _handle()
+	 * @used-by self::m()
+	 * @used-by self::o()
+	 * @used-by self::_handle()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\Payment\W\Strategy::op()
 	 * @return OP
@@ -169,8 +169,8 @@ abstract class Handler implements IMA {
 
 	/**
 	 * 2017-01-01
-	 * @used-by cv()
-	 * @used-by log()
+	 * @used-by self::cv()
+	 * @used-by self::log()
 	 * @used-by \Dfe\AllPay\Block\Info\ATM::paymentId()
 	 * @used-by \Dfe\AllPay\W\Event\BankCard::numPayments()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::expiration()
@@ -182,28 +182,23 @@ abstract class Handler implements IMA {
 
 	/**
 	 * 2017-11-18
-	 * @used-by handle()
+	 * @used-by self::handle()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @return Responder
 	 */
 	final function responder() {return $this->_f->responder();}
 
 	/**
-	 * 2016-07-19
-	 * @return Store
-	 */
-	final protected function store() {return $this->o()->getStore();}
-
-	/**
 	 * 2016-12-26
 	 * 2017-03-30 Используем @uses dfc(), чтобы метод игнорировал повторный вызов с прежним параметром.
-	 * @used-by handle()
+	 * @used-by self::handle()
 	 * @param \Exception|null $e [optional]
 	 */
 	private function log(\Exception $e = null) {dfc($this, function(\Exception $e = null) {
 		/**
 		 * 2017-03-30
-		 * Намеренно не используем здесь не @see m(), потому что этот метод работает через @see op(),
+		 * Намеренно не используем здесь @see self::m(),
+		 * потому что этот метод работает через @see self::op(),
 		 * а этот метод может падать: например, если транзакция не найдена.
 		 */
 		$m = $this->_f->m(); /** @var M $m */
@@ -230,26 +225,26 @@ abstract class Handler implements IMA {
 
 	/**
 	 * 2017-03-10
-	 * @used-by __construct()
-	 * @used-by event()
+	 * @used-by self::__construct()
+	 * @used-by self::event()
 	 * @var Event
 	 */
 	private $_e;
 
 	/**
 	 * 2017-03-30
-	 * @used-by __construct()
-	 * @used-by responder()
-	 * @used-by \Df\Payment\W\Handler::log()
+	 * @used-by self::__construct()
+	 * @used-by self::log()
+	 * @used-by self::responder()
 	 * @var F
 	 */
 	private $_f;
 
 	/**
 	 * 2017-03-15
-	 * @used-by __construct()
-	 * @used-by nav()
-	 * @used-by op()
+	 * @used-by self::__construct()
+	 * @used-by self::nav()
+	 * @used-by self::op()
 	 * @var Nav
 	 */
 	private $_nav;
