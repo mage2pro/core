@@ -22,10 +22,8 @@ class Url {
 	);}
 
 	/**
-	 * 2016-08-27
-	 * The method returns a 2-tuple:
-	 * the first element is for the test mode, the second is for the production mode.
-	 * @used-by url()
+	 * 2016-08-27 The method returns a 2-tuple: the first element is for the test mode, the second is for the production mode.
+	 * @used-by self::url()
 	 * @see \Dfe\AllPay\Url::stageNames()
 	 * @see \Dfe\PostFinance\Url::stageNames()
 	 * @see \Dfe\SecurePay\Url::stageNames()
@@ -36,7 +34,7 @@ class Url {
 
 	/**
 	 * 2017-03-23
-	 * @used-by s()
+	 * @used-by self::s()
 	 * @param M $m
 	 * @param string[] $stages
 	 */
@@ -44,16 +42,16 @@ class Url {
 
 	/**
 	 * 2017-03-23
-	 * @used-by __construct()
-	 * @used-by url()
+	 * @used-by self::__construct()
+	 * @used-by self::url()
 	 * @var M
 	 */
 	private $_m;
 
 	/**
 	 * 2017-03-23
-	 * @used-by __construct()
-	 * @used-by stageNames()
+	 * @used-by self::__construct()
+	 * @used-by self::stageNames()
 	 * @var string[]
 	 */
 	private $_stages;

@@ -46,24 +46,24 @@ final class Entry {
 
 	/**
 	 * 2017-03-12
-	 * @used-by __construct()
-	 * @used-by name()
+	 * @used-by self::__construct()
+	 * @used-by self::name()
 	 * @var string
 	 */
 	private $_name;
 
 	/**
 	 * 2017-03-12
-	 * @used-by __construct()
-	 * @used-by value()
+	 * @used-by self::__construct()
+	 * @used-by self::value()
 	 * @var string|Phrase|null
 	 */
 	private $_value;
 
 	/**
 	 * 2017-03-12
-	 * @used-by __construct()
-	 * @used-by weight()
+	 * @used-by self::__construct()
+	 * @used-by self::weight()
 	 * @var int
 	 */
 	private $_weight;

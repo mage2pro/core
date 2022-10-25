@@ -75,7 +75,7 @@ class GlobalT implements Sb {
 	 * Но потом понял, что у меня все иконки платёжных систем единого размера: 46x30
 	 * (и в ядре сейчас все иконки платёжных систем такиого же размера),
 	 * поэтому решил не расходовать ресурсы на определение этих размеров в реальном времени.
-	 * @used-by getConfig()
+	 * @used-by self::getConfig()
 	 * @return array(string => mixed)
 	 */
 	private function icons() {return df_clean(df_map(function($t) {return

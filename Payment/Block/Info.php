@@ -239,7 +239,7 @@ abstract class Info extends _P {
 	/**
 	 * 2018-11-16
 	 * @abstract
-	 * @used-by ci();   
+	 * @used-by self::ci();
 	 * @see \Dfe\TBCBank\Block\Info::ciId()
 	 * @return string|null
 	 */
@@ -271,7 +271,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2016-08-09
-	 * @used-by si()
+	 * @used-by self::si()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
 	 * @return Report
@@ -299,7 +299,7 @@ abstract class Info extends _P {
 	 * 2017-03-25
 	 * Для меня название метода getIsSecureMode() неинтуитивно, и я всё время путаюсь с его значением.
 	 * Поэтому объявил свой идентичный метод.
-	 * @used-by siEx()
+	 * @used-by self::siEx()
 	 * @used-by \Df\StripeClone\Block\Info::cardNumberLabel()
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
@@ -315,12 +315,12 @@ abstract class Info extends _P {
 	 * on the frontend «multishipping/checkout/overview» page:
 	 * this page is shown to the customer just before an order placement.
 	 * An example of a «multishipping/checkout/overview» page: https://mage2.pro/t/4403
-	 * @used-by getCacheKeyInfo()
-	 * @used-by iia()
-	 * @used-by isTest()
-	 * @used-by m()
-	 * @used-by o()
-	 * @used-by option()
+	 * @used-by self::getCacheKeyInfo()
+	 * @used-by self::iia()
+	 * @used-by self::isTest()
+	 * @used-by self::m()
+	 * @used-by self::o()
+	 * @used-by self::option()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @param string|null $k [optional]
@@ -353,12 +353,12 @@ abstract class Info extends _P {
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by rCheckoutSuccess()
-	 * @used-by ci()
-	 * @used-by s()
-	 * @used-by siID()
-	 * @used-by titleB()
-	 * @used-by tm()
+	 * @used-by self::rCheckoutSuccess()
+	 * @used-by self::ci()
+	 * @used-by self::s()
+	 * @used-by self::siID()
+	 * @used-by self::titleB()
+	 * @used-by self::tm()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
 	 * @used-by \Df\StripeClone\Block\Info::cf()
@@ -369,7 +369,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-03-29
-	 * @used-by rCheckoutSuccess()
+	 * @used-by self::rCheckoutSuccess()
 	 * @see \Df\GingerPaymentsBase\Block\Info::msgCheckoutSuccess()
 	 * @see \Dfe\Moip\Block\Info\Boleto::msgCheckoutSuccess()
 	 * @return string|null
@@ -378,7 +378,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-03-29
-	 * @used-by rUnconfirmed()
+	 * @used-by self::rUnconfirmed()
 	 * @see \Df\GingerPaymentsBase\Block\Info::msgUnconfirmed()
 	 * @see \Dfe\ACH\Block\Info::msgUnconfirmed()
 	 * @return string|null
@@ -455,20 +455,18 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-08-04
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @return string
 	 */
 	protected function rBackend() {
 		$this->prepareToRendering();
 		# 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
-		return df_tag('div', 'df-payment-info',
-			$this->m()->getTitle() . $this->rUnconfirmed() . $this->rTable()
-		);
+		return df_tag('div', 'df-payment-info', $this->m()->getTitle() . $this->rUnconfirmed() . $this->rTable());
 	}
 	
 	/**
 	 * 2017-08-04
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @see \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
 	 * @return string
 	 */
@@ -485,7 +483,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-08-04
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @return string
 	 */
 	protected function rEmail() {return $this->rCustomerAccount();}
@@ -506,16 +504,14 @@ abstract class Info extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/adminhtml/templates/info/pdf/default.phtml#L15
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/frontend/templates/info/pdf/default.phtml#L15
 	 * @see \Magento\Payment\Block\Info::toPdf()
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @return string
 	 */
 	protected function rPDF() {
 		$this->prepareToRendering();
 		return implode('{{pdf_row_separator}}', df_clean(dfa_flatten([
 			$this->m()->getTitle()
-			,df_map($this->dic(), function(Entry $e) {return
-				!$e->name() ? $e->value() : "{$e->name()}: {$e->value()}"
-			;})
+			,df_map($this->dic(), function(Entry $e) {return !$e->name() ? $e->value() : "{$e->name()}: {$e->value()}";})
 		])));
 	}
 
@@ -534,10 +530,10 @@ abstract class Info extends _P {
 	 * 2016-11-17
 	 * Не вызываем здесь @see __(),
 	 * потому что словарь ещё будет меняться, в частности, методом @see prepareDic()
-	 * @see getSpecificInformation()
+	 * @see self::getSpecificInformation()
 	 * Ключи потом будут автоматически переведены методом @see \Df\Payment\Info\Entry::nameT()
 	 * Значения переведены не будут!
-	 * @used-by siEx()
+	 * @used-by self::siEx()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
@@ -561,7 +557,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2016-11-17
-	 * @used-by siID()
+	 * @used-by self::siID()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepare()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
@@ -593,7 +589,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2016-07-13
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @see \Dfe\TwoCheckout\Block\Info::testModeLabel()
 	 * @return string
 	 */
@@ -601,9 +597,9 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-03-29
-	 * @used-by confirmed()
-	 * @used-by e()
-	 * @used-by siID()
+	 * @used-by self::confirmed()
+	 * @used-by self::e()
+	 * @used-by self::siID()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
 	 * @used-by \Df\StripeClone\Block\Info::cardData()
@@ -621,7 +617,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2018-11-12
-	 * @used-by siID()
+	 * @used-by self::siID()
 	 * @see \Dfe\TBCBank\Block\Info::transIDLabel()
 	 * @return string
 	 */
@@ -629,7 +625,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2018-11-16
-	 * @used-by ci()
+	 * @used-by self::ci()
 	 * @return C|null
 	 */
 	private function c() {return dfc($this, function() {return df_customer(
@@ -643,7 +639,7 @@ abstract class Info extends _P {
 	 * 2017-04-01
 	 * Проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим.
 	 * https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @return string|null
 	 */
 	private function rCheckoutSuccess() {/** @var M|IM $m */ return
@@ -667,26 +663,26 @@ abstract class Info extends _P {
 	 * How is the setIsSecureMode() magic method used for a payment information block?
 	 * https://mage2.pro/t/3551
 	 *
-	 * @used-by extended()
-	 * @used-by getCacheKeyInfo()
+	 * @used-by self::extended()
+	 * @used-by self::getCacheKeyInfo()
 	 * @return bool
 	 */
 	private function isSecureMode() {return !df_is_backend() || $this->_secureMode;}
 
 	/**
 	 * 2018-11-16
-	 * @used-by c()
+	 * @used-by self::c()
 	 * @return O
 	 */
 	private function o() {return $this->ii()->getOrder();}
 
 	/**
 	 * 2017-08-04
-	 * @used-by rBackend()
-	 * @used-by rCheckoutSuccess()
-	 * @used-by rCustomerAccount()
-	 * @used-by rEmail()
-	 * @used-by rPDF()
+	 * @used-by self::rBackend()
+	 * @used-by self::rCheckoutSuccess()
+	 * @used-by self::rCustomerAccount()
+	 * @used-by self::rEmail()
+	 * @used-by self::rPDF()
 	 */
 	private function prepareToRendering() {
 		$this->tm()->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
@@ -699,14 +695,14 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-08-24
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @return Phrase
 	 */
 	private function rMultishipping() {return $this->m()->getTitle();}
 
 	/**
 	 * 2017-03-25
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @return string
 	 */
 	private function rTable() {return !$this->dic()->count() ? '' : df_tag('table',
@@ -725,7 +721,7 @@ abstract class Info extends _P {
 	
 	/**
 	 * 2017-03-25
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @return string
 	 */
 	private function rUnconfirmed() {return $this->tm()->confirmed() ? '' : df_tag(
@@ -734,8 +730,8 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-01-13
-	 * @used-by msgUnconfirmed()
-	 * @used-by transIDLabel()
+	 * @used-by self::msgUnconfirmed()
+	 * @used-by self::transIDLabel()
 	 * @return string
 	 */
 	private function titleB() {return $this->m()->titleB();}
@@ -746,25 +742,25 @@ abstract class Info extends _P {
 	 * $_i is a @see \Magento\Quote\Model\Quote\Payment on the frontend «multishipping/checkout/overview» page:
 	 * this page is shown to the customer just before an order placement.
 	 * An example of a «multishipping/checkout/overview» page: https://mage2.pro/t/4403
-	 * @used-by ii()
-	 * @used-by setInfo()
+	 * @used-by self::ii()
+	 * @used-by self::setInfo()
 	 * @var II|I|OP|QP
 	 */
 	private $_i;
 
 	/**
 	 * 2017-03-25
-	 * @used-by _toHtml()
-	 * @used-by getCacheKeyInfo()
-	 * @used-by toPdf()
+	 * @used-by self::_toHtml()
+	 * @used-by self::getCacheKeyInfo()
+	 * @used-by self::toPdf()
 	 * @var bool|null
 	 */
 	private $_pdf;
 
 	/**
 	 * 2017-08-03
-	 * @used-by isSecureMode()
-	 * @used-by setIsSecureMode()
+	 * @used-by self::isSecureMode()
+	 * @used-by self::setIsSecureMode()
 	 * @var bool|null
 	 */
 	private $_secureMode;

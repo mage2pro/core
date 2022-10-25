@@ -44,8 +44,8 @@ abstract class Multishipping extends _P {
 
 	/**
 	 * 2017-08-24
-	 * @used-by m()
-	 * @used-by setMethod()
+	 * @used-by self::m()
+	 * @used-by self::setMethod()
 	 * @var M
 	 */
 	private $_m;

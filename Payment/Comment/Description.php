@@ -56,7 +56,7 @@ class Description extends \Df\Config\Comment {
 
 	/**
 	 * 2017-09-11
-	 * @used-by locations()
+	 * @used-by self::locations()
 	 * @param string $text
 	 * @param array(string => string|bool) $o
 	 * @return string
@@ -67,7 +67,7 @@ class Description extends \Df\Config\Comment {
 
 	/**
 	 * 2017-09-11
-	 * @used-by getCommentText()
+	 * @used-by self::getCommentText()
 	 * @param array(string => mixed) $l
 	 * @return string
 	 */

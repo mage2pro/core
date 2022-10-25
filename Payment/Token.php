@@ -25,18 +25,16 @@ final class Token {
 
 	/**
 	 * 2017-08-28    
-	 * @used-by exchangedGet()
-	 * @used-by exchangedSet()
+	 * @used-by self::exchangedGet()
+	 * @used-by self::exchangedSet()
 	 * @var array(string => string)
 	 */
 	private static $_exchanged = [];
 	
 	/**
 	 * 2016-08-23
-	 * Для Stripe этот параметр может содержать не только токен новой карты
-	 * (например: «tok_18lWSWFzKb8aMux1viSqpL5X»),
-	 * но и идентификатор ранее использовавшейся карты
-	 * (например: «card_18lGFRFzKb8aMux1Bmcjsa5L»).
+	 * Для Stripe этот параметр может содержать не только токен новой карты (например: «tok_18lWSWFzKb8aMux1viSqpL5X»),
+	 * но и идентификатор ранее использовавшейся карты (например: «card_18lGFRFzKb8aMux1Bmcjsa5L»).
 	 * 2017-02-11
 	 * @used-by \Df\Payment\Init\Action::token()
 	 * @used-by \Df\Payment\Operation::token()
@@ -55,7 +53,7 @@ final class Token {
 
 	/**
 	 * 2017-04-07
-	 * @used-by get()
+	 * @used-by self::get()
 	 * @used-by \Df\Payment\Observer\Multishipping::execute()   
 	 * @used-by \Df\StripeClone\Method::iiaKeys()
 	 * @used-by \Dfe\CheckoutCom\Method::iiaKeys()
