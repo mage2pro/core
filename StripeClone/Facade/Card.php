@@ -31,7 +31,7 @@ abstract class Card {
 
 	/**
 	 * 2017-02-11
-	 * @used-by isActive()
+	 * @used-by self::isActive()
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @see \Dfe\Moip\Facade\Card::expMonth()
@@ -51,7 +51,7 @@ abstract class Card {
 	 * 2017-07-19 Some PSPs like Moip does not return the card's expiration date.
 	 * https://github.com/mage2pro/moip/blob/0.7.6/Facade/Card.php#L84-L104
 	 * 2018-11-13 If value is exist, then it should be a 4-digits integer.
-	 * @used-by isActive()
+	 * @used-by self::isActive()
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @see \Dfe\Moip\Facade\Card::expYear()

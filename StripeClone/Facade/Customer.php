@@ -91,7 +91,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * The top-level keys are bank card tokens there, and their values form the corresponding bank card labels.
 	 * So the TBCBank module (unlike the rest modules) does not do any API requests
 	 * to retrieve a customer's saved cards.
-	 * @used-by get()
+	 * @used-by self::get()
 	 * @see \Dfe\Moip\Facade\Customer::_get()
 	 * @see \Dfe\Omise\Facade\Customer::_get()
 	 * @see \Dfe\Paymill\Facade\Customer::_get()
@@ -108,7 +108,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-11
 	 * 2018-11-14 $c is an array for TBCBank
-	 * @used-by cards()
+	 * @used-by self::cards()
 	 * @see \Dfe\Moip\Facade\Customer::cardsData()
 	 * @see \Dfe\Omise\Facade\Customer::cardsData()
 	 * @see \Dfe\Paymill\Facade\Customer::cardsData()
@@ -144,8 +144,8 @@ abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * 2018-11-14 $c is an array for TBCBank
-	 * @used-by cardsActive()
-	 * @used-by cardIdForJustCreated()
+	 * @used-by self::cardsActive()
+	 * @used-by self::cardIdForJustCreated()
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @param object|array(string => mixed) $c
 	 * @return Card[]

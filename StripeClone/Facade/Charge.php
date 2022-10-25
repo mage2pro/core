@@ -67,7 +67,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * 2017-02-12
 	 * Returns the path to the bank card information
 	 * in a charge converted to an array by @see \Df\StripeClone\Facade\O::toArray()
-	 * @used-by cardData()
+	 * @used-by self::cardData()
 	 * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
 	 * @see \Dfe\Moip\Facade\Charge::pathToCard()
 	 * @see \Dfe\Omise\Facade\Charge::pathToCard()
@@ -161,7 +161,7 @@ abstract class Charge extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-02-11
-	 * @used-by card()
+	 * @used-by self::card()
 	 * @see \Dfe\Vantiv\Facade\Charge::cardData()
 	 * @param object|array(string => mixed) $c
 	 * @return object|array(string => string)
@@ -198,7 +198,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * Если ПС (как, например, Spryng) не поддерживает сохранение банковской карты
 	 * для будущего повторного использования, то этот метод должен вернуть `null`.
 	 * Этого достаточно, чтобы @used-by \Df\StripeClone\Payer::tokenIsNew() всегда возвращала `true`.
-	 * @used-by tokenIsNew()
+	 * @used-by self::tokenIsNew()
 	 * @see \Dfe\Moip\Facade\Charge::cardIdPrefix()
 	 * @see \Dfe\Omise\Facade\Charge::cardIdPrefix()
 	 * @see \Dfe\Paymill\Facade\Charge::cardIdPrefix()
@@ -217,8 +217,8 @@ abstract class Charge extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-06-12
-	 * @used-by preorderGet()
-	 * @used-by preorderSet()
+	 * @used-by self::preorderGet()
+	 * @used-by self::preorderSet()
 	 * @var object
 	 */
 	private $_preorder;
