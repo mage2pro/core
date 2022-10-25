@@ -22,7 +22,7 @@ class Context {
 
 	/**
 	 * 2017-01-10
-	 * @used-by clear()
+	 * @used-by self::clear()
 	 * @used-by \Df\Sentry\Client::capture()
 	 * @used-by \Df\Sentry\Client::extra_context()
 	 * @var array(string => mixed)
@@ -30,7 +30,7 @@ class Context {
 	public $extra;
 	/**
 	 * 2017-01-10
-	 * @used-by clear()
+	 * @used-by self::clear()
 	 * @used-by \Df\Sentry\Client::capture()
 	 * @used-by \Df\Sentry\Client::tags()
 	 * @var array(string => string)
@@ -38,7 +38,7 @@ class Context {
 	public $tags;
 	/**
 	 * 2017-01-10
-	 * @used-by clear()
+	 * @used-by self::clear()
 	 * @used-by \Df\Sentry\Client::get_user_data()
 	 * @used-by \Df\Sentry\Client::user()
 	 * @var array(string => mixed)

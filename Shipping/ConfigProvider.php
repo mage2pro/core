@@ -7,7 +7,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 abstract class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	/**
 	 * 2018-04-23
-	 * @used-by getConfig()
+	 * @used-by self::getConfig()
 	 * @see \Doormall\Shipping\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
@@ -42,7 +42,7 @@ abstract class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IConfigProvider::getConfig()
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @used-by \Magento\Checkout\Model\CompositeConfigProvider::getConfig():
 	 *		public function getConfig() {
 	 *			$config = [];
@@ -63,24 +63,23 @@ abstract class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Config\ISettings::s()
-	 * @used-by getConfig()
-	 * @return S
+	 * @used-by self::getConfig()
 	 */
-	function s() {return $this->m()->s();}
+	function s():S {return $this->m()->s();}
 
 	/**
 	 * 2017-02-07
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by getConfig()
+	 * @used-by self::getConfig()
 	 * @return Method
 	 */
 	protected function m() {return dfc($this, function() {return dfsm($this->_mc);});}
 
 	/**
 	 * 2017-03-03
-	 * @used-by __construct()
-	 * @used-by m()
-	 * @used-by s()
+	 * @used-by self::__construct()
+	 * @used-by self::m()
+	 * @used-by self::s()
 	 * @var string
 	 */
 	private $_mc;

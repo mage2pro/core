@@ -167,7 +167,7 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return $this->_code;
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L601-L609
-	 * @used-by getConfigData()
+	 * @used-by self::getConfigData()
 	 * @used-by \Df\Shipping\ConfigProvider::getConfig()
 	 * @return string
 	 */
@@ -409,7 +409,7 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * @override
 	 * @see IAC::isActive()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrierInterface.php#L95-L101
-	 * @used-by getConfigData()
+	 * @used-by self::getConfigData()
 	 * @see AC::isActive():
 	 *	public function isActive() {
 	 *		$active = $this->getConfigData('active');
@@ -559,7 +559,7 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * 2019-03-30
 	 * "How to fix «Call to undefined method processAdditionalValidation()»
 	 * after upgrading Magento to 2.2.6?": https://mage2.pro/t/5871
-	 * @used-by proccessAdditionalValidation()
+	 * @used-by self::proccessAdditionalValidation()
 	 * @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates()
 	 * https://github.com/magento/magento2/blob/2.2.6/app/code/Magento/Shipping/Model/Shipping.php#L262-L262
 	 * @param _DO $r
@@ -607,8 +607,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * 2018-04-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by dfss()
-	 * @used-by getConfigData()
-	 * @used-by isActive()
+	 * @used-by self::getConfigData()
+	 * @used-by self::isActive()
 	 * @see \Df\Shipping\Settings::scopeDefault()
 	 * @param string|null $k [optional]
 	 * @param mixed|callable $d [optional]
@@ -655,7 +655,7 @@ abstract class Method implements IC, IAC, INonInterceptable {
 
 	/**
 	 * 2018-04-21
-	 * @used-by getConfigData()
+	 * @used-by self::getConfigData()
 	 * @see \Magento\Shipping\Model\Shipping::collectCarrierRates():
 	 * 	if ($carrier->getConfigData('showmethod') == 0 && $result->getError()) {
 	 * 		return $this;
@@ -667,7 +667,7 @@ abstract class Method implements IC, IAC, INonInterceptable {
 
 	/**
 	 * 2018-04-17
-	 * @used-by getCarrierCode()
+	 * @used-by self::getCarrierCode()
 	 * @used-by dfsm_code()
 	 * @uses \Doormall\Shipping\Method::CODE
 	 * @uses \Frugue\Shipping\Method::CODE
@@ -704,8 +704,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 
 	/**
 	 * 2018-04-17
-	 * @used-by getConfigData()
-	 * @used-by setStore()
+	 * @used-by self::getConfigData()
+	 * @used-by self::setStore()
 	 * @var int|null
 	 */
 	private $_storeId;

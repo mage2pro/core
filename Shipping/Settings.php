@@ -44,10 +44,10 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2018-04-21
-	 * @used-by __construct()
-	 * @used-by m()
-	 * @used-by prefix()
-	 * @used-by scopeDefault()
+	 * @used-by self::__construct()
+	 * @used-by self::m()
+	 * @used-by self::prefix()
+	 * @used-by self::scopeDefault()
 	 * @var M
 	 */
 	private $_m;

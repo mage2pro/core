@@ -26,7 +26,7 @@ class Serializer {
 
 	/**
 	 * 2020-06-28
-	 * @used-by serialize()
+	 * @used-by self::serialize()
 	 * @see \Df\Sentry\ReprSerializer::_serialize()
 	 * @param mixed $v
 	 * @return bool|false|float|int|string|string[]|null
@@ -57,7 +57,7 @@ class Serializer {
 	 * https://docs.sentry.io/product/accounts/quotas#attribute-limits
 	 * 2) "How to disable data clipping in the «Additional Data» block?": https://forum.sentry.io/t/694
 	 * 3) "Bypass clipped strings and sliced stacktrace variables": https://github.com/getsentry/sentry-php/issues/450
-	 * @used-by _serialize()
+	 * @used-by self::_serialize()
 	 * @used-by \Df\Sentry\ReprSerializer::_serialize()
 	 * @param string|mixed $r
 	 * @return false|string|string[]|null
