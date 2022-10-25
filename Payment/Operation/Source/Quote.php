@@ -40,7 +40,7 @@ final class Quote extends \Df\Payment\Operation\Source {
 	 * 2017-04-09
 	 * @override
 	 * @see \Df\Payment\Operation\Source::ii()
-	 * @used-by oq()
+	 * @used-by self::oq()
 	 * @used-by \Df\Payment\Operation::ii()
 	 * @return QP
 	 */
@@ -69,15 +69,15 @@ final class Quote extends \Df\Payment\Operation\Source {
 
 	/**
 	 * 2017-04-08
-	 * @used-by __construct()
-	 * @used-by m()
+	 * @used-by self::__construct()
+	 * @used-by self::m()
 	 * @var M
 	 */
 	private $_m;
 
 	/**
 	 * 2017-04-08
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @var M
 	 */
 	private $_q;

@@ -65,8 +65,8 @@ final class _3DS extends \Df\Config\Settings {
 
 	/**
 	 * 2017-12-12
-	 * @used-by disable_()
-	 * @used-by enable_()
+	 * @used-by self::disable_()
+	 * @used-by self::enable_()
 	 * @param string|null $countryId
 	 * @return bool
 	 */
@@ -82,8 +82,8 @@ final class _3DS extends \Df\Config\Settings {
 
 	/**
 	 * 2017-10-20
-	 * @used-by __construct()
-	 * @used-by prefix()
+	 * @used-by self::__construct()
+	 * @used-by self::prefix()
 	 * @var S
 	 */
 	private $_s;

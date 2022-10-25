@@ -49,7 +49,7 @@ class Order extends Source {
 	 * 2017-04-08
 	 * @override
 	 * @see \Df\Payment\Operation\Source::ii()
-	 * @used-by oq()
+	 * @used-by self::oq()
 	 * @used-by \Df\Payment\Operation::ii()
 	 * @used-by \Df\Payment\Operation\Source\Creditmemo::cm()
 	 * @return OP
@@ -71,17 +71,17 @@ class Order extends Source {
 	 * 2017-04-08
 	 * @override
 	 * @see \Df\Payment\Operation\Source::oq()
-	 * @used-by id()
+	 * @used-by self::id()
 	 * @return O
 	 */
 	final function oq() {return df_order($this->ii());}
 
 	/**
 	 * 2017-04-08
-	 * @used-by __construct()
-	 * @used-by amount()
-	 * @used-by ii()
-	 * @used-by m()
+	 * @used-by self::__construct()
+	 * @used-by self::amount()
+	 * @used-by self::ii()
+	 * @used-by self::m()
 	 * @var M
 	 */
 	private $_m;
