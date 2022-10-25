@@ -50,17 +50,15 @@ final class CapturePreauthorized extends \Df\Payment\W\Strategy {
 		}
 		else {
 			$o->setCustomerNoteNotify(true)->setIsInProcess(true);
-			/** @var Invoice $i */
-			df_db_transaction()->addObject($i = $this->invoice())->addObject($o)->save(); 
+			df_db_transaction()->addObject($i = $this->invoice())->addObject($o)->save(); /** @var Invoice $i */
 			df_mail_invoice($i);
-			# 2017-09-13
-			# We do not set a response here, because PayPal clones require a specific response on success.
+			# 2017-09-13 We do not set a response here, because PayPal clones require a specific response on success.
 		}
 	}
 	
 	/**
 	 * 2016-03-26
-	 * @used-by _handle()
+	 * @used-by self::_handle()
 	 * @return Invoice|DfInvoice
 	 * @throws LE
 	 */

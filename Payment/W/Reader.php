@@ -60,9 +60,9 @@ class Reader implements IEvent {
 	 * 2017-03-10
 	 * @override
 	 * @see \Df\Payment\W\IEvent::r()
-	 * @used-by error()
-	 * @used-by rr()
-	 * @used-by \Df\Payment\W\Reader::t()
+	 * @used-by self::error()
+	 * @used-by self::rr()
+	 * @used-by self::t()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
@@ -71,8 +71,8 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-01-12
+	 * @used-by self::t()
 	 * @used-by \Df\Payment\W\Event::rr()
-	 * @used-by \Df\Payment\W\Reader::t()
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed
@@ -85,7 +85,7 @@ class Reader implements IEvent {
 	 * Some PSP send only one type of notifications.
 	 * In such case, a notification does not denote its own type, and this method returns null.
 	 * 2017-03-13 The result is in our internal format, not in the PSP format.
-	 * @used-by tl()
+	 * @used-by self::tl()
 	 * @used-by \Df\Payment\W\Event::t()
 	 * @used-by \Df\Payment\W\F::c()
 	 * @used-by \Dfe\AllPay\W\Reader::isOffline()
@@ -108,7 +108,7 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-10
-	 * @used-by tl()
+	 * @used-by self::tl()
 	 * @used-by \Df\Payment\W\Event::tl_()
 	 * @param string|null $t
 	 * @return string
@@ -117,10 +117,8 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-13 Returns a value in the PSP format.
-	 * 2017-03-23
-	 * Использую именно @uses array_key_exists(),
-	 * чтобы для ПС с единственным типом оповещений писать ?df-type=
-	 * @used-by t()
+	 * 2017-03-23 Использую именно @uses array_key_exists(), чтобы для ПС с единственным типом оповещений писать ?df-type=
+	 * @used-by self::t()
 	 * @used-by \Df\Payment\W\Event::tl()
 	 * @return string|null
 	 */
@@ -130,7 +128,7 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-10
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @see \Df\Payment\W\Reader\Json::http()
 	 * @see \Dfe\AlphaCommerceHub\W\Reader::http()
 	 * @see \Dfe\Qiwi\W\Reader::http()
@@ -140,7 +138,7 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-10
-	 * @used-by tRaw()
+	 * @used-by self::tRaw()
 	 * @see \Df\GingerPaymentsBase\W\Reader::kt()
 	 * @see \Dfe\AllPay\W\Reader::kt()
 	 * @see \Dfe\Omise\W\Reader::kt()
@@ -153,7 +151,7 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-12-08
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @see \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
 	 * @see \Dfe\TBCBank\W\Reader::reqFilter()
 	 * @param array(string => mixed) $r
@@ -163,7 +161,7 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-12 Converts an event type from the PSP format to our internal format.
-	 * @used-by t()
+	 * @used-by self::t()
 	 * @see \Dfe\AllPay\W\Reader::te2i()
 	 * @param string $t
 	 * @return string
@@ -172,7 +170,7 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-10
-	 * @used-by errorP()
+	 * @used-by self::errorP()
 	 * @param string $reason
 	 * @throws Critical
 	 */
@@ -183,7 +181,7 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-15
-	 * @used-by rr()
+	 * @used-by self::rr()
 	 * @param $k
 	 * @throws Critical
 	 */
@@ -191,7 +189,7 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-10
-	 * @used-by testData()
+	 * @used-by self::testData()
 	 * @param string|null $k
 	 * @param string|null $d
 	 * @return array(string => mixed)|mixed|null
@@ -200,7 +198,7 @@ class Reader implements IEvent {
 
 	/**
 	 * 2017-03-11
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @return array(string => mixed)
 	 * @throws Critical
 	 */
@@ -221,32 +219,32 @@ class Reader implements IEvent {
 	 * 2017-03-11
 	 * $m здесь НЕ СОДЕРЖИТ корректного II.
 	 * Для вычисления корректного II нам ещё предстоит провести кучу операций:
-	 * 1) Определить, к какой транзакции Magento относится данное событие.
-	 * 2) Загрузить эту транзакцию из БД.
-	 * 3) По транзакции получить II.
+	 * 		1) Определить, к какой транзакции Magento относится данное событие.
+	 * 		2) Загрузить эту транзакцию из БД.
+	 * 		3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
-	 * @used-by __construct()
-	 * @used-by error()
-	 * @used-by m()
-	 * @used-by testData()
+	 * @used-by self::__construct()
+	 * @used-by self::error()
+	 * @used-by self::m()
+	 * @used-by self::testData()
 	 * @var M
 	 */
 	private $_m;
 
 	/**
 	 * 2017-03-10
-	 * @used-by __construct()
-	 * @used-by r()
+	 * @used-by self::__construct()
+	 * @used-by self::r()
 	 * @var array(string => mixed)
 	 */
 	private $_req;
 
 	/**
 	 * 2017-03-10
-	 * @used-by __construct()
-	 * @used-by test()
-	 * @used-by testData()
-	 * @used-by tRaw()
+	 * @used-by self::__construct()
+	 * @used-by self::test()
+	 * @used-by self::testData()
+	 * @used-by self::tRaw()
 	 * @var array(string => mixed)
 	 */
 	private $_test;

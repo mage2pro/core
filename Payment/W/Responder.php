@@ -30,7 +30,7 @@ class Responder {
 
 	/**
 	 * 2017-11-18
-	 * @used-by get()
+	 * @used-by self::get()
 	 * @return bool
 	 */
 	final function isSuccess() {return !$this->_response;}
@@ -79,7 +79,7 @@ class Responder {
 
 	/**
 	 * 2017-09-13
-	 * @used-by setError()
+	 * @used-by self::setError()
 	 * @see \Dfe\AllPay\W\Responder::error()
 	 * @see \Dfe\Qiwi\W\Responder::error()
 	 * @param \Exception|string $e
@@ -89,7 +89,7 @@ class Responder {
 
 	/**
 	 * 2017-01-04
-	 * @used-by setNotForUs
+	 * @used-by self::setNotForUs()
 	 * @see \Dfe\AllPay\W\Responder::notForUs()
 	 * @see \Dfe\Qiwi\W\Responder::notForUs()
 	 * @param string|null $message [optional]
@@ -99,16 +99,16 @@ class Responder {
 
 	/**
 	 * 2017-09-13
-	 * @used-by error()
-	 * @used-by ignored()
-	 * @used-by notForUs()
+	 * @used-by self::error()
+	 * @used-by self::ignored()
+	 * @used-by self::notForUs()
 	 * @param wResult $v
 	 */
 	final protected function set(wResult $v) {$this->_response = $v;}
 
 	/**
 	 * 2017-09-13
-	 * @used-by get()
+	 * @used-by self::get()
 	 * @see \Dfe\AllPay\W\Responder::success()
 	 * @see \Dfe\Dragonpay\W\Responder::success()
 	 * @see \Dfe\IPay88\W\Responder::success()
@@ -120,24 +120,24 @@ class Responder {
 
 	/**
 	 * 2017-09-13
-	 * @used-by __construct()
-	 * @used-by e()
+	 * @used-by self::__construct()
+	 * @used-by self::e()
 	 * @var F
 	 */
 	private $_f;
 
 	/**
 	 * 2017-09-13
-	 * @used-by get()
-	 * @used-by isSuccess()
-	 * @used-by set()
+	 * @used-by self::get()
+	 * @used-by self::isSuccess()
+	 * @used-by self::set()
 	 * @var wResult
 	 */
 	private $_response;
 
 	/**
 	 * 2017-09-13
-	 * @used-by error()
+	 * @used-by self::error()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @param \Exception|string $e
 	 * @return wResult

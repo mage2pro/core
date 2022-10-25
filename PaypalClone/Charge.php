@@ -17,7 +17,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2017-08-19
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @see \Dfe\AllPay\Charge::k_Amount()
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_Amount()
 	 * @see \Dfe\Dragonpay\Charge::k_Amount()
@@ -32,7 +32,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-08-19
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @see \Dfe\AllPay\Charge::k_MerchantId()
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_MerchantId()
 	 * @see \Dfe\Dragonpay\Charge::k_MerchantId()
@@ -47,7 +47,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2016-08-29
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @see \Dfe\AllPay\Charge::k_RequestId()
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_RequestId()
 	 * @see \Dfe\Dragonpay\Charge::k_RequestId()
@@ -67,7 +67,6 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * Currently, only the Yandex.Kassa charge requests do not use a signature:
 	 * @see \Dfe\YandexKassa\Charge::k_Signature()
 	 * https://tech.yandex.com/money/doc/payment-solution/payment-form/payment-form-http-docpage
-	 *
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @see \Dfe\AllPay\Charge::k_Signature()
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_Signature()
@@ -101,7 +100,6 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
 	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
 	 * ведь там все идентификаторы имели бы одинаковую приставку.
-	 *
 	 * 2017-04-16
 	 * Прошлые комментарии для модуля allPay:
 	 * ======================================
@@ -112,7 +110,6 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * «Merchant trade number could not be repeated.
 	 * It is composed with upper and lower cases of English letter and numbers.»
 	 * Must be filled.
-	 *
 	 * 2016-07-05
 	 * Значение может содержать только цифры и латинские буквы.
 	 * Все другие символы недопустимы.
@@ -151,7 +148,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-08-19
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_Currency()
 	 * @see \Dfe\Dragonpay\Charge::k_RequestId()
 	 * @see \Dfe\IPay88\Charge::k_RequestId()
@@ -163,7 +160,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-08-19
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_Email()
 	 * @see \Dfe\Dragonpay\Charge::k_Email()
 	 * @see \Dfe\IPay88\Charge::k_Email()
@@ -177,7 +174,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-08-19
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @see \Dfe\IPay88\Charge::testAmountF()
 	 * @return float|int|string
 	 */

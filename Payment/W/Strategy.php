@@ -17,7 +17,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 abstract class Strategy {
 	/**
 	 * 2017-01-06
-	 * @used-by handle()
+	 * @used-by self::handle()
 	 * @see \Df\Payment\W\Strategy\CapturePreauthorized::_handle()
 	 * @see \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @see \Df\Payment\W\Strategy\Refund::_handle()
@@ -34,8 +34,8 @@ abstract class Strategy {
 	/**
 	 * 2017-03-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by ro()
-	 * @used-by ttCurrent()
+	 * @used-by self::ro()
+	 * @used-by self::ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 * @used-by \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
@@ -53,7 +53,7 @@ abstract class Strategy {
 
 	/**
 	 * 2017-01-15
-	 * @used-by s()
+	 * @used-by self::s()
 	 * @return M
 	 */
 	final protected function m() {return dfc($this, function() {return df_ar($this->_h->m(), M::class);});}
@@ -94,24 +94,24 @@ abstract class Strategy {
 
 	/**
 	 * 2017-01-06
-	 * @used-by \Df\Payment\W\Strategy::handle()
+	 * @used-by self::handle()
 	 * @param Handler $h
 	 */
 	private function __construct(Handler $h) {$this->_h = $h;}
 
 	/**
 	 * 2017-01-06
-	 * @used-by __construct()
-	 * @used-by delegate()
-	 * @used-by m()
-	 * @used-by o()
+	 * @used-by self::__construct()
+	 * @used-by self::delegate()
+	 * @used-by self::m()
+	 * @used-by self::o()
 	 * @var Handler
 	 */
 	private $_h;
 
 	/**
 	 * 2017-03-18
-	 * @used-by delegate()
+	 * @used-by self::delegate()
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @param string $class
 	 * @param Handler $h

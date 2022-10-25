@@ -31,8 +31,8 @@ final class Ignored extends \Df\Payment\W\Exception {
 
 	/**
 	 * 2017-03-11
-	 * @used-by __construct()
-	 * @used-by message()
+	 * @used-by self::__construct()
+	 * @used-by self::message()
 	 * @var string|null
 	 */
 	private $_type;

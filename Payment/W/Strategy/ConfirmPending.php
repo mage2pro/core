@@ -166,14 +166,13 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 			if ($succ) {
 				dfp_mail($o);
 			}
-			# 2017-09-13
-			# We do not set a response here, because PayPal clones require a specific response on success.
+			# 2017-09-13 We do not set a response here, because PayPal clones require a specific response on success.
 		}
 	}
 
 	/**
 	 * 2018-11-13
-	 * @used-by _handle()
+	 * @used-by self::_handle()
 	 * @see \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
 	 */
 	protected function onSuccess() {}
@@ -185,7 +184,7 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 	 * 2) "Show the `refno` value on the backend order screen for not yet paid orders":
 	 * https://github.com/mage2pro/dragonpay/issues/7
 	 * 3) The default value is false for backward compatibility.
-	 * @used-by _handle()
+	 * @used-by self::_handle()
 	 * @see \Dfe\Dragonpay\W\Strategy\ConfirmPending::storeIntermediateResponses()
 	 * @return bool
 	 */
