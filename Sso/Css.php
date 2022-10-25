@@ -39,7 +39,7 @@ class Css extends _P {
 
 	/**
 	 * 2016-12-04 The result should be cached because the method resets the `needConfirm` value.
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @used-by \Df\Sso\Button::_toHtml()
 	 * @return bool
 	 */

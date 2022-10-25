@@ -64,13 +64,6 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 
 	/**
 	 * 2016-06-04
-	 * @used-by register()
-	 * @return array(string => mixed)
-	 */
-	protected function addressData() {return [];}
-
-	/**
-	 * 2016-06-04
 	 * 2016-12-01
 	 * @see \Dfe\AmazonLogin\Customer
 	 * @see \Dfe\FacebookLogin\Customer
@@ -271,7 +264,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @used-by mc()
 	 * @return string
 	 */
-	final private function fId() {return dfc($this, function() {return Schema::fIdC($this);});}
+	private function fId() {return dfc($this, function() {return Schema::fIdC($this);});}
 
 	/**
 	 * 2015-10-12
@@ -303,7 +296,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			$a->setCustomer($mc);
 			$v = df_visitor(); /** @var \Df\Core\Visitor $v */
 			$c = $this->c(); /** @var DC $c */
-			$a->addData(df_clean($this->addressData() + [
+			$a->addData(df_clean([
 				# 2017-04-07
 				# Сервис геолокации может отказать нам в данных,
 				# но мы не можем передавать в ядро пустое значение:

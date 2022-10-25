@@ -81,7 +81,7 @@ abstract class Customer extends \Df\Core\O {
 
 	/**
 	 * 2016-06-04
-	 * @used-by dob()
+	 * @used-by self::dob()
 	 * @return \DateTime|null
 	 */
 	protected function _dob() {return null;}
