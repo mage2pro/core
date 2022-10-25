@@ -22,7 +22,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * The k_idE() method for such PSPs can return `null`,
 	 * and then a presudo-identifier wiull bi generated automatically.
 	 * Such identifier serves only as `txn_id` for the current Magento transaction.
-	 * @used-by idE()
+	 * @used-by self::idE()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_idE()
 	 * @see \Dfe\AllPay\W\Event::k_idE()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::k_idE()
@@ -39,7 +39,7 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-01-18
-	 * @used-by signatureProvided()
+	 * @used-by self::signatureProvided()
 	 * @see \Dfe\AllPay\W\Event::k_signature()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::k_signature()
 	 * @see \Dfe\Dragonpay\W\Event::k_signature()
@@ -56,7 +56,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-18
 	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
-	 * @used-by status()
+	 * @used-by self::status()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_status()
 	 * @see \Dfe\AllPay\W\Event::k_status()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::k_status()
@@ -91,10 +91,10 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2016-08-27
-	 * Раньше метод isSuccessful() вызывался из метода @see validate().
-	 * Отныне же @see validate() проверяет, корректно ли сообщение от платёжной системы.
+	 * Раньше метод isSuccessful() вызывался из метода @see self::validate().
+	 * Отныне же @see self::validate() проверяет, корректно ли сообщение от платёжной системы.
 	 * Даже если оплата завершилась отказом покупателя, но оповещение об этом корректно,
-	 * то @see validate() вернёт true.
+	 * то @see self::validate() вернёт true.
 	 * isSuccessful() же проверяет, прошла ли оплата успешно.
 	 *
 	 * 2017-08-30
@@ -110,7 +110,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 *
 	 * @override
 	 * @see \Df\Payment\W\Event::isSuccessful()
-	 * @used-by ttCurrent()
+	 * @used-by self::ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Event::ttCurrent()
@@ -187,7 +187,7 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-01-18
-	 * @used-by statusT()
+	 * @used-by self::statusT()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::k_statusT()
 	 * @see \Dfe\Dragonpay\W\Event::k_statusT()
 	 * @see \Dfe\IPay88\W\Event::k_statusT()
@@ -199,8 +199,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-03-18
 	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
-	 * @used-by isSuccessful()
-	 * @used-by statusT()
+	 * @used-by self::isSuccessful()
+	 * @used-by self::statusT()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\Dragonpay\W\Event::isSuccessful()
 	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
@@ -217,7 +217,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2016-08-27
 	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
-	 * @used-by isSuccessful()
+	 * @used-by self::isSuccessful()
 	 * @see \Dfe\AllPay\W\Event::statusExpected()
 	 * @see \Dfe\AllPay\W\Event\Offline::statusExpected()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::statusExpected()
@@ -229,7 +229,7 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-03-18
-	 * @used-by validate()
+	 * @used-by self::validate()
 	 * @return string
 	 */
 	private function signatureProvided() {return $this->rr($this->k_signature());}
