@@ -3,7 +3,7 @@ namespace Df\Qa;
 final class Dumper {
 	/**
 	 * @used-by df_dump()
-	 * @used-by dumpArrayElements()
+	 * @used-by self::dumpArrayElements()
 	 * @param mixed $v
 	 * @return string
 	 */
@@ -37,8 +37,8 @@ final class Dumper {
 	 * 2015-01-25 @uses df_ksort() для удобства сравнения двух версий массива/объекта в Araxis Merge.
 	 *
 	 * @see df_kv()
-	 * @used-by dumpArray()
-	 * @used-by dumpObject()
+	 * @used-by self::dumpArray()
+	 * @used-by self::dumpObject()
 	 * @param mixed[]|array(string => mixed) $a
 	 * @return string
 	 */
@@ -47,14 +47,14 @@ final class Dumper {
 	;}));}
 
 	/**
-	 * @used-by dump()
+	 * @used-by self::dump()
 	 * @param mixed $a
 	 * @return string
 	 */
 	private function dumpArray(array $a) {return "[\n" . df_tab_multiline($this->dumpArrayElements($a)) . "\n]";}
 
 	/**
-	 * @used-by dump()
+	 * @used-by self::dump()
 	 * @param object $o
 	 * @return string
 	 */
@@ -74,7 +74,7 @@ final class Dumper {
 	}
 
 	/**
-	 * @used-by dumpObject()
+	 * @used-by self::dumpObject()
 	 * @var array(string => bool)
 	 */
 	private $_dumped = [];
@@ -83,7 +83,6 @@ final class Dumper {
 	 * Обратите внимание, что мы намеренно не используем для @see Df_Core_Dumper
 	 * объект-одиночку, потому что нам надо вести учёт выгруженных объектов,
 	 * чтобы не попасть в бесконечную рекурсию при циклических ссылках.
-	 * @return \Df\Qa\Dumper
 	 */
-	static function i() {return new self;}
+	static function i():self {return new self;}
 }
