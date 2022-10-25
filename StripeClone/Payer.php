@@ -54,8 +54,8 @@ class Payer extends \Df\Payment\Facade {
 	 * Если ПС (как, например, Spryng) не поддерживает сохранение банковской карты
 	 * для будущего повторного использования, то @uses cardIdPrefix() должна вернуть null,
 	 * и тогда tokenIsNew() всегда вернёт true,
-	 * @used-by cardId()
-	 * @used-by newCard()
+	 * @used-by self::cardId()
+	 * @used-by self::newCard()
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return bool
 	 */
@@ -68,9 +68,9 @@ class Payer extends \Df\Payment\Facade {
 	 * For Stripe it could be not only a new bank card token (like «tok_18lWSWFzKb8aMux1viSqpL5X»),
 	 * but also an ID of a previosuly used bank card (like «card_18lGFRFzKb8aMux1Bmcjsa5L»).
 	 * 2017-11-12 Since last month, it could be also a Stripe's source ID (like «src_1BMxGwFzKb8aMux1dThSCfhP»).
-	 * @used-by cardId()
-	 * @used-by newCard()
-	 * @used-by tokenIsNew()
+	 * @used-by self::cardId()
+	 * @used-by self::newCard()
+	 * @used-by self::tokenIsNew()
 	 * @used-by \Dfe\Stripe\Payer::tokenIsSingleUse()
 	 * @return string
 	 */
@@ -83,8 +83,8 @@ class Payer extends \Df\Payment\Facade {
 	 * «If a source can only be used once, this parameter is set to `single_use`
 	 * and a source must be created each time a customer makes a payment.
 	 * Such sources should not be attached to customers and should be charged directly instead.»
-	 * @used-by cardId()
-	 * @used-by customerId()
+	 * @used-by self::cardId()
+	 * @used-by self::customerId()
 	 * @see \Dfe\Stripe\Payer::tokenIsSingleUse()
 	 * @return bool
 	 */
@@ -92,8 +92,8 @@ class Payer extends \Df\Payment\Facade {
 
 	/**
 	 * 2016-08-23
-	 * @used-by customerId()
-	 * @used-by newCard()
+	 * @used-by self::customerId()
+	 * @used-by self::newCard()
 	 * @return string
 	 */
 	private function customerIdSaved() {return dfc($this, function() {return df_ci_get(
@@ -103,8 +103,8 @@ class Payer extends \Df\Payment\Facade {
 	/**
 	 * 2017-06-12
 	 * 2017-07-16 It returns a 2-tuple: [customer ID, card ID].
-	 * @used-by cardId()
-	 * @used-by customerId()
+	 * @used-by self::cardId()
+	 * @used-by self::customerId()
 	 * @return string[]
 	 */
 	private function newCard() {return dfc($this, function() {
