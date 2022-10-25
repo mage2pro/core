@@ -91,15 +91,15 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * а пароль будет либо скрытым, либо необязательным полем.
 	 * После регистрации свежесозданная учётная запись будет привязана
 	 * к учётной записи покупателя в провайдере SSO.
-	 * @used-by mc()
+	 * @used-by self::mc()
 	 * @return bool
 	 */
 	protected function canRegister() {return true;}
 
 	/**
 	 * 2016-06-04
-	 * @used-by mc()
-	 * @used-by register()
+	 * @used-by self::mc()
+	 * @used-by self::register()
 	 * @return array(string => mixed)
 	 */
 	protected function customerData() {return dfc($this, function() {$c = $this->c(); return df_clean([
@@ -128,7 +128,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * 2016-06-06
 	 * Перечень свойств покупателя, которые надо обновить в Magento
 	 * после их изменения в сторонней системе авторизации.
-	 * @used-by mc()
+	 * @used-by self::mc()
 	 * @return string[]
 	 */
 	protected function customerFieldsToSync() {return [$this->fId()];}
@@ -141,7 +141,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * а в случае с Amazon мы гарантированно можем получить точный адрес из профиля Amazon,
 	 * поэтому нам нет никакого смысла забивать систему неточным автоматическим адресом.
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index::needCreateAddress()
-	 * @used-by register()
+	 * @used-by self::register()
 	 * @return bool
 	 */
 	protected function needCreateAddress() {return true;}
@@ -159,7 +159,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 
 	/**
 	 * 2016-12-02
-	 * @used-by execute()
+	 * @used-by self::execute()
 	 * @return array(string => mixed)
 	 */
 	protected function registrationData() {return [];}
@@ -169,8 +169,8 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * 2016-12-01
 	 * Отныне метод может (и будет) возвращать null в том случае,
 	 * когда учётная запись покупателя отсутствует в Magento,
-	 * а метод @see canRegister() вернул false (случай Blackbaud NetCommunity).
-	 * @used-by _execute()
+	 * а метод @see self::canRegister() вернул false (случай Blackbaud NetCommunity).
+	 * @used-by self::_execute()
 	 * @return MC|null
 	 */
 	private function mc() {return dfc($this, function() {
@@ -261,15 +261,14 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 
 	/**
 	 * 2016-06-04
-	 * @used-by mc()
+	 * @used-by self::mc()
 	 * @return string
 	 */
 	private function fId() {return dfc($this, function() {return Schema::fIdC($this);});}
 
 	/**
-	 * 2015-10-12
-	 * Регистрация нового покупателя.
-	 * @used-by mc()
+	 * 2015-10-12 Регистрация нового покупателя.
+	 * @used-by self::mc()
 	 * @param MC $mc
 	 */
 	private function register(MC $mc) {
@@ -336,8 +335,8 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * а пароль будет либо скрытым, либо необязательным полем.
 	 * После регистрации свежесозданная учётная запись будет привязана
 	 * к учётной записи покупателя в провайдере SSO.
-	 * @used-by _execute()
-	 * @used-by redirectUrl()
+	 * @used-by self::_execute()
+	 * @used-by self::redirectUrl()
 	 * @var bool
 	 */
 	private $_redirectToRegistration = false;
