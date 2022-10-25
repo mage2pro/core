@@ -54,10 +54,8 @@ final class PlaceOrderInternal {
 	
 	/**
 	 * 2016-07-18
-	 * 2016-10-24
-	 * Сообщение для покупателя функция возвращает,
-	 * а сообщение для администратора — логирует.
-	 * @used-by _place()
+	 * 2016-10-24 Сообщение для покупателя функция возвращает, а сообщение для администратора — логирует.
+	 * @used-by self::_place()
 	 * @param \Exception|DFPE $e
 	 * @return string
 	 */
@@ -107,16 +105,16 @@ final class PlaceOrderInternal {
 
 	/**
 	 * 2017-12-13
-	 * @used-by _place()
-	 * @used-by s()
+	 * @used-by self::_place()
+	 * @used-by self::s()
 	 * @return Method
 	 */
 	private function m() {return dfc($this, function() {return dfpm(dfp(df_quote($this->qid())));});}
 
 	/**
 	 * 2016-07-18
-	 * @used-by _place()
-	 * @used-by message()
+	 * @used-by self::_place()
+	 * @used-by self::message()
 	 * @return Settings
 	 */
 	private function s() {return dfc($this, function() {return $this->m()->s();});}
@@ -131,6 +129,8 @@ final class PlaceOrderInternal {
 
 	/**
 	 * 2017-03-12
+	 * @used-by self::__construct()
+	 * @used-by self::qid()
 	 * @var bool
 	 */
 	private $_isGuest;
@@ -161,8 +161,8 @@ final class PlaceOrderInternal {
 
 	/**
 	 * 2016-07-01
-	 * @used-by _place()
-	 * @used-by setRedirectData()
+	 * @used-by self::_place()
+	 * @used-by self::setRedirectData()
 	 */
 	private static $REDIRECT_DATA = 'df_redirect';
 }
