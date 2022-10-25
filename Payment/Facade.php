@@ -24,7 +24,7 @@ abstract class Facade {
 	 * «Call to private Df\Payment\Facade::__construct() from context 'Df\StripeClone\Facade\Customer'».
 	 * @see \Df\StripeClone\CardFormatter::__construct()
 	 * https://github.com/mage2pro/core/blob/2.8.25/StripeClone/CardFormatter.php#L53-L62
-	 * @used-by s()
+	 * @used-by self::s()
 	 * @param M $m
 	 */
 	final protected function __construct(M $m) {$this->_m = $m;}
@@ -39,7 +39,7 @@ abstract class Facade {
 
 	/**
 	 * 2017-02-11
-	 * @used-by cm()
+	 * @used-by self::cm()
 	 * @used-by \Df\StripeClone\Payer::token()
 	 * @return II|I|OP|QP
 	 */
@@ -48,8 +48,8 @@ abstract class Facade {
 	/**
 	 * 2017-02-11
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by ii()
-	 * @used-by tm()
+	 * @used-by self::ii()
+	 * @used-by self::tm()
 	 * @used-by \Dfe\Paymill\Facade\O::toArray()
 	 * @used-by \Dfe\Square\Facade\Charge::create()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
@@ -75,10 +75,10 @@ abstract class Facade {
 
 	/**
 	 * 2017-02-11
-	 * @used-by __construct()
-	 * @used-by m()
-	 * @used-by tm()
-	 * @used-by ss()
+	 * @used-by self::__construct()
+	 * @used-by self::m()
+	 * @used-by self::tm()
+	 * @used-by self::ss()
 	 * @var M
 	 */
 	private $_m;
