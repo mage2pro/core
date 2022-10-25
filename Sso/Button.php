@@ -11,10 +11,11 @@ use Magento\Framework\View\Element\AbstractBlock as _P;
 abstract class Button extends _P {
 	/**
 	 * 2016-11-27
-	 * @used-by attributes()
-	 * @return string
+	 * @used-by self::attributes()
+	 * @see \Dfe\BlackbaudNetCommunity\Button::lHref()
+	 * @see \Df\Sso\Button\Js::lHref()
 	 */
-	abstract protected function lHref();
+	abstract protected function lHref():string;
 
 	/**
 	 * 2016-11-23

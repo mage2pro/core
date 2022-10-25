@@ -48,9 +48,8 @@ abstract class Js extends \Df\Sso\Button {
 	 * @override
 	 * @see \Df\Sso\Button::lHref()
 	 * @used-by \Df\Sso\Button::attributes()
-	 * @return string
 	 */
-	final protected function lHref() {return 'javascript:void(0)';}
+	final protected function lHref():string {return 'javascript:void(0)';}
 
 	/**
 	 * 2016-11-26
