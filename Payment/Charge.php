@@ -15,7 +15,7 @@ namespace Df\Payment;
 abstract class Charge extends Operation {
 	/**
 	 * 2016-08-27
-	 * @used-by customerReturnRemote()
+	 * @used-by self::customerReturnRemote()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
