@@ -69,13 +69,8 @@ abstract class Button extends _P {
 	 * @return array(string => string)
 	 */
 	protected function attributes() {return
-		($this->isNative() ? $this->attributesN() :
-			['href' => $this->lHref(), 'title' => $this->s()->label()]
-		)
-		+ [
-			'class' => df_cc_s(
-				'df-sso-button', $this->cssClass(), $this->s()->type(), $this->cssClass2()
-			)
+		($this->isNative() ? $this->attributesN() : ['href' => $this->lHref(), 'title' => $this->s()->label()]) + [
+			'class' => df_cc_s('df-sso-button', $this->cssClass(), $this->s()->type(), $this->cssClass2())
 			,'id' => df_uid(4, "{$this->cssClass()}-")
 			,'rel' => 'nofollow'
 		]
@@ -91,8 +86,8 @@ abstract class Button extends _P {
 
 	/**
 	 * 2016-11-25
-	 * @used-by id()
-	 * @used-by attributes()
+	 * @used-by self::attributes()
+	 * @used-by self::id()
 	 * @used-by \Df\Sso\Button\Js::jsOptions()
 	 * @return string
 	 */
@@ -102,7 +97,7 @@ abstract class Button extends _P {
 
 	/**
 	 * 2016-11-29
-	 * @used-by attributes()
+	 * @used-by self::attributes()
 	 * @see \Dfe\FacebookLogin\Button::cssClass2()
 	 * @return string
 	 */
@@ -110,17 +105,15 @@ abstract class Button extends _P {
 
 	/**
 	 * 2016-11-29
-	 * @used-by attributes()
+	 * @used-by self::attributes()
 	 * @used-by \Dfe\FacebookLogin\Button::cssClass2()
 	 * @return bool
 	 */
-	final protected function isNative() {return dfc($this, function() {return UNL::isNative(
-		$this->s()->type()
-	);});}
+	final protected function isNative() {return dfc($this, function() {return UNL::isNative($this->s()->type());});}
 
 	/**
 	 * 2016-11-23
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @return string
 	 */
 	protected function loggedIn() {return '';}
@@ -128,7 +121,7 @@ abstract class Button extends _P {
 	/**
 	 * 2016-11-23
 	 * @see \Dfe\FacebookLogin\Button::loggedOut()
-	 * @used-by _toHtml()
+	 * @used-by self::_toHtml()
 	 * @return string
 	 */
 	protected function loggedOut() {$unified = UNL::isUnified($this->s()->type()); return
@@ -158,8 +151,7 @@ abstract class Button extends _P {
 	 * @used-by \Magento\Framework\View\Element\AbstractBlock::setLayout()
 	 */
 	protected function _prepareLayout() {
-		/** @var bool $done */
-		static $done;
+		static $done; /** @var bool $done */
 		if (!$done) {
 			df_page_config()->addPageAsset('Df_Sso::main.css');
 			$done = true;
@@ -177,15 +169,12 @@ abstract class Button extends _P {
 	);});}
 
 	/**
-	 * 2016-11-30
-	 * Другой алгоритм: $this->getParentBlock() instanceof Links
-	 *@used-by _toHtml()
-	 * @used-by loggedOut()
+	 * 2016-11-30 Другой алгоритм: `$this->getParentBlock() instanceof Links`.
+	 * @used-by self::_toHtml()
+	 * @used-by self::loggedOut()
 	 * @return string
 	 */
-	private function isInHeader() {return dfc($this, function() {return
-		'header.links' === df_parent_name($this)
-	;});}
+	private function isInHeader() {return dfc($this, function() {return 'header.links' === df_parent_name($this);});}
 
 	/**
 	 * 2016-11-23
@@ -198,14 +187,11 @@ abstract class Button extends _P {
 	 * https://github.com/mage2pro/core/blob/ab34df/Core/lib/cache.php?ts=4#L151-L160
 	 * @return \Df\Sso\Settings
 	 */
-	private static function sModule() {return dfcf(function($c) {return
-		Settings::convention($c)
-	;}, [static::class]);}
+	private static function sModule() {return dfcf(function($c) {return Settings::convention($c);}, [static::class]);}
 
 	/**
-	 * 2016-12-01
-	 * https://3v4l.org/Ns95Q
-	 * @used-by loggedOut()
+	 * 2016-12-01 https://3v4l.org/Ns95Q
+	 * @used-by self::loggedOut()
 	 * @var string
 	 */
 	private static $_inlineCssB;
