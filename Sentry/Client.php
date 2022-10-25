@@ -145,7 +145,7 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * @used-by capture()
+	 * @used-by self::capture()
 	 * @return array|array[]|null[]
 	 */
 	private function get_user_data() {
@@ -171,8 +171,8 @@ final class Client {
 
 	/**
 	 * 2017-04-08
-	 * @used-by captureException()
-	 * @used-by captureMessage()
+	 * @used-by self::captureException()
+	 * @used-by self::captureMessage()
 	 * @param mixed $data
 	 * @param mixed[] $trace [optional]
 	 * @return mixed
@@ -228,7 +228,7 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * @used-by send()
+	 * @used-by self::send()
 	 * @param array(string => mixed) $data
 	 * @return string
 	 */
@@ -243,8 +243,8 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * @used-by __construct()
-	 * @used-by capture()
+	 * @used-by self::__construct()
+	 * @used-by self::capture()
 	 * @param array $data
 	 */
 	private function send(&$data) {
@@ -264,7 +264,7 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * @used-by send()
+	 * @used-by self::send()
 	 * @param string $url
 	 * @param array $data
 	 * @param array $headers
@@ -296,7 +296,7 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * @used-by send_http()
+	 * @used-by self::send_http()
 	 * @return array(string => mixed)
 	 */
 	private function get_curl_options() {
@@ -402,7 +402,7 @@ final class Client {
 	}
 
 	/**
-	 * @used-by captureException()
+	 * @used-by self::captureException()
 	 * @param string $severity  PHP E_$x error constant
 	 * @return string           Sentry log level group
 	 */
@@ -447,14 +447,14 @@ final class Client {
 
 	/**
 	 * 2016-12-23
-	 * @used-by get_curl_options()
+	 * @used-by self::get_curl_options()
 	 * @return string
 	 */
 	private function getUserAgent() {return 'mage2.pro/' . df_core_version();}
 
 	/**
 	 * 2016-12-23
-	 * @used-by captureException()
+	 * @used-by self::captureException()
 	 * @param array(string => string|int|array) $frame
 	 * @return bool
 	 */
@@ -464,7 +464,7 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * @used-by capture()
+	 * @used-by self::capture()
 	 * @param $data
 	 */
 	private function sanitize(&$data) {
@@ -492,35 +492,34 @@ final class Client {
 	public $severity_map;
 	/**
 	 * 2020-06-27
-	 * @used-by capture()
-	 * @used-by captureException()
-	 * @used-by setAppPath()
+	 * @used-by self::capture()
+	 * @used-by self::captureException()
+	 * @used-by self::setAppPath()
 	 * @var string|null
 	 */
 	private $app_path;
 	private $error_types;
 	/**
 	 * 2020-06-28
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @var string
 	 */
 	private $_keyPrivate;
 	/**
 	 * 2020-06-28
-	 * @used-by __construct()
-	 * @used-by send()
+	 * @used-by self::__construct()
+	 * @used-by self::send()
 	 * @var string
 	 */
 	private $_keyPublic;
 	/**
 	 * 2020-06-28
-	 * @used-by __construct()
-	 * @used-by capture()
-	 * @used-by send()
+	 * @used-by self::__construct()
+	 * @used-by self::capture()
+	 * @used-by self::send()
 	 * @var int
 	 */
 	private $_projectId;
-	private $reprSerializer;
 	private $serializer;
 	const DEBUG = 'debug';
 	const ERROR = 'error';
@@ -528,8 +527,8 @@ final class Client {
 	const INFO = 'info';
 	/**
 	 * 2020-06-28
-	 * @used-by capture()
-	 * @used-by captureException()
+	 * @used-by self::capture()
+	 * @used-by self::captureException()
 	 * @used-by \Df\Sentry\Trace::get_default_context()
 	 * @used-by \Df\Sentry\Trace::get_frame_context()
 	 * @used-by \Df\Sentry\Trace::info()
