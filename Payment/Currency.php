@@ -44,8 +44,8 @@ class Currency {
 	 * 2016-09-05 «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * Текущая валюта может меняться динамически (в том числе посетителем магазина и сессией),
 	 * поэтому мы используем параметр store, а не scope.
-	 * @used-by oq()
-	 * @used-by rateToPayment()
+	 * @used-by self::oq()
+	 * @used-by self::rateToPayment()
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @param null|string|int|IScope|Store $s [optional]
 	 * @param string|null $oc [optional]
@@ -57,9 +57,9 @@ class Currency {
 
 	/**
 	 * 2016-09-07
-	 * @used-by convert()
-	 * @used-by toBase()
-	 * @used-by toOrder()
+	 * @used-by self::convert()
+	 * @used-by self::toBase()
+	 * @used-by self::toOrder()
 	 * @used-by \Df\Payment\Method::cPayment()
 	 * @used-by \Df\Payment\Method::isAvailable()
 	 * @used-by \Df\Payment\Operation\Source::currencyC()
@@ -97,7 +97,7 @@ class Currency {
 
 	/**
 	 * 2017-10-12
-	 * @used-by iso3()
+	 * @used-by self::iso3()
 	 * @see \Dfe\Spryng\Currency::_iso3()
 	 * @see \Dfe\Stripe\Currency::_iso3()
 	 * @param null|string|int|IScope|Store $s [optional]
@@ -116,16 +116,15 @@ class Currency {
 	/**
 	 * 2017-10-12
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by _iso3()
+	 * @used-by self::_iso3()
 	 * @return Settings
 	 */
 	protected function s() {return $this->_m->s();}
 
 	/**
-	 * 2016-09-05
-	 * Конвертирует денежную величину в валюту «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @used-by fromBase()
-	 * @used-by fromOrder()
+	 * 2016-09-05 Конвертирует денежную величину в валюту «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @used-by self::fromBase()
+	 * @used-by self::fromOrder()
 	 * @param float $a
 	 * @param string $from
 	 * @param O|Q $oq
@@ -135,7 +134,7 @@ class Currency {
 
 	/**
 	 * 2017-10-12
-	 * @used-by factory()
+	 * @used-by self::factory()
 	 * @var M
 	 */
 	private $_m;

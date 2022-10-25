@@ -57,7 +57,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see IConfigProvider::getConfig()
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @used-by \Magento\Checkout\Model\CompositeConfigProvider::getConfig():
 	 *		public function getConfig() {
 	 *			$config = [];
@@ -78,20 +78,19 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Config\ISettings::s()
-	 * @used-by config()
-	 * @used-by configOptions()
-	 * @used-by getConfig()           
+	 * @used-by self::config()
+	 * @used-by self::configOptions()
+	 * @used-by self::getConfig()
 	 * @used-by \Dfe\ACH\ConfigProvider::config()
 	 * @used-by \Dfe\AllPay\ConfigProvider::options()
 	 * @used-by \Dfe\IPay88\ConfigProvider::options()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
-	 * @return S
 	 */
-	function s() {return $this->m()->s();}
+	function s():S {return $this->m()->s();}
 
 	/**
 	 * 2017-04-17 The result amount is in the payment currency.
-	 * @used-by config()
+	 * @used-by self::config()
 	 * @used-by \Dfe\Robokassa\ConfigProvider::options()
 	 * @return float
 	 */
@@ -164,9 +163,9 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	/**
 	 * 2017-02-07
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by config()
-	 * @used-by getConfig()
-	 * @used-by p()
+	 * @used-by self::config()
+	 * @used-by self::getConfig()
+	 * @used-by self::p()
 	 * @used-by \Df\Payment\ConfigProvider::currency()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
@@ -177,17 +176,17 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 
 	/**
 	 * 2017-10-12
-	 * @used-by amount()
-	 * @used-by config()
+	 * @used-by self::amount()
+	 * @used-by self::config()
 	 * @return Currency
 	 */
 	private function currency() {return dfp_currency($this->m());}
 
 	/**
 	 * 2017-03-03
-	 * @used-by __construct()
-	 * @used-by m()
-	 * @used-by s()
+	 * @used-by self::__construct()
+	 * @used-by self::m()
+	 * @used-by self::s()
 	 * @var string
 	 */
 	private $_mc;

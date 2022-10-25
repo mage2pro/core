@@ -69,7 +69,7 @@ class CustomerReturn extends Action {
 
 	/**
 	 * 2017-04-13
-	 * @used-by execute()
+	 * @used-by self::execute()
 	 * @see \Dfe\IPay88\Controller\CustomerReturn\Index::isSuccess()
 	 * @see \Dfe\Robokassa\Controller\CustomerReturn\Index::isSuccess()
 	 * @see \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
@@ -79,7 +79,7 @@ class CustomerReturn extends Action {
 
 	/**
 	 * 2016-08-27
-	 * @used-by execute()
+	 * @used-by self::execute()
 	 * @see \Dfe\AllPay\Controller\CustomerReturn\Index::message()
 	 * @see \Dfe\IPay88\Controller\CustomerReturn\Index::message()
 	 * @return string
