@@ -18,7 +18,7 @@ class F {
 	/**
 	 * 2017-03-13
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by handler()
+	 * @used-by self::handler()
 	 * @used-by \Df\Payment\TM::responses()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Payment\W\Responder::e()
@@ -91,8 +91,8 @@ class F {
 
 	/**
 	 * 2017-03-15
-	 * @used-by event()
-	 * @used-by handler()
+	 * @used-by self::event()
+	 * @used-by self::handler()
 	 * @param string $base
 	 * @param mixed ...$a
 	 * @return object
@@ -109,13 +109,13 @@ class F {
 	 * Пример события с обоими разделителями: «charge.dispute.funds_reinstated»
 	 * 2017-03-13
 	 * Имеется 2 пути спуска по иерархии:
-	 * 1) спуск по иерархии наследования.
-	 * 2) спуск по составному типу события
+	 * 		1) спуск по иерархии наследования.
+	 * 		2) спуск по составному типу события
 	 * 2017-03-15
 	 * Отныне мы реализуем ОБА пути спуска.
-	 * 1) @see trySuf()
+	 * 1) @see self::trySuf()
 	 * 2) смотрите цикл while в методе c().
-	 * @used-by aspect()
+	 * @used-by self::aspect()
 	 * @param string $a
 	 * @param bool $critical [optional]
 	 * @return string
@@ -147,7 +147,7 @@ class F {
 
 	/**
 	 * 2017-03-15 Cпуск по иерархии наследования.
-	 * @used-by c()
+	 * @used-by self::c()
 	 * @param string|null ...$s
 	 * @return string|null
 	 */
@@ -155,7 +155,7 @@ class F {
 
 	/**
 	 * 2017-03-15 Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.
-	 * @used-by c()
+	 * @used-by self::c()
 	 * @param string $a
 	 * @param string[] $ta
 	 * @return string|null
@@ -164,9 +164,9 @@ class F {
 
 	/**
 	 * 2017-03-13
-	 * @used-by __construct()
-	 * @used-by c()
-	 * @used-by event()
+	 * @used-by self::__construct()
+	 * @used-by self::c()
+	 * @used-by self::event()
 	 * @var R
 	 */
 	private $_r;
@@ -180,11 +180,11 @@ class F {
 	 * 2) Загрузить эту транзакцию из БД.
 	 * 3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
-	 * @used-by __construct()
-	 * @used-by c()
-	 * @used-by m()
-	 * @used-by try_()
-	 * @used-by tryTA()
+	 * @used-by self::__construct()
+	 * @used-by self::c()
+	 * @used-by self::m()
+	 * @used-by self::try_()
+	 * @used-by self::tryTA()
 	 * @var M
 	 */
 	private $_m;
