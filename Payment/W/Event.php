@@ -11,7 +11,7 @@ use Df\Payment\W\Exception\Critical;
 abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-01-16
-	 * @used-by pid()
+	 * @used-by self::pid()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_pid()
 	 * @see \Df\StripeClone\W\Event::k_pid()
 	 * @see \Dfe\AllPay\W\Event::k_pid()
@@ -215,9 +215,8 @@ abstract class Event implements IEvent, IMA {
 
 	/**
 	 * 2017-03-10
-	 * 2017-03-13
-	 * Returns a value in our internal format, not in the PSP format.
-	 * @used-by tl()
+	 * 2017-03-13 Returns a value in our internal format, not in the PSP format.
+	 * @used-by self::tl()
 	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @used-by \Df\Payment\W\Event::tl()
 	 * @used-by \Df\Payment\W\Handler::log()
@@ -257,7 +256,7 @@ abstract class Event implements IEvent, IMA {
 
 	/**
 	 * 2017-03-13
-	 * @used-by tl()
+	 * @used-by self::tl()
 	 * @see \Dfe\AllPay\W\Event::useRawTypeForLabel()
 	 * @return bool
 	 */
@@ -265,7 +264,7 @@ abstract class Event implements IEvent, IMA {
 
 	/**
 	 * 2017-03-13
-	 * @used-by tl()
+	 * @used-by self::tl()
 	 * @used-by \Df\Payment\W\Event::tl_()
 	 * @see \Dfe\AllPay\W\Event::tl_()
 	 * @param string|null $t
@@ -275,10 +274,10 @@ abstract class Event implements IEvent, IMA {
 
 	/**
 	 * 2017-03-10
-	 * @used-by __construct()
-	 * @used-by r()
-	 * @used-by rd()
-	 * @used-by t()
+	 * @used-by self::__construct()
+	 * @used-by self::r()
+	 * @used-by self::rd()
+	 * @used-by self::t()
 	 * @var Reader
 	 */
 	private $_r;

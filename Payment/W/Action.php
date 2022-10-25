@@ -119,7 +119,7 @@ class Action extends \Df\Payment\Action {
 	 * Отныне игнорируемые операции логирую только на своих серверах.
 	 * Аналогично поступаю и с @see \Df\Payment\Method::action():
 	 * @see \Df\StripeClone\Method::needLogActions()
-	 * @used-by execute()
+	 * @used-by self::execute()
 	 * @param Ignored $e
 	 */
 	private function ignoredLog(Ignored $e) {
