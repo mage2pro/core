@@ -17,7 +17,7 @@ abstract class Nav {
 	 * Внутренний полный идентификатор текущей транзакции.
 	 * Он используется лишь для присвоения его транзакции
 	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
-	 * @used-by op()
+	 * @used-by self::op()
 	 * @see \Df\PaypalClone\W\Nav::id()
 	 * @see \Df\StripeClone\W\Nav::id()
 	 * @return string
@@ -31,18 +31,15 @@ abstract class Nav {
 	 * Возвращает идентификатор родительской транзакции в Magento
 	 * на основе некоего полученного из ПС значения.
 	 * Эта основа в настоящее время бывает 2-х видов:
-	 *
 	 * 1) Идентификатор платежа в платёжной системе.
 	 * Это случай Stripe-подобных платёжных систем: у них идентификатор формируется платёжной системой.
-	 *
 	 * 2) Локальный внутренний идентификатор родительской транзакции.
 	 * Это случай PayPal-подобных платёжных систем, когда мы сами ранее сформировали
 	 * идентификатор запроса к платёжной системе (этот запрос и является родительской транзакцией).
 	 * Такой идентификатор формируется в методах:
 	 * @see \Df\Payment\Operation::id()
 	 * @see \Dfe\AllPay\Charge::id()
-	 *
-	 * @used-by pid()
+	 * @used-by self::pid()
 	 * @see \Df\PaypalClone\W\Nav::pidAdapt()
 	 * @see \Df\StripeClone\W\Nav::pidAdapt()
 	 * @param string $id
@@ -143,7 +140,7 @@ abstract class Nav {
 	 * Так вот, если просто свалиться с исключительной ситуацией (код HTTP 500),
 	 * то Stripe задолбает повторными запросами.
 	 * Надо вернуть код HTTP 200 и человекопонятное сообщение: мол, запрос — не для нашего магазина.
-	 * @used-by op()
+	 * @used-by self::op()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @return T
 	 * @throws NotForUs
@@ -157,8 +154,8 @@ abstract class Nav {
 
 	/**
 	 * 2017-03-16 It returns the parent transaction ID in Magento.
-	 * @used-by op()
-	 * @used-by p()
+	 * @used-by self::op()
+	 * @used-by self::p()
 	 * @used-by \Df\Payment\W\Strategy::parentId()
 	 * @return string
 	 */
@@ -206,11 +203,11 @@ abstract class Nav {
 
 	/**
 	 * 2017-03-15
-	 * @used-by __construct()
-	 * @used-by e()
-	 * @used-by mPartial()
-	 * @used-by op()
-	 * @used-by pid()
+	 * @used-by self::__construct()
+	 * @used-by self::e()
+	 * @used-by self::mPartial()
+	 * @used-by self::op()
+	 * @used-by self::pid()
 	 * @var Event
 	 */
 	private $_e;
