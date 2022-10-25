@@ -7,7 +7,7 @@ use Df\Qa\Trace\Formatter;
  */
 abstract class Failure {
 	/**
-	 * @used-by report()
+	 * @used-by self::report()
 	 * @see \Df\Qa\Failure\Error::main()
 	 * @see \Df\Qa\Failure\Exception::main()
 	 * @return string
@@ -16,7 +16,7 @@ abstract class Failure {
 
 	/**
 	 * @abstract
-	 * @used-by postface()
+	 * @used-by self::postface()
 	 * @see \Df\Qa\Failure\Error::trace()
 	 * @see \Df\Qa\Failure\Exception::trace()
 	 * @return array(array(string => string|int))
@@ -33,7 +33,7 @@ abstract class Failure {
 	);});}
 
 	/**
-	 * @used-by report()
+	 * @used-by self::report()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
 	 * @see \Df\Qa\Failure\Exception::postface()
 	 * @return string
@@ -41,14 +41,14 @@ abstract class Failure {
 	protected function postface() {return Formatter::p(new Trace(array_slice($this->trace(), $this->stackLevel())));}
 
 	/**
-	 * @used-by report()
+	 * @used-by self::report()
 	 * @see \Df\Qa\Failure\Error::preface()
 	 * @return string
 	 */
 	protected function preface() {return '';}
 
 	/**
-	 * @used-by report()
+	 * @used-by self::report()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
 	 * @param string|string[] $items
 	 * @return string
@@ -62,7 +62,7 @@ abstract class Failure {
 	}
 
 	/**
-	 * @used-by postface()
+	 * @used-by self::postface()
 	 * @see \Df\Qa\Failure\Exception::stackLevel()
 	 * @see \Df\Qa\Failure\Error::stackLevel()
 	 * @return int
