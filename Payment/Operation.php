@@ -79,9 +79,9 @@ abstract class Operation implements IMA {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Payment\IMA::m()
-	 * @used-by amountFormat()
-	 * @used-by s()
-	 * @used-by token()
+	 * @used-by self::amountFormat()
+	 * @used-by self::s()
+	 * @used-by self::token()
 	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Refund::process()
@@ -112,9 +112,9 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-07-02
-	 * @see addressSB()
-	 * @used-by customerPhone()
-	 * @used-by locale()
+	 * @see self::addressSB()
+	 * @used-by self::customerPhone()
+	 * @used-by self::locale()
 	 * @used-by \Dfe\Square\P\Reg::p()
 	 * @return OA
 	 */
@@ -154,9 +154,8 @@ abstract class Operation implements IMA {
 	final protected function addressSB() {return $this->_src->addressSB();}
 
 	/**
-	 * 2016-09-05
-	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @used-by amountF()
+	 * 2016-09-05 Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * @used-by self::amountF()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
 	 * @return float
 	 */
@@ -188,8 +187,8 @@ abstract class Operation implements IMA {
 	 * Конвертирует денежную величину (в валюте платежа) из обычного числа в формат платёжной системы.
 	 * В частности, некоторые платёжные системы хотят денежные величины в копейках (Checkout.com),
 	 * обязательно целыми (allPay) и т.п.
-	 * @used-by amountF()
-	 * @used-by cFromDocF()
+	 * @used-by self::amountF()
+	 * @used-by self::cFromDocF()
 	 * @used-by \Dfe\Moip\P\Preorder::amountMargin()
 	 * @used-by \Dfe\Moip\P\Preorder::pAmount()
 	 * @used-by \Dfe\Moip\P\Preorder::pItems()
@@ -213,7 +212,7 @@ abstract class Operation implements IMA {
 	 * 2016-09-06
 	 * Converts $a from a sales document currency to the payment currency.
 	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @used-by cFromDocF()
+	 * @used-by self::cFromDocF()
 	 * @used-by \Dfe\CheckoutCom\Charge::cProduct()
 	 * @param float $a
 	 * @return float
@@ -240,7 +239,7 @@ abstract class Operation implements IMA {
 	/**
 	 * 2017-02-18
 	 * @uses \Magento\Sales\Model\Order::getCustomerDob() возвращает строку вида «1982-07-08 00:00:00».
-	 * @used-by customerDobS()
+	 * @used-by self::customerDobS()
 	 * @return ZD|null
 	 */
 	final protected function customerDob() {return dfc($this, function() {return
@@ -353,7 +352,7 @@ abstract class Operation implements IMA {
 	 * и если он отменён — то восстановим корзину покупателя.»
 	 * https://github.com/mage2pro/allpay/blob/1.1.31/Charge.php?ts=4#L365-L378
 	 *
-	 * @see customerReturnRemoteWithFailure()
+	 * @see self::customerReturnRemoteWithFailure()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
@@ -368,7 +367,7 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2017-08-23
-	 * @see customerReturnRemote()
+	 * @see self::customerReturnRemote()
 	 * @used-by \Dfe\PostFinance\Charge::pCharge()
 	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
 	 * @return string
@@ -409,10 +408,9 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-08-30
-	 * @used-by o()
+	 * @used-by self::o()
 	 * @used-by \Df\Payment\Operation\Source\Creditmemo::cm()
 	 * @used-by \Df\StripeClone\P\Charge::token()
-	 *
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @return II|I|OP
 	 */
@@ -420,7 +418,7 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2017-03-06
-	 * @used-by oiLeafs()
+	 * @used-by self::oiLeafs()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @return string
 	 */
@@ -513,6 +511,8 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-08-26
+	 * @used-by self::customerNameF()
+	 * @used-by self::customerNameL()
 	 * @return array(string|null)
 	 */
 	private function customerNameA() {return dfc($this, function() {
@@ -532,19 +532,19 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2017-04-08
-	 * @used-by __construct()
-	 * @used-by addressB()
-	 * @used-by addressBS()
-	 * @used-by addressS()
-	 * @used-by addressSB()
-	 * @used-by cFromDoc()
-	 * @used-by currencyC()
-	 * @used-by customerEmail()
-	 * @used-by m()
-	 * @used-by id()
-	 * @used-by ii()
-	 * @used-by s()
-	 * @used-by store()
+	 * @used-by self::__construct()
+	 * @used-by self::addressB()
+	 * @used-by self::addressBS()
+	 * @used-by self::addressS()
+	 * @used-by self::addressSB()
+	 * @used-by self::cFromDoc()
+	 * @used-by self::currencyC()
+	 * @used-by self::customerEmail()
+	 * @used-by self::m()
+	 * @used-by self::id()
+	 * @used-by self::ii()
+	 * @used-by self::s()
+	 * @used-by self::store()
 	 * @var _Source|SOrder|SQuote|SCreditmemo
 	 */
 	private $_src;
