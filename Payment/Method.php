@@ -858,12 +858,11 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
-	 * 2017-02-08
-	 * Конвертирует $a из учётной валюты в валюту платежа.
+	 * 2017-02-08 Конвертирует $a из учётной валюты в валюту платежа.
 	 * @see \Df\Payment\Currency::iso3()
-	 * @used-by _void()
 	 * @used-by dfp_due()
-	 * @used-by refund()
+	 * @used-by self::_void()
+	 * @used-by self::refund()
 	 * @param float $a
 	 * @return float
 	 * @uses \Df\Payment\Currency::fromBase()
@@ -1512,8 +1511,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://mage2.pro/t/4764
 	 * 2018-10-07 We should not cache the result: https://github.com/mage2pro/core/issues/80
 	 * @used-by dfp_due()
-	 * @used-by convert()
-	 * @used-by cPayment()
+	 * @used-by self::convert()
+	 * @used-by self::cPayment()
 	 * @used-by \Df\Payment\Init\Action::oq()
 	 * @used-by \Df\Payment\Operation::__construct()
 	 * @return O|Q
@@ -1713,8 +1712,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2017-01-22 Первый аргумент — для тестового режима, второй — для промышленного.
-	 * @used-by validate()
 	 * @used-by dfp_sentry_tags()
+	 * @used-by self::validate()
 	 * @used-by \Df\Payment\Url::url()
 	 * @used-by \Dfe\SecurePay\Method::amountFormat()
 	 * @param mixed ...$args [optional]
@@ -1827,8 +1826,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-08-14
-	 * @used-by refund()
-	 * @used-by _void()
+	 * @used-by self::_void()
+	 * @used-by self::refund()
 	 * @see \Df\StripeClone\Method::_refund()
 	 * @see \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @see \Dfe\SecurePay\Method::_refund()
@@ -1907,8 +1906,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2.2) задача №2 решается не здесь (потому что здесь нет запроса к API),
 	 * а в обработчике оповещений от платёжной системы: @see \Df\Payment\W\Handler
 	 *
-	 * @used-by authorize()
-	 * @used-by capture()
+	 * @used-by self::authorize()
+	 * @used-by self::capture()
 	 * @see \Df\StripeClone\Method::charge()
 	 * @see \Dfe\AlphaCommerceHub\Method::charge()
 	 * @see \Dfe\CheckoutCom\Method::charge()
@@ -1926,7 +1925,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * да и их диагностические сообщения — это не всегда то, что нам нужно.
 	 * По этой причине мы их конвертируем в свои.
 	 * Пока данная функциональность используется модулем Stripe.
-	 * @used-by action()
+	 * @used-by self::action()
 	 * @see \Dfe\Stripe\Method::convertException()
 	 * @param \Exception $e
 	 * @return \Exception
@@ -1990,10 +1989,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 1) Stripe: getConfigPaymentAction
 	 * 2) [Stripe] chargeNew
 	 * 3) Stripe: capture
-	 * №1 и №3 создавались как из @used-by action()
+	 * №1 и №3 создавались как из @used-by self::action()
 	 * Нам не нужно так много записей для единственной операции,
 	 * поэтому добавил сейчас возможность отключать логирование в action().
-	 * @used-by action()
+	 * @used-by self::action()
 	 * @see \Df\StripeClone\Method::needLogActions()
 	 * @return bool
 	 */
@@ -2013,7 +2012,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2017-08-02
-	 * @used-by getTitle()
+	 * @used-by self::getTitle()
 	 * @used-by \Dfe\Moip\Method::titleF()
 	 * @see \Dfe\Moip\Method::titleF()
 	 * @return string
@@ -2093,7 +2092,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2017-03-22
-	 * @used-by iiaSetTRR()
+	 * @used-by self::iiaSetTRR()
 	 * @used-by \Df\Payment\TM::req()
 	 */
 	const IIA_TR_REQUEST = 'Request';
