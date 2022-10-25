@@ -52,9 +52,9 @@ final class Trace implements \IteratorAggregate, \Countable {
 
 	/**
 	 * 2020-02-27
-	 * @used-by __construct()
-	 * @used-by count()
-	 * @used-by getIterator()
+	 * @used-by self::__construct()
+	 * @used-by self::count()
+	 * @used-by self::getIterator()
 	 * @var F[]
 	 */
 	private $_frames;
