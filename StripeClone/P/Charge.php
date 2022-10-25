@@ -19,7 +19,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2017-02-11
 	 * 2017-02-18 Ключ, значением которого является токен банковской карты.
 	 * 2017-10-09 The key name of a bank card token or of a saved bank card ID.
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @used-by \Df\StripeClone\P\Reg::k_CardId()
 	 * @see \Dfe\Moip\P\Charge::k_CardId()
 	 * @see \Dfe\Omise\P\Charge::k_CardId()
@@ -36,7 +36,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * Dynamic statement descripor
 	 * https://mage2.pro/tags/dynamic-statement-descriptor
 	 * https://stripe.com/blog/dynamic-descriptors
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Charge::k_DSD()
 	 * @see \Dfe\Omise\P\Charge::k_DSD()
 	 * @see \Dfe\Paymill\P\Charge::k_DSD()
@@ -49,7 +49,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-10-09
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Square\P\Charge::amountAndCurrency()
 	 * @return array(string => string|int)
 	 */
@@ -59,7 +59,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-06-12
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Charge::inverseCapture()
 	 * @see \Dfe\Square\P\Charge::inverseCapture()
 	 * @return bool
@@ -68,7 +68,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-02-11
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Charge::p()
 	 * @see \Dfe\Omise\P\Charge::p()
 	 * @see \Dfe\Square\P\Charge::p()
@@ -79,7 +79,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-02-18
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Charge::k_Capture()
 	 * @see \Dfe\Spryng\P\Charge::k_Capture()
 	 * @see \Dfe\Square\P\Charge::k_Capture()
@@ -89,7 +89,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-10-09
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Square\P\Charge::k_CustomerId()
 	 * @return string
 	 */
@@ -97,7 +97,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2018-11-24
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Square\P\Charge::k_Description()
 	 * @return string
 	 */
@@ -105,7 +105,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-02-18
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Charge::k_Excluded()
 	 * @see \Dfe\Spryng\P\Charge::k_Excluded()
 	 * @return string[]
@@ -114,7 +114,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-06-11
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @see \Dfe\Moip\P\Charge::v_CardId()
 	 * @param string $id
@@ -176,7 +176,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-06-11
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @used-by \Df\StripeClone\P\Reg::charge()
 	 * @param M $m
 	 * @return self
@@ -187,7 +187,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-02-11
-	 * @used-by amountAndCurrency()
+	 * @used-by self::amountAndCurrency()
 	 * @used-by \Dfe\Moip\P\Charge::k_Excluded()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 */
@@ -195,14 +195,14 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-02-11
-	 * @used-by k_Capture()
+	 * @used-by self::k_Capture()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 */
 	const K_CAPTURE = 'capture';
 
 	/**
 	 * 2017-02-11
-	 * @used-by amountAndCurrency()
+	 * @used-by self::amountAndCurrency()
 	 * @used-by \Dfe\Moip\P\Charge::k_Excluded()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 * @used-by \Dfe\Spryng\P\Charge::k_Excluded()
@@ -211,7 +211,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-02-11
-	 * @used-by k_CustomerId()
+	 * @used-by self::k_CustomerId()
 	 * @used-by \Dfe\Moip\P\Charge::k_Excluded()
 	 * @used-by \Dfe\Paymill\Facade\Charge::create()
 	 */
@@ -219,7 +219,7 @@ abstract class Charge extends \Df\Payment\Charge {
 
 	/**
 	 * 2017-02-11
-	 * @used-by request()
+	 * @used-by self::request()
 	 * @used-by \Dfe\Moip\P\Charge::k_Excluded()
 	 * @used-by \Dfe\Paymill\Facade\Customer::create()
 	 * @used-by \Dfe\Spryng\P\Charge::k_Excluded()
