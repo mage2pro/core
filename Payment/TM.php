@@ -66,9 +66,9 @@ final class TM {
 	 * в невинном сценарии отображения таблицы заказов
 	 * (в контексте рисования колонки с названиями способов оплаты).
 	 * 2017-11-12 It returns the first transaction for the current payment.
-	 * @used-by confirmed()
-	 * @used-by req()
-	 * @used-by tResponses()
+	 * @used-by self::confirmed()
+	 * @used-by self::req()
+	 * @used-by self::tResponses()
 	 * @used-by \Df\Payment\Block\Info::confirmed()
 	 * @used-by \Df\Payment\Block\Info::siID()
 	 * @param bool $throw [optional]
@@ -119,15 +119,15 @@ final class TM {
 
 	/**
 	 * 2017-03-05
-	 * @used-by s()
+	 * @used-by self::s()
 	 * @param M $m
 	 */
 	private function __construct(M $m) {$this->_ii = $m->getInfoInstance(); $this->_m = $m;}
 
 	/**
 	 * 2016-07-18
-	 * @used-by responseF()
-	 * @used-by responseL()
+	 * @used-by self::responseF()
+	 * @used-by self::responseL()
 	 * @uses df_first()
 	 * @uses df_last()
 	 * @param string ...$k
@@ -143,7 +143,7 @@ final class TM {
 	/**
 	 * 2016-07-18
 	 * 2017-11-12 It returns all the payment's transactions except the first one, wrapped by event instances.
-	 * @used-by response()
+	 * @used-by self::response()
 	 * @return Ev[]
 	 */
 	private function responses() {return dfc($this, function() {return array_map(function(T $t) {return
@@ -153,8 +153,8 @@ final class TM {
 	/**
 	 * 2017-08-31
 	 * 2017-11-12 It returns all the payment's transactions except the first one.
-	 * @used-by confirmed()
-	 * @used-by responses()
+	 * @used-by self::confirmed()
+	 * @used-by self::responses()
 	 * @return T[]
 	 */
 	private function tResponses() {return dfc($this, function() {return
@@ -163,17 +163,17 @@ final class TM {
 
 	/**
 	 * 2017-03-05
-	 * @used-by __construct()
-	 * @used-by confirmed()
-	 * @used-by parent()
+	 * @used-by self::__construct()
+	 * @used-by self::confirmed()
+	 * @used-by self::parent()
 	 * @var II|I|OP|QP
 	 */
 	private $_ii;
 
 	/**
 	 * 2017-03-05
-	 * @used-by __construct()
-	 * @used-by responses()
+	 * @used-by self::__construct()
+	 * @used-by self::responses()
 	 * @var M
 	 */
 	private $_m;
@@ -184,14 +184,12 @@ final class TM {
 	 * @param string|object $m
 	 * @return self
 	 */
-	static function s($m) {
-		/**
-		 * 2018-02-06
-		 * $m->getInfoInstance() fixes the issue:
-		 * «iPay88 showed "not yet paid" on admin backend.
-		 * However, according to record from iPay88 those orders were "successful paid" payment»
-		 * https://github.com/mage2pro/ipay88/issues/9
-		 */
-		return dfcf(function(M $m) {return new self($m);}, [$m = dfpm($m), $m->getInfoInstance()]);
-	}
+	static function s($m) {return dfcf(function(M $m) {return new self($m);}, [
+		# 2018-02-06
+		# $m->getInfoInstance() fixes the issue:
+		# «iPay88 showed "not yet paid" on admin backend.
+		# However, according to record from iPay88 those orders were "successful paid" payment»
+		# https://github.com/mage2pro/ipay88/issues/9
+		$m = dfpm($m), $m->getInfoInstance()
+	]);}
 }

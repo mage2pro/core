@@ -190,7 +190,7 @@ abstract class Settings extends \Df\API\Settings {
 	/**
 	 * 2017-03-27
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by applicableForQuoteByCountry()
+	 * @used-by self::applicableForQuoteByCountry()
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AlphaCommerceHub\Settings::card()
 	 * @used-by \Dfe\Moip\Settings::boleto()
@@ -233,10 +233,10 @@ abstract class Settings extends \Df\API\Settings {
 
 	/**
 	 * 2017-03-27
-	 * @used-by __construct()
-	 * @used-by m()
-	 * @used-by prefix()
-	 * @used-by scopeDefault()
+	 * @used-by self::__construct()
+	 * @used-by self::m()
+	 * @used-by self::prefix()
+	 * @used-by self::scopeDefault()
 	 * @var M
 	 */
 	private $_m;

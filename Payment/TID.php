@@ -65,7 +65,7 @@ final class TID {
 
 	/**
 	 * 2017-03-22
-	 * @used-by s()
+	 * @used-by self::s()
 	 * @param M $m
 	 */
 	private function __construct(M $m) {$this->_m = $m;}
@@ -77,7 +77,7 @@ final class TID {
 	 * Поэтому для них использую приставку в виде кода модуля
 	 * и перевожу посредством @uses md5() к унифицированному виду
 	 * (гарантированном не содержащему дефисов и других неожиданных символов).
-	 * @used-by e2i()
+	 * @used-by self::e2i()
 	 * @param string $id
 	 * @return string
 	 */
@@ -87,9 +87,9 @@ final class TID {
 
 	/**
 	 * 2017-03-22
-	 * @used-by __construct()
-	 * @used-by i2e()
-	 * @used-by md5()
+	 * @used-by self::__construct()
+	 * @used-by self::i2e()
+	 * @used-by self::md5()
 	 * @var M
 	 */
 	private $_m;
@@ -104,15 +104,14 @@ final class TID {
 
 	/**
 	 * 2017-03-22
-	 * @used-by i2e()
-	 * @used-by md5()
+	 * @used-by self::i2e()
+	 * @used-by self::md5()
 	 * @var string
 	 */
 	private static $MD5 = 'md5';
 	/**
 	 * 2017-03-22
-	 * @used-by i2e()
-	 * e2i
+	 * @used-by self::e2i()
 	 * @var string
 	 */
 	private static $S = '-';
