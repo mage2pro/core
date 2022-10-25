@@ -10,7 +10,7 @@ use Df\Customer\AddAttribute\Customer as Add;
 abstract class Data extends \Df\Framework\Upgrade\Data {
 	/**
 	 * 2016-06-05
-	 * @used-by attribute()
+	 * @used-by self::attribute()
 	 * @see \Dfe\AmazonLogin\Setup\UpgradeData::labelPrefix()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeData::labelPrefix()
 	 * @see \Dfe\FacebookLogin\Setup\UpgradeData::labelPrefix()
@@ -33,7 +33,7 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 
 	/**
 	 * 2015-10-10
-	 * @used-by _process()
+	 * @used-by self::_process()
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeData::_process()
 	 * @param string $name
 	 * @param string $l

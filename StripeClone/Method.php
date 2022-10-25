@@ -31,7 +31,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-26
-	 * @used-by transUrl()
+	 * @used-by self::transUrl()
 	 * @see \Dfe\Moip\Method::transUrlBase()
 	 * @see \Dfe\Omise\Method::transUrlBase()
 	 * @see \Dfe\Paymill\Method::transUrlBase()
@@ -232,7 +232,7 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2018-11-14
-	 * @used-by chargeNew()
+	 * @used-by self::chargeNew()
 	 * @see \Dfe\TBCBank\Method::chargeNewParams()
 	 * @see \Dfe\Vantiv\Method::chargeNewParams()
 	 * @param bool $capture
@@ -522,8 +522,8 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2017-02-10
-	 * @used-by charge()
-	 * @used-by chargeNew()
+	 * @used-by self::charge()
+	 * @used-by self::chargeNew()
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @return fCharge
 	 */
@@ -560,7 +560,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * (пока — только проверки 3D Secure, но возможны и другие варианты,
 	 * т.к. Stripe вроде бы стал поддерживать Bancontact и другие европейские платёжные системы).
 	 * на основании конкретного параметра $charge.
-	 * @used-by chargeNew()
+	 * @used-by self::chargeNew()
 	 * @see \Dfe\Omise\Method::redirectNeeded()
 	 * @param object|array(string => mixed) $c
 	 * @return bool
@@ -570,7 +570,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2017-07-30
 	 * 2017-08-02 For now, it is never overriden.
-	 * @used-by chargeNew()
+	 * @used-by self::chargeNew()
 	 * @return string
 	 */
 	final protected function transPrefixForRedirectCase() {return Ev::T_3DS;}
@@ -600,7 +600,7 @@ abstract class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-28
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by charge()
+	 * @used-by self::charge()
 	 * @param bool $capture
 	 * @return object|array(string => mixed)
 	 */
@@ -753,9 +753,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-01-05
 	 * The method translates an external (from a PSP) payment identifier to an internal one.
 	 * Usually it is done by adding the `-<transaction type>` suffix.
-	 * @used-by _refund()
-	 * @used-by charge()
-	 * @used-by chargeNew()
+	 * @used-by self::_refund()
+	 * @used-by self::charge()
+	 * @used-by self::chargeNew()
 	 * @param string $id
 	 * @param string $type
 	 * @return string
@@ -767,10 +767,10 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-01-05
 	 * Преобразует внутренний идентификатор транзакции во внешний.
 	 * Внутренний идентификатор отличается от внешнего наличием окончания «-<тип транзакции>».
-	 * @used-by _refund()
-	 * @used-by charge()
-	 * @used-by e2i()
-	 * @used-by transUrl()
+	 * @used-by self::_refund()
+	 * @used-by self::charge()
+	 * @used-by self::e2i()
+	 * @used-by self::transUrl()
 	 * @param string $id
 	 * @return string
 	 */
@@ -778,9 +778,9 @@ abstract class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-12-27
-	 * @used-by _refund()
-	 * @used-by charge()
-	 * @used-by chargeNew()
+	 * @used-by self::_refund()
+	 * @used-by self::charge()
+	 * @used-by self::chargeNew()
 	 * @param object $response
 	 * @param array(string => mixed) $request [optional]
 	 */

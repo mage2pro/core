@@ -29,7 +29,7 @@ use Df\StripeClone\Facade\Card;
 class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	/**
 	 * 2017-02-09
-	 * @used-by config()
+	 * @used-by self::config()
 	 * @used-by \Dfe\Moip\ConfigProvider::config()
 	 * @return array(string => string)
 	 */

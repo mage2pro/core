@@ -34,7 +34,7 @@ final class Emulation {
 
 	/**
 	 * 2021-09-08
-	 * @used-by beforeStartEnvironmentEmulation()
+	 * @used-by self::beforeStartEnvironmentEmulation()
 	 * @used-by \Df\Store\Plugin\Model\App\Emulation::beforeStopEnvironmentEmulation()
 	 * @var array(string => mixed)|null
 	 */

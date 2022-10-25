@@ -71,7 +71,7 @@ class CardFormatter {
 	 * despite it is used only inside the class.
 	 * @see \Df\Payment\Facade::__construct()
 	 * https://github.com/mage2pro/core/blob/2.8.25/Payment/Facade.php#L18-L27
-	 * @used-by s()
+	 * @used-by self::s()
 	 * @param C $c
 	 */
 	final protected function __construct(C $c) {$this->_c = $c;}
