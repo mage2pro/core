@@ -38,7 +38,7 @@ abstract class Js extends \Df\Sso\Button {
 
 	/**
 	 * 2016-11-26
-	 * @used-by attributes()
+	 * @used-by self::attributes()
 	 * @see \Dfe\AmazonLogin\Button::jsOptions()
 	 * @return array(string => mixed)
 	 */
@@ -54,8 +54,8 @@ abstract class Js extends \Df\Sso\Button {
 
 	/**
 	 * 2016-11-26
+	 * @used-by self::attributes()
 	 * @see \Dfe\AmazonLogin\Button::redirectShouldBeSecure()
-	 * @used-by attributes()
 	 * @return bool
 	 */
 	protected function redirectShouldBeSecure() {return false;}
