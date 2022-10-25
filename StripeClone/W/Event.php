@@ -46,8 +46,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * Если конкретные данные сообщения расположены прямо на верхнем уровне иерархии,
 	 * то метод должен вернуть null или пустую строку.
 	 *
-	 * @used-by k_pid()
-	 * @used-by ro()
+	 * @used-by self::k_pid()
+	 * @used-by self::ro()
 	 * @see \Df\GingerPaymentsBase\W\Event::roPath()
 	 * @see \Dfe\Moip\W\Event::roPath()
 	 * @see \Dfe\Omise\W\Event::roPath()
@@ -116,7 +116,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * but a Stripe's `source.*` event too, and these events have the same `id` property:
 	 * "An initial reusable source for a card which requires a 3D Secure verification': https://mage2.pro/t/4893
 	 * "A derived single-use 3D Secure source": https://mage2.pro/t/4894
-	 * @used-by k_pid()
+	 * @used-by self::k_pid()
 	 * @see \Df\GingerPaymentsBase\W\Event::k_pidSuffix()
 	 * @see \Dfe\Omise\W\Event\Refund::k_pidSuffix()
 	 * @see \Dfe\Paymill\W\Event\Refund::k_pidSuffix()

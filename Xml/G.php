@@ -35,7 +35,7 @@ final class G extends \Df\Core\O {
 	 * Более того, метод @see SimpleXMLElement::__toString() отсутствует в PHP версий 5.2.17 и ниже:
 	 * http://3v4l.org/Wiia2#v500
 	 * 2016-08-31
-	 * @used-by p()
+	 * @used-by self::p()
 	 * @return string
 	 */
 	private function _p() {
@@ -72,7 +72,7 @@ final class G extends \Df\Core\O {
 	const P__ATTRIBUTES = 'attributes';
 
 	/**
-	 * @used-by _p()
+	 * @used-by self::_p()
 	 */
 	const P__SKIP_HEADER = 'skip_header';
 }

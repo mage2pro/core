@@ -15,8 +15,8 @@ class X extends MX {
 	 * https://stackoverflow.com/a/43566078
 	 * @override
 	 * @see \SimpleXMLElement::addAttribute()
-	 * @used-by addAttributes()
-	 * @used-by addChildX()
+	 * @used-by self::addAttributes()
+	 * @used-by self::addChildX()
 	 * @param string $k
 	 * @param string|null $v [optional]
 	 * @param string|null $ns [optional]
@@ -25,7 +25,7 @@ class X extends MX {
 
 	/**
 	 * @used-by df_xml_node()
-	 * @used-by importArray()
+	 * @used-by self::importArray()
 	 * @used-by \Df\Xml\G::_p()
 	 * @param array(string => string) $attributes
 	 */
@@ -48,10 +48,10 @@ class X extends MX {
 	/**
 	 * @override
 	 * @see \SimpleXMLElement::addChild()
-	 * @used-by addChildText()
-	 * @used-by addChildX()
-	 * @used-by importArray()
-	 * @used-by importString()
+	 * @used-by self::addChildText()
+	 * @used-by self::addChildX()
+	 * @used-by self::importArray()
+	 * @used-by self::importString()
 	 * @param string $name
 	 * @param string|null $value [optional]
 	 * @param string|null $namespace [optional]
@@ -90,7 +90,7 @@ class X extends MX {
 	 * @see \Magento\Framework\Simplexml\Element::asNiceXml()
 	 * @used-by df_xml_prettify()
 	 * @used-by df_xml_report()
-	 * @used-by asNiceXml()
+	 * @used-by self::asNiceXml()
 	 * @used-by \Df\Xml\G::_p()
 	 * @param string $filename [optional]
 	 * @param int $level  [optional]
@@ -209,7 +209,7 @@ class X extends MX {
 
 	/**
 	 * @used-by df_xml_node()
-	 * @used-by importArray()
+	 * @used-by self::importArray()
 	 * @used-by \Df\Xml\G::_p()
 	 * @param array(string => mixed) $array
 	 * @param string[]|bool $wrapInCData [optional]
@@ -363,7 +363,7 @@ class X extends MX {
 	 *		</СтавкаНалога>
 	 *	</СтавкиНалогов>
 	 * в массив array('НДС' => '10')
-	 * @used-by Df_1C_Cml2_Import_Data_Entity_Product::getTaxes()
+	 * 2022-10-25 @deprecated It is unused.
 	 * @param string $path
 	 * @param string $keyName
 	 * @param string $valueName
@@ -423,7 +423,7 @@ class X extends MX {
 	 *		</СтавкаНалога>
 	 *	</СтавкиНалогов>
 	 * в массив array('НДС' => '10')
-	 * @used-by Df_1C_Cml2_Import_Data_Entity_Product::getTaxes()
+	 * 2022-10-25 @deprecated It is unused.
 	 * @param string $path
 	 * @param string $keyName
 	 * @param string $valueName
@@ -441,7 +441,7 @@ class X extends MX {
 	}
 
 	/**
-	 * @used-by importString()
+	 * @used-by self::importString()
 	 * @param string $tagName
 	 * @param string $valueAsText
 	 */
@@ -456,8 +456,8 @@ class X extends MX {
 
 	/**
 	 * 2016-08-31 http://stackoverflow.com/a/11727581
-	 * @used-by addChildX()
-	 * @used-by importArray()
+	 * @used-by self::addChildX()
+	 * @used-by self::importArray()
 	 * @param X $child
 	 */
 	private function addChildX(X $child) {
@@ -472,8 +472,8 @@ class X extends MX {
 
 	/**
 	 * http://stackoverflow.com/a/6260295
-	 * @used-by addChildText()
-	 * @used-by importString()
+	 * @used-by self::addChildText()
+	 * @used-by self::importString()
 	 * @param string $s
 	 */
 	private function cdata($s) {
@@ -482,7 +482,7 @@ class X extends MX {
 	}
 
 	/**
-	 * @used-by importArray()
+	 * @used-by self::importArray()
 	 * @param string|null $key
 	 * @param mixed $value
 	 * @param string[]|bool $wrapInCData [optional]
@@ -554,8 +554,8 @@ class X extends MX {
 	 * https://stackoverflow.com/a/9391673
 	 * https://stackoverflow.com/a/43566078
 	 * https://stackoverflow.com/a/6928183
-	 * @used-by addAttribute()
-	 * @used-by addChild()
+	 * @used-by self::addAttribute()
+	 * @used-by self::addChild()
 	 * @param string $s
 	 * @return string
 	 */
@@ -563,7 +563,7 @@ class X extends MX {
 
 	/**
 	 * http://stackoverflow.com/a/3153704
-	 * @used-by importString()
+	 * @used-by self::importString()
 	 * @param mixed $v
 	 */
 	private function setValue($v):self {$this[0] = $v; return $v;}
@@ -690,15 +690,15 @@ class X extends MX {
 
 	/**
 	 * 2021-12-12
-	 * @used-by importString()
-	 * @used-by markAsCData()
+	 * @used-by self::importString()
+	 * @used-by self::markAsCData()
 	 * @return Marker
 	 */
 	private static function marker() {static $r; return $r ?: $r = new Marker('[[', ']]');}
 
 	/**
-	 * @used-by __destruct()
-	 * @used-by asCanonicalArray()
+	 * @used-by self::__destruct()
+	 * @used-by self::asCanonicalArray()
 	 * @var array(string => array(string => mixed))
 	 */
 	private static $_canonicalArray = [];

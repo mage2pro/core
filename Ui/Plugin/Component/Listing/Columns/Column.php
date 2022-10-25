@@ -12,7 +12,7 @@ class Column {
 
 	/**
 	 * 2018-07-28
-	 * @used-by beforePrepare()
+	 * @used-by self::beforePrepare()
 	 * @used-by \Df\Payment\Observer\ColumnPrepare::execute()
 	 */
 	const COLUMN = 'column';
