@@ -15,7 +15,7 @@ use Df\Payment\IMA;
 abstract class Signer {
 	/**
 	 * 2016-07-10
-	 * @used-by _sign()
+	 * @used-by self::_sign()
 	 * @see \Dfe\AllPay\Signer::sign()
 	 * @see \Dfe\Dragonpay\Signer::sign()
 	 * @see \Dfe\IPay88\Signer::sign()
@@ -65,8 +65,8 @@ abstract class Signer {
 
 	/**
 	 * 2017-03-13   
-	 * @used-by _sign()
-	 * @used-by v()
+	 * @used-by self::_sign()
+	 * @used-by self::v()
 	 * @var array(string => mixed)
 	 */
 	private $_v;
@@ -91,7 +91,7 @@ abstract class Signer {
 
 	/**
 	 * 2017-04-10
-	 * @used-by _sign()
+	 * @used-by self::_sign()
 	 * @see \Dfe\IPay88\Signer::adjust()
 	 * @param array(string => mixed) $v
 	 * @return array(string => mixed)
@@ -100,8 +100,8 @@ abstract class Signer {
 
 	/**
 	 * 2016-08-27
-	 * @used-by signRequest()
-	 * @used-by signResponse()
+	 * @used-by self::signRequest()
+	 * @used-by self::signResponse()
 	 * @param IMA $caller
 	 * @param array(string => mixed) $v
 	 * @return string
