@@ -151,7 +151,7 @@ class Action {
 
 	/**
 	 * 2017-09-10
-	 * @used-by action()
+	 * @used-by self::action()
 	 * @see \Dfe\Dragonpay\Init\Action::forceGet()
 	 * @see \Dfe\Qiwi\Init\Action::redirectMethod()
 	 * @return bool
@@ -161,8 +161,8 @@ class Action {
 	/**
 	 * 2017-03-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by e2i()
-	 * @used-by token()
+	 * @used-by self::e2i()
+	 * @used-by self::token()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\PaypalClone\Init\Action::charge()
@@ -178,8 +178,8 @@ class Action {
 
 	/**
 	 * 2017-03-21
-	 * @used-by action()
-	 * @used-by preconfigured()
+	 * @used-by self::action()
+	 * @used-by self::preconfigured()
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @return O
 	 */
@@ -187,8 +187,8 @@ class Action {
 
 	/**
 	 * 2017-03-21
-	 * @used-by action()
-	 * @used-by preconfiguredToCapture()
+	 * @used-by self::action()
+	 * @used-by self::preconfiguredToCapture()
 	 * @see \Dfe\TBCBank\Init\Action::preconfigured()
 	 * @return string
 	 */
@@ -204,14 +204,12 @@ class Action {
 		 * The `action` key with the `df-null` value is now used by the ACH module:
 		 * https://github.com/mage2pro/ach/blob/0.0.9/etc/config.xml#L12
 		 */
-		return df_n_get(
-			$s->v($key, null, function() use($s) {return $s->v('payment_action') ?: $s->v('action');}) ?: AC::C
-		);
+		return df_n_get($s->v($key, null, function() use($s) {return $s->v('payment_action') ?: $s->v('action');}) ?: AC::C);
 	});}
 
 	/**
 	 * 2017-09-10
-	 * @used-by action()
+	 * @used-by self::action()
 	 * @see \Dfe\Qiwi\Init\Action::preorder()
 	 * @see \Dfe\Stripe\Init\Action::preorder()
 	 */
@@ -219,7 +217,7 @@ class Action {
 
 	/**
 	 * 2017-03-21
-	 * @used-by action()
+	 * @used-by self::action()
 	 * @see \Df\PaypalClone\Init\Action::redirectParams()
 	 * @see \Dfe\Qiwi\Init\Action::redirectParams()
 	 * @see \Dfe\TBCBank\Init\Action::redirectParams()
@@ -233,7 +231,7 @@ class Action {
 	 * Помимо этого метода имеется также метод @see \Df\StripeClone\Method::redirectNeeded(),
 	 * который принимает решение о необходимости проверки 3D Secure
 	 * на основании конкретного параметра $charge.
-	 * @used-by action()
+	 * @used-by self::action()
 	 * @see \Df\GingerPaymentsBase\Init\Action::redirectUrl()
 	 * @see \Dfe\AllPay\Init\Action::redirectUrl()
 	 * @see \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
@@ -254,7 +252,7 @@ class Action {
 	/**
 	 * 2017-03-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by preconfigured()
+	 * @used-by self::preconfigured()
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
@@ -283,7 +281,7 @@ class Action {
 	 * В этом случае мы намеренно не перекрываем метод transId(), и он возвращает null.
 	 * Таким образом @used-by action() не будет записывать первичную транзакцию,
 	 * и запись первичной транзакции будет происходить только в @see \Df\StripeClone\Method::chargeNew()
-	 * @used-by action()
+	 * @used-by self::action()
 	 * @see \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @see \Df\PaypalClone\Init\Action::transId()
 	 * @see \Dfe\Qiwi\Init\Action::transId()
@@ -301,7 +299,7 @@ class Action {
 
 	/**
 	 * 2017-03-21
-	 * @used-by redirectUrl()
+	 * @used-by self::redirectUrl()
 	 * @var M
 	 */
 	private $_m;

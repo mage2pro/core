@@ -52,13 +52,13 @@ abstract class Source implements \Df\Payment\IMA {
 	 * 2017-04-07
 	 * @see \Df\Payment\Operation\Source\Order::oq()
 	 * @see \Df\Payment\Operation\Source\Quote::oq()
-	 * @used-by addressB()
-	 * @used-by addressS()
-	 * @used-by cFromDoc()
-	 * @used-by currencyC()
-	 * @used-by customerEmail()
-	 * @used-by customerName()
-	 * @used-by store()
+	 * @used-by self::addressB()
+	 * @used-by self::addressS()
+	 * @used-by self::cFromDoc()
+	 * @used-by self::currencyC()
+	 * @used-by self::customerEmail()
+	 * @used-by self::customerName()
+	 * @used-by self::store()
 	 * @return O|Q
 	 */
 	abstract function oq();
@@ -70,8 +70,8 @@ abstract class Source implements \Df\Payment\IMA {
 	 * платёжный адрес у заказа всегда присутствует,
 	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
 	 * он содержит только email покупателя.
-	 * @used-by addressBS()
-	 * @used-by addressSB()
+	 * @used-by self::addressBS()
+	 * @used-by self::addressSB()
 	 * @used-by \Df\Payment\Operation::addressB()
 	 * @return OA|QA
 	 */
@@ -86,7 +86,7 @@ abstract class Source implements \Df\Payment\IMA {
 	 * https://github.com/mage2pro/core/blob/3.5.2/Payment/Operation/Source.php#L217-L267
 	 * Now I think that such address mix is a bad idea.
 	 * because the result address could contain components of completely different addresses.
-	 * @see addressSB()
+	 * @see self::addressSB()
 	 * @used-by \Df\Payment\Operation::addressBS()
 	 * @return OA|QA|null
 	 */
@@ -105,9 +105,9 @@ abstract class Source implements \Df\Payment\IMA {
 	 * https://en.wikipedia.org/wiki/Null_object_pattern
 	 * An empty order address can be detected by a `null`-response on
 	 * @see \Magento\Sales\Model\Order\Address::getParentId()
-	 * @used-by addressBS()
-	 * @used-by addressSB()
-	 * @used-by addressMixed()
+	 * @used-by self::addressBS()
+	 * @used-by self::addressSB()
+	 * @used-by self::addressMixed()
 	 * @used-by \Df\Payment\Operation::addressS()
 	 * @param bool $empty [optional]
 	 * @return OA|QA
@@ -117,13 +117,13 @@ abstract class Source implements \Df\Payment\IMA {
 	/**
 	 * 2016-07-02
 	 * 2017-12-21
-	 * Previously, I used @see addressMixed() here:
+	 * Previously, I used @see self::addressMixed() here:
 	 * 		return $this->addressMixed($bs = false);
 	 * https://github.com/mage2pro/core/blob/3.5.2/Payment/Operation/Source.php#L105-L111
 	 * https://github.com/mage2pro/core/blob/3.5.2/Payment/Operation/Source.php#L217-L267
 	 * Now I think that such address mix is a bad idea.
 	 * because the result address could contain components of completely different addresses.
-	 * @see addressBS()
+	 * @see self::addressBS()
 	 * @used-by \Df\Payment\Operation::addressSB()
 	 * @return OA|QA
 	 */
@@ -221,7 +221,7 @@ abstract class Source implements \Df\Payment\IMA {
 
 	/**
 	 * 2017-04-09
-	 * @used-by currencyC()
+	 * @used-by self::currencyC()
 	 * @used-by \Df\Payment\Operation::s()
 	 * @return Settings
 	 */

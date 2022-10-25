@@ -58,7 +58,6 @@ final class Report implements \IteratorAggregate, \Countable {
 
 	/**
 	 * 2016-08-09
-	 * @used-by \Df\Payment\Info\Report::get()
 	 * @used-by \Df\Payment\Block\Info::_toHtml()
 	 * @uses \Df\Payment\Info\Entry::weight()
 	 */
