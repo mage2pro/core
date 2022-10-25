@@ -31,7 +31,7 @@ class AC extends \Df\Config\Source {
 
 	/**
 	 * 2017-03-21
-	 * @used-by c()
+	 * @used-by self::c()
 	 * @used-by \Df\Payment\Init\Action::preconfigured()
 	 * @used-by \Df\Payment\Source\AC::map()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()

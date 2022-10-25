@@ -15,8 +15,8 @@ final class Options {
 
 	/**
 	 * 2016-07-05 «Allowed Payment Options»
-	 * @used-by denied()
-	 * @used-by o()
+	 * @used-by self::denied()
+	 * @used-by self::o()
 	 * @used-by \Dfe\AllPay\Charge::isSingleOptionChosen()
 	 * @used-by \Dfe\AllPay\Charge::pChoosePayment()
 	 * @return string[]
@@ -32,7 +32,7 @@ final class Options {
 
 	/**
 	 * 2016-07-05 «Limit the payment options availability?»
-	 * @used-by o()
+	 * @used-by self::o()
 	 * @used-by \Dfe\AllPay\Charge::pChoosePayment()
 	 * @used-by \Dfe\AllPay\Charge::pIgnorePayment()
 	 * @return bool
@@ -57,7 +57,7 @@ final class Options {
 
 	/**
 	 * 2017-09-19 «Where to ask for a payment option?»
-	 * @used-by o()
+	 * @used-by self::o()
 	 * @used-by \Df\Payment\ConfigProvider::configOptions()
 	 * @param S $s
 	 * @return bool
@@ -66,15 +66,15 @@ final class Options {
 
 	/**
 	 * 2017-03-03
-	 * @used-by __construct()
-	 * @used-by needShow()
+	 * @used-by self::__construct()
+	 * @used-by self::needShow()
 	 * @var S
 	 */
 	private $_s;
 
 	/**
 	 * 2017-03-03
-	 * @used-by __construct()
+	 * @used-by self::__construct()
 	 * @var Source
 	 */
 	private $_source;

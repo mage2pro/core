@@ -7,9 +7,8 @@ namespace Df\Payment\Source\API\Key;
  */
 abstract class Testable extends \Df\Payment\Source\API\Key {
 	/**
-	 * 2017-02-15
-	 * Первый аргумент — для тестового режима, второй — для промышленного.
-	 * @used-by tkey()
+	 * 2017-02-15 Первый аргумент — для тестового режима, второй — для промышленного.
+	 * @used-by self::tkey()
 	 * @used-by \Dfe\Spryng\Source\Account::fetch()
 	 * @param mixed ...$args [optional]
 	 * @return bool
@@ -27,7 +26,7 @@ abstract class Testable extends \Df\Payment\Source\API\Key {
 
 	/**
 	 * 2017-03-28
-	 * @used-by test()
+	 * @used-by self::test()
 	 * @return bool
 	 */
 	private function _test() {return dfc($this, function() {return df_starts_with(df_last($this->pathA()), 'test');});}
