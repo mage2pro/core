@@ -33,7 +33,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 
 	/**
 	 * 2020-06-16
-	 * @used-by getModuleComposerPackageMy()
+	 * @used-by self::getModuleComposerPackageMy()
 	 * @param string $moduleDir
 	 * @return Package
 	 * @throws \Magento\Framework\Exception\FileSystemException
@@ -55,7 +55,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * since 2017-03-23 by the following commit: https://github.com/magento/magento2/commit/29bc089e
 	 * This commit is applied to Magento ≥ 2.3.0.
 	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
-	 * @used-by getSuggestsFromModules()
+	 * @used-by self::getSuggestsFromModules()
 	 * @param string $f
 	 * @return \Magento\Framework\Config\Composer\Package
 	 */

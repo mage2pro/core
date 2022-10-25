@@ -44,8 +44,8 @@ final class ImportDataBefore implements ObserverInterface {
 
 	/**
 	 * 2017-10-12
-	 * @used-by data()
-	 * @used-by execute()
+	 * @used-by self::data()
+	 * @used-by self::execute()
 	 * @var _DO|null
 	 */
 	private static $_data;

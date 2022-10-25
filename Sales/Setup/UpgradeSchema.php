@@ -19,7 +19,7 @@ class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 
 	/**
 	 * 2018-05-01
-	 * @used-by _process()
+	 * @used-by self::_process()
 	 * @used-by df_oi_add()
 	 * @used-by df_oi_get()
 	 * @var string
