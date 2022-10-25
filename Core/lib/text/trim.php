@@ -154,7 +154,6 @@ function df_trim_text_a($s, array $trimA, callable $f) {
  * @used-by dfpm_code_short()
  * @used-by dfsm_code_short()
  * @used-by \Df\Framework\Request::extra()
- * @used-by \Df\Payment\Method::transactionIdG2L()
  * @used-by \Df\PaypalClone\Signer::_sign()
  * @used-by \Df\Qa\Trace\Frame::__toString()
  * @used-by \Df\Zoho\App::title()

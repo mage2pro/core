@@ -68,7 +68,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 4) ['USD' => [min, max], '*' => [min, max]] — лимиты заданы с таблицей,
 	 * причём '*' — это лимиты по умолчанию.
 	 * В случаях №2 и №4 min и/или max может быть равно null: это означает отсутствие лимита.
-	 * @used-by isAvailable()
+	 * @used-by self::isAvailable()
 	 * @see \Df\GingerPaymentsBase\Method::amountLimits()
 	 * @see \Dfe\ACH\Method::amountLimits()
 	 * @see \Dfe\AllPay\Method::amountLimits()
@@ -98,16 +98,13 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-02-15
 	 * @override
 	 * How is a payment method's acceptPayment() used? https://mage2.pro/t/715
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::acceptPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L304-L312
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::acceptPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L696-L713
-	 *
 	 * 2016-05-09
 	 * A «Flagged» payment can be handled the same way as an «Authorised» payment:
 	 * we can «capture» or «void» it.
-	 *
 	 * @param II|I|OP $payment
 	 * @return bool
 	 */
@@ -133,10 +130,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * обработки исключительных ситуаций, а здесь мы лишь выполняем общую, универсальную
 	 * часть такой обработки.
 	 * 3) Инициализировать библиотеку платёжной системы.
-	 * @used-by authorize()
-	 * @used-by capture()
-	 * @used-by refund()
-	 * @used-by void()
+	 * @used-by self::authorize()
+	 * @used-by self::capture()
+	 * @used-by self::refund()
+	 * @used-by self::void()
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @param string|\Closure $f
 	 * @param bool $log [optional]
@@ -210,10 +207,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Конвертирует денежную величину (в валюте платежа) из обычного числа в формат платёжной системы.
 	 * В частности, некоторые платёжные системы хотят денежные величины в копейках (Checkout.com),
 	 * обязательно целыми (allPay) и т.п.
-	 *
-	 * 2016-09-08
-	 * Обратная операция по отношению к @see amountParse()
-	 *
+	 * 2016-09-08 Эта операция является обратной по отношению к @see amountParse()
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Operation::amountFormat()
 	 * @used-by \Df\StripeClone\Method::_refund()
@@ -234,7 +228,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-09-08
 	 * Конвертирует денежную величину из формата платёжной системы в обычное число.
 	 * Обратная операция по отношению к @see amountFormat()
-	 *
 	 * @used-by dfp_refund()
 	 * @used-by \Dfe\Stripe\Method::amountLimits()
 	 * @param float|int|string $a
@@ -258,7 +251,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2022-10-19
 	 * We can use `final` in the method's signature despite if M2 code generation
 	 * because the class implements @see INonInterceptable.
-	 * @used-by isAvailable()
+	 * @used-by self::isAvailable()
 	 * @param _DO $o
 	 */
 	final function assignData(_DO $o):self {
@@ -323,16 +316,13 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Magento\Sales\Model\Order\Payment\Operations\AuthorizeOperation::authorize()
 	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L45
 	 * How is a payment method's authorize() used? https://mage2.pro/t/707
-	 *
 	 * 2016-09-05
 	 * Отныне валюта платёжных транзакций настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency»
 	 * @see \Df\Payment\Currency::iso3()
-	 *
 	 * 2016-08-19
 	 * Со вчерашнего для мои платёжные модули выполняют платёжные транзакции
 	 * не в учётной валюте системы, а в валюте заказа (т.е., витринной валюте).
-	 *
 	 * Однако это привело к тому, что операция авторизации
 	 * стала помечать заказы (платежи) как «Suspected Fraud» (STATUS_FRAUD).
 	 * Это происходит из-за кода метода
@@ -362,24 +352,18 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Т.е. метод сравнивает размер подлежащей оплате стоимости заказа в валюте заказа
 	 * с размером текущего платежа, который в учётной валюте системы,
 	 * и поэтому вот метод возвращает false.
-	 *
-	 * Самым разумным решением этой проблемы мне показалось
-	 * ручное убирание флага IsFraudDetected
-	 *
+	 * Самым разумным решением этой проблемы мне показалось ручное убирание флага IsFraudDetected
 	 * 2017-04-08
 	 * Отныне аргумент $a намеренно игнорируем с целью упрощения системы,
 	 * потому что это значение мы можем получить в любой удобный момент самостоятельно
 	 * посредством @see dfp_due()
-	 *
 	 * 2021-07-01
 	 * $a is a string because it is a result of the @see \Magento\Sales\Model\Order\Payment::formatAmount() call:
 	 * 		$amount = $payment->formatAmount($amount, true);
 	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Sales/Model/Order/Payment/Operations/AuthorizeOperation.php#L36
-	 *
 	 * 2022-10-19
 	 * We can use `final` in the method's signature despite if M2 code generation
 	 * because the class implements @see INonInterceptable.
-	 *
 	 * @param II $i
 	 * @param string|float $a
 	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
@@ -414,7 +398,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-02-09
 	 * @override
 	 * https://mage2.pro/tags/capture
-	 *
 	 * Важно для витрины вернуть true, чтобы
 	 * @see Df_Payment_Model_Action_Confirm::process() и другие аналогичные методы
 	 * (например, @see Df_Alfabank_Model_Action_CustomerReturn::process())
@@ -748,7 +731,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * "Provide an ability to the Magento backend users (merchants) to set up country restrictions separately
 	 * for each AlphaCommerceHub's payment option (bank cards, PayPal, POLi Payments, etc.)":
 	 * https://github.com/mage2pro/alphacommercehub/issues/85
-	 * @used-by canUseForCountry()
+	 * @used-by self::canUseForCountry()
 	 * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
 	 * @param string $c
 	 * @param string|null $p [optional]
@@ -889,7 +872,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-09-07 The payment currency code for the current order or quote.
-	 * @used-by amountFormat()
+	 * @used-by self::amountFormat()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::amountFormat()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @return string
@@ -898,8 +881,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-09-08
-	 * 2017-02-08
-	 * Конвертирует $a из валюты платежа в учётную.
+	 * 2017-02-08 Конвертирует $a из валюты платежа в учётную.
 	 * @param float $a
 	 * @return float
 	 * @uses \Df\Payment\Currency::toBase()
@@ -908,8 +890,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-09-08
-	 * 2017-02-08
-	 * Конвертирует $a из валюты платежа в валюту заказа.
+	 * 2017-02-08 Конвертирует $a из валюты платежа в валюту заказа.
 	 * @param float $a
 	 * @return float
 	 * @uses \Df\Payment\Currency::toOrder()
@@ -1156,16 +1137,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-02-09
 	 * @override
 	 * How is a payment method's getStore() used? https://mage2.pro/t/695
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::getStore()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L49-L53
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getStore()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L278-L284
+	 * 2016-09-07 Для самого себя я использую метод @see store()
 	 * @return int
-	 *
-	 * 2016-09-07
-	 * Для самого себя я использую метод @see store()
-	 *
 	 * @used-by \Df\Payment\Settings::scopeDefault()
 	 */
 	final function getStore() {return $this->_storeId;}
@@ -1266,8 +1243,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod
 	 * and by vault payment methods.
 	 *
-	 * Но раз уж этот метод присутствует в интерфейсе,
-	 * то я его использую в методе @used-by \Df\Payment\Method::s()
+	 * Но раз уж этот метод присутствует в интерфейсе, то я его использую в методе @used-by self::s()
 	 *
 	 * @see \Magento\Payment\Model\MethodInterface::isActive()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L352-L359
@@ -1620,16 +1596,16 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Сегодня заметил, что параметр scope сюда никто не передаёт, поэтому убрал его.
 	 * @see \Df\Payment\Settings::scopeDefault()
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by action()
-	 * @used-by canUseForCountryP()
-	 * @used-by cardTypes()
 	 * @used-by dfps()
-	 * @used-by getConfigData()
-	 * @used-by isActive()
-	 * @used-by requireBillingAddress()
-	 * @used-by test()
-	 * @used-by titleB()
-	 * @used-by titleF()
+	 * @used-by self::action()
+	 * @used-by self::canUseForCountryP()
+	 * @used-by self::cardTypes()
+	 * @used-by self::getConfigData()
+	 * @used-by self::isActive()
+	 * @used-by self::requireBillingAddress()
+	 * @used-by self::test()
+	 * @used-by self::titleB()
+	 * @used-by self::titleF()
 	 * @used-by \Df\Payment\Block\Info::s()
 	 * @used-by \Df\Payment\Currency::s()
 	 * @used-by \Df\Payment\Facade::ss()
@@ -1665,8 +1641,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/mage2pro/core/blob/2.4.13/Payment/Observer/DataProvider/SearchResult.php#L52-L65
 	 * Аналогично, в Method может устанавливаться разный store: @see setStore()
 	 * Поэтому будьте осторожны с кэшированием внутри Method!
-	 * @used-by getInfoInstance()
-	 * @used-by isAvailable()
+	 * @used-by self::getInfoInstance()
+	 * @used-by self::isAvailable()
 	 * @param II|I|OP|QP $i
 	 */
 	final function setInfoInstance(II $i) {
@@ -1686,8 +1662,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 		}
 		/**
 		 * 2019-01-17
-		 * Fron now on, we can get here from @see isAvailable(),
-		 * and in this case we need to set the store manually too.
+		 * Fron now on, we can get here from @see isAvailable(), and in this case we need to set the store manually too.
 		 */
 		else if ($i instanceof QP) {
 			$this->setStore($i->getQuote()->getStoreId());
@@ -1716,7 +1691,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * а непосредственно перед платёжной операцией: @see action()
 	 *
 	 * 2017-03-14
-	 * @used-by setInfoInstance()
+	 * @used-by self::setInfoInstance()
 	 * @param int $storeId
 	 */
 	final function setStore($storeId) {$this->_storeId = (int)$storeId;}
@@ -1730,16 +1705,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	function skipDfwEncode() {return false;}
 
 	/**
-	 * 2016-09-07
-	 * Намеренно не используем @see _storeId
+	 * 2016-09-07 Намеренно не используем @see _storeId
 	 * @used-by \Dfe\Robokassa\Choice::title()
 	 * @return Store
 	 */
 	final function store() {return dfc($this, function() {return $this->o()->getStore();});}
 
 	/**
-	 * 2017-01-22
-	 * Первый аргумент — для тестового режима, второй — для промышленного.
+	 * 2017-01-22 Первый аргумент — для тестового режима, второй — для промышленного.
 	 * @used-by validate()
 	 * @used-by dfp_sentry_tags()
 	 * @used-by \Df\Payment\Url::url()
@@ -1760,7 +1733,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2017-03-22
-	 * @used-by tidFormat()
+	 * @used-by self::tidFormat()
 	 * @used-by \Df\Payment\Init\Action::e2i()
 	 * @used-by \Df\PaypalClone\W\Nav::e2i()
 	 * @used-by \Df\StripeClone\Method::e2i()
@@ -1783,8 +1756,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 */
 	final function tidFormat(T $t, $e = false) {
 		$id = $t->getTxnId(); /** @var string $id */
-		return df_tag_if(!$e ? $id : $this->tid()->i2e($id), $url = $this->transUrl($t), 'a', [
-			/** @var string|null $url */
+		return df_tag_if(!$e ? $id : $this->tid()->i2e($id), $url = $this->transUrl($t), 'a', [/** @var string|null $url */
 			'href' => $url, 'target' => '_blank', 'title' => __(
 				'View the transaction in the %1 interface', $this->getTitle()
 			)
@@ -1793,10 +1765,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2017-01-13
-	 * @used-by action()
 	 * @used-by dfpm_title()
-	 * @used-by getInfoBlockType()
-	 * @used-by getTitle()
+	 * @used-by self::action()
+	 * @used-by self::getInfoBlockType()
+	 * @used-by self::getTitle()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pClient()
 	 * @used-by \Df\Payment\Block\Info::titleB()
 	 * @used-by \Df\Payment\ConfigProvider::config()
@@ -1805,9 +1777,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	final function titleB() {return $this->s('title_backend', function() {return df_class_second($this);});}
 
 	/**
-	 * 2016-02-12
+	 * 2016-02-12 How is a payment method's validate() used? https://mage2.pro/t/698
 	 * @override
-	 * How is a payment method's validate() used? https://mage2.pro/t/698
 	 * @see \Magento\Payment\Model\MethodInterface::validate()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L230-L237
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::validate()
@@ -1835,16 +1806,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	}
 
 	/**
-	 * 2016-02-15
+	 * 2016-02-15 How is a payment method's void() used? https://mage2.pro/t/712
 	 * @override
-	 * How is a payment method's void() used? https://mage2.pro/t/712
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::void()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L288-L295
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::void()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L671-L686
 	 * @param II|I|OP $payment
-	 * @uses _void()
+	 * @uses self::_void()
 	 */
 	final function void(II $payment):self {
 		$this->action('_void');
@@ -1870,15 +1839,15 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-08-14
-	 * @used-by \Df\Payment\Method::void()
+	 * @used-by self::void()
 	 * @see \Dfe\CheckoutCom\Method::_void()
 	 */
 	protected function _void() {$this->_refund($this->cFromBase($this->ii()->getBaseAmountAuthorized()));}
 
 	/**
 	 * 2016-11-13
-	 * @used-by \Df\Payment\Method::amountFormat()
-	 * @used-by \Df\Payment\Method::amountParse()
+	 * @used-by self::amountFormat()
+	 * @used-by self::amountParse()
 	 * @see \Dfe\AllPay\Method::amountFactor()
 	 * @see \Dfe\AlphaCommerceHub\Method::amountFactor()
 	 * @see \Dfe\Dragonpay\Method::amountFactor()
@@ -1893,7 +1862,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-11-13
-	 * @used-by \Df\Payment\Method::amountFactor()
+	 * @used-by self::amountFactor()
 	 * @see \Dfe\CheckoutCom\Method::amountFactorTable()
 	 * @see \Dfe\Stripe\Method::amountFactorTable()
 	 * @return array(int => string|string[])
@@ -1901,16 +1870,15 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	protected function amountFactorTable() {return [];}
 
 	/**
-	 * 2016-02-29
-	 * Решил, что значением по умолчанию разумно сделать false.
-	 * @used-by \Df\Payment\Method::isAvailable()
+	 * 2016-02-29 Решил, что значением по умолчанию разумно сделать false.
+	 * @used-by self::isAvailable()
 	 * @return bool
 	 */
 	final protected function availableInBackend() {return false;}
 
 	/**
 	 * 2016-03-08
-	 * @used-by \Df\Payment\Method::getConfigData()
+	 * @used-by self::getConfigData()
 	 * @return string
 	 */
 	final protected function cardTypes() {return $this->s('cctypes');}
@@ -1990,7 +1958,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-05-03
-	 * @used-by \Df\Payment\Method::assignData()
+	 * @used-by self::assignData()
 	 * @see \Df\GingerPaymentsBase\Method::iiaKeys()
 	 * @see \Df\StripeClone\Method::iiaKeys()
 	 * @see \Dfe\ACH\Method::iiaKeys()
@@ -2054,7 +2022,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-08-20
-	 * @used-by \Df\Payment\Method::tidFormat()
+	 * @used-by self::tidFormat()
 	 * @see \Df\GingerPaymentsBase\Method::transUrl()
 	 * @see \Df\StripeClone\Method::transUrl()
 	 * @param T $t
@@ -2064,19 +2032,19 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2017-03-30 Цель этого метода — запретить использовать для класса оператор new вне класса.
-	 * @used-by _s()
+	 * @used-by self::_s()
 	 */
 	private function __construct() {}
 
 	/**
 	 * 2016-09-06
+	 * @used-by self::cFromBase()
+	 * @used-by self::cToBase()
+	 * @used-by self::cToOrder()
 	 * @uses \Df\Payment\Currency::fromBase()
 	 * @uses \Df\Payment\Currency::fromOrder()
 	 * @uses \Df\Payment\Currency::toBase()
 	 * @uses \Df\Payment\Currency::toOrder()
-	 * @used-by cFromBase()
-	 * @used-by cToBase()
-	 * @used-by cToOrder()
 	 * @param float $a
 	 * @return float
 	 */
@@ -2085,35 +2053,26 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	);}
 
 	/**
-	 * 2016-09-07
-	 * Код валюты заказа.
-	 * @used-by \Df\Payment\Method::cFromBase()
-	 * @used-by \Df\Payment\Method::cPayment()
-	 * @return string
-	 */
-	private function cOrder() {return $this->o()->getOrderCurrencyCode();}
-
-	/**
 	 * 2017-10-12
-	 * @used-by convert()
-	 * @used-by cPayment()
-	 * @used-by isAvailable()
+	 * @used-by self::convert()
+	 * @used-by self::cPayment()
+	 * @used-by self::isAvailable()
 	 * @return Currency
 	 */
 	private function currency() {return dfc($this, function() {return dfp_currency($this);});}
 
 	/**
 	 * 2016-02-12
-	 * @used-by getInfoInstance()
-	 * @used-by setInfoInstance()
+	 * @used-by self::getInfoInstance()
+	 * @used-by self::setInfoInstance()
 	 * @var II|I|OP|QP
 	 */
 	private $_ii;
 
 	/**
 	 * 2016-02-09
-	 * @used-by getStore()
-	 * @used-by setStore()
+	 * @used-by self::getStore()
+	 * @used-by self::setStore()
 	 * @var int
 	 */
 	private $_storeId;
@@ -2121,7 +2080,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-07-13
 	 * @used-by dfp_is_test()
-	 * @used-by validate()
+	 * @used-by self::validate()
 	 */
 	const II__TEST = 'df_test';
 
@@ -2141,7 +2100,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-12-29
-	 * @used-by iiaSetTRR()
+	 * @used-by self::iiaSetTRR()
 	 * @used-by \Df\GingerPaymentsBase\Method::transUrl()
 	 * @used-by \Df\Payment\TM::res0()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
@@ -2165,15 +2124,15 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * которая относится к Magento, но модуль не должен запрашивать выполнение этой операции
 	 * на стороне платёжной системы, потому что на стороне платёжной системы
 	 * эта операция уже выполнена, и платёжная система как раз нас об этом уведомляет.
-	 * @used-by action()
 	 * @used-by dfp_webhook_case()
+	 * @used-by self::action()
 	 */
 	const WEBHOOK_CASE = 'df_webhook_case';
 
 	/**
 	 * 2016-07-10
 	 * @used-by dfpm_code()
-	 * @used-by getCode()
+	 * @used-by self::getCode()
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
 	 * @uses \Dfe\CheckoutCom\Method::CODE
 	 * @uses \Dfe\IPay88\Method::CODE
@@ -2215,16 +2174,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	final static function sgReset() {df_ram()->clean(self::$CACHE_TAG);}
 
 	/**
-	 * 2016-07-10
-	 * @param string $globalId
-	 * @return string
-	 */
-	final static function transactionIdG2L($globalId) {return df_trim_text_left($globalId, self::codeS() . '-');}
-
-	/**
 	 * 2017-08-28
-	 * @used-by sgReset()
-	 * @used-by tags()
+	 * @used-by self::sgReset()
+	 * @used-by self::tags()
 	 * @var string
 	 */
 	private static $CACHE_TAG = __CLASS__;
