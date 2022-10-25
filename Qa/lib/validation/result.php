@@ -30,6 +30,22 @@ function df_result_s($v, $sl = 0) {return df_check_s($v) ? $v : Q::raiseErrorRes
 );}
 
 /**
+ * @used-by df_country_2_to_3()
+ * @used-by df_country_3_to_2()
+ * @used-by df_dts()
+ * @used-by \Df\API\Settings::merchantID()
+ * @used-by \Df\GingerPaymentsBase\Method::option()
+ * @used-by \Df\Payment\Operation::id()
+ * @used-by \Df\Payment\Operation\Source::customerEmail()
+ * @used-by \Df\Payment\Operation\Source\Creditmemo::id()
+ * @used-by \Df\Payment\Operation\Source\Order::id()
+ * @used-by \Df\Payment\Token::get()
+ * @used-by \Df\StripeClone\Facade\Customer::cardIdForJustCreated()
+ * @used-by \Df\Zoho\App::title()
+ * @used-by \Dfe\FacebookLogin\Customer::longLivedAccessToken()
+ * @used-by \Dfe\FacebookLogin\Customer::picture()
+ * @used-by \Dfe\IPay88\Method::option()
+ * @used-by \Dfe\Robokassa\Method::option()
  * @param string $v
  * @param int $sl [optional]
  * @return string

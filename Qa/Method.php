@@ -48,14 +48,6 @@ final class Method {
 	static function assertResultIsArray($v, $sl = 0) {return self::vr(VArray::s(), $v, ++$sl);}
 
 	/**
-	 * @param string $v
-	 * @param int $sl [optional]
-	 * @return string
-	 * @throws E
-	 */
-	static function assertResultIsString($v, $sl = 0) {return self::vr(VString::s(), $v, ++$sl);}
-
-	/**
 	 * @used-by df_assert_array()
 	 * @param array $v
 	 * @param int $sl [optional]
@@ -74,7 +66,7 @@ final class Method {
 
 	/**
 	 * @used-by df_param_sne()
-	 * @used-by vp()
+	 * @used-by self::vp()
 	 * @param string $method
 	 * @param array $messages
 	 * @param int $ord  zero-based
@@ -99,7 +91,7 @@ final class Method {
 	/**
 	 * @used-by df_result_s()
 	 * @used-by df_result_sne()
-	 * @used-by vr()
+	 * @used-by self::vr()
 	 * @param string $vd
 	 * @param array $messages
 	 * @param int $sl
@@ -117,7 +109,7 @@ final class Method {
 
 	/**
 	 * @used-by df_assert_sne()
-	 * @used-by vv()
+	 * @used-by self::vv()
 	 * @param string $vd
 	 * @param array $messages
 	 * @param int $sl
@@ -150,9 +142,9 @@ final class Method {
 	/**
 	 * Объект @see Frame конструируется на основе $o + 2,
 	 * потому что нам нужно вернуть название метода, который вызвал тот метод, который вызвал метод caller.
-	 * @used-by raiseErrorParam()
-	 * @used-by raiseErrorResult()
-	 * @used-by raiseErrorVariable()
+	 * @used-by self::raiseErrorParam()
+	 * @used-by self::raiseErrorResult()
+	 * @used-by self::raiseErrorVariable()
 	 * @param int $o [optional]
 	 * @return Frame
 	 */
@@ -171,7 +163,7 @@ final class Method {
 	private static function throwException($message, $sl = 0) {df_error(new E($message, ++$sl));}
 	
 	/**
-	 * @used-by assertParamIsInteger()
+	 * @used-by self::assertParamIsInteger()
 	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $ord
@@ -184,6 +176,7 @@ final class Method {
 	);}
 
 	/**
+	 * @used-by self::assertResultIsArray()
 	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $sl
