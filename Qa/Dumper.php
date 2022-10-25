@@ -12,6 +12,13 @@ final class Dumper {
 	);}
 
 	/**
+	 * @used-by self::dump()
+	 * @param mixed $a
+	 * @return string
+	 */
+	private function dumpArray(array $a) {return "[\n" . df_tab_multiline($this->dumpArrayElements($a)) . "\n]";}
+
+	/**
 	 * Эта функция имеет 2 отличия от @see print_r():
 	 * 1) она корректно обрабатывает объекты и циклические ссылки
 	 * 2) она для верхнего уровня не печатает обрамляющее «Array()» и табуляцию, т.е. вместо
@@ -33,25 +40,16 @@ final class Dumper {
 	 *	[comment] => Оплата заказа №100000099 в магазине localhost.com.
 	 *	[message] =>
 	 *	[label] => localhost.com
-	 *
 	 * 2015-01-25 @uses df_ksort() для удобства сравнения двух версий массива/объекта в Araxis Merge.
-	 *
 	 * @see df_kv()
 	 * @used-by self::dumpArray()
 	 * @used-by self::dumpObject()
 	 * @param mixed[]|array(string => mixed) $a
 	 * @return string
 	 */
-	function dumpArrayElements(array $a) {return df_cc_n(df_map_k(df_ksort($a), function($k, $v) {return
+	private function dumpArrayElements(array $a) {return df_cc_n(df_map_k(df_ksort($a), function($k, $v) {return
 		"$k: {$this->dump($v)}"
 	;}));}
-
-	/**
-	 * @used-by self::dump()
-	 * @param mixed $a
-	 * @return string
-	 */
-	private function dumpArray(array $a) {return "[\n" . df_tab_multiline($this->dumpArrayElements($a)) . "\n]";}
 
 	/**
 	 * @used-by self::dump()
@@ -80,8 +78,8 @@ final class Dumper {
 	private $_dumped = [];
 
 	/**
-	 * Обратите внимание, что мы намеренно не используем для @see Df_Core_Dumper
-	 * объект-одиночку, потому что нам надо вести учёт выгруженных объектов,
+	 * Обратите внимание, что мы намеренно не используем для этого класса объект-одиночку,
+	 * потому что нам надо вести учёт выгруженных объектов,
 	 * чтобы не попасть в бесконечную рекурсию при циклических ссылках.
 	 */
 	static function i():self {return new self;}
