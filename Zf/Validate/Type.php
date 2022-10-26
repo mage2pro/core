@@ -10,7 +10,7 @@ namespace Df\Zf\Validate;
  */
 abstract class Type extends \Df\Zf\Validate {
 	/**
-	 * @used-by _message()
+	 * @used-by self::_message()
 	 * @see \Df\Zf\Validate\ArrayT::expected()
 	 * @see \Df\Zf\Validate\IntT::expected()
 	 * @see \Df\Zf\Validate\StringT::expected()

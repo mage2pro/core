@@ -3,7 +3,7 @@ namespace Df\Zf;
 /** @see \Df\Zf\Validate\Type */
 abstract class Validate implements \Zend_Validate_Interface {
 	/**
-	 * @used-by getMessage()
+	 * @used-by self::getMessage()
 	 * @see \Df\Zf\Validate\Type::_message()
 	 * @return string
 	 */
