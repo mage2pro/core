@@ -1,5 +1,6 @@
 <?php
 namespace Df\Typography;
+/** @used-by \Df\Typography\Font::size() */
 final class Size extends \Df\Core\O {
 	/**
 	 * 2015-12-16
@@ -17,23 +18,13 @@ final class Size extends \Df\Core\O {
 	 * 2015-12-16
 	 * @return float
 	 */
-	function valueF() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_float($this->value());
-		}
-		return $this->{__METHOD__};
-	}
+	function valueF() {return df_float($this->value());}
 
 	/**
 	 * 2015-12-16
 	 * @return int
 	 */
-	function valueI() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = intval($this->value());
-		}
-		return $this->{__METHOD__};
-	}
+	function valueI() {return intval($this->value());}
 
 	/** @var string */
 	private static $P__UNITS = 'units';

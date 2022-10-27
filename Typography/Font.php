@@ -70,8 +70,11 @@ final class Font extends \Df\Config\O {
 		$this->scale_horizontal() / 100, $this->scale_vertical() / 100
 	);});}
 
-	/** @return Size */
-	function size() {return $this->_size();}
+	/**
+	 * 2015-12-16
+	 * @used-by self::letter_spacing()
+	 */
+	function size():Size {return dfc($this, function($key) {return new Size($this[$key]);}, [df_caller_f()]);}
 
 	/**
 	 * 2015-12-16
@@ -93,12 +96,6 @@ final class Font extends \Df\Config\O {
 	function weight() {return dfc($this, function() {return
 		$this->variantNumber() ?: ($this->bold() ? 'bold' : 'normal')
 	;});}
-
-	/**
-	 * 2015-12-16
-	 * @return Size
-	 */
-	private function _size() {return dfc($this, function($key) {return new Size($this[$key]);}, [df_caller_f()]);}
 
 	/** @return bool */
 	private function bold() {return $this->b();}
