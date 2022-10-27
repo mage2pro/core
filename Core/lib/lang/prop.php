@@ -74,6 +74,8 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Inkifi\Pwinty\API\Entity\Order::magentoOrder()
  * @used-by \Wolf\Filter\Customer::categoryPath()
  * @used-by \Wolf\Filter\Customer::garage()
+ * @see df_once()
+ * @see dfc()
  * @param object|null|\ArrayAccess $o
  * @param mixed|string $v [optional]
  * @param string|mixed|null $d [optional]

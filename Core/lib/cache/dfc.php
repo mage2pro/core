@@ -20,6 +20,8 @@ use Df\Core\RAM;
  * 2.2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
  * и поэтому Closure не уникальна.
  * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
+ * @see df_prop()
+ * @see dfc()
  * @param object $o
  * @param Closure $f
  * @param mixed[] $a [optional]
@@ -62,7 +64,7 @@ function df_once($o, Closure $f, array $a = [], $unique = true, $offset = 0):voi
 		}
 		# 2022-10-17 https://3v4l.org/6cVAu
 		$map2 =& $map[$o]; /** @var array(string => mixed) $map2 */
-		if (!isset($map2, $k)) {
+		if (!array_key_exists($k, $map2)) {
 			$f(...$a); # 2017-01-12 ... works correctly here: https://3v4l.org/0shto
 			$map2[$k] = true;
 		}
@@ -88,6 +90,8 @@ function df_once($o, Closure $f, array $a = [], $unique = true, $offset = 0):voi
  * 2.2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
  * и поэтому Closure не уникальна.
  * @used-by dfaoc()
+ * @see df_once()
+ * @see df_prop()
  * @param object $o
  * @param Closure $f
  * @param mixed[] $a [optional]
@@ -130,9 +134,12 @@ function dfc($o, Closure $f, array $a = [], $unique = true, $offset = 0) {
 		}
 		# 2022-10-17 https://3v4l.org/6cVAu
 		$map2 =& $map[$o]; /** @var array(string => mixed) $map2 */
-		# 2017-01-12 ... works correctly here: https://3v4l.org/0shto
-		# 2022-10-17 The ternary operator works correctly here: https://3v4l.org/MutM4
-		$r = isset($map2, $k) ? $map2[$k] : $map2[$k] = $f(...$a);
+		/**
+		 * 2017-01-12 ... works correctly here: https://3v4l.org/0shto
+		 * 2022-10-17 The ternary operator works correctly here: https://3v4l.org/MutM4
+		 * 2022-10-27 We can not use @see isset() here: https://3v4l.org/FhAUv
+		 */
+		$r = array_key_exists($k, $map2) ? $map2[$k] : $map2[$k] = $f(...$a);
 	}
 	return $r;
 }
