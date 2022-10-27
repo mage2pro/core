@@ -44,46 +44,43 @@ class Select2 extends Select {
 		 * В этот момент опции выпадающего списка ещё не инициализированы,
 		 * поэтому дожидаемся их инициализации.
 		 */
-		if (!isset($this->{__METHOD__}) && $this->getValues()) {
-			/**
-			 * 2016-09-03
-			 * Этот класс присваивается оригинальному элементу select
-			 * (который при использовании select2 вроде бы роли не играет),
-			 * и родительскому контейнеру .df-field, который присутствует в том случае,
-			 * если наш элемент управления был создан внутри нашего нестандартного филдсета,
-			 * и осутствует, если наш элемент управления является элементом управления вернхнего уровня
-			 * (то есть, указан в атрибуте «type» тега <field>).
-			 */
-			$this->addClass(df_cc_s('df-select2', $this->customCssClass()));
-			df_fe_init($this, __CLASS__, df_asset_third_party('Select2/main.css'), [
-				/**
-				 * 2016-08-10
-				 * Этот стиль присваивается выпадающему списку select2.
-				 * By analogy with @see \Df\Framework\Form\Element\Fieldset::field()
-				 * https://github.com/mage2pro/core/blob/1.6.3/Framework/Form/Element/Fieldset.php#L309
-				 */
-				'cssClass' => df_cc_s(
-					'df-select2'
-					,$this->customCssClass()
-					,Fieldset::customCssClassByShortName(df_fe_name_short($this->getName()))
-				)
-				,'disabled' => $this->disabled()
-				,'extra' => df_eta($this[self::EXTRA])
-				/**
-				 * 2019-06-02
-				 * As I understand, we do not need to pass `options` to Select2 here,
-				 * because Select2 will get options from HTML,
-				 * and passing them again via JavaScript will rewrite the previous initialization,
-				 * which sometimes causes some bugs:
-				 * e.g., a default "Please Select" option lose the `selected` status
-				 * because of the following code:
-				 * https://github.com/mage2pro/core/blob/4.5.1/Core/view/base/web/thirdParty/Select2/main.js#L3335
-				 */
-				,'options' => []//$this->getValues()
-				,'value' => $this->getValue() # 2016-08-10 Выбранное значение.
-				,'width' => $this->width()
-			]);
-			$this->{__METHOD__} = true;
+		if ($this->getValues()) {
+			df_once($this, function() {
+				# 2016-09-03
+				# Этот класс присваивается оригинальному элементу select
+				# (который при использовании select2 вроде бы роли не играет),
+				# и родительскому контейнеру .df-field, который присутствует в том случае,
+				# если наш элемент управления был создан внутри нашего нестандартного филдсета,
+				# и осутствует, если наш элемент управления является элементом управления вернхнего уровня
+				# (то есть, указан в атрибуте «type» тега <field>).
+				$this->addClass(df_cc_s('df-select2', $this->customCssClass()));
+				df_fe_init($this, __CLASS__, df_asset_third_party('Select2/main.css'), [
+					/**
+					 * 2016-08-10
+					 * Этот стиль присваивается выпадающему списку select2.
+					 * By analogy with @see \Df\Framework\Form\Element\Fieldset::field()
+					 * https://github.com/mage2pro/core/blob/1.6.3/Framework/Form/Element/Fieldset.php#L309
+					 */
+					'cssClass' => df_cc_s(
+						'df-select2'
+						,$this->customCssClass()
+						,Fieldset::customCssClassByShortName(df_fe_name_short($this->getName()))
+					)
+					,'disabled' => $this->disabled()
+					,'extra' => df_eta($this[self::EXTRA])
+					# 2019-06-02
+					# As I understand, we do not need to pass `options` to Select2 here,
+					# because Select2 will get options from HTML,
+					# and passing them again via JavaScript will rewrite the previous initialization,
+					# which sometimes causes some bugs:
+					# e.g., a default "Please Select" option lose the `selected` status
+					# because of the following code:
+					# https://github.com/mage2pro/core/blob/4.5.1/Core/view/base/web/thirdParty/Select2/main.js#L3335
+					,'options' => []//$this->getValues()
+					,'value' => $this->getValue() # 2016-08-10 Выбранное значение.
+					,'width' => $this->width()
+				]);
+			});
 		}
 		return parent::setRenderer($renderer);
 	}
