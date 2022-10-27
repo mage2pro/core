@@ -152,49 +152,45 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * @used-by self::_render()
 	 */
 	private function outerCssClasses():string {
-		if (!isset($this->{__METHOD__})) {
-			/** @var string[] $resultA */
-			$resultA = [
-				'admin__field field'
-				/**
-				 * 2015-12-11
-				 * Тонкий момент.
-				 * Я пришёл к выводу, что не могу опираться на селектор .field,
-				 * потому что этот селектор отсутствует у полей внутри inline fieldset,
-				 * а у полей внутри inline fieldset я этот селектор убрал намеренно,
-				 * потому что это селектор слишком уж заточек ядром под блочные поля,
-				 * и для нормальной работы в инлайновом режиме
-				 * слишком много правил CSS пришлось бы переопределять.
-				 * @see \Df\Framework\Form\Element\Renderer\Inline::render()
-				 * https://github.com/mage2pro/core/tree/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Framework/Data/Form/Element/Renderer/Inline.php#L50
-				 */
-				,'df-field'
-				# 2015-11-23
-				# Намеренно удалил класс "field-{$this->e()->getId()}",
-				# ибо он только мусорит и мной не используется.
-				, $this->e()->getCssClass()
-				# 2015-11-23
-				# Моё добавление
-				,E::getClassDfOnly($this->e())
-				# 2015-11-23
-				# Моё добавление.
-				, $this->e()->getContainerClass()
-				# 2015-11-26
-				# Моё добавление.
-				# Все контейнеры выпадающих списков будут иметь, например, класс «df-type-select»:
-				# https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L30
-				, 'df-type-' . $this->e()->getType()
-				, $this->shouldLabelBeAtRight() ? 'choice' : ''
-				, $this->note() ? 'with-note' : ''
-				, !$this->e()->getLabelHtml() ? 'no-label' : ''
-			];
-			if ($this->e()->getRequired()) {
-				$resultA[]= 'required';
-				$resultA[]= '_required';
-			}
-			$this->{__METHOD__} = df_cc_s($resultA);
+		$ra = [
+			'admin__field field'
+			/**
+			 * 2015-12-11
+			 * Тонкий момент.
+			 * Я пришёл к выводу, что не могу опираться на селектор .field,
+			 * потому что этот селектор отсутствует у полей внутри inline fieldset,
+			 * а у полей внутри inline fieldset я этот селектор убрал намеренно,
+			 * потому что это селектор слишком уж заточек ядром под блочные поля,
+			 * и для нормальной работы в инлайновом режиме
+			 * слишком много правил CSS пришлось бы переопределять.
+			 * @see \Df\Framework\Form\Element\Renderer\Inline::render()
+			 * https://github.com/mage2pro/core/tree/489029cab0b8be03e4a79f0d33ce9afcdec6a76c/Framework/Data/Form/Element/Renderer/Inline.php#L50
+			 */
+			,'df-field'
+			# 2015-11-23
+			# Намеренно удалил класс "field-{$this->e()->getId()}",
+			# ибо он только мусорит и мной не используется.
+			, $this->e()->getCssClass()
+			# 2015-11-23
+			# Моё добавление
+			,E::getClassDfOnly($this->e())
+			# 2015-11-23
+			# Моё добавление.
+			, $this->e()->getContainerClass()
+			# 2015-11-26
+			# Моё добавление.
+			# Все контейнеры выпадающих списков будут иметь, например, класс «df-type-select»:
+			# https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Select.php#L30
+			, 'df-type-' . $this->e()->getType()
+			, $this->shouldLabelBeAtRight() ? 'choice' : ''
+			, $this->note() ? 'with-note' : ''
+			, !$this->e()->getLabelHtml() ? 'no-label' : ''
+		]; /** @var string[] $ra */
+		if ($this->e()->getRequired()) {
+			$ra[]= 'required';
+			$ra[]= '_required';
 		}
-		return $this->{__METHOD__};
+		return df_cc_s($ra);
 	}
 
 	/**

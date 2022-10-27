@@ -91,32 +91,32 @@ final class Regex extends \Df\Core\O {
 		: df_cc_n(array_slice($this->getSubjectSplitted(), 0, $this->getSubjectMaxLinesToReport()))
 	;});}
 
-	/** @return string[] */
-	private function getSubjectSplitted() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_explode_n($this->getSubject());
-		}
-		return $this->{__METHOD__};
-	}
+	/**
+	 * @used-by self::getSubjectReportPart()
+	 * @used-by self::isSubjectTooLongToReport()
+	 * @return string[]
+	 */
+	private function getSubjectSplitted() {return dfc($this, function() {return df_explode_n($this->getSubject());});}
 
-	/** @return bool */
-	private function isSubjectMultiline() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} = df_t()->isMultiline($this->getSubject());
-		}
-		return $this->{__METHOD__};
-	}
+	/**
+	 * @used-by self::isSubjectTooLongToReport()
+	 * @used-by self::throwInternalError()
+	 * @used-by self::throwNotMatch()
+	 */
+	private function isSubjectMultiline():bool {return dfc($this, function() {return df_t()->isMultiline(
+		$this->getSubject()
+	);});}
 
-	/** @return bool */
-	private function isSubjectTooLongToReport() {
-		if (!isset($this->{__METHOD__})) {
-			$this->{__METHOD__} =
-				$this->isSubjectMultiline()
-				&& ($this->getSubjectMaxLinesToReport() < count($this->getSubjectSplitted()))
-			;
-		}
-		return $this->{__METHOD__};
-	}
+	/**
+	 * @used-by self::getSubjectReportPart()
+	 * @used-by self::getSubjectSplitted()
+	 * @used-by self::throwInternalError()
+	 * @used-by self::throwNotMatch()
+	 * @return bool
+	 */
+	private function isSubjectTooLongToReport() {return dfc($this, function() {return
+		$this->isSubjectMultiline() && $this->getSubjectMaxLinesToReport() < count($this->getSubjectSplitted())
+	;});}
 
 	/** @return bool */
 	private function needThrowOnError() {return $this[self::$P__THROW_ON_ERROR];}
@@ -158,26 +158,24 @@ final class Regex extends \Df\Core\O {
 				. " к строке «{$this->getSubject()}» произошёл сбой{$errorCodeForUser}."
 			;
 		}
+		elseif (!$this->isSubjectTooLongToReport()) {
+			$message =
+				"При применении регулярного выражения «{$this->getPattern()}»"
+				." произошёл сбой{$errorCodeForUser}."
+				."\nТекст, к которому применялось регулярное выражение:"
+				."\nНАЧАЛО ТЕКСТА:\n{$this->getSubject()}\nКОНЕЦ ТЕКСТА"
+			;
+		}
 		else {
-			if (!$this->isSubjectTooLongToReport()) {
-				$message =
-					"При применении регулярного выражения «{$this->getPattern()}»"
-					." произошёл сбой{$errorCodeForUser}."
-					."\nТекст, к которому применялось регулярное выражение:"
-					."\nНАЧАЛО ТЕКСТА:\n{$this->getSubject()}\nКОНЕЦ ТЕКСТА"
-				;
-			}
-			else {
-				df_report($this->getReportFileName(), $this->getSubject());
-				$message =
-					"При применении регулярного выражения «{$this->getPattern()}»"
-					." произошёл сбой{$errorCodeForUser}."
-					."\nТекст, к которому применялось регулярное выражение,"
-					." смотрите в файле {$this->getReportFilePath()}."
-					."\nПервые {$this->getSubjectMaxLinesToReport()} строк текста:"
-					."\nНАЧАЛО:\n{$this->getSubjectReportPart()}\nКОНЕЦ"
-				;
-			}
+			df_report($this->getReportFileName(), $this->getSubject());
+			$message =
+				"При применении регулярного выражения «{$this->getPattern()}»"
+				." произошёл сбой{$errorCodeForUser}."
+				."\nТекст, к которому применялось регулярное выражение,"
+				." смотрите в файле {$this->getReportFilePath()}."
+				."\nПервые {$this->getSubjectMaxLinesToReport()} строк текста:"
+				."\nНАЧАЛО:\n{$this->getSubjectReportPart()}\nКОНЕЦ"
+			;
 		}
 		df_error($message);
 	}
@@ -190,22 +188,20 @@ final class Regex extends \Df\Core\O {
 		if (!$this->isSubjectMultiline()) {
 			$message = "Строка «{$this->getSubject()}» не отвечает регулярному выражению «{$this->getPattern()}».";
 		}
+		elseif (!$this->isSubjectTooLongToReport()) {
+			$message =
+				"Указанный ниже текст не отвечает регулярному выражению «{$this->getPattern()}»:"
+				."\nНАЧАЛО ТЕКСТА:\n{$this->getSubject()}\nКОНЕЦ ТЕКСТА"
+			;
+		}
 		else {
-			if (!$this->isSubjectTooLongToReport()) {
-				$message =
-					"Указанный ниже текст не отвечает регулярному выражению «{$this->getPattern()}»:"
-					."\nНАЧАЛО ТЕКСТА:\n{$this->getSubject()}\nКОНЕЦ ТЕКСТА"
-				;
-			}
-			else {
-				df_report($this->getReportFileName(), $this->getSubject());
-				$message =
-					"Текст не отвечает регулярному выражению «{$this->getPattern()}»."
-					."\nТекст смотрите в файле {$this->getReportFilePath()}."
-					."\nПервые {$this->getSubjectMaxLinesToReport()} строк текста:"
-					."\nНАЧАЛО:\n{$this->getSubjectReportPart()}\nКОНЕЦ"
-				;
-			}
+			df_report($this->getReportFileName(), $this->getSubject());
+			$message =
+				"Текст не отвечает регулярному выражению «{$this->getPattern()}»."
+				."\nТекст смотрите в файле {$this->getReportFilePath()}."
+				."\nПервые {$this->getSubjectMaxLinesToReport()} строк текста:"
+				."\nНАЧАЛО:\n{$this->getSubjectReportPart()}\nКОНЕЦ"
+			;
 		}
 		df_error($message);
 	}

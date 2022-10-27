@@ -17,11 +17,9 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  * нерабочий: «Invalid method Magento\Sales\Model\Order\Creditmemo::register»
  * https://mage2.pro/t/1029
  * Поэтому делаю по аналогии с @see \Magento\Sales\Controller\Adminhtml\Order\Creditmemo\Save::execute()
- *
  * @used-by \Df\Payment\W\Strategy\Refund::_handle()
  * @used-by \Dfe\CheckoutCom\Handler\Charge\Refunded::process()
  * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::process()
- *
  * @param P $p
  * @param int $tid
  * @param string|int|float|null $a [optional]	 в валюте заказа (платежа), в формате платёжной системы (копейках).

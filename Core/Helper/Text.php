@@ -161,14 +161,6 @@ class Text {
 	function singleLine($s) {return str_replace(["\r\n", "\r", "\n", "\t"], ' ', $s);}
 
 	/**
-	 * Источник алгоритма: http://stackoverflow.com/a/14338869
-	 * @param string $s1
-	 * @param string $s2
-	 * @return string
-	 */
-	function xor_($s1, $s2) {return bin2hex(pack('H*', $s1) ^ pack('H*', $s2));}
-
-	/**
 	 * @used-by df_quote_double()
 	 * @used-by self::quote()
 	 */

@@ -88,6 +88,7 @@ function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) u
  * @used-by \Dfe\Robokassa\Signer\Request::values()
  * @used-by \Dfe\Robokassa\Signer\Response::values()
  * @used-by \Dfe\SecurePay\Signer\Request::values()
+ * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::process()
  * @used-by \Dfe\TwoCheckout\Method::charge()
  * @used-by \DxMoto\Core\Observer\CanLog::execute()
  * @used-by \Mageside\CanadaPostShipping\Model\Carrier::_doRatesRequest() (canadasatellite.ca)
