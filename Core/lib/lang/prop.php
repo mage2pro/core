@@ -36,7 +36,7 @@ const DF_N = 'df-null';
 function df_n_get($v) {return DF_N === $v ? null : $v;}
 
 /**
- * @used-by \Dfe\FacebookLogin\Customer::_dob()
+ * 2022-10-27 @deprecated It is unused.
  * @param mixed|null $v
  * @return mixed|string
  */
