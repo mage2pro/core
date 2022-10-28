@@ -118,6 +118,7 @@ function df_sync($id, callable $job, $interval = 0.1) { /** @var mixed $r */
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Model\Order\Item::aroundGetProductOptions(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/62)
  * @used-by \Df\Framework\Console\Command::execute()
  * @used-by \Df\GoogleFont\Font\Variant\Preview::box()
+ * @used-by \Df\GoogleFont\Fonts\Png::url()
  * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Df\Qa\Trace\Frame::methodR()
  * @used-by \Df\Theme\Controller\Result\MessagePlugin::getCookiesMessages()
