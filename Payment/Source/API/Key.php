@@ -10,7 +10,6 @@ abstract class Key extends \Df\Config\Source\API\Key {
 	 * @override
 	 * @see \Df\Config\Source\API\Key::ss()
 	 * @used-by \Df\Config\Source\API\Key::isRequirementMet()
-	 * @return S
 	 */
-	protected function ss() {return dfps($this);}
+	final protected function ss():S {return dfps($this);}
 }

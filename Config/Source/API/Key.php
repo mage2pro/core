@@ -17,17 +17,15 @@ abstract class Key extends \Df\Config\Source\API {
 	 * @used-by self::requirement()
 	 * @see \Dfe\Spryng\Source\Account::apiKeyTitle()
 	 * @see \Dfe\Square\Source\Location::apiKeyTitle()
-	 * @return string
 	 */
-	abstract protected function apiKeyTitle();
+	abstract protected function apiKeyTitle():string;
 
 	/**
 	 * 2017-07-02
 	 * @used-by self::apiKey()
 	 * @see \Df\Payment\Source\API\Key::ss()
-	 * @return S
 	 */
-	abstract protected function ss();
+	abstract protected function ss():S;
 
 	/**
 	 * 2017-07-02
