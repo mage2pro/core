@@ -208,15 +208,14 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\Omise\Exception\Charge::sentryContext()
 	 * @return array(string => mixed)
 	 */
-	function sentryContext() {return [];}
+	function sentryContext():array {return [];}
 
 	/**
 	 * 2017-10-03
 	 * @used-by \Df\Sentry\Client::captureException()
 	 * @see \Df\PaypalClone\W\Exception\InvalidSignature::sentryType()
-	 * @return string
 	 */
-	function sentryType() {return get_class($this);}
+	function sentryType():string {return get_class($this);}
 
 	/**
 	 * 2015-11-27

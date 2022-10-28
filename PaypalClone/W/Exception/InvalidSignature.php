@@ -48,9 +48,8 @@ final class InvalidSignature extends \Df\Payment\W\Exception\Critical {
 	 * @override
 	 * @see \Df\Core\Exception::sentryType()
 	 * @used-by \Df\Sentry\Client::captureException()
-	 * @return string
 	 */
-	function sentryType() {return 'Invalid signature';}
+	function sentryType():string {return 'Invalid signature';}
 
 	/**
 	 * 2017-10-03
