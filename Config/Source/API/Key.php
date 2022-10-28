@@ -9,9 +9,8 @@ abstract class Key extends \Df\Config\Source\API {
 	 * @used-by self::apiKey()
 	 * @see \Dfe\Spryng\Source\Account::apiKeyName()
 	 * @see \Dfe\Square\Source\Location::apiKeyName()
-	 * @return string
 	 */
-	abstract protected function apiKeyName();
+	abstract protected function apiKeyName():string;
 
 	/**
 	 * 2017-07-02

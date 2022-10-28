@@ -22,9 +22,8 @@ final class WaitPeriodType extends \Df\Config\Source {
 	 * @param S $s
 	 * @param string|null $k [optional]
 	 * @param string $kType [optional]
-	 * @return int
 	 */
-	static function calculate(S $s, $k = null, $kType = 'waitPeriodType') {return dfcf(function(S $s, $k, $kType) {
+	static function calculate(S $s, $k = null, $kType = 'waitPeriodType'):int {return dfcf(function(S $s, $k, $kType) {
 		$r = $s->nat($k); /** @var int $r */
 		return self::$WORKING_DAYS === $s->v($kType) ? $r :
 			df_num_calendar_days_by_num_working_days(ZD::now(), $r, $s->scope())

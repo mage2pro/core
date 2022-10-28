@@ -21,5 +21,5 @@ final class YN extends \Df\Config\SourceBase {
 	 * @used-by \Magento\Config\Model\Config\Structure\Element\Field::_getOptionsFromSourceModel()
 	 * @return array(array('label' => string, 'value' => int|string))
 	 */
-	function toOptionArray() {return df_yes_no();}
+	function toOptionArray():array {return df_yes_no();}
 }
