@@ -217,14 +217,21 @@ function df_error_html(...$args):void {df_header_utf(); throw df_error_create(..
 
 /**
  * 2016-07-27
+ * 2022-10-28 @deprecated It is unused.
  * @see df_should_not_be_here()
- * @param string $method
+ * @param string $m
  * @throws DFE
  */
-function df_not_implemented($method) {df_error("The method «{$method}» is not implemented yet.");}
+function df_not_implemented($m):void {df_error("The method «{$m}» is not implemented yet.");}
 
 /**
  * @see df_not_implemented()
+ * @used-by \Df\Payment\Method::canAuthorize()
+ * @used-by \Df\Payment\Method::canCaptureOnce()
+ * @used-by \Df\Payment\Method::canOrder()
+ * @used-by \Df\Payment\Method::order()
+ * @used-by \Dfe\Dynamics365\API\Facade::GetDefaultPriceLevel()
+ * @used-by \Dfe\Qiwi\W\Event::k_idE()
  * @throws DFE
  */
 function df_should_not_be_here() {df_error_html('The method %s is not allowed to call.', df_caller_mh());}

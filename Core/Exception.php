@@ -13,7 +13,10 @@ use Magento\Framework\Phrase;
  * то ядро может показать её сообщение на экране, а в противном случае — не показать.
  * Бывает ещё, что в противном случае сообщение всё-таки показывается, но с другим форматированием.
  * @see \Df\API\Exception
+ * @see \Df\GoogleFont\Exception
  * @see \Df\Payment\Exception
+ * @see \Df\Payment\W\Exception\NotForUs
+ * @see \Dfe\FacebookLogin\Exception
  */
 class Exception extends LE implements \ArrayAccess {
 	/**
@@ -125,9 +128,8 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\Omise\Exception\Charge::message()
 	 * @see \Dfe\Stripe\Exception::message()
 	 * @see \Dfe\TwoCheckout\Exception::message()
-	 * @return string
 	 */
-	function message() {return $this->getMessage();}
+	function message():string {return $this->getMessage();}
 
 	/**
 	 * A message for a buyer.
