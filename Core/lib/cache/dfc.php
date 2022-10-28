@@ -138,6 +138,7 @@ function dfc($o, Closure $f, array $a = [], $unique = true, $offset = 0) {
 		 * 2017-01-12 ... works correctly here: https://3v4l.org/0shto
 		 * 2022-10-17 The ternary operator works correctly here: https://3v4l.org/MutM4
 		 * 2022-10-27 We can not use @see isset() here: https://3v4l.org/FhAUv
+		 * 2022-10-28 @see \Df\Core\RAM::exists()
 		 */
 		$r = array_key_exists($k, $map2) ? $map2[$k] : $map2[$k] = $f(...$a);
 	}

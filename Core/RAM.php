@@ -8,7 +8,7 @@ final class RAM {
 	 * @used-by \Df\Payment\Method::sgReset()
 	 * @param string $tag
 	 */
-	function clean($tag) {
+	function clean($tag):void {
 		if (isset($this->_tags[$tag])) {
 			foreach ($this->_tags[$tag] as $k) { /** @var string $k */
 				unset($this->_data[$k]);
@@ -27,9 +27,8 @@ final class RAM {
 	 * @used-by dfcf()
 	 * @used-by get()
 	 * @param string $k
-	 * @return bool
 	 */
-	function exists($k) {return array_key_exists($k, $this->_data);}
+	function exists($k):bool {return array_key_exists($k, $this->_data);}
 
 	/**
 	 * 2017-08-11

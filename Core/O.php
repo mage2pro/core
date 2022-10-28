@@ -91,9 +91,8 @@ class O implements \ArrayAccess {
 	 * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::execute()
 	 * @used-by \Mangoit\MediaclipHub\Controller\Index\OrderStatusUpdateEndpoint::pAvailableForDownload()
-	 * @return string
 	 */
-	function j() {return df_json_encode($this->_a);}
+	function j():string {return df_json_encode($this->_a);}
 
 	/**
 	 * 2017-07-13
