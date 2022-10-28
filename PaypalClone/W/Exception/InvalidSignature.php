@@ -27,19 +27,21 @@ final class InvalidSignature extends \Df\Payment\W\Exception\Critical {
 	 * @override
 	 * @see \Df\Core\Exception::message()
 	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @return string
 	 */
-	function message() {return $this->_message(df_my());}
+	function message():string {return $this->_message(df_my());}
 
 	/**
 	 * 2017-10-03
 	 * @override
 	 * @see \Df\Core\Exception::messageD()
+	 * @used-by df_etsd()
 	 * @used-by \Df\Core\Exception::messageL()
 	 * @used-by \Df\Core\Exception::messageSentry()
-	 * @return string
+	 * @used-by \Df\Payment\PlaceOrderInternal::message()
+	 * @used-by \Df\Qa\Failure\Exception::main()
+	 * @used-by \Df\Sentry\Client::captureException()
 	 */
-	function messageD() {return $this->_message(true);}
+	function messageD():string {return $this->_message(true);}
 
 	/**
 	 * 2017-10-03

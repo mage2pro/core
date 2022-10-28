@@ -10,7 +10,7 @@ final class Exception extends \Df\Qa\Failure {
 	 * @return string
 	 */
 	protected function main() {
-		$r = $this->_e->messageL(); /** @var string $r */
+		$r = $this->_e->messageD(); /** @var string $r */
 		return !$this->_e->isMessageHtml() ? $r : strip_tags($r);
 	}
 

@@ -90,7 +90,7 @@ final class Client {
 			$isDFE = $e instanceof DFE; /** @var bool $isDFE */
 			$dataI = [
 				'type' => $isDFE ? $e->sentryType() : get_class($e)
-				,'value' => $this->serializer->serialize($isDFE ? $e->messageSentry() : $e->getMessage())
+				,'value' => $this->serializer->serialize($isDFE ? $e->messageD() : $e->getMessage())
 			];
 			$trace = $e->getTrace();
 			$needAddCurrentFrame = !self::needSkipFrame($trace[0]); /** @var bool $needAddCurrentFrame */

@@ -45,9 +45,8 @@ function df_ets($e) {return df_adjust_paths_in_message(
  * @used-by \Dfe\Klarna\Test\Charge::t01()
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
  * @param E|string $e
- * @return string
  */
-function df_etsd($e) {return df_adjust_paths_in_message(
+function df_etsd($e):string {return df_adjust_paths_in_message(
 	!$e instanceof E ? $e : ($e instanceof DFE ? $e->messageD() : $e->getMessage())
 );}
 
