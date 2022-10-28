@@ -42,7 +42,7 @@ final class RAM {
 	 * 2017-08-11
 	 * @used-by df_cache_clean()
 	 */
-	function reset() {$this->_data = []; $this->_tags = [];}
+	function reset():void {$this->_data = []; $this->_tags = [];}
 
 	/**
 	 * 2017-08-10
@@ -89,7 +89,6 @@ final class RAM {
 	/**
 	 * 2017-08-10
 	 * @used-by df_ram()
-	 * @return self
 	 */
-	static function s() {static $r; return $r ? $r : $r = new self;}
+	static function s():self {static $r; return $r ? $r : $r = new self;}
 }

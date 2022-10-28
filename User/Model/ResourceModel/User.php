@@ -12,8 +12,8 @@ class User extends \Magento\User\Model\ResourceModel\User {
 		return $conn->fetchRow($select, $binds);
 	}
 
-	/** @return self */
-	static function s() {static $r; return $r ? $r : $r = df_o(__CLASS__);}
+	/** @used-by \Df\User\Plugin\Model\User::aroundAuthenticate() */
+	static function s():self {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }
 
 

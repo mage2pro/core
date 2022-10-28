@@ -1,5 +1,5 @@
 <?php
-use Df\Core\Helper\Text;
+use Df\Core\Helper\Text as T;
 /**
  * 2015-12-31
  * 1) IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий: https://en.wikipedia.org/wiki/Thin_space
@@ -200,9 +200,8 @@ function df_strings_are_equal_ci($s1, $s2) {return 0 === strcmp(mb_strtolower($s
  * @used-by df_quote_single()
  * @used-by \Df\Core\Text\Regex::isSubjectMultiline()
  * @used-by \Df\Xml\G::_p()
- * @return Text
  */
-function df_t() {return Text::s();}
+function df_t():T {return T::s();}
 
 /**
  * 2016-07-05

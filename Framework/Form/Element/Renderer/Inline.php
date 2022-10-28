@@ -93,7 +93,6 @@ class Inline implements RendererInterface {
 	 * 2015-11-19
 	 * @used-by \Df\Framework\Form\Element\Fieldset::inline()
 	 * @used-by \Df\Framework\Form\Element\Fieldset\Inline::getElementRendererDf()
-	 * @return self
 	 */
-	final static function s() {static $r; return $r ? $r : $r = new self;}
+	final static function s():self {static $r; return $r ? $r : $r = new self;}
 }

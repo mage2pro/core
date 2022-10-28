@@ -114,7 +114,6 @@ abstract class Session implements \ArrayAccess {
 	 * @used-by \Dfe\TBCBank\Init::p()
 	 * @used-by \Dfe\TBCBank\Init\Action::redirectParams()
 	 * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
-	 * @return self
 	 */
-	final static function s() {return dfcf(function($c) {return new $c;}, [static::class]);}
+	final static function s():self {return dfcf(function($c) {return new $c;}, [static::class]);}
 }

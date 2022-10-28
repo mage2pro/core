@@ -178,6 +178,6 @@ class Text {
 	 */
 	const QUOTE__SINGLE = 'single';
 
-	/** @return self */
-	static function s() {static $r; return $r ? $r : $r = new self;}
+	/** @used-by df_t() */
+	static function s():self {static $r; return $r ? $r : $r = new self;}
 }
