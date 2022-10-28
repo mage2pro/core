@@ -68,37 +68,30 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by self::__construct()
 	 * @param mixed ...$args
 	 */
-	function comment(...$args) {$this->_comments[]= df_format($args);}
-
-	/**
-	 * @param mixed ...$args
-	 */
-	function commentPrepend(...$args) {array_unshift($this->_comments, df_format($args));}
+	final function comment(...$args):void {$this->_comments[]= df_format($args);}
 
 	/**
 	 * @used-by \Df\Qa\Failure\Exception::preface()
 	 * @return string[]
 	 */
-	function comments() {return $this->_comments;}
+	final function comments():array {return $this->_comments;}
 
 	/**
 	 * @used-by \Df\Qa\Failure\Exception::stackLevel()
-	 * @return int
 	 */
-	function getStackLevelsCountToSkip() {return $this->_stackLevelsCountToSkip;}
+	final function getStackLevelsCountToSkip():int {return $this->_stackLevelsCountToSkip;}
 
 	/**
 	 * 2016-07-31
 	 * @used-by \Df\Qa\Failure\Exception::main()
 	 * @used-by \Df\Payment\PlaceOrderInternal::message()
 	 * @see \Dfe\Omise\Exception\Charge::isMessageHtml()
-	 * @return bool
 	 */
-	function isMessageHtml() {return $this->_messageIsHtml;}
+	function isMessageHtml():bool {return $this->_messageIsHtml;}
 
 	/**
 	 * 2016-07-31
-	 * @used-by df_error_create_html()
+	 * @used-by df_error_html()
 	 */
 	final function markMessageAsHtml():self {$this->_messageIsHtml = true; return $this;}
 

@@ -204,13 +204,6 @@ function df_error_create($m = null) {return
 ;}
 
 /**
- * 2016-08-02
- * @param string|string[] ...$args
- * @return DFE
- */
-function df_error_create_html(...$args) {return df_error_create(...$args)->markMessageAsHtml();}
-
-/**
  * 2016-07-31
  * @used-by df_abstract()
  * @used-by df_config_e()
@@ -220,7 +213,7 @@ function df_error_create_html(...$args) {return df_error_create(...$args)->markM
  * @param string|string[] ...$args
  * @throws DFE
  */
-function df_error_html(...$args) {df_header_utf(); throw df_error_create_html(...$args);}
+function df_error_html(...$args):void {df_header_utf(); throw df_error_create(...$args)->markMessageAsHtml();}
 
 /**
  * 2016-07-27
