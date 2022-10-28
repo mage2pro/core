@@ -139,6 +139,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * низкоуровневые сообщения покупателям показывать всегда неправильно,
 	 * а потомки этого класса могут переопределить у себя этот метод
 	 * (так, в частности, поступают потмки в платёжных модулях).
+	 * @used-by \Df\Payment\PlaceOrderInternal::message()
 	 * @see \Dfe\CheckoutCom\Exception::messageC()
 	 * @see \Dfe\Klarna\Exception::messageC()
 	 * @see \Dfe\Omise\Exception\Charge::messageC()
