@@ -2,14 +2,13 @@
 namespace Df\User\Model\ResourceModel;
 class User extends \Magento\User\Model\ResourceModel\User {
 	/**
+	 * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
 	 * @param string $email
 	 * @return array(string => mixed)|false
 	 */
 	function loadByEmail($email) {
-		$conn = $this->getConnection();
-		$select = $conn->select()->from($this->getMainTable())->where('email=:email');
-		$binds = ['email' => $email];
-		return $conn->fetchRow($select, $binds);
+		$c = $this->getConnection();
+		return $c->fetchRow($c->select()->from($this->getMainTable())->where('email=:email'), ['email' => $email]);
 	}
 
 	/** @used-by \Df\User\Plugin\Model\User::aroundAuthenticate() */

@@ -8,10 +8,8 @@ class User {
 	 * @param \Closure $f
 	 * @param string $username
 	 * @param string $password
-	 * @return bool
-	 * @throws \Magento\Framework\Exception\AuthenticationException
 	 */
-	function aroundAuthenticate(Sb $sb, \Closure $f, $username, $password) {
+	function aroundAuthenticate(Sb $sb, \Closure $f, $username, $password):bool {
 		$loginByEmail = dfo($sb, self::LOGIN_BY_EMAIL); /** @var bool $loginByEmail */
 		unset($sb->{self::LOGIN_BY_EMAIL});
 		$r = false; /** @var bool $r */
@@ -20,9 +18,9 @@ class User {
 			 * 2016-04-10
 			 * It is implemented by analogy with @see \Magento\User\Model\User::loadByUsername()
 			 * https://github.com/magento/magento2/blob/052e789/app/code/Magento/User/Model/User.php#L606-L619
+			 * @var array(string => mixed)|false $data
 			 */
-			$data = Resource::s()->loadByEmail($username); /** @var array(string => mixed)|false $data */
-			if ($data) {
+			if ($data = Resource::s()->loadByEmail($username)) {
 				$sb->setData($data);
 				$r = true;
 				df_dispatch('admin_user_authenticate_after', [
@@ -30,9 +28,12 @@ class User {
 				]);
 			}
 		}
-		return $r ? $r : $f($username, $password);
+		return $r ?: $f($username, $password);
 	}
 
-	/** @used-by \Df\Backend\Model\Auth::loginByEmail() */
+	/**
+	 * @used-by self::aroundAuthenticate()
+	 * @used-by \Df\Backend\Model\Auth::loginByEmail()
+	 */
 	const LOGIN_BY_EMAIL = 'login_by_email';
 }

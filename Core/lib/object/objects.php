@@ -218,6 +218,7 @@ function df_sc($resultClass, $expectedClass = null, array $params = [], $cacheKe
  * @see dfa()
  * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Df\StripeClone\Facade\Charge::cardData()
+ * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
  * @used-by \MageSuper\Faq\Observer\CheckRecaptcha3::execute() (canadasatellite.ca)
  * @param object $o
  * @param string|int $k
