@@ -3,6 +3,8 @@
  * 2019-09-08
  * @used-by df_n_get()
  * @used-by df_n_set()
+ * @used-by df_prop()
+ * @used-by df_prop_k()
  * @used-by \CanadaSatellite\Bambora\Session::failedCount() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/14)
  * @used-by \Df\API\Client::logging()
  * @used-by \Df\API\FacadeOptions::resC()
@@ -76,11 +78,11 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Wolf\Filter\Customer::garage()
  * @see df_once()
  * @see dfc()
- * @param object|null|\ArrayAccess $o
+ * @param object|null|ArrayAccess $o
  * @param mixed|string $v [optional]
  * @param string|mixed|null $d [optional]
  * @param string|null $type [optional]
- * @return mixed|object|\ArrayAccess|null
+ * @return mixed|object|ArrayAccess|null
  */
 function df_prop($o, $v = DF_N, $d = null, $type = null) {/** @var object|mixed|null $r */
 	/**
@@ -97,7 +99,10 @@ function df_prop($o, $v = DF_N, $d = null, $type = null) {/** @var object|mixed|
 		$type = $d; $d = null;
 	}
 	/** @var string $k */
-	if (is_null($o)) { # 2019-09-08 A static call.
+	if (!is_null($o)) {
+		$r = df_prop_k($o, df_caller_f(), $v, $d);
+	}
+	else {# 2019-09-08 A static call.
 		$k = df_caller_m();
 		static $s; /** @var array(string => mixed) $s */
 		if ($isGet) {
@@ -108,67 +113,89 @@ function df_prop($o, $v = DF_N, $d = null, $type = null) {/** @var object|mixed|
 			$r = null;
 		}
 	}
+	return $isGet && 'int' === $type ? intval($r) : $r;
+}
+
+/**
+ * 2022-10-28
+ * @used-by df_prop()
+ * @used-by \Df\Backend\Model\Auth::loginByEmail()
+ * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
+ * @param object|ArrayAccess $o
+ * @param string $k
+ * @param mixed|string $v [optional]
+ * @param string|mixed|null $d [optional]
+ * @return mixed|object|ArrayAccess|null
+ */
+function df_prop_k($o, $k, $v = DF_N, $d = null) {/** @var object|mixed|null $r */
+	/**
+	 * 2019-09-08
+	 * 1) My 1st solution was comparing $v with `null`,
+	 * but it is wrong because it fails for a code like `$object->property(null)`.
+	 * 2) My 2nd solution was using @see func_num_args():
+	 * «How to tell if optional parameter in PHP method/function was set or not?»
+	 * https://stackoverflow.com/a/3471863
+	 * It is wrong because the $v argument is alwaus passed to df_prop()
+	 */
+	$isGet = DF_N === $v; /** @vae bool $isGet */
+	if ($o instanceof ArrayAccess) {
+		if ($isGet) {
+			$r = !$o->offsetExists($k) ? $d : $o->offsetGet($k);
+		}
+		else {
+			$o->offsetSet($k, $v);
+			$r = $o;
+		}
+	}
 	else {
-		$k = df_caller_f();
-		if ($o instanceof \ArrayAccess) {
+		$a = '_' . __FUNCTION__; /** @var string $a */
+		/**
+		 * 2022-10-18
+		 * 1) Dynamic properties are deprecated since PHP 8.2:
+		 * https://www.php.net/manual/migration82.deprecated.php#migration82.deprecated.core.dynamic-properties
+		 * https://wiki.php.net/rfc/deprecate_dynamic_properties
+		 * 2) @see dfc()
+		 */
+		static $hasWeakMap; /** @var bool $hasWeakMap */
+		$hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : @class_exists('WeakMap');
+		if (!$hasWeakMap) {
+			if (!isset($o->$a)) {
+				$o->$a = [];
+			}
 			if ($isGet) {
-				$r = !$o->offsetExists($k) ? $d : $o->offsetGet($k);
+				$r = dfa($o->$a, $k, $d);
 			}
 			else {
-				$o->offsetSet($k, $v);
+				# 2022-10-18
+				# The previous code was:
+				# 		$prop =& $o->$a;
+				#		$prop[$k] = $v;
+				# The new code works correctly in PHP ≤ 8.2: https://3v4l.org/8agSI1
+				$o->{$a}[$k] = $v;
 				$r = $o;
 			}
 		}
 		else {
-			$a = '_' . __FUNCTION__; /** @var string $a */
-			/**
-			 * 2022-10-18
-			 * 1) Dynamic properties are deprecated since PHP 8.2:
-			 * https://www.php.net/manual/migration82.deprecated.php#migration82.deprecated.core.dynamic-properties
-			 * https://wiki.php.net/rfc/deprecate_dynamic_properties
-			 * 2) @see dfc()
-			 */
-			static $hasWeakMap; /** @var bool $hasWeakMap */
-			$hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : @class_exists('WeakMap');
-			if (!$hasWeakMap) {
-				if (!isset($o->$a)) {
-					$o->$a = [];
-				}
-				if ($isGet) {
-					$r = dfa($o->$a, $k, $d);
-				}
-				else {
-					# 2022-10-18
-					# The previous code was:
-					# 		$prop =& $o->$a;
-					#		$prop[$k] = $v;
-					# The new code works correctly in PHP ≤ 8.2: https://3v4l.org/8agSI1
-					$o->{$a}[$k] = $v;
-					$r = $o;
-				}
+			static $map; /** @var WeakMap $map */
+			$map = $map ?: new WeakMap;
+			if (!$map->offsetExists($o)) {
+				$map[$o] = [];
+			}
+			# 2022-10-17 https://3v4l.org/6cVAu
+			$map2 =& $map[$o]; /** @var array(string => mixed) $map2 */
+			if (!isset($map2[$a])) {
+				$map2[$a] = [];
+			}
+			# 2022-10-18 https://3v4l.org/1tS4v
+			$prop =& $map2[$a]; /** array(string => mixed) $prop */
+			if ($isGet) {
+				$r = dfa($prop, $k, $d);
 			}
 			else {
-				static $map; /** @var WeakMap $map */
-				$map = $map ?: new WeakMap;
-				if (!$map->offsetExists($o)) {
-					$map[$o] = [];
-				}
-				# 2022-10-17 https://3v4l.org/6cVAu
-				$map2 =& $map[$o]; /** @var array(string => mixed) $map2 */
-				if (!isset($map2[$a])) {
-					$map2[$a] = [];
-				}
-				# 2022-10-18 https://3v4l.org/1tS4v
-				$prop =& $map2[$a]; /** array(string => mixed) $prop */
-				if ($isGet) {
-					$r = dfa($prop, $k, $d);
-				}
-				else {
-					$prop[$k] = $v;
-					$r = $o;
-				}
+				$prop[$k] = $v;
+				$r = $o;
 			}
 		}
 	}
-	return $isGet && 'int' === $type ? intval($r) : $r;
+	return $r;
 }

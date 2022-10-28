@@ -15,7 +15,7 @@ class Auth extends \Magento\Backend\Model\Auth {
 		$this->_initCredentialStorage();
 		/** @var \Magento\Backend\Model\Auth\Credential\StorageInterface|\Magento\User\Model\User $user */
 		$user = $this->getCredentialStorage();
-		$user->{\Df\User\Plugin\Model\User::LOGIN_BY_EMAIL} = true;
+		df_prop_k($user, \Df\User\Plugin\Model\User::LOGIN_BY_EMAIL, true);
 		$user->login($email, null);
 		if ($user->getId()) {
 			/** @var IStorage|\Magento\Backend\Model\Auth\Session $authSession */

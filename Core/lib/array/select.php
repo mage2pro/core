@@ -52,6 +52,8 @@ function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) u
  * @used-by df_log_l()
  * @used-by df_oi_get()
  * @used-by df_package()
+ * @used-by df_prop()
+ * @used-by df_prop_k()
  * @used-by df_request_method()
  * @used-by df_trd()
  * @used-by df_visitor_ip()

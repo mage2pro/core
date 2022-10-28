@@ -10,8 +10,8 @@ class User {
 	 * @param string $password
 	 */
 	function aroundAuthenticate(Sb $sb, \Closure $f, $username, $password):bool {
-		$loginByEmail = dfo($sb, self::LOGIN_BY_EMAIL); /** @var bool $loginByEmail */
-		unset($sb->{self::LOGIN_BY_EMAIL});
+		$loginByEmail = df_prop_k($sb, self::LOGIN_BY_EMAIL); /** @var bool $loginByEmail */
+		df_prop_k($sb, self::LOGIN_BY_EMAIL, false);
 		$r = false; /** @var bool $r */
 		if ($loginByEmail) {
 			/**
