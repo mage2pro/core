@@ -20,7 +20,7 @@ class NoWhiteBlack extends \Df\Config\Source {
 	 * @see \Df\Config\Source\NoWhiteBlack\Specified::titles()
 	 * @return string[]
 	 */
-	protected function titles() {return [self::$W => 'Whitelist', self::$B => 'Blacklist'];}
+	protected function titles():array {return [self::$W => 'Whitelist', self::$B => 'Blacklist'];}
 
 	/**
 	 * @used-by self::is()

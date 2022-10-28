@@ -9,5 +9,5 @@ class Specified extends NoWhiteBlack {
 	 * @used-by \Df\Config\Source\NoWhiteBlack::map()
 	 * @return string[]
 	 */
-	protected function titles() {return [self::$W => 'Specified', self::$B => 'All But Specified'];}
+	protected function titles():array {return [self::$W => 'Specified', self::$B => 'All But Specified'];}
 }
