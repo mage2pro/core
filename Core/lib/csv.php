@@ -11,17 +11,15 @@ use Magento\Framework\File\Csv;
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()
  * @used-by \Dfe\FacebookLogin\Customer::responseA()
  * @param string|string[] ...$args
- * @return string
  */
-function df_csv(...$args) {return implode(',', df_args($args));}
+function df_csv(...$args):string {return implode(',', df_args($args));}
 
 /**
  * 2017-06-21
  * @used-by df_intl_dic_read()  
  * @used-by df_module_csv2()
- * @return Csv
  */
-function df_csv_o() {return df_new_om(Csv::class);}
+function df_csv_o():Csv {return df_new_om(Csv::class);}
 
 /**
  * 2015-02-07
@@ -41,13 +39,13 @@ function df_csv_o() {return df_new_om(Csv::class);}
  * @param string $d [optional]
  * @return string[]
  */
-function df_csv_parse($s, $d = ',') {return !$s ? [] : df_trim(explode($d, $s));}
+function df_csv_parse($s, $d = ','):array {return !$s ? [] : df_trim(explode($d, $s));}
 
 /**
  * @param string|null $s
  * @return int[]
  */
-function df_csv_parse_int($s) {return df_int(df_csv_parse($s));}
+function df_csv_parse_int($s):array {return df_int(df_csv_parse($s));}
 
 /**
  * 2015-02-07
@@ -60,13 +58,11 @@ function df_csv_parse_int($s) {return df_int(df_csv_parse($s));}
  * @used-by \Dfe\Moip\P\Reg::ga()
  * @used-by \Dfe\Sift\Payload\OQI::p()
  * @param string|string[] ...$args
- * @return string
  */
-function df_csv_pretty(...$args) {return implode(', ', dfa_flatten($args));}
+function df_csv_pretty(...$args):string {return implode(', ', dfa_flatten($args));}
 
 /**
+ * 2022-10-29 @deprecated It is unused.
  * @param string|string[] ...$args
- * @return string
  */
-function df_csv_pretty_quote(...$args) {return df_csv_pretty(df_quote_russian(df_args($args)));}
-
+function df_csv_pretty_quote(...$args):string {return df_csv_pretty(df_quote_russian(df_args($args)));}
