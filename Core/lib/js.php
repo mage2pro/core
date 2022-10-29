@@ -6,9 +6,8 @@
  * @used-by royalwholesalecandy.com: app/code/MGS/Mmegamenu/view/adminhtml/templates/category.phtml
  * @used-by vendor/mage2pro/facebook/view/frontend/templates/init.phtml
  * @param mixed $v
- * @return string
  */
-function df_ejs($v) {return !is_string($v) ? df_json_encode($v) : df_quote_single(str_replace(
+function df_ejs($v):string {return !is_string($v) ? df_json_encode($v) : df_quote_single(str_replace(
 	"'", '\u0027', df_trim(json_encode($v), '"')
 ));}
 
@@ -45,9 +44,8 @@ function df_ejs($v) {return !is_string($v) ? df_json_encode($v) : df_quote_singl
  * @param string|object|null $m
  * @param string|null $s [optional]
  * @param array(string => mixed) $p [optional]
- * @return string
  */
-function df_js($m, $s = null, array $p = []) {$s = $s ?: 'main'; return df_js_x(
+function df_js($m, $s = null, array $p = []):string {$s = $s ?: 'main'; return df_js_x(
 	'*', df_check_url_absolute($s) ? null : $m, $s, $p
 );}
 
@@ -62,9 +60,8 @@ function df_js($m, $s = null, array $p = []) {$s = $s ?: 'main'; return df_js_x(
  * @see df_widget()
  * @param string $s
  * @param array(string => mixed) $p [optional]
- * @return string
  */
-function df_js_c($s, array $p = []) {return df_js(null, 'Magento_Ui/js/core/app', ['components' => [
+function df_js_c($s, array $p = []):string {return df_js(null, 'Magento_Ui/js/core/app', ['components' => [
 	$s => ['component' => $s] + $p
 ]]);}
 
@@ -78,9 +75,8 @@ function df_js_c($s, array $p = []) {return df_js(null, 'Magento_Ui/js/core/app'
  * https://github.com/inkifi/map/blob/0.1.5/view/frontend/templates/create.phtml#L4-L6
  * @param string|string[] $n
  * @param mixed $v
- * @return string
  */
-function df_js_data($n, $v) {return df_tag('script', ['type' => 'text/javascript'], sprintf(
+function df_js_data($n, $v):string {return df_tag('script', ['type' => 'text/javascript'], sprintf(
 	"window.%s = %s;", df_cc('.', $n), df_ejs($v)
 ));}
 
@@ -93,9 +89,8 @@ function df_js_data($n, $v) {return df_tag('script', ['type' => 'text/javascript
  * 2) Загрузка скрипта не блокирует рисование страницы браузером
  * (аналогично для этого можно было бы использовать атрибут async тега script).
  * @param string $n
- * @return string
  */
-function df_js_inline_r($n) {return df_tag('script', ['type' => 'text/javascript'], "require(['$n']);");}
+function df_js_inline_r($n):string {return df_tag('script', ['type' => 'text/javascript'], "require(['$n']);");}
 
 /**
  * 2017-04-21
@@ -103,11 +98,10 @@ function df_js_inline_r($n) {return df_tag('script', ['type' => 'text/javascript
  * @used-by vendor/tradefurniturecompany/core/view/frontend/templates/js.phtml
  * @param string $res
  * @param bool $async [optional]
- * @return string
  */
-function df_js_inline_url($res, $async = false) {return df_resource_inline($res, function($url) use($async) {return df_tag(
-	'script', ['src' => $url, 'type' => 'text/javascript'] + (!$async ? [] : ['async' => 'async']), null, false
-);});}
+function df_js_inline_url($res, $async = false):string {return df_resource_inline($res, function($url) use($async) {return
+	df_tag('script', ['src' => $url, 'type' => 'text/javascript'] + (!$async ? [] : ['async' => 'async']), null, false)
+;});}
 
 /**
  * 2019-06-01
@@ -124,9 +118,8 @@ function df_js_inline_url($res, $async = false) {return df_resource_inline($res,
  * 4) `null`.
  * @param string|null $s [optional]
  * @param array(string => mixed) $p [optional]
- * @return string
  */
-function df_js_x($selector, $m, $s = null, array $p = []) {return df_tag(
+function df_js_x($selector, $m, $s = null, array $p = []):string {return df_tag(
 	'script', ['type' => 'text/x-magento-init'], df_json_encode([$selector => [
 		df_cc_path(is_null($m) ? null : df_module_name($m), $s ?: 'main') => $p
 	]])
@@ -142,7 +135,6 @@ function df_js_x($selector, $m, $s = null, array $p = []) {return df_tag(
  * а @see \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
  * всегда обрамляет значение в одинарные кавычки,
  * поэтому df_widget() всегда совместима с @see df_tag()
- *
  * 2017-04-21
  * Эта функция предоставляет альтернативный @see df_js() способ
  * инициализации браузерного компонента: параметры инициализации передаются компоненту
@@ -170,12 +162,10 @@ function df_js_x($selector, $m, $s = null, array $p = []) {return df_tag(
  * оказывается ассоциированным с неким конкретным элементом HTML:
  * этим данный способ инициализации отличается от способа функции @see df_js(),
  * которая не привязывает код JavaScript браузерного компонента ни к какому элементу HTML.
- *
  * @used-by \Df\Sso\Button\Js::attributes()
  * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
- *
  * @param string|object|null $m
  * $m could be:
  * 1) A module name: «A_B»
@@ -186,7 +176,7 @@ function df_js_x($selector, $m, $s = null, array $p = []) {return df_tag(
  * @param array(string => mixed) $p [optional]
  * @return array(string => string)
  */
-function df_widget($m, $s = null, array $p = []) {return ['data-mage-init' => df_json_encode([
+function df_widget($m, $s = null, array $p = []):array {return ['data-mage-init' => df_json_encode([
 	/**
 	 * 2019-11-13
 	 * I intentionally use `!is_null($s)` instead of `$s ?:`.
