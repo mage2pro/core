@@ -1,32 +1,11 @@
 <?php
 namespace Df\Core\Helper;
-class Text {
+final class Text {
 	/**
 	 * @used-by \Df\Core\Text\Regex::isSubjectMultiline()
 	 * @param string $s
-	 * @return bool
 	 */
-	function isMultiline($s) {return df_contains($s, "\n") || df_contains($s, "\r");}
-
-	/**
-	 * Простой, неполный, но практически адекватный для моих ситуаций
-	 * способ опредилелить, является ли строка регулярным выражением.
-	 * @param string $s
-	 * @return string
-	 */
-	function isRegex($s) {return df_starts_with($s, '#');}
-
-	/**
-	 * @param string $s
-	 * @return string
-	 */
-	function normalizeName($s) {return mb_strtoupper(df_trim($s));}
-
-	/**
-	 * @param string $s
-	 * @return string[]
-	 */
-	function parseTextarea($s) {return df_clean(df_trim(df_explode_n(df_trim($s))));}
+	function isMultiline($s):bool {return df_contains($s, "\n") || df_contains($s, "\r");}
 
 	/**
 	 * @used-by df_quote_double()
@@ -78,64 +57,8 @@ class Text {
 	 * Новый алгоритм взял отсюда:  http://stackoverflow.com/a/20717751
 	 * 2021-12-13 @deprecated It is unused.
 	 * @param string $s
-	 * @return string
 	 */
-	function removeLineBreaks($s) {return str_replace(["\r\n", "\r", "\n"], ' ', $s);}
-
-	/**
-	 * http://www.php.net/str_ireplace
-	 * @param string $search
-	 * @param string $replace
-	 * @param string $subject
-	 * @param int|null $count [optional]
-	 * @return string
-	 */
-	function replaceCI($search, $replace, $subject, $count = null) {
-		if (!is_array($search)) {
-			$slen = mb_strlen($search);
-			if (0 === $slen) {
-				return $subject;
-			}
-			$lendif = mb_strlen($replace) - mb_strlen($search);
-			$search = mb_strtolower($search);
-			$search = preg_quote($search);
-			$lstr = mb_strtolower($subject);
-			$i = 0;
-			$matched = 0;
-			/** @var string[] $matches */
-			$matches = [];
-			while (1 === preg_match('/(.*)'.$search.'/Us',$lstr, $matches)) {
-				if ($i === $count ) {
-					break;
-				}
-				$mlen = mb_strlen($matches[0]);
-				$lstr = mb_substr($lstr, $mlen);
-				$subject =
-					substr_replace(
-						$subject, $replace, $matched+strlen($matches[1]), $slen
-					)
-				;
-				$matched += $mlen + $lendif;
-				$i++;
-			}
-			return $subject;
-		}
-		else {
-			foreach (array_keys($search) as $k ) {
-				if (is_array($replace)) {
-					if (array_key_exists($k, $replace)) {
-						$subject = $this->replaceCI($search[$k], $replace[$k], $subject, $count);
-					}
-					else {
-						$subject = $this->replaceCI($search[$k], '', $subject, $count);
-					}
-				} else {
-					$subject = $this->replaceCI($search[$k], $replace, $subject, $count);
-				}
-			}
-			return $subject;
-		}
-	}
+	function removeLineBreaks($s):string {return str_replace(["\r\n", "\r", "\n"], ' ', $s);}
 
 	/**
 	 * 2015-03-03 Алгоритм аналогичен @see removeLineBreaks()
