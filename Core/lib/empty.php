@@ -32,7 +32,7 @@
  * @param mixed|null $v
  * @return mixed[]
  */
-function df_eta($v) {
+function df_eta($v):array {
 	if (!is_array($v)) {
 		df_assert(empty($v));
 		$v = [];
@@ -77,9 +77,8 @@ function df_fts($v) {return (false === $v) ? '' : $v;}
  * @used-by dfa_deep()
  * @used-by \Df\Payment\Block\Info::si()
  * @param mixed $v
- * @return bool
  */
-function df_nes($v) {return is_null($v) || '' === $v;}
+function df_nes($v):bool {return is_null($v) || '' === $v;}
 
 /**
  * @see df_fts()

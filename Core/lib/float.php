@@ -21,31 +21,28 @@
  * @used-by \TFC\GoogleShopping\Att\Price::format() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/6)
  * @param float $v
  * @param int $prec [optional]
- * @return string
  */
-function dff_2($v, $prec = 2) {return number_format($v, $prec, '.', '');}
+function dff_2($v, $prec = 2):string {return number_format($v, $prec, '.', '');}
 
 /**
  * 2016-09-08
  * @used-by \Dfe\Color\Image::labels()
  * @used-by \TFC\Core\Plugin\Paypal\Model\Cart::aroundGetAmounts()
  * @param float|int|string $v
- * @return float
  */
-function dff_2f($v) {return floatval(dff_2(floatval($v)));}
+function dff_2f($v):float {return floatval(dff_2(floatval($v)));}
 
 /**
  * 2016-10-23 Для нецелых чисел работает как @see dff_2(), а для целых — отбрасывает десятичную часть.
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
- * @param int|float $v
- * @param int $prec [optional]
- * @return string
  * 3 => 3
  * 3.333 => 3.33
  * 3.300 => 3.30
  * https://3v4l.org/AUTCA
+ * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
+ * @param int|float $v
+ * @param int $prec [optional]
  */
-function dff_2i($v, $prec = 2) {return is_int($v) ? (string)$v : dff_2($v, $prec);}
+function dff_2i($v, $prec = 2):string {return is_int($v) ? (string)$v : dff_2($v, $prec);}
 
 /**
  * 2015-04-09 Форматирует вещественное число с отсечением незначащих нулей после запятой.
@@ -53,10 +50,10 @@ function dff_2i($v, $prec = 2) {return is_int($v) ? (string)$v : dff_2($v, $prec
  * 3 => 3
  * 3.333 => 3.333
  * 3.300 => 3.3
+ * 2022-10-29 @deprecated It is unused.
  * @param float|int $v
- * @return string
  */
-function dff_chop0($v) {
+function dff_chop0($v):string {
 	$f = df_float($v); /** @var float $f */
 	$intPart = (int)$f; /** @var int $intPart */
 	# намеренно используем «==»
@@ -78,9 +75,8 @@ function dff_chop0($v) {
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @param float|string|int $a
  * @param float|string|int $b
- * @return bool
  */
-function dff_eq($a, $b) {return dff_eq0(floatval($a) - floatval($b), .001 * $a);}
+function dff_eq($a, $b):bool {return dff_eq0(floatval($a) - floatval($b), .001 * $a);}
 
 /**      
  * 2016-09-08
@@ -101,6 +97,5 @@ function dff_eq($a, $b) {return dff_eq0(floatval($a) - floatval($b), .001 * $a);
  * @used-by \TFC\Core\Plugin\Paypal\Model\Cart::aroundGetAmounts()
  * @param float $a
  * @param float $deviation [optional]
- * @return bool
  */
-function dff_eq0($a, $deviation = .001) {return abs($a) < $deviation;}
+function dff_eq0($a, $deviation = .001):bool {return abs($a) < $deviation;}
