@@ -9,11 +9,9 @@ namespace Df\Core;
  */
 # @codingStandardsIgnoreFile
 if (@class_exists('\PHPUnit\Framework\TestCase')) {
-	/** @noinspection PhpMultipleClassesDeclarationsInOneFile */
 	abstract class TestCaseBase extends \PHPUnit\Framework\TestCase {}
 }
 else {
-	/** @noinspection PhpMultipleClassesDeclarationsInOneFile */
 	abstract class TestCaseBase extends \PHPUnit_Framework_TestCase {
 		/**
 		 * 2016-11-10
@@ -21,7 +19,7 @@ else {
 		 * поэтому эмулируем его.
 		 * @param string $exception
 		 */
-		function expectException($exception) {
+		function expectException($exception):void {
 			/** @noinspection PhpUndefinedMethodInspection */
 			$this->setExpectedException($exception);}
 	}

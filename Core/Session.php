@@ -15,9 +15,8 @@ abstract class Session implements \ArrayAccess {
 	 * @see \Df\Customer\SessionBase::c()
 	 * @see \Dfe\TBCBank\Session::c()
 	 * @see \Frugue\Core\Session::c()
-	 * @return string
 	 */
-	abstract protected function c();
+	abstract protected function c():string;
 
 	/**
 	 * 2021-10-26

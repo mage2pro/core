@@ -13,7 +13,6 @@ abstract class SessionBase extends \Df\Core\Session {
 	 * @override
 	 * @see \Df\Core\Session::c()
 	 * @used-by \Df\Core\Session::__construct()
-	 * @return string
 	 */
-	final protected function c() {return \Magento\Customer\Model\Session\Storage::class;}
+	final protected function c():string {return \Magento\Customer\Model\Session\Storage::class;}
 }

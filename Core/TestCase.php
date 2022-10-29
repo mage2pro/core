@@ -20,18 +20,18 @@ abstract class TestCase extends TestCaseBase {
 	 * 2017-02-26
 	 * @see \Df\Payment\TestCase::s()
 	 * @param object|string|null $m [optional]
-	 * @return S
 	 */
-    protected function s($m = null) {return dfs($m ?: $this);}
+    protected function s($m = null):S {return dfs($m ?: $this);}
 
 	/**
 	 * 2016-11-03
 	 * @override
 	 * @see \PHPUnit_Framework_TestCase::setUp()
 	 * @see \PHPUnit\Framework\TestCase::setUp()
+	 * @see \Dfe\Omise\Test\TestCase::setUp()
 	 * @see \Dfe\Stripe\Test\CaseT::setUp()
 	 */
-	protected function setUp() {
+	protected function setUp():void {
 		if (!self::$r) {
 			self::$r = true;
 			Bootstrap::create(BP, $_SERVER)->createApplication(Http::class);

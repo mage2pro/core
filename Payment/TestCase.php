@@ -30,7 +30,6 @@ class TestCase extends \Df\Core\TestCase {
 	 * @see \Df\Core\TestCase::s()
 	 * @used-by \Dfe\TBCBank\Test\CaseT\Init::transId()
 	 * @param object|string|null $m [optional]
-	 * @return Settings
 	 */
-    protected function s($m = null) {return $m ? dfps($m) : $this->m()->s();}
+    protected function s($m = null):Settings {return $m ? dfps($m) : $this->m()->s();}
 }
