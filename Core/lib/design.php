@@ -40,7 +40,6 @@ function df_theme_resolver() {return df_o(IThemeResolver::class);}
 
 /**
  * 2016-11-29
- * @return ThemeCollection
+ * @used-by df_theme()
  */
-function df_themes() {return df_o(ThemeCollection::class);}
-
+function df_themes():ThemeCollection {return df_o(ThemeCollection::class);}
