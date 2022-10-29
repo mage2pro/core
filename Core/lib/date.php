@@ -304,10 +304,9 @@ function df_month(ZD $date = null):int {return df_nat0(df_date($date)->toString(
  * @used-by \Dfe\AllPay\Charge::pCharge()
  * @used-by \Dfe\CheckoutCom\Charge::pMetadata()
  * @param string $format
- * @param string|null $timezone [optional]   
- * @return string
+ * @param string|null $timezone [optional]
  */
-function df_now($format, $timezone = null) {return
+function df_now($format, $timezone = null):string {return
 	(new DT(null, !$timezone ? null : new DTZ($timezone)))->format($format)
 ;}
 
@@ -317,9 +316,8 @@ function df_now($format, $timezone = null) {return
  * @param ZD $startDate
  * @param int $numWorkingDays
  * @param null|string|int|ScopeA|Store $store [optional]
- * @return int
  */
-function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays, $store = null) {
+function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays, $store = null):int {
 	$r = $numWorkingDays; /** @var int $r */
 	if ((0 === $r) && df_is_day_off($startDate)) {
 		$r++;
@@ -341,12 +339,12 @@ function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays
 
 /**
  * 2016-07-19 Портировал из Российской сборки Magento.
+ * @used-by df_days_left()
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @param ZD|null $d1 [optional]
  * @param ZD|null $d2 [optional]
- * @return int
  */
-function df_num_days(ZD $d1 = null, ZD $d2 = null) {
+function df_num_days(ZD $d1 = null, ZD $d2 = null):int {
 	$d1 = df_date($d1);
 	$d2 = df_date($d2);
 	$dateMin = df_date_min($d1, $d2); /** @var ZD $dateMin */
@@ -369,34 +367,35 @@ function df_num_days(ZD $d1 = null, ZD $d2 = null) {
  * @used-by \Dfe\Moip\Test\CaseT\Payment\Boleto::pPayment()
  * @used-by \Dfe\Moip\Test\CaseT\Payment\OnlineBanking::pPayment()
  * @param int $add
- * @return ZD
  */
-function df_today_add($add) {return df_date_reset_time(ZD::now()->addDay($add));}
+function df_today_add($add):ZD {return df_date_reset_time(ZD::now()->addDay($add));}
 
 /**
  * 2016-10-15
+ * @used-by df_yesterday()
  * @param int $sub
- * @return ZD
  */
-function df_today_sub($sub) {return df_date_reset_time(ZD::now()->subDay($sub));}
+function df_today_sub($sub):ZD {return df_date_reset_time(ZD::now()->subDay($sub));}
 
 /**
  * 2016-10-15
- * @return ZD
+ * 2022-10-29 @deprecated It is unused.
  */
-function df_tomorrow() {return df_today_add(1);}
+function df_tomorrow():ZD {return df_today_add(1);}
 
 /**
  * 2018-11-13
  * @see df_hour()
+ * @see df_month()
  * @used-by \Df\StripeClone\Facade\Card::isActive()
+ * @used-by \Dfe\TBCBank\Test\CaseT\Regular::t04()
  * @param ZD|null $date [optional]
- * @return int
  */
-function df_year(ZD $date = null) {return df_nat0(df_date($date)->toString(ZD::YEAR, 'iso'));}
+function df_year(ZD $date = null):int {return df_nat0(df_date($date)->toString(ZD::YEAR, 'iso'));}
 
 /**
  * 2016-10-15
+ * 2022-10-29 @deprecated It is unused.
  * @return ZD
  */
-function df_yesterday() {return df_today_sub(1);}
+function df_yesterday():ZD {return df_today_sub(1);}
