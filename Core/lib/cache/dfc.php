@@ -20,6 +20,7 @@ use Df\Core\RAM;
  * 2.2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
  * и поэтому Closure не уникальна.
  * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
+ * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
  * @see df_prop()
  * @see dfc()
  * @param object $o
