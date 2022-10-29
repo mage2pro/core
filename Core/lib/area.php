@@ -24,31 +24,31 @@ function df_area_code($onE = null) {return df_try(function() {return df_app_stat
  * @used-by df_is_frontend()
  * @used-by df_is_rest()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @param string ...$values
- * @return bool
+ * @param string ...$v
  */
-function df_area_code_is(...$values) {return in_array(df_area_code(), $values);}
+function df_area_code_is(...$v):bool {return in_array(df_area_code(), $v);}
 
 /**
  * 2019-06-21
  * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
  */
-function df_area_code_set_b() {df_app_state()->setAreaCode(A::AREA_ADMINHTML);}
+function df_area_code_set_b():void {df_app_state()->setAreaCode(A::AREA_ADMINHTML);}
 
 /**
+ *
  * 2021-11-25
  * It fixes the «Area code is not set» error in @see \Magento\Framework\App\State::getAreaCode()
  * when the area code is really not set (e.g., for console commands like `bin/magento tfc:google-shopping:1`).
  * @used-by df_view_config()
  */
-function df_area_code_set_d() {df_area_code() || df_area_code_set_f();}
+function df_area_code_set_d():void {df_area_code() || df_area_code_set_f();}
 
 /**
  * 2019-06-21
  * @used-by df_area_code_set_d()
  * @used-by \Df\Core\TestCase::setUp()
  */
-function df_area_code_set_f() {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
+function df_area_code_set_f():void {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
 
 /**
  * 2015-08-14 Мы не вправе кэшировать результат работы функции: ведь текущий магазин может меняться.
@@ -88,9 +88,8 @@ function df_area_code_set_f() {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
  * @used-by \Df\Payment\Method::isAvailable()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
  * @used-by \Dfe\Sift\Observer::f()
- * @return bool
  */
-function df_is_backend() {return df_area_code_is(A::AREA_ADMINHTML) || df_is_ajax() && df_backend_user();}
+function df_is_backend():bool {return df_area_code_is(A::AREA_ADMINHTML) || df_is_ajax() && df_backend_user();}
 
 /**
  * 2016-06-02 By analogy with @see df_is_backend()
@@ -104,9 +103,8 @@ function df_is_backend() {return df_area_code_is(A::AREA_ADMINHTML) || df_is_aja
  * @see df_is_ajax()
  * @see df_is_backend()
  * @see df_is_rest()
- * @return bool
  */
-function df_is_frontend() {return df_area_code_is(A::AREA_FRONTEND) || df_is_ajax() && df_customer_session_id();}
+function df_is_frontend():bool {return df_area_code_is(A::AREA_FRONTEND) || df_is_ajax() && df_customer_session_id();}
 
 /**
  * 2017-03-15
@@ -114,6 +112,5 @@ function df_is_frontend() {return df_area_code_is(A::AREA_FRONTEND) || df_is_aja
  * @see df_is_backend()
  * @see df_is_frontend()
  * @used-by df_response()
- * @return bool
  */
-function df_is_rest() {return df_area_code_is(A::AREA_WEBAPI_REST);}
+function df_is_rest():bool {return df_area_code_is(A::AREA_WEBAPI_REST);}

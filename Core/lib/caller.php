@@ -7,9 +7,8 @@ use Exception as E;
  * @used-by df_abstract()
  * @used-by df_sentry_ext_f()
  * @param int $o [optional]
- * @return string
  */
-function df_caller_c($o = 0) {return df_first(df_explode_method(df_caller_m(++$o)));}
+function df_caller_c($o = 0):string {return df_first(df_explode_method(df_caller_m(++$o)));}
 
 /**
  * 2017-03-28 If the function is called from a closure, then it will go up through the stask until it leaves all closures.
@@ -21,7 +20,7 @@ function df_caller_c($o = 0) {return df_first(df_explode_method(df_caller_m(++$o
  * @param F|null $predicate [optional]
  * @return array(string => string|int)
  */
-function df_caller_entry($p = 0, F $predicate = null) {
+function df_caller_entry($p = 0, F $predicate = null):array {
 	/**
 	 * 2018-04-24
 	 * I do not understand why did I use `2 + $offset` here before.
@@ -96,9 +95,8 @@ function df_caller_entry($p = 0, F $predicate = null) {
  * @used-by \Dfe\Dynamics365\Test\TestCase::p()
  * @used-by \KingPalm\B2B\Schema::f()
  * @param int $o [optional]
- * @return string
  */
-function df_caller_f($o = 0) {return df_caller_entry(++$o)['function'];}
+function df_caller_f($o = 0):string {return df_caller_entry(++$o)['function'];}
 
 /**
  * 2016-08-10
@@ -112,9 +110,8 @@ function df_caller_f($o = 0) {return df_caller_entry(++$o)['function'];}
  * @used-by df_prop()
  * @used-by df_sentry_extra_f()
  * @param int $o [optional]
- * @return string
  */
-function df_caller_m($o = 0) {
+function df_caller_m($o = 0):string {
 	$bt = df_caller_entry(++$o); /** @var array(string => int) $bt */
 	$class = dfa($bt, 'class'); /** @var string $class */
 	if (!$class) {
@@ -128,15 +125,13 @@ function df_caller_m($o = 0) {
  * 2016-08-29
  * @used-by df_abstract()
  * @used-by df_should_not_be_here()
- * @return string
  */
-function df_caller_mh() {return df_tag('b', [], df_caller_ml(1));}
+function df_caller_mh():string {return df_tag('b', [], df_caller_ml(1));}
 
 /**
  * 2016-08-31
  * @used-by df_abstract()
  * @used-by df_caller_mh()
  * @param int $o [optional]
- * @return string
  */
-function df_caller_ml($o = 0) {return df_caller_m(++$o) . '()';}
+function df_caller_ml($o = 0):string {return df_caller_m(++$o) . '()';}
