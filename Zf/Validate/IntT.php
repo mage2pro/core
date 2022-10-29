@@ -23,9 +23,6 @@ final class IntT extends Type {
 	 */
 	protected function expected() {return 'an integer';}
 
-	/**
-	 * @used-by \Df\Qa\Method::assertParamIsInteger()
-	 * @return self
-	 */
-	static function s() {static $r; return $r ? $r : $r = new self;}
+	/** @used-by \Df\Qa\Method::assertParamIsInteger()  */
+	static function s():self {static $r; return $r ? $r : $r = new self;}
 }

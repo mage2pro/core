@@ -29,7 +29,6 @@ final class ArrayT extends Type implements \Zend_Filter_Interface {
 	/**
 	 * @used-by \Df\Qa\Method::assertResultIsArray()
 	 * @used-by \Df\Qa\Method::assertValueIsArray()
-	 * @return self
 	 */
-	static function s() {static $r; return $r ? $r : $r = new self;}
+	static function s():self {static $r; return $r ? $r : $r = new self;}
 }

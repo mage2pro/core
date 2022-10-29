@@ -39,9 +39,6 @@ final class FloatT extends Parser {
 	 */
 	protected function getZendValidatorClass() {return 'Zend_Validate_Float';}
 
-	/**
-	 * @used-by df_float()
-	 * @return self
-	 */
-	static function s() {static $r; return $r ? $r : $r = new self;}
+	/** @used-by df_float() */
+	static function s():self {static $r; return $r ? $r : $r = new self;}
 }

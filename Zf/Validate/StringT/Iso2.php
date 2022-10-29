@@ -23,7 +23,6 @@ final class Iso2 extends \Df\Zf\Validate\Type {
 	/**
 	 * @used-by df_check_iso2()
 	 * @used-by \Df\Qa\Method::assertParamIsIso2()
-	 * @return self
 	 */
-	static function s() {static $r; return $r ? $r : $r = new self;}
+	static function s():self {static $r; return $r ? $r : $r = new self;}
 }

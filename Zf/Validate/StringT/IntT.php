@@ -36,9 +36,6 @@ final class IntT extends \Df\Zf\Validate\Type {
 	 */
 	protected function expected() {return 'an integer';}
 
-	/**
-	 * @used-by df_int()
-	 * @return self
-	 */
-	static function s() {static $r; return $r ? $r : $r = new self;}
+	/** @used-by df_int() */
+	static function s():self {static $r; return $r ? $r : $r = new self;}
 }
