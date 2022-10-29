@@ -309,7 +309,7 @@ function df_xml_children(CX $e, $name, $req = false) { /** @var CX|null $r */
 		 * то есть реально возвращает количество детей типа rule.
 		 * Далее, оператор [] также работает, как для массива (!)
 		 * http://stackoverflow.com/a/16100099
-		 * Класс \SimpleXMLElement — вообще один из самых необычных классов PHP.
+		 * Класс @see \SimpleXMLElement — вообще один из самых необычных классов PHP.
 		 */
 		$r = $e->{$name};
 	}

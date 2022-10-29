@@ -371,10 +371,8 @@ class X extends MX {
 	 */
 	function map($path, $keyName, $valueName) {
 		$r = []; /** @var array(string => string) $r */
-		/** @var X[] $nodes */
-		$nodes = $this->xpathA($path);
-		foreach ($nodes as $node) {
-			/** @var X $node */
+		$nodes = $this->xpathA($path); /** @var X[] $nodes */
+		foreach ($nodes as $node) {/** @var X $node */
 			$r[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
 		return $r;
@@ -431,10 +429,8 @@ class X extends MX {
 	 */
 	function xpathMap($path, $keyName, $valueName) {
 		$r = []; /** @var array(string => string) $r */
-		/** @var X[] $nodes */
-		$nodes = $this->xpathA($path);
-		foreach ($nodes as $node) {
-			/** @var X $node */
+		$nodes = $this->xpathA($path); /** @var X[] $nodes */
+		foreach ($nodes as $node) { /** @var X $node */
 			$r[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
 		return $r;

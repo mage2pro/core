@@ -149,7 +149,7 @@ abstract class Settings {
 	 * @used-by \Df\Framework\Mail\TransportObserver::execute()
 	 * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
 	 * @used-by \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath()
-	 * @used-by \Dfe\Portal\Plugin\Theme\Model\View\Design::beforeGetConfigurationDesignTheme()
+	 * @used-by \Dfe\Portal\Plugin\Theme\Model\View\Design::aroundGetConfigurationDesignTheme()
 	 * @used-by \Dfe\Sift\Observer::f()
 	 * @used-by \Dfe\Stripe\Block\Js::_toHtml()
 	 * @used-by \Dfe\TBCBank\API\Client::proxy()
