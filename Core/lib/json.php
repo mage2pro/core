@@ -7,11 +7,8 @@ use Df\Core\Exception as DFE;
  * @used-by df_check_json_complex()
  * @used-by \Df\API\Client::_p()
  * @param mixed $v
- * @return bool
  */
-function df_check_json($v) {/** @noinspection PhpUsageOfSilenceOperatorInspection */ return !is_null(
-	@json_decode($v)
-);}
+function df_check_json($v):bool {return !is_null(@json_decode($v));}
 
 /**
  * 2016-08-19
