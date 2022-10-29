@@ -39,12 +39,11 @@ abstract class Button extends _P {
 	 * @return string
 	 */
 	final protected function _toHtml() {
-		/** @var string $result */
-		$result =
+		$r =
 			Css::isAccConfirmation() || Css::isRegCompletion()
 			|| !self::sModule()->enable() || !$this->s()->enable() ? '' :
 				(df_customer_logged_in() ? $this->loggedIn() : $this->loggedOut())
-		;
+		; /** @var string $r */
 		/**
 		 * 2016-11-23
 		 * Ссылки в шапке надо обязательно обрамлять в <li>, потому что они выводятся внутри <ul>:
@@ -58,7 +57,7 @@ abstract class Button extends _P {
 		 * @see \Magento\Framework\View\Element\Html\Links::_toHtml()
 		 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Element/Html/Links.php#L76-L82
 		 */
-		return df_tag_if($result, $result && $this->isInHeader(), 'li', "df-sso-li-{$this->s()->type()}");
+		return df_tag_if($r, $r && $this->isInHeader(), 'li', "df-sso-li-{$this->s()->type()}");
 	}
 
 	/**

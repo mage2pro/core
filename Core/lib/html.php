@@ -20,9 +20,8 @@ function df_html_b(...$args) {return df_call_a(function($s) {return df_tag('b', 
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @param string|string[] ...$args
- * @return string
  */
-function df_link_inline(...$args) {return df_call_a(function($res) {return df_resource_inline(
+function df_link_inline(...$args):string {return df_call_a(function($res) {return df_resource_inline(
 	$res, function($url) {return df_tag('link', ['href' => $url, 'rel' => 'stylesheet', 'type' => 'text/css'], null, false);}
 );}, $args);}
 
@@ -40,9 +39,8 @@ function df_link_inline(...$args) {return df_call_a(function($res) {return df_re
  * @used-by df_link_inline()
  * @param string $r
  * @param Closure $f
- * @return string
  */
-function df_resource_inline($r, Closure $f) {
+function df_resource_inline($r, Closure $f):string {
 	static $c; /** @var array(string => bool) $c */
 	if (!$r || isset($c[$r])) {$result = '';}
 	else {$c[$r] = true; $result = $f(df_asset_create($r)->getUrl());}
@@ -56,20 +54,18 @@ function df_resource_inline($r, Closure $f) {
  * @used-by \Df\Sso\Button::loggedOut()
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  * @param string $css
- * @return string
  */
-function df_style_inline($css) {return !$css ? '' : df_tag('style', ['type' => 'text/css'], $css);}
+function df_style_inline($css):string {return !$css ? '' : df_tag('style', ['type' => 'text/css'], $css);}
 
 /**
  * 2016-12-04
  * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Frugue\Shipping\Header::_toHtml()
- * @param string ...$selectors
- * @return string
+ * @param string ...$s
  */
-function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style_inline(
-	df_csv_pretty($selectors) . ' {display: none !important;}'
+function df_style_inline_hide(...$s):string {return !$s ? '' : df_style_inline(
+	df_csv_pretty($s) . ' {display: none !important;}'
 );}
 
 /**
@@ -102,9 +98,8 @@ function df_style_inline_hide(...$selectors) {return !$selectors ? '' : df_style
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
  * @param string|null|string[] $content [optional]
  * @param bool|null $multiline [optional]
- * @return string
  */
-function df_tag($tag, $attrs = [], $content = null, $multiline = null) {return Tag::render(
+function df_tag($tag, $attrs = [], $content = null, $multiline = null):string {return Tag::render(
 	$tag, is_array($attrs) ? $attrs : ['class' => $attrs], $content, $multiline
 );}
 
@@ -114,21 +109,22 @@ function df_tag($tag, $attrs = [], $content = null, $multiline = null) {return T
  * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
  * @param string $text
  * @param string ...$url
- * @return string
  */
-function df_tag_ab($text, ...$url) {return df_tag('a', ['href' => implode($url), 'target' => '_blank'], $text);}
+function df_tag_ab($text, ...$url):string {return df_tag('a', ['href' => implode($url), 'target' => '_blank'], $text);}
 
 /**
  * 2016-10-24          
  * @used-by \Df\Payment\Comment\Description::a()
+ * @used-by \Df\Payment\Method::tidFormat()
+ * @used-by \Df\Payment\PlaceOrderInternal::message()
+ * @used-by \Df\Sso\Button::_toHtml()
  * @param string $content
  * @param bool $condition
  * @param string $tag
  * @param string|array(string => string|string[]|int|null) $attributes [optional]
  * @param bool $multiline [optional]
- * @return string
  */
-function df_tag_if($content, $condition, $tag, $attributes = [], $multiline = null) {return
+function df_tag_if($content, $condition, $tag, $attributes = [], $multiline = null):string {return
 	!$condition ? $content : df_tag($tag, $attributes, $content, $multiline)
 ;}
 
@@ -138,9 +134,8 @@ function df_tag_if($content, $condition, $tag, $attributes = [], $multiline = nu
  * @param bool $isOrdered [optional]
  * @param string|null $cssList [optional]
  * @param string|null $cssItem [optional]
- * @return string
  */
-function df_tag_list(array $items, $isOrdered = false, $cssList = null, $cssItem = null) {return df_tag(
+function df_tag_list(array $items, $isOrdered = false, $cssList = null, $cssItem = null):string {return df_tag(
 	$isOrdered ? 'ol' : 'ul'
 	,array_filter(['class' => $cssList])
 	,df_cc_n(array_map(function($i) use($cssItem) {return df_tag('li', array_filter(['class' => $cssItem]), $i);}, $items))
