@@ -7,6 +7,7 @@ use Magento\Store\Model\StoreCookieManager;
 use Magento\Store\Api\StoreCookieManagerInterface;
 /**
  * 2016-11-07
+ * 2022-10-29 @deprecated It is unused.
  * @param string $name
  * @param string|null $d [optional]
  * @return string|null
@@ -15,27 +16,29 @@ function df_cookie_get($name = null, $d = null) {return df_cookie_m()->getCookie
 
 /**
  * 2016-06-06
+ * @used-by df_cookie_get()
+ * @used-by df_cookie_set_js()
  * @return CookieManagerInterface|PhpCookieManager
  */
 function df_cookie_m() {return df_o(CookieManagerInterface::class);}
 
 /**
  * 2016-06-06
+ * @used-by df_cookie_metadata_standard()
  * @return CookieMetadataFactory
  */
-function df_cookie_metadata() {return df_o(CookieMetadataFactory::class);}
+function df_cookie_metadata():CookieMetadataFactory {return df_o(CookieMetadataFactory::class);}
 
 /**
  * 2016-06-06
- * @return PublicCookieMetadata
+ * @used-by df_cookie_set_js()
  */
-function df_cookie_metadata_standard() {
-	/** @var PublicCookieMetadata $result */
-	$result = df_cookie_metadata()->createPublicCookieMetadata();
-	$result->setDurationOneYear();
-	$result->setPath('/');
-	$result->setHttpOnly(false);
-	return $result;
+function df_cookie_metadata_standard():PublicCookieMetadata {
+	$r = df_cookie_metadata()->createPublicCookieMetadata(); /** @var PublicCookieMetadata $r */
+	$r->setDurationOneYear();
+	$r->setPath('/');
+	$r->setHttpOnly(false);
+	return $r;
 }
 
 /**
@@ -43,12 +46,10 @@ function df_cookie_metadata_standard() {
  * Cookie VS Session: http://stackoverflow.com/questions/6253633
  * @used-by \Dfe\AmazonLogin\Controller\Index\Index::postProcess()
  * Устанавливает куку, которая будет доступна из JavaScript.
- * @param string $name
- * @param string $value
+ * @param string $k
+ * @param string $v
  */
-function df_cookie_set_js($name, $value) {
-	df_cookie_m()->setPublicCookie($name, $value, df_cookie_metadata_standard());
-}
+function df_cookie_set_js($k, $v):void {df_cookie_m()->setPublicCookie($k, $v, df_cookie_metadata_standard());}
 
 /**
  * 2015-11-04
