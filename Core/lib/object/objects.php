@@ -224,7 +224,12 @@ function df_sc($resultClass, $expectedClass = null, array $params = [], $cacheKe
  * @param mixed|callable|null $d [optional]
  * @return mixed|null
  */
-function dfo($o, $k, $d = null) {return isset($o->{$k}) ? $o->{$k} : df_call_if($d, $k);}
+function dfo($o, $k, $d = null) {return
+	# 2022-10-29
+	# It works even in PHP 8.2 (despite dynamic properties are deprecated since PHP 8.2): https://3v4l.org/2Q8Fm
+	# https://www.php.net/manual/migration82.deprecated.php#migration82.deprecated.core.dynamic-properties
+	isset($o->{$k}) ? $o->{$k} : df_call_if($d, $k)
+;}
 
 /**
  * 2017-07-11
