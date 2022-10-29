@@ -112,7 +112,7 @@ final class Visitor extends O {
 	 * @used-by self::r()
 	 * @return array(string => mixed)
 	 */
-	private function responseA() {return dfc($this, function() {return df_try(function() {return
+	private function responseA():array {return dfc($this, function() {return df_try(function() {return
 		df_http_json('http://geoip.mage2.pro/json/' . $this[self::$P__IP], [], 5);
 	}, []);});}
 
@@ -121,7 +121,6 @@ final class Visitor extends O {
 	 * @used-by df_visitor()
 	 * @used-by \Dfe\TwoCheckout\Address::visitor()
 	 * @param string|null $ip [optional]
-	 * @return self
 	 */
 	static function sp($ip = null):self {return dfcf(function($ip = null) {return new self([
 		self::$P__IP => $ip ?: df_visitor_ip()
