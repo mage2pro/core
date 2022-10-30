@@ -4,14 +4,11 @@ use Df\Core\R\ConT;
 use ReflectionClass as RC;
 
 /**
- * 2016-02-08
- * Применение @uses dfa_flatten() делает возможным вызовы типа:
- * df_cc_class_uc('Aa', ['Bb', 'Cb']) => Aa\Bb\Cb
+ * 2016-02-08 Применение @uses dfa_flatten() делает возможным вызовы типа: df_cc_class_uc('Aa', ['Bb', 'Cb']) => Aa\Bb\Cb
  * @see df_cc_class_uc()
  * @param string|string[] ...$args
- * @return string
  */
-function df_cc_class(...$args) {return implode('\\', df_clean(dfa_flatten($args)));}
+function df_cc_class(...$args):string {return implode('\\', df_clean(dfa_flatten($args)));}
 
 /**
  * 2016-03-25
@@ -20,18 +17,16 @@ function df_cc_class(...$args) {return implode('\\', df_clean(dfa_flatten($args)
  * Мы используем это в модулях Stripe и Checkout.com.
  * @see df_cc_class()
  * @param string|string[] ...$args
- * @return string
  */
-function df_cc_class_uc(...$args) {return df_cc_class(df_ucfirst(dfa_flatten($args)));}
+function df_cc_class_uc(...$args):string {return df_cc_class(df_ucfirst(dfa_flatten($args)));}
 
 /**
  * 2016-08-10 Если класс не указан, то вернёт название функции. Поэтому в качестве $a1 можно передавать null.
  * @used-by \Df\Qa\Trace\Frame::method()
  * @param string|object|null|array(object|string)|array(string = string) $a1
  * @param string|null $a2 [optional]
- * @return string
  */
-function df_cc_method($a1, $a2 = null) {return df_ccc('::',
+function df_cc_method($a1, $a2 = null):string {return df_ccc('::',
 	$a2 ? [df_cts($a1), $a2] : (
 		!isset($a1['function']) ? $a1 :
 			[dfa($a1, 'class'), $a1['function']]
@@ -43,9 +38,8 @@ function df_cc_method($a1, $a2 = null) {return df_ccc('::',
  * http://stackoverflow.com/a/666701
  * @used-by \Df\Payment\W\F::i()
  * @param string $c
- * @return bool
  */
-function df_class_check_abstract($c) {df_param_sne($c, 0); return (new RC(df_ctr($c)))->isAbstract();}
+function df_class_check_abstract($c):bool {df_param_sne($c, 0); return (new RC(df_ctr($c)))->isAbstract();}
 
 /**
  * 2016-05-06
@@ -66,9 +60,8 @@ function df_class_exists($c):bool {$c = df_ctr($c); return @class_exists($c);}
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @used-by df_class_my()
  * @param string|object $c
- * @return string
  */
-function df_class_f($c) {return df_first(df_explode_class($c));}
+function df_class_f($c):string {return df_first(df_explode_class($c));}
 
 /**
  * 2017-01-10
@@ -76,10 +69,10 @@ function df_class_f($c) {return df_first(df_explode_class($c));}
  * (возвращала бы путь к файлу из папки «var/generation», а не из папки модуля).
  * Пример результата: «C:/work/mage2.pro/store/vendor/mage2pro/allpay/Webhook/ATM.php».
  * Пока эта функция никем не используется.
+ * 2022-10-31 @deprecated It is unused.
  * @param string|object $c
- * @return string
  */
-function df_class_file($c) {return df_path_n((new RC(df_cts(df_ctr($c))))->getFileName());}
+function df_class_file($c):string {return df_path_n((new RC(df_cts(df_ctr($c))))->getFileName());}
 
 /**
  * 2015-12-29
@@ -96,17 +89,15 @@ function df_class_file($c) {return df_path_n((new RC(df_cts(df_ctr($c))))->getFi
  * @used-by \Dfe\AlphaCommerceHub\Test\CaseT\PayPal\PaymentStatus::t01()
  * @used-by \Dfe\AlphaCommerceHub\Test\CaseT\PayPal\RefundPayment::t01()
  * @param string|object $c
- * @return string
  */
-function df_class_l($c) {return df_last(df_explode_class($c));}
+function df_class_l($c):string {return df_last(df_explode_class($c));}
 
 /**
  * 2018-01-30
  * 2021-10-27 @deprecared It is unused.
  * @param string|object $c
- * @return string
  */
-function df_class_llc($c) {return strtolower(df_class_l($c));}
+function df_class_llc($c):string {return strtolower(df_class_l($c));}
 
 /**
  * 2016-01-01
@@ -115,20 +106,18 @@ function df_class_llc($c) {return strtolower(df_class_l($c));}
  * https://3v4l.org/k6Hd5
  * @used-by \Df\Config\Plugin\Model\Config\SourceFactory::aroundCreate()
  * @param string|object $c
- * @return bool
  */
-function df_class_my($c) {return in_array(df_class_f($c), ['Df', 'Dfe', 'Dfr']);}
+function df_class_my($c):bool {return in_array(df_class_f($c), ['Df', 'Dfe', 'Dfr']);}
 
 /**
  * 2016-07-10
  * Df\PaypalClone\W\Handler => Df\PaypalClone\Request
  * @param string|object $c
  * @param string ...$newSuffix
- * @return string
  */
-function df_class_replace_last($c, ...$newSuffix) {return implode(df_cld($c),
-	array_merge(df_head(df_explode_class($c)), dfa_flatten($newSuffix))
-);}
+function df_class_replace_last($c, ...$newSuffix):string {return implode(df_cld($c), array_merge(
+	df_head(df_explode_class($c)), dfa_flatten($newSuffix)
+));}
 
 /**
  * 2016-02-09
@@ -137,9 +126,8 @@ function df_class_replace_last($c, ...$newSuffix) {return implode(df_cld($c),
  * https://3v4l.org/k6Hd5
  * @used-by \Df\API\Settings::titleB()
  * @param string|object $c
- * @return string
  */
-function df_class_second($c) {return df_explode_class($c)[1];}
+function df_class_second($c):string {return df_explode_class($c)[1];}
 
 /**
  * 2016-02-09
@@ -150,18 +138,16 @@ function df_class_second($c) {return df_explode_class($c)[1];}
  * @used-by df_oi_get()
  * @used-by df_oi_save()
  * @param string|object $c
- * @return string
  */
-function df_class_second_lc($c) {return df_lcfirst(df_class_second($c));}
+function df_class_second_lc($c):string {return df_lcfirst(df_class_second($c));}
 
 /**
  * 2016-11-25 «Df\Sso\Settings\Button» => «Settings\Button»
  * 2017-02-11 «Df\Sso\Settings\IButton» => «Settings\Button»  
  * @used-by dfs_con()
  * @param string|object $c
- * @return string
  */
-function df_class_suffix($c) {/** @var string $r */
+function df_class_suffix($c):string {/** @var string $r */
 	$r = implode(df_cld($c), array_slice(df_explode_class($c), 2));
 	if (interface_exists($c)) {
 		if ($a = df_explode_class($r)) {/** @var string[] $a */
@@ -179,9 +165,8 @@ function df_class_suffix($c) {/** @var string $r */
  * 2016-10-20
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @param string|object $c
- * @return string
  */
-function df_cld($c) {return df_contains(df_cts($c) , '\\') ? '\\' : '_';}
+function df_cld($c):string {return df_contains(df_cts($c) , '\\') ? '\\' : '_';}
 
 /**
  * 2016-08-04
@@ -219,14 +204,14 @@ function df_const($c, $name, $def = null) {return
 function df_con($c, $suf, $def = null, $throw = true) {return ConT::generic(
 	function($c, $suf) {return
 		/** @var string $del */
-		# 2016-11-25
-		# Применение df_cc() обязательно, потому что $suf может быть массивом.
+		# 2016-11-25 Применение df_cc() обязательно, потому что $suf может быть массивом.
 		df_cc($del = df_cld($c), df_module_name($c, $del), $suf)
 	;}, $c, $suf, $def, $throw
 );}
 
 /**
  * 2016-10-26
+ * 2022-10-31 @deprecated It is unused.
  * @param object|string $c
  * @param string|string[] $suf
  * @param string|null $def [optional]
@@ -234,23 +219,19 @@ function df_con($c, $suf, $def = null, $throw = true) {return ConT::generic(
  * @return string|null
  */
 function df_con_child($c, $suf, $def = null, $throw = true) {return ConT::generic(
-	function($c, $suf) {return
-		df_cc(df_cld($c), $c, $suf)
-	;}, $c, $suf, $def, $throw
+	function($c, $suf) {return df_cc(df_cld($c), $c, $suf);}, $c, $suf, $def, $throw
 );}
 
 /**
  * 2016-11-25
- * Возвращает имя класса с тем же суффиксом, что и $def,
- * но из папки того же модуля, которому принадлежит класс $c.
+ * Возвращает имя класса с тем же суффиксом, что и $def, но из папки того же модуля, которому принадлежит класс $c.
  * Результат должен быть наследником класса $def.
  * Если класс не найден, то возвращается $def.
  * Параметр $throw этой функции не нужен, потому что параметр $def обязателен.
  * Пример:
- * $c => \Dfe\FacebookLogin\Button
- * $def = \Df\Sso\Settings\Button
- * Результат: «Dfe\FacebookLogin\Settings\Button»
- *
+ * 		$c => \Dfe\FacebookLogin\Button
+ * 		$def = \Df\Sso\Settings\Button
+ * 		Результат: «Dfe\FacebookLogin\Settings\Button»
  * 2016-12-28
  * Отличие от @see df_con_sibling рассмотрим на примере:
  * класс: Dfe\AAA\Webhook\Exception
@@ -260,9 +241,7 @@ function df_con_child($c, $suf, $def = null, $throw = true) {return ConT::generi
  * df_con_sibling($this, 'Xxx\Yyy', \Df\Payment\Xxx\Yyy)
  * 		работает точно так же, но запись длиннее
  * 		+ не проверяет, что результат имеет класс \Df\Payment\Xxx\Yyy или его потомка.
-
  * 2017-02-11 Отныне функция позволяет в качестве $def передавать интерфейс: @see df_class_suffix()
- *
  * @used-by dfpm_c()
  * @used-by dfsm_c()
  * @used-by \Df\API\Facade::p()
@@ -341,8 +320,9 @@ function df_con_hier_suf($c, $suf, $throw = true) {
 }
 
 /**
- * 2017-03-20
- * Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.
+ * 2017-03-20 Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.
+ * @used-by \Df\Payment\W\F::tryTA()
+ * @used-by \Df\PaypalClone\Signer::_sign()
  * @param object|string $c
  * @param string|string[] $sufBase
  * @param string|string[] $ta
@@ -395,10 +375,9 @@ function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
  * 2016-11-25
  * Возвращает имя класса из той же папки, что и $c, но с окончанием $nameLast.
  * Пример:
- * $c => \Df\Payment\W\Handler
- * $nameLast = «Exception»
- * Результат: «Df\Payment\W\Handler\Exception»
- * @used-by \Df\Payment\W\Handler::exceptionC()
+ * 		$c => \Df\Payment\W\Handler
+ * 		$nameLast = «Exception»
+ * 		Результат: «Df\Payment\W\Handler\Exception»
  * 2016-12-28
  * Отличие от @see df_con_heir рассмотрим на примере:
  * класс: Dfe\AAA\Webhook\Exception
@@ -408,7 +387,7 @@ function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
  * df_con_sibling($this, 'Webhook\Report', \Df\Payment\Xxx\Yyy)
  * 		работает точно так же, но запись длиннее
  * 		+ не проверяет, что результат имеет класс \Df\Payment\Xxx\Yyy или его потомка.
- * 
+ * @used-by \Df\Payment\W\Handler::exceptionC()
  * @param object|string $c
  * @param string|string[] $nameLast
  * @param string|null $def [optional]
@@ -416,9 +395,7 @@ function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
  * @return string|null
  */
 function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return ConT::generic(
-	function($c, $nameLast) {return
-		df_class_replace_last($c, $nameLast)
-	;}, $c, $nameLast, $def, $throw
+	function($c, $nameLast) {return df_class_replace_last($c, $nameLast);}, $c, $nameLast, $def, $throw
 );}
 
 /**
@@ -434,20 +411,19 @@ function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return ConT:
  * @used-by \Df\Payment\Method::getInfoBlockType()
  * @param string|object $c
  * @param string $del [optional]
- * @return string
  */
-function df_cts($c, $del = '\\') {/** @var string $r */
+function df_cts($c, $del = '\\'):string {/** @var string $r */
 	$r = df_trim_interceptor(is_object($c) ? get_class($c) : ltrim($c, '\\'));
 	return '\\' === $del ? $r : str_replace('\\', $del, $r);
 }
 
 /**
  * 2016-01-29
+ * 2022-10-31 @deprecated It is unused.
  * @param string $c
  * @param string $del
- * @return string
  */
-function df_cts_lc($c, $del) {return implode($del, df_explode_class_lc($c));}
+function df_cts_lc($c, $del):string {return implode($del, df_explode_class_lc($c));}
 
 /**
  * 2016-04-11 Dfe_CheckoutCom => dfe_checkout_com
@@ -455,15 +431,21 @@ function df_cts_lc($c, $del) {return implode($del, df_explode_class_lc($c));}
  * @used-by df_report_prefix()
  * @param string $c
  * @param string $del
- * @return string
  */
-function df_cts_lc_camel($c, $del) {return implode($del, df_explode_class_lc_camel($c));}
+function df_cts_lc_camel($c, $del):string {return implode($del, df_explode_class_lc_camel($c));}
 
 /**
+ * @used-by df_class_f()
+ * @used-by df_class_l()
+ * @used-by df_class_replace_last()
+ * @used-by df_class_second()
+ * @used-by df_class_suffix()
+ * @used-by df_cts_lc()
+ * @used-by df_explode_class_lc()
  * @param string|object $c
  * @return string[]
  */
-function df_explode_class($c) {return df_explode_multiple(['\\', '_'], df_cts($c));}
+function df_explode_class($c):array {return df_explode_multiple(['\\', '_'], df_cts($c));}
 
 /**
  * 2016-04-11 Dfe_CheckoutCom => [Dfe, Checkout, Com]
@@ -473,7 +455,7 @@ function df_explode_class($c) {return df_explode_multiple(['\\', '_'], df_cts($c
  * @param string|object $c
  * @return string[]
  */
-function df_explode_class_camel($c) {return dfa_flatten(df_explode_camel(explode('\\', df_cts($c))));}
+function df_explode_class_camel($c):array {return dfa_flatten(df_explode_camel(explode('\\', df_cts($c))));}
 
 /**
  * 2016-01-14
@@ -482,7 +464,7 @@ function df_explode_class_camel($c) {return dfa_flatten(df_explode_camel(explode
  * @param string|object $c
  * @return string[]
  */
-function df_explode_class_lc($c) {return df_lcfirst(df_explode_class($c));}
+function df_explode_class_lc($c):array {return df_lcfirst(df_explode_class($c));}
 
 /**
  * 2016-04-11
@@ -493,7 +475,7 @@ function df_explode_class_lc($c) {return df_lcfirst(df_explode_class($c));}
  * @param string|object $c
  * @return string[]
  */
-function df_explode_class_lc_camel($c) {return df_lcfirst(df_explode_class_camel($c));}
+function df_explode_class_lc_camel($c):array {return df_lcfirst(df_explode_class_camel($c));}
 
 /**
  * 2021-02-24
@@ -501,4 +483,4 @@ function df_explode_class_lc_camel($c) {return df_lcfirst(df_explode_class_camel
  * @param string $m
  * @return string[]
  */
-function df_explode_method($m) {return explode('::', $m);}
+function df_explode_method($m):array {return explode('::', $m);}
