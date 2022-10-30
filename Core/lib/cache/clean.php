@@ -7,7 +7,7 @@ use Magento\Framework\Cache\FrontendInterface as IFrontend;
  * @used-by \Df\OAuth\App::getAndSaveTheRefreshToken()
  * @used-by \Dfe\Moip\Backend\Enable::dfSaveAfter()
  */
-function df_cache_clean() {
+function df_cache_clean():void {
 	df_map(function(IFrontend $f) {$f->getBackend()->clean();}, df_cache_pool());
 	df_ram()->reset();
 	/**
@@ -26,7 +26,7 @@ function df_cache_clean() {
  * @used-by \Df\API\Client::p()
  * @param string $tag
  */
-function df_cache_clean_tag($tag) {
+function df_cache_clean_tag($tag):void {
 	df_cache()->clean([$tag]);
 	df_ram()->clean($tag);
 }
