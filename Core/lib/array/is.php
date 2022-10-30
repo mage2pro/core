@@ -19,9 +19,8 @@ if (!function_exists('array_is_list')) {
 	 * @used-by \Df\Payment\ConfigProvider::configOptions()
 	 * @used-by \Df\Payment\Method::isAvailable()
 	 * @param array(int|string => mixed) $a
-	 * @return bool
 	 */
-	function array_is_list(array $a) {
+	function array_is_list(array $a):bool {
 		$r = true; /** @var bool $r */
 		foreach (array_keys($a) as $k => $v) {
 			# 2015-02-07
@@ -54,6 +53,5 @@ if (!function_exists('array_is_list')) {
  * @used-by df_ksort()
  * @used-by \Df\Xml\X::importArray()
  * @param array(int|string => mixed) $a
- * @return bool
  */
-function df_is_assoc(array $a) {return !$a || !array_is_list($a);}
+function df_is_assoc(array $a):bool {return !$a || !array_is_list($a);}
