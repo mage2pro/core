@@ -15,9 +15,8 @@ function df_check_json($v):bool {return !is_null(@json_decode($v));}
  * @see json_decode() спокойно принимает не только строки, но и числа, а также true.
  * Наша функция возвращает true, если аргумент является именно строкой.
  * @param mixed $v
- * @return bool
  */
-function df_check_json_complex($v) {return is_string($v) && df_starts_with($v, '{') && df_check_json($v);}
+function df_check_json_complex($v):bool {return is_string($v) && df_starts_with($v, '{') && df_check_json($v);}
 
 /**
  * «Returns the value encoded in json in appropriate PHP type.
