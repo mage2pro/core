@@ -115,8 +115,7 @@ function df_merge_single(array $arrays):array {return array_merge(...$arrays); }
 
 /**
  * 2017-10-28
- * Plain `array_merge($r, $b)` works wronly,
- * if $b contains contains SOME numeric-string keys like "99":
+ * Plain `array_merge($r, $b)` works wronly, if $b contains contains SOME numeric-string keys like "99":
  * https://github.com/mage2pro/core/issues/40#issuecomment-340139933
  * https://stackoverflow.com/a/5929671
  * @used-by dfa_select_ordered()

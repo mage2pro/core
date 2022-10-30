@@ -10,7 +10,7 @@
  * @param mixed[] $a
  * @return mixed[]|string[]
  */
-function df_head(array $a) {return array_slice($a, 0, -1);}
+function df_head(array $a):array {return array_slice($a, 0, -1);}
 
 /**
  * 2021-11-30
@@ -19,9 +19,8 @@ function df_head(array $a) {return array_slice($a, 0, -1);}
  * @param array $a
  * @param int $offset
  * @param int|null $length [optional]
- * @return array
  */
-function df_slice(array $a, $offset, $length = null) {return array_slice(
+function df_slice(array $a, $offset, $length = null):array {return array_slice(
 	/**
 	 * 2021-10-05
 	 * @uses array_slice() returns an empty array if `$limit` is `0`, and returns all elements if `$limit` is `null`,
@@ -39,4 +38,4 @@ function df_slice(array $a, $offset, $length = null) {return array_slice(
  * @param mixed[] $a
  * @return mixed[]|string[]
  */
-function df_tail(array $a) {return array_slice($a, 1);}
+function df_tail(array $a):array {return array_slice($a, 1);}
