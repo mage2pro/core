@@ -7,9 +7,8 @@ use Magento\Framework\App\Cache\StateInterface as IState;
  * 2015-08-13 https://mage2.pro/t/52
  * 2021-03-06 @deprecated It is unused.
  * @param string $type
- * @return bool
  */
-function df_cache_enabled($type) {
+function df_cache_enabled($type):bool {
 	$state = df_o(IState::class); /** @var IState|State $state */
 	return $state->isEnabled($type);
 }
@@ -19,11 +18,9 @@ function df_cache_enabled($type) {
  * 2016-10-28
  * Добавил дополнительный уровень кэширования: в оперативной памяти.
  * Также позволил в качестве $key передавать массив.
- *
  * 2016-11-01
  * При вызове @see df_cache_get_simple синтаксис use для параметра $f использовать безопасно,
  * в отличие от @see dfc() и @see dfcf(), потому что ключ кэширования передаётся параметром $key.
- *
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\API\Client::p()
  * @used-by \Df\GingerPaymentsBase\Api::idealBanks()
@@ -88,6 +85,7 @@ function df_cache_load($key) {return df_cache()->load($key);}
  * @param string $key
  * @param string[] $tags [optional]
  * @param int|null $lifeTime [optional]
- * @return bool
  */
-function df_cache_save($data, $key, $tags = [], $lifeTime = null) {return df_cache()->save($data, $key, $tags, $lifeTime);}
+function df_cache_save($data, $key, $tags = [], $lifeTime = null):bool {return df_cache()->save(
+	$data, $key, $tags, $lifeTime
+);}
