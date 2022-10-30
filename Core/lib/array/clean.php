@@ -94,7 +94,7 @@ use Magento\Framework\DataObject as _DO;
  * @param mixed ...$k [optional]
  * @return mixed[]
  */
-function df_clean(array $r, ...$k) {/** @var mixed[] $r */return df_clean_r(
+function df_clean(array $r, ...$k):array {/** @var mixed[] $r */return df_clean_r(
 	$r, array_merge([false], df_args($k)), false
 );}
 
@@ -111,7 +111,7 @@ function df_clean(array $r, ...$k) {/** @var mixed[] $r */return df_clean_r(
  * @param bool $req [optional]
  * @return mixed[]
  */
-function df_clean_r(array $r, $k = [], $req = true) {/** @var mixed[] $r */
+function df_clean_r(array $r, $k = [], $req = true):array {/** @var mixed[] $r */
 	/** 2020-02-05 @see array_unique() does not work correctly here, even with the @see SORT_REGULAR flag. */
 	$k = array_merge($k, ['', null, []]);
 	if ($req) {
@@ -132,7 +132,7 @@ function df_clean_r(array $r, $k = [], $req = true) {/** @var mixed[] $r */
  * @return array(int|string => mixed)
  * @throws DFE
  */
-function df_clean_keys(array $a, ...$remove) {
+function df_clean_keys(array $a, ...$remove):array {
 	# 2017-02-18
 	# Для неассоциативных массивов функция не только не имеет смысла,
 	# но и работала бы некорректно в свете замечания к функции df_clean():
@@ -151,7 +151,7 @@ function df_clean_keys(array $a, ...$remove) {
  * @param array(string => mixed) $a
  * @return array(string => mixed)
  */
-function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
+function df_clean_xml(array $a):array {return df_clean($a, [df_cdata('')]);}
 
 /**
  * 2016-11-08
@@ -170,7 +170,7 @@ function df_clean_xml(array $a) {return df_clean($a, [df_cdata('')]);}
  * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
  * @return array(int|string => mixed)
  */
-function df_filter($a1, $a2) { /** @var array $r */
+function df_filter($a1, $a2):array { /** @var array $r */
 	# 2020-03-02
 	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
