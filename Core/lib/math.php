@@ -1,17 +1,5 @@
 <?php
 /**
- * 2022-10-30 @deprecated It is unused.
- * @param float|int $value
- */
-function df_ceil($value):int {return (int)ceil($value);}
-
-/**
- * @param float|int $value
- * @return int
- */
-function df_floor($value) {return (int)floor($value);}
-
-/**
  * @param float|int $value
  * @return int
  */
