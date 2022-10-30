@@ -12,15 +12,13 @@ const DF_INTERCEPTOR = '\Interceptor';
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @used-by dfpm_c()
  * @param string|object $c
- * @return string
  */
-function df_interceptor($c) {return df_cts($c) . DF_INTERCEPTOR;}
+function df_interceptor($c):string {return df_cts($c) . DF_INTERCEPTOR;}
 
 /**
  * 2021-03-26
  * @used-by df_cts()
  * @used-by \Df\Framework\Plugin\EntityManager\TypeResolver::afterResolve()
  * @param string $c
- * @return string
  */
-function df_trim_interceptor($c) {return df_trim_text_right($c, DF_INTERCEPTOR);}
+function df_trim_interceptor($c):string {return df_trim_text_right($c, DF_INTERCEPTOR);}
