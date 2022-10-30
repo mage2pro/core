@@ -17,9 +17,8 @@ function df_cache() {return df_o(ICache::class);}
 /**
  * 2017-06-30
  * @used-by df_cache_clean()
- * @return Pool
  */
-function df_cache_pool() {return df_o(Pool::class);}
+function df_cache_pool():Pool {return df_o(Pool::class);}
 
 /**
  * 2017-06-30
@@ -34,6 +33,5 @@ function df_cache_type_list() {return df_o(ITypeList::class);}
  * @used-by df_cache_clean_tag()
  * @used-by dfcf()
  * @used-by \Df\Payment\Method::sgReset()
- * @return RAM
  */
-function df_ram() {return RAM::s();}
+function df_ram():RAM {return RAM::s();}
