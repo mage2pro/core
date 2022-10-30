@@ -171,6 +171,7 @@ function dfa_combine_self(...$a) {$a = df_args($a); return array_combine($a, $a)
  * http://php.net/manual/function.array-fill.php
  * «5.6.0	num may now be zero. Previously, num was required to be greater than zero»
  * @see array_fill_keys()
+ * @used-by df_vector_sum()
  * @param int $startIndex
  * @param int $length
  * @param mixed $value

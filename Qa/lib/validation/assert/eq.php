@@ -3,6 +3,7 @@ use Df\Core\Exception as DFE;
 use Exception as E;
 
 /**
+ * @used-by df_vector_sum()
  * @param string|int|float|bool $expected
  * @param string|int|float|bool $v
  * @param string|E|null $m [optional]

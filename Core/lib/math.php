@@ -11,15 +11,14 @@ function df_round($v):int {return (int)round($v);}
 /**
  * 2015-02-26
  * Складывает 2 числовых массива как векторы.
- * Второй аргумент может быть также числом:
- * тогда считается, что все координаты этого вектора равны данному числу.
+ * Второй аргумент может быть также числом: тогда считается, что все координаты этого вектора равны данному числу.
+ * 2022-10-30 @deprecated It is unused.
  * @param int[]|float[] $a
  * @param int|float|int[]|float[] $b
  * @return int[]|float[]
  */
 function df_vector_sum(array $a, $b) {
-	/** @var int $length */
-	$length = count($a);
+	$length = count($a); /** @var int $length */
 	if (!is_array($b)) {
 		$b = dfa_fill(0, $length, $b);
 	}
@@ -28,10 +27,9 @@ function df_vector_sum(array $a, $b) {
 		$b = array_values($b);
 	}
 	$a = array_values($a);
-	/** @var int[]|float[] $result */
-	$result = [];
+	$r = []; /** @var int[]|float[] $r */
 	for ($i = 0; $i < $length; $i++) {
-		$result[]= $a[$i] + $b[$i];
+		$r[]= $a[$i] + $b[$i];
 	}
-	return $result;
+	return $r;
 }
