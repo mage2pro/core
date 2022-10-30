@@ -4,10 +4,18 @@ use Df\Core\Exception as DFE;
 use Magento\Framework\DataObject as _DO;
 
 /**
+ * @used-by df_con_hier_suf_ta()
+ * @used-by df_explode_xpath()
+ * @used-by df_fe_init()
+ * @used-by df_find()
+ * @used-by df_map()
+ * @used-by \Df\API\Facade::p()
+ * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
+ * @used-by \Df\Framework\Validator\Composite::check()
  * @param mixed|mixed[] $v
  * @return mixed[]|string[]|float[]|int[]
  */
-function df_array($v) {return is_array($v) ? $v : [$v];}
+function df_array($v):array {return is_array($v) ? $v : [$v];}
 
 /**
  * 2015-12-30 Преобразует коллекцию или массив в карту.
@@ -16,7 +24,7 @@ function df_array($v) {return is_array($v) ? $v : [$v];}
  * @param \Traversable|array(int|string => _DO) $items
  * @return mixed[]
  */
-function df_index($k, $a) {return array_combine(df_column($a, $k), $a);}
+function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
 
 /**
  * 2015-02-11
@@ -30,9 +38,8 @@ function df_index($k, $a) {return array_combine(df_column($a, $k), $a);}
  * @used-by dfa_select_ordered()
  * @used-by dfak_transform()
  * @param \Traversable|array $t
- * @return array
  */
-function df_ita($t) {return is_array($t) ? $t : iterator_to_array($t);}
+function df_ita($t):array {return is_array($t) ? $t : iterator_to_array($t);}
 
 /**
  * @used-by Df_InTime_Api::call()
@@ -46,13 +53,12 @@ function df_stdclass_to_array($value) {return df_json_decode(json_encode($value)
 /**
  * http://en.wikipedia.org/wiki/Tuple
  * 2020-02-12
- * 1) df_tuple(['a' => [1, 2, 3], 'b' => [4, 5]]) →
- * [['a' => 1, 'b' => 4], ['a' => 2, 'b' => 5], ['a' => 3, 'b' => null]]
+ * 1) df_tuple(['a' => [1, 2, 3], 'b' => [4, 5]]) → [['a' => 1, 'b' => 4], ['a' => 2, 'b' => 5], ['a' => 3, 'b' => null]]
  * 2) df_tuple([[1, 2, 3], [4, 5]]) → [[1, 4], [2, 5], [3, null]]
+ * 2022-10-31 @deprecated It is unused.
  * @param array $arrays
- * @return array
  */
-function df_tuple(array $arrays) {
+function df_tuple(array $arrays):array {
 	$r = []; /** @var array $r */
 	$countItems = max(array_map('count', $arrays)); /** @var int $count */
 	for ($ordering = 0; $ordering < $countItems; $ordering++) {
@@ -75,9 +81,9 @@ function df_tuple(array $arrays) {
  * @param array|callable|\Traversable $b
  * @return array(int|string => mixed)
  */
-function dfaf($a, $b) {
+function dfaf($a, $b):array {
 	# 2020-02-15
-	# «A variable is expected to be a traversable or an array, but actually it is a «object»»:
+	# "A variable is expected to be a traversable or an array, but actually it is a «object»":
 	# https://github.com/tradefurniturecompany/site/issues/36
 	$ca = is_callable($a); /** @var bool $ca */
 	$cb = is_callable($b); /** @var bool $ca */
@@ -123,7 +129,7 @@ function dfa_seq(array $a, array $k, $d = null) {
  * @param string|int $k
  * @return array(int|string => array(int|string => mixed))
  */
-function dfa_group(array $a, $k) {
+function dfa_group(array $a, $k):array {
 	$r = []; /** @var array(int|string => array(int|string => mixed)) $r */
 	$isInt = is_int($k); /** @var bool $isInt */
 	foreach ($a as $v) { /** @var mixed $v */
@@ -146,7 +152,7 @@ function dfa_group(array $a, $k) {
  * @param int|null $length
  * @return string[]
  */
-function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length]);}
+function dfa_chop(array $a, $length):array {return df_map('mb_substr', $a, [0, $length]);}
 
 /**               
  * 2016-11-25
@@ -160,7 +166,7 @@ function dfa_chop(array $a, $length) {return df_map('mb_substr', $a, [0, $length
  * @param string|int|int[]|string[] ...$a
  * @return array(int|string => int|string)
  */
-function dfa_combine_self(...$a) {$a = df_args($a); return array_combine($a, $a);}
+function dfa_combine_self(...$a):array {$a = df_args($a); return array_combine($a, $a);}
 
 /**
  * Эта функция отличается от @uses array_fill() только тем,
@@ -177,7 +183,7 @@ function dfa_combine_self(...$a) {$a = df_args($a); return array_combine($a, $a)
  * @param mixed $value
  * @return mixed[]
  */
-function dfa_fill($startIndex, $length, $value) {return !$length ? [] : array_fill($startIndex, $length, $value);}
+function dfa_fill($startIndex, $length, $value):array {return !$length ? [] : array_fill($startIndex, $length, $value);}
 
 /**
  * 2016-03-25 http://stackoverflow.com/a/1320156
@@ -206,7 +212,7 @@ function dfa_fill($startIndex, $length, $value) {return !$length ? [] : array_fi
  * @param array $a
  * @return mixed[]
  */
-function dfa_flatten(array $a) {
+function dfa_flatten(array $a):array {
 	$r = []; /** @var mixed[] $r */
 	array_walk_recursive($a, function($a) use(&$r) {$r[]= $a;});
 	return $r;
@@ -219,7 +225,7 @@ function dfa_flatten(array $a) {
  * @param \Traversable|array(int|string => _DO|AI) $c
  * @return int[]|string[]
  */
-function dfa_ids($c) {return df_map('df_id', $c);}
+function dfa_ids($c):array {return df_map('df_id', $c);}
 
 /**
  * 2016-07-31
@@ -234,9 +240,8 @@ function dfa_ids($c) {return df_map('df_id', $c);}
  * https://www.php.net/manual/function.array-unique.php#refsect1-function.array-unique-changelog
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @param array $a
- * @return array
  */
-function dfa_repeated(array $a) {return array_values(array_unique(array_diff_key($a, array_unique($a))));}
+function dfa_repeated(array $a):array {return array_values(array_unique(array_diff_key($a, array_unique($a))));}
 
 /**
  * Работает в разы быстрее, чем @see array_unique()
@@ -268,7 +273,7 @@ function dfa_repeated(array $a) {return array_values(array_unique(array_diff_key
  * @param array(int|string => int|string) $a
  * @return array(int|string => int|string)
  */
-function dfa_unique_fast(array $a) {return array_keys(@array_flip($a));}
+function dfa_unique_fast(array $a):array {return array_keys(@array_flip($a));}
 
 /**
  * 2020-01-29
@@ -301,19 +306,19 @@ function dfa_unpack(array $a) {return !($c = count($a)) ? null : (1 === $c ? $a[
  * @param string ...$k
  * @return array(string => mixed)
  */
-function dfa_unset(array $a, ...$k) {return array_diff_key($a, array_flip(df_args($k)));}
+function dfa_unset(array $a, ...$k):array {return array_diff_key($a, array_flip(df_args($k)));}
 
 /**
- * Алгоритм взят отсюда:
- * http://php.net/manual/function.array-unshift.php#106570
+ * Алгоритм взят отсюда: http://php.net/manual/function.array-unshift.php#106570
+ * 2022-10-31 @deprecated It is unused.
  * @param array(string => mixed) $a
  * @param string $k
  * @param mixed $v
  */
-function dfa_unshift_assoc(&$a, $k, $v)  {
-	$a = array_reverse($a, $preserve_keys = true);
+function dfa_unshift_assoc(&$a, $k, $v):void  {
+	$a = array_reverse($a, true);
 	$a[$k] = $v;
-	$a = array_reverse($a, $preserve_keys = true);
+	$a = array_reverse($a, true);
 }
 
 /**
