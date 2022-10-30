@@ -13,7 +13,7 @@
  * @param callable|null $f [optional]
  * @return array(int|string => mixed)
  */
-function df_ksort(array $a, $f = null) {
+function df_ksort(array $a, $f = null):array {
 	// 2020-08-25
 	// «`exception.values.0.stacktrace.frames`: Discarded invalid value» / «Reason: expected an array» in Sentry:
 	// https://github.com/mage2pro/core/issues/139
@@ -35,7 +35,7 @@ function df_ksort(array $a, $f = null) {
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
  */
-function df_ksort_ci(array $a) {ksort($a, SORT_FLAG_CASE|SORT_STRING); return $a;}
+function df_ksort_ci(array $a):array {ksort($a, SORT_FLAG_CASE|SORT_STRING); return $a;}
 
 /**
  * 2017-07-05
@@ -45,7 +45,7 @@ function df_ksort_ci(array $a) {ksort($a, SORT_FLAG_CASE|SORT_STRING); return $a
  * @param callable|null $f [optional]
  * @return array(int|string => mixed)
  */
-function df_ksort_r(array $a, $f = null) {return df_ksort(df_map_k(function($k, $v) use($f) {return
+function df_ksort_r(array $a, $f = null):array {return df_ksort(df_map_k(function($k, $v) use($f) {return
 	!is_array($v) ? $v : df_ksort_r($v, $f)
 ;}, $a), $f);}
 
@@ -58,7 +58,7 @@ function df_ksort_r(array $a, $f = null) {return df_ksort(df_map_k(function($k, 
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
  */
-function df_ksort_r_ci(array $a) {return array_is_list($a)
+function df_ksort_r_ci(array $a):array {return array_is_list($a)
 	/**
 	 * 2017-09-08
 	 * @todo It would be nice to use df_sort($a) here,
@@ -96,7 +96,7 @@ function df_ksort_r_ci(array $a) {return array_is_list($a)
  * @param Closure|string|null $f [optional]
  * @return array(int|string => mixed)
  */
-function df_sort(array $a, $f = null) {
+function df_sort(array $a, $f = null):array {
 	$isList = array_is_list($a); /** @var bool $isList */
 	if (!$f) {
 		$isList ? sort($a) : asort($a);
@@ -116,7 +116,7 @@ function df_sort(array $a, $f = null) {
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
  */
-function df_sort_a(array $a) {asort($a); return $a;}
+function df_sort_a(array $a):array {asort($a); return $a;}
 
 /**
  * 2017-02-02 http://stackoverflow.com/a/7930575
@@ -132,7 +132,7 @@ function df_sort_a(array $a) {asort($a); return $a;}
  * @param callable|null $get
  * @return string[]|mixed[]
  */
-function df_sort_names(array $a, $locale = null, callable $get = null) {
+function df_sort_names(array $a, $locale = null, callable $get = null):array {
 	$c = new \Collator($locale); /** @var \Collator $c */
 	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(!$get ? $a : $get($a), !$get ? $b : $get($b));});
 }
