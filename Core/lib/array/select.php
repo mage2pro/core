@@ -23,7 +23,7 @@ use Traversable as T;
  * @param string|null $fk [optional]
  * @return array(int|string => mixed)
  */
-function df_column($c, $fv, $fk = null) {return df_map_kr($c, function($k, $v) use($fv, $fk) {return [
+function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k, $v) use($fv, $fk) {return [
 	!$fk ? $k : df_call($v, $fk), df_call($v, $fv)
 ];});}
 
@@ -166,7 +166,7 @@ function dfaoc($o, F $f, $k = null, $d = null) {return dfa(dfc($o, $f, [], false
  * @param string[] $k
  * @return array(string => string)
  */
-function dfa_select_ordered($a, array $k)  {
+function dfa_select_ordered($a, array $k):array {
 	$resultKeys = array_fill_keys($k, null); /** @var array(string => null) $resultKeys */
 	/**
 	 * 2017-10-28
