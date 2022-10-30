@@ -52,12 +52,11 @@ use Df\Core\Exception as DFE;
  * @return array(string => mixed)
  * @throws DFE
  */
-function df_extend(array $defaults, array $newValues) {/** @var array(string => mixed) $r */
+function df_extend(array $defaults, array $newValues):array {/** @var array(string => mixed) $r */
 	# Здесь ошибочно было бы $r = [], потому что если ключ отсутствует в $newValues, то тогда он не попадёт в $r.
 	$r = $defaults;
-	foreach ($newValues as $key => $newValue) {
-		/** @var int|string $key */ /** @var mixed $newValue */ /** @var mixed $defaultValue */
-		$defaultValue = dfa($defaults, $key);
+	foreach ($newValues as $key => $newValue) {/** @var int|string $key */ /** @var mixed $newValue */
+		$defaultValue = dfa($defaults, $key); /** @var mixed $defaultValue */
 		if (!is_array($defaultValue)) {
 			# 2016-08-23 unset добавил сегодня.
 			if (is_null($newValue)) {
@@ -67,30 +66,26 @@ function df_extend(array $defaults, array $newValues) {/** @var array(string => 
 				$r[$key] = $newValue;
 			}
 		}
+		elseif (is_array($newValue)) {
+			$r[$key] = df_extend($defaultValue, $newValue);
+		}
+		elseif (is_null($newValue)) {
+			unset($r[$key]);
+		}
 		else {
-			if (is_array($newValue)) {
-				$r[$key] = df_extend($defaultValue, $newValue);
-			}
-			else {
-				if (is_null($newValue)) {
-					unset($r[$key]);
-				}
-				else {
-					# Если значение по умолчанию является массивом, а новое значение не является массивом,
-					# то это наверняка говорит об ошибке программиста.
-					df_error(
-						"df_extend: the default value of key «{$key}» is an array {defaultValue},"
-						. "\nbut the programmer mistakenly tries to substitute it"
-						. ' with the value {newValue} of type «{newType}».'
-						. "\nThe new value should be an array or `null`."
-						,[
-							'{defaultValue}' => df_t()->singleLine(df_dump($defaultValue))
-							,'{newType}' => gettype($newValue)
-							,'{newValue}' => df_dump($newValue)
-						]
-					);
-				}
-			}
+			# Если значение по умолчанию является массивом, а новое значение не является массивом,
+			# то это наверняка говорит об ошибке программиста.
+			df_error(
+				"df_extend: the default value of key «{$key}» is an array {defaultValue},"
+				. "\nbut the programmer mistakenly tries to substitute it"
+				. ' with the value {newValue} of type «{newType}».'
+				. "\nThe new value should be an array or `null`."
+				,[
+					'{defaultValue}' => df_t()->singleLine(df_dump($defaultValue))
+					,'{newType}' => gettype($newValue)
+					,'{newValue}' => df_dump($newValue)
+				]
+			);
 		}
 	}
 	return $r;
@@ -98,11 +93,12 @@ function df_extend(array $defaults, array $newValues) {/** @var array(string => 
 
 /**
  * Оба входных массива должны быть ассоциативными
- * @param array(string => mixed) $array1
- * @param array(string => mixed) $array2
+ * 2022-10-31 @deprecated It is unused.
+ * @param array(string => mixed) $a1
+ * @param array(string => mixed) $a2
  * @return array(string => mixed)
  */
-function df_merge_not_empty(array $array1, array $array2) {return array_filter($array2) + $array1;}
+function df_merge_not_empty(array $a1, array $a2):array {return array_filter($a2) + $a1;}
 
 /**
  * 2015-02-11
@@ -111,10 +107,11 @@ function df_merge_not_empty(array $array1, array $array2) {return array_filter($
  * Это бывает удобно в функциональном программировании, например:
  * @used-by Df_Dataflow_Model_Registry_MultiCollection::getEntities()
  * @used-by Df_Dellin_Model_Request_Rate::getDates()
+ * 2022-10-31 @deprecated It is unused.
  * @param array(int|string => mixed) ...$arrays
  * @return array(int|string => mixed)
  */
-function df_merge_single(array $arrays) {return array_merge(...$arrays); }
+function df_merge_single(array $arrays):array {return array_merge(...$arrays); }
 
 /**
  * 2017-10-28
@@ -127,10 +124,9 @@ function df_merge_single(array $arrays) {return array_merge(...$arrays); }
  * @param array(string|int => mixed) $b
  * @return array(string|int => mixed)
  */
-function dfa_merge_numeric(array $r, array $b) {
+function dfa_merge_numeric(array $r, array $b):array {
 	foreach ($b as $k => $v) {
 		$r[$k] = $v;
 	}
 	return $r;
 }
-
