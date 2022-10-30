@@ -5,19 +5,16 @@
  * Вставляет новые элементы внутрь массива.
  * http://php.net/manual/function.array-splice.php
  * Если нужно вставить только один элемент, то необязательно обрамлять его в массив.
- *
  * 2016-11-23
  * Достоинство этой функции перед @uses array_splice()
  * ещё и в отсутствии требования передачи первого параметра по ссылке.
- *
  * 2016-11-24 Отныне функция правильно работает с ассоциативными массивами.
- *
  * @param mixed[] $a
  * @param int $pos
  * @param mixed|mixed[] $add
  * @return mixed[]
  */
-function dfa_insert(array $a, $pos, $add) {
+function dfa_insert(array $a, $pos, $add):array {
 	if (!is_array($add) || array_is_list($add)) {
 		array_splice($a, $pos, 0, $add);
 	}
@@ -55,7 +52,7 @@ function dfa_insert(array $a, $pos, $add) {
  * @param string[] $k
  * @return array(string => mixed)
  */
-function dfa_prepend_by_keys(array $a, array $k) {return dfa($a, $k) + $a;}
+function dfa_prepend_by_keys(array $a, array $k):array {return dfa($a, $k) + $a;}
 
 /**
  * 2015-02-07
@@ -87,6 +84,6 @@ function dfa_prepend_by_keys(array $a, array $k) {return dfa($a, $k) + $a;}
  * @param string[] $v
  * @return array(string => mixed)
  */
-function dfa_prepend_by_values(array $a, array $v) {return array_flip(dfa_prepend_by_keys(array_flip($a), $v));}
+function dfa_prepend_by_values(array $a, array $v):array {return array_flip(dfa_prepend_by_keys(array_flip($a), $v));}
 
 
