@@ -33,10 +33,8 @@ const DF_BEFORE = -1;
  *
  * 2017-07-09
  * Now the function accepts an array as $object.
- * Even in this case it differs from @see array_column():
- * array_column() misses the keys: https://3v4l.org/llMrL
+ * Even in this case it differs from @see array_column(): array_column() misses the keys: https://3v4l.org/llMrL
  * df_column() preserves the keys.
- *
  * @used-by df_category_names()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Core\GlobalSingletonDestructor::process()
@@ -45,7 +43,7 @@ const DF_BEFORE = -1;
  * @param mixed ...$p
  * @return mixed[]|string[]
  */
-function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return df_call($v, $f, $p);}, $c);}
+function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {return df_call($v, $f, $p);}, $c);}
 
 /**
  * 2015-02-11
@@ -87,7 +85,7 @@ function df_each($c, $f, ...$p) {return df_map(function($v) use($f, $p) {return 
  * @return array(int|string => mixed)
  * @throws DFE
  */
-function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false) {
+function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false):array {
 	# 2020-03-02
 	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
@@ -141,7 +139,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $retu
  * @param array|callable|\Traversable $a2
  * @return array(int|string => mixed)
  */
-function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
+function df_map_k($a1, $a2):array {return df_map($a1, $a2, [], [], DF_BEFORE);}
 
 /**
  * 2016-11-08 Функция принимает аргументы в любом порядке.
@@ -157,7 +155,7 @@ function df_map_k($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE);}
  * @return array(int|string => mixed)
  * @throws DFE
  */
-function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
+function df_map_kr($a1, $a2):array {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
 
 /**
  * 2016-11-08 Функция принимает аргументы в любом порядке.
@@ -180,4 +178,4 @@ function df_map_kr($a1, $a2) {return df_map($a1, $a2, [], [], DF_BEFORE, true);}
  * @param array|callable|\Traversable $a2
  * @return array(int|string => mixed)
  */
-function df_map_r($a1, $a2) {return df_map($a1, $a2, [], [], 0, true);}
+function df_map_r($a1, $a2):array {return df_map($a1, $a2, [], [], 0, true);}
