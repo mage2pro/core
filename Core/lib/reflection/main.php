@@ -57,9 +57,8 @@ function df_class_check_abstract($c) {df_param_sne($c, 0); return (new RC(df_ctr
  * @used-by dfpm_c()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @param string $c
- * @return bool
  */
-function df_class_exists($c) {$c = df_ctr($c); return @class_exists($c);}
+function df_class_exists($c):bool {$c = df_ctr($c); return @class_exists($c);}
 
 /**
  * 2016-01-01

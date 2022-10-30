@@ -10,17 +10,15 @@ use Magento\Framework\Interception\ObjectManager\Config\Developer;
  * 2017-03-20
  * @used-by df_class_exists()
  * @param string $c
- * @return string
  */
-function df_ctr($c) {return df_vtr(df_om_config()->getPreference($c));}
+function df_ctr($c):string {return df_vtr(df_om_config()->getPreference($c));}
 
 /**
  * 2017-03-20
  * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()
  * @param string $c
- * @return bool
  */
-function df_is_virtual($c) {return !!dfa(df_virtual_types(), $c);}
+function df_is_virtual($c):bool {return !!dfa(df_virtual_types(), $c);}
 
 /**
  * 2015-08-13
@@ -109,13 +107,12 @@ function df_om_config() {return df_o(IConfig::class);}
  * @used-by df_ctr()
  * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()
  * @param string $c
- * @return string
  */
-function df_vtr($c) {return df_om_config()->getInstanceType($c);}
+function df_vtr($c):string {return df_om_config()->getInstanceType($c);}
 
 /**
  * 2017-03-20
  * @used-by df_is_virtual()
  * @return array(string => string)
  */
-function df_virtual_types() {return df_om_config()->getVirtualTypes();}
+function df_virtual_types():array {return df_om_config()->getVirtualTypes();}
