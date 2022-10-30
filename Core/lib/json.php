@@ -163,9 +163,8 @@ function df_json_decode($s, $throw = true) {/** @var mixed|bool|null $r */
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param mixed $v
  * @param int $flags [optional]
- * @return string
  */
-function df_json_encode($v, $flags = 0) {return json_encode(df_json_sort($v),
+function df_json_encode($v, $flags = 0):string {return json_encode(df_json_sort($v),
 	JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE | $flags
 );}
 
