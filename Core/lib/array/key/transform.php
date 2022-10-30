@@ -25,7 +25,7 @@
  * @param int $c
  * @return array(string => mixed)
  */
-function dfa_key_case(array $a, $c) {return dfak_transform_r($a, function($k) use($c) {return
+function dfa_key_case(array $a, $c):array {return dfak_transform_r($a, function($k) use($c) {return
 	mb_convert_case($k, $c, 'UTF-8')
 ;});}
 
@@ -37,7 +37,7 @@ function dfa_key_case(array $a, $c) {return dfak_transform_r($a, function($k) us
  * @param array(int|string => mixed) $a
  * @return array(int => mixed)
  */
-function dfa_key_int(array $a) {return dfak_transform($a, 'df_int');}
+function dfa_key_int(array $a):array {return dfak_transform($a, 'df_int');}
 
 /**
  * 2020-01-29
@@ -50,7 +50,9 @@ function dfa_key_int(array $a) {return dfak_transform($a, 'df_int');}
  * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function dfak_prefix(array $a, $p, $req = false) {return dfak_transform($a, function($k) use($p) {return "$p$k";}, $req);}
+function dfak_prefix(array $a, $p, $req = false):array {return dfak_transform($a, function($k) use($p) {return
+	"$p$k"
+;}, $req);}
 
 /**
  * 2017-02-01
@@ -72,7 +74,7 @@ function dfak_prefix(array $a, $p, $req = false) {return dfak_transform($a, func
  * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function dfak_transform($a1, $a2, $req = false) {
+function dfak_transform($a1, $a2, $req = false):array {
 	# 2020-03-02
 	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
@@ -97,7 +99,7 @@ function dfak_transform($a1, $a2, $req = false) {
  * @param array|callable|\Traversable $a2
  * @return array(string => mixed)
  */
-function dfak_transform_r($a1, $a2) {return dfak_transform($a1, $a2, true);}
+function dfak_transform_r($a1, $a2):array {return dfak_transform($a1, $a2, true);}
 
 /**
  * 2017-02-01
@@ -105,4 +107,4 @@ function dfak_transform_r($a1, $a2) {return dfak_transform($a1, $a2, true);}
  * @param array(string => mixed) $a
  * @return array(string => mixed)
  */
-function dfa_key_uc(array $a) {return dfa_key_case($a, MB_CASE_UPPER);}
+function dfa_key_uc(array $a):array {return dfa_key_case($a, MB_CASE_UPPER);}
