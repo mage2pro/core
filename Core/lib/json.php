@@ -172,9 +172,8 @@ function df_json_encode($v, $flags = 0):string {return json_encode(df_json_sort(
  * 2020-02-15
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @param mixed $v
- * @return string
  */
-function df_json_encode_partial($v) {return df_json_encode($v, JSON_PARTIAL_OUTPUT_ON_ERROR);}
+function df_json_encode_partial($v):string {return df_json_encode($v, JSON_PARTIAL_OUTPUT_ON_ERROR);}
 
 /**
  * 2022-10-15
@@ -193,9 +192,8 @@ function df_json_file_read($p) {return df_json_decode(df_file_read($p));}
  * 2017-07-05
  * @used-by \Df\API\Client::_p()
  * @param string|array(string => mixed) $j
- * @return string
  */
-function df_json_prettify($j) {return df_json_encode(df_json_decode($j));}
+function df_json_prettify($j):string {return df_json_encode(df_json_decode($j));}
 
 /**
  * 2017-09-07
