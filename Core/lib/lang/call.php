@@ -122,4 +122,6 @@ function df_call_a(callable $f, array $parentArgs, $pAppend = [], $pPrepend = []
  * @param mixed ...$a [optional]
  * @return mixed
  */
-function df_call_if($v, ...$a) {return is_callable($v) && !is_string($v) && !is_array($v) ? call_user_func_array($v, $a) : $v;}
+function df_call_if($v, ...$a) {return is_callable($v) && !is_string($v) && !is_array($v)
+	? call_user_func_array($v, $a) : $v
+;}

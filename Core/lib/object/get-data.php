@@ -23,7 +23,7 @@ function df_assert_gd($v) {return df_has_gd($v) ? $v : df_error(df_ucfirst(
  * @param F|bool|mixed $onE [optional]
  * @return array(string => mixed)
  */
-function df_gd($v, $onE = true) {return df_try(function() use($v) {return df_assert_gd($v)->getData();}, $onE);}
+function df_gd($v, $onE = true):array {return df_try(function() use($v) {return df_assert_gd($v)->getData();}, $onE);}
 
 /**
  * 2020-02-04
@@ -31,6 +31,5 @@ function df_gd($v, $onE = true) {return df_try(function() use($v) {return df_ass
  * @used-by df_call()
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @param mixed $v
- * @return bool
  */
-function df_has_gd($v) {return $v instanceof _DO || $v instanceof AE;}
+function df_has_gd($v):bool {return $v instanceof _DO || $v instanceof AE;}
