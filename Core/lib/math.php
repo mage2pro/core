@@ -17,7 +17,7 @@ function df_round($v):int {return (int)round($v);}
  * @param int|float|int[]|float[] $b
  * @return int[]|float[]
  */
-function df_vector_sum(array $a, $b) {
+function df_vector_sum(array $a, $b):array {
 	$length = count($a); /** @var int $length */
 	if (!is_array($b)) {
 		$b = dfa_fill(0, $length, $b);
