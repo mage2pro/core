@@ -29,11 +29,11 @@ use Df\Core\Exception as DFE;
  * @return mixed|null
  * @throws DFE
  */
-function dfa_deep(array $a, $path, $d = null) {/** @var mixed|null $r */
+function dfa_deep(array $a, $path, $d = null) {/** @var mixed|null $r */ /** @var string[] $pathParts */
 	if (df_nes($path)) {
 		$r = $a;
 	}
-	else if (is_array($path)) {
+	elseif (is_array($path)) {
 		$pathParts = $path;
 	}
 	else {
@@ -48,12 +48,11 @@ function dfa_deep(array $a, $path, $d = null) {/** @var mixed|null $r */
 			 * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
 			 * Это вполне укладывается в наш универсальный алгоритм.
 			 */
-			$pathParts = df_explode_xpath($path); /** @var string[] $pathParts */
+			$pathParts = df_explode_xpath($path);
 		}
 	}
 	if (!isset($r)) {
 		$r = null;
-		/** @noinspection PhpUndefinedVariableInspection */
 		while ($pathParts) {
 			$r = dfa($a, array_shift($pathParts));
 			if (is_array($r)) {
@@ -80,7 +79,7 @@ function dfa_deep(array $a, $path, $d = null) {/** @var mixed|null $r */
  * @return array(string => mixed)
  * @throws DFE
  */
-function dfa_deep_set(array &$array, $path, $value) {
+function dfa_deep_set(array &$array, $path, $value):array {
 	$pathParts = df_explode_xpath($path); /** @var string[] $pathParts */
 	$a = &$array; /** @var array(string => mixed) $a */
 	while ($pathParts) {
@@ -107,7 +106,7 @@ function dfa_deep_set(array &$array, $path, $value) {
  * @param int $l
  * @return array
  */
-function dfa_deep_slice(array $a, $l) {return 1 === $l ? (array_is_list($a) ? $a : array_keys($a)) : array_map(
+function dfa_deep_slice(array $a, $l):array {return 1 === $l ? (array_is_list($a) ? $a : array_keys($a)) : array_map(
 	function($v) use($l) {return !is_array($v) ? $v : dfa_deep_slice($v, $l - 1);}, $a
 );}
 
