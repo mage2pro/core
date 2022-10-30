@@ -13,10 +13,14 @@ use Magento\Framework\Model\AbstractModel as M;
  */
 function df_ic($resultClass, $a2 = null, array $a3 = []) {
 	/** @var string|null $expectedClass */ /** @var array(string => mixed) $params */
-	# 2020-03-02
-	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	# 2020-03-02, 2022-10-31
+	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
+	#		[$expectedClass, $params] = is_array($a2) ? [null, $a2] : [$a2, $a3];
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	# We should support PHP 7.0.
+	# https://3v4l.org/3O92j
+	# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+	# https://stackoverflow.com/a/28233499
 	list($expectedClass, $params) = is_array($a2) ? [null, $a2] : [$a2, $a3];
 	return df_ar(new $resultClass($params), $expectedClass);
 }
@@ -71,9 +75,8 @@ function df_id($o, $allowNull = false) {/** @var int|string|null $r */
  * @used-by df_order_backend_url()
  * @param object|int|string $o
  * @param bool $allowNull [optional]
- * @return int
  */
-function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $allowNull);}
+function df_idn($o, $allowNull = false):int {return df_nat(df_id($o, $allowNull), $allowNull);}
 
 /**
  * 2017-01-12
@@ -84,6 +87,9 @@ function df_idn($o, $allowNull = false) {return df_nat(df_id($o, $allowNull), $a
  * https://3v4l.org/eI2vf
  * http://stackoverflow.com/a/25781989
  * https://php.net/manual/functions.arguments.php#example-145
+ * 2022-10-31
+ * `object` as a return type requires PHP ≥ 7.2:
+ * https://www.php.net/manual/language.types.declarations.php#language.types.declarations.base
  * @used-by df_newa()
  * @used-by \Df\Payment\Currency::f()
  * @used-by \Df\Payment\W\F::__construct()
@@ -109,6 +115,9 @@ function df_new($c, ...$args) {return new $c(...$args);}
  * PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса.
  * Поэтому и создал эту небольшую функцию.
  * В отличие от @see df_new_om(), она не использует Object Manager.
+ * 2022-10-31
+ * `object` as a return type requires PHP ≥ 7.2:
+ * https://www.php.net/manual/language.types.declarations.php#language.types.declarations.base
  * @used-by dfs_con()
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Payment\W\F::aspect()
@@ -235,6 +244,9 @@ function dfo($o, $k, $d = null) {return
  * 2017-07-11
  * It returns a singleton of a class from the $caller module with the $owner or $suf suffix.
  * The result should be a descendant of the $owner, and should exist (it is not defaulted to $owner).
+ * 2022-10-31
+ * `object` as a return type requires PHP ≥ 7.2:
+ * https://www.php.net/manual/language.types.declarations.php#language.types.declarations.base
  * @used-by df_oauth_app()
  * @used-by \Df\Zoho\App::s()
  * @used-by \Df\ZohoBI\API\Facade::s()
