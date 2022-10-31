@@ -25,9 +25,8 @@ final class Register {
 	 *
 	 * @param Sb $sb
 	 * @param _DO $r
-	 * @return _DO
 	 */
-	function afterGetFormData(Sb $sb, _DO $r) {return $r->setData($r->getData()
+	function afterGetFormData(Sb $sb, _DO $r):_DO {return $r->setData($r->getData()
 		+ Sess::s()->ssoRegistrationData()
 		+ (!df_my_local() ? [] : [
 			'dob' => '1982-07-08'
