@@ -9,9 +9,8 @@ use Magento\Sales\Model\Order as O;
 /**
  * 2016-12-01
  * @used-by \Df\Sso\CustomerReturn::mc()
- * @return bool
  */
-function df_are_customers_global() {return dfcf(function() {
+function df_are_customers_global():bool {return dfcf(function() {
 	$share = df_o(Share::class); /** @var Share $share */
 	return $share->isGlobalScope();
 });}

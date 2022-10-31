@@ -13,7 +13,7 @@ use Magento\Framework\DataObject as _DO;
  * @param _DO|C $c
  * @param array(string => mixed) $info
  */
-function df_ci_add(_DO $c, array $info) {
+function df_ci_add(_DO $c, array $info):array {
 	$c[Schema::F__DF] = df_json_encode(df_extend(df_eta(df_ci_get(null, $c)), $info));
 }
 
@@ -58,7 +58,7 @@ function df_ci_get($m = null, _DO $c = null) {
  * @param mixed|null $info
  * @param C|null $c [optional]
  */
-function df_ci_save($m, $info, C $c = null) {
+function df_ci_save($m, $info, C $c = null):void {
 	$data = [df_class_second_lc($m) => $info]; /** @var array(string => string) $data */
 	if ($c = df_customer($c)) {
 		df_ci_add($c, $data);
