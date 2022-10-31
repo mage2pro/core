@@ -20,7 +20,7 @@ final class RegisterSuccess implements ObserverInterface {
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @param O $o
 	 */
-	function execute(O $o) {
+	function execute(O $o):void {
 		$c = df_customer($o['customer']); /** @var Customer $c */
 		$s = Sess::s(); /** @var Sess $s */
 		if ($s->ssoId()) {
