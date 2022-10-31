@@ -8,10 +8,11 @@ use Magento\Store\Model\Store;
 
 /**
  * 2015-12-28
+ * @used-by df_currencies_ctn()
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return string[]
  */
-function df_currencies_codes_allowed($s = null) {return df_store($s)->getAvailableCurrencyCodes(true);}
+function df_currencies_codes_allowed($s = null):array {return df_store($s)->getAvailableCurrencyCodes(true);}
 
 /**
  * 2016-09-05
@@ -19,9 +20,8 @@ function df_currencies_codes_allowed($s = null) {return df_store($s)->getAvailab
  * @used-by \Df\Payment\Currency::fromBase()
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
- * @return string
  */
-function df_currency_base_c($s = null) {return df_currency_base($s)->getCode();}
+function df_currency_base_c($s = null):string {return df_currency_base($s)->getCode();}
 
 /**
  * 2016-07-04       
@@ -29,9 +29,8 @@ function df_currency_base_c($s = null) {return df_currency_base($s)->getCode();}
  * @used-by df_currency_name()
  * @used-by df_currency_num()   
  * @param C|string|null $c [optional]
- * @return string
  */
-function df_currency_code($c = null) {return df_currency($c)->getCode();}
+function df_currency_code($c = null):string {return df_currency($c)->getCode();}
 
 /**
  * 2016-09-05
@@ -40,9 +39,8 @@ function df_currency_code($c = null) {return df_currency($c)->getCode();}
  * а текущая валюта может меняться динамически (в том числе посетителем магазина и сессией).
  * @used-by \Df\Directory\FE\Currency::map()
  * @param int|string|null|bool|StoreInterface $s [optional]
- * @return string
  */
-function df_currency_current_c($s = null) {return df_currency_current($s)->getCode();}
+function df_currency_current_c($s = null):string {return df_currency_current($s)->getCode();}
 
 /**
  * 2018-09-26
@@ -53,15 +51,14 @@ function df_currency_current_c($s = null) {return df_currency_current($s)->getCo
  * @used-by \Dfe\TBCBank\Charge::common()
  * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
  * @param string|C|string[]|C[]|null $c
- * @return string
  */
-function df_currency_num($c = null) {return dfa(df_currency_nums(), df_currency_code($c));}
+function df_currency_num($c = null):string {return dfa(df_currency_nums(), df_currency_code($c));}
 
 /**
  * 2018-09-26  
  * @used-by df_currency_num()
  * @return array(string => string)
  */
-function df_currency_nums() {return dfcf(function() {return array_column(
+function df_currency_nums():array {return dfcf(function() {return array_column(
 	df_module_json('Df_Directory', 'iso4217'), 'numeric', 'alpha'
 );});}

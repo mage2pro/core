@@ -12,7 +12,7 @@ function df_region_name($name, $id) {
 	if ($name) {
 		$r = $name;
 	}
-	else if ($id) {
+	elseif ($id) {
 		$a = df_new_om(A::class); /** @var A $a */
 		$r = $a->getRegionModel((int)$id)->getName();
 	}
