@@ -26,26 +26,26 @@ function df_e(...$args) {return df_call_a(function($text) {return htmlspecialcha
  * 2019-11-15 https://stackoverflow.com/a/1253417
  * @used-by \Inkifi\Consolidation\Controller\Adminhtml\Index\Index::execute()
  * @param string $s
- * @return bool
  */
-function df_is_guid($s) {return 36 === strlen($s) && preg_match(
+function df_is_guid($s):bool {return 36 === strlen($s) && preg_match(
 	'#^\{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}\}?$#', $s
 );}
 
 /**
  * http://darklaunch.com/2009/05/06/php-normalize-newlines-line-endings-crlf-cr-lf-unix-windows-mac
+ * @used-by df_explode_n()
  * @param string $s
- * @return string
  */
-function df_normalize($s) {return strtr($s, ["\r\n" => "\n", "\r" => "\n"]);}
+function df_normalize($s):string {return strtr($s, ["\r\n" => "\n", "\r" => "\n"]);}
 
 /**
- * 2017-04-22 «+79.6-2» => «7962»
+ * 2017-04-22
+ * «+79.6-2» => «7962»
  * http://stackoverflow.com/a/35619532
+ * 2022-10-31 @deprecated It is unused.
  * @param string $s
- * @return string
  */
-function df_remove_non_digits($s) {return preg_replace('[\D]', '', $s);}
+function df_remove_non_digits($s):string {return preg_replace('[\D]', '', $s);}
 
 /**
  * 2015-03-03
@@ -60,9 +60,8 @@ function df_remove_non_digits($s) {return preg_replace('[\D]', '', $s);}
  * @used-by \Dfe\IPay88\Signer::adjust()
  * @param string $s
  * @param string|string[] ...$remove
- * @return string
  */
-function df_string_clean($s, ...$remove) {return str_replace(dfa_flatten($remove), null, $s);}
+function df_string_clean($s, ...$remove):string {return str_replace(dfa_flatten($remove), null, $s);}
 
 /**
  * 2017-02-09
@@ -112,6 +111,5 @@ function df_string_clean($s, ...$remove) {return str_replace(dfa_flatten($remove
  * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
  * @used-by \Dfe\TBCBank\Charge::textFilter()
  * @param string $s
- * @return string
  */
-function df_translit($s) {return transliterator_transliterate('Any-Latin; Latin-ASCII', $s);}
+function df_translit($s):string {return transliterator_transliterate('Any-Latin; Latin-ASCII', $s);}
