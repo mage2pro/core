@@ -6,7 +6,6 @@
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Customer/Controller/Account/CreatePost.php#L239-L242
  */
 namespace Df\Customer\Observer;
-use Df\Customer\Model\Session;
 use Df\Customer\Session as Sess;
 use Df\Sso\Upgrade\Schema;
 use Magento\Customer\Model\Customer;
