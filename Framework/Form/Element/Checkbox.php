@@ -26,9 +26,8 @@ class Checkbox extends _P {
 	 *			return parent::getElementHtml();
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/Checkbox.php#L55-L67
-	 * @return bool
 	 */
-	final function getChecked() {return $this['checked'] || $this['value'];}
+	final function getChecked():bool {return $this['checked'] || $this['value'];}
 
 	/**
 	 * 2016-11-20
@@ -64,9 +63,8 @@ class Checkbox extends _P {
 	 *			return $html;
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L426-L441
-	 * @return string
 	 */
-	function getElementHtml() {
+	function getElementHtml():string {
 		$this->addClass('df-checkbox');
 		if ($this->getChecked()) {
 			$this->setData('checked', 'checked');
@@ -111,9 +109,8 @@ class Checkbox extends _P {
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see _Checkbox::getIsChecked()
-	 * @return bool
 	 */
-	function getIsChecked() {return $this->getChecked();}
+	function getIsChecked():bool {return $this->getChecked();}
 
 	/**
 	 * 2019-05-30
@@ -148,11 +145,10 @@ class Checkbox extends _P {
 	 * Когда галка чекбокса установлена, то значением настроечного поля является пустая строка,
 	 * а когда галка не установлена — то ключ значения отсутствует.
 	 * 2015-12-21 Всё чуточку изменилось...
-	 * @param mixed $value
-	 * @param bool|callable $default [optional]
-	 * @return bool
+	 * @used-by \Df\Config\O::b()
+	 * @used-by \Df\Framework\Form\Element\Fieldset::checkbox()
+	 * @param mixed $v
+	 * @param bool|callable $d [optional]
 	 */
-	final static function b($value, $default = false) {return df_if1(
-		is_null($value), $default, '' === $value || df_bool($value)
-	);}
+	final static function b($v, $d = false):bool {return df_if1(is_null($v), $d, '' === $v || df_bool($v));}
 }
