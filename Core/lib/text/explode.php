@@ -5,11 +5,10 @@
  * @param string $s
  * @return string[]
  */
-function df_explode_multiple(array $delimiters, $s) {
+function df_explode_multiple(array $delimiters, $s):array {
 	$main = array_shift($delimiters); /** @var string $main */
 	# 2016-03-25
-	# «If search is an array and replace is a string,
-	# then this replacement string is used for every value of search.»
+	# «If search is an array and replace is a string, then this replacement string is used for every value of search.»
 	# https://php.net/manual/function.str-replace.php
 	return explode($main, str_replace($delimiters, $main, $s));
 }
@@ -29,7 +28,7 @@ function df_explode_multiple(array $delimiters, $s) {
  * @param string $s
  * @return string[]
  */
-function df_explode_n($s) {return explode("\n", df_normalize(df_trim($s)));}
+function df_explode_n($s):array {return explode("\n", df_normalize(df_trim($s)));}
 
 /**
  * 2016-09-03 Another implementation: df_explode_multiple(['/', DS], $path)
@@ -40,19 +39,18 @@ function df_explode_n($s) {return explode("\n", df_normalize(df_trim($s)));}
  * @param string $p
  * @return string[]
  */
-function df_explode_path($p) {return df_explode_xpath(df_path_n($p));}
+function df_explode_path($p):array {return df_explode_xpath(df_path_n($p));}
 
 /**
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param string $url
  * @return string[]
  */
-function df_explode_url($url) {return explode('/', $url);}
+function df_explode_url($url):array {return explode('/', $url);}
 
 /**
  * 2015-02-06
- * Обратите внимание, что если разделитель отсутствует в строке $xpath,
- * то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
+ * Если разделитель отсутствует в строке, то @uses explode() вернёт не строку, а массив со одим элементом — строкой.
  * Это вполне укладывается в наш универсальный алгоритм.
  * @used-by df_explode_path()
  * @used-by dfa_deep()
@@ -62,4 +60,4 @@ function df_explode_url($url) {return explode('/', $url);}
  * @param string|string[] $p
  * @return string[]
  */
-function df_explode_xpath($p) {return dfa_flatten(array_map(function($s) {return explode('/', $s);}, df_array($p)));}
+function df_explode_xpath($p):array {return dfa_flatten(array_map(function($s) {return explode('/', $s);}, df_array($p)));}
