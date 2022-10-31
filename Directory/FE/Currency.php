@@ -24,9 +24,7 @@ class Currency extends Dropdown {
 		# поэтому я решил убрать опции self::$ORDER и self::$BASE,
 		# однако чтобы это не поломало магазины тех клиентов,
 		# у которых одно из этих значений уже выбрано (а self::$ORDER было значением по умолчанию).
-		return $allowed && (!$chosen || !in_array($chosen, $allowed)) ? df_first($allowed) :
-			($chosen ?: self::$ORDER)
-		;
+		return $allowed && (!$chosen || !in_array($chosen, $allowed)) ? df_first($allowed) : ($chosen ?: self::$ORDER);
 	}
 
 	/**
@@ -62,7 +60,7 @@ class Currency extends Dropdown {
 	 *
 	 * @return array(array(string => string))
 	 */
-	function getValues() {return dfc($this, function() {$v = $this->dfValues(); return
+	function getValues():array {return dfc($this, function() {$v = $this->dfValues(); return
 		# 2016-12-26 Здесь нужно именно array_merge(), потому что индексы — целочисленные.
 		$v ? df_currencies_options($v) : array_merge(
 			df_map_to_options_t([self::$ORDER => 'Order Currency', self::$BASE => 'Base Currency'])
@@ -78,9 +76,8 @@ class Currency extends Dropdown {
 	 * @param string $code
 	 * @param null|string|int|S|Store $store [optional]
 	 * @param string|null $orderCurrency [optional]
-	 * @return string
 	 */
-	final static function v($code, $store = null, $orderCurrency = null) {return dftr(
+	final static function v($code, $store = null, $orderCurrency = null):string {return dftr(
 		$code ?: self::$ORDER, self::map($store, $orderCurrency)
 	);}
 
@@ -91,7 +88,7 @@ class Currency extends Dropdown {
 	 * @param string|null $orderCurrency [optional]
 	 * @return array(string => string|null)
 	 */
-	private static function map($store = null, $orderCurrency = null) {return dfcf(
+	private static function map($store = null, $orderCurrency = null):array {return dfcf(
 		function($store = null, $orderCurrency = null) {return [
 			self::$BASE => df_currency_base_c($store)
 			,self::$ORDER => $orderCurrency ?: df_currency_current_c($store)
