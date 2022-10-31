@@ -1,12 +1,13 @@
 <?php
 use Df\Customer\Model\Session as DfSession;
 use Magento\Customer\Api\AccountManagementInterface as IAM;
-use Magento\Customer\Api\CustomerRepositoryInterface as ICustomerRepository;
+use Magento\Customer\Api\CustomerRepositoryInterface as IRep;
 use Magento\Customer\Api\GroupManagementInterface;
 use Magento\Customer\Model\AccountManagement as AM;
 use Magento\Customer\Model\CustomerRegistry;
 use Magento\Customer\Model\GroupManagement;
 use Magento\Customer\Model\ResourceModel\Customer as CR;
+use Magento\Customer\Model\ResourceModel\CustomerRepository as Rep;
 use Magento\Customer\Model\Session;
 
 /**
@@ -28,25 +29,23 @@ function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
  * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
- * @return CustomerRegistry
  */
-function df_customer_registry() {return df_o(CustomerRegistry::class);}
+function df_customer_registry():CustomerRegistry {return df_o(CustomerRegistry::class);}
 
 /**
  * 2021-05-07
  * @used-by \Df\Quote\Plugin\Model\QuoteAddressValidator::doValidate()
- * @return ICustomerRepository
+ * @return IRep|Rep
  */
-function df_customer_rep() {return df_o(ICustomerRepository::class);}
+function df_customer_rep() {return df_o(IRep::class);}
 
 /**
  * 2016-12-01
  * @used-by wolf_set()
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
- * @return CR
  */
-function df_customer_resource() {return df_o(CR::class);}
+function df_customer_resource():CR {return df_o(CR::class);}
 
 /**
  * @used-by df_customer()
