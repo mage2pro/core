@@ -6,7 +6,7 @@ use Magento\Framework\Model\AbstractModel as Model;
  * 2016-08-22
  * @param Model $m
  */
-function df_eav_partial_save(Model $m) {
+function df_eav_partial_save(Model $m):void {
 	$r = $m->getResource(); /** @var AbstractEntity $r */
 	$r->isPartialSave(true);
 	try {$m->save();}
@@ -21,7 +21,7 @@ function df_eav_partial_save(Model $m) {
  * @param string $attName
  * @param mixed $attValue
  */
-function df_eav_update(Model $m, $attName, $attValue) {
+function df_eav_update(Model $m, $attName, $attValue):void {
 	df_param_sne($attName, 1);
 	$m[$attName] = $attValue;
 	$r = df_ar($m->getResource(), AbstractEntity::class); /** @var AbstractEntity $r */
