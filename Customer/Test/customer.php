@@ -5,5 +5,5 @@ class customer extends \Df\Core\TestCase {
 	/**
 	 * 2016-12-01
 	 */
-	function t00() {}
+	function t00():void {}
 }
