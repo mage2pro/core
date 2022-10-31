@@ -11,37 +11,27 @@ use Df\Core\Helper\Text as T;
 const DF_THIN_SPACE = ' ';
 
 /**
- * @see df_bts_r()
  * @see df_bts_yn()
  * @used-by \Df\Qa\Dumper::dump()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
  * @param bool $v
- * @return string
  */
-function df_bts($v) {return $v ? 'true' : 'false';}
-
-/**
- * @see df_bts()
- * @see df_bts_yn()
- * @param bool $v
- * @return string
- */
-function df_bts_r($v) {return $v ? 'да' : 'нет';}
+function df_bts($v):string {return $v ? 'true' : 'false';}
 
 /**
  * 2017-11-08
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @see df_bts()
- * @see df_bts_r()
  * @param bool $v
- * @return string
  */
-function df_bts_yn($v) {return $v ? 'yes' : 'no';}
+function df_bts_yn($v):string {return $v ? 'yes' : 'no';}
 
 /**
+ * Я так понимаю, здесь безопасно использовать @uses strpos вместо @see mb_strpos() даже для UTF-8.
+ * http://stackoverflow.com/questions/13913411/mb-strpos-vs-strpos-whats-the-difference
  * 2015-04-17 Добавлена возможность указывать в качестве $needle массив.
  * 2022-10-14 @see str_contains() has been added to PHP 8: https://www.php.net/manual/function.str-contains.php
  * @used-by df_block_output()
@@ -62,11 +52,8 @@ function df_bts_yn($v) {return $v ? 'yes' : 'no';}
  * @used-by \TFC\Core\Observer\CanLog::execute()
  * @param string $haystack
  * @param string|string[] ...$n
- * @return bool
- * Я так понимаю, здесь безопасно использовать @uses strpos вместо @see mb_strpos() даже для UTF-8.
- * http://stackoverflow.com/questions/13913411/mb-strpos-vs-strpos-whats-the-difference
  */
-function df_contains($haystack, ...$n) {/** @var bool $r */
+function df_contains($haystack, ...$n):bool {/** @var bool $r */
 	# 2017-07-10 This branch is exclusively for optimization.
 	if (1 === count($n) && !is_array($n0 = $n[0])) {
 		$r = false !== strpos($haystack, $n0);
@@ -86,17 +73,11 @@ function df_contains($haystack, ...$n) {/** @var bool $r */
 
 /**
  * 2015-08-24
+ * 2022-10-31 @deprecated It is unused.
  * @param string $haystack
  * @param string $needle
- * @return bool
  */
-function df_contains_ci($haystack, $needle) {return df_contains(mb_strtoupper($haystack), mb_strtoupper($needle));}
-
-/**
- * @param string $text
- * @return bool
- */
-function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#mui', $text);}
+function df_contains_ci($haystack, $needle):bool {return df_contains(mb_strtoupper($haystack), mb_strtoupper($needle));}
 
 /**
  * Иногда я для разработки использую заплатку ядра для xDebug —
@@ -119,10 +100,10 @@ function df_has_russian_letters($text) {return df_preg_test('#[А-Яа-яЁё]#m
  * Одна из таких функций — df_string.
  *          
  * @used-by df_type()
+ * @used-by \Df\Xml\X::importString()
  * @param mixed $v
- * @return string
  */
-function df_string($v) {
+function df_string($v):string {
 	if (is_object($v)) {
 		/**
 		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
@@ -147,9 +128,8 @@ function df_string($v) {
 /**
  * @used-by \Df\Zf\Validate\Type::_message()
  * @param mixed $v
- * @return string
  */
-function df_string_debug($v) {
+function df_string_debug($v):string {
 	$r = ''; /** @var string $r */
 	if (is_object($v)) {
 		/**
@@ -179,19 +159,19 @@ function df_string_debug($v) {
 }
 
 /**
+ * https://php.net/manual/function.str-split.php#107658
+ * 2022-10-31 @deprecated It is unused.
  * @param string $s
- * @return array
- * http://us3.php.net/manual/en/function.str-split.php#107658
+ * @return string[]
  */
-function df_string_split($s) {return preg_split("//u", $s, -1, PREG_SPLIT_NO_EMPTY);}
+function df_string_split($s):array {return preg_split("//u", $s, -1, PREG_SPLIT_NO_EMPTY);}
 
 /**
  * @used-by \Df\PaypalClone\W\Event::validate()
  * @param $s1
  * @param $s2
- * @return bool
  */
-function df_strings_are_equal_ci($s1, $s2) {return 0 === strcmp(mb_strtolower($s1), mb_strtolower($s2));}
+function df_strings_are_equal_ci($s1, $s2):bool {return 0 === strcmp(mb_strtolower($s1), mb_strtolower($s2));}
 
 /**
  * @used-by df_extend()
@@ -225,9 +205,8 @@ function df_t():T {return T::s();}
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
  * @param int|null $length [optional]	Длина уникальной части, без учёта $prefix.
  * @param string $prefix [optional]
- * @return string
  */
-function df_uid($length = null, $prefix = '') {
+function df_uid($length = null, $prefix = ''):string {
 	# Важно использовать $more_entropy = true, потому что иначе на быстрых серверах
 	# (я заметил такое поведение при использовании Zend Server Enterprise и PHP 5.4)
 	# uniqid будет иногда возвращать одинаковые значения при некоторых двух последовательных вызовах.

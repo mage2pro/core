@@ -38,13 +38,13 @@ function df_preg_prefix($prefix, $subject, $throwOnNotMatch = false) {return df_
 );}
 
 /**
- * @used-by df_has_russian_letters()
+ * 2022-10-31 @deprecated It is unused.
  * @param string $pattern
  * @param string $subject
  * @param bool $throwOnError [optional]
  * @return bool
- * @throws \Exception
+ * @throws Exception
  */
-function df_preg_test($pattern, $subject, $throwOnError = true) {return R::i(
-	$pattern, $subject, $throwOnError, $throwOnNotMatch = false
+function df_preg_test($pattern, $subject, $throwOnError = true):bool {return R::i(
+	$pattern, $subject, $throwOnError, false
 )->test();}
