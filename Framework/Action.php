@@ -23,9 +23,8 @@ abstract class Action extends \Magento\Framework\App\Action\Action {
 	 * @used-by \Df\Payment\CustomerReturn::execute()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Shipping\Action::s()
-	 * @return string
 	 */
-	final protected function module() {return dfc($this, function() {return df_module_name_c(
+	final protected function module():string {return dfc($this, function() {return df_module_name_c(
 		df_request_o()->getControllerModule()
 	);});}
 }
