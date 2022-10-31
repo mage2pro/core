@@ -17,7 +17,7 @@ const DF_THIN_SPACE = ' ';
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
- * @param boolean $v
+ * @param bool $v
  * @return string
  */
 function df_bts($v) {return $v ? 'true' : 'false';}
@@ -25,7 +25,7 @@ function df_bts($v) {return $v ? 'true' : 'false';}
 /**
  * @see df_bts()
  * @see df_bts_yn()
- * @param boolean $v
+ * @param bool $v
  * @return string
  */
 function df_bts_r($v) {return $v ? 'да' : 'нет';}
@@ -36,7 +36,7 @@ function df_bts_r($v) {return $v ? 'да' : 'нет';}
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @see df_bts()
  * @see df_bts_r()
- * @param boolean $v
+ * @param bool $v
  * @return string
  */
 function df_bts_yn($v) {return $v ? 'yes' : 'no';}

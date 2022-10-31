@@ -93,7 +93,7 @@ abstract class Result implements ResultInterface {
 	 * @see \Magento\Framework\Controller\AbstractResult::setHeader()
 	 * @param string $name
 	 * @param string $value
-	 * @param boolean $replace
+	 * @param bool $replace
 	 */
 	function setHeader($name, $value, $replace = false):self {
 		$this->_headers[] = ['name' => $name, 'replace' => $replace, 'value' => $value]; return $this;
