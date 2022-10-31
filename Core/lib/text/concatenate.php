@@ -1,10 +1,10 @@
 <?php
 /**
  * 2016-10-17
+ * 2022-10-31 @deprecated It is unused.
  * @param string|string[] ...$elements
- * @return string
  */
-function df_c(...$elements) {return implode(dfa_flatten($elements));}
+function df_c(...$elements):string {return implode(dfa_flatten($elements));}
 
 /**
  * @see df_ccc()
@@ -14,9 +14,8 @@ function df_c(...$elements) {return implode(dfa_flatten($elements));}
  * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
  * @param string $glue
  * @param string|string[] ...$elements
- * @return string
  */
-function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements));}
+function df_cc($glue, ...$elements):string {return implode($glue, dfa_flatten($elements));}
 
 /**
  * 2016-08-13
@@ -25,9 +24,8 @@ function df_cc($glue, ...$elements) {return implode($glue, dfa_flatten($elements
  * @used-by \Dfe\Square\API\Validator::short()
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
  * @param string|string[] ...$args
- * @return string
  */
-function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
+function df_cc_br(...$args):string {return df_ccc("<br>", dfa_flatten($args));}
 
 /**
  * @used-by df_api_rr_failed()
@@ -65,9 +63,8 @@ function df_cc_br(...$args) {return df_ccc("<br>", dfa_flatten($args));}
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml
  * @used-by vendor/mage2pro/portal/view/frontend/templates/root.phtml
  * @param string|string[] ...$args
- * @return string
  */
-function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
+function df_cc_n(...$args):string {return df_ccc("\n", dfa_flatten($args));}
 
 /**
  * 2015-12-01 Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
@@ -93,16 +90,15 @@ function df_cc_n(...$args) {return df_ccc("\n", dfa_flatten($args));}
  * @used-by \TFC\Image\Command\C1::image()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @param string|string[] ...$args
- * @return string
  */
-function df_cc_path(...$args) {return df_ccc('/', dfa_flatten($args));}
+function df_cc_path(...$args):string {return df_ccc('/', dfa_flatten($args));}
 
 /**
  * 2016-05-31
+ * @used-by \Df\GoogleFont\Fonts\Fs::baseRelative()
  * @param string|string[] ...$args
- * @return string
  */
-function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args)), '/');}
+function df_cc_path_t(...$args):string {return df_append(df_cc_path(dfa_flatten($args)), '/');}
 
 /**
  * 2016-08-10
@@ -122,13 +118,31 @@ function df_cc_path_t(...$args) {return df_append(df_cc_path(dfa_flatten($args))
  * @used-by \TFC\GoogleShopping\Att\Price::format() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/6)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param string|string[] ...$args
- * @return string
  */
-function df_cc_s(...$args) {return df_ccc(' ', dfa_flatten($args));}
+function df_cc_s(...$args):string {return df_ccc(' ', dfa_flatten($args));}
 
 /**
  * @see df_cc()
+ * @used-by df_asset_name()
+ * @used-by df_cc_br()
  * @used-by df_cc_method()
+ * @used-by df_cc_n()
+ * @used-by df_cc_path()
+ * @used-by df_cc_s()
+ * @used-by df_fe_init()
+ * @used-by df_log_l()
+ * @used-by df_oqi_s()
+ * @used-by df_report_prefix()
+ * @used-by df_url_bp()
+ * @used-by \Df\Payment\Comment\Description::locations()
+ * @used-by \Df\Payment\TID::e2i()
+ * @used-by \Df\Payment\W\Handler::log()
+ * @used-by \Df\Payment\W\Reader::testData()
+ * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
+ * @used-by \Dfe\AllPay\Charge::pIgnorePayment()
+ * @used-by \Dfe\AllPay\Charge::productUrls()
+ * @used-by \Dfe\AmazonLogin\Customer::url()
+ * @used-by \Dfe\TwoCheckout\Charge::liDiscount()
  * @param string $glue
  * @param string|string[] ...$elements
  * @return string
