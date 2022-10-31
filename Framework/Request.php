@@ -1,8 +1,7 @@
 <?php
-# 2017-01-01
-# Этот класс вычленяет из запроса параметры с приставкой «df-»
 namespace Df\Framework;
-class Request {
+# 2017-01-01 Этот класс вычленяет из запроса параметры с приставкой «df-»
+final class Request {
 	/**
 	 * 2017-01-01 Возвращает параметры запроса без приставки «df-».
 	 * @used-by \Df\Payment\W\Reader::http()
@@ -31,7 +30,7 @@ class Request {
 	 * @used-by self::extra()
 	 * @return array(string => mixed)
 	 */
-	private static function extraKeysRaw() {return dfcf(function() {return array_filter(
+	private static function extraKeysRaw():array {return dfcf(function() {return array_filter(
 		array_keys(df_request()), function($k) {return df_starts_with($k, 'df-');}
 	);});}
 }

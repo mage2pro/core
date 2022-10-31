@@ -64,10 +64,8 @@ abstract class Upgrade {
 	 * @used-by self::isInitial()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeData::initial()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeSchema::initial()
-	 * @see \Dfe\IPay88\Setup\UpgradeData::initial()
-	 * @return string
 	 */
-	protected function initial() {return '0.0.1';}
+	protected function initial():string {return '0.0.1';}
 
 	/**
 	 * 2016-12-02
@@ -80,9 +78,8 @@ abstract class Upgrade {
 	 * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeData::_process()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
-	 * @return bool
 	 */
-	final protected function isInitial() {return $this->v($this->initial());}
+	final protected function isInitial():bool {return $this->v($this->initial());}
 
 	/**
 	 * 2016-08-14
@@ -91,7 +88,7 @@ abstract class Upgrade {
 	 * @param FSetup|SSetup $setup
 	 * @param IModuleContext|ModuleContext $context
 	 */
-	final protected function process(FSetup $setup, IModuleContext $context) {
+	final protected function process(FSetup $setup, IModuleContext $context):void {
 		$setup->startSetup();
 		$this->_context = $context;
 		$this->_setup = $setup;
@@ -104,9 +101,8 @@ abstract class Upgrade {
 	 * @used-by \Df\Sales\Setup\Schema::sQuote()
 	 * @used-by \Df\Sales\Setup\Schema::sSales()
 	 * @param string $c [optional]
-	 * @return EavSetup
 	 */
-	final protected function sEav($c = EavSetup::class) {return dfc($this, function($c) {return
+	final protected function sEav($c = EavSetup::class):EavSetup {return dfc($this, function($c) {return
 		df_new_om($c, ['setup' => $this->_setup])
 	;}, [$c]);}
 
@@ -134,9 +130,8 @@ abstract class Upgrade {
 	 * https://github.com/mage2pro/markdown/blob/1.0.24/Setup/UpgradeSchema.php#L74-L82
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::createTableEav()
 	 * @param string|array $t
-	 * @return string
 	 */
-	final protected function t($t) {return $this->_setup->getTable($t);}
+	final protected function t($t):string {return $this->_setup->getTable($t);}
 
 	/**
 	 * 2016-08-21
@@ -152,9 +147,8 @@ abstract class Upgrade {
 	 * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 * @param string $v
-	 * @return bool
 	 */
-	final protected function v($v) {return -1 === version_compare($this->_context->getVersion(), $v);}
+	final protected function v($v):bool {return -1 === version_compare($this->_context->getVersion(), $v);}
 
 	/**
 	 * 2016-12-02
