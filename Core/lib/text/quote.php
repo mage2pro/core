@@ -20,6 +20,8 @@ function df_quote_russian($s) {return df_t()->quote($s, T::QUOTE__RUSSIAN);}
 
 /**
  * @used-by df_ejs()
+ * @used-by \Df\Typography\Font::css()
+ * @used-by \Dfe\Frontend\Block\ProductView\Css::customCss()
  * @param string|string[]|P|P[] $s
  * @return string|string[]
  */
