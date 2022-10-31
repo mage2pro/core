@@ -15,6 +15,7 @@ function df_lcfirst(...$args) {return df_call_a(function($s) {return
 
 /**
  * 2016-05-22
+ * 2022-10-31 @deprecated It is unused.
  * @param string|string[] ...$args
  * @return string|string[]
  */
@@ -49,6 +50,7 @@ function df_ucfirst(...$args) {return df_call_a(function($s) {return
  * https://php.net/manual/function.mb-convert-case.php
  * https://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
  * @see df_ucfirst
+ * @used-by \Df\Config\Source\LetterCase::apply()
  * @param string|string[] ...$args
  * @return string|string[]
  */

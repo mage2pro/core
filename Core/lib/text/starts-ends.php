@@ -25,9 +25,8 @@
  * @used-by \RWCandy\Captcha\Assert::email()       
  * @param string $haystack
  * @param string|string[] $needle
- * @return bool
  */
-function df_ends_with($haystack, $needle) {return is_array($needle)
+function df_ends_with($haystack, $needle):bool {return is_array($needle)
 	? null !== df_find($needle, __FUNCTION__, [], [$haystack])
 	: 0 === ($l = mb_strlen($needle)) || $needle === mb_substr($haystack, -$l)
 ;}
@@ -80,9 +79,8 @@ function df_ends_with($haystack, $needle) {return is_array($needle)
  * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  * @param string $haystack
  * @param string|string[] $needle
- * @return bool
  */
-function df_starts_with($haystack, $needle) {return is_array($needle)
+function df_starts_with($haystack, $needle):bool {return is_array($needle)
 	? null !== df_find($needle, __FUNCTION__, [], [$haystack])
 	: $needle === mb_substr($haystack, 0, mb_strlen($needle))
 ;}
