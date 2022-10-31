@@ -12,9 +12,8 @@ use Df\Zf\Filter\StringTrim as Trim;
  * @used-by \Dfe\YandexKassa\Result::attributes()
  * @param string $s
  * @param int|null $max [optional]
- * @return string
  */
-function df_chop($s, $max = null) {return !$max || (mb_strlen($s = df_trim($s)) <= $max) ? $s :
+function df_chop($s, $max = null):string {return !$max || (mb_strlen($s = df_trim($s)) <= $max) ? $s :
 	df_trim_right(mb_substr($s, 0, $max - 1)) . '…'
 ;}
 
@@ -90,9 +89,8 @@ function df_trim($s, $charlist = null, $throw = false) {return df_try(function()
  * @used-by \Dfe\PostFinance\W\Event::cardNumber()
  * @param string $s
  * @param string $charlist [optional]
- * @return string
  */
-function df_trim_left($s, $charlist = null) {return ltrim($s, $charlist ?: " \t\n\r\0\x0B");}
+function df_trim_left($s, $charlist = null):string {return ltrim($s, $charlist ?: " \t\n\r\0\x0B");}
 
 /**
  * Пусть пока будет так. Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
@@ -102,9 +100,8 @@ function df_trim_left($s, $charlist = null) {return ltrim($s, $charlist ?: " \t\
  * @used-by df_trim_ds_right()
  * @param string $s
  * @param string $charlist [optional]
- * @return string
  */
-function df_trim_right($s, $charlist = null) {return rtrim($s, $charlist ?: " \t\n\r\0\x0B");}
+function df_trim_right($s, $charlist = null):string {return rtrim($s, $charlist ?: " \t\n\r\0\x0B");}
 
 /**
  * It chops the $trim prefix or/and suffix from the $s string.
@@ -112,9 +109,8 @@ function df_trim_right($s, $charlist = null) {return rtrim($s, $charlist ?: " \t
  * 2020-06-28 @deprecated It is unused.
  * @param string $s
  * @param string|string[] $trim
- * @return string
  */
-function df_trim_text($s, $trim) {return df_trim_text_left_right($s, $trim, $trim);}
+function df_trim_text($s, $trim):string {return df_trim_text_left_right($s, $trim, $trim);}
 
 /**
  * 2016-10-28
@@ -123,9 +119,8 @@ function df_trim_text($s, $trim) {return df_trim_text_left_right($s, $trim, $tri
  * @param string $s
  * @param string[] $trimA
  * @param callable $f
- * @return string
  */
-function df_trim_text_a($s, array $trimA, callable $f) {
+function df_trim_text_a($s, array $trimA, callable $f):string {
 	$r = $s; /** @var string $r */
 	$l = mb_strlen($r); /** @var int $l */
 	foreach ($trimA as $trim) {/** @var string $trim */
@@ -162,9 +157,8 @@ function df_trim_text_a($s, array $trimA, callable $f) {
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
  * @param string $s
  * @param string|string[] $trim
- * @return string
  */
-function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
+function df_trim_text_left($s, $trim):string {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
 	$trim === mb_substr($s, 0, $l = mb_strlen($trim)) ? mb_substr($s, $l) : $s
 );}
 
@@ -176,9 +170,8 @@ function df_trim_text_left($s, $trim) {return is_array($trim) ? df_trim_text_a($
  * @param string $s
  * @param string $left
  * @param string $right
- * @return string
  */
-function df_trim_text_left_right($s, $left, $right) {return df_trim_text_right(df_trim_text_left($s, $left), $right);}
+function df_trim_text_left_right($s, $left, $right):string {return df_trim_text_right(df_trim_text_left($s, $left), $right);}
 
 /**
  * It chops the $trim ending from the $s string.
@@ -194,8 +187,7 @@ function df_trim_text_left_right($s, $left, $right) {return df_trim_text_right(d
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
  * @param string $s
  * @param string|string[] $trim
- * @return string
  */
-function df_trim_text_right($s, $trim) {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
+function df_trim_text_right($s, $trim):string {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
 	0 !== ($l = mb_strlen($trim)) && $trim === mb_substr($s, -$l) ? mb_substr($s, 0, -$l) : $s
 );}
