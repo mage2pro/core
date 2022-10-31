@@ -27,9 +27,8 @@ class LoggerHandler extends _P {
 	 * @used-by self::handle()
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
 	 * @param array(string => mixed) $d
-	 * @return bool
 	 */
-	static function p(array $d) {
+	final static function p(array $d):bool {
 		$m = dfa($d, 'message'); /** @var string $m */
 		return
 			# 2020-10-22
