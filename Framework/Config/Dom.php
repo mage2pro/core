@@ -1,7 +1,9 @@
 <?php
 namespace Df\Framework\Config;
+use \DOMDocument as Doc;
 /**
  * 2015-11-15
+ * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * Цель перекрытия — устранение дефекта
  * https://github.com/magento/magento2/issues/2372
  * «Magento 2 ignores XML schema location in the etc/adminhtml/system.xml documents
@@ -18,14 +20,14 @@ namespace Df\Framework\Config;
 class Dom extends \Magento\Framework\Config\Dom {
 	/**
 	 * 2015-11-15
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\Config\Dom::validate()
 	 * @param string $schemaFileName
 	 * @param array $errors
-	 * @return bool
 	 * @throws \Exception
 	 */
-	function validate($schemaFileName, &$errors = []) {
+	function validate($schemaFileName, &$errors = []):bool {
 		parent::validate($schemaFileName, $errors);
 		$errors = array_filter($errors, function($message) {
 			/** @var string $message */
@@ -50,32 +52,22 @@ class Dom extends \Magento\Framework\Config\Dom {
 	 * @override
 	 * @see \Magento\Framework\Config\Dom::_initDom()
 	 * @param string $xml
-	 * @return \DOMDocument
 	 * @throws \Magento\Framework\Config\Dom\ValidationException
 	 */
-	protected function _initDom($xml) {
-		/** @var string $defaultSchema */
-		$defaultSchema = $this->schema;
-		/** @var \DOMDocument $dom */
-		$dom = new \DOMDocument;
-		$dom->loadXML($xml);
+	protected function _initDom($xml):Doc {
+		$defaultSchema = $this->schema; /** @var string $defaultSchema */
+		$doc = new Doc; /** @var Doc $doc */
+		$doc->loadXML($xml);
 		# Возвращает строку вида: «urn:magento:module:Magento_Config:etc/system_file.xsd»
 		/** @var string $schema */
-		$schema = $dom->documentElement->getAttributeNS(
-			$dom->lookupNamespaceUri('xsi'), 'noNamespaceSchemaLocation'
-		);
-		/**
-		 * Используем df_starts_with($customSchema, 'urn:')
-		 * для совместимости с устаревшим и нигде в ядре не используемым форматом
-		 * с обратными файловыми путями: ../
-		 *
-		 * 2016-06-07
-		 * Раньше тут стояло:
-		 * if ($schema && && df_starts_with($schema, 'urn:')
-		 * Однако сторонние модули используют хуёвые невалидные схемы типа
-		 * urn:magento:framework:Backend/etc/system_file.xsd
-		 * что приводило к сбоям.
-		 */
+		$schema = $doc->documentElement->getAttributeNS($doc->lookupNamespaceUri('xsi'), 'noNamespaceSchemaLocation');
+		# Используем df_starts_with($customSchema, 'urn:')
+		# для совместимости с устаревшим и нигде в ядре не используемым форматом с обратными файловыми путями: ../
+		# 2016-06-07
+		# Раньше тут стояло:
+		# 		if ($schema && && df_starts_with($schema, 'urn:')
+		# Однако сторонние модули используют хуёвые невалидные схемы типа
+		# «urn:magento:framework:Backend/etc/system_file.xsd», что приводило к сбоям.
 		if ($schema && 'urn:magento:module:Df_Config:etc/system_file.xsd' === $schema) {
 			/**
 			 * Переводить схему в формат файлового пути необязательно:
@@ -84,13 +76,9 @@ class Dom extends \Magento\Framework\Config\Dom {
 			 */
 			$this->schema = $schema;
 		}
-		/** @var \DOMDocument $result */
-		try {
-			$result = parent::_initDom($xml);
-		}
-		finally {
-			$this->schema = $defaultSchema;
-		}
-		return $result;
+		/** @var Doc $r */
+		try {$r = parent::_initDom($xml);}
+		finally {$r->schema = $defaultSchema;}
+		return $r;
 	}
 }
