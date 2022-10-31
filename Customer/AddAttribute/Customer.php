@@ -13,7 +13,7 @@ final class Customer {
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function checkbox($name, $label, array $system = [], array $custom = []) {self::p(
+	static function checkbox($name, $label, array $system = [], array $custom = []):void {self::p(
 		'boolean', $name, $label, ['backend' => bBoolean::class] + $system, $custom
 	);}
 	
@@ -25,7 +25,7 @@ final class Customer {
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function hidden($name, $label, array $system = [], array $custom = []) {self::p(
+	static function hidden($name, $label, array $system = [], array $custom = []):void {self::p(
 		'hidden', $name, $label, $system, $custom
 	);}	
 
@@ -42,7 +42,7 @@ final class Customer {
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function select($name, $label, $sourceC, array $system = [], array $custom = []) {self::p(
+	static function select($name, $label, $sourceC, array $system = [], array $custom = []):void {self::p(
 		'select', $name, $label, $system + ['source' => $sourceC], $custom
 	);}
 
@@ -56,7 +56,7 @@ final class Customer {
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function text($name, $label, array $system = [], array $custom = []) {self::p(
+	static function text($name, $label, array $system = [], array $custom = []):void {self::p(
 		'text', $name, $label, $system, $custom
 	);}
 
@@ -68,7 +68,7 @@ final class Customer {
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function textarea($name, $label, array $system = [], array $custom = []) {self::p(
+	static function textarea($name, $label, array $system = [], array $custom = []):void {self::p(
 		'textarea', $name, $label, $system, $custom
 	);}
 
@@ -100,7 +100,7 @@ final class Customer {
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	private static function p($input, $name, $label, array $system = [], array $custom = []) {
+	private static function p($input, $name, $label, array $system = [], array $custom = []):void {
 		$vBackend = dfa($custom, self::VISIBLE_IN_BACKEND, true); /** @var bool $vBackend */
 		$vFrontend = dfa($custom, self::VISIBLE_ON_FRONTEND, true); /** @var bool $vFrontend */
 		df_eav_setup()->addAttribute('customer', $name,
