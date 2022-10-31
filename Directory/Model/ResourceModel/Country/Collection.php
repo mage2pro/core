@@ -24,7 +24,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @used-by df_country_2_to_3()
 	 * @return array(string => string)
 	 */
-	function mapFrom2To3() {return dfc($this, function() {return array_flip($this->mapFrom3To2());});}
+	final function mapFrom2To3():array {return dfc($this, function() {return array_flip($this->mapFrom3To2());});}
 
 	/**
 	 * 2016-05-20
@@ -32,26 +32,21 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @used-by self::mapFrom2To3()
 	 * @return array(string => string)
 	 */
-	function mapFrom3To2() {return dfc($this, function() {return df_map_r($this, function(C $c) {return [
+	final function mapFrom3To2():array {return dfc($this, function() {return df_map_r($this, function(C $c) {return [
 		$c->getIso3Code(), $c->getIso2Code()
 	];});});}
 
 	/**
 	 * 2016-05-19
 	 * @used-by df_countries_ctn()
-	 * Возвращает массив,
-	 * в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
+	 * Возвращает массив, в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
 	 * а значениями — названия стран для заданной локали (или системной локали по умолчанию).
 	 * https://ru.wikipedia.org/wiki/ISO_3166-1
-	 * Например:
-	 *	array(
-	 *		'AU' => 'Австралия'
-	 *		,'AT' => 'Австрия'
-	 *	)
+	 * Например: ['AU' => 'Австралия', 'AT' => 'Австрия']
 	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
-	function mapFromCodeToName($l = null) {return dfc($this, function($l) {
+	final function mapFromCodeToName($l = null):array {return dfc($this, function($l) {
 		$needTranslate = 'en_US' !== $l; /** @var bool $needTranslate */
 		$zL = new zL($l); /** @var zL $zL */
 		return df_sort_names(df_map_r($this, function(C $c) use($needTranslate, $zL) {return [
@@ -65,7 +60,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @override
 	 * @see \Magento\Directory\Model\ResourceModel\Country\Collection::_construct
 	 */
-	protected function _construct() {
+	final protected function _construct():void {
 		parent::_construct();
 		$this->setModel(C::class);
 	}
@@ -78,5 +73,5 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * @used-by df_countries()
 	 * @used-by \Df\Directory\Model\Country::cs()
 	 */
-	static function s():self {static $r; return $r ? $r : $r = df_o(__CLASS__);}
+	final static function s():self {static $r; return $r ? $r : $r = df_o(__CLASS__);}
 }
