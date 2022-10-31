@@ -32,7 +32,7 @@ class Select extends _Select implements ElementI {
 	 * @see \Df\Framework\Form\Element\Select2\Number::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Select\Range::onFormInitialized()
 	 */
-	function onFormInitialized() {}
+	function onFormInitialized():void {}
 
 	/**
 	 * 2016-01-29

@@ -80,7 +80,7 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	final function onFormInitialized() {
+	final function onFormInitialized():void {
 		$this->addClass('df-multiselect');
 		df_fe_init($this, __CLASS__, df_asset_third_party('Select2/main.css'), ['ordered' => $this->ordered()]);
 	}

@@ -171,12 +171,8 @@ class Element extends \Df\Core\O implements RendererInterface {
 			# Намеренно удалил класс "field-{$this->e()->getId()}",
 			# ибо он только мусорит и мной не используется.
 			, $this->e()->getCssClass()
-			# 2015-11-23
-			# Моё добавление
-			,E::getClassDfOnly($this->e())
-			# 2015-11-23
-			# Моё добавление.
-			, $this->e()->getContainerClass()
+			,E::getClassDfOnly($this->e()) # 2015-11-23 Моё добавление.
+			, $this->e()->getContainerClass() # 2015-11-23 Моё добавление.
 			# 2015-11-26
 			# Моё добавление.
 			# Все контейнеры выпадающих списков будут иметь, например, класс «df-type-select»:

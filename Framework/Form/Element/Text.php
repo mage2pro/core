@@ -44,7 +44,7 @@ class Text extends _Text implements ElementI {
 	 * @see \Df\Framework\Form\Element\Color::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Number::onFormInitialized()
 	 */
-	function onFormInitialized() {}
+	function onFormInitialized():void {}
 
 	/**
 	 * 2015-11-24

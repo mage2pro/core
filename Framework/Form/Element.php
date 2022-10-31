@@ -38,7 +38,7 @@ class Element extends AE implements ElementI {
 	 * @see ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	final function onFormInitialized() {}
+	final function onFormInitialized():void {}
 
 	/**
 	 * 2015-12-11
@@ -49,10 +49,11 @@ class Element extends AE implements ElementI {
 	 * потому что для классов типа .admin__control-select
 	 * в ядре присутствуют правила CSS, которые считают элементы с этими классами
 	 * элементами управления, а не контейнерами, и корёжат нам вёрстку.
+	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::outerCssClasses()
+	 * @used-by \Df\Framework\Form\Element\Renderer\Inline::render()
 	 * @param AE|Element $e
-	 * @return string
 	 */
-	final static function getClassDfOnly(AE $e) {return df_cc_s(array_filter(
+	final static function getClassDfOnly(AE $e):string {return df_cc_s(array_filter(
 		df_trim(explode(' ', $e->getClass())), function($c) {return df_starts_with($c, 'df-');}
 	));}
 
@@ -60,12 +61,9 @@ class Element extends AE implements ElementI {
 	 * 2015-11-24
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::shouldLabelBeAtRight()
 	 * @param AE|Element $e
-	 * @return bool
 	 */
-	final static function shouldLabelBeAtRight(AE $e) {/** @var string|null $p */return
-		($p = $e->getLabelPosition())
-		? ElementI::AFTER === $p
-		: in_array($e->getExtType(), ['checkbox', 'radio'])
+	final static function shouldLabelBeAtRight(AE $e):bool {/** @var string|null $p */return
+		($p = $e->getLabelPosition()) ? ElementI::AFTER === $p : in_array($e->getExtType(), ['checkbox', 'radio'])
 	;}
 
 	/**
@@ -76,9 +74,8 @@ class Element extends AE implements ElementI {
 	 * https://github.com/magento/magento2/blob/c58d2d/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L331-L338
 	 * @param AE $element
 	 * @param string $suffix [optional]
-	 * @return string
 	 */
-	final static function uidSt(AE $element, $suffix = null) {return df_trim(
+	final static function uidSt(AE $element, $suffix = null):string {return df_trim(
 		df_last(explode('=', $element->_getUiId($suffix))), '"'
 	);}
 }

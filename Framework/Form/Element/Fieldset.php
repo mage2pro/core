@@ -131,7 +131,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @see \Dfe\Sift\PM\FE::onFormInitialized()
 	 * @see \Doormall\Shipping\Partner\FE::onFormInitialized()
 	 */
-	function onFormInitialized() {df_fe_init($this, __CLASS__);}
+	function onFormInitialized():void {df_fe_init($this, __CLASS__);}
 
 	/**
 	 * 2015-12-12
