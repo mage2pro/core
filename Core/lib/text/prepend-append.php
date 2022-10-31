@@ -10,10 +10,10 @@ function df_append($s, $tail):string {return df_ends_with($s, $tail) ? $s : $s .
 
 /**
  * 2015-12-25
+ * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  * @param string $s
- * @return string
  */
-function df_n_prepend($s) {return '' === $s ? '' : "\n$s";}
+function df_n_prepend($s):string {return '' === $s ? '' : "\n$s";}
 
 /**
  * Аналог @see str_pad() для Unicode: http://stackoverflow.com/a/14773638
@@ -24,9 +24,8 @@ function df_n_prepend($s) {return '' === $s ? '' : "\n$s";}
  * @param int $length
  * @param string $pattern
  * @param int $position
- * @return string
  */
-function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {/** @var string $r */
+function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT):string {/** @var string $r */
 	$encoding = 'UTF-8'; /** @var string $encoding */
 	$input_length = mb_strlen($phrase, $encoding); /** @var int $input_length */
 	$pad_string_length = mb_strlen($pattern, $encoding); /** @var int $pad_string_length */
@@ -71,9 +70,8 @@ function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT) {/*
  * @used-by df_rgb2hex()
  * @param int $length
  * @param int|string $number
- * @return string
  */
-function df_pad0($length, $number) {return str_pad($number, $length, '0', STR_PAD_LEFT);}
+function df_pad0($length, $number):string {return str_pad($number, $length, '0', STR_PAD_LEFT);}
 
 /**
  * 2016-03-08 It adds the $head prefix to the $s string if the prefix is absent in $s.
@@ -82,9 +80,8 @@ function df_pad0($length, $number) {return str_pad($number, $length, '0', STR_PA
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetElementHtml()
  * @param string $s
  * @param string $head
- * @return string
  */
-function df_prepend($s, $head) {return df_starts_with($s, $head) ? $s : $head . $s;}
+function df_prepend($s, $head):string {return df_starts_with($s, $head) ? $s : $head . $s;}
 
 /**
  * @used-by df_tab_multiline()
@@ -100,6 +97,5 @@ function df_tab(...$args) {return df_call_a(function($text) {return "\t" . $text
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @used-by \Df\Typography\Css::render()
  * @param string $s
- * @return string
  */
-function df_tab_multiline($s) {return df_cc_n(df_tab(df_explode_n($s)));}
+function df_tab_multiline($s):string {return df_cc_n(df_tab(df_explode_n($s)));}
