@@ -10,7 +10,7 @@ use Magento\Store\Api\Data\StoreInterface;
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return array(string => string)
  */
-function df_currencies_ctn($s = null) {return dfcf(function($s = null) {
+function df_currencies_ctn($s = null):array {return dfcf(function($s = null) {
 	$s = df_store($s);
 	$currency = df_o(C::class); /** @var C $currency */
 	$codes = df_currencies_codes_allowed($s); /** @var string[] $codes */
@@ -33,7 +33,7 @@ function df_currencies_ctn($s = null) {return dfcf(function($s = null) {
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return array(array(string => string))
  */
-function df_currencies_options(array $keys = [], $s = null) {return dfcf(function(array $keys = [], $s = null) {return
+function df_currencies_options(array $keys = [], $s = null):array {return dfcf(function(array $keys = [], $s = null) {return
 	df_map_to_options(dfa(df_currencies_ctn($s), df_etn($keys)));
 }, func_get_args());}
 
