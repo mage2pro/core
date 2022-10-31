@@ -19,9 +19,8 @@ function df_att_set($a) {return $a instanceof IAS ? $a : df_att_set_r()->get(
  * @used-by ikf_is_mediaclip_product()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @param IAS|_AS|P|int $a
- * @return string
  */
-function df_att_set_name($a) {return df_att_set($a)->getAttributeSetName();}
+function df_att_set_name($a):string {return df_att_set($a)->getAttributeSetName();}
 
 /**
  * 2019-02-27
