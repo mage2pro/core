@@ -1,6 +1,8 @@
 <?php
 namespace Df\Framework\Api;
 use Magento\Framework\Api\AbstractSimpleObject as _P;
+# 2017-05-22
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class AbstractSimpleObject extends _P {
 	/**
 	 * 2017-05-22
@@ -9,5 +11,5 @@ class AbstractSimpleObject extends _P {
 	 * @param string $k
 	 * @return mixed|null
 	 */
-	static function get(_P $o, $k) {return $o->_get($k);}
+	final static function get(_P $o, $k) {return $o->_get($k);}
 }
