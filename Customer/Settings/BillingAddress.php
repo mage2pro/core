@@ -9,26 +9,25 @@ namespace Df\Customer\Settings;
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Validator
  * @see \Df\Payment\Settings::requireBillingAddress()
  */
-class BillingAddress {
+final class BillingAddress {
 	/**     
 	 * 2016-07-27
 	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
 	 * @param bool $v [optional]
 	 */
-	static function disable($v = true) {self::$_stack[]= $v;}
+	static function disable($v = true):void {self::$_stack[]= $v;}
 	/**     
 	 * 2016-07-27
 	 * @used-by \Df\Customer\Plugin\Model\Address\AbstractAddress::aroundValidate()
 	 * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
 	 * @used-by \Df\Sales\Plugin\Model\Order\Address\Validator::aroundValidate()
-	 * @return bool
 	 */
-	static function disabled() {return df_last(self::$_stack);}
+	static function disabled():bool {return df_last(self::$_stack);}
 	/**      
 	 * 2016-07-27
 	 * @used-by \Df\Payment\PlaceOrderInternal::_place() 
 	 */
-	static function restore() {
+	static function restore():void {
 		array_pop(self::$_stack);
 		df_assert_gt0(count(self::$_stack));
 	}
