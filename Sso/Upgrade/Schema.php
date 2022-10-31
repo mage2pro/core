@@ -33,7 +33,7 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	 * @used-by \Df\Framework\Upgrade::process()
 	 * @see \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
 	 */
-	protected function _process() {
+	protected function _process():void {
 		if ($this->isInitial()) {
 			/**
 			 * 2016-06-04

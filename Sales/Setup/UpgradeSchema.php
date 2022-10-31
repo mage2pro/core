@@ -10,7 +10,7 @@ class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 	 * @see \Df\Framework\Upgrade::_process()
 	 * @used-by \Df\Framework\Upgrade::process()
 	 */
-	final protected function _process() {
+	final protected function _process():void {
 		if ($this->v('3.7.19')) {
 			/** 2016-11-04 У нас теперь также есть функция @see df_db_column_add() */
 			df_dbc_o(self::F__DF, T::textLong('Mage2.PRO'));

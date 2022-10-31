@@ -25,7 +25,7 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * @used-by \Df\Framework\Upgrade::process()
 	 * @see \Dfe\FacebookLogin\Setup\UpgradeData::_process()
 	 */
-	protected function _process() {
+	protected function _process():void {
 		if ($this->isInitial()) {
 			$this->att(Schema::fIdC($this), 'User ID');
 		}

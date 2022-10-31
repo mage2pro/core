@@ -46,7 +46,7 @@ abstract class Upgrade {
 	 * @see \Verdepieno\Core\Setup\UpgradeData::_process()
 	 * @see \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 */
-	abstract protected function _process();
+	abstract protected function _process():void;
 
 	/**
 	 * 2016-12-08

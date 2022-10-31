@@ -9,7 +9,7 @@ class UpgradeSchema extends \Df\Framework\Upgrade\Schema {
 	 * @see \Df\Framework\Upgrade::_process()
 	 * @used-by \Df\Framework\Upgrade::process()
 	 */
-	final protected function _process() {
+	final protected function _process():void {
 		if ($this->v('1.0.0')) {
 			df_uninstall('Df_Oauth');
 		}
