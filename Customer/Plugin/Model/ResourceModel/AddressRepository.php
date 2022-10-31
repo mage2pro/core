@@ -1,7 +1,7 @@
 <?php
 namespace Df\Customer\Plugin\Model\ResourceModel;
 use Df\Customer\Settings\BillingAddress as S;
-use Magento\Customer\Api\Data\AddressInterface as AI;
+use Magento\Customer\Api\Data\AddressInterface as IA;
 use Magento\Customer\Model\Address;
 use Magento\Customer\Model\Customer;
 use Magento\Customer\Model\Data\Address as CDA;
@@ -15,16 +15,13 @@ final class AddressRepository {
 	 * Помимо этого плагина для данной функциональности нужны ещё 2:
 	 * @see \Df\Customer\Plugin\Model\Address\AbstractAddress
 	 * @see \Df\Sales\Plugin\Model\Order\Address\Validator
-	 *
 	 * @see \Magento\Customer\Model\ResourceModel\AddressRepository::save()
 	 * @param Sb $sb
 	 * @param \Closure $f
-	 * @param AI|CDA $address
-	 * @return AI
+	 * @param IA|CDA $address
 	 * @throws InputException
 	 */
-	function aroundSave(Sb $sb, \Closure $f, AI $address) {
-		/** @var AI $result */
+	function aroundSave(Sb $sb, \Closure $f, AI $address):IA {/** @var IA $r */
 		/**
 		 * 2016-07-27
 		 * Адрес приобретает тип, только когда используется при оформлении заказа.
@@ -42,7 +39,7 @@ final class AddressRepository {
 		 * Поэтому ветка S::disabled() нужна.
 		 */
 		if (!S::disabled()) {
-			$result = $f($address);
+			$r = $f($address);
 		}
 		else {
 			$customer = df_customer($address->getCustomerId()); /** @var Customer $customer */
@@ -65,8 +62,8 @@ final class AddressRepository {
 			df_customer_registry()->remove($address->getCustomerId());
 			df_address_registry()->push($addressM);
 			$customer->getAddressesCollection()->clear();
-			$result = $addressM->getDataModel();
+			$r = $addressM->getDataModel();
 		}
-		return $result;
+		return $r;
 	}
 }

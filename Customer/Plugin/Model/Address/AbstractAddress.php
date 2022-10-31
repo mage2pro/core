@@ -17,7 +17,5 @@ final class AbstractAddress {
 	 * @param \Closure $f
 	 * @return bool|string[]
 	 */
-	function aroundValidate(Sb $sb, \Closure $f) {return
-		S::disabled() && df_address_is_billing($sb) ? true : $f()
-	;}
+	function aroundValidate(Sb $sb, \Closure $f) {return S::disabled() && df_address_is_billing($sb) ? true : $f();}
 }
