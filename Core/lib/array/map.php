@@ -86,11 +86,15 @@ function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {r
  * @throws DFE
  */
 function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false):array {
-	# 2020-03-02
-	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	# 2020-03-02, 2022-10-31
+	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
+	#		[$a, $b] = [1, 2];
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	# We should support PHP 7.0.
-	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
+	# https://3v4l.org/3O92j
+	# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+	# https://stackoverflow.com/a/28233499
+	list($a, $f) = dfaf($a1, $a2); /** @var array|Traversable $a */ /** @var callable $f */
 	/** @var array(int|string => mixed) $r */
 	if (!$pAppend && !$pPrepend && 0 === $keyPosition && !$returnKey) {
 		$r = array_map($f, df_ita($a));

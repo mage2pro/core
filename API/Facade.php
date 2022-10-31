@@ -157,10 +157,14 @@ abstract class Facade {
 		$opt = $opt ?: $this->opts();
 		$methodF = strtoupper(df_caller_f()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
-		# 2020-03-02
-		# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+		# 2020-03-02, 2022-10-31
+		# 1) Symmetric array destructuring requires PHP ≥ 7.1:
+		#		[$a, $b] = [1, 2];
 		# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 		# We should support PHP 7.0.
+		# https://3v4l.org/3O92j
+		# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+		# https://stackoverflow.com/a/28233499
 		list($id, $p) = is_array($p) ? [null, $p] : [$p, []]; /** @var int|string|null $id */
 		/** @uses \Df\API\Client::__construct() */
 		$c = df_newa(df_con($this, 'API\\Client'), Client::class,

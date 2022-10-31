@@ -37,10 +37,14 @@ function df_url_base($u) {return df_first(df_url_bp($u));}
 function df_url_bp($u) {
 	/** @var string $base */ /** @var string $path */
 	if (!df_check_url($u)) {
-		# 2020-03-02
-		# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+		# 2020-03-02, 2022-10-31
+		# 1) Symmetric array destructuring requires PHP ≥ 7.1:
+		#		[$a, $b] = [1, 2];
 		# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 		# We should support PHP 7.0.
+		# https://3v4l.org/3O92j
+		# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+		# https://stackoverflow.com/a/28233499
 		list($base, $path) = ['', $u];
 	}
 	else {
@@ -71,10 +75,14 @@ function df_url_path($u) {return df_trim_ds(df_request_i($u)->getPathInfo());}
  * @return string
  */
 function df_url_trim_index($u) {
-	# 2020-03-02
-	# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+	# 2020-03-02, 2022-10-31
+	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
+	#		[$a, $b] = [1, 2];
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	# We should support PHP 7.0.
+	# https://3v4l.org/3O92j
+	# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+	# https://stackoverflow.com/a/28233499
 	list($base, $path) = df_url_bp($u); /** @var string $base */ /** @var string $path */
 	$a = df_explode_path($path); /** @var string[] $a */
 	$i = count($a) - 1; /** @var int $i */

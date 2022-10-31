@@ -78,10 +78,14 @@ class Checkbox extends _P {
 		$result = ''; /** @var string $result */
 		$htmlId = $this->getHtmlId();
 		/** @var string|null $label */ /** @var string|null $before */ /** @var string|null $after */
-		# 2020-03-02
-		# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+		# 2020-03-02, 2022-10-31
+		# 1) Symmetric array destructuring requires PHP ≥ 7.1:
+		#		[$a, $b] = [1, 2];
 		# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 		# We should support PHP 7.0.
+		# https://3v4l.org/3O92j
+		# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+		# https://stackoverflow.com/a/28233499
 		list($before, $after) =
 			!($label = $this[self::LABEL]) ? [$this->getBeforeElementHtml(), $this->getAfterElementHtml()] : (
 				!!$this[self::LABEL_POSITION_BEFORE] ? [$label, null] : [null, $label]

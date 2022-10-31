@@ -1345,10 +1345,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 			if ($limitsForCurrency = $limits instanceof \Closure ? $limits($cc) : (
 				array_is_list($limits) ? $limits : dfa($limits, $cc, dfa($limits, '*'))
 			)) {
-				# 2020-03-02
-				# The square bracket syntax for array destructuring assignment (`[…] = […]`) requires PHP ≥ 7.1:
+				# 2020-03-02, 2022-10-31
+				# 1) Symmetric array destructuring requires PHP ≥ 7.1:
+				#		[$a, $b] = [1, 2];
 				# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 				# We should support PHP 7.0.
+				# https://3v4l.org/3O92j
+				# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+				# https://stackoverflow.com/a/28233499
 				list($min, $max) = $limitsForCurrency; /** @var int|float|null $min */ /** @var int|float|null $max */
 				$r = (is_null($min) || $a >= $min) && (is_null($max) || $a <= $max);
 			}
