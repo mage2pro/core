@@ -12,7 +12,7 @@ abstract class Dropdown extends \Df\Framework\Form\Element\Select2 {
 	 * @see \Df\Framework\Form\Element\Select2::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	final function onFormInitialized() {parent::onFormInitialized(); df_fe_init($this, __CLASS__);}
+	final function onFormInitialized():void {parent::onFormInitialized(); df_fe_init($this, __CLASS__);}
 	
 	/**
 	 * 2016-09-03
@@ -26,9 +26,8 @@ abstract class Dropdown extends \Df\Framework\Form\Element\Select2 {
 	 * @override
 	 * @see \Df\Framework\Form\Element\Select2::customCssClass()
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
-	 * @return string
 	 */
-	final protected function customCssClass() {return 'df-directory-dropdown';}
+	final protected function customCssClass():string {return 'df-directory-dropdown';}
 
 	/**
 	 * 2016-11-13
@@ -44,7 +43,5 @@ abstract class Dropdown extends \Df\Framework\Form\Element\Select2 {
 	 * @used-by \Df\Directory\FE\Currency::getValues()
 	 * @return string[]
 	 */
-	final protected function dfValues() {return dfc($this, function() {return df_fe_fc_csv(
-		$this, 'dfValues'
-	);});}
+	final protected function dfValues():array {return dfc($this, function() {return df_fe_fc_csv($this, 'dfValues');});}
 }
