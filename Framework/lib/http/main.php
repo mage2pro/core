@@ -55,7 +55,7 @@ function df_http_context() {return df_o(Context::class);}
  * однако оно является системным требованием Magento 2:
  * http://devdocs.magento.com/guides/v2.0/install-gde/system-requirements.html#required-php-extensions
  * Поэтому мы вправе использовать здесь @uses file_get_contents
- * Note 3. The function returns the read data or FALSE on failure. http://php.net/manual/function.file-get-contents.php
+ * Note 3. The function returns the read data or FALSE on failure. https://php.net/manual/function.file-get-contents.php
  *
  * 2016-05-31
  * Стандартное время ожидание ответа сервера задаётся опцией default_socket_timeout:

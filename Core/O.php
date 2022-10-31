@@ -99,7 +99,7 @@ class O implements \ArrayAccess {
 	 * «This method is executed when using isset() or empty() on objects implementing ArrayAccess.
 	 * When using empty() ArrayAccess::offsetGet() will be called and checked if empty
 	 * only if ArrayAccess::offsetExists() returns TRUE».
-	 * http://php.net/manual/arrayaccess.offsetexists.php
+	 * https://php.net/manual/arrayaccess.offsetexists.php
 	 * @override
 	 * @see \ArrayAccess::offsetExists()
 	 * @used-by df_prop()

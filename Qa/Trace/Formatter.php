@@ -67,7 +67,7 @@ final class Formatter {
 	 * Этот метод может быть приватным, несмотря на использование его как callable,
 	 * потому что он используется как callable только внутри своего класса:
 	 * @used-by self::p()
-	 * http://php.net/manual/language.types.callable.php#113447
+	 * https://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP: http://3v4l.org/OipEQ
 	 * @param array $p
 	 * @return string|null

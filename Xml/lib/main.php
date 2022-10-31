@@ -34,7 +34,7 @@ function df_cdata_raw_if_needed($s) {return !df_needs_cdata($s) ? $s : "<![CDATA
  * 2015-02-27
  * Обратите внимание,
  * что метод @see \SimpleXMLElement::count() появился только в PHP 5.3,
- * поэтому мы его не используем: http://php.net/manual/simplexmlelement.count.php
+ * поэтому мы его не используем: https://php.net/manual/simplexmlelement.count.php
  * Также обратите внимание, что count($e->children())
  * некорректно возвращает 1 для листов в PHP 5.1: http://3v4l.org/PT6Pt
  * Однако нам не нужно поддерживать PHP 5.1.
@@ -51,8 +51,8 @@ function df_cdata_raw_if_needed($s) {return !df_needs_cdata($s) ? $s : "<![CDATA
  *
  * Обратите внимение, что класс @see \SimpleXMLElement не реализует интерфейс @see Iterator,
  * а реализует только интерфейс @see Traversable.
- * http://php.net/manual/class.iterator.php
- * http://php.net/manual/class.traversable.php
+ * https://php.net/manual/class.iterator.php
+ * https://php.net/manual/class.traversable.php
  * https://php.net/manual/simplexmlelement.count.php
  * Однако @uses count() почему-то работает для него.
  * @see \SimpleXMLElement — самый загадочный класс PHP.
@@ -61,8 +61,8 @@ function df_cdata_raw_if_needed($s) {return !df_needs_cdata($s) ? $s : "<![CDATA
  * Нельзя здесь использовать count($e->children()),
  * потому что класс @see SimpleXmlElement не реализует интерфейс @see Iterator,
  * а реализует только интерфейс @see Traversable.
- * http://php.net/manual/class.iterator.php
- * http://php.net/manual/class.traversable.php
+ * https://php.net/manual/class.iterator.php
+ * https://php.net/manual/class.traversable.php
  * https://php.net/manual/simplexmlelement.count.php
  *
  * @param CX $e

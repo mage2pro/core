@@ -71,7 +71,7 @@ function df_trim($s, $charlist = null, $throw = false) {return df_try(function()
 		/**
 		 * @see Zend_Filter_StringTrim::filter() теоретически может вернуть null,
 		 * потому что этот метод зачастую перепоручает вычисление результата функции @uses preg_replace()
-		 * @url http://php.net/manual/function.preg-replace.php
+		 * @url https://php.net/manual/function.preg-replace.php
 		 */
 		$r = df_nts($r);
 		# Как ни странно, Zend_Filter_StringTrim иногда выдаёт результат « ».

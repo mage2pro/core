@@ -15,7 +15,7 @@ function df_camel_to_underscore(...$args) {return df_call_a(function($s) {return
  * «NewNASAModule» => array(«New», «NASA», «Module»)
  * http://stackoverflow.com/a/17122207
  * 2016-08-24
- * http://php.net/manual/reference.pcre.pattern.modifiers.php
+ * https://php.net/manual/reference.pcre.pattern.modifiers.php
  * x (PCRE_EXTENDED)
  * 		If this modifier is set, whitespace data characters in the pattern are totally ignored
  * 		except when escaped or inside a character class,

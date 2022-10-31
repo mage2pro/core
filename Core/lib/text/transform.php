@@ -46,8 +46,8 @@ function df_ucfirst(...$args) {return df_call_a(function($s) {return
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucwords()
- * http://php.net/manual/function.mb-convert-case.php
- * http://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
+ * https://php.net/manual/function.mb-convert-case.php
+ * https://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
  * @see df_ucfirst
  * @param string|string[] ...$args
  * @return string|string[]

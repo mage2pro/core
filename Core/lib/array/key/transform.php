@@ -2,7 +2,7 @@
 /**
  * 2015-02-07
  * Аналог @see array_change_key_case() с поддержкой UTF-8.
- * Реализацию взял отсюда: http://php.net/manual/function.array-change-key-case.php#107715
+ * Реализацию взял отсюда: https://php.net/manual/function.array-change-key-case.php#107715
  * Обратите внимание, что @see array_change_key_case() некорректно работает с UTF-8.
  * Например:
  *		$countries = array('Россия' => 'RU', 'Украина' => 'UA', 'Казахстан' => 'KZ');

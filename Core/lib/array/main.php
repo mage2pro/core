@@ -174,7 +174,7 @@ function dfa_combine_self(...$a):array {$a = df_args($a); return array_combine($
  * Если $length = 0, то функция возвращает пустой массив.
  * @uses array_fill() разрешает параметру $num (аналог $length)
  * быть равным нулю только начиная с PHP 5.6:
- * http://php.net/manual/function.array-fill.php
+ * https://php.net/manual/function.array-fill.php
  * «5.6.0	num may now be zero. Previously, num was required to be greater than zero»
  * @see array_fill_keys()
  * @used-by df_vector_sum()
@@ -309,7 +309,7 @@ function dfa_unpack(array $a) {return !($c = count($a)) ? null : (1 === $c ? $a[
 function dfa_unset(array $a, ...$k):array {return array_diff_key($a, array_flip(df_args($k)));}
 
 /**
- * Алгоритм взят отсюда: http://php.net/manual/function.array-unshift.php#106570
+ * Алгоритм взят отсюда: https://php.net/manual/function.array-unshift.php#106570
  * 2022-10-31 @deprecated It is unused.
  * @param array(string => mixed) $a
  * @param string $k

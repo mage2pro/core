@@ -145,7 +145,7 @@ final class Regex extends \Df\Core\O {
 			 * @see preg_last_error() возвращает уже какой-то полезный для диагностики код.
 			 * Пример из документации:
 			 * df_preg_test('/(?:\D+|<\d+>)*[!?]/', 'foobar foobar foobar');
-			 * http://php.net/manual/function.preg-last-error.php
+			 * https://php.net/manual/function.preg-last-error.php
 			 */
 			/** @var string|null $textCode */
 			$textCode = $this->translateErrorCode($numericCode);

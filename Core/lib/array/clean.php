@@ -6,7 +6,7 @@ use Magento\Framework\DataObject as _DO;
  * 2015-02-07
  * Обратите внимание,
  * что во многих случаях эффективней использовавать @see array_filter() вместо @see df_clean().
- * http://php.net/manual/function.array-filter.php
+ * https://php.net/manual/function.array-filter.php
  * @see array_filter() с единственным параметром удалит из массива все элементы,
  * чьи значения приводятся к логическому «false».
  * Т.е., помимо наших array('', null, []),

@@ -18,7 +18,7 @@ define(['jquery', 'df-lodash'], function($, _) {return {
 	/**
 	 * 2016-02-27
 	 * Аналог функции PHP array_intersect_key()
-	 * http://php.net/manual/function.array-intersect-key.php
+	 * https://php.net/manual/function.array-intersect-key.php
 	 * http://underscorejs.org/#keys
 	 * http://underscorejs.org/#intersection
 	 * http://underscorejs.org/#pick

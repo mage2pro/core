@@ -53,7 +53,7 @@ final class Text {
 	 * If from and to have different lengths,
 	 * the extra characters in the longer of the two are ignored.
 	 * The length of str will be the same as the return value's.»
-	 * http://php.net/strtr
+	 * https://php.net/strtr
 	 * Новый алгоритм взял отсюда:  http://stackoverflow.com/a/20717751
 	 * 2021-12-13 @deprecated It is unused.
 	 * @param string $s
@@ -75,7 +75,7 @@ final class Text {
 	 * If from and to have different lengths,
 	 * the extra characters in the longer of the two are ignored.
 	 * The length of str will be the same as the return value's.»
-	 * http://php.net/strtr
+	 * https://php.net/strtr
 	 * Новый алгоритм взял отсюда: http://stackoverflow.com/a/20717751
 	 * @used-by df_extend()
 	 * @param string $s

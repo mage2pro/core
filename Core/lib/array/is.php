@@ -26,7 +26,7 @@ if (!function_exists('array_is_list')) {
 			# 2015-02-07
 			# Согласно спецификации PHP, ключами массива могут быть целые числа, либо строки.
 			# Третьего не дано.
-			# http://php.net/manual/language.types.array.php
+			# https://php.net/manual/language.types.array.php
 			# 2017-02-18
 			# На самом деле ключом может быть и null, что неявно приводится к пустой строке:
 			# http://stackoverflow.com/a/18247435

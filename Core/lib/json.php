@@ -22,7 +22,7 @@ function df_check_json_complex($v):bool {return is_string($v) && df_starts_with(
  * «Returns the value encoded in json in appropriate PHP type.
  * Values true, false and null are returned as TRUE, FALSE and NULL respectively.
  * NULL is returned if the json cannot be decoded or if the encoded data is deeper than the recursion limit.»
- * http://php.net/manual/function.json-decode.php
+ * https://php.net/manual/function.json-decode.php
  * @used-by df_cache_get_simple()
  * @used-by df_ci_get()
  * @used-by df_github_request()

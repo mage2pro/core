@@ -17,14 +17,14 @@ use Df\Core\Exception as DFE;
  * 1)
  * array_merge_recursive(array('width' => 180), array('width' => 200))
  * вернёт: array(array('width' => array(180, 200)))
- * http://php.net/manual/function.array-merge-recursive.php
+ * https://php.net/manual/function.array-merge-recursive.php
  * Наша функция df_extend(array('width' => 180), array('width' => 200))
  * вернёт array('width' => 200)
  *
  * 2)
  * array_replace_recursive(array('x' => array('A', 'B')), array('x' => 'C'))
  * вернёт: array('x' => array('С', 'B'))
- * http://php.net/manual/function.array-replace-recursive.php
+ * https://php.net/manual/function.array-replace-recursive.php
  * Наша функция df_extend(array('x' => array('A', 'B')), array('x' => 'C'))
  * вернёт array('x' => 'C')
  *

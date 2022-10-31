@@ -11,7 +11,7 @@ final class IntT extends Type {
 	 */
 	function isValid($v) {
 		$this->prepareValidation($v);
-		# Обратите внимание, что здесь нужно именно «==», а не «===»: http://php.net/manual/function.is-int.php#35820
+		# Обратите внимание, что здесь нужно именно «==», а не «===»: https://php.net/manual/function.is-int.php#35820
 		return is_numeric($v) && ($v == (int)$v);
 	}
 

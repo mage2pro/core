@@ -10,7 +10,7 @@ function df_hex2rgb($hex) {return sscanf($hex, "#%02x%02x%02x");}
 /**
  * 2015-11-29
  * @uses dechex()
- * http://php.net/manual/function.dechex.php
+ * https://php.net/manual/function.dechex.php
  * http://stackoverflow.com/a/15202156
  * 2022-10-16 @deprecated It is unused.
  * @param int[] $rgb

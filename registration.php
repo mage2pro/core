@@ -6,7 +6,7 @@ use Magento\Framework\Component\ComponentRegistrar as R;
 $requireFiles = function($libDir) use(&$requireFiles) {
 	# 2015-02-06
 	# array_slice removes «.» and «..».
-	# http://php.net/manual/function.scandir.php#107215
+	# https://php.net/manual/function.scandir.php#107215
 	foreach (array_slice(scandir($libDir), 2) as $c) {  /** @var string $resource */
 		is_dir($resource = "{$libDir}/{$c}") ? $requireFiles($resource) : require_once "{$libDir}/{$c}";
 	}

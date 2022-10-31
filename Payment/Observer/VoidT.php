@@ -43,8 +43,8 @@ use Magento\Sales\Model\Order\Payment as OP;
  *
  *	2017-01-17
  *	«Void» is not a reserved word even in PHP 7:
- *	http://php.net/manual/reserved.keywords.php
- *	http://php.net/manual/reserved.other-reserved-words.php
+ *	https://php.net/manual/reserved.keywords.php
+ *	https://php.net/manual/reserved.other-reserved-words.php
  *
  *	2017-07-21
  *	«Void» became a reserved word in PHP 7.1:

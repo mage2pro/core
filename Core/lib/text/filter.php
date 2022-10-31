@@ -52,7 +52,7 @@ function df_remove_non_digits($s) {return preg_replace('[\D]', '', $s);}
  * Раньше алгоритм был таким:
  *	 strtr($s, array_fill_keys($wordsToRemove, ''))
  * Он корректен, но новый алгоритм быстрее, потому что не требует вызова нестандартных функций.
- * http://php.net/str_replace
+ * https://php.net/str_replace
  * «If replace has fewer values than search,
  * then an empty string is used for the rest of replacement values.»
  * http://3v4l.org/9qvC4

@@ -3,7 +3,7 @@
 /**
  * 2016-08-26
  * Вставляет новые элементы внутрь массива.
- * http://php.net/manual/function.array-splice.php
+ * https://php.net/manual/function.array-splice.php
  * Если нужно вставить только один элемент, то необязательно обрамлять его в массив.
  * 2016-11-23
  * Достоинство этой функции перед @uses array_splice()

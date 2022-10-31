@@ -232,7 +232,7 @@ function df_days_off($s = null):array {return dfcf(function($s = null) {return d
  * http://3v4l.org/ihOFp
  * 2) Несмотря на свою спецификацию, @uses ZD::toString() может вернуть не только строку, но и FALSE.
  * http://www.php.net/manual/en/function.date.php
- * http://php.net/gmdate
+ * https://php.net/gmdate
  * @used-by df_date_from_timestamp_14()
  * @used-by df_dtss()
  * @used-by df_file_name()
