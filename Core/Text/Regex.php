@@ -38,7 +38,7 @@ final class Regex extends \Df\Core\O {
 			}
 		}
 		else {
-			if ($this->needThrowOnError()) {
+			if ($this[self::$P__THROW_ON_ERROR]) {
 				$this->throwInternalError();
 			}
 			$r = false;
@@ -63,29 +63,55 @@ final class Regex extends \Df\Core\O {
 	/**
 	 * @used-by df_preg_test()
 	 * @used-by self::matchInt()
-	 * @return bool
 	 */
-	function test() {return dfc($this, function() {return !is_null($this->match()) && (false !== $this->match());});}
+	function test():bool {return dfc($this, function() {return !is_null($this->match()) && (false !== $this->match());});}
 
-	/** @return string */
-	private function getPattern() {return $this[self::$P__PATTERN];}
+	/**
+	 * @used-by self::match()
+	 * @used-by self::throwInternalError()
+	 * @used-by self::throwNotMatch()
+	 */
+	private function getPattern():string {return $this[self::$P__PATTERN];}
 
-	/** @return bool */
-	private function getReportFileName() {return 'regular-expression-subject.txt';}
+	/**
+	 * @used-by self::getReportFilePath()
+	 * @used-by self::throwInternalError()
+	 * @used-by self::throwNotMatch()
+	 */
+	private function getReportFileName():bool {return 'regular-expression-subject.txt';}
 
-	/** @return bool */
-	private function getReportFilePath() {
-		return df_cc_path(BP, 'var', 'log', $this->getReportFileName());
-	}
+	/**
+	 * @used-by self::throwInternalError()
+	 * @used-by self::throwNotMatch()
+	 */
+	private function getReportFilePath():bool {return df_cc_path(BP, 'var', 'log', $this->getReportFileName());}
 
-	/** @return string */
-	private function getSubject() {return $this[self::$P__SUBJECT];}
+	/**
+	 * @used-by self::getSubjectReportPart()
+	 * @used-by self::getSubjectSplitted()
+	 * @used-by self::isSubjectMultiline()
+	 * @used-by self::match()
+	 * @used-by self::throwInternalError()
+	 * @used-by self::throwNotMatch()
+	 */
+	private function getSubject():string {return $this[self::$P__SUBJECT];}
 
-	/** @return int */
-	private function getSubjectMaxLinesToReport() {return 5;}
+	/**
+	 * 2022-10-31
+	 * Private constants require PHP ≥ 7.1: https://stackoverflow.com/a/40933237
+	 * We need to support PHP 7.0.
+	 * @used-by self::getSubjectReportPart()
+	 * @used-by self::isSubjectTooLongToReport()
+	 * @used-by self::throwInternalError()
+	 * @used-by self::throwNotMatch()
+	 */
+	private function getSubjectMaxLinesToReport():int {return 5;}
 
-	/** @return string */
-	private function getSubjectReportPart() {return dfc($this, function() {return
+	/**
+	 * @used-by self::throwInternalError()
+	 * @used-by self::throwNotMatch()
+	 */
+	private function getSubjectReportPart():string {return dfc($this, function() {return
 		!$this->isSubjectTooLongToReport()
 		? $this->getSubject()
 		: df_cc_n(array_slice($this->getSubjectSplitted(), 0, $this->getSubjectMaxLinesToReport()))
@@ -96,7 +122,7 @@ final class Regex extends \Df\Core\O {
 	 * @used-by self::isSubjectTooLongToReport()
 	 * @return string[]
 	 */
-	private function getSubjectSplitted() {return dfc($this, function() {return df_explode_n($this->getSubject());});}
+	private function getSubjectSplitted():array {return dfc($this, function() {return df_explode_n($this->getSubject());});}
 
 	/**
 	 * @used-by self::isSubjectTooLongToReport()
@@ -118,48 +144,45 @@ final class Regex extends \Df\Core\O {
 		$this->isSubjectMultiline() && $this->getSubjectMaxLinesToReport() < count($this->getSubjectSplitted())
 	;});}
 
-	/** @return bool */
-	private function needThrowOnError() {return $this[self::$P__THROW_ON_ERROR];}
-
-	/** @return bool */
-	private function needThrowOnNotMatch() {return $this[self::$P__THROW_ON_NOT_MATCH];}
+	/**
+	 * @used-by self::match()
+	 * @used-by self::matchInt()
+	 */
+	private function needThrowOnNotMatch():bool {return $this[self::$P__THROW_ON_NOT_MATCH];}
 
 	/**
+	 * @used-by self::match()
 	 * @throws \Exception
 	 */
-	private function throwInternalError() {
-		/** @var int $numericCode */
-		$numericCode = preg_last_error();
+	private function throwInternalError():void {
+		$numericCode = preg_last_error(); /** @var int $numericCode */
 		/** @var string $errorCodeForUser */
 		if (!$numericCode) {
 			/**
-			 * Обратите внимание, что при простых сбоях
-			 * @see preg_last_error() возвращает 0 (PREG_NO_ERROR).
+			 * При простых сбоях @see preg_last_error() возвращает 0 (PREG_NO_ERROR).
 			 * Например, при таком: df_preg_test('#(#', 'тест');
 			 */
 			$errorCodeForUser = '';
 		}
 		else {
 			/**
-			 * А вот при сложных сбоях
-			 * @see preg_last_error() возвращает уже какой-то полезный для диагностики код.
+			 * А вот при сложных сбоях @see preg_last_error() возвращает уже какой-то полезный для диагностики код.
 			 * Пример из документации:
-			 * df_preg_test('/(?:\D+|<\d+>)*[!?]/', 'foobar foobar foobar');
+			 * 		df_preg_test('/(?:\D+|<\d+>)*[!?]/', 'foobar foobar foobar');
 			 * https://php.net/manual/function.preg-last-error.php
 			 */
-			/** @var string|null $textCode */
-			$textCode = $this->translateErrorCode($numericCode);
+			$textCode = dfa(self::getErrorCodeMap(), $numericCode); /** @var string|null $textCode */
 			$errorCodeForUser = ' ' . ($textCode ? $textCode : 'с кодом ' . $numericCode);
 		}
-		/** @var string $message */
+		/** @var string $m */
 		if (!$this->isSubjectMultiline()) {
-			$message =
+			$m =
 				"При применении регулярного выражения «{$this->getPattern()}»"
 				. " к строке «{$this->getSubject()}» произошёл сбой{$errorCodeForUser}."
 			;
 		}
 		elseif (!$this->isSubjectTooLongToReport()) {
-			$message =
+			$m =
 				"При применении регулярного выражения «{$this->getPattern()}»"
 				." произошёл сбой{$errorCodeForUser}."
 				."\nТекст, к которому применялось регулярное выражение:"
@@ -168,7 +191,7 @@ final class Regex extends \Df\Core\O {
 		}
 		else {
 			df_report($this->getReportFileName(), $this->getSubject());
-			$message =
+			$m =
 				"При применении регулярного выражения «{$this->getPattern()}»"
 				." произошёл сбой{$errorCodeForUser}."
 				."\nТекст, к которому применялось регулярное выражение,"
@@ -177,48 +200,53 @@ final class Regex extends \Df\Core\O {
 				."\nНАЧАЛО:\n{$this->getSubjectReportPart()}\nКОНЕЦ"
 			;
 		}
-		df_error($message);
+		df_error($m);
 	}
 
 	/**
+	 * @used-by self::match()
+	 * @used-by self::matchInt()
 	 * @throws \Exception
 	 */
-	private function throwNotMatch() {
-		/** @var string $message */
+	private function throwNotMatch():void {/** @var string $m */
 		if (!$this->isSubjectMultiline()) {
-			$message = "Строка «{$this->getSubject()}» не отвечает регулярному выражению «{$this->getPattern()}».";
+			$m = "Строка «{$this->getSubject()}» не отвечает регулярному выражению «{$this->getPattern()}».";
 		}
 		elseif (!$this->isSubjectTooLongToReport()) {
-			$message =
+			$m =
 				"Указанный ниже текст не отвечает регулярному выражению «{$this->getPattern()}»:"
 				."\nНАЧАЛО ТЕКСТА:\n{$this->getSubject()}\nКОНЕЦ ТЕКСТА"
 			;
 		}
 		else {
 			df_report($this->getReportFileName(), $this->getSubject());
-			$message =
+			$m =
 				"Текст не отвечает регулярному выражению «{$this->getPattern()}»."
 				."\nТекст смотрите в файле {$this->getReportFilePath()}."
 				."\nПервые {$this->getSubjectMaxLinesToReport()} строк текста:"
 				."\nНАЧАЛО:\n{$this->getSubjectReportPart()}\nКОНЕЦ"
 			;
 		}
-		df_error($message);
+		df_error($m);
 	}
-
-	/**
-	 * @param int $errorCode
-	 * @return string|null
-	 */
-	private function translateErrorCode($errorCode) {return dfa(self::getErrorCodeMap(), $errorCode);}
 
 	/** @var string */
 	private static $P__PATTERN = 'pattern';
 	/** @var string */
 	private static $P__SUBJECT = 'subject';
-	/** @var string */
+
+	/**
+	 * @used-by self::i()
+	 * @used-by self::match()
+	 * @var string
+	 */
 	private static $P__THROW_ON_ERROR = 'throw_on_error';
-	/** @var string */
+
+	/**
+	 * @used-by self::i()
+	 * @used-by self::needThrowOnNotMatch()
+	 * @var string
+	 */
 	private static $P__THROW_ON_NOT_MATCH = 'throw_on_not_match';
 
 	/**
@@ -226,20 +254,16 @@ final class Regex extends \Df\Core\O {
 	 * @param string $subject
 	 * @param bool $throwOnError [optional]
 	 * @param bool $throwOnNotMatch [optional]
-	 * @return \Df\Core\Text\Regex
 	 */
-	static function i($pattern, $subject, $throwOnError = true, $throwOnNotMatch = false) {
-		return new self([
-			self::$P__PATTERN => $pattern
-			, self::$P__SUBJECT => $subject
-			, self::$P__THROW_ON_ERROR => $throwOnError
-			, self::$P__THROW_ON_NOT_MATCH => $throwOnNotMatch
-		]);
-	}
+	static function i($pattern, $subject, $throwOnError = true, $throwOnNotMatch = false):self {return new self([
+		self::$P__PATTERN => $pattern
+		, self::$P__SUBJECT => $subject
+		, self::$P__THROW_ON_ERROR => $throwOnError
+		, self::$P__THROW_ON_NOT_MATCH => $throwOnNotMatch
+	]);}
 
 	/**
-	 * Возвращает соответствие между числовыми кодами,
-	 * возвращаемыми функцией @see preg_last_error(),
+	 * Возвращает соответствие между числовыми кодами, возвращаемыми функцией @see preg_last_error(),
 	 * и их символьными соответствиями:
 	 *	PREG_NO_ERROR
 	 *	PREG_INTERNAL_ERROR
@@ -247,9 +271,10 @@ final class Regex extends \Df\Core\O {
 	 *	PREG_RECURSION_LIMIT_ERROR
 	 *	PREG_BAD_UTF8_ERROR
 	 *	PREG_BAD_UTF8_OFFSET_ERROR
+	 * @used-by self::throwInternalError()
 	 * @return array(int => string)
 	 */
-	private static function getErrorCodeMap() {return dfcf(function() {return array_filter(
+	private static function getErrorCodeMap():array {return dfcf(function() {return array_filter(
 		df_map_kr(function($s, $n) {return
 			[$n, !df_ends_with($s, '_ERROR') ? null : $s]
 		;}, get_defined_constants(true)['pcre'])
