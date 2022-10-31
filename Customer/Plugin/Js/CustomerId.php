@@ -25,5 +25,5 @@ final class CustomerId {
 	 * @param array(string => mixed) $r
 	 * @return array(string => mixed)
 	 */
-	function afterGetSectionData(Sb $sb, array $r) {return ['id' => df_customer_id()] + $r;}
+	function afterGetSectionData(Sb $sb, array $r):array {return ['id' => df_customer_id()] + $r;}
 }
