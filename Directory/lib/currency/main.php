@@ -14,9 +14,8 @@ use NumberFormatter as NF;
  * 2016-07-04 «How to load a currency by its ISO code?» https://mage2.pro/t/1840
  * @used-by df_currency_base()
  * @param C|string|null $c [optional]
- * @return C
  */
-function df_currency($c = null) {/** @var C $r */
+function df_currency($c = null):C {/** @var C $r */
 	if (!$c) {
 		$r = df_currency_base();
 	}
@@ -45,9 +44,8 @@ function df_currency($c = null) {/** @var C $r */
  * @used-by \Df\Payment\Currency::rateToPayment()
  * @used-by \Df\Payment\Currency::toBase()
  * @param ScopeA|Store|ConfigData|IConfigData|O|Q|array(int|string)|null|string|int $s [optional]
- * @return C
  */
-function df_currency_base($s = null) {return df_currency(df_assert_sne(df_cfg(
+function df_currency_base($s = null):C {return df_currency(df_assert_sne(df_cfg(
 	C::XML_PATH_CURRENCY_BASE, df_is_oq($s) ? $s->getStore() : $s
 )));}
 
@@ -55,12 +53,12 @@ function df_currency_base($s = null) {return df_currency(df_assert_sne(df_cfg(
  * 2017-01-29
  * «How to get the currency code for a country with PHP?» https://mage2.pro/t/2552
  * http://stackoverflow.com/a/31755693
+ * @used-by \Df\Directory\Test\currency::t01()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::currency()
  * @used-by \Dfe\Stripe\FE\Currency::currency()
  * @param string|Country $c
- * @return string
  */
-function df_currency_by_country_c($c) {return dfcf(function($c) {return
+function df_currency_by_country_c($c):string {return dfcf(function($c) {return
 	(new NF(df_locale_by_country($c), NF::CURRENCY))->getTextAttribute(NF::CURRENCY_CODE)
 ;}, [df_currency_code($c)]);}
 
@@ -70,7 +68,8 @@ function df_currency_by_country_c($c) {return dfcf(function($c) {return
  * В отличие от @see df_currency_base() здесь мы вынуждены использовать не $scope, а $store,
  * потому что учётную валюту можно просто считать из настроек,
  * а текущая валюта может меняться динамически (в том числе посетителем магазина и сессией).
+ * @used-by df_currency_current_c()
+ * @used-by df_currency_rate_to_current()
  * @param int|string|null|bool|StoreInterface $s [optional]
- * @return C
  */
-function df_currency_current($s = null) {return df_store($s)->getCurrentCurrency();}
+function df_currency_current($s = null):C {return df_store($s)->getCurrentCurrency();}
