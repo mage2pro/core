@@ -1,10 +1,11 @@
 <?php
-use Magento\Customer\Api\AddressRepositoryInterface as ICustomerAddressRep;
+use Magento\Customer\Api\AddressRepositoryInterface as IAddressRep;
 use Magento\Customer\Helper\Address as AddressH;
 use Magento\Customer\Model\Address as CA;
 use Magento\Customer\Model\AddressRegistry;
 use Magento\Customer\Model\Address\AbstractAddress as AA;
 use Magento\Customer\Model\Customer;
+use Magento\Customer\Model\ResourceModel\AddressRepository as AddressRep;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address as QA;
 use Magento\Sales\Model\Order;
@@ -23,9 +24,8 @@ use Magento\Store\Api\Data\StoreInterface;
 /**
  * 2019-06-01
  * @used-by \KingPalm\B2B\Block\Registration::region()
- * @return AddressH
  */
-function df_address_h() {return df_o(AddressH::class);}
+function df_address_h():AddressH {return df_o(AddressH::class);}
 
 /**
  * 2016-07-27
@@ -36,16 +36,14 @@ function df_address_h() {return df_o(AddressH::class);}
  * а не используется в контексте оформления заказа, то такой адрес ещё типа не имеет,
  * и в будущем, в зависимости от контекста,
  * может использоваться и как адрес доставки, и как платёжный адрес.
- * 
  * @used-by \Df\Customer\Plugin\Model\Address\AbstractAddress::aroundValidate()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Validator::aroundValidate()
  * @uses \Magento\Quote\Model\Quote\Address::getAddressType()
  * @uses \Magento\Customer\Model\Address::getAddressType()
  * @param AA|CA|QA|OA $a
- * @return bool
  */
-function df_address_is_billing($a) {return df_is_aa($a) ? AA::TYPE_BILLING === $a['address_type'] : (
+function df_address_is_billing($a):bool {return df_is_aa($a) ? AA::TYPE_BILLING === $a['address_type'] : (
 	df_is_oa($a) ? OA::TYPE_BILLING === $a->getAddressType() : df_error(
 		"Invalid address class: «%s».",  get_class($a)
 	)
@@ -65,9 +63,8 @@ function df_address_owner($a) {return df_is_ca($a) ? $a->getCustomer() : (
  * 2016-04-05
  * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
  * @used-by \Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
- * @return AddressRegistry
  */
-function df_address_registry() {return df_o(AddressRegistry::class);}
+function df_address_registry():AddressRegistry {return df_o(AddressRegistry::class);}
 
 /**
  * 2016-04-04  
@@ -82,34 +79,31 @@ function df_address_store($a) {/** @var Customer|Quote|null $owner */return
 /**
  * 2021-05-07
  * @used-by \Df\Quote\Plugin\Model\QuoteAddressValidator::doValidate()
- * @return ICustomerAddressRep
+ * @return IAddressRep|AddressRep
  */
-function df_customer_address_rep() {return df_o(ICustomerAddressRep::class);}
+function df_customer_address_rep() {return df_o(IAddressRep::class);}
 
 /**
  * 2017-04-22
  * @used-by df_address_is_billing()
  * @used-by df_is_address()
  * @param mixed $v
- * @return bool
  */
-function df_is_aa($v) {return $v instanceof AA;}
+function df_is_aa($v):bool {return $v instanceof AA;}
 
 /**
  * 2017-04-22
  * @used-by df_phone()
  * @param mixed $v
- * @return bool
  */
-function df_is_address($v) {return df_is_aa($v) || df_is_oa($v);}
+function df_is_address($v):bool {return df_is_aa($v) || df_is_oa($v);}
 
 /**
  * 2017-04-22
  * @used-by df_address_owner()
  * @param mixed $v
- * @return bool
  */
-function df_is_ca($v) {return $v instanceof CA;}
+function df_is_ca($v):bool {return $v instanceof CA;}
 
 /**
  * 2017-04-22
@@ -117,15 +111,13 @@ function df_is_ca($v) {return $v instanceof CA;}
  * @used-by df_address_owner()
  * @used-by df_is_address()
  * @param mixed $v
- * @return bool
  */
-function df_is_oa($v) {return $v instanceof OA;}
+function df_is_oa($v):bool {return $v instanceof OA;}
 
 /**
  * 2017-04-22
  * @used-by df_address_owner()
  * @used-by df_is_address()
  * @param mixed $v
- * @return bool
  */
-function df_is_qa($v) {return $v instanceof QA;}
+function df_is_qa($v):bool {return $v instanceof QA;}
