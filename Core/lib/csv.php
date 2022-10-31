@@ -54,6 +54,7 @@ function df_csv_parse_int($s):array {return df_int(df_csv_parse($s));}
  * df_csv_pretty(['aaa', 'bbb']) → 'aaa, bbb, ccc'
  * @see df_csv()
  * @used-by dfe_modules_log()
+ * @used-by \Df\Framework\Validator\Currency::message()
  * @used-by \Df\Sentry\Client::send()
  * @used-by \Dfe\Moip\P\Reg::ga()
  * @used-by \Dfe\Sift\Payload\OQI::p()

@@ -34,7 +34,7 @@ class Currency implements \Df\Framework\IValidator {
 	 */
 	private function message() {
 		$namesA = df_quote_russian(df_html_b(df_currency_name($this->_iso3))); /** @var string $namesA */
-		$namesS = implode(', ', $namesA); /** @var string $namesS */
+		$namesS = df_csv_pretty($namesA); /** @var string $namesS */
 		/** @var string $whatToEnable */ /** @var string $whatToSet */ /** @var string $object */
 		# 2020-03-02, 2022-10-31
 		# 1) Symmetric array destructuring requires PHP ≥ 7.1:
