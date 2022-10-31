@@ -95,7 +95,7 @@ function df_sprintf($s):string {/** @var string $r */ /** @var mixed[] $args */
 /**
  * @used-by df_sprintf()
  * @param string|mixed[] $s
- * @throws \Exception
+ * @throws Exception
  */
 function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $args */
 	# 2020-03-02, 2022-10-31
@@ -112,8 +112,8 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
 	}
 	else {
 		try {$r = vsprintf($s, df_tail($args));}
-		catch (Exception $e) {/** @var bool $inProcess */
-			static $inProcess = false;
+		catch (Exception $e) {
+			static $inProcess = false; /** @var bool $inProcess */
 			if (!$inProcess) {
 				$inProcess = true;
 				df_error(
@@ -122,7 +122,6 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
 					. "\nParameters:\n{params}."
 					,['{message}' => df_ets($e), '{params}' => print_r(df_tail($args), true)]
 				);
-				$inProcess = false;
 			}
 		}
 	}
@@ -140,9 +139,8 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
  * @param string $s
  * @param array(string => string) $variables
  * @param string|callable|null $onUnknown
- * @return string
  */
-function df_var($s, array $variables, $onUnknown = null) {return preg_replace_callback(
+function df_var($s, array $variables, $onUnknown = null):string {return preg_replace_callback(
 	'#\{([^\}]*)\}#ui', function($m) use($variables, $onUnknown) {return
 		dfa($variables, dfa($m, 1, ''), $onUnknown)
 	;}, $s
