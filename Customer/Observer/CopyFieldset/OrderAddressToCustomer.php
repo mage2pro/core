@@ -26,6 +26,6 @@ final class OrderAddressToCustomer implements ObserverInterface {
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @param O $o
 	 */
-	function execute(O $o) {df_ci_add($o['target'], Sess::s()->customer());}
+	function execute(O $o):void {df_ci_add($o['target'], Sess::s()->customer());}
 }
 
