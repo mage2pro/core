@@ -9,37 +9,30 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by df_country()
  * @param bool $allowedOnly [optional]
  * @param int|string|null|bool|IStore $s [optional]
- * @return CC
  */
-function df_countries($allowedOnly = false, $s = null) {return !$allowedOnly ? CC::s() : df_countries_allowed($s);}
+function df_countries($allowedOnly = false, $s = null):CC {return !$allowedOnly ? CC::s() : df_countries_allowed($s);}
 
 /**
  * 2016-05-20
  * @used-by df_countries()
  * @param int|string|null|bool|IStore $s [optional]
- * @return CC
  */
-function df_countries_allowed($s = null) {return dfcf(function($id) {return
+function df_countries_allowed($s = null):CC {return dfcf(function($id) {return
 	C::c()->loadByStore($id)
 ;}, [df_store_id($s)]);}
 
 /**        
  * 2016-05-20
- * Возвращает массив,
- * в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
+ * Возвращает массив, в котором ключами являются 2-буквенные коды стран по стандарту ISO 3166-1 alpha-2,
  * а значениями — названия стран для заданной локали (или системной локали по умолчанию).
  * https://ru.wikipedia.org/wiki/ISO_3166-1
- * Например:
- *	array(
- *		'AU' => 'Австралия'
- *		,'AT' => 'Австрия'
- *	)
+ * Например: ['AU' => 'Австралия', 'AT' => 'Австрия']
  * @used-by df_countries_options()
  * @used-by df_country_ctn()
  * @param string|null $locale [optional]
  * @return array(string => string)
  */
-function df_countries_ctn($locale = null) {return df_countries()->mapFromCodeToName($locale);}
+function df_countries_ctn($locale = null):array {return df_countries()->mapFromCodeToName($locale);}
 
 /**
  * 2017-01-21
@@ -50,7 +43,7 @@ function df_countries_ctn($locale = null) {return df_countries()->mapFromCodeToN
  * @param string[] $filter [optional]
  * @return array(array(string => string))
  */
-function df_countries_options(array $filter = []) {return dfcf(function(array $filter = []) {return df_map_to_options(
+function df_countries_options(array $filter = []):array {return dfcf(function(array $filter = []) {return df_map_to_options(
 	df_sort_names(dfa(df_countries_ctn(), df_etn($filter)))
 );}, func_get_args());}
 
@@ -73,25 +66,22 @@ function df_country($c, $throw = true) {return $c instanceof C ? $c : dfcf(funct
  * @used-by \Dfe\Moip\P\Reg::pShippingAddress()
  * @used-by \Dfe\Moip\Test\Data::address()
  * @param string $iso2
- * @return string
  */
-function df_country_2_to_3($iso2) {return df_result_sne(dfa(CC::s()->mapFrom2To3(), $iso2));}
+function df_country_2_to_3($iso2):string {return df_result_sne(dfa(CC::s()->mapFrom2To3(), $iso2));}
 
 /**
  * 2016-05-20 Конвертирует 3-символьный код страны (например, «RUS») в двухсимвольный («RU»).
  * @used-by \Dfe\Moip\Facade\Card::country()
  * @param string $iso3
- * @return string
  */
-function df_country_3_to_2($iso3) {return df_result_sne(dfa(CC::s()->mapFrom3To2(), $iso3));}
+function df_country_3_to_2($iso3):string {return df_result_sne(dfa(CC::s()->mapFrom3To2(), $iso3));}
 
 /**
  * 2017-01-29
  * @used-by df_locale_by_country()
  * @param string|C $c
- * @return string
  */
-function df_country_code($c) {return df_country($c)->getIso2Code();}
+function df_country_code($c):string {return df_country($c)->getIso2Code();}
 
 /**
  * 2015-12-28
@@ -100,7 +90,7 @@ function df_country_code($c) {return df_country($c)->getIso2Code();}
  * @param int|string|null|bool|IStore $s [optional]
  * @return string[]
  */
-function df_country_codes_allowed($s = null) {return df_csv_parse(df_cfg('general/country/allow', $s));}
+function df_country_codes_allowed($s = null):array {return df_csv_parse(df_cfg('general/country/allow', $s));}
 
 /**        
  * 2016-05-20
@@ -113,9 +103,8 @@ function df_country_codes_allowed($s = null) {return df_csv_parse(df_cfg('genera
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @param string $iso2
  * @param string|null $locale [optional]
- * @return string
  */
-function df_country_ctn($iso2, $locale = null) {df_param_iso2($iso2, 0); return
+function df_country_ctn($iso2, $locale = null):string {df_param_iso2($iso2, 0); return
 	dfa(df_countries_ctn($locale), strtoupper($iso2)) ?: df_error(
 		'Unable to find out name of the country with ISO code «%1» for locale «%2».',
 		$iso2 ,df_locale($locale)
