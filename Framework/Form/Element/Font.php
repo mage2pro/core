@@ -19,7 +19,7 @@ class Font extends Fieldset {
 	 * @see \Df\Framework\Form\Element\Fieldset::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	function onFormInitialized() {
+	function onFormInitialized():void {
 		parent::onFormInitialized();
 		$this->addClass('df-font'); # 2016-07-30 This CSS class will be applied to the <fieldset> DOM node.
 		$this->checkbox(O::enabled, 'Setup?');

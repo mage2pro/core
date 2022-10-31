@@ -89,7 +89,7 @@ abstract class Button extends AE implements ElementI, IComment {
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	final function onFormInitialized() {
+	final function onFormInitialized():void {
 		/**
 		 * 2017-06-27
 		 * This code removes the «[store view]» sublabel, similar to

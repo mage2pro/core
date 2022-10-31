@@ -19,7 +19,7 @@ abstract class Table extends Hidden {
 	 * @see self::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	final function onFormInitialized() {df_fe_init(
+	final function onFormInitialized():void {df_fe_init(
 		$this, __CLASS__, df_asset_third_party('Handsontable/main.css'), ['columns' => $this->columns()]
 	);}
 }

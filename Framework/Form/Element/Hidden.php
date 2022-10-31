@@ -26,5 +26,5 @@ class Hidden extends _Hidden implements ElementI {
 	 * @see \Df\Framework\Form\Element\Table::onFormInitialized()
 	 * @see \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
 	 */
-	function onFormInitialized() {}
+	function onFormInitialized():void {}
 }

@@ -43,7 +43,7 @@ class Textarea extends _Textarea implements ElementI {
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	final function onFormInitialized() {}
+	final function onFormInitialized():void {}
 
 	/**
 	 * 2016-03-09

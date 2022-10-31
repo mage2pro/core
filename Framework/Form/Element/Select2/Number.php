@@ -12,7 +12,7 @@ class Number extends \Df\Framework\Form\Element\Select2 {
 	 * @see \Df\Framework\Form\Element\Select2::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	final function onFormInitialized() {
+	final function onFormInitialized():void {
 		parent::onFormInitialized();
 		df_fe_init($this, __CLASS__, [], [], 'select2/number');
 	}

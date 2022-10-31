@@ -14,7 +14,7 @@ class Quantity extends Fieldset\Inline {
 	 * @see \Df\Framework\Form\Element\Text::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	final function onFormInitialized() {
+	final function onFormInitialized():void {
 		parent::onFormInitialized();
 		$this->addClass('df-quantity');
 		$t = $this->getTitle(); /** @var string|null|Phrase $t */
