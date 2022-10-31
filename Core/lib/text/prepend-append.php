@@ -5,9 +5,8 @@
  * @used-by df_file_ext_add()
  * @param string $s
  * @param string $tail
- * @return string
  */
-function df_append($s, $tail) {return df_ends_with($s, $tail) ? $s : $s . $tail;}
+function df_append($s, $tail):string {return df_ends_with($s, $tail) ? $s : $s . $tail;}
 
 /**
  * 2015-12-25
