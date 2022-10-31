@@ -15,7 +15,7 @@ class ArrayT extends Fieldset {
 	 * @see \Df\Framework\Form\Element\Fieldset::onFormInitialized()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
 	 */
-	final function onFormInitialized() {
+	final function onFormInitialized():void {
 		parent::onFormInitialized();
 		$this->addClass('df-array');
 		# 2015-12-29 It is an invisible template row.
@@ -51,7 +51,7 @@ class ArrayT extends Fieldset {
 	 *		dfItemFormElement='Dfe\CurrencyFormat\FE'
 	 *		(...)
 	 *	>(...)</field>
-	 * @return string
+	 * @used-by self::onFormInitialized()
 	 */
-	private function itemFormElement() {return $this->fc('dfItemFormElement');}
+	private function itemFormElement():string {return $this->fc('dfItemFormElement');}
 }
