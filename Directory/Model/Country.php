@@ -32,4 +32,3 @@ class Country extends \Magento\Directory\Model\Country {
 	 */
 	final static function c():C {return df_new_om(C::class);}
 }
-
