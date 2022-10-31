@@ -40,7 +40,7 @@ final class ColumnType {
 	 * @param array(string => string|int) $o [optional]
 	 * @return array(string => string|int)
 	 */
-	static function bool($c, array $o = []) {return $o + [
+	static function bool($c, array $o = []):array {return $o + [
 		'comment' => $c, 'default' => 0, 'length' => 1, 'nullable' => false, 'type' => 'boolean'
 	];}
 
@@ -52,7 +52,7 @@ final class ColumnType {
 	 * @param array(string => string|int) $o [optional]
 	 * @return array(string => string|int)
 	 */
-	static function text($c, array $o = []) {return $o + [
+	static function text($c, array $o = []):array {return $o + [
 		'comment' => $c, 'length' => 255, 'nullable' => true, 'type' => T::TYPE_TEXT
 	];}
 
@@ -64,5 +64,5 @@ final class ColumnType {
 	 * @param string $c
 	 * @return array(string => string|int)
 	 */
-	static function textLong($c) {return self::text($c, ['length' => 65536]);}
+	static function textLong($c):array {return self::text($c, ['length' => 65536]);}
 }

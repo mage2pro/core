@@ -21,17 +21,15 @@ abstract class Command extends _P implements INonInterceptable {
 	 * @see \TFC\Image\Command\C1::p()
 	 * @see \TFC\Image\Command\C2::p()
 	 * @see \TFC\Image\Command\C3::p()
-	 * @return void
 	 */
-	abstract protected function p();
+	abstract protected function p():void;
 
 	/**
 	 * 2020-10-25
 	 * @override
 	 * @see \Symfony\Component\Console\Command\Command::execute()
-	 * @return int
 	 */
-	final protected function execute(I $i, O $o) {$this->_i = $i; $this->_o = $o; return df_try(
+	final protected function execute(I $i, O $o):int {$this->_i = $i; $this->_o = $o; return df_try(
 		function() {$this->p(); return Cli::RETURN_SUCCESS;}
 		,function(E $e) use($o) {
 			$o->writeln(df_tag('error', [], $e->getMessage()));
@@ -44,16 +42,15 @@ abstract class Command extends _P implements INonInterceptable {
 
 	/**
 	 * 2020-10-25
-	 * @return I
+	 * 2022-10-31 @deprecated It is unused.
 	 */
-	final protected function input() {return $this->_i;}
+	final protected function input():I {return $this->_i;}
 
 	/**
 	 * 2020-10-25
 	 * @used-by \TFC\Image\Command\C1::image()
-	 * @return O
 	 */
-	final protected function output() {return $this->_o;}
+	final protected function output():O {return $this->_o;}
 
 	/**
 	 * 2020-20-25
