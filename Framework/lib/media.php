@@ -19,17 +19,15 @@ function df_img_adapter() {return df_img_adapter_f()->create();}
 /**
  * 2018-11-24
  * @used-by df_img_adapter()
- * @return FAdapter
  */
-function df_img_adapter_f() {return df_o(FAdapter::class);}
+function df_img_adapter_f():FAdapter {return df_o(FAdapter::class);}
 
 /**
  * 2020-12-13
  * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  * @param string $f
- * @return bool
  */
-function df_img_is_jpeg($f) {return in_array(strtolower(df_file_ext($f)), ['jpg', 'jpeg']);}
+function df_img_is_jpeg($f):bool {return in_array(strtolower(df_file_ext($f)), ['jpg', 'jpeg']);}
 
 /**
  * 2018-11-24
@@ -37,9 +35,8 @@ function df_img_is_jpeg($f) {return in_array(strtolower(df_file_ext($f)), ['jpg'
  * @param string $f An image's path relative to the `pub/media` folder
  * @param int|null $w [optional]
  * @param int|null $h [optional]
- * @return string
  */
-function df_img_resize($f, $w = null, $h = null) {
+function df_img_resize($f, $w = null, $h = null):string {
 	$h = df_etn($h); $w = df_etn($w);
 	$srcDirR = dirname($f); /** @var string $srcDirR */
 	$dstDirR = df_cc_path($srcDirR, 'cache', "{$w}x{$h}"); /** @var string $dstDirR */
@@ -67,18 +64,16 @@ function df_img_resize($f, $w = null, $h = null) {
  * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_product_image_path2abs()
- * @param string $path [optional]
- * @return string
+ * @param string $p [optional]
  */
-function df_media_path_absolute($path = '') {return df_path_absolute(DL::MEDIA, $path);}
+function df_media_path_absolute($p = ''):string {return df_path_absolute(DL::MEDIA, $p);}
 
 /**
  * 2015-11-30 Левый «/» мы убираем.
  * @used-by df_media_path2url()
- * @param string $path
- * @return string
+ * @param string $p
  */
-function df_media_path_relative($path) {return df_path_relative($path, DL::MEDIA);}
+function df_media_path_relative($p):string {return df_path_relative($p, DL::MEDIA);}
 
 /**
  * 2015-11-30
@@ -98,18 +93,16 @@ function df_media_reader() {return df_fs_r(DL::MEDIA);}
  * @see df_media_url2path()
  * @see df_product_image_url()
  * @param string $p [optional]
- * @return string
  */
-function df_media_path2url($p = '') {return df_store()->getBaseUrl(U::URL_TYPE_MEDIA) . df_media_path_relative($p);}
+function df_media_path2url($p = ''):string {return df_store()->getBaseUrl(U::URL_TYPE_MEDIA) . df_media_path_relative($p);}
 
 /**
  * 2019-09-20        
  * @used-by df_product_image_path()
  * @see df_media_path2url()
  * @param string $u [optional]
- * @return string
  */
-function df_media_url2path($u = '') {return df_media_path_absolute(df_trim_text_left(
+function df_media_url2path($u = ''):string {return df_media_path_absolute(df_trim_text_left(
 	$u, df_store()->getBaseUrl(U::URL_TYPE_MEDIA)
 ));}
 
@@ -128,8 +121,7 @@ function df_media_writer() {return df_fs_w(DL::MEDIA);}
  * because the @see \Magento\Framework\App\Request\Http singleton is not yet initialized there.
  * 2) The `/pub` can be absent (it depends on the webserver settings).
  * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
- * @return string
  */
-function df_strip_media_from_request_uri() {return
+function df_strip_media_from_request_uri():string {return
 	df_trim_text_left(df_trim_text_left(dfa($_SERVER, 'REQUEST_URI'), '/pub'), '/' . DL::MEDIA . '/')
 ;}
