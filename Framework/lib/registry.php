@@ -8,7 +8,7 @@ use Magento\Framework\Registry as R;
  * @param string $k
  * @param mixed $v
  */
-function df_register($k, $v) {df_registry_o()->register($k, $v);}
+function df_register($k, $v):void {df_registry_o()->register($k, $v);}
 
 /**
  * 2015-10-31
@@ -26,13 +26,12 @@ function df_registry($k) {return df_registry_o()->registry($k);}
  * @used-by df_register()
  * @used-by df_registry()
  * @used-by df_unregister()
- * @return R
  */
-function df_registry_o() {return df_o(R::class);}
+function df_registry_o():R {return df_o(R::class);}
 
 /**
  * 2020-03-01
  * @used-by \MageKey\AdcPopup\Observer\QuoteAddAfter::execute()		tradefurniturecompany.co.uk
  * @param string $k
  */
-function df_unregister($k) {return df_registry_o()->unregister($k);}
+function df_unregister($k):void {df_registry_o()->unregister($k);}
