@@ -9,7 +9,7 @@ use Magento\Framework\DB\Select as S;
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return array(array(string => string))
  */
-function df_fetch($t, $cols = '*', $compareK = null, $compareV = null) {
+function df_fetch($t, $cols = '*', $compareK = null, $compareV = null):array {
 	$s = df_db_from($t, $cols); /** @var S $s */
 	if (is_array($compareK)) {
 		foreach ($compareK as $c => $v) {/** @var string $c */ /** @var string $v */
@@ -34,7 +34,7 @@ function df_fetch($t, $cols = '*', $compareK = null, $compareV = null) {
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function df_fetch_col($t, $col, $compareK = null, $compareV = null, $distinct = false) {
+function df_fetch_col($t, $col, $compareK = null, $compareV = null, $distinct = false):array {
 	$s = df_db_from($t, $col); /** @var S $s */
 	if (is_array($compareK)) {
 		foreach ($compareK as $c => $v) {/** @var string $c */ /** @var string $v */
@@ -60,8 +60,8 @@ function df_fetch_col($t, $col, $compareK = null, $compareV = null, $distinct = 
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function df_fetch_col_int($t, $cSelect, $compareK = null, $compareV = null, $distinct = false) {return
-	/** I intentionally do not use @see df_int() to gain speed */
+function df_fetch_col_int($t, $cSelect, $compareK = null, $compareV = null, $distinct = false):array {return
+	/** I do not use @see df_int() to make the function faster */
 	df_int_simple(df_fetch_col($t, $cSelect, $compareK, $compareV, $distinct))
 ;}
 
@@ -74,7 +74,7 @@ function df_fetch_col_int($t, $cSelect, $compareK = null, $compareV = null, $dis
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int[]|string[]
  */
-function df_fetch_col_int_unique($t, $cSelect, $compareK = null, $compareV = null) {return df_fetch_col_int(
+function df_fetch_col_int_unique($t, $cSelect, $compareK = null, $compareV = null):array {return df_fetch_col_int(
 	$t, $cSelect, $compareK, $compareV, $distinct = true
 );}
 
