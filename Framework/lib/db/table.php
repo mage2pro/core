@@ -22,9 +22,8 @@
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
  * @param string|string[] $n
- * @return string
  */
-function df_table($n) {return dfcf(function($n) {return df_db_resource()->getTableName($n);}, [$n]);}
+function df_table($n):string {return dfcf(function($n) {return df_db_resource()->getTableName($n);}, [$n]);}
 
 /**
  * 2015-04-12
@@ -34,7 +33,7 @@ function df_table($n) {return dfcf(function($n) {return df_db_resource()->getTab
  * @param int|string|int[]|string[] $values
  * @param bool $not [optional]
  */
-function df_table_delete($t, $columnName, $values, $not = false) {
+function df_table_delete($t, $columnName, $values, $not = false):void {
 	$condition = df_sql_predicate_simple($values, $not); /** @var string $condition */
 	df_conn()->delete(df_table($t), ["{$columnName} {$condition}" => $values]);
 }
@@ -46,12 +45,11 @@ function df_table_delete($t, $columnName, $values, $not = false) {
  * @param string $column
  * @param int|string|int[]|string[] $values
  */
-function df_table_delete_not($t, $column, $values) {df_table_delete($t, $column, $values, $not = true);}
+function df_table_delete_not($t, $column, $values) {df_table_delete($t, $column, $values, true);}
 
 /**
  * 2019-11-30
  * 2022-10-22 @deprecated It is unused.
  * @param string $t
- * @return bool
  */
-function df_table_exists($t) {return df_conn()->isTableExists(df_table($t));}
+function df_table_exists($t):bool {return df_conn()->isTableExists(df_table($t));}
