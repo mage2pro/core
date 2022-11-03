@@ -26,7 +26,7 @@ class Textarea extends _Textarea implements ElementI {
 	 * @used-by \Magento\Framework\Data\Form\Element\Textarea::getElementHtml()
 	 * @return string[]
 	 */
-	function getHtmlAttributes() {return array_merge(['placeholder'], parent::getHtmlAttributes());}
+	function getHtmlAttributes():array {return array_merge(['placeholder'], parent::getHtmlAttributes());}
 
 	/**
 	 * 2016-03-09
@@ -59,7 +59,7 @@ class Textarea extends _Textarea implements ElementI {
 	 * https://github.com/mage2pro/core/tree/34f8c108/Config/etc/system_file.xsd#L102
 	 * https://github.com/mage2pro/twitter-timeline/blob/604c28e/etc/adminhtml/system.xml#L50
 	 */
-	final protected function _construct() {
+	final protected function _construct():void {
 		parent::_construct();
 		if ($dfRows = df_fe_fc_i($this, 'dfRows')) {  /** @var int $dfRows */
 			$this['rows'] = $dfRows;

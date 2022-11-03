@@ -1,6 +1,8 @@
 <?php
 namespace Df\Framework\Form\Element;
 use Df\Framework\Form\Element;
+use Magento\Framework\Phrase;
+
 /**
  * 2016-05-30
  * @see \Df\Amazon\FE\JsOrigin
@@ -19,16 +21,17 @@ abstract class Url extends Element {
 	 *	if ((string)$element->getComment()) {
 	 *		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
 	 *	}
+	 * @return string|Phrase|null
 	 */
 	function getComment() {return $this->thirdPartyLocalhost() ? null : parent::getComment();}
 
 	/**
 	 * 2016-05-30
 	 * 2016-06-07
-	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * 'id' => $this->getId() нужно для совместимости с 2.0.6,
 	 * иначе там сбой в выражении inputs = $(idTo).up(this._config.levels_up)
 	 * https://mail.google.com/mail/u/0/#search/maged%40wrapco.com.au/15510135c446afdb
+	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
 	 * @used-by \Magento\Framework\Data\Form\Element\AbstractElement::getDefaultHtml():
@@ -43,9 +46,8 @@ abstract class Url extends Element {
 	 *			return $html;
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L426-L441
-	 * @return string
 	 */
-	function getElementHtml() {return df_tag('div', ['class' => 'df-url', 'id' => $this->getId()],
+	function getElementHtml():string {return df_tag('div', ['class' => 'df-url', 'id' => $this->getId()],
 		$this->thirdPartyLocalhost() ? $this->messageForThirdPartyLocalhost() : $this->messageForOthers()
 	);}
 	
@@ -53,9 +55,8 @@ abstract class Url extends Element {
 	 * 2016-05-31
 	 * @used-by self::getElementHtml()
 	 * @see \Df\Framework\Form\Element\Webhook::messageForThirdPartyLocalhost()
-	 * @return string
 	 */
-	protected function messageForThirdPartyLocalhost() {return $this->messageForOthers();}
+	protected function messageForThirdPartyLocalhost():string {return $this->messageForOthers();}
 
 	/**
 	 * 2016-05-30
@@ -92,20 +93,16 @@ abstract class Url extends Element {
 	 * @see \Df\Amazon\FE\JsOrigin::url() 
 	 * @see \Df\Payment\FE\CustomerReturn::url()
 	 * @see \Df\Sso\FE\CustomerReturn::url()
-	 * @return string
 	 */
-	protected function url() {return df_webhook(
-		$this->m(), df_fe_fc($this, 'dfWebhook_suffix'), $this->requireHttps()
-	);}
+	protected function url():string {return df_webhook($this->m(), df_fe_fc($this, 'dfWebhook_suffix'), $this->requireHttps());}
 
 	/**
 	 * 2016-05-30
 	 * @used-by self::messageForOthers()
 	 * @used-by self::url()
 	 * @used-by \Df\Amazon\FE\JsOrigin::url()
-	 * @return bool
 	 */
-	final protected function requireHttps() {return dfc($this, function() {return
+	final protected function requireHttps():bool {return dfc($this, function() {return
 		!df_is_localhost() && df_fe_fc_b($this, 'dfWebhook_requireHTTPS')
 	;});}
 
@@ -113,17 +110,15 @@ abstract class Url extends Element {
 	 * 2017-04-12
 	 * @used-by \Df\Payment\FE\CustomerReturn::routePath()
 	 * @used-by \Df\Sso\FE\CustomerReturn::url()
-	 * @return string
 	 */
-	final protected function m() {return dfc($this, function() {return df_fe_m($this);});}
+	final protected function m():string {return dfc($this, function() {return df_fe_m($this);});}
 
 	/**
 	 * 2016-05-31
 	 * @used-by self::getElementHtml()
 	 * @used-by self::messageForThirdPartyLocalhost()
-	 * @return string
 	 */
-	private function messageForOthers() {$url = $this->url(); return
+	private function messageForOthers():string {$url = $this->url(); return
 		!$this->requireHttps() || df_check_https_strict($url) ? $url :
 			'Looks like your <a href="https://mage2.pro/t/1723" target="_blank">'
 			.'«<b>General</b>» → «<b>Web</b>» → «<b>Base URLs (Secure)</b>'
@@ -135,7 +130,6 @@ abstract class Url extends Element {
 	 * 2016-05-30
 	 * @used-by self::getComment()
 	 * @used-by self::getElementHtml()
-	 * @return bool
 	 */
-	private function thirdPartyLocalhost() {return dfc($this, function() {return df_is_localhost() && !df_my();});}
+	private function thirdPartyLocalhost():bool {return dfc($this, function() {return df_is_localhost() && !df_my();});}
 }
