@@ -7,17 +7,15 @@ if (!defined('DS')) {
  * 2017-12-13
  * @used-by \Df\Payment\Method::canUseForCountryP()
  * @param string $p
- * @return string
  */
-function df_add_ds_right($p) {return df_trim_ds_right($p) . '/';}
+function df_add_ds_right($p):string {return df_trim_ds_right($p) . '/';}
 
 /**
  * 2016-10-14
  * @used-by df_url_bp()
  * @param string $p
- * @return string
  */
-function df_trim_ds($p) {return df_trim($p, '/\\');}
+function df_trim_ds($p):string {return df_trim($p, '/\\');}
 
 /**
  * 2015-11-30
@@ -29,9 +27,8 @@ function df_trim_ds($p) {return df_trim($p, '/\\');}
  * @used-by \Dfe\Salesforce\Test\Basic::url()
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param string $p
- * @return string
  */
-function df_trim_ds_left($p) {return df_trim_left($p, '/\\');}
+function df_trim_ds_left($p):string {return df_trim_left($p, '/\\');}
 
 /**
  * 2016-10-14
@@ -41,6 +38,5 @@ function df_trim_ds_left($p) {return df_trim_left($p, '/\\');}
  * @used-by \Dfe\BlackbaudNetCommunity\Url::build()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::check()
  * @param string $p
- * @return string
  */
-function df_trim_ds_right($p) {return df_trim_right($p, '/\\');}
+function df_trim_ds_right($p):string {return df_trim_right($p, '/\\');}
