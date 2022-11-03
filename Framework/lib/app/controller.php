@@ -17,7 +17,7 @@ function df_auth_f() {return df_o(IAuth::class);}
  * 2019-11-21
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  */
-function df_no_dispatch() {
+function df_no_dispatch():void {
 	$af = df_o(AF::class); /** @var AF $af */
 	$af->set('', Controller::FLAG_NO_DISPATCH, true);
 }
