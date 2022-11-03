@@ -12,9 +12,8 @@ use Df\Core\Exception as DFE;
  * @see df_rp_has()
  * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
  * @param string $s
- * @return bool
  */
-function df_action_has($s) {return df_contains(df_action_name(), $s);}
+function df_action_has($s):bool {return df_contains(df_action_name(), $s);}
 
 /**
  * 2016-01-07
@@ -26,9 +25,8 @@ function df_action_has($s) {return df_contains(df_action_name(), $s);}
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param string ...$names
- * @return bool
  */
-function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a, dfa_flatten($names));}
+function df_action_is(...$names):bool {return ($a = df_action_name()) && in_array($a, dfa_flatten($names));}
 
 /**
  * 2015-09-02
@@ -48,7 +46,8 @@ function df_action_is(...$names) {return ($a = df_action_name()) && in_array($a,
  * @throws DFE
  */
 function df_action_name() {return df_is_cli() ? null : df_assert_ne('__', df_request_o()->getFullActionName(),
-	'`Magento\Framework\App\Request\Http::getFullActionName()` is called to early (the underlying object is not yet initialized).'
+	'`Magento\Framework\App\Request\Http::getFullActionName()` is called too early'
+	. ' (the underlying object is not yet initialized).'
 );}
 
 /**
@@ -58,9 +57,8 @@ function df_action_name() {return df_is_cli() ? null : df_assert_ne('__', df_req
  * @used-by df_is_system_config()
  * @used-by \DxMoto\Core\Plugin\Amasty\Finder\Observer\LayoutRender::aroundExecute()
  * @param string|string[] $p
- * @return bool
  */
-function df_action_prefix($p) {return df_starts_with(df_action_name(), $p);}
+function df_action_prefix($p):bool {return df_starts_with(df_action_name(), $p);}
 
 /**
  * 2019-12-26
@@ -70,9 +68,8 @@ function df_action_prefix($p) {return df_starts_with(df_action_name(), $p);}
  * @used-by df_referer_ends_with()
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
  * @used-by https://github.com/royalwholesalecandy/core/issues/58#issuecomment-569049731
- * @return string
  */
-function df_referer() {return dfa($_SERVER, 'HTTP_REFERER');}
+function df_referer():string {return dfa($_SERVER, 'HTTP_REFERER');}
 
 /**
  * 2019-11-04
@@ -80,6 +77,5 @@ function df_referer() {return dfa($_SERVER, 'HTTP_REFERER');}
  * @used-by \PPCs\Core\Plugin\Amazon\Payment\Observer\AddAmazonButton::aroundExecute()
  * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer()
  * @param string $s
- * @return bool
  */
-function df_referer_ends_with($s) {return df_ends_with(df_referer(), $s);}
+function df_referer_ends_with($s):bool {return df_ends_with(df_referer(), $s);}
