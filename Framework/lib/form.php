@@ -71,7 +71,6 @@ function df_fa_link() {return df_link_inline(df_fa());}
  * @used-by df_fe_fc_csv()
  * @used-by df_fe_fc_i()
  * @used-by \Df\Framework\Form\Element\Fieldset::fc()
- * @used-by \Df\Framework\Form\Element\Select::fc()
  * @used-by \Df\Framework\Form\Element\Url::url()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
