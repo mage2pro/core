@@ -5,9 +5,8 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
  * 2019-08-23
  * @used-by df_google_init_service_account()
  * @param string $p [optional]
- * @return string
  */
-function df_fs_etc($p = '') {return df_cc_path(df_fs_dl()->getPath(DL::CONFIG), df_trim_ds_left($p));}
+function df_fs_etc($p = ''):string {return df_cc_path(df_fs_dl()->getPath(DL::CONFIG), df_trim_ds_left($p));}
 
 /**
  * 2021-03-20
@@ -16,7 +15,7 @@ function df_fs_etc($p = '') {return df_cc_path(df_fs_dl()->getPath(DL::CONFIG), 
  * @param string $f
  * @throws Exception
  */
-function df_mkdir($f) {df_file()->checkAndCreateFolder($f);}
+function df_mkdir($f):void {df_file()->checkAndCreateFolder($f);}
 
 /**
  * 2021-03-20
@@ -25,4 +24,4 @@ function df_mkdir($f) {df_file()->checkAndCreateFolder($f);}
  * @used-by \Magedelight\Firstdata\Model\Api\AbstractInterface::__construct() (canadasatellite.ca)
  * @throws Exception
  */
-function df_mkdir_log() {df_mkdir(df_fs_dl()->getPath(DL::LOG));}
+function df_mkdir_log():void {df_mkdir(df_fs_dl()->getPath(DL::LOG));}
