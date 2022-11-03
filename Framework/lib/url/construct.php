@@ -18,10 +18,9 @@ use Magento\Store\Model\Store;
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string|null $path [optional]
  * @param bool $backend [optional]
- * @return string
  * @throws DFE
  */
-function df_route($m, $path = null, $backend = false) {
+function df_route($m, $path = null, $backend = false):string {
 	/** @var string $route */
 	$route = df_route_config()->getRouteFrontName($m = df_module_name($m), $backend ? 'adminhtml' : 'frontend');
 	if ($m === $route) {
@@ -43,9 +42,8 @@ function df_route($m, $path = null, $backend = false) {
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param string|null $path [optional]
  * @param array(string => mixed) $p [optional]
- * @return string
  */
-function df_url($path = null, array $p = []) {return df_url_o()->getUrl($path, df_nosid() + $p);}
+function df_url($path = null, array $p = []):string {return df_url_o()->getUrl($path, df_nosid() + $p);}
 
 /**
  * 2015-11-28
@@ -59,9 +57,8 @@ function df_url($path = null, array $p = []) {return df_url_o()->getUrl($path, d
  * @used-by \Df\Framework\Validator\Currency::message()
  * @param string|null $path [optional]
  * @param array(string => mixed) $p [optional]
- * @return string
  */
-function df_url_backend($path = null, array $p = []) {return df_url_trim_index(df_url_backend_new()->getUrl(
+function df_url_backend($path = null, array $p = []):string {return df_url_trim_index(df_url_backend_new()->getUrl(
 	$path, df_nosid() + $p
 ));}
 
@@ -75,9 +72,8 @@ function df_url_backend($path = null, array $p = []) {return df_url_trim_index(d
  * @used-by df_cm_backend_url()
  * @param string|null $path [optional]
  * @param array(string => mixed) $p [optional]
- * @return string
  */
-function df_url_backend_ns($path = null, array $p = []) {return df_url_backend($path, ['_nosecret' => true] + $p);}
+function df_url_backend_ns($path = null, array $p = []):string {return df_url_backend($path, ['_nosecret' => true] + $p);}
 
 /**
  * 2015-11-28
@@ -90,9 +86,8 @@ function df_url_backend_ns($path = null, array $p = []) {return df_url_backend($
  * @param string|null $path [optional]
  * @param array(string => mixed) $p [optional]
  * @param Store|int|string|null $store [optional]
- * @return string
  */
-function df_url_frontend($path = null, array $p = [], $store = null) {return df_url_trim_index(
+function df_url_frontend($path = null, array $p = [], $store = null):string {return df_url_trim_index(
 	df_url_frontend_o()->getUrl($path, df_nosid() + $p + (is_null($store) ? [] : ['_store' => df_store($store)]))
 );}
 
@@ -104,9 +99,8 @@ function df_url_frontend($path = null, array $p = [], $store = null) {return df_
  * @param string $tmpl
  * @param string[] $names
  * @param mixed ...$args [optional]
- * @return string
  */
-function df_url_staged($test, $tmpl, array $names, ...$args) {
+function df_url_staged($test, $tmpl, array $names, ...$args):string {
 	$r = str_replace('{stage}', $test ? df_first($names) : df_last($names), $tmpl); /** @var string $r */
 	/**
 	 * 2017-09-10
@@ -138,9 +132,8 @@ function df_url_staged($test, $tmpl, array $names, ...$args) {
  * @param bool $requireHTTPS [optional]
  * @param Store|int|string|null $s [optional]
  * @param array(string => string) $p [optional]
- * @return string
  */
-function df_webhook($m, $suffix = '', $requireHTTPS = false, $s = null, $p = []) {
+function df_webhook($m, $suffix = '', $requireHTTPS = false, $s = null, $p = []):string {
 	$path = df_route($m, $suffix); /** @var string $path */
 	$r = df_my_local()
 		? "https://mage2.pro/sandbox/$path" . (!$p ? '' : '?' . http_build_query($p))
