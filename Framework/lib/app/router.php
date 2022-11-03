@@ -11,9 +11,8 @@ use Magento\Framework\App\Request\Http;
  * @used-by df_action_c_forward()
  * @used-by df_action_c_redirect()
  * @param string $c
- * @return IAction
  */
-function df_action_create($c) {
+function df_action_create($c):IAction {
 	$f = df_o(ActionFactory::class); /** @var ActionFactory $f */
 	return $f->create($c);
 }
@@ -22,16 +21,14 @@ function df_action_create($c) {
  * 2021-05-11
  * @used-by \Dfe\Portal\Router::match()
  * @used-by \Mageplaza\Blog\Controller\Router::forward() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/190)
- * @return Forward
  */
-function df_action_c_forward() {return df_action_create(Forward::class);}
+function df_action_c_forward():Forward {return df_action_create(Forward::class);}
 
 /**
  * 2021-05-11
  * @used-by df_router_redirect()
- * @return Redirect
  */
-function df_action_c_redirect() {return df_action_create(Redirect::class);}
+function df_action_c_redirect():Redirect {return df_action_create(Redirect::class);}
 
 /**
  * 2021-06-27
@@ -39,9 +36,8 @@ function df_action_c_redirect() {return df_action_create(Redirect::class);}
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param IRequest|Http $req
  * @param string $path
- * @return Redirect
  */
-function df_router_redirect(IRequest $req, $path) {
+function df_router_redirect(IRequest $req, $path):Redirect {
 	df_response()->setRedirect(df_url_frontend($path), 301);
 	$req->setDispatched(true);
 	return df_action_c_redirect();

@@ -81,7 +81,7 @@ function df_response($r = null) {return $r ?: df_o(
  * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a2 [optional]
  * @return array(array(string => string), IResult|wResult|IHttpResponse|HttpResponse)
  */
-function df_response_ar($a1 = null, $a2 = null) {return
+function df_response_ar($a1 = null, $a2 = null):array {return
 	is_array($a1) ? [$a1, df_response($a2)] : (
 		is_array($a2) ? [$a2, df_response($a1)] : (
 			is_object($a1) ? [[], $a1] : (
@@ -97,7 +97,7 @@ function df_response_ar($a1 = null, $a2 = null) {return
  * @used-by \Df\Framework\App\Action\Image::execute()
  * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
  */
-function df_response_cache_max() {df_response_headers([
+function df_response_cache_max():void {df_response_headers([
 	'Cache-Control' => 'max-age=315360000'
 	,'Expires' => 'Thu, 31 Dec 2037 23:55:55 GMT'
 	# 2015-12-09
@@ -117,7 +117,7 @@ function df_response_cache_max() {df_response_headers([
  * @param string $contentType
  * @param IResult|wResult|IHttpResponse|HttpResponse|null $r [optional]
  */
-function df_response_content_type($contentType, $r = null) {df_response($r)->setHeader('Content-Type', $contentType, true);}
+function df_response_content_type($contentType, $r = null):void {df_response($r)->setHeader('Content-Type', $contentType, true);}
 
 /**
  * 2015-11-29

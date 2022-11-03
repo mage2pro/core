@@ -5,9 +5,8 @@ use Magento\Store\App\Response\Redirect as ResponseRedirect;
 /**
  * 2017-11-17
  * @used-by \Df\Payment\W\Action::execute()
- * @return bool
  */
-function df_is_redirect() {return df_response()->isRedirect();}
+function df_is_redirect():bool {return df_response()->isRedirect();}
 
 /**
  * 2017-11-16
@@ -59,19 +58,19 @@ function df_redirect($path, $p = []) {
  * 2019-11-21
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  */
-function df_redirect_back() {df_response()->setRedirect(df_response_redirect()->getRefererUrl());}
+function df_redirect_back():void {df_response()->setRedirect(df_response_redirect()->getRefererUrl());}
 
 /**
  * 2020-05-27
  * @used-by \BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
  */
-function df_redirect_to_checkout() {df_redirect('checkout');}
+function df_redirect_to_checkout():void {df_redirect('checkout');}
 
 /**
  * 2020-10-20
  * @used-by \BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
  */
-function df_redirect_to_home() {df_redirect('/');}
+function df_redirect_to_home():void {df_redirect('/');}
 
 /**
  * 2017-11-17
@@ -89,7 +88,7 @@ function df_redirect_to_home() {df_redirect('/');}
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  */
-function df_redirect_to_payment() {df_redirect('checkout', ['_fragment' => 'payment']);}
+function df_redirect_to_payment():void {df_redirect('checkout', ['_fragment' => 'payment']);}
 
 /**
  * 2017-11-17
@@ -100,7 +99,7 @@ function df_redirect_to_payment() {df_redirect('checkout', ['_fragment' => 'paym
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  */
-function df_redirect_to_success() {df_order_last(false) ? df_redirect('checkout/onepage/success') : null;}
+function df_redirect_to_success():void {df_order_last(false) ? df_redirect('checkout/onepage/success') : null;}
 
 /**
  * 2019-11-21
