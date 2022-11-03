@@ -7,19 +7,14 @@ use Magento\Framework\Data\Helper\PostHelper;
 
 /**
  * 2015-01-28
- * По примеру @see df_handle_entry_point_exception()
- * добавил условие @uses Mage::getIsDeveloperMode()
- * потому что Magento выводит диагностические сообщения на экран
- * только при соблюдении этого условия.
  * 2016-07-31
- * К сожалению, мы не можем указывать кодировку в обработчике,
- * установленном @see set_exception_handler(),
+ * К сожалению, мы не можем указывать кодировку в обработчике, установленном @see set_exception_handler(),
  * потому что @see set_exception_handler() в Magento работать не будет
  * из-за глобального try..catch в методе @see Mage::run()
  * @used-by df_error()
  * @used-by df_error_html()
  */
-function df_header_utf() {df_is_cli() || headers_sent() ?: header('Content-Type: text/html; charset=UTF-8');}
+function df_header_utf():void {df_is_cli() || headers_sent() ?: header('Content-Type: text/html; charset=UTF-8');}
 
 /**
  * 2017-02-26      
@@ -28,7 +23,7 @@ function df_header_utf() {df_is_cli() || headers_sent() ?: header('Content-Type:
  * @param array(string => string) $a [optional]
  * @return array(string => string)
  */
-function df_headers(array $a = []) {return dfak_transform($a + [
+function df_headers(array $a = []):array {return dfak_transform($a + [
 	'Author' => 'Dmitry Fedyuk', 'EMail' => 'admin@mage2.pro', 'Website' => 'https://mage2.pro'
 ], function($k) {return "X-Mage2.PRO-{$k}";});}
 
@@ -36,9 +31,8 @@ function df_headers(array $a = []) {return dfak_transform($a + [
  * 2016-12-04
  * @used-by df_customer_logged_in_2()
  * @used-by \Wolf\Filter\Block\Navigation::getCacheKeyInfo()
- * @return Context
  */
-function df_http_context() {return df_o(Context::class);}
+function df_http_context():Context {return df_o(Context::class);}
 
 /**
  * 2015-11-27
@@ -77,8 +71,7 @@ function df_http_context() {return df_o(Context::class);}
  * @return string|bool
  */
 function df_http_get($urlBase, array $params = [], $timeout = null) {
-	/** @var string $url */
-	$url = !$params ? $urlBase : $urlBase . '?' . http_build_query($params);
+	$url = !$params ? $urlBase : $urlBase . '?' . http_build_query($params); /** @var string $url */
 	/**
 	 * 2016-05-31
 	 * file_get_contents() может возбудить @see E_WARNING:
@@ -105,7 +98,7 @@ function df_http_get($urlBase, array $params = [], $timeout = null) {
  * @param int|null $timeout [optional]
  * @return array(string => mixed)
  */
-function df_http_json($urlBase, array $params = [], $timeout = null) {return
+function df_http_json($urlBase, array $params = [], $timeout = null):array {return
 	/** @var string|bool $json */ /** @var bool|array|null $r */
 	false === ($json = df_http_get($urlBase, $params, $timeout))
 	|| !is_array($r = df_json_decode($json))
@@ -116,9 +109,8 @@ function df_http_json($urlBase, array $params = [], $timeout = null) {return
  * 2018-07-25
  * @used-by \Frugue\Store\Block\Switcher::post()
  * @used-by vendor/blushme/checkout/view/frontend/templates/extra-sell.phtml (blushme.se)
- * @return PostHelper
  */
-function df_post_h() {return df_o(PostHelper::class);}
+function df_post_h():PostHelper {return df_o(PostHelper::class);}
 
 /**
  * @used-by df_scope()
@@ -183,9 +175,8 @@ function df_request_body() {return file_get_contents('php://input');}
  * 2017-03-09
  * @see df_http_json()
  * @used-by \Df\Payment\W\Reader\Json::http()
- * @return string
  */
-function df_request_body_json() {return !($j = df_request_body()) ? [] : df_json_decode($j);}
+function df_request_body_json():string {return !($j = df_request_body()) ? [] : df_json_decode($j);}
 
 /**
  * 2016-12-25
@@ -204,9 +195,8 @@ function df_request_header($k) {return df_request_o()->getHeader($k);}
  * 2021-06-05
  * @used-by df_context()
  * @used-by \Df\Sentry\Client::get_http_data()
- * @return string
  */
-function df_request_method() {return dfa($_SERVER, 'REQUEST_METHOD');}
+function df_request_method():string {return dfa($_SERVER, 'REQUEST_METHOD');}
 
 /**
  * 2015-08-14 https://github.com/magento/magento2/issues/1675
@@ -244,6 +234,5 @@ function df_request_o() {return df_o(IRequest::class);}
  * @used-by df_url_path_contains()
  * @used-by \Alignet\Paymecheckout\Plugin\Magento\Framework\Session\SidResolver::aroundGetSid() (innomuebles.com)
  * @param string ...$s
- * @return bool
  */
-function df_rp_has(...$s) {return df_contains(df_request_o()->getPathInfo(), ...$s);}
+function df_rp_has(...$s):bool {return df_contains(df_request_o()->getPathInfo(), ...$s);}
