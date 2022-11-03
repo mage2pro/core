@@ -8,9 +8,8 @@ use Magento\Framework\View\Asset\Source;
  * @used-by df_asset_create()
  * @used-by df_asset_url()
  * @used-by df_phtml_exists()
- * @return Repository
  */
-function df_asset() {return df_o(Repository::class);}
+function df_asset():Repository {return df_o(Repository::class);}
 
 /**
  * 2015-10-27
@@ -21,9 +20,8 @@ function df_asset() {return df_o(Repository::class);}
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Moip\ConfigProvider::config()
  * @param string $u
- * @return File
  */
-function df_asset_create($u) {$a = df_asset(); return !df_check_url_absolute($u)
+function df_asset_create($u):File {$a = df_asset(); return !df_check_url_absolute($u)
 	? $a->createAsset($u)
 	: $a->createRemoteAsset($u, dfa(['css' => 'text/css', 'js' => 'application/javascript'], df_file_ext($u)))
 ;}
@@ -39,9 +37,8 @@ function df_asset_create($u) {$a = df_asset(); return !df_check_url_absolute($u)
  * @param string $name
  * @param string|null $m [optional]
  * @param string|null $ext [optional]
- * @return bool
  */
-function df_asset_exists($name, $m = null, $ext = null) {return dfcf(
+function df_asset_exists($name, $m = null, $ext = null):bool {return dfcf(
 	function($name, $m = null, $ext = null) {return
 		!!df_asset_source()->findSource(df_asset_create(df_asset_name($name, $m, $ext)))
 	;}
@@ -64,9 +61,8 @@ function df_asset_exists($name, $m = null, $ext = null) {return dfcf(
  * @param string|null $name [optional]
  * @param string|object|null $m [optional]
  * @param string|null $extension [optional]
- * @return string
  */
-function df_asset_name($name = null, $m = null, $extension = null) {return df_ccc(
+function df_asset_name($name = null, $m = null, $extension = null):string {return df_ccc(
 	'.', df_ccc('::', $m ? df_module_name($m) : null, $name ?: 'main'), $extension
 );}
 
@@ -74,9 +70,8 @@ function df_asset_name($name = null, $m = null, $extension = null) {return df_cc
  * 2015-12-29
  * @used-by df_asset_exists()
  * @used-by df_asset_url()
- * @return Source
  */
-function df_asset_source() {return df_o(Source::class);}
+function df_asset_source():Source {return df_o(Source::class);}
 
 /**
  * 2016-09-06
@@ -88,9 +83,8 @@ function df_asset_source() {return df_o(Source::class);}
  * @used-by \Dfe\Markdown\FormElement::css()
  * @used-by \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
  * @param string $localPath
- * @return string
  */
-function df_asset_third_party($localPath) {return "Df_Core::thirdParty/$localPath";}
+function df_asset_third_party($localPath):string {return "Df_Core::thirdParty/$localPath";}
 
 /**
  * 2019-02-11
