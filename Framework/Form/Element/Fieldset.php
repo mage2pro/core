@@ -11,7 +11,7 @@ use Df\Framework\Form\Element\Select2\Number as Select2Number;
 use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Fieldset as FieldsetM;
-use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
+use Magento\Framework\Data\Form\Element\Renderer\RendererInterface as IRenderer;
 use Magento\Framework\Data\Form\Element\Select as SelectM;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Phrase;
@@ -25,12 +25,9 @@ use Magento\Framework\Phrase;
  * @see \Dfe\Sift\PM\FE
  * @see \Doormall\Shipping\Partner\FE
  * @method AbstractForm|Fieldset getContainer()
- * @method RendererInterface|null getElementRendererDf()
  * @method mixed[] getFieldConfig()
  * @method string|null|Phrase getLabel()
  * @method string|null|Phrase getTitle()
- * @method mixed getValue()
- * @method Fieldset setElementRendererDf(RendererInterface $value)
  * @method Fieldset setLabel(string $value)
  * @method Fieldset setTitle(string $value)
  * @method Fieldset setValue(mixed $value)
@@ -94,9 +91,9 @@ class Fieldset extends FieldsetM implements ElementI {
 		 * By analogy with https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/Block/Widget/Form.php#L70-L75
 		 * https://mage2.pro/t/239
 		 * @uses \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element
-		 * @var RendererInterface|null $ren
+		 * @var IRenderer|null $ren
 		 */
-		if ($ren = $this->getElementRendererDf() ?: (!df_is_backend() ? null : BackendRenderer::s())) {
+		if ($ren = $this->elementRendererDf() ?: (!df_is_backend() ? null : BackendRenderer::s())) {
 			$r->setRenderer($ren);
 		}
 		return $r;
@@ -205,6 +202,14 @@ class Fieldset extends FieldsetM implements ElementI {
 		}
 		return $this->field('' === $name ? 'color' : $name, Color::class, $label, $data);
 	}
+
+	/**
+	 * 2022-11-03
+	 * @used-by self::addField()
+	 * @see \Df\Framework\Form\Element\Fieldset\Inline::elementRendererDf()
+	 * @return RendererInterface|null
+	 */
+	protected function elementRendererDf() {return null;}
 
 	/**
 	 * 2015-11-17

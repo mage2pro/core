@@ -22,9 +22,8 @@ class Webhook extends Url {
 	 * @override
 	 * @see \Df\Framework\Form\Element\Url::messageForThirdPartyLocalhost()
 	 * @used-by \Df\Framework\Form\Element\Url::getElementHtml()
-	 * @return string
 	 */
-	final protected function messageForThirdPartyLocalhost() {return
+	final protected function messageForThirdPartyLocalhost():string {return
 		'The notifications are not available, because the store is running on <b>localhost</b>'
 	;}
 }

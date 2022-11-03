@@ -10,16 +10,16 @@ class Inline extends Fieldset {
 	/**
 	 * 2015-11-19
 	 * @override
-	 * @see \Df\Framework\Form\Element\Fieldset::getElementRendererDf()
-	 * @return InlineRenderer
-	 */
-	final function getElementRendererDf() {return InlineRenderer::s();}
-
-	/**
-	 * 2015-11-19
-	 * @override
 	 * @see \Df\Framework\Form\Element\Fieldset::_construct()
 	 * @used-by \Magento\Framework\Data\Form\AbstractForm::__construct()
 	 */
 	final protected function _construct():void {$this->addClass('df-fieldset-inline'); parent::_construct();}
+
+	/**
+	 * 2015-11-19
+	 * @override
+	 * @see \Df\Framework\Form\Element\Fieldset::elementRendererDf()
+	 * @used-by \Df\Framework\Form\Element\Fieldset::addField()
+	 */
+	final protected function elementRendererDf():InlineRenderer {return InlineRenderer::s();}
 }
