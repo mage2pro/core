@@ -5,15 +5,16 @@ use Df\Config\Source\SizeUnit;
 use Df\Core\Exception as DFE;
 use Df\Framework\Form\Element as E;
 use Df\Framework\Form\ElementI;
+use Df\Framework\Form\Element\Fieldset\Inline as FInline;
 use Df\Framework\Form\Element\Renderer\Inline;
 use Df\Framework\Form\Element\Select2\Number as Select2Number;
 use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Data\Form\Element\Fieldset as FieldsetM;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
+use Magento\Framework\Data\Form\Element\Select as SelectM;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Phrase;
-use \Df\Framework\Form\Element\Fieldset\Inline as FInline;
 /**
  * 2015-11-17
  * @see \Df\Framework\Form\Element\ArrayT
@@ -404,7 +405,7 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $v
 	 * @param array(string => mixed)|string $data [optional]
 	 * @param array|string|null $cfg [optional]
-	 * @return \Magento\Framework\Data\Form\Element\Select|E
+	 * @return SelectM|E
 	 */
 	final protected function select($name, $label, $v, $data = [], $cfg = 'select') {
 		if (!is_array($v)) {
@@ -448,7 +449,7 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
 	 * @param array(string => mixed)|string $data [optional]
-	 * @return \Magento\Framework\Data\Form\Element\Select|E
+	 * @return SelectM|E
 	 */
 	final protected function select2($name, $label, $values, $data = []) {return $this->select(
 		$name, $label, $values, $data, Select2::class
@@ -460,7 +461,7 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
 	 * @param array(string => mixed)|string $data [optional]
-	 * @return \Magento\Framework\Data\Form\Element\Select|E
+	 * @return SelectM|E
 	 */
 	final protected function select2Number($name, $label, $values, $data = []) {return $this->select(
 		$name, $label, $values, $data, Select2Number::class
@@ -522,7 +523,7 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * 2015-11-17
 	 * @param string $name
 	 * @param string|Phrase $label
-	 * @return \Magento\Framework\Data\Form\Element\Select
+	 * @return SelectM
 	 */
 	final protected function yesNo($name, $label) {return $this->select($name, $label, df_yes_no());}
 
