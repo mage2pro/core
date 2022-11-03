@@ -5,7 +5,7 @@
  * @used-by \Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()
  * @return string[]
  */
-function df_modules_my() {return dfcf(function() {return array_keys(array_filter(df_map_k(
+function df_modules_my():array {return dfcf(function() {return array_keys(array_filter(df_map_k(
 	df_map_r(df_module_list()->getNames(), function($m) {return [$m,
 		df_starts_with($m, 'Magento_') ? [] : df_package($m, 'authors', [])
 	];})
