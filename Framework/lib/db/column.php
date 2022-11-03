@@ -107,12 +107,10 @@ function df_db_column_drop($t, $c) {
 	return !!df_conn()->query($query)->fetchColumn();
  * It is also correct, I used it before I found the
  * @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::tableColumnExists() method.
- *
  * @param string $table
  * @param string $column
- * @return bool
  */
-function df_db_column_exists($table, $column) {return
+function df_db_column_exists($table, $column):bool {return
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
@@ -147,7 +145,7 @@ function df_db_column_exists($table, $column) {return
  * @param string $column
  * @return array(string => string|int|null)
  */
-function df_db_column_describe($table, $column) {return df_result_array(dfa(
+function df_db_column_describe($table, $column):array {return df_result_array(dfa(
 	df_conn()->describeTable(df_table($table)), $column
 ));}
 
@@ -162,7 +160,7 @@ function df_db_column_describe($table, $column) {return df_result_array(dfa(
  * @param string $from  The column should exist in the table!
  * @param string $to
  */
-function df_db_column_rename($table, $from, $to) {
+function df_db_column_rename($table, $from, $to):void {
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,

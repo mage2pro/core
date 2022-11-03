@@ -45,4 +45,3 @@ function df_dbc_oa($name, $dfn = null) {df_db_column_add('sales_order_address', 
  * @param string|null|array(string => mixed) $dfn [optional]
  */
 function df_dbc_qa($name, $dfn = null) {df_db_column_add('quote_address', ...func_get_args());}
-
