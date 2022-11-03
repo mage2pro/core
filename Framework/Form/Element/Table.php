@@ -11,7 +11,7 @@ abstract class Table extends Hidden {
 	 * @see \Dfe\Typography\Config\Fonts::columns()
 	 * @return string[]
 	 */
-	abstract protected function columns();
+	abstract protected function columns():array;
 
 	/**
 	 * 2015-12-16
