@@ -40,9 +40,8 @@ class Inline implements RendererInterface {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L443-L459
 	 * @param AE|E $e
-	 * @return string
 	 */
-	function render(AE $e) {
+	function render(AE $e):string {
 		$labelAtRight = E::shouldLabelBeAtRight($e); /** @var bool $labelAtRight */
 		/**
 		 * 2015-12-11
