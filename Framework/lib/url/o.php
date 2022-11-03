@@ -13,9 +13,8 @@ use Magento\Framework\Url\Helper\Data as H;
  * 2020-01-18
  * @used-by df_url_path()
  * @param string $url
- * @return Req
  */
-function df_request_i($url) {return df_new_om(Req::class, ['uri' => $url]);}
+function df_request_i($url):Req {return df_new_om(Req::class, ['uri' => $url]);}
 
 /**
  * 2016-08-27 
@@ -26,22 +25,18 @@ function df_route_config() {return df_o(IRouteConfig::class);}
 
 /**
  * 2017-06-28
- * @return UrlBackend
+ * @used-by df_url_backend()
  */
-function df_url_backend_new() {return df_new_om(UrlBackend::class);}
-
-/** @return UrlBackend */
-function df_url_backend_o() {return df_o(UrlBackend::class);}
+function df_url_backend_new():UrlBackend {return df_new_om(UrlBackend::class);}
 
 /**
  * 2020-01-19
  * @used-by df_url_param_redirect()
- * @return H
  */
-function df_url_h() {return df_o(H::class);}
+function df_url_h():H {return df_o(H::class);}
 
-/** @return Url */
-function df_url_frontend_o() {return df_o(Url::class);}
+/** @used-by df_url_frontend() */
+function df_url_frontend_o():Url {return df_o(Url::class);}
 
 /**
  * @used-by df_current_url()
