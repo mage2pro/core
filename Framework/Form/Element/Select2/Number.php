@@ -30,16 +30,14 @@ class Number extends \Df\Framework\Form\Element\Select2 {
 	 * (то есть, указан в атрибуте «type» тега <field>).
 	 * @see \Df\Framework\Form\Element\Select2::customCssClass()
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
-	 * @return string
 	 */
-	final protected function customCssClass() {return 'df-select2-number';}
+	final protected function customCssClass():string {return 'df-select2-number';}
 
 	/**
 	 * 2016-08-12
 	 * @override
 	 * @see \Df\Framework\Form\Element\Select2::width()
 	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
-	 * @return string
 	 */
-	final protected function width() {return '5em';}
+	final protected function width():string {return '5em';}
 }

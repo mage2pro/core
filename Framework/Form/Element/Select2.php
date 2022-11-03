@@ -97,25 +97,22 @@ class Select2 extends Select {
 	 * (то есть, указан в атрибуте «type» тега <field>).
 	 * @used-by self::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Select2\Number::customCssClass()
-	 * @return string
 	 */
-	protected function customCssClass() {return '';}
+	protected function customCssClass():string {return '';}
 
 	/**
 	 * 2017-10-15
 	 * @used-by self::setRenderer()
 	 * @see \Dfe\Stripe\FE\Currency::disabled()
-	 * @return bool
 	 */
-	protected function disabled() {return false;}
+	protected function disabled():bool {return false;}
 
 	/**
 	 * 2016-08-12
 	 * @used-by self::onFormInitialized()
 	 * @see \Df\Framework\Form\Element\Select2\Number::width()
-	 * @return string
 	 */
-	protected function width() {return null;}
+	protected function width():string {return '';}
 
 	/**
 	 * 2019-06-02
