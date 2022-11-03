@@ -4,16 +4,16 @@ use Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element as BackendRenderer;
 use Df\Config\Source\SizeUnit;
 use Df\Core\Exception as DFE;
 use Df\Framework\Form\Element as E;
+use Df\Framework\Form\ElementI;
 use Df\Framework\Form\Element\Renderer\Inline;
 use Df\Framework\Form\Element\Select2\Number as Select2Number;
-use Df\Framework\Form\ElementI;
 use Magento\Framework\Data\Form\AbstractForm;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
-use Magento\Framework\Data\Form\Element\Fieldset as _Fieldset;
+use Magento\Framework\Data\Form\Element\Fieldset as FieldsetM;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
-use Magento\Framework\Data\Form\Element\Textarea;
 use Magento\Framework\Data\OptionSourceInterface;
 use Magento\Framework\Phrase;
+use \Df\Framework\Form\Element\Fieldset\Inline as FInline;
 /**
  * 2015-11-17
  * @see \Df\Framework\Form\Element\ArrayT
@@ -37,7 +37,7 @@ use Magento\Framework\Phrase;
  * @method Fieldset unsTitle()
  * @method Fieldset unsValue()
  */
-class Fieldset extends _Fieldset implements ElementI {
+class Fieldset extends FieldsetM implements ElementI {
 	/**
 	 * 2015-12-12
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -77,28 +77,28 @@ class Fieldset extends _Fieldset implements ElementI {
 	/**
 	 * 2015-11-19 «Propose to add a fieldset-specific element renderer» https://mage2.pro/t/228
 	 * @override
+	 * @see FieldsetM::addField()
+	 * @used-by self::field()
+	 * @used-by self::fieldset()
 	 * @param string $elementId
 	 * @param string $type
 	 * @param array $config
 	 * @param bool|false $after
 	 * @param bool|false $isAdvanced
-	 * @return AE
 	 */
-	function addField($elementId, $type, $config, $after = false, $isAdvanced = false) {
-		$result = parent::addField($elementId, $type, $config, $after, $isAdvanced); /** @var AE $result */
-		/** @var RendererInterface|null $renderer */
-		if ($renderer = $this->getElementRendererDf() ?: (!df_is_backend() ? null :
-			/**
-			 * 2015-11-22
-			 * By analogy with https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/Block/Widget/Form.php#L70-L75
-			 * https://mage2.pro/t/239
-			 * @uses \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element
-			 */
-			BackendRenderer::s()
-		)) {
-			$result->setRenderer($renderer);
+	function addField($elementId, $type, $config, $after = false, $isAdvanced = false):AE {
+		$r = parent::addField($elementId, $type, $config, $after, $isAdvanced); /** @var AE $r */
+		/**
+		 * 2015-11-22
+		 * By analogy with https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Backend/Block/Widget/Form.php#L70-L75
+		 * https://mage2.pro/t/239
+		 * @uses \Magento\Backend\Block\Widget\Form\Renderer\Fieldset\Element
+		 * @var RendererInterface|null $ren
+		 */
+		if ($ren = $this->getElementRendererDf() ?: (!df_is_backend() ? null : BackendRenderer::s())) {
+			$r->setRenderer($ren);
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
@@ -112,7 +112,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @see \Magento\Framework\Data\Form\Element\Fieldset::getChildren()
 	 * @return AE[]
 	 */
-	function getChildren() {return iterator_to_array($this->getElements());}
+	function getChildren():array {return iterator_to_array($this->getElements());}
 
 	/**
 	 * 2015-11-23
@@ -140,27 +140,29 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @used-by df_fe_top()
 	 * Возвращает филдсет самого верхнего уровня.
 	 * У филдсета самого верхнего уровня метод getContainer() возвращает форму.
-	 * @return Fieldset
 	 */
-	function top() {return dfc($this, function() {return $this->isTop() ? $this : $this->_parent->top();});}
+	function top():self {return dfc($this, function() {return $this->isTop() ? $this : $this->_parent->top();});}
 
 	/**
 	 * 2015-11-17
 	 * @override
 	 * @see \Magento\Framework\Data\Form\AbstractForm::_construct()
 	 * @used-by \Magento\Framework\Data\Form\AbstractForm::__construct()
+	 * @see \Df\Framework\Form\Element\Fieldset\Inline::_construct()
 	 */
-	protected function _construct() {$this->addClass('df-fieldset'); parent::_construct();}
+	protected function _construct():void {$this->addClass('df-fieldset'); parent::_construct();}
 
 	/**
 	 * 2015-11-17
+	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
+	 * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed)|bool|string $value [optional]
 	 * @param string|null $note [optional]
-	 * @return \Magento\Framework\Data\Form\Element\Checkbox|E
+	 * @return Checkbox|E
 	 */
-	protected function checkbox($name, $label = null, $value = null, $note = null) {
+	final protected function checkbox($name, $label = null, $value = null, $note = null) {
 		$data = is_array($value) ? $value + ['note' => $note] : (
 			is_bool($value)
 			? ['checked' => $value, 'note' => $note]
@@ -172,16 +174,8 @@ class Fieldset extends _Fieldset implements ElementI {
 	}
 
 	/**
-	 * 2015-11-17
-	 * Независимые поля имеют имена: groups[frontend][fields][value__font__emphase__bold][value]
-	 * У нас же имя будет: groups[frontend][fields][value__font][df_children][emphase__bold]
-	 * @param string $name
-	 * @return string
-	 */
-	protected function cn($name) {return $this->nameFull() . "[{$name}]";}
-
-	/**
 	 * 2015-11-24
+	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @param string|null $name [optional]
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
@@ -237,14 +231,23 @@ class Fieldset extends _Fieldset implements ElementI {
 	 *			&:before {content: "\f035";}
 	 *		}
 	 * 2) Отныне в качестве подписи можно указывать название класса Font Awesome.
-	 * @used-by select()
+	 * @used-by self::checkbox()
+	 * @used-by self::color()
+	 * @used-by self::hidden()
+	 * @used-by self::number()
+	 * @used-by self::quantity()
+	 * @used-by self::select()
+	 * @used-by self::text()
+	 * @used-by self::textarea()
+	 * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
+	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @param string $name
 	 * @param string $type
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return AE|E
 	 */
-	protected function field($name, $type, $label = null, $data = []) {
+	final protected function field($name, $type, $label = null, $data = []) {
 		/**
 		 * 2015-12-13
 		 * Приходящее из $data значение $value будем использовать только как значение по умолчанию
@@ -282,85 +285,66 @@ class Fieldset extends _Fieldset implements ElementI {
 		}
 		$additionalClass = dfa($data, self::$FD__CSS_CLASS); /** @var string|null $additionalClass */
 		unset($data[self::$FD__CSS_CLASS]);
-		/**
-		 * 2016-07-30
-		 * Здесь происходит рекурсия, потому что добавление поля к внутреннему филдсету
-		 * сводится (через десяток вызовов) к добавлению этого поля к филдсету самого верхнего уровня.
-		 */
-		$result = $this->addField($this->cn($name), $type, $params + $data); /** @var AE|E $result */
-		/**
-		 * 2015-11-25
-		 * Позволяет выбирать элементы по их короткому имени.
-		 * Полное имя слишком длинно, использовать его в селекторах неудобно:
-		 * groups[frontend][fields][value__font][df_children][bold].
-		 */
-		$result->addClass(self::customCssClassByShortName($name));
+		# 2016-07-30
+		# Здесь происходит рекурсия, потому что добавление поля к внутреннему филдсету
+		# сводится (через десяток вызовов) к добавлению этого поля к филдсету самого верхнего уровня.
+		$r = $this->addField($this->cn($name), $type, $params + $data); /** @var AE|E $r */
+		# 2015-11-25
+		# Позволяет выбирать элементы по их короткому имени.
+		# Полное имя слишком длинно, использовать его в селекторах неудобно:
+		# 		groups[frontend][fields][value__font][df_children][bold].
+		$r->addClass(self::customCssClassByShortName($name));
 		if ($additionalClass) {
-			$result->addClass($additionalClass);
+			$r->addClass($additionalClass);
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
 	 * 2015-11-17
 	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @param string|null $cssClass [optional]
-	 * @return Fieldset\Inline
 	 */
-	protected function fieldsetInline($cssClass = null) {return $this->fieldset(Fieldset\Inline::class, $cssClass);}
+	final protected function fieldsetInline($cssClass = null):FInline {return $this->fieldset(FInline::class, $cssClass);}
 
 	/**
 	 * 2015-12-28
-	 * @param string $name
-	 * @param string $value
-	 * @param string|null|Phrase $label [optional]
-	 * @return Hidden
+	 * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
+	 * @param string $n
+	 * @param string $v
+	 * @param string|null|Phrase $l [optional]
 	 */
-	protected function hidden($name, $value, $label = null) {
-		$r = $this->field($name, Hidden::class, $label, ['value' => $value]); /** @var Hidden $r */
-		$r->setAfterElementHtml($label);
+	final protected function hidden($n, $v, $l = null):Hidden {
+		$r = $this->field($n, Hidden::class, $l, ['value' => $v]); /** @var Hidden $r */
+		$r->setAfterElementHtml($l);
 		return $r;
 	}
 
 	/**
 	 * 2015-11-19
-	 * @param \Magento\Framework\Data\Form\Element\AbstractElement|\Magento\Framework\Data\Form\Element\AbstractElement[] $elements
+	 * 2022-10-31 @deprecated It is unused.
+	 * @param AE|AE[] $e
 	 * @return AE|AE[]|E|E[]
 	 */
-	protected function inline($elements) {
+	final protected function inline($e) {
 		if (1 < func_num_args()) {
-			$elements = func_get_args();
+			$e = func_get_args();
 		}
-		return is_array($elements) ? array_map([$this, __FUNCTION__], $elements) : $elements->setRenderer(Inline::s());
+		return is_array($e) ? array_map([$this, __FUNCTION__], $e) : $e->setRenderer(Inline::s());
 	}
 
 	/**
 	 * 2016-07-30
 	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
 	 * @used-by \Doormall\Shipping\Partner\FE::onFormInitialized()
-	 * @param string $name
-	 * @param string|null|Phrase $label [optional]
-	 * @param int|float|null $default [optional]
+	 * @param string $n
+	 * @param string|null|Phrase $l [optional]
+	 * @param int|float|null $d [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
-	protected function money($name, $label = null, $default = null, $data = []) {return $this->number(
-		$name, $label, $data + [
-			'value' => $default, Number::LABEL_RIGHT => df_currency_base($this->scope())->getCode()
-		])
-	;}
-
-	/**
-	 * 2016-08-02
-	 * @used-by self::money()
-	 * @used-by self::percent()
-	 * @param string $name
-	 * @param string|null|Phrase $label [optional]
-	 * @param array(string => mixed) $data [optional]
-	 * @return E|Number
-	 */
-	protected function number($name, $label = null, $data = []) {return $this->field(
-		$name, Number::class, $label, $data
+	final protected function money($n, $l = null, $d = null, $data = []) {return $this->number(
+		$n, $l, $data + ['value' => $d, Number::LABEL_RIGHT => df_currency_base($this->scope())->getCode()]
 	);}
 
 	/**
@@ -373,18 +357,19 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed) $data [optional]
 	 * @return Number|E
 	 */
-	protected function percent($name, $label = null, $default = null, $data = []) {return $this->number(
+	final protected function percent($name, $label = null, $default = null, $data = []) {return $this->number(
 		$name, $label, $data + ['value' => $default, Number::LABEL_RIGHT => '%']
 	);}
 
 	/**
 	 * 2016-07-30
+	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
-	protected function quantity($name, $label = null, $data = []) {return $this->field(
+	final protected function quantity($name, $label = null, $data = []) {return $this->field(
 		$name, Quantity::class, $label, $data
 	);}
 
@@ -421,7 +406,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array|string|null $cfg [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|E
 	 */
-	protected function select($name, $label, $v, $data = [], $cfg = 'select') {
+	final protected function select($name, $label, $v, $data = [], $cfg = 'select') {
 		if (!is_array($v)) {
 			if (!$v instanceof OptionSourceInterface) {
 				$v = df_o($v);
@@ -465,7 +450,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed)|string $data [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|E
 	 */
-	protected function select2($name, $label, $values, $data = []) {return $this->select(
+	final protected function select2($name, $label, $values, $data = []) {return $this->select(
 		$name, $label, $values, $data, Select2::class
 	);}
 
@@ -477,7 +462,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed)|string $data [optional]
 	 * @return \Magento\Framework\Data\Form\Element\Select|E
 	 */
-	protected function select2Number($name, $label, $values, $data = []) {return $this->select(
+	final protected function select2Number($name, $label, $values, $data = []) {return $this->select(
 		$name, $label, $values, $data, Select2Number::class
 	);}
 
@@ -488,7 +473,7 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
-	protected function size($name, $label = null, $data = []) {return $this->quantity(
+	final protected function size($name, $label = null, $data = []) {return $this->quantity(
 		$name, $label, $data + [Quantity::P__VALUES => SizeUnit::s()->toOptionArray()]
 	);}
 
@@ -539,7 +524,17 @@ class Fieldset extends _Fieldset implements ElementI {
 	 * @param string|Phrase $label
 	 * @return \Magento\Framework\Data\Form\Element\Select
 	 */
-	protected function yesNo($name, $label) {return $this->select($name, $label, df_yes_no());}
+	final protected function yesNo($name, $label) {return $this->select($name, $label, df_yes_no());}
+
+	/**
+	 * 2015-11-17
+	 * Независимые поля имеют имена: groups[frontend][fields][value__font__emphase__bold][value]
+	 * У нас же имя будет: groups[frontend][fields][value__font][df_children][emphase__bold]
+	 * @used-by self::field()
+	 * @used-by self::fieldset()
+	 * @param string $name
+	 */
+	private function cn($name):string {return $this->nameFull() . "[{$name}]";}
 
 	/**
 	 * 2015-12-29
@@ -596,6 +591,17 @@ class Fieldset extends _Fieldset implements ElementI {
 		# Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
 		: (!$this->_anonymous ? $this->getId() : $this->_parent->nameFull())
 	;});}
+
+	/**
+	 * 2016-08-02
+	 * @used-by self::money()
+	 * @used-by self::percent()
+	 * @param string $n
+	 * @param string|null|Phrase $l [optional]
+	 * @param array(string => mixed) $data [optional]
+	 * @return E|Number
+	 */
+	private function number($n, $l = null, $data = []) {return $this->field($n, Number::class, $l, $data);}
 
 	/**
 	 * 2016-12-15
