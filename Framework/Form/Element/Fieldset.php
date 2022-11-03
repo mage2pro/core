@@ -457,6 +457,7 @@ class Fieldset extends FieldsetM implements ElementI {
 
 	/**
 	 * 2016-08-10
+	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
 	 * @param string $name
 	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
@@ -469,6 +470,7 @@ class Fieldset extends FieldsetM implements ElementI {
 
 	/**
 	 * 2015-12-11
+	 * 2022-11-03 @deprecated It is unused.
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
@@ -480,7 +482,7 @@ class Fieldset extends FieldsetM implements ElementI {
 
 	/**
 	 * 2015-12-12
-	 * @used-by \Df\Framework\Form\Element\Quantity::onFormInitialized()
+	 * @used-by Quantity::onFormInitialized()
 	 * @param string $name
 	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
@@ -510,6 +512,8 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * а строку JSON, соответствующую запакованному в JSON массиву:
 	 * https://code.dmitry-fedyuk.com/m2e/currency-format/issues/1
 	 * Заметил это только для модуля «Price Format».
+	 * @used-by self::checkbox()
+	 * @used-by self::field()
 	 * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
 	 * @param string|null $name [optional]
 	 * @return string|null  
@@ -521,11 +525,11 @@ class Fieldset extends FieldsetM implements ElementI {
 
 	/**
 	 * 2015-11-17
+	 * 2022-11-03 @deprecated It is unused.
 	 * @param string $name
 	 * @param string|Phrase $label
-	 * @return SelectM
 	 */
-	final protected function yesNo($name, $label) {return $this->select($name, $label, df_yes_no());}
+	final protected function yesNo($name, $label):SelectM {return $this->select($name, $label, df_yes_no());}
 
 	/**
 	 * 2015-11-17
@@ -547,9 +551,8 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @used-by self::fieldsetInline()
 	 * @param string|null $class [optional]
 	 * @param string|null $cssClass [optional]
-	 * @return self
 	 */
-	private function fieldset($class = null, $cssClass = null) {
+	private function fieldset($class = null, $cssClass = null):self {
 		if (!$class) {
 			$class = __CLASS__;
 		}
@@ -574,9 +577,10 @@ class Fieldset extends FieldsetM implements ElementI {
 
 	/**
 	 * 2015-12-12
-	 * @return bool
+	 * @used-by self::nameFull()
+	 * @used-by self::top()
 	 */
-	private function isTop() {return dfc($this, function() {return !$this->_parent instanceof self;});}
+	private function isTop():bool {return dfc($this, function() {return !$this->_parent instanceof self;});}
 
 	/**
 	 * 2015-12-12
@@ -584,9 +588,9 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * *) getName() возвращает «groups[frontend][fields][value_font][value]»
 	 * *) getId() возвращает dfe_sku_frontend_value_font
 	 * Для подчинённых филдсетов мы getId() равно getName()
-	 * @return string
+	 * @used-by self::cn()
 	 */
-	private function nameFull() {return dfc($this, function() {return
+	private function nameFull():string {return dfc($this, function() {return
 		$this->isTop()
 		? df_trim_text_right($this->getName(), '[value]')
 		# Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
@@ -608,9 +612,10 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * 2016-12-15
 	 * По умолчанию «scope» равно «default», а для магазина — «stores».
 	 * По умолчанию «scope_id» равно пустой строке.
+	 * @used-by self::money()
 	 * @return array(int|string)
 	 */
-	private function scope() {return dfc($this, function() {$t = $this->top(); return [
+	private function scope():array {return dfc($this, function() {$t = $this->top(); return [
 		$t['scope'], $t['scope_id']
 	];});}
 
@@ -640,10 +645,15 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * 2016-08-10
 	 * @used-by self::field()
 	 * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
-	 * @param string $name
-	 * @return string
+	 * @param string $n
 	 */
-	static function customCssClassByShortName($name) {return 'df-name-' . $name;}
+	final static function customCssClassByShortName($n):string {return "df-name-$n";}
+
+	/**
+	 * @used-by self::select()
+	 * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
+	 */
+	const EMPTY = 'empty';
 
 	/**
 	 * 2016-07-30
@@ -652,15 +662,9 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @param array(string => mixed) $data
 	 * @param string $class
 	 */
-	private static function fdCssClass(&$data, $class) {
+	private static function fdCssClass(&$data, $class):void {
 		$data[self::$FD__CSS_CLASS] = df_cc_s(dfa($data, self::$FD__CSS_CLASS), $class);
 	}
-
-	/**
-	 * @used-by self::select()
-	 * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
-	 */
-	const EMPTY = 'empty';
 
 	/**
 	 * 2016-07-30
