@@ -6,9 +6,8 @@
  * @used-by df_img_is_jpeg()
  * @used-by \TFC\Image\Command\C1::scan()
  * @param string $f
- * @return string
  */
-function df_file_ext($f) {return pathinfo($f, PATHINFO_EXTENSION);}
+function df_file_ext($f):string {return pathinfo($f, PATHINFO_EXTENSION);}
 
 /**
  * 2020-06-28
@@ -17,18 +16,16 @@ function df_file_ext($f) {return pathinfo($f, PATHINFO_EXTENSION);}
  * @used-by df_module_file()
  * @param string $f
  * @param string|null $ext
- * @return string
  */
-function df_file_ext_add($f, $ext) {return !$ext ? $f : df_append($f, ".$ext");}
+function df_file_ext_add($f, $ext):string {return !$ext ? $f : df_append($f, ".$ext");}
 
 /**
  * 2018-07-06
  * @used-by df_report()
  * @param string $f
  * @param string $ext
- * @return string
  */
-function df_file_ext_def($f, $ext) {return ($e = df_file_ext($f)) ? $f : df_trim_right($f, '.') . ".$ext";}
+function df_file_ext_def($f, $ext):string {return ($e = df_file_ext($f)) ? $f : df_trim_right($f, '.') . ".$ext";}
 
 /**
  * 2015-04-01
@@ -39,6 +36,6 @@ function df_file_ext_def($f, $ext) {return ($e = df_file_ext($f)) ? $f : df_trim
  * @see df_file_ext_add()
  * @used-by wolf_u2n()
  * @param string $s
- * @return mixed
+ * @return string|null
  */
 function df_strip_ext($s) {return preg_replace('#\.[^.]*$#', '', $s);}
