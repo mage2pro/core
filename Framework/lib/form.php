@@ -10,16 +10,14 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
  * @used-by df_fa_link()
  * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
  * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
- * @return string
  */
-function df_fa() {return 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css';}
+function df_fa():string {return 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css';}
 
 /**
  * 2016-11-30  
  * @used-by \Df\Sso\Button::loggedOut()
- * @return string
  */
-function df_fa_link() {return df_link_inline(df_fa());}
+function df_fa_link():string {return df_link_inline(df_fa());}
 
 /**
  * 2016-01-29
@@ -87,9 +85,8 @@ function df_fe_fc(AE $e, $k = null, $d = null) {return dfa(df_eta(df_fe_top($e)-
  * @param AE|E $e
  * @param string $key
  * @param bool|null|callable $d [optional]
- * @return bool
  */
-function df_fe_fc_b(AE $e, $key, $d = false) {return df_bool(df_fe_fc($e, $key, $d));}
+function df_fe_fc_b(AE $e, $key, $d = false):bool {return df_bool(df_fe_fc($e, $key, $d));}
 
 /**
  * 2016-11-13
@@ -99,25 +96,23 @@ function df_fe_fc_b(AE $e, $key, $d = false) {return df_bool(df_fe_fc($e, $key, 
  * @param int|null|callable $d [optional]
  * @return string[]
  */
-function df_fe_fc_csv(AE $e, $key, $d = 0) {return df_csv_parse(df_fe_fc($e, $key, $d));}
+function df_fe_fc_csv(AE $e, $key, $d = 0):array {return df_csv_parse(df_fe_fc($e, $key, $d));}
 
 /**
  * 2016-01-29
  * @param AE|E $e
  * @param string $key
  * @param int|null|callable $d [optional]
- * @return int
  */
-function df_fe_fc_i(AE $e, $key, $d = 0) {return df_int(df_fe_fc($e, $key, $d));}
+function df_fe_fc_i(AE $e, $key, $d = 0):int {return df_int(df_fe_fc($e, $key, $d));}
 
 /**
  * 2017-04-12 Видимо, @see df_fe_top() надо заменить на эту функцию.
  * 2017-04-23 Эта функция перестала кем-либо использоваться. Раньше она использовалась функцией @see df_fe_m().
  * @param AE|E $e
- * @return FS
  * @throws DFE
  */
-function df_fe_fs(AE $e) {
+function df_fe_fs(AE $e):FS {
 	while ($e && !$e instanceof FS) {
 		$e = $e->getContainer();
 	}
@@ -243,12 +238,10 @@ function df_fe_m(AE $e, $throw = true) {  /** @var string|null $r */
 }
 
 /**
- * 2016-08-10
- * «groups[all_pay][groups][installment_sales][fields][plans][template][months]» => «months»
+ * 2016-08-10 «groups[all_pay][groups][installment_sales][fields][plans][template][months]» => «months»
  * @param string $nameFull
- * @return string
  */
-function df_fe_name_short($nameFull) {return df_last(df_clean(df_explode_multiple(['[', ']'], $nameFull)));}
+function df_fe_name_short($nameFull):string {return df_last(df_clean(df_explode_multiple(['[', ']'], $nameFull)));}
 
 /**
  * 2017-08-10
@@ -288,7 +281,7 @@ function df_fe_top(AE $e) {return method_exists($e, 'top') ? $e->top() : $e;}
  * @param string $suffix [optional]
  * @return array(string => string)
  */
-function df_fe_uid(AE $e, $suffix = null) {return ['data-ui-id' => E::uidSt($e, $suffix)];}
+function df_fe_uid(AE $e, $suffix = null):array {return ['data-ui-id' => E::uidSt($e, $suffix)];}
 
 /**
  * 2016-01-08
@@ -296,7 +289,7 @@ function df_fe_uid(AE $e, $suffix = null) {return ['data-ui-id' => E::uidSt($e, 
  * @param string $uidSuffix [optional]
  * @return array(string => string)
  */
-function df_fe_attrs(AE $e, $uidSuffix = null) {return
+function df_fe_attrs(AE $e, $uidSuffix = null):array {return
 	['id' => $e->getHtmlId(), 'name' => $e->getName()]
 	+ df_fe_uid($e, $uidSuffix)
 	+ dfa($e->getData(), $e->getHtmlAttributes())
