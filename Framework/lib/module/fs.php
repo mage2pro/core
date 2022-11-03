@@ -19,7 +19,7 @@ use Magento\Framework\Module\Dir\Reader;
  * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name, 'csv', $req,
+function df_module_csv2($m, $name, $req = true):array {return df_module_file($m, $name, 'csv', $req,
 	function($f) {return df_csv_o()->getDataPairs($f);}
 );}
 
@@ -71,17 +71,15 @@ function df_module_csv2($m, $name, $req = true) {return df_module_file($m, $name
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
  * @param string|object|null $m
  * @param string $type [optional]
- * @return string
- * @throws \InvalidArgumentException
+ * @throws InvalidArgumentException
  */
-function df_module_dir($m, $type = '') {
+function df_module_dir($m, $type = ''):string {
 	if ('Magento_Framework' !== ($m = df_module_name($m))) {
 		$r = df_module_dir_reader()->getModuleDir($type, $m);
 	}
 	else {
 		$r = df_framework_path();
-		# 2019-12-31 'Magento_Framework' is not a module, so it does not have subpaths specific for modules.
-		df_assert(!$type);
+		df_assert(!$type); # 2019-12-31 'Magento_Framework' is not a module, so it does not have subpaths specific for modules.
 	}
 	return $r;
 }
@@ -89,9 +87,8 @@ function df_module_dir($m, $type = '') {
 /**
  * 2019-12-31
  * @used-by df_module_dir()
- * @return Reader
  */
-function df_module_dir_reader() {return df_o(Reader::class);}
+function df_module_dir_reader():Reader {return df_o(Reader::class);}
 
 /**
  * 2020-02-02
@@ -108,7 +105,7 @@ function df_module_dir_reader() {return df_o(Reader::class);}
  * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function df_module_enum($m, $name, $req = true) {return df_module_file($m, $name, 'txt', $req, function($f) {return
+function df_module_enum($m, $name, $req = true):array {return df_module_file($m, $name, 'txt', $req, function($f) {return
 	df_explode_n(file_get_contents($f)
 );});}
 
@@ -129,7 +126,7 @@ function df_module_enum($m, $name, $req = true) {return df_module_file($m, $name
  * @param Closure|null $parser [optional]
  * @return array(string => mixed)
  */
-function df_module_file($m, $name, $ext = '', $req = true, Closure $parser = null) {return dfcf(
+function df_module_file($m, $name, $ext = '', $req = true, Closure $parser = null):array {return dfcf(
 	function($m, $name, $ext = '', $req = true, Closure $parser = null) {return
 		file_exists($f = df_module_path_etc($m, df_file_ext_add($name, $ext)))
 			? (!$parser ? $f : $parser($f))
@@ -160,7 +157,7 @@ function df_module_file($m, $name, $ext = '', $req = true, Closure $parser = nul
  * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function df_module_json($m, $name, $req = true) {return df_module_file($m, $name, 'json', $req, function($f) {return
+function df_module_json($m, $name, $req = true):array {return df_module_file($m, $name, 'json', $req, function($f) {return
 	df_json_file_read($f)
 ;});}
 
@@ -177,10 +174,9 @@ function df_module_json($m, $name, $req = true) {return df_module_file($m, $name
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string|object|null $m
  * @param string $localPath [optional]
- * @return string
- * @throws \InvalidArgumentException
+ * @throws InvalidArgumentException
  */
-function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m), $localPath);}
+function df_module_path($m, $localPath = ''):string {return df_cc_path(df_module_dir($m), $localPath);}
 
 /**
  * 2016-07-19
@@ -196,7 +192,6 @@ function df_module_path($m, $localPath = '') {return df_cc_path(df_module_dir($m
  * @used-by df_module_file()
  * @param string|object|null $m
  * @param string $localPath [optional]
- * @return string
- * @throws \InvalidArgumentException
+ * @throws InvalidArgumentException
  */
-function df_module_path_etc($m, $localPath = '') {return df_cc_path(df_module_dir($m, Dir::MODULE_ETC_DIR), $localPath);}
+function df_module_path_etc($m, $localPath = ''):string {return df_cc_path(df_module_dir($m, Dir::MODULE_ETC_DIR), $localPath);}
