@@ -35,9 +35,8 @@
  * @used-by \TFC\Blog\Plugin\Block\Post\ListPost::afterGetCustomBlogThemeVendor()
  * @param string|object|null $c [optional]
  * @param string $del [optional]
- * @return string
  */
-function df_module_name($c = null, $del = '_') {return dfcf(function($c, $del) {return implode($del, array_slice(
+function df_module_name($c = null, $del = '_'):string {return dfcf(function($c, $del) {return implode($del, array_slice(
 	df_explode_class($c), 0, 2
 ));}, [$c ? df_cts($c) : 'Df\Core', $del]);}
 
@@ -54,18 +53,16 @@ function df_module_name($c = null, $del = '_') {return dfcf(function($c, $del) {
  * @used-by \Df\Framework\Action::module()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @param string|object|null $c [optional]
- * @return string
  */
-function df_module_name_c($c = null) {return df_module_name($c, '\\');}
+function df_module_name_c($c = null):string {return df_module_name($c, '\\');}
 
 /**
  * 2016-08-28 «Dfe\AllPay\W\Handler» => «AllPay»
  * 2016-10-20
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * @param string|object $c
- * @return string
  */
-function df_module_name_short($c) {return dfcf(function($c) {return df_explode_class($c)[1];}, [df_cts($c)]);}
+function df_module_name_short($c):string {return dfcf(function($c) {return df_explode_class($c)[1];}, [df_cts($c)]);}
 
 /**
  * 2016-02-16 «Dfe\CheckoutCom\Method» => «dfe_checkout_com»
@@ -82,6 +79,5 @@ function df_module_name_short($c) {return dfcf(function($c) {return df_explode_c
  * @see df_cts_lc_camel()
  * @param string|object $c
  * @param string $del [optional]
- * @return string
  */
-function df_module_name_lc($c, $del = '_') {return implode($del, df_explode_class_lc_camel(df_module_name_c($c)));}
+function df_module_name_lc($c, $del = '_'):string {return implode($del, df_explode_class_lc_camel(df_module_name_c($c)));}
