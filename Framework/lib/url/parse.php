@@ -22,10 +22,11 @@ function df_domain($u, $www = false, $throw = true) {return
 
 /**
  * 2016-05-31
+ * @used-by \Df\Amazon\FE\JsOrigin::url()
  * @param string $u
  * @return string
  */
-function df_url_base($u) {return df_first(df_url_bp($u));}
+function df_url_base($u):string {return df_first(df_url_bp($u));}
 
 /**
  * 2017-02-13 «https://mage2.pro/sandbox/dfe-paymill» => [«https://mage2.pro»,  «sandbox/dfe-paymill»]
@@ -34,7 +35,7 @@ function df_url_base($u) {return df_first(df_url_bp($u));}
  * @param string $u
  * @return string[]
  */
-function df_url_bp($u) {
+function df_url_bp($u):array {
 	/** @var string $base */ /** @var string $path */
 	if (!df_check_url($u)) {
 		# 2020-03-02, 2022-10-31
@@ -64,17 +65,15 @@ function df_url_bp($u) {
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by \Frugue\Store\Plugin\UrlRewrite\Model\StoreSwitcher\RewriteUrl::aroundSwitch()
  * @param string $u
- * @return string
  */
-function df_url_path($u) {return df_trim_ds(df_request_i($u)->getPathInfo());}
+function df_url_path($u):string {return df_trim_ds(df_request_i($u)->getPathInfo());}
 
 /**
  * 2017-02-13 It removes the following endinds: «/», «index/», «index/index/».
  * @used-by df_url_frontend()
  * @param string $u
- * @return string
  */
-function df_url_trim_index($u) {
+function df_url_trim_index($u):string {
 	# 2020-03-02, 2022-10-31
 	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 	#		[$a, $b] = [1, 2];
