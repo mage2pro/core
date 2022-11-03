@@ -15,7 +15,7 @@ use Magento\Framework\Phrase as P;
  * @param P|string $s
  * @param string $type
  */
-function df_message_add($s, $type) {df_message_m()->addMessage(
+function df_message_add($s, $type):void {df_message_m()->addMessage(
 	df_message_m()->createMessage($type, 'non-existent')->setText(df_phrase($s)), null
 );}
 
@@ -27,7 +27,7 @@ function df_message_add($s, $type) {df_message_m()->addMessage(
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @param string|P|\Exception $m
  */
-function df_message_error($m) {df_message_add(df_ets($m), IM::TYPE_ERROR);}
+function df_message_error($m):void {df_message_add(df_ets($m), IM::TYPE_ERROR);}
 
 /**
  * 2016-08-02 https://mage2.pro/t/974
@@ -41,11 +41,11 @@ function df_message_m() {return df_o(IMM::class);}
  * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @param P|string $m
  */
-function df_message_notice($m) {df_message_add($m, IM::TYPE_NOTICE);}
+function df_message_notice($m):void {df_message_add($m, IM::TYPE_NOTICE);}
 
 /**
  * 2016-12-04
  * @used-by \Df\Sso\CustomerReturn::_execute()
  * @param P|string $m
  */
-function df_message_success($m) {df_message_add($m, IM::TYPE_SUCCESS);}
+function df_message_success($m):void {df_message_add($m, IM::TYPE_SUCCESS);}
