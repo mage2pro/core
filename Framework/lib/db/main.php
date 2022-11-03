@@ -8,7 +8,7 @@ use Magento\Framework\DB\Select;
  * @used-by df_db_name()
  * @return array(string => string)
  */
-function df_db_credentials() {return array_combine(
+function df_db_credentials():array {return array_combine(
 	$kk = [C::KEY_NAME, C::KEY_USER, C::KEY_PASSWORD]
 	,df_deployment_cfg(df_map($kk, function($k) {return df_cc_path(C::CONFIG_PATH_DB_CONNECTION_DEFAULT, $k);}))
 );}
@@ -27,7 +27,7 @@ function df_db_credentials() {return array_combine(
  * 2017-08-02 For now it is never used.
  * @param string $t
  */
-function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPrimaryKeyName($t));}
+function df_db_drop_pk($t):void {df_conn()->dropIndex(df_table($t), df_conn()->getPrimaryKeyName($t));}
 
 /**
  * 2016-12-01
@@ -54,7 +54,7 @@ function df_db_drop_pk($t) {df_conn()->dropIndex(df_table($t), df_conn()->getPri
  * @param string|Entity|array(string => string) $t
  * @param string|string[] $cols [optional]
  * @param string|null $schema [optional]
- * @return Select|\Zend_Db_Select
+ * @return Select|Zend_Db_Select
  */
 function df_db_from($t, $cols = '*', $schema = null) {return df_select()->from(
 	$t instanceof Entity ? $t->getEntityTable() : (is_array($t) ? $t : df_table($t)), $cols, $schema
@@ -63,18 +63,16 @@ function df_db_from($t, $cols = '*', $schema = null) {return df_select()->from(
 /**
  * 2015-10-12 Returns the database name: https://mage2.pro/t/134
  * @used-by df_next_increment_old()
- * @return string
  */
-function df_db_name() {return dfa(df_db_credentials(), C::KEY_NAME);}
+function df_db_name():string {return dfa(df_db_credentials(), C::KEY_NAME);}
 
 /**
  * 2016-12-23 http://stackoverflow.com/a/10414925
  * @used-by df_sentry_m()
  * @see \Magento\Backup\Model\ResourceModel\Helper::getHeader()
  * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Backup/Model/ResourceModel/Helper.php#L178
- * @return string
  */
-function df_db_version() {return dfcf(function() {return df_conn()->fetchRow("SHOW VARIABLES LIKE 'version'")['Value'];});}
+function df_db_version():string {return dfcf(function() {return df_conn()->fetchRow("SHOW VARIABLES LIKE 'version'")['Value'];});}
 
 /**
  * 2015-08-23
@@ -84,6 +82,6 @@ function df_db_version() {return dfcf(function() {return df_conn()->fetchRow("SH
  * @param string $t
  * @return string|null
  */
-function df_primary_key($t) {return dfcf(function($t) {return
-	df_first(df_eta(dfa_deep(df_conn()->getIndexList($t), 'PRIMARY/COLUMNS_LIST')))
-;}, func_get_args());}
+function df_primary_key($t) {return dfcf(function($t) {return df_first(df_eta(dfa_deep(
+	df_conn()->getIndexList($t), 'PRIMARY/COLUMNS_LIST'
+)));}, func_get_args());}
