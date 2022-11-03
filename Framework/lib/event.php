@@ -20,7 +20,7 @@ use Magento\Framework\Event\ManagerInterface as IManager;
  * @param string $ev
  * @param array(string => mixed) $d
  */
-function df_dispatch($ev, array $d = []) {
+function df_dispatch($ev, array $d = []):array {
 	$m = df_o(IManager::class); /** @var IManager|Manager $m */
 	$m->dispatch($ev, $d);
 }
