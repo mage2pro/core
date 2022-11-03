@@ -7,19 +7,18 @@ use Magento\Framework\Exception\LocalizedException as LE;
  * @used-by df_webhook()
  * @param string $u
  * @param string|E $msg [optional]
- * @return string
  * @throws E|LE
  */
-function df_assert_https($u, $msg = null) {return df_check_https_strict($u) ? $u : df_error(
+function df_assert_https($u, $msg = null):string {return df_check_https_strict($u) ? $u : df_error(
 	$msg ?: "The URL «{$u}» is invalid, because the system expects an URL which starts with «https://»."
 );}
 
 /**
  * 2016-07-16
+ * @used-by df_zf_http()
  * @param string $u
- * @return bool
  */
-function df_check_https($u) {return df_starts_with(strtolower($u), 'https');}
+function df_check_https($u):bool {return df_starts_with(strtolower($u), 'https');}
 
 /**
  * 2016-05-30
@@ -28,10 +27,11 @@ function df_check_https($u) {return df_starts_with(strtolower($u), 'https');}
  * @see \Zend_Uri::factory()
  * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Uri.php#L100
  * $scheme = strtolower($uri[0]);
+ * @used-by df_assert_https()
+ * @used-by \Df\Framework\Form\Element\Url::messageForOthers()
  * @param string $u
- * @return bool
  */
-function df_check_https_strict($u) {return 'https' === df_zuri($u)->getScheme();}
+function df_check_https_strict($u):bool {return 'https' === df_zuri($u)->getScheme();}
 
 /**
  * http://stackoverflow.com/a/15011528
@@ -47,9 +47,8 @@ function df_check_url($s) {return false !== filter_var($s, FILTER_VALIDATE_URL);
  * @used-by df_asset_create()
  * @used-by df_js()
  * @param string $u
- * @return bool
  */
-function df_check_url_absolute($u) {return df_starts_with($u, ['http', '//']);}
+function df_check_url_absolute($u):bool {return df_starts_with($u, ['http', '//']);}
 
 /**
  * 2018-05-11
@@ -64,6 +63,5 @@ function df_check_url_absolute($u) {return df_starts_with($u, ['http', '//']);}
  * @used-by \Magenest\QuickBooksDesktop\Observer\Customer\Address::execute()
  * @used-by \Magenest\QuickBooksDesktop\Observer\Customer\Edit::execute()
  * @param string $s
- * @return bool
  */
-function df_url_path_contains($s) {return df_rp_has($s);}
+function df_url_path_contains($s):bool {return df_rp_has($s);}
