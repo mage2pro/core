@@ -6,8 +6,6 @@ use Magento\Framework\Filesystem\Directory\ReadFactory as DirectoryReadFactory;
 use Magento\Framework\Filesystem\Directory\ReadInterface as IDirectoryRead;
 use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
 use Magento\Framework\Filesystem\Directory\WriteInterface as IDirectoryWrite;
-use Magento\Framework\Filesystem\File\Read as FileRead;
-use Magento\Framework\Filesystem\File\ReadInterface as IFileRead;
 use Magento\Framework\Filesystem\File\Write as FileWrite;
 use Magento\Framework\Filesystem\File\WriteInterface as IFileWrite;
 use Magento\Framework\Filesystem\Io\File as File;
@@ -18,9 +16,8 @@ use Magento\Framework\Filesystem\Io\Sftp;
  * @used-by df_mkdir()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::writeLocal()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
- * @return File
  */
-function df_file() {return df_o(File::class);}
+function df_file():File {return df_o(File::class);}
 
 /**
  * 2022-10-14
@@ -40,9 +37,8 @@ function df_file() {return df_o(File::class);}
  * @used-by \Dfe\Color\Image::dominant()
  * @param string $p
  * @param bool $req [optional]
- * @return string
  */
-function df_file_read($p, $req = true) {/** @var string $r */
+function df_file_read($p, $req = true):string {/** @var string $r */
 	if (false === ($r = @file_get_contents($p)) && $req) {
 		df_error("Unable to read the file «{$p}».");
 	}
@@ -66,7 +62,7 @@ function df_file_read($p, $req = true) {/** @var string $r */
  * @param string $contents
  * @param bool $append [optional]
  */
-function df_file_write($p, $contents, $append = false) {
+function df_file_write($p, $contents, $append = false):void {
 	/**
 	 * 2017-04-22
 	 * С не-строками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
@@ -143,23 +139,22 @@ function df_file_write($p, $contents, $append = false) {
  * 2015-11-29
  * @used-by df_fs_r()
  * @used-by df_fs_w()
- * @return Filesystem
  */
-function df_fs() {return df_o(Filesystem::class);}
+function df_fs():Filesystem {return df_o(Filesystem::class);}
 
 /**
  * 2017-04-03 Портировал из РСМ. Никем не используется.
+ * 2022-11-03 @deprecated It is unused.
  * @param string $p
  */
-function df_fs_delete($p) {File::rmdirRecursive(df_param_sne($p, 0));}
+function df_fs_delete($p):void {File::rmdirRecursive(df_param_sne($p, 0));}
 
 /**
  * 2019-08-23
  * @used-by df_fs_etc()
  * @used-by df_mkdir_log()
- * @return DL
  */
-function df_fs_dl() {return df_o(DL::class);}
+function df_fs_dl():DL {return df_o(DL::class);}
 
 /**
  * 2015-11-30
@@ -173,9 +168,8 @@ function df_fs_r($p) {return df_fs()->getDirectoryRead($p);}
 /**
  * 2020-06-16
  * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageParent()
- * @return DirectoryReadFactory
  */
-function df_fs_rf() {return df_o(DirectoryReadFactory::class);}
+function df_fs_rf():DirectoryReadFactory {return df_o(DirectoryReadFactory::class);}
 
 /**
  * 2015-11-29
@@ -193,4 +187,4 @@ function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload::_p()
  * @return Sftp
  */
-function df_sftp() {return df_o(Sftp::class);}
+function df_sftp():Sftp {return df_o(Sftp::class);}
