@@ -6,10 +6,11 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
  * Удаляет из сообщений типа
  * «Warning: Division by zero in C:\work\mage2.pro\store\vendor\mage2pro\stripe\Method.php on line 207»
  * файловый путь до папки Magento.
+ * @used-by df_ets()
+ * @used-by df_etsd()
  * @param string $m
- * @return string
  */
-function df_adjust_paths_in_message($m) {
+function df_adjust_paths_in_message($m):string {
 	$bpLen = mb_strlen(BP); /** @var int $bpLen */
 	do {
 		$begin = mb_strpos($m, BP); /** @var int|false $begin */
@@ -38,18 +39,16 @@ function df_adjust_paths_in_message($m) {
  * @used-by df_sync()
  * @param string $p
  * @param string $suffix [optional]
- * @return string
  */
-function df_path_absolute($p, $suffix = '') {return df_prepend(df_trim_ds_left($suffix), df_fs_r($p)->getAbsolutePath());}
+function df_path_absolute($p, $suffix = ''):string {return df_prepend(df_trim_ds_left($suffix), df_fs_r($p)->getAbsolutePath());}
 
 /**
  * 2017-05-08
  * @used-by \Df\Framework\Plugin\Session\SessionManager::beforeStart()
  * @used-by \Df\Sentry\Trace::info()
  * @param string $p
- * @return bool
  */
-function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($p), df_path_n(BP));}
+function df_path_is_internal($p):bool {return '' === $p || df_starts_with(df_path_n($p), df_path_n(BP));}
 
 /**
  * Заменяет все сиволы пути на /
@@ -68,18 +67,16 @@ function df_path_is_internal($p) {return '' === $p || df_starts_with(df_path_n($
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @param string $p
- * @return string
  */
-function df_path_n($p) {return str_replace(['\/', '\\'], '/', $p);}
+function df_path_n($p):string {return str_replace(['\/', '\\'], '/', $p);}
 
 /**
  * 2016-12-30 It replaces all path delimiters with @uses DS
  * 2021-12-17 https://3v4l.org/OGUh6
  * @see df_path_n()
  * @param string $p
- * @return string
  */
-function df_path_n_real($p) {return str_replace(['\/', '\\', '/'], DS, $p);}
+function df_path_n_real($p):string {return str_replace(['\/', '\\', '/'], DS, $p);}
 
 /**
  * 2015-12-06 It trims the ending «/».
@@ -91,8 +88,7 @@ function df_path_n_real($p) {return str_replace(['\/', '\\', '/'], DS, $p);}
  * @used-by \Df\Sentry\Trace::info()
  * @param string $p
  * @param string $b [optional]
- * @return string
  */
-function df_path_relative($p, $b = DL::ROOT) {return df_trim_text_left(
+function df_path_relative($p, $b = DL::ROOT):string {return df_trim_text_left(
 	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_fs_r($b)->getAbsolutePath())
 );}
