@@ -19,10 +19,8 @@ class Multiselect extends _Multiselect implements ElementI {
 	 *		return $element->getElementHtml();
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Config/Block/System/Config/Form/Field.php#L21-L30
-	 * @return string
 	 */
-	function getElementHtml() {
-		/** @var string $r */
+	function getElementHtml():string {/** @var string $r */
 		if (!$this->ordered()) {
 			$r = parent::getElementHtml();
 		}
@@ -47,8 +45,7 @@ class Multiselect extends _Multiselect implements ElementI {
 					is_array($o['value']) ? df_uid() : $o['value'], $o
 				];}, $options);
 				$prepend = []; /** @var array $prepend */
-				foreach ($selectedA as $selectedI) {
-					/** @var string $selectedI */
+				foreach ($selectedA as $selectedI) {/** @var string $selectedI */
 					if (isset($options[$selectedI])) {
 						$prepend[]= $options[$selectedI];
 						unset($options[$selectedI]);
@@ -112,7 +109,7 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * implemented and used? https://mage2.pro/t/1616
 	 * @param array $values
 	 */
-	final function setValues(array $values) {
+	final function setValues(array $values):void {
 		$first = df_first($values); /** @var array(string => string)|null $first */
 		/**
 		 * 2016-05-13
@@ -129,8 +126,6 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * 2017-09-23
 	 * @used-by self::getElementHtml()
 	 * @used-by self::onFormInitialized()
-	 * @return bool
 	 */
-	private function ordered() {return dfc($this, function() {return df_fe_fc_b($this, 'dfMultiselect_ordered');});}
+	private function ordered():bool {return dfc($this, function() {return df_fe_fc_b($this, 'dfMultiselect_ordered');});}
 }
-
