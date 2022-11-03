@@ -9,9 +9,8 @@ use Magento\Framework\Config\Composer\Package;
  * @used-by \Df\Sentry\Client::__construct()
  * @used-by \Df\Sentry\Client::getUserAgent()
  * @used-by \Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
- * @return string
  */
-function df_core_version() {return dfcf(function() {return df_package_version('Df_Core');});}
+function df_core_version():string {return dfcf(function() {return df_package_version('Df_Core');});}
 
 /**
  * 2017-01-10
@@ -49,11 +48,10 @@ function df_package($m = null, $k = null, $d = null) {
 
 /**
  * 2020-06-16
- * @used-by @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageParent()
+ * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageParent()
  * @param string $json
- * @return Package
  */
-function df_package_new($json) {return df_new_om(Package::class, ['json' => $json]);}
+function df_package_new($json):Package {return df_new_om(Package::class, ['json' => $json]);}
 
 /**
  * 2017-04-16
@@ -87,6 +85,6 @@ function df_package_version($m = null) {return df_package($m, 'version');}
  * @used-by dfe_portal_plugins()
  * @return array(string => array(string => mixed))
  */
-function dfe_packages() {return dfcf(function() {return df_map_r(dfe_modules(), function($m) {return [
+function dfe_packages():array {return dfcf(function() {return df_map_r(dfe_modules(), function($m) {return [
 	$m, df_package($m)
 ];});});}
