@@ -4,17 +4,15 @@
  * 2018-11-23 https://stackoverflow.com/a/53446950
  * 2020-01-19 @deprecated It is unused.
  * @see df_is_google_ua()
- * @return bool
  */
-function df_is_google_page_speed() {return df_request_ua('Chrome-Lighthouse');}
+function df_is_google_page_speed():bool {return df_request_ua('Chrome-Lighthouse');}
 
 /**
  * 2020-01-19 https://support.google.com/webmasters/answer/1061943
  * @see df_is_google_page_speed()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @return bool
  */
-function df_is_google_ua() {return df_request_ua(
+function df_is_google_ua():bool {return df_request_ua(
 	'APIs-Google', 'Mediapartners-Google', 'AdsBot-Google', 'Googlebot', 'FeedFetcher-Google'
 	,'DuplexWeb-Google', 'Google Favicon'
 );}

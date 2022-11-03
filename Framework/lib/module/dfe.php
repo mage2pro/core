@@ -7,7 +7,7 @@
  * @see df_modules_my()
  * @return string[]
  */
-function dfe_modules() {return df_modules_p('Dfe_');}
+function dfe_modules():array {return df_modules_p('Dfe_');}
 
 /**
  * 2017-04-01
@@ -17,7 +17,7 @@ function dfe_modules() {return df_modules_p('Dfe_');}
  * @used-by \Df\Core\Controller\Index\Index::execute()
  * @return array(string => array)
  */
-function dfe_modules_info() {return dfcf(function() {return df_map_kr(dfe_packages(), function($m, $p) {return [
+function dfe_modules_info():array {return dfcf(function() {return df_map_kr(dfe_packages(), function($m, $p) {return [
 	df_cc_s(substr($m, 4), $p['version']), $p
 ];});});};
 
@@ -25,7 +25,7 @@ function dfe_modules_info() {return dfcf(function() {return df_map_kr(dfe_packag
  * 2017-04-01
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  */
-function dfe_modules_log() {df_sentry(null
+function dfe_modules_log():void {df_sentry(null
 	,sprintf('%s: %s', df_domain_current(), df_csv_pretty(array_keys(dfe_modules_info())))
 	,['extra' => ['Backend URL' => df_url_backend_ns()]]
 );}
