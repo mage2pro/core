@@ -6,5 +6,5 @@ class module extends \Df\Core\TestCase {
 	 * @test
 	 * 2020-04-16
 	 */
-	function t01() {print_r(df_modules_my());}
+	function t01():void {print_r(df_modules_my());}
 }
