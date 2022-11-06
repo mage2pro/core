@@ -12,18 +12,16 @@ abstract class Handler {
 	 * @used-by self::p()
 	 * @see \Df\Framework\Log\Handler\Cookie::_p()
 	 * @see \Df\Framework\Log\Handler\NoSuchEntity::_p()
-	 * @return bool
 	 */
-	abstract protected function _p();
+	abstract protected function _p():bool;
 
 	/**
 	 * 2021-08-09
 	 * @used-by \Df\Framework\Log\Handler\Cookie::_p()
 	 * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @used-by \Df\Framework\Log\Handler\PayPal::_p()
-	 * @return Record
 	 */
-	final protected function r() {return $this->_r;}
+	final protected function r():Record {return $this->_r;}
 
 	/**
 	 * 2021-09-08
@@ -44,9 +42,8 @@ abstract class Handler {
 	 * 2021-09-08
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
 	 * @param Record $r
-	 * @return bool
 	 */
-	final static function p(Record $r) {
+	final static function p(Record $r):bool {
 		$i = new static($r); /** @var self $i */
 		return $i->_p();
 	}

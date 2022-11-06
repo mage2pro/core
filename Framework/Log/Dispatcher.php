@@ -45,7 +45,6 @@ class Dispatcher extends _P {
 	 * @override
 	 * @see \Monolog\Handler\AbstractProcessingHandler::handle()
 	 * @param array(string => mixed) $d
-	 * @return bool
 	 */
 	function handle(array $d):bool {
 		$rc = new Record($d); /** @var Record $rc */
