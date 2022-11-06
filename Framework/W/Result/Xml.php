@@ -28,9 +28,10 @@ abstract class Xml extends \Df\Framework\W\Result {
 	 * @see \Df\Framework\W\Result::__toString()
 	 * @used-by self::render()
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @return string
 	 */
-	final function __toString() {return df_xml_g($this->tag(), $this->contents(), [G::P__ATTRIBUTES => $this->attributes()]);}
+	final function __toString():string {return df_xml_g(
+		$this->tag(), $this->contents(), [G::P__ATTRIBUTES => $this->attributes()]
+	);}
 
 	/**
 	 * 2021-12-03
@@ -39,7 +40,7 @@ abstract class Xml extends \Df\Framework\W\Result {
 	 * @see \TFC\GoogleShopping\Result::attributes()
 	 * @return array(string => mixed)
 	 */
-	protected function attributes() {return [];}
+	protected function attributes():array {return [];}
 
 	/**
 	 * 2021-12-03
@@ -48,7 +49,7 @@ abstract class Xml extends \Df\Framework\W\Result {
 	 * @see \TFC\GoogleShopping\Result::contents()
 	 * @return array(string => mixed)
 	 */
-	protected function contents() {return [];}
+	protected function contents():array {return [];}
 
 	/**
 	 * 2017-10-02, 2021-12-03
@@ -58,18 +59,17 @@ abstract class Xml extends \Df\Framework\W\Result {
 	 * https://tech.yandex.ru/money/doc/payment-solution/payment-notifications/payment-notifications-http-docpage
 	 * @used-by self::render()
 	 * @see \Dfe\Qiwi\Result::contentType()
-	 * @return string
 	 */
-	protected function contentType() {return 'application/xml';}
+	protected function contentType():string {return 'application/xml';}
 
 	/**
 	 * 2021-12-03
 	 * @override
-	 * @see \Magento\Framework\Controller\AbstractResult::render()
-	 * https://github.com/magento/magento2/blob/2.1.0/lib/internal/Magento/Framework/Controller/AbstractResult.php#L109-L113
+	 * @see \Df\Framework\W\Result::render()
+	 * @used-by \Df\Framework\W\Result::renderResult()
 	 * @param IHttpResponse|HttpResponse $r
 	 */
-	final protected function render(IHttpResponse $r) {
+	final protected function render(IHttpResponse $r):void {
 		$r->setBody($this->__toString());
 		df_response_content_type($this->contentType(), $r);
 	}

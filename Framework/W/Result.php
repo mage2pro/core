@@ -38,6 +38,7 @@ abstract class Result implements ResultInterface {
 	 * 2017-03-30
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @see \Df\Framework\W\Result\Text::__toString()
+	 * @see \Df\Framework\W\Result\Xml::__toString()
 	 * @see \Justuno\M2\W\Result\Js::__toString()
 	 * @see \TFC\GoogleShopping\Result::__toString() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
 	 */
@@ -47,6 +48,7 @@ abstract class Result implements ResultInterface {
 	 * 2016-08-24
 	 * @used-by self::renderResult()
 	 * @see \Df\Framework\W\Result\Text::render()
+	 * @see \Df\Framework\W\Result\Xml::render()
 	 * @see \Justuno\M2\W\Result\Js::render()
 	 * ---
 	 * @see \Magento\Framework\Controller\AbstractResult::render()
