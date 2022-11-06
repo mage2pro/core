@@ -21,5 +21,3 @@ abstract class TransportObserver implements IOb {
 		}
 	}
 }
-
-
