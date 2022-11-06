@@ -15,8 +15,7 @@ final class ResponseInterface {
 	 * @see \Magento\Framework\App\ResponseInterface::sendResponse()
 	 * @param Sb $sb
 	 * @param int $r
-	 * @return int
 	 */
-	function afterSendResponse(Sb $sb, $r) {df_dispatch('df_controller_front_send_response_after'); return $r;}
+	function afterSendResponse(Sb $sb, $r):int {df_dispatch('df_controller_front_send_response_after'); return $r;}
 }
 
