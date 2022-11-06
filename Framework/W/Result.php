@@ -40,19 +40,19 @@ abstract class Result implements ResultInterface {
 	 * @see \Df\Framework\W\Result\Text::__toString()
 	 * @see \Justuno\M2\W\Result\Js::__toString()
 	 * @see \TFC\GoogleShopping\Result::__toString() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
-	 * @return string
 	 */
-	abstract function __toString();
+	abstract function __toString():string;
 
 	/**
 	 * 2016-08-24
-	 * @see \Magento\Framework\Controller\AbstractResult::render()
 	 * @used-by self::renderResult()
 	 * @see \Df\Framework\W\Result\Text::render()
 	 * @see \Justuno\M2\W\Result\Js::render()
+	 * ---
+	 * @see \Magento\Framework\Controller\AbstractResult::render()
 	 * @param IHttpResponse|HttpResponse $r
 	 */
-	abstract protected function render(IHttpResponse $r);
+	abstract protected function render(IHttpResponse $r):void;
 
 	/**
 	 * 2016-08-24 Render content.

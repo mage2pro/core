@@ -30,9 +30,9 @@ class Currency implements \Df\Framework\IValidator {
 
 	/**
 	 * 2016-06-30
-	 * @return Phrase
+	 * @used-by self::check()
 	 */
-	private function message() {
+	private function message():Phrase {
 		$namesA = df_quote_russian(df_html_b(df_currency_name($this->_iso3))); /** @var string $namesA */
 		$namesS = df_csv_pretty($namesA); /** @var string $namesS */
 		/** @var string $whatToEnable */ /** @var string $whatToSet */ /** @var string $object */

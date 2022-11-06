@@ -26,9 +26,8 @@ class Json extends Text {
 	 * @override
 	 * @see \Df\Framework\W\Result\Text::contentType()
 	 * @used-by \Df\Framework\W\Result\Text::render()
-	 * @return string
 	 */
-	final protected function contentType() {return 'application/json';}
+	final protected function contentType():string {return 'application/json';}
 
 	/**
 	 * 2016-08-24
@@ -36,7 +35,6 @@ class Json extends Text {
 	 * @see \Df\Framework\W\Result\Text::prepare()
 	 * @used-by \Df\Framework\W\Result\Text::i()
 	 * @param string|object|mixed[] $s
-	 * @return string
 	 */
-	final protected function prepare($s) {return !is_array($s) && !is_object($s) ? $s : df_json_encode($s);}
+	final protected function prepare($s):string {return !is_array($s) && !is_object($s) ? $s : df_json_encode($s);}
 }

@@ -48,9 +48,8 @@ class Text extends \Df\Framework\W\Result {
 	 * @override
 	 * @see \Df\Framework\W\Result::__toString()
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @return string
 	 */
-	final function __toString() {return $this->_body;}
+	final function __toString():string {return $this->_body;}
 
 	/**
 	 * 2016-08-24
@@ -76,7 +75,7 @@ class Text extends \Df\Framework\W\Result {
 	 * @used-by \Df\Framework\W\Result::renderResult()
 	 * @param IHttpResponse|HttpResponse $r
 	 */
-	final protected function render(IHttpResponse $r) {
+	final protected function render(IHttpResponse $r):void {
 		$r->setBody($this->_body);
 		df_response_content_type(implode('; ', [$this->contentType(), 'charset=utf-8']), $r);
 	}
