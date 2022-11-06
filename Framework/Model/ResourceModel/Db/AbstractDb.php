@@ -19,8 +19,7 @@ abstract class AbstractDb extends \Magento\Framework\Model\ResourceModel\Db\Abst
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @used-by \Dfe\Logo\R\Logo::insertOnDuplicate()
 	 * @param string|null $n [optional]
-	 * @return string
 	 * @throws LE
 	 */
-	function t($n = null) {return !$n ? $this->getMainTable() : $this->getTable($n);}
+	function t($n = null):string {return !$n ? $this->getMainTable() : $this->getTable($n);}
 }

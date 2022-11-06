@@ -38,6 +38,7 @@ abstract class Upgrade {
 	 * @see \Df\Sso\Upgrade\Data::_process()
 	 * @see \Df\Sso\Upgrade\Schema::_process()
 	 * @see \Dfe\IPay88\Setup\UpgradeData::_process()
+	 * @see \Dfe\Logo\Setup\UpgradeSchema::_process()
 	 * @see \Dfe\Markdown\Setup\UpgradeSchema::_process()
 	 * @see \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
 	 * @see \Justuno\M2\Setup\UpgradeSchema::_process()
