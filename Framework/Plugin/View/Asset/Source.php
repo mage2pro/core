@@ -25,11 +25,9 @@ class Source {
 		 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Filesystem/Driver/File.php#L148-L153
 		 */
 		catch (EFileSystem $e) {
-			/**
-			 * 2019-12-30 Dmitry Fedyuk https://github.com/mage2pro
-			 * «Unable to resolve the source file for 'frontend/bs_eren/bs_eren3/en_US/quickview/bxslider.js'»
-			 * https://github.com/royalwholesalecandy/core/issues/70
-			 */
+			# 2019-12-30 Dmitry Fedyuk https://github.com/mage2pro
+			# «Unable to resolve the source file for 'frontend/bs_eren/bs_eren3/en_US/quickview/bxslider.js'»
+			# https://github.com/royalwholesalecandy/core/issues/70
 			df_log_l($this, df_cc_n("Unable to resolve the source file for {$a->getFilePath()}", df_referer()));
 			throw new ENotFound(new Phrase('Unable to resolve the source file for "%1"', [$a->getFilePath()]), 0, $e);
 		}
