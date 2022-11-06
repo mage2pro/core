@@ -18,9 +18,8 @@ abstract class App {
 	 * @used-by \Df\OAuth\FE\Button::s()
 	 * @see \Dfe\Dynamics365\OAuth\App::ss()
 	 * @see \Dfe\Salesforce\OAuth\App::ss()
-	 * @return Settings
 	 */
-	abstract function ss();
+	abstract function ss():Settings;
 
 	/**
 	 * 2017-07-10
