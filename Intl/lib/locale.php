@@ -12,18 +12,16 @@ use Magento\Framework\Locale\ResolverInterface as IResolver;
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge() 
  * @used-by \Frugue\Store\Block\Switcher::map()
  * @param string|null $locale [optional]
- * @return string
  */
-function df_lang($locale = null) {return substr(df_locale($locale), 0, 2);}
+function df_lang($locale = null):string {return substr(df_locale($locale), 0, 2);}
 
 /**            
  * 2017-04-15 
  * @used-by df_lang_ru_en() 
  * @used-by \Df\Config\Source\EnableYN::toOptionArray()
  * @param mixed ...$args
- * @return bool
  */
-function df_lang_ru(...$args) {return df_b($args, 'ru' === df_lang());}
+function df_lang_ru(...$args):bool {return df_b($args, 'ru' === df_lang());}
 
 /**               
  * 2017-09-03    
@@ -31,25 +29,22 @@ function df_lang_ru(...$args) {return df_b($args, 'ru' === df_lang());}
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Dfe\Robokassa\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
- * @return string
  */
-function df_lang_ru_en() {return df_lang_ru('ru', 'en');}
+function df_lang_ru_en():string {return df_lang_ru('ru', 'en');}
 
 /**
  * 2018-04-21
  * @used-by df_lang_zh_en()
  * @used-by \Doormall\Shipping\Partner\Entity::title()
  * @param mixed ...$args
- * @return bool
  */
-function df_lang_zh(...$args) {return df_b($args, 'zh' === df_lang());}
+function df_lang_zh(...$args):bool {return df_b($args, 'zh' === df_lang());}
 
 /**
  * 2018-04-24
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
- * @return string
  */
-function df_lang_zh_en() {return df_lang_zh('zh', 'en');}
+function df_lang_zh_en():string {return df_lang_zh('zh', 'en');}
 
 /**
  * 2015-08-15               
@@ -63,9 +58,8 @@ function df_lang_zh_en() {return df_lang_zh('zh', 'en');}
  * @used-by \Dfe\CurrencyFormat\O::postProcess()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
  * @param string|null $l [optional]
- * @return string
  */
-function df_locale($l = null) {/** @var string $r */
+function df_locale($l = null):string {/** @var string $r */
 	if ($l) {
 		$r = $l;
 	}
@@ -117,12 +111,13 @@ function df_locale($l = null) {/** @var string $r */
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::locale()
  * @param string|Country $c
- * @return string
  */
-function df_locale_by_country($c) {return \Zend_Locale::getLocaleToTerritory(df_country_code($c));}
+function df_locale_by_country($c):string {return \Zend_Locale::getLocaleToTerritory(df_country_code($c));}
 
 /**
  * 2016-09-06
+ * @used-by \Df\Payment\ConfigProvider::config()
+ * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
  * @return IFormat|Format
  */
 function df_locale_f() {return df_o(IFormat::class);}
