@@ -57,7 +57,6 @@ final class CsrfValidator {
 	 * @param \Closure $f
 	 * @param IR|R $r
 	 * @param IA $a
-	 * @return bool
 	 */
-	function aroundValidate(Sb $sb, \Closure $f, IR $r, IA $a) {return $a instanceof DfA || $f($r, $a);}
+	function aroundValidate(Sb $sb, \Closure $f, IR $r, IA $a):bool {return $a instanceof DfA || $f($r, $a);}
 }
