@@ -124,7 +124,7 @@ abstract class App {
 	 * @see \Dfe\Dynamics365\OAuth\App::pCommon()
 	 * @return array(string => string)
 	 */
-	function pCommon() {return df_clean([
+	function pCommon():array {return df_clean([
 		/**
 		 * 2017-06-27 Dynamics 365:
 		 * «The Application Id assigned to your app when you registered it with Azure AD.
@@ -192,15 +192,12 @@ abstract class App {
 	 *
 	 * @used-by \Dfe\Dynamics365\API\Client::headers()
 	 * @used-by \Dfe\Salesforce\API\Client::headers()
-	 * @return string
 	 * @throws DFE
 	 */
-	final function token() {
+	final function token():string {
 		# 2017-07-11 Each descendant class has its own set of the static variables: https://3v4l.org/3GihR
-		/** @var string|null $r */
-		static $r;
-		/** @var int $expiration */
-		static $expiration;
+		static $r; /** @var string|null $r */
+		static $expiration; /** @var int $expiration */
 		if ($r && time() > $expiration) {
 			$r = null;
 		}
@@ -243,7 +240,7 @@ abstract class App {
 	 * @return array(string => mixed)
 	 * @throws DFE
 	 */
-	private function requestToken(array $key) {
+	private function requestToken(array $key):array {
 		$s = $this->ss();
 		# 2017-06-28
 		# «Now that you've acquired an authorization code and have been granted permission by the user,
