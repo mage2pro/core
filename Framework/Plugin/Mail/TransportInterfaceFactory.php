@@ -22,9 +22,8 @@ final class TransportInterfaceFactory {
 	 * @param Sb $sb
 	 * @param \Closure $f
 	 * @param array $data [optional]
-	 * @return string
 	 */
-	function aroundCreate(Sb $sb, \Closure $f, array $data = []) {
+	function aroundCreate(Sb $sb, \Closure $f, array $data = []):string {
 		$container = new _DO; /** @var _DO $container */
 		/** 2018-01-28 @used-by \Df\Framework\Mail\TransportObserver::execute() */
 		df_dispatch('df_mail_transport', [self::CONTAINER => $container]);
