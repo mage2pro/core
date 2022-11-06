@@ -21,7 +21,7 @@ final class AddStockDataToCollection {
 	 * @param bool $skipAbsent
 	 * @param int $stockId
 	 */
-	function aroundExecute(Sb $sb, F $f, C $c, $skipAbsent, $stockId) {
+	function aroundExecute(Sb $sb, F $f, C $c, $skipAbsent, $stockId):void {
 		if (!self::$PRESERVE_ABSENT_F && !$c->getFlag(self::PRESERVE_ABSENT)) {
 			$f($c, $skipAbsent, $stockId);
 		}
