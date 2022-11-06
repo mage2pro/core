@@ -15,7 +15,7 @@ final class AbstractAction {
 	 * @used-by \Magento\Framework\App\Action\Action::dispatch()
 	 * @param Sb $sb
 	 */
-	function beforeExecute(Sb $sb) {
+	function beforeExecute(Sb $sb):void {
 		/** @var IRequest|Http $r */
 		if (($r = $sb->getRequest()) instanceof Http && in_array($r->getFullActionName(), [
 			'sales_order_view', 'sales_order_invoice_view', 'sales_guest_invoice', 'sales_guest_print'
