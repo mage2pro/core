@@ -22,11 +22,10 @@ class ActionList extends Sb {
      * @param string $action
 	 * @return string|null
 	 */
-	function aroundGet(Sb $sb, \Closure $f, $m, $area, $ns, $action) {return
-		$f($m, $area, $ns, $action) ?: (
-			'Df' !== substr($m, 0, 2) 
-			|| !df_is_virtual($c = df_cc_class_uc(df_module_name_c($m), 'Controller', 'adminhtml' === $area ? $area : null, $ns, $action))
-			? null : df_vtr($c)			
+	function aroundGet(Sb $sb, \Closure $f, $m, $area, $ns, $action) {return $f($m, $area, $ns, $action) ?: (
+		'Df' !== substr($m, 0, 2) || !df_is_virtual(
+			$c = df_cc_class_uc(df_module_name_c($m), 'Controller', 'adminhtml' === $area ? $area : null, $ns, $action)
 		)
-	;}
+		? null : df_vtr($c)
+	);}
 }
