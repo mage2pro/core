@@ -5,9 +5,8 @@
  * @param string|object $m
  * @param string|null $folder [optional]
  * @param string|null $l [optional]
- * @return string
  */
-function df_intl_dic_path($m, $l = null, $folder = null) {return df_cc_path(
+function df_intl_dic_path($m, $l = null, $folder = null):string {return df_cc_path(
 	df_module_dir($m), $folder ?: 'i18n', df_locale($l) . '.csv'
 );}
 
@@ -20,7 +19,7 @@ function df_intl_dic_path($m, $l = null, $folder = null) {return df_cc_path(
  * @param string|null $locale [optional]
  * @return array(string => string)|mixed
  */
-function df_intl_dic_read($m, $locale = null, $folder = null) {
+function df_intl_dic_read($m, $locale = null, $folder = null):array {
 	$p = df_intl_dic_path($m, $locale, $folder); /** @var string $p */
 	return df_try(function() use($p) {return df_csv_o()->getDataPairs($p);}, [])
 ;}
@@ -39,7 +38,7 @@ function df_intl_dic_read($m, $locale = null, $folder = null) {
  * @param string|null $folder [optional]
  * @param string|null $locale [optional]
  */
-function df_intl_dic_write($m, array $data, $locale = null, $folder = null) {
+function df_intl_dic_write($m, array $data, $locale = null, $folder = null):void {
 	$path = df_intl_dic_path($m, $locale, $folder); /** @var string $path */
 	$h = fopen($path, 'w'); /** @var resource $h */
 	df_map_k(function($k, $v) use($h) {/** @var string $k */ /** @var string $v */
