@@ -55,5 +55,5 @@ final class AppInterface {
 	 * @param B $b
 	 * @param E $e
 	 */
-	function beforeCatchException(Sb $sb, B $b, E $e) {df_log_e($e);}
+	function beforeCatchException(Sb $sb, B $b, E $e):void {df_log_e($e);}
 }
