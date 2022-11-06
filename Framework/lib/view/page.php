@@ -4,12 +4,12 @@ use Magento\Framework\View\Result\Page as ResultPage;
 use Magento\Framework\View\Result\PageFactory;
 /**
  * 2015-10-05
- * @param string $name
- * @param string|null $value
+ * @param string $k
+ * @param string|null $v
  */
-function df_metadata($name, $value) {
-	if (!is_null($value) && '' !== $value) {
-		df_page_config()->setMetadata($name, $value);
+function df_metadata($k, $v) {
+	if (!is_null($v) && '' !== $v) {
+		df_page_config()->setMetadata($k, $v);
 	}
 }
 
@@ -19,9 +19,8 @@ function df_metadata($name, $value) {
  * @used-by df_page_title()
  * @used-by \Df\Sso\Button::_prepareLayout()
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
- * @return Config
  */
-function df_page_config() {return df_o(Config::class);}
+function df_page_config():Config {return df_o(Config::class);}
 
 /**
  * 2017-05-07
@@ -30,7 +29,7 @@ function df_page_config() {return df_o(Config::class);}
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
  * @param string $s
  */
-function df_page_title($s) {df_page_config()->getTitle()->set($s);}
+function df_page_title($s):void {df_page_config()->getTitle()->set($s);}
 
 /**
  * 2017-05-05
@@ -42,9 +41,8 @@ function df_page_title($s) {df_page_config()->getTitle()->set($s);}
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
  * @param string|null $template [optional]
  * @param string ...$handles [optional]
- * @return ResultPage
  */
-function df_page_result($template = null, ...$handles) {
+function df_page_result($template = null, ...$handles):ResultPage {
 	$f = df_o(PageFactory::class);/** @var PageFactory $f */
 	$r = $f->create(false, df_clean(['template' => $template])); /** @var ResultPage $r */
 	foreach ($handles as $h) {
