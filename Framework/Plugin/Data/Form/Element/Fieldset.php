@@ -33,15 +33,11 @@ class Fieldset {
 	 * @param bool $isAdvanced [optional]
 	 * @return array(string|bool|array(string => mixed))
 	 */
-	function beforeAddField(
-		Sb $sb, $elementId, $type, array $config, $after = false, $isAdvanced = false
-	) {
+	function beforeAddField(Sb $sb, $elementId, $type, array $config, $after = false, $isAdvanced = false):array {
 		$fc = dfa($config, 'field_config'); /** @var array(string => mixed)|null $fc */
-		/**
-		 * 2016-09-27
-		 * Модуль Unirgy Dropship ошибочно пихает в $fc объект класса stdClass вместо массива:
-		 * https://code.dmitry-fedyuk.com/m2e/stripe/issues/5
-		 */
+		# 2016-09-27
+		# Модуль Unirgy Dropship ошибочно пихает в $fc объект класса stdClass вместо массива:
+		# https://code.dmitry-fedyuk.com/m2e/stripe/issues/5
 		if ($fc && is_array($fc)) {
 			$path = df_cc_path(dfa($fc, 'path'), dfa($fc, 'id')); /** @var string|null $path */
 			$backendC = dfa($fc, 'backend_model'); /** @var string|null $backendC */
