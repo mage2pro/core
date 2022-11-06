@@ -23,7 +23,7 @@ final class SessionManager {
 	 * «How is the session initialized?» https://mage2.pro/t/3916
 	 * @param Sb $sb
 	 */
-	function beforeStart(Sb $sb) {
+	function beforeStart(Sb $sb):void {
 		/**
 		 * 2017-12-30
 		 * "PHP 7.2: «Warning: ini_set(): A session is active.

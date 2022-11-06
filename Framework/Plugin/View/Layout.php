@@ -138,9 +138,8 @@ class Layout extends UiComponent {
 	 *
 	 * @param Sb $sb
 	 * @param bool $r
-	 * @return bool
 	 */
-	function afterIsCacheable(Sb $sb, $r) {return $r && !dfc($this, function() {return
+	function afterIsCacheable(Sb $sb, $r) {return $r && !dfc($this, function():bool {return
 		!!df_find(function($h) {return df_starts_with($h, [
 			/**
 			 * 2016-11-21
