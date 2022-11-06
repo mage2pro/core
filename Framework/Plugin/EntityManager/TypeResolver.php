@@ -14,7 +14,6 @@ final class TypeResolver {
 	 * @see \Magento\Framework\EntityManager\TypeResolver::resolve()
 	 * @param Sb $sb
 	 * @param string $r
-	 * @return string
 	 */
-	function afterResolve(Sb $sb, $r) {return df_trim_interceptor($r);}
+	function afterResolve(Sb $sb, $r):string {return df_trim_interceptor($r);}
 }
