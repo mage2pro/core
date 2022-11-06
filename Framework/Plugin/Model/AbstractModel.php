@@ -51,9 +51,8 @@ final class AbstractModel {
 	 * @see \Magento\Framework\Model\AbstractModel::afterSave()
 	 * @param Sb $sb
 	 * @param Sb|null $r
-	 * @return Sb
 	 */
-	function afterAfterSave(Sb $sb, $r) {
+	function afterAfterSave(Sb $sb, $r):Sb {
 		foreach (CallbackPool::get(spl_object_hash($sb)) as $f) {/** @var callable $f */
 			call_user_func($f);
 		}
