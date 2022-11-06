@@ -77,9 +77,8 @@ function df_block($c, $data = [], $template = null, array $vars = []) {
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()   
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
- * @return string
  */
-function df_block_output($m, $t = null, array $vars = [], array $data = []) {return !$t
+function df_block_output($m, $t = null, array $vars = [], array $data = []):string {return !$t
 	? df_block($m, $data, null, $vars)->toHtml()
 	: df_block(
 		null
@@ -120,6 +119,6 @@ function df_layout_update($onError = true) {return df_try(function() {
  * @param AbstractBlock|string $e
  * @return string|null
  */
-function df_parent_name($e) {return df_ftn(
-	df_layout()->getParentName($e instanceof AbstractBlock ? $e->getNameInLayout() : $e)
-);}
+function df_parent_name($e) {return df_ftn(df_layout()->getParentName(
+	$e instanceof AbstractBlock ? $e->getNameInLayout() : $e
+));}

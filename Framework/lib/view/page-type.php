@@ -2,18 +2,16 @@
 /**
  * 2019-03-27
  * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
- * @return bool
  */
-function df_is_catalog_product_list() {return df_handle('catalog_category_view');}
+function df_is_catalog_product_list():bool {return df_handle('catalog_category_view');}
 
 /**
  * 2019-03-27
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
  * @used-by \TFC\Core\Plugin\Theme\Block\Html\Breadcrumbs::aroundAddCrumb()
- * @return bool
  */
-function df_is_catalog_product_view() {return df_handle('catalog_product_view');}
+function df_is_catalog_product_view():bool {return df_handle('catalog_product_view');}
 
 /**
  * 2016-08-24
@@ -33,9 +31,8 @@ function df_is_catalog_product_view() {return df_handle('catalog_product_view');
  * @used-by \Df\Payment\ConfigProvider::getConfig()
  * @used-by \Df\Payment\ConfigProvider\GlobalT::getConfig()
  * @used-by \Df\Shipping\ConfigProvider::getConfig()
- * @return bool
  */
-function df_is_checkout() {return
+function df_is_checkout():bool {return
 	df_is_checkout_multishipping()
 	# 2018-09-22 Aheadworks OneStepCheckout, MagePlaza OneStepCheckout
 	|| df_action_prefix('onestepcheckout')
@@ -55,9 +52,8 @@ function df_is_checkout() {return
  * @used-by df_is_checkout()
  * @used-by \Df\Payment\Block\Info::_toHtml()
  * @used-by \Df\Payment\Observer\Multishipping::execute()
- * @return bool
  */
-function df_is_checkout_multishipping() {return df_action_prefix('multishipping_checkout');}
+function df_is_checkout_multishipping():bool {return df_action_prefix('multishipping_checkout');}
 
 /**
  * 2017-03-29
@@ -66,17 +62,15 @@ function df_is_checkout_multishipping() {return df_action_prefix('multishipping_
  * @see  df_is_checkout_multishipping()
  * How to detect the «checkout success» page programmatically in PHP? https://mage2.pro/t/3562
  * @used-by \Df\Payment\Block\Info::_toHtml()
- * @return bool
  */
-function df_is_checkout_success() {return df_handle('checkout_onepage_success');}
+function df_is_checkout_success():bool {return df_handle('checkout_onepage_success');}
 
 /**
  * 2018-11-23
  * @used-by \Frugue\Core\Plugin\Framework\App\PageCache\Kernel()
  * @used-by \Magento\RequireJs\Model\FileManager::createBundleJsPool() (Frugue)
- * @return bool
  */
-function df_is_home() {return df_handle('cms_index_index');}
+function df_is_home():bool {return df_handle('cms_index_index');}
 
 /**
  * 2016-12-04
@@ -84,18 +78,16 @@ function df_is_home() {return df_handle('cms_index_index');}
  * @todo May be we should use @see df_action() here?
  * @see df_is_checkout_multishipping()
  * @used-by \Df\Sso\Css::isAccConfirmation()
- * @return bool
  */
-function df_is_login() {return df_handle('customer_account_login');}
+function df_is_login():bool {return df_handle('customer_account_login');}
 
 /**
  * 2016-12-02
  * 2017-08-28
  * @todo May be we should use @see df_action() here?
  * @see  df_is_checkout_multishipping()
- * @return bool
  */
-function df_is_reg() {return df_handle('customer_account_create');}
+function df_is_reg():bool {return df_handle('customer_account_create');}
 
 /**
  * 2017-10-15
@@ -112,6 +104,5 @@ function df_is_reg() {return df_handle('customer_account_create');}
  * "«Please set your Moip private key in the Magento backend» even if the Moip private key is set"
  * https://github.com/mage2pro/moip/issues/22
  * @used-by \Df\Config\Settings::scope()
- * @return bool
  */
-function df_is_system_config() {return df_action_prefix('adminhtml_system_config');}
+function df_is_system_config():bool {return df_action_prefix('adminhtml_system_config');}
