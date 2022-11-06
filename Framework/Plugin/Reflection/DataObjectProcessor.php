@@ -14,11 +14,11 @@ class DataObjectProcessor {
      * @param string $type
 	 * @return array(string => mixed)
 	 */
-	function aroundBuildOutputDataArray(Sb $sb, \Closure $f, $object, $type) {
-		$result = $f($object, $type); /** @var array(string => mixed) $result */
+	function aroundBuildOutputDataArray(Sb $sb, \Closure $f, $object, $type):array {
+		$r = $f($object, $type); /** @var array(string => mixed) $r */
 		if ($object instanceof DC) {
-			$result += df_clean([Schema::F__DF => df_api_object_get($object, Schema::F__DF)]);
+			$r += df_clean([Schema::F__DF => df_api_object_get($object, Schema::F__DF)]);
 		}
-		return $result;
+		return $r;
 	}
 }
