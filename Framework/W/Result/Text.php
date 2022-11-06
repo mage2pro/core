@@ -55,18 +55,16 @@ class Text extends \Df\Framework\W\Result {
 	 * 2016-08-24
 	 * @used-by self::render()
 	 * @see \Df\Framework\W\Result\Json::contentType()
-	 * @return string
 	 */
-	protected function contentType() {return 'text/plain';}
+	protected function contentType():string {return 'text/plain';}
 
 	/**
 	 * 2016-08-24
 	 * @used-by self::i()
 	 * @see \Df\Framework\W\Result\Json::prepare()
 	 * @param mixed $s
-	 * @return string
 	 */
-	protected function prepare($s) {return $s;}
+	protected function prepare($s):string {return $s;}
 
 	/**
 	 * 2016-07-04
@@ -111,9 +109,8 @@ class Text extends \Df\Framework\W\Result {
 	 * @used-by \Wolf\Filter\Controller\Garage\Remove::execute()
 	 * @used-by \Wolf\Filter\Controller\Index\Change::execute()
 	 * @param mixed $body
-	 * @return self
 	 */
-	static function i($body) {
+	static function i($body):self {
 		$r = new static; /** @var self $r */
 		$r->_body = $r->prepare($body);
 		return $r;
