@@ -9,7 +9,8 @@ final class Cookie extends \Df\Framework\Log\Handler {
 	 * @override
 	 * @see \Df\Framework\Log\Handler::_p()
 	 * @used-by \Df\Framework\Log\Handler::p()
-	 * @return bool
 	 */
-	protected function _p() {return $this->r()->msg('Unable to send the cookie. Maximum number of cookies would be exceeded.');}
+	protected function _p():bool {return $this->r()->msg(
+		'Unable to send the cookie. Maximum number of cookies would be exceeded.'
+	);}
 }
