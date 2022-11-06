@@ -65,5 +65,5 @@ abstract class Schema extends \Df\Framework\Upgrade implements IUpgradeSchema {
 	 * @param Setup|ISchemaSetup $setup
 	 * @param IModuleContext|ModuleContext $context
 	 */
-	function upgrade(ISchemaSetup $setup, IModuleContext $context) {$this->process($setup, $context);}
+	function upgrade(ISchemaSetup $setup, IModuleContext $context):void {$this->process($setup, $context);}
 }

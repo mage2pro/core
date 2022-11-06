@@ -58,5 +58,5 @@ abstract class Data extends \Df\Framework\Upgrade implements UpgradeDataInterfac
 	 * @param DataSetup|IDataSetup $setup
 	 * @param IModuleContext|ModuleContext $context
 	 */
-	final function upgrade(IDataSetup $setup, IModuleContext $context) {$this->process($setup, $context):void;}
+	final function upgrade(IDataSetup $setup, IModuleContext $context):void {$this->process($setup, $context);}
 }
