@@ -10,7 +10,7 @@ final class ResourceConnection {
 	 * @param string $n [optional]
 	 * @return string[]
 	 */
-	function beforeGetConnection(Sb $sb, $n = Sb::DEFAULT_CONNECTION) {return [
+	function beforeGetConnection(Sb $sb, $n = Sb::DEFAULT_CONNECTION):array {return [
 		Sb::DEFAULT_CONNECTION !== $n || !self::$CUSTOM ? $n : self::$CUSTOM
 	];}
 
