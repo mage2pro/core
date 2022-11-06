@@ -19,8 +19,7 @@ class AbstractElement extends Sb {
 
 	/**
 	 * 2016-11-20
-	 * У класса @see \Magento\Framework\Data\Form\Element\AbstractElement
-	 * метод getComment() — магический.
+	 * У класса @see \Magento\Framework\Data\Form\Element\AbstractElement метод getComment() — магический.
 	 * К магическим методам плагины не применяются.
 	 * Поэтому для задействования плагина необходимо унаследоваться от класса ядра
 	 * и явно объявить в своём классе метод getComment().
@@ -31,9 +30,8 @@ class AbstractElement extends Sb {
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
 	 * @param Sb $sb
 	 * @param string $r
-	 * @return string
 	 */
-	function afterGetComment(Sb $sb, $r) {
+	function afterGetComment(Sb $sb, $r):string {
 		if ($vc = df_fe_fc($sb, 'dfValidator')) { /** @var string|null $vc */
 			$v = df_o($vc); /** @var \Df\Framework\IValidator $v */
 			if (true !== ($messages = $v->check($sb))) { /** @var Phrase|Phrase[]|true $messages */
@@ -59,9 +57,8 @@ class AbstractElement extends Sb {
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
 	 * @param Sb $sb
 	 * @param string $r
-	 * @return string
 	 */
-	function afterGetElementHtml(Sb $sb, $r) {return
+	function afterGetElementHtml(Sb $sb, $r):string {return
 		df_starts_with($r, '<label class="addbefore"') ? $r : df_prepend($r, $sb->getBeforeElementHtml())
 	;}
 
@@ -74,7 +71,7 @@ class AbstractElement extends Sb {
 	 * @param string[] $r
 	 * @return string[]
 	 */
-	function afterGetHtmlAttributes(Sb $sb, $r) {return array_merge($r, ['autocomplete']);}
+	function afterGetHtmlAttributes(Sb $sb, $r):array {return array_merge($r, ['autocomplete']);}
 
 	/**
 	 * 2015-11-24
@@ -89,9 +86,8 @@ class AbstractElement extends Sb {
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::setForm()
 	 * @param Sb $sb
 	 * @param Sb $r
-	 * @return Sb
 	 */
-	function afterSetForm(Sb $sb, Sb $r) {
+	function afterSetForm(Sb $sb, Sb $r):Sb {
 		if ($sb instanceof ElementI) {
 			df_once($sb, function() use($sb) {
 				$sb->onFormInitialized();
@@ -109,25 +105,21 @@ class AbstractElement extends Sb {
 	 * (значением которой является класс Font Awesome)
 	 * и выводим, по сути, пустые теги <label><span></span></label>.
 	 * 3) Добавляем атрибут title.
-	 * 2015-12-28
-	 * 4) Добавляем класс, соответствующий типу элемента.
-	 *
 	 * Пример использования Font Awesome: https://github.com/mage2pro/core/tree/7cb37ab2c4d728bc20d29ca3c7c643e551f6eb0a/Framework/Data/Form/Element/Font.php#L40
-	 *
+	 * 2015-12-28 4) Добавляем класс, соответствующий типу элемента.
 	 * @see \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml()
 	 * @param Sb|E $sb
 	 * @param \Closure $f
 	 * @param string|null $idSuffix
-	 * @return string
 	 */
-	function aroundGetLabelHtml(Sb $sb, \Closure $f, $idSuffix = '') {
-		/** @var string|null|Phrase $label */ /** @var string $result */
-		if (is_null($label = $sb->getLabel())) {
-			$result = '';
+	function aroundGetLabelHtml(Sb $sb, \Closure $f, $idSuffix = ''):string {/** @var string $r */
+		/** @var string|null|Phrase $l */
+		if (is_null($l = $sb->getLabel())) {
+			$r = '';
 		}
 		else {
-			$label = (string)$label;
+			$l = (string)$l;
 			/**
 			 * 2015-12-25
 			 * @see \Magento\Framework\Data\Form\Element\Multiline::getLabelHtml()
@@ -138,25 +130,21 @@ class AbstractElement extends Sb {
 			if ('' === $idSuffix && $sb instanceof Multiline) {
 				$idSuffix = 0;
 			}
-			/** @var string[] $classA */
-			$classA = ['label', "admin__field-label df-element-{$sb->getType()}"];
-			if (df_starts_with($label, 'fa-')) {
-				$classA = array_merge($classA, ['fa', $label]);
-				$label = '';
+			$classA = ['label', "admin__field-label df-element-{$sb->getType()}"]; /** @var string[] $classA */
+			if (df_starts_with($l, 'fa-')) {
+				$classA = array_merge($classA, ['fa', $l]);
+				$l = '';
 			}
 			$params = [
-				'class' => df_cc_s($classA)
-				,'for' => $sb->getHtmlId() . $idSuffix
-				,'data-ui-id' => E::uidSt($sb, 'label')
+				'class' => df_cc_s($classA), 'for' => $sb->getHtmlId() . $idSuffix, 'data-ui-id' => E::uidSt($sb, 'label')
 			]; /** @var array(string => string) $params */
-			/** @var string $title */
-			$title = (string)$sb->getTitle();
-			if ($title !== $label) {
+			$title = (string)$sb->getTitle(); /** @var string $title */
+			if ($title !== $l) {
 				$params['title'] = $title;
 			}
-			$result = df_tag('label', $params, df_tag('span', [], $label)) . "\n";
+			$r = df_tag('label', $params, df_tag('span', [], $l)) . "\n";
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
@@ -166,5 +154,5 @@ class AbstractElement extends Sb {
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
 	 * @param Sb $sb
 	 */
-	function beforeGetElementHtml(Sb $sb) {$sb['autocomplete'] = 'new-password';}
+	function beforeGetElementHtml(Sb $sb):void {$sb['autocomplete'] = 'new-password';}
 }
