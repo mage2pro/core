@@ -33,10 +33,8 @@ class PackageInfoFactory extends \Magento\Framework\Module\PackageInfoFactory {
 	 * @used-by \Magento\Framework\Module\DependencyChecker::__construct():
 	 * 		$this->packageInfo = $packageInfoFactory->create();
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Module/DependencyChecker.php#L41-L53
-	 * @return PackageInfo
 	 */
-    function create() {$om = $this->objectManager; return $om->create(PackageInfo::class, [
+    function create():PackageInfo {$om = $this->objectManager; return $om->create(PackageInfo::class, [
     	'reader' => $om->create(Reader::class, ['moduleList' => $om->create(FullModuleList::class)])
 	]);}
 }
-

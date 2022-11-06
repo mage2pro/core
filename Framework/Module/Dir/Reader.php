@@ -48,9 +48,8 @@ class Reader extends _P {
 	 * @used-by \Magento\Framework\Module\PackageInfo::load():
 	 * 		$jsonData = $this->reader->getComposerJsonFiles()->toArray();
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Module/PackageInfo.php#L73-L114
-	 * @return I
 	 */
-	function getComposerJsonFiles() {$r = parent::getComposerJsonFiles(); /** @var I $r */return
+	function getComposerJsonFiles():I {$r = parent::getComposerJsonFiles(); /** @var I $r */return
 		dfI::pathsSet($r, array_filter(dfI::pathsGet($r), function($f) {return '/composer.json' !== $f;}))
 	;}
 }
