@@ -39,12 +39,10 @@ final class Record {
 	 * 2021-09-08
 	 * @used-by self::e()
 	 * @used-by self::msg()
-	 * @param string|string[]|null $k [optional]
-	 * @param string|null $d [optional]
-	 * @return array(string => mixed)|mixed|null
-	 * @return O
+	 * @param string $k [optional]
+	 * @return string|null
 	 */
-	private function d($k = null, $d = null) {return $this->_d->a($k, $d);}
+	private function d($k) {return $this->_d->a($k);}
 
 	/**
 	 * 2021-09-08
