@@ -3,7 +3,7 @@
 namespace Df\Framework\Test;
 class translation extends \Df\Core\TestCase {
 	/** 2017-02-09 */
-	function t01() {$s = '歐付寶 Rónán allPay Федюк [] --'; print_r([
+	function t01():void {$s = '歐付寶 Rónán allPay Федюк [] --'; print_r([
 		'df_fs_name' => df_fs_name($s)
 		,'df_translit' => df_translit($s)
 		,'df_translit_url' => df_translit_url($s)
