@@ -26,18 +26,16 @@ abstract class App {
 	 * @used-by \Df\OAuth\FE\Button::onFormInitialized()
 	 * @see \Dfe\Dynamics365\OAuth\App::urlAuth()
 	 * @see \Dfe\Salesforce\OAuth\App::urlAuth()
-	 * @return string
 	 */
-	abstract function urlAuth();
+	abstract function urlAuth():string;
 
 	/**
 	 * 2017-06-30 «OAuth authorization endpoints» https://msdn.microsoft.com/en-us/library/dn531009.aspx#bkmk_oauthurl
 	 * @used-by self::requestToken()
 	 * @see \Dfe\Dynamics365\OAuth\App::urlToken()
 	 * @see \Dfe\Salesforce\OAuth\App::urlToken()
-	 * @return string
 	 */
-	abstract protected function urlToken();
+	abstract protected function urlToken():string;
 
 	/**
 	 * 2017-06-29 Dynamics 365
@@ -61,7 +59,7 @@ abstract class App {
 	 * @var string $refreshToken
 	 * @throws DFE
 	 */
-	final function getAndSaveTheRefreshToken() {
+	final function getAndSaveTheRefreshToken():void {
 		/** @var array(string => string) $r */
 		$this->validateResponse($r = df_request());
 		/**
