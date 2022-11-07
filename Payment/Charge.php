@@ -111,5 +111,5 @@ abstract class Charge extends Operation {
 	 * @used-by self::metadata()
 	 * @return array(string => string)
 	 */
-	private function vars() {return dfc($this, function() {return Metadata::vars($this->store(), $this->oq());});}
+	private function vars():array {return dfc($this, function() {return Metadata::vars($this->store(), $this->oq());});}
 }
