@@ -14,9 +14,8 @@ use Magento\Sales\Model\Order\Item as OI;
  * @used-by df_oqi_discount_b()
  * @used-by df_oqi_tax()
  * @param OI|QI $i
- * @return float
  */
-function df_oqi_amount($i) {
+function df_oqi_amount($i):float {
 	$k0 = df_trim_text_left(df_caller_f(), 'df_oqi_'); /** @var string $k0 */
 	$k1 = df_trim_text_right($k0, '_b'); /** @var string $k1 */
 	$i = df_oqi_top($i);
@@ -29,9 +28,8 @@ function df_oqi_amount($i) {
  * 2020-01-31     
  * @used-by \Dfe\Sift\Payload\OQI::p()
  * @param OI|QI $i
- * @return string
  */
-function df_oqi_currency_c($i) {return df_oq_currency_c(df_oq($i));}
+function df_oqi_currency_c($i):string {return df_oq_currency_c(df_oq($i));}
 
 /**
  * 2017-06-09
@@ -41,9 +39,8 @@ function df_oqi_currency_c($i) {return df_oq_currency_c(df_oq($i));}
  * @used-by \Dfe\YandexKassa\Charge::pTax()
  * @param OI|QI $i
  * @param int|null $max [optional]
- * @return string
  */
-function df_oqi_desc($i, $max = null) {
+function df_oqi_desc($i, $max = null):string {
 	$p = df_oqi_top($i)->getProduct(); /** @var P|DFP $p */
 	return df_chop(strip_tags($p->getShortDescription() ?: $p->getDescription()) ?: $i->getName(), $max);
 }
@@ -54,26 +51,23 @@ function df_oqi_desc($i, $max = null) {
  * @used-by df_oqi_price()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @param OI|QI $i
- * @return float
  */
-function df_oqi_discount($i) {return df_oqi_amount($i);}
+function df_oqi_discount($i):float {return df_oqi_amount($i);}
 
 /**
  * 2019-11-20 It returns a value for the whole row.
  * @see df_oqi_discount()
  * @used-by df_oqi_price()
  * @param OI|QI $i
- * @return float
  */
-function df_oqi_discount_b($i) {return df_oqi_amount($i);}
+function df_oqi_discount_b($i):float {return df_oqi_amount($i);}
 
 /**
  * 2019-11-20 It returns a value for the whole row.
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @param OI|QI $i
- * @return float
  */
-function df_oqi_tax($i) {return df_oqi_amount($i);}
+function df_oqi_tax($i):float {return df_oqi_amount($i);}
 
 /**
  * 2017-02-01
@@ -82,9 +76,8 @@ function df_oqi_tax($i) {return df_oqi_amount($i);}
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
- * @return string
  */
-function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
+function df_oqi_image($i):string {return df_product_image_url($i->getProduct());}
 
 /**
  * 2016-09-07
@@ -118,7 +111,7 @@ function df_oqi_image($i) {return df_product_image_url($i->getProduct());}
  * @param string|null $locale [optional] Используется для упорядочивания элементов.
  * @return array(int => mixed)|OI[]|QI[]
  */
-function df_oqi_leafs($oq, Closure $f = null, $locale = null) {
+function df_oqi_leafs($oq, Closure $f = null, $locale = null):array {
 	$r = df_sort_names(array_values(array_filter(
 		$oq->getItems(), function($i) {/** @var OI|QI $i */ return df_oqi_is_leaf($i);}
 	)), $locale, function($i) {/** @var OI|QI $i */ return $i->getName();}); /** @var OI[]|QI[] $r */
@@ -197,9 +190,8 @@ function df_oqi_leafs($oq, Closure $f = null, $locale = null) {
  * @param OI|QI $i
  * @param bool $withTax [optional]
  * @param bool $withDiscount [optional]
- * @return float
  */
-function df_oqi_price($i, $withTax = false, $withDiscount = false) {/** @var float $r */
+function df_oqi_price($i, $withTax = false, $withDiscount = false):float {/** @var float $r */
 	$r = floatval($withTax ? $i->getPriceInclTax() : (
 		df_is_oi($i) ? $i->getPrice() :
 			# 2017-04-20 У меня $i->getPrice() для quote item возвращает значение в учётной валюте: видимо, из-за дефекта ядра.
@@ -234,13 +226,11 @@ function df_oqi_price($i, $withTax = false, $withDiscount = false) {/** @var flo
  * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
- * @return int
  */
-function df_oqi_qty($i) {return intval(df_is_oi($i) ? $i->getQtyOrdered() : (df_is_qi($i) ? $i->getQty() : df_error()));}
+function df_oqi_qty($i):int {return intval(df_is_oi($i) ? $i->getQtyOrdered() : (df_is_qi($i) ? $i->getQty() : df_error()));}
 
 /**
  * 2016-09-07
- * 2018-08-11 @deprecated It is unused.
  * 2021-05-30
  * 1) The previous implementation:
  * 		array_filter($oq->getItems(), function($i) {return !$i->getParentItem();})
@@ -252,6 +242,7 @@ function df_oqi_qty($i) {return intval(df_is_oi($i) ? $i->getQtyOrdered() : (df_
  * 2.2) @see \Magento\Sales\Model\Order::getAllVisibleItems()
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order.php#L1338-L1350
  * https://github.com/magento/magento2/blob/2.4.2-p1/app/code/Magento/Sales/Model/Order.php#L1509-L1523
+ * @used-by df_oqi_roots_m()
  * @param O|Q $oq
  * @return array(OI|QI)
  */
@@ -279,11 +270,12 @@ function df_oqi_roots_m($oq, Closure $f) {return array_map($f, df_oqi_roots($oq)
  * @param O|Q $oq
  * @param string $sep [optional] 2016-07-04 Добавил этот параметр для модуля AllPay,
  * где разделителем должен быть символ #.
- * @return string
  */
-function df_oqi_s($oq, $sep = ', ') {return df_ccc($sep, df_oqi_roots_m($oq, function($i) {/** @var OI|QI $i */return df_cc_s(
-	$i->getName(), 1 >= ($qty = df_oqi_qty($i)) ? null : "({$qty})"
-);}));}
+function df_oqi_s($oq, $sep = ', '):string {return df_ccc($sep, df_oqi_roots_m($oq,
+	function($i) {/** @var OI|QI $i */return df_cc_s(
+		$i->getName(), 1 >= ($qty = df_oqi_qty($i)) ? null : "({$qty})"
+	);}
+));}
 
 /**
  * 2017-03-06
@@ -308,11 +300,10 @@ function df_oqi_tax_rate($i, $asInteger = false) {
 /**
  * 2017-09-30
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
- * The `tax_percent` field is not filled for the configurable childs, so we should use @uses df_oqi_top()
+ * The `tax_percent` field is not filled for configurable children, that is why we use @uses df_oqi_top()
  * @param OI|QI $i
- * @return float
  */
-function df_oqi_tax_percent($i) {return floatval(df_oqi_top($i)->getTaxPercent());}
+function df_oqi_tax_percent($i):float {return floatval(df_oqi_top($i)->getTaxPercent());}
 
 /**
  * 2016-08-18
