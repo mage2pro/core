@@ -16,7 +16,7 @@ final class Admin {
 	 * @param string[]|null $allowedTags [optional]
 	 * @return string
 	 */
-	function aroundEscapeHtmlWithLinks(Sb $sb, \Closure $f, $data, $allowedTags = null) {
-		return df_trans_is_my() ? $data : $f($data, $allowedTags);
-	}
+	function aroundEscapeHtmlWithLinks(Sb $sb, \Closure $f, $data, $allowedTags = null) {return
+		df_trans_is_my() ? $data : $f($data, $allowedTags)
+	;}
 }

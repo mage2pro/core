@@ -60,10 +60,11 @@ function df_trans_current() {return df_registry('current_transaction');}
 
 /**
  * 2016-08-19
+ * @used-by \Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail\Grid::beforeAddColumn()
+ * @used-by \Df\Sales\Plugin\Helper\Admin::aroundEscapeHtmlWithLinks()
  * @param T|null $t [optional]
- * @return boolean
  */
-function df_trans_is_my(T $t = null) {return dfp_my(df_trans($t, false));}
+function df_trans_is_my(T $t = null):bool {return dfp_my(df_trans($t, false));}
 
 /**
  * 2016-11-17

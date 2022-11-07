@@ -7,9 +7,8 @@ final class IntT extends Type {
 	 * @used-by \Df\Qa\Method::vp()
 	 * @see df_is_int()
 	 * @param string|int $v
-	 * @return boolean
 	 */
-	function isValid($v) {
+	function isValid($v):bool {
 		$this->prepareValidation($v);
 		# Обратите внимание, что здесь нужно именно «==», а не «===»: https://php.net/manual/function.is-int.php#35820
 		return is_numeric($v) && ($v == (int)$v);

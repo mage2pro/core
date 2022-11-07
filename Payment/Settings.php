@@ -43,11 +43,10 @@ abstract class Settings extends \Df\API\Settings {
 	 * https://github.com/mage2pro/alphacommercehub/issues/85
 	 * 2) It is implemented by analogy with @see \Magento\Payment\Model\Checks\CanUseForCountry::isApplicable()
 	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
-	 * @param string $option
-	 * @return boolean
+	 * @param string $opt
 	 */
-	final function applicableForQuoteByCountry($option) {return $this->m()->canUseForCountryP(
-		df_oq_country_sb(df_quote()), $option
+	final function applicableForQuoteByCountry($opt):bool {return $this->m()->canUseForCountryP(
+		df_oq_country_sb(df_quote()), $opt
 	);}
 
 	/**
@@ -55,24 +54,21 @@ abstract class Settings extends \Df\API\Settings {
 	 * It is implemented by analogy with @see \Magento\Payment\Model\Checks\TotalMinMax::isApplicable()
 	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
 	 * @used-by \Dfe\Moip\ConfigProvider::config()
-	 * @param string $option
-	 * @return boolean
+	 * @param string $opt
 	 */
-	final function applicableForQuoteByMinMaxTotal($option) {
+	final function applicableForQuoteByMinMaxTotal($opt):bool {
 		$a = df_quote()->getBaseGrandTotal(); /** @var float $a */
-        $max = $this->v("$option/" . T::MAX_ORDER_TOTAL); /** @var float $max */
-		$min = $this->v("$option/" . T::MIN_ORDER_TOTAL); /** @var float $min */
+        $max = $this->v("$opt/" . T::MAX_ORDER_TOTAL); /** @var float $max */
+		$min = $this->v("$opt/" . T::MIN_ORDER_TOTAL); /** @var float $min */
 		return !($min && $a < $min || $max && $a > $max);
 	}
 
 	/**
-	 * 2016-11-16
-	 * «Description»                                
+	 * 2016-11-16 «Description»
 	 * @used-by \Df\Payment\Charge::description()
 	 * @used-by \Dfe\ACH\ConfigProvider::config()
-	 * @return string
 	 */
-	final function description() {return $this->v();}
+	final function description():string {return $this->v();}
 
 	/**
 	 * 2016-03-14
@@ -83,9 +79,8 @@ abstract class Settings extends \Df\API\Settings {
 	 * https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
-	 * @return string
 	 */
-	final function dsd() {return $this->v(null, null, function() {return $this->v('statement');});}
+	final function dsd():string {return $this->v(null, null, function() {return $this->v('statement');});}
 
 	/**
 	 * 2016-12-27
@@ -104,14 +99,13 @@ abstract class Settings extends \Df\API\Settings {
 	 * @see \Dfe\Omise\Settings::init()
 	 * @see \Dfe\Stripe\Settings::init()
 	 */
-	function init() {}
+	function init():void {}
 
 	/**
 	 * 2016-12-26
 	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @return bool
 	 */
-	final function log() {return $this->b(null, null, true);}
+	final function log():bool {return $this->b(null, null, true);}
 
 	/**
 	 * 2016-08-27
@@ -125,9 +119,8 @@ abstract class Settings extends \Df\API\Settings {
 	 * @used-by \Dfe\CheckoutCom\Response::messageC()
 	 * @param string|null $m [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return string
 	 */
-	final function messageFailure($m = null, $s = null) {return df_var(
+	final function messageFailure($m = null, $s = null):string {return df_var(
 		$this->v(null, $s, function() use($m) {return df_cc_br(
 			'Sorry, the payment attempt is failed.'
 			,!$m ? null : "The payment service's message is «<b>{originalMessage}</b>»."
@@ -143,9 +136,10 @@ abstract class Settings extends \Df\API\Settings {
 
 	/**
 	 * 2016-03-14
+	 * @used-by \Df\Payment\Charge::metadata()
 	 * @return string[]
 	 */
-	final function metadata() {return $this->csv();}
+	final function metadata():array {return $this->csv();}
 
 	/**
 	 * 2016-07-27
@@ -167,9 +161,8 @@ abstract class Settings extends \Df\API\Settings {
 	 *
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Method::requireBillingAddress()
-	 * @return bool
 	 */
-	final function requireBillingAddress() {return $this->b(null, null, function() {return
+	final function requireBillingAddress():bool {return $this->b(null, null, function() {return
 		$this->b('askForBillingAddress', null, true)
 	;});}
 
@@ -181,9 +174,8 @@ abstract class Settings extends \Df\API\Settings {
 	 * @used-by \Dfe\IPay88\Settings::options()
 	 * @used-by \Dfe\YandexKassa\Settings::options()
 	 * @param string|ConfigSource $source
-	 * @return Options
 	 */
-	final protected function _options($source) {return dfc($this, function($s) {return new Options(
+	final protected function _options($source):Options {return dfc($this, function($s) {return new Options(
 		$this, is_object($s) ? $s : df_sc($s, ConfigSource::class)
 	);}, func_get_args());}
 
@@ -196,9 +188,8 @@ abstract class Settings extends \Df\API\Settings {
 	 * @used-by \Dfe\Moip\Settings::boleto()
 	 * @used-by \Dfe\TBCBank\Settings::proxy()
 	 * @used-by \Dfe\Vantiv\Settings::proxy()
-	 * @return M
 	 */
-	protected function m() {return $this->_m;}
+	protected function m():M {return $this->_m;}
 
 	/**
 	 * 2016-08-25
@@ -209,9 +200,7 @@ abstract class Settings extends \Df\API\Settings {
 	 * @see \Dfe\AlphaCommerceHub\Settings\Card::prefix()
 	 * @see \Dfe\Moip\Settings\Boleto::prefix()
 	 */
-	protected function prefix():string {return dfc($this, function() {return
-		'df_payment/' . dfpm_code_short($this->_m)
-	;});}
+	protected function prefix():string {return dfc($this, function() {return 'df_payment/' . dfpm_code_short($this->_m);});}
 
 	/**
 	 * 2017-03-27
