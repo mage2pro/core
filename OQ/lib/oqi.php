@@ -325,9 +325,8 @@ function df_oqi_top($i) {return $i->getParentItem() ?: $i;}
  * @param OI|QI $i
  * @param bool $withTax [optional]
  * @param bool $withDiscount [optional]
- * @return float
  */
-function df_oqi_total($i, $withTax = false, $withDiscount = false) {return
+function df_oqi_total($i, $withTax = false, $withDiscount = false):float {return
 	df_oqi_price($i, $withTax, $withDiscount) * $i->getQtyOrdered()
 ;}
 
@@ -338,6 +337,5 @@ function df_oqi_total($i, $withTax = false, $withDiscount = false) {return
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
- * @return string
  */
-function df_oqi_url($i) {return df_oqi_top($i)->getProduct()->getProductUrl();}
+function df_oqi_url($i):string {return df_oqi_top($i)->getProduct()->getProductUrl();}
