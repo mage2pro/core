@@ -1,6 +1,7 @@
 <?php
 namespace Df\OAuth;
 use Magento\Framework\App\Action\Action as _P;
+use Magento\Framework\Controller\Result\Redirect;
 /**
  * 2017-06-27
  * @see \Df\OAuth\ReturnT\GeneralPurpose
@@ -12,7 +13,7 @@ abstract class ReturnT extends _P {
 	 * @used-by self::execute()
 	 * @see \Df\Sso\CustomerReturn::_execute()
 	 */
-	abstract protected function _execute();
+	abstract protected function _execute():void;
 
 	/**
 	 * 2017-06-27
@@ -22,9 +23,8 @@ abstract class ReturnT extends _P {
 	 * @used-by \Magento\Framework\App\Action\Action::dispatch():
 	 * 		$result = $this->execute();
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
-	 * @return \Magento\Framework\Controller\Result\Redirect
 	 */
-	function execute() {
+	function execute():Redirect {
 		try {$this->_execute();}
 		catch (\Exception $e) {df_log($e); df_message_error($e);}
 		$this->postProcess();
@@ -36,7 +36,7 @@ abstract class ReturnT extends _P {
 	 * @used-by self::execute()
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index::postProcess()
 	 */
-	protected function postProcess() {}
+	protected function postProcess():void {}
 
 	/**
 	 * 2016-06-05 @see urldecode() здесь вызывать уже не надо, проверял.
@@ -48,9 +48,8 @@ abstract class ReturnT extends _P {
 	 * @used-by \Df\Sso\CustomerReturn::redirectUrl()
 	 * @see \Df\OAuth\ReturnT\GeneralPurpose::redirectUrl()
 	 * @see \Df\Sso\CustomerReturn::redirectUrl()
-	 * @return string
 	 */
-	protected function redirectUrl() {return
+	protected function redirectUrl():string {return
 		df_starts_with($r = df_request($this->redirectUrlKey()) ?: df_url(), 'http') ? $r : base64_decode($r)
 	;}
 
@@ -58,9 +57,8 @@ abstract class ReturnT extends _P {
 	 * 2016-06-04
 	 * @used-by self::redirectUrl()
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index::redirectUrlKey()
-	 * @return string
 	 */
-	protected function redirectUrlKey() {return self::REDIRECT_URL_KEY;}
+	protected function redirectUrlKey():string {return self::REDIRECT_URL_KEY;}
 
 	/**
 	 * 2016-12-02

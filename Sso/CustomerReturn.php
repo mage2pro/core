@@ -22,7 +22,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @see \Df\OAuth\ReturnT::_execute()
 	 * @used-by \Df\OAuth\ReturnT::execute()
 	 */
-	final protected function _execute() {
+	final protected function _execute():void {
 		if (!$this->mc()) {
 			# 2016-12-01
 			# Учётная запись покупателя отсутствует в Magento,

@@ -13,25 +13,20 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-06-29
 	 * @used-by \Df\OAuth\FE\Button::getCommentText()
 	 * @used-by \Df\OAuth\FE\Button::getElementHtml()
-	 * @return bool
 	 */
-	final function authenticatedB() {return dfc($this, function() {return
-		!!$this->refreshToken(df_scope())
-	;});}
+	final function authenticatedB():bool {return dfc($this, function() {return !!$this->refreshToken(df_scope());});}
 
 	/**
 	 * 2017-04-23
 	 * @used-by \Df\OAuth\App::pCommon()
-	 * @return string
 	 */
-	final function clientId() {return $this->v();}
+	final function clientId():string {return $this->v();}
 
 	/**
 	 * 2017-04-23
 	 * @used-by \Df\OAuth\App::requestToken()
-	 * @return string
 	 */
-	final function clientPassword() {return $this->p();}
+	final function clientPassword():string {return $this->p();}
 
 	/**
 	 * 2017-06-29
@@ -56,7 +51,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param string $scope		«default», «websites», or «stores»
 	 * @param int $scopeId		E.g.: «0»
 	 */
-	final function refreshTokenSave($v, $scope, $scopeId) {df_cfg_save(
+	final function refreshTokenSave($v, $scope, $scopeId):void {df_cfg_save(
 		"{$this->prefix()}/refreshToken", $v, $scope, $scopeId
 	);}
 }

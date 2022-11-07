@@ -37,9 +37,8 @@ abstract class Button extends AE implements ElementI, IComment {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L106-L126
 	 * @param string $v
-	 * @return string
 	 */
-	function getCommentText($v) {return (string)__($this->s()->authenticatedB()
+	function getCommentText($v):string {return (string)__($this->s()->authenticatedB()
 		? "<b>Your Magento instance is <span class='df-ok'>successfully authenticated</span> to your %1 instance.</b>"
 		: "<b>You <span class='df-warning'>need to authenticate</span> your Magento instance to your %1 instance.</b>"
 	,df_api_name($this->m()));}
@@ -61,9 +60,8 @@ abstract class Button extends AE implements ElementI, IComment {
 	 *			return $html;
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L426-L441
-	 * @return string
 	 */
-	function getElementHtml() {return df_block(W::class, [
+	function getElementHtml():string {return df_block(W::class, [
 		'id' => $this->getHtmlId(), 'label' => __($this->s()->authenticatedB() ? 'Re-authenticate' : 'Authenticate')
 	])->toHtml();}
 
@@ -74,7 +72,7 @@ abstract class Button extends AE implements ElementI, IComment {
 	 * @see \Dfe\Salesforce\Button::pExtra()
 	 * @return array(string => mixed)
 	 */
-	protected function pExtra() {return [];}
+	protected function pExtra():array {return [];}
 
 	/**
 	 * 2017-06-27
@@ -181,26 +179,23 @@ abstract class Button extends AE implements ElementI, IComment {
 	 * @used-by self::getCommentText()
 	 * @used-by self::getElementHtml()
 	 * @used-by \Dfe\Dynamics365\Button::url()
-	 * @return Settings
 	 */
-	final protected function s() {return $this->app()->ss();}
+	final protected function s():Settings {return $this->app()->ss();}
 
 	/**
 	 * 2017-07-10
 	 * @used-by self::onFormInitialized()
 	 * @used-by self::s()
-	 * @return App
 	 */
-	private function app() {return df_oauth_app($this->m());}
+	private function app():App {return df_oauth_app($this->m());}
 
 	/**
 	 * 2017-07-11
 	 * @used-by self::app()
 	 * @used-by self::getCommentText()
 	 * @used-by self::onFormInitialized()
-	 * @return string
 	 */
-	private function m() {return dfc($this, function() {return df_module_name_c($this);});}
+	private function m():string {return dfc($this, function() {return df_module_name_c($this);});}
 
 	/**
 	 * 2017-07-11
