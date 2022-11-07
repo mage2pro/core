@@ -10,9 +10,8 @@ abstract class Action extends \Df\Framework\Action {
 	/**
 	 * 2016-12-25
 	 * @used-by \Df\Payment\CustomerReturn::execute()
-	 * @return bool
 	 */
-	final protected function needLog() {return $this->s()->log();}
+	final protected function needLog():bool {return $this->s()->log();}
 
 	/**
 	 * 2016-12-25
@@ -20,7 +19,6 @@ abstract class Action extends \Df\Framework\Action {
 	 * @used-by self::needLog()
 	 * @used-by \Df\Payment\CustomerReturn::execute()
 	 * @used-by \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
-	 * @return S
 	 */
-	protected function s() {return dfps($this->module());}
+	protected function s():S {return dfps($this->module());}
 }
