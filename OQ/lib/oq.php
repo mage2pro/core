@@ -36,9 +36,8 @@ function df_assert_oq($v) {return df_is_oq($v) ? $v : df_error('Expected an orde
  * @used-by dfp_due()
  * @used-by \Df\Payment\Operation::__construct()
  * @param mixed $v
- * @return bool
  */
-function df_is_o($v) {return $v instanceof IO;}
+function df_is_o($v):bool {return $v instanceof IO;}
 
 /**
  * 2017-04-20
@@ -46,9 +45,8 @@ function df_is_o($v) {return $v instanceof IO;}
  * @used-by df_oi()
  * @used-by df_oq()
  * @param mixed $v
- * @return bool
  */
-function df_is_oi($v) {return $v instanceof OI;}
+function df_is_oi($v):bool {return $v instanceof OI;}
 
 /**
  * 2017-04-08
@@ -61,18 +59,16 @@ function df_is_oi($v) {return $v instanceof OI;}
  * @used-by dfpex_args()
  * @used-by dfpm()
  * @param mixed $v
- * @return bool
  */
-function df_is_oq($v) {return df_is_o($v) || df_is_q($v);}
+function df_is_oq($v):bool {return df_is_o($v) || df_is_q($v);}
 
 /**
  * 2020-02-05
  * @used-by df_product()
  * @used-by df_sales_doc()
  * @param mixed $v
- * @return bool
  */
-function df_is_oqi($v) {return df_is_oi($v) || df_is_qi($v);}
+function df_is_oqi($v):bool {return df_is_oi($v) || df_is_qi($v);}
 
 /**
  * 2017-04-10
@@ -83,9 +79,8 @@ function df_is_oqi($v) {return df_is_oi($v) || df_is_qi($v);}
  * @used-by dfp_due()
  * @used-by \Df\Quote\Model\Quote::runOnFreshAC()
  * @param mixed $v
- * @return bool
  */
-function df_is_q($v) {return $v instanceof IQ;}
+function df_is_q($v):bool {return $v instanceof IQ;}
 
 /**
  * 2017-04-20
@@ -93,9 +88,8 @@ function df_is_q($v) {return $v instanceof IQ;}
  * @used-by df_oq()
  * @used-by df_oqi_is_leaf()
  * @param mixed $v
- * @return bool
  */
-function df_is_qi($v) {return $v instanceof QI;}
+function df_is_qi($v):bool {return $v instanceof QI;}
 
 /**
  * 2017-03-12
@@ -116,9 +110,8 @@ function df_oq($i) {return df_is_oq($i) ? $i : (df_is_oi($i) ? $i->getOrder() : 
  * @used-by \Df\Payment\Plugin\Model\Checks\CanUseForCountry::aroundIsApplicable()
  * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
  * @param O|Q $oq
- * @return string
  */
-function df_oq_country_sb($oq) {return DfQ::runOnFreshAC(function() use($oq) {return
+function df_oq_country_sb($oq):string {return DfQ::runOnFreshAC(function() use($oq) {return
 	($a = $oq->getShippingAddress()) && ($r = $a->getCountry()) ? $r : (
 		($a = $oq->getBillingAddress()) && ($r = $a->getCountry()) ? $r :
 			df_directory()->getDefaultCountry()
@@ -133,10 +126,9 @@ function df_oq_country_sb($oq) {return DfQ::runOnFreshAC(function() use($oq) {re
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Part::amount()
  * @used-by \Dfe\Moip\Test\Order::amount()
  * @param O|Q $oq
- * @return string
  * @throws DFE
  */
-function df_oq_currency_c($oq) {return df_is_o($oq) ? $oq->getOrderCurrencyCode() : (
+function df_oq_currency_c($oq):string {return df_is_o($oq) ? $oq->getOrderCurrencyCode() : (
 	df_is_q($oq) ? $oq->getQuoteCurrencyCode() : df_error(
 		'df_oq_currency_c(): an order or quote is required, but got %s.', df_type($oq)
 	)
@@ -146,9 +138,8 @@ function df_oq_currency_c($oq) {return df_is_o($oq) ? $oq->getOrderCurrencyCode(
  * 2016-03-09
  * @used-by \Df\Payment\Operation\Source::customerName()
  * @param O|Q $oq
- * @return string
  */
-function df_oq_customer_name($oq) {return dfcf(function($oq) {
+function df_oq_customer_name($oq):string {return dfcf(function($oq) {
 	/** @var O|Q $oq */ /** @var string $r */
 	# 2017-04-10
 	# До завершения оформления заказа гостем quote не содержит имени покупателя,
@@ -175,9 +166,8 @@ function df_oq_customer_name($oq) {return dfcf(function($oq) {
  * 2018-11-14
  * @used-by \Df\Payment\Metadata::vars()
  * @param O|Q $oq
- * @return string
  */
-function df_oq_iid($oq) {/** @var string $r */
+function df_oq_iid($oq):string {/** @var string $r */
 	if (df_is_o($oq)) {
 		$r = $oq->getIncrementId();
 	}
@@ -236,18 +226,17 @@ function df_oq_sa($oq, $empty = false) {/** @var OA|QA|null $r */
  * 2017-04-20
  * @used-by \Dfe\Moip\P\Preorder::pAmount()
  * @param O|Q $oq
- * @return float
  */
-function df_oq_shipping_amount($oq) {return df_is_o($oq) ? $oq->getShippingAmount() : (
+function df_oq_shipping_amount($oq):float {return df_is_o($oq) ? $oq->getShippingAmount() : (
 	df_is_q($oq) ? $oq->getShippingAddress()->getShippingAmount() : df_error()
 );}
 
 /**
  * 2017-04-20
+ * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Shipping::p()
  * @param O|Q $oq
- * @return float
  */
-function df_oq_shipping_desc($oq) {return df_is_o($oq) ? $oq->getShippingDescription() : (
+function df_oq_shipping_desc($oq):float {return df_is_o($oq) ? $oq->getShippingDescription() : (
 	df_is_q($oq) ? $oq->getShippingAddress()->getShippingDescription() : df_error()
 );}
 
@@ -256,9 +245,10 @@ function df_oq_shipping_desc($oq) {return df_is_o($oq) ? $oq->getShippingDescrip
  * @used-by df_oqi_leafs()
  * @used-by \Yaman\Ordermotion\Observer::BuildOrderDetail()
  * @param OI|QI $i
- * @return bool
  */
-function df_oqi_is_leaf($i) {return df_is_oi($i) ? !$i->getChildrenItems() : (df_is_qi($i) ? !$i->getChildren() : df_error());}
+function df_oqi_is_leaf($i):bool {return df_is_oi($i) ? !$i->getChildrenItems() : (
+	df_is_qi($i) ? !$i->getChildren() : df_error()
+);}
 
 /**
  * 2017-03-19
