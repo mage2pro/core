@@ -7,6 +7,5 @@ use Df\OAuth\App;
  * @used-by \Dfe\Dynamics365\API\Client::headers()
  * @used-by \Dfe\Salesforce\API\Client::headers()
  * @param string|object $c
- * @return App
  */
-function df_oauth_app($c) {return dfs_con($c, 'OAuth\\App');}
+function df_oauth_app($c):App {return dfs_con($c, 'OAuth\\App');}
