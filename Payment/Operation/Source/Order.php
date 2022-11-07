@@ -63,9 +63,8 @@ class Order extends Source {
 	 * @see \Df\Payment\IMA::m()
 	 * @used-by \Df\Payment\Operation::m()
 	 * @used-by \Df\Payment\Operation\Source::cFromDoc()
-	 * @return M
 	 */
-	final function m() {return $this->_m;}
+	final function m():M {return $this->_m;}
 
 	/**
 	 * 2017-04-08

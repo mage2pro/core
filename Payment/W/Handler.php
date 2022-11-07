@@ -134,9 +134,8 @@ abstract class Handler implements IMA {
 	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Df\Payment\W\Strategy::m()
-	 * @return M
 	 */
-	function m() {return dfc($this, function() {return dfpm($this->op());});}
+	function m():M {return dfc($this, function() {return dfpm($this->op());});}
 
 	/**
 	 * 2017-03-15  

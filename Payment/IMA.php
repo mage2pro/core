@@ -24,7 +24,6 @@ interface IMA {
 	 * @see \Df\Payment\Operation\Source\Order::m()
 	 * @see \Df\Payment\W\Event::m()
 	 * @see \Df\Payment\W\Handler::m()
-	 * @return Method
 	 */
-	function m();
+	function m():Method;
 }

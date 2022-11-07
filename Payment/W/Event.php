@@ -118,9 +118,8 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\PaypalClone\W\Exception\InvalidSignature::__construct()
 	 * @used-by \Dfe\Stripe\W\Event\Source::ttCurrent()
 	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
-	 * @return M
 	 */
-	function m() {return $this->_r->m();}
+	function m():M {return $this->_r->m();}
 
 	/**
 	 * 2016-07-09

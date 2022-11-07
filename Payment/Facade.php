@@ -93,8 +93,8 @@ abstract class Facade {
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @used-by \Dfe\Moip\P\Preorder::p()
 	 * @used-by \Dfe\Stripe\Method::cardType()
+	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @used-by \Dfe\TBCBank\Init\Action::isRecurring()
-	 * \Dfe\TBCBank\Facade\Charge::capturePreauthorized
 	 * @param M $m
 	 */
 	static function s(M $m):self {return dfcf(function(M $m, $c) {
