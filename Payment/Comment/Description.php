@@ -29,9 +29,8 @@ class Description extends \Df\Config\Comment {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L106-L126
 	 * @param string $v
-	 * @return string
 	 */
-	function getCommentText($v) {
+	function getCommentText($v):string {
 		$rules = $this->sibling('description_rules'); /** @var array(string => mixed)|null $rules */
 		# 2019-09-27 $lengthS is empty for Dfe_ACH.
 		$lengthS = ''; /** @var string $lengthS */
@@ -59,9 +58,8 @@ class Description extends \Df\Config\Comment {
 	 * @used-by self::locations()
 	 * @param string $text
 	 * @param array(string => string|bool) $o
-	 * @return string
 	 */
-	private function a($text, array $o) {return df_tag_if($text, dfa($o, 'url'), 'a', [
+	private function a($text, array $o):string {return df_tag_if($text, dfa($o, 'url'), 'a', [
 		'target' => '_blank', 'title' => dfa($o, 'title'), 'href' => dfa($o, 'url')
 	]);}
 
@@ -69,9 +67,8 @@ class Description extends \Df\Config\Comment {
 	 * 2017-09-11
 	 * @used-by self::getCommentText()
 	 * @param array(string => mixed) $l
-	 * @return string
 	 */
-	private function locations(array $l) {
+	private function locations(array $l):string {
 		$customer = dfa($l, 'customer', []); /** @var array(string => mixed)|null $customer */
 		$merchant = dfa($l, 'merchant', []); /** @var array(string => mixed)|null $merchant */
 		$payment = dfa($l, 'payment', []); /** @var array(string => mixed)|null $payment */
