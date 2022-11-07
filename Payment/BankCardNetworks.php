@@ -11,7 +11,7 @@ final class BankCardNetworks {
 	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
 	 * @return string[]
 	 */
-	static function custom() {return [self::Hipercard, self::Hiper, self::Elo, self::UnionPayForBraintree];}
+	static function custom():array {return [self::Hipercard, self::Hiper, self::Elo, self::UnionPayForBraintree];}
 
 	/**
 	 * 2017-07-19
@@ -22,7 +22,7 @@ final class BankCardNetworks {
 	 * @param int|null $h [optional]
 	 * @return array(string => int)
 	 */
-	static function dimensions($w = null, $h = null) {return array_combine(['width', 'height'],
+	static function dimensions($w = null, $h = null):array {return array_combine(['width', 'height'],
 		(!$w && !$h) ? [46, 30] : (
 			!$w ? [round(46 * $h / 30), $h] : (
 				!$h ? [$w, round(30 * $w / 46)] : [$w, $h]))
@@ -43,7 +43,7 @@ final class BankCardNetworks {
 	 * @return string
 	 * @throws DFE
 	 */
-	static function url($t, $onE = true) {return df_try(function() use($t) {return df_asset_url(
+	static function url($t, $onE = true):string {return df_try(function() use($t) {return df_asset_url(
 		# 2020-02-08
 		# 1) It is for the Magento's Braintree payment module.
 		# "An icon of the UnionPay bank card network is absent on the frontend Braintree payment form":
