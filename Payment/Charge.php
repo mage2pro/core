@@ -22,9 +22,8 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @param string $path [optional]
-	 * @return string
 	 */
-	final protected function callback($path = 'confirm') {return df_webhook($this->m(), $path);}
+	final protected function callback($path = 'confirm'):string {return df_webhook($this->m(), $path);}
 
 	/**
 	 * 2016-08-26
@@ -34,15 +33,13 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Spryng\P\Charge::p()
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
-	 * @return string
 	 */
-	final protected function customerIp() {return $this->o()->getRemoteIp();}
+	final protected function customerIp():string {return $this->o()->getRemoteIp();}
 
 	/**
 	 * 2016-08-27
-	 * @return string
 	 */
-	final protected function customerReturn() {return dfp_url_customer_return($this->m());}
+	final protected function customerReturn():string {return dfp_url_customer_return($this->m());}
 
 	/**
 	 * 2017-03-06
