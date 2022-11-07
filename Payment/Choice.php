@@ -43,15 +43,13 @@ class Choice {
 	 * @used-by \Dfe\AlphaCommerceHub\Choice::title()
 	 * @used-by \Dfe\Moip\Choice::title()
 	 * @used-by \Dfe\Robokassa\Choice::title()
-	 * @return M
 	 */
-	protected function m() {return $this->_m;}
+	protected function m():M {return $this->_m;}
 
 	/**
-	 * 2017-04-17
+	 * 2017-04-17 Возвращает параметры первичного запроса магазина к ПС.
 	 * @used-by \Df\GingerPaymentsBase\Choice::option()
 	 * @used-by \Dfe\AlphaCommerceHub\Choice::id()
-	 * Возвращает параметры первичного запроса магазина к ПС.
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
@@ -82,9 +80,8 @@ class Choice {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Choice::title()
 	 * @param string|null $k [optional]
-	 * @return \Df\Payment\Settings
 	 */
-	protected function s($k = null) {return $this->_m->s($k);}
+	protected function s($k = null):Settings {return $this->_m->s($k);}
 
 	/**
 	 * 2017-04-17
@@ -97,9 +94,8 @@ class Choice {
 	 * 2017-04-17
 	 * @used-by self::req()
 	 * @used-by self::responseF()
-	 * @return \Df\Payment\TM
 	 */
-	private function tm() {return df_tm($this->m());}
+	private function tm():TM {return df_tm($this->m());}
 
 	/**
 	 * 2017-04-17
@@ -114,9 +110,8 @@ class Choice {
 	 * 2017-04-17
 	 * @used-by dfp_choice()
 	 * @param II|OP|QP|O|Q|T $op
-	 * @return self
 	 */
-	final static function f($op) {return dfcf(function(OP $op) {
+	final static function f($op):self {return dfcf(function(OP $op) {
 		$c = df_con_hier($m = df_ar(dfpm($op), M::class), __CLASS__); /** @var string $c */ /** @var M $m */
 		return new $c($m);
 	}, [dfp($op)]);}
