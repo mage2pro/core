@@ -15,6 +15,10 @@ final class Metadata extends \Df\Config\Source {
 
 	/**
 	 * 2016-03-09
+	 * 2022-11-07
+	 * We override the method's visibility here: @see \Df\Config\Source::map()
+	 * We really can do it in any PHP version: https://3v4l.org/BeF9f
+	 * https://stackoverflow.com/a/16877913
 	 * @override
 	 * @see \Df\Config\Source::map()
 	 * @used-by \Df\Config\Source::toOptionArray()
@@ -34,7 +38,7 @@ final class Metadata extends \Df\Config\Source {
 	 * @param O|Q $oq
 	 * @return array(string => string)
 	 */
-	static function vars(Store $s, $oq) {return array_combine(self::s()->keys(), [
+	static function vars(Store $s, $oq):array {return array_combine(self::s()->keys(), [
 		df_oq_customer_name($oq)
 		,df_oq_iid($oq)
 		,df_oqi_s($oq)
