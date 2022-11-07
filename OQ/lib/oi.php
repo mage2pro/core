@@ -8,9 +8,8 @@ use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OIC;
  * 2019-02-27 @deprecated It is unused.
  * @param string|OI $v
  * @param string|null $k[optional]
- * @return OI
  */
-function df_oi($v, $k = null) {
+function df_oi($v, $k = null):OI {
 	if (df_is_oi($v)) {
 		$r = $v;
 	}
@@ -35,6 +34,5 @@ function df_oi_r() {return df_o(IOIR::class);}
  * 2019-02-24
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::oic()
  * @used-by \Inkifi\Mediaclip\Event::oi()
- * @return OIC
  */
-function df_oic() {return df_new_om(OIC::class);}
+function df_oic():OIC {return df_new_om(OIC::class);}
