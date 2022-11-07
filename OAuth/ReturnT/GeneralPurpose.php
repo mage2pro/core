@@ -27,7 +27,7 @@ class GeneralPurpose extends \Df\OAuth\ReturnT {
 	 * @used-by \Df\OAuth\ReturnT::execute()
 	 * @throws DFE
 	 */
-	final protected function _execute() {df_oauth_app(App::state(B::MODULE))->getAndSaveTheRefreshToken();}
+	final protected function _execute():void {df_oauth_app(App::state(B::MODULE))->getAndSaveTheRefreshToken();}
 
 	/**
 	 * 2017-06-28
@@ -36,7 +36,6 @@ class GeneralPurpose extends \Df\OAuth\ReturnT {
 	 * @override
 	 * @see \Df\OAuth\ReturnT::redirectUrl()
 	 * @used-by \Df\OAuth\ReturnT::execute()
-	 * @return string
 	 */
-	final protected function redirectUrl() {return App::state(B::URL);}
+	final protected function redirectUrl():string {return App::state(B::URL);}
 }

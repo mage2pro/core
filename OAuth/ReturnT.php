@@ -11,6 +11,7 @@ abstract class ReturnT extends _P {
 	/**
 	 * 2017-06-27
 	 * @used-by self::execute()
+	 * @see \Df\OAuth\ReturnT\GeneralPurpose::_execute()
 	 * @see \Df\Sso\CustomerReturn::_execute()
 	 */
 	abstract protected function _execute():void;
