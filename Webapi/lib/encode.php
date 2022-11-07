@@ -49,6 +49,4 @@
  * @param mixed $v
  * @return string|int|float|bool
  */
-function dfw_encode($v) {return is_null($v) ? '' : (
-	is_array($v) || is_object($v) ? df_json_encode($v) : $v
-);}
+function dfw_encode($v) {return is_null($v) ? '' : (is_array($v) || is_object($v) ? df_json_encode($v) : $v);}

@@ -22,6 +22,7 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Store\Model\Store;
+use \Exception as E;
 /**
  * 2016-02-08
  * 2017-03-30
@@ -103,16 +104,13 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::acceptPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L696-L713
 	 * 2016-05-09
-	 * A «Flagged» payment can be handled the same way as an «Authorised» payment:
-	 * we can «capture» or «void» it.
-	 * @param II|I|OP $payment
-	 * @return bool
+	 * A «Flagged» payment can be handled the same way as an «Authorised» payment: we can «capture» or «void» it.
+	 * @param II|I|OP $p
 	 */
-	final function acceptPayment(II $payment) {
+	final function acceptPayment(II $p):bool {
 		# 2016-03-15
-		# The obvious $this->charge($payment) is not quite correct,
-		# because no invoice will be created in this case.
-		$payment->capture();
+		# The obvious $this->charge($payment) is not quite correct, because no invoice will be created in such case.
+		$p->capture();
 		return true;
 	}
 
@@ -171,7 +169,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 					df_sentry($this, "{$this->titleB()}: $actionS");
 				}
 			}
-			catch (\Exception $e) {
+			catch (E $e) {
 				# 2017-01-10
 				# Конвертация исключительных ситуаций библиотеки платёжной системы в наши.
 				# Исключительные ситуации библиотеки платёжной системы имеют свою внутреннуюю структуру,
@@ -231,9 +229,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by dfp_refund()
 	 * @used-by \Dfe\Stripe\Method::amountLimits()
 	 * @param float|int|string $a
-	 * @return float
 	 */
-	final function amountParse($a) {return $a / $this->amountFactor();}
+	final function amountParse($a):float {return $a / $this->amountFactor();}
 
 	/**
 	 * 2016-02-15
@@ -392,7 +389,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canAuthorize()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L297-L306
 	 */
-	final function canAuthorize() {df_should_not_be_here();}
+	final function canAuthorize():bool {df_should_not_be_here(); return false;}
 
 	/**
 	 * 2016-02-09
@@ -471,30 +468,25 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Operations/AbstractOperation.php#L56-L75
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment/Operations/AbstractOperation.php#L59-L78
-	 *
 	 * @see \Df\StripeClone\Method::canCapture()
 	 * @see \Dfe\AlphaCommerceHub\Method::canCapture()
 	 * @see \Dfe\CheckoutCom\Method::canCapture()
 	 * @see \Dfe\TwoCheckout\Method::canCapture()
-	 *
-	 * @return bool
 	 */
-	function canCapture() {return df_area_code_is(Area::AREA_FRONTEND, Area::AREA_WEBAPI_REST);}
+	function canCapture():bool {return df_area_code_is(Area::AREA_FRONTEND, Area::AREA_WEBAPI_REST);}
 
 	/**
 	 * 2016-02-10
 	 * @override
 	 * https://mage2.pro/tags/capture
-	 *
 	 * https://mage2.pro/t/658
 	 * The @see \Magento\Payment\Model\MethodInterface::canCaptureOnce() is never used
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canCaptureOnce()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L87-L93
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canCaptureOnce()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L330-L339
 	 */
-	final function canCaptureOnce() {df_should_not_be_here();}
+	final function canCaptureOnce():bool {df_should_not_be_here(); return false;}
 
 	/**
 	 * 2016-02-09
@@ -522,15 +514,13 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\Spryng\Method::canCapturePartial()
 	 * @see \Dfe\Stripe\Method::canCapturePartial()
 	 * @see \Dfe\TBCBank\Method::canCapturePartial()
-	 *
-	 * @return bool
 	 */
-	function canCapturePartial() {return false;}
+	function canCapturePartial():bool {return false;}
 
 	/**
 	 * 2016-02-15
 	 * @override
-	 * How is a payment method's cancel() used? https://mage2.pro/t/710
+	 * "How is a payment method's cancel() used?" https://mage2.pro/t/710
 	 * @see \Magento\Payment\Model\MethodInterface::cancel()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L279-L286
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::cancel()
@@ -545,52 +535,43 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-02-10
 	 * @override
-	 * How is a payment method's canEdit() used? https://mage2.pro/t/672
-	 * How is @see \Magento\Sales\Model\Order::canEdit() implemented and used? https://mage2.pro/t/673
-	 *
+	 * "How is a payment method's canEdit() used?" https://mage2.pro/t/672
+	 * "How is \Magento\Sales\Model\Order::canEdit() implemented and used?" https://mage2.pro/t/673
 	 * @see \Magento\Payment\Model\MethodInterface::canEdit()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L133-L139
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canEdit()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L395-L404
-	 * @return bool
 	 */
-	final function canEdit() {return true;}
+	final function canEdit():bool {return true;}
 
 	/**
 	 * 2016-02-11
 	 * @override
 	 * https://mage2.pro/tags/payment-transaction
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canFetchTransactionInfo()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L141-L147
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canFetchTransactionInfo()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L406-L415
-	 * @return bool
-	 *
 	 * USAGES
 	 * https://mage2.pro/t/676
 	 * How is a payment method's canFetchTransactionInfo() used?
-	 *
 	 * How is @see \Magento\Sales\Model\Order\Payment::canFetchTransactionInfo() implemented and used?
 	 * https://mage2.pro/t/677
 	 */
-	final function canFetchTransactionInfo() {return false;}
+	final function canFetchTransactionInfo():bool {return false;}
 
 	/**
 	 * 2016-02-09
 	 * @override
-	 * https://mage2.pro/t/640
-	 * The method canOrder() should be removed from the interface
-	 * @see \Magento\Payment\Model\MethodInterface,
-	 * because it is not used outside of a particular interface's implementation
+	 * "The method canOrder() should be removed from the interface \Magento\Payment\Model\MethodInterface
+	 * because it is not used outside of a particular interface's implementation" https://mage2.pro/t/640
 	 * @see \Magento\Payment\Model\Method\AbstractMethod
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canOrder()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L55-L61
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canOrder()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L286-L295
 	 */
-	final function canOrder() {df_should_not_be_here();}
+	final function canOrder():bool {df_should_not_be_here(); return false;}
 
 	/**
 	 * 2016-02-10
@@ -598,16 +579,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Результат метода говорит системе о том, поддерживает ли способ оплаты
 	 * автоматизированный возврат оплаты покупателю.
 	 * https://mage2.pro/tags/refund
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canRefund()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L95-L101
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canRefund()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L341-L350
-	 *
 	 * USAGES
-	 * https://mage2.pro/t/659
-	 * How is a payment method's canRefund() used?
-	 *
+	 * "How is a payment method's canRefund() used?" https://mage2.pro/t/659
 	 * 2017-12-06
 	 * 1) @used-by \Magento\Sales\Model\Order\Payment::canRefund():
 	 *		public function canRefund() {
@@ -631,61 +608,50 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice/Validation/CanRefund.php#L84-L94
 	 * It is since Magento 2.2: https://github.com/magento/magento2/commit/767151b4
-	 *
 	 * @see \Df\StripeClone\Method::canRefund()
 	 * @see \Dfe\AlphaCommerceHub\Method::canRefund()
 	 * @see \Dfe\CheckoutCom\Method::canRefund()
 	 * @see \Dfe\SecurePay\Method::canRefund()
 	 * @see \Dfe\TwoCheckout\Method::canRefund()
-	 *@return bool
 	 */
-	function canRefund() {return false;}
+	function canRefund():bool {return false;}
 
 	/**
 	 * 2016-02-10
 	 * @override
 	 * https://mage2.pro/tags/refund
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canRefundPartialPerInvoice()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L103-L109
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canRefundPartialPerInvoice()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L352-L361
-	 * @return bool
-	 *
 	 * USAGES
-	 * https://mage2.pro/t/663
-	 * How is a payment method's canRefundPartialPerInvoice() used?
-	 *
+	 * "How is a payment method's canRefundPartialPerInvoice() used?" https://mage2.pro/t/663
 	 * 2017-02-08
 	 * @see \Df\StripeClone\Method::canRefundPartialPerInvoice()
 	 * @see \Dfe\CheckoutCom\Method::canRefundPartialPerInvoice()
 	 * @see \Dfe\TwoCheckout\Method::canRefundPartialPerInvoice()
 	 */
-	function canRefundPartialPerInvoice() {return false;}
+	function canRefundPartialPerInvoice():bool {return false;}
 
 	/**
 	 * 2016-02-15
 	 * @override
-	 * How is a payment method's canReviewPayment() used? https://mage2.pro/t/714
-	 *
+	 * "How is a payment method's canReviewPayment() used?" https://mage2.pro/t/714
 	 * 2016-03-08
 	 * http://stackoverflow.com/a/12814128
 	 * «Magento's Order View block will check $order->canReviewPayment()
 	 * which will look at the _canReviewPayment variable on the payment method,
 	 * and if true, display two buttons on the Order View :
 	 * "Accept Payment" and "Deny Payment".»
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canReviewPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L297-L302
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canReviewPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L688-L696
-	 * @return bool
-	 *
 	 * 2017-02-08
 	 * @see \Df\StripeClone\Method::canReviewPayment()
 	 * @see \Dfe\CheckoutCom\Method::canReviewPayment()
 	 */
-	function canReviewPayment() {return false;}
+	function canReviewPayment():bool {return false;}
 
 	/**
 	 * 2016-02-10
@@ -693,14 +659,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * The same as @see \Df\Payment\Method::canUseInternal(), but it is used for the frontend only.
 	 * https://mage2.pro/t/671
 	 * https://mage2.pro/tags/payment-can-use
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canUseCheckout()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L126-L131
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canUseCheckout()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L156-L161
-	 * @return bool
 	 */
-	final function canUseCheckout() {return true;}
+	final function canUseCheckout():bool {return true;}
 
 	/**
 	 * 2016-02-11
@@ -722,9 +686,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Magento\Payment\Model\Checks\CanUseForCountry::isApplicable()
 	 * How is a payment method's canUseForCountry() used? https://mage2.pro/t/682
 	 * @param string $c
-	 * @return bool
 	 */
-	final function canUseForCountry($c) {return $this->canUseForCountryP($c);}
+	final function canUseForCountry($c):bool {return $this->canUseForCountryP($c);}
 	
 	/**
 	 * 2017-12-13
@@ -735,9 +698,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
 	 * @param string $c
 	 * @param string|null $p [optional]
-	 * @return bool
 	 */
-	final function canUseForCountryP($c, $p = null) {
+	final function canUseForCountryP($c, $p = null):bool {
 		$p = !$p ? $p : df_add_ds_right($p);
 		return NWB::is($this->s("{$p}country_restriction"), $c, df_csv_parse($this->s("{$p}countries")));
 	}
@@ -750,10 +712,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L192-L199
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canUseForCurrency()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L484-L494
-	 * @param string $currencyCode
-	 * @return bool
+	 * @param string $c
 	 */
-	final function canUseForCurrency($currencyCode) {return true;}
+	final function canUseForCurrency($c):bool {return true;}
 
 	/**
 	 * 2016-02-10
@@ -763,14 +724,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * By default there is no custom login and the method just returns true.
 	 * https://mage2.pro/t/670
 	 * https://mage2.pro/tags/payment-can-use
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::canUseInternal()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L118-L124
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canUseInternal()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L149-L154
-	 * @return bool
 	 */
-	final function canUseInternal() {return true;}
+	final function canUseInternal():bool {return true;}
 
 	/**
 	 * 2016-02-10
@@ -804,13 +763,11 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L528-L543
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L562-L578
-	 *
 	 * @see \Df\StripeClone\Method::canVoid()
 	 * @see \Dfe\AlphaCommerceHub\Method::canVoid()
 	 * @see \Dfe\CheckoutCom\Method::canVoid()
-	 * @return bool
 	 */
-	function canVoid() {return false;}
+	function canVoid():bool {return false;}
 
 	/**
 	 * 2016-02-15
@@ -864,75 +821,63 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by self::_void()
 	 * @used-by self::refund()
 	 * @param float $a
-	 * @return float
 	 * @uses \Df\Payment\Currency::fromBase()
 	 */
-	final function cFromBase($a) {return $this->convert($a);}
+	final function cFromBase($a):float {return $this->convert($a);}
 
 	/**
 	 * 2016-09-07 The payment currency code for the current order or quote.
 	 * @used-by self::amountFormat()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::amountFormat()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
-	 * @return string
 	 */
-	final function cPayment() {return dfc($this, function() {return $this->currency()->oq($this->oq());});}
+	final function cPayment():string {return dfc($this, function() {return $this->currency()->oq($this->oq());});}
 
 	/**
 	 * 2016-09-08
 	 * 2017-02-08 Конвертирует $a из валюты платежа в учётную.
 	 * @param float $a
-	 * @return float
 	 * @uses \Df\Payment\Currency::toBase()
 	 */
-	final function cToBase($a) {return $this->convert($a);}
+	final function cToBase($a):float {return $this->convert($a);}
 
 	/**
 	 * 2016-09-08
 	 * 2017-02-08 Конвертирует $a из валюты платежа в валюту заказа.
 	 * @param float $a
-	 * @return float
 	 * @uses \Df\Payment\Currency::toOrder()
 	 */
-	final function cToOrder($a) {return $this->convert($a);}
+	final function cToOrder($a):float {return $this->convert($a);}
 
 	/**
 	 * 2016-02-15
 	 * @override
-	 * How is a payment method's denyPayment() used? https://mage2.pro/t/716
-	 *
+	 * "How is a payment method's denyPayment() used?" https://mage2.pro/t/716
 	 * @see \Magento\Payment\Model\MethodInterface::denyPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L314-L322
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::denyPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L715-L730
-	 *
-	 * @param II|I|OP $payment
-	 * @return bool
-	 *
+	 * @param II|I|OP $p
 	 * 2017-02-08
 	 * @see \Df\StripeClone\Method::denyPayment()
 	 * @see \Dfe\CheckoutCom\Method::denyPayment()
 	 */
-	function denyPayment(II $payment) {return false;}
+	function denyPayment(II $p):bool {return false;}
 
 	/**
 	 * 2016-02-11
 	 * @override
-	 *
 	 * @see \Magento\Payment\Model\MethodInterface::fetchTransactionInfo()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L149-L158
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::fetchTransactionInfo()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L417-L428
-	 *
 	 * @param II $payment
 	 * @param string $transactionId
 	 * @return array(string => mixed)
-	 *
 	 * USAGES
-	 * https://mage2.pro/t/678
-	 * How is a payment method's fetchTransactionInfo() used?
+	 * "How is a payment method's fetchTransactionInfo() used?" https://mage2.pro/t/678
 	 */
-	final function fetchTransactionInfo(II $payment, $transactionId) {return [];}
+	final function fetchTransactionInfo(II $payment, $transactionId):array {return [];}
 
 	/**
 	 * 2016-02-08
@@ -941,15 +886,13 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L17-L23
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getCode()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L496-L508
-	 * @return string
 	 */
-	final function getCode() {return self::codeS();}
+	final function getCode():string {return self::codeS();}
 
 	/**
 	 * 2016-02-15
 	 * @override
-	 * How is a payment method's getConfigData() used? https://mage2.pro/t/717
-	 *
+	 * "How is a payment method's getConfigData() used?" https://mage2.pro/t/717
 	 * @see \Magento\Payment\Model\MethodInterface::getConfigData()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L324-L332
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getConfigData()
@@ -1018,7 +961,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L510-L518
 	 *
 	 * USAGE
-	 * How is a payment method's getFormBlockType() used? https://mage2.pro/t/691
+	 * "How is a payment method's getFormBlockType() used?" https://mage2.pro/t/691
 	 * @used-by \Magento\Payment\Helper\Data::getMethodFormBlock()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Helper/Data.php#L174
 	 *
@@ -1048,7 +991,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.0-rc2.1/app/code/Magento/Payment/Block/Form/Container.php#L67-L85
 	 */
-	final function getFormBlockType() {return df_con_hier($this, \Df\Payment\Block\Multishipping::class);}
+	final function getFormBlockType():string {return df_con_hier($this, \Df\Payment\Block\Multishipping::class);}
 
 	/**
 	 * 2016-02-11
@@ -1064,23 +1007,16 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 *			return $block;
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Helper/Data.php#L182-L196
-	 *
 	 * 2016-08-29 The method is called only one time, so it does not need to cache own result.
-	 *
 	 * 2017-01-13
 	 * Задействовал @uses df_con_hier(), чтобы подхватывать @see \Df\StripeClone\Block\Info
 	 * для потомков @see @see \Df\StripeClone\Method
-	 * 
-	 * 2017-11-19
-	 * "The class Df\Payment\Block\Info should not be instantiated":
-	 * https://github.com/mage2pro/core/issues/57
-	 *
+	 * 2017-11-19 "The class Df\Payment\Block\Info should not be instantiated": https://github.com/mage2pro/core/issues/57
 	 * @see \Dfe\AllPay\Method::getInfoBlockType()
 	 * @see \Dfe\CheckoutCom\Method::getInfoBlockType()
 	 * @see \Dfe\Moip\Method::getInfoBlockType()
-	 * @return string
 	 */
-	function getInfoBlockType() {
+	function getInfoBlockType():string {
 		$r = df_con_hier($this, bInfo::class); /** @var string $r */
 		/** 2017-11-19 I use @uses df_cts() to strip the «\Interceptor» suffix */
 		if (bInfo::class === df_cts($r)) {
@@ -1099,7 +1035,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getInfoInstance()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L531-L545
 	 * @throws DFE|NoSuchEntityException
-	 * @return II|I|OP|QP
 	 *
 	 * 2017-02-09
 	 * Раньше (почти ровно год назад) я сделал реализацию этого метода по аналогии с
@@ -1124,6 +1059,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by dfp()
 	 * @used-by \Df\Payment\TM::__construct()
 	 * @used-by \Df\Payment\Facade::ii()
+	 *
+	 * @return II|I|OP|QP
 	 */
 	final function getInfoInstance() {
 		if (!$this->_ii && ($q = df_quote() /** @var Q $q */)) {
@@ -1141,23 +1078,21 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getStore()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L278-L284
 	 * 2016-09-07 Для самого себя я использую метод @see store()
-	 * @return int
 	 * @used-by \Df\Payment\Settings::scopeDefault()
 	 */
-	final function getStore() {return $this->_storeId;}
+	final function getStore():int {return $this->_storeId;}
 
 	/**
 	 * 2016-02-08
-	 * @override
-	 * How is a payment method's getTitle() used? https://mage2.pro/t/692
-	 *
+	 * @override "How is a payment method's getTitle() used?" https://mage2.pro/t/692
 	 * @see \Magento\Payment\Model\MethodInterface::getTitle()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L34-L40
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getTitle()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L732-L740
-	 * @return string
 	 */
-	final function getTitle() {return dfc($this, function() {return df_is_backend() ? $this->titleB() : $this->titleF();});}
+	final function getTitle():string {return dfc($this, function() {return
+		df_is_backend() ? $this->titleB() : $this->titleF()
+	;});}
 
 	/**
 	 * 2016-03-06
@@ -1179,7 +1114,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @param string|array(string => mixed) $k [optional]
 	 * @param mixed|null $v [optional]
 	 */
-	final function iiaSet($k, $v = null) {$this->ii()->setAdditionalInformation($k, $v);}
+	final function iiaSet($k, $v = null):void {$this->ii()->setAdditionalInformation($k, $v);}
 
 	/**
 	 * 2016-09-01
@@ -1208,7 +1143,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @param string|array(string => mixed)|null $req
 	 * @param string|array(string => mixed)|null $res
 	 */
-	final function iiaSetTRR($req, $res = null) {$i = $this->ii(); df_trd_set($i,
+	final function iiaSetTRR($req, $res = null):void {$i = $this->ii(); df_trd_set($i,
 		df_clean([self::IIA_TR_REQUEST => $req, self::IIA_TR_RESPONSE => $res])
 		+ dfa($i->getTransactionAdditionalInfo(), T::RAW_DETAILS, [])
 	);}
@@ -1222,15 +1157,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L361-L372
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::initialize()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L838-L852
-	 *
 	 * @param string $paymentAction
 	 * @param object $stateObject
-	 * @return void
-	 * 
 	 * 2017-02-08
 	 * @see \Df\StripeClone\Method::initialize()
 	 */
-	function initialize($paymentAction, $stateObject) {}
+	function initialize($paymentAction, $stateObject):void {}
 
 	/**
 	 * 2016-02-09
@@ -1257,9 +1189,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * has a wrong PHPDoc type for the $storeId parameter»
 	 *
 	 * @param null|string|int|ScopeInterface $storeId [optional]
-	 * @return bool
 	 */
-	final function isActive($storeId = null) {return $this->s()->b('enable', $storeId);}
+	final function isActive($storeId = null):bool {return $this->s()->b('enable', $storeId);}
 
 	/**
 	 * 2016-02-15
@@ -1275,16 +1206,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Magento\Quote\Model\Quote\Payment::importData()
 	 * @used-by \Magento\Sales\Model\AdminOrder\Create::_validate()
 	 * @param ICart|Q $q [optional]
-	 * @return bool
 	 */
-	final function isAvailable(ICart $q = null) {
+	final function isAvailable(ICart $q = null):bool {
 		if ($q) {
-			/**
-			 * 2019-05-10
-			 * It fixes the issue:
-			 * "«Call to a member function getStoreId() on null» on a backend ordering":
-			 * https://github.com/mage2pro/core/issues/85
-			 */
+			# 2019-05-10
+			# It fixes the issue: "«Call to a member function getStoreId() on null» on a backend ordering":
+			# https://github.com/mage2pro/core/issues/85
 			$qp = $q->getPayment(); /** @var QP $qp */
 			if (!$qp->getQuote()) {
 				$qp->setQuote($q);
@@ -1457,9 +1384,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Sales/Model/Order/Invoice/PayOperation.php#L43-L57
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice/PayOperation.php#L43-L57
 	 * @see \Df\StripeClone\Method::isGateway()
-	 * @return bool
 	 */
-	function isGateway() {return false;}
+	function isGateway():bool {return false;}
 
 	/**
 	 * 2016-02-11 How is a payment method's isInitializeNeeded() used? https://mage2.pro/t/681
@@ -1482,31 +1408,27 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L324-L334
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L356-L366
 	 * @see \Df\StripeClone\Method::isInitializeNeeded()
-	 * @return bool
 	 */
-	function isInitializeNeeded() {return false;}
+	function isInitializeNeeded():bool {return false;}
 
 	/**
 	 * 2016-02-11
 	 * @override
-	 * How is a payment method's isOffline() used? https://mage2.pro/t/680
-	 *
+	 * "How is a payment method's isOffline() used?" https://mage2.pro/t/680
 	 * @see \Magento\Payment\Model\MethodInterface::isOffline()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L168-L174
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::isOffline()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L442-L451
-	 * @return bool
 	 */
-	final function isOffline() {return false;}
+	final function isOffline():bool {return false;}
 
 	/**
 	 * 2016-03-15
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
-	 * @return O 
 	 * @throws InputException|LE|NoSuchEntityException
 	 */
-	final function o() {return df_order($this->ii());}
+	final function o():O {return df_order($this->ii());}
 
 	/**
 	 * 2017-02-07
@@ -1534,9 +1456,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L585-L601
 	 * @param II $payment
 	 * @param float $a
-	 * @return void
 	 */
-	final function order(II $payment, $a) {df_should_not_be_here();}
+	final function order(II $payment, $a):void {df_should_not_be_here();}
 
 	/**
 	 * 2018-04-14
@@ -1544,7 +1465,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
 	 * @param int $id
 	 */
-	function orderPlaced($id) {}
+	function orderPlaced($id):void {}
 
 	/**
 	 * 2016-02-15 How is a payment method's refund() used? https://mage2.pro/t/709
@@ -1589,9 +1510,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * for each AlphaCommerceHub's payment option (bank cards, PayPal, POLi Payments, etc.)":
 	 * https://github.com/mage2pro/alphacommercehub/issues/84
 	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
-	 * @return bool
+	 * @see \Dfe\AlphaCommerceHub\Method::requireBillingAddress()
 	 */
-	function requireBillingAddress() {return $this->s()->requireBillingAddress();}
+	function requireBillingAddress():bool {return $this->s()->requireBillingAddress();}
 
 	/**
 	 * 2016-07-13
@@ -1648,7 +1569,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by self::isAvailable()
 	 * @param II|I|OP|QP $i
 	 */
-	final function setInfoInstance(II $i) {
+	final function setInfoInstance(II $i):void {
 		$this->_ii = $i;
 		/**
 		 * 2017-03-14
@@ -1667,7 +1588,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 		 * 2019-01-17
 		 * Fron now on, we can get here from @see isAvailable(), and in this case we need to set the store manually too.
 		 */
-		else if ($i instanceof QP) {
+		elseif ($i instanceof QP) {
 			$this->setStore($i->getQuote()->getStoreId());
 		}
 	}
@@ -1697,22 +1618,20 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by self::setInfoInstance()
 	 * @param int $storeId
 	 */
-	final function setStore($storeId) {$this->_storeId = (int)$storeId;}
+	final function setStore($storeId):void {$this->_storeId = (int)$storeId;}
 
 	/**
 	 * 2018-04-15
 	 * @see \Dfe\Tap\Model\Tap::skipDfwEncode()
 	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
-	 * @return bool
 	 */
-	function skipDfwEncode() {return false;}
+	function skipDfwEncode():bool {return false;}
 
 	/**
 	 * 2016-09-07 Намеренно не используем @see _storeId
 	 * @used-by \Dfe\Robokassa\Choice::title()
-	 * @return Store
 	 */
-	final function store() {return dfc($this, function() {return $this->o()->getStore();});}
+	final function store():Store {return dfc($this, function() {return $this->o()->getStore();});}
 
 	/**
 	 * 2017-01-22 Первый аргумент — для тестового режима, второй — для промышленного.
@@ -1720,10 +1639,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by self::validate()
 	 * @used-by \Df\Payment\Url::url()
 	 * @used-by \Dfe\SecurePay\Method::amountFormat()
-	 * @param mixed ...$args [optional]
+	 * @param mixed ...$a [optional]
 	 * @return bool|mixed
 	 */
-	final function test(...$args) {return df_b($args, $this->s()->test());}
+	final function test(...$a) {return df_b($a, $this->s()->test());}
 
 	/**
 	 * 2017-08-30
@@ -1732,7 +1651,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Core\RAM::set()
 	 * @return string[]
 	 */
-	final function tags() {return [self::$CACHE_TAG];}
+	final function tags():array {return [self::$CACHE_TAG];}
 
 	/**
 	 * 2017-03-22
@@ -1745,9 +1664,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
-	 * @return TID
 	 */
-	final function tid() {return TID::s($this);}
+	final function tid():TID {return TID::s($this);}
 
 	/**
 	 * 2016-08-20
@@ -1755,9 +1673,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
 	 * @param T $t
 	 * @param bool $e [optional]
-	 * @return string
 	 */
-	final function tidFormat(T $t, $e = false) {
+	final function tidFormat(T $t, $e = false):string {
 		$id = $t->getTxnId(); /** @var string $id */
 		return df_tag_if(!$e ? $id : $this->tid()->i2e($id), $url = $this->transUrl($t), 'a', [/** @var string|null $url */
 			'href' => $url, 'target' => '_blank', 'title' => __(
@@ -1775,9 +1692,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\GingerPaymentsBase\Charge::pClient()
 	 * @used-by \Df\Payment\Block\Info::titleB()
 	 * @used-by \Df\Payment\ConfigProvider::config()
-	 * @return string
 	 */
-	final function titleB() {return $this->s('title_backend', function() {return df_class_second($this);});}
+	final function titleB():string {return $this->s('title_backend', function() {return df_class_second($this);});}
 
 	/**
 	 * 2016-02-12 How is a payment method's validate() used? https://mage2.pro/t/698
@@ -1838,14 +1754,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\TwoCheckout\Method::_refund()
 	 * @param float $a
 	 */
-	protected function _refund($a) {}
+	protected function _refund($a):void {}
 
 	/**
 	 * 2016-08-14
 	 * @used-by self::void()
 	 * @see \Dfe\CheckoutCom\Method::_void()
 	 */
-	protected function _void() {$this->_refund($this->cFromBase($this->ii()->getBaseAmountAuthorized()));}
+	protected function _void():void {$this->_refund($this->cFromBase($this->ii()->getBaseAmountAuthorized()));}
 
 	/**
 	 * 2016-11-13
@@ -1857,9 +1773,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\IPay88\Method::amountFactor()
 	 * @see \Dfe\Robokassa\Method::amountFactor()
 	 * @see \Dfe\TwoCheckout\Method::amountFactor()
-	 * @return int
 	 */
-	protected function amountFactor() {return df_find(function($factor, $list) {return
+	protected function amountFactor():int {return df_find(function($factor, $list) {return
 		in_array($this->cPayment(), df_csv_parse($list)) ? $factor : null
 	;}, $this->amountFactorTable(), [], [], DF_BEFORE) ?: 100;}
 
@@ -1870,21 +1785,19 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\Stripe\Method::amountFactorTable()
 	 * @return array(int => string|string[])
 	 */
-	protected function amountFactorTable() {return [];}
+	protected function amountFactorTable():array {return [];}
 
 	/**
 	 * 2016-02-29 Решил, что значением по умолчанию разумно сделать false.
 	 * @used-by self::isAvailable()
-	 * @return bool
 	 */
-	final protected function availableInBackend() {return false;}
+	final protected function availableInBackend():bool {return false;}
 
 	/**
 	 * 2016-03-08
 	 * @used-by self::getConfigData()
-	 * @return string
 	 */
-	final protected function cardTypes() {return $this->s('cctypes');}
+	final protected function cardTypes():string {return $this->s('cctypes');}
 
 	/**
 	 * 2016-08-14
@@ -1918,7 +1831,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\TwoCheckout\Method::charge()
 	 * @param bool $capture [optional]
 	 */
-	protected function charge($capture = true) {}
+	protected function charge($capture = true):void {}
 
 	/**
 	 * 2016-12-28
@@ -1931,10 +1844,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Пока данная функциональность используется модулем Stripe.
 	 * @used-by self::action()
 	 * @see \Dfe\Stripe\Method::convertException()
-	 * @param \Exception $e
-	 * @return \Exception
+	 * @param E $e
 	 */
-	protected function convertException(\Exception $e) {return $e;}
+	protected function convertException(E $e):E {return $e;}
 
 	/**
 	 * 2016-03-06
@@ -1957,7 +1869,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
 	 * @param array(string => mixed) $v
 	 */
-	final protected function iiaAdd(array $v) {dfp_add_info($this->ii(), $v);}
+	final protected function iiaAdd(array $v):array {dfp_add_info($this->ii(), $v);}
 
 	/**
 	 * 2016-05-03
@@ -1977,14 +1889,15 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\YandexKassa\Method::iiaKeys()
 	 * @return string[]
 	 */
-	protected function iiaKeys() {return [];}
+	protected function iiaKeys():array {return [];}
 
 	/**
 	 * 2016-08-14
+	 * @used-by \Dfe\TwoCheckout\Method::charge()
 	 * @param string|array(string => mixed) $k [optional]
 	 * @param mixed|null $v [optional]
 	 */
-	final protected function iiaUnset($k, $v = null) {$this->ii()->unsAdditionalInformation($k, $v);}
+	final protected function iiaUnset($k, $v = null):void {$this->ii()->unsAdditionalInformation($k, $v);}
 
 	/**
 	 * 2017-02-01
@@ -1998,30 +1911,22 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * поэтому добавил сейчас возможность отключать логирование в action().
 	 * @used-by self::action()
 	 * @see \Df\StripeClone\Method::needLogActions()
-	 * @return bool
 	 */
-	protected function needLogActions() {return true;}
-
-	/**
-	 * 2016-03-15
-	 * @return int|null
-	 */
-	final protected function oi() {return $this->o()->getId();}
+	protected function needLogActions():bool {return true;}
 
 	/**
 	 * 2016-09-06
-	 * @return string
+	 * @used-by \Dfe\TwoCheckout\Method::charge()
 	 */
-	final protected function oii() {return $this->o()->getIncrementId();}
+	final protected function oii():string {return $this->o()->getIncrementId();}
 
 	/**
 	 * 2017-08-02
 	 * @used-by self::getTitle()
 	 * @used-by \Dfe\Moip\Method::titleF()
 	 * @see \Dfe\Moip\Method::titleF()
-	 * @return string
 	 */
-	protected function titleF() {return $this->s('title', null, function() {return df_class_second($this);});}
+	protected function titleF():string {return $this->s('title', null, function() {return df_class_second($this);});}
 
 	/**
 	 * 2016-08-20
@@ -2049,9 +1954,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @uses \Df\Payment\Currency::toBase()
 	 * @uses \Df\Payment\Currency::toOrder()
 	 * @param float $a
-	 * @return float
 	 */
-	private function convert($a) {return call_user_func(
+	private function convert($a):float {return call_user_func(
 		[$this->currency(), lcfirst(substr(df_caller_f(), 1))], $a, $this->oq()
 	);}
 
@@ -2060,9 +1964,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by self::convert()
 	 * @used-by self::cPayment()
 	 * @used-by self::isAvailable()
-	 * @return Currency
 	 */
-	private function currency() {return dfc($this, function() {return dfp_currency($this);});}
+	private function currency():Currency {return dfc($this, function() {return dfp_currency($this);});}
 
 	/**
 	 * 2016-02-12
@@ -2140,9 +2043,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @uses \Dfe\CheckoutCom\Method::CODE
 	 * @uses \Dfe\IPay88\Method::CODE
 	 * @uses \Dfe\TwoCheckout\Method::CODE
-	 * @return string
 	 */
-	final static function codeS() {return dfcf(function($c) {return df_const(
+	final static function codeS():string {return dfcf(function($c) {return df_const(
 		$c, 'CODE', function() use($c) {return df_module_name_lc($c);}
 	);}, [static::class]);}
 
@@ -2166,15 +2068,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by dfpm()
 	 * @used-by \Df\Payment\Plugin\Model\Method\FactoryT::aroundCreate()
 	 * @param string $c
-	 * @return self
 	 */
-	final static function sg($c) {return dfcf(function($c) {return new $c;}, [dfpm_c($c)]);}
+	final static function sg($c):self {return dfcf(function($c) {return new $c;}, [dfpm_c($c)]);}
 
 	/**
 	 * 2017-08-28
 	 * @used-by \Df\Payment\Observer\Multishipping::execute()
 	 */
-	final static function sgReset() {df_ram()->clean(self::$CACHE_TAG);}
+	final static function sgReset():void {df_ram()->clean(self::$CACHE_TAG);}
 
 	/**
 	 * 2017-08-28

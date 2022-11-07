@@ -80,9 +80,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment/Operations/AbstractOperation.php#L59-L78
 	 * @override
 	 * @see \Df\Payment\Method::canCapture()
-	 * @return bool
 	 */
-	final function canCapture() {return true;}
+	final function canCapture():bool {return true;}
 
 	/**
 	 * 2016-03-08
@@ -111,25 +110,22 @@ abstract class Method extends \Df\Payment\Method {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice/Validation/CanRefund.php#L84-L94
 	 * It is since Magento 2.2: https://github.com/magento/magento2/commit/767151b4
-	 * @return bool
 	 */
-	final function canRefund() {return true;}
+	final function canRefund():bool {return true;}
 
 	/**
 	 * 2016-03-08
 	 * @override
 	 * @see \Df\Payment\Method::canRefundPartialPerInvoice()
-	 * @return bool
 	 */
-	final function canRefundPartialPerInvoice() {return true;}
+	final function canRefundPartialPerInvoice():bool {return true;}
 
 	/**
 	 * 2016-03-15
 	 * @override
 	 * @see \Df\Payment\Method::canReviewPayment()
-	 * @return bool
 	 */
-	final function canReviewPayment() {return true;}
+	final function canReviewPayment():bool {return true;}
 
 	/**
 	 * 2016-03-15
@@ -149,9 +145,8 @@ abstract class Method extends \Df\Payment\Method {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L528-L543
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L562-L578
-	 * @return bool
 	 */
-	final function canVoid() {return true;}
+	final function canVoid():bool {return true;}
 
 	/**
 	 * 2016-03-07
@@ -162,9 +157,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by \Df\Payment\Method::capture()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
 	 * @param bool|null $capture [optional]
-	 * @throws \Stripe\Error\Card
 	 */
-	final function charge($capture = true) {
+	final function charge($capture = true):void {
 		df_sentry_extra($this, 'Amount', $a = dfp_due($this)); /** @var float $a */
 		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
 		/**
@@ -244,10 +238,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-03-15
 	 * @override
 	 * @see \Df\Payment\Method::denyPayment()
-	 * @param II|I|OP  $payment
-	 * @return bool
+	 * @param II|I|OP $p
 	 */
-	final function denyPayment(II $payment) {return true;}
+	final function denyPayment(II $p):bool {return true;}
 
 	/**
 	 * 2016-03-15
@@ -291,7 +284,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Magento\Sales\Model\Order::isPaymentReview()
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L821-L832
 	 */
-	final function initialize($action, $dto) {$dto['state'] = O::STATE_PAYMENT_REVIEW;}
+	final function initialize($action, $dto):void {$dto['state'] = O::STATE_PAYMENT_REVIEW;}
 
 	/**
 	 * 2017-11-11
@@ -378,9 +371,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * The code is the same in Magento 2.1.2 - 2.2.1:
 	 * https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Sales/Model/Order/Invoice/PayOperation.php#L43-L57
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Invoice/PayOperation.php#L43-L57
-	 * @return bool
 	 */
-	final function isGateway() {return true;}
+	final function isGateway():bool {return true;}
 
 	/**
 	 * 2017-07-30
@@ -444,9 +436,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * This code is the same in Magento 2.0.0 - 2.2.1:
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment.php#L324-L334
 	 * https://github.com/magento/magento2/blob/2.2.1/app/code/Magento/Sales/Model/Order/Payment.php#L356-L366
-	 * @return bool
 	 */
-	final function isInitializeNeeded() {return ACR::R === $this->getConfigPaymentAction();}
+	final function isInitializeNeeded():bool {return ACR::R === $this->getConfigPaymentAction();}
 
 	/**
 	 * 2017-01-19
@@ -455,7 +446,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by \Df\Payment\Method::refund()
 	 * @param float|null $a
 	 */
-	final protected function _refund($a) {
+	final protected function _refund($a):void {
 		$ii = $this->ii(); /** @var OP $ii */
 		/**
 		 * 2016-03-17, 2017-11-11
@@ -539,7 +530,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Dfe\Stripe\Method::iiaKeys()
 	 * @return string[]
 	 */
-	protected function iiaKeys() {return [Token::KEY];}
+	protected function iiaKeys():array {return [Token::KEY];}
 
 	/**
 	 * 2017-02-01
@@ -549,9 +540,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @override
 	 * @see \Df\Payment\Method::needLogActions()
 	 * @used-by \Df\Payment\Method::action()
-	 * @return bool
 	 */
-	final protected function needLogActions() {return df_my();}
+	final protected function needLogActions():bool {return df_my();}
 
 	/**
 	 * 2017-01-12
