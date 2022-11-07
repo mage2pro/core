@@ -26,21 +26,21 @@ abstract class Multishipping extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0-rc2.1/app/code/Magento/Payment/Helper/Data.php#L169-L181
 	 * @param M $m
 	 */
-	function setMethod(M $m) {$this->_m = $m;}
+	function setMethod(M $m):void {$this->_m = $m;}
 
 	/**
 	 * 2017-08-25
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @return M
+	 * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
 	 */
-	protected function m() {return $this->_m;}
+	protected function m():M {return $this->_m;}
 
 	/**
 	 * 2017-08-25
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @return S
+	 * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
 	 */
-	protected function s() {return $this->_m->s();}
+	protected function s():S {return $this->_m->s();}
 
 	/**
 	 * 2017-08-24
