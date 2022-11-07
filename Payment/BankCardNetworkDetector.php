@@ -6,9 +6,8 @@ final class BankCardNetworkDetector {
 	 * 2018-12-19
 	 * @used-by \Dfe\Vantiv\Facade\Card::brand()
 	 * @param string $c
-	 * @return string
 	 */
-	static function label($c) {return dftr($c, [
+	static function label($c):string {return dftr($c, [
 		self::AE => 'American Express'
 		,self::DN => 'Diners Club'
 		,self::DS => 'Discover'
