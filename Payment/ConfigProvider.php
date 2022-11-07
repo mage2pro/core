@@ -69,7 +69,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Checkout/Model/CompositeConfigProvider.php#L31-L41
 	 * @return array(string => mixed)
 	 */
-	function getConfig() {return ['payment' =>
+	function getConfig():array {return ['payment' =>
 		!df_is_checkout() || !$this->s()->enable() ? [] : [$this->m()->getCode() => $this->config()]
 	];}
 
@@ -92,9 +92,8 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * 2017-04-17 The result amount is in the payment currency.
 	 * @used-by self::config()
 	 * @used-by \Dfe\Robokassa\ConfigProvider::options()
-	 * @return float
 	 */
-	final protected function amount() {return dfc($this, function() {return $this->currency()->fromOrder(
+	final protected function amount():float {return dfc($this, function() {return $this->currency()->fromOrder(
 		df_quote()->getGrandTotal(), df_quote()
 	);});}
 
@@ -111,23 +110,20 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @see \Dfe\YandexKassa\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
-	protected function config() {
+	protected function config():array {
 		$s = $this->s(); /** @var S $s */
 		$currency = $this->currency(); /** @var Currency $currency */
 		$currencyC = $currency->iso3(); /** @var string $currencyC */
 		return [
 			/**
 			 * 2017-11-05
-			 * @todo «Passing `amountF` to the client side is incorrect,
-			 * because a payment's amount could be changed client-side
-			 * (e.g., after a discount code application)»
-			 * https://github.com/mage2pro/core/issues/45
+			 * @todo «Passing `amountF` to the client side is incorrect, because a payment's amount could be changed client-side
+			 * (e.g., after a discount code application)» https://github.com/mage2pro/core/issues/45
 			 */
 			'amountF' => $this->m()->amountFormat($this->amount())
 			,'requireBillingAddress' => $s->requireBillingAddress()
 			,'isTest' => $s->test()
-			# 2017-02-07
-			# https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L249-L258
+			# 2017-02-07 https://github.com/mage2pro/core/blob/1.12.7/Payment/view/frontend/web/mixin.js?ts=4#L249-L258
 			,'paymentCurrency' => [
 				# 2016-09-06
 				# Код платёжной валюты.
@@ -170,17 +166,15 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
 	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::config()
-	 * @return Method
 	 */
-	protected function m() {return dfc($this, function() {return dfpmq($this->_mc);});}
+	protected function m():Method {return dfc($this, function() {return dfpmq($this->_mc);});}
 
 	/**
 	 * 2017-10-12
 	 * @used-by self::amount()
 	 * @used-by self::config()
-	 * @return Currency
 	 */
-	private function currency() {return dfp_currency($this->m());}
+	private function currency():Currency {return dfp_currency($this->m());}
 
 	/**
 	 * 2017-03-03
@@ -196,7 +190,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
 	 * @return array(string => mixed)
 	 */
-	final static function p() {
+	final static function p():array {
 		$i = df_new_om(static::class); /** @var self $i */
 		return dfa_deep($i->getConfig(), "payment/{$i->m()->getCode()}");
 	}
@@ -210,9 +204,8 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @param IOptions $o
 	 * @return array(string => mixed)
 	 */
-	final protected static function configOptions(IOptions $o) {$s = $o->s(); /** @var Settings $s */ return [
-		# 2017-09-19 «Where to ask for a payment option?»
-		'needShowOptions' => Options::needShow($s)
+	final protected static function configOptions(IOptions $o):array {$s = $o->s(); /** @var Settings $s */ return [
+		'needShowOptions' => Options::needShow($s) # 2017-09-19 «Where to ask for a payment option?»
 		/**
 		 * 2017-09-18
 		 * @used-by Df_Payments/withOptions::options()
@@ -228,9 +221,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 		 * It is important to use @uses array_values()
 		 * for the result to be interpreted as an array? not object, on the client side.
 		 */
-		,'options' => array_is_list($oo = $o->options()) ? $oo : /**
-		 *
-		 */
+		,'options' => array_is_list($oo = $o->options()) ? $oo :
 			array_values(df_map_k($oo, function($v, $l) {return ['label' => $l, 'value' => $v];}))
 		# 2017-09-19 A text to be shown on the Magento checkout page instead of the payment options dialog.
 		,'optionsDescription' => $s->v('optionsDescription')
