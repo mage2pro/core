@@ -20,13 +20,11 @@ final class TM {
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction.php#L37
 	 * https://github.com/magento/magento2/blob/2.0.17/app/code/Magento/Sales/Api/Data/TransactionInterface.php
 	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
-	 * @return bool
 	 */
-	function confirmed() {return dfc($this, function() {/** @var T|null|false $t */ return
+	function confirmed():bool {return dfc($this, function() {/** @var T|null|false $t */ return
 		df_order($this->_ii)->hasInvoices()
 		# 2017-03-27
-		# Тот случай, когда платёж только авторизован.
-		# Magento не создаёт в этом случае invoice
+		# Тот случай, когда платёж только авторизован. Magento не создаёт invoice в этом случае.
 		# @todo Может, надо просто создавать invoice при авторизации платежа?
 		|| ($t = $this->tReq(false)) && (T::TYPE_AUTH === $t->getTxnType())
 		/**
@@ -146,7 +144,7 @@ final class TM {
 	 * @used-by self::response()
 	 * @return Ev[]
 	 */
-	private function responses() {return dfc($this, function() {return array_map(function(T $t) {return
+	private function responses():array {return dfc($this, function() {return array_map(function(T $t) {return
 		F::s($this->_m, df_trd($t))->e()
 	;}, $this->tResponses());});}
 
@@ -157,7 +155,7 @@ final class TM {
 	 * @used-by self::responses()
 	 * @return T[]
 	 */
-	private function tResponses() {return dfc($this, function() {return
+	private function tResponses():array {return dfc($this, function() {return
 		!($p = $this->tReq(false)) ? [] : df_sort($p->getChildTransactions())
 	;});}
 
@@ -182,9 +180,8 @@ final class TM {
 	 * 2017-03-23
 	 * @used-by df_tm()
 	 * @param string|object $m
-	 * @return self
 	 */
-	static function s($m) {return dfcf(function(M $m) {return new self($m);}, [
+	static function s($m):self {return dfcf(function(M $m) {return new self($m);}, [
 		# 2018-02-06
 		# $m->getInfoInstance() fixes the issue:
 		# «iPay88 showed "not yet paid" on admin backend.
