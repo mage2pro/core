@@ -100,13 +100,13 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	/**
 	 * 2016-08-04
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
+	 * @see \Df\GingerPaymentsBase\ConfigProvider::config()
 	 * @see \Df\Payment\ConfigProvider\BankCard::config()
 	 * @see \Dfe\ACH\ConfigProvider::config()
 	 * @see \Dfe\AllPay\ConfigProvider::config()
 	 * @see \Dfe\AlphaCommerceHub\ConfigProvider::config()
 	 * @see \Dfe\IPay88\ConfigProvider::config()
 	 * @see \Dfe\Robokassa\ConfigProvider::config()
-	 * @see \Dfe\TBCBank\ConfigProvider::config()
 	 * @see \Dfe\YandexKassa\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */

@@ -22,5 +22,5 @@ interface IOptions extends \Df\Config\ISettings{
 	 * @see \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return array(<value> => <label>)|array(array('label' => string, 'value' => int|string, 'children' => <...>))
 	 */
-	function options();
+	function options():array;
 }
