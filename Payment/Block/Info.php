@@ -4,6 +4,8 @@ use Df\Payment\Choice;
 use Df\Payment\Info\Entry;
 use Df\Payment\Info\Report;
 use Df\Payment\Method as M;
+use Df\Payment\Settings;
+use Df\Payment\TM;
 use Df\Payment\W\Event;
 use Magento\Customer\Model\Customer as C;
 use Magento\Framework\Phrase;
@@ -14,6 +16,7 @@ use Magento\Payment\Model\MethodInterface as IM;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
+
 /**
  * 2016-05-06
  * @see \Df\GingerPaymentsBase\Block\Info
@@ -56,7 +59,7 @@ abstract class Info extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L1011-L1033
 	 * @return string[]
 	 */
-    function getCacheKeyInfo() {return [
+    function getCacheKeyInfo():array {return [
     	df_cts($this), df_cts($this->m()), $this->_pdf, $this->isSecureMode(), df_hash_a($this->iia())
 	];}
 
@@ -72,9 +75,8 @@ abstract class Info extends _P {
 	 *		$paymentBlock->getMethod()->setStore($storeId);
 	 *		$paymentBlockHtml = $paymentBlock->toHtml();
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Helper/Data.php#L198-L226
-	 * @return M
 	 */
-	final function getMethod() {return $this->m();}
+	final function getMethod():M {return $this->m();}
 
 	/**
 	 * 2017-08-03
@@ -97,7 +99,7 @@ abstract class Info extends _P {
 	 *
 	 * @param II|I|OP|QP $i
 	 */
-	final function setInfo(II $i) {$this->_i = $i;}
+	final function setInfo(II $i):void {$this->_i = $i;}
 
 	/**
 	 * 2017-08-03
@@ -159,9 +161,8 @@ abstract class Info extends _P {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/Block/Info.php#L64-L80
 	 * @see \Magento\Payment\Block\Info::toPdf()
-	 * @return string
 	 */
-	final function toPdf() {
+	final function toPdf():string {
 		try {$this->_pdf = true; $result = $this->toHtml();}
 		finally {$this->_pdf = false;}
 		return $result;
@@ -252,9 +253,8 @@ abstract class Info extends _P {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
-	 * @return Choice
 	 */
-	protected function choice() {return dfp_choice($this->ii());}
+	protected function choice():Choice {return dfp_choice($this->ii());}
 
 	/**
 	 * 2017-04-17
@@ -274,9 +274,8 @@ abstract class Info extends _P {
 	 * @used-by self::si()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
-	 * @return Report
 	 */
-	final protected function dic() {return dfc($this, function() {return new Report;});}
+	final protected function dic():Report {return dfc($this, function() {return new Report;});}
 
 	/**
 	 * 2016-07-18
@@ -363,9 +362,8 @@ abstract class Info extends _P {
 	 * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
 	 * @used-by \Df\StripeClone\Block\Info::cf()
 	 * @used-by \Dfe\Vantiv\Block\Info::card()
-	 * @return M
 	 */
-	protected function m() {return dfpm($this->ii());}
+	protected function m():M {return dfpm($this->ii());}
 
 	/**
 	 * 2017-03-29
@@ -393,11 +391,8 @@ abstract class Info extends _P {
 	 * тогда блок с информацией о платеже будет содержать только название способа оплаты
 	 * и вид режима платежа: тестовый или промышленный.
 	 * Однако я специально сделал метод абстрактным: чтобы:
-	 * 1) разработчики платёжных модулей (я) не забывали,
-	 * что этот метод — главный в классе, и именно его им нужно переопределять.
-	 * 2) заставить разработчиков платёжных модулей (меня)
-	 * не лениться отображать дополнительную инфомацию о платеже.
-	 *
+	 * 1) разработчики платёжных модулей (я) не забывали, что этот метод — главный в классе, и именно его им нужно переопределять.
+	 * 2) заставить разработчиков платёжных модулей (меня) не лениться отображать дополнительную инфомацию о платеже.
 	 * 2016-11-29
 	 * Почему-то текущая dev-версия Magento 2 некорректно компилирует это класс
 	 * при объявлении метода prepare() абстрактным:
@@ -405,7 +400,6 @@ abstract class Info extends _P {
 	 * and must therefore be declared abstract or implement the remaining methods
 	 * (Df\Payment\Block\Info::prepare)»
 	 * Поэтому был вынужден убрать «abstract».
-	 *
 	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
 	 * @see \Df\GingerPaymentsBase\Block\Info::prepare()
 	 * @see \Df\StripeClone\Block\Info::prepare()
@@ -422,7 +416,7 @@ abstract class Info extends _P {
 	 * @see \Dfe\TwoCheckout\Block\Info::prepare()
 	 * @see \Dfe\YandexKassa\Block\Info::prepare()
 	 */
-	protected function prepare() {df_abstract($this);}
+	protected function prepare():void {df_abstract($this);}
 
 	/**
 	 * 2016-08-09
@@ -430,7 +424,7 @@ abstract class Info extends _P {
 	 * @see \Dfe\AllPay\Block\Info::prepareDic()
 	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareDic()
 	 */
-	protected function prepareDic() {}
+	protected function prepareDic():void {}
 
 	/**
 	 * 2016-08-13
@@ -451,26 +445,14 @@ abstract class Info extends _P {
 	 * @see \Dfe\Dragonpay\Block\Info::prepareUnconfirmed()
 	 * @used-by \Dfe\Dragonpay\Block\Info::prepareUnconfirmed()
 	 */
-	protected function prepareUnconfirmed() {$this->si('State', __('Review'));}
-
-	/**
-	 * 2017-08-04
-	 * @used-by self::_toHtml()
-	 * @return string
-	 */
-	protected function rBackend() {
-		$this->prepareToRendering();
-		# 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
-		return df_tag('div', 'df-payment-info', $this->m()->getTitle() . $this->rUnconfirmed() . $this->rTable());
-	}
+	protected function prepareUnconfirmed():void {$this->si('State', __('Review'));}
 	
 	/**
 	 * 2017-08-04
 	 * @used-by self::_toHtml()
 	 * @see \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
-	 * @return string
 	 */
-	protected function rCustomerAccount() {
+	protected function rCustomerAccount():string {
 		$this->prepareToRendering();
 		# 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Core/view/base/web/main.less#L41
 		return df_tag('div', 'df-payment-info',
@@ -482,54 +464,19 @@ abstract class Info extends _P {
 	}
 
 	/**
-	 * 2017-08-04
-	 * @used-by self::_toHtml()
-	 * @return string
-	 */
-	protected function rEmail() {return $this->rCustomerAccount();}
-
-	/**
-	 * 2017-08-02
-	 * I have implemented in by analogi with the standard PHP rendering implementation.
-	 * The standard PDF template is the same for the frontend and the backend parts:
-	 * 		<?= $block->escapeHtml($block->getMethod()->getTitle()) ?>{{pdf_row_separator}}
-	 *			<?php if ($specificInfo = $block->getSpecificInformation()):?>
-	 *				<?php foreach ($specificInfo as $label => $value):?>
-	 *					<?= $block->escapeHtml($label) ?>:
-	 *					<?= $block->escapeHtml(implode(' ', $block->getValueAsArray($value))) ?>
-	 *					{{pdf_row_separator}}
-	 *				<?php endforeach; ?>
-	 *			<?php endif;?>
-	 * 		<?= $block->escapeHtml(implode('{{pdf_row_separator}}', $block->getChildPdfAsArray())) ?>
-	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/adminhtml/templates/info/pdf/default.phtml#L15
-	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/frontend/templates/info/pdf/default.phtml#L15
-	 * @see \Magento\Payment\Block\Info::toPdf()
-	 * @used-by self::_toHtml()
-	 * @return string
-	 */
-	protected function rPDF() {
-		$this->prepareToRendering();
-		return implode('{{pdf_row_separator}}', df_clean(dfa_flatten([
-			$this->m()->getTitle()
-			,df_map($this->dic(), function(Entry $e) {return !$e->name() ? $e->value() : "{$e->name()}: {$e->value()}";})
-		])));
-	}
-
-	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @param string|null $k [optional]
-	 * @return \Df\Payment\Settings
 	 */
-	protected function s($k = null) {return $this->m()->s($k);}
+	protected function s($k = null):Settings {return $this->m()->s($k);}
 
 	/**
 	 * 2016-11-17
 	 * Не вызываем здесь @see __(),
-	 * потому что словарь ещё будет меняться, в частности, методом @see prepareDic()
+	 * потому что словарь ещё будет меняться, в частности, методом @see self::prepareDic()
 	 * @see self::getSpecificInformation()
 	 * Ключи потом будут автоматически переведены методом @see \Df\Payment\Info\Entry::nameT()
 	 * Значения переведены не будут!
@@ -545,7 +492,7 @@ abstract class Info extends _P {
 	 * @param string|Phrase|null|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
-	final protected function si($k, $v = null) {
+	final protected function si($k, $v = null):void {
 		is_array($k)
 		# 2016-11-17
 		# К сожалению, нельзя использовать [$this, __FUNCTION__], потому что метод si() — protected.
@@ -572,7 +519,7 @@ abstract class Info extends _P {
 	 * @param string|Phrase|null|array(string => string) $k
 	 * @param string|null $v [optional]
 	 */
-	final protected function siEx($k, $v = null) {
+	final protected function siEx($k, $v = null):void {
 		if ($this->extended()) {
 			$this->si($k, $v);
 		}
@@ -583,7 +530,7 @@ abstract class Info extends _P {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 */
-	final protected function siID() {return $this->siEx(
+	final protected function siID():void {$this->siEx(
 		$this->transIDLabel(), $this->m()->tidFormat($this->tm()->tReq(), true)
 	);}
 
@@ -591,9 +538,8 @@ abstract class Info extends _P {
 	 * 2016-07-13
 	 * @used-by self::_toHtml()
 	 * @see \Dfe\TwoCheckout\Block\Info::testModeLabel()
-	 * @return string
 	 */
-	protected function testModeLabel() {return 'Test';}
+	protected function testModeLabel():string {return 'Test';}
 
 	/**
 	 * 2017-03-29
@@ -611,26 +557,22 @@ abstract class Info extends _P {
 	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
 	 * @used-by \Dfe\TBCBank\Block\Info::ciId()
 	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
-	 * @return \Df\Payment\TM
 	 */
-	final protected function tm() {return df_tm($this->m());}
+	final protected function tm():TM {return df_tm($this->m());}
 
 	/**
 	 * 2018-11-12
 	 * @used-by self::siID()
 	 * @see \Dfe\TBCBank\Block\Info::transIDLabel()
-	 * @return string
 	 */
-	protected function transIDLabel() {return "{$this->titleB()} ID";}
+	protected function transIDLabel():string {return "{$this->titleB()} ID";}
 
 	/**
 	 * 2018-11-16
 	 * @used-by self::ci()
 	 * @return C|null
 	 */
-	private function c() {return dfc($this, function() {return df_customer(
-		$this->o()->getCustomerId(), null
-	);});}
+	private function c() {return dfc($this, function() {return df_customer($this->o()->getCustomerId(), null);});}
 
 	/**
 	 * 2017-03-29
@@ -644,7 +586,33 @@ abstract class Info extends _P {
 	 */
 	private function rCheckoutSuccess() {/** @var M|IM $m */ return
 		!($s = $this->msgCheckoutSuccess()) ? null : df_tag('div', 'df-checkout-success', $s)
-	;}		
+	;}
+
+	/**
+	 * 2017-08-02
+	 * I have implemented in by analogi with the standard PHP rendering implementation.
+	 * The standard PDF template is the same for the frontend and the backend parts:
+	 * 		<?= $block->escapeHtml($block->getMethod()->getTitle()) ?>{{pdf_row_separator}}
+	 *			<?php if ($specificInfo = $block->getSpecificInformation()):?>
+	 *				<?php foreach ($specificInfo as $label => $value):?>
+	 *					<?= $block->escapeHtml($label) ?>:
+	 *					<?= $block->escapeHtml(implode(' ', $block->getValueAsArray($value))) ?>
+	 *					{{pdf_row_separator}}
+	 *				<?php endforeach; ?>
+	 *			<?php endif;?>
+	 * 		<?= $block->escapeHtml(implode('{{pdf_row_separator}}', $block->getChildPdfAsArray())) ?>
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/adminhtml/templates/info/pdf/default.phtml#L15
+	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Payment/view/frontend/templates/info/pdf/default.phtml#L15
+	 * @see \Magento\Payment\Block\Info::toPdf()
+	 * @used-by self::_toHtml()
+	 */
+	private function rPDF():string {
+		$this->prepareToRendering();
+		return implode('{{pdf_row_separator}}', df_clean(dfa_flatten([
+			$this->m()->getTitle()
+			,df_map($this->dic(), function(Entry $e) {return !$e->name() ? $e->value() : "{$e->name()}: {$e->value()}";})
+		])));
+	}
 
 	/**
 	 * 2016-08-29
@@ -665,16 +633,14 @@ abstract class Info extends _P {
 	 *
 	 * @used-by self::extended()
 	 * @used-by self::getCacheKeyInfo()
-	 * @return bool
 	 */
-	private function isSecureMode() {return !df_is_backend() || $this->_secureMode;}
+	private function isSecureMode():bool {return !df_is_backend() || $this->_secureMode;}
 
 	/**
 	 * 2018-11-16
 	 * @used-by self::c()
-	 * @return O
 	 */
-	private function o() {return $this->ii()->getOrder();}
+	private function o():O {return $this->ii()->getOrder();}
 
 	/**
 	 * 2017-08-04
@@ -684,7 +650,7 @@ abstract class Info extends _P {
 	 * @used-by self::rEmail()
 	 * @used-by self::rPDF()
 	 */
-	private function prepareToRendering() {
+	private function prepareToRendering():void {
 		$this->tm()->confirmed() ? $this->prepare() : $this->prepareUnconfirmed();
 		if ($this->isTest()) {
 			$this->si('Mode', __($this->testModeLabel()));
@@ -694,18 +660,32 @@ abstract class Info extends _P {
 	}
 
 	/**
+	 * 2017-08-04
+	 * @used-by self::_toHtml()
+	 */
+	private function rBackend():string {
+		$this->prepareToRendering();
+		# 2017-03-29 https://github.com/mage2pro/core/blob/2.4.9/Payment/view/adminhtml/web/main.less#L6
+		return df_tag('div', 'df-payment-info', $this->m()->getTitle() . $this->rUnconfirmed() . $this->rTable());
+	}
+
+	/**
+	 * 2017-08-04
+	 * @used-by self::_toHtml()
+	 */
+	private function rEmail():string {return $this->rCustomerAccount();}
+
+	/**
 	 * 2017-08-24
 	 * @used-by self::_toHtml()
-	 * @return Phrase
 	 */
-	private function rMultishipping() {return $this->m()->getTitle();}
+	private function rMultishipping():Phrase {return $this->m()->getTitle();}
 
 	/**
 	 * 2017-03-25
 	 * @used-by self::_toHtml()
-	 * @return string
 	 */
-	private function rTable() {return !$this->dic()->count() ? '' : df_tag('table',
+	private function rTable():string {return !$this->dic()->count() ? '' : df_tag('table',
 		!df_is_backend() ? 'data table' : df_cc_s('data-table admin__table-secondary df-payment-info', $this->ii('method'))
 		,df_map($this->dic(), function(Entry $e) {return
 			df_tag('tr', [],
@@ -722,9 +702,8 @@ abstract class Info extends _P {
 	/**
 	 * 2017-03-25
 	 * @used-by self::_toHtml()
-	 * @return string
 	 */
-	private function rUnconfirmed() {return $this->tm()->confirmed() ? '' : df_tag(
+	private function rUnconfirmed():string {return $this->tm()->confirmed() ? '' : df_tag(
 		'div', 'df-unconfirmed', $this->msgUnconfirmed()
 	);}
 
@@ -732,9 +711,8 @@ abstract class Info extends _P {
 	 * 2017-01-13
 	 * @used-by self::msgUnconfirmed()
 	 * @used-by self::transIDLabel()
-	 * @return string
 	 */
-	private function titleB() {return $this->m()->titleB();}
+	private function titleB():string {return $this->m()->titleB();}
 
 	/**
 	 * 2017-08-03    

@@ -80,7 +80,7 @@ class Info extends \Df\Payment\Block\Info {
 	 * @see \Dfe\Square\Block\Info::prepare()
 	 * @see \Dfe\TBCBank\Block\Info::prepare()
 	 */
-	protected function prepare() {
+	protected function prepare():void {
 		$cf = $this->cf(); /** @var CF $cf */
 		$this->siID();
 		$this->si($this->cardNumberLabel(), $cf->label());
