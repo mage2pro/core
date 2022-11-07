@@ -142,9 +142,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @override
 	 * @see \Df\Payment\Operation::id()
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @return string
 	 */
-	final protected function id() {return Identification::get($this->o());}
+	final protected function id():string {return Identification::get($this->o());}
 
 	/**
 	 * 2017-08-19

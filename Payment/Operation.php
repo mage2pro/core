@@ -88,9 +88,8 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
-	 * @return M
 	 */
-	function m() {return $this->_src->m();}
+	function m():M {return $this->_src->m();}
 
 	/**
 	 * 2016-08-26
@@ -116,9 +115,8 @@ abstract class Operation implements IMA {
 	 * @used-by self::customerPhone()
 	 * @used-by self::locale()
 	 * @used-by \Dfe\Square\P\Reg::p()
-	 * @return OA
 	 */
-	final protected function addressBS() {return $this->_src->addressBS();}
+	final protected function addressBS():OA {return $this->_src->addressBS();}
 
 	/**
 	 * 2016-08-26
@@ -149,21 +147,18 @@ abstract class Operation implements IMA {
 	 * @see addressBS()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\CheckoutCom\Charge::cPhone()
-	 * @return OA
 	 */
-	final protected function addressSB() {return $this->_src->addressSB();}
+	final protected function addressSB():OA {return $this->_src->addressSB();}
 
 	/**
 	 * 2016-09-05 Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by self::amountF()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItems()
-	 * @return float
 	 */
-	final protected function amount() {return $this->_src->amount();}
+	final protected function amount():float {return $this->_src->amount();}
 
 	/**
-	 * 2016-09-07
-	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * 2016-09-07 Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::testAmountF()
@@ -178,9 +173,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
 	 * @return float|int|string
 	 */
-	final protected function amountF() {return dfc($this, function() {return
-		$this->amountFormat($this->amount())
-	;});}
+	final protected function amountF() {return dfc($this, function() {return $this->amountFormat($this->amount());});}
 
 	/**
 	 * 2016-09-07
@@ -215,9 +208,8 @@ abstract class Operation implements IMA {
 	 * @used-by self::cFromDocF()
 	 * @used-by \Dfe\CheckoutCom\Charge::cProduct()
 	 * @param float $a
-	 * @return float
 	 */
-	final protected function cFromDoc($a) {return $this->_src->cFromDoc($a);}
+	final protected function cFromDoc($a):float {return $this->_src->cFromDoc($a);}
 
 	/**
 	 * 2016-08-17 The payment currency code: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
@@ -232,9 +224,8 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Stripe\P\_3DS::p()
 	 * @used-by \Dfe\TBCBank\Charge::common()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
-	 * @return string
 	 */
-	final protected function currencyC() {return $this->_src->currencyC();}
+	final protected function currencyC():string {return $this->_src->currencyC();}
 
 	/**
 	 * 2017-02-18
@@ -269,9 +260,8 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pTax()
-	 * @return string
 	 */
-	final protected function customerEmail() {return $this->_src->customerEmail();}
+	final protected function customerEmail():string {return $this->_src->customerEmail();}
 
 	/**
 	 * 2017-02-18
@@ -292,9 +282,8 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @used-by \Dfe\PostFinance\Charge::pCharge()
-	 * @return string
 	 */
-	final protected function customerName() {return $this->_src->customerName();}
+	final protected function customerName():string {return $this->_src->customerName();}
 
 	/**
 	 * 2016-08-26
@@ -325,9 +314,8 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\PostFinance\Charge::pCharge()
 	 * @used-by \Dfe\Square\P\Reg::p()
 	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
-	 * @return string
 	 */
-	final protected function customerPhone() {return $this->addressBS()->getTelephone();}
+	final protected function customerPhone():string {return $this->addressBS()->getTelephone();}
 
 	/**
 	 * 2016-08-27
@@ -361,18 +349,16 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Stripe\P\_3DS::p()
 	 * @used-by \Dfe\YandexKassa\Charge::pCharge()
-	 * @return string
 	 */
-	final protected function customerReturnRemote() {return dfp_url_customer_return_remote($this->m());}
+	final protected function customerReturnRemote():string {return dfp_url_customer_return_remote($this->m());}
 
 	/**
 	 * 2017-08-23
 	 * @see self::customerReturnRemote()
 	 * @used-by \Dfe\PostFinance\Charge::pCharge()
 	 * @used-by \Dfe\Qiwi\Charge::pRedirect()
-	 * @return string
 	 */
-	final protected function customerReturnRemoteWithFailure() {return dfp_url_customer_return_remote_f(
+	final protected function customerReturnRemoteWithFailure():string {return dfp_url_customer_return_remote_f(
 		$this->m()
 	);}
 
@@ -402,9 +388,8 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @see \Df\PaypalClone\Charge::id()
 	 * @see \Dfe\Qiwi\Charge::id()
-	 * @return string
 	 */
-	protected function id() {return df_result_sne($this->_src->id());}
+	protected function id():string {return df_result_sne($this->_src->id());}
 
 	/**
 	 * 2016-08-30
@@ -420,9 +405,8 @@ abstract class Operation implements IMA {
 	 * 2017-03-06
 	 * @used-by self::oiLeafs()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
-	 * @return string
 	 */
-	final protected function locale() {return dfc($this, function() {return df_locale_by_country(
+	final protected function locale():string {return dfc($this, function() {return df_locale_by_country(
 		$this->addressBS()->getCountryId()
 	);});}
 
@@ -448,9 +432,8 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\TwoCheckout\Charge::liDiscount()
 	 * @used-by \Dfe\TwoCheckout\Charge::liShipping()
 	 * @used-by \Dfe\TwoCheckout\Charge::liTax()
-	 * @return O
 	 */
-	final protected function o() {return df_order($this->ii());}
+	final protected function o():O {return df_order($this->ii());}
 
 	/**
 	 * 2016-09-07
@@ -470,7 +453,7 @@ abstract class Operation implements IMA {
 	 * @param \Closure $f
 	 * @return array(int => mixed)
 	 */
-	final protected function oiLeafs(\Closure $f) {return df_oqi_leafs($this->o(), $f, $this->locale());}
+	final protected function oiLeafs(\Closure $f):array {return df_oqi_leafs($this->o(), $f, $this->locale());}
 
 	/**
 	 * 2018-11-09
@@ -487,17 +470,15 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
-	 * @return Settings
 	 */
-	protected function s() {return $this->_src->s();}
+	protected function s():Settings {return $this->_src->s();}
 
 	/**
 	 * 2016-05-06
 	 * @used-by \Df\Payment\Charge::vars()
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
-	 * @return Store
 	 */
-	final protected function store() {return $this->_src->store();}
+	final protected function store():Store {return $this->_src->store();}
 
 	/**
 	 * 2018-11-14
@@ -505,9 +486,8 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\TBCBank\Charge::pNew()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
-	 * @return string
 	 */
-	final protected function token() {return dfc($this, function() {return Token::get($this->m()->ii());});}
+	final protected function token():string {return dfc($this, function() {return Token::get($this->m()->ii());});}
 
 	/**
 	 * 2016-08-26
@@ -515,11 +495,10 @@ abstract class Operation implements IMA {
 	 * @used-by self::customerNameL()
 	 * @return array(string|null)
 	 */
-	private function customerNameA() {return dfc($this, function() {
-		/** @var O $o */ $o = $this->o();
-		/** @var OA $ba */ $ba = $this->addressB();
-		/** @var C|DFCustomer $c */
-		/** @var string|null $f */
+	private function customerNameA():array {return dfc($this, function() {
+		$o = $this->o(); /** @var O $o */
+		$ba = $this->addressB(); /** @var OA $ba */
+		/** @var C|DFCustomer $c */ /** @var string|null $f */
 		return ($f = $o->getCustomerFirstname()) ? [$f, $o->getCustomerLastname()] : (
 			($c = $o->getCustomer()) && ($f = $c->getFirstname()) ? [$f, $c->getLastname()] : (
 				$f = $ba->getFirstname() ? [$f, $ba->getLastname()] : (
