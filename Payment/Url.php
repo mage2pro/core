@@ -15,9 +15,8 @@ class Url {
 	 * @param string $url
 	 * @param bool $test [optional]
 	 * @param mixed ...$args [optional]
-	 * @return string
 	 */
-	final function url($url, $test = null, ...$args) {return df_url_staged(
+	final function url($url, $test = null, ...$args):string {return df_url_staged(
 		!is_null($test) ? $test : $this->_m->test(), $url, $this->stageNames(), ...$args
 	);}
 
@@ -30,7 +29,7 @@ class Url {
 	 * @see \Dfe\YandexKassa\Url::stageNames()
 	 * @return string[]
 	 */
-	protected function stageNames() {return $this->_stages;}
+	protected function stageNames():array {return $this->_stages;}
 
 	/**
 	 * 2017-03-23
@@ -61,9 +60,8 @@ class Url {
 	 * @used-by dfp_url_api()
 	 * @param string|object $m
 	 * @param string[] $stages
-	 * @return self
 	 */
-	final static function f($m, array $stages = []) {return dfcf(function(M $m, array $stages) {
+	final static function f($m, array $stages = []):self {return dfcf(function(M $m, array $stages) {
 		/** @var string $c */$c = df_con_hier($m, __CLASS__); return new $c($m, $stages ?: ['', '']);
 	}, [dfpm($m), $stages]);}
 }
