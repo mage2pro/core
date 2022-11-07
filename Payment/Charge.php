@@ -38,6 +38,8 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-08-27
+	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\Omise\P\Charge::p()
 	 */
 	final protected function customerReturn():string {return dfp_url_customer_return($this->m());}
 
@@ -53,22 +55,20 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\TBCBank\Charge::common()
-	 * @return string
 	 */
-	final protected function description() {$s = $this->s(); return $this->text(
+	final protected function description():string {$s = $this->s(); return $this->text(
 		$s->description(), $s->v('description_rules/maxLength/value')
 	);}
 
 	/**
-	 * 2016-09-07
-	 * Ключами результата являются человекопонятные названия переменных.
+	 * 2016-09-07 Ключами результата являются человекопонятные названия переменных.
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\Stripe\P\Charge::p()
 	 * @param string|null $length [optional]
 	 * @param string|null $count [optional]
 	 * @return array(string => string)
 	 */
-	final protected function metadata($length = null, $count = null) {
+	final protected function metadata($length = null, $count = null):array {
 		$k = $this->s()->metadata(); /** @var string[] $k */ /** @var array(string => string) $m */
 		$m = array_combine(dfa(Metadata::s()->map(), $k), dfa($this->vars(), $k));
 		return array_combine(dfa_chop(array_keys($m), $length), dfa_chop(array_values($m), $count));
@@ -84,9 +84,8 @@ abstract class Charge extends Operation {
 	 * @param string $s
 	 * @param int|null $max [optional]
 	 * @param callable|string $filter [optional]
-	 * @return string
 	 */
-	final protected function text($s, $max = null, $filter = 'textFilter') {
+	final protected function text($s, $max = null, $filter = 'textFilter'):string {
 		$r = df_var($s, $this->vars()); /** @var string $r */
 		/**
 		 * 2017-11-22
@@ -103,9 +102,8 @@ abstract class Charge extends Operation {
 	 * @see \Dfe\AlphaCommerceHub\Charge::textFilter()
 	 * @see \Dfe\TBCBank\Charge::textFilter()
 	 * @param string $s
-	 * @return string
 	 */
-	protected function textFilter($s) {return $s;}
+	protected function textFilter($s):string {return $s;}
 
 	/**
 	 * 2016-05-06
