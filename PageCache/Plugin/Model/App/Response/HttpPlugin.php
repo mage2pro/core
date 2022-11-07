@@ -20,7 +20,7 @@ final class HttpPlugin {
 	 * @param \Closure $f
 	 * @param Http $http
 	 */
-	function aroundBeforeSendResponse(Sb $sb, \Closure $f, Http $http) {
+	function aroundBeforeSendResponse(Sb $sb, \Closure $f, Http $http):void {
 		if (!headers_sent()) {
 			$f($http);
 		}
