@@ -56,22 +56,20 @@ abstract class Facade {
 	 * @used-by \Dfe\Vantiv\Facade\Charge::card()
 	 * @return M
 	 */
-	protected function m() {return $this->_m;}
+	protected function m():M {return $this->_m;}
 
 	/**
 	 * 2018-11-15
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\TBCBank\Facade\Customer::cardsData()
-	 * @return S
 	 */
-	protected function ss() {return $this->_m->s();}
+	protected function ss():S {return $this->_m->s();}
 
 	/**
 	 * 2018-11-12
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
-	 * @return TM
 	 */
-	final protected function tm() {return df_tm($this->_m);}
+	final protected function tm():TM {return df_tm($this->_m);}
 
 	/**
 	 * 2017-02-11
@@ -98,9 +96,8 @@ abstract class Facade {
 	 * @used-by \Dfe\TBCBank\Init\Action::isRecurring()
 	 * \Dfe\TBCBank\Facade\Charge::capturePreauthorized
 	 * @param M $m
-	 * @return self
 	 */
-	static function s(M $m) {return dfcf(function(M $m, $c) {
+	static function s(M $m):self {return dfcf(function(M $m, $c) {
 		/**
 		 * 2017-07-19
 		 * Unable to reduce the implementation to:
