@@ -21,7 +21,7 @@ final class Token {
 	 * @param string $methodCode
 	 * @param string $cardId
 	 */
-	static function exchangedSet($methodCode, $cardId) {self::$_exchanged[$methodCode] = $cardId;}
+	static function exchangedSet($methodCode, $cardId):void {self::$_exchanged[$methodCode] = $cardId;}
 
 	/**
 	 * 2017-08-28    
@@ -44,9 +44,8 @@ final class Token {
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @param II|OP|QP|O|Q $p
 	 * @param bool $required [optional]
-	 * @return string
 	 */
-	static function get($p, $required = true) {
+	static function get($p, $required = true):string {
 		$r = dfp_iia($p, self::KEY); /** @var string|bool $r */
 		return !$required ? $r : df_result_sne($r);
 	}
