@@ -30,7 +30,7 @@ class CustomerReturn extends Action {
 	 * 		$result = $this->execute();
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
 	 */
-	function execute() {
+	function execute():void {
 		if ($this->needLog()) {
 			dfp_report($this->module(), df_request(), 'customerReturn');
 		}
@@ -50,8 +50,7 @@ class CustomerReturn extends Action {
 				$o->cancel()->save();
 			}
 			$ss->restoreQuote();
-			/** @var string $msg */
-			$msg = $this->s()->messageFailure($this->message(), $o ? $o->getStore() : null);
+			$msg = $this->s()->messageFailure($this->message(), $o ? $o->getStore() : null); /** @var string $msg */
 			if ($o) {
 				# 2017-04-13
 				# @todo Надо бы здесь дополнительно сохранять в транзакции ответ ПС.
@@ -73,16 +72,14 @@ class CustomerReturn extends Action {
 	 * @see \Dfe\IPay88\Controller\CustomerReturn\Index::isSuccess()
 	 * @see \Dfe\Robokassa\Controller\CustomerReturn\Index::isSuccess()
 	 * @see \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
-	 * @return bool
 	 */
-	protected function isSuccess() {return !df_request(Operation::FAILURE);}
+	protected function isSuccess():bool {return !df_request(Operation::FAILURE);}
 
 	/**
 	 * 2016-08-27
 	 * @used-by self::execute()
 	 * @see \Dfe\AllPay\Controller\CustomerReturn\Index::message()
 	 * @see \Dfe\IPay88\Controller\CustomerReturn\Index::message()
-	 * @return string
 	 */
-	protected function message() {return '';}
+	protected function message():string {return '';}
 }
