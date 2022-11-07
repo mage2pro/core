@@ -9,6 +9,7 @@ use Magento\Quote\Api\CartManagementInterface as IQM;
 use Magento\Quote\Api\Data\CartInterface as IQuote;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdMask;
+use \Exception as E;
 # 2016-07-18
 final class PlaceOrderInternal {
 	/**
@@ -34,7 +35,7 @@ final class PlaceOrderInternal {
 			try {$oid = df_quote_m()->placeOrder($this->qid());}
 			finally {BA::restore();}
 		}
-		catch (\Exception $e) {throw new CouldNotSave(__($this->message($e)), $e);}
+		catch (E $e) {throw new CouldNotSave(__($this->message($e)), $e);}
 		/**
 		 * 2018-04-14
 		 * The previous code was:
@@ -45,10 +46,8 @@ final class PlaceOrderInternal {
 		$m = $this->m(); /** @var M $m */
 		$m->orderPlaced($oid);
 		$r = dfp_iia($m, self::$REDIRECT_DATA);
-		/**
-		 * 2018-04-15
-		 * https://www.upwork.com/messages/rooms/room_c037d73dc6d45dee9ad4a664a05ce541/story_89760d8131dae4d3d268f13009b89950
-		 */
+		# 2018-04-15
+		# https://www.upwork.com/messages/rooms/room_c037d73dc6d45dee9ad4a664a05ce541/story_89760d8131dae4d3d268f13009b89950
 		return $m->skipDfwEncode() ? $r : dfw_encode($r);
 	}
 	
@@ -56,10 +55,9 @@ final class PlaceOrderInternal {
 	 * 2016-07-18
 	 * 2016-10-24 Сообщение для покупателя функция возвращает, а сообщение для администратора — логирует.
 	 * @used-by self::_place()
-	 * @param \Exception|DFPE $e
-	 * @return string
+	 * @param E|DFPE $e
 	 */
-	private function message(\Exception $e) {
+	private function message(E $e):string {
 		$isShipping = df_ets($e) === (string)__('Please specify a shipping method.'); /** @var bool $isShipping */
 		/** @var bool $isSpecific */
 		if (!($isSpecific = $e instanceof DFPE)) {
@@ -86,9 +84,10 @@ final class PlaceOrderInternal {
 
 	/**
 	 * 2016-07-18
-	 * @return int
+	 * @used-by self::_place()
+	 * @used-by self::m()
 	 */
-	private function qid() {return dfc($this, function() {
+	private function qid():int {return dfc($this, function() {
 		/** @var int|string $result */
 		$result = $this->_cartId;
 		/**
@@ -111,17 +110,15 @@ final class PlaceOrderInternal {
 	 * 2017-12-13
 	 * @used-by self::_place()
 	 * @used-by self::s()
-	 * @return Method
 	 */
-	private function m() {return dfc($this, function() {return dfpm(dfp(df_quote($this->qid())));});}
+	private function m():Method {return dfc($this, function() {return dfpm(dfp(df_quote($this->qid())));});}
 
 	/**
 	 * 2016-07-18
 	 * @used-by self::_place()
 	 * @used-by self::message()
-	 * @return Settings
 	 */
-	private function s() {return dfc($this, function() {return $this->m()->s();});}
+	private function s():Settings {return dfc($this, function() {return $this->m()->s();});}
 
 	/**
 	 * 2017-03-12
@@ -159,7 +156,7 @@ final class PlaceOrderInternal {
 	 * @param array(string => mixed) $p [optional]
 	 * @param bool $forceGet [optional]
 	 */
-	static function setRedirectData(M $m, $url, array $p = [], $forceGet = false) {$m->iiaSet(
+	static function setRedirectData(M $m, $url, array $p = [], $forceGet = false):array {$m->iiaSet(
 		self::$REDIRECT_DATA, ['forceGet' => $forceGet, 'p' => $p, 'url' => $url]
 	);}
 
