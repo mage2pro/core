@@ -57,7 +57,7 @@ class GlobalT implements Sb {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Checkout/Model/CompositeConfigProvider.php#L31-L41
 	 * @return array(string => mixed)
 	 */
-	function getConfig() {return !df_is_checkout() ? [] : ['payment' => ['ccform' => [
+	function getConfig():array {return !df_is_checkout() ? [] : ['payment' => ['ccform' => [
 		'icons' => $this->icons()
 	]]];}
 
@@ -78,7 +78,7 @@ class GlobalT implements Sb {
 	 * @used-by self::getConfig()
 	 * @return array(string => mixed)
 	 */
-	private function icons() {return df_clean(df_map(function($t) {return
+	private function icons():array {return df_clean(df_map(function($t) {return
 		!($url = N::url($t, null)) ? [null, null] : [$t, N::dimensions() + ['url' => $url]]
 	;}, N::custom(), [], [], 0, true));}
 }
