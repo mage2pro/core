@@ -33,10 +33,9 @@ final class PlaceOrder {
 	 * @param IQP|QP $qp
 	 * @param IQA|QA|null $ba
 	 * 2017-04-04 Важно возвращать именно string: @see dfw_encode()
-	 * @return string
 	 * @throws CouldNotSave|LE
 	 */
-	function guest($cartId, $email, IQP $qp, IQA $ba = null) {return $this->p(
+	function guest($cartId, $email, IQP $qp, IQA $ba = null):string {return $this->p(
 		true, $cartId, $email, $qp, $ba
 	);}
 
@@ -46,10 +45,9 @@ final class PlaceOrder {
 	 * @param int $cartId
 	 * @param IQP|QP $qp
 	 * @param IQA|QA|null $ba
-	 * @return string
 	 * @throws CouldNotSave|LE
 	 */
-	function registered($cartId, IQP $qp, IQA $ba = null) {return $this->p(false, $cartId, $qp, $ba);}
+	function registered($cartId, IQP $qp, IQA $ba = null):string {return $this->p(false, $cartId, $qp, $ba);}
 
 	/**
 	 * 2017-04-05
@@ -63,10 +61,9 @@ final class PlaceOrder {
 	 * @param int|string $cartId
 	 * @param mixed ...$args
 	 * 2017-04-04 Важно возвращать именно string: @see dfw_encode()
-	 * @return string
 	 * @throws CouldNotSave|LE
 	 */
-	private function p($isGuest, $cartId, ...$args) {
+	private function p($isGuest, $cartId, ...$args):string {
 		/** @var IGuest|Guest|IRegistered|Registered $saver */
 		$saver = df_o($isGuest ? IGuest::class : IRegistered::class);
 		$saver->savePaymentInformation($cartId, ...$args);
