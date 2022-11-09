@@ -31,7 +31,7 @@ final class SearchResult implements ObserverInterface {
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @param Ob $o
 	 */
-	function execute(Ob $o) {
+	function execute(Ob $o):void {
 		$provider = $o[Plugin::PROVIDER]; /** @var Provider $provider */
 		/** @var ISearchResult|ApiSearchResult|UiSearchResult|OrderGC|InvoiceGC|CreditmemoGC $result */
 		$result = $o[Plugin::RESULT];
