@@ -60,9 +60,8 @@ final class VoidT implements ObserverInterface {
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @param Observer $ob
 	 */
-	function execute(Observer $ob) {
-		/** @var OP $op */
-		if (dfp_my($op = $ob['payment'])) {
+	function execute(Observer $ob):void {
+		if (dfp_my($op = $ob['payment'])) { /** @var OP $op */
 			$op->getOrder()->setState(O::STATE_CLOSED)->setStatus(df_order_ds(O::STATE_CLOSED));
 		}
 	}
