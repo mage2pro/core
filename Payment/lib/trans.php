@@ -93,9 +93,8 @@ function df_trans_r():TR {return df_o(TR::class);}
  * @used-by \Dfe\TwoCheckout\Handler\Charge::op()
  * @param string $txnId
  * @param bool $throw [optional]
- * @return T
  * @throws DFE
  */
-function df_transx($txnId, $throw = true) {return dfcf(function($txnId, $throw = true) {return df_load(
+function df_transx($txnId, $throw = true):T {return dfcf(function($txnId, $throw = true) {return df_load(
 	T::class, $txnId, $throw, 'txn_id'
 );}, func_get_args());}
