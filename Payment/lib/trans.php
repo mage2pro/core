@@ -8,14 +8,12 @@ use Magento\Sales\Model\Order\Payment\Transaction\Repository as TR;
 
 /**
  * 2016-11-17
- * 2017-01-05
- * Для загрузки транзакции по «txn_id» используйте @see df_transx()
+ * 2017-01-05 Для загрузки транзакции по «txn_id» используйте @see df_transx()
  * @param T|int|null $t
  * @param bool $throw [optional]
- * @return T
  * @throws DFE
  */
-function df_trans($t = null, $throw = true) {/** @var T|int|null $r */
+function df_trans($t = null, $throw = true):T {/** @var T|int|null $r */
 	$r = is_null($t) ? df_trans_current() : ($t instanceof T ? $t : df_trans_r()->get($t));
 	return !$throw ? $r : df_ar($r, T::class);
 }
@@ -73,15 +71,15 @@ function df_trans_is_my(T $t = null):bool {return dfp_my(df_trans($t, false));}
  * @param bool|mixed $rf [optional]
  * @return bool|mixed
  */
-function df_trans_is_test($t = null, $rt = true, $rf = false) {return 
-	dfp_is_test(dfp(df_trans($t))) ? $rt : $rf
-;}
+function df_trans_is_test($t = null, $rt = true, $rf = false) {return dfp_is_test(dfp(df_trans($t))) ? $rt : $rf;}
 
 /**
  * 2016-07-13
+ * @used-by df_trans()
+ * @used-by df_trans_by_payment()
  * @return TR
  */
-function df_trans_r() {return df_o(TR::class);}
+function df_trans_r():TR {return df_o(TR::class);}
 
 /**
  * 2017-01-05

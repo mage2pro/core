@@ -14,9 +14,8 @@ use Df\Payment\W\Event;
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\SecurePay\Signer\Response::values()
  * @param string|object $m
- * @return TM
  */
-function df_tm($m) {return TM::s($m);}
+function df_tm($m):TM {return TM::s($m);}
 
 /**
  * 2017-03-23
