@@ -8,7 +8,7 @@ use Magento\Sales\Model\Order\Payment\Repository;
  * @used-by dfp_methods()
  * @return H
  */
-function dfp_h() {return df_o(H::class);}
+function dfp_h():H {return df_o(H::class);}
 
 /**
  * 2016-05-07 https://mage2.pro/tags/order-payment-repository
