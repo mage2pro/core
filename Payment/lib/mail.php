@@ -48,8 +48,7 @@ function dfp_mail(O $o):void {
 	# Помещаем код ниже в блок else, потому что если письмо с заказом уже отослано,
 	# то письмо со счётом отсылать не надо, даже если счёт присутствует и письмо о нём не отсылалось.
 	else {
-		/** @var I $i */
-		$i = $o->getInvoiceCollection()->getLastItem();
+		$i = $o->getInvoiceCollection()->getLastItem(); /** @var I $i */
 		/**
 		 * 2016-08-17
 		 * @uses \Magento\Framework\Data\Collection::getLastItem()
