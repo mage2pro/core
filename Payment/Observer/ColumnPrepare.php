@@ -39,12 +39,10 @@ final class ColumnPrepare implements ObserverInterface {
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @param O $o
 	 */
-	function execute(O $o) {
+	function execute(O $o):void {
 		$c = $o[Plugin::COLUMN]; /** @var Column $c */
 		if ('payment_method' === $c->getName() && 'sales_order_grid' === $c->getContext()->getNamespace()) {
-			$c['config'] = [
-				'bodyTmpl' => 'ui/grid/cells/html', 'component' => 'Df_Ui/js/grid/columns/select'
-		   ] + $c['config'];
+			$c['config'] = ['bodyTmpl' => 'ui/grid/cells/html', 'component' => 'Df_Ui/js/grid/columns/select'] + $c['config'];
 		}
 	}
 }
