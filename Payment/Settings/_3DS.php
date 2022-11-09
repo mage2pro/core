@@ -21,9 +21,8 @@ final class _3DS extends \Df\Config\Settings {
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @param string|null $countryId
 	 * @param int|null $customerId
-	 * @return bool
 	 */
-	function disable_($countryId, $customerId) {return dfc($this, function($countryId, $customerId) {return
+	function disable_($countryId, $customerId):bool {return dfc($this, function($countryId, $customerId) {return
 		$this->b('enabled') && (
 			$this->b('forAll')
 			|| ($this->b('forReturning') && !df_customer_is_new($customerId))
@@ -38,9 +37,8 @@ final class _3DS extends \Df\Config\Settings {
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @param string|null $countryId
 	 * @param int|null $customerId
-	 * @return bool
 	 */
-	function enable_($countryId, $customerId) {return dfc($this, function($countryId, $customerId) {return
+	function enable_($countryId, $customerId):bool {return dfc($this, function($countryId, $customerId) {return
 		$this->b('forAll')
 		|| $this->b('forNew') && df_customer_is_new($customerId)
 		|| $this->countries($countryId)
@@ -68,9 +66,8 @@ final class _3DS extends \Df\Config\Settings {
 	 * @used-by self::disable_()
 	 * @used-by self::enable_()
 	 * @param string|null $countryId
-	 * @return bool
 	 */
-	private function countries($countryId) {return
+	private function countries($countryId):bool {return
 		$this->nwbn('countries', $countryId, 'forShippingDestinations')
 		# 2016-05-31
 		# Today it seems that the PHP request to freegeoip.net stopped returning any value,
