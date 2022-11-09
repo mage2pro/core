@@ -132,9 +132,8 @@ class Action {
 	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
-	 * @return bool
 	 */
-	final function preconfiguredToCapture() {return AC::c($this->preconfigured());}
+	final function preconfiguredToCapture():bool {return AC::c($this->preconfigured());}
 
 	/**
 	 * 2017-03-26
@@ -145,18 +144,16 @@ class Action {
 	 * @used-by \Dfe\TBCBank\Init\Action::transId()
 	 * @param string $id
 	 * @param string|null $t [optional]
-	 * @return string
 	 */
-	final protected function e2i($id, $t = null) {return $this->m()->tid()->e2i($id, $t);}
+	final protected function e2i($id, $t = null):string {return $this->m()->tid()->e2i($id, $t);}
 
 	/**
 	 * 2017-09-10
 	 * @used-by self::action()
 	 * @see \Dfe\Dragonpay\Init\Action::forceGet()
-	 * @see \Dfe\Qiwi\Init\Action::redirectMethod()
-	 * @return bool
+	 * @see \Dfe\Qiwi\Init\Action::forceGet()
 	 */
-	protected function forceGet() {return false;}
+	protected function forceGet():bool {return false;}
 
 	/**
 	 * 2017-03-21
@@ -172,30 +169,26 @@ class Action {
 	 * @used-by \Dfe\Qiwi\Init\Action::res()
 	 * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @used-by \Dfe\TBCBank\Init\Action::isRecurring()
-	 * @return M
 	 */
-	protected function m() {return $this->_m;}
+	protected function m():M {return $this->_m;}
 
 	/**
 	 * 2017-03-21
 	 * @used-by self::action()
 	 * @used-by self::preconfigured()
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
-	 * @return O
 	 */
-	final protected function oq() {return $this->_m->oq();}
+	final protected function oq():O {return $this->_m->oq();}
 
 	/**
 	 * 2017-03-21
 	 * @used-by self::action()
 	 * @used-by self::preconfiguredToCapture()
 	 * @see \Dfe\TBCBank\Init\Action::preconfigured()
-	 * @return string
 	 */
-	protected function preconfigured() {return dfc($this, function() {
+	protected function preconfigured():string {return dfc($this, function() {
 		$s = $this->s(); /** @var S $s */
-		/** @var string $key */
-		$key = 'actionFor' . (df_customer_is_new($this->oq()->getCustomerId()) ? 'New' : 'Returned');
+		$key = 'actionFor' . (df_customer_is_new($this->oq()->getCustomerId()) ? 'New' : 'Returned'); /** @var string $key */
 		/**
 		 * 2018-10-06
 		 * The `action` key is used by the TBC Bank module:
@@ -213,7 +206,7 @@ class Action {
 	 * @see \Dfe\Qiwi\Init\Action::preorder()
 	 * @see \Dfe\Stripe\Init\Action::preorder()
 	 */
-	protected function preorder() {}
+	protected function preorder():void {}
 
 	/**
 	 * 2017-03-21
@@ -223,7 +216,7 @@ class Action {
 	 * @see \Dfe\TBCBank\Init\Action::redirectParams()
 	 * @return array(string => mixed)
 	 */
-	protected function redirectParams() {return [];}
+	protected function redirectParams():array {return [];}
 
 	/**
 	 * 2016-12-24
@@ -259,16 +252,14 @@ class Action {
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @used-by \Dfe\Stripe\Init\Action::preorder()
 	 * @used-by \Dfe\TBCBank\Init\Action::preconfigured()
-	 * @return S
 	 */
-	protected function s() {return $this->_m->s();}
+	protected function s():S {return $this->_m->s();}
 
 	/**
 	 * 2018-11-14
 	 * @used-by \Dfe\TBCBank\Init\Action::transId()
-	 * @return string
 	 */
-	final protected function token() {return dfc($this, function() {return Token::get($this->m()->ii());});}
+	final protected function token():string {return dfc($this, function() {return Token::get($this->m()->ii());});}
 
 	/**
 	 * 2017-03-21 Возвращает идентификатор транзакции во внутреннем формате.
@@ -313,9 +304,8 @@ class Action {
 	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @param M $m
-	 * @return self
 	 */
-	final static function sg(M $m) {return dfcf(function(M $m) {
+	final static function sg(M $m):self {return dfcf(function(M $m) {
 		$c = df_con_hier($m, self::class); /** @var string $c */
 		return new $c($m);
 	}, [$m]);}

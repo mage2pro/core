@@ -21,7 +21,7 @@ abstract class Action extends \Df\Payment\Init\Action {
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @return array(string => mixed)
 	 */
-	final protected function redirectParams() {return df_last($this->charge());}
+	final protected function redirectParams():array {return df_last($this->charge());}
 
 	/**
 	 * 2017-03-21
