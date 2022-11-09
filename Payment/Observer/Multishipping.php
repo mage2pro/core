@@ -41,7 +41,7 @@ final class Multishipping implements ObserverInterface {
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @param O $o
 	 */
-	function execute(O $o) {
+	function execute(O $o):void {
 		if (df_is_checkout_multishipping()) {
 			$p = $o['payment']; /** @var OP $p */
 			/**
