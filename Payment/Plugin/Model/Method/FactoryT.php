@@ -54,7 +54,5 @@ final class FactoryT {
 	 * @param array $d [optional]
 	 * @return M|IM
 	 */
-	function aroundCreate(Sb $sb, \Closure $f, $c, $d = []) {return 
-		is_a($c, M::class, true) ? M::sg($c) : $f($c, $d)
-	;}
+	function aroundCreate(Sb $sb, \Closure $f, $c, $d = []) {return is_a($c, M::class, true) ? M::sg($c) : $f($c, $d);}
 }
