@@ -12,9 +12,8 @@ use Magento\Sales\Model\Order as O;
  * @used-by \Df\Payment\Method::isAvailable()
  * @used-by \Df\Payment\Operation\Source::currencyC()
  * @param string|object $m
- * @return C
  */
-function dfp_currency($m) {return C::f($m);}
+function dfp_currency($m):C {return C::f($m);}
 
 /**
  * 2017-04-08
@@ -24,7 +23,7 @@ function dfp_currency($m) {return C::f($m);}
  * @return array(M, O|Q)  
  * @throws DFE
  */
-function dfpex_args($a0, $a1 = null) {return ($a1
+function dfpex_args($a0, $a1 = null):array {return ($a1
 	? ($a0 instanceof M ? [$a0, df_oq($a1)] : (df_is_oq($a0) ? [df_ar($a1, M::class), $a0] : []))
 	: ($a0 instanceof M ? [$a0, $a0->o()] : (df_is_oq($a0) ? [dfpm($a0), $a0] : []))) ?: df_error(
 		'dfpex_args(): invalid first argument: %s.', df_type($a0)
@@ -38,9 +37,8 @@ function dfpex_args($a0, $a1 = null) {return ($a1
  * @used-by \Df\Payment\Operation\Source::cFromDoc()
  * @param float $a
  * @param mixed ...$args
- * @return float
  */
-function dfpex_from_doc($a, ...$args) {
+function dfpex_from_doc($a, ...$args):float {
 	# 2020-03-02, 2022-10-31
 	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 	#		[$a, $b] = [1, 2];
