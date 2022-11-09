@@ -11,23 +11,20 @@ abstract class Testable extends \Df\Payment\Source\API\Key {
 	 * @used-by self::tkey()
 	 * @used-by \Dfe\Spryng\Source\Account::fetch()
 	 * @param mixed ...$args [optional]
-	 * @return bool
 	 */
-	final protected function test(...$args) {return df_b($args, $this->_test());}
+	final protected function test(...$args):bool {return df_b($args, $this->_test());}
 
 	/**
 	 * 2017-02-15
 	 * @used-by \Dfe\Square\Source\Location::apiKeyName()
 	 * @used-by \Dfe\Spryng\Source\Account::apiKeyName()
 	 * @param string $name
-	 * @return string
 	 */
-	final protected function tkey($name) {return "{$this->test('test', 'live')}$name";}
+	final protected function tkey($name):string {return "{$this->test('test', 'live')}$name";}
 
 	/**
 	 * 2017-03-28
 	 * @used-by self::test()
-	 * @return bool
 	 */
-	private function _test() {return dfc($this, function() {return df_starts_with(df_last($this->pathA()), 'test');});}
+	private function _test() {return dfc($this, function():bool {return df_starts_with(df_last($this->pathA()), 'test');});}
 }
