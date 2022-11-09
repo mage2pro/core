@@ -15,15 +15,13 @@ class Order extends Source {
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @param M $m
 	 * 2016-09-05
-	 * Размер транзакции в валюте платёжных транзакций,
-	 * которая настраивается администратором опцией
+	 * Размер транзакции в валюте платёжных транзакций, которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
 	final function __construct(M $m) {$this->_m = $m;}
 
 	/**
-	 * 2017-04-08
-	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * 2017-04-08 Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @override
 	 * @see \Df\Payment\Operation\Source::amount()
 	 * @used-by \Df\Payment\Operation::amount()
@@ -41,9 +39,8 @@ class Order extends Source {
 	 * @see \Df\Payment\Operation\Source::id()
 	 * @used-by \Df\Payment\Operation::id()
 	 * @see \Df\Payment\Operation\Source\Creditmemo::id()
-	 * @return string
 	 */
-	function id() {return df_result_sne($this->oq()->getIncrementId());}
+	function id():string {return df_result_sne($this->oq()->getIncrementId());}
 
 	/**
 	 * 2017-04-08
@@ -52,9 +49,8 @@ class Order extends Source {
 	 * @used-by self::oq()
 	 * @used-by \Df\Payment\Operation::ii()
 	 * @used-by \Df\Payment\Operation\Source\Creditmemo::cm()
-	 * @return OP
 	 */
-	final function ii() {return dfc($this, function() {return df_ar($this->_m->ii(), OP::class);});}
+	final function ii():OP {return dfc($this, function() {return df_ar($this->_m->ii(), OP::class);});}
 
 	/**
 	 * 2017-04-08
@@ -71,9 +67,8 @@ class Order extends Source {
 	 * @override
 	 * @see \Df\Payment\Operation\Source::oq()
 	 * @used-by self::id()
-	 * @return O
 	 */
-	final function oq() {return df_order($this->ii());}
+	final function oq():O {return df_order($this->ii());}
 
 	/**
 	 * 2017-04-08
