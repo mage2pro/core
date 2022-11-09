@@ -40,9 +40,8 @@ final class Entry {
 	 * безвесовые записи между весовыми, но увы...
 	 * @used-by \Df\Payment\Info\Report::addAfter()
 	 * @used-by \Df\Payment\Info\Report::sort()
-	 * @return int
 	 */
-	function weight() {return $this->_weight;}
+	function weight():int {return $this->_weight;}
 
 	/**
 	 * 2017-03-12
