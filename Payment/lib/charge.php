@@ -9,6 +9,7 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\Collection as IC;
  * 2017-04-08
  * By analogy with @see \Magento\Sales\Model\Order\Payment::processAction()
  * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424
+ * The result is in the order/payment currency.
  * @used-by \Df\Payment\Operation\Source\Order::amount()
  * @used-by \Df\Payment\Operation\Source\Quote::amount()
  * @used-by \Df\StripeClone\Method::charge()
@@ -16,9 +17,8 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\Collection as IC;
  * @used-by \Dfe\CheckoutCom\Method::capturePreauthorized()
  * @param M $m
  * @param O|Q|I|CM|null $d [optional]
- * @return float in the order/payment currency
  */
-function dfp_due(M $m, $d = null) {
+function dfp_due(M $m, $d = null):float {
 	$d = $d ?: ($m->ii()->getCreditmemo() ?: $m->oq());
 	# 2018-10-06 This code handles the backend partial capture of a preauthorized bank card payment.
 	if (df_is_o($d)) {
