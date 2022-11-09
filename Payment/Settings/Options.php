@@ -21,23 +21,22 @@ final class Options {
 	 * @used-by \Dfe\AllPay\Charge::pChoosePayment()
 	 * @return string[]
 	 */
-	function allowed() {return $this->_s->csv('optionsAllowed');}
+	function allowed():array {return $this->_s->csv('optionsAllowed');}
 
 	/**
 	 * 2017-03-03
 	 * @used-by \Dfe\AllPay\Charge::pIgnorePayment()
 	 * @return string[]
 	 */
-	function denied() {return array_diff($this->_source->keys(), $this->allowed());}
+	function denied():array {return array_diff($this->_source->keys(), $this->allowed());}
 
 	/**
 	 * 2016-07-05 «Limit the payment options availability?»
 	 * @used-by self::o()
 	 * @used-by \Dfe\AllPay\Charge::pChoosePayment()
 	 * @used-by \Dfe\AllPay\Charge::pIgnorePayment()
-	 * @return bool
 	 */
-	function isLimited() {return $this->_s->b('optionsLimit');}
+	function isLimited():bool {return $this->_s->b('optionsLimit');}
 
 	/**
 	 * 2016-08-07
@@ -51,7 +50,7 @@ final class Options {
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return array(<value> => <label>)
 	 */
-	function o($force = false) {return !self::needShow($this->_s) && !$force ? [] : $this->_source->options(
+	function o($force = false):array {return !self::needShow($this->_s) && !$force ? [] : $this->_source->options(
 		!$this->isLimited() ? null : $this->allowed()
 	);}
 
@@ -60,9 +59,8 @@ final class Options {
 	 * @used-by self::o()
 	 * @used-by \Df\Payment\ConfigProvider::configOptions()
 	 * @param S $s
-	 * @return bool
 	 */
-	static function needShow(S $s) {return OL::MAGENTO === $s->v('optionsLocation', null, OL::MAGENTO);}
+	static function needShow(S $s):bool {return OL::MAGENTO === $s->v('optionsLocation', null, OL::MAGENTO);}
 
 	/**
 	 * 2017-03-03
