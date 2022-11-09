@@ -66,4 +66,3 @@ final class VoidT implements ObserverInterface {
 		}
 	}
 }
-
