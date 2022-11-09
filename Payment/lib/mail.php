@@ -35,7 +35,7 @@ use Magento\Sales\Model\Order as O;
  *
  * @param O $o
  */
-function dfp_mail(O $o) {
+function dfp_mail(O $o):void {
 	/**
 	 * 2016-08-17
 	 * @uses \Magento\Sales\Model\Order::getEmailSent() говорит,
