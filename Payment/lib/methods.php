@@ -12,7 +12,7 @@
  * @used-by dfp_methods_o()
  * @return array(array(string => string))
  */
-function dfp_methods() {return dfcf(function() {return df_map_k(function($k, $v) {return
+function dfp_methods():array {return dfcf(function() {return df_map_k(function($k, $v) {return
 	'Credit Card' !== $v ? $v : df_desc($v, $k)
 ;}, dfp_h()->getPaymentMethodList(true));});}
 
@@ -28,4 +28,4 @@ function dfp_methods() {return dfcf(function() {return df_map_k(function($k, $v)
  * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
  * @return array(array(string => string))
  */
-function dfp_methods_o() {return df_map_to_options(dfp_methods());}
+function dfp_methods_o():array {return df_map_to_options(dfp_methods());}
