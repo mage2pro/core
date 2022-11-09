@@ -46,7 +46,6 @@ class AC extends \Df\Config\Source {
 	 * @used-by \Df\Payment\Init\Action::preconfiguredToCapture()
 	 * @used-by \Dfe\CheckoutCom\Method::isCaptureDesired()
 	 * @param string $v
-	 * @return bool
 	 */
-	static function c($v) {return self::C === $v;}
+	final static function c($v):bool {return self::C === $v;}
 }
