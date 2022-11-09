@@ -18,9 +18,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @param mixed|null $d [optional]
  * @return array(string => mixed)|mixed
  */
-function df_trd(T $t, $k = null, $d = null) {return dfa(
-	df_eta($t->getAdditionalInformation(T::RAW_DETAILS)), $k, $d
-);}
+function df_trd(T $t, $k = null, $d = null):array {return dfa(df_eta($t->getAdditionalInformation(T::RAW_DETAILS)), $k, $d);}
 
 /**
  * 2016-07-10
@@ -33,4 +31,4 @@ function df_trd(T $t, $k = null, $d = null) {return dfa(
  * @param II|OP|QP|null $p
  * @param array(string => mixed) $v
  */
-function df_trd_set(II $p, array $v) {$p->setTransactionAdditionalInfo(T::RAW_DETAILS, df_ksort($v));}
+function df_trd_set(II $p, array $v):array {$p->setTransactionAdditionalInfo(T::RAW_DETAILS, df_ksort($v));}
