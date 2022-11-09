@@ -26,35 +26,27 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  * @return int|null
  */
 function dfp_refund(P $p, $tid, $a = null) {
-	/** @var I $i */
-	/** @var O $o */
-	$i = df_invoice_by_trans($o = df_order($p), $tid);
-	/** @var M $m */
-	$m = dfpm($p);
-	/** @var CML $cml */
-	$cml = df_o(CML::class);
+	$i = df_invoice_by_trans($o = df_order($p), $tid); /** @var I $i */ /** @var O $o */
+	$m = dfpm($p); /** @var M $m */
+	$cml = df_o(CML::class); /** @var CML $cml */
 	$cml->setOrderId($o->getId())->setInvoiceId($i->getId());
 	if ($a) {
 		/**
 		 * 2016-09-08
 		 * Обработка частичного возврата.
 		 * Делаем по аналогии с @see \Dfe\TwoCheckout\Handler\RefundIssued::cm()
-		 *
 		 * Произвожу расчёты в базовой валюте, чтобы не мешали курсовые колебания,
 		 * которые могли произойти в период между платежом и возвратом.
-		 *
 		 * 2017-01-18
 		 * Более того, ядро требует данных в базовой валюте! (смотрите ниже)
 		 * @see \Magento\Sales\Model\Order\Creditmemo::setAdjustmentNegative()
 		 */
 		$refundAmountB = $m->cToBase($m->amountParse($a)); /** @var float $refundAmountB */
-		/** @var float $diffB */
-		$diffB = $i->getBaseGrandTotal() - $refundAmountB;
+		$diffB = $i->getBaseGrandTotal() - $refundAmountB; /** @var float $diffB */
 		if (!dff_eq0($diffB)) {
 			/**
 			 * 2016-05-23
 			 * https://mage2.pro/tags/credit-memo-adjustment
-			 *
 			 * Стек вызова:
 			 * 1) @used-by \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoader::load()
 			 * https://github.com/magento/magento2/blob/b366da/app/code/Magento/Sales/Controller/Adminhtml/Order/CreditmemoLoader.php#L186
@@ -62,7 +54,6 @@ function dfp_refund(P $p, $tid, $a = null) {
 			 * https://github.com/magento/magento2/blob/b366da/app/code/Magento/Sales/Model/Order/CreditmemoFactory.php#L155
 			 * 3) @used-by \Magento\Sales\Model\Order\CreditmemoFactory::initData()
 			 * https://github.com/magento/magento2/blob/b366da/app/code/Magento/Sales/Model/Order/CreditmemoFactory.php#L244-L246
-			 *
 			 * 2017-01-18
 			 * Значение должно быть в базовой валюте!
 			 * @used-by \Magento\Sales\Model\Order\Creditmemo::setAdjustmentNegative()
@@ -76,7 +67,6 @@ function dfp_refund(P $p, $tid, $a = null) {
 			]);
 		}
 	}
-	/** @var CM|false $cm */
 	/**
 	 * 2017-01-19
 	 * Когда мы выполняем возврат на стороне Magento,
@@ -143,9 +133,10 @@ function dfp_refund(P $p, $tid, $a = null) {
 		 * «Division by zero in magento/module-sales/Model/Order/Creditmemo/Item.php»
 		 * https://github.com/mage2pro/stripe/issues/43
 		 * I am unable to reproduce it myself.
+		 * 2022-11-09 The PHPStorm warning is intentionally ignored here.
 		 */
 		,function(\Exception $e) {return 'lennyshoe.com' === df_domain_current() ? null : df_error($e);}
-	);
+	); /** @var CM|false $cm */
 	/**
 	 * 2016-12-30
 	 * @uses \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoader::load()
@@ -158,9 +149,9 @@ function dfp_refund(P $p, $tid, $a = null) {
 	 * by making your event processing idempotent.»
 	 * https://stripe.com/docs/webhooks#best-practices
 	 */
-	/** @var int|null $result */
+	/** @var int|null $r */
 	if (!$cm) {
-		$result = null;
+		$r = null;
 	}
 	else {
 		/**
@@ -185,7 +176,7 @@ function dfp_refund(P $p, $tid, $a = null) {
 		 * Что интересно, при возврате из административной части Magento 2
 		 * покупатель тоже не получает уведомление.
 		 */
-		$result = $cm->getId();
+		$r = $cm->getId();
 	}
 	/**
 	 * 2017-01-18
@@ -193,5 +184,5 @@ function dfp_refund(P $p, $tid, $a = null) {
 	 * сохраняем для заказа состояние «Processing»:
 	 * @see \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
 	 */
-	return $result;
+	return $r;
 }

@@ -152,7 +152,7 @@ function df_abstract($caller) {
  * @param string|string[]|mixed|E|Phrase|null ...$args
  * @throws DFE
  */
-function df_error(...$args) {
+function df_error(...$args):void {
 	df_header_utf();
 	$e = df_error_create(...$args); /** @var DFE $e */
 	/**
