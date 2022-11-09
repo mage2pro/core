@@ -105,9 +105,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @override
 	 * @see \Df\Payment\W\Event::k_pid()
 	 * @used-by \Df\Payment\W\Event::pid()
-	 * @return string
 	 */
-	final protected function k_pid() {return df_cc_path($this->roPath(), $this->k_pidSuffix());}
+	final protected function k_pid():string {return df_cc_path($this->roPath(), $this->k_pidSuffix());}
 
 	/**
 	 * 2017-02-14

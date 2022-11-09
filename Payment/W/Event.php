@@ -16,16 +16,15 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Df\StripeClone\W\Event::k_pid()
 	 * @see \Dfe\AllPay\W\Event::k_pid()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::k_pid()
-	 * @see \Dfe\Dragonpay\W\Event::k_pid
+	 * @see \Dfe\Dragonpay\W\Event::k_pid()
 	 * @see \Dfe\IPay88\W\Event::k_pid()
 	 * @see \Dfe\PostFinance\W\Event::k_pid()
 	 * @see \Dfe\Qiwi\W\Event::k_pid()
 	 * @see \Dfe\Robokassa\W\Event::k_pid()
 	 * @see \Dfe\SecurePay\W\Event::k_pid()
 	 * @see \Dfe\YandexKassa\W\Event::k_pid()
-	 * @return string
 	 */
-	abstract protected function k_pid();
+	abstract protected function k_pid():string;
 
 	/**
 	 * 2017-01-06
