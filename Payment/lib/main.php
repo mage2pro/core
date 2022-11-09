@@ -47,7 +47,7 @@ function dfp($v) {return $v instanceof II ? $v : ($v instanceof IM ? $v->getInfo
  * @param OP $p
  * @param string $action
  */
-function dfp_action(OP $p, $action) {DfOP::action($p, $action);}
+function dfp_action(OP $p, $action):void {DfOP::action($p, $action);}
 
 /**
  * 2016-05-20
@@ -55,10 +55,10 @@ function dfp_action(OP $p, $action) {DfOP::action($p, $action);}
  * @used-by \Df\Payment\Method::iiaAdd()  
  * @used-by \Df\Payment\Observer\Multishipping::execute()
  * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
- * @param II|I|OP|QP $p
+ * @param II|OP|QP $p
  * @param array $info
  */
-function dfp_add_info(II $p, array $info) {
+function dfp_add_info(II $p, array $info):void {
 	foreach ($info as $k => $v) {/** @var string $k */ /** @var string $v */
 		$p->setAdditionalInformation($k, $v);
 	}
@@ -74,11 +74,11 @@ function dfp_add_info(II $p, array $info) {
  * мы знали, что этот возврат мы уже обрабатывали и не обрабатывали бы его повторно:
  * @used-by \Df\StripeClone\Method::_refund()
  * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/Method.php?ts=4#L262-L273
- * @param II|I|OP|QP $p
+ * @param II|OP|QP $p
  * @param string $k
  * @param string $v
  */
-function dfp_container_add(II $p, $k, $v) {$p->setAdditionalInformation($k, df_json_encode(
+function dfp_container_add(II $p, $k, $v):void {$p->setAdditionalInformation($k, df_json_encode(
 	array_merge(dfp_container_get($p, $k), [$v])
 ));}
 
@@ -88,13 +88,13 @@ function dfp_container_add(II $p, $k, $v) {$p->setAdditionalInformation($k, df_j
  * Пока эта функция имеет лишь вспомогательное значение:
  * @used-by dfp_container_add()
  * @used-by dfp_container_has()
- * @param II|I|OP|QP $p
+ * @param II|OP|QP $p
  * @param string $k
  * @return string[]
  * 2017-03-11
  * Формально возвращает array(string => mixed), но реально — string[].
  */
-function dfp_container_get(II $p, $k) {/** @var string $j */ return
+function dfp_container_get(II $p, $k):array {/** @var string $j */ return
 	!($j = $p->getAdditionalInformation($k)) ? [] : df_json_decode($j)
 ;}
 
@@ -102,12 +102,11 @@ function dfp_container_get(II $p, $k) {/** @var string $j */ return
  * 2017-01-19
  * @used-by \Df\Payment\W\Strategy\Refund::_handle()
  * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
- * @param II|I|OP|QP $p
+ * @param II|OP|QP $p
  * @param string $k
  * @param string $v
- * @return bool
  */
-function dfp_container_has(II $p, $k, $v) {return in_array($v, dfp_container_get($p, $k));}
+function dfp_container_has(II $p, $k, $v):bool {return in_array($v, dfp_container_get($p, $k));}
 
 /**
  * 2016-08-08
@@ -129,17 +128,15 @@ function dfp_iia($p, ...$k) {return dfa(dfp($p)->getAdditionalInformation(), dfa
  * 2016-11-17
  * @used-by df_trans_is_test()
  * @param II|OP|QP $p
- * @return bool
  */
-function dfp_is_test(II $p) {return dfp_iia($p, M::II__TEST);}
+function dfp_is_test(II $p):bool {return dfp_iia($p, M::II__TEST);}
 
 /**
  * 2016-08-26
  * @used-by \Dfe\SecurePay\Method::amountFormat()
  * @param float|int|string $a
- * @return string
  */
-function dfp_last2($a) {return substr(strval(round(100 * df_float($a))), -2);}
+function dfp_last2($a):string {return substr(strval(round(100 * df_float($a))), -2);}
 
 /**
  * 2016-08-14

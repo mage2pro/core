@@ -17,9 +17,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by dfps()
  * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
  * @param IM|II|OP|QP|T|object|string|O|null $v
- * @return bool
  */
-function dfp_my($v) {return $v && dfpm($v) instanceof M;}
+function dfp_my($v):bool {return $v && dfpm($v) instanceof M;}
 
 /**
  * 2017-02-07
