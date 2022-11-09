@@ -32,9 +32,8 @@ final class Quote extends \Df\Payment\Operation\Source {
 	 * @override
 	 * @see \Df\Payment\Operation\Source::id()
 	 * @used-by \Df\Payment\Operation::id()
-	 * @return int
 	 */
-	function id() {return df_assert($this->_q->getId());}
+	function id():int {return df_assert($this->_q->getId());}
 
 	/**
 	 * 2017-04-09
@@ -42,9 +41,8 @@ final class Quote extends \Df\Payment\Operation\Source {
 	 * @see \Df\Payment\Operation\Source::ii()
 	 * @used-by self::oq()
 	 * @used-by \Df\Payment\Operation::ii()
-	 * @return QP
 	 */
-	function ii() {return dfc($this, function() {return df_ar(dfp($this->_q), QP::class);});}
+	function ii():QP {return dfc($this, function() {return df_ar(dfp($this->_q), QP::class);});}
 
 	/**
 	 * 2017-04-08
@@ -52,9 +50,8 @@ final class Quote extends \Df\Payment\Operation\Source {
 	 * @override
 	 * @see \Df\Payment\IMA::m()
 	 * @used-by \Df\Payment\Operation::m()
-	 * @return M
 	 */
-	function m() {return $this->_m;}
+	function m():M {return $this->_m;}
 
 	/**
 	 * 2017-04-08
@@ -63,9 +60,8 @@ final class Quote extends \Df\Payment\Operation\Source {
 	 * @used-by \Df\Payment\Operation\Source::cFromDoc()
 	 * @used-by \Df\Payment\Operation\Source::currencyC()
 	 * @used-by \Df\Payment\Operation\Source::store()
-	 * @return Q
 	 */
-	function oq() {return $this->_q;}
+	function oq():Q {return $this->_q;}
 
 	/**
 	 * 2017-04-08

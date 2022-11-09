@@ -22,6 +22,7 @@ interface IMA {
 	 * @used-by \Df\PaypalClone\Signer::_sign()
 	 * @see Operation::m()
 	 * @see \Df\Payment\Operation\Source\Order::m()
+	 * @see \Df\Payment\Operation\Source\Quote::m()
 	 * @see \Df\Payment\W\Event::m()
 	 * @see \Df\Payment\W\Handler::m()
 	 */
