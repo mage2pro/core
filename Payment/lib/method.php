@@ -100,10 +100,9 @@ function dfpm(...$args) {return dfcf(function(...$args) {
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @used-by \Df\Payment\Method::sg()
  * @param string|object $c
- * @param bool $allowAbstract [optional] 
- * @return string
+ * @param bool $allowAbstract [optional]
  */
-function dfpm_c($c, $allowAbstract = false) {return dfcf(function($c, $allowAbstract = false) {return
+function dfpm_c($c, $allowAbstract = false):string {return dfcf(function($c, $allowAbstract = false) {return
 	ConT::p($allowAbstract, function() use($c) {return df_con_heir($c, M::class);})
 ;}, func_get_args());}
 
@@ -121,18 +120,16 @@ function dfpm_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $me
  * @used-by dfpm_code_short()
  * @uses \Df\Payment\Method::codeS()
  * @param string|object $c
- * @return string
  */
-function dfpm_code($c) {return dfcf(function($c) {return dfpm_call_s($c, 'codeS');}, [df_cts($c)]);}
+function dfpm_code($c):string {return dfcf(function($c) {return dfpm_call_s($c, 'codeS');}, [df_cts($c)]);}
 
 /**
  * 2016-08-25 Without the «dfe_» prefix.
  * @uses \Df\Payment\Method::codeS()
  * @used-by \Df\Payment\Settings::prefix()
  * @param string|object $c
- * @return string
  */
-function dfpm_code_short($c) {return df_trim_text_left(dfpm_code($c), 'dfe_');}
+function dfpm_code_short($c):string {return df_trim_text_left(dfpm_code($c), 'dfe_');}
 
 /**
  * 2016-12-22
@@ -144,18 +141,16 @@ function dfpm_code_short($c) {return df_trim_text_left(dfpm_code($c), 'dfe_');}
  * @used-by \Df\Payment\W\Exception::mTitle()
  * @used-by \Df\Payment\W\Handler::log()
  * @param string|object $c
- * @return string
  */
-function dfpm_title($c) {/** @var IM|M $m */ return dfp_my($m = dfpm($c)) ? $m->titleB() : df_module_name($m);}
+function dfpm_title($c):string {/** @var IM|M $m */ return dfp_my($m = dfpm($c)) ? $m->titleB() : df_module_name($m);}
 
 /**
  * 2017-03-30
  * @used-by \Df\Payment\ConfigProvider::m()
  * @param IM|II|OP|QP|O|Q|T|object|string|null $c
  * @param mixed $s
- * @return M
  */
-function dfpmq($c, $s = null) {
+function dfpmq($c, $s = null):M {
 	$r = dfpm($c); /** @var M $r */
 	$r->setInfoInstance(dfp(df_quote()));
 	if ($s) {
