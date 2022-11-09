@@ -12,6 +12,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
  * @used-by \Df\Framework\Validator\Composite::check()
+ * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @param mixed|mixed[] $v
  * @return mixed[]|string[]|float[]|int[]
  */

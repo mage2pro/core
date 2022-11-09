@@ -58,6 +58,8 @@ function df_cc_br(...$args):string {return df_ccc("<br>", dfa_flatten($args));}
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
+ * @used-by \TFC\Core\B\Home\Slider::i() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
+ * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
  * @used-by \Wyomind\SimpleGoogleShopping\Model\Observer::checkToGenerate(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/26)
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml

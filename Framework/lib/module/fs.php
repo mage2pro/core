@@ -152,6 +152,7 @@ function df_module_file($m, $name, $ext = '', $req = true, Closure $parser = nul
  * @used-by \Dfe\IPay88\Source\Option::all()
  * @used-by \Dfe\IPay88\Source\Option::map()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
+ * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @param string|object|null $m
  * @param string $name
  * @param bool $req [optional]

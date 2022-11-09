@@ -73,6 +73,7 @@ function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {r
  * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by \Inkifi\Pwinty\Event::shipments()
+ * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml

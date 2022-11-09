@@ -89,7 +89,8 @@ function df_style_inline_hide(...$s):string {return !$s ? '' : df_style_inline(
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
  * @used-by \KingPalm\B2B\Block\Registration::region()
- * @used-by \TFC\Core\B\Home\Slider::i()
+ * @used-by \TFC\Core\B\Home\Slider::i() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
+ * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
