@@ -122,7 +122,7 @@ class Action extends \Df\Payment\Action {
 	 * @used-by self::execute()
 	 * @param Ignored $e
 	 */
-	private function ignoredLog(Ignored $e) {
+	private function ignoredLog(Ignored $e):void {
 		if (df_my()) {
 			dfp_sentry_tags($m = $e->m()); /** @var string $m */
 			$req = $e->event()->r(); /** @var array(string => mixed) $req */
