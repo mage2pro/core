@@ -9,7 +9,7 @@ final class ACR extends AC {
 	 * @used-by \Df\Config\Source::toOptionArray()
 	 * @return array(string => string)
 	 */
-	protected function map() {return parent::map() + [self::R => 'Review'];}
+	protected function map():array {return parent::map() + [self::R => 'Review'];}
 
 	/**
 	 * 2017-03-21

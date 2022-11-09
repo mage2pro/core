@@ -39,10 +39,9 @@ final class Identification extends \Df\Config\Source {
 	 * @used-by \Df\PaypalClone\Charge::id()
 	 * @used-by \Dfe\Qiwi\Charge::id()
 	 * @param O $o
-	 * @return string
 	 * @throws DFE
 	 */
-	static function get(O $o) {
+	static function get(O $o):string {
 		$s = dfps($o); /** @var \Df\Payment\Settings $s */
 		/** @var string $r */
 		# 2017-08-14
