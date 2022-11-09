@@ -138,17 +138,14 @@ abstract class Source implements \Df\Payment\IMA {
 	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\Payment\Operation::cFromDoc()
 	 * @param float $a
-	 * @return float
 	 */
-	final function cFromDoc($a) {return dfpex_from_doc($a, $this->oq(), $this->m());}
+	final function cFromDoc($a):float {return dfpex_from_doc($a, $this->oq(), $this->m());}
 
 	/**
-	 * 2017-04-09
-	 * Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * 2017-04-09 Код платёжной валюты: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by \Df\Payment\Operation::currencyC()
-	 * @return string
 	 */
-	final function currencyC() {return dfp_currency($this->m())->oq($this->oq());}
+	final function currencyC():string {return dfp_currency($this->m())->oq($this->oq());}
 
 	/**
 	 * 2017-04-09
@@ -198,17 +195,15 @@ abstract class Source implements \Df\Payment\IMA {
 	 * хотя покупатель уже указал свой email на шаге «Shipping Address»: https://mage2.pro/t/3633
 	 * @todo Проанализировать заказ гостями виртуальных товаров: ведь там нет shipping address!
 	 * @used-by \Df\Payment\Operation::customerEmail()
-	 * @return string
 	 * @throws DFE
 	 */
-	final function customerEmail() {return df_result_sne($this->oq()->getCustomerEmail());}
+	final function customerEmail():string {return df_result_sne($this->oq()->getCustomerEmail());}
 
 	/**
 	 * 2016-08-24
 	 * @used-by \Df\Payment\Operation::customerName()
-	 * @return string
 	 */
-	final function customerName() {return df_oq_customer_name($this->oq());}
+	final function customerName():string {return df_oq_customer_name($this->oq());}
 
 	/**
 	 * 2017-11-01
@@ -223,16 +218,14 @@ abstract class Source implements \Df\Payment\IMA {
 	 * 2017-04-09
 	 * @used-by self::currencyC()
 	 * @used-by \Df\Payment\Operation::s()
-	 * @return Settings
 	 */
-	final function s() {return $this->m()->s();}
+	final function s():Settings {return $this->m()->s();}
 
 	/**
 	 * 2017-04-08
 	 * @uses \Magento\Quote\Model\Quote::getStore()
 	 * @uses \Magento\Sales\Model\Order::getStore()
 	 * @used-by \Df\Payment\Operation::store()
-	 * @return Store
 	 */
-	final function store() {return $this->oq()->getStore();}
+	final function store():Store {return $this->oq()->getStore();}
 }
