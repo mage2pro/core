@@ -135,7 +135,6 @@ class Responder {
 	 * @used-by self::error()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @param \Exception|string $e
-	 * @return wResult
 	 */
-	final static function defaultError($e) {return Text::i(df_lets($e))->setHttpResponseCode(500);}
+	final static function defaultError($e):wResult {return Text::i(df_lets($e))->setHttpResponseCode(500);}
 }
