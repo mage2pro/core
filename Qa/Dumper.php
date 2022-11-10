@@ -5,18 +5,16 @@ final class Dumper {
 	 * @used-by df_dump()
 	 * @used-by self::dumpArrayElements()
 	 * @param mixed $v
-	 * @return string
 	 */
-	function dump($v) {return is_object($v) ? $this->dumpObject($v) : (
+	function dump($v):string {return is_object($v) ? $this->dumpObject($v) : (
 		is_array($v) ? $this->dumpArray($v) : (is_bool($v) ? df_bts($v) : (is_string($v) ? $v : print_r($v, true)))
 	);}
 
 	/**
 	 * @used-by self::dump()
 	 * @param mixed $a
-	 * @return string
 	 */
-	private function dumpArray(array $a) {return "[\n" . df_tab_multiline($this->dumpArrayElements($a)) . "\n]";}
+	private function dumpArray(array $a):string {return "[\n" . df_tab_multiline($this->dumpArrayElements($a)) . "\n]";}
 
 	/**
 	 * Эта функция имеет 2 отличия от @see print_r():
@@ -45,18 +43,16 @@ final class Dumper {
 	 * @used-by self::dumpArray()
 	 * @used-by self::dumpObject()
 	 * @param mixed[]|array(string => mixed) $a
-	 * @return string
 	 */
-	private function dumpArrayElements(array $a) {return df_cc_n(df_map_k(df_ksort($a), function($k, $v) {return
+	private function dumpArrayElements(array $a):string {return df_cc_n(df_map_k(df_ksort($a), function($k, $v) {return
 		"$k: {$this->dump($v)}"
 	;}));}
 
 	/**
 	 * @used-by self::dump()
 	 * @param object $o
-	 * @return string
 	 */
-	private function dumpObject($o) {/** @var string $r */
+	private function dumpObject($o):string {/** @var string $r */
 		$hash = spl_object_hash($o); /** @var string $hash */
 		if (isset($this->_dumped[$hash])) {
 			$r = sprintf('[recursion: %s]', get_class($o));
