@@ -21,9 +21,8 @@ use Df\Qa\Dumper;
  * @used-by \Dfe\Robokassa\Test\Basic::t01()
  * @used-by \Hotlink\Brightpearl\Model\Api\Transport::_submit() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/site/issues/122)
  * @param \Magento\Framework\DataObject|mixed[]|mixed $v
- * @return string
  */
-function df_dump($v) {return Dumper::i()->dump($v);}
+function df_dump($v):string {return Dumper::i()->dump($v);}
 
 /**
  * 2015-04-05
@@ -39,9 +38,8 @@ function df_dump($v) {return Dumper::i()->dump($v);}
  * @used-by dfaf()
  * @used-by dfpex_args()
  * @param mixed $v
- * @return string
  */
-function df_type($v) {return is_object($v) ? sprintf('an object: %s', get_class($v), df_dump($v)) : (is_array($v)
+function df_type($v):string {return is_object($v) ? sprintf('an object: %s', get_class($v), df_dump($v)) : (is_array($v)
 	? (10 < ($c = count($v)) ? "«an array of $c elements»" : 'an array: ' . df_dump($v))
 	/** 2020-02-04 We should not use @see df_desc() here */
 	: (is_null($v) ? '`null`' : sprintf('«%s» (%s)', df_string($v), gettype($v)))
