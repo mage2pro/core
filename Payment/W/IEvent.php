@@ -17,12 +17,10 @@ interface IEvent {
 	function r($k = null, $d = null);
 
 	/**
-	 * 2017-03-11
-	 * Type label.
+	 * 2017-03-11 Type label.
 	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @see \Df\Payment\W\Event::tl()
 	 * @see \Df\Payment\W\Reader::tl()
-	 * @return string
 	 */
-	function tl();
+	function tl():string;
 }

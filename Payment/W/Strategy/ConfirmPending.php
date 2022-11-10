@@ -106,7 +106,7 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 					 */
 					dfp_action($op, $action);					
 				}
-				else if ($this->storeIntermediateResponses()) {
+				elseif ($this->storeIntermediateResponses()) {
 					$op->addTransaction(T::TYPE_PAYMENT);
 				}
 				$this->onSuccess();

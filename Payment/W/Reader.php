@@ -96,15 +96,13 @@ class Reader implements IEvent {
 	;});}
 
 	/**
-	 * 2017-03-12
-	 * Type label.
+	 * 2017-03-12 Type label.
 	 * @override
 	 * @see \Df\Payment\W\IEvent::tl()
 	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @used-by \Df\Payment\W\Handler::log()
-	 * @return string
 	 */
-	final function tl() {return dfc($this, function() {return $this->tl_($this->t());});}
+	final function tl():string {return dfc($this, function() {return $this->tl_($this->t());});}
 
 	/**
 	 * 2017-03-10

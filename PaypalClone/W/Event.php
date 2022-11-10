@@ -118,9 +118,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\PostFinance\W\Event::isSuccessful()
 	 * @see \Dfe\Qiwi\W\Event::isSuccessful()
 	 * @see \Dfe\YandexKassa\W\Event::isSuccessful()
-	 * @return bool
 	 */
-	function isSuccessful() {return dfc($this, function() {return
+	function isSuccessful():bool {return dfc($this, function() {return
 		strval($this->statusExpected()) === strval($this->status())
 	;});}
 
@@ -160,7 +159,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Qiwi\W\Event::ttCurrent()
 	 * @see \Dfe\YandexKassa\W\Event::ttCurrent()
 	 */
-	function ttCurrent() {return $this->isSuccessful() ? self::T_CAPTURE : self::T_INFO;}
+	function ttCurrent():string {return $this->isSuccessful() ? self::T_CAPTURE : self::T_INFO;}
 
 	/**
 	 * 2016-07-09
@@ -177,7 +176,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\AlphaCommerceHub\W\Event::validate()
 	 * @throws \Exception
 	 */
-	function validate() {
+	function validate():void {
 		$e = Signer::signResponse($this, $this->r()); /** @var string $e */
 		$p = $this->signatureProvided(); /** @var string $p */
 		if (!df_strings_are_equal_ci($e, $p)) {

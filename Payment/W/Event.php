@@ -39,7 +39,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * so it should be unique in a payment processing cycle:
 	 * a particular payment can not have multiple transactions with the same suffix.
-	 *
+	 * 2022-11-10 The result could be an empty string: @see \Dfe\Moip\W\Event::ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\PaypalClone\W\Nav::id()
 	 * @used-by \Df\StripeClone\W\Nav::id()
@@ -54,9 +54,8 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
 	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
 	 * @see \Dfe\TBCBank\W\Event::ttCurrent()
-	 * @return string
 	 */
-	abstract function ttCurrent();
+	abstract function ttCurrent():string;
 
 	/**
 	 * 2017-03-10
@@ -91,15 +90,13 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * so it should be unique in a payment processing cycle:
 	 * a particular payment can not have multiple transactions with the same suffix.
-	 *
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\PaypalClone\W\Event::ttCurrent()
 	 * @see \Df\PaypalClone\W\Event::isSuccessful()
 	 * @see \Dfe\Stripe\W\Event\Source::isSuccessful()
 	 * @see \Dfe\TBCBank\W\Event::isSuccessful()
-	 * @return bool
 	 */
-	function isSuccessful() {return true;}
+	function isSuccessful():bool {return true;}
 
 	/**
 	 * 2017-03-17
@@ -126,7 +123,6 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-03-16
 	 * Возвращает некую основу для вычисления идентификатора родительской транзакции в Magento.
 	 * Эта основа в настоящее время бывает 2-х видов:
-	 *
 	 * 1) Идентификатор платежа в платёжной системе.
 	 * Так происходит для Stripe-подобных модулей.
 	 * На основе этого идентификатора мы:
@@ -134,20 +130,17 @@ abstract class Event implements IEvent, IMA {
 	 *     (посредством прибавления окончания «-<тип родительской транзакции>»)
 	 *     1.2) создаём идентификатор текущей транзакции
 	 *     (аналогично, посредством прибавления окончания «-<тип текущей транзакции>»).
-	 *
 	 * 2) Переданный нами ранее платёжной системе наш внутренний идентификатор родительской транзакции
 	 * (т.е., запроса к платёжой системе) в локальном (коротком) формате
 	 * (т.е. без приставки «<имя платёжного модуля>-»).
-	 *
 	 * @used-by \Df\Payment\W\Nav::pid()
 	 * @used-by \Df\PaypalClone\W\Event::idE()
 	 * @used-by \Df\StripeClone\W\Event::idBase()
 	 * @used-by \Dfe\Robokassa\W\Responder::success()
 	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 * @see \Dfe\Qiwi\W\Event::pid()
-	 * @return string
 	 */
-	function pid() {return $this->rr($this->k_pid());}
+	function pid():string {return $this->rr($this->k_pid());}
 
 	/**
 	 * 2017-03-10
@@ -186,9 +179,8 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-03-13
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @return Reader
 	 */
-	function rd() {return $this->_r;}
+	function rd():Reader {return $this->_r;}
 
 	/**
 	 * 2017-01-12
@@ -228,13 +220,12 @@ abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-03-10 Type label.
 	 * @override
-	 * @see \Df\Payment\W\IEvent::r()
+	 * @see \Df\Payment\W\IEvent::tl()
 	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @used-by \Df\Payment\W\Handler::log() 
 	 * @used-by \Dfe\AllPay\Choice::title()
-	 * @return string
 	 */
-	final function tl() {return dfc($this, function() {return $this->tl_(
+	final function tl():string {return dfc($this, function() {return $this->tl_(
 		$this->useRawTypeForLabel() ? $this->_r->tRaw() : $this->t()
 	);});}
 
@@ -250,15 +241,14 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Df\PaypalClone\W\Event::validate()
 	 * @throws \Exception
 	 */
-	function validate() {}
+	function validate():void {}
 
 	/**
 	 * 2017-03-13
 	 * @used-by self::tl()
 	 * @see \Dfe\AllPay\W\Event::useRawTypeForLabel()
-	 * @return bool
 	 */
-	protected function useRawTypeForLabel() {return false;}
+	protected function useRawTypeForLabel():bool {return false;}
 
 	/**
 	 * 2017-03-13
@@ -266,9 +256,8 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\Payment\W\Event::tl_()
 	 * @see \Dfe\AllPay\W\Event::tl_()
 	 * @param string|null $t
-	 * @return string
 	 */
-	protected function tl_($t) {return $this->_r->tl_($t);}
+	protected function tl_($t):string {return $this->_r->tl_($t);}
 
 	/**
 	 * 2017-03-10
