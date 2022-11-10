@@ -22,14 +22,14 @@ abstract class Strategy {
 	 * @see \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @see \Df\Payment\W\Strategy\Refund::_handle()
 	 */
-	abstract protected function _handle();
+	abstract protected function _handle():void;
 
 	/**
 	 * 2017-11-10
 	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 * @param string $c
 	 */
-	final protected function delegate($c) {self::handle($c, $this->_h);}
+	final protected function delegate($c):void {self::handle($c, $this->_h);}
 
 	/**
 	 * 2017-03-18
@@ -39,24 +39,21 @@ abstract class Strategy {
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 * @used-by \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
-	 * @return Event
 	 */
-	protected function e() {return $this->_h->e();}
+	protected function e():Event {return $this->_h->e();}
 
 	/**
 	 * 2017-01-17
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\Payment\W\Strategy\Refund::_handle()
-	 * @return Handler
 	 */
-	final protected function h() {return $this->_h;}
+	final protected function h():Handler {return $this->_h;}
 
 	/**
 	 * 2017-01-15
 	 * @used-by self::s()
-	 * @return M
 	 */
-	final protected function m() {return dfc($this, function() {return df_ar($this->_h->m(), M::class);});}
+	final protected function m():M {return dfc($this, function() {return df_ar($this->_h->m(), M::class);});}
 
 	/**
 	 * 2017-01-06
@@ -73,16 +70,14 @@ abstract class Strategy {
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\Payment\W\Strategy\Refund::_handle()
 	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
-	 * @return OP
 	 */
-	final protected function op() {return $this->_h->op();}
+	final protected function op():OP {return $this->_h->op();}
 
 	/**
 	 * 2017-11-17
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @return S
 	 */
-	final protected function s() {return $this->m()->s();}
+	final protected function s():S {return $this->m()->s();}
 
 	/**
 	 * 2017-01-07
@@ -116,7 +111,7 @@ abstract class Strategy {
 	 * @param string $class
 	 * @param Handler $h
 	 */
-	final static function handle($class, Handler $h) {
+	final static function handle($class, Handler $h):void {
 		$i = df_ar(new $class($h), __CLASS__); /** @var self $i */
 		$i->_handle();
 	}

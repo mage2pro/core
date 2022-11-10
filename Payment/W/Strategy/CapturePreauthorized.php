@@ -35,7 +35,7 @@ final class CapturePreauthorized extends \Df\Payment\W\Strategy {
 	 * @see \Df\Payment\W\Strategy::_handle()
 	 * @used-by \Df\Payment\W\Strategy::handle()
 	 */
-	protected function _handle() {
+	protected function _handle():void {
 		$o = $this->o(); /** @var O|DFO $o */
 		# 2016-12-30
 		# Мы не должны считать исключительной ситуацией повторное получение

@@ -21,7 +21,7 @@ final class Refund extends \Df\Payment\W\Strategy {
 	 * @see \Df\Payment\W\Strategy::_handle()
 	 * @used-by \Df\Payment\W\Strategy::::handle()
 	 */
-	protected function _handle() {
+	protected function _handle():void {
 		$h = df_ar($this->h(), IRefund::class); /** @var Handler|IRefund $h */
 		if (!dfp_container_has($this->op(), M::II_TRANS, $h->eTransId())) {
 			dfp_refund($this->op(), $h->nav()->pid(), $h->amount());
