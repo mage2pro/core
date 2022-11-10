@@ -83,9 +83,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
 	 * @see \Dfe\Qiwi\W\Event::idE()
-	 * @return string
 	 */
-	function idE() {return ($k = $this->k_idE()) ? $this->rr($k) : "{$this->pid()}e";}
+	function idE():string {return ($k = $this->k_idE()) ? $this->rr($k) : "{$this->pid()}e";}
 
 	/**
 	 * 2016-08-27
@@ -220,14 +219,13 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\AlphaCommerceHub\W\Event::statusExpected()
 	 * @see \Dfe\IPay88\W\Event::statusExpected()
 	 * @see \Dfe\SecurePay\W\Event::statusExpected()
-	 * @return string|int|null
+	 * @return int|null
 	 */
 	protected function statusExpected() {return null;}
 
 	/**
 	 * 2017-03-18
 	 * @used-by self::validate()
-	 * @return string
 	 */
-	private function signatureProvided() {return $this->rr($this->k_signature());}
+	private function signatureProvided():string {return $this->rr($this->k_signature());}
 }
