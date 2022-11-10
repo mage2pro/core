@@ -151,16 +151,15 @@ class Reader implements IEvent {
 	 * @param array(string => mixed) $r
 	 * @return array(string => mixed)
 	 */
-	protected function reqFilter(array $r) {return $r;}
+	protected function reqFilter(array $r):array {return $r;}
 
 	/**
 	 * 2017-03-12 Converts an event type from the PSP format to our internal format.
 	 * @used-by self::t()
 	 * @see \Dfe\AllPay\W\Reader::te2i()
 	 * @param string $t
-	 * @return string
 	 */
-	protected function te2i($t) {return $t;}
+	protected function te2i($t):string {return $t;}
 
 	/**
 	 * 2017-03-10
@@ -168,7 +167,7 @@ class Reader implements IEvent {
 	 * @param string $reason
 	 * @throws Critical
 	 */
-	private function error($reason) {
+	private function error($reason):void {
 		($r = $this->r()) ? df_sentry_extra($this, 'Request', $r) : null;
 		throw new Critical($this->_m, $this, "The request is invalid because $reason.");
 	}
@@ -179,7 +178,7 @@ class Reader implements IEvent {
 	 * @param $k
 	 * @throws Critical
 	 */
-	private function errorP($k) {$this->error("the required parameter `{$k}` is absent");}
+	private function errorP($k):void {$this->error("the required parameter `{$k}` is absent");}
 
 	/**
 	 * 2017-03-10
@@ -196,7 +195,7 @@ class Reader implements IEvent {
 	 * @return array(string => mixed)
 	 * @throws Critical
 	 */
-	private function testData() {
+	private function testData():array {
 		if (!array_key_exists('type', $this->_test)) {
 			$this->errorP('df-type');
 		}
