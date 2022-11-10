@@ -83,15 +83,14 @@ abstract class Handler implements IMA {
 	 * @used-by \Dfe\Qiwi\W\Handler::amount()
 	 * @used-by \Dfe\Qiwi\W\Handler::eTransId()
 	 * @used-by \Dfe\Qiwi\W\Handler::strategyC()
-	 * @return Event
 	 */
-	function e() {return $this->_e;}
+	function e():Event {return $this->_e;}
 
 	/**
 	 * 2016-07-04
 	 * @used-by \Df\Payment\W\Action::execute()
 	 */
-	final function handle() {
+	final function handle():void {
 		try {
 			if ($this->m()->s()->log()) {
 				$this->log();
@@ -111,10 +110,10 @@ abstract class Handler implements IMA {
 			$this->log($e);
 			# 2016-07-15
 			# Раньше тут стояло
-			//	if ($this->_order) {
-			//		$this->_order->cancel();
-			//		$this->_order->save();
-			//	}
+			#	if ($this->_order) {
+			#		$this->_order->cancel();
+			#		$this->_order->save();
+			#	}
 			# На самом деле, исключительная ситуация свидетельствует о сбое в программе,
 			# либо о некорректном запросе якобы от платёжного сервера (хакерской попытке, например),
 			# поэтому отменять заказ тут неразумно.
@@ -140,19 +139,16 @@ abstract class Handler implements IMA {
 	/**
 	 * 2017-03-15  
 	 * @used-by \Df\Payment\W\Strategy\Refund::_handle()
-	 * @return Nav
 	 */
-	final function nav() {return $this->_nav;}
+	final function nav():Nav {return $this->_nav;}
 
 	/**
 	 * 2016-07-10
-	 * 2017-01-06
-	 * Аналогично можно получить результат и из транзакции: $this->tParent()->getOrder()
+	 * 2017-01-06 Аналогично можно получить результат и из транзакции: $this->tParent()->getOrder()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\Payment\W\Strategy::o()
-	 * @return O
 	 */
-	final function o() {return df_order($this->op());}
+	final function o():O {return df_order($this->op());}
 
 	/**
 	 * 2016-07-10
@@ -162,9 +158,8 @@ abstract class Handler implements IMA {
 	 * @used-by self::_handle()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\Payment\W\Strategy::op()
-	 * @return OP
 	 */
-	final function op() {return $this->_nav->op();}
+	final function op():OP {return $this->_nav->op();}
 
 	/**
 	 * 2017-01-01
@@ -183,9 +178,8 @@ abstract class Handler implements IMA {
 	 * 2017-11-18
 	 * @used-by self::handle()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @return Responder
 	 */
-	final function responder() {return $this->_f->responder();}
+	final function responder():Responder {return $this->_f->responder();}
 
 	/**
 	 * 2016-12-26
@@ -193,7 +187,7 @@ abstract class Handler implements IMA {
 	 * @used-by self::handle()
 	 * @param \Exception|null $e [optional]
 	 */
-	private function log(\Exception $e = null) {dfc($this, function(\Exception $e = null) {
+	private function log(\Exception $e = null):void {dfc($this, function(\Exception $e = null) {
 		/**
 		 * 2017-03-30
 		 * Намеренно не используем здесь @see self::m(),
