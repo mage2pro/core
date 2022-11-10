@@ -13,7 +13,7 @@ use Magento\Framework\Phrase;
  * @used-by \Df\Payment\Block\Info::ciId()
  * @param object|string $caller
  */
-function df_abstract($caller) {
+function df_abstract($caller):void {
 	/**
 	 * 2017-11-19
 	 * "Improve the «The method \Df\Payment\Block\Info::prepare() should be redefined
@@ -176,9 +176,8 @@ function df_error(...$args):void {
  * @used-by df_error_create_html()
  * @used-by \Df\API\Client::_p()
  * @param string|string[]|mixed|E|Phrase|null $m [optional]
- * @return DFE
  */
-function df_error_create($m = null) {return
+function df_error_create($m = null):DFE {return
 	$m instanceof E ? DFE::wrap($m) :
 		new DFE($m instanceof Phrase ? $m : (
 			/**
@@ -233,7 +232,7 @@ function df_not_implemented($m):void {df_error("The method «{$m}» is not imple
  * @used-by \Dfe\Qiwi\W\Event::k_idE()
  * @throws DFE
  */
-function df_should_not_be_here() {df_error_html('The method %s is not allowed to call.', df_caller_mh());}
+function df_should_not_be_here():void {df_error_html('The method %s is not allowed to call.', df_caller_mh());}
 
 /**
  * 2021-03-25
@@ -242,7 +241,7 @@ function df_should_not_be_here() {df_error_html('The method %s is not allowed to
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Rss\Controller\Feed::beforeExecute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43#issuecomment-806507581)
  * @throws NFE
  */
-function df_throw_404() {throw new NFE(__('Page not found.'));}
+function df_throw_404():void {throw new NFE(__('Page not found.'));}
 
 /**
  * Эта функция используется, как правило, при отключенном режиме разработчика.
@@ -256,4 +255,4 @@ function df_throw_404() {throw new NFE(__('Page not found.'));}
  * @param bool $r [optional]
  * @throws DFE
  */
-function df_throw_last_error($r = false) {$r ?: \Df\Qa\Failure\Error::throwLast();}
+function df_throw_last_error($r = false):void {$r ?: \Df\Qa\Failure\Error::throwLast();}
