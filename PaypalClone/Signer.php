@@ -1,6 +1,7 @@
 <?php
 namespace Df\PaypalClone;
 use Df\Payment\IMA;
+use Df\Payment\Settings;
 /**
  * 2016-07-10
  * @see \Dfe\AllPay\Signer
@@ -24,9 +25,8 @@ abstract class Signer {
 	 * @see \Dfe\Robokassa\Signer::sign()
 	 * @see \Dfe\SecurePay\Signer::sign()
 	 * @see \Dfe\YandexKassa\Signer::sign()
-	 * @return string
 	 */
-	abstract protected function sign();
+	abstract protected function sign():string;
 
 	/**
 	 * 2017-03-27
@@ -38,9 +38,8 @@ abstract class Signer {
 	 * @used-by \Dfe\Robokassa\Signer\Response::values()
 	 * @used-by \Dfe\SecurePay\Signer::sign()
 	 * @used-by \Dfe\SecurePay\Signer\Request::values()
-	 * @return \Df\Payment\Settings
 	 */
-	protected function s() {return dfps($this);}
+	protected function s():Settings {return dfps($this);}
 
 	/**
 	 * 2017-03-13            
