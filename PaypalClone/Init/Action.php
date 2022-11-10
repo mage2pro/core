@@ -39,5 +39,5 @@ abstract class Action extends \Df\Payment\Init\Action {
 	 * @used-by self::transId()
 	 * @return array(string, array(string => mixed))
 	 */
-	private function charge() {return dfc($this, function() {return Charge::p($this->m());});}
+	private function charge():array {return dfc($this, function() {return Charge::p($this->m());});}
 }
