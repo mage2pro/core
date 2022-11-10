@@ -184,7 +184,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 				 * @uses \Magento\Framework\Exception\LocalizedException
 				 * https://mage2.pro/t/945
 				 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
-				 *
 				 * 2017-09-27
 				 * Previously, I had the following code here: throw df_le($e);
 				 * It triggered a false positive of the Magento Marketplace code validation tool:
@@ -192,7 +191,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 				 * https://github.com/mage2pro/core/issues/27
 				 * https://github.com/magento/marketplace-eqp/issues/45
 				 * So I write it in the 2 lines as a workaround: $e = df_le($e); throw $e;
-				 * I use the same solution here: @see \Df\Config\Backend::save()
+				 * 2022-11-10 @noinspection PhpUnnecessaryLocalVariableInspection
 				 */
 				$e = df_le($e); throw $e;
 			}
