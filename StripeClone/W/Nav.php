@@ -1,5 +1,6 @@
 <?php
 namespace Df\StripeClone\W;
+use Magento\Tests\NamingConvention\true\string;
 /**
  * 2017-03-15
  * 2017-03-26, 2017-11-10
@@ -27,13 +28,11 @@ class Nav extends \Df\Payment\W\Nav {
 
 	/**
 	 * 2017-01-06
-	 * Преобразует идентификатор платежа в платёжной системе
-	 * в глобальный внутренний идентификатор родительской транзакции.
+	 * Преобразует идентификатор платежа в платёжной системе в глобальный внутренний идентификатор родительской транзакции.
 	 * @override
 	 * @see \Df\Payment\W\Nav::pidAdapt()
 	 * @used-by \Df\Payment\W\Nav::pid()
 	 * @param string $id
-	 * @return string
 	 */
-	protected function pidAdapt($id) {return $this->e2i($id, $this->e()->ttParent());}
+	final protected function pidAdapt($id):string {return $this->e2i($id, $this->e()->ttParent());}
 }

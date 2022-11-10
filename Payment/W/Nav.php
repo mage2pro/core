@@ -44,9 +44,8 @@ abstract class Nav {
 	 * @see \Df\PaypalClone\W\Nav::pidAdapt()
 	 * @see \Df\StripeClone\W\Nav::pidAdapt()
 	 * @param string $id
-	 * @return string
 	 */
-	abstract protected function pidAdapt($id);
+	abstract protected function pidAdapt($id):string;
 
 	/**
 	 * 2017-03-15

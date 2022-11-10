@@ -1,7 +1,6 @@
 <?php
 namespace Df\PaypalClone\W;
 use Magento\Tests\NamingConvention\true\string;
-
 /**
  * 2017-03-15
  * 2017-09-14 It is used as a base for the \Dfe\Qiwi\W\Nav virtual type.
@@ -40,7 +39,6 @@ final class Nav extends \Df\Payment\W\Nav {
 	 * @see \Df\Payment\W\Nav::pidAdapt()
 	 * @used-by \Df\Payment\W\Nav::pid()
 	 * @param string $id
-	 * @return string
 	 */
-	protected function pidAdapt($id) {return $this->e2i($id);}
+	protected function pidAdapt($id):string {return $this->e2i($id);}
 }
