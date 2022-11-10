@@ -183,7 +183,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @param Method $m
 	 * @return array(string, array(string => mixed))
 	 */
-	final static function p(Method $m) {
+	final static function p(Method $m):array {
 		$i = df_new(df_con_heir($m, __CLASS__), $m); /** @var self $i */
 		/**
 		 * 2017-01-05
