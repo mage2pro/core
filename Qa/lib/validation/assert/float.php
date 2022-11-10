@@ -86,7 +86,6 @@ function df_float_positive($v, $allow0 = false, $throw = true) {/** @var float|n
 /**
  * 2021-03-06 @deprecated It is unused.
  * @param mixed $v
- * @return float
  * @throws DFE
  */
-function df_float_positive0($v) {return df_float_positive($v, $allow0 = true);}
+function df_float_positive0($v):float {return df_float_positive($v, $allow0 = true);}
