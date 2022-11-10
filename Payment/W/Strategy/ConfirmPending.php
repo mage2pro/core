@@ -175,7 +175,7 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 	 * @used-by self::_handle()
 	 * @see \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
 	 */
-	protected function onSuccess() {}
+	protected function onSuccess():void {}
 
 	/**
 	 * 2019-07-05
@@ -186,7 +186,6 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 	 * 3) The default value is false for backward compatibility.
 	 * @used-by self::_handle()
 	 * @see \Dfe\Dragonpay\W\Strategy\ConfirmPending::storeIntermediateResponses()
-	 * @return bool
 	 */
-	protected function storeIntermediateResponses() {return false;}
+	protected function storeIntermediateResponses():bool {return false;}
 }
