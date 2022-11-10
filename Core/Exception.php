@@ -123,6 +123,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * нам действительно нужен.
 	 * @used-by df_ets()
 	 * @see \Df\GoogleFont\Exception::message()
+	 * @see \Df\Payment\W\Exception\Ignored::message()
 	 * @see \Dfe\FacebookLogin\Exception::message()
 	 * @see \Dfe\Klarna\Exception::message()
 	 * @see \Dfe\Omise\Exception\Charge::message()

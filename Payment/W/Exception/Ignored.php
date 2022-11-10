@@ -22,9 +22,8 @@ final class Ignored extends \Df\Payment\W\Exception {
 	 * @see \Df\Core\Exception::message()
 	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @used-by \Df\Payment\W\Responder::ignored()
-	 * @return string
 	 */
-	function message() {return sprintf(
+	function message():string {return sprintf(
 		"The %snotifications are intentionally ignored by the {$this->mTitle()} module.",
 			is_null($this->_type) ? '' : "«{$this->_type}» "
 	);}
