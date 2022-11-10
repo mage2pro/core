@@ -22,49 +22,43 @@ class F {
 	 * @used-by \Df\Payment\TM::responses()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Payment\W\Responder::e()
-	 * @return Event
 	 * @throws Critical|Ignored
 	 */
-	function e() {return $this->aspect(Event::class, $this->_r);}
+	function e():Event {return $this->aspect(Event::class, $this->_r);}
 
 	/**
 	 * 2017-03-13
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @return Handler
 	 */
-	final function handler() {return $this->aspect(Handler::class, $this, $this->e());}
+	final function handler():Handler {return $this->aspect(Handler::class, $this, $this->e());}
 
 	/**
 	 * 2017-03-30
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Payment\W\Handler::log()
-	 * @return M
 	 */
-	final function m() {return $this->_m;}
+	final function m():M {return $this->_m;}
 
 	/**
 	 * 2017-03-15
 	 * @used-by \Df\Payment\W\Handler::__construct
-	 * @return Nav
 	 */
-	final function nav() {return $this->aspect(Nav::class, $this->e());}
+	final function nav():Nav {return $this->aspect(Nav::class, $this->e());}
 
 	/**
 	 * 2017-03-13
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\AllPay\W\F::sufEvent()
 	 * @used-by \Dfe\AllPay\W\F::sufNav()
-	 * @return R
 	 */
-	protected function r() {return $this->_r;}
+	protected function r():R {return $this->_r;}
 
 	/**
 	 * 2017-09-12
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @return Responder
 	 */
-	final function responder() {return $this->aspect(Responder::class, $this);}
+	final function responder():Responder {return $this->aspect(Responder::class, $this);}
 
 	/**
 	 * 2017-01-07
@@ -91,6 +85,7 @@ class F {
 
 	/**
 	 * 2017-03-15
+	 * 2022-11-10 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
 	 * @used-by self::event()
 	 * @used-by self::handler()
 	 * @param string $base
@@ -118,10 +113,9 @@ class F {
 	 * @used-by self::aspect()
 	 * @param string $a
 	 * @param bool $critical [optional]
-	 * @return string
 	 * @throws Critical|Ignored
 	 */
-	private function c($a, $critical = false) {
+	private function c($a, $critical = false):string {
 		$r = $this->_r; /** @var R $r */
 		$m = $this->_m; /** @var M $m */
 		$t = $r->t(); /** @var string|null $t */
@@ -196,10 +190,9 @@ class F {
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @param string|object $m
 	 * @param array(string => mixed)|null $req [optional]
-	 * @return self
 	 * @throws Critical|Ignored
 	 */
-	final static function s($m, $req = null) {return dfcf(function(M $m, $req = null) {
+	final static function s($m, $req = null):self {return dfcf(function(M $m, $req = null) {
 		$c = df_con_hier($m, self::class); /** @var string $c */
 		return new $c($m, $req);
 	}, [dfpm($m), $req]);}
