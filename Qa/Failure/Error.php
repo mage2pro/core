@@ -8,9 +8,8 @@ final class Error extends \Df\Qa\Failure {
 	 * @override
 	 * @see \Df\Qa\Failure::main()
 	 * @used-by \Df\Qa\Failure::report()
-	 * @return string
 	 */
-	protected function main() {return df_cc_n(
+	protected function main():string {return df_cc_n(
 		"[{$this->type(true)}] {$this->info('message')}"
 		,df_kv(['File' => $this->info('file'), 'Line' => $this->info('line')])
 	);}
@@ -21,9 +20,8 @@ final class Error extends \Df\Qa\Failure {
 	 * @see \Df\Qa\Failure::preface()
 	 * @used-by \Df\Qa\Failure::report()
 	 * @used-by self::report()
-	 * @return string
 	 */
-	protected function preface() {return df_json_encode(df_context());}
+	protected function preface():string {return df_json_encode(df_context());}
 
 	/**
 	 * @override

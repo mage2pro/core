@@ -7,9 +7,8 @@ final class Exception extends \Df\Qa\Failure {
 	 * @override
 	 * @see \Df\Qa\Failure::main()
 	 * @used-by \Df\Qa\Failure::report()
-	 * @return string
 	 */
-	protected function main() {
+	protected function main():string {
 		$r = $this->_e->messageD(); /** @var string $r */
 		return !$this->_e->isMessageHtml() ? $r : strip_tags($r);
 	}

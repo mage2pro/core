@@ -10,9 +10,8 @@ abstract class Failure {
 	 * @used-by self::report()
 	 * @see \Df\Qa\Failure\Error::main()
 	 * @see \Df\Qa\Failure\Exception::main()
-	 * @return string
 	 */
-	abstract protected function main();
+	abstract protected function main():string;
 
 	/**
 	 * @abstract
@@ -21,14 +20,13 @@ abstract class Failure {
 	 * @see \Df\Qa\Failure\Exception::trace()
 	 * @return array(array(string => string|int))
 	 */
-	abstract protected function trace();
+	abstract protected function trace():array;
 
 	/**
 	 * @used-by df_log_l()
 	 * @used-by \Df\Qa\Failure\Error::log()
-	 * @return string
 	 */
-	final function report() {return dfc($this, function() {return $this->sections(
+	final function report():string {return dfc($this, function() {return $this->sections(
 		$this->preface(), $this->main(), $this->postface()
 	);});}
 
@@ -36,24 +34,21 @@ abstract class Failure {
 	 * @used-by self::report()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
 	 * @see \Df\Qa\Failure\Exception::postface()
-	 * @return string
 	 */
-	protected function postface() {return Formatter::p(new Trace(array_slice($this->trace(), $this->stackLevel())));}
+	protected function postface():string {return Formatter::p(new Trace(array_slice($this->trace(), $this->stackLevel())));}
 
 	/**
 	 * @used-by self::report()
 	 * @see \Df\Qa\Failure\Error::preface()
-	 * @return string
 	 */
-	protected function preface() {return '';}
+	protected function preface():string {return '';}
 
 	/**
 	 * @used-by self::report()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
 	 * @param string|string[] $items
-	 * @return string
 	 */
-	protected function sections($items) {
+	protected function sections($items):string {
 		if (!is_array($items)) {
 			$items = func_get_args();
 		}
@@ -65,7 +60,6 @@ abstract class Failure {
 	 * @used-by self::postface()
 	 * @see \Df\Qa\Failure\Exception::stackLevel()
 	 * @see \Df\Qa\Failure\Error::stackLevel()
-	 * @return int
 	 */
-	protected function stackLevel() {return 0;}
+	protected function stackLevel():int {return 0;}
 }
