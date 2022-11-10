@@ -8,9 +8,10 @@
  * @param int|float|null $min
  * @param int|float|null $max
  * @param bool $inclusive [optional]
- * @return bool
  */
-function df_between($v, $min, $max, $inclusive = true) {return $inclusive ? $v >= $min && $v <= $max : $v > $min && $v < $max;}
+function df_between($v, $min, $max, $inclusive = true):bool {return
+	$inclusive ? $v >= $min && $v <= $max : $v > $min && $v < $max
+;}
 
 /**
  * We need `==` here, not `===`: https://php.net/manual/function.is-int.php#35820
@@ -18,9 +19,8 @@ function df_between($v, $min, $max, $inclusive = true) {return $inclusive ? $v >
  * @used-by df_is_nat()
  * @used-by \Df\Core\Text\Regex::matchInt()
  * @param mixed $v
- * @return bool
  */
-function df_is_int($v) {return is_numeric($v) && ($v == (int)$v);}
+function df_is_int($v):bool {return is_numeric($v) && ($v == (int)$v);}
 
 /**
  * 2020-02-03
@@ -28,23 +28,20 @@ function df_is_int($v) {return is_numeric($v) && ($v == (int)$v);}
  * @used-by dfp()
  * @used-by \Dfe\AllPay\Method::plan()
  * @param mixed $v
- * @return bool
  */
-function df_is_nat($v) {return df_is_int($v) && 0 < $v;}
+function df_is_nat($v):bool {return df_is_int($v) && 0 < $v;}
 
 /**
  * @used-by df_country()
  * @param mixed $v
- * @return bool
  */
-function df_check_iso2($v) {return \Df\Zf\Validate\StringT\Iso2::s()->isValid($v);}
+function df_check_iso2($v):bool {return \Df\Zf\Validate\StringT\Iso2::s()->isValid($v);}
 
 /**
  * @used-by df_result_s()
  * @param string $v
- * @return bool
  */
-function df_check_s($v) {return \Df\Zf\Validate\StringT::s()->isValid($v);}
+function df_check_s($v):bool {return \Df\Zf\Validate\StringT::s()->isValid($v);}
 
 /**
  * @used-by df_desc()
@@ -52,9 +49,8 @@ function df_check_s($v) {return \Df\Zf\Validate\StringT::s()->isValid($v);}
  * @used-by df_leaf_sne()
  * @used-by sift_prefix()
  * @param mixed $v
- * @return bool
  */
-function df_es($v) {return '' === $v;}
+function df_es($v):bool {return '' === $v;}
 
 /** 2022-10-15 @see is_iterable() has been added to PHP 7.1: https://www.php.net/manual/function.is-iterable.php */
 if (!function_exists('is_iterable')) {
@@ -62,8 +58,7 @@ if (!function_exists('is_iterable')) {
 	 * 2016-08-09 http://stackoverflow.com/questions/31701517#comment59189177_31701556
 	 * @used-by dfaf()
 	 * @used-by df_assert_traversable()
-	 * @param \Traversable|array $v
-	 * @return bool
+	 * @param Traversable|array $v
 	 */
-	function is_iterable($v) {return is_array($v) || $v instanceof \Traversable;}
+	function is_iterable($v):bool {return is_array($v) || $v instanceof Traversable;}
 }

@@ -75,10 +75,9 @@ function df_assert($cond, $m = null) {return $cond ?: df_error($m);}
  * @used-by \Df\Xml\X::importArray()
  * @param array $v
  * @param int $sl [optional]
- * @return array
  * @throws DFE
  */
-function df_assert_array($v, $sl = 0) {return Q::assertValueIsArray($v, ++$sl);}
+function df_assert_array($v, $sl = 0):array {return Q::assertValueIsArray($v, ++$sl);}
 
 /**
  * 2017-02-18
@@ -87,7 +86,7 @@ function df_assert_array($v, $sl = 0) {return Q::assertValueIsArray($v, ++$sl);}
  * @return array(string => mixed)
  * @throws DFE
  */
-function df_assert_assoc(array $a) {return df_is_assoc($a) ? $a : df_error('The array should be associative.');}
+function df_assert_assoc(array $a):array {return df_is_assoc($a) ? $a : df_error('The array should be associative.');}
 
 /**
  * 2021-03-22
@@ -113,10 +112,9 @@ function df_assert_between($v, $min, $max, $inclusive = true) {
  * @used-by \Df\Config\Backend\Serialized::entityC()
  * @param string $c
  * @param string|E $m [optional]
- * @return string
  * @throws DFE
  */
-function df_assert_class_exists($c, $m = null) {
+function df_assert_class_exists($c, $m = null):string {
 	df_param_sne($c, 0);
 	return df_class_exists($c) ? $c : df_error($m ?: "The required class «{$c}» does not exist.");
 }
@@ -172,10 +170,9 @@ function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @param string $v
  * @param int $sl [optional]
- * @return string
  * @throws DFE
  */
-function df_assert_sne($v, $sl = 0) {
+function df_assert_sne($v, $sl = 0):string {
 	$sl++;
 	Q::assertValueIsString($v, $sl);
 	# The previous code `if (!$v)` was wrong because it rejected the '0' string.
@@ -185,9 +182,9 @@ function df_assert_sne($v, $sl = 0) {
 /**
  * 2016-08-09
  * @used-by dfaf()
- * @param \Traversable|array $v
+ * @param Traversable|array $v
  * @param string|E $m [optional]
- * @return \Traversable|array
+ * @return Traversable|array
  * @throws DFE
  */
 function df_assert_traversable($v, $m = null) {return is_iterable($v) ? $v : df_error($m ?:
@@ -202,9 +199,8 @@ function df_assert_traversable($v, $m = null) {return is_iterable($v) ? $v : df_
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @param mixed $v
- * @return bool
  */
-function df_bool($v) {
+function df_bool($v):bool {
 	/**
 	 * Unfortunately, we can not replace @uses in_array() with @see array_flip() + @see isset() to speedup the execution,
 	 * because it could lead to the warning: «Warning: array_flip(): Can only flip STRING and INTEGER values!».
@@ -257,15 +253,13 @@ function df_bool($v) {
  *		$result = df_state()->getController() instanceof $controllerClass;
  * При этом нельзя писать
  *		df_state()->getController() instanceof 'Df_1C_Cml2Controller'
- * потому что правый операнд instanceof может быть строковой переменной,
- * но не может быть просто строкой!
+ * потому что правый операнд instanceof может быть строковой переменной, но не может быть просто строкой!
  * https://php.net/manual/language.operators.type.php#example-148
  * 2021-05-31 @deprecated It is unused.
  * @param mixed $v
  * @param string|string[] $class
- * @return bool
  */
-function df_is($v, $class) {/** @var bool $r */
+function df_is($v, $class):bool {/** @var bool $r */
 	if (2 < func_num_args()) {
 		$arguments = func_get_args(); /** @var mixed[] $arguments */
 		$class = df_tail($arguments); /** @var string[] $classes */
