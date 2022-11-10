@@ -24,16 +24,15 @@ class Responder {
 	/**
 	 * 2017-09-13
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @return wResult
 	 */
-	final function get() {return $this->isSuccess() ? $this->success() : $this->_response;}
+	final function get():wResult {return $this->isSuccess() ? $this->success() : $this->_response;}
 
 	/**
 	 * 2017-11-18
 	 * @used-by self::get()
-	 * @return bool
+	 * @used-by \Df\Payment\W\Action::execute()
 	 */
-	final function isSuccess() {return !$this->_response;}
+	final function isSuccess():bool {return !$this->_response;}
 
 	/**
 	 * 2017-09-13
@@ -42,28 +41,28 @@ class Responder {
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @param \Exception|string $e
 	 */
-	final function setError($e) {$this->set($this->error($e));}
+	final function setError($e):void {$this->set($this->error($e));}
 
 	/**
 	 * 2017-09-13
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @param string|null $message [optional]
 	 */
-	final function setNotForUs($message = null) {$this->set($this->notForUs($message));}
+	final function setNotForUs($message = null):void {$this->set($this->notForUs($message));}
 
 	/**
 	 * 2017-01-17
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @param Ignored $e
 	 */
-	final function setIgnored(Ignored $e) {$this->set(Text::i($e->message()));}
+	final function setIgnored(Ignored $e):void {$this->set(Text::i($e->message()));}
 
 	/**
 	 * 2017-09-13
 	 * @used-by \Df\Payment\W\Strategy::softFailure()
 	 * @param wResult|Phrase|string|null $v
 	 */
-	final function setSoftFailure($v) {$this->set(
+	final function setSoftFailure($v):void {$this->set(
 		($v = is_string($v) ?  __($v) : $v) instanceof Phrase ? Text::i($v) : $v
 	);}
 
@@ -73,9 +72,8 @@ class Responder {
 	 * @used-by \Dfe\Robokassa\W\Responder::success()
 	 * @used-by \Dfe\YandexKassa\W\Responder::error()
 	 * @used-by \Dfe\YandexKassa\W\Responder::success()
-	 * @return Event
 	 */
-	protected function e() {return $this->_f->e();}
+	protected function e():Event {return $this->_f->e();}
 
 	/**
 	 * 2017-09-13
@@ -83,9 +81,8 @@ class Responder {
 	 * @see \Dfe\AllPay\W\Responder::error()
 	 * @see \Dfe\Qiwi\W\Responder::error()
 	 * @param \Exception|string $e
-	 * @return wResult
 	 */
-	protected function error($e) {return self::defaultError($e);}
+	protected function error($e):wResult {return self::defaultError($e);}
 
 	/**
 	 * 2017-01-04
@@ -93,9 +90,8 @@ class Responder {
 	 * @see \Dfe\AllPay\W\Responder::notForUs()
 	 * @see \Dfe\Qiwi\W\Responder::notForUs()
 	 * @param string|null $message [optional]
-	 * @return wResult
 	 */
-	protected function notForUs($message = null) {return Text::i($message);}
+	protected function notForUs($message = null):wResult {return Text::i($message);}
 
 	/**
 	 * 2017-09-13
@@ -104,7 +100,7 @@ class Responder {
 	 * @used-by self::notForUs()
 	 * @param wResult $v
 	 */
-	final protected function set(wResult $v) {$this->_response = $v;}
+	final protected function set(wResult $v):void {$this->_response = $v;}
 
 	/**
 	 * 2017-09-13
@@ -114,9 +110,8 @@ class Responder {
 	 * @see \Dfe\IPay88\W\Responder::success()
 	 * @see \Dfe\Qiwi\W\Responder::success()
 	 * @see \Dfe\Robokassa\W\Responder::success()
-	 * @return wResult
 	 */
-	protected function success() {return Text::i('success');}
+	protected function success():wResult {return Text::i('success');}
 
 	/**
 	 * 2017-09-13
