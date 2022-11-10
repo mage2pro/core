@@ -29,8 +29,13 @@ function df_param_iso2($v, $ord, $sl = 0):string {return Q::assertParamIsIso2($v
  * @throws DFE
  */
 function df_param_s($v, $ord, $sl = 0):string {$sl++;
-	# Раньше тут стояло	`$method->assertParamIsString($v, $ord, $sl)`
-	# При второй попытке тут стояло `if (!$v)`, что тоже неправильно, ибо непустая строка '0' не проходит такую валидацию.
+	/**
+	 * Раньше тут стояло `$method->assertParamIsString($v, $ord, $sl)`
+	 * При второй попытке тут стояло `if (!$v)`, что тоже неправильно, ибо непустая строка '0' не проходит такую валидацию.
+	 * 2022-11-10
+	 * @see df_param_sne()
+	 * @see df_result_sne()
+	 */
 	return Q::assertValueIsString($v, $sl) ? $v : Q::raiseErrorParam(__FUNCTION__, [Q::S], $ord, $sl);
 }
 
@@ -57,8 +62,13 @@ function df_param_s($v, $ord, $sl = 0):string {$sl++;
  * @throws DFE
  */
 function df_param_sne($v, $ord, $sl = 0):string {$sl++;
-	# Раньше тут стояло: `$method->assertParamIsString($v, $ord, $sl)`
-	# При второй попытке тут стояло `if (!$v)`, что тоже неправильно, ибо непустая строка '0' не проходит такую валидацию.
+	/**
+	 * Раньше тут стояло `$method->assertParamIsString($v, $ord, $sl)`
+	 * При второй попытке тут стояло `if (!$v)`, что тоже неправильно, ибо непустая строка '0' не проходит такую валидацию.
+	 * 2022-11-10
+	 * @see df_param_s()
+	 * @see df_result_sne()
+	 */
 	Q::assertValueIsString($v, $sl);
 	return '' !== strval($v) ? $v : Q::raiseErrorParam(__FUNCTION__, [Q::NES], $ord, $sl);
 }
