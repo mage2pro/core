@@ -8,5 +8,5 @@ final class Handler extends \Df\Payment\W\Handler {
 	 * @see \Df\Payment\W\Handler::strategyC()
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 */
-	protected function strategyC() {return \Df\Payment\W\Strategy\ConfirmPending::class;}
+	protected function strategyC():string {return \Df\Payment\W\Strategy\ConfirmPending::class;}
 }
