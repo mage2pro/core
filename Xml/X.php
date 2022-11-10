@@ -380,10 +380,11 @@ class X extends MX {
 
 	/**
 	 * @override
+	 * @see \SimpleXMLElement::xpath()
 	 * @param string|string[] $path
 	 * @return X[]
 	 */
-	function xpath($path) {
+	function xpath($path):array {
 		if (1 < func_num_args()) {
 			$path = df_cc_path(func_get_args());
 		}
