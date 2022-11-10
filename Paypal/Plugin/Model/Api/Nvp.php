@@ -13,7 +13,7 @@ final class Nvp {
 	 * @see \Magento\Paypal\Model\Express::_placeOrder()
 	 * @param Sb $sb
 	 */
-	function beforeCallDoExpressCheckoutPayment(Sb $sb) {
+	function beforeCallDoExpressCheckoutPayment(Sb $sb):void {
 		if (self::eligible($a = $sb['address'])) {/** @var OA $a */
 			$sb->addData(['address' => $a->getOrder()->getBillingAddress(), 'suppress_shipping' => true]);
 			$sb->unsetData('billing_address');
@@ -27,7 +27,7 @@ final class Nvp {
 	 * @see \Magento\Paypal\Model\Api\Nvp::callSetExpressCheckout()
 	 * @param Sb $sb
 	 */
-	function beforeCallSetExpressCheckout(Sb $sb) {
+	function beforeCallSetExpressCheckout(Sb $sb):void {
 		if (self::eligible($sb['address'])) {
 			$sb['suppress_shipping'] = true;
 		}
@@ -42,7 +42,6 @@ final class Nvp {
 	 * @used-by self::beforeCallDoExpressCheckoutPayment()
 	 * @used-by self::beforeCallSetExpressCheckout()
 	 * @param OA|QA|null $a
-	 * @return bool
 	 */
-	private static function eligible($a) {return $a && df_ends_with($a->getEmail(), '@mage2.pro');}
+	private static function eligible($a):bool {return $a && df_ends_with($a->getEmail(), '@mage2.pro');}
 }
