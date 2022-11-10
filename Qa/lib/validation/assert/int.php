@@ -49,7 +49,7 @@ function df_int($v, $allowNull = true) {/** @var int|int[] $r */
  * @param mixed[] $v
  * @return int[]
  */
-function df_int_simple(array $v) {return array_map('intval', $v);}
+function df_int_simple(array $v):array {return array_map('intval', $v);}
 
 /**
  * @see df_is_nat()
@@ -67,8 +67,14 @@ function df_nat($v, $allow0 = false):int {/** @var int $r */
 }
 
 /**
+ * @used-by df_date_from_timestamp_14()
+ * @used-by df_day_of_week_as_digit()
+ * @used-by df_hour()
+ * @used-by df_month()
+ * @used-by df_year()
+ * @used-by \Df\Qa\Failure\Error::type()
  * @param mixed $v
  * @return int
  * @throws DFE
  */
-function df_nat0($v) {return df_nat($v, $allow0 = true);}
+function df_nat0($v):int {return df_nat($v, $allow0 = true);}
