@@ -23,7 +23,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * and then a presudo-identifier wiull bi generated automatically.
 	 * Such identifier serves only as `txn_id` for the current Magento transaction.
 	 * @used-by self::idE()
-	 * @see \Df\GingerPaymentsBase\W\Event::k_idE()
 	 * @see \Dfe\AllPay\W\Event::k_idE()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::k_idE()
 	 * @see \Dfe\Dragonpay\W\Event::k_idE()
@@ -49,7 +48,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Robokassa\W\Event::k_signature()
 	 * @see \Dfe\SecurePay\W\Event::k_signature()
 	 * @see \Dfe\YandexKassa\W\Event::k_signature()
-	 * @return string
+	 * @return string|null
 	 */
 	abstract protected function k_signature();
 
@@ -57,7 +56,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-01-18
 	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
 	 * @used-by self::status()
-	 * @see \Df\GingerPaymentsBase\W\Event::k_status()
 	 * @see \Dfe\AllPay\W\Event::k_status()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::k_status()
 	 * @see \Dfe\Dragonpay\W\Event::k_status()
