@@ -75,18 +75,16 @@ abstract class Signer {
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @param IMA $caller
 	 * @param array(string => mixed) $p
-	 * @return string
 	 */
-	final static function signRequest(IMA $caller, array $p) {return self::_sign($caller, $p);}
+	final static function signRequest(IMA $caller, array $p):string {return self::_sign($caller, $p);}
 
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\W\Event::validate()
 	 * @param IMA $caller
 	 * @param array(string => mixed) $p
-	 * @return string
 	 */
-	final static function signResponse(IMA $caller, array $p) {return self::_sign($caller, $p);}
+	final static function signResponse(IMA $caller, array $p):string {return self::_sign($caller, $p);}
 
 	/**
 	 * 2017-04-10
@@ -95,7 +93,7 @@ abstract class Signer {
 	 * @param array(string => mixed) $v
 	 * @return array(string => mixed)
 	 */
-	protected function adjust(array $v) {return $v;}
+	protected function adjust(array $v):array {return $v;}
 
 	/**
 	 * 2016-08-27
@@ -103,9 +101,8 @@ abstract class Signer {
 	 * @used-by self::signResponse()
 	 * @param IMA $caller
 	 * @param array(string => mixed) $v
-	 * @return string
 	 */
-	private static function _sign(IMA $caller, array $v) {/** @var self $i */
+	private static function _sign(IMA $caller, array $v):string {/** @var self $i */
 		$i = df_new(df_con_hier_suf_ta($caller->m(), 'Signer', df_trim_text_left(df_caller_f(), 'sign')));
 		$i->_v = $i->adjust($v);
 		return $i->sign();
