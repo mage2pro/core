@@ -7,7 +7,7 @@ final class Context {
 	 * @used-by \Df\Qa\Failure\Error::preface()
 	 * @return array(string => mixed)
 	 */
-	static function base() {return [
+	static function base():array {return [
 		['mage2pro/core' => df_core_version(), 'Magento' => df_magento_version(), 'PHP' => phpversion()]
 		+ (df_is_cli()
 			? ['Command' => df_cli_cmd()]
