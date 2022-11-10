@@ -17,9 +17,8 @@ final class Exception extends \Df\Qa\Failure {
 	 * @override
 	 * @see \Df\Qa\Failure::postface()
 	 * @used-by \Df\Qa\Failure::report()
-	 * @return string
 	 */
-	protected function postface() {return $this->sections($this->sections($this->_e->comments()), parent::postface());}
+	protected function postface():string {return $this->sections($this->sections($this->_e->comments()), parent::postface());}
 
 	/**
 	 * @override
@@ -50,7 +49,6 @@ final class Exception extends \Df\Qa\Failure {
 	/**
 	 * @used-by df_log_l()
 	 * @param E $e
-	 * @return self
 	 */
-	static function i(E $e) {$r = new self; $r->_e = DFE::wrap($e); return $r;}
+	static function i(E $e):self {$r = new self; $r->_e = DFE::wrap($e); return $r;}
 }
