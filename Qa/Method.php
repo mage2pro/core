@@ -14,29 +14,18 @@ final class Method {
 	 * @param int $v
 	 * @param int $ord
 	 * @param int $sl [optional]
-	 * @return int
 	 * @throws E
 	 */
-	static function assertParamIsInteger($v, $ord, $sl = 0) {return self::vp(VInt::s(), $v, $ord, ++$sl);}
+	static function assertParamIsInteger($v, $ord, $sl = 0):int {return self::vp(VInt::s(), $v, $ord, ++$sl);}
 
 	/**
 	 * @used-by df_param_iso2()
 	 * @param string $v
 	 * @param int $ord
 	 * @param int $sl [optional]
-	 * @return string
 	 * @throws E
 	 */
-	static function assertParamIsIso2($v, $ord, $sl = 0) {return self::vp(VIso2::s(), $v, $ord, ++$sl);}
-
-	/**
-	 * @param string $v
-	 * @param int $ord
-	 * @param int $sl [optional]
-	 * @return string
-	 * @throws E
-	 */
-	static function assertParamIsString($v, $ord, $sl = 0) {return self::vp(VString::s(), $v, $ord, ++$sl);}
+	static function assertParamIsIso2($v, $ord, $sl = 0):string {return self::vp(VIso2::s(), $v, $ord, ++$sl);}
 
 	/**
 	 * @used-by df_result_array()
