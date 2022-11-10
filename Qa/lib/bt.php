@@ -48,7 +48,7 @@ function df_bt_inc($p, $o = 1) {return is_array($p) || $p instanceof E ? $p : $o
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
  * которые и так очевидны (например, вызов данной функции, вызов df_bt_log() и т.п.)
  */
-function df_bt_log($p = 0) {df_report('bt-{date}-{time}.log', df_bt_s(df_bt_inc($p)));}
+function df_bt_log($p = 0):void {df_report('bt-{date}-{time}.log', df_bt_s(df_bt_inc($p)));}
 
 /**
  * 2019-12-16
@@ -58,6 +58,5 @@ function df_bt_log($p = 0) {df_report('bt-{date}-{time}.log', df_bt_s(df_bt_inc(
  * @param int|E|array(array(string => string|int)) $p
  * Позволяет при записи стека вызовов пропустить несколько последних вызовов функций,
  * которые и так очевидны (например, вызов данной функции, вызов df_bt_log() и т.п.)
- * @return string
  */
-function df_bt_s($p = 0) {return Formatter::p(new Trace(df_bt(df_bt_inc($p))));}
+function df_bt_s($p = 0):string {return Formatter::p(new Trace(df_bt(df_bt_inc($p))));}
