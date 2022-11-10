@@ -37,18 +37,16 @@ final class Trace implements \IteratorAggregate, \Countable {
 	 * @override
 	 * @see \Countable::count() https://www.php.net/manual/countable.count.php
 	 * @used-by \Df\Qa\Trace\Formatter::p()
-	 * @return int
 	 */
-	function count() {return count($this->_frames);}
+	function count():int {return count($this->_frames);}
 
 	/**
 	 * 2020-02-27
 	 * @override
 	 * @see \IteratorAggregate::getIterator() https://www.php.net/manual/iteratoraggregate.getiterator.php
 	 * @used-by \Df\Qa\Trace\Formatter::p()
-	 * @return AI
 	 */
-	function getIterator() {return new AI($this->_frames);}
+	function getIterator():AI {return new AI($this->_frames);}
 
 	/**
 	 * 2020-02-27
