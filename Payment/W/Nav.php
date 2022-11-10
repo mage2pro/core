@@ -17,10 +17,11 @@ abstract class Nav {
 	 * Внутренний полный идентификатор текущей транзакции.
 	 * Он используется лишь для присвоения его транзакции
 	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
+	 * 2022-11-10 It can return `null`: @see \Dfe\Stripe\W\Nav\Source::id()
 	 * @used-by self::op()
 	 * @see \Df\PaypalClone\W\Nav::id()
 	 * @see \Df\StripeClone\W\Nav::id()
-	 * @return string
+	 * @return string|null
 	 */
 	abstract protected function id();
 
@@ -180,9 +181,8 @@ abstract class Nav {
 	 * @uses \Df\StripeClone\Method::e2i()
 	 * @param string $id
 	 * @param string|null $type [optional]
-	 * @return string
 	 */
-	final protected function e2i($id, $type = null) {return $this->mPartial()->tid()->e2i(
+	final protected function e2i($id, $type = null):string {return $this->mPartial()->tid()->e2i(
 		df_param_sne($id, 0), $type
 	);}
 

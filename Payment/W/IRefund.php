@@ -9,16 +9,14 @@ namespace Df\Payment\W;
  */
 interface IRefund {
 	/**
-	 * 2017-01-17
-	 * В валюте заказа (платежа), в формате платёжной системы (копейках).
+	 * 2017-01-17 В валюте заказа (платежа), в формате платёжной системы (копейках).
 	 * @used-by \Df\Payment\W\Strategy\Refund::_handle()
 	 * @see \Dfe\Omise\W\Handler\Refund\Create::amount()
 	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::amount()
 	 * @see \Dfe\Qiwi\W\Handler::amount()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
-	 * @return int
 	 */
-	function amount();
+	function amount():int;
 
 	/**
 	 * 2017-01-19 Метод должен вернуть идентификатор операции (не платежа!) в платёжной системе.
@@ -32,8 +30,7 @@ interface IRefund {
 	 * @see \Dfe\Paymill\W\Handler\Refund\Succeeded::eTransId()
 	 * @see \Dfe\Qiwi\W\Handler::eTransId()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
-	 * @return string
 	 */
-	function eTransId();
+	function eTransId():string;
 }
 
