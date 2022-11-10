@@ -32,9 +32,8 @@ abstract class Exception extends \Df\Payment\Exception {
 	/**
 	 * 2017-03-11
 	 * @used-by \Df\Payment\W\Action::ignoredLog()
-	 * @return IEvent
 	 */
-	final function event() {return $this->_event;}
+	final function event():IEvent {return $this->_event;}
 
 	/**
 	 * 2017-03-11
@@ -45,17 +44,15 @@ abstract class Exception extends \Df\Payment\Exception {
 	 * 3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
 	 * @used-by \Df\Payment\W\Action::ignoredLog()
-	 * @return string
 	 */
-	final function m() {return $this->_m;}
+	final function m():string {return $this->_m;}
 
 	/**
 	 * 2017-03-11
 	 * @used-by \Df\Payment\W\Action::ignored
 	 * @used-by \Df\Payment\W\Exception\Ignored::mTitle()
-	 * @return string
 	 */
-	final function mTitle() {return dfpm_title($this->_m);}
+	final function mTitle():string {return dfpm_title($this->_m);}
 
 	/**
 	 * 2017-03-11
