@@ -31,27 +31,27 @@ final class Method {
 	 * @used-by df_result_array()
 	 * @param array $v
 	 * @param int $sl [optional]
-	 * @return array
 	 * @throws E
 	 */
-	static function assertResultIsArray($v, $sl = 0) {return self::vr(VArray::s(), $v, ++$sl);}
+	static function assertResultIsArray($v, $sl = 0):array {return self::vr(VArray::s(), $v, ++$sl);}
 
 	/**
 	 * @used-by df_assert_array()
 	 * @param array $v
 	 * @param int $sl [optional]
-	 * @return array
 	 * @throws E
 	 */
-	static function assertValueIsArray($v, $sl = 0) {return self::vv(VArray::s(), $v, ++$sl);}
+	static function assertValueIsArray($v, $sl = 0):array {return self::vv(VArray::s(), $v, ++$sl);}
 
 	/**
+	 * @used-by df_assert_sne()
+	 * @used-by df_param_s()
+	 * @used-by df_param_sne()
 	 * @param string $v
 	 * @param int $sl [optional]
-	 * @return string
 	 * @throws E
 	 */
-	static function assertValueIsString($v, $sl = 0) {return self::vv(VString::s(), $v, ++$sl);}
+	static function assertValueIsString($v, $sl = 0):string {return self::vv(VString::s(), $v, ++$sl);}
 
 	/**
 	 * @used-by df_param_sne()
@@ -62,7 +62,7 @@ final class Method {
 	 * @param int $sl
 	 * @throws E
 	 */
-	static function raiseErrorParam($method, array $messages, $ord, $sl = 1) {
+	static function raiseErrorParam($method, array $messages, $ord, $sl = 1):void {
 		$frame = self::caller($sl); /** @var Frame $frame */
 		$name = 'unknown'; /** @var string $name */
 		if (!is_null($ord) && $frame->methodR()) {/** @var RP $param */
@@ -86,7 +86,7 @@ final class Method {
 	 * @param int $sl
 	 * @throws E
 	 */
-	static function raiseErrorResult($vd, array $messages, $sl = 1) {
+	static function raiseErrorResult($vd, array $messages, $sl = 1):void {
 		$messagesS = df_cc_n($messages); /** @var string $messagesS */
 		$method = self::caller($sl)->method(); /** @var string $method */
 		self::throwException(
@@ -104,7 +104,7 @@ final class Method {
 	 * @param int $sl
 	 * @throws E
 	 */
-	static function raiseErrorVariable($vd, array $messages, $sl = 1) {
+	static function raiseErrorVariable($vd, array $messages, $sl = 1):void {
 		$messagesS = df_cc_n($messages); /** @var string $messagesS */
 		$method = self::caller($sl)->method(); /** @var string $method */
 		self::throwException(
@@ -135,21 +135,18 @@ final class Method {
 	 * @used-by self::raiseErrorResult()
 	 * @used-by self::raiseErrorVariable()
 	 * @param int $o [optional]
-	 * @return Frame
 	 */
-	private static function caller($o) {return Frame::i(df_bt(0, 3 + $o)[2 + $o]);}
+	private static function caller($o):Frame {return Frame::i(df_bt(0, 3 + $o)[2 + $o]);}
 
 	/**
 	 * 2015-01-28
-	 * Раньше тут стояло throw $e, что приводило к отображению на экране
-	 * диагностического сообщения в неверной кодировке.
-	 * @uses df_error() точнее: эта функция в режиме разработчика
-	 * отсылает браузеру заголовок HTTP о требуемой кодировке.
+	 * Раньше тут стояло throw $e, что приводило к отображению на экране диагностического сообщения в неверной кодировке.
+	 * @uses df_error() точнее: эта функция в режиме разработчика отсылает браузеру заголовок HTTP о требуемой кодировке.
 	 * @param string $message
 	 * @param int $sl [optional]
 	 * @throws E
 	 */
-	private static function throwException($message, $sl = 0) {df_error(new E($message, ++$sl));}
+	private static function throwException($message, $sl = 0):void {df_error(new E($message, ++$sl));}
 	
 	/**
 	 * @used-by self::assertParamIsInteger()
