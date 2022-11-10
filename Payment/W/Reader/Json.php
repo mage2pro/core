@@ -16,5 +16,5 @@ abstract class Json extends \Df\Payment\W\Reader {
 	 * @used-by \Df\Payment\W\Reader::__construct()
 	 * @return array(string => mixed)
 	 */
-	final protected function http() {return df_request_body_json();}
+	final protected function http():array {return df_request_body_json();}
 }

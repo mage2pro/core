@@ -52,9 +52,8 @@ class Reader implements IEvent {
 	 * 3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
 	 * @used-by \Df\Payment\W\Event::m()
-	 * @return M
 	 */
-	function m() {return $this->_m;}
+	function m():M {return $this->_m;}
 
 	/**
 	 * 2017-03-10
@@ -91,9 +90,7 @@ class Reader implements IEvent {
 	 * @used-by \Dfe\AllPay\W\Reader::isOffline()
 	 * @return string|null
 	 */
-	final function t() {return dfc($this, function() {return
-		is_null($r = $this->tRaw()) ? null : $this->te2i($r)
-	;});}
+	final function t() {return dfc($this, function() {return is_null($r = $this->tRaw()) ? null : $this->te2i($r);});}
 
 	/**
 	 * 2017-03-12 Type label.
@@ -109,9 +106,8 @@ class Reader implements IEvent {
 	 * @used-by self::tl()
 	 * @used-by \Df\Payment\W\Event::tl_()
 	 * @param string|null $t
-	 * @return string
 	 */
-	final function tl_($t) {return !is_null($t) ? $t : 'Confirmation';}
+	final function tl_($t):string {return !is_null($t) ? $t : 'Confirmation';}
 
 	/**
 	 * 2017-03-13 Returns a value in the PSP format.
@@ -132,7 +128,7 @@ class Reader implements IEvent {
 	 * @see \Dfe\Qiwi\W\Reader::http()
 	 * @return array(string => mixed)
 	 */
-	protected function http() {return Req::clean();}
+	protected function http():array {return Req::clean();}
 
 	/**
 	 * 2017-03-10
