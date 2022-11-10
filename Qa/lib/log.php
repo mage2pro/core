@@ -107,7 +107,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
  * @param string $m
  * @param bool $append [optional]
  */
-function df_report($f, $m, $append = false) {
+function df_report($f, $m, $append = false):void {
 	if ('' !== $m) {
 		df_param_s($m, 1);
 		$f = df_file_ext_def($f, 'log');
