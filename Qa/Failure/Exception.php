@@ -25,9 +25,8 @@ final class Exception extends \Df\Qa\Failure {
 	 * @override
 	 * @see \Df\Qa\Failure::stackLevel()
 	 * @used-by \Df\Qa\Failure::postface()
-	 * @return int
 	 */
-	protected function stackLevel() {return $this->_e->getStackLevelsCountToSkip();}
+	protected function stackLevel():int {return $this->_e->getStackLevelsCountToSkip();}
 
 	/**
 	 * @override
@@ -35,7 +34,7 @@ final class Exception extends \Df\Qa\Failure {
 	 * @used-by \Df\Qa\Failure::postface()
 	 * @return array(array(string => string|int))
 	 */
-	protected function trace() {return df_ef($this->_e)->getTrace();}
+	protected function trace():array {return df_ef($this->_e)->getTrace();}
 
 	/**
 	 * 2021-10-04

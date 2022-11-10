@@ -27,9 +27,8 @@ final class Error extends \Df\Qa\Failure {
 	 * @override
 	 * @see \Df\Qa\Failure::stackLevel()
 	 * @used-by \Df\Qa\Failure::postface()
-	 * @return int
 	 */
-	protected function stackLevel() {return 13;}
+	protected function stackLevel():int {return 13;}
 
 	/**
 	 * @see debug_backtrace() не работает в функции-обработчике
@@ -40,13 +39,13 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by \Df\Qa\Failure::postface()
 	 * @return array(array(string => string|int))
 	 */
-	protected function trace() {return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];}
+	protected function trace():array {return self::xdebug() ? array_reverse(xdebug_get_function_stack()) : [];}
 
 	/**
 	 * @used-by self::check()
 	 * @throws \Exception
 	 */
-	private function log() {
+	private function log():void {
 		# 2015-04-04
 		# Нам нужно правильно обработать ситуацию, когда при формировании диагностического отчёта о сбое происходит новый сбой.
 		# 1) Статическая переменная `$inProcess` предотвращает нас от бесконечной рекурсии.
@@ -74,7 +73,7 @@ final class Error extends \Df\Qa\Failure {
 	 * 2015-04-05 Оборачиваем код в try..catch, чтобы не утратить сообщение о внутреннем сбое при асинхронном запросе.
 	 * @used-by https://github.com/mage2pro/core/blob/5.6.0/registration.php#L28
 	 */
-	static function check() {
+	static function check():void {
 		try {
 			if (error_get_last() && self::isFatal()) {
 				self::i()->log();
@@ -89,7 +88,7 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by df_throw_last_error()
 	 * @throws Exception
 	 */
-	static function throwLast() {
+	static function throwLast():void {
 		df_assert(error_get_last());
 		df_error(self::i()->main());
 	}
@@ -97,9 +96,8 @@ final class Error extends \Df\Qa\Failure {
 	/**
 	 * @used-by self::check()
 	 * @used-by self::throwLast()
-	 * @return self
 	 */
-	private static function i() {return new self;}
+	private static function i():self {return new self;}
 
 	/**
 	 * @used-by self::main()
@@ -109,12 +107,8 @@ final class Error extends \Df\Qa\Failure {
 	 */
 	private static function info($key) {return dfa(error_get_last(), $key);}
 
-	/**
-	 * @used-by self::check()
-	 * @return self::bool
-	 * @return int[]
-	 */
-	private static function isFatal() {
+	/** @used-by self::check() */
+	private static function isFatal():bool {
 		static $r;/** @var array(int => int) $r */
 		if (!$r) {
 			$r = [E_ERROR, E_PARSE, E_CORE_ERROR, E_CORE_WARNING, E_COMPILE_ERROR, E_COMPILE_WARNING];
@@ -131,7 +125,7 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by self::type()
 	 * @return array(int => string)
 	 */
-	private static function map() {
+	private static function map():array {
 		static $r; /** @var array(int => string) $r */
 		if (!$r) {
 			$r = [
@@ -169,7 +163,6 @@ final class Error extends \Df\Qa\Failure {
 	/**
 	 * @used-by self::isFatal()
 	 * @used-by self::trace()
-	 * @return bool
 	 */
-	private static function xdebug() {static $r; return $r ? $r : $r = extension_loaded('xdebug');}
+	private static function xdebug():bool {static $r; return $r ? $r : $r = extension_loaded('xdebug');}
 }
