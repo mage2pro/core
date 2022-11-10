@@ -40,7 +40,6 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Robokassa\Charge::k_MerchantId()
 	 * @see \Dfe\SecurePay\Charge::k_MerchantId()
 	 * @see \Dfe\YandexKassa\Charge::k_MerchantId()
-	 * @return string
 	 */
 	abstract protected function k_MerchantId():string;
 
@@ -55,9 +54,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Robokassa\Charge::k_RequestId()
 	 * @see \Dfe\SecurePay\Charge::k_RequestId()
 	 * @see \Dfe\YandexKassa\Charge::k_RequestId()
-	 * @return string
 	 */
-	abstract protected function k_RequestId();
+	abstract protected function k_RequestId():string;
 
 	/**
 	 * 2016-08-27
