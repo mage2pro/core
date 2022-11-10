@@ -60,10 +60,11 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2016-08-27
 	 * 2017-09-25
-	 * The method can return null if the request does not need a signature.
+	 * The method can return `null` if the request does not need a signature.
 	 * Currently, only the Yandex.Kassa charge requests do not use a signature:
 	 * @see \Dfe\YandexKassa\Charge::k_Signature()
 	 * https://tech.yandex.com/money/doc/payment-solution/payment-form/payment-form-http-docpage
+	 * 2022-11-10 \Dfe\AlphaCommerceHub\Charge::k_Signature() returns `null` too.
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @see \Dfe\AllPay\Charge::k_Signature()
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_Signature()
@@ -89,7 +90,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\YandexKassa\Charge::pCharge()
 	 * @return array(string => mixed)
 	 */
-	abstract protected function pCharge();
+	abstract protected function pCharge():array;
 
 	/**
 	 * 2017-01-05
