@@ -13,27 +13,24 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\Item as II;
  * @used-by df_is_sales_doc()
  * @used-by df_sales_doc()
  * @param mixed $v
- * @return bool
  */
-function df_is_credit_memo($v) {return $v instanceof C;}
+function df_is_credit_memo($v):bool {return $v instanceof C;}
 
 /**
  * 2020-03-13
  * @used-by df_is_sales_doc()
  * @used-by df_sales_doc()
  * @param mixed $v
- * @return bool
  */
-function df_is_invoice($v) {return $v instanceof I;}
+function df_is_invoice($v):bool {return $v instanceof I;}
 
 /**
  * 2020-03-13
  * @see df_is_oq()
  * @used-by df_sales_doc()
  * @param mixed $v
- * @return bool
  */
-function df_is_sales_doc($v) {return df_is_oq($v) || df_is_credit_memo($v) || df_is_invoice($v);}
+function df_is_sales_doc($v):bool {return df_is_oq($v) || df_is_credit_memo($v) || df_is_invoice($v);}
 
 /**
  * 2020-03-13

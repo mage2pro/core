@@ -3,6 +3,7 @@ use Magento\Sales\Model\Order\Creditmemo as CM;
 /**
  * 2016-05-21
  * @see df_order_backend_url()
+ * @used-by \Dfe\TwoCheckout\Method::_refund()
  * @param CM|int $cm
  */
 function df_cm_backend_url($cm):string {return df_url_backend_ns('sales/order_creditmemo/view', [
@@ -16,6 +17,7 @@ function df_cm_backend_url($cm):string {return df_url_backend_ns('sales/order_cr
  * он устанавливается только при сохранении объекта:
  * @see \Magento\Sales\Model\ResourceModel\EntityAbstract::_beforeSave()
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/ResourceModel/EntityAbstract.php#L123-L129
+ * @used-by \Df\Payment\Method::refund()
  * @param CM $cm
  */
 function df_cm_set_increment_id(CM $cm):void {
