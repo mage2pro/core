@@ -1,7 +1,8 @@
 <?php
 namespace Df\Sentry;
-use \Exception as E;
 use Df\Core\Exception as DFE;
+use Magento\Framework\App\ErrorHandler;
+use \Exception as E;
 final class Client {
 	/**
 	 * 2020-06-27
@@ -435,11 +436,8 @@ final class Client {
 	 * 2016-12-23
 	 * @used-by self::captureException()
 	 * @param array(string => string|int|array) $frame
-	 * @return bool
 	 */
-	private static function needSkipFrame(array $frame) {return
-		\Magento\Framework\App\ErrorHandler::class === dfa($frame, 'class')
-	;}
+	private static function needSkipFrame(array $frame):bool {return ErrorHandler::class === dfa($frame, 'class');}
 
 	/**
 	 * 2020-06-27
