@@ -30,7 +30,7 @@ use Magento\User\Model\User;
  * @param _DO|mixed[]|mixed|E $v
  * @param array(string => mixed) $context [optional]
  */
-function df_sentry($m, $v, array $context = []) {
+function df_sentry($m, $v, array $context = []):void {
 	/** @var string[] $domainsToSkip */
 	static $domainsToSkip = ['pumpunderwear.com', 'quanticlo.com', 'sanasafinaz.com'];
 	if ($v instanceof E || !in_array(df_domain_current(), $domainsToSkip)) {
@@ -133,14 +133,14 @@ function df_sentry($m, $v, array $context = []) {
  * @param string|object|null $m
  * @param mixed ...$v
  */
-function df_sentry_extra($m, ...$v) {df_sentry_m($m)->extra(!$v ? $v : (is_array($v[0]) ? $v[0] : [$v[0] => $v[1]]));}
+function df_sentry_extra($m, ...$v):void {df_sentry_m($m)->extra(!$v ? $v : (is_array($v[0]) ? $v[0] : [$v[0] => $v[1]]));}
 
 /**
  * 2019-05-20
  * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
  * @param mixed $v
  */
-function df_sentry_extra_f($v) {df_sentry_m(df_caller_c())->extra([df_caller_m() => $v]);}
+function df_sentry_extra_f($v):void {df_sentry_m(df_caller_c())->extra([df_caller_m() => $v]);}
 
 /**
  * 2016-12-22
@@ -157,9 +157,8 @@ function df_sentry_extra_f($v) {df_sentry_m(df_caller_c())->extra([df_caller_m()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * @param string|object|null $m
- * @return Sentry
  */
-function df_sentry_m($m) {return dfcf(function($m) {
+function df_sentry_m($m) {return dfcf(function($m):Sentry {
 	$r = null; /** @var Sentry $r */
 	/** @var array(string => $r) $a */ /** @var array(string => string)|null $sa */
 	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
@@ -191,9 +190,8 @@ function df_sentry_m($m) {return dfcf(function($m) {
  * @used-by df_sentry()
  * @used-by df_sentry_m()
  * @param string|object|null $m [optional]
- * @return string
  */
-function df_sentry_module($m = null) {return !$m ? 'Df_Core' : df_module_name($m);}
+function df_sentry_module($m = null):string {return !$m ? 'Df_Core' : df_module_name($m);}
 
 /**
  * 2017-01-10
@@ -206,4 +204,4 @@ function df_sentry_module($m = null) {return !$m ? 'Df_Core' : df_module_name($m
  * @param string|object|null $m
  * @param array(string => mixed) $a
  */
-function df_sentry_tags($m, array $a) {df_sentry_m($m)->tags($a);}
+function df_sentry_tags($m, array $a):void {df_sentry_m($m)->tags($a);}
