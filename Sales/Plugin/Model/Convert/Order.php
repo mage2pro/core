@@ -17,7 +17,7 @@ final class Order {
 	 * @param F $f
 	 * @return array(string => mixed)
 	 */
-	function aroundToInvoice(Sb $sb, F $f, O $o) {
+	function aroundToInvoice(Sb $sb, F $f, O $o):array {
 		$r = $f($o); /** @var I $i */
 		$r->getItemsCollection()->load();
 		return $r;
