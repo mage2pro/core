@@ -27,9 +27,8 @@ class Info extends \Df\Payment\Block\Info {
 	 * 2018-11-12
 	 * @used-by self::prepare()
 	 * @see \Dfe\TBCBank\Block\Info::cardNumberLabel()
-	 * @return string
 	 */
-	protected function cardNumberLabel() {return $this->extended('Card Number', 'Number');}
+	protected function cardNumberLabel():string {return $this->extended('Card Number', 'Number');}
 
 	/**
 	 * 2018-12-19
