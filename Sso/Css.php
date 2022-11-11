@@ -29,9 +29,8 @@ class Css extends _P {
 	 *		}
 	 *		$html = $this->_afterToHtml($html);
 	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L643-L689
-	 * @return string
 	 */
-	final protected function _toHtml() {
+	final protected function _toHtml():string {
 		$hhl = df_style_inline_hide('.header.links', '#switcher-currency'); /** @var string $hhl */
 		return self::isAccConfirmation() ? $hhl . df_style_inline_hide('.login-container') :
 			(self::isRegCompletion() ? $hhl . df_js(__CLASS__, 'reg-completion') : '')
@@ -41,9 +40,8 @@ class Css extends _P {
 	 * 2016-12-04 The result should be cached because the method resets the `needConfirm` value.
 	 * @used-by self::_toHtml()
 	 * @used-by \Df\Sso\Button::_toHtml()
-	 * @return bool
 	 */
-	final static function isAccConfirmation() {return dfcf(function() {
+	final static function isAccConfirmation():bool {return dfcf(function() {
 		$s = Sess::s(); /** @var Sess $s */
 		if ($r = df_is_login() && $s->needConfirm()) { /** @var bool $r */
 			$s->needConfirm(false);
@@ -59,7 +57,6 @@ class Css extends _P {
 	 * 1) метод @see \Df\Sso\CustomerReturn::execute() перенаправляет покупателя на страницу регистрации.
 	 * 2) мы не показываем наши кнопки SSO,
 	 * а также скрываем из шапки стандартные ссылки «Sign In», «Create an Account» и блок выбора валюты.
-	 * @return bool
 	 */
-	final static function isRegCompletion() {return dfcf(function() {return df_is_reg() && Sess::s()->ssoProvider();});}
+	final static function isRegCompletion():bool {return dfcf(function() {return df_is_reg() && Sess::s()->ssoProvider();});}
 }
