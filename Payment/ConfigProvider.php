@@ -8,6 +8,7 @@ use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 /**
  * 2016-08-04
  * @see \Df\GingerPaymentsBase\ConfigProvider
+ * @see \Df\StripeClone\ConfigProvider
  * @see \Df\Payment\ConfigProvider\BankCard
  * @see \Dfe\ACH\ConfigProvider
  * @see \Dfe\AllPay\ConfigProvider
