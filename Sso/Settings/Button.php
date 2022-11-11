@@ -8,12 +8,12 @@ namespace Df\Sso\Settings;
  */
 class Button extends \Df\Config\Settings\Configurable {
 	/**
-	 * 2016-11-24
-	 * The button's label.
+	 * 2016-11-24 The button's label.
+	 * @used-by \Df\Sso\Button::attributes()
+	 * @used-by \Df\Sso\Button::loggedOut()
 	 * @see \Dfe\AmazonLogin\Settings\Button::label()
-	 * @return string
 	 */
-	function label() {return $this->v();}
+	function label():string {return $this->v();}
 
 	/**
 	 * 2016-11-26
