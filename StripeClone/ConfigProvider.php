@@ -33,7 +33,7 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	 * @used-by \Dfe\Moip\ConfigProvider::config()
 	 * @return array(string => string)
 	 */
-	final protected function cards() {
+	final protected function cards():array {
 		$r = []; /** @var array(string => string) $r */
 		$m = $this->m(); /** @var Method $m */
 		/**
@@ -146,7 +146,7 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	 * @see \Dfe\TwoCheckout\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
-	protected function config() {return [
+	protected function config():array {return [
 		'cards' => $this->cards(), 'publicKey' => $this->s()->publicKey()
 	] + parent::config();}
 }
