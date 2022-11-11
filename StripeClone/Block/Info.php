@@ -34,9 +34,8 @@ class Info extends \Df\Payment\Block\Info {
 	 * 2018-12-19
 	 * @used-by self::cf()
 	 * @see \Dfe\Vantiv\Block\Info::card()
-	 * @return Card
 	 */
-	protected function card() {return Card::create($this->m(), $this->cardData());}
+	protected function card():Card {return Card::create($this->m(), $this->cardData());}
 
 	/**
 	 * 2017-11-12
