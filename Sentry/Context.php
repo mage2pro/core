@@ -5,20 +5,7 @@ class Context {
 	 * 2020-06-27
 	 * @used-by \Df\Sentry\Client::__construct()
 	 */
-	function __construct()
-	{
-		$this->clear();
-	}
-
-	/**
-	 * Clean up existing context.
-	 */
-	function clear()
-	{
-		$this->tags = [];
-		$this->extra = [];
-		$this->user = null;
-	}
+	function __construct() {$this->extra = []; $this->tags = []; $this->user = null;}
 
 	/**
 	 * 2017-01-10
