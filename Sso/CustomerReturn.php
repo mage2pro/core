@@ -128,9 +128,11 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * Перечень свойств покупателя, которые надо обновить в Magento
 	 * после их изменения в сторонней системе авторизации.
 	 * @used-by self::mc()
+	 * @see \Dfe\AmazonLogin\Controller\Index\Index::customerFieldsToSync()
+	 * @see \Dfe\FacebookLogin\Controller\Index\Index::customerFieldsToSync()
 	 * @return string[]
 	 */
-	protected function customerFieldsToSync() {return [$this->fId()];}
+	protected function customerFieldsToSync():array {return [$this->fId()];}
 
 	/**
 	 * 2016-06-05
