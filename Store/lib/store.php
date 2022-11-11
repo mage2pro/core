@@ -91,9 +91,8 @@ function df_store($v = null) {/** @var string|null $c */return
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @used-by \Frugue\Store\Switcher::params()
  * @param null|string|int|IScope $s [optional]
- * @return string
  */
-function df_store_code($s = null) {return df_scope_code($s);}
+function df_store_code($s = null):string {return df_scope_code($s);}
 
 /**
  * 2020-01-18
@@ -101,7 +100,7 @@ function df_store_code($s = null) {return df_scope_code($s);}
  * @used-by df_store_code_from_url()
  * @return string[]
  */
-function df_store_codes() {return dfcf(function() {return array_map(
+function df_store_codes():array {return dfcf(function() {return array_map(
 	function(IStore $s) {return $s->getCode();}, df_stores()
 );});}
 
