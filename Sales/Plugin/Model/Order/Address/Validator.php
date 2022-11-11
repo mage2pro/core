@@ -21,7 +21,7 @@ class Validator extends Sb {
 	 * @param Address $a
 	 * @return string[]
 	 */
-	function aroundValidate(Sb $sb, \Closure $f, Address $a) {return
+	function aroundValidate(Sb $sb, \Closure $f, Address $a):array {return
 		S::disabled() && df_address_is_billing($a) ? [] : $f($a)
 	;}
 }
