@@ -301,7 +301,7 @@ final class Client {
 	 * @used-by self::send_http()
 	 * @return array(string => mixed)
 	 */
-	private function get_curl_options() {
+	private function get_curl_options():array {
 		$r = [
 			CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4
 			,CURLOPT_SSL_VERIFYHOST => 2
@@ -353,16 +353,14 @@ final class Client {
 
 	/**
 	 * Return the URL for the current request
-	 *
+	 * @used-by self::get_http_data()
 	 * @return string|null
 	 */
-	private function get_current_url()
-	{
+	private function get_current_url() {
 		# When running from commandline the REQUEST_URI is missing.
 		if (!isset($_SERVER['REQUEST_URI'])) {
 			return null;
 		}
-
 		# HTTP_HOST is a client-supplied header that is optional in HTTP 1.0
 		$host = (!empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST']
 			: (!empty($_SERVER['LOCAL_ADDR'])  ? $_SERVER['LOCAL_ADDR']
@@ -374,11 +372,9 @@ final class Client {
 
 	/**
 	 * Was the current request made over https?
-	 *
-	 * @return bool
+	 * @used-by self::get_current_url()
 	 */
-	private function isHttps()
-	{
+	private function isHttps():bool {
 		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
 			return true;
 		}
@@ -399,9 +395,8 @@ final class Client {
 	/**
 	 * @used-by self::captureException()
 	 * @param string $severity  PHP E_$x error constant
-	 * @return string           Sentry log level group
 	 */
-	private function translateSeverity($severity) {
+	private function translateSeverity($severity):string {
 		if (is_array($this->severity_map) && isset($this->severity_map[$severity])) {
 			return $this->severity_map[$severity];
 		}
