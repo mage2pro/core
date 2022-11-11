@@ -80,8 +80,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	/**
 	 * 2016-12-01
 	 * Если полученной от провайдера SSO информации недостаточно для регистрации покупателя в Magento
-	 * (так, например, для Blackbaud NetCommunity),
-	 * то это метод должен вернуть false:
+	 * (так, например, для Blackbaud NetCommunity), то это метод должен вернуть false:
 	 * @see \Dfe\BlackbaudNetCommunity\Controller\Index\Index::canRegister()
 	 * В этом случае покупатель-новичок не будет автоматически зарегистрирован,
 	 * а вместо этого будет перенаправлен на стандартную страницу регистрации Magento,
@@ -253,9 +252,8 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	/**
 	 * 2016-06-04
 	 * @used-by self::mc()
-	 * @return string
 	 */
-	private function fId() {return dfc($this, function() {return Schema::fIdC($this);});}
+	private function fId():string {return dfc($this, function() {return Schema::fIdC($this);});}
 
 	/**
 	 * 2015-10-12 Регистрация нового покупателя.
