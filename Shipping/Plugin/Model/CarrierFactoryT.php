@@ -16,8 +16,7 @@ final class CarrierFactoryT {
 	 * @param int|null $sid [optional]
 	 * @return M|IM
 	 */
-	function aroundCreate(Sb $sb, \Closure $f, $c, $sid = null) {
-		/** @var $r */
+	function aroundCreate(Sb $sb, \Closure $f, $c, $sid = null) {/** @var $r */
 		if (!is_a($c, M::class, true)) {
 			$r = $f($c, $sid);
 		}
