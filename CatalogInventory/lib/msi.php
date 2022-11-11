@@ -30,12 +30,12 @@ function df_msi_stock_ids(P $p):array {return array_filter(array_unique(array_ma
  * @uses \Magento\InventorySales\Model\ResourceModel\GetAssignedStockIdForWebsite::execute()
  * makes a direct query to the database.
  * 3) The $v argument could be one of:
- * *) a website: W
- * *) a store: Store
- * *) a website's ID: int
- * *) a website's code: string
- * *) null or absert: the current website
- * *) true: the default website
+ * 		*) a website: W
+ * 		*) a store: Store
+ * 		*) a website's ID: int
+ * 		*) a website's code: string
+ * 		*) `null` or absent: the current website
+ * 		*) `true`: the default website
  * @used-by df_msi_stock_ids()
  * @param W|Store|int|string|null|bool $v [optional]
  * @return int|null
