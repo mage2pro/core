@@ -16,9 +16,16 @@ abstract class Card {
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @used-by \Df\StripeClone\CardFormatter::label()
-	 * @return string
+	 * @see \Dfe\Moip\Facade\Card::brand()
+	 * @see \Dfe\Omise\Facade\Card::brand()
+	 * @see \Dfe\Paymill\Facade\Card::brand()
+	 * @see \Dfe\Spryng\Facade\Card::brand()
+	 * @see \Dfe\Square\Facade\Card::brand()
+	 * @see \Dfe\Stripe\Facade\Card::brand()
+	 * @see \Dfe\TBCBank\Facade\Card::brand()
+	 * @see \Dfe\Vantiv\Facade\Card::brand()
 	 */
-	abstract function brand();
+	abstract function brand():string;
 
 	/**
 	 * 2017-02-11
