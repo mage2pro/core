@@ -74,9 +74,8 @@ final class State {
 	 * @param Sb $sb
 	 * @param \Closure $f
 	 * @param O|DFO $o
-	 * @return string
 	 */
-	function aroundCheck(Sb $sb, \Closure $f, O $o) {
+	function aroundCheck(Sb $sb, \Closure $f, O $o):string {
 		$f($o);
 		/** @var OP|null $op */
 		if (dfp_my($op = $o->getPayment())) {
