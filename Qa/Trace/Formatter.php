@@ -9,9 +9,8 @@ final class Formatter {
 	 * @used-by df_bt_s()
 	 * @used-by \Df\Qa\Failure::postface()
 	 * @param T $t
-	 * @return string
 	 */
-	static function p(T $t) {return dfcf(function($t) {
+	static function p(T $t):string {return dfcf(function($t) {
 		$count = count($t); /** @var int $count */
 		return implode(df_map_k($t, function($index, F $frame) use($count) {
 			$index++;
@@ -32,10 +31,9 @@ final class Formatter {
 	/**     
 	 * 2020-02-27          
 	 * @used-by self::p()
-	 * @param Frame $f 
-	 * @return string
+	 * @param Frame $f
 	 */
-	private static function frame(F $f) {/** @var string $r */
+	private static function frame(F $f):string {/** @var string $r */
 		try {
 			$resultA = array_filter(array_map([__CLASS__, 'param'], [
 				['Location', df_cc(':', df_path_relative($f->filePath()), $f->line())], ['Callee', $f->method()]
