@@ -22,7 +22,7 @@ final class OrderPlaceAfter implements ObserverInterface {
 	 * What events are triggered on an order placement? https://mage2.pro/t/3573
 	 * @param O $o
 	 */
-	function execute(O $o) {
+	function execute(O $o):void {
 		try {
 			/** @var string $k */ /** @var string|false $v */
 			if (!($v = df_cache_load($k = md5(__METHOD__))) || 7 < df_num_days(df_date_parse($v, false))) {
