@@ -4,9 +4,8 @@ use Magento\Sales\Model\Order\Creditmemo as CM;
  * 2016-05-21
  * @see df_order_backend_url()
  * @param CM|int $cm
- * @return string
  */
-function df_cm_backend_url($cm) {return df_url_backend_ns('sales/order_creditmemo/view', [
+function df_cm_backend_url($cm):string {return df_url_backend_ns('sales/order_creditmemo/view', [
 	'creditmemo_id' => df_idn($cm)
 ]);}
 
@@ -19,13 +18,11 @@ function df_cm_backend_url($cm) {return df_url_backend_ns('sales/order_creditmem
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/ResourceModel/EntityAbstract.php#L123-L129
  * @param CM $cm
  */
-function df_cm_set_increment_id(CM $cm) {
+function df_cm_set_increment_id(CM $cm):void {
 	if (!$cm->getIncrementId()) {
-		$cm->setIncrementId(
-			df_sales_seq_m()->getSequence(
-				$cm->getEntityType(),
-				$cm->getStore()->getGroup()->getDefaultStoreId()
-			)->getNextValue()
-		);
+		$cm->setIncrementId(df_sales_seq_m()->getSequence(
+			$cm->getEntityType(),
+			$cm->getStore()->getGroup()->getDefaultStoreId()
+		)->getNextValue());
 	}
 }
