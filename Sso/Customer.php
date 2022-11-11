@@ -81,13 +81,16 @@ abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
 	 * @used-by CustomerReturn::c()
+	 * @see \Dfe\AmazonLogin\Customer::validate()
+	 * @see \Dfe\BlackbaudNetCommunity\Customer::validate()
 	 * @throws \Exception
 	 */
-	function validate() {}
+	function validate():void {}
 
 	/**
 	 * 2016-06-04
 	 * @used-by self::dob()
+	 * @see \Dfe\FacebookLogin\Customer::_dob()
 	 * @return \DateTime|null
 	 */
 	protected function _dob() {return null;}
