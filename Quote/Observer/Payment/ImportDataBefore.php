@@ -33,7 +33,7 @@ final class ImportDataBefore implements ObserverInterface {
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
 	 * @param Observer $ob
 	 */
-	function execute(Observer $ob) {self::$_data = $ob['input'];}
+	function execute(Observer $ob):void {self::$_data = $ob['input'];}
 
 	/**
 	 * 2017-10-12
