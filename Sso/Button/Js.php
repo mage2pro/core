@@ -14,7 +14,7 @@ abstract class Js extends \Df\Sso\Button {
 	 * @see \Dfe\FacebookLogin\Button::attributes()
 	 * @return array(string => string)
 	 */
-	protected function attributes() {return df_widget(
+	protected function attributes():array {return df_widget(
 		$this, 'button', $this->jsOptions() + [
 			'redirect' => $this->getUrl(df_route($this), df_clean([
 				'_secure' => $this->redirectShouldBeSecure()], false
@@ -42,7 +42,7 @@ abstract class Js extends \Df\Sso\Button {
 	 * @see \Dfe\AmazonLogin\Button::jsOptions()
 	 * @return array(string => mixed)
 	 */
-	protected function jsOptions() {return ['selector' => ".{$this->cssClass()}"];}
+	protected function jsOptions():array {return ['selector' => ".{$this->cssClass()}"];}
 
 	/**
 	 * 2016-11-27
@@ -56,7 +56,6 @@ abstract class Js extends \Df\Sso\Button {
 	 * 2016-11-26
 	 * @used-by self::attributes()
 	 * @see \Dfe\AmazonLogin\Button::redirectShouldBeSecure()
-	 * @return bool
 	 */
-	protected function redirectShouldBeSecure() {return false;}
+	protected function redirectShouldBeSecure():bool {return false;}
 }
