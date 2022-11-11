@@ -64,8 +64,7 @@ function df_locale($l = null):string {/** @var string $r */
 		$r = $l;
 	}
 	else {
-		static $cached; /** @var string $cached */
-		if (!isset($cached)) {
+		$r = dfcf(function() {/** @var string $r */
 			# 2015-10-22
 			# Отдельно обрабатываем случай запроса вида:
 			# http://localhost.com:900/store/pub/static/adminhtml/Magento/backend/ru_RU/js-translation.json
@@ -80,9 +79,9 @@ function df_locale($l = null):string {/** @var string $r */
 			 * https://github.com/magento/magento2/issues/2159
 			 */
 			if ($fileName === \Magento\Translation\Model\Js\Config::DICTIONARY_FILE_NAME) {
-				$cached = array_pop($urlParts);
+				$r = array_pop($urlParts);
 			}
-			if (!isset($cached)) {
+			if (!isset($r)) {
 				/**
 				 * 2015-09-20
 				 * Обратите внимание, что перечисленные ниже классы ведут себя по-разному.
@@ -93,10 +92,10 @@ function df_locale($l = null):string {/** @var string $r */
 				 * \Magento\Backend\Model\Locale\Resolver или \Magento\Framework\Locale\Resolver
 				 */
 				$resolver = df_o(IResolver::class); /** @var IResolver|Resolver $resolver */
-				$cached = $resolver->getLocale();
+				$r = $resolver->getLocale();
 			}
-		}
-		$r = $cached;
+			return $r;
+		});
 	}
 	return $r;
 }
