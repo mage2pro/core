@@ -20,7 +20,7 @@ use Magento\Sales\Model\ResourceModel\Order\Status\History\Collection as HC;
  * @param I $i
  * @throws ME
  */
-function df_mail_invoice(I $i) {
+function df_mail_invoice(I $i):void {
 	$s = df_o(InvoiceSender::class); /** @var InvoiceSender $s */
 	$s->send($i);
 }
@@ -38,7 +38,7 @@ function df_mail_invoice(I $i) {
  * @param O $o
  * @throws ME
  */
-function df_mail_order(O $o) {
+function df_mail_order(O $o):void {
 	$s = df_o(OrderSender::class); /** @var OrderSender $s */
 	$s->send($o);
 	df_order_comment($o, 'You have confirmed the order to the customer via email.', false, true);
@@ -53,7 +53,7 @@ function df_mail_order(O $o) {
  * @param Shipment $sh
  * @throws ME
  */
-function df_mail_shipment(Shipment $sh) {
+function df_mail_shipment(Shipment $sh):void {
 	$s = df_new_om(ShipmentSender::class); /** @var ShipmentSender $s */
 	$s->send($sh);
 	if (!$sh->getEmailSent()) {
