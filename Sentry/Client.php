@@ -40,7 +40,7 @@ final class Client {
 	 * @param string $m
 	 * @param array $d
 	 */
-	function captureMessage($m, array $d) {$this->capture([
+	function captureMessage($m, array $d):void {$this->capture([
 		'message' => $m, 'sentry.interfaces.Message' => ['formatted' => $m, 'message' => $m, 'params' => []]
 	] + $d);}
 
@@ -54,7 +54,7 @@ final class Client {
 	 * @used-by df_sentry_extra_f()
 	 * @param array(string => mixed) $a
 	 */
-	function extra(array $a) {$this->context->extra = array_merge_recursive($this->context->extra, $a);}
+	function extra(array $a):void {$this->context->extra = array_merge_recursive($this->context->extra, $a);}
 
 	/**
 	 * 2017-01-10 «/» can not be used in a tag.
@@ -65,7 +65,7 @@ final class Client {
 	 * @uses df_translit_url()
 	 * @param array(string => string) $a
 	 */
-	function tags(array $a) {$this->context->tags = dfak_transform($a, 'df_translit_url') + $this->context->tags;}
+	function tags(array $a):void {$this->context->tags = dfak_transform($a, 'df_translit_url') + $this->context->tags;}
 
 	/**
 	 * @used-by df_sentry_m()
@@ -74,7 +74,7 @@ final class Client {
 	 * @param array(string => mixed) $data
 	 * @param bool $merge [optional]
 	 */
-	function user(array $d, $merge = true) {
+	function user(array $d, $merge = true):void {
 		$this->context->user = $d + (!$merge || !$this->context->user ? [] : $this->context->user);
 	}
 
@@ -84,7 +84,7 @@ final class Client {
 	 * @param E|DFE $e
 	 * @param array(string => mixed) $data
 	 */
-	function captureException(E $e, array $data) {
+	function captureException(E $e, array $data):void {
 		$eOriginal = $e; /** @var E $eOriginal */
 		do {
 			$isDFE = $e instanceof DFE; /** @var bool $isDFE */
@@ -113,7 +113,7 @@ final class Client {
 				$data['level'] = self::ERROR;
 			}
 		}
-		return $this->capture($data, $trace);
+		$this->capture($data, $trace);
 	}
 	
 	private function get_http_data() {
@@ -175,9 +175,8 @@ final class Client {
 	 * @used-by self::captureMessage()
 	 * @param mixed $data
 	 * @param mixed[] $trace [optional]
-	 * @return mixed
 	 */
-	private function capture($data, array $trace = []) {
+	private function capture($data, array $trace = []):string {
 		$data += [
 			'culprit' => $this->transaction->peek()
 			,'event_id' => $this->uuid4()
@@ -328,31 +327,24 @@ final class Client {
 
 	/**
 	 * Generate an uuid4 value
-	 *
-	 * @return string
+	 * @used-by self::capture()
 	 */
-	private function uuid4()
-	{
+	private function uuid4():string {
 		$uuid = sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
 			# 32 bits for "time_low"
 			mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-
 			# 16 bits for "time_mid"
 			mt_rand(0, 0xffff),
-
 			# 16 bits for "time_hi_and_version",
 			# four most significant bits holds version number 4
 			mt_rand(0, 0x0fff) | 0x4000,
-
 			# 16 bits, 8 bits for "clk_seq_hi_res",
 			# 8 bits for "clk_seq_low",
 			# two most significant bits holds zero and one for variant DCE1.1
 			mt_rand(0, 0x3fff) | 0x8000,
-
 			# 48 bits for "node"
 			mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
 		);
-
 		return str_replace('-', '', $uuid);
 	}
 
