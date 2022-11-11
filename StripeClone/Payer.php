@@ -84,17 +84,15 @@ class Payer extends \Df\Payment\Facade {
 	 * @used-by self::cardId()
 	 * @used-by self::customerId()
 	 * @see \Dfe\Stripe\Payer::tokenIsSingleUse()
-	 * @return bool
 	 */
-	protected function tokenIsSingleUse() {return false;}
+	protected function tokenIsSingleUse():bool {return false;}
 
 	/**
 	 * 2016-08-23
 	 * @used-by self::customerId()
 	 * @used-by self::newCard()
-	 * @return string
 	 */
-	private function customerIdSaved() {return dfc($this, function() {return df_ci_get(
+	private function customerIdSaved():string {return dfc($this, function() {return df_ci_get(
 		$this->m(), !($id = df_order($this->ii())->getCustomerId()) ? null : df_customer($id)
 	);});}
 
@@ -105,7 +103,7 @@ class Payer extends \Df\Payment\Facade {
 	 * @used-by self::customerId()
 	 * @return string[]
 	 */
-	private function newCard() {return dfc($this, function() {
+	private function newCard():array {return dfc($this, function() {
 		$m = $this->m(); /** @var Method $m */
 		$isCard = $m->isCard(); /** @var bool $isCard */
 		df_assert(!$isCard || $this->tokenIsNew());
