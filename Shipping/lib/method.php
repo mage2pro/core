@@ -10,25 +10,21 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface as IM;
  * @return M|IM
  */
 function dfsm(...$args) {return dfcf(function(...$args) {
-	/** @var array(string => M|IM) $cache */
-	/** @var IM|object|string|null $src */
-	if ($args) {
-		$src = array_shift($args);
-	}
-	else {
+	if (!$args) {
 		df_error('You can not use dfsm() without arguments yet.');
 	}
-	/** @var IM|M $result */
+	$src = array_shift($args); /** @var IM|object|string|null $src */
+	/** @var IM|M $r */
 	if ($src instanceof IM) {
-		$result = $src;
+		$r = $src;
 	}
 	else {
-		$result = M::sg($src);
+		$r = M::sg($src);
 		if ($args) {
-			$result->setStore(df_store_id($args[0]));
+			$r->setStore(df_store_id($args[0]));
 		}
 	}
-	return $result;
+	return $r;
 }, func_get_args());}
 
 /**
@@ -42,9 +38,8 @@ function dfsm(...$args) {return dfcf(function(...$args) {
  * @used-by \Df\Shipping\Method::sg()
  * @param string|object $c
  * @param bool $allowAbstract [optional]
- * @return string
  */
-function dfsm_c($c, $allowAbstract = false) {return dfcf(function($c, $allowAbstract = false) {return
+function dfsm_c($c, $allowAbstract = false):string {return dfcf(function($c, $allowAbstract = false) {return
 	ConT::p($allowAbstract, function() use($c) {return df_con_heir($c, M::class);})
 ;}, func_get_args());}
 
@@ -64,16 +59,13 @@ function dfsm_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $me
  * @used-by \Df\Shipping\Settings::enable()
  * @uses \Df\Shipping\Method::codeS()
  * @param string|object $c
- * @return string
  */
-function dfsm_code($c) {return dfcf(function($c) {return dfsm_call_s($c, 'codeS');}, [df_cts($c)]);}
+function dfsm_code($c):string {return dfcf(function($c) {return dfsm_call_s($c, 'codeS');}, [df_cts($c)]);}
 
 /**
- * 2018-04-21
- * Без префикса «dfe_»
+ * 2018-04-21 Без префикса «dfe_»
  * @used-by \Df\Shipping\Settings::prefix()
  * @uses \Df\Shipping\Method::codeS()
  * @param string|object $c
- * @return string
  */
-function dfsm_code_short($c) {return df_trim_text_left(dfsm_code($c), 'dfe_');}
+function dfsm_code_short($c):string {return df_trim_text_left(dfsm_code($c), 'dfe_');}
