@@ -11,7 +11,7 @@ use Magento\Framework\DataObject as _DO;
  * @param _DO|O $o
  * @param array(string => mixed) $info
  */
-function df_oi_add(_DO $o, array $info) {
+function df_oi_add(_DO $o, array $info):void {
 	$o[Schema::F__DF] = df_json_encode(df_extend(df_eta(df_oi_get(null, $o)), $info));
 }
 
@@ -36,7 +36,7 @@ function df_oi_get($m = null, _DO $o = null) {
  * @param mixed|null $info
  * @param O|null $o [optional]
  */
-function df_oi_save($m, $info, O $o = null) {
+function df_oi_save($m, $info, O $o = null):void {
 	$data = [df_class_second_lc($m) => $info]; /** @var array(string => string) $data */
 	$o = df_order($o);
 	df_oi_add($o, $data);
