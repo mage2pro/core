@@ -36,9 +36,8 @@ abstract class Button extends _P {
 	 *		}
 	 *		$html = $this->_afterToHtml($html);
 	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L643-L689
-	 * @return string
 	 */
-	final protected function _toHtml() {
+	final protected function _toHtml():string {
 		$r =
 			Css::isAccConfirmation() || Css::isRegCompletion()
 			|| !self::sModule()->enable() || !$this->s()->enable() ? '' :
@@ -67,7 +66,7 @@ abstract class Button extends _P {
 	 * @see \Dfe\FacebookLogin\Button::attributes()
 	 * @return array(string => string)
 	 */
-	protected function attributes() {return
+	protected function attributes():array {return
 		($this->isNative() ? $this->attributesN() : ['href' => $this->lHref(), 'title' => $this->s()->label()]) + [
 			'class' => df_cc_s('df-sso-button', $this->cssClass(), $this->s()->type(), $this->cssClass2())
 			,'id' => df_uid(4, "{$this->cssClass()}-")
@@ -88,9 +87,8 @@ abstract class Button extends _P {
 	 * @used-by self::attributes()
 	 * @used-by self::id()
 	 * @used-by \Df\Sso\Button\Js::jsOptions()
-	 * @return string
 	 */
-	final protected function cssClass() {return dfc($this, function() {return implode(
+	final protected function cssClass():string {return dfc($this, function() {return implode(
 		'-', df_explode_class_lc_camel($this)
 	);});}
 
@@ -98,9 +96,8 @@ abstract class Button extends _P {
 	 * 2016-11-29
 	 * @used-by self::attributes()
 	 * @see \Dfe\FacebookLogin\Button::cssClass2()
-	 * @return string
 	 */
-	protected function cssClass2() {return '';}
+	protected function cssClass2():string {return '';}
 
 	/**
 	 * 2016-11-29
