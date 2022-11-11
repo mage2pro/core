@@ -425,17 +425,6 @@ final class Client {
 	}
 
 	/**
-	 * Provide a map of PHP Error constants to Sentry logging groups to use instead
-	 * of the defaults in translateSeverity()
-	 *
-	 * @param array $map
-	 */
-	function registerSeverityMap($map)
-	{
-		$this->severity_map = $map;
-	}
-
-	/**
 	 * 2016-12-23
 	 * @used-by self::get_curl_options()
 	 * @return string
