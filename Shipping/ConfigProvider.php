@@ -11,7 +11,7 @@ abstract class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @see \Doormall\Shipping\ConfigProvider::config()
 	 * @return array(string => mixed)
 	 */
-	abstract protected function config();
+	abstract protected function config():array;
 
 	/**
 	 * 2017-03-03
@@ -54,7 +54,7 @@ abstract class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Checkout/Model/CompositeConfigProvider.php#L31-L41
 	 * @return array(string => mixed)
 	 */
-	function getConfig() {return ['shipping' => !df_is_checkout() || !$this->s()->enable() ? [] : [
+	function getConfig():array {return ['shipping' => !df_is_checkout() || !$this->s()->enable() ? [] : [
 		$this->m()->getCarrierCode() => $this->config()
 	]];}
 
@@ -71,9 +71,8 @@ abstract class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * 2017-02-07
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by self::getConfig()
-	 * @return Method
 	 */
-	protected function m() {return dfc($this, function() {return dfsm($this->_mc);});}
+	protected function m():Method {return dfc($this, function() {return dfsm($this->_mc);});}
 
 	/**
 	 * 2017-03-03
