@@ -18,10 +18,12 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 
 	/**
 	 * 2016-12-02
+	 * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
+	 * @used-by \Df\Sso\CustomerReturn::fId()
+	 * @used-by \Df\Sso\Upgrade\Data::_process()
 	 * @param string|object $c
-	 * @return string
 	 */
-	static function fIdC($c) {return df_con_s(str_replace('_', '\\', df_cts($c)), 'Setup\UpgradeSchema', 'fId');}
+	final static function fIdC($c):string {return df_con_s(str_replace('_', '\\', df_cts($c)), 'Setup\UpgradeSchema', 'fId');}
 
 	/**
 	 * 2016-12-02
