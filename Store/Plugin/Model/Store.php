@@ -9,7 +9,6 @@ class Store {
 	 * @see AbstractFrontend::getName()
 	 * @param Sb $sb
 	 * @param string $r
-	 * @return string
 	 */
-	function afterGetName(Sb $sb, $r) {return 'Admin' === $r ? __($r) : $r;}
+	function afterGetName(Sb $sb, $r):string {return 'Admin' === $r ? __($r) : $r;}
 }
