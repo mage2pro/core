@@ -13,7 +13,7 @@ use Magento\Sales\Model\Order\Status\History;
  * @param $visibleOnFront
  * @param $customerNotified
  */
-function df_order_comment(O $o, $text, $visibleOnFront = false, $customerNotified = false) {
+function df_order_comment(O $o, $text, $visibleOnFront = false, $customerNotified = false):void {
 	$h = $o->addStatusHistoryComment(__($text)); /** @var History|IHistory $h */
 	$h->setIsVisibleOnFront($visibleOnFront);
 	$h->setIsCustomerNotified($customerNotified);
