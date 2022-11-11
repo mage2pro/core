@@ -103,24 +103,22 @@ abstract class Button extends _P {
 	 * 2016-11-29
 	 * @used-by self::attributes()
 	 * @used-by \Dfe\FacebookLogin\Button::cssClass2()
-	 * @return bool
 	 */
-	final protected function isNative() {return dfc($this, function() {return UNL::isNative($this->s()->type());});}
+	final protected function isNative():bool {return dfc($this, function() {return UNL::isNative($this->s()->type());});}
 
 	/**
 	 * 2016-11-23
 	 * @used-by self::_toHtml()
-	 * @return string
+	 * @see \Dfe\AmazonLogin\Button::loggedIn()
 	 */
-	protected function loggedIn() {return '';}
+	protected function loggedIn():string {return '';}
 
 	/**
 	 * 2016-11-23
+	 * @used-by self::_toHtml()
 	 * @see \Dfe\FacebookLogin\Button::loggedOut()
-	 * @used-by self::_toHtml()
-	 * @return string
 	 */
-	protected function loggedOut() {$unified = UNL::isUnified($this->s()->type()); return
+	protected function loggedOut():string {$unified = UNL::isUnified($this->s()->type()); return
 		df_tag('a', $this->attributes(), df_tag_if($this->s()->label(), $unified, 'span'))
 		.(!$unified ? '' : df_fa_link())
 		# 2016-11-30
