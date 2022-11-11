@@ -39,7 +39,7 @@ final class BlackList {
 	 * @used-by self::add()
 	 * @param array(string => int) $v
 	 */
-	private static function save(array $v):void {return df_cfg_save_cc(self::$K, df_json_encode($v));}
+	private static function save(array $v):void {df_cfg_save_cc(self::$K, df_json_encode($v));}
 
 	/**
 	 * 2021-09-16
