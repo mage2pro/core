@@ -1,6 +1,7 @@
 <?php
 namespace Df\Sentry;
 use Df\Core\Exception as DFE;
+use JMS\Serializer\Annotation as Serializer;
 use Magento\Framework\App\ErrorHandler;
 use \Exception as E;
 final class Client {
@@ -18,7 +19,6 @@ final class Client {
 		$this->_user = null;
 		$this->context = new Context;
 		$this->curl_path = 'curl';
-		$this->error_types = null;
 		$this->extra_data = [];
 		$this->logger = 'php';
 		$this->severity_map = null;
@@ -444,7 +444,7 @@ final class Client {
 	 * @used-by self::capture()
 	 * @param $data
 	 */
-	private function sanitize(&$data) {
+	private function sanitize(&$data):void {
 		if (!empty($data['request'])) {
 			$data['request'] = $this->serializer->serialize($data['request']);
 		}
@@ -467,15 +467,7 @@ final class Client {
 	public $context;
 	public $extra_data;
 	public $severity_map;
-	/**
-	 * 2020-06-27
-	 * @used-by self::capture()
-	 * @used-by self::captureException()
-	 * @used-by self::setAppPath()
-	 * @var string|null
-	 */
-	private $app_path;
-	private $error_types;
+
 	/**
 	 * 2020-06-28
 	 * @used-by self::__construct()
