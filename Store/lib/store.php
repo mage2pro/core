@@ -152,7 +152,7 @@ function df_store_m() {return df_o(IStoreManager::class);}
  * @param bool $codeKey [optional]
  * @return string[]
  */
-function df_store_names($withDefault = false, $codeKey = false) {return array_map(
+function df_store_names($withDefault = false, $codeKey = false):array {return array_map(
 	function(IStore $store) {return $store->getName();}, df_stores($withDefault, $codeKey)
 );}
 
@@ -162,25 +162,22 @@ function df_store_names($withDefault = false, $codeKey = false) {return array_ma
  * @used-by df_store_url_web()
  * @param int|string|null|bool|IStore $s
  * @param string $type
- * @return string
  */
-function df_store_url($s, $type) {return df_store($s)->getBaseUrl($type);}
+function df_store_url($s, $type):string {return df_store($s)->getBaseUrl($type);}
 
 /**
  * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
  * @used-by \Df\Payment\Metadata::vars()
  * @param int|string|null|bool|IStore $s [optional]
- * @return string
  */
-function df_store_url_link($s = null) {return df_store_url($s, U::URL_TYPE_LINK);}
+function df_store_url_link($s = null):string {return df_store_url($s, U::URL_TYPE_LINK);}
 
 /**
  * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
  * @used-by df_domain_current()
  * @param int|string|null|bool|IStore $s [optional]
- * @return string
  */
-function df_store_url_web($s = null) {return df_store_url($s, U::URL_TYPE_WEB);}
+function df_store_url_web($s = null):string {return df_store_url($s, U::URL_TYPE_WEB);}
 
 /**
  * 2016-01-11
@@ -193,6 +190,4 @@ function df_store_url_web($s = null) {return df_store_url($s, U::URL_TYPE_WEB);}
  * @param bool $codeKey [optional]
  * @return array|IStore[]
  */
-function df_stores($withDefault = false, $codeKey = false) {return df_ksort(
-	df_store_m()->getStores($withDefault, $codeKey)
-);}
+function df_stores($withDefault = false, $codeKey = false) {return df_ksort(df_store_m()->getStores($withDefault, $codeKey));}
