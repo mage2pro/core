@@ -30,7 +30,7 @@ class Payer extends \Df\Payment\Facade {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return string
 	 */
-	function cardId() {return
+	final function cardId():string {return
 		!$this->tokenIsNew() || $this->tokenIsSingleUse() ? $this->token() : df_last($this->newCard())
 	;}
 
@@ -40,7 +40,7 @@ class Payer extends \Df\Payment\Facade {
 	 * @used-by \Dfe\Moip\P\Preorder::p()
 	 * @return string|null
 	 */
-	function customerId() {return $this->tokenIsSingleUse() ? null: (
+	final function customerId() {return $this->tokenIsSingleUse() ? null: (
 		$this->customerIdSaved() ?: df_first($this->newCard())
 	);}
 
@@ -57,9 +57,8 @@ class Payer extends \Df\Payment\Facade {
 	 * @used-by self::cardId()
 	 * @used-by self::newCard()
 	 * @used-by \Df\StripeClone\P\Charge::request()
-	 * @return bool
 	 */
-	function tokenIsNew() {return dfc($this, function() {return
+	final function tokenIsNew():bool {return dfc($this, function() {return
 		FCharge::s($this->m())->tokenIsNew($this->token())
 	;});}
 
@@ -72,9 +71,8 @@ class Payer extends \Df\Payment\Facade {
 	 * @used-by self::newCard()
 	 * @used-by self::tokenIsNew()
 	 * @used-by \Dfe\Stripe\Payer::tokenIsSingleUse()
-	 * @return string
 	 */
-	final protected function token() {return Token::get($this->ii());}
+	final protected function token():string {return Token::get($this->ii());}
 
 	/**
 	 * 2017-11-12
