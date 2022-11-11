@@ -36,17 +36,15 @@ function df_quote($q = null) {return $q instanceof IQ ? $q : (
 /**
  * 2021-05-26
  * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
- * @return CustomerM
  */
-function df_quote_customer_m() {return df_o(CustomerM::class);}
+function df_quote_customer_m():CustomerM {return df_o(CustomerM::class);}
 
 /**
  * 2020-01-25
  * @used-by df_quote()
  * @param IQ|Q|IO|null $q [optional]
- * @return int
  */
-function df_quote_id($q = null) {return !$q ? df_quote()->getId() : (
+function df_quote_id($q = null):int {return !$q ? df_quote()->getId() : (
 	df_is_o($q) ? $q->getQuoteId() : (df_is_q($q) ? $q->getId() : df_error())
 );}
 
