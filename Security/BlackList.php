@@ -8,15 +8,14 @@ final class BlackList {
 	 * @used-by df_ban()
 	 * @param string $ip [optional]
 	 */
-	static function add($ip = null) {self::save([self::ip($ip) => time() + 60 * 60 * 24 * 30] + self::load());}
+	static function add($ip = null):void {self::save([self::ip($ip) => time() + 60 * 60 * 24 * 30] + self::load());}
 
 	/**
 	 * 2021-09-16
 	 * @used-by \Df\Framework\Plugin\App\Http::aroundLaunch()
 	 * @param string|null $ip [optional]
-	 * @return bool
 	 */
-	static function has($ip = null) {return dfa(self::load(), self::ip($ip));}
+	static function has($ip = null):bool {return dfa(self::load(), self::ip($ip));}
 
 	/**
 	 * 2021-09-16
@@ -24,14 +23,14 @@ final class BlackList {
 	 * @used-by self::has()
 	 * @param string|null $v [optional]
 	 */
-	private static function ip($v = null) {return $v ?: df_visitor_ip();}
+	private static function ip($v = null):string {return $v ?: df_visitor_ip();}
 
 	/**
 	 * 2021-09-16
 	 * @used-by self::add()
 	 * @return array(string => int)
 	 */
-	private static function load() {$t = time(); return array_filter(
+	private static function load():array {$t = time(); return array_filter(
 		($j = df_cfg(self::$K)) ? df_json_decode($j) : [], function($v) use($t) {return $t < $v;}
 	);}
 
@@ -40,7 +39,7 @@ final class BlackList {
 	 * @used-by self::add()
 	 * @param array(string => int) $v
 	 */
-	private static function save(array $v) {return df_cfg_save_cc(self::$K, df_json_encode($v));}
+	private static function save(array $v):void {return df_cfg_save_cc(self::$K, df_json_encode($v));}
 
 	/**
 	 * 2021-09-16
