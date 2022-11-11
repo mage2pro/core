@@ -260,7 +260,7 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @used-by self::mc()
 	 * @param MC $mc
 	 */
-	private function register(MC $mc) {
+	private function register(MC $mc):void {
 		# 2015-10-12
 		# https://github.com/magento/magento2/issues/2087
 		# Приходится присваивать магазин в 2 шага...
