@@ -11,7 +11,8 @@ final class Rss {
 	 * @see \Magento\Rss\Model\Rss::getFeeds()
 	 * @param Sb $sb
 	 * @param array(string => mixed) $r
-	 * @return string
 	 */
-	function afterGetFeeds(Sb $sb, array $r) {return df_map($r, function($v) {return !$v  instanceof Ph ? $v : (string)$v;});}
+	function afterGetFeeds(Sb $sb, array $r):string {return df_map($r, function($v) {return
+		!$v  instanceof Ph ? $v : (string)$v
+	;});}
 }
