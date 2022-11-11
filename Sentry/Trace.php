@@ -8,9 +8,8 @@ final class Trace {
 	 * @used-by \Df\Sentry\Client::capture()
 	 * @used-by \Df\Sentry\Client::captureException()
 	 * @param $frames
-	 * @return array
 	 */
-	static function info($frames) {
+	static function info($frames):array {
 		$serializer = new Serializer;
 		$reprSerializer = new ReprSerializer;
 		$r = [];
@@ -86,7 +85,7 @@ final class Trace {
 	 * @param $line
 	 * @return array(string => mixed)
 	 */
-	private static function code($file, $line) {
+	private static function code($file, $line):array {
 		$context_lines = 5; /** @const int $context_lines */
 		/** @var array(string => mixed) $r */
 		$r = ['filename' => $file, 'line' => '', 'lineno' => $line, 'prefix' => [], 'suffix' => []];
@@ -138,7 +137,7 @@ final class Trace {
 	 * @param array(string => mixed) $frame
 	 * @return array(string => mixed)
 	 */
-	private static function get_default_context($frame) {
+	private static function get_default_context($frame):array {
 		$r = []; /** @var array(string => mixed) $r */
 		$i = 1; /** @var int $i */
 		foreach (dfa($frame, 'args', []) as $arg) {
@@ -157,7 +156,7 @@ final class Trace {
 	 * @param array(string => mixed) $frame
 	 * @return array(string => mixed)
 	 */
-	private static function get_frame_context(array $frame) {
+	private static function get_frame_context(array $frame):array {
 		$r = []; /** @var array(string => mixed) $r */
 		if (isset($frame['args'])) {
 			$args = dfa($frame, 'args'); /** @var array $args */
@@ -168,7 +167,7 @@ final class Trace {
 			if (!$f || df_contains($f, '__lambda_func') || 'Closure' === $c || df_ends_with($f, '{closure}')) {
 				$r = self::get_default_context($frame);
 			}
-			else if (in_array($f, ['include', 'include_once', 'require', 'require_once'])) {
+			elseif (in_array($f, ['include', 'include_once', 'require', 'require_once'])) {
 				$r = empty($args) ? [] : ['param1' => $args[0]];
 			}
 			else {
