@@ -492,7 +492,6 @@ final class Client {
 	private $serializer;
 	const DEBUG = 'debug';
 	const ERROR = 'error';
-	const FATAL = 'fatal';
 	const INFO = 'info';
 	/**
 	 * 2020-06-28
