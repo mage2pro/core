@@ -24,9 +24,8 @@ final class Frame extends \Df\Core\O {
 	 * @used-by \Df\Qa\Method::raiseErrorResult()
 	 * @used-by \Df\Qa\Method::raiseErrorVariable()
 	 * @used-by \Df\Qa\Trace\Formatter::frame()
-	 * @return string
 	 */
-	function method() {return df_cc_method($this->class_(), $this->function_());}
+	function method():string {return df_cc_method($this->class_(), $this->function_());}
 
 	/**
 	 * 2020-02-20
@@ -53,9 +52,8 @@ final class Frame extends \Df\Core\O {
 	/**
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @param int $ordering  		zero-based
-	 * @return RP
 	 */
-	function methodParameter($ordering) {return dfc($this, function($ordering) {/** @var RP $r */
+	function methodParameter($ordering):RP {return dfc($this, function($ordering) {/** @var RP $r */
 		df_param_integer($ordering, 0);
 		df_assert($m = $this->methodR()); /** @var RM|null $m */
 		if ($ordering >= count($m->getParameters())) { # Параметр должен существовать
@@ -73,30 +71,26 @@ final class Frame extends \Df\Core\O {
 	/**
 	 * @used-by self::methodR()
 	 * @used-by self::method()
-	 * @return string
 	 */
-	private function class_() {return df_nts($this['class']);}
+	private function class_():string {return df_nts($this['class']);}
 	
 	/**
 	 * @used-by self::methodR()
 	 * @used-by self::method()
-	 * @return string
 	 */
-	private function function_() {return df_nts($this['function']);}
+	private function function_():string {return df_nts($this['function']);}
 
 	/**
 	 * 2016-07-31
 	 * @used-by self::methodR()
-	 * @return bool
 	 */
-	private function isClosure() {return df_ends_with($this->function_(), '{closure}');}
+	private function isClosure():bool {return df_ends_with($this->function_(), '{closure}');}
 
 	/**           
 	 * 2020-02-27 `self $previous` works even in PHP 5.0.0: https://3v4l.org/pTl8l
 	 * @used-by \Df\Qa\Method::caller()
 	 * @used-by \Df\Qa\Trace::__construct()
 	 * @param array(string => string|int) $a
-	 * @return self
 	 */
-	static function i(array $a) {return new self($a);}
+	static function i(array $a):self {return new self($a);}
 }
