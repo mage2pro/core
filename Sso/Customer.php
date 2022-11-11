@@ -64,6 +64,7 @@ abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
 	 * @used-by CustomerReturn::register()
+	 * @see \Dfe\FacebookLogin\Customer::nameMiddle()
 	 * @return string|null
 	 */
 	function nameMiddle() {return '';}
@@ -74,9 +75,8 @@ abstract class Customer extends \Df\Core\O {
 	 * По крайней мере, для Amazon надо брать последние символы идентификатора,
 	 * потому что первые одинаковы для всех: «amzn1.account.AGM6GZJB6GO42REKZDL33HG7GEJA»
 	 * @used-by CustomerReturn::register()
-	 * @return string
 	 */
-	function password() {return substr($this->id(), -8);}
+	final function password():string {return substr($this->id(), -8);}
 
 	/**
 	 * 2016-06-04
