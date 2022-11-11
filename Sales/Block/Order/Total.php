@@ -16,7 +16,7 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * 2016-08-13
 	 * @used-by \Magento\Sales\Block\Order\Totals::_beforeToHtml()
 	 */
-	abstract function initTotals();
+	abstract function initTotals():void;
 
 	/**
 	 * 2016-08-14 Add new total to totals array after specific total or before last total by default.
@@ -28,7 +28,7 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @param float $valueBase
 	 * @param string|null $after [optional]
 	 */
-	final protected function addAfter($code, $label, $value, $valueBase, $after = null) {$this->add(
+	final protected function addAfter($code, $label, $value, $valueBase, $after = null):void {$this->add(
 		'addTotal', $code, $label, $value, $valueBase, $after
 	);}
 
@@ -42,16 +42,15 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @param float $valueBase
 	 * @param string|null $before [optional]
 	 */
-	final protected function addBefore($code, $label, $value, $valueBase, $before = null) {$this->add(
+	final protected function addBefore($code, $label, $value, $valueBase, $before = null):void {$this->add(
 		'addTotalBefore', $code, $label, $value, $valueBase, $before
 	);}
 
 	/**
 	 * 2016-08-14
 	 * @used-by \Dfe\AllPay\Block\Total::initTotals()
-	 * @return Payment
 	 */
-	final protected function op() {return dfp($this->getParentBlock()->getOrder());}
+	final protected function op():Payment {return dfp($this->getParentBlock()->getOrder());}
 
 	/**
 	 * 2016-08-14
@@ -62,7 +61,7 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * @param float $valueBase
 	 * @param string|null $position [optional]
 	 */
-	private function add($method, $code, $label, $value, $valueBase, $position = null) {call_user_func(
+	private function add($method, $code, $label, $value, $valueBase, $position = null):void {call_user_func(
 		[$this->getParentBlock(), $method]
 		,new _DO(['code' => $code, 'label' => __($label), 'value' => $value, 'base_value' => $valueBase])
 		,$position
