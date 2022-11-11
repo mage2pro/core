@@ -147,9 +147,8 @@ abstract class Button extends _P {
 	 * 2016-11-24
 	 * 2016-11-27
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @return S
 	 */
-	protected function s() {return dfc($this, function() {return df_new(
+	protected function s():S {return dfc($this, function() {return df_new(
 		df_con_heir($this, S::class), $this['dfConfigPrefix']
 	);});}
 
@@ -157,9 +156,8 @@ abstract class Button extends _P {
 	 * 2016-11-30 Другой алгоритм: `$this->getParentBlock() instanceof Links`.
 	 * @used-by self::_toHtml()
 	 * @used-by self::loggedOut()
-	 * @return string
 	 */
-	private function isInHeader() {return dfc($this, function() {return 'header.links' === df_parent_name($this);});}
+	private function isInHeader():string {return dfc($this, function() {return 'header.links' === df_parent_name($this);});}
 
 	/**
 	 * 2016-11-23
@@ -170,9 +168,9 @@ abstract class Button extends _P {
 	 * 2016-11-24
 	 * Передаём static::class как аргумент, чтобы потомки этого класса имели индивидуальный кэш:
 	 * https://github.com/mage2pro/core/blob/ab34df/Core/lib/cache.php?ts=4#L151-L160
-	 * @return \Df\Sso\Settings
+	 * @return Settings
 	 */
-	private static function sModule() {return dfcf(function($c) {return Settings::convention($c);}, [static::class]);}
+	private static function sModule():Settings {return dfcf(function($c) {return Settings::convention($c);}, [static::class]);}
 
 	/**
 	 * 2016-12-01 https://3v4l.org/Ns95Q
