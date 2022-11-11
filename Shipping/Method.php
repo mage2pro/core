@@ -85,9 +85,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * @see \Doormall\Shipping\Method::collectRates()
 	 * @see \Frugue\Shipping\Method::collectRates()
 	 * @param Req $req
-	 * @return Res
 	 */
-	abstract function collectRates(Req $req);
+	abstract function collectRates(Req $req):Res;
 
 	/**
 	 * 2018-04-17
@@ -150,9 +149,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L590-L599
 	 * @param mixed $d
-	 * @return void
 	 */
-	final function debugData($d) {}
+	final function debugData($d):void {}
 
 	/**
 	 * 2018-04-17
