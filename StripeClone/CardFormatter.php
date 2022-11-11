@@ -13,9 +13,8 @@ class CardFormatter {
 	 * 2017-02-12
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
-	 * @return C
 	 */	
-	function c() {return $this->_c;}
+	function c():C {return $this->_c;}
 
 	/**
 	 * 2017-02-11
@@ -45,7 +44,7 @@ class CardFormatter {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @return array(string => string)
 	 */
-	final function ii() {return [
+	final function ii():array {return [
 		DfOP::COUNTRY => $this->country()
 		,OP::CC_EXP_MONTH => $this->_c->expMonth()
 		,OP::CC_EXP_YEAR => $this->_c->expYear()
@@ -60,9 +59,8 @@ class CardFormatter {
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @see \Dfe\Moip\CardFormatter::label()
 	 * @see \Dfe\TBCBank\CardFormatter::label()
-	 * @return string
 	 */
-	function label() {return dfp_card_format_last4($this->_c->last4(), $this->_c->brand());}
+	function label():string {return dfp_card_format_last4($this->_c->last4(), $this->_c->brand());}
 
 	/**
 	 * 2017-02-11
@@ -89,9 +87,8 @@ class CardFormatter {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @param string|object $m
 	 * @param C $c
-	 * @return self
 	 */
-	final static function s($m, C $c) {return dfcf(function($m, C $c) {
+	final static function s($m, C $c):self {return dfcf(function($m, C $c) {
 		/**
 		 * 2017-07-19
 		 * Unable to reduce the implementation to:
