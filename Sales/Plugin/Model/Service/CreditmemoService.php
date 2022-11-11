@@ -21,13 +21,13 @@ final class CreditmemoService {
 	 *
 	 * @see \Magento\Sales\Model\Service\CreditmemoService::refund()
 	 * @param Sb $sb
-	 * @param ICreditmemo|Creditmemo $creditmemo
+	 * @param ICreditmemo|Creditmemo $c
 	 * @param bool $offlineRequested [optional]
 	 */
-	function beforeRefund(Sb $sb, ICreditmemo $creditmemo, $offlineRequested = false):void {
-		if ($creditmemo instanceof Creditmemo) {
+	function beforeRefund(Sb $sb, ICreditmemo $c, $offlineRequested = false):void {
+		if ($c instanceof Creditmemo) {
 			/** @noinspection PhpUndefinedMethodInspection */
-			$creditmemo->setDoTransaction(!$offlineRequested);
+			$c->setDoTransaction(!$offlineRequested);
 		}
 	}
 }
