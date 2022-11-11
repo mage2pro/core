@@ -234,15 +234,13 @@ final class Client {
 	 * 2020-06-27
 	 * @used-by self::send()
 	 * @param array(string => mixed) $data
-	 * @return string
 	 */
-	private function encode(&$data) {
+	private function encode(&$data):string {
 		$r = df_json_encode($data);
 		if (function_exists('gzcompress')) {
 			$r = gzcompress($r);
 		}
-		$r = base64_encode($r);
-		return $r;
+		return base64_encode($r);
 	}
 
 	/**
