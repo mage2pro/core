@@ -14,9 +14,8 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * @see \Dfe\AmazonLogin\Setup\UpgradeData::labelPrefix()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeData::labelPrefix()
 	 * @see \Dfe\FacebookLogin\Setup\UpgradeData::labelPrefix()
-	 * @return string
 	 */
-	abstract protected function labelPrefix();
+	abstract protected function labelPrefix():string;
 
 	/**
 	 * 2016-12-02
