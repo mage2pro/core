@@ -37,10 +37,9 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t03()
  * @param int|O|OP|null $o [optional]
- * @return O     
  * @throws InputException|LE|NoSuchEntityException
  */
-function df_order($o = null) {return df_is_o($o) ? $o : (
+function df_order($o = null):O {return df_is_o($o) ? $o : (
 	$o instanceof OP ? df_order_by_payment($o) : (
 		is_numeric($o = $o ?: df_request('order_id')) ? df_order_r()->get($o)
 			: df_error('df_order: invalid argument: %s.', df_type($o))
@@ -53,15 +52,13 @@ function df_order($o = null) {return df_is_o($o) ? $o : (
  * 2016-05-22
  * Даже если включена опция «Add Secret Key to URLs», адреса без ключей всё равно работают.
  * https://mage2.pro/tags/backend-url-secret-key
- * How to skip adding the secret key to a backend URL using the «_nosecret» parameter?
- * https://mage2.pro/t/1644
+ * "How to skip adding the secret key to a backend URL using the «_nosecret» parameter?" https://mage2.pro/t/1644
  * 2016-08-24
  * @see df_customer_backend_url()
  * @see df_cm_backend_url()
  * @param O|int $o
- * @return string
  */
-function df_order_backend_url($o) {return df_url_backend_ns('sales/order/view', ['order_id' => df_idn($o)]);}
+function df_order_backend_url($o):string {return df_url_backend_ns('sales/order/view', ['order_id' => df_idn($o)]);}
 
 /**
  * 2016-05-07
@@ -93,12 +90,12 @@ function df_order_by_payment(OP $p) {return dfcf(function(OP $p) {
 /**
  * 2017-03-18
  * @used-by df_order_ds()
- * @return Config
  */
-function df_order_config() {return df_o(Config::class);}
+function df_order_config():Config {return df_o(Config::class);}
 
 /**
  * 2016-05-04
+ * @used-by df_order()
  * @return IOrderRepository|OrderRepository
  */
 function df_order_r() {return df_o(IOrderRepository::class);}
@@ -117,9 +114,8 @@ function df_order_r() {return df_o(IOrderRepository::class);}
  * вызывая @uses \Magento\Sales\Model\Order::getShippingMethod() с параметром $asObject = false
  * @used-by \Dfe\Stripe\P\Address::p()
  * @param O $o
- * @return string
  */
-function df_order_shipping_title(O $o) {return /** @var string $c */
+function df_order_shipping_title(O $o):string {return /** @var string $c */
 	!$o->getShippingMethod() || !($c = $o->getShippingMethod(true)['method']) ? '' :
 		df_cfg("carriers/$c/title")
 ;}
@@ -130,6 +126,5 @@ function df_order_shipping_title(O $o) {return /** @var string $c */
  * @used-by \Df\Sales\Model\Order\Payment::processActionS()
  * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
  * @param string $state
- * @return string
  */
-function df_order_ds($state) {return df_order_config()->getStateDefaultStatus($state);}
+function df_order_ds($state):string {return df_order_config()->getStateDefaultStatus($state);}
