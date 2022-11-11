@@ -71,9 +71,8 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @see \Dfe\FacebookLogin\Controller\Index\Index
 	 * @see \Dfe\AmazonLogin\Controller\Index\Index
-	 * @return DC
 	 */
-	protected function c() {return dfc($this, function() {
+	protected function c():DC {return dfc($this, function() {
 		$r = df_new(df_con_heir($this, DC::class)); /** @var DC $r */
 		$r->validate();
 		return $r;
@@ -92,17 +91,17 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * После регистрации свежесозданная учётная запись будет привязана
 	 * к учётной записи покупателя в провайдере SSO.
 	 * @used-by self::mc()
-	 * @return bool
 	 */
-	protected function canRegister() {return true;}
+	protected function canRegister():bool {return true;}
 
 	/**
 	 * 2016-06-04
 	 * @used-by self::mc()
 	 * @used-by self::register()
+	 * @see \Dfe\FacebookLogin\Controller\Index\Index::customerData()
 	 * @return array(string => mixed)
 	 */
-	protected function customerData() {return dfc($this, function() {$c = $this->c(); return df_clean([
+	protected function customerData():array {return dfc($this, function() {$c = $this->c(); return df_clean([
 		'dob' => $c->dob()
 		,'email' => $c->email() ?: df_next_increment('customer_entity') . '@none.com'
 		,'firstname' => $c->nameFirst()
