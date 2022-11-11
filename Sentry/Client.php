@@ -117,6 +117,7 @@ final class Client {
 	}
 
 	/**
+	 * 2022-11-11
 	 * @used-by self::capture()
 	 * @return array(string => array(string => string))
 	 */
@@ -152,7 +153,7 @@ final class Client {
 	 * @used-by self::capture()
 	 * @return array|array[]|null[]
 	 */
-	private function get_user_data() {
+	private function get_user_data():array {
 		$user = $this->context->user;
 		if ($user === null) {
 			if (!function_exists('session_id') || !session_id()) {
