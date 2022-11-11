@@ -36,7 +36,6 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 			$this->_redirectToRegistration = true;
 			$s2 = Sess::s(); /** @var Sess $s2 */
 			$s2->ssoId($this->c()->id());
-			$s2->ssoRegistrationData($this->registrationData());
 			$s2->ssoProvider(df_module_name($this));
 			$settings = dfs($this); /** @var Settings $settings */
 			df_message_success($settings->regCompletionMessage());
@@ -155,13 +154,6 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	final protected function redirectUrl():string {return
 		!$this->_redirectToRegistration ? parent::redirectUrl() : df_customer_url()->getRegisterUrl()
 	;}
-
-	/**
-	 * 2016-12-02
-	 * @used-by self::execute()
-	 * @return array(string => mixed)
-	 */
-	protected function registrationData() {return [];}
 
 	/**
 	 * 2015-10-08

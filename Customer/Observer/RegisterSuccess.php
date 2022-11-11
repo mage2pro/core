@@ -33,7 +33,6 @@ final class RegisterSuccess implements ObserverInterface {
 		}
 		$s->ssoId(null);
 		$s->ssoProvider(null);
-		$s->ssoRegistrationData([]);
 		$s->needConfirm(df_customer_is_need_confirm($c));
 	}
 }
