@@ -1,19 +1,18 @@
 <?php
 namespace Df\Sentry;
-class TransactionStack {
+final class TransactionStack {
 	/**
 	 * 2020-06-27
 	 * @used-by \Df\Sentry\Client::__construct()
 	 */
 	function __construct() {$this->stack = [];}
 
-	function clear()
-	{
-		$this->stack = [];
-	}
-
-	function peek()
-	{
+	/**
+	 * 2022-11-11
+	 * @used-by \Df\Sentry\Client::capture()
+	 * @return string|null
+	 */
+	function peek() {
 		$len = count($this->stack);
 		if ($len === 0) {
 			return null;
@@ -21,20 +20,10 @@ class TransactionStack {
 		return $this->stack[$len - 1];
 	}
 
-	function push($context)
-	{
-		$this->stack[] = $context;
-	}
-
-	function pop($context=null)
-	{
-		if (!$context) {
-			return array_pop($this->stack);
-		}
-		while (!empty($this->stack)) {
-			if (array_pop($this->stack) === $context) {
-				return $context;
-			}
-		}
-	}
+	/**
+	 * 2022-11-11
+	 * @used-by \Df\Sentry\Client::__construct()
+	 * @param string $c
+	 */
+	function push($c):void {$this->stack[] = $c;}
 }
