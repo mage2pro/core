@@ -249,7 +249,7 @@ final class Client {
 	 * @used-by self::capture()
 	 * @param array $data
 	 */
-	private function send(&$data) {
+	private function send(&$data):void {
 		$domain = 1000 > $this->_projectId ? 'log.mage2.pro' : 'sentry.io'; /** @var string $domain */ # 2018-08-25
 		$this->send_http("https://$domain/api/{$this->_projectId}/store/", $this->encode($data), [
 			'Content-Type' => 'application/octet-stream'
@@ -271,7 +271,7 @@ final class Client {
 	 * @param array $data
 	 * @param array $headers
 	 */
-	private function send_http($url, $data, $headers = []) {
+	private function send_http($url, $data, $headers = []):void {
 		# 2022-10-16 https://www.php.net/manual/migration80.incompatible.php#migration80.incompatible.resource2object
 		$c = curl_init($url); /** @var resource|\CurlHandle $c */
 		try {
