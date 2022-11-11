@@ -20,7 +20,6 @@ class Button extends \Df\Config\Settings\Configurable {
 	 * @see \Df\Sso\Source\Button\Type\UNL
 	 * @used-by \Df\Sso\Button::html()
 	 * @used-by \Df\Sso\Button\Js::loggedOut()
-	 * @return string
 	 */
-	final function type() {return $this->v();}
+	final function type():string {return $this->v();}
 }
