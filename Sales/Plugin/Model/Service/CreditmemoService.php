@@ -24,7 +24,7 @@ final class CreditmemoService {
 	 * @param ICreditmemo|Creditmemo $creditmemo
 	 * @param bool $offlineRequested [optional]
 	 */
-	function beforeRefund(Sb $sb, ICreditmemo $creditmemo, $offlineRequested = false) {
+	function beforeRefund(Sb $sb, ICreditmemo $creditmemo, $offlineRequested = false):void {
 		if ($creditmemo instanceof Creditmemo) {
 			/** @noinspection PhpUndefinedMethodInspection */
 			$creditmemo->setDoTransaction(!$offlineRequested);
