@@ -44,7 +44,7 @@ class Info extends \Df\Payment\Block\Info {
 	 * @param string|array(string => mixed) $r
 	 * @return array(string => mixed)
 	 */
-	final protected function cardDataFromChargeResponse($r) {
+	final protected function cardDataFromChargeResponse($r):array {
 		/**
 		 * 2017-01-13
 		 * Раньше я хранил ответ сервера в JSON, теперь же я храню его в виде массива.
@@ -65,9 +65,8 @@ class Info extends \Df\Payment\Block\Info {
 	 * 2018-11-13
 	 * @used-by self::prepare()
 	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
-	 * @return CF
 	 */
-	final protected function cf() {return dfc($this, function() {return CF::s($this->m(), $this->card());});}
+	final protected function cf():CF {return dfc($this, function() {return CF::s($this->m(), $this->card());});}
 
 	/**
 	 * 2017-01-13
