@@ -11,28 +11,27 @@
  * for orders, invoices, credit memos, etc.
  * @used-by \Df\Payment\Block\Info::_toHtml()
  * @used-by \Dfe\Moip\CardFormatter::label()
- * @return bool
  */
-function df_sales_email_sending() {return !!df_find(function(array $i) {return df_contains(
+function df_sales_email_sending():bool {return !!df_find(function(array $i) {return df_contains(
 	dfa($i, 'class'), 'EmailSender', 'Email\Sender'
 );}, debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS));}
 
 /**
  * 2016-01-29
- * @param string $type
+ * @param string $t
  * @return int|false
  */
-function df_sales_entity_type_index($type) {return array_search(
-	$type, array_values(df_sales_entity_types()
-));}
+function df_sales_entity_type_index($t) {return array_search($t, array_values(df_sales_entity_types()));}
 
 /**
  * 2016-01-11
+ * @used-by df_sales_entity_type_index()
+ * @used-by \Dfe\SalesSequence\Config\Affix\Element::rows()
+ * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
+ * @used-by \Dfe\SalesSequence\Config\Next\Backend::nextNumbersFromDb()
+ * @used-by \Dfe\SalesSequence\Config\Next\Element::columns()
  * @return array(string => string)
  */
-function df_sales_entity_types() {return [
-	'Order' => 'order'
-	,'Invoice' => 'invoice'
-	,'Shipment' => 'shipment'
-	,'Credit Memo' => 'creditmemo'
+function df_sales_entity_types():array {return [
+	'Order' => 'order', 'Invoice' => 'invoice', 'Shipment' => 'shipment', 'Credit Memo' => 'creditmemo'
 ];}
