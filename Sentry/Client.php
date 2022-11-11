@@ -115,8 +115,12 @@ final class Client {
 		}
 		$this->capture($data, $trace);
 	}
-	
-	private function get_http_data() {
+
+	/**
+	 * @used-by self::capture()
+	 * @return array(string => array(string => string))
+	 */
+	private function get_http_data():array {
 		$headers = [];
 		foreach ($_SERVER as $key => $value) {
 			if (0 === strpos($key, 'HTTP_')) {
