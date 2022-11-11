@@ -13,7 +13,7 @@ final class Emulation {
 	 * @param string $area
 	 * @param bool $force
 	 */
-	function beforeStartEnvironmentEmulation(Sb $sb, $storeId, $area, $force) {
+	function beforeStartEnvironmentEmulation(Sb $sb, $storeId, $area, $force):void {
 		if (!$this->_initial) {
 			$this->_initial = ['area' => $area, 'force' => $force, 'storeId' => $storeId, 'trace' => df_bt_log()];
 		}
@@ -30,7 +30,7 @@ final class Emulation {
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/App/Emulation.php#L160-L182
 	 * https://github.com/magento/magento2/blob/2.4.3/app/code/Magento/Store/Model/App/Emulation.php#L167-L189
 	 */
-	function beforeStopEnvironmentEmulation() {$this->_initial = null;}
+	function beforeStopEnvironmentEmulation():void {$this->_initial = null;}
 
 	/**
 	 * 2021-09-08
