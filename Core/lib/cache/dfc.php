@@ -21,6 +21,7 @@ use Df\Core\RAM;
  * и поэтому Closure не уникальна.
  * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
+ * @used-by \Df\Sso\Button::_prepareLayout()
  * @see df_prop()
  * @see dfc()
  * @param object $o

@@ -123,12 +123,9 @@ abstract class Button extends _P {
 		.(!$unified ? '' : df_fa_link())
 		# 2016-11-30
 		# Наши кнопки больше по высоте стандартных ссылок в шапке,
-		# поэтому именьшаем отступ от кнопок до низа шапки,
-		# чтобы шапка не была слишком большой по высоте.
+		# поэтому уменьшаем отступ от кнопок до низа шапки, чтобы шапка не была слишком большой по высоте.
 		.(!$this->isInHeader() || UNL::isLink($this->s()->type()) || self::$_inlineCssB ? '' :
-			self::$_inlineCssB = df_style_inline(
-				'.df-theme-luma .page-header .header.panel {padding-bottom: 0.4rem;}'
-			)
+			self::$_inlineCssB = df_style_inline('.df-theme-luma .page-header .header.panel {padding-bottom: 0.4rem;}')
 		)
 	;}
 
@@ -144,13 +141,7 @@ abstract class Button extends _P {
 	 * @see \Magento\Framework\View\Element\AbstractBlock::_prepareLayout()
 	 * @used-by \Magento\Framework\View\Element\AbstractBlock::setLayout()
 	 */
-	protected function _prepareLayout() {
-		static $done; /** @var bool $done */
-		if (!$done) {
-			df_page_config()->addPageAsset('Df_Sso::main.css');
-			$done = true;
-		}
-	}
+	protected function _prepareLayout():void {df_once($this, function() {df_page_config()->addPageAsset('Df_Sso::main.css');});}
 	
 	/**
 	 * 2016-11-24
