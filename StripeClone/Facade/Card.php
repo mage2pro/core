@@ -32,6 +32,14 @@ abstract class Card {
 	 * 2017-10-07 It should be an ISO-2 code or `null`.
 	 * https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
 	 * @used-by \Df\StripeClone\CardFormatter::country()
+	 * @see \Dfe\Moip\Facade\Card::country()
+	 * @see \Dfe\Omise\Facade\Card::country()
+	 * @see \Dfe\Paymill\Facade\Card::country()
+	 * @see \Dfe\Spryng\Facade\Card::country()
+	 * @see \Dfe\Square\Facade\Card::country()
+	 * @see \Dfe\Stripe\Facade\Card::country()
+	 * @see \Dfe\TBCBank\Facade\Card::country()
+	 * @see \Dfe\Vantiv\Facade\Card::country()
 	 * @return string|null
 	 */
 	abstract function country();
