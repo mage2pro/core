@@ -18,19 +18,11 @@ final class CreditmemoRepository {
 	 * @param Sb $sb
 	 * @param \Closure $f
 	 * @param CM $element
-	 * @return CM
 	 * @throws CouldNotSaveException|LE;
 	 */
-	function aroundSave(Sb $sb, \Closure $f, CM $element) {
-		/** @var CM $result */
-		try {
-			$result = $f($element);
-		}
-		catch(CouldNotSaveException $e) {
-			/** @var \Exception|null $previous */
-			$previous = $e->getPrevious();
-			throw $previous instanceof LE ? $previous : $e;
-		}
-		return $result;
+	function aroundSave(Sb $sb, \Closure $f, CM $element):CM {/** @var CM $r */
+		try {$r = $f($element);}
+		catch(CouldNotSaveException $e) {throw ($p = $e->getPrevious()) instanceof LE ? $p : $e; /** @var \Exception|null $p */}
+		return $r;
 	}
 }
