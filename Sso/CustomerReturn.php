@@ -141,20 +141,18 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	 * потому что автоматический адрес создаётся на основании геолокации, что не точно,
 	 * а в случае с Amazon мы гарантированно можем получить точный адрес из профиля Amazon,
 	 * поэтому нам нет никакого смысла забивать систему неточным автоматическим адресом.
-	 * @see \Dfe\AmazonLogin\Controller\Index\Index::needCreateAddress()
 	 * @used-by self::register()
-	 * @return bool
+	 * @see \Dfe\AmazonLogin\Controller\Index\Index::needCreateAddress()
 	 */
-	protected function needCreateAddress() {return true;}
+	protected function needCreateAddress():bool {return true;}
 
 	/**
 	 * 2017-08-01
 	 * @override
 	 * @see \Df\OAuth\ReturnT::redirectUrl()
 	 * @used-by \Df\OAuth\ReturnT::execute()
-	 * @return string
 	 */
-	final protected function redirectUrl() {return
+	final protected function redirectUrl():string {return
 		!$this->_redirectToRegistration ? parent::redirectUrl() : df_customer_url()->getRegisterUrl()
 	;}
 
