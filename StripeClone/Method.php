@@ -550,9 +550,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by self::chargeNew()
 	 * @see \Dfe\Omise\Method::redirectNeeded()
 	 * @param object|array(string => mixed) $c
-	 * @return bool
 	 */
-	protected function redirectNeeded($c) {return false;}
+	protected function redirectNeeded($c):bool {return false;}
 
 	/**
 	 * 2017-07-30
