@@ -49,10 +49,8 @@ function df_currency_name($c = null) {/** @var string|string[] $r */
 		$r = array_map(__FUNCTION__, $c);
 	}
 	else {
-		static $rb; /** @var \ResourceBundle $rb */
-		if (!isset($rb))  {
-			$rb = (new CurrencyBundle)->get(df_locale())['Currencies'];
-		}
+		static $rb; /** @var ResourceBundle $rb */
+		$rb = $rb ?: (new CurrencyBundle)->get(df_locale())['Currencies'];
 		$code = is_string($c) ? $c : df_currency_code($c); /** @var string $code */
 		$r = $rb[$code][1] ?: $code;
 	}
