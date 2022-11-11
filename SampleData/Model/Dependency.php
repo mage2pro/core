@@ -16,10 +16,9 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @override
 	 * @see \Magento\SampleData\Model\Dependency::getSuggestsFromModules()
 	 * @used-by \Magento\SampleData\Model\Dependency::getSampleDataPackages()
-	 * @return array
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
-	protected function getSuggestsFromModules() {
+	protected function getSuggestsFromModules():array {
 		$suggests = [];
 		foreach (df_component_r()->getPaths(R::MODULE) as $moduleDir) {
 			$package = $this->getModuleComposerPackageMy($moduleDir);
@@ -35,10 +34,9 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * 2020-06-16
 	 * @used-by self::getModuleComposerPackageMy()
 	 * @param string $moduleDir
-	 * @return Package
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
-	private function getModuleComposerPackageParent($moduleDir) {
+	private function getModuleComposerPackageParent($moduleDir):Package {
 		foreach ([$moduleDir, $moduleDir . DIRECTORY_SEPARATOR . '..'] as $dir) {/** @var IRead $directory */
 			$directory = df_fs_rf()->create($dir);
 			if ($directory->isExist('composer.json') && $directory->isReadable('composer.json')) {
@@ -57,9 +55,8 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
 	 * @used-by self::getSuggestsFromModules()
 	 * @param string $f
-	 * @return \Magento\Framework\Config\Composer\Package
 	 */
-	private function getModuleComposerPackageMy($f) {return $this->getModuleComposerPackageParent(
+	private function getModuleComposerPackageMy($f):Package {return $this->getModuleComposerPackageParent(
 		false === strpos($f, 'mage2pro') || file_exists($f) ? $f : preg_replace(
 			'#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f)
 		)
