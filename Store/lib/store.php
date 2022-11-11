@@ -107,10 +107,9 @@ function df_store_codes():array {return dfcf(function() {return array_map(
 /**            
  * 2017-01-21
  * «How to get the store's country?» https://mage2.pro/t/2509
- * @param null|string|int|IStore $store [optional] 
- * @return Country
+ * @param null|string|int|IStore $store [optional]
  */
-function df_store_country($store = null) {return df_country(df_store($store)->getConfig(
+function df_store_country($store = null):Country {return df_country(df_store($store)->getConfig(
 	Inf::XML_PATH_STORE_INFO_COUNTRY_CODE
 ));}
 
@@ -122,16 +121,17 @@ function df_store_country($store = null) {return df_country(df_store($store)->ge
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param int|string|null|bool|IStore $store [optional]
- * @return int
  */
-function df_store_id($store = null) {return df_store($store)->getId();}
+function df_store_id($store = null):int {return df_store($store)->getId();}
 
 /**
  * 2016-01-11
+ * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
+ * @used-by \Dfe\SalesSequence\Config\Next\Backend::nextNumbersFromDb()
  * @param bool $withDefault [optional]
  * @return int[]
  */
-function df_store_ids($withDefault = false) {return array_keys(df_stores($withDefault));}
+function df_store_ids($withDefault = false):array {return array_keys(df_stores($withDefault));}
 
 /**
  * 2017-02-07              
