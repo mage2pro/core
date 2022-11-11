@@ -231,7 +231,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param bool $capture
 	 * @return array(string => mixed)
 	 */
-	protected function chargeNewParams($capture) {return pCharge::request($this, $capture);}
+	protected function chargeNewParams($capture):array {return pCharge::request($this, $capture);}
 
 	/**
 	 * 2016-03-15
@@ -378,9 +378,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * Whether the current payment is by a bank card.
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Moip\Method::isCard()
-	 * @return bool
 	 */
-	function isCard() {return true;}
+	function isCard():bool {return true;}
 
 	/**
 	 * 2016-11-13
@@ -515,9 +514,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by self::charge()
 	 * @used-by self::chargeNew()
 	 * @used-by \Dfe\Stripe\Method::cardType()
-	 * @return fCharge
 	 */
-	final protected function fCharge() {return fCharge::s($this);}
+	final protected function fCharge():fCharge {return fCharge::s($this);}
 
 	/**
 	 * 2016-05-03
