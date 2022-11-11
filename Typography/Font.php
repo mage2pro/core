@@ -154,10 +154,10 @@ final class Font extends \Df\Config\O {
 				$css->rule('text-decoration', 'underline');
 			}
 			switch ($this->letter_case()) {
-				case LetterCase::$LOWERCASE:
+				case LetterCase::LOWERCASE:
 					$css->rule('text-transform', 'lowercase');
 					break;
-				case LetterCase::$UCFIRST:
+				case LetterCase::UCFIRST:
 					# 2015-11-14
 					#		.link { text-transform: lowercase; }
 					#		.link:first-letter {text-transform: uppercase;}
@@ -165,10 +165,10 @@ final class Font extends \Df\Config\O {
 					$css->rule('text-transform', 'lowercase');
 					$css->rule('text-transform', 'uppercase', ':first-letter');
 					break;
-				case LetterCase::$UCWORDS:
+				case LetterCase::UCWORDS:
 					$css->rule('text-transform', 'capitalize');
 					break;
-				case LetterCase::$UPPERCASE:
+				case LetterCase::UPPERCASE:
 					$css->rule('text-transform', 'uppercase');
 					break;
 			}

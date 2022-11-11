@@ -10,7 +10,7 @@ final class LetterCase extends \Df\Config\Source {
 	 * @return array(string => string)
 	 */
 	protected function map():array {
-		$vv = [self::$_DEFAULT, self::$UCFIRST, self::$UCWORDS, self::$UPPERCASE, self::$LOWERCASE]; /** @var string[] $vv */
+		$vv = [self::$_DEFAULT, self::UCFIRST, self::UCWORDS, self::UPPERCASE, self::LOWERCASE]; /** @var string[] $vv */
 		/** @var string[] $ll */
 		$ll = ['As Is', 'Uppercase first letter', 'Uppercase Each Word\'s First Letter', 'UPPERCASE', 'lowercase'];
 		/** @var string|null $s */
@@ -20,29 +20,29 @@ final class LetterCase extends \Df\Config\Source {
 	}
 
 	/**
+	 * @used-by self::apply()
 	 * @used-by self::map()
 	 * @used-by \Df\Typography\Font::css()
-	 * @var string
 	 */
-	static $LOWERCASE = 'lowercase';
+	const LOWERCASE = 'lowercase';
 	/**
+	 * @used-by self::apply()
 	 * @used-by self::map()
 	 * @used-by \Df\Typography\Font::css()
-	 * @var string
 	 */
-	static $UCFIRST = 'ucfirst';
+	const UCFIRST = 'ucfirst';
 	/**
+	 * @used-by self::apply()
 	 * @used-by self::map()
 	 * @used-by \Df\Typography\Font::css()
-	 * @var string
 	 */
-	static $UCWORDS = 'ucwords';
+	const UCWORDS = 'ucwords';
 	/**
+	 * @used-by self::apply()
 	 * @used-by self::map()
 	 * @used-by \Df\Typography\Font::css()
-	 * @var string
 	 */
-	static $UPPERCASE = 'uppercase';
+	const UPPERCASE = 'uppercase';
 
 	/**
 	 * @used-by map()
@@ -51,16 +51,16 @@ final class LetterCase extends \Df\Config\Source {
 	 */
 	private static function apply($s, $format):string {/** @var string $r */
 		switch($format) {
-			case self::$LOWERCASE:
+			case self::LOWERCASE:
 				$r = mb_strtolower($s);
 				break;
-			case self::$UPPERCASE:
+			case self::UPPERCASE:
 				$r = mb_strtoupper($s);
 				break;
-			case self::$UCFIRST:
+			case self::UCFIRST:
 				$r = df_ucfirst(mb_strtolower(df_trim($s)));
 				break;
-			case self::$UCWORDS:
+			case self::UCWORDS:
 				$r = df_ucwords($s);
 				break;
 			default:
