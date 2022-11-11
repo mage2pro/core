@@ -167,9 +167,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L601-L609
 	 * @used-by self::getConfigData()
 	 * @used-by \Df\Shipping\ConfigProvider::getConfig()
-	 * @return string
 	 */
-	final function getCarrierCode() {return self::codeS();}
+	final function getCarrierCode():string {return self::codeS();}
 
 	/**
 	 * 2018-04-17
@@ -259,9 +258,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L190-L200
 	 * @param _DO $p|null
-	 * @return array
 	 */
-	final function getContainerTypes(_DO $p = null) {return [];}
+	final function getContainerTypes(_DO $p = null):array {return [];}
 
 	/**
 	 * 2018-04-17
@@ -277,9 +275,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L611-L621
 	 * @param _DO $p|null
-	 * @return array
 	 */
-	final function getContentTypes(_DO $p = null) {return [];}
+	final function getContentTypes(_DO $p = null):array {return [];}
 
 	/**
 	 * 2018-04-17
@@ -294,9 +291,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return $this->_customizableContainerTypes;
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L257-L265
-	 * @return array
 	 */
-	final function getCustomizableContainerTypes() {return [];}
+	final function getCustomizableContainerTypes():array {return [];}
 
 	/**
 	 * 2018-04-17
@@ -312,9 +308,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L267-L277
 	 * @param _DO $p|null
-	 * @return array
 	 */
-	final function getDeliveryConfirmationTypes(_DO $p = null) {return [];}
+	final function getDeliveryConfirmationTypes(_DO $p = null):array {return [];}
 
 	/**
 	 * 2018-05-08
@@ -355,9 +350,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L449-L476
 	 * @param float $cost
-	 * @return float
 	 */
-	final function getFinalPriceWithHandlingFee($cost) {return $cost;}
+	final function getFinalPriceWithHandlingFee($cost):float {return $cost;}
 
 	/**
 	 * 2022-10-19
@@ -371,7 +365,7 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return $this->getConfigData('sort_order');
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L380-L388
-	 * @return array
+	 * @return string|null
 	 */
 	final function getSortOrder() {return null;}
 
@@ -395,9 +389,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L512-L531
 	 * @param float $weight
-	 * @return float
 	 */
-	final function getTotalNumOfBoxes($weight) {return $weight;}
+	final function getTotalNumOfBoxes($weight):float {return $weight;}
 
 	/**
 	 * 2018-04-17
@@ -414,9 +407,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return $active == 1 || $active == 'true';
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L338-L348
-	 * @return bool
 	 */
-	final function isActive() {return $this->s()->b('enable');}
+	final function isActive():bool {return $this->s()->b('enable');}
 
 	/**
 	 * 2018-04-17
@@ -431,9 +423,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return false;
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L543-L551
-	 * @return bool
 	 */
-	final function isCityRequired() {return false;}
+	final function isCityRequired():bool {return false;}
 
 	/**
 	 * 2018-04-17
@@ -457,9 +448,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return parent::addItem($rate);
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Quote/Model/ResourceModel/Quote/Address/Rate/Collection.php#L96-L109
-	 * @return bool
 	 */
-	final function isFixed() {return true;}
+	final function isFixed():bool {return true;}
 
 	/**
 	 * 2018-04-17
@@ -477,9 +467,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * @used-by \Magento\Shipping\Block\Adminhtml\Create\Items::canCreateShippingLabel()
 	 * @used-by \Magento\Shipping\Block\Adminhtml\View\Form::canCreateShippingLabel()
 	 * @used-by \Magento\Shipping\Model\Shipping\LabelGenerator::create()
-	 * @return bool
 	 */
-	final function isShippingLabelsAvailable() {return false;}
+	final function isShippingLabelsAvailable():bool {return false;}
 
 	/**
 	 * 2018-04-17
@@ -494,9 +483,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return false;
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L533-L541
-	 * @return bool
 	 */
-	final function isStateProvinceRequired() {return false;}
+	final function isStateProvinceRequired():bool {return false;}
 
 	/**
 	 * 2018-04-17
@@ -512,9 +500,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		}
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Block/Adminhtml/Order/Tracking.php#L69-L85
-	 * @return bool
 	 */
-	final function isTrackingAvailable() {return false;}
+	final function isTrackingAvailable():bool {return false;}
 
 	/**
 	 * 2018-04-17
@@ -530,9 +517,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L553-L563
 	 * @param string|null $countryId
-	 * @return bool
 	 */
-	final function isZipCodeRequired($countryId = null) {return false;}
+	final function isZipCodeRequired($countryId = null):bool {return false;}
 
 	/**
 	 * 2018-04-17
@@ -579,9 +565,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L164-L175
 	 * @param _DO $r
-	 * @return _DO
 	 */
-	final function requestToShipment($r) {return new _DO;}
+	final function requestToShipment($r):_DO {return new _DO;}
 
 	/**
 	 * 2018-04-17
@@ -597,9 +582,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L164-L175
 	 * @param _DO $r
-	 * @return _DO
 	 */
-	final function returnOfShipment($r) {return new _DO;}
+	final function returnOfShipment($r):_DO {return new _DO;}
 
 	/**
 	 * 2018-04-21
@@ -628,9 +612,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * 2018-04-17
 	 * @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates()
 	 * @param string $v
-	 * @return void
 	 */
-	final function setActiveFlag($v) {}
+	final function setActiveFlag($v):void {}
 
 	/**
 	 * 2018-04-17
@@ -638,18 +621,16 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * @used-by \Magento\Shipping\Model\CarrierFactory::create()
 	 * @used-by \Magento\Shipping\Model\CarrierFactory::get()
 	 * @param string $carrierCode
-	 * @return void
 	 */
-	final function setId($carrierCode) {}
+	final function setId($carrierCode):void {}
 
 	/**
 	 * 2018-04-17
 	 * @used-by \Df\Shipping\Plugin\Model\CarrierFactoryT::aroundCreate()
 	 * @used-by \Magento\Shipping\Model\CarrierFactory::create()
 	 * @param int $v
-	 * @return void
 	 */
-	final function setStore($v) {$this->_storeId = $v;}
+	final function setStore($v):void {$this->_storeId = $v;}
 
 	/**
 	 * 2018-04-21
@@ -659,9 +640,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * 		return $this;
 	 * 	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Shipping.php#L311-L313
-	 * @return bool
 	 */
-	private function showMethod() {return true;}
+	private function showMethod():bool {return true;}
 
 	/**
 	 * 2018-04-17
@@ -670,9 +650,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * @uses \Doormall\Shipping\Method::CODE
 	 * @uses \Frugue\Shipping\Method::CODE
 	 * @see \Df\Payment\Method::codeS()
-	 * @return string
 	 */
-	final static function codeS() {return dfcf(function($c) {return df_const(
+	final static function codeS():string {return dfcf(function($c) {return df_const(
 		$c, 'CODE', function() use($c) {return df_module_name_lc($c);}
 	);}, [static::class]);}
 
@@ -696,9 +675,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * @used-by dfsm()
 	 * @used-by \Df\Shipping\Plugin\Model\CarrierFactoryT::aroundCreate()
 	 * @param string $c
-	 * @return self
 	 */
-	final static function sg($c) {return dfcf(function($c) {return new $c;}, [dfsm_c($c)]);}
+	final static function sg($c):self {return dfcf(function($c) {return new $c;}, [dfsm_c($c)]);}
 
 	/**
 	 * 2018-04-17
