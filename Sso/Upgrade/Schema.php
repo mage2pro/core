@@ -13,18 +13,15 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	 * @see \Dfe\AmazonLogin\Setup\UpgradeSchema::fId()
 	 * @see \Dfe\BlackbaudNetCommunity\Setup\UpgradeSchema::fId()
 	 * @see \Dfe\FacebookLogin\Setup\UpgradeSchema::fId()
-	 * @return string
 	 */
-	static function fId() {df_abstract(__CLASS__); return '';}
+	static function fId():string {df_abstract(__CLASS__); return '';}
 
 	/**
 	 * 2016-12-02
 	 * @param string|object $c
 	 * @return string
 	 */
-	static function fIdC($c) {return
-		df_con_s(str_replace('_', '\\', df_cts($c)), 'Setup\UpgradeSchema', 'fId')
-	;}
+	static function fIdC($c) {return df_con_s(str_replace('_', '\\', df_cts($c)), 'Setup\UpgradeSchema', 'fId');}
 
 	/**
 	 * 2016-12-02
