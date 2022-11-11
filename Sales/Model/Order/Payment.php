@@ -22,7 +22,7 @@ class Payment extends OP {
 	 * @param OP $op
 	 * @param string $action
 	 */
-	final static function action(OP $op, $action) {
+	final static function action(OP $op, $action):void {
 		$op->processAction($action, $o = df_order($op));
 		$op->updateOrder($o, O::STATE_PROCESSING, df_order_ds(O::STATE_PROCESSING), true);
 	}	
