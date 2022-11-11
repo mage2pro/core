@@ -46,9 +46,8 @@ class Renderer extends Sb {
 	 * @param \Closure $f
 	 * @param Address $a
 	 * @param string $type
-	 * @return string
 	 */
-	function aroundFormat(Sb $sb, \Closure $f, Address $a, $type) {/** @var string $r */
+	function aroundFormat(Sb $sb, \Closure $f, Address $a, $type):string {/** @var string $r */
 		# 2016-08-17
 		# Убеждаемся, что firstname и lastname равны null,
 		# чтобы не ломать отображение адресов, для которых информация присутствует
@@ -63,11 +62,9 @@ class Renderer extends Sb {
 			 * собраз заказы, а потом снова включил эту опцию,
 			 * то адреса заказов, собранных во время отключения опции,
 			 * должны обрабатываться корректно.
-			 * 
 			 * Замечание №2.
 			 * Дальнейший код идёт по аналалогии с кодом
 			 * @see \Magento\Sales\Model\Order\Address\Renderer::format()
-			 * 
 			 * 2016-07-27
 			 * By analogy with @see \Magento\Sales\Model\Order\Address\Renderer::format()
 			 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Address/Renderer.php#L51
@@ -92,14 +89,9 @@ class Renderer extends Sb {
 	/**
 	 * 2016-07-27
 	 * Обсерверы по умолчанию являются одиночками: https://github.com/magento/magento2/blob/1.0.0-beta/lib/internal/Magento/Framework/Event/Invoker/InvokerDefault.php#L56-L60
-	 * Мы используем свою одиночку, а не общую с ядром,
-	 * потому что наша одиночка хранит значения по-умолчанию,
-	 * а одиночка ядра загрязняется нашим хаком из метода
-	 * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
+	 * Мы используем свою одиночку, а не общую с ядром, потому что наша одиночка хранит значения по-умолчанию,
+	 * а одиночка ядра загрязняется нашим хаком из метода @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
 	 * Таким образом, мы используем нашу одиночку для того, чтобы очистить одиночку ядра.
-	 * @return AddressConfig
 	 */
-	private function addressConfig() {return dfc($this, function() {return
-		df_new_om(AddressConfig::class)
-	;});}
+	private function addressConfig():AddressConfig {return dfc($this, function() {return df_new_om(AddressConfig::class);});}
 }
