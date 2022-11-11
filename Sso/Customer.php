@@ -18,7 +18,7 @@ abstract class Customer extends \Df\Core\O {
 	 * 2016-06-04
 	 * @return \DateTime|null
 	 */
-	function dob() {return dfc($this, function() {/** @var \DateTime|null $r */
+	final function dob() {return dfc($this, function() {/** @var \DateTime|null $r */
 		if (!($r = $this->_dob()) && df_customer_att_is_required('dob')) {
 			$r = new \DateTime;
 			$r->setDate(1900, 1, 1);
@@ -29,17 +29,19 @@ abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
 	 * @used-by CustomerReturn::customerData()
+	 * @see \Dfe\AmazonLogin\Customer::email()
+	 * @see \Dfe\FacebookLogin\Customer::email()
 	 * @return string|null
 	 */
 	function email() {return null;}
 
 	/**
 	 * 2016-06-04
-	 * @see \Df\Customer\Model\Gender
 	 * @used-by CustomerReturn::register()
+	 * @see \Dfe\FacebookLogin\Customer::gender()
 	 * @return int
 	 */
-	function gender() {return Gender::UNKNOWN;}
+	function gender():int {return Gender::UNKNOWN;}
 
 	/**
 	 * 2016-06-04
