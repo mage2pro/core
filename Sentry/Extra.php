@@ -12,7 +12,7 @@ final class Extra {
 	 * @param array(string => mixed) $a
 	 * @return array(string => string)
 	 */
-	static function adjust(array $a) {/** @var array(string => string) $r */
+	static function adjust(array $a):array {/** @var array(string => string) $r */
 		$r = [];
 		foreach ($a as $k => $v)  {/** @var string $k */ /** @var mixed $v */
 			if (!is_array($v)) {
