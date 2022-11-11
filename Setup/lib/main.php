@@ -16,4 +16,4 @@ function df_setup() {return df_o(ISetup::class);}
  * @see \Magento\Setup\Model\ModuleRegistryUninstaller::removeModulesFromDeploymentConfig()
  * @param string $m
  */
-function df_uninstall($m) {df_setup()->deleteTableRow('setup_module', 'module', $m);}
+function df_uninstall($m):void {df_setup()->deleteTableRow('setup_module', 'module', $m);}
