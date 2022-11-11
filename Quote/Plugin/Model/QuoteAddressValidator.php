@@ -23,7 +23,7 @@ final class QuoteAddressValidator {
 	 * @param ICart $c
 	 * @param IQuoteAddress $a
 	 */
-	function aroundValidateForCart(Sb $sb, \Closure $f, ICart $c, IQuoteAddress $a) {self::doValidate(
+	function aroundValidateForCart(Sb $sb, \Closure $f, ICart $c, IQuoteAddress $a):void {self::doValidate(
 		$a, $c->getCustomerId() ?: null
 	);}
 
@@ -38,7 +38,7 @@ final class QuoteAddressValidator {
 	 * @param int|null $customerId
 	 * @throws NSE
 	 */
-	private static function doValidate(IQuoteAddress $address, $customerId) {
+	private static function doValidate(IQuoteAddress $address, $customerId):void {
 		if ($customerId) {
 			$customer = df_customer_rep()->getById($customerId);
 			if (!$customer->getId()) {
