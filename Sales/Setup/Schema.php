@@ -28,7 +28,7 @@ abstract class Schema extends \Df\Framework\Upgrade\Schema {
 	 * @todo It is never used, see the comment for the class.
 	 * @param string $fieldName
 	 */
-	final protected function addFieldToSalesItems($fieldName) {
+	final protected function addFieldToSalesItems($fieldName):void {
 		$params = ['type' => 'text']; /** @var array(string => string) $params */
 		$sQuote = $this->sEav(QuoteSetup::class);  /** @var QuoteSetup $sQuote */
 		$sQuote->addAttribute('quote_item', $fieldName, $params);
