@@ -379,9 +379,8 @@ abstract class Info extends _P {
 	 * @used-by self::rUnconfirmed()
 	 * @see \Df\GingerPaymentsBase\Block\Info::msgUnconfirmed()
 	 * @see \Dfe\ACH\Block\Info::msgUnconfirmed()
-	 * @return string|null
 	 */
-	protected function msgUnconfirmed() {return df_tag('div', 'df-unconfirmed-text', __(
+	protected function msgUnconfirmed():string {return df_tag('div', 'df-unconfirmed-text', __(
 		'The payment is not yet confirmed by %1.', $this->titleB()
 	));}
 
