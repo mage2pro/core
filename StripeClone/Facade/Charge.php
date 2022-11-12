@@ -159,12 +159,35 @@ abstract class Charge extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-02-11
+	 * 2017-02-18
+	 * Если ПС (как, например, Spryng) не поддерживает сохранение банковской карты
+	 * для будущего повторного использования, то этот метод должен вернуть `null`.
+	 * Этого достаточно, чтобы @used-by \Df\StripeClone\Payer::tokenIsNew() всегда возвращала `true`.
+	 * @used-by self::tokenIsNew()
+	 * @see \Dfe\Moip\Facade\Charge::cardIdPrefix()
+	 * @see \Dfe\Omise\Facade\Charge::cardIdPrefix()
+	 * @see \Dfe\Paymill\Facade\Charge::cardIdPrefix()
+	 * @see \Dfe\Spryng\Facade\Charge::cardIdPrefix()
+	 * @return string
+	 */
+	protected function cardIdPrefix() {return null;}
+
+	/**
+	 * 2017-06-13
+	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
+	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @used-by \Dfe\Moip\Facade\Charge::create()
+	 * @return object
+	 */
+	protected function preorderGet() {return $this->_preorder;}
+
+	/**
+	 * 2017-02-11
 	 * @used-by self::card()
-	 * @see \Dfe\Vantiv\Facade\Charge::cardData()
 	 * @param object|array(string => mixed) $c
 	 * @return object|array(string => string)
 	 */
-	final protected function cardData($c) {$p = $this->pathToCard(); /** @var string $p */ return
+	private function cardData($c) {$p = $this->pathToCard(); /** @var string $p */ return
 		((is_array($c) || $c instanceof \ArrayAccess) ? $c[$p] : (
 			!is_object($c) ? null : (
 				/**
@@ -189,30 +212,6 @@ abstract class Charge extends \Df\Payment\Facade {
 			)
 		)) ?: df_error('You should implement cardData().')
 	;}
-
-	/**
-	 * 2017-02-11
-	 * 2017-02-18
-	 * Если ПС (как, например, Spryng) не поддерживает сохранение банковской карты
-	 * для будущего повторного использования, то этот метод должен вернуть `null`.
-	 * Этого достаточно, чтобы @used-by \Df\StripeClone\Payer::tokenIsNew() всегда возвращала `true`.
-	 * @used-by self::tokenIsNew()
-	 * @see \Dfe\Moip\Facade\Charge::cardIdPrefix()
-	 * @see \Dfe\Omise\Facade\Charge::cardIdPrefix()
-	 * @see \Dfe\Paymill\Facade\Charge::cardIdPrefix()
-	 * @see \Dfe\Spryng\Facade\Charge::cardIdPrefix()
-	 * @return string
-	 */
-	protected function cardIdPrefix() {return null;}
-
-	/**
-	 * 2017-06-13
-	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
-	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Dfe\Moip\Facade\Charge::create()
-	 * @return object
-	 */
-	protected function preorderGet() {return $this->_preorder;}
 
 	/**
 	 * 2017-06-12
