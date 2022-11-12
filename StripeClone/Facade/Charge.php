@@ -61,9 +61,8 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\TBCBank\Facade\Charge::id()
 	 * @see \Dfe\Vantiv\Facade\Charge::id()
 	 * @param object|array(string => mixed) $c
-	 * @return string
 	 */
-	abstract function id($c);
+	abstract function id($c):string;
 
 	/**
 	 * 2017-02-12
