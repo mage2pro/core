@@ -133,16 +133,15 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * 2) Creating a «payment».
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Moip\Facade\Charge::needPreorder()
-	 * @return bool
 	 */
-	function needPreorder() {return false;}
+	function needPreorder():bool {return false;}
 
 	/**
 	 * 2017-06-12
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @param object $o
 	 */
-	final function preorderSet($o) {$this->_preorder = $o;}
+	final function preorderSet($o):void {$this->_preorder = $o;}
 
 	/**
 	 * 2017-10-10
@@ -155,9 +154,8 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Stripe\Facade\Charge::tokenIsNew()
 	 * @see \Dfe\TBCBank\Facade\Charge::tokenIsNew()
 	 * @param string $id
-	 * @return bool
 	 */
-	function tokenIsNew($id) {return !df_starts_with($id, $this->cardIdPrefix());}
+	function tokenIsNew($id):bool {return !df_starts_with($id, $this->cardIdPrefix());}
 
 	/**
 	 * 2017-02-11
