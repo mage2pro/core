@@ -85,6 +85,14 @@ abstract class Card {
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Facade\Customer::cardIdForJustCreated()
+	 * @see \Dfe\Moip\Facade\Card::id()
+	 * @see \Dfe\Omise\Facade\Card::id()
+	 * @see \Dfe\Paymill\Facade\Card::id()
+	 * @see \Dfe\Spryng\Facade\Card::id()
+	 * @see \Dfe\Square\Facade\Card::id()
+	 * @see \Dfe\Stripe\Facade\Card::id()
+	 * @see \Dfe\TBCBank\Facade\Card::id()
+	 * @see \Dfe\Vantiv\Facade\Card::id()
 	 * @return string|null
 	 */
 	abstract function id();
@@ -92,6 +100,14 @@ abstract class Card {
 	/**
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
+	 * @see \Dfe\Moip\Facade\Card::owner()
+	 * @see \Dfe\Omise\Facade\Card::owner()
+	 * @see \Dfe\Paymill\Facade\Card::owner()
+	 * @see \Dfe\Spryng\Facade\Card::owner()
+	 * @see \Dfe\Square\Facade\Card::owner()
+	 * @see \Dfe\Stripe\Facade\Card::owner()
+	 * @see \Dfe\TBCBank\Facade\Card::owner()
+	 * @see \Dfe\Vantiv\Facade\Card::owner()
 	 * @return string|null
 	 */
 	abstract function owner();
@@ -100,7 +116,15 @@ abstract class Card {
 	 * 2017-02-11
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @used-by \Df\StripeClone\CardFormatter::label()
-	 * @return string
+	 * @see \Dfe\Moip\Facade\Card::last4()
+	 * @see \Dfe\Omise\Facade\Card::last4()
+	 * @see \Dfe\Paymill\Facade\Card::last4()
+	 * @see \Dfe\Spryng\Facade\Card::last4()
+	 * @see \Dfe\Square\Facade\Card::last4()
+	 * @see \Dfe\Stripe\Facade\Card::last4()
+	 * @see \Dfe\TBCBank\Facade\Card::last4()
+	 * @see \Dfe\Vantiv\Facade\Card::last4()
+	 * @return string|null
 	 */
 	abstract function last4();
 
