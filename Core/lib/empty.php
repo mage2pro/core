@@ -82,6 +82,7 @@ function df_nes($v):bool {return is_null($v) || '' === $v;}
 
 /**
  * @see df_fts()
+ * @used-by df_starts_with()
  * @used-by df_trim()
  * @used-by sift_prefix()
  * @used-by \Df\Qa\Trace\Frame::class_()

@@ -168,9 +168,8 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Omise\Facade\Charge::cardIdPrefix()
 	 * @see \Dfe\Paymill\Facade\Charge::cardIdPrefix()
 	 * @see \Dfe\Spryng\Facade\Charge::cardIdPrefix()
-	 * @return string
 	 */
-	protected function cardIdPrefix() {return null;}
+	protected function cardIdPrefix():string {return '';}
 
 	/**
 	 * 2017-06-13
