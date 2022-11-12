@@ -432,7 +432,7 @@ function df_xml_parse($x, $throw = true) {/** @var X $r */
 					. "********************\n"
 					. "%s\n"
 					. "********************\n"
-					, df_ets($e)
+					, df_xts($e)
 					, df_trim($x)
 				);
 			}

@@ -63,7 +63,7 @@ final class Error extends \Df\Qa\Failure {
 				$inProcess = false;
 			}
 			catch (\Exception $e) {
-				df_log(df_ets($e));
+				df_log(df_xts($e));
 				throw $e;
 			}
 		}
@@ -80,7 +80,7 @@ final class Error extends \Df\Qa\Failure {
 			}
 		}
 		catch (\Exception $e) {
-			df_log(df_ets($e));
+			df_log(df_xts($e));
 		}
 	}
 

@@ -60,7 +60,7 @@ class X extends MX {
 	 */
 	function addChild($name, $value = null, $namespace = null) {/** @var CX $r */
 		try {$r = parent::addChild($this->k($name), $value, $namespace);}
-		catch (E $e) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_ets($e));}
+		catch (E $e) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_xts($e));}
 		return $r;
 	}
 
@@ -507,7 +507,7 @@ class X extends MX {
 		$valueIsString = is_string($value); /** @var bool $valueIsString */
 		$valueAsString = null; /** @var string $valueAsString */
 		try {$valueAsString = $valueIsString ? $value : df_string($value);}
-		catch (E $e) {df_error("Unable to convert the value of the key «{$keyAsString}» to a string.\n%s", df_ets($e));}
+		catch (E $e) {df_error("Unable to convert the value of the key «{$keyAsString}» to a string.\n%s", df_xts($e));}
 		if ($valueIsString && $valueAsString) {
 			/**
 			 * Поддержка синтаксиса

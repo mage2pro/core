@@ -34,7 +34,7 @@ function df_ef(E $e):E {while ($e->getPrevious()) {$e = $e->getPrevious();} retu
  * @param E|P|string $e
  * @return P|string
  */
-function df_ets($e) {return df_adjust_paths_in_message(
+function df_xts($e) {return df_adjust_paths_in_message(
 	!$e instanceof E ? $e : ($e instanceof DFE ? $e->message() : $e->getMessage())
 );}
 
@@ -45,7 +45,7 @@ function df_ets($e) {return df_adjust_paths_in_message(
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
  * @param E|string $e
  */
-function df_etsd($e):string {return df_adjust_paths_in_message(
+function df_xtsd($e):string {return df_adjust_paths_in_message(
 	!$e instanceof E ? $e : ($e instanceof DFE ? $e->messageD() : $e->getMessage())
 );}
 
@@ -58,7 +58,7 @@ function df_etsd($e):string {return df_adjust_paths_in_message(
  * @used-by \Dfe\TwoCheckout\Method::api()
  * @param E $e
  */
-function df_le(E $e):LE {return $e instanceof LE ? $e : new LE(__(df_ets($e)), $e);}
+function df_le(E $e):LE {return $e instanceof LE ? $e : new LE(__(df_xts($e)), $e);}
 
 /**
  * 2016-03-17
@@ -77,4 +77,4 @@ function df_leh(callable $f) {/** @var mixed $r */try {$r = $f();} catch (E $e) 
  * @param E|string $e
  * @return P|string
  */
-function df_lets($e) {return !$e instanceof E ? __($e) : df_ets(df_le($e));}
+function df_lets($e) {return !$e instanceof E ? __($e) : df_xts(df_le($e));}

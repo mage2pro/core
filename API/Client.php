@@ -397,7 +397,7 @@ abstract class Client {
 			# https://3v4l.org/3O92j
 			# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 			# https://stackoverflow.com/a/28233499
-			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_ets($e)];
+			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_xts($e)];
 			$req = df_zf_http_last_req($c); /** @var string $req */
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
 			$path = df_url_path($this->url()); /** @var string $path */

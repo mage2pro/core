@@ -44,7 +44,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * then you can pass an empty string (instead of `null`) as the second argument:
  * @see \Df\Core\Exception::__construct():
  *		if (is_null($m)) {
- *			$m = __($prev ? df_ets($prev) : 'No message');
+ *			$m = __($prev ? df_xts($prev) : 'No message');
  *			# 2017-02-20 To facilite the «No message» diagnostics.
  *			if (!$prev) {
  *				df_bt_log();

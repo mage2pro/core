@@ -103,7 +103,7 @@ abstract class Handler implements IMA {
 		/** 2017-09-15 @uses NotForUs is thrown from @see \Df\Payment\W\Nav::p() */
 		catch (NotForUs $e) {
 			$this->log();
-			$this->responder()->setNotForUs(df_ets($e));
+			$this->responder()->setNotForUs(df_xts($e));
 		}
 		catch (\Exception $e) {
 			$this->log();

@@ -34,7 +34,7 @@ final class InvalidSignature extends \Df\Payment\W\Exception\Critical {
 	 * 2017-10-03
 	 * @override
 	 * @see \Df\Core\Exception::messageD()
-	 * @used-by df_etsd()
+	 * @used-by df_xtsd()
 	 * @used-by \Df\Core\Exception::messageL()
 	 * @used-by \Df\Core\Exception::messageSentry()
 	 * @used-by \Df\Payment\PlaceOrderInternal::message()

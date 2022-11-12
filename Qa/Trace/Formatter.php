@@ -41,7 +41,7 @@ final class Formatter {
 			$r = df_cc_n($resultA);
 		}
 		catch (\Exception $e) {
-			$r = df_ets($e);
+			$r = df_xts($e);
 			/**
 			 * 2020-02-20
 			 * 1) «Function include() does not exist»: https://github.com/tradefurniturecompany/site/issues/60

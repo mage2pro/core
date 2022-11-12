@@ -58,7 +58,7 @@ class Exception extends LE implements \ArrayAccess {
 			}
 		}
 		if (is_null($m)) {
-			$m = __($prev ? df_ets($prev) : 'No message');
+			$m = __($prev ? df_xts($prev) : 'No message');
 			# 2017-02-20 To facilite the «No message» diagnostics.
 			if (!$prev) {
 				df_bt_log();
@@ -107,7 +107,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * Конечно, наша архитектура обладает тем недостатком,
 	 * что пользователи нашего класса и его потомков должны для извлечения диагностического сообщения
 	 * вместо стандартного интерфейса @see E::getMessage()
-	 * использовать функцию @see df_ets()
+	 * использовать функцию @see df_xts()
 	 *
 	 * Однако неочевидно, как обойти этот недостаток.
 	 * В частности, способ, когда диагностическое сообщение формируется прямо в конструкторе
@@ -121,7 +121,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * которые добавляются динамически, а не сразу в конструкторе).
 	 * По этой причине данный метод @see message(), несмотря на его некую громоздкость,
 	 * нам действительно нужен.
-	 * @used-by df_ets()
+	 * @used-by df_xts()
 	 * @see \Df\GoogleFont\Exception::message()
 	 * @see \Df\Payment\W\Exception\Ignored::message()
 	 * @see \Dfe\FacebookLogin\Exception::message()
@@ -151,7 +151,7 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * Сообщение для разработчика.
-	 * @used-by df_etsd()
+	 * @used-by df_xtsd()
 	 * @used-by self::messageSentry()
 	 * @used-by \Df\Payment\PlaceOrderInternal::message()
 	 * @used-by \Df\Qa\Failure\Exception::main()

@@ -27,7 +27,7 @@ function df_message_add($s, $type):void {df_message_m()->addMessage(
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @param string|P|\Exception $m
  */
-function df_message_error($m):void {df_message_add(df_ets($m), IM::TYPE_ERROR);}
+function df_message_error($m):void {df_message_add(df_xts($m), IM::TYPE_ERROR);}
 
 /**
  * 2016-08-02 https://mage2.pro/t/974

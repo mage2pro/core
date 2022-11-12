@@ -58,7 +58,7 @@ final class PlaceOrderInternal {
 	 * @param E|DFPE $e
 	 */
 	private function message(E $e):string {
-		$isShipping = df_ets($e) === (string)__('Please specify a shipping method.'); /** @var bool $isShipping */
+		$isShipping = df_xts($e) === (string)__('Please specify a shipping method.'); /** @var bool $isShipping */
 		/** @var bool $isSpecific */
 		if (!($isSpecific = $e instanceof DFPE)) {
 			$e = df_ef($e);
@@ -77,7 +77,7 @@ final class PlaceOrderInternal {
 		list($mc, $md) =
 			$isSpecific
 			? [$e->messageC(), df_tag_if($e->messageD(), $e->isMessageHtml(), 'pre')]
-			: [dfp_error_message(), df_etsd($e)]
+			: [dfp_error_message(), df_xtsd($e)]
 		; /** @var string $mc */ /** @var string $md */
 		return !$this->s()->test() ? $mc : df_cc_br($mc, __('Debug message:'), $md);
 	}
