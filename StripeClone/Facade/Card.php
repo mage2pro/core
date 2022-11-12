@@ -131,9 +131,8 @@ abstract class Card {
 	/**
 	 * 2018-11-13
 	 * @used-by \Df\StripeClone\Facade\Customer::cardsActive()
-	 * @return bool
 	 */
-	final function isActive() {return /** @var int $y1 */ /** @var int $y2 */
+	final function isActive():bool {return /** @var int $y1 */ /** @var int $y2 */
 		($y1 = df_year()) < ($y2 = $this->expYear()) || ($y1 === $y2 && df_month() <= $this->expMonth())
 	;}
 
@@ -145,7 +144,6 @@ abstract class Card {
 	 * @used-by \Dfe\Vantiv\Method::card()
 	 * @param string|object $m
 	 * @param object|array(string => string) $data
-	 * @return self
 	 */
-	static function create($m, $data) {return df_new(df_con_heir($m, self::class), $data);}
+	static function create($m, $data):self {return df_new(df_con_heir($m, self::class), $data);}
 }
