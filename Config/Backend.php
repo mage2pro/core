@@ -57,14 +57,14 @@ class Backend extends \Magento\Framework\App\Config\Value {
 			df_log($e);
 			/**
 			 * 2017-09-27
-			 * Previously, I had the following code here: throw df_le($e);
+			 * Previously, I had the following code here: throw df_lx($e);
 			 * It triggered a false positive of the Magento Marketplace code validation tool:
 			 * «Namespace for df_le class is not specified»:
 			 * https://github.com/mage2pro/core/issues/27
 			 * https://github.com/magento/marketplace-eqp/issues/45
-			 * So I write it in the 2 lines as a workaround: $e = df_le($e); throw $e;
+			 * So I write it in the 2 lines as a workaround: $e = df_lx($e); throw $e;
 			 * I use the same solution here: \Df\Payment\Method::action()
-			 * 2017-10-19 Previously, I had the following code here: $e = df_le($e); throw $e;
+			 * 2017-10-19 Previously, I had the following code here: $e = df_lx($e); throw $e;
 			 */
 			df_message_error($e);
 		}

@@ -185,15 +185,15 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 				 * https://mage2.pro/t/945
 				 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
 				 * 2017-09-27
-				 * Previously, I had the following code here: throw df_le($e);
+				 * Previously, I had the following code here: throw df_lx($e);
 				 * It triggered a false positive of the Magento Marketplace code validation tool:
 				 * «Namespace for df_le class is not specified»:
 				 * https://github.com/mage2pro/core/issues/27
 				 * https://github.com/magento/marketplace-eqp/issues/45
-				 * So I write it in the 2 lines as a workaround: $e = df_le($e); throw $e;
+				 * So I write it in the 2 lines as a workaround: $e = df_lx($e); throw $e;
 				 * 2022-11-10 @noinspection PhpUnnecessaryLocalVariableInspection
 				 */
-				$e = df_le($e); throw $e;
+				$e = df_lx($e); throw $e;
 			}
 		}
 		return $result;
