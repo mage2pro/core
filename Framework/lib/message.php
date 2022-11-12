@@ -25,7 +25,7 @@ function df_message_add($s, $type):void {df_message_m()->addMessage(
  * @used-by \Df\Config\Backend\Serialized::processA()
  * @used-by \Df\OAuth\ReturnT::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
- * @param string|P|\Exception $m
+ * @param string|P|Exception $m
  */
 function df_message_error($m):void {df_message_add(df_xts($m), IM::TYPE_ERROR);}
 

@@ -4,11 +4,42 @@ use Exception as E;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase as P;
 /**
+ * 2016-03-17
+ * @used-by df_leh()
+ * @used-by df_lets()
+ * @used-by \Df\Payment\Method::action()
+ * @used-by \Dfe\CheckoutCom\Method::leh()
+ * @used-by \Dfe\TwoCheckout\Method::api()
+ * @param E $e
+ */
+function df_le(E $e):LE {return $e instanceof LE ? $e : new LE(__(df_xts($e)), $e);}
+
+/**
+ * 2016-03-17
+ * @used-by \Dfe\CheckoutCom\Controller\Index\Index::execute()
+ * @used-by \Dfe\TwoCheckout\Controller\Index\Index::execute()
+ * @param callable $f
+ * @return mixed
+ * @throws LE
+ */
+function df_leh(callable $f) {/** @var mixed $r */try {$r = $f();} catch (E $e) {throw df_le($e);} return $r;}
+
+/**
+ * 2016-07-20
+ * @used-by \Df\Payment\W\Responder::defaultError()
+ * @used-by \Dfe\AllPay\W\Responder::error()
+ * @param E|string $e
+ * @return P|string
+ */
+function df_lets($e) {return !$e instanceof E ? __($e) : df_xts(df_le($e));}
+
+/**
  * 2016-07-18
+ * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Qa\Failure\Exception::trace()
  * @param E $e
  */
-function df_ef(E $e):E {while ($e->getPrevious()) {$e = $e->getPrevious();} return $e;}
+function df_xf(E $e):E {while ($e->getPrevious()) {$e = $e->getPrevious();} return $e;}
 
 /**
  * @used-by df_le()
@@ -48,33 +79,3 @@ function df_xts($e) {return df_adjust_paths_in_message(
 function df_xtsd($e):string {return df_adjust_paths_in_message(
 	!$e instanceof E ? $e : ($e instanceof DFE ? $e->messageD() : $e->getMessage())
 );}
-
-/**
- * 2016-03-17
- * @used-by df_leh()
- * @used-by df_lets()
- * @used-by \Df\Payment\Method::action()
- * @used-by \Dfe\CheckoutCom\Method::leh()
- * @used-by \Dfe\TwoCheckout\Method::api()
- * @param E $e
- */
-function df_le(E $e):LE {return $e instanceof LE ? $e : new LE(__(df_xts($e)), $e);}
-
-/**
- * 2016-03-17
- * @used-by \Dfe\CheckoutCom\Controller\Index\Index::execute()
- * @used-by \Dfe\TwoCheckout\Controller\Index\Index::execute()
- * @param callable $f
- * @return mixed
- * @throws LE
- */
-function df_leh(callable $f) {/** @var mixed $r */try {$r = $f();} catch (E $e) {throw df_le($e);} return $r;}
-
-/**
- * 2016-07-20
- * @used-by \Df\Payment\W\Responder::defaultError()
- * @used-by \Dfe\AllPay\W\Responder::error()
- * @param E|string $e
- * @return P|string
- */
-function df_lets($e) {return !$e instanceof E ? __($e) : df_xts(df_le($e));}

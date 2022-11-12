@@ -61,7 +61,7 @@ final class PlaceOrderInternal {
 		$isShipping = df_xts($e) === (string)__('Please specify a shipping method.'); /** @var bool $isShipping */
 		/** @var bool $isSpecific */
 		if (!($isSpecific = $e instanceof DFPE)) {
-			$e = df_ef($e);
+			$e = df_xf($e);
 		}
 		if (!$isShipping) {
 			df_log($e);
