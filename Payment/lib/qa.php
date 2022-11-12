@@ -13,11 +13,12 @@ function dfp_error($m = null):void {df_checkout_error(dfp_error_message($m));}
  * @used-by dfp_error()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Dfe\Stripe\Exception::messageC()
+ * @used-by \Dfe\TwoCheckout\Exception::messageC()
  * @param string|null $m [optional]
  */
-function dfp_error_message($m = null):string {return nl2br(df_cc_n(
+function dfp_error_message($m = ''):string {return nl2br(df_cc_n(
 	__("Sorry, the payment attempt is failed.")
-	, $m ? __("The payment service's message is «<b>%1</b>».", $m) : null
+	, $m ? __("The payment service's message is «<b>%1</b>».", $m) : ''
 	,__("Please try again, or try another payment method.")
 ));}
 
