@@ -79,17 +79,9 @@ function df_ends_with($haystack, $needle):bool {return is_array($needle)
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  * @param string $haystack
- * @param string|null|array(string|null) $needle
+ * @param string|string[] $needle
  */
-function df_starts_with($haystack, $needle):bool {/** @var bool $r */
-	if (is_array($needle)) {
-		$r = null !== df_find($needle, __FUNCTION__, [], [$haystack]);
-	}
-	else {
-		# 2022-11-12
-		# "PHP ≥ 8.1: «Passing null to parameter … of type string is deprecated»": https://github.com/mage2pro/core/issues/173
-		$needle = df_ets($needle);
-		$r = $needle === mb_substr($haystack, 0, mb_strlen($needle));
-	}
-	return $r;
-}
+function df_starts_with(string $haystack, $needle):bool {return is_array($needle)
+	? null !== df_find($needle, __FUNCTION__, [], [$haystack])
+	: $needle === mb_substr($haystack, 0, mb_strlen($needle))
+;}
