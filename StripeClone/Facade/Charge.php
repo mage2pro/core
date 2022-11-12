@@ -123,9 +123,8 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Vantiv\Facade\Charge::card()
 	 * @param object|array(string => mixed) $c
-	 * @return Card
 	 */
-	function card($c) {return Card::create($this, $this->cardData($c));}
+	function card($c):Card {return Card::create($this, $this->cardData($c));}
 
 	/**
 	 * 2017-06-12
