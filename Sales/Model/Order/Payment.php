@@ -35,11 +35,9 @@ class Payment extends OP {
 	 * and @see \Magento\Sales\Model\Order\Payment::_getInvoiceForTransactionId()
 	 * duplicate almost the same code
 	 * @used-by df_invoice_by_trans()
-	 * @param O $o
-	 * @param int $tid
 	 * @return Invoice|null
 	 */
-	final static function getInvoiceForTransactionId(O $o, $tid) {
+	final static function getInvoiceForTransactionId(O $o, string $tid) {
 		$i = df_new_om(__CLASS__); /** @var Payment $i */
 		$i->setOrder($o);
 		return $i->_getInvoiceForTransactionId($tid);

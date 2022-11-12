@@ -91,10 +91,8 @@ function df_trans_r():TR {return df_o(TR::class);}
  * 2) Для загрузки транзакции по целочисленному идентификатору используйте @see df_trans()
  * @used-by \Df\Payment\W\Nav::parent()
  * @used-by \Dfe\TwoCheckout\Handler\Charge::op()
- * @param string $txnId
- * @param bool $throw [optional]
  * @throws DFE
  */
-function df_transx($txnId, $throw = true):T {return dfcf(function($txnId, $throw = true) {return df_load(
+function df_transx(string $txnId, bool $throw = true):T {return dfcf(function($txnId, $throw = true) {return df_load(
 	T::class, $txnId, $throw, 'txn_id'
 );}, func_get_args());}

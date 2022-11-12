@@ -20,12 +20,10 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  * @used-by \Df\Payment\W\Strategy\Refund::_handle()
  * @used-by \Dfe\CheckoutCom\Handler\Charge\Refunded::process()
  * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::process()
- * @param P $p
- * @param int $tid
  * @param string|int|float|null $a [optional]	 в валюте заказа (платежа), в формате платёжной системы (копейках).
  * @return int|null
  */
-function dfp_refund(P $p, $tid, $a = null) {
+function dfp_refund(P $p, string $tid, $a = null) {
 	$i = df_invoice_by_trans($o = df_order($p), $tid); /** @var I $i */ /** @var O $o */
 	$m = dfpm($p); /** @var M $m */
 	$cml = df_o(CML::class); /** @var CML $cml */
