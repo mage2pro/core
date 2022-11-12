@@ -12,6 +12,8 @@ function dfp_error($m = null):void {df_checkout_error(dfp_error_message($m));}
  * 2016-08-19
  * @used-by dfp_error()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
+ * @used-by \Dfe\Klarna\Exception::messageC()
+ * @used-by \Dfe\Omise\Exception\Charge::messageC()
  * @used-by \Dfe\Stripe\Exception::messageC()
  * @used-by \Dfe\TwoCheckout\Exception::messageC()
  * @param string|null $m [optional]

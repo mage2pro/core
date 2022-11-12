@@ -133,10 +133,10 @@ class Exception extends LE implements \ArrayAccess {
 	function message():string {return $this->getMessage();}
 
 	/**
-	 * A message for a buyer.
+	 * A message for the buyer.
 	 * 2016-10-24
-	 * Раньше этот метод возвращал $this->message().
-	 * Теперь я думаю, что null логичнее:
+	 * Раньше этот метод возвращал `$this->message()`.
+	 * Теперь я думаю, что '' логичнее:
 	 * низкоуровневые сообщения покупателям показывать всегда неправильно,
 	 * а потомки этого класса могут переопределить у себя этот метод
 	 * (так, в частности, поступают потмки в платёжных модулях).
@@ -146,9 +146,8 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Dfe\Omise\Exception\Charge::messageC()
 	 * @see \Dfe\Stripe\Exception::messageC()
 	 * @see \Dfe\TwoCheckout\Exception::messageC()
-	 * @return string|null
 	 */
-	function messageC() {return null;}
+	function messageC():string {return '';}
 
 	/**
 	 * Сообщение для разработчика.
