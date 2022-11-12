@@ -35,10 +35,11 @@ function df_ends_with($haystack, $needle):bool {return is_array($needle)
  * Утверждают, что код ниже работает быстрее, чем return 0 === mb_strpos($haystack, $needle);
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
+ * 2022-10-14 @see str_starts_with() has been added to PHP 8: https://www.php.net/manual/function.str-starts-with.php
+ * 2022-11-12 It returns `true` if $needle is an empty string: https://3v4l.org/R3WhEH
  * @see df_ends_with()
  * @see df_prepend()
  * @see df_trim_text_left()
- * 2022-10-14 @see str_starts_with() has been added to PHP 8: https://www.php.net/manual/function.str-starts-with.php
  * @used-by df_action_prefix()
  * @used-by df_check_https()
  * @used-by df_check_json_complex()
@@ -78,9 +79,17 @@ function df_ends_with($haystack, $needle):bool {return is_array($needle)
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  * @param string $haystack
- * @param string|string[] $needle
+ * @param string|null|array(string|null) $needle
  */
-function df_starts_with($haystack, $needle):bool {return is_array($needle)
-	? null !== df_find($needle, __FUNCTION__, [], [$haystack])
-	: $needle === mb_substr($haystack, 0, mb_strlen($needle))
-;}
+function df_starts_with($haystack, $needle):bool {/** @var bool $r */
+	if (is_array($needle)) {
+		$r = null !== df_find($needle, __FUNCTION__, [], [$haystack]);
+	}
+	else {
+		# 2022-11-12
+		# "PHP ≥ 8.1: «Passing null to parameter … of type string is deprecated»": https://github.com/mage2pro/core/issues/173
+		$needle = df_ets($needle);
+		$r = $needle === mb_substr($haystack, 0, mb_strlen($needle));
+	}
+	return $r;
+}
