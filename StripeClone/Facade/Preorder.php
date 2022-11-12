@@ -13,6 +13,7 @@ use Df\StripeClone\Method as M;
 abstract class Preorder extends \Df\Payment\Facade {
 	/**
 	 * 2017-06-12
+	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Moip\Facade\Preorder::create()
 	 * @param array(string => mixed) $p

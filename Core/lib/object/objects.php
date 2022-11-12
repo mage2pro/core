@@ -87,9 +87,7 @@ function df_idn($o, $allowNull = false):int {return df_nat(df_id($o, $allowNull)
  * https://3v4l.org/eI2vf
  * http://stackoverflow.com/a/25781989
  * https://php.net/manual/functions.arguments.php#example-145
- * 2022-10-31
- * `object` as a return type requires PHP ≥ 7.2:
- * https://www.php.net/manual/language.types.declarations.php#language.types.declarations.base
+ * 2022-10-31 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
  * @used-by df_newa()
  * @used-by \Df\Payment\Currency::f()
  * @used-by \Df\Payment\W\F::__construct()
@@ -115,9 +113,7 @@ function df_new($c, ...$args) {return new $c(...$args);}
  * PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса.
  * Поэтому и создал эту небольшую функцию.
  * В отличие от @see df_new_om(), она не использует Object Manager.
- * 2022-10-31
- * `object` as a return type requires PHP ≥ 7.2:
- * https://www.php.net/manual/language.types.declarations.php#language.types.declarations.base
+ * 2022-10-31 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
  * @used-by dfs_con()
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Payment\W\F::aspect()
@@ -244,9 +240,7 @@ function dfo($o, $k, $d = null) {return
  * 2017-07-11
  * It returns a singleton of a class from the $caller module with the $owner or $suf suffix.
  * The result should be a descendant of the $owner, and should exist (it is not defaulted to $owner).
- * 2022-10-31
- * `object` as a return type requires PHP ≥ 7.2:
- * https://www.php.net/manual/language.types.declarations.php#language.types.declarations.base
+ * 2022-10-31 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
  * @used-by df_oauth_app()
  * @used-by \Df\Zoho\App::s()
  * @used-by \Df\ZohoBI\API\Facade::s()

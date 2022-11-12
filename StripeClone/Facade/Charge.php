@@ -16,6 +16,7 @@ use Df\StripeClone\Method as M;
 abstract class Charge extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
+	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
 	 * @used-by \Df\StripeClone\Method::charge()
 	 * @see \Dfe\Moip\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Omise\Facade\Charge::capturePreauthorized()
@@ -34,6 +35,7 @@ abstract class Charge extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-02-10
+	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Moip\Facade\Charge::create()
 	 * @see \Dfe\Omise\Facade\Charge::create()
@@ -82,8 +84,8 @@ abstract class Charge extends \Df\Payment\Facade {
 	abstract function pathToCard();
 
 	/**
-	 * 2017-02-10
-	 * Метод должен вернуть библиотечный объект API платёжной системы.
+	 * 2017-02-10 Метод должен вернуть библиотечный объект API платёжной системы.
+	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @see \Dfe\Moip\Facade\Charge::refund()
 	 * @see \Dfe\Omise\Facade\Charge::refund()
@@ -101,8 +103,8 @@ abstract class Charge extends \Df\Payment\Facade {
 	abstract function refund($id, $a);
 
 	/**
-	 * 2017-02-10
-	 * Метод должен вернуть библиотечный объект API платёжной системы.
+	 * 2017-02-10 Метод должен вернуть библиотечный объект API платёжной системы.
+	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @see \Dfe\Moip\Facade\Charge::void()
 	 * @see \Dfe\Omise\Facade\Charge::void()
@@ -209,6 +211,7 @@ abstract class Charge extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-06-13
+	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\Moip\Facade\Charge::create()
 	 * @return object

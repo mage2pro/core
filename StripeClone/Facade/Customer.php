@@ -41,6 +41,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * Этот метод должен регистрировать в ПС не только покупателя, но и его банковскую карту.
 	 * Stripe и Omise умеют делать это сразу (в ответ на единый запрос к ПС),
 	 * а вот для Paymill банковскую карту надо регистрировать отдельным запросом к ПС.
+	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Moip\Facade\Customer::create()
 	 * @see \Dfe\Omise\Facade\Customer::create()
