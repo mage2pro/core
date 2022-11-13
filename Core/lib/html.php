@@ -95,12 +95,11 @@ function df_style_inline_hide(...$s):string {return !$s ? '' : df_style_inline(
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/selected_car_onsearchresultpage.phtml
- * @param string $tag
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
  * @param string|null|string[] $content [optional]
  * @param bool|null $multiline [optional]
  */
-function df_tag($tag, $attrs = [], $content = null, $multiline = null):string {return Tag::render(
+function df_tag(string $tag, $attrs = [], $content = null, $multiline = null):string {return Tag::render(
 	$tag, is_array($attrs) ? $attrs : ['class' => $attrs], $content, $multiline
 );}
 
