@@ -37,6 +37,5 @@ function df_trim_ds_left($p):string {return df_trim_left($p, '/\\');}
  * @used-by \Df\Payment\Method::canUseForCountryP()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::build()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::check()
- * @param string $p
  */
-function df_trim_ds_right($p):string {return df_trim_right($p, '/\\');}
+function df_trim_ds_right(string $p):string {return df_trim_right($p, '/\\');}
