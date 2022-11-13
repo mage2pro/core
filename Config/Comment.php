@@ -7,10 +7,9 @@ abstract class Comment implements IComment {
 	/**
 	 * 2017-10-15
 	 * @used-by \Df\Payment\Comment\Description::getCommentText()
-	 * @param string $k
 	 * @return string|null
 	 */
-	final protected function sibling($k) {return df_cfg("{$this->groupPath()}/$k", df_scope());}
+	final protected function sibling(string $k) {return df_cfg("{$this->groupPath()}/$k", df_scope());}
 
 	/**
 	 * 2017-09-11
