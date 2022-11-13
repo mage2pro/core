@@ -97,9 +97,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2018-11-24
 	 * @used-by self::request()
 	 * @see \Dfe\Square\P\Charge::k_Description()
-	 * @return string
 	 */
-	protected function k_Description() {return self::K_DESCRIPTION;}
+	protected function k_Description():string {return self::K_DESCRIPTION;}
 
 	/**
 	 * 2017-02-18
