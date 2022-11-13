@@ -53,7 +53,7 @@ class Reg extends \Df\Payment\Operation {
 	 * @see \Dfe\Spryng\P\Reg::k_Excluded()
 	 * @return string[]
 	 */
-	protected function k_Excluded() {return [];}
+	protected function k_Excluded():array {return [];}
 
 	/**
 	 * 2017-06-11
