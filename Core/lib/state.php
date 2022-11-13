@@ -90,10 +90,8 @@ function df_magento_version_m() {return df_o(ProductMetadataInterface::class);}
 /**
  * 2017-05-13 https://mage2.pro/t/2615
  * 2022-10-14 @deprecated It is unused. And it is slow.
- * @param string $url
- * @return string
  */
-function df_magento_version_remote($url) {return dfcf(function($url) {return df_try(function() use($url) {
+function df_magento_version_remote(string $url):string {return dfcf(function($url) {return df_try(function() use($url) {
 	/** @var string[] $a */
 	$a = explode(' ', df_string_clean(df_trim_text_left(df_file_read("$url/magento_version"), 'Magento/'), '(', ')'));
 	return 2 !== count($a) ? [] : array_combine(['version', 'edition'], $a);
