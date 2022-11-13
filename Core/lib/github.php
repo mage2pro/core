@@ -16,10 +16,9 @@ function df_github_repo_version($repo):string {return df_github_request("repos/$
 /**
  * 2017-05-10 https://developer.github.com/v3/repos/releases/#get-the-latest-release
  * @used-by df_github_repo_version()
- * @param string $path
  * @param string|null $k [optional]
  */
-function df_github_request($path, $k = null, $params = []):string {
+function df_github_request(string $path, $k = null, $params = []):string {
 	$c = df_zf_http("https://api.github.com/$path")
 		# 2017-06-28
 		# «Difference between the Accept and Content-Type HTTP headers»
