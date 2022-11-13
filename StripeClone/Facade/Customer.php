@@ -21,6 +21,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * https://github.com/mage2pro/moip/blob/0.7.2/Facade/Customer.php#L37-L55
 	 * @see \Dfe\Spryng\Facade\Customer::cardAdd()
 	 * https://github.com/mage2pro/spryng/blob/1.1.10/Facade/Customer.php#L18-L27
+	 * 2022-11-13 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Moip\Facade\Customer::cardAdd()
 	 * @see \Dfe\Omise\Facade\Customer::cardAdd()
@@ -31,10 +32,8 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\TBCBank\Facade\Customer::cardAdd()
 	 * @see \Dfe\Vantiv\Facade\Customer::cardAdd()
 	 * @param object $c
-	 * @param string $token
-	 * @return string
 	 */
-	abstract function cardAdd($c, $token);
+	abstract function cardAdd($c, string $token):string;
 	
 	/**
 	 * 2017-02-10
