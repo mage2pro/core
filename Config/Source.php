@@ -160,10 +160,9 @@ abstract class Source extends SourceBase {
 	 *	)
 	 * And f() allows us to retrieve a particular attribute or a child.
 	 * @used-by \Df\Config\Source\LetterCase::map()
-	 * @param string $k
 	 * @return string|null
 	 */
-	final protected function f($k) {return df_config_field()->getAttribute($k);}
+	final protected function f(string $k) {return df_config_field()->getAttribute($k);}
 
 	/**
 	 * 2017-04-10 «all_pay»
