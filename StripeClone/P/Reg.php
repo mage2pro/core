@@ -71,10 +71,9 @@ class Reg extends \Df\Payment\Operation {
 	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Reg::v_CardId()
 	 * @see \Dfe\Stripe\P\Reg::v_CardId()
-	 * @param string $id
 	 * @return string|array(string => mixed)
 	 */
-	protected function v_CardId($id) {return $id;}
+	protected function v_CardId(string $id) {return $id;}
 
 	/**
 	 * 2017-06-11
