@@ -90,9 +90,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2017-10-09
 	 * @used-by self::request()
 	 * @see \Dfe\Square\P\Charge::k_CustomerId()
-	 * @return string
 	 */
-	protected function k_CustomerId() {return self::K_CUSTOMER_ID;}
+	protected function k_CustomerId():string {return self::K_CUSTOMER_ID;}
 
 	/**
 	 * 2018-11-24
