@@ -128,14 +128,12 @@ function df_date_min(ZD $d1, ZD $d2):ZD {return df_date_lt($d1, $d2) ? $d1 : $d2
  * 2016-07-20
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @used-by \Dfe\AllPay\W\Event::time()
- * @param string $dateS
- * @param bool $throw [optional]
  * @param string|null $format [optional]
  * @param string|null $tz [optional]
  * @return ZD|null
  * @throws \Exception
  */
-function df_date_parse($dateS, $throw = true, $format = null, $tz = null) {
+function df_date_parse(string $dateS, bool $throw = true, $format = null, $tz = null) {
 	/** @var string $defaultTZ */
 	if ($tz) {
 		$defaultTZ = date_default_timezone_get();
