@@ -120,14 +120,6 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return string
 	 */
-	function scaleRule() {return dfc($this, function() {return sprintf('scale(%.2f,%.2f)',
-		$this->scale_horizontal() / 100, $this->scale_vertical() / 100
-	);});}
-
-	/**
-	 * 2015-12-16
-	 * @return string
-	 */
 	function style() {return dfc($this, function() {return dfa(
 		['regular' => 'normal', 'italic' => 'italic']
 		, $this->variantWord()
@@ -147,6 +139,14 @@ final class Font extends \Df\Config\O {
 
 	/** @return bool */
 	private function bold() {return $this->b();}
+
+	/**
+	 * 2015-12-16
+	 * @used-by self::css()
+	 */
+	private function scaleRule():string {return dfc($this, function() {return sprintf('scale(%.2f,%.2f)',
+		$this->scale_horizontal() / 100, $this->scale_vertical() / 100
+	);});}
 
 	/**
 	 * 2015-12-16
