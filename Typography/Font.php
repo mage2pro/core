@@ -191,9 +191,10 @@ final class Font extends \Df\Config\O {
 
 	/**
 	 * 2015-12-16
-	 * @return string
+	 * @used-by self::variantNumber()
+	 * @used-by self::variantWord()
 	 */
-	private function variant() {return dfc($this, function() {return dfa($this->familyA(), 1, '');});}
+	private function variant():string {return dfc($this, function() {return dfa($this->familyA(), 1, '');});}
 
 	/**
 	 * 2015-12-16 Вычленяет «700» из «700italic»
