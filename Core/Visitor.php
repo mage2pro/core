@@ -11,9 +11,8 @@ final class Visitor extends O {
 	/**
 	 * На английском языке. Например: «Russia».
 	 * 2022-10-29 @deprecated It is unused.
-	 * @return string
 	 */
-	function countryName() {return $this->r('country_name');}
+	function countryName():string {return $this->r('country_name');}
 
 	/**
 	 * @used-by \Df\Payment\Settings\_3DS::countries()
