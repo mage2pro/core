@@ -81,7 +81,7 @@ class Reg extends \Df\Payment\Operation {
 	 * @param M $m
 	 * @return array(string => mixed)
 	 */
-	final static function request(M $m) {
+	final static function request(M $m):array {
 		$i = df_new(df_con_heir($m, __CLASS__), $m); /** @var self $i */
 		$r = df_clean_keys([
 			$i->k_Description() => $i->customerName(), $i->k_Email() => $i->customerEmail()
