@@ -6,9 +6,8 @@ if (!defined('DS')) {
 /**
  * 2017-12-13
  * @used-by \Df\Payment\Method::canUseForCountryP()
- * @param string $p
  */
-function df_add_ds_right($p):string {return df_trim_ds_right($p) . '/';}
+function df_add_ds_right(string $p):string {return df_trim_ds_right($p) . '/';}
 
 /**
  * 2016-10-14
