@@ -29,9 +29,8 @@ class Reg extends \Df\Payment\Operation {
 	 * @see \Dfe\Moip\P\Reg::k_CardId()
 	 * @see \Dfe\Spryng\P\Reg::k_CardId()
 	 * @see \Dfe\Square\P\Reg::k_CardId()
-	 * @return string
 	 */
-	protected function k_CardId() {return $this->charge()->k_CardId();}
+	protected function k_CardId():string {return $this->charge()->k_CardId();}
 
 	/**
 	 * 2017-10-10
