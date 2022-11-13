@@ -70,8 +70,6 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-01-04
-	 * @param string|string[]|null $k [optional]
-	 * @param mixed|null $d [optional]
 	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::isPending()
 	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::amount()
 	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::eTransId()
@@ -80,6 +78,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\Stripe\W\Event\Source::checkIgnored()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
+	 * @param string|string[]|null $k [optional]
+	 * @param mixed|null $d [optional]
 	 * @return mixed|int|string|null|array(string => mixed)
 	 * @throws Critical
 	 */
@@ -120,7 +120,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Omise\W\Event\Refund::k_pidSuffix()
 	 * @see \Dfe\Paymill\W\Event\Refund::k_pidSuffix()
 	 * @see \Dfe\TBCBank\W\Event::k_pidSuffix()
-	 * @return string
 	 */
-	protected function k_pidSuffix() {return 'id';}
+	protected function k_pidSuffix():string {return 'id';}
 }
