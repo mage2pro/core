@@ -75,10 +75,9 @@ final class Visitor extends O {
 	 * @used-by self::regionCode()
 	 * @used-by self::regionName()
 	 * @used-by self::timeZone()
-	 * @param string $key
 	 * @return string|null
 	 */
-	private function r($key) {return dfa($this->responseA(), $key);}
+	private function r(string $k) {return dfa($this->responseA(), $k);}
 
 	/**
 	 * 2016-05-31
