@@ -27,7 +27,7 @@ final class Font extends \Df\Config\O {
 
 	/**
 	 * 2015-12-16
-	 *
+	 * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
 	 */
 	function css(string $selector):string {/** @var string $result */
 		if (!$this->enabled()) {
