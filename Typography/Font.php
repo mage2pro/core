@@ -25,8 +25,11 @@ final class Font extends \Df\Config\O {
 	 */
 	function color():string {return $this->v();}
 
-	/** @return bool */
-	function enabled() {return $this->b();}
+	/**
+	 * @used-by self::css()
+	 * @used-by \Dfe\Frontend\Block\ProductView\Css::customCss()
+	 */
+	function enabled():bool {return $this->b();}
 
 	/** @return string */
 	function family() {return df_first($this->familyA());}
@@ -138,8 +141,7 @@ final class Font extends \Df\Config\O {
 	 * @param string $selector
 	 * @return string
 	 */
-	function css($selector) {
-		/** @var string $result */
+	function css($selector) {/** @var string $result */
 		if (!$this->enabled()) {
 			$result = '';
 		}
