@@ -97,7 +97,7 @@ class Reg extends \Df\Payment\Operation {
 		 * because some payment modules (Moip) implement non-card payment options.
 		 * A similar code block is here: @see \Df\StripeClone\P\Charge::request()
 		 */
-		if ($k = $i->k_CardId()/** string|null */) {
+		if ($k = $i->k_CardId()) {/** @var string $k */
 			$r[$k] = $i->v_CardId($i->token());
 		}
 		return $r + $i->p();

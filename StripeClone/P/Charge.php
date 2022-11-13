@@ -27,9 +27,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Spryng\P\Charge::k_CardId()
 	 * @see \Dfe\Square\P\Charge::k_CardId()
 	 * @see \Dfe\Stripe\P\Charge::k_CardId()
-	 * @return string
 	 */
-	abstract function k_CardId();
+	abstract function k_CardId():string;
 
 	/**
 	 * 2017-02-18
@@ -168,7 +167,7 @@ abstract class Charge extends \Df\Payment\Charge {
 		 * because some payment modules (Moip) implement non-card payment options.
 		 * A similar code block is here: @see \Df\StripeClone\P\Reg::request()
 		 */
-		if ($k = $i->k_CardId() /** @var string $k|null */) {
+		if ($k = $i->k_CardId() /** @var string $k */) {
 			$r[$k] = $i->v_CardId($payer->cardId(), $payer->tokenIsNew());
 		}
 		return $r + $i->p();
