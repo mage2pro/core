@@ -116,9 +116,6 @@ final class Font extends \Df\Config\O {
 		'//fonts.googleapis.com/css?family=' . urlencode($this->family())
 	;});}
 
-	/** @return float */
-	function scale_vertical() {return $this->f();}
-
 	/**
 	 * 2015-12-16
 	 * @return string
@@ -179,6 +176,12 @@ final class Font extends \Df\Config\O {
 	 * @used-by self::scaleRule()
 	 */
 	private function scale_horizontal():float {return $this->f();}
+
+	/**
+	 * @used-by self::needScale()
+	 * @used-by self::scaleRule()
+	 */
+	private function scale_vertical():float {return $this->f();}
 
 	/**
 	 * 2015-12-16
