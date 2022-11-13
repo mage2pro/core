@@ -19,7 +19,6 @@ final class WaitPeriodType extends \Df\Config\Source {
 	 * @used-by \Dfe\AllPay\Settings::waitPeriodATM()
 	 * @used-by \Dfe\Moip\Settings\Boleto::waitPeriod()
 	 * @used-by \Dfe\Qiwi\Settings::waitPeriod()
-	 * @param S $s
 	 * @param string|null $k [optional]
 	 * @param string $kType [optional]
 	 */
