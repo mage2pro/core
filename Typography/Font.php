@@ -120,34 +120,12 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @return string
 	 */
-	function style() {return dfc($this, function() {return dfa(
-		['regular' => 'normal', 'italic' => 'italic']
-		, $this->variantWord()
-		, $this->italic() ? 'italic' : ''
-	);});}
-
-	/** @return bool */
-	function underline() {return $this->b();}
-
-	/**
-	 * 2015-12-16
-	 * @return string
-	 */
 	function weight() {return dfc($this, function() {return
 		$this->variantNumber() ?: ($this->bold() ? 'bold' : 'normal')
 	;});}
 
 	/** @return bool */
 	private function bold() {return $this->b();}
-
-	/**
-	 * 2015-12-16
-	 * @used-by self::css()
-	 */
-	private function scaleRule():string {return dfc($this, function() {return sprintf('scale(%.2f,%.2f)',
-		$this->scale_horizontal() / 100, $this->scale_vertical() / 100
-	);});}
-
 	/**
 	 * 2015-12-16
 	 * @return string[]
@@ -178,6 +156,14 @@ final class Font extends \Df\Config\O {
 	private function scale_horizontal():float {return $this->f();}
 
 	/**
+	 * 2015-12-16
+	 * @used-by self::css()
+	 */
+	private function scaleRule():string {return dfc($this, function() {return sprintf('scale(%.2f,%.2f)',
+		$this->scale_horizontal() / 100, $this->scale_vertical() / 100
+	);});}
+
+	/**
 	 * @used-by self::needScale()
 	 * @used-by self::scaleRule()
 	 */
@@ -189,6 +175,19 @@ final class Font extends \Df\Config\O {
 	 * @used-by self::letter_spacing()
 	 */
 	private function size():Size {return dfc($this, function($key) {return new Size($this[$key]);}, [df_caller_f()]);}
+
+	/**
+	 * 2015-12-16
+	 * @used-by self::css()
+	 */
+	private function style():string {return dfc($this, function() {return dfa(
+		['regular' => 'normal', 'italic' => 'italic']
+		, $this->variantWord()
+		, $this->italic() ? 'italic' : ''
+	);});}
+
+	/** @used-by self::css() */
+	private function underline():bool {return $this->b();}
 
 	/**
 	 * 2015-12-16
