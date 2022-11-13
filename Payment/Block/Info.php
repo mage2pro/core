@@ -404,6 +404,7 @@ abstract class Info extends _P {
 	 * @see \Df\StripeClone\Block\Info::prepare()
 	 * @see \Dfe\ACH\Block\Info::prepare()
 	 * @see \Dfe\AllPay\Block\Info::prepare()
+	 * @see \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @see \Dfe\Dragonpay\Block\Info::prepare()
 	 * @see \Dfe\IPay88\Block\Info::prepare()
 	 * @see \Dfe\Moip\Block\Info\Boleto::prepare()
