@@ -22,15 +22,14 @@ abstract class Refund extends \Df\Payment\Facade {
 	 * 2017-02-14
 	 * Этот же идентификатор должен возвращать @see \Df\Payment\W\IRefund::eTransId()
 	 * @used-by \Df\StripeClone\Method::_refund()
-	 * @see \Dfe\Omise\Facade\Charge::transId()
-	 * @see \Dfe\Paymill\Facade\Charge::transId()
-	 * @see \Dfe\Spryng\Facade\Charge::transId()
+	 * @see \Dfe\Omise\Facade\Refund::transId()
+	 * @see \Dfe\Paymill\Facade\Refund::transId()
+	 * @see \Dfe\Spryng\Facade\Refund::transId()
 	 * @see \Dfe\Square\Facade\Refund::transId()
-	 * @see \Dfe\Stripe\Facade\Charge::transId()
+	 * @see \Dfe\Stripe\Facade\Refund::transId()
 	 * @see \Dfe\TBCBank\Facade\Refund::transId()
 	 * @see \Dfe\Vantiv\Facade\Refund::transId()
 	 * @param object $r
-	 * @return string
 	 */
-	abstract function transId($r);
+	abstract function transId($r):string;
 }

@@ -75,10 +75,8 @@ function dfp_add_info(II $p, array $info):void {
  * @used-by \Df\StripeClone\Method::_refund()
  * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/Method.php?ts=4#L262-L273
  * @param II|OP|QP $p
- * @param string $k
- * @param string $v
  */
-function dfp_container_add(II $p, $k, $v):void {$p->setAdditionalInformation($k, df_json_encode(
+function dfp_container_add(II $p, string $k, string $v):void {$p->setAdditionalInformation($k, df_json_encode(
 	array_merge(dfp_container_get($p, $k), [$v])
 ));}
 
