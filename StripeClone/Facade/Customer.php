@@ -148,9 +148,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @param object|array(string => mixed) $c
 	 * @return Card[]
 	 */
-	final function cards($c) {return array_map(function($data) {return
-		Card::create($this, $data)
-	;}, $this->cardsData($c));}
+	final function cards($c):array {return array_map(function($d) {return Card::create($this, $d);}, $this->cardsData($c));}
 
 	/**
 	 * 2018-11-13
