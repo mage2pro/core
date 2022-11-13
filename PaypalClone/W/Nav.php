@@ -38,7 +38,6 @@ final class Nav extends \Df\Payment\W\Nav {
 	 * @override
 	 * @see \Df\Payment\W\Nav::pidAdapt()
 	 * @used-by \Df\Payment\W\Nav::pid()
-	 * @param string $id
 	 */
-	protected function pidAdapt($id):string {return $this->e2i($id);}
+	protected function pidAdapt(string $id):string {return $this->e2i($id);}
 }
