@@ -46,9 +46,8 @@ class Responder {
 	/**
 	 * 2017-09-13
 	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @param string|null $message [optional]
 	 */
-	final function setNotForUs($message = null):void {$this->set($this->notForUs($message));}
+	final function setNotForUs(string $m):void {$this->set($this->notForUs($m));}
 
 	/**
 	 * 2017-01-17
@@ -89,9 +88,8 @@ class Responder {
 	 * @used-by self::setNotForUs()
 	 * @see \Dfe\AllPay\W\Responder::notForUs()
 	 * @see \Dfe\Qiwi\W\Responder::notForUs()
-	 * @param string|null $message [optional]
 	 */
-	protected function notForUs($message = null):wResult {return Text::i($message);}
+	protected function notForUs(string $m):wResult {return Text::i($m);}
 
 	/**
 	 * 2017-09-13

@@ -11,10 +11,8 @@
  * @used-by \Dfe\CheckoutCom\Response::messageC()
  * @used-by \Dfe\Sift\Payload\Promotion\Discount::desc()
  * @used-by \Dfe\Stripe\Facade\Charge::refundAdjustments()
- * @param string $s1
- * @param string $s2
  */
-function df_desc($s1, $s2):string {return df_es($s1) ? $s2 : (df_es($s2) || $s2 === $s1 ? $s1 : "$s1 ($s2)");}
+function df_desc(string $s1, string $s2):string {return df_es($s1) ? $s2 : (df_es($s2) || $s2 === $s1 ? $s1 : "$s1 ($s2)");}
 
 /**
  * @used-by df_checkout_error()
