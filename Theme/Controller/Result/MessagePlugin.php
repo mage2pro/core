@@ -15,9 +15,8 @@ class MessagePlugin extends _P {
 	 * @override
 	 * @see \Magento\Theme\Controller\Result\MessagePlugin::getCookiesMessages()
 	 * @used-by \Magento\Theme\Controller\Result\MessagePlugin::getMessages()
-	 * @return array
 	 */
-	protected function getCookiesMessages() {return array_slice(
+	protected function getCookiesMessages():array {return array_slice(
 		# 2021-06-04
 		# "«Unable to unserialize value» on the `sales/guest/view` page":
 		# https://github.com/canadasatellite-ca/site/issues/139
