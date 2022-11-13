@@ -157,7 +157,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @param object|array(string => mixed) $c
 	 * @return Card[]
 	 */
-	final function cardsActive($c) {return array_filter($this->cards($c), function(Card $card) {return
+	final function cardsActive($c):array {return array_filter($this->cards($c), function(Card $card) {return
 		$card->isActive()
 	;});}
 
