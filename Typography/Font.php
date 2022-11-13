@@ -114,11 +114,10 @@ final class Font extends \Df\Config\O {
 	private function letter_spacing():Size {return $this->size();}
 
 	/**
-	 * 2015-12-16
-	 * http://stackoverflow.com/questions/4659345
-	 * @return string
+	 * 2015-12-16 http://stackoverflow.com/questions/4659345
+	 * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
 	 */
-	function link() {return dfc($this, function() {return $this->familyIsStandard() ? '' :
+	function link():string {return dfc($this, function() {return $this->familyIsStandard() ? '' :
 		'//fonts.googleapis.com/css?family=' . urlencode($this->family())
 	;});}
 
