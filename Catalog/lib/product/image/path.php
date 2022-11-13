@@ -10,9 +10,9 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]
  */
-function df_product_image_path(P $p, $type = null, $attrs = []):string {return df_media_url2path(df_product_image_url(
-	$p, $type, $attrs
-));}
+function df_product_image_path(P $p, $type = null, array $attrs = []):string {return df_media_url2path(
+	df_product_image_url($p, $type, $attrs)
+);}
 
 /**
  * 2019-08-21
