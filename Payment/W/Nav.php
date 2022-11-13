@@ -178,10 +178,9 @@ abstract class Nav {
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * @used-by \Df\StripeClone\W\Nav::pidAdapt()
 	 * @uses \Df\StripeClone\Method::e2i()
-	 * @param string $id
 	 * @param string|null $type [optional]
 	 */
-	final protected function e2i($id, $type = null):string {return $this->mPartial()->tid()->e2i(
+	final protected function e2i(string $id, $type = null):string {return $this->mPartial()->tid()->e2i(
 		df_param_sne($id, 0), $type
 	);}
 
