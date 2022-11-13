@@ -67,9 +67,8 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * @see \Dfe\TBCBank\Facade\Customer::id()
 	 * @see \Dfe\Vantiv\Facade\Customer::id()
 	 * @param object $c
-	 * @return string
 	 */
-	abstract function id($c);
+	abstract function id($c):string;
 
 	/**
 	 * 2017-02-10
