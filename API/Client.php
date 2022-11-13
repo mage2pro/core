@@ -55,14 +55,13 @@ abstract class Client {
 	 * @used-by \Df\Zoho\API\Client::i()
 	 * @used-by \Dfe\Dynamics365\API\Facade::metadata()
 	 * @used-by \Dfe\Dynamics365\API\Facade::p()
-	 * @param string $path
 	 * @param string|array(string => mixed) $p [optional]
 	 * @param string|null $method [optional]
 	 * @param array(string => mixed) $zfConfig [optional]
 	 * @param Store $s [optional]
 	 * @throws DFE
 	 */
-	final function __construct($path, $p = [], $method = null, array $zfConfig = [], Store $s = null) {
+	final function __construct(string $path, $p = [], $method = null, array $zfConfig = [], Store $s = null) {
 		$this->_path = $path;
 		$this->_store = df_store($s);
 		$this->_c = $this->setup($zfConfig + $this->zfConfig());

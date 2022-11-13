@@ -10,7 +10,7 @@ final class FacadeOptions {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Create::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
-	 * @param string|null|string $v [optional]
+	 * @param string|null $v [optional]
 	 * @return string|self
 	 */
 	function resC($v = DF_N) {return df_prop($this, $v, O::class);}
