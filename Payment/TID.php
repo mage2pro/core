@@ -27,10 +27,8 @@ final class TID {
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
 	 * @used-by \Dfe\SecurePay\Method::_refund()
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
-	 * @param string $id
-	 * @param string|null $t [optional]
 	 */
-	function e2i($id, $t = null):string {return df_ccc(self::$S, 15 < strlen($id) ? $id : $this->md5($id), $t);}
+	function e2i(string $id, $t = ''):string {return df_ccc(self::$S, 15 < strlen($id) ? $id : $this->md5($id), $t);}
 
 	/**
 	 * 2017-03-22

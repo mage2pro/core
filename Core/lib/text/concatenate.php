@@ -145,8 +145,6 @@ function df_cc_s(...$args):string {return df_ccc(' ', dfa_flatten($args));}
  * @used-by \Dfe\AllPay\Charge::productUrls()
  * @used-by \Dfe\AmazonLogin\Customer::url()
  * @used-by \Dfe\TwoCheckout\Charge::liDiscount()
- * @param string $glue
  * @param string|string[] ...$elements
- * @return string
  */
-function df_ccc($glue, ...$elements) {return implode($glue, df_clean(dfa_flatten($elements)));}
+function df_ccc(string $glue, ...$elements):string {return implode($glue, df_clean(dfa_flatten($elements)));}
