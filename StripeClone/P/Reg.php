@@ -44,9 +44,8 @@ class Reg extends \Df\Payment\Operation {
 	 * @used-by self::newCard()
 	 * @see \Dfe\Spryng\P\Reg::k_Email()
 	 * @see \Dfe\Square\P\Reg::k_Email()
-	 * @return string
 	 */
-	protected function k_Email() {return self::K_EMAIL;}
+	protected function k_Email():string {return self::K_EMAIL;}
 
 	/**
 	 * 2017-06-11
