@@ -117,9 +117,6 @@ final class Font extends \Df\Config\O {
 	;});}
 
 	/** @return float */
-	function scale_horizontal() {return $this->f();}
-
-	/** @return float */
 	function scale_vertical() {return $this->f();}
 
 	/**
@@ -176,6 +173,12 @@ final class Font extends \Df\Config\O {
 	private function needScale():bool {return
 		100 !== intval($this->scale_horizontal()) || 100 !== intval($this->scale_vertical())
 	;}
+
+	/**
+	 * @used-by self::needScale()
+	 * @used-by self::scaleRule()
+	 */
+	private function scale_horizontal():float {return $this->f();}
 
 	/**
 	 * 2015-12-16
