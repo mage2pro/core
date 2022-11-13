@@ -36,9 +36,8 @@ class Reg extends \Df\Payment\Operation {
 	 * 2017-10-10
 	 * @used-by self::request()
 	 * @see \Dfe\Square\P\Reg::k_Description()
-	 * @return string
 	 */
-	protected function k_Description() {return self::K_DESCRIPTION;}
+	protected function k_Description():string {return self::K_DESCRIPTION;}
 
 	/**
 	 * 2017-06-11
