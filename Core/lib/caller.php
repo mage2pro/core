@@ -89,7 +89,7 @@ function df_caller_entry($p = 0, F $predicate = null):array {
  * @used-by \Df\Payment\TM::response()
  * @used-by \Df\PaypalClone\Signer::_sign()
  * @used-by \Df\StripeClone\Method::transInfo()
- * @used-by \Df\Typography\Font::_size()
+ * @used-by \Df\Typography\Font::size()
  * @used-by \Dfe\AlphaCommerceHub\API\Facade\BankCard::op()
  * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
  * @used-by \Dfe\Dynamics365\Test\TestCase::p()

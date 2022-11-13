@@ -108,8 +108,10 @@ final class Font extends \Df\Config\O {
 	 */
 	function familyIsStandard():bool {return 'default' === $this->familyS();}
 
-	/** @return Size */
-	function letter_spacing() {return $this->_size();}
+	/**
+	 * @used-by self::css()
+	 */
+	private function letter_spacing():Size {return $this->size();}
 
 	/**
 	 * 2015-12-16
@@ -136,12 +138,6 @@ final class Font extends \Df\Config\O {
 	function scaleRule() {return dfc($this, function() {return sprintf('scale(%.2f,%.2f)',
 		$this->scale_horizontal() / 100, $this->scale_vertical() / 100
 	);});}
-
-	/**
-	 * 2015-12-16
-	 * @used-by self::letter_spacing()
-	 */
-	function size():Size {return dfc($this, function($key) {return new Size($this[$key]);}, [df_caller_f()]);}
 
 	/**
 	 * 2015-12-16
@@ -181,6 +177,13 @@ final class Font extends \Df\Config\O {
 
 	/** @used-by self::css() */
 	private function letter_case():bool {return $this->v();}
+
+	/**
+	 * 2015-12-16
+	 * @used-by self::css()
+	 * @used-by self::letter_spacing()
+	 */
+	private function size():Size {return dfc($this, function($key) {return new Size($this[$key]);}, [df_caller_f()]);}
 
 	/**
 	 * 2015-12-16
