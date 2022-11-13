@@ -57,11 +57,10 @@ function df_date_from_db($datetime, $throw = true) {
 /**
  * Создаёт объект-дату по строке вида «20131115153657».
  * 2022-10-29 @deprecated It is unused.
- * @param string $timestamp
  * @param string|null $offsetType [optional]
  * @return ZD
  */
-function df_date_from_timestamp_14($timestamp, $offsetType = null) {
+function df_date_from_timestamp_14(string $timestamp, $offsetType = null) {
 	df_assert(ctype_digit($timestamp));
 	df_assert_eq(14, strlen($timestamp));
 	# Почему-то new Zend_Date($timestamp, 'yMMddHHmmss') у меня не работает
