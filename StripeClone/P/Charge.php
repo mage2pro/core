@@ -54,7 +54,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Square\P\Charge::amountAndCurrency()
 	 * @return array(string => string|int)
 	 */
-	protected function amountAndCurrency() {return [
+	protected function amountAndCurrency():array {return [
 		self::K_AMOUNT => $this->amountF(), self::K_CURRENCY => $this->currencyC()
 	];}
 
