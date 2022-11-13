@@ -25,7 +25,6 @@ function df_cookie_m() {return df_o(CookieManagerInterface::class);}
 /**
  * 2016-06-06
  * @used-by df_cookie_metadata_standard()
- * @return CookieMetadataFactory
  */
 function df_cookie_metadata():CookieMetadataFactory {return df_o(CookieMetadataFactory::class);}
 
