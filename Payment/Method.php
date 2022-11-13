@@ -695,10 +695,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/mage2pro/alphacommercehub/issues/85
 	 * @used-by self::canUseForCountry()
 	 * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
-	 * @param string $c
 	 * @param string|null $p [optional]
 	 */
-	final function canUseForCountryP($c, $p = null):bool {
+	final function canUseForCountryP(string $c, $p = null):bool {
 		$p = !$p ? $p : df_add_ds_right($p);
 		return NWB::is($this->s("{$p}country_restriction"), $c, df_csv_parse($this->s("{$p}countries")));
 	}
