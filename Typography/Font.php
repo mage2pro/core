@@ -26,13 +26,80 @@ final class Font extends \Df\Config\O {
 	function color():string {return $this->v();}
 
 	/**
+	 * 2015-12-16
+	 *
+	 */
+	function css(string $selector):string {/** @var string $result */
+		if (!$this->enabled()) {
+			$result = '';
+		}
+		else {
+			$css = Css::i($selector); /** @var Css $css */
+			$css->rule('font-weight', $this->weight());
+			$css->rule('color', $this->color());
+			$css->rule('font-style', $this->style());
+			if ($this->underline()) {
+				$css->rule('text-decoration', 'underline');
+			}
+			switch ($this->letter_case()) {
+				case LetterCase::LOWERCASE:
+					$css->rule('text-transform', 'lowercase');
+					break;
+				case LetterCase::UCFIRST:
+					# 2015-11-14
+					#		.link { text-transform: lowercase; }
+					#		.link:first-letter {text-transform: uppercase;}
+					# http://stackoverflow.com/a/10256138
+					$css->rule('text-transform', 'lowercase');
+					$css->rule('text-transform', 'uppercase', ':first-letter');
+					break;
+				case LetterCase::UCWORDS:
+					$css->rule('text-transform', 'capitalize');
+					break;
+				case LetterCase::UPPERCASE:
+					$css->rule('text-transform', 'uppercase');
+					break;
+			}
+			if ($this->letter_spacing()->value()) {
+				$css->rule('letter-spacing', $this->letter_spacing());
+			}
+			if ($this->needScale()) {
+				/** @var string[] $names */
+				$names = [
+					'transform'
+					, '-webkit-transform'
+					, '-moz-transform'
+					, '-ms-transform'
+					, '-o-transform'
+				];
+				foreach ($names as $name) {
+					/** @var string $name */
+					$css->rule($name, $this->scaleRule());
+				}
+			}
+			if ($this->size()->value()) {
+				$css->rule('font-size', $this->size());
+			}
+			if ('default' !== $this->family()) {
+				$css->rule('font-family', df_quote_single($this->family()));
+			}
+			$result = $css->render();
+		}
+		return $result;
+	}
+
+	/**
 	 * @used-by self::css()
 	 * @used-by \Dfe\Frontend\Block\ProductView\Css::customCss()
 	 */
 	function enabled():bool {return $this->b();}
 
-	/** @return string */
-	function family() {return df_first($this->familyA());}
+	/**
+	 * @used-by self::css()
+	 * @used-by self::link()
+	 * @return string
+	 */
+	function family():string {return df_first($this->familyA());}
 
 	/**
 	 * 2015-12-25
@@ -135,70 +202,6 @@ final class Font extends \Df\Config\O {
 	private function variantWord() {return dfc($this, function() {return str_replace(
 		$this->variantNumber(), '', $this->variant()
 	);});}
-
-	/**
-	 * 2015-12-16
-	 * @param string $selector
-	 * @return string
-	 */
-	function css($selector) {/** @var string $result */
-		if (!$this->enabled()) {
-			$result = '';
-		}
-		else {
-			$css = Css::i($selector); /** @var Css $css */
-			$css->rule('font-weight', $this->weight());
-			$css->rule('color', $this->color());
-			$css->rule('font-style', $this->style());
-			if ($this->underline()) {
-				$css->rule('text-decoration', 'underline');
-			}
-			switch ($this->letter_case()) {
-				case LetterCase::LOWERCASE:
-					$css->rule('text-transform', 'lowercase');
-					break;
-				case LetterCase::UCFIRST:
-					# 2015-11-14
-					#		.link { text-transform: lowercase; }
-					#		.link:first-letter {text-transform: uppercase;}
-					# http://stackoverflow.com/a/10256138
-					$css->rule('text-transform', 'lowercase');
-					$css->rule('text-transform', 'uppercase', ':first-letter');
-					break;
-				case LetterCase::UCWORDS:
-					$css->rule('text-transform', 'capitalize');
-					break;
-				case LetterCase::UPPERCASE:
-					$css->rule('text-transform', 'uppercase');
-					break;
-			}
-			if ($this->letter_spacing()->value()) {
-				$css->rule('letter-spacing', $this->letter_spacing());
-			}
-			if ($this->needScale()) {
-				/** @var string[] $names */
-				$names = [
-					'transform'
-					, '-webkit-transform'
-					, '-moz-transform'
-					, '-ms-transform'
-					, '-o-transform'
-				];
-				foreach ($names as $name) {
-					/** @var string $name */
-					$css->rule($name, $this->scaleRule());
-				}
-			}
-			if ($this->size()->value()) {
-				$css->rule('font-size', $this->size());
-			}
-			if ('default' !== $this->family()) {
-				$css->rule('font-family', df_quote_single($this->family()));
-			}
-			$result = $css->render();
-		}
-		return $result;
-	}
 
 	const bold = 'bold';
 	const color = 'color';
