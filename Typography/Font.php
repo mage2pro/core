@@ -145,8 +145,7 @@ final class Font extends \Df\Config\O {
 			$result = '';
 		}
 		else {
-			/** @var Css $css */
-			$css = Css::i($selector);
+			$css = Css::i($selector); /** @var Css $css */
 			$css->rule('font-weight', $this->weight());
 			$css->rule('color', $this->color());
 			$css->rule('font-style', $this->style());

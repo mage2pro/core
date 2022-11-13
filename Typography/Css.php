@@ -24,15 +24,24 @@ final class Css extends \Df\Core\O {
 		}
 	}
 
-	/** @var array(string => string[]) */
+	/**
+	 * @used-by self::render()
+	 * @used-by self::rule()
+	 * @var array(string => string[])
+	 */
 	private $_blocks = [];
 
-	/** @var string */
+	/**
+	 * @used-by self::i()
+	 * @used-by self::rule()
+	 * @var string
+	 */
 	private static $P__PREFIX = 'selector';
+
 	/**
 	 * 2015-12-21
-	 * @param string $prefix [optional]
-	 * @return string
+	 * @used-by \Df\Typography\Font::css()
+	 * @used-by \Dfe\Frontend\Block\ProductView\Css::customCss()
 	 */
-	static function i($prefix = '') {return new self([self::$P__PREFIX => $prefix]);}
+	static function i(string $prefix = ''):string {return new self([self::$P__PREFIX => $prefix]);}
 }
