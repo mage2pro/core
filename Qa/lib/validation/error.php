@@ -231,6 +231,7 @@ function df_not_implemented($m):void {df_error("The method «{$m}» is not imple
  * @used-by \Dfe\Dynamics365\API\Facade::GetDefaultPriceLevel()
  * @used-by \Dfe\Qiwi\W\Event::k_idE()
  * @used-by \Dfe\TBCBank\Facade\Customer::cardAdd()
+ * @used-by \Dfe\Vantiv\Facade\Customer::cardAdd()
  * @throws DFE
  */
 function df_should_not_be_here():void {df_error_html('The method %s is not allowed to call.', df_caller_mh());}
