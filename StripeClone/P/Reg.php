@@ -64,7 +64,7 @@ class Reg extends \Df\Payment\Operation {
 	 * @see \Dfe\Stripe\P\Reg::p()
 	 * @return array(string => mixed)
 	 */
-	protected function p() {return [];}
+	protected function p():array {return [];}
 
 	/**
 	 * 2017-06-11
