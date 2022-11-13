@@ -45,10 +45,8 @@ function df_cookie_metadata_standard():PublicCookieMetadata {
  * Cookie VS Session: http://stackoverflow.com/questions/6253633
  * @used-by \Dfe\AmazonLogin\Controller\Index\Index::postProcess()
  * Устанавливает куку, которая будет доступна из JavaScript.
- * @param string $k
- * @param string $v
  */
-function df_cookie_set_js($k, $v):void {df_cookie_m()->setPublicCookie($k, $v, df_cookie_metadata_standard());}
+function df_cookie_set_js(string $k, string $v):void {df_cookie_m()->setPublicCookie($k, $v, df_cookie_metadata_standard());}
 
 /**
  * 2015-11-04
