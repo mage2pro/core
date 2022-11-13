@@ -16,9 +16,8 @@ class Reg extends \Df\Payment\Operation {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by self::k_CardId()
 	 * @used-by \Dfe\Moip\P\Reg::v_CardId()
-	 * @return Charge
 	 */
-	protected function charge() {return Charge::sn($this->m());}
+	protected function charge():Charge {return Charge::sn($this->m());}
 
 	/**
 	 * 2017-06-11
