@@ -172,9 +172,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @used-by self::request()
 	 * @used-by \Df\StripeClone\P\Reg::charge()
 	 */
-	final static function sn(M $m):self {return dfcf(function(M $m) {return df_new(
-		df_con_heir($m, __CLASS__), $m
-	);}, [$m]);}
+	final static function sn(M $m):self {return dfcf(function(M $m) {return df_new(df_con_heir($m, __CLASS__), $m);}, [$m]);}
 
 	/**
 	 * 2017-02-11
