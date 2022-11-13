@@ -103,9 +103,10 @@ final class Font extends \Df\Config\O {
 
 	/**
 	 * 2015-12-25
-	 * @return bool
+	 * @used-by self::link()
+	 * @used-by \Dfe\Frontend\Block\ProductView\Css::customCss()
 	 */
-	function familyIsStandard() {return 'default' === $this->familyS();}
+	function familyIsStandard():bool {return 'default' === $this->familyS();}
 
 	/** @return bool */
 	function letter_case() {return $this->v();}
