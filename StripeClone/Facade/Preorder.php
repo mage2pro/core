@@ -26,7 +26,6 @@ abstract class Preorder extends \Df\Payment\Facade {
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Moip\Facade\Preorder::id()
 	 * @param object $o
-	 * @return string
 	 */
-	abstract function id($o);
+	abstract function id($o):string;
 }
