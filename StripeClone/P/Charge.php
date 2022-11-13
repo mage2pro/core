@@ -75,7 +75,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Stripe\P\Charge::p()
 	 * @return array(string => mixed)
 	 */
-	protected function p() {return [];}
+	protected function p():array {return [];}
 
 	/**
 	 * 2017-02-18
