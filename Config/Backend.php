@@ -157,11 +157,9 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * https://mage2.pro/t/5148
 	 * @used-by self::label()
 	 * @used-by \Df\Config\Backend\Serialized::entityC()
-	 * @param string $k
-	 * @param bool $req [optional]
 	 * @return string|null
 	 */
-	final protected function fc($k, $req = true) {
+	final protected function fc(string $k, bool $req = true) {
 		$r = dfad(df_config_field($this), $k); /** @var string|null $r */
 		if ($req && is_null($r)) {
 			# 2020-07-08
