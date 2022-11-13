@@ -20,12 +20,9 @@ final class Css extends \Df\Core\O {
 	 */
 	function rule(string $n, string $v, string $selector = ''):void {
 		if ('' !== $v && false !== $v) {
-			$this->_blocks[$this->prefix() . $selector][]= "$n: $v !important;";
+			$this->_blocks[$this[self::$P__PREFIX] . $selector][]= "$n: $v !important;";
 		}
 	}
-
-	/** @return string */
-	private function prefix() {return $this[self::$P__PREFIX];}
 
 	/** @var array(string => string[]) */
 	private $_blocks = [];
