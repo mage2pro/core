@@ -108,9 +108,6 @@ final class Font extends \Df\Config\O {
 	 */
 	function familyIsStandard():bool {return 'default' === $this->familyS();}
 
-	/** @return bool */
-	function letter_case() {return $this->v();}
-
 	/** @return Size */
 	function letter_spacing() {return $this->_size();}
 
@@ -181,6 +178,9 @@ final class Font extends \Df\Config\O {
 
 	/** @return bool */
 	private function italic() {return $this->b();}
+
+	/** @used-by self::css() */
+	private function letter_case():bool {return $this->v();}
 
 	/**
 	 * 2015-12-16
