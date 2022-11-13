@@ -28,5 +28,5 @@ abstract class O extends \Df\Payment\Facade {
 	 * @param object $o
 	 * @return array(string => mixed)
 	 */
-	abstract function toArray($o);
+	abstract function toArray($o):array;
 }
