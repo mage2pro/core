@@ -83,9 +83,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Moip\P\Charge::k_Capture()
 	 * @see \Dfe\Spryng\P\Charge::k_Capture()
 	 * @see \Dfe\Square\P\Charge::k_Capture()
-	 * @return string
 	 */
-	protected function k_Capture() {return self::K_CAPTURE;}
+	protected function k_Capture():string {return self::K_CAPTURE;}
 
 	/**
 	 * 2017-10-09
