@@ -63,9 +63,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @used-by self::request()
 	 * @see \Dfe\Moip\P\Charge::inverseCapture()
 	 * @see \Dfe\Square\P\Charge::inverseCapture()
-	 * @return bool
 	 */
-	protected function inverseCapture() {return false;}
+	protected function inverseCapture():bool {return false;}
 
 	/**
 	 * 2017-02-11
