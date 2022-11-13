@@ -22,9 +22,8 @@ final class Font extends \Df\Config\O {
 	 * Современные браузеры прекрасно понимают нотацию rgba:
 	 * http://stackoverflow.com/a/10835846
 	 * https://developer.mozilla.org/en-US/docs/Web/CSS/opacity
-	 * @return string
 	 */
-	function color() {return $this->v();}
+	function color():string {return $this->v();}
 
 	/** @return bool */
 	function enabled() {return $this->b();}
