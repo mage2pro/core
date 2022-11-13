@@ -167,10 +167,8 @@ abstract class Source extends SourceBase {
 	/**
 	 * 2017-04-10 «all_pay»
 	 * @used-by \Df\Payment\Source::titleB()
-	 * @param string $k
-	 * @return string
 	 */
-	final protected function sibling($k):string {return df_cfg(df_cc_path(df_head($this->pathA()), $k), df_scope());}
+	final protected function sibling(string $k):string {return df_cfg(df_cc_path(df_head($this->pathA()), $k), df_scope());}
 
 	/**
 	 * 2017-03-28
