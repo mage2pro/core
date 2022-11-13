@@ -114,11 +114,9 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @used-by self::request()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @see \Dfe\Moip\P\Charge::v_CardId()
-	 * @param string $id
-	 * @param bool $isNew
 	 * @return string|array(string => mixed)
 	 */
-	protected function v_CardId($id, $isNew) {return $id;}
+	protected function v_CardId(string $id, bool $isNew) {return $id;}
 
 	/**
 	 * 2016-12-28
