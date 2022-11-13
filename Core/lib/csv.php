@@ -36,10 +36,9 @@ function df_csv_o():Csv {return df_new_om(Csv::class);}
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param string|null $s
- * @param string $d [optional]
  * @return string[]
  */
-function df_csv_parse($s, $d = ','):array {return !$s ? [] : df_trim(explode($d, $s));}
+function df_csv_parse($s, string $d = ','):array {return !$s ? [] : df_trim(explode($d, $s));}
 
 /**
  * @param string|null $s
