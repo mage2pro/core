@@ -300,10 +300,9 @@ function df_month(ZD $date = null):int {return df_nat0(df_date($date)->toString(
  * 2016-07-09 http://stackoverflow.com/a/28447380
  * @used-by \Dfe\AllPay\Charge::pCharge()
  * @used-by \Dfe\CheckoutCom\Charge::pMetadata()
- * @param string $format
  * @param string|null $timezone [optional]
  */
-function df_now($format, $timezone = null):string {return
+function df_now(string $format, $timezone = null):string {return
 	(new DT(null, !$timezone ? null : new DTZ($timezone)))->format($format)
 ;}
 
