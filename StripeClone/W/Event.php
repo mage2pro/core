@@ -65,9 +65,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * @see \Dfe\Omise\W\Event\Refund::idBase()
 	 * @see \Dfe\Paymill\W\Event\Refund::idBase()
-	 * @return string
 	 */
-	function idBase() {return $this->pid();}
+	function idBase():string {return $this->pid();}
 
 	/**
 	 * 2017-01-04
