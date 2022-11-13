@@ -107,7 +107,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Spryng\P\Charge::k_Excluded()
 	 * @return string[]
 	 */
-	protected function k_Excluded() {return [];}
+	protected function k_Excluded():array {return [];}
 
 	/**
 	 * 2017-06-11
