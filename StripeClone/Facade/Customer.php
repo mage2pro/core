@@ -125,9 +125,8 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * 2017-10-10
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Square\Facade\Customer::addCardInASeparateStepForNewCustomers()
-	 * @return bool
 	 */
-	function addCardInASeparateStepForNewCustomers() {return false;}
+	function addCardInASeparateStepForNewCustomers():bool {return false;}
 
 	/**
 	 * 2017-02-10
