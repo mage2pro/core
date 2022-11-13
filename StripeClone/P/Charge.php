@@ -124,11 +124,9 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-11-13 Omise: https://www.omise.co/charges-api#charges-create
 	 * 2017-02-11 Paymill https://developers.paymill.com/API/index#-transaction-object
 	 * @used-by \Df\StripeClone\Method::chargeNewParams()
-	 * @param M $m
-	 * @param bool $capture [optional]
 	 * @return array(string => mixed)
 	 */
-	final static function request(M $m, $capture = true) {
+	final static function request(M $m, bool $capture = true):array {
 		$i = self::sn($m); /** @var self $i */
 		$payer = Payer::s($m); /** @var Payer $payer */
 		$k_Excluded = $i->k_Excluded(); /** @var string[] $k_Excluded */
