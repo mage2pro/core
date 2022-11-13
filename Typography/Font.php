@@ -109,20 +109,12 @@ final class Font extends \Df\Config\O {
 	function familyIsStandard():bool {return 'default' === $this->familyS();}
 
 	/**
-	 * @used-by self::css()
-	 */
-	private function letter_spacing():Size {return $this->size();}
-
-	/**
 	 * 2015-12-16 http://stackoverflow.com/questions/4659345
 	 * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
 	 */
 	function link():string {return dfc($this, function() {return $this->familyIsStandard() ? '' :
 		'//fonts.googleapis.com/css?family=' . urlencode($this->family())
 	;});}
-
-	/** @return bool */
-	function needScale() {return 100 !== intval($this->scale_horizontal()) || 100 !== intval($this->scale_vertical());}
 
 	/** @return float */
 	function scale_horizontal() {return $this->f();}
@@ -176,6 +168,14 @@ final class Font extends \Df\Config\O {
 
 	/** @used-by self::css() */
 	private function letter_case():bool {return $this->v();}
+
+	/** @used-by self::css() */
+	private function letter_spacing():Size {return $this->size();}
+
+	/** @used-by self::css() */
+	private function needScale():bool {return
+		100 !== intval($this->scale_horizontal()) || 100 !== intval($this->scale_vertical())
+	;}
 
 	/**
 	 * 2015-12-16
