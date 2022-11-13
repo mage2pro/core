@@ -13,7 +13,7 @@ abstract class Preorder extends \Df\Payment\Operation {
 	 * @see \Dfe\Moip\P\Preorder::p()
 	 * @return array(string => mixed)
 	 */
-	abstract protected function p();
+	abstract protected function p():array;
 
 	/**
 	 * 2017-06-12
