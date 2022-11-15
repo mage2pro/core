@@ -48,9 +48,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 */
 	final protected function cfg($paramName, $d = null) {return dfa($this->_params, $paramName, $d);}
 
-	/** @return string|null */
-	protected function getExplanation() {return $this->cfg(self::$PARAM__EXPLANATION);}
-
 	/** @return mixed */
 	protected function getValue() {return $this->cfg(self::$PARAM__VALUE);}
 
@@ -83,7 +80,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 		 * значения каких параметров им надо сбрасывать между разными валидациями.
 		 */
 		unset($this->_params[self::$PARAM__VALUE]);
-		unset($this->_params[self::$PARAM__EXPLANATION]);
 	}
 
 	/**
@@ -115,8 +111,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 */
 	private $_params = [];
 
-	/** @var string */
-	private static $PARAM__EXPLANATION = 'explanation';
 	/** @var string */
 	private static $PARAM__VALUE = 'value';
 }
