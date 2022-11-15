@@ -64,4 +64,3 @@ class Text extends AbstractRenderer {
 		return df_result_s(df_check_json_complex($v) || df_check_xml($v) ? df_tag('pre', [], $v) : $v);
 	}
 }
-
