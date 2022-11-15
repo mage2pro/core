@@ -179,7 +179,7 @@ function df_strings_are_equal_ci($s1, $s2):bool {return 0 === strcmp(mb_strtolow
  * @used-by df_quote_russian()
  * @used-by df_quote_single()
  * @used-by \Df\Core\Text\Regex::isSubjectMultiline()
- * @used-by \Df\Xml\G::_p()
+ * @used-by \Df\Xml\G::p()
  */
 function df_t():T {return T::s();}
 

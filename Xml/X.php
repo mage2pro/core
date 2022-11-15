@@ -26,7 +26,7 @@ class X extends MX {
 	/**
 	 * @used-by df_xml_node()
 	 * @used-by self::importArray()
-	 * @used-by \Df\Xml\G::_p()
+	 * @used-by \Df\Xml\G::p()
 	 * @param array(string => string) $attributes
 	 */
 	function addAttributes(array $attributes):self {
@@ -91,7 +91,7 @@ class X extends MX {
 	 * @used-by df_xml_prettify()
 	 * @used-by df_xml_report()
 	 * @used-by self::asNiceXml()
-	 * @used-by \Df\Xml\G::_p()
+	 * @used-by \Df\Xml\G::p()
 	 * @param string $filename [optional]
 	 * @param int $level  [optional]
 	 * @return string
@@ -163,7 +163,7 @@ class X extends MX {
 	 * Однако этот алгоритм неверен: ведь в заголовке XML может присутствовать указание кодировки, например:
 	 * 		<?xml version='1.0' encoding='utf-8'?>
 	 * Новый алгоритм взят отсюда: http://stackoverflow.com/a/5947858
-	 * @used-by \Df\Xml\G::_p()
+	 * @used-by \Df\Xml\G::p()
 	 * @return string
 	 */
 	function asXMLPart() {
@@ -210,7 +210,7 @@ class X extends MX {
 	/**
 	 * @used-by df_xml_node()
 	 * @used-by self::importArray()
-	 * @used-by \Df\Xml\G::_p()
+	 * @used-by \Df\Xml\G::p()
 	 * @param array(string => mixed) $array
 	 * @param string[]|bool $wrapInCData [optional]
 	 * @return X

@@ -4,12 +4,10 @@ namespace Df\Xml;
 final class G extends \Df\Core\O {
 	/**
 	 * @see \Magento\Framework\Simplexml\Element::asNiceXml() не добавляет к документу заголовок XML: его надо добавить вручную.
-	 *
 	 * 2015-02-27
 	 * Для конвертации объекта класса @see SimpleXMLElement в строку
 	 * надо использовать именно метод @uses SimpleXMLElement::asXML(),
 	 * а не @see SimpleXMLElement::__toString() или оператор (string)$this.
-	 *
 	 * @see SimpleXMLElement::__toString() и (string)$this
 	 * возвращают непустую строку только для концевых узлов (листьев дерева XML).
 	 * Пример:
@@ -35,39 +33,17 @@ final class G extends \Df\Core\O {
 	 * Более того, метод @see SimpleXMLElement::__toString() отсутствует в PHP версий 5.2.17 и ниже:
 	 * http://3v4l.org/Wiia2#v500
 	 * 2016-08-31
-	 * @used-by self::p()
-	 */
-	private function _p():string {
-		$header = $this[self::P__SKIP_HEADER] ? '' : df_xml_header(); /** @var string $header */
-		$x = df_xml_parse("$header\n<{$this[self::$P__TAG]}/>"); /** @var X $x */
-		$x->addAttributes($this[self::P__ATTRIBUTES]);
-		$x->importArray($this[self::$P__CONTENTS]);
-		# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML: http://stackoverflow.com/a/10095901
-		return str_replace("\x0B", "&#x0B;", $this[self::P__SKIP_HEADER] ? $x->asXMLPart() : df_cc_n($header, $x->asNiceXml()));
-	}
-
-	/**
-	 * @used-by self::_p()
-	 * @used-by self::p()
-	 * @var string
-	 */
-	private static $P__CONTENTS = 'contents';
-
-	/**
-	 * @used-by self::_p()
-	 * @used-by self::p()
-	 * @var string
-	 */
-	private static $P__TAG = 'tag';
-
-	/**
-	 * 2016-08-31
 	 * @used-by df_xml_g()
 	 * @param array(string => mixed) $contents
 	 * @param array(string => mixed) $p [optional]
 	 */
 	static function p(string $tag, array $contents, array $p = []):string {
-		return (new static([self::$P__CONTENTS => $contents, self::$P__TAG => $tag] + $p))->_p();
+		$h = dfa($p, self::P__SKIP_HEADER, df_xml_header()); /** @var string $h */
+		$x = df_xml_parse("$h\n<{$tag}/>"); /** @var X $x */
+		$x->addAttributes(dfa($p, self::P__ATTRIBUTES, []));
+		$x->importArray($contents);
+		# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML: http://stackoverflow.com/a/10095901
+		return str_replace("\x0B", "&#x0B;", dfa($p, self::P__SKIP_HEADER)? $x->asXMLPart() : df_cc_n($h, $x->asNiceXml()));
 	}
 
 	/**
@@ -77,8 +53,6 @@ final class G extends \Df\Core\O {
 	 */
 	const P__ATTRIBUTES = 'attributes';
 
-	/**
-	 * @used-by self::_p()
-	 */
+	/** @used-by self::_p() */
 	const P__SKIP_HEADER = 'skip_header';
 }

@@ -49,7 +49,7 @@ function df_cc_br(...$args):string {return df_ccc("<br>", dfa_flatten($args));}
  * @used-by \Df\Qa\Method::raiseErrorVariable()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Df\Typography\Css::render()
- * @used-by \Df\Xml\G::_p()
+ * @used-by \Df\Xml\G::p()
  * @used-by \Dfe\AllPay\Block\Info\Barcode::paymentId()
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  * @used-by \Dfe\Klarna\Button::_toHtml()
