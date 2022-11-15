@@ -42,14 +42,16 @@ abstract class Validate implements \Zend_Validate_Interface {
 	final function getMessages():array {return [__CLASS__ => $this->getMessage()];}
 
 	/**
-	 * @param string $paramName
 	 * @param mixed $d [optional]
 	 * @return mixed
 	 */
-	final protected function cfg($paramName, $d = null) {return dfa($this->_params, $paramName, $d);}
+	final protected function cfg(string $paramName, $d = null) {return dfa($this->_params, $paramName, $d);}
 
-	/** @return mixed */
-	protected function getValue() {return $this->cfg(self::$PARAM__VALUE);}
+	/**
+	 * @used-by \Df\Zf\Validate\Type::_message()
+	 * @return mixed
+	 */
+	final protected function getValue() {return $this->cfg(self::$PARAM__VALUE);}
 
 	/**
 	 * @param mixed $v
