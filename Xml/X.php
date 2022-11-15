@@ -544,7 +544,10 @@ final class X extends MX {
 	 */
 	private function setValue($v):self {$this[0] = $v; return $v;}
 
+	/** @used-by self::importArray() */
 	const ATTR = '_attr';
+
+	/** @used-by self::importArray() */
 	const CONTENT = '_content';
 
 	/**
@@ -601,11 +604,9 @@ final class X extends MX {
 	 *		 [official_site] => http://themeforest.net/item/fortis-responsive-magento-theme/1744309?ref=dfediuk
 	 *	 )
 	 *
-	 * @param MX $e
-	 * @param bool $isCanonical [optional]
 	 * @return array(string => string|array)
 	 */
-	static function asMultiArray(MX $e, $isCanonical = true) {
+	static function asMultiArray(MX $e, bool $isCanonical = true):array {
 		$r = []; /** @var array(string => string|array) $r */
 		if (!$e->hasChildren()) {
 			/** Просто повторяем алгоритм метода @see \Magento\Framework\Simplexml\Element::_asArray() */
