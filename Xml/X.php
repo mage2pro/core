@@ -427,8 +427,8 @@ final class X extends MX {
 	}
 
 	/** @used-by self::importString() */
-	private function addChildText(string $tagName, string $valueAsText):void {
-		$r = $this->addChild($tagName); /** @var X $r */
+	private function addChildText(string $tag, string $valueAsText):void {
+		$r = $this->addChild($tag); /** @var X $r */
 		/**
 		 * @uses CX::addChild() создаёт и возвращает не просто CX, как говорит документация, а объект класса родителя.
 		 * Поэтому в нашем случае addChild создаст объект E.
@@ -440,9 +440,8 @@ final class X extends MX {
 	 * 2016-08-31 http://stackoverflow.com/a/11727581
 	 * @used-by self::addChildX()
 	 * @used-by self::importArray()
-	 * @param X $child
 	 */
-	private function addChildX(X $child) {
+	private function addChildX(X $child):void {
 		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var X $childInThis */
 		foreach ($child->attributes() as $attr => $value) { /** @var string $name */ /** @var string $value */
 			$childInThis->addAttribute($attr, $value);
