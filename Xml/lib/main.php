@@ -502,6 +502,5 @@ function df_xml_s($x):string {return is_string($x) ? $x : $x->asXML();}
  * 2021-12-02 @deprecated It is unused.
  * @see df_xml_s()
  * @param string|X $x
- * @return X
  */
-function df_xml_x($x) {return $x instanceof X ? $x : df_xml_parse($x);}
+function df_xml_x($x):X {return $x instanceof X ? $x : df_xml_parse($x);}
