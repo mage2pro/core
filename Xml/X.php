@@ -373,6 +373,7 @@ final class X extends MX {
 	 * @param string|string[] $path
 	 * @return X[]
 	 */
+	#[\ReturnTypeWillChange]
 	function xpath($path):array {
 		if (1 < func_num_args()) {
 			$path = df_cc_path(func_get_args());
