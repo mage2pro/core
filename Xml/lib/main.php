@@ -320,10 +320,8 @@ function df_xml_children(CX $e, string $name, bool $req = false) { /** @var CX|n
  * return !df_xml_exists($e) || !count($e->children());
  *
  * @used-by df_check_leaf()
- * @param CX|null $e
- * @return bool
  */
-function df_xml_exists(CX $e = null) {return !empty($e);}
+function df_xml_exists(CX $e = null):bool {return !empty($e);}
 
 /**
  * http://stackoverflow.com/questions/1560827/php-simplexml-check-if-a-child-exist#comment20135428_1562158
