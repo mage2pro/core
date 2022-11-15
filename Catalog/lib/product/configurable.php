@@ -28,4 +28,4 @@ function df_configurable_children(P $p) {
  * @param P[] $pp
  * @return P[]
  */
-function df_not_configurable(array $pp) {return array_filter($pp, function(P $p) {return !df_configurable($p);});}
+function df_not_configurable(array $pp):array {return array_filter($pp, function(P $p) {return !df_configurable($p);});}
