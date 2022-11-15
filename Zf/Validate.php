@@ -87,11 +87,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 	}
 
 	/**
-	 * @param string $value
-	 */
-	protected function setExplanation($value) {$this->_params[self::$PARAM__EXPLANATION] = $value;}
-
-	/**
 	 * @param string $message
 	 */
 	protected function setMessage($message) {$this->_message = $message;}
@@ -104,9 +99,20 @@ abstract class Validate implements \Zend_Validate_Interface {
 		$this->_params[self::$PARAM__VALUE] = $value;
 	}
 
-	/** @var string */
+	/**
+	 * @used-by self::getMessage()
+	 * @used-by self::reset()
+	 * @used-by self::setMessage()
+	 * @var string
+	 */
 	private $_message;
-	/** @var array(string => mixed) */
+
+	/**
+	 * @used-by self::__construct()
+	 * @used-by self::cfg()
+	 * @used-by self::reset()
+	 * @var array(string => mixed)
+	 */
 	private $_params = [];
 
 	/** @var string */
