@@ -172,26 +172,23 @@ function df_leaf(CX $e = null, $d = null) {/** @var string $r */
 function df_leaf_b(CX $e = null, $default = false):bool {return df_bool(df_leaf($e, $default));}
 
 /**
- * @param string $child
+ * 2022-11-15 @deprecated It is unused.
  * @param string|mixed|null|callable $d [optional]
  * @return string|mixed|null
  */
-function df_leaf_child(CX $e, $child, $d = null) {return df_leaf($e->{$child}, $d);}
+function df_leaf_child(CX $e, string $child, $d = null) {return df_leaf($e->{$child}, $d);}
 
 /**
  * 2015-08-16 Намеренно убрал параметр $default.
- * @param CX|null $e [optional]
- * @return float
+ * 2022-11-15 @deprecated It is unused.
  */
-function df_leaf_f(CX $e = null) {return df_float(df_leaf($e));}
+function df_leaf_f(CX $e = null):float {return df_float(df_leaf($e));}
 
 /**
- * 2015-08-16
- * Намеренно убрал параметр $default.
- * @param CX|null $e [optional]
- * @return int
+ * 2015-08-16 Намеренно убрал параметр $default.
+ * 2022-11-15 @deprecated It is unused.
  */
-function df_leaf_i(CX $e = null) {return df_int(df_leaf($e));}
+function df_leaf_i(CX $e = null):int {return df_int(df_leaf($e));}
 
 /**
  * @used-by df_leaf_sne()
