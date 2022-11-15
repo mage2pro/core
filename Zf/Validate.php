@@ -20,10 +20,11 @@ abstract class Validate implements \Zend_Validate_Interface {
 	final function __construct(array $p = []) {$this->_params = $p;}
 
 	/**
-	 * @override
-	 * @return string
+	 * @used-by df_float()
+	 * @used-by df_int()
+	 * @used-by self::getMessages()
 	 */
-	function getMessage() {
+	final function getMessage():string {
 		if (!isset($this->_message)) {
 			$this->_message = $this->_message();
 			if ($this->getExplanation()) {
@@ -38,7 +39,7 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 * @see \Zend_Validate_Interface::getMessages()
 	 * @return array(string => string)
 	 */
-	function getMessages():array {return [__CLASS__ => $this->getMessage()];}
+	final function getMessages():array {return [__CLASS__ => $this->getMessage()];}
 
 	/**
 	 * @param string $paramName
