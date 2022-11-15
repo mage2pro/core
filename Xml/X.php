@@ -443,8 +443,8 @@ final class X extends MX {
 	 */
 	private function addChildX(X $child):void {
 		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var X $childInThis */
-		foreach ($child->attributes() as $attr => $value) { /** @var string $name */ /** @var string $value */
-			$childInThis->addAttribute($attr, $value);
+		foreach ($child->attributes() as $attr => $v) { /** @var string $name */ /** @var string $v */
+			$childInThis->addAttribute($attr, $v);
 		}
 		foreach ($child->children() as $childChild) { /** @var X $childChild */
 			$childInThis->addChildX($childChild);
@@ -455,9 +455,8 @@ final class X extends MX {
 	 * http://stackoverflow.com/a/6260295
 	 * @used-by self::addChildText()
 	 * @used-by self::importString()
-	 * @param string $s
 	 */
-	private function cdata($s) {
+	private function cdata(string $s):void {
 		$e = dom_import_simplexml($this); /** @var \DOMElement $e */
 		$e->appendChild($e->ownerDocument->createCDATASection($s));
 	}
