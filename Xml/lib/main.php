@@ -219,10 +219,8 @@ function df_leaf_sne(CX $e = null, $d = ''):string {/** @var string $r */
  * @see df_cdata()
  * @used-by df_cdata_raw_if_needed()
  * @used-by \Df\Xml\X::importString()
- * @param string $s
- * @return bool
  */
-function df_needs_cdata($s) {
+function df_needs_cdata(string $s):bool {
 	$s1 = htmlspecialchars_decode($s, ENT_XML1 | ENT_QUOTES);
     $s2 = htmlspecialchars($s1, ENT_XML1 | ENT_NOQUOTES);
 	return $s !== $s2 && $s1 !== $s2;
