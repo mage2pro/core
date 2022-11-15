@@ -166,13 +166,12 @@ function df_leaf(CX $e = null, $d = null) {/** @var string $r */
 /**
  * @deprecated It is unused.
  * @param CX|null $e [optional]
- * @param bool $default|callable [optional]
+ * @param bool|callable $default [optional]
  * @return bool
  */
-function df_leaf_b(CX $e = null, $default = false) {return df_bool(df_leaf($e, $default));}
+function df_leaf_b(CX $e = null, $default = false):bool {return df_bool(df_leaf($e, $default));}
 
 /**
- * @param CX $e
  * @param string $child
  * @param string|mixed|null|callable $d [optional]
  * @return string|mixed|null
