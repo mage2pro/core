@@ -116,8 +116,8 @@ final class Font extends \Df\Config\O {
 		'//fonts.googleapis.com/css?family=' . urlencode($this->family())
 	;});}
 
-	/** @return bool */
-	private function bold() {return $this->b();}
+	/** @used-by self::weight() */
+	private function bold():bool {return $this->b();}
 
 	/**
 	 * 2015-12-16
@@ -169,6 +169,8 @@ final class Font extends \Df\Config\O {
 
 	/**
 	 * 2015-12-16
+	 * 2022-11-15 https://3v4l.org/Y2QDP
+	 * @see self::$size
 	 * @used-by self::css()
 	 * @used-by self::letter_spacing()
 	 */
@@ -226,6 +228,12 @@ final class Font extends \Df\Config\O {
 	const letter_spacing = 'letter_spacing';
 	const scale_horizontal = 'scale_horizontal';
 	const scale_vertical = 'scale_vertical';
+	/**
+	 * 2022-11-15
+	 * https://3v4l.org/Y2QDP
+	 * @see self::size()
+	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
+	 */
 	const size = 'size';
 	const underline = 'underline';
 }

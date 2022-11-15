@@ -4,9 +4,11 @@ namespace Df\Typography;
 final class Size extends \Df\Core\O {
 	/**
 	 * 2015-12-16
-	 * @override
+	 * 2022-11-15 https://3v4l.org/FGH9K
+	 * @used-by \Df\Typography\Font::css():
+	 * 		$css->rule('font-size', $this->size());
 	 */
-	function __toString() {return "{$this->value()}{$this->units()}";}
+	function __toString():string {return "{$this->value()}{$this->units()}";}
 
 	/** @return string */
 	function units() {return $this[self::$P__UNITS];}
