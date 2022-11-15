@@ -26,14 +26,14 @@ class X extends MX {
 	 * @used-by df_xml_g()
 	 * @used-by df_xml_node()
 	 * @used-by self::importArray()
-	 * @param array(string => string) $attributes
+	 * @param array(string => string) $atts
 	 */
-	function addAttributes(array $attributes):self {
-		foreach ($attributes as $k => $v) {/** @var string $k */ /** @var mixed $v */
+	function addAttributes(array $atts):void {
+		foreach ($atts as $k => $v) {/** @var string $k */ /** @var mixed $v */
 			df_assert_sne($k);
 			# убрал strval($v) для ускорения системы
 			if (is_object($v) || is_array($v)) {
-				df_log($attributes);
+				df_log($atts);
 				df_error(
 					"Значение поля «{$k}» должно быть строкой, однако является %s."
 					,is_object($v) ? sprintf('объектом класса %s', get_class($v)) : 'массивом'
@@ -41,7 +41,6 @@ class X extends MX {
 			}
 			$this->addAttribute($k, $v);
 		}
-		return $this;
 	}
 
 	/**
