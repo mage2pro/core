@@ -353,9 +353,7 @@ final class X extends MX {
 	 *	</СтавкиНалогов>
 	 * в массив array('НДС' => '10')
 	 * 2022-10-25 @deprecated It is unused.
-	 * @param string $path
-	 * @param string $keyName
-	 * @param string $valueName
+	 * @see self::xpathMap()
 	 * @return array(string => string)
 	 */
 	function map(string $path, string $keyName, string $valueName):array {
@@ -415,9 +413,7 @@ final class X extends MX {
 	 *	</СтавкиНалогов>
 	 * в массив array('НДС' => '10')
 	 * 2022-10-25 @deprecated It is unused.
-	 * @param string $path
-	 * @param string $keyName
-	 * @param string $valueName
+	 * @see self::map()
 	 * @return array(string => string)
 	 */
 	function xpathMap(string $path, string $keyName, string $valueName):array {
@@ -431,10 +427,8 @@ final class X extends MX {
 
 	/**
 	 * @used-by self::importString()
-	 * @param string $tagName
-	 * @param string $valueAsText
 	 */
-	private function addChildText($tagName, $valueAsText) {
+	private function addChildText(string $tagName, string $valueAsText) {
 		$r = $this->addChild($tagName); /** @var X $r */
 		/**
 		 * @uses CX::addChild() создаёт и возвращает не просто CX, как говорит документация, а объект класса родителя.
