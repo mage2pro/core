@@ -463,7 +463,7 @@ function df_xml_parse($x, bool $throw = true) {/** @var X $r */
  * @return array(string => mixed)
  * @throws E
  */
-function df_xml_parse_a($x) {return df_xml_parse($x)->asArray();}
+function df_xml_parse_a($x):array {return df_xml_parse($x)->asArray();}
 
 /**
  * 2016-09-01
