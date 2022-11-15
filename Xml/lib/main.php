@@ -249,7 +249,7 @@ function df_xml_child(CX $e, string $name, bool $req = false) {
 		 * то есть реально возвращает количество детей типа rule.
 		 * Далее, оператор [] также работает, как для массива (!)
 		 * http://stackoverflow.com/a/16100099
-		 * Класс \SimpleXMLElement — вообще один из самых необычных классов PHP.
+		 * Класс @see \SimpleXMLElement — вообще один из самых необычных классов PHP.
 		 */
 		df_assert_eq(1, count($childNodes));
 		$r = $childNodes[0];
@@ -260,13 +260,10 @@ function df_xml_child(CX $e, string $name, bool $req = false) {
 
 /**
  * @used-by df_xml_child()
- * @param CX $e
- * @param string $name
- * @param bool $req [optional]
  * @return CX|null
  * @throws E
  */
-function df_xml_children(CX $e, $name, $req = false) { /** @var CX|null $r */
+function df_xml_children(CX $e, string $name, bool $req = false) { /** @var CX|null $r */
 	df_param_sne($name, 0);
 	if (df_xml_exists_child($e, $name)) {
 		/**
