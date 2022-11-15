@@ -46,21 +46,28 @@ final class G extends \Df\Core\O {
 		return str_replace("\x0B", "&#x0B;", $this[self::P__SKIP_HEADER] ? $x->asXMLPart() : df_cc_n($header, $x->asNiceXml()));
 	}
 
-	/** @var string */
+	/**
+	 * @used-by self::_p()
+	 * @used-by self::p()
+	 * @var string
+	 */
 	private static $P__CONTENTS = 'contents';
-	/** @var string */
+
+	/**
+	 * @used-by self::_p()
+	 * @used-by self::p()
+	 * @var string
+	 */
 	private static $P__TAG = 'tag';
 
 	/**
 	 * 2016-08-31
 	 * @used-by df_xml_g()
-	 * @param string $tag
 	 * @param array(string => mixed) $contents
 	 * @param array(string => mixed) $p [optional]
-	 * @return string
 	 */
-	static function p($tag, array $contents, array $p = []) {return
-		(new static([self::$P__CONTENTS => $contents, self::$P__TAG => $tag] + $p))->_p();
+	static function p(string $tag, array $contents, array $p = []):string {
+		return (new static([self::$P__CONTENTS => $contents, self::$P__TAG => $tag] + $p))->_p();
 	}
 
 	/**
