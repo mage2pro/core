@@ -45,6 +45,11 @@ abstract class Validate implements \Zend_Validate_Interface {
 	final protected function getValue() {return dfa($this->_params, self::$PARAM__VALUE);}
 
 	/**
+	 * @param string $message
+	 */
+	protected function setMessage($message) {$this->_message = $message;}
+
+	/**
 	 * @used-by \Df\Zf\Validate\ArrayT::isValid()
 	 * @used-by \Df\Zf\Validate\IntT::isValid()
 	 * @used-by \Df\Zf\Validate\StringT::isValid()
@@ -54,12 +59,10 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 * @used-by \Df\Zf\Validate\StringT\Parser::isValid()
 	 * @param mixed $v
 	 */
-	final protected function prepareValidation($v):void {$this->setValue($v);}
-
-	/**
-	 * @param string $message
-	 */
-	protected function setMessage($message) {$this->_message = $message;}
+	final protected function setValue($v):void {
+		$this->reset();
+		$this->_params[self::$PARAM__VALUE] = $v;
+	}
 
 	/** @used-by setValue() */
 	private function reset():void {
@@ -85,14 +88,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 		 * значения каких параметров им надо сбрасывать между разными валидациями.
 		 */
 		unset($this->_params[self::$PARAM__VALUE]);
-	}
-
-	/**
-	 * @param mixed $value
-	 */
-	private function setValue($value) {
-		$this->reset();
-		$this->_params[self::$PARAM__VALUE] = $value;
 	}
 
 	/**

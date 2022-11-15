@@ -9,7 +9,7 @@ final class IntT extends \Df\Zf\Validate\Type {
 	 * @return bool
 	 */
 	function isValid($v) {
-		$this->prepareValidation($v);
+		$this->setValue($v);
 		/**
 		 * 1) Думаю, правильно будет конвертировать строки типа «09» в целые числа без сбоев.
 		 * 2) 9 === (int)'09'.

@@ -17,7 +17,7 @@ final class StringT extends Type implements \Zend_Filter_Interface {
 	 * @return bool
 	 */
 	function isValid($v) {
-		$this->prepareValidation($v);
+		$this->setValue($v);
 		# 2015-02-16
 		# Раньше здесь стояло просто `is_string($value)`
 		# Однако интерпретатор PHP способен неявно и вполне однозначно

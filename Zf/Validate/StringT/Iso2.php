@@ -10,7 +10,7 @@ final class Iso2 extends \Df\Zf\Validate\Type {
 	 * @param mixed $v
 	 * @return bool
 	 */
-	function isValid($v) {$this->prepareValidation($v); return is_string($v) && (2 === mb_strlen($v));}
+	function isValid($v) {$this->setValue($v); return is_string($v) && (2 === mb_strlen($v));}
 
 	/**
 	 * @override
