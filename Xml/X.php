@@ -467,7 +467,7 @@ final class X extends MX {
 	 * @param mixed $value
 	 * @param string[]|bool $wrapInCData [optional]
 	 */
-	private function importString($key, $value, $wrapInCData = []) {
+	private function importString($key, $value, $wrapInCData = []):void {
 		$needWrapInCData = !is_array($wrapInCData) && !!$wrapInCData; /** @var bool $needWrapInCData */
 		$wrapInCData = df_eta($wrapInCData);
 		# `null` означает, что метод `importString` не должен создавать дочерний тэг `$key`,
