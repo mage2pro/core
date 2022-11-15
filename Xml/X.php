@@ -366,6 +366,7 @@ final class X extends MX {
 	}
 
 	/**
+	 * 2022-11-15 @deprecated It is unused.
 	 * @override
 	 * @see \SimpleXMLElement::xpath()
 	 * @param string|string[] $path
