@@ -5,11 +5,10 @@ use Magento\Framework\Simplexml\Element as MX;
 use SimpleXMLElement as CX;
 
 /**
- * @param CX $e
- * @return CX
+ * @used-by df_leaf()
  * @throws E
  */
-function df_assert_leaf(CX $e) {return df_check_leaf($e) ? $e : df_error(
+function df_assert_leaf(CX $e):CX {return df_check_leaf($e) ? $e : df_error(
 	"Требуется лист XML, однако получена ветка XML:\n%s.", df_xml_report($e)
 );}
 
@@ -163,7 +162,7 @@ function df_leaf(CX $e = null, $d = null) {/** @var string $r */
 	if (is_null($e)) {
 		$r = df_call_if($d);
 	}
-	else if (df_es($r = (string)df_assert_leaf($e))) {
+	elseif (df_es($r = (string)df_assert_leaf($e))) {
 		/**
 		 * 2015-09-25
 		 * Добавил данное условие, чтобы различать случай пустого узла и отсутствия узла.
