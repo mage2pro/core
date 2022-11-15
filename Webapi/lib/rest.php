@@ -13,9 +13,8 @@ function df_rest_action():string {
 /**
  * 2017-03-15
  * @used-by df_rest_route()
- * @return IPR
  */
-function df_rest_ipr() {return df_o(IPR::class);}
+function df_rest_ipr():IPR {return df_o(IPR::class);}
 
 /**
  * 2017-03-15
