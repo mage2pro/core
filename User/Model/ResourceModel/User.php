@@ -5,9 +5,9 @@ class User extends \Magento\User\Model\ResourceModel\User {
 	 * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
 	 * @return array(string => mixed)|false
 	 */
-	function loadByEmail(string $email):array {
+	function loadByEmail(string $e):array {
 		$c = $this->getConnection();
-		return $c->fetchRow($c->select()->from($this->getMainTable())->where('email=:email'), ['email' => $email]);
+		return $c->fetchRow($c->select()->from($this->getMainTable())->where('email=:email'), ['email' => $e]);
 	}
 
 	/** @used-by \Df\User\Plugin\Model\User::aroundAuthenticate() */
