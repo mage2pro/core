@@ -116,14 +116,6 @@ final class Font extends \Df\Config\O {
 		'//fonts.googleapis.com/css?family=' . urlencode($this->family())
 	;});}
 
-	/**
-	 * 2015-12-16
-	 * @return string
-	 */
-	function weight() {return dfc($this, function() {return
-		$this->variantNumber() ?: ($this->bold() ? 'bold' : 'normal')
-	;});}
-
 	/** @return bool */
 	private function bold() {return $this->b();}
 	/**
@@ -132,11 +124,14 @@ final class Font extends \Df\Config\O {
 	 */
 	private function familyA() {return dfc($this, function() {return explode(':', $this->familyS());});}
 
-	/** @return string */
-	private function familyS() {return $this[self::family];}
+	/**
+	 * @used-by self::familyA()
+	 * @used-by self::familyIsStandard()
+	 */
+	private function familyS():string {return $this[self::family];}
 
-	/** @return bool */
-	private function italic() {return $this->b();}
+	/** @used-by self::style() */
+	private function italic():bool {return $this->b();}
 
 	/** @used-by self::css() */
 	private function letter_case():bool {return $this->v();}
@@ -212,6 +207,12 @@ final class Font extends \Df\Config\O {
 	private function variantWord():string {return dfc($this, function() {return str_replace(
 		$this->variantNumber(), '', $this->variant()
 	);});}
+
+	/**
+	 * 2015-12-16
+	 * @used-by self::css()
+	 */
+	private function weight():string {return $this->variantNumber() ?: ($this->bold() ? 'bold' : 'normal');}
 
 	const bold = 'bold';
 	const color = 'color';
