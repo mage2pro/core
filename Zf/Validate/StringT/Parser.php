@@ -12,7 +12,7 @@ abstract class Parser extends \Df\Zf\Validate\Type {
 	 * @return bool
 	 */
 	function isValid($v) {
-		$this->setValue($v);
+		$this->v($v);
 		return $this->getZendValidator('en_US')->isValid($v) || $this->getZendValidator('ru_RU')->isValid($v);
 	}
 

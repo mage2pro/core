@@ -45,7 +45,7 @@ function df_float($v, $allowNull = true) {/** @var int|int[] $r */
 			 * которые порождаются функцией @see df_error().
 			 * О сбоях преобразования типов надо оповещать разработчика.
 			 */
-			df_error(FloatT::s()->getMessage());
+			df_error(FloatT::s()->message());
 		}
 		else {
 			df_assert($valueIsString);

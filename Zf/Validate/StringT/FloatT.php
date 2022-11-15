@@ -9,7 +9,7 @@ final class FloatT extends Parser {
 	 * @return bool
 	 */
 	function isValid($v) {
-		$this->setValue($v);
+		$this->v($v);
 		/**
 		 * 1) Избавляет от сбоев типа
 		 * «Система не смогла распознать значение «368.» типа «string» как вещественное число.»

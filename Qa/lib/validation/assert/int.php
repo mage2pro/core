@@ -29,7 +29,7 @@ function df_int($v, $allowNull = true) {/** @var int|int[] $r */
 		$r = 0;
 	}
 	elseif (!IntT::s()->isValid($v)) {
-		df_error(IntT::s()->getMessage());
+		df_error(IntT::s()->message());
 	}
 	else {
 		$r = (int)$v;

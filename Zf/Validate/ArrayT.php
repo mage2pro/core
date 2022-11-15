@@ -16,7 +16,7 @@ final class ArrayT extends Type implements \Zend_Filter_Interface {
 	 * @param mixed $v
 	 * @return bool
 	 */
-	function isValid($v) {$this->setValue($v); return is_array($v);}
+	function isValid($v) {$this->v($v); return is_array($v);}
 
 	/**
 	 * @override

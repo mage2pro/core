@@ -9,7 +9,7 @@ final class IntT extends Type {
 	 * @param string|int $v
 	 */
 	function isValid($v):bool {
-		$this->setValue($v);
+		$this->v($v);
 		# Обратите внимание, что здесь нужно именно «==», а не «===»: https://php.net/manual/function.is-int.php#35820
 		return is_numeric($v) && ($v == (int)$v);
 	}

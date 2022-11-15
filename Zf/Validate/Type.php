@@ -24,12 +24,12 @@ abstract class Type extends \Df\Zf\Validate {
 	/**
 	 * @override
 	 * @see \Df\Zf\Validate::_message()
-	 * @used-by \Df\Zf\Validate::getMessage()
+	 * @used-by df_float()
+	 * @used-by df_int()
+	 * @used-by \Df\Zf\Validate::getMessages()
 	 */
-	final protected function _message():string {return is_null($this->getValue())
+	final function message():string {$v = $this->v(); return is_null($v)
 		? "Got `NULL` instead of {$this->expected()}."
-		: sprintf("Unable to recognize the value «%s» of type «%s» as {$this->expected()}.",
-			df_string_debug($this->getValue()), gettype($this->getValue())
-		)
+		: sprintf("Unable to recognize the value «%s» of type «%s» as {$this->expected()}.", df_string_debug($v), gettype($v))
 	;}
 }
