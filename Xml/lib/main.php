@@ -388,13 +388,12 @@ function df_xml_header(string $enc = 'UTF-8', string $v = '1.0'):string {return 
 
 /**
  * @used-by \Dfe\SecurePay\Refund::process()
+ * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t04()
- * @param string $tag
  * @param array(string => string) $attr [optional]
- * @param mixed[] $contents [optional]
- * @return X
+ * @param array(string => mixed) $contents [optional]
  */
-function df_xml_node($tag, array $attr = [], array $contents = []) {
+function df_xml_node(string $tag, array $attr = [], array $contents = []):X {
 	$r = df_xml_parse("<{$tag}/>"); /** @var X $r */
 	$r->addAttributes($attr);
 	$r->importArray($contents);
@@ -410,11 +409,10 @@ function df_xml_node($tag, array $attr = [], array $contents = []) {
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param string|X $x
- * @param bool $throw [optional]
  * @return X|null
  * @throws E
  */
-function df_xml_parse($x, $throw = true) {/** @var X $r */
+function df_xml_parse($x, bool $throw = true) {/** @var X $r */
 	if ($x instanceof X) {
 		$r = $x;
 	}
