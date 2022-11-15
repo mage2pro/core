@@ -1,7 +1,12 @@
 <?php
 namespace Df\Zf;
 /**
- * @see \Df\Zf\Validate\Type
+ * @see \Df\Zf\Validate\ArrayT
+ * @see \Df\Zf\Validate\IntT
+ * @see \Df\Zf\Validate\StringT
+ * @see \Df\Zf\Validate\StringT\IntT
+ * @see \Df\Zf\Validate\StringT\Iso2
+ * @see \Df\Zf\Validate\StringT\Parser
  * @used-by \Df\Zf\Validate\ArrayT::s()
  * @used-by \Df\Zf\Validate\IntT::s()
  * @used-by \Df\Zf\Validate\StringT::s()
@@ -11,12 +16,16 @@ namespace Df\Zf;
  */
 abstract class Validate implements \Zend_Validate_Interface {
 	/**
-	 * @used-by df_float()
-	 * @used-by df_int()
-	 * @used-by self::getMessages()
-	 * @see \Df\Zf\Validate\Type::message()
+	 * @used-by self::message()
+	 * @see \Df\Zf\Validate\ArrayT::expected()
+	 * @see \Df\Zf\Validate\IntT::expected()
+	 * @see \Df\Zf\Validate\StringT::expected()
+	 * @see \Df\Zf\Validate\StringT\FloatT::expected()
+	 * @see \Df\Zf\Validate\StringT\IntT::expected()
+	 * @see \Df\Zf\Validate\StringT\Iso2::expected()
+	 * @return string
 	 */
-	abstract function message():string;
+	abstract protected function expected();
 
 	/**
 	 * @override
@@ -24,6 +33,16 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 * @return array(string => string)
 	 */
 	final function getMessages():array {return [__CLASS__ => $this->message()];}
+
+	/**
+	 * @used-by df_float()
+	 * @used-by df_int()
+	 * @used-by \Df\Zf\Validate::getMessages()
+	 */
+	final function message():string {$v = $this->v(); return is_null($v)
+		? "Got `NULL` instead of {$this->expected()}."
+		: sprintf("Unable to recognize the value «%s» of type «%s» as {$this->expected()}.", df_string_debug($v), gettype($v))
+	;}
 
 	/**
 	 * @used-by \Df\Zf\Validate\ArrayT::isValid()

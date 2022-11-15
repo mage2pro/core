@@ -1,7 +1,7 @@
 <?php
 namespace Df\Zf\Validate;
 use Magento\Framework\Phrase;
-final class StringT extends Type implements \Zend_Filter_Interface {
+final class StringT extends \Df\Zf\Validate implements \Zend_Filter_Interface {
 	/**
 	 * @override
 	 * @param mixed $v
@@ -14,9 +14,8 @@ final class StringT extends Type implements \Zend_Filter_Interface {
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
 	 * @param mixed $v
-	 * @return bool
 	 */
-	function isValid($v) {
+	function isValid($v):bool {
 		$this->v($v);
 		# 2015-02-16
 		# Раньше здесь стояло просто `is_string($value)`

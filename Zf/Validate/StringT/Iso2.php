@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Validate\StringT;
-final class Iso2 extends \Df\Zf\Validate\Type {
+final class Iso2 extends \Df\Zf\Validate {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
@@ -8,9 +8,8 @@ final class Iso2 extends \Df\Zf\Validate\Type {
 	 * @used-by \Df\Qa\Method::vp()
 	 * @used-by \Df\Qa\Method::vv()
 	 * @param mixed $v
-	 * @return bool
 	 */
-	function isValid($v) {$this->v($v); return is_string($v) && (2 === mb_strlen($v));}
+	function isValid($v):bool {$this->v($v); return is_string($v) && (2 === mb_strlen($v));}
 
 	/**
 	 * @override

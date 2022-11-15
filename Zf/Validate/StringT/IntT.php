@@ -1,14 +1,13 @@
 <?php
 namespace Df\Zf\Validate\StringT;
-final class IntT extends \Df\Zf\Validate\Type {
+final class IntT extends \Df\Zf\Validate {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
 	 * @used-by df_int()
 	 * @param string $v
-	 * @return bool
 	 */
-	function isValid($v) {
+	function isValid($v):bool {
 		$this->v($v);
 		/**
 		 * 1) Думаю, правильно будет конвертировать строки типа «09» в целые числа без сбоев.

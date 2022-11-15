@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Validate;
-final class ArrayT extends Type implements \Zend_Filter_Interface {
+final class ArrayT extends \Df\Zf\Validate implements \Zend_Filter_Interface {
 	/**
 	 * 2016-08-31
 	 * @override
@@ -14,9 +14,8 @@ final class ArrayT extends Type implements \Zend_Filter_Interface {
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
 	 * @param mixed $v
-	 * @return bool
 	 */
-	function isValid($v) {$this->v($v); return is_array($v);}
+	function isValid($v):bool {$this->v($v); return is_array($v);}
 
 	/**
 	 * @override

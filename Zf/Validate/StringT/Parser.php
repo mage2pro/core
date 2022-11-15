@@ -1,7 +1,7 @@
 <?php
 namespace Df\Zf\Validate\StringT;
 /** @see \Df\Zf\Validate\StringT\FloatT */
-abstract class Parser extends \Df\Zf\Validate\Type {
+abstract class Parser extends \Df\Zf\Validate {
 	/** @return string */
 	abstract protected function getZendValidatorClass();
 
@@ -9,9 +9,8 @@ abstract class Parser extends \Df\Zf\Validate\Type {
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
 	 * @param string $v
-	 * @return bool
 	 */
-	function isValid($v) {
+	function isValid($v):bool {
 		$this->v($v);
 		return $this->getZendValidator('en_US')->isValid($v) || $this->getZendValidator('ru_RU')->isValid($v);
 	}

@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Validate;
-final class IntT extends Type {
+final class IntT extends \Df\Zf\Validate {
 	/**
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
