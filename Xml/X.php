@@ -661,17 +661,15 @@ final class X extends MX {
 	 * Убрал df_param_s и df_result_s для ускорения работы модуля Яндекс.Маркет
 	 * @used-by df_cdata()
 	 * @param string|null $s
-	 * @return string
 	 */
-	static function markAsCData($s) {return self::marker()->mark($s);}
+	static function markAsCData($s):string {return self::marker()->mark($s);}
 
 	/**
 	 * 2021-12-12
 	 * @used-by self::importString()
 	 * @used-by self::markAsCData()
-	 * @return Marker
 	 */
-	private static function marker() {static $r; return $r ?: $r = new Marker('[[', ']]');}
+	private static function marker():Marker {static $r; return $r ?: $r = new Marker('[[', ']]');}
 
 	/**
 	 * @used-by self::__destruct()
