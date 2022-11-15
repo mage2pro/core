@@ -28,9 +28,8 @@ final class FloatT extends Parser {
 	 * @override
 	 * @see \Df\Zf\Validate\Type::expected()
 	 * @used-by \Df\Zf\Validate\Type::_message()
-	 * @return string
 	 */
-	protected function expected() {return 'a float';}
+	protected function expected():string {return 'a float';}
 
 	/**
 	 * @override

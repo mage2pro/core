@@ -32,9 +32,8 @@ final class StringT extends \Df\Zf\Validate implements \Zend_Filter_Interface {
 	 * @override
 	 * @see \Df\Zf\Validate\Type::expected()
 	 * @used-by \Df\Zf\Validate\Type::_message()
-	 * @return string
 	 */
-	protected function expected() {return 'a string';}
+	protected function expected():string {return 'a string';}
 
 	/**
 	 * @used-by df_check_s()

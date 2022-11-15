@@ -23,9 +23,8 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 * @see \Df\Zf\Validate\StringT\FloatT::expected()
 	 * @see \Df\Zf\Validate\StringT\IntT::expected()
 	 * @see \Df\Zf\Validate\StringT\Iso2::expected()
-	 * @return string
 	 */
-	abstract protected function expected();
+	abstract protected function expected():string;
 
 	/**
 	 * @override

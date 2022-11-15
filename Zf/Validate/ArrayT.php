@@ -19,11 +19,10 @@ final class ArrayT extends \Df\Zf\Validate implements \Zend_Filter_Interface {
 
 	/**
 	 * @override
-	 * @see \Df\Zf\Validate\Type::expected()
-	 * @used-by \Df\Zf\Validate\Type::_message()
-	 * @return string
+	 * @see \Df\Zf\Validate::expected()
+	 * @used-by \Df\Zf\Validate::message()
 	 */
-	protected function expected() {return 'an array';}
+	protected function expected():string {return 'an array';}
 
 	/**
 	 * @used-by \Df\Qa\Method::assertResultIsArray()
