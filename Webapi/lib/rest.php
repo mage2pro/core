@@ -19,6 +19,5 @@ function df_rest_ipr():IPR {return df_o(IPR::class);}
 /**
  * 2017-03-15
  * @used-by df_rest_action()
- * @return Route
  */
-function df_rest_route() {return df_rest_ipr()->getRoute();}
+function df_rest_route():Route {return df_rest_ipr()->getRoute();}
