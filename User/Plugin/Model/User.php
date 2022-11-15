@@ -3,13 +3,8 @@ namespace Df\User\Plugin\Model;
 use Df\User\Model\ResourceModel\User as Resource;
 use Magento\User\Model\User as Sb;
 class User {
-	/**
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param string $username
-	 * @param string $password
-	 */
-	function aroundAuthenticate(Sb $sb, \Closure $f, $username, $password):bool {
+	/** @see \Magento\User\Model\User::authenticate() */
+	function aroundAuthenticate(Sb $sb, \Closure $f, string $username, string $password):bool {
 		$loginByEmail = df_prop_k($sb, self::LOGIN_BY_EMAIL); /** @var bool $loginByEmail */
 		df_prop_k($sb, self::LOGIN_BY_EMAIL, false);
 		$r = false; /** @var bool $r */
