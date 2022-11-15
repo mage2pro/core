@@ -494,9 +494,8 @@ function df_xml_report(CX $e):string {return $e instanceof MX ? $e->asNiceXml() 
  * @see df_xml_x()
  * @used-by df_xml_parse_header()
  * @param string|X $x
- * @return string
  */
-function df_xml_s($x) {return is_string($x) ? $x : $x->asXML();}
+function df_xml_s($x):string {return is_string($x) ? $x : $x->asXML();}
 
 /**
  * 2016-09-01
