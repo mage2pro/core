@@ -324,13 +324,10 @@ function df_xml_children(CX $e, string $name, bool $req = false) { /** @var CX|n
 function df_xml_exists(CX $e = null):bool {return !empty($e);}
 
 /**
- * http://stackoverflow.com/questions/1560827/php-simplexml-check-if-a-child-exist#comment20135428_1562158
+ * http://stackoverflow.com/questions/1560827#comment20135428_1562158
  * @used-by df_xml_children()
- * @param CX $e
- * @param string $child
- * @return bool
  */
-function df_xml_exists_child(CX $e, $child) {return isset($e->{$child});}
+function df_xml_exists_child(CX $e, string $child):bool {return isset($e->{$child});}
 
 /**
  * @see \Magento\Framework\Simplexml\Element::asNiceXml() не добавляет к документу заголовок XML: его надо добавить вручную.
