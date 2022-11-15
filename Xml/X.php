@@ -386,10 +386,12 @@ final class X extends MX {
 	}
 
 	/**
+	 * @used-by self::map()
+	 * @used-by self::xpathMap()
 	 * @param string|string[] $path
 	 * @return X[]
 	 */
-	function xpathA($path) {
+	function xpathA($path):array {
 		if (1 < func_num_args()) {
 			$path = df_cc_path(func_get_args());
 		}
