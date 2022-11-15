@@ -420,7 +420,7 @@ final class X extends MX {
 	 * @param string $valueName
 	 * @return array(string => string)
 	 */
-	function xpathMap($path, $keyName, $valueName) {
+	function xpathMap(string $path, string $keyName, string $valueName):array {
 		$r = []; /** @var array(string => string) $r */
 		$nodes = $this->xpathA($path); /** @var X[] $nodes */
 		foreach ($nodes as $node) { /** @var X $node */
