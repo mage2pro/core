@@ -4,12 +4,10 @@ use Magento\Webapi\Controller\Rest\Router\Route;
 /**
  * 2017-03-15
  * @used-by df_sentry()
- * @return string
  */
-function df_rest_action() {
-	/** @var Route $r */
-	$r = df_rest_route();
-	return "{$r->getServiceClass()}::{$r->getServiceMethod()}";
+function df_rest_action():string {
+	$r = df_rest_route(); /** @var Route $r */
+	return df_cc_method($r->getServiceClass(), $r->getServiceMethod());
 }
 
 /**

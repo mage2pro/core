@@ -22,6 +22,7 @@ function df_cc_class_uc(...$args):string {return df_cc_class(df_ucfirst(dfa_flat
 
 /**
  * 2016-08-10 Если класс не указан, то вернёт название функции. Поэтому в качестве $a1 можно передавать null.
+ * @used-by df_rest_action()
  * @used-by \Df\Qa\Trace\Frame::method()
  * @param string|object|null|array(object|string)|array(string = string) $a1
  * @param string|null $a2 [optional]
