@@ -18,11 +18,8 @@ use Magento\Wishlist\Model\Item as I;
  * includes the configurable product as the first element of the result's array.
  * We do not need it, so we filter it out.
  * @used-by frugue/core/view/frontend/templates/wishlist/item/column/image.phtml
- * @param I $i
- * @return P[]
+ * @return P[]|string
  */
-function df_wishlist_item_candidates(I $i) {return df_not_configurable(
-	$i->getProduct()->getTypeInstance()->prepareForCartAdvanced(
-		$i->getBuyRequest(), $i->getProduct(), T::PROCESS_MODE_LITE
-	)
-);}
+function df_wishlist_item_candidates(I $i) {return df_not_configurable(df_assert_array(
+	$i->getProduct()->getTypeInstance()->prepareForCartAdvanced($i->getBuyRequest(), $i->getProduct(), T::PROCESS_MODE_LITE)
+));}

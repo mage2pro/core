@@ -71,6 +71,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
 function df_assert($cond, $m = null) {return $cond ?: df_error($m);}
 
 /**
+ * @used-by df_wishlist_item_candidates()
  * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
  * @used-by \Df\Xml\X::importArray()
  * @param array $v
