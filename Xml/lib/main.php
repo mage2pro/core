@@ -470,7 +470,7 @@ function df_xml_parse_a($x):array {return df_xml_parse($x)->asArray();}
  * Если XML не отформатирован, то после его заголовка перенос строки идти не обязан: http://stackoverflow.com/a/8384602
  * @used-by df_xml_prettify()
  * @param string|X $x
- * @return string |null
+ * @return string|null
  */
 function df_xml_parse_header($x) {return df_preg_match('#^<\?xml.*\?>#', df_xml_s($x));}
 
@@ -481,7 +481,7 @@ function df_xml_parse_header($x) {return df_preg_match('#^<\?xml.*\?>#', df_xml_
  * @param string|X $x
  * @return string
  */
-function df_xml_prettify($x) {return df_cc_n(df_xml_parse_header($x), df_xml_parse($x)->asNiceXml());}
+function df_xml_prettify($x):string {return df_cc_n(df_xml_parse_header($x), df_xml_parse($x)->asNiceXml());}
 
 /**
  * @used-by df_assert_leaf()
