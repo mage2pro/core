@@ -1,5 +1,6 @@
 <?php
 namespace Df\Typography;
+# 2015-12-16
 /** @used-by \Df\Typography\Font::size() */
 final class Size extends \Df\Core\O {
 	/**
@@ -9,28 +10,12 @@ final class Size extends \Df\Core\O {
 	 * 		$css->rule('font-size', $this->size());
 	 * @used-by \Df\Typography\Font::letter_spacing():
 	 */
-	function __toString():string {return "{$this->value()}{$this->units()}";}
-
-	/** @return string */
-	function units() {return $this[self::$P__UNITS];}
-
-	/** @return string */
-	function value() {return $this[self::$P__VALUE];}
+	function __toString():string {return $this->value() . $this['units'];}
 
 	/**
 	 * 2015-12-16
-	 * @return float
+	 * @used-by self::__toString()
+	 * @used-by \Df\Typography\Font::css()
 	 */
-	function valueF() {return df_float($this->value());}
-
-	/**
-	 * 2015-12-16
-	 * @return int
-	 */
-	function valueI() {return intval($this->value());}
-
-	/** @var string */
-	private static $P__UNITS = 'units';
-	/** @var string */
-	private static $P__VALUE = 'value';
+	function value():string {return $this['value'];}
 }

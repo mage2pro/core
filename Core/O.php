@@ -46,6 +46,7 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\GoogleFont\Fonts\Sprite::i()
 	 * @used-by \Df\Qa\Failure\Error::i()
 	 * @used-by \Df\Qa\Failure\Exception::i()
+	 * @used-by \Df\Typography\Font::size()
 	 * @used-by \Df\Xml\G::p()
 	 * @used-by \Dfe\TwoCheckout\Exception::__construct()
 	 * @used-by \Dfe\TwoCheckout\LineItem::buildLI()
