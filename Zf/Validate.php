@@ -27,9 +27,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 	final function getMessage():string {
 		if (!isset($this->_message)) {
 			$this->_message = $this->_message();
-			if ($this->getExplanation()) {
-				$this->_message .= ("\n" . $this->getExplanation());
-			}
 		}
 		return $this->_message;
 	}
@@ -42,24 +39,30 @@ abstract class Validate implements \Zend_Validate_Interface {
 	final function getMessages():array {return [__CLASS__ => $this->getMessage()];}
 
 	/**
-	 * @param mixed $d [optional]
-	 * @return mixed
-	 */
-	final protected function cfg(string $paramName, $d = null) {return dfa($this->_params, $paramName, $d);}
-
-	/**
 	 * @used-by \Df\Zf\Validate\Type::_message()
 	 * @return mixed
 	 */
-	final protected function getValue() {return $this->cfg(self::$PARAM__VALUE);}
+	final protected function getValue() {return dfa($this->_params, self::$PARAM__VALUE);}
 
 	/**
+	 * @used-by \Df\Zf\Validate\ArrayT::isValid()
+	 * @used-by \Df\Zf\Validate\IntT::isValid()
+	 * @used-by \Df\Zf\Validate\StringT::isValid()
+	 * @used-by \Df\Zf\Validate\StringT\FloatT::isValid()
+	 * @used-by \Df\Zf\Validate\StringT\IntT::isValid()
+	 * @used-by \Df\Zf\Validate\StringT\Iso2::isValid()
+	 * @used-by \Df\Zf\Validate\StringT\Parser::isValid()
 	 * @param mixed $v
 	 */
-	protected function prepareValidation($v) {$this->setValue($v);}
+	final protected function prepareValidation($v):void {$this->setValue($v);}
+
+	/**
+	 * @param string $message
+	 */
+	protected function setMessage($message) {$this->_message = $message;}
 
 	/** @used-by setValue() */
-	protected function reset() {
+	private function reset():void {
 		unset($this->_message);
 		/**
 		 * Раньше тут стоял код $this->_params = []
@@ -83,11 +86,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 		 */
 		unset($this->_params[self::$PARAM__VALUE]);
 	}
-
-	/**
-	 * @param string $message
-	 */
-	protected function setMessage($message) {$this->_message = $message;}
 
 	/**
 	 * @param mixed $value
