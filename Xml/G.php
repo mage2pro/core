@@ -36,9 +36,8 @@ final class G extends \Df\Core\O {
 	 * http://3v4l.org/Wiia2#v500
 	 * 2016-08-31
 	 * @used-by self::p()
-	 * @return string
 	 */
-	private function _p() {
+	private function _p():string {
 		$header = $this[self::P__SKIP_HEADER] ? '' : df_xml_header(); /** @var string $header */
 		$x = df_xml_parse("$header\n<{$this[self::$P__TAG]}/>"); /** @var X $x */
 		$x->addAttributes($this[self::P__ATTRIBUTES]);
