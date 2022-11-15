@@ -44,6 +44,9 @@ class X extends MX {
 	}
 
 	/**
+	 * 2022-11-15
+	 * 1) `static` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-static
+	 * 2) We can not declare the $name argument type with PHP < 8: https://3v4l.org/ptpUM
 	 * @override
 	 * @see \SimpleXMLElement::addChild()
 	 * @used-by self::addChildText()
@@ -56,7 +59,8 @@ class X extends MX {
 	 * @return CX
 	 * @throws E
 	 */
-	function addChild($name, $value = null, $namespace = null) {/** @var CX $r */
+	#[\ReturnTypeWillChange]
+	function addChild($name, $value = null, $namespace = null):CX {/** @var CX $r */
 		try {$r = parent::addChild($this->k($name), $value, $namespace);}
 		catch (E $e) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_xts($e));}
 		return $r;
