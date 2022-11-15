@@ -228,13 +228,10 @@ function df_needs_cdata(string $s):bool {
 
 /**
  * @deprecated It is unused.
- * @param CX $e
- * @param string $name
- * @param bool $req [optional]
  * @return CX|null
  * @throws E
  */
-function df_xml_child(CX $e, $name, $req = false) {
+function df_xml_child(CX $e, string $name, bool $req = false) {
 	$childNodes = df_xml_children($e, $name, $req); /** @var CX[] $childNodes */
 	if (is_null($childNodes)) { /** @var CX|null $r */
 		$r = null;
