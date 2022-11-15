@@ -118,11 +118,14 @@ final class Font extends \Df\Config\O {
 
 	/** @return bool */
 	private function bold() {return $this->b();}
+
 	/**
 	 * 2015-12-16
+	 * @used-by self::family()
+	 * @used-by self::variant()
 	 * @return string[]
 	 */
-	private function familyA() {return dfc($this, function() {return explode(':', $this->familyS());});}
+	private function familyA():array {return explode(':', $this->familyS());}
 
 	/**
 	 * @used-by self::familyA()
