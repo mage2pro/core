@@ -13,10 +13,12 @@ class X extends MX {
 	 * https://www.php.net/manual/en/simplexmlelement.addattribute.php
 	 * https://stackoverflow.com/a/9391673
 	 * https://stackoverflow.com/a/43566078
+	 * 2022-11-15 We can not declare the $k argument type with PHP < 8: https://3v4l.org/ptpUM
 	 * @override
 	 * @see \SimpleXMLElement::addAttribute()
 	 * @used-by self::addAttributes()
 	 * @used-by self::addChildX()
+	 * @param string $k
 	 * @param string|null $v [optional]
 	 * @param string|null $ns [optional]
 	 */
