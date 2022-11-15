@@ -27,8 +27,7 @@ function df_cdata_raw_if_needed(string $s):string {return !df_needs_cdata($s) ? 
 
 /**
  * 2015-02-27
- * Обратите внимание,
- * что метод @see \SimpleXMLElement::count() появился только в PHP 5.3,
+ * 1) Метод @see \SimpleXMLElement::count() появился только в PHP 5.3,
  * поэтому мы его не используем: https://php.net/manual/simplexmlelement.count.php
  * Также обратите внимание, что count($e->children())
  * некорректно возвращает 1 для листов в PHP 5.1: http://3v4l.org/PT6Pt
@@ -60,10 +59,9 @@ function df_cdata_raw_if_needed(string $s):string {return !df_needs_cdata($s) ? 
  * https://php.net/manual/class.traversable.php
  * https://php.net/manual/simplexmlelement.count.php
  *
- * @param CX $e
- * @return bool
+ * @used-by df_assert_leaf()
  */
-function df_check_leaf(CX $e) {return !df_xml_exists($e) || !$e->children()->count();}
+function df_check_leaf(CX $e):bool {return !df_xml_exists($e) || !$e->children()->count();}
 
 /**
  * 2016-09-01
