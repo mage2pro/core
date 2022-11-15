@@ -475,18 +475,16 @@ final class X extends MX {
 		if (!is_null($key)) {
 			df_param_sne($key, 0);
 		}
-		/** @var string $keyAsString */
 		$keyAsString =
 			is_null($key)
 			? $this->getName()
-			:
-				/**
-				 * Раньше тут стояло df_string($key).
-				 * Убрал @see df_string() для ускорения модуля Яндекс.Маркет.
-				 * Более того, выше стоит проверка df_param_s, так что если $key не null, то $key гарантированно строка.
-				 */
-				$key
-		;
+			/**
+			 * Раньше тут стояло df_string($key).
+			 * Убрал @see df_string() для ускорения модуля Яндекс.Маркет.
+			 * Более того, выше стоит проверка df_param_s, так что если $key не null, то $key гарантированно строка.
+			 */
+			: $key
+		; /** @var string $keyAsString */
 		$valueIsString = is_string($value); /** @var bool $valueIsString */
 		$valueAsString = null; /** @var string $valueAsString */
 		try {$valueAsString = $valueIsString ? $value : df_string($value);}
@@ -536,10 +534,8 @@ final class X extends MX {
 	 * https://stackoverflow.com/a/6928183
 	 * @used-by self::addAttribute()
 	 * @used-by self::addChild()
-	 * @param string $s
-	 * @return string
 	 */
-	private function k($s) {return !df_contains($s, ':') ? $s : "xmlns:$s";}
+	private function k(string $s):string {return !df_contains($s, ':') ? $s : "xmlns:$s";}
 
 	/**
 	 * http://stackoverflow.com/a/3153704
