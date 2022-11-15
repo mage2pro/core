@@ -479,7 +479,6 @@ function df_xml_parse_header($x) {return df_preg_match('#^<\?xml.*\?>#', df_xml_
  * @used-by \Dfe\SecurePay\Refund::process()
  * @uses \Df\Xml\X::asNiceXml() не сохраняет заголовок XML.
  * @param string|X $x
- * @return string
  */
 function df_xml_prettify($x):string {return df_cc_n(df_xml_parse_header($x), df_xml_parse($x)->asNiceXml());}
 
