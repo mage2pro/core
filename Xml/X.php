@@ -73,7 +73,7 @@ final class X extends MX {
 	 * 1) гарантия, что результат — массив
 	 * 2) кэширование результата
 	 * @override
-	 * @see MX::asCanonicalArray()
+	 * @see \Magento\Framework\Simplexml\Element::asCanonicalArray()
 	 * @return array(string => mixed)
 	 */
 	function asCanonicalArray():array {
@@ -180,35 +180,22 @@ final class X extends MX {
 	}
 	
 	/**
-	 * Этот метод отличается от родительского только возвращением null вместо false в случае отсутствия значения.
-	 *
+	 * 1) Этот метод отличается от родительского только возвращением null вместо false в случае отсутствия значения.
 	 * Мы можем так делать, потому что родительский класс сам внутри себя не использует метод descend
 	 * (и, соответственно, не полагается на возвращение значения false).
-	 *
-	 * Интерпретатор PHP не разрешает присваивать полям объектов класса CX (и его наследников) значения сложных типов.
+	 * 2) Интерпретатор PHP не разрешает присваивать полям объектов класса CX (и его наследников) значения сложных типов.
 	 * Такое присваивание приводит к сбою: «Warning: It is not yet possible to assign complex types to attributes».
 	 * По этой причине не используем кэширование результата.
-	 *
-	 * в комментарии к свойству @see \Magento\Framework\Simplexml\Element::$_parent
-	 * дана рекомендация использования функции @see spl_object_hash(),
-	 * однако это слишком сложно и необчевидно, ускорит ли работу системы
-	 * (также могут быть проблемы с расходом оперативной памяти).
-	 *
+	 * 3) В комментарии к свойству @see \Magento\Framework\Simplexml\Element::$_parent
+	 * дана рекомендация использования функции @see spl_object_hash(), однако это слишком сложно,
+	 * и неочевидно, ускорит ли работу системы (также могут быть проблемы с расходом оперативной памяти).
+	 * 2022-11-15 @deprecated It is unused.
 	 * @override
+	 * @see \Magento\Framework\Simplexml\Element::descend()
 	 * @param string|string[] $path
 	 * @return X|null
 	 */
 	function descend($path) {return df_ftn(parent::descend($path));}
-
-	/**
-	 * @param string|string[] $path
-	 * @return X
-	 */
-	function descendO($path) {
-		$r = $this->descend($path);
-		df_assert($r instanceof X);
-		return $r;
-	}
 
 	/**
 	 * @used-by df_xml_g()
