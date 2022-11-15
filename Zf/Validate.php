@@ -20,15 +20,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 	final function __construct(array $p = []) {$this->_params = $p;}
 
 	/**
-	 * Этот метод присутствует для совместимости c устаревшими версиями Zend Framework
-	 * (в частности, с версией 1.9.6, которая используется в Magento CE 1.4.0.1)
-	 * @deprecated Since 1.5.0
-	 * @override
-	 * @return array(string => string)
-	 */
-	function getErrors() {return array_keys($this->getMessages());}
-
-	/**
 	 * @override
 	 * @return string
 	 */
@@ -44,9 +35,10 @@ abstract class Validate implements \Zend_Validate_Interface {
 
 	/**
 	 * @override
+	 * @see \Zend_Validate_Interface::getMessages()
 	 * @return array(string => string)
 	 */
-	function getMessages() {return [__CLASS__ => $this->getMessage()];}
+	function getMessages():array {return [__CLASS__ => $this->getMessage()];}
 
 	/**
 	 * @param string $paramName
