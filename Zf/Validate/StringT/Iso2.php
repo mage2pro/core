@@ -13,8 +13,8 @@ final class Iso2 extends \Df\Zf\Validate {
 
 	/**
 	 * @override
-	 * @see \Df\Zf\Validate\Type::expected()
-	 * @used-by \Df\Zf\Validate\Type::_message()
+	 * @see \Df\Zf\Validate::expected()
+	 * @used-by \Df\Zf\Validate::message()
 	 */
 	protected function expected():string {return 'an ISO 3166-1 alpha-2 country code';}
 
