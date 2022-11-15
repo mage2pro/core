@@ -7,6 +7,7 @@ final class Size extends \Df\Core\O {
 	 * 2022-11-15 https://3v4l.org/FGH9K
 	 * @used-by \Df\Typography\Font::css():
 	 * 		$css->rule('font-size', $this->size());
+	 * @used-by \Df\Typography\Font::letter_spacing():
 	 */
 	function __toString():string {return "{$this->value()}{$this->units()}";}
 
