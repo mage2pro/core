@@ -4,7 +4,7 @@ use \Exception as E;
 use Df\Core\Text\Marker;
 use Magento\Framework\Simplexml\Element as MX;
 use SimpleXMLElement as CX;
-class X extends MX {
+final class X extends MX {
 	/** */
 	function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}
 
@@ -73,9 +73,10 @@ class X extends MX {
 	 * 1) гарантия, что результат — массив
 	 * 2) кэширование результата
 	 * @override
+	 * @see MX::asCanonicalArray()
 	 * @return array(string => mixed)
 	 */
-	function asCanonicalArray() {
+	function asCanonicalArray():array {
 		$_this = spl_object_hash($this); /** @var string $_this */
 		if (!isset(self::$_canonicalArray[$_this])) {
 			/**
