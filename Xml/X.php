@@ -425,10 +425,8 @@ final class X extends MX {
 		return $r;
 	}
 
-	/**
-	 * @used-by self::importString()
-	 */
-	private function addChildText(string $tagName, string $valueAsText) {
+	/** @used-by self::importString() */
+	private function addChildText(string $tagName, string $valueAsText):void {
 		$r = $this->addChild($tagName); /** @var X $r */
 		/**
 		 * @uses CX::addChild() создаёт и возвращает не просто CX, как говорит документация, а объект класса родителя.
