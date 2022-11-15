@@ -17,11 +17,10 @@ class X extends MX {
 	 * @see \SimpleXMLElement::addAttribute()
 	 * @used-by self::addAttributes()
 	 * @used-by self::addChildX()
-	 * @param string $k
 	 * @param string|null $v [optional]
 	 * @param string|null $ns [optional]
 	 */
-	function addAttribute($k, $v = null, $ns = null) {parent::addAttribute($this->k($k), $v, $ns);}
+	function addAttribute(string $k, $v = null, $ns = null):void {parent::addAttribute($this->k($k), $v, $ns);}
 
 	/**
 	 * @used-by df_xml_g()
