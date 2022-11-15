@@ -25,9 +25,8 @@ abstract class Type extends \Df\Zf\Validate {
 	 * @override
 	 * @see \Df\Zf\Validate::_message()
 	 * @used-by \Df\Zf\Validate::getMessage()
-	 * @return string
 	 */
-	final protected function _message() {return is_null($this->getValue())
+	final protected function _message():string {return is_null($this->getValue())
 		? "Got `NULL` instead of {$this->expected()}."
 		: sprintf("Unable to recognize the value «%s» of type «%s» as {$this->expected()}.",
 			df_string_debug($this->getValue()), gettype($this->getValue())

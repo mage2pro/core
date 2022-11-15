@@ -5,9 +5,8 @@ abstract class Validate implements \Zend_Validate_Interface {
 	/**
 	 * @used-by self::getMessage()
 	 * @see \Df\Zf\Validate\Type::_message()
-	 * @return string
 	 */
-	abstract protected function _message();
+	abstract protected function _message():string;
 
 	/**
 	 * @used-by \Df\Zf\Validate\ArrayT::s()
