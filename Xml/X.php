@@ -24,9 +24,9 @@ class X extends MX {
 	function addAttribute($k, $v = null, $ns = null) {parent::addAttribute($this->k($k), $v, $ns);}
 
 	/**
+	 * @used-by df_xml_g()
 	 * @used-by df_xml_node()
 	 * @used-by self::importArray()
-	 * @used-by \Df\Xml\G::p()
 	 * @param array(string => string) $attributes
 	 */
 	function addAttributes(array $attributes):self {
@@ -88,15 +88,14 @@ class X extends MX {
 	 * 2016-09-01 Родительский метод задаёт вложенность тремя пробелами, а я предпочитаю символ табуляции.
 	 * @override
 	 * @see \Magento\Framework\Simplexml\Element::asNiceXml()
+	 * @used-by df_xml_g()
 	 * @used-by df_xml_prettify()
 	 * @used-by df_xml_report()
 	 * @used-by self::asNiceXml()
-	 * @used-by \Df\Xml\G::p()
 	 * @param string $filename [optional]
 	 * @param int $level  [optional]
-	 * @return string
 	 */
-	function asNiceXml($filename = '', $level = 0) {
+	function asNiceXml($filename = '', $level = 0):string {
 		if (is_numeric($level)) {
 			$pad = str_pad('', $level * 1, "\t", STR_PAD_LEFT);
 			$nl = "\n";
@@ -163,10 +162,9 @@ class X extends MX {
 	 * Однако этот алгоритм неверен: ведь в заголовке XML может присутствовать указание кодировки, например:
 	 * 		<?xml version='1.0' encoding='utf-8'?>
 	 * Новый алгоритм взят отсюда: http://stackoverflow.com/a/5947858
-	 * @used-by \Df\Xml\G::p()
-	 * @return string
+	 * @used-by df_xml_g()
 	 */
-	function asXMLPart() {
+	function asXMLPart():string {
 		$dom = dom_import_simplexml($this); /** @var \DOMElement $dom */
 		/**
 		 * 2021-12-13
@@ -208,14 +206,13 @@ class X extends MX {
 	}
 
 	/**
+	 * @used-by df_xml_g()
 	 * @used-by df_xml_node()
 	 * @used-by self::importArray()
-	 * @used-by \Df\Xml\G::p()
 	 * @param array(string => mixed) $array
 	 * @param string[]|bool $wrapInCData [optional]
-	 * @return X
 	 */
-	function importArray(array $array, $wrapInCData = []) {
+	function importArray(array $array, $wrapInCData = []):X {
 		foreach ($array as $key => $v) { /** @var string $key */ /** @var mixed $v */
 			if ($v instanceof X) {
 				/**

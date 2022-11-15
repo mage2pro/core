@@ -161,6 +161,7 @@ abstract class Client {
 	/**
 	 * 2017-07-13
 	 * @used-by self::reqJson()
+	 * @used-by self::reqXml()
 	 * @used-by \Dfe\Sift\API\Client::_construct()
 	 * @param callable|IFilter $f
 	 * @param int $p
@@ -228,6 +229,7 @@ abstract class Client {
 
 	/**
 	 * 2017-07-13
+	 * @see self::reqXml()
 	 * @used-by \Dfe\AlphaCommerceHub\API\Client::_construct()
 	 * @used-by \Dfe\Moip\API\Client::_construct()
 	 * @used-by \Dfe\Sift\API\Client::_construct()
@@ -239,12 +241,12 @@ abstract class Client {
 
 	/**
 	 * 2018-12-18
+	 * @see self::reqJson()
 	 * @used-by \Dfe\Vantiv\API\Client::_construct()
-	 * @param string $tag
-	 * @param array(string => mixed) $p [optional]
+	 * @param array(string => mixed) $atts [optional]
 	 */
-	final protected function reqXml($tag, array $p = []):void {$this->addFilterReq(
-		function(array $a) use($tag, $p) {return df_xml_g($tag, $a, $p);}
+	final protected function reqXml(string $tag, array $atts = []):void {$this->addFilterReq(
+		function(array $contents) use($tag, $atts):string {return df_xml_g($tag, $contents, $atts);}
 	);}
 
 	/**

@@ -1,6 +1,5 @@
 <?php
 namespace Df\Framework\W\Result;
-use Df\Xml\G;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\Response\HttpInterface as IHttpResponse;
 /**
@@ -29,9 +28,7 @@ abstract class Xml extends \Df\Framework\W\Result {
 	 * @used-by self::render()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 */
-	final function __toString():string {return df_xml_g(
-		$this->tag(), $this->contents(), [G::P__ATTRIBUTES => $this->attributes()]
-	);}
+	final function __toString():string {return df_xml_g($this->tag(), $this->contents(), $this->attributes());}
 
 	/**
 	 * 2021-12-03
