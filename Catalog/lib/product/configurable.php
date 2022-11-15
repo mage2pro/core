@@ -13,10 +13,10 @@ function df_configurable(P $p):bool {return T::TYPE_CODE === $p->getTypeId();}
 
 /**
  * 2019-09-18
- * @param P $p
+ * 2022-11-15 @deprecated It is unused.
  * @return P[]
  */
-function df_configurable_children(P $p) {
+function df_configurable_children(P $p):array {
 	df_assert(df_configurable($p));
 	$t = $p->getTypeInstance(); /** @var T $t */
 	return $t->getUsedProducts($p);
