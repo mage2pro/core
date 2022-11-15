@@ -16,18 +16,14 @@ function df_assert_leaf(CX $e):CX {return df_check_leaf($e) ? $e : df_error(
  * @see df_needs_cdata()
  * @used-by df_clean_xml()
  * @used-by \Dfe\SecurePay\Refund::process()
- * @param string $s
- * @return string
  */
-function df_cdata($s) {return X::markAsCData($s);}
+function df_cdata(string $s):string {return X::markAsCData($s);}
 
 /**
  * 2021-12-16
  * @used-by \Df\Xml\X::asNiceXml()
- * @param string $s
- * @return string
  */
-function df_cdata_raw_if_needed($s) {return !df_needs_cdata($s) ? $s : "<![CDATA[$s]]>";}
+function df_cdata_raw_if_needed(string $s):string {return !df_needs_cdata($s) ? $s : "<![CDATA[$s]]>";}
 
 /**
  * 2015-02-27
