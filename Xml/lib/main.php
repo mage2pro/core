@@ -34,7 +34,7 @@ function df_cdata_raw_if_needed(string $s):string {return !df_needs_cdata($s) ? 
  * Однако нам не нужно поддерживать PHP 5.1.
  *
  * Обратите внимание, что для несуществующего узла попытка вызова @uses count()
- * привелёт к сбою: «Warning: count(): Node no longer exists»
+ * приведёт к сбою: «Warning: count(): Node no longer exists»
  * http://3v4l.org/PsIPe#v512
  *
  * Текущий алгоритм проверен на работоспособность здесь: http://3v4l.org/VldTN
