@@ -7,5 +7,5 @@ final class Client extends \Zend_Http_Client {
 	 * @used-by \Df\API\Client::p()
 	 * @return array(string => string)
 	 */
-	function auth() {return $this->auth;}
+	function auth():array {return $this->auth;}
 }
