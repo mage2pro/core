@@ -57,7 +57,6 @@ function df_etn($v) {return $v ?: null;}
  * @used-by df_parent_name()
  * @used-by \Df\Xml\X::descend()
  * @used-by \Dfe\Stripe\Init\Action::need3DS()
- * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @param mixed|false $v
  * @return mixed|null
  */
@@ -67,6 +66,7 @@ function df_ftn($v) {return (false === $v) ? null : $v;}
  * 2022-10-15
  * @see df_nts()
  * @used-by df_file_read()
+ * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @param mixed|false $v
  * @return mixed|string
  */
