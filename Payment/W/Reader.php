@@ -157,9 +157,8 @@ class Reader implements IEvent {
 	 * 2017-03-12 Converts an event type from the PSP format to our internal format.
 	 * @used-by self::t()
 	 * @see \Dfe\AllPay\W\Reader::te2i()
-	 * @param string $t
 	 */
-	protected function te2i($t):string {return $t;}
+	protected function te2i(string $t):string {return $t;}
 
 	/**
 	 * 2017-03-10
