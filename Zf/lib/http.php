@@ -69,7 +69,7 @@ function df_zf_http_skip_certificate_verifications(C $c):void {
 	 * @see C::$config https://github.com/magento/zf1/blob/1.13.1/library/Zend/Http/Client.php#L126
 	 * The used adapter can be changed in $config, so we create another adapter.
 	 */
-	$c->setAdapter((new \Zend_Http_Client_Adapter_Socket)->setStreamContext([
-		'ssl' => ['allow_self_signed' => true, 'verify_peer' => false]
-	]));
+	$c->setAdapter((new \Zend_Http_Client_Adapter_Socket)->setStreamContext(['ssl' => [
+		'allow_self_signed' => true, 'verify_peer' => false
+	]]));
 }
