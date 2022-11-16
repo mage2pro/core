@@ -225,6 +225,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Конвертирует денежную величину из формата платёжной системы в обычное число.
 	 * Обратная операция по отношению к @see amountFormat()
 	 * @used-by dfp_refund()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
 	 * @used-by \Dfe\Stripe\Method::amountLimits()
 	 * @param float|int|string $a
 	 */
