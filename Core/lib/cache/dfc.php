@@ -41,7 +41,7 @@ function df_once($o, Closure $f, array $a = [], $unique = true, $offset = 0):voi
 	if (!isset($b['class'], $b['function'])) {
 		df_error("[df_once] Invalid backtrace frame:\n" . df_dump($b)); # 2017-01-02 Usually it means that $offset is wrong.
 	}
-	/** @var string $k */
+	/** @var string $k */ /** 2022-11-17 @see df_cc_method() */
 	$k = "{$b['class']}::{$b['function']}" . (!$a ? null : df_hash_a($a)) . ($unique ? null : spl_object_hash($f));
 	/**
 	 * 2022-10-17
@@ -113,7 +113,7 @@ function dfc($o, Closure $f, array $a = [], $unique = true, $offset = 0) {
 	if (!isset($b['class'], $b['function'])) {
 		df_error("[dfc] Invalid backtrace frame:\n" . df_dump($b)); # 2017-01-02 Usually it means that $offset is wrong.
 	}
-	/** @var string $k */
+	/** @var string $k */ /** 2022-11-17 @see df_cc_method() */
 	$k = "{$b['class']}::{$b['function']}" . (!$a ? null : df_hash_a($a)) . ($unique ? null : spl_object_hash($f));
 	/**
 	 * 2022-10-17
@@ -221,6 +221,7 @@ function dfcf(Closure $f, array $a = [], array $tags = [], $unique = true, $offs
 	 * А get_called_class() мы здесь не можем вызывать вовсе:
 	 * «Warning: get_called_class() called from outside a class»
 	 * https://3v4l.org/ioT7c
+	 * 2022-11-17 @see df_cc_method()
 	 */
 	$k = (!isset($b['class']) ? null : $b['class'] . '::') . $b['function']
 		. (!$a ? null : '--' . df_hash_a($a))
