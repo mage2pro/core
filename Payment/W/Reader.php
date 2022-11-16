@@ -105,9 +105,9 @@ class Reader implements IEvent {
 	 * 2017-03-10
 	 * @used-by self::tl()
 	 * @used-by \Df\Payment\W\Event::tl_()
-	 * @param string $t
+	 * @param string|null $t
 	 */
-	final function tl_(string $t):string {return $t ?: 'Confirmation';}
+	final function tl_($t):string {return !is_null($t) ? $t : 'Confirmation';}
 
 	/**
 	 * 2017-03-13 Returns a value in the PSP format.
