@@ -95,12 +95,10 @@ function df_url_frontend($path = null, array $p = [], $store = null):string {ret
  * 2017-01-22
  * @used-by dfp_url_api()
  * @used-by \Inkifi\Pwinty\API\Client::urlBase()
- * @param bool $test
- * @param string $tmpl
  * @param string[] $names
  * @param mixed ...$args [optional]
  */
-function df_url_staged($test, $tmpl, array $names, ...$args):string {
+function df_url_staged(bool $test, string $tmpl, array $names, ...$args):string {
 	$r = str_replace('{stage}', $test ? df_first($names) : df_last($names), $tmpl); /** @var string $r */
 	/**
 	 * 2017-09-10

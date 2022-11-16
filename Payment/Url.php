@@ -12,11 +12,9 @@ class Url {
 	/**
 	 * 2016-08-27
 	 * @used-by dfp_url_api()
-	 * @param string $url
-	 * @param bool $test [optional]
 	 * @param mixed ...$args [optional]
 	 */
-	final function url($url, $test = null, ...$args):string {return df_url_staged(
+	final function url(string $url, bool $test = null, ...$args):string {return df_url_staged(
 		!is_null($test) ? $test : $this->_m->test(), $url, $this->stageNames(), ...$args
 	);}
 
