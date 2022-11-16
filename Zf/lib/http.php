@@ -32,7 +32,7 @@ function df_zf_http($url = null, $config = []):C {
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  */
 function df_zf_http_last_req(C $c):string {
-	/** @var string $s */ $s = $c->getLastRequest();
+	$s = $c->getLastRequest(); /** @var string $s */
 	/**
 	 * 2017-07-13
 	 * @see \Zend_Http_Client_Adapter_Socket::write():
@@ -62,7 +62,7 @@ function df_zf_http_last_req(C $c):string {
  * @used-by df_zf_http()
  * @param C $c
  */
-function df_zf_http_skip_certificate_verifications(C $c) {
+function df_zf_http_skip_certificate_verifications(C $c):void {
 	/**
 	 * 2017-07-16
 	 * @see \Zend_Http_Client_Adapter_Socket is the default adapter for Zend_Http_Client:
