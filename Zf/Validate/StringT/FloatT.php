@@ -21,7 +21,7 @@ final class FloatT extends Parser {
 		if (is_string($v) && df_ends_with($v, '.') && ('.' !== $v)) {
 			$v .= '0';
 		}
-		return $this->getZendValidator('en_US')->isValid($v) || $this->getZendValidator('ru_RU')->isValid($v);
+		return $this->validator('en_US')->isValid($v) || $this->validator('ru_RU')->isValid($v);
 	}
 
  	/**
@@ -33,9 +33,10 @@ final class FloatT extends Parser {
 
 	/**
 	 * @override
-	 * @return string
+	 * @see \Df\Zf\Validate\StringT\Parser::validatorC()
+	 * @used-by \Df\Zf\Validate\StringT\Parser::validator()
 	 */
-	protected function getZendValidatorClass() {return 'Zend_Validate_Float';}
+	protected function validatorC():string {return 'Zend_Validate_Float';}
 
 	/** @used-by df_float() */
 	static function s():self {static $r; return $r ? $r : $r = new self;}
