@@ -30,10 +30,8 @@ function df_zf_http($url = null, $config = []):C {
 /**
  * 2017-07-01
  * @used-by \Dfe\Dynamics365\API\Facade::p()
- * @param C $c
- * @return string
  */
-function df_zf_http_last_req(C $c) {
+function df_zf_http_last_req(C $c):string {
 	/** @var string $s */ $s = $c->getLastRequest();
 	/**
 	 * 2017-07-13
