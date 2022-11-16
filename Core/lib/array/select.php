@@ -143,7 +143,8 @@ function dfad($o, $k = null, $d = null) {return is_null($k) ? $o : dfa(df_gd($o)
 
 /**
  * 2020-01-29
- * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
+ * 2022-11-17
+ * `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * @used-by \Df\Config\A::get()
  * @used-by \Df\Framework\Form\Element\Fieldset::v()
  * @used-by \Df\Payment\TM::req()

@@ -274,7 +274,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * As you can see from this code, we can not just return @see ACR::R from @see getConfigPaymentAction():
 	 * if @see isInitializeNeeded() returns `false` (it is by default),
 	 * then the order's state will be forcedly set to @see \Magento\Sales\Model\Order::STATE_PROCESSING.
-	 * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
+	 * 2022-11-17
+	 * `object` as an argument type is not supported by PHP < 7.2:
+	 * https://github.com/mage2pro/core/issues/174#user-content-object
 	 * @override
 	 * @see \Df\Payment\Method::initialize()
 	 * @param string $action

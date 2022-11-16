@@ -19,7 +19,7 @@ use Df\Core\RAM;
  * 2.2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
  * и поэтому Closure не уникальна.
  * 2022-11-17
- * 1) `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
+ * 1) `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * 2) Previously, I had a df_once() function which only difference from dfc() was a void result of $f.
  * Today I have noticed that you can use a void-result $f with dfc(): https://3v4l.org/CYJ1X
  * So I removed df_once().

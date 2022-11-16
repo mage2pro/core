@@ -138,7 +138,9 @@ abstract class Charge extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-06-12
-	 * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
+	 * 2022-11-17
+	 * `object` as an argument type is not supported by PHP < 7.2:
+	 * https://github.com/mage2pro/core/issues/174#user-content-object
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @param object $o
 	 */

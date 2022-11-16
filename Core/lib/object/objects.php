@@ -220,7 +220,8 @@ function df_sc($resultClass, $expectedClass = null, array $params = [], $cacheKe
  * 		class A {private $b = 3;}
  * 		$a = new A;
  * 		echo intval(isset($a->{'b'}));
- * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
+ * 2022-11-17
+ * `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * @see dfa()
  * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Df\StripeClone\Facade\Charge::cardData()

@@ -12,9 +12,8 @@ final class Report implements \IteratorAggregate, \Countable {
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
 	 * @param string|Phrase|null $name
 	 * @param string|Phrase $value
-	 * @param int $weight [optional]
 	 */
-	function add($name, $value, $weight = 0):void {$this->_items[]= new Entry($name, $value, $weight);}
+	function add(string $name, string $value, int $weight = 0):void {$this->_items[]= new Entry($name, $value, $weight);}
 
 	/**
 	 * 2016-08-09

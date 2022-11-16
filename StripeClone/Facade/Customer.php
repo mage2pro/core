@@ -21,7 +21,9 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * https://github.com/mage2pro/moip/blob/0.7.2/Facade/Customer.php#L37-L55
 	 * @see \Dfe\Spryng\Facade\Customer::cardAdd()
 	 * https://github.com/mage2pro/spryng/blob/1.1.10/Facade/Customer.php#L18-L27
-	 * 2022-11-13 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
+	 * 2022-11-13
+	 * `object` as an argument type is not supported by PHP < 7.2:
+	 * https://github.com/mage2pro/core/issues/174#user-content-object
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Moip\Facade\Customer::cardAdd()
 	 * @see \Dfe\Omise\Facade\Customer::cardAdd()
@@ -57,7 +59,9 @@ abstract class Customer extends \Df\Payment\Facade {
 
 	/**
 	 * 2017-02-10
-	 * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
+	 * 2022-11-17
+	 * `object` as an argument type is not supported by PHP < 7.2:
+	 * https://github.com/mage2pro/core/issues/174#user-content-object
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Moip\Facade\Customer::id()
 	 * @see \Dfe\Omise\Facade\Customer::id()
@@ -132,7 +136,9 @@ abstract class Customer extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * 2017-02-18 Добавил обработку ПС (Spryng), которые не поддерживают сохранение карт.
-	 * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
+	 * 2022-11-17
+	 * `object` as an argument type is not supported by PHP < 7.2:
+	 * https://github.com/mage2pro/core/issues/174#user-content-object
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @param object $c
 	 * @return string|null

@@ -49,7 +49,9 @@ final class Dumper {
 	;}));}
 
 	/**
-	 * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
+	 * 2022-11-17
+	 * `object` as an argument type is not supported by PHP < 7.2:
+	 * https://github.com/mage2pro/core/issues/174#user-content-object
 	 * @used-by self::dump()
 	 * @param object $o
 	 */
