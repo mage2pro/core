@@ -442,9 +442,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @override
 	 * @see \Df\Payment\Method::_refund()
 	 * @used-by \Df\Payment\Method::refund()
-	 * @param float|null $a
 	 */
-	final protected function _refund($a):void {
+	final protected function _refund(float $a):void {
 		$ii = $this->ii(); /** @var OP $ii */
 		/**
 		 * 2016-03-17, 2017-11-11

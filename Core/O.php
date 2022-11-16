@@ -21,7 +21,6 @@ namespace Df\Core;
  * @see \Dfe\CheckoutCom\Handler
  * @see \Dfe\TwoCheckout\Address
  * @see \Dfe\TwoCheckout\Handler
- * @see \Dfe\TwoCheckout\LineItem
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item
  * @see \Inkifi\Mediaclip\API\Entity\Order\Item\File
  * @see \Inkifi\Mediaclip\Event

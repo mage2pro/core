@@ -158,7 +158,7 @@ function dfp_last2($a):string {return substr(strval(round(100 * df_float($a))), 
  * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
- * @used-by \Dfe\TwoCheckout\Handler\Charge::op()
+ * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::op()
  * @see \Df\Payment\Method::action()
  * @param II|OP|QP|null $p [optional]
  * @param bool $v [optional]

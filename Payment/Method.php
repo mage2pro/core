@@ -1750,9 +1750,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @see \Dfe\SecurePay\Method::_refund()
 	 * @see \Dfe\TwoCheckout\Method::_refund()
-	 * @param float $a
 	 */
-	protected function _refund($a):void {}
+	protected function _refund(float $a):void {}
 
 	/**
 	 * 2016-08-14

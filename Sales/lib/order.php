@@ -28,7 +28,7 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by \Df\Payment\W\Handler::o()
  * @used-by \Df\Sales\Model\Order\Payment::processActionS()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::o()
- * @used-by \Dfe\TwoCheckout\Handler\Charge::o()
+ * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::o()
  * @used-by \Inkifi\Mediaclip\Event::o()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()

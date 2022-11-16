@@ -186,7 +186,6 @@ function df_oqi_leafs($oq, Closure $f = null, $locale = null):array {
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
- *
  * @param OI|QI $i
  * @param bool $withTax [optional]
  * @param bool $withDiscount [optional]
@@ -312,7 +311,7 @@ function df_oqi_tax_percent($i):float {return floatval(df_oqi_top($i)->getTaxPer
  * @used-by df_oqi_tax_percent()
  * @used-by df_oqi_url()
  * @used-by omx_parse_sku()
- * @used-by \Dfe\TwoCheckout\LineItem\Product::top()
+ * @used-by \Dfe\TwoCheckout\LineItem\Product::options()
  * @used-by \Yaman\Ordermotion\Observer::BuildOrderDetail()
  * @param OI|QI $i
  * @return OI|QI
