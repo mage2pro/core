@@ -8,6 +8,7 @@ namespace Df\Zf\Filter;
  * Такое у меня происходило в методе @see Df_Autotrading_Model_Request_Locations::parseLocation()
  * Кто виноват: решение или исходный класс Zend_Filter_StringTrim — не знаю (скорее, решение).
  * Поэтому мой класс \Df\Zf\Filter\StringTrim дополняет решение по ссылке выше программным кодом из Zend Framework 2.0.
+ * @used-by df_trim()
  */
 final class StringTrim extends \Zend_Filter_StringTrim {
 	/**
