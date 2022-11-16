@@ -26,7 +26,7 @@ class Action {
 		$m = $this->_m; /** @var M $m */
 		$this->preorder();
 		$p = $this->redirectParams(); /** @var array(string => mixed) $p */
-		if ($url = dfp_url_api($m, $this->redirectUrl())) { /** @var string|null $url */
+		if ($url = dfp_url_api($m, $this->redirectUrl())) { /** @var string $url */
 			PO::setRedirectData($m, $url, $p, $this->forceGet());
 			# 2016-12-20
 			if ($this->s()->log()) {
@@ -238,9 +238,8 @@ class Action {
 	 * @see \Dfe\Stripe\Init\Action::redirectUrl()
 	 * @see \Dfe\TBCBank\Init\Action::redirectUrl()
 	 * @see \Dfe\YandexKassa\Init\Action::redirectUrl()
-	 * @return string|null
 	 */
-	protected function redirectUrl() {return null;}
+	protected function redirectUrl():string {return '';}
 
 	/**
 	 * 2017-03-21
