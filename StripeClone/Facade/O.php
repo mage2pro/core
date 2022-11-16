@@ -16,6 +16,7 @@ use Df\StripeClone\Method as M;
 abstract class O extends \Df\Payment\Facade {
 	/**
 	 * 2016-12-27
+	 * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
 	 * @used-by \Df\StripeClone\Method::transInfo()
 	 * @see \Dfe\Moip\Facade\O::toArray()
 	 * @see \Dfe\Omise\Facade\O::toArray()

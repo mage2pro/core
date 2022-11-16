@@ -19,6 +19,7 @@ use Df\Core\RAM;
  * 2.1) Если Ваш метод содержит несколько вызовов dfc() для разных Closure.
  * 2.2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
  * и поэтому Closure не уникальна.
+ * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
  * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
  * @used-by \Df\Sso\Button::_prepareLayout()
@@ -91,6 +92,7 @@ function df_once($o, Closure $f, array $a = [], $unique = true, $offset = 0):voi
  * 2.1) Если Ваш метод содержит несколько вызовов dfc() для разных Closure.
  * 2.2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
  * и поэтому Closure не уникальна.
+ * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
  * @used-by dfaoc()
  * @see df_once()
  * @see df_prop()

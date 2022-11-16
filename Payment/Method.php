@@ -1146,14 +1146,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	);}
 
 	/**
-	 * 2016-02-15
-	 * @override
-	 * How is a payment method's initialize() used? https://mage2.pro/t/722
-	 *
+	 * 2016-02-15 How is a payment method's initialize() used? https://mage2.pro/t/722
 	 * @see \Magento\Payment\Model\MethodInterface::initialize()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L361-L372
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::initialize()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L838-L852
+	 * 2022-11-17 `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174
+	 * @override
+	 * @see \Magento\Payment\Model\MethodInterface::initialize()
 	 * @param string $paymentAction
 	 * @param object $stateObject
 	 * 2017-02-08
