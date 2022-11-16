@@ -89,9 +89,7 @@ class AbstractElement extends Sb {
 	 */
 	function afterSetForm(Sb $sb, Sb $r):Sb {
 		if ($sb instanceof ElementI) {
-			df_once($sb, function() use($sb) {
-				$sb->onFormInitialized();
-			});
+			dfc($sb, function() use($sb) {$sb->onFormInitialized();});
 		}
 		return $r;
 	}

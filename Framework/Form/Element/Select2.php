@@ -45,7 +45,7 @@ class Select2 extends Select {
 		 * поэтому дожидаемся их инициализации.
 		 */
 		if ($this->getValues()) {
-			df_once($this, function() {
+			dfc($this, function() {
 				# 2016-09-03
 				# Этот класс присваивается оригинальному элементу select
 				# (который при использовании select2 вроде бы роли не играет),

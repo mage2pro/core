@@ -141,7 +141,7 @@ abstract class Button extends _P {
 	 * @see \Magento\Framework\View\Element\AbstractBlock::_prepareLayout()
 	 * @used-by \Magento\Framework\View\Element\AbstractBlock::setLayout()
 	 */
-	protected function _prepareLayout():void {df_once($this, function() {df_page_config()->addPageAsset('Df_Sso::main.css');});}
+	protected function _prepareLayout():void {dfc($this, function() {df_page_config()->addPageAsset('Df_Sso::main.css');});}
 	
 	/**
 	 * 2016-11-24
