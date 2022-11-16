@@ -216,10 +216,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\Robokassa\Method::amountFormat()
 	 * @see \Dfe\TwoCheckout\Method::amountFormat()
 	 * @see \Dfe\YandexKassa\Method::amountFormat()
-	 * @param float $a
 	 * @return float|int|string
 	 */
-	function amountFormat($a) {return round($a * $this->amountFactor());}
+	function amountFormat(float $a) {return round($a * $this->amountFactor());}
 
 	/**
 	 * 2016-09-08
