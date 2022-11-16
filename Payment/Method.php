@@ -248,7 +248,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * We can use `final` in the method's signature despite if M2 code generation
 	 * because the class implements @see INonInterceptable.
 	 * @used-by self::isAvailable()
-	 * @param _DO $o
 	 */
 	final function assignData(_DO $o):self {
 		/**
