@@ -93,7 +93,6 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Moip\ConfigProvider::config()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\Spryng\Settings::api()
-	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @used-by \Inkifi\Pwinty\API\Client::urlBase()
 	 * @param null|string|int|S $s [optional]
 	 */

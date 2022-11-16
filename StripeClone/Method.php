@@ -155,9 +155,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by \Df\Payment\Method::authorize()
 	 * @used-by \Df\Payment\Method::capture()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
-	 * @param bool|null $capture [optional]
 	 */
-	final function charge($capture = true):void {
+	final function charge(bool $capture = true):void {
 		df_sentry_extra($this, 'Amount', $a = dfp_due($this)); /** @var float $a */
 		df_sentry_extra($this, 'Need Capture?', df_bts($capture));
 		/**
