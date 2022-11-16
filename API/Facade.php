@@ -168,7 +168,11 @@ abstract class Facade {
 		list($id, $p) = is_array($p) ? [null, $p] : [$p, []]; /** @var int|string|null $id */
 		/** @uses \Df\API\Client::__construct() */
 		$c = df_newa(df_con($this, 'API\\Client'), Client::class,
-			$this->path($id, $suffix), $p, $method, $this->zfConfig()
+			# 2022-11-17
+			# 1) PHP of any versions does not accept `null` for arguments of type `string`:
+			# https://github.com/mage2pro/core/issues/174
+			# 2) PHP ≥ 7 accepts `int` and `float` for arguments of type `string`: https://github.com/mage2pro/core/issues/174
+			$this->path(df_nts($id), $suffix), $p, $method, $this->zfConfig()
 			,(is_null($id) ? null : $this->storeByP($id)) ?: $this->_store
 		); /** @var Client $c */
 		$this->adjustClient($c);
@@ -218,15 +222,15 @@ abstract class Facade {
 
 	/**
 	 * 2017-12-03
+	 * 2022-11-17 PHP ≥ 7 accepts `int` and `float` for arguments of type `string`: https://github.com/mage2pro/core/issues/174
 	 * @used-by self::p()
 	 * @see \Dfe\AlphaCommerceHub\API\Facade::path()
 	 * @see \Dfe\Sift\API\Facade\Event::path()
 	 * @see \Dfe\TBCBank\API\Facade::path()
 	 * @see \Dfe\Vantiv\API\Facade::path()
 	 * @see \Inkifi\Mediaclip\API\Facade\User::path()
-	 * @param int|string|null $id
 	 */
-	protected function path($id, string $suffix = ''):string {return df_cc_path(
+	protected function path(string $id, string $suffix = ''):string {return df_cc_path(
 		$this->prefix(), strtolower(df_class_l($this)) . 's', urlencode($id), $suffix
 	);}
 
