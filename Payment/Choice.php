@@ -30,9 +30,8 @@ class Choice {
 	 * @see \Dfe\Moip\Choice::title()
 	 * @see \Dfe\PostFinance\Choice::title()
 	 * @see \Dfe\Robokassa\Choice::title()
-	 * @return Phrase|string|null
 	 */
-	function title() {return null;}
+	function title():string {return '';}
 
 	/**
 	 * 2017-04-17
