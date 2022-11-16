@@ -183,10 +183,9 @@ abstract class Client {
 	 * @used-by self::__construct()
 	 * @see \Df\ZohoBI\API\Client::commonParams()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::commonParams()
-	 * @param string $path
 	 * @return array(string => mixed)
 	 */
-	protected function commonParams($path):array {return [];}
+	protected function commonParams(string $path):array {return [];}
 
 	/**
 	 * 2017-07-05
