@@ -157,8 +157,7 @@ function df_prop_k($o, $k, $v = DF_N, $d = null) {/** @var object|mixed|null $r 
 		 * 2) @see dfc()
 		 */
 		static $hasWeakMap; /** @var bool $hasWeakMap */
-		$hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : @class_exists('WeakMap');
-		if (!$hasWeakMap) {
+		if (!($hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : @class_exists('WeakMap'))) {
 			if (!isset($o->$a)) {
 				$o->$a = [];
 			}
