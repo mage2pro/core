@@ -14,12 +14,12 @@ final class StringTrim extends \Zend_Filter_StringTrim {
 	/**
 	 * @override
 	 * @see \Zend_Filter_StringTrim::_unicodeTrim()
-	 * @param string $value
+	 * @param string $s
 	 * @param string $charlist
 	 */
-	protected function _unicodeTrim($value, $charlist = '\\\\s'):string {/** @var string $r */
-		if ('' === $value) {
-			$r = $value;
+	protected function _unicodeTrim($s, $charlist = '\\\\s'):string {/** @var string $r */
+		if ('' === $s) {
+			$r = $s;
 		}
 		else {
 			# Начало кода из Zend Framework 2.0
@@ -29,7 +29,7 @@ final class StringTrim extends \Zend_Filter_StringTrim {
 				$charlist
 			);
   			$pattern = '/^[' . $chars . ']+|[' . $chars . ']+$/usSD';
-			$r = preg_replace($pattern, '', $value);
+			$r = preg_replace($pattern, '', $s);
 			# Конец кода из Zend Framework 2.0
 			if (null === $r) {
 				/**
@@ -44,20 +44,15 @@ final class StringTrim extends \Zend_Filter_StringTrim {
 				 * «/contacts/index/++++++++++++++++++++++++++++++++++++++++++Result:+�å+������ü+����û+��ÿ+�������è;»
 				 * Неверность кодировки объясняется, видимо, функциями ядра для работы с веб-адресами.
 				 */
-				$r = $this->_slowUnicodeTrim($value, $charlist);
+				$r = $this->_slowUnicodeTrim($s, $charlist);
 			}
 		}
 		return $r;
 	}
 
-	/**
-	 * @used-by self::_unicodeTrim()
-	 * @param $value
-	 * @param $chars
-	 * @return string
-	 */
-	private function _slowUnicodeTrim($value, $chars) {
-		$utfChars = $this->_splitUtf8($value);
+	/** @used-by self::_unicodeTrim() */
+	private function _slowUnicodeTrim(string $s, string $chars):string {
+		$utfChars = $this->_splitUtf8($s);
 		$pattern = '/^[' . $chars . ']$/usSD';
 		while ($utfChars && preg_match($pattern, $utfChars[0])) {
 			array_shift($utfChars);
@@ -70,15 +65,14 @@ final class StringTrim extends \Zend_Filter_StringTrim {
 
 	/**
 	 * @used-by self::_slowUnicodeTrim()
-	 * @param $v
 	 * @return array|bool
 	 */
-	private function _splitUtf8($v) {
+	private function _splitUtf8(string $s) {
 		try {
-			$r = str_split(iconv('UTF-8', 'UTF-32BE', $v), 4);
+			$r = str_split(iconv('UTF-8', 'UTF-32BE', $s), 4);
 		}
 		catch (\Exception $e) {
-			df_error("The value is not encoded in UTF-8: «{$v}».");
+			df_error("The value is not encoded in UTF-8: «{$s}».");
 		}
 		array_walk($r, function(&$c) {$c = iconv('UTF-32BE', 'UTF-8', $c);});
 		return $r;
