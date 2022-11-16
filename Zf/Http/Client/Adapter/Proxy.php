@@ -9,24 +9,22 @@ namespace Df\Zf\Http\Client\Adapter;
  * https://github.com/magento/zf1/blob/1.14.0/library/Zend/Http/Client/Adapter/Proxy.php#L299-L304
  * https://github.com/magento/zf1/blob/1.13.1/library/Zend/Http/Client/Adapter/Proxy.php#L299-L304
  * I have fixed the issue by using the @see \Zend_Http_Client_Adapter_Proxy::connectHandshake() method
- * from the `magento/zendframework1` package 1.14.1:
+ * from the 1.14.1 version of the `magento/zendframework1` package:
  * https://github.com/magento/zf1/blob/1.14.1/library/Zend/Http/Client/Adapter/Proxy.php#L299-L302
  */
 final class Proxy extends \Zend_Http_Client_Adapter_Proxy {
     /**
      * Preform handshaking with HTTPS proxy using CONNECT method
-     *
-     * @param string  $host
-     * @param integer $port
-     * @param string  $http_ver
-     * @param array   $headers
-     * @return void
+     * @overide
+	 * @see \Zend_Http_Client_Adapter_Proxy::connectHandshake()
+	 * @used-by \Zend_Http_Client_Adapter_Proxy::write()
+     * @param string $host
+     * @param int $port
+     * @param string $http_ver
+     * @param array $headers
      * @throws \Zend_Http_Client_Adapter_Exception
      */
-    protected function connectHandshake(
-        $host, $port = 443, $http_ver = '1.1', array &$headers = array()
-    )
-    {
+    protected function connectHandshake($host, $port = 443, $http_ver = '1.1', array &$headers = []):void {
         $request = "CONNECT $host:$port HTTP/$http_ver\r\n" .
                    "Host: " . $host . "\r\n";
 
