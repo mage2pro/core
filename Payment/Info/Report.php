@@ -10,10 +10,10 @@ final class Report implements \IteratorAggregate, \Countable {
 	 * @used-by self::addAfter()
 	 * @used-by \Df\Payment\Block\Info::si()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
-	 * @param string|Phrase|null $name
-	 * @param string|Phrase $value
+	 * @param string $k
+	 * @param string $v
 	 */
-	function add(string $name, string $value, int $weight = 0):void {$this->_items[]= new Entry($name, $value, $weight);}
+	function add(string $k, string $v, int $weight = 0):void {$this->_items[]= new Entry($k, $v, $weight);}
 
 	/**
 	 * 2016-08-09

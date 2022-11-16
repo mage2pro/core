@@ -498,8 +498,7 @@ abstract class Info extends _P {
 		# К сожалению, нельзя использовать [$this, __FUNCTION__], потому что метод si() — protected.
 		# https://3v4l.org/64N3q
 		? df_map_k(function($k, $v) {return $this->si($k, $v);}, $k)
-		# 2017-02-19 Отныне пустые строки выводить не будем.
-		: (df_nes($v) ? null : $this->dic()->add($k, $v));
+		: (df_nes($v) ? null : $this->dic()->add($k, $v)); # 2017-02-19 Отныне пустые строки выводить не будем.
 	}
 
 	/**
