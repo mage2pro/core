@@ -82,6 +82,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @see \Dfe\AllPay\Charge::pCharge()
+	 * @see \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @see \Dfe\Dragonpay\Charge::pCharge()
 	 * @see \Dfe\IPay88\Charge::pCharge()
 	 * @see \Dfe\PostFinance\Charge::pCharge()
