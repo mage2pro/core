@@ -10,9 +10,8 @@ use Zend_Http_Client as C;
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param string|null $url [optional]
  * @param array(string => mixed)|null $config [optional]
- * @return C
  */
-function df_zf_http($url = null, $config = []) {
+function df_zf_http($url = null, $config = []):C {
 	$r = new C($url, $config + [
 		'timeout' => 120
 		/**
