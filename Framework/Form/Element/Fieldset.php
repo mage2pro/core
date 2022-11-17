@@ -333,13 +333,11 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * 2016-07-30
 	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
 	 * @used-by \Doormall\Shipping\Partner\FE::onFormInitialized()
-	 * @param string $n
-	 * @param string|null|Phrase $l [optional]
 	 * @param int|float|null $d [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
-	final protected function money($n, $l = null, $d = null, $data = []) {return $this->number(
+	final protected function money(string $n, string $l = '', $d = null, array $data = []) {return $this->number(
 		$n, $l, $data + ['value' => $d, Number::LABEL_RIGHT => df_currency_base($this->scope())->getCode()]
 	);}
 
