@@ -3,6 +3,8 @@ namespace Df\Framework\Validator;
 use Df\Framework\IValidator as IV;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Phrase;
+# 2016-06-30
+/**  2022-11-17 @deprecated It is unused. */
 class Composite implements IV {
 	/**
 	 * 2016-06-30

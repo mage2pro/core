@@ -2,6 +2,7 @@
 namespace Df\Framework\Validator;
 use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 use Magento\Framework\Phrase;
+# 2016-06-30
 class Currency implements \Df\Framework\IValidator {
 	/**
 	 * 2016-06-30
