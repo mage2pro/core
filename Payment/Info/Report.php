@@ -35,11 +35,8 @@ final class Report implements \IteratorAggregate, \Countable {
 	/**
 	 * 2016-08-09
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::prepareDic()
-	 * @param string $nameToFind
-	 * @param string|Phrase|null $name
-	 * @param string|Phrase $value
 	 */
-	function addAfter($nameToFind, $name, $value):void {
+	function addAfter(string $nameToFind, string $name, string $value):void {
 		/** @var Entry|null $itemToFind */
 		$itemToFind = df_find($this, function(Entry $e) use($nameToFind) {return $e->name() === $nameToFind;});
 		$this->add($name, $value, !$itemToFind ? 0 : 1 + $itemToFind->weight());
