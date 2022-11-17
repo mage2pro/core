@@ -173,5 +173,6 @@ function df_config_structure():Structure {return df_o(Structure::class);}
 
 /**
  * 2016-08-02
+ * @used-by \Df\Config\Backend::label()
  */
 function df_config_tab_label(Section $s):string {return DfStructure::tab($s->getData()['tab'], 'label');}

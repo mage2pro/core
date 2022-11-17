@@ -3,7 +3,6 @@ namespace Df\Config;
 use Magento\Config\Model\Config\Structure\AbstractElement as ConfigElement;
 use Magento\Config\Model\Config\Structure\Element\Section;
 use Magento\Config\Model\Config\Structure\ElementInterface as IConfigElement;
-use Magento\Framework\Phrase;
 /**
  * 2016-08-03
  * Since Magento 2.1.0, a backend model is created
@@ -118,7 +117,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	final protected function label():string {return dfc($this, function() {
 		/** 2017-12-12 @todo Should we care of a custom `config_path` or not? https://mage2.pro/t/5148 */
 		$pathA = explode('/', $this->getPath()); /** @var string[] $pathA */
-		$resultA = []; /** @var Phrase[] $resultA */
+		$resultA = []; /** @var string[] $resultA */
 		/** @var IConfigElement|ConfigElement|Section|null $e */
 		while ($pathA && ($e = df_config_structure()->getElementByPathParts($pathA))) {
 			$resultA[]= $e->getLabel();
