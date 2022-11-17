@@ -154,13 +154,11 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * 2015-11-17
 	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
-	 * @param string $name
-	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed)|bool|string $value [optional]
 	 * @param string|null $note [optional]
 	 * @return Checkbox|E
 	 */
-	final protected function checkbox($name, $label = null, $value = null, $note = null) {
+	final protected function checkbox(string $name, string $label = '', $value = null, $note = null) {
 		$data = is_array($value) ? $value + ['note' => $note] : (
 			is_bool($value)
 			? ['checked' => $value, 'note' => $note]
