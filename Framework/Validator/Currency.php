@@ -21,10 +21,10 @@ class Currency implements \Df\Framework\IValidator {
 	 * @see \Df\Framework\IValidator::check()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
 	 * @param AE $e
-	 * @return true|Phrase|Phrase[]
+	 * @return true|string|string[]
 	 */
 	function check(AE $e) {return
-		# 2016-11-20 !! обязательно, потому что нам нужно вернуть именно true|Phrase|Phrase[]
+		# 2016-11-20 !! обязательно, потому что нам нужно вернуть именно true|string|string[]
 		!!df_filter($this->_iso3, function($c) {return df_currency_has_rate($c);}) ?: $this->message()
 	;}
 
@@ -32,7 +32,7 @@ class Currency implements \Df\Framework\IValidator {
 	 * 2016-06-30
 	 * @used-by self::check()
 	 */
-	private function message():Phrase {
+	private function message():string {
 		$namesA = df_quote_russian(df_html_b(df_currency_name($this->_iso3))); /** @var string $namesA */
 		$namesS = df_csv_pretty($namesA); /** @var string $namesS */
 		/** @var string $whatToEnable */ /** @var string $whatToSet */ /** @var string $object */
@@ -51,7 +51,6 @@ class Currency implements \Df\Framework\IValidator {
 		;
 		$urlEnable = df_url_backend('admin/system_config/edit/section/currency'); /** @var string $urlEnable */
 		$urlRate = df_url_backend('admin/system_currency'); /** @var string $urlRate */
-		# 2016-11-2 @todo It should return a Phrase, not a string.
 		return "Please <a href='{$urlEnable}' target='_blank'>enable</a> {$whatToEnable}"
 	   	. " and <a href='{$urlRate}' target='_blank'>set {$whatToSet}</a> for {$object}.";
 	}

@@ -34,7 +34,7 @@ class AbstractElement extends Sb {
 	function afterGetComment(Sb $sb, $r):string {
 		if ($vc = df_fe_fc($sb, 'dfValidator')) { /** @var string|null $vc */
 			$v = df_o($vc); /** @var \Df\Framework\IValidator $v */
-			if (true !== ($messages = $v->check($sb))) { /** @var Phrase|Phrase[]|true $messages */
+			if (true !== ($messages = $v->check($sb))) { /** @var string|string[]|true $messages */
 				$r .= df_tag_list(df_array($messages), false, 'df-enabler-warnings');
 			}	
 		}
