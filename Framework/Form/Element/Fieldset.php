@@ -454,12 +454,10 @@ class Fieldset extends FieldsetM implements ElementI {
 	/**
 	 * 2015-12-11
 	 * 2022-11-03 @deprecated It is unused.
-	 * @param string $name
-	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
-	final protected function size($name, $label = null, $data = []) {return $this->quantity(
+	final protected function size(string $name, string $label = '', array $data = []) {return $this->quantity(
 		$name, $label, $data + [Quantity::P__VALUES => SizeUnit::s()->toOptionArray()]
 	);}
 
