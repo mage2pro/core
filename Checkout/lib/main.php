@@ -23,12 +23,12 @@ function df_cart_h():CartH {return df_o(CartH::class);}
 
 /**
  * 2016-07-14
+ * 2022-11-17 PHP allows to declare a type before `...`: https://github.com/mage2pro/core/issues/174#user-content-...
  * @used-by dfp_error()
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @param string|Phrase ...$a
  */
-function df_checkout_error(...$a) {df_checkout_message(df_format($a), false);}
+function df_checkout_error(string ...$a):void {df_checkout_message(df_format($a), false);}
 
 /**
  * 2021-05-26
