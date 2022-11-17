@@ -345,14 +345,12 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * 2015-12-13
 	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
-	 * @param string $name
-	 * @param string|null|Phrase $label [optional]
 	 * @param int|null $default [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Number|E
 	 */
-	final protected function percent($name, $label = null, $default = null, $data = []) {return $this->number(
-		$name, $label, $data + ['value' => $default, Number::LABEL_RIGHT => '%']
+	final protected function percent(string $name, string $l = '', $def = null, array $data = []) {return $this->number(
+		$name, $l, $data + ['value' => $def, Number::LABEL_RIGHT => '%']
 	);}
 
 	/**
