@@ -173,7 +173,5 @@ function df_config_structure():Structure {return df_o(Structure::class);}
 
 /**
  * 2016-08-02
- * @param Section $s
- * @return Phrase
  */
-function df_config_tab_label(Section $s) {return DfStructure::tab($s->getData()['tab'], 'label');}
+function df_config_tab_label(Section $s):string {return DfStructure::tab($s->getData()['tab'], 'label');}
