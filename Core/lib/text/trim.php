@@ -29,12 +29,20 @@ function df_chop($s, $max = null):string {return !$max || (mb_strlen($s = df_tri
  * @used-by df_chop()
  * @used-by df_csv_parse()
  * @used-by df_ejs()
+ * @used-by df_explode_n()
  * @used-by df_explode_space()
  * @used-by df_parse_colon()
  * @used-by df_trim()
- * @used-by df_explode_n()
+ * @used-by df_trim_ds()
+ * @used-by df_xml_parse()
  * @used-by \Df\Config\Source\LetterCase::apply()
  * @used-by \Df\Core\Format\Html\Tag::content()
+ * @used-by \Df\Framework\Form\Element::uidSt()
+ * @used-by \Df\Qa\Failure::sections()
+ * @used-by \Dfe\Portal\Block\Content::getTemplate()
+ * @used-by \Dfe\Portal\Controller\Index\Index::execute()
+ * @used-by \Dfe\Portal\Router::match()
+ * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
  * @used-by \Dfe\TwoCheckout\Address::line()
  * @used-by \Dfe\TwoCheckout\Method::_refund()
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
@@ -46,7 +54,7 @@ function df_chop($s, $max = null):string {return !$max || (mb_strlen($s = df_tri
 function df_trim($s, $charlist = null, $throw = false) {return df_try(function() use($s, $charlist, $throw) {
 	/** @var string|string[] $r */
 	if (is_array($s)) {
-		$r = df_map('df_trim', $s, [$charlist, $throw]);
+		$r = df_map('df_trim', $s, [$charlist, $throw]); /** @uses df_trim() */
 	}
 	else {
 		if (!is_null($charlist)) {
