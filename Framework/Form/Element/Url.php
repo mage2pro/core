@@ -1,7 +1,6 @@
 <?php
 namespace Df\Framework\Form\Element;
 use Df\Framework\Form\Element;
-
 /**
  * 2016-05-30
  * @see \Df\Amazon\FE\JsOrigin
