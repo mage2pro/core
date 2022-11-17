@@ -57,9 +57,8 @@ abstract class Customer extends \Df\Core\O {
 	 * @used-by CustomerReturn::register()
 	 * @see \Dfe\AmazonLogin\Customer::nameLast()
 	 * @see \Dfe\FacebookLogin\Customer::nameLast()
-	 * @return string|null
 	 */
-	function nameLast() {return null;}
+	function nameLast():string {return '';}
 
 	/**
 	 * 2016-06-04
