@@ -72,10 +72,6 @@ class Element extends AE implements ElementI {
 	 * Метод @uses \Magento\Framework\Data\Form\Element\AbstractElement::_getUiId()
 	 * возвращает атрибут и его значение уже в виже слитной строки, поэтому парсим её.
 	 * https://github.com/magento/magento2/blob/c58d2d/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L331-L338
-	 * @param AE $element
-	 * @param string $suffix [optional]
 	 */
-	final static function uidSt(AE $element, $suffix = null):string {return df_trim(
-		df_last(explode('=', $element->_getUiId($suffix))), '"'
-	);}
+	final static function uidSt(AE $e, $suf = ''):string {return df_trim(df_last(explode('=', $e->_getUiId($suf))), '"');}
 }

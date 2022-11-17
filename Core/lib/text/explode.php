@@ -25,10 +25,9 @@ function df_explode_multiple(array $delimiters, $s):array {
  * @used-by \Dfe\TBCBank\W\Reader::reqFilter()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
- * @param string $s
  * @return string[]
  */
-function df_explode_n($s):array {return explode("\n", df_normalize(df_trim($s)));}
+function df_explode_n(string $s):array {return explode("\n", df_normalize(df_trim($s)));}
 
 /**
  * 2016-09-03 Another implementation: df_explode_multiple(['/', DS], $path)
