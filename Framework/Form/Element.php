@@ -54,7 +54,7 @@ class Element extends AE implements ElementI {
 	 * @param AE|Element $e
 	 */
 	final static function getClassDfOnly(AE $e):string {return df_cc_s(array_filter(
-		df_trim(df_explode_space($e->getClass())), function($c) {return df_starts_with($c, 'df-');}
+		df_explode_space($e->getClass()), function($c) {return df_starts_with($c, 'df-');}
 	));}
 
 	/**

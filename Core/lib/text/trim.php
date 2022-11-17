@@ -27,6 +27,7 @@ function df_chop($s, $max = null):string {return !$max || (mb_strlen($s = df_tri
  * @see Df_Core_Model_RemoteControl_Coder::encode()
  * 2017-07-01 Добавил параметр $throw.
  * @used-by df_ejs()
+ * @used-by df_explode_space()
  * @used-by df_parse_colon()
  * @used-by df_trim()
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()

@@ -51,7 +51,7 @@ function df_explode_path($p):array {return df_explode_xpath(df_path_n($p));}
  * @used-by \Df\Framework\Form\Element::getClassDfOnly()
  * @return string[]
  */
-function df_explode_space(string $s):array {return explode(' ', $s);}
+function df_explode_space(string $s):array {return df_trim(explode(' ', $s));}
 
 /**
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
