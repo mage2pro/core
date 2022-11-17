@@ -389,14 +389,12 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @used-by \Df\Framework\Form\Element\Quantity::onFormInitialized()
 	 * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
 	 * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
-	 * @param string $name
-	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $v
 	 * @param array(string => mixed)|string $data [optional]
 	 * @param array|string|null $cfg [optional]
 	 * @return SelectM|E
 	 */
-	final protected function select($name, $label, $v, $data = [], $cfg = 'select') {
+	final protected function select(string $name, string $label, $v, $data = [], $cfg = 'select') {
 		if (!is_array($v)) {
 			if (!$v instanceof OptionSourceInterface) {
 				$v = df_o($v);
