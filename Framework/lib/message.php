@@ -12,10 +12,8 @@ use Magento\Framework\Phrase as P;
  * @used-by df_message_error()
  * @used-by df_message_notice()
  * @used-by df_message_success()
- * @param P|string $s
- * @param string $type
  */
-function df_message_add($s, $type):void {df_message_m()->addMessage(
+function df_message_add(string $s, string $type):void {df_message_m()->addMessage(
 	df_message_m()->createMessage($type, 'non-existent')->setText(df_phrase($s)), null
 );}
 
@@ -39,13 +37,11 @@ function df_message_m() {return df_o(IMM::class);}
 /**
  * 2018-05-11
  * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
- * @param P|string $m
  */
-function df_message_notice($m):void {df_message_add($m, IM::TYPE_NOTICE);}
+function df_message_notice(string $m):void {df_message_add($m, IM::TYPE_NOTICE);}
 
 /**
  * 2016-12-04
  * @used-by \Df\Sso\CustomerReturn::_execute()
- * @param P|string $m
  */
-function df_message_success($m):void {df_message_add($m, IM::TYPE_SUCCESS);}
+function df_message_success(string $m):void {df_message_add($m, IM::TYPE_SUCCESS);}
