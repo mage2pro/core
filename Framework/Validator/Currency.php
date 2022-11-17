@@ -20,7 +20,6 @@ class Currency implements \Df\Framework\IValidator {
 	 * @override
 	 * @see \Df\Framework\IValidator::check()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
-	 * @used-by \Df\Framework\Validator\Composite::check()
 	 * @param AE $e
 	 * @return true|Phrase|Phrase[]
 	 */

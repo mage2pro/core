@@ -11,7 +11,6 @@ use Magento\Framework\DataObject as _DO;
  * @used-by df_map()
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
- * @used-by \Df\Framework\Validator\Composite::check()
  * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @param mixed|mixed[] $v
  * @return mixed[]|string[]|float[]|int[]
@@ -207,7 +206,6 @@ function dfa_fill($startIndex, $length, $value):array {return !$length ? [] : ar
  * @used-by df_mail()
  * @used-by df_string_clean()
  * @used-by dfa_unpack()
- * @used-by \Df\Framework\Validator\Composite::check()
  * @used-by \Df\Payment\Block\Info::rPDF()
  * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
  * @param array $a
