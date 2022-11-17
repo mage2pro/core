@@ -1,6 +1,5 @@
 <?php
 use Magento\Config\Model\Config\Source\Yesno as YN;
-use Magento\Framework\Phrase;
 /**
  * 2015-12-28 Преобразует при необходимости простой одномерный массив в список опций.
  * @used-by \Df\Framework\Form\Element\Fieldset::select()
