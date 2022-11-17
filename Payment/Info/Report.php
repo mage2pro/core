@@ -1,7 +1,6 @@
 <?php
 namespace Df\Payment\Info;
 use ArrayIterator as AI;
-use Magento\Framework\Phrase;
 # 2016-08-09
 final class Report implements \IteratorAggregate, \Countable {
 	/**
