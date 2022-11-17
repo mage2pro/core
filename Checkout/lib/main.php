@@ -38,11 +38,8 @@ function df_checkout_h():DataH {return df_o(DataH::class);}
 
 /**
  * 2016-07-14 Сообщение показывается всего на 5 секунд, а затем скрывается: https://mage2.pro/t/1871
- * @used-by df_checkout_error()
- * @param string|Phrase $s
- * @param bool $success
  */
-function df_checkout_message($s, $success) {
+function df_checkout_message(string $s, bool $success):void {
 	$sess = Sess::s(); /** @var Sess $sess */
 	/** 2016-07-14 @used-by https://github.com/mage2pro/core/blob/539a6c4/Checkout/view/frontend/web/js/messages.js?ts=4#L17 */
 	$sess->messages(array_merge($sess->messages(), [['text' => df_phrase($s), 'success' => $success]]));
