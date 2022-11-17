@@ -200,6 +200,7 @@ abstract class Settings {
 	 * @used-by \Df\Config\Source\API\Key::isRequirementMet()
 	 * @used-by \Df\Payment\Settings::testableGeneric()
 	 * @used-by \Df\Payment\Settings\Proxy::password()
+	 * @used-by \Dfe\AmazonLogin\Settings\Credentials::secret()
 	 * @used-by \Dfe\CurrencyConvert\Settings::accessKey()
 	 * @used-by \Dfe\Sift\Settings::signatureKey()
 	 * @used-by \Inkifi\Map\Settings::keyGoogle()

@@ -40,7 +40,7 @@ function df_result_s($v, $sl = 0):string {return df_check_s($v) ? $v : Q::raiseE
  * @used-by \Df\Payment\Token::get()
  * @used-by \Df\StripeClone\Facade\Customer::cardIdForJustCreated()
  * @used-by \Df\Zoho\App::title()
- * @used-by \Dfe\AmazonLogin\Customer::profile()
+ * @used-by \Dfe\AmazonLogin\Customer::res()
  * @used-by \Dfe\FacebookLogin\Customer::longLivedAccessToken()
  * @used-by \Dfe\FacebookLogin\Customer::picture()
  * @used-by \Dfe\IPay88\Method::option()
