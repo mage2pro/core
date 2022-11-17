@@ -191,9 +191,6 @@ abstract class Settings {
 	 * 2015-12-07
 	 * I have corrected the method, so it now returns null for an empty value
 	 * (avoids to decrypt a null-value or an empty string).
-	 * @param string|null $k [optional]
-	 * @param null|string|int|S|Store $s [optional]
-	 * @param mixed|callable $d [optional]
 	 * 2017-02-08
 	 * Параметр $d нужен обязательно,
 	 * потому что этот метод с этим параметром вызывается из @used-by \Df\Payment\Settings::testableGeneric()
@@ -207,6 +204,9 @@ abstract class Settings {
 	 * @used-by \Inkifi\Map\Settings::keyGoogle()
 	 * @used-by \Inkifi\Map\Settings::keyMapBox()
 	 * @used-by \Inkifi\Map\Settings::keyOpenCage()
+	 * @param string|null $k [optional]
+	 * @param null|string|int|S|Store $s [optional]
+	 * @param mixed|callable $d [optional]
 	 * @return string|null
 	 */
 	final function p($k = null, $s = null, $d = null) {
