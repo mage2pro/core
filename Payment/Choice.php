@@ -2,7 +2,6 @@
 namespace Df\Payment;
 use Df\Payment\Method as M;
 use Df\Payment\W\Event;
-use Magento\Framework\Phrase;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Payment as QP;
