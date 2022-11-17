@@ -8,9 +8,8 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
  * файловый путь до папки Magento.
  * @used-by df_xts()
  * @used-by df_xtsd()
- * @param string $m
  */
-function df_adjust_paths_in_message($m):string {
+function df_adjust_paths_in_message(string $m):string {
 	$bpLen = mb_strlen(BP); /** @var int $bpLen */
 	do {
 		$begin = mb_strpos($m, BP); /** @var int|false $begin */
