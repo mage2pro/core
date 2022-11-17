@@ -10,9 +10,11 @@ abstract class Customer extends \Df\Core\O {
 	/**
 	 * 2016-06-04
 	 * @used-by CustomerReturn::register()
-	 * @return string|int
+	 * @see \Dfe\AmazonLogin\Customer::id()
+	 * @see \Dfe\BlackbaudNetCommunity\Customer::id()
+	 * @see \Dfe\FacebookLogin\Customer::id()
 	 */
-	abstract function id();
+	abstract function id():string;
 
 	/**
 	 * 2016-06-04
