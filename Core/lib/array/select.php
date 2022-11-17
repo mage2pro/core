@@ -82,6 +82,7 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @used-by \Df\Sentry\Client::get_http_data()
  * @used-by \Df\Sso\CustomerReturn::mc()
  * @used-by \Dfe\AlphaCommerceHub\W\Event::providerRespL()
+ * @used-by \Dfe\AmazonLogin\Customer::res()
  * @used-by \Dfe\CurrencyFormat\O::postProcess()
  * @used-by \Dfe\Dragonpay\Signer\Request::values()
  * @used-by \Dfe\Dragonpay\Signer\Response::values()

@@ -88,7 +88,7 @@ function df_http_get($urlBase, array $params = [], $timeout = null) {
  * 2016-04-13
  * @see df_request_body_json()
  * @used-by \Df\Core\Visitor::responseA()
- * @used-by \Dfe\AmazonLogin\Customer::response()
+ * @used-by \Dfe\AmazonLogin\Customer::res()
  * @used-by \Dfe\CurrencyConvert\Ecb::rates()
  * @used-by \Dfe\GoogleBackendLogin\Plugin\Backend\App\AbstractAction::beforeDispatch()
  * @used-by \Dfe\Paymill\Test\CaseT::token()
