@@ -3,7 +3,6 @@ use Df\Core\Exception as DFE;
 use Exception as E;
 use Magento\Framework\Exception\NotFoundException as NFE;
 use Magento\Framework\Phrase;
-
 /**
  * 2016-08-27
  * Параметр $caller нам реально нужен,
