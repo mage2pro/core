@@ -6,9 +6,8 @@ final class StringT extends \Df\Zf\Validate implements \Zend_Filter_Interface {
 	 * @override
 	 * @see \Zend_Filter_Interface::filter()
 	 * @param mixed $v
-	 * @return string|mixed
 	 */
-	function filter($v) {return is_null($v) || is_int($v) ? strval($v) : $v;}
+	function filter($v):string {return is_null($v) || is_int($v) ? strval($v) : $v;}
 
 	/**
 	 * @override
