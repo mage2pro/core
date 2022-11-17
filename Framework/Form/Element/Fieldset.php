@@ -243,13 +243,10 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @used-by self::textarea()
 	 * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
 	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
-	 * @param string $name
-	 * @param string $type
-	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return AE|E
 	 */
-	final protected function field($name, $type, $label = null, $data = []) {
+	final protected function field(string $name, string $type, string $label = '', array $data = []) {
 		/**
 		 * 2015-12-13
 		 * Приходящее из $data значение $value будем использовать только как значение по умолчанию
