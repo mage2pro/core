@@ -356,12 +356,10 @@ class Fieldset extends FieldsetM implements ElementI {
 	/**
 	 * 2016-07-30
 	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
-	 * @param string $name
-	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Quantity|E
 	 */
-	final protected function quantity($name, $label = null, $data = []) {return $this->field(
+	final protected function quantity(string $name, string $label = '', array $data = []) {return $this->field(
 		$name, Quantity::class, $label, $data
 	);}
 
