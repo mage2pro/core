@@ -63,9 +63,8 @@ function df_xf(E $e):E {while ($e->getPrevious()) {$e = $e->getPrevious();} retu
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param E|P|string $e
- * @return P|string
  */
-function df_xts($e) {return df_adjust_paths_in_message(
+function df_xts($e):string {return df_adjust_paths_in_message(
 	!$e instanceof E ? $e : ($e instanceof DFE ? $e->message() : $e->getMessage())
 );}
 
