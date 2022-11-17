@@ -1,7 +1,6 @@
 <?php
 namespace Df\Framework\Form\Element;
 use Df\Framework\Form\Element;
-use Magento\Framework\Phrase;
 
 /**
  * 2016-05-30
@@ -21,9 +20,8 @@ abstract class Url extends Element {
 	 *	if ((string)$element->getComment()) {
 	 *		$html .= '<p class="note"><span>' . $element->getComment() . '</span></p>';
 	 *	}
-	 * @return string|Phrase|null
 	 */
-	function getComment() {return $this->thirdPartyLocalhost() ? null : parent::getComment();}
+	function getComment():string {return $this->thirdPartyLocalhost() ? '' : parent::getComment();}
 
 	/**
 	 * 2016-05-30

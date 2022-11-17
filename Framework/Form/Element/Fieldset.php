@@ -576,12 +576,10 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * 2016-08-02
 	 * @used-by self::money()
 	 * @used-by self::percent()
-	 * @param string $n
-	 * @param string|null|Phrase $l [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return E|Number
 	 */
-	private function number($n, $l = null, $data = []) {return $this->field($n, Number::class, $l, $data);}
+	private function number(string $n, string $l = '', array $data = []) {return $this->field($n, Number::class, $l, $data);}
 
 	/**
 	 * 2016-12-15
