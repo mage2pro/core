@@ -6,27 +6,22 @@ final class Entry {
 	/**
 	 * 2016-08-09
 	 * @used-by \Df\Payment\Info\Report::add()
-	 * @param string|Phrase|null $name
-	 * @param string|Phrase $value
-	 * @param int $weight [optional]
 	 */
-	function __construct($name, $value, $weight = 0) {
-		$this->_name = $name; $this->_value = $value; $this->_weight = $weight;
+	function __construct(string $name, string $value, int $weight = 0) {
+		$this->_name = (string)__($name); $this->_value = $value; $this->_weight = $weight;
 	}
 
 	/**
 	 * 2016-08-09
 	 * @used-by \Df\Payment\Info\Report::get()
-	 * @return Phrase|null
 	 */
-	function name() {return is_null($n = $this->_name) || $n instanceof Phrase ? $n :__($n);}
+	function name():string {return $this->_name;}
 
 	/**
 	 * 2016-08-09
 	 * @used-by \Df\Payment\Info\Report::get()
-	 * @return string|Phrase
 	 */
-	function value() {return $this->_value;}
+	function value():string {return $this->_value;}
 
 	/**
 	 * 2016-08-09
@@ -55,7 +50,7 @@ final class Entry {
 	 * 2017-03-12
 	 * @used-by self::__construct()
 	 * @used-by self::value()
-	 * @var string|Phrase|null
+	 * @var string
 	 */
 	private $_value;
 
