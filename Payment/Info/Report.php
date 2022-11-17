@@ -13,8 +13,6 @@ final class Report implements \IteratorAggregate, \Countable {
 	 * @used-by self::addAfter()
 	 * @used-by \Df\Payment\Block\Info::si()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
-	 * @param string $k
-	 * @param string $v
 	 */
 	function add(string $k, string $v, int $weight = 0):void {$this->_items[]= new Entry($k, $v, $weight);}
 
@@ -22,9 +20,8 @@ final class Report implements \IteratorAggregate, \Countable {
 	 * 2016-08-09
 	 * 2022-11-09 @deprecated It is unused.
 	 * @param array(string => string|Phrase) $items
-	 * @param int $weight [optional]
 	 */
-	function addA(array $items, $weight = 0):void {
+	function addA(array $items, int $weight = 0):void {
 		foreach ($items as $k => $v) {
 			$this->add($k, $v, $weight);
 			$weight += 10; /** 2016-08-09 Чтобы при вызове @see \Df\Payment\Info\Report::addAfter() не происходило конфликтов. */
