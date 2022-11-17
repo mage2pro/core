@@ -203,6 +203,8 @@ abstract class Settings {
 	 * @used-by \Dfe\BlackbaudNetCommunity\Settings::privateKey()
 	 * @used-by \Dfe\CurrencyConvert\Settings::accessKey()
 	 * @used-by \Dfe\Moip\Settings::googlePrivateKey()
+	 * @used-by \Dfe\Qiwi\Settings::password1()
+	 * @used-by \Dfe\Qiwi\Settings::password2()
 	 * @used-by \Dfe\Sift\Settings::signatureKey()
 	 * @used-by \Inkifi\Map\Settings::keyGoogle()
 	 * @used-by \Inkifi\Map\Settings::keyMapBox()
