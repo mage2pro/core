@@ -1,6 +1,5 @@
 <?php
 namespace Df\Checkout;
-use Magento\Framework\Phrase;
 # 2021-10-22 "Improve the custom session data handling interface": https://github.com/mage2pro/core/issues/163
 final class Session extends SessionBase {
 	/**
