@@ -31,9 +31,8 @@ abstract class Customer extends \Df\Core\O {
 	 * @used-by CustomerReturn::customerData()
 	 * @see \Dfe\AmazonLogin\Customer::email()
 	 * @see \Dfe\FacebookLogin\Customer::email()
-	 * @return string|null
 	 */
-	function email() {return null;}
+	function email():string {return '';}
 
 	/**
 	 * 2016-06-04

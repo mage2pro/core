@@ -90,6 +90,7 @@ function df_nes($v):bool {return is_null($v) || '' === $v;}
  * @used-by \Df\Qa\Trace\Frame::class_()
  * @used-by \Df\Qa\Trace\Frame::function_()
  * @used-by \Df\Typography\Font::variantNumber()
+ * @used-by \Dfe\AmazonLogin\Customer::p()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\ShippingAddress::test()
  * @used-by \Dfe\SalesSequence\Settings::affix()
  * @used-by \Dfe\Sift\API\Validator\Event::long()
