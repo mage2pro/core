@@ -464,12 +464,10 @@ class Fieldset extends FieldsetM implements ElementI {
 	/**
 	 * 2015-12-12
 	 * @used-by Quantity::onFormInitialized()
-	 * @param string $name
-	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Text|E
 	 */
-	final protected function text($name, $label = null, $data = []) {return $this->field(
+	final protected function text(string $name, string $label = '', array $data = []) {return $this->field(
 		$name, Text::class, $label, $data
 	);}
 
