@@ -93,7 +93,7 @@ function df_magento_version_m() {return df_o(ProductMetadataInterface::class);}
  */
 function df_magento_version_remote(string $url):string {return dfcf(function($url) {return df_try(function() use($url) {
 	/** @var string[] $a */
-	$a = explode(' ', df_string_clean(df_trim_text_left(df_file_read("$url/magento_version"), 'Magento/'), '(', ')'));
+	$a = df_explode_space(df_string_clean(df_trim_text_left(df_file_read("$url/magento_version"), 'Magento/'), '(', ')'));
 	return 2 !== count($a) ? [] : array_combine(['version', 'edition'], $a);
 });}, [df_trim_ds_right($url)]);}
 

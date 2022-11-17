@@ -42,6 +42,18 @@ function df_explode_n($s):array {return explode("\n", df_normalize(df_trim($s)))
 function df_explode_path($p):array {return df_explode_xpath(df_path_n($p));}
 
 /**
+ * 2022-11-17
+ * @used-by df_file_name()
+ * @used-by df_magento_version_remote()
+ * @used-by df_phone_explode()
+ * @used-by df_webserver()
+ * @used-by \Dfe\AmazonLogin\Customer::nameA()
+ * @used-by \Df\Framework\Form\Element::getClassDfOnly()
+ * @return string[]
+ */
+function df_explode_space(string $s):array {return explode(' ', $s);}
+
+/**
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param string $url
  * @return string[]

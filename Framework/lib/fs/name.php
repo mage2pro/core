@@ -4,11 +4,8 @@
  * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.
  * Результатом всегда является непустая строка.
  * @used-by df_report()
- * @param string $directory
- * @param string $template
- * @param string $ds [optional]
  */
-function df_file_name($directory, $template, $ds = '-'):string { /** @var string $r */
+function df_file_name(string $directory, string $template, string $ds = '-'):string { /** @var string $r */
 	# 2016-11-09 If $template contains the file's path, when it will be removed from $template and added to $directory.
 	$directory = df_path_n($directory);
 	$template = df_path_n($template);
@@ -40,7 +37,7 @@ function df_file_name($directory, $template, $ds = '-'):string { /** @var string
 	 * А вторая операция тупо делает из этого значения 0.
 	 */
 	$vars['time-full-ms'] = implode($ds, [$vars['time-full'], sprintf(
-		'%02d', round(100 * df_first(explode(' ', microtime())))
+		'%02d', round(100 * df_first(df_explode_space(microtime())))
 	)]);
 	while (true) {
 		/** @var string $fileName */
