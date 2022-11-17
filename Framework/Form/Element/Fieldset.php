@@ -443,13 +443,11 @@ class Fieldset extends FieldsetM implements ElementI {
 	/**
 	 * 2016-08-10
 	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
-	 * @param string $name
-	 * @param string|null|Phrase $label
 	 * @param array(array(string => string|int))|string[]|string|OptionSourceInterface $values
 	 * @param array(string => mixed)|string $data [optional]
 	 * @return SelectM|E
 	 */
-	final protected function select2Number($name, $label, $values, $data = []) {return $this->select(
+	final protected function select2Number(string $name, string $label, $values, array $data = []) {return $this->select(
 		$name, $label, $values, $data, Select2Number::class
 	);}
 
