@@ -474,12 +474,10 @@ class Fieldset extends FieldsetM implements ElementI {
 	/**
 	 * 2018-04-20
 	 * @used-by \Doormall\Shipping\Partner\FE::onFormInitialized()
-	 * @param string $name
-	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Textarea|E
 	 */
-	final protected function textarea($name, $label = null, $data = []) {return $this->field(
+	final protected function textarea(string $name, string $label = '', array $data = []) {return $this->field(
 		$name, Textarea::class, $label, $data
 	);}
 
