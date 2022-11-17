@@ -309,11 +309,8 @@ class Fieldset extends FieldsetM implements ElementI {
 	/**
 	 * 2015-12-28
 	 * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
-	 * @param string $n
-	 * @param string $v
-	 * @param string|null|Phrase $l [optional]
 	 */
-	final protected function hidden($n, $v, $l = null):Hidden {
+	final protected function hidden(string $n, string $v, string $l = ''):Hidden {
 		$r = $this->field($n, Hidden::class, $l, ['value' => $v]); /** @var Hidden $r */
 		$r->setAfterElementHtml($l);
 		return $r;
