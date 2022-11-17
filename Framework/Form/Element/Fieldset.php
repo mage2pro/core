@@ -172,12 +172,10 @@ class Fieldset extends FieldsetM implements ElementI {
 	/**
 	 * 2015-11-24
 	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
-	 * @param string|null $name [optional]
-	 * @param string|null|Phrase $label [optional]
 	 * @param array(string => mixed) $data [optional]
 	 * @return Color|E
 	 */
-	protected function color($name = 'color', $label = null, $data = []) {
+	protected function color(string $name = 'color', string $label = '', array $data = []) {
 		/**
 		 * 2015-12-13
 		 * Намеренно использую строгое стравнение с пустой строкой,
