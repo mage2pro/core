@@ -195,6 +195,7 @@ abstract class Settings {
 	 * Параметр $d нужен обязательно,
 	 * потому что этот метод с этим параметром вызывается из @used-by \Df\Payment\Settings::testableGeneric()
 	 * @used-by \Df\Config\Source\API\Key::isRequirementMet()
+	 * @used-by \Df\OAuth\Settings::clientPassword()
 	 * @used-by \Df\Payment\Settings::testableGeneric()
 	 * @used-by \Df\Payment\Settings\Proxy::password()
 	 * @used-by \Dfe\AmazonLogin\Settings\Credentials::secret()
