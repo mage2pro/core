@@ -503,10 +503,8 @@ class Fieldset extends FieldsetM implements ElementI {
 	/**
 	 * 2015-11-17
 	 * 2022-11-03 @deprecated It is unused.
-	 * @param string $name
-	 * @param string|Phrase $label
 	 */
-	final protected function yesNo($name, $label):SelectM {return $this->select($name, $label, df_yes_no());}
+	final protected function yesNo(string $n, string $l):SelectM {return $this->select($n, $l, df_yes_no());}
 
 	/**
 	 * 2015-11-17
