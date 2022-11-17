@@ -6,6 +6,10 @@ use Magento\Framework\Phrase;
 final class Report implements \IteratorAggregate, \Countable {
 	/**
 	 * 2016-08-09
+	 * 2022-11-17
+	 * PHP accepts objects which implement `__toString()` as arguments of type `string`:
+	 * https://github.com/mage2pro/core/issues/174#user-content-object-to-string
+	 * So you can pass @see \Magento\Framework\Phrase as $k or $v.
 	 * @used-by self::addA()
 	 * @used-by self::addAfter()
 	 * @used-by \Df\Payment\Block\Info::si()
