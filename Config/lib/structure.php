@@ -6,7 +6,6 @@ use Magento\Config\Model\Config\Structure\Element\Group;
 use Magento\Config\Model\Config\Structure\Element\Section;
 use Magento\Config\Model\Config\Structure\ElementInterface as IElement;
 use Magento\Framework\App\Config\Value as V;
-use Magento\Framework\Phrase;
 /**
  * 2016-08-02
  * *) By analogy with @see \Magento\Config\Block\System\Config\Form::initForm()
