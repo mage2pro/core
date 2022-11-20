@@ -1422,6 +1422,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-03-15
+	 * @used-by \Dfe\CheckoutCom\Method::need3DS()
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
 	 * @throws InputException|LE|NoSuchEntityException
