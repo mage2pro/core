@@ -150,7 +150,7 @@ final class PlaceOrderInternal {
 	/**
 	 * 2017-03-21
 	 * @used-by \Df\Payment\Init\Action::action()
-	 * @used-by \Dfe\CheckoutCom\Method::ckoRedirectUrl()
+	 * @used-by \Dfe\CheckoutCom\Method::needRedirect()
 	 * @param M $m
 	 * @param string $url
 	 * @param array(string => mixed) $p [optional]
