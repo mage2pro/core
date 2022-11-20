@@ -202,6 +202,7 @@ abstract class Settings {
 	 * @used-by \Df\Zoho\Settings::token()
 	 * @used-by \Dfe\AmazonLogin\Settings\Credentials::secret()
 	 * @used-by \Dfe\BlackbaudNetCommunity\Settings::privateKey()
+	 * @used-by \Df\API\Facade::all()
 	 * @used-by \Dfe\CurrencyConvert\Settings::accessKey()
 	 * @used-by \Dfe\Moip\Settings::googlePrivateKey()
 	 * @used-by \Dfe\Qiwi\Settings::password1()
