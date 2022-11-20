@@ -1748,6 +1748,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by self::refund()
 	 * @see \Df\StripeClone\Method::_refund()
 	 * @see \Dfe\AlphaCommerceHub\Method::_refund()
+	 * @see \Dfe\CheckoutCom\Method::_refund()
 	 * @see \Dfe\SecurePay\Method::_refund()
 	 * @see \Dfe\TwoCheckout\Method::_refund()
 	 */
