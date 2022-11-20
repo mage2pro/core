@@ -933,7 +933,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L374-L381
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getConfigPaymentAction()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L854-L864
-	 *
+	 * ----
 	 * 1) @used-by \Df\StripeClone\Method::isInitializeNeeded()
 	 * 2) @used-by \Magento\Sales\Model\Order\Payment::place()
 	 * 		$action = $methodInstance->getConfigPaymentAction();
@@ -943,11 +943,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Sales/Model/Order/Payment.php#L359-L360
 	 * 		'payment_action' => 'getConfigPaymentAction'
 	 * https://github.com/mage2pro/core/blob/3.2.31/Payment/Method.php#L898-L904
-	 *
+	 * ----
 	 * @see \Dfe\CheckoutCom\Method::getConfigPaymentAction()
-	 * @return string|null
 	 */
-	function getConfigPaymentAction() {return dfc($this, function() {return InitAction::sg($this)->action();});}
+	function getConfigPaymentAction():string {return dfc($this, function() {return InitAction::sg($this)->action();});}
 
 	/**
 	 * 2016-02-08
