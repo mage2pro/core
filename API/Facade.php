@@ -115,10 +115,9 @@ abstract class Facade {
 	 * 2017-09-03
 	 * @used-by \Dfe\Qiwi\Init\Action::preorder()
 	 * @param array(string => mixed) $p
-	 * @param string|null $suffix [optional]
 	 * @throws DFE
 	 */
-	final function put(array $p, $suffix = null):Op {return $this->p($p, null, $suffix);}
+	final function put(array $p, string $suffix = ''):Op {return $this->p($p, null, $suffix);}
 
 	/**
 	 * 2019-03-04
