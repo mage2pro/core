@@ -88,8 +88,6 @@ function df_date_least():ZD {return new ZD(0);}
  * 2016-07-19
  * @used-by df_date_min()
  * @used-by df_is_date_expired()
- * @param ZD $d1
- * @param ZD $d2
  */
 function df_date_lt(ZD $d1, ZD $d2):bool {return $d1->getTimestamp() < $d2->getTimestamp();}
 
