@@ -92,7 +92,5 @@ function dff_eq($a, $b):bool {return dff_eq0(floatval($a) - floatval($b), .001 *
  * @used-by \Dfe\TwoCheckout\Method::_refund()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @used-by \TFC\Core\Plugin\Paypal\Model\Cart::aroundGetAmounts()
- * @param float $a
- * @param float $deviation [optional]
  */
-function dff_eq0($a, $deviation = .001):bool {return abs($a) < $deviation;}
+function dff_eq0(float $a, float $deviation = .001):bool {return abs($a) < $deviation;}
