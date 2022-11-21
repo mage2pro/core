@@ -6,7 +6,6 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
  * 2019-09-20
  * @see df_product_image_url()
  * @used-by \Dfe\Color\Observer\ProductImportBunchSaveAfter::execute()
- * @param P $p
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]
  */
