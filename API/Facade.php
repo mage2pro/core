@@ -78,10 +78,9 @@ abstract class Facade {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @param int|string $id
-	 * @param string|null $suffix [optional]
 	 * @param FacadeOptions|null $opt [optional]
 	 */
-	final function get($id, $suffix = null, FacadeOptions $opt = null):Op {return $this->p($id, null, $suffix, $opt);}
+	final function get($id, string $suffix = '', FacadeOptions $opt = null):Op {return $this->p($id, null, $suffix, $opt);}
 
 	/**
 	 * 2017-09-04 @deprecated It is unused.
