@@ -280,9 +280,8 @@ abstract class Client {
 	/**
 	 * 2019-04-04
 	 * @used-by \Inkifi\Pwinty\API\Client::_construct()
-	 * @param string $k
 	 */
-	final protected function resPath($k):void {$this->addFilterResAV(function(array $a) use($k) {return
+	final protected function resPath(string $k):void {$this->addFilterResAV(function(array $a) use($k) {return
 		dfa_deep($a, $k, $a)
 	;});}
 
