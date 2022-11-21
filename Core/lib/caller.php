@@ -92,9 +92,8 @@ function df_caller_entry($p = 0, F $predicate = null):array {
  * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
  * @used-by \Dfe\Dynamics365\Test\TestCase::p()
  * @used-by \KingPalm\B2B\Schema::f()
- * @param int $o [optional]
  */
-function df_caller_f($o = 0):string {return df_caller_entry(++$o)['function'];}
+function df_caller_f(int $o = 0):string {return df_caller_entry(++$o)['function'];}
 
 /**
  * 2016-08-10
