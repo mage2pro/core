@@ -1,7 +1,10 @@
 <?php
 namespace Df\Config\Plugin\Model\Config;
 use Magento\Config\Model\Config\SourceFactory as Sb;
-use Magento\Framework\Option\ArrayInterface as IOptionsArray;
+# 2022-11-21
+# It exists since Magento 2.0.0:
+# https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/OptionSourceInterface.php
+use Magento\Framework\Data\OptionSourceInterface as IOptionSource;
 # 2015-11-14
 final class SourceFactory {
 	/**
@@ -13,5 +16,5 @@ final class SourceFactory {
 	 * 2016-01-01 We got there during the `<source_model>` tag handling by the Magento core.
 	 * @see \Magento\Config\Model\Config\SourceFactory::create()
 	 */
-	function aroundCreate(Sb $sb, \Closure $f, string $c):IOptionsArray {return df_class_my($c) ? new $c : $f($c);}
+	function aroundCreate(Sb $sb, \Closure $f, string $c):IOptionSource {return df_class_my($c) ? new $c : $f($c);}
 }
