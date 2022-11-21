@@ -422,9 +422,8 @@ abstract class Client {
 	 * @used-by self::resPath()
 	 * @used-by self::resStripRoot()
 	 * @param callable|IFilter $f
-	 * @param int $p
 	 */
-	private function addFilterResAV($f, $p = FilterChain::DEFAULT_PRIORITY):void {$this->_filtersResAV->attach($f, $p);}
+	private function addFilterResAV($f, int $p = FilterChain::DEFAULT_PRIORITY):void {$this->_filtersResAV->attach($f, $p);}
 
 	/**
 	 * 2017-10-08 Adds $f at the lowest priority (it will be applied after all other filters).
