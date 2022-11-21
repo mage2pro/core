@@ -155,7 +155,6 @@ function df_date_parse(string $dateS, bool $throw = true, $format = null, string
  * @used-by df_num_days()
  * @used-by df_today_add()
  * @used-by df_today_sub()
- * @param ZD|null $date [optional]
  */
 function df_date_reset_time(ZD $date = null):ZD {
 	$r = $date ? new ZD($date) : ZD::now(); /** @var ZD $r */
