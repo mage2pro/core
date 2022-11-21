@@ -134,9 +134,8 @@ class Element extends \Df\Core\O implements RendererInterface {
 
 	/**
 	 * 2015-12-28
-	 * @param string $s
 	 */
-	private function innerRow($s):string {return !$s ? '' : df_tag('div', 'df-element-row', $s);}
+	private function innerRow(string $s):string {return !$s ? '' : df_tag('div', 'df-element-row', $s);}
 
 	/**
 	 * 2015-11-22
