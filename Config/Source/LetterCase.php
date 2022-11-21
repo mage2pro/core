@@ -44,12 +44,8 @@ final class LetterCase extends \Df\Config\Source {
 	 */
 	const UPPERCASE = 'uppercase';
 
-	/**
-	 * @used-by map()
-	 * @param string $s
-	 * @param string $format
-	 */
-	private static function apply($s, $format):string {/** @var string $r */
+	/** @used-by map() */
+	private static function apply(string $s, string $format):string {/** @var string $r */
 		switch($format) {
 			case self::LOWERCASE:
 				$r = mb_strtolower($s);
