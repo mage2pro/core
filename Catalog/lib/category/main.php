@@ -17,7 +17,6 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @param int|string|C $c
  * @param int|string|null|bool|IStore $s [optional]
- * @return C
  */
 function df_category($c, $s = false):C {return $c instanceof C ? $c : df_category_r()->get(
 	$c, false === $s ? null : df_store_id(true === $s ? null : $s)
