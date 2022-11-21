@@ -138,6 +138,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * Если значение шифруется только в промышленном режиме, то используйте @see self::testablePV().
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
+	 * @uses \Df\Payment\Settings::p()
 	 * @used-by \Df\StripeClone\Settings::privateKey()
 	 * @used-by \Dfe\Klarna\Settings::sharedSecret()
 	 * @used-by \Dfe\Moip\Settings::privateToken()
@@ -151,7 +152,6 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
-	 * @uses \Df\Payment\Settings::p()
 	 * @return mixed
 	 */
 	final protected function testableP($k = null, $s = null, $d = null) {return $this->testableGeneric(
