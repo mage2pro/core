@@ -237,7 +237,6 @@ function df_dtss(string $dateInSourceFormat, string $sourceFormat, string $resul
  * 2022-10-29 @deprecated It is unused.
  * @see df_month()
  * @see df_year()
- * @param ZD|null $date [optional]
  */
 function df_hour(ZD $date = null):int {return df_nat0(df_date($date)->toString(ZD::HOUR_SHORT, 'iso'));}
 
