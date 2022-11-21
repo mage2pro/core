@@ -243,7 +243,6 @@ function df_hour(ZD $date = null):int {return df_nat0(df_date($date)->toString(Z
 /**
  * 2016-07-19
  * @used-by df_days_left()
- * @param ZD $date
  */
 function df_is_date_expired(ZD $date):bool {return df_date_lt(df_date_reset_time($date), df_date_reset_time());}
 
