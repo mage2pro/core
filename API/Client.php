@@ -173,9 +173,8 @@ abstract class Client {
 	 * @used-by \Dfe\Qiwi\API\Client::_construct()
 	 * @used-by \Dfe\Vantiv\API\Client::_construct()
 	 * @param callable|IFilter $f
-	 * @param int $p
 	 */
-	final protected function addFilterResBV($f, $p = FilterChain::DEFAULT_PRIORITY):void {$this->_filtersResBV->attach($f, $p);}
+	final protected function addFilterResBV($f, int $p = FilterChain::DEFAULT_PRIORITY):void {$this->_filtersResBV->attach($f, $p);}
 
 	/**
 	 * 2017-07-08
