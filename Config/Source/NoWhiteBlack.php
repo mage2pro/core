@@ -45,10 +45,9 @@ class NoWhiteBlack extends \Df\Config\Source {
 	 * @used-by \Df\Payment\Method::canUseForCountry()
 	 * @used-by \Df\Config\Settings::nwb()
 	 * @param string|bool $listType
-	 * @param string $element
 	 * @param string[] $set
 	 */
-	final static function is($listType, $element, array $set):bool {return
+	final static function is($listType, string $element, array $set):bool {return
 		!$listType || (self::$B === $listType xor in_array($element, $set))
 	;}
 
