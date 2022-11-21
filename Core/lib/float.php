@@ -19,10 +19,8 @@
  * @used-by \Dfe\YandexKassa\Method::amountFormat()
  * @used-by \TFC\Core\B\Checkout\Success::_toHtml() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/42)
  * @used-by \TFC\GoogleShopping\Att\Price::format() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/6)
- * @param float $v
- * @param int $prec [optional]
  */
-function dff_2($v, $prec = 2):string {return number_format($v, $prec, '.', '');}
+function dff_2(float $v, int $prec = 2):string {return number_format($v, $prec, '.', '');}
 
 /**
  * 2016-09-08
