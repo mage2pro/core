@@ -1,21 +1,17 @@
 <?php
 namespace Df\Core\Helper;
 final class Text {
-	/**
-	 * @used-by \Df\Core\Text\Regex::isSubjectMultiline()
-	 * @param string $s
-	 */
-	function isMultiline($s):bool {return df_contains($s, "\n") || df_contains($s, "\r");}
+	/** @used-by \Df\Core\Text\Regex::isSubjectMultiline() */
+	function isMultiline(string $s):bool {return df_contains($s, "\n") || df_contains($s, "\r");}
 
 	/**
 	 * @used-by df_quote_double()
 	 * @used-by df_quote_russian()
 	 * @used-by df_quote_single()
 	 * @param string|string[]|array(string => string) $s
-	 * @param string $t [optional]
 	 * @return string|string[]
 	 */
-	function quote($s, $t = self::QUOTE__RUSSIAN) {
+	function quote($s, string $t = self::QUOTE__RUSSIAN) {
 		if ('"' === $t) {
 			$t = self::QUOTE__DOUBLE;
 		}
