@@ -6,9 +6,8 @@ final class RAM {
 	 * 2017-08-10
 	 * @used-by df_cache_clean_tag()   
 	 * @used-by \Df\Payment\Method::sgReset()
-	 * @param string $tag
 	 */
-	function clean($tag):void {
+	function clean(string $tag):void {
 		if (isset($this->_tags[$tag])) {
 			foreach ($this->_tags[$tag] as $k) { /** @var string $k */
 				unset($this->_data[$k]);
