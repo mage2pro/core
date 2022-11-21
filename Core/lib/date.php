@@ -38,18 +38,9 @@ function df_date_create(...$args):ZD {
  * @return ZD|null
  * @throws Exception
  */
-function df_date_from_db(string $datetime, bool $throw = true) {
-	df_param_sne($datetime, 0);
-	$r = null; /** @var ZD|null $r */
-	if ($datetime) {
-		try {$r = new ZD($datetime, ZD::ISO_8601);}
-		catch (Exception $e) {
-			if ($throw) {
-				df_error($e);
-			}
-		}
-	}
-	return $r;
+function df_date_from_db(string $s, bool $onE = true) {
+	df_param_sne($s, 0);
+	return df_try(function() use($s) {return new ZD($s, ZD::ISO_8601);}, $onE);
 }
 
 /**
