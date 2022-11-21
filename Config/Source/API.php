@@ -41,7 +41,6 @@ abstract class API extends \Df\Config\Source {
 	 * 2017-02-15
 	 * @used-by self::map()
 	 * @see \Dfe\Square\Source\Location::exception()
-	 * @param \Exception $e
 	 * @return array(string => string)
 	 */
 	protected function exception(\Exception $e):array {return ['error' => $e->getMessage()];}
