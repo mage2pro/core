@@ -12,7 +12,7 @@ class Index extends _P {
 	 * 		$result = $this->execute();
 	 * https://github.com/magento/magento2/blob/2.2.1/lib/internal/Magento/Framework/App/Action/Action.php#L84-L125
 	 */
-	function execute():Json {return df_response_sign(Json::i(array_map(function(array $a) {return dfa($a, [
+	function execute():Json {return df_response_sign(Json::i(array_map(function(array $a):array {return dfa($a, [
 		'type', 'description', 'homepage', 'license', 'authors'
 	]);}, dfe_modules_info())));}
 }
