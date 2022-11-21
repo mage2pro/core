@@ -8,11 +8,10 @@ use Magento\Store\Api\StoreCookieManagerInterface;
 /**
  * 2016-11-07
  * 2022-10-29 @deprecated It is unused.
- * @param string $name
  * @param string|null $d [optional]
  * @return string|null
  */
-function df_cookie_get($name = null, $d = null) {return df_cookie_m()->getCookie($name, $d);}
+function df_cookie_get(string $name, $d = null) {return df_cookie_m()->getCookie($name, $d);}
 
 /**
  * 2016-06-06
