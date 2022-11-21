@@ -6,10 +6,9 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
  * 2019-09-20
  * @see df_product_image_url()
  * @used-by \Dfe\Color\Observer\ProductImportBunchSaveAfter::execute()
- * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]
  */
-function df_product_image_path(P $p, $type = null, array $attrs = []):string {return df_media_url2path(df_product_image_url(
+function df_product_image_path(P $p, string $type = '', array $attrs = []):string {return df_media_url2path(df_product_image_url(
 	$p, $type, $attrs
 ));}
 
@@ -19,9 +18,8 @@ function df_product_image_path(P $p, $type = null, array $attrs = []):string {re
  * @used-by \MageWorx\OptionFeatures\Helper\Data::getThumbImageUrl(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/46)
  * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
  * @see df_media_path_absolute()
- * @param string $rel
  */
-function df_product_image_path2abs($rel):string {return df_cc_path(df_product_images_path(), df_trim_ds_left($rel));}
+function df_product_image_path2abs(string $rel):string {return df_cc_path(df_product_images_path(), df_trim_ds_left($rel));}
 
 /**
  * 2020-10-26
