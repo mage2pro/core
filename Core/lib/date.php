@@ -220,18 +220,15 @@ function df_dts(ZD $d = null, $fmt = null, $l = null):string {return df_result_s
 /**
  * Переводит дату из одного строкового формата в другой.
  * 2022-10-29 @deprecated It is unused.
- * @param string $dateInSourceFormat
- * @param string $sourceFormat
- * @param string $resultFormat
- * @param bool $canBeEmpty [optional]
  */
-function df_dtss($dateInSourceFormat, $sourceFormat, $resultFormat, $canBeEmpty = false):string {/** @var string $r */
-	if (!$dateInSourceFormat) {
-		df_assert($canBeEmpty, 'Пустая дата недопустима.');
-		$r = '';
+function df_dtss(string $dateInSourceFormat, string $sourceFormat, string $resultFormat, bool $canBeEmpty = false):string {
+	/** @var string $r */
+	if ($dateInSourceFormat) {
+		$r = df_dts(new ZD($dateInSourceFormat, $sourceFormat), $resultFormat);
 	}
 	else {
-		$r = df_dts(new ZD($dateInSourceFormat, $sourceFormat), $resultFormat);
+		df_assert($canBeEmpty, 'Empty $dateInSourceFormat is not allowed.');
+		$r = '';
 	}
 	return $r;
 }
