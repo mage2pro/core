@@ -118,9 +118,8 @@ final class Visitor extends O {
 	 * 2016-05-20
 	 * @used-by df_visitor()
 	 * @used-by \Dfe\TwoCheckout\Address::visitor()
-	 * @param string|null $ip [optional]
 	 */
-	static function sp($ip = null):self {return dfcf(function($ip = null) {return new self([
+	static function sp(string $ip = ''):self {return dfcf(function(string $ip):self {return new self([
 		self::$P__IP => $ip ?: df_visitor_ip()
 	]);}, [$ip]);}
 
