@@ -52,7 +52,6 @@ function df_pc_disable_flat(F $f = null) {
  * If the the «Use Flat Catalog Product» option is enabled,
  * then the products collection is loaded directly from a `catalog_product_flat_<store>` table,
  * and such tables do not contain disabled products at least in Magento 2.4.0.
- * @param C $c
  */
 function df_pc_preserve_absent(C $c):C {return $c->setFlag(PAddStock::PRESERVE_ABSENT, true);}
 
