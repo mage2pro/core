@@ -128,6 +128,5 @@ function df_caller_mh():string {return df_tag('b', [], df_caller_ml(1));}
  * 2016-08-31
  * @used-by df_abstract()
  * @used-by df_caller_mh()
- * @param int $o [optional]
  */
-function df_caller_ml($o = 0):string {return df_caller_m(++$o) . '()';}
+function df_caller_ml(int $o = 0):string {return df_caller_m(++$o) . '()';}
