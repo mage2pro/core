@@ -50,8 +50,7 @@ function df_product_images_path_rel():string {return dfcf(function() {return df_
  * 2019-08-23
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @see df_media_path_absolute()
- * @param string $rel
  */
-function df_product_image_tmp_path2abs($rel):string {return df_path_absolute(
+function df_product_image_tmp_path2abs(string $rel):string {return df_path_absolute(
 	DL::MEDIA, 'tmp/catalog/product/' . df_trim_ds_left($rel)
 );}
