@@ -28,10 +28,9 @@ function df_product_images_additional(P $p, int $limit = 0):array {
  * @used-by df_product_image_url() Recursion
  * @used-by \TFC\GoogleShopping\Att\ImageLink::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @used-by \TFC\GoogleShopping\Command\C1::gp() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
- * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]
  */
-function df_product_image_url(P $p, $type = null, array $attrs = []):string {/** @var string|null $r */
+function df_product_image_url(P $p, string $type = '', array $attrs = []):string {/** @var string|null $r */
 	if ($type) {
 		$r = df_catalog_image_h()
 			->init($p, $type, ['type' => $type] + $attrs + df_view_config()->getMediaAttributes(
