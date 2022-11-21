@@ -215,8 +215,8 @@ function df_days_off($s = null):array {return dfcf(function($s = null) {return d
  * @param string|null $format [optional]
  * @param Zend_Locale|string|null $locale [optional]
  */
-function df_dts(ZD $date = null, $format = null, $locale = null):string {return df_result_sne(
-	df_date($date)->toString($format, $type = null, $locale)
+function df_dts(ZD $d = null, $format = null, $locale = null):string {return df_result_sne(
+	df_date($d)->toString($format, null, $locale)
 );}
 
 /**
