@@ -115,13 +115,10 @@ function df_tag_ab(string $text, string ...$url):string {return df_tag(
  * @used-by \Df\Payment\Method::tidFormat()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Sso\Button::_toHtml()
- * @param string $content
- * @param bool $condition
- * @param string $tag
  * @param string|array(string => string|string[]|int|null) $attributes [optional]
- * @param bool $multiline [optional]
+ * @param bool|string $multiline [optional]
  */
-function df_tag_if($content, $condition, $tag, $attributes = [], $multiline = null):string {return
+function df_tag_if(string $content, bool $condition, string $tag, $attributes = [], $multiline = null):string {return
 	!$condition ? $content : df_tag($tag, $attributes, $content, $multiline)
 ;}
 
