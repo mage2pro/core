@@ -7,8 +7,6 @@ final class State {
 	/**
 	 * 2020-11-24
 	 * @see \Magento\Catalog\Model\Indexer\AbstractFlatState::isFlatEnabled()
-	 * @param Sb $sb
-	 * @param F $f
 	 */
 	function aroundIsFlatEnabled(Sb $sb, F $f):bool {return !self::$DISABLE && $f();}
 
