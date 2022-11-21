@@ -109,9 +109,8 @@ function df_scope():array {
  * @used-by \Df\Config\Settings::_font()
  * @used-by \Df\Config\Settings::_matrix()
  * @param null|string|int|ScopeA|Store $s [optional]
- * @param string $type [optional]
  */
-function df_scope_code($s = null, $type = SS::SCOPE_STORE):string {
+function df_scope_code($s = null, string $type = SS::SCOPE_STORE):string {
 	if (($s === null || is_numeric($s)) && $type !== IScopeConfig::SCOPE_TYPE_DEFAULT) {
 		$s = df_scope_resolver_pool()->get($type)->getScope($s);
 	}

@@ -129,13 +129,14 @@ function df_cfg_save(string $path, string $v, string $scope = 'default', int $sc
 
 /**
  * 2021-09-22
+ * 2022-11-21
+ * A $path: «web/unsecure/base_url».
+ * A $scope: «default», «websites», «website», «stores», «store».
+ * A $scopeId: «0».
  * @used-by \Df\Security\BlackList::save()
  * @param string $path
- * @param string $v
- * @param string $scope [optional]
- * @param int $scopeId [optional]
  */
-function df_cfg_save_cc($path, $v, $scope = 'default', $scopeId = 0):void {
+function df_cfg_save_cc(string $path, string $v, string $scope = 'default', int $scopeId = 0):void {
 	df_cfg_save($path, $v, $scope, $scopeId);
 	df_cache_clean_cfg();
 }
