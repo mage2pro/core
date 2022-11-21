@@ -8,10 +8,9 @@ use Magento\InventoryConfigurationApi\Model\IsSourceItemManagementAllowedForProd
 /**
  * 2019-11-22
  * @used-by df_qty()
- * @param P $p
  * @throws DFE
  */
-function df_assert_qty_supported(P $p) {df_assert(
+function df_assert_qty_supported(P $p):void {df_assert(
 	df_pt_has_qty($t = $p->getTypeId()), "Products of type `$t` do not have a quantity."
 );}
 
