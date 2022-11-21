@@ -16,6 +16,5 @@ function df_product_is_bundle(P $p):bool {return B::TYPE_CODE === $p->getTypeId(
  * @see df_configurable()
  * @see df_not_configurable()
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
- * @param string $t
  */
-function df_product_type_composite($t):bool {return in_array($t, [B::TYPE_CODE, C::TYPE_CODE, G::TYPE_CODE]);}
+function df_product_type_composite(string $t):bool {return in_array($t, [B::TYPE_CODE, C::TYPE_CODE, G::TYPE_CODE]);}
