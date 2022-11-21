@@ -106,11 +106,10 @@ abstract class Facade {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Submit::p()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param int|string|array(string => mixed) $p
-	 * @param string|null $suffix [optional]
 	 * @param FacadeOptions|null $opt [optional]
 	 * @throws DFE
 	 */
-	final function post($p, $suffix = null, FacadeOptions $opt = null):Op {return $this->p($p, null, $suffix, $opt);}
+	final function post($p, string $suffix = '', FacadeOptions $opt = null):Op {return $this->p($p, null, $suffix, $opt);}
 
 	/**
 	 * 2017-09-03
