@@ -6,8 +6,6 @@ final class Operation implements \ArrayAccess {
 	/**
 	 * 2017-07-13
 	 * @used-by \Df\API\Facade::p()
-	 * @param O $req
-	 * @param O $res
 	 */
 	function __construct(O $req, O $res) {$this->_req = $req; $this->_res = $res;}
 
