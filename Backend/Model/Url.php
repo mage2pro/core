@@ -23,7 +23,7 @@ class Url extends \Magento\Backend\Model\Url {
 	 * 		$pathSecure = $this->_urlSecurityInfo->isSecure('/' . $this->_getActionPath());
 	 * https://github.com/magento/magento2/blob/2.2.0-rc2.0/lib/internal/Magento/Framework/Url.php#L405
 	 */
-	final protected function _getActionPath() {
+	final protected function _getActionPath():string {
         $r = \Magento\Framework\Url::_getActionPath(); /** @var string $r */  /** @var string $front */
         return !($front = $this->getAreaFrontName()) ? $r : "$front/$r";
 	}
