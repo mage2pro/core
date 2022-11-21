@@ -58,11 +58,10 @@ class Serialized extends Backend {
 	 * 2016-08-03   
 	 * @used-by self::processI()
 	 * @used-by \Df\Config\Backend\ArrayT::processI()
-	 * @return string
 	 */
-	final protected function entityC():string {return dfc($this, function() {return df_assert_class_exists(
-		$this->fc('dfEntity')
-	);});}
+	final protected function entityC():string {return dfc($this, function():string {return df_assert_class_exists($this->fc(
+		'dfEntity'
+	));});}
 
 	/**
 	 * 2016-08-07     
