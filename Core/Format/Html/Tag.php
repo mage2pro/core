@@ -30,7 +30,7 @@ final class Tag extends \Df\Core\O {
 			$this->shouldAttributesBeMultiline() ? 'df_tab_multiline' : 'df_nop'
 			,implode(
 				$this->shouldAttributesBeMultiline() ? "\n" :  ' '
-				,df_clean(df_map_k(function($name, $value) {
+				,df_clean(df_map_k(function(string $name, string $value):string {
 					df_param_sne($name, 0);
 					/**
 					 * 2015-04-16 Передавать в качестве $value массив имеет смысл, например, для атрибута «class».
