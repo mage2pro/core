@@ -59,9 +59,8 @@ function df_style_inline(string $css):string {return !$css ? '' : df_tag('style'
  * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Frugue\Shipping\Header::_toHtml()
- * @param string ...$s
  */
-function df_style_inline_hide(...$s):string {return !$s ? '' : df_style_inline(
+function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_inline(
 	df_csv_pretty($s) . ' {display: none !important;}'
 );}
 
