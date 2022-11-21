@@ -343,7 +343,6 @@ function df_tomorrow():ZD {return df_today_add(1);}
  * @see df_month()
  * @used-by \Df\StripeClone\Facade\Card::isActive()
  * @used-by \Dfe\TBCBank\Test\CaseT\Regular::t04()
- * @param ZD|null $date [optional]
  */
 function df_year(ZD $date = null):int {return df_nat0(df_date($date)->toString(ZD::YEAR, 'iso'));}
 
