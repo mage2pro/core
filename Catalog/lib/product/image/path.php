@@ -25,9 +25,8 @@ function df_product_image_path2abs(string $rel):string {return df_cc_path(df_pro
  * 2020-10-26
  * @used-by \TFC\Image\Command\C1::image()
  * @used-by \TFC\Image\Command\C1::p()
- * @param string $abs
  */
-function df_product_image_path2rel($abs):string {return df_trim_text_left($abs, df_product_images_path() . '/');}
+function df_product_image_path2rel(string $abs):string {return df_trim_text_left($abs, df_product_images_path() . '/');}
 
 /**
  * 2020-10-26
