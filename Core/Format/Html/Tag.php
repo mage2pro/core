@@ -88,9 +88,8 @@ final class Tag extends \Df\Core\O {
 	 * 2016-08-05
 	 * @used-by self::content()
 	 * @used-by self::shortTagAllowed()
-	 * @param string ...$tags
 	 */
-	private function tagIs(...$tags):bool {return in_array($this->tag(), $tags);}
+	private function tagIs(string ...$tags):bool {return in_array($this->tag(), $tags);}
 
 	/** @var string */
 	private static $P__ATTRIBUTES = 'attributes';
