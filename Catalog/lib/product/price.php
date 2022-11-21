@@ -53,7 +53,6 @@ function df_price_special(P $p) {return df_prices($p)['special_price'];}
  * @uses \Magento\Framework\Pricing\Price\AbstractPrice::getValue()
  * @used-by df_price_regular()
  * @used-by df_price_special()
- * @param P $p
  * @return array(string => IPrice)
  */
 function df_prices(P $p):array {return df_map($p->getPriceInfo()->getPrices(), function(IPrice $p) {return $p->getValue();});}
