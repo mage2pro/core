@@ -34,6 +34,7 @@ function df_theme($id = null) {/** @var Theme|null $r */
 
 /**
  * 2016-11-29
+ * @used-by df_theme()
  * @return IThemeResolver|ThemeResolver
  */
 function df_theme_resolver() {return df_o(IThemeResolver::class);}
