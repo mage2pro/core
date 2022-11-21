@@ -102,8 +102,6 @@ function df_date_max(ZD $d1, ZD $d2):ZD {return df_date_gt($d1, $d2) ? $d1 : $d2
 /**
  * 2016-07-19
  * @used-by df_num_days()
- * @param ZD $d1
- * @param ZD $d2
  */
 function df_date_min(ZD $d1, ZD $d2):ZD {return df_date_lt($d1, $d2) ? $d1 : $d2;}
 
