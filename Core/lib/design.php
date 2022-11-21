@@ -18,18 +18,17 @@ function df_design() {return df_o(IDesign::class);}
  * @param int|null $id [optional]
  * @return Theme|null
  */
-function df_theme($id = null) {
+function df_theme($id = null) {/** @var Theme|null $r */
 	if ($id) {
-		$result = df_themes()->getItemById($id);
+		$r = df_themes()->getItemById($id);
 	}
 	else {
-		/** @var Theme $result */
-		$result = df_theme_resolver()->get();
-		if ($result->isVirtual()) {
-			$result = df_themes()->getItemById(df_design()->getConfigurationDesignTheme('frontend'));
+		$r = df_theme_resolver()->get();
+		if ($r->isVirtual()) {
+			$r = df_themes()->getItemById(df_design()->getConfigurationDesignTheme('frontend'));
 		}
 	}
-	return $result;
+	return $r;
 }
 
 /**
