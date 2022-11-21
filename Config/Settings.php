@@ -491,9 +491,8 @@ abstract class Settings {
 	 * @used-by \Mangoit\MediaclipHub\Helper\Data::CheckoutWithSingleProduct()
 	 * @used-by \Mangoit\MediaclipHub\Helper\Data::GetStoreAuthorizationHeader()
 	 * @param Store|int|null $s [optional]
-	 * @param string $c [optional]
 	 */
-	static function s($s = null, $c = null):self {return dfcf(
+	static function s($s = null, string $c = ''):self {return dfcf(
 		function($s, $c) {return new $c($s);}, [df_store($s), $c ?: static::class]
 	);}
 
