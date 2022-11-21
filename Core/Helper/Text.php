@@ -73,10 +73,8 @@ final class Text {
 	 * https://php.net/strtr
 	 * Новый алгоритм взял отсюда: http://stackoverflow.com/a/20717751
 	 * @used-by df_extend()
-	 * @param string $s
-	 * @return string
 	 */
-	function singleLine($s) {return str_replace(["\r\n", "\r", "\n", "\t"], ' ', $s);}
+	function singleLine(string $s):string {return str_replace(["\r\n", "\r", "\n", "\t"], ' ', $s);}
 
 	/**
 	 * @used-by df_quote_double()
