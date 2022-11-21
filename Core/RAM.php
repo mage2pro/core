@@ -44,12 +44,11 @@ final class RAM {
 	/**
 	 * 2017-08-10
 	 * @used-by dfcf()
-	 * @param string $k
 	 * @param mixed $v
 	 * @param string[] $tags [optional]
 	 * @return mixed
 	 */
-	function set($k, $v, $tags = []) {
+	function set(string $k, $v, $tags = []) {
 		if ($v instanceof ICached) {
 			$tags += $v->tags();
 		}
