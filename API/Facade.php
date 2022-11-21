@@ -293,9 +293,6 @@ abstract class Facade {
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param Store|Order $s [optional]
-	 * @return self
 	 */
-	static function s($s = null):self {return dfcf(
-		function($c, Store $s) {return new $c($s);}, [static::class, df_store($s)]
-	);}
+	static function s($s = null):self {return dfcf(function($c, Store $s) {return new $c($s);}, [static::class, df_store($s)]);}
 }
