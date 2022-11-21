@@ -111,7 +111,7 @@ function df_date_min(ZD $d1, ZD $d2):ZD {return df_date_lt($d1, $d2) ? $d1 : $d2
  * @used-by \Dfe\AllPay\W\Event::time()
  * @param string|null $format [optional]
  * @return ZD|null
- * @throws \Exception
+ * @throws Exception
  */
 function df_date_parse(string $dateS, bool $throw = true, $format = null, string $tz = '') {
 	/** @var string $defaultTZ */
