@@ -275,7 +275,6 @@ class Exception extends LE implements \ArrayAccess {
 	/**
 	 * @used-by df_error_create()
 	 * @used-by \Df\Qa\Failure\Exception::i()
-	 * @param E $e
 	 */
 	final static function wrap(E $e):self {return $e instanceof self ? $e : new self($e);}
 }
