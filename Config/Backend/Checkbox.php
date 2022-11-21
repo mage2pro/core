@@ -22,5 +22,3 @@ class Checkbox extends Backend {
 		parent::dfSaveBefore();
 	}
 }
-
-
