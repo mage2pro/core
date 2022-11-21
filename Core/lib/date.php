@@ -273,11 +273,9 @@ function df_now(string $fmt, $tz = null):string {return (new DT(null, !$tz ? nul
 /**
  * 2016-07-19 Портировал из Российской сборки Magento.  
  * @used-by \Df\Config\Source\WaitPeriodType::calculate()
- * @param ZD $startDate
- * @param int $numWorkingDays
  * @param null|string|int|ScopeA|Store $store [optional]
  */
-function df_num_calendar_days_by_num_working_days(ZD $startDate, $numWorkingDays, $store = null):int {
+function df_num_calendar_days_by_num_working_days(ZD $startDate, int $numWorkingDays, $store = null):int {
 	$r = $numWorkingDays; /** @var int $r */
 	if ((0 === $r) && df_is_day_off($startDate)) {
 		$r++;
