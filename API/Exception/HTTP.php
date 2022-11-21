@@ -9,7 +9,6 @@ final class HTTP extends \Df\API\Exception {
 	 * @override
 	 * @see \Df\Core\Exception::__construct()
 	 * @used-by \Df\API\Client::p()
-	 * @param R $r
 	 */
 	function __construct(R $r) {$this->_r = $r;}
 
