@@ -67,9 +67,9 @@ function df_cfg($k, $scope = null, $d = null) {
 
 /**
  * 2016-08-03
- * A $path: «web/unsecure/base_url»
- * A $scope: «default»
- * A $scopeId: «0»
+ * A $path: «web/unsecure/base_url».
+ * A $scope: «default», «websites», «website», «stores», «store».
+ * A $scopeId: «0».
  * @see df_cfg_save()
  */
 function df_cfg_delete(string $path, string $scope, int $scopeId):void {df_cfg_r()->deleteConfig($path, $scope, $scopeId);}
@@ -100,7 +100,10 @@ function df_cfg_m() {return df_o(IConfig::class);}
 function df_cfg_r():RConfig {return df_o(RConfig::class);}
 
 /**
- * 2016-08-03 How to save a config option programmatically? https://mage2.pro/t/289    
+ * 2016-08-03 How to save a config option programmatically? https://mage2.pro/t/289
+ * A $path: «web/unsecure/base_url».
+ * A $scope: «default», «websites», «website», «stores», «store».
+ * A $scopeId: «0».
  * 2017-10-22
  * Note 1.
  * The @see \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITE constant exists in all the Magento 2 versions:
@@ -119,14 +122,10 @@ function df_cfg_r():RConfig {return df_o(RConfig::class);}
  * @see df_cfg_delete()
  * @used-by df_cfg_save_cc()
  * @used-by \Dfe\Dynamics365\Settings\General\OAuth::refreshTokenSave()
- * @param string $path		E.g.: «web/unsecure/base_url»
- * @param string $v
- * @param string $scope [optional]		«default», «websites», «website», «stores», «store»
- * @param int $scopeId [optional]		E.g.: «0»
  */
-function df_cfg_save($path, $v, $scope = 'default', $scopeId = 0):void {df_cfg_r()->saveConfig($path, $v, dftr($scope, [
-	SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES
-]), $scopeId);}
+function df_cfg_save(string $path, string $v, string $scope = 'default', int $scopeId = 0):void {df_cfg_r()->saveConfig(
+	$path, $v, dftr($scope, [SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES]), $scopeId
+);}
 
 /**
  * 2021-09-22
