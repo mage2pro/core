@@ -212,12 +212,10 @@ function df_days_off($s = null):array {return dfcf(function($s = null) {return d
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()
  * @used-by \TFC\GoogleShopping\Result::contents() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
- * @param string|null $format [optional]
- * @param Zend_Locale|string|null $locale [optional]
+ * @param string|null $fmt [optional]
+ * @param Zend_Locale|string|null $l [optional]
  */
-function df_dts(ZD $d = null, $format = null, $locale = null):string {return df_result_sne(df_date($d)->toString(
-	$format, null, $locale
-));}
+function df_dts(ZD $d = null, $fmt = null, $l = null):string {return df_result_sne(df_date($d)->toString($fmt, null, $l));}
 
 /**
  * Переводит дату из одного строкового формата в другой.
