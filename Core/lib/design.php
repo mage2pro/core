@@ -15,6 +15,7 @@ function df_design() {return df_o(IDesign::class);}
 
 /**
  * 2016-11-29
+ * 2022-11-21 @deprecated It is unused.
  * @param int|null $id [optional]
  * @return Theme|null
  */
