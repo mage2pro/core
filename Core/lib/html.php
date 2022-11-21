@@ -37,10 +37,8 @@ function df_link_inline(...$args):string {return df_call_a(function($res) {retur
  * https://mage2.pro/t/1010
  * @used-by df_js_inline_url()
  * @used-by df_link_inline()
- * @param string $r
- * @param Closure $f
  */
-function df_resource_inline($r, Closure $f):string {
+function df_resource_inline(string $r, Closure $f):string {
 	static $c; /** @var array(string => bool) $c */
 	if (!$r || isset($c[$r])) {$result = '';}
 	else {$c[$r] = true; $result = $f(df_asset_create($r)->getUrl());}
