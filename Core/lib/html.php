@@ -51,9 +51,8 @@ function df_resource_inline(string $r, Closure $f):string {
  * @used-by df_style_inline_hide()
  * @used-by \Df\Sso\Button::loggedOut()
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
- * @param string $css
  */
-function df_style_inline($css):string {return !$css ? '' : df_tag('style', ['type' => 'text/css'], $css);}
+function df_style_inline(string $css):string {return !$css ? '' : df_tag('style', ['type' => 'text/css'], $css);}
 
 /**
  * 2016-12-04
