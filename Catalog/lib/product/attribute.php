@@ -15,12 +15,11 @@ function df_product_atts_r():R {return df_o(R::class);}
  * 2019-08-21                   
  * @used-by df_product_att_options()
  * @used-by df_product_att_val_s()
- * @param string $c
  * @param F|bool|mixed $onE [optional]
  * @return A|null
  * @throws NSE
  */
-function df_product_att($c, $onE = true) {return df_try(function() use($c) {return df_product_atts_r()->get($c);}, $onE);}
+function df_product_att(string $c, $onE = true) {return df_try(function() use($c) {return df_product_atts_r()->get($c);}, $onE);}
 
 /**
  * 2021-04-24
