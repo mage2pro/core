@@ -3,6 +3,7 @@ use Magento\Catalog\Model\Product as P;
 use Magento\Framework\Pricing\Price\PriceInterface as IPrice;
 /**
  * 2021-12-21
+ * 2022-11-21 @deprecated It is unused.
  */
 function df_price_regular(P $p):float {return df_prices($p)['regular_price'];}
 
