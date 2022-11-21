@@ -109,11 +109,11 @@ function df_date_min(ZD $d1, ZD $d2):ZD {return df_date_lt($d1, $d2) ? $d1 : $d2
  * 2016-07-20
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @used-by \Dfe\AllPay\W\Event::time()
- * @param string|null $format [optional]
+ * @param string|null $fmt [optional]
  * @return ZD|null
  * @throws Exception
  */
-function df_date_parse(string $dateS, bool $throw = true, $format = null, string $tz = '') {
+function df_date_parse(string $dateS, bool $throw = true, $fmt = null, string $tz = '') {
 	/** @var string $defaultTZ */
 	if ($tz) {
 		$defaultTZ = date_default_timezone_get();
@@ -123,7 +123,7 @@ function df_date_parse(string $dateS, bool $throw = true, $format = null, string
 		if ($tz) {
 			date_default_timezone_set($tz);
 		}
-		$r = new ZD($dateS, $format);
+		$r = new ZD($dateS, $fmt);
 		if ($tz) {
 			# 2016-07-28
 			# Эта операция конвертирует время из пояса $tz в пояс $defaultTZ.
