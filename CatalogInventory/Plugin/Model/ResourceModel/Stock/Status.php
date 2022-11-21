@@ -25,12 +25,9 @@ final class Status {
 	/**
 	 * 2020-11-23
 	 * @see \Magento\CatalogInventory\Model\ResourceModel\Stock\Status::addStockDataToCollection()
-	 * @param Sb $sb
-	 * @param C $c
-	 * @param bool $skipAbsent
 	 * @return mixed[]
 	 */
-	function beforeAddStockDataToCollection(Sb $sb, C $c, $skipAbsent):array {return [
+	function beforeAddStockDataToCollection(Sb $sb, C $c, bool $skipAbsent):array {return [
 		$c, $skipAbsent && !AddStockData::$PRESERVE_ABSENT_F && !$c->getFlag(AddStockData::PRESERVE_ABSENT)
 	];}
 }
