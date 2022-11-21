@@ -381,21 +381,18 @@ abstract class Settings {
 	 * потому что класс ребёнка не обязательно должен быть наследником класса родителя:
 	 * ему достаточно быть наследником @see \Df\Config\Settings
 	 * @used-by \Dfe\AllPay\Settings::installmentSales()
-	 * @param string $c
 	 */
-	final protected function child($c):Settings {return self::s($this->_scope, $c);}
+	final protected function child(string $c):Settings {return self::s($this->_scope, $c);}
 
 	/**
 	 * 2016-05-13
 	 * 2016-06-09
 	 * Если опция не задана, но метод возвращает «да».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
-	 * @param string $suf
-	 * @param string $v
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final protected function nwb($suf, $v, $k = null, $s = null):bool {return NWB::is(
+	final protected function nwb(string $suf, string $v, $k = null, $s = null):bool {return NWB::is(
 		$this->v($k = $k ?: df_caller_f(), $s), $v, $this->csv("{$k}_$suf", $s)
 	);}
 
