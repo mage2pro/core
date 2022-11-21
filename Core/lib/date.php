@@ -40,7 +40,7 @@ function df_date_create(...$args):ZD {
  */
 function df_date_from_db(string $s, bool $onE = true) {
 	df_param_sne($s, 0);
-	return df_try(function() use($s) {return new ZD($s, ZD::ISO_8601);}, $onE);
+	return df_try(function() use($s):ZD {return new ZD($s, ZD::ISO_8601);}, $onE);
 }
 
 /**
