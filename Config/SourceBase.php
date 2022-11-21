@@ -33,8 +33,7 @@ abstract class SourceBase extends _P implements ArrayInterface {
 	 *	 	if ($attribute->usesSource()) {
 	 *			foreach ($attribute->getSource()->getAllOptions() as $option) { 
 	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Model/AttributeMetadataConverter.php#L66-L68
-	 * @param bool $withEmpty [optional]
 	 * @return array(array('label' => string, 'value' => int|string))
 	 */
-	final function getAllOptions($withEmpty = true):array {return $this->toOptionArray();}
+	final function getAllOptions(bool $withEmpty = true):array {return $this->toOptionArray();}
 }
