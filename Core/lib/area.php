@@ -24,9 +24,8 @@ function df_area_code($onE = null) {return df_try(function() {return df_app_stat
  * @used-by df_is_frontend()
  * @used-by df_is_rest()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @param string ...$v
  */
-function df_area_code_is(...$v):bool {return in_array(df_area_code(), $v);}
+function df_area_code_is(string ...$v):bool {return in_array(df_area_code(), $v);}
 
 /**
  * 2019-06-21
