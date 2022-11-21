@@ -260,7 +260,7 @@ function df_is_day_off(ZD $d, $s = null):bool {return in_array(df_day_of_week_as
  * @used-by \Df\StripeClone\Facade\Card::isActive()
  * @used-by \Dfe\TBCBank\Test\CaseT\Regular::t04()
  */
-function df_month(ZD $date = null):int {return df_nat0(df_date($date)->toString(ZD::MONTH, 'iso'));}
+function df_month(ZD $d = null):int {return df_nat0(df_date($d)->toString(ZD::MONTH, 'iso'));}
 
 /**
  * 2016-07-09 http://stackoverflow.com/a/28447380
