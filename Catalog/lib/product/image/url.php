@@ -27,7 +27,6 @@ function df_product_images_additional(P $p, int $limit = 0):array {
  * @used-by df_oqi_image()
  * @used-by df_product_image_url() Recursion
  * @used-by \TFC\GoogleShopping\Att\ImageLink::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
- * @param P $p
  * @param string|null $type [optional]
  * @param array(string => string) $attrs [optional]
  */
