@@ -8,19 +8,15 @@ namespace Df\Core;
  * `PHPUnit has been upgraded from 4.1.0 to 6.2.x in Magento 2.2.0-RC1.8`: https://mage2.pro/t/4275
  */
 # @codingStandardsIgnoreFile
-if (@class_exists('\PHPUnit\Framework\TestCase')) {
-	abstract class TestCaseBase extends \PHPUnit\Framework\TestCase {}
-}
+if (@class_exists('\PHPUnit\Framework\TestCase')) {abstract class TestCaseBase extends \PHPUnit\Framework\TestCase {}}
 else {
 	abstract class TestCaseBase extends \PHPUnit_Framework_TestCase {
 		/**
 		 * 2016-11-10
-		 * Метод @see \PHPUnit\Framework\TestCase::expectException() появился только в PHPUnit 5.2.0,
-		 * поэтому эмулируем его.
-		 * @param string $exception
+		 * Метод @see \PHPUnit\Framework\TestCase::expectException() появился только в PHPUnit 5.2.0, поэтому эмулируем его.
 		 */
-		function expectException($exception):void {
-			/** @noinspection PhpUndefinedMethodInspection */
-			$this->setExpectedException($exception);}
+		function expectException(string $e):void {
+			/** @noinspection PhpUndefinedMethodInspection */ $this->setExpectedException($e);
+		}
 	}
 }
