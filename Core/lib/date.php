@@ -164,10 +164,8 @@ function df_date_reset_time(ZD $date = null):ZD {
 /**
  * 2022-10-29 @deprecated It is unused.
  * @see df_date_from_db()
- * @param ZD $date
- * @param bool $inCurrentTimeZone [optional]
  */
-function df_date_to_db(ZD $date, $inCurrentTimeZone = true):string {return $date->toString(
+function df_date_to_db(ZD $date, bool $inCurrentTimeZone = true):string {return $date->toString(
 	$inCurrentTimeZone ? 'Y-MM-dd HH:mm:ss' : ZD::ISO_8601
 );}
 
