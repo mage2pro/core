@@ -106,9 +106,8 @@ function df_caller_f(int $o = 0):string {return df_caller_entry(++$o)['function'
  * @used-by df_caller_ml()
  * @used-by df_prop()
  * @used-by df_sentry_extra_f()
- * @param int $o [optional]
  */
-function df_caller_m($o = 0):string {
+function df_caller_m(int $o = 0):string {
 	$bt = df_caller_entry(++$o); /** @var array(string => int) $bt */
 	$class = dfa($bt, 'class'); /** @var string $class */
 	if (!$class) {
