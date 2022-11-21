@@ -27,7 +27,6 @@ class Fieldset extends Sb {
 	 * Этот дефект приводит к неработоспособности условия <depends> для элемента:
 	 * т.е. видимость элемента перестаёт зависеть от другой опции.
 	 * @see \Magento\Config\Block\System\Config\Form\Fieldset::render()
-	 * @param Sb|F $sb
 	 */
 	function aroundRender(Sb $sb, \Closure $f, AE $e):string {/** @var string $r */
 		/**
