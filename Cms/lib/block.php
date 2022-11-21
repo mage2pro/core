@@ -15,12 +15,11 @@ function df_cms_block($b):B {return $b instanceof B ? $b : df_cms_block_r()->get
 /**
  * 2018-05-21
  * @used-by \AlbumEnvy\Popup\Settings::content()
- * @param int $id
  * @param Closure|bool|mixed $onError [optional]
  * @return string|null
  * @throws NSE
  */
-function df_cms_block_content($id, $onError = null) {return df_try(function() use($id) {return
+function df_cms_block_content(int $id, $onError = null) {return df_try(function() use($id) {return
 	df_cms_block($id)->getContent()
 ;}, $onError);}
 
