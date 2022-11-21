@@ -61,9 +61,8 @@ abstract class Facade {
 	 * 2017-08-08
 	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t03_delete()
 	 * @used-by \Dfe\Moip\Test\CaseT\Notification::t04_delete_all()
-	 * @param string $id
 	 */
-	final function delete($id):Op {return $this->p($id);}
+	final function delete(string $id):Op {return $this->p($id);}
 
 	/**
 	 * 2017-07-13
