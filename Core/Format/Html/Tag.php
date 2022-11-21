@@ -30,29 +30,32 @@ final class Tag extends \Df\Core\O {
 			$this->shouldAttributesBeMultiline() ? 'df_tab_multiline' : 'df_nop'
 			,implode(
 				$this->shouldAttributesBeMultiline() ? "\n" :  ' '
-				,df_clean(df_map_k(function(string $name, string $value):string {
-					df_param_sne($name, 0);
-					/**
-					 * 2015-04-16 Передавать в качестве $value массив имеет смысл, например, для атрибута «class».
-					 * 2016-11-29
-					 * Не использую @see df_e(), чтобы сохранить двойные кавычки (data-mage-init)
-					 * и в то же время сконвертировать одинарные
-					 * (потому что значения атрибутов мы ниже обрамляем именно одинарными).
-					 * 2017-09-11
-					 * Today I have notices that `&apos;` does not work for me
-					 * on the Magento 2 backend configuration pages:
-					 * @see \Df\Payment\Comment\Description::a()
-					 * So I switched to the `&#39;` solution.
-					 * «How do I escape a single quote?» https://stackoverflow.com/a/2428595
-					 */
-					$value = htmlspecialchars(
-						str_replace("'", '&#39;', !is_array($value) ? $value : df_cc_s($value))
-						,ENT_NOQUOTES
-						,'UTF-8'
-						,false
-					);
-					return '' === $value ? '' : "{$name}='{$value}'";
-				}, $this->attributes()))
+				,df_clean(df_map_k(
+					/** 2022-11-21 @param string|string[] $v */
+					function(string $k, $v):string {
+						df_param_sne($k, 0);
+						/**
+						 * 2015-04-16 Передавать в качестве $value массив имеет смысл, например, для атрибута «class».
+						 * 2016-11-29
+						 * Не использую @see df_e(), чтобы сохранить двойные кавычки (data-mage-init)
+						 * и в то же время сконвертировать одинарные
+						 * (потому что значения атрибутов мы ниже обрамляем именно одинарными).
+						 * 2017-09-11
+						 * Today I have notices that `&apos;` does not work for me
+						 * on the Magento 2 backend configuration pages:
+						 * @see \Df\Payment\Comment\Description::a()
+						 * So I switched to the `&#39;` solution.
+						 * «How do I escape a single quote?» https://stackoverflow.com/a/2428595
+						 */
+						$v = htmlspecialchars(
+							str_replace("'", '&#39;', !is_array($v) ? $v : df_cc_s($v))
+							,ENT_NOQUOTES
+							,'UTF-8'
+							,false
+						);
+						return '' === $v ? '' : "{$k}='{$v}'";
+					}, $this->attributes()
+				))
 			)
 		)
 	);}
