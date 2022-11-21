@@ -67,7 +67,6 @@ class Element extends \Df\Core\O implements RendererInterface {
 	 * 2015-11-22
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\Renderer\RendererInterface::render()
-	 * @param AE $element
 	 */
 	function render(AE $element):string {return (new self([self::$P__E => $element]))->_render();}
 
