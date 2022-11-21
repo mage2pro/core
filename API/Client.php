@@ -58,7 +58,7 @@ abstract class Client {
 	 * @param string|array(string => mixed) $p [optional]
 	 * @param string|null $method [optional]
 	 * @param array(string => mixed) $zfConfig [optional]
-	 * @param Store $s [optional]
+	 * @param Store|null $s [optional]
 	 * @throws DFE
 	 */
 	final function __construct(string $path, $p = [], $method = null, array $zfConfig = [], Store $s = null) {
