@@ -322,9 +322,8 @@ function df_num_days(ZD $d1 = null, ZD $d2 = null):int {
  * @used-by \Dfe\Moip\P\Charge::p()
  * @used-by \Dfe\Moip\Test\CaseT\Payment\Boleto::pPayment()
  * @used-by \Dfe\Moip\Test\CaseT\Payment\OnlineBanking::pPayment()
- * @param int $add
  */
-function df_today_add($add):ZD {return df_date_reset_time(ZD::now()->addDay($add));}
+function df_today_add(int $add):ZD {return df_date_reset_time(ZD::now()->addDay($add));}
 
 /**
  * 2016-10-15
