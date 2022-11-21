@@ -173,7 +173,6 @@ function df_date_to_db(ZD $date, bool $inCurrentTimeZone = true):string {return 
  * 2016-07-19 Портировал из Российской сборки Magento.
  * @used-by df_is_day_off()
  * @used-by df_num_calendar_days_by_num_working_days()
- * @param ZD|null $date [optional]
  */
 function df_day_of_week_as_digit(ZD $date = null):int {return df_nat0(df_date($date)->toString(ZD::WEEKDAY_8601, 'iso'));}
 
