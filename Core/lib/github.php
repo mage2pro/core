@@ -9,9 +9,8 @@ function df_github_token():string {return df_credentials('github');}
 /**
  * 2017-05-10 https://developer.github.com/v3/repos/releases#get-the-latest-release
  * @used-by \Dfe\Portal\Test\Basic::t02()
- * @param string $repo
  */
-function df_github_repo_version($repo):string {return df_github_request("repos/$repo/releases/latest", 'tag_name');}
+function df_github_repo_version(string $repo):string {return df_github_request("repos/$repo/releases/latest", 'tag_name');}
 
 /**
  * 2017-05-10 https://developer.github.com/v3/repos/releases/#get-the-latest-release
