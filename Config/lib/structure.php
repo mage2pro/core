@@ -18,10 +18,9 @@ use Magento\Framework\App\Config\Value as V;
  * @used-by df_config_group()
  * @used-by df_config_section()
  * @param V|string $path
- * @param string|null $expectedClass [optional]
  * @return IElement|F|Group|Section|null
  */
-function df_config_e($path, bool $throw = true, $expectedClass = null) { /** @var IElement|F|Group|Section|null $r */
+function df_config_e($path, bool $throw = true, string $expectedClass = '') { /** @var IElement|F|Group|Section|null $r */
 	# 2020-02-02
 	# 1) It correctly handles a custom `config_path` value.
 	# 2) "Magento\Config\Model\Config\Structure\AbstractElement::getPath() ignores a custom `config_path` value"
