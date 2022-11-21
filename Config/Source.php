@@ -112,9 +112,8 @@ abstract class Source extends SourceBase {
 	 *			$sourceModel->setPath($this->getPath());
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L435-L438
-	 * @param string $v
 	 */
-	final function setPath($v) {$this->_path = $v;}
+	final function setPath(string $v) {$this->_path = $v;}
 
 	/**
 	 * 2015-11-27

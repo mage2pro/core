@@ -503,7 +503,6 @@ abstract class Settings {
 	 * E.g., the @see \Dfe\Omise\Settings::_3DS() method handles the «test3DS» and «live3DS» keys.
 	 * @used-by self::v()
 	 * @used-by \Df\API\Settings::testableGeneric()
-	 * @param string $n
 	 */
-	final protected static function phpNameToKey($n):string {return df_trim_left($n, '_');}
+	final protected static function phpNameToKey(string $n):string {return df_trim_left($n, '_');}
 }
