@@ -38,9 +38,8 @@ function dff_2f($v):float {return floatval(dff_2(floatval($v)));}
  * https://3v4l.org/AUTCA
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @param int|float $v
- * @param int $prec [optional]
  */
-function dff_2i($v, $prec = 2):string {return is_int($v) ? (string)$v : dff_2($v, $prec);}
+function dff_2i($v, int $prec = 2):string {return is_int($v) ? (string)$v : dff_2($v, $prec);}
 
 /**
  * 2015-04-09 Форматирует вещественное число с отсечением незначащих нулей после запятой.
