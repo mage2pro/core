@@ -54,10 +54,7 @@ final class Tag {
 						 * «How do I escape a single quote?» https://stackoverflow.com/a/2428595
 						 */
 						$v = htmlspecialchars(
-							str_replace("'", '&#39;', !is_array($v) ? $v : df_cc_s($v))
-							,ENT_NOQUOTES
-							,'UTF-8'
-							,false
+							str_replace("'", '&#39;', !is_array($v) ? $v : df_cc_s($v)), ENT_NOQUOTES, 'UTF-8', false
 						);
 						return '' === $v ? '' : "{$k}='{$v}'";
 					}, $this->_attrs
