@@ -212,7 +212,6 @@ function df_days_off($s = null):array {return dfcf(function($s = null) {return d
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()
  * @used-by \TFC\GoogleShopping\Result::contents() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
- * @param ZD|null $date [optional]
  * @param string|null $format [optional]
  * @param Zend_Locale|string|null $locale [optional]
  */
