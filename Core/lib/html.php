@@ -105,7 +105,9 @@ function df_tag(string $tag, $attrs = [], $content = null, $multiline = null):st
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
  */
-function df_tag_ab(string $text, string ...$url):string {return df_tag('a', ['href' => implode($url), 'target' => '_blank'], $text);}
+function df_tag_ab(string $text, string ...$url):string {return df_tag(
+	'a', ['href' => implode($url), 'target' => '_blank'], $text
+);}
 
 /**
  * 2016-10-24          
