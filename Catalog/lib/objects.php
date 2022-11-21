@@ -23,6 +23,5 @@ function df_catalog_locator() {
 /**
  * 2020-10-30
  * @used-by app/design/frontend/TradeFurnitureCompany/default/Magento_Catalog/templates/category/description.phtml
- * @return OutputH
  */
 function df_catalog_output():OutputH {return df_o(OutputH::class);}
