@@ -266,11 +266,9 @@ function df_month(ZD $d = null):int {return df_nat0(df_date($d)->toString(ZD::MO
  * 2016-07-09 http://stackoverflow.com/a/28447380
  * @used-by \Dfe\AllPay\Charge::pCharge()
  * @used-by \Dfe\CheckoutCom\Charge::pMetadata()
- * @param string|null $timezone [optional]
+ * @param string|null $tz [optional]
  */
-function df_now(string $format, $timezone = null):string {return
-	(new DT(null, !$timezone ? null : new DTZ($timezone)))->format($format)
-;}
+function df_now(string $fmt, $tz = null):string {return (new DT(null, !$tz ? null : new DTZ($tz)))->format($fmt);}
 
 /**
  * 2016-07-19 Портировал из Российской сборки Magento.  
