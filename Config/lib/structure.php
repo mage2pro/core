@@ -152,11 +152,9 @@ function df_config_group(string $path, bool $throw = true) {return df_config_e($
 /**
  * 2016-08-02
  * 2020-02-02 @deprecated It is unused.
- * @param string $path
- * @param bool $throw [optional]
  * @return Section|null
  */
-function df_config_section($path, $throw = true) {return df_config_e($path, $throw, Section::class);}
+function df_config_section(string $path, bool $throw = true) {return df_config_e($path, $throw, Section::class);}
 
 /**
  * 2016-08-02 By analogy with @see \Magento\Config\Block\System\Config\Form::__construct()
