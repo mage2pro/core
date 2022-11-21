@@ -35,12 +35,10 @@ function df_date_create(...$args):ZD {
 /**
  * @used-by \Df\Payment\Operation::customerDob()
  * @see df_date_to_db()
- * @param string $datetime
- * @param bool $throw [optional]
  * @return ZD|null
  * @throws Exception
  */
-function df_date_from_db($datetime, $throw = true) {
+function df_date_from_db(string $datetime, bool $throw = true) {
 	df_param_sne($datetime, 0);
 	$r = null; /** @var ZD|null $r */
 	if ($datetime) {
