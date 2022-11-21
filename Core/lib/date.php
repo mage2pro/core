@@ -328,9 +328,8 @@ function df_today_add(int $add):ZD {return df_date_reset_time(ZD::now()->addDay(
 /**
  * 2016-10-15
  * @used-by df_yesterday()
- * @param int $sub
  */
-function df_today_sub($sub):ZD {return df_date_reset_time(ZD::now()->subDay($sub));}
+function df_today_sub(int $sub):ZD {return df_date_reset_time(ZD::now()->subDay($sub));}
 
 /**
  * 2016-10-15
