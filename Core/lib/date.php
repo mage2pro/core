@@ -75,8 +75,6 @@ function df_date_from_timestamp_14(string $timestamp, $offsetType = null):ZD {
 /**
  * 2016-07-19
  * @used-by df_date_max()
- * @param ZD $d1
- * @param ZD $d2
  */
 function df_date_gt(ZD $d1, ZD $d2):bool {return $d1->getTimestamp() > $d2->getTimestamp();}
 
