@@ -16,7 +16,6 @@ function df_msi():bool {return dfcf(function() {return df_module_enabled('Magent
  * 2019-11-22
  * @used-by df_qty()
  * @uses df_msi_website2stockId()
- * @param P $p
  * @return int[]
  */
 function df_msi_stock_ids(P $p):array {return array_filter(array_unique(array_map(
