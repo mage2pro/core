@@ -16,11 +16,8 @@ function df_head(array $a):array {return array_slice($a, 0, -1);}
  * 2021-11-30
  * @used-by df_bt()
  * @used-by df_product_images_additional()
- * @param array $a
- * @param int $offset
- * @param int|null $length [optional]
  */
-function df_slice(array $a, $offset, $length = null):array {return array_slice(
+function df_slice(array $a, int $offset, int $length = 0):array {return array_slice(
 	/**
 	 * 2021-10-05
 	 * @uses array_slice() returns an empty array if `$limit` is `0`, and returns all elements if `$limit` is `null`,
