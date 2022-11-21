@@ -69,11 +69,10 @@ function df_checkout_session() {return df_o(Session::class);}
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by \TFC\Core\B\Checkout\Success::_toHtml() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/42)
- * @param bool $required [optional]
  * @return O|null
  * @throws DFE
  */
-function df_order_last($required = true) {
+function df_order_last(bool $required = true) {
 	$s = df_checkout_session(); /** @var Session|DfSession $s */
 	return $s->getLastRealOrderId() ? $s->getLastRealOrder() : (!$required ? null : df_error());
 }
