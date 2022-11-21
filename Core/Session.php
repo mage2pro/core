@@ -76,10 +76,8 @@ abstract class Session implements \ArrayAccess {
 	 * @used-by self::offsetGet()
 	 * @used-by self::offsetSet()
 	 * @used-by self::offsetUnset()
-	 * @param string $k [optional]
-	 * @return string
 	 */
-	private function k($k) {return $this->_prefix . $k;}
+	private function k(string $k):string {return $this->_prefix . $k;}
 
 	/**
 	 * 2021-10-27
