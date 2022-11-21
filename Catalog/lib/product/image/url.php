@@ -8,7 +8,7 @@ use Magento\Catalog\Model\Product as P;
  * @used-by \TFC\GoogleShopping\Att\AdditionalImageLink::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param int|null $limit [optionaL]
  */
-function df_product_images_additional(P $p, $limit = null) {
+function df_product_images_additional(P $p, $limit = null):array {
 	$m = basename($p->getImage()); /** @var string $main */
 	return df_slice(
 		array_filter(df_column($p->getMediaGalleryImages(), 'url'), function($u) use($m) {return basename($u) !== $m;})
