@@ -15,7 +15,6 @@ function df_price_regular(P $p):float {return df_prices($p)['regular_price'];}
  * and @see \Magento\Catalog\Model\Product::getSpecialToDate()
  * `df_prices($p)['special_price']` returns `false` in this case.
  * @used-by \TFC\GoogleShopping\Att\SalePrice::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/4)
- * @param P $p
  * @return float|false
  */
 function df_price_special(P $p) {return df_prices($p)['special_price'];}
