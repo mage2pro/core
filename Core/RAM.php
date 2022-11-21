@@ -25,17 +25,15 @@ final class RAM {
 	 * https://3v4l.org/9cQOO
 	 * @used-by dfcf()
 	 * @used-by get()
-	 * @param string $k
 	 */
-	function exists($k):bool {return array_key_exists($k, $this->_data);}
+	function exists(string $k):bool {return array_key_exists($k, $this->_data);}
 
 	/**
 	 * 2017-08-11
 	 * @used-by dfcf()
-	 * @param string $k
 	 * @return mixed
 	 */
-	function get($k) {return $this->exists($k) ? $this->_data[$k] : null;}
+	function get(string $k) {return $this->exists($k) ? $this->_data[$k] : null;}
 
 	/**
 	 * 2017-08-11
