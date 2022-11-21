@@ -1,6 +1,7 @@
 <?php
 /**
  * 2017-03-15 Нулевой параметр argv — это имя текущего скрипта.
+ * 2022-11-23 With $i = null the function returns all `argv` data: @see df_cli_cmd().
  * @used-by df_cli_cmd()
  * @used-by df_cli_script()
  * @used-by df_is_cron()
