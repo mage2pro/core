@@ -349,6 +349,5 @@ function df_year(ZD $date = null):int {return df_nat0(df_date($date)->toString(Z
 /**
  * 2016-10-15
  * 2022-10-29 @deprecated It is unused.
- * @return ZD
  */
 function df_yesterday():ZD {return df_today_sub(1);}
