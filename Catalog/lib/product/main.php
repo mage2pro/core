@@ -96,9 +96,8 @@ function df_product_id($p):int {return df_int($p instanceof P ? $p->getId() : $p
  * 2018-06-04
  * @see df_product()
  * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
- * @param int $id
  */
-function df_product_load($id):P {return df_product_r()->getById($id, false, null, true);}
+function df_product_load(int $id):P {return df_product_r()->getById($id, false, null, true);}
 
 /**
  * 2019-02-26                
