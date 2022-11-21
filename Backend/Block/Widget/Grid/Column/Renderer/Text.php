@@ -41,7 +41,6 @@ class Text extends AbstractRenderer {
 	 * @see \Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer::render()
 	 * @used-by \Magento\Backend\Block\Widget\Grid\Column::getRowField()
 	 * @used-by \Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail\Grid::beforeAddColumn()
-	 * @param _DO $row
 	 */
 	function render(_DO $row):string {
 		$v = $this->_getValue($row); /** @var string|array(string => mixed)|null $v */
