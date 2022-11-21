@@ -332,10 +332,9 @@ abstract class Settings {
 	 * @used-by \Dfe\Sift\Settings::pm()
 	 * @used-by \Doormall\Shipping\Settings::partners()
 	 * @param string|null $k [optional]
-	 * @param string $itemClass
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final protected function _a($itemClass, $k = null, $s = null):ConfigA {return dfcf(
+	final protected function _a(string $itemClass, $k = null, $s = null):ConfigA {return dfcf(
 		function($itemClass, $k, $s) {return
 			ConfigA::i($itemClass, !$this->enable($s) ? [] : $this->json($k, $s))
 		;}, [$itemClass, $k ?: df_caller_f(), df_scope_code($this->scope($s))]
