@@ -145,11 +145,9 @@ function df_config_field_path():string {
 /**
  * 2016-08-02
  * @used-by \Df\Payment\Comment\Description::locations()
- * @param string $path
- * @param bool $throw [optional]
  * @return Group|null
  */
-function df_config_group($path, $throw = true) {return df_config_e($path, $throw, Group::class);}
+function df_config_group(string $path, bool $throw = true) {return df_config_e($path, $throw, Group::class);}
 
 /**
  * 2016-08-02
