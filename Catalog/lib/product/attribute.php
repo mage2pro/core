@@ -47,9 +47,9 @@ function df_product_att_options_m(string $c):array {return df_options_to_map(df_
 
 /**              
  * 2019-09-22
- * @param string $sku
+ * @used-by \Dfe\Color\Observer\ProductImportBunchSaveAfter::execute()
  */
-function df_product_sku2id($sku):int {return (int)df_product_res()->getIdBySku($sku);}
+function df_product_sku2id(string $sku):int {return (int)df_product_res()->getIdBySku($sku);}
 
 /**
  * 2020-01-31
