@@ -299,8 +299,6 @@ function df_num_calendar_days_by_num_working_days(ZD $startDate, int $numWorking
  * 2016-07-19 Портировал из Российской сборки Magento.
  * @used-by df_days_left()
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
- * @param ZD|null $d1 [optional]
- * @param ZD|null $d2 [optional]
  */
 function df_num_days(ZD $d1 = null, ZD $d2 = null):int {
 	$d1 = df_date($d1);
