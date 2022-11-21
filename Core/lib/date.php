@@ -249,7 +249,6 @@ function df_is_date_expired(ZD $date):bool {return df_date_lt(df_date_reset_time
 /**
  * 2016-07-19 Портировал из Российской сборки Magento.
  * @used-by df_num_calendar_days_by_num_working_days()
- * @param ZD $d
  * @param null|string|int|ScopeA|Store $s [optional]
  */
 function df_is_day_off(ZD $d, $s = null):bool {return in_array(df_day_of_week_as_digit($d), df_days_off($s));}
