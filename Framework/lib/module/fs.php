@@ -148,7 +148,7 @@ function df_module_file($m, $name, $ext = '', $req = true, Closure $parser = nul
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/settings.phtml
  * @used-by \Df\PaypalClone\W\Event::statusT()
  * @used-by \Dfe\AllPay\W\Event::tlByCode()
- * @used-by \Dfe\CheckoutCom\Source\Prefill::_config()
+ * @used-by \Dfe\CheckoutCom\Source\Prefill::config()
  * @used-by \Dfe\IPay88\Source\Option::all()
  * @used-by \Dfe\IPay88\Source\Option::map()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
