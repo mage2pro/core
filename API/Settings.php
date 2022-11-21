@@ -182,15 +182,11 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by self::publicKey()
 	 * @uses self::testable()
 	 * @uses self::testableP()
-	 * @param string $method
-	 * @param string $type
-	 * @param string $alt
 	 * @param null|string|int|S|Store $s [optional]
-	 * @param bool $throw [optional]
 	 * @return string|null
 	 * @throws DFE
 	 */
-	private function key($method, $type, $alt, $s = null, $throw = true) {return
+	private function key(string $method, string $type, string $alt, $s = null, bool $throw = true) {return
 		$this->$method("{$type}Key", $s, function() use($method, $alt, $s) {return
 			$this->$method("{$alt}Key", $s);}
 		) ?: ($throw ? df_error("Please set your {$this->titleB()} $type key in the Magento backend.") : null)
