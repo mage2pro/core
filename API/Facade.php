@@ -144,11 +144,10 @@ abstract class Facade {
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
 	 * @param int|string|array(string => mixed) $p [optional]
 	 * @param string|null $method [optional]
-	 * @param string|null $suffix [optional]
 	 * @param FacadeOptions|null $opt [optional]
 	 * @throws DFE
 	 */
-	final protected function p($p = [], $method = null, $suffix = null, FacadeOptions $opt = null):Op {
+	final protected function p($p = [], $method = null, string $suffix = '', FacadeOptions $opt = null):Op {
 		$opt = $opt ?: $this->opts();
 		$methodF = strtoupper(df_caller_f()); /** @var string $method */
 		$method = $method ?: (in_array($methodF, [Z::POST, Z::PUT, Z::DELETE, Z::PATCH]) ? $methodF : Z::GET);
