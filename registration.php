@@ -3,7 +3,7 @@ use Magento\Framework\Component\ComponentRegistrar as R;
 # 2017-11-13
 # Today I have added the subdirectories support inside the `lib` folders,
 # because some lib/*.php files became too big, and I want to split them.
-$requireFiles = function($libDir) use(&$requireFiles) {
+$requireFiles = function(string $libDir) use(&$requireFiles):void {
 	# 2015-02-06
 	# array_slice removes «.» and «..».
 	# https://php.net/manual/function.scandir.php#107215

@@ -37,6 +37,7 @@ abstract class Upgrade {
 	 * @see \Df\Sales\Setup\UpgradeSchema::_process()
 	 * @see \Df\Sso\Upgrade\Data::_process()
 	 * @see \Df\Sso\Upgrade\Schema::_process()
+	 * @see \Dfe\Color\Setup\UpgradeSchema::_process()
 	 * @see \Dfe\IPay88\Setup\UpgradeData::_process()
 	 * @see \Dfe\Logo\Setup\UpgradeSchema::_process()
 	 * @see \Dfe\Markdown\Setup\UpgradeSchema::_process()
