@@ -20,7 +20,6 @@ function df_pc():C {return df_new_om(C::class);}
  * @see df_pc_preserve_absent_f()
  * 1) "Add an ability to temporary disable the flat mode for products": https://github.com/mage2pro/core/issues/149
  * 2) Currently, it is unused here, but used in Justuno: https://github.com/justuno-com/m2/issues/23
- * @param Closure|null $f [optional]
  * @return mixed|null
  */
 function df_pc_disable_flat(F $f = null) {
