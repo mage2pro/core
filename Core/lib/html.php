@@ -99,9 +99,10 @@ function df_style_inline_hide(...$s):string {return !$s ? '' : df_style_inline(
  * @param string|null|string[] $content [optional]
  * @param bool|null $multiline [optional]
  */
-function df_tag(string $tag, $attrs = [], $content = null, $multiline = null):string {return Tag::render(
-	$tag, is_array($attrs) ? $attrs : ['class' => $attrs], $content, $multiline
-);}
+function df_tag(string $tag, $attrs = [], $content = null, $multiline = null):string {
+	$t = new Tag($tag, is_array($attrs) ? $attrs : ['class' => $attrs], $content, $multiline); /** @vat Tag $t */
+	return $t->render();
+}
 
 /**
  * 2016-11-17

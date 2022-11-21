@@ -1,35 +1,41 @@
 <?php
 namespace Df\Core\Format\Html;
-final class Tag extends \Df\Core\O {
-	/** @used-by self::render() */
-	private function _render():string {return
-		"<{$this->openTagWithAttributesAsText()}"
-		. ($this->shouldAttributesBeMultiline() ? "\n" : '')
-		. (!$this->content() && $this->shortTagAllowed() ? '/>' : ">{$this->content()}</{$this->tag()}>")
-	;}
-	
+final class Tag {
 	/**
-	 * @used-by openTagWithAttributesAsText()
-	 * @used-by shouldAttributesBeMultiline()
-	 */
-	private function attributes():array {return $this->a(self::$P__ATTRIBUTES, []);}
+	 * 2022-11-21
+	 * @used-by df_tag()
+	 * @param array(string => string) $attrs [optional]
+	 * @param string|null|string[] $content [optional]
+	 * @param bool|null $multiline [optional]
+	 */	
+	function __construct(string $tag, array $attrs = [], $content = null, $multiline = null) {
+		$this->_tag = strtolower($tag);	
+		$this->_attrs = $attrs;	
+		$this->_content = $content;	
+		$this->_multiline = !is_null($multiline) ? $multiline : 1 < count($attrs);
+	}
 	
-	/** @used-by self::_render() */
+	/** @used-by df_tag() */
+	function render():string {return
+		"<{$this->openTagWithAttributesAsText()}"
+		. ($this->_multiline ? "\n" : '')
+		. (!$this->content() && $this->shortTagAllowed() ? '/>' : ">{$this->content()}</{$this->_tag}>")
+	;}
+
+	/** @used-by self::render() */
 	private function content():string {return dfc($this, function() {
-		$c = df_trim(df_cc_n($this[self::$P__CONTENT]), "\n"); /** @var string $c */
-		return $this->tagIs('pre', 'code') || !df_contains($c, "\n") ? $c :
-			"\n" . df_tab_multiline($c) . "\n"
-		;
+		$c = df_trim(df_cc_n($this->_content), "\n"); /** @var string $c */
+		return $this->tagIs('pre', 'code') || !df_contains($c, "\n") ? $c : "\n" . df_tab_multiline($c) . "\n";
 	});}
 	
-	/** @used-by self::_render() */
+	/** @used-by self::render() */
 	private function openTagWithAttributesAsText():string {return df_cc_s(
-		$this->tag()
-		,$this->shouldAttributesBeMultiline() ? "\n" : null
+		$this->_tag
+		,$this->_multiline ? "\n" : null
 		,call_user_func(
-			$this->shouldAttributesBeMultiline() ? 'df_tab_multiline' : 'df_nop'
+			$this->_multiline ? 'df_tab_multiline' : 'df_nop'
 			,implode(
-				$this->shouldAttributesBeMultiline() ? "\n" :  ' '
+				$this->_multiline ? "\n" :  ' '
 				,df_clean(df_map_k(
 					/** 2022-11-21 @param string|string[] $v */
 					function(string $k, $v):string {
@@ -54,7 +60,7 @@ final class Tag extends \Df\Core\O {
 							,false
 						);
 						return '' === $v ? '' : "{$k}='{$v}'";
-					}, $this->attributes()
+					}, $this->_attrs
 				))
 			)
 		)
@@ -65,52 +71,49 @@ final class Tag extends \Df\Core\O {
 	 * Self-closing `span` tags sometimes work incorrectly,
 	 * I have encountered it today while working on the frugue.com website.
 	 * https://stackoverflow.com/questions/2816833
+	 * @used-by self::render()
 	 */
 	private function shortTagAllowed():bool {return !$this->tagIs('div', 'script', 'span');}
-
-	/**
-	 * @used-by self::_render()
-	 * @used-by self::openTagWithAttributesAsText()
-	 */
-	private function shouldAttributesBeMultiline():bool {return dfc($this, function() {/** @var bool|null $r */return
-		!is_null($r = $this[self::$P__MULTILINE]) ? $r : 1 < count($this->attributes())
-	;});}
-
-	/**
-	 * 2016-08-05
-	 * @used-by self::_render()
-	 * @used-by self::openTagWithAttributesAsText()
-	 * @used-by self::tagIs()
-	 */
-	private function tag():string {return dfc($this, function() {return strtolower($this[self::$P__TAG]);});}
 
 	/**
 	 * 2016-08-05
 	 * @used-by self::content()
 	 * @used-by self::shortTagAllowed()
 	 */
-	private function tagIs(string ...$tags):bool {return in_array($this->tag(), $tags);}
-
-	/** @var string */
-	private static $P__ATTRIBUTES = 'attributes';
-	/** @var string */
-	private static $P__CONTENT = 'content';
-	/** @var string */
-	private static $P__MULTILINE = 'multiline';
-	/** @var string */
-	private static $P__TAG = 'tag';
-
+	private function tagIs(string ...$tags):bool {return in_array($this->_tag, $tags);}
+	
 	/**
-	 * @used-by df_tag()
-	 * @param string $tag
-	 * @param array(string => string) $attrs [optional]
-	 * @param string|null|string[] $content [optional]
-	 * @param bool|null $multiline [optional]
+	 * 2022-11-21
+	 * @used-by self::__construct()
+	 * @used-by self::openTagWithAttributesAsText()
+	 * @var array(string => string)
 	 */
-	static function render($tag, array $attrs = [], $content = null, $multiline = null):string {return (new self([
-		self::$P__ATTRIBUTES => $attrs
-		,self::$P__CONTENT => $content
-		,self::$P__MULTILINE => $multiline
-		,self::$P__TAG => $tag
-	]))->_render();}
+	private $_attrs;	
+	
+	/**
+	 * 2022-11-21
+	 * @used-by self::__construct()
+	 * @used-by self:: content()
+	 * @var string|null|string[]
+	 */
+	private $_content;	
+	
+	/**
+	 * 2022-11-21
+	 * @used-by self::__construct()
+	 * @used-by self::openTagWithAttributesAsText()
+	 * @used-by self::render()
+	 * @var bool|null
+	 */
+	private $_multiline;		
+	
+	/**
+	 * 2022-11-21
+	 * @used-by self::__construct()
+	 * @used-by self::render()
+	 * @used-by self::openTagWithAttributesAsText()
+	 * @used-by self::tagIs()
+	 * @var string
+	 */
+	private $_tag;	
 }

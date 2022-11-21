@@ -6,7 +6,6 @@ namespace Df\Core;
  * @see \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element
  * @see \Df\Config\A
  * @see \Df\Config\O
- * @see \Df\Core\Format\Html\Tag
  * @see \Df\Core\Text\Regex
  * @see \Df\Core\Visitor
  * @see \Df\GoogleFont\Font
