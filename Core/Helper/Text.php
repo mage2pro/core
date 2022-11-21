@@ -52,9 +52,8 @@ final class Text {
 	 * https://php.net/strtr
 	 * Новый алгоритм взял отсюда:  http://stackoverflow.com/a/20717751
 	 * 2021-12-13 @deprecated It is unused.
-	 * @param string $s
 	 */
-	function removeLineBreaks($s):string {return str_replace(["\r\n", "\r", "\n"], ' ', $s);}
+	function removeLineBreaks(string $s):string {return str_replace(["\r\n", "\r", "\n"], ' ', $s);}
 
 	/**
 	 * 2015-03-03 Алгоритм аналогичен @see removeLineBreaks()
