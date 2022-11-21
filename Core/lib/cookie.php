@@ -53,4 +53,3 @@ function df_cookie_set_js(string $k, string $v):void {df_cookie_m()->setPublicCo
  * @return StoreCookieManagerInterface|StoreCookieManager
  */
 function df_store_cookie_m() {return df_o(StoreCookieManagerInterface::class);}
-
