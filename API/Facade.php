@@ -125,7 +125,6 @@ abstract class Facade {
 	 * @see \Dfe\Sift\API\Facade::adjustClient()
 	 * @see \Inkifi\Mediaclip\API\Facade\Order\Item::adjustClient()
 	 * @see \Inkifi\Pwinty\API\Facade\Order::adjustClient()
-	 * @param Client $c
 	 */
 	protected function adjustClient(Client $c):void {}
 
