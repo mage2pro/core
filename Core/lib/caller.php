@@ -6,9 +6,8 @@ use Exception as E;
  * 2017-11-19
  * @used-by df_abstract()
  * @used-by df_sentry_ext_f()
- * @param int $o [optional]
  */
-function df_caller_c($o = 0):string {return df_first(df_explode_method(df_caller_m(++$o)));}
+function df_caller_c(int $o = 0):string {return df_first(df_explode_method(df_caller_m(++$o)));}
 
 /**
  * 2017-03-28 If the function is called from a closure, then it will go up through the stask until it leaves all closures.
