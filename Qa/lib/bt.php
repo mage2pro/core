@@ -11,10 +11,9 @@ use Df\Qa\Trace\Formatter;
  * @used-by dfs_con()
  * @used-by \Df\Qa\Method::caller()
  * @param E|int|null|array(array(string => string|int)) $p [optional]
- * @param int $limit [optional]
  * @return array(array(string => mixed))
  */
-function df_bt($p = 0, $limit = 0):array {return is_array($p) ? $p : ($p instanceof E ? $p->getTrace() : df_slice(
+function df_bt($p = 0, int $limit = 0):array {return is_array($p) ? $p : ($p instanceof E ? $p->getTrace() : df_slice(
 	debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, !$limit ? 0 : 1 + $p + $limit), 1 + $p, $limit
 ));}
 
