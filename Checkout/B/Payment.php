@@ -34,5 +34,3 @@ class Payment extends _P {
 	 */
 	final protected function _toHtml():string {return df_js(__CLASS__, 'payment');}
 }
-
-
