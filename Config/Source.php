@@ -185,7 +185,7 @@ abstract class Source extends SourceBase {
 	 * @used-by \Dfe\IPay88\W\Event::optionTitle()
 	 * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
 	 */
-	static function s():self {return dfcf(function($c) {return new $c;}, [static::class]);}
+	static function s():self {return dfcf(function(string $c) {return new $c;}, [static::class]);}
 
 	/**
 	 * 2017-02-05
