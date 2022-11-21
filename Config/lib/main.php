@@ -67,12 +67,12 @@ function df_cfg($k, $scope = null, $d = null) {
 
 /**
  * 2016-08-03
+ * A $path: «web/unsecure/base_url»
+ * A $scope: «default»
+ * A $scopeId: «0»
  * @see df_cfg_save()
- * @param string $path		E.g.: «web/unsecure/base_url»
- * @param string $scope		E.g.: «default»
- * @param int $scopeId		E.g.: «0»
  */
-function df_cfg_delete($path, $scope, $scopeId):void {df_cfg_r()->deleteConfig($path, $scope, $scopeId);}
+function df_cfg_delete(string $path, string $scope, int $scopeId):void {df_cfg_r()->deleteConfig($path, $scope, $scopeId);}
 
 /**
  * 2016-11-12
