@@ -14,8 +14,6 @@ final class DataProvider {
 	/**
 	 * 2021-05-04
 	 * @see \Magento\AdobeStockImageAdminUi\Model\Listing\DataProvider::getData()
-	 * @param Sb $sb
-	 * @param F $f
 	 * @return array(string => mixed)
 	 */
 	function aroundGetData(Sb $sb, F $f):array {return
