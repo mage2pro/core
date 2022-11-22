@@ -12,10 +12,9 @@ use Closure as F;
  * @used-by df_each()
  * @param object|mixed|array $o
  * @param string|callable|F $m
- * @param mixed[] $p [optional]
  * @return mixed
  */
-function df_call($o, $m, $p = []) {/** @var mixed $r */
+function df_call($o, $m, array $p = []) {/** @var mixed $r */
 	if (is_array($o) && df_is_assoc($o)) {
 		$r = dfa($o, $m);
 	}
