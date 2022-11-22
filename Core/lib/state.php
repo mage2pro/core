@@ -66,8 +66,7 @@ function df_magento_version():string {return dfcf(function() {return df_trim_tex
 function df_magento_version_ge(string $v):bool {return version_compare(df_magento_version(), $v, 'ge');}
 
 /**
- * 2016-06-25
- * https://mage2.pro/t/543
+ * 2016-06-25 https://mage2.pro/t/543
  */
 function df_magento_version_full() {
 	$v = df_magento_version_m(); /** @var ProductMetadata|ProductMetadataInterface $v */
