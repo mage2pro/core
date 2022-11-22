@@ -102,11 +102,8 @@ function dfa_deep_set(array &$array, $path, $value):array {
  * https://github.com/mage2pro/core/blob/3.7.13/Core/etc/doc/dfa_deep_slice/1.png
  * https://github.com/mage2pro/core/blob/3.7.13/Core/etc/doc/dfa_deep_slice/2.png
  * https://github.com/mage2pro/core/blob/3.7.13/Core/etc/doc/dfa_deep_slice/3.png
- * @param array $a
- * @param int $l
- * @return array
  */
-function dfa_deep_slice(array $a, $l):array {return 1 === $l ? (array_is_list($a) ? $a : array_keys($a)) : array_map(
+function dfa_deep_slice(array $a, int $l):array {return 1 === $l ? (array_is_list($a) ? $a : array_keys($a)) : array_map(
 	function($v) use($l) {return !is_array($v) ? $v : dfa_deep_slice($v, $l - 1);}, $a
 );}
 
