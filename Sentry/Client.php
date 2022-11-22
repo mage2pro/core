@@ -180,7 +180,6 @@ final class Client {
 	 * @used-by self::captureException()
 	 * @used-by self::captureMessage()
 	 * @param mixed $data
-	 * @param mixed[] $trace [optional]
 	 */
 	private function capture($data, array $trace = []):string {
 		$data += [
