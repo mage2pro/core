@@ -22,7 +22,6 @@ function df_test_file_l($m, string $localPath = ''):string {return file_get_cont
  * 2016-11-21
  * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
  * @param string|object $m
- * @param string $localPath [optional]
  * @return array(string => string|array)
  */
-function df_test_file_lj($m, $localPath = ''):array {return df_json_decode(df_test_file_l($m, "$localPath.json"));}
+function df_test_file_lj($m, string $localPath = ''):array {return df_json_decode(df_test_file_l($m, "$localPath.json"));}
