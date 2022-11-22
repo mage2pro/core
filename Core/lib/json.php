@@ -74,11 +74,10 @@ function df_check_json_complex($v):bool {return is_string($v) && df_starts_with(
  * @used-by app/design/frontend/MageSuper/magestylish/Cart2Quote_Quotation/templates/email/proposal/items/quote/bundle.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/68)
  * @used-by app/design/frontend/MageSuper/magestylish/Cart2Quote_Quotation/templates/email/quote/items/quote/bundle.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/67)
  * @param string|null $s
- * @param bool $throw [optional]
  * @return array|mixed|bool|null
  * @throws DFE
  */
-function df_json_decode($s, $throw = true) {/** @var mixed|bool|null $r */
+function df_json_decode($s, bool $throw = true) {/** @var mixed|bool|null $r */
 	# 2015-12-19 У PHP 7.0.1 декодировании пустой строки почему-то приводит к сбою: «Decoding failed: Syntax error».
 	# 2022-10-14
 	# «an empty string is no longer considered valid JSON»:
