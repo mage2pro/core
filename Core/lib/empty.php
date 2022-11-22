@@ -30,7 +30,6 @@
  * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @used-by \Mangoit\MediaclipHub\Helper\Data::getMediaClipProjects()
  * @param mixed|null $v
- * @return mixed[]
  */
 function df_eta($v):array {
 	if (!is_array($v)) {
