@@ -61,10 +61,8 @@ function df_magento_version():string {return dfcf(function() {return df_trim_tex
 
 /**
  * 2016-08-24
- * @param string $version
- * @return bool
  */
-function df_magento_version_ge($version) {return version_compare(df_magento_version(), $version, 'ge');}
+function df_magento_version_ge(string $v):bool {return version_compare(df_magento_version(), $v, 'ge');}
 
 /**
  * 2016-06-25
