@@ -83,7 +83,6 @@ function df_first_key(array $a) {
  * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
- * @param mixed[] $array
  * @return mixed|null
  */
 function df_last(array $array) {return !$array ? null : end($array);}
