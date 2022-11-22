@@ -29,10 +29,9 @@ function df_args(array $a):array {return !$a || !is_array($a[0]) ? $a : $a[0];}
  * Если массив $args непуст, то функция возвращает:
  * 		$args[0] при истинности $r
  *		$args[1] при ложности $r
- * @param bool $r
  * @return mixed
  */
-function df_b(array $args, $r) {return !$args ? $r : $args[intval(!$r)];}
+function df_b(array $args, bool $r) {return !$args ? $r : $args[intval(!$r)];}
 
 /**
  * 2016-02-09 Осуществляет ленивое ветвление только для первой ветки.
