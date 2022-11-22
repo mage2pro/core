@@ -21,9 +21,8 @@ function df_app_state():State {return df_o(State::class);}
  * @see df_is_rest()
  * @used-by df_is_backend()
  * @used-by df_is_frontend()
- * @return bool
  */
-function df_is_ajax() {static $r; return !is_null($r) ? $r : $r = df_request_o()->isXmlHttpRequest();}
+function df_is_ajax():bool {static $r; return !is_null($r) ? $r : $r = df_request_o()->isXmlHttpRequest();}
 
 /**
  * 2015-12-09
