@@ -9,9 +9,9 @@ use Magento\Config\Model\Config\Source\Yesno as YN;
  * @param string[] $a
  * @return array(array(string => string|int))
  */
-function df_a_to_options(array $a):array {return is_null($f = df_first($a)) || isset($f['value']) ? $a :
-	df_map_to_options(dfa_combine_self($a))
-;}
+function df_a_to_options(array $a):array {return is_null($f = df_first($a)) || isset($f['value']) ? $a : df_map_to_options(
+	dfa_combine_self($a)
+);}
 
 /**
  * 2018-01-29
