@@ -196,7 +196,6 @@ function dfa_fill(int $startIndex, int $length, $value):array {return !$length ?
  * @used-by dfa_unpack()
  * @used-by \Df\Payment\Block\Info::rPDF()
  * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
- * @param array $a
  * @return mixed[]
  */
 function dfa_flatten(array $a):array {
