@@ -9,9 +9,8 @@ use Magento\Framework\App\State;
  * @used-by df_area_code_set_f()
  * @used-by df_is_backend()
  * @used-by df_is_dev()
- * @return State
  */
-function df_app_state() {return df_o(State::class);}
+function df_app_state():State {return df_o(State::class);}
 
 /**
  * 2015-08-15
