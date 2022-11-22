@@ -26,11 +26,10 @@ use Df\Core\Exception as DFE;
  * @param array|callable|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
- * @param int $keyPosition [optional]
  * @return mixed|null
  * @throws DFE
  */
-function df_find($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
+function df_find($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0) {
 	# 2020-03-02, 2022-10-31
 	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 	#		[$a, $b] = [1, 2];
