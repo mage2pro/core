@@ -161,9 +161,8 @@ function df_json_decode($s, bool $throw = true) {/** @var mixed|bool|null $r */
  * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param mixed $v
- * @param int $flags [optional]
  */
-function df_json_encode($v, $flags = 0):string {return json_encode(df_json_sort($v),
+function df_json_encode($v, int $flags = 0):string {return json_encode(df_json_sort($v),
 	JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE | $flags
 );}
 
