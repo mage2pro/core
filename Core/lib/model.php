@@ -36,6 +36,8 @@ function df_load($m, $id, bool $throw = true, $field = null) {/** @var M|null $r
 /**
  * 2016-05-23
  * @see \Df\Framework\Plugin\Model\AbstractModel::afterSave()
+ * @used-by \Dfe\TwoCheckout\Method::_refund()
+ * @used-by \Dfe\TwoCheckout\Method::charge()
  * @param callable|array $callback
  */
 function df_on_save(M $m, $callback):void {CallbackPool::attach(spl_object_hash($m), $callback);}
