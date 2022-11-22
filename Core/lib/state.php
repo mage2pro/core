@@ -26,6 +26,7 @@ function df_is_ajax():bool {static $r; return !is_null($r) ? $r : $r = df_reques
 
 /**
  * 2015-12-09 https://mage2.pro/t/299
+ * 2022-11-22 @deprecated It is unused.
  */
 function df_is_dev():bool {return State::MODE_DEVELOPER === df_app_state()->getMode();}
 
