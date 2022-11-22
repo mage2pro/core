@@ -95,9 +95,11 @@ function df_js_inline_r(string $n):string {return df_tag('script', ['type' => 't
  * @see df_js_inline_r()
  * @used-by vendor/tradefurniturecompany/core/view/frontend/templates/js.phtml
  */
-function df_js_inline_url(string $res, bool $async = false):string {return df_resource_inline($res, function($url) use($async) {return
-	df_tag('script', ['src' => $url, 'type' => 'text/javascript'] + (!$async ? [] : ['async' => 'async']), null, false)
-;});}
+function df_js_inline_url(string $res, bool $async = false):string {return df_resource_inline(
+	$res, function(string $url) use($async):string {return df_tag(
+		'script', ['src' => $url, 'type' => 'text/javascript'] + (!$async ? [] : ['async' => 'async']), null, false
+	);}
+);}
 
 /**
  * 2019-06-01
