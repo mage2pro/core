@@ -26,6 +26,5 @@ function df_slice(array $a, int $offset, int $length = 0):array {return array_sl
  * @see df_first()
  * @see df_last()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
- * @return mixed[]|string[]
  */
 function df_tail(array $a):array {return array_slice($a, 1);}
