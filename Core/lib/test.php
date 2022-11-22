@@ -15,9 +15,8 @@ function df_test_file($m, string $localPath = ''):string {return df_cc_path(df_m
  * 2016-11-21
  * @used-by df_test_file_lj()
  * @param string|object $m
- * @param string $localPath [optional]
  */
-function df_test_file_l($m, $localPath = ''):string {return file_get_contents(df_test_file($m, $localPath));}
+function df_test_file_l($m, string $localPath = ''):string {return file_get_contents(df_test_file($m, $localPath));}
 
 /**
  * 2016-11-21
