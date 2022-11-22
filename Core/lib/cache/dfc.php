@@ -18,6 +18,7 @@ use Df\Core\RAM;
  * 2.1) Если Ваш метод содержит несколько вызовов dfc() для разных Closure.
  * 2.2) В случаях, подобных @see dfaoc(), когда Closure передаётся в метод в качестве параметра,
  * и поэтому Closure не уникальна.
+ * 2017-01-02 Задавайте параметр $offset в том случае, когда dfc() вызывается опосредованно. Например, так делает @see dfaoc().
  * 2022-11-17
  * 1) `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * 2) Previously, I had a df_once() function which only difference from dfc() was a void result of $f.
@@ -31,13 +32,9 @@ use Df\Core\RAM;
  * @used-by dfaoc()
  * @see df_prop()
  * @param object $o
- * @param Closure $f
- * @param mixed[] $a [optional]
- * @param bool $unique [optional]
- * @param int $offset [optional] 2017-01-02 Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно. Например, так делает @see dfaoc().
  * @return mixed
  */
-function dfc($o, Closure $f, array $a = [], $unique = true, $offset = 0) {
+function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0) {
 	/**
 	 * 2021-10-05
 	 * I do not use @see df_bt() to make the implementation faster. An implementation via df_bt() is:
