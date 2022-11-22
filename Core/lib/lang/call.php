@@ -77,10 +77,9 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
  * @param mixed[]|mixed[][] $parentArgs
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
- * @param int $keyPosition [optional]
  * @return mixed|mixed[]
  */
-function df_call_a(callable $f, array $parentArgs, $pAppend = [], $pPrepend = [], $keyPosition = 0) {
+function df_call_a(callable $f, array $parentArgs, $pAppend = [], $pPrepend = [], int $keyPosition = 0) {
 	/**
 	 * 2016-11-13 We can not use @see df_args() here
 	 * 2019-06-05
