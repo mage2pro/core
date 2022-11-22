@@ -40,10 +40,8 @@ function dfp_error_message($m = ''):string {return nl2br(df_cc_n(
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string|object $m
  * @param string|mixed[] $d
- * @param string|null $title [optional]
- * @param string|null $suffix [optional]
  */
-function dfp_report($m, $d, $title = null, $suffix = null):void {
+function dfp_report($m, $d, string $title = '', string $suffix = ''):void {
 	dfp_sentry_tags($m);
 	df_sentry($m, $title ?: dfpm_title($m), ['extra' => is_array($d) ? $d : ['Payment Data' => $d]]);
 	df_log_l(df_module_name_c($m), $d, $suffix);
