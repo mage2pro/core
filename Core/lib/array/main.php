@@ -42,15 +42,6 @@ function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
 function df_ita($t):array {return is_array($t) ? $t : iterator_to_array($t);}
 
 /**
- * @used-by Df_InTime_Api::call()
- * http://stackoverflow.com/a/18576902
- * @param mixed $value
- * @return array
- * @throws DFE
- */
-function df_stdclass_to_array($value) {return df_json_decode(json_encode($value));}
-
-/**
  * http://en.wikipedia.org/wiki/Tuple
  * 2020-02-12
  * 1) df_tuple(['a' => [1, 2, 3], 'b' => [4, 5]]) → [['a' => 1, 'b' => 4], ['a' => 2, 'b' => 5], ['a' => 3, 'b' => null]]

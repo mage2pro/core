@@ -34,7 +34,6 @@ function df_check_json_complex($v):bool {return is_string($v) && df_starts_with(
  * @used-by df_oro_get_list()
  * @used-by df_package()
  * @used-by df_request_body_json()
- * @used-by df_stdclass_to_array()
  * @used-by df_test_file_lj()
  * @used-by dfp_container_get()
  * @used-by ikf_project()
