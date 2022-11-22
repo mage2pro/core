@@ -25,11 +25,9 @@ function df_app_state():State {return df_o(State::class);}
 function df_is_ajax():bool {static $r; return !is_null($r) ? $r : $r = df_request_o()->isXmlHttpRequest();}
 
 /**
- * 2015-12-09
- * https://mage2.pro/t/299
- * @return bool
+ * 2015-12-09 https://mage2.pro/t/299
  */
-function df_is_dev() {return State::MODE_DEVELOPER === df_app_state()->getMode();}
+function df_is_dev():bool {return State::MODE_DEVELOPER === df_app_state()->getMode();}
 
 /**
  * 2016-05-15 http://stackoverflow.com/a/2053295
