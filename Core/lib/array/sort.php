@@ -130,7 +130,6 @@ function df_sort_a(array $a):array {asort($a); return $a;}
  * @param string[]|mixed[] $a
  * @param string|null $locale
  * @param callable|null $get
- * @return string[]|mixed[]
  */
 function df_sort_names(array $a, $locale = null, callable $get = null):array {
 	$c = new \Collator($locale); /** @var \Collator $c */
