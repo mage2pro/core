@@ -41,7 +41,6 @@ const DF_BEFORE = -1;
  * @param \Traversable|array(int|string => _DO|array(string => mixed)) $c
  * @param string|callable $f
  * @param mixed ...$p
- * @return mixed[]|string[]
  */
 function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {return df_call($v, $f, $p);}, $c);}
 
