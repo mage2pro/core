@@ -168,12 +168,10 @@ function dfa_combine_self(...$a):array {$a = df_args($a); return array_combine($
  * «5.6.0	num may now be zero. Previously, num was required to be greater than zero»
  * @see array_fill_keys()
  * @used-by df_vector_sum()
- * @param int $startIndex
- * @param int $length
  * @param mixed $value
  * @return mixed[]
  */
-function dfa_fill($startIndex, $length, $value):array {return !$length ? [] : array_fill($startIndex, $length, $value);}
+function dfa_fill(int $startIndex, int $length, $value):array {return !$length ? [] : array_fill($startIndex, $length, $value);}
 
 /**
  * 2016-03-25 http://stackoverflow.com/a/1320156
