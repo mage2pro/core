@@ -14,12 +14,11 @@ use Magento\Framework\Model\AbstractModel as M;
  * @used-by \Df\Payment\PlaceOrderInternal::qid()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
  * @param string|int|null $id
- * @param bool $throw [optional]
  * @param string|null $field [optional]
  * @return M|null
  * @throws DFE
  */
-function df_load($m, $id, $throw = true, $field = null) {/** @var M|null $r */
+function df_load($m, $id, bool $throw = true, $field = null) {/** @var M|null $r */
 	$c = df_cts($m); /** @var string $c */
 	if (!$id) {
 		$r = !$throw ? null : df_error("You are trying to load a model of the class «{$c}» with an empty ID.");
