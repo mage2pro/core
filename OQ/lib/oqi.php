@@ -99,6 +99,8 @@ function df_oqi_image($i):string {return df_product_image_url($i->getProduct());
  * Ведь эта функция используется только для передачи позиций заказа в платежные системы,
  * а там они отображаются покупателю и администратору, и удобно, чтобы они были упорядочены по имени.
  *
+ * 2022-11-22 $locale используется для упорядочивания элементов.
+ *
  * @used-by \Df\Payment\Operation::oiLeafs()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Dfe\Moip\Test\Order::pItems()
@@ -108,10 +110,9 @@ function df_oqi_image($i):string {return df_product_image_url($i->getProduct());
  *
  * @param O|Q $oq
  * @param Closure|null $f [optional]
- * @param string|null $locale [optional] Используется для упорядочивания элементов.
  * @return array(int => mixed)|OI[]|QI[]
  */
-function df_oqi_leafs($oq, Closure $f = null, $locale = null):array {
+function df_oqi_leafs($oq, Closure $f = null, string $locale = ''):array {
 	$r = df_sort_names(array_values(array_filter(
 		$oq->getItems(), function($i) {/** @var OI|QI $i */ return df_oqi_is_leaf($i);}
 	)), $locale, function($i) {/** @var OI|QI $i */ return $i->getName();}); /** @var OI[]|QI[] $r */

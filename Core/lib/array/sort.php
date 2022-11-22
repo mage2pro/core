@@ -128,7 +128,7 @@ function df_sort_a(array $a):array {asort($a); return $a;}
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  */
-function df_sort_names(array $a, string $l = '', callable $get = null):array {
+function df_sort_names(array $a, string $l = '', Closure $get = null):array {
 	$c = new Collator($l); /** @var Collator $c */
 	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(!$get ? $a : $get($a), !$get ? $b : $get($b));});
 }
