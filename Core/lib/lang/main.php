@@ -43,12 +43,11 @@ function df_if1(bool $cond, $onTrue, $onFalse = null) {return $cond ? df_call_if
 
 /**
  * 2016-02-09 Осуществляет ленивое ветвление только для второй ветки.
- * @param bool $cond
  * @param mixed $onTrue
  * @param mixed|null|callable $onFalse [optional]
  * @return mixed
  */
-function df_if2($cond, $onTrue, $onFalse = null) {return $cond ? $onTrue : df_call_if($onFalse);}
+function df_if2(bool $cond, $onTrue, $onFalse = null) {return $cond ? $onTrue : df_call_if($onFalse);}
 
 /**
  * Осуществляет ленивое ветвление.
