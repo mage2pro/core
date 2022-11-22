@@ -52,12 +52,11 @@ function df_if2(bool $cond, $onTrue, $onFalse = null) {return $cond ? $onTrue : 
 /**
  * Осуществляет ленивое ветвление.
  * @used-by df_cfg()
- * @param bool $cond
  * @param mixed|callable $onTrue
  * @param mixed|null|callable $onFalse [optional]
  * @return mixed
  */
-function df_if($cond, $onTrue, $onFalse = null) {return $cond ? df_call_if($onTrue) : df_call_if($onFalse);}
+function df_if(bool $cond, $onTrue, $onFalse = null) {return $cond ? df_call_if($onTrue) : df_call_if($onFalse);}
 
 /**
  * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
