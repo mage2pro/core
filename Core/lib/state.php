@@ -67,6 +67,7 @@ function df_magento_version_ge(string $v):bool {return version_compare(df_magent
 
 /**
  * 2016-06-25 https://mage2.pro/t/543
+ * 2022-11-22 @deprecated It is unused.
  */
 function df_magento_version_full() {
 	$v = df_magento_version_m(); /** @var ProductMetadata|ProductMetadataInterface $v */
