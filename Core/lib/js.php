@@ -94,10 +94,8 @@ function df_js_inline_r(string $n):string {return df_tag('script', ['type' => 't
  * 2017-04-21
  * @see df_js_inline_r()
  * @used-by vendor/tradefurniturecompany/core/view/frontend/templates/js.phtml
- * @param string $res
- * @param bool $async [optional]
  */
-function df_js_inline_url($res, $async = false):string {return df_resource_inline($res, function($url) use($async) {return
+function df_js_inline_url(string $res, bool $async = false):string {return df_resource_inline($res, function($url) use($async) {return
 	df_tag('script', ['src' => $url, 'type' => 'text/javascript'] + (!$async ? [] : ['async' => 'async']), null, false)
 ;});}
 
