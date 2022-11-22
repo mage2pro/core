@@ -64,12 +64,10 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0) 
  * 2020-04-25
  * @used-by dfa_r()
  * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
- * @param array $a
- * @param string $k
  * @param mixed $d [optional]
  * @return mixed|null
  */
-function dfa_r(array $a, $k, $d = null) {/** @var mixed|null $r */
+function dfa_r(array $a, string $k, $d = null) {/** @var mixed|null $r */
 	if (isset($a[$k])) {
 		$r = $a[$k];
 	}
