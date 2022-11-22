@@ -358,7 +358,6 @@ function df_con_hier_suf_ta($c, $sufBase, $ta, $throw = true) {
  * @param string|object $c
  * @param string|string[] $suffix
  * @param string $method
- * @param mixed[] $params [optional]
  * @return mixed
  */
 function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
