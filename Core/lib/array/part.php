@@ -7,7 +7,6 @@
  * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
- * @return mixed[]|string[]
  */
 function df_head(array $a):array {return array_slice($a, 0, -1);}
 
