@@ -87,9 +87,8 @@ function df_js_data($n, $v):string {return df_tag('script', ['type' => 'text/jav
  * но и из другого скрипта JavaScript: применение RequireJS позволяет нам не загружать скрипт повторно.
  * 2) Загрузка скрипта не блокирует рисование страницы браузером
  * (аналогично для этого можно было бы использовать атрибут async тега script).
- * @param string $n
  */
-function df_js_inline_r($n):string {return df_tag('script', ['type' => 'text/javascript'], "require(['$n']);");}
+function df_js_inline_r(string $n):string {return df_tag('script', ['type' => 'text/javascript'], "require(['$n']);");}
 
 /**
  * 2017-04-21
