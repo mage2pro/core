@@ -15,8 +15,6 @@ use Magento\Framework\App\Filesystem\DirectoryList;
  * @used-by dfa_combine_self()
  * @used-by dfa_unset()
  * @see dfa_unpack()
- * @param mixed[] $a
- * @return mixed[]
  */
 function df_args(array $a):array {return !$a || !is_array($a[0]) ? $a : $a[0];}
 
