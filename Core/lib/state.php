@@ -99,9 +99,8 @@ function df_magento_version_remote(string $url):string {return dfcf(function($ur
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()   
  * @used-by \KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
- * @return bool
  */
-function df_my() {return isset($_SERVER['DF_DEVELOPER']);}
+function df_my():bool {return isset($_SERVER['DF_DEVELOPER']);}
 
 /**
  * 2017-06-09 «dfediuk» is the CLI user name on my localhost. 
