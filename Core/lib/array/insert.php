@@ -11,7 +11,6 @@
  * @used-by \Df\Sso\Source\Button\Type\UNL::map()
  * @used-by \Dfe\SecurePay\Signer::sign()
  * @param mixed|mixed[] $add
- * @return mixed[]
  */
 function dfa_insert(array $a, int $pos, $add):array {
 	if (!is_array($add) || array_is_list($add)) {
