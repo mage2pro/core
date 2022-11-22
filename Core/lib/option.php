@@ -67,10 +67,9 @@ function df_map_to_options_reverse(array $map):array {return array_map('df_optio
  * @used-by df_map_to_options_reverse()
  * @used-by df_map_to_options_t()
  * @param string|int $v
- * @param string $l
  * @return array(string => string|int)
  */
-function df_option($v, $l):array {return ['label' => $l, 'value' => $v];}
+function df_option($v, string $l):array {return ['label' => $l, 'value' => $v];}
 
 /**
  * 2020-02-02
