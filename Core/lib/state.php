@@ -36,9 +36,8 @@ function df_is_dev():bool {return State::MODE_DEVELOPER === df_app_state()->getM
  * @used-by df_my_local()
  * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @return bool
  */
-function df_is_localhost() {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
+function df_is_localhost():bool {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
 
 /**
  * 2016-12-22
