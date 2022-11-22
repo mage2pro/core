@@ -42,7 +42,6 @@ final class Dumper {
 	 * @see df_kv()
 	 * @used-by self::dumpArray()
 	 * @used-by self::dumpObject()
-	 * @param mixed[]|array(string => mixed) $a
 	 */
 	private function dumpArrayElements(array $a):string {return df_cc_n(df_map_k(df_ksort($a), function($k, $v) {return
 		"$k: {$this->dump($v)}"
