@@ -81,12 +81,10 @@ function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {r
  * @param array|callable|\Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
- * @param int $keyPosition [optional]
- * @param bool $returnKey [optional]
  * @return array(int|string => mixed)
  * @throws DFE
  */
-function df_map($a1, $a2, $pAppend = [], $pPrepend = [], $keyPosition = 0, $returnKey = false):array {
+function df_map($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, bool $returnKey = false):array {
 	# 2020-03-02, 2022-10-31
 	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 	#		[$a, $b] = [1, 2];
