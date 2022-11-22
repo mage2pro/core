@@ -42,9 +42,8 @@ function df_is_localhost():bool {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []
 /**
  * 2016-12-22
  * 2020-06-27 @deprecated It is unused.
- * @return bool
  */
-function df_is_windows() {return dfcf(function() {return 'WIN' === strtoupper(substr(PHP_OS, 0, 3));});}
+function df_is_windows():bool {return dfcf(function() {return 'WIN' === strtoupper(substr(PHP_OS, 0, 3));});}
 
 /**
  * 2016-06-25 https://mage2.pro/t/543
