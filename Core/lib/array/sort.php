@@ -127,10 +127,9 @@ function df_sort_a(array $a):array {asort($a); return $a;}
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
- * @param string|null $locale
  * @param callable|null $get
  */
-function df_sort_names(array $a, $locale = null, callable $get = null):array {
-	$c = new \Collator($locale); /** @var \Collator $c */
+function df_sort_names(array $a, string $l = '', callable $get = null):array {
+	$c = new \Collator($l); /** @var \Collator $c */
 	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(!$get ? $a : $get($a), !$get ? $b : $get($b));});
 }
