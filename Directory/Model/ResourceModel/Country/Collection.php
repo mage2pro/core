@@ -43,10 +43,9 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * а значениями — названия стран для заданной локали (или системной локали по умолчанию).
 	 * https://ru.wikipedia.org/wiki/ISO_3166-1
 	 * Например: ['AU' => 'Австралия', 'AT' => 'Австрия']
-	 * @param string|null $l [optional]
 	 * @return array(string => string)
 	 */
-	final function mapFromCodeToName($l = null):array {return dfc($this, function($l) {
+	final function mapFromCodeToName(string $l = ''):array {return dfc($this, function($l) {
 		$needTranslate = 'en_US' !== $l; /** @var bool $needTranslate */
 		$zL = new zL($l); /** @var zL $zL */
 		return df_sort_names(df_map_r($this, function(C $c) use($needTranslate, $zL) {return [
