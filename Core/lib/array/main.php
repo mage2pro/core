@@ -167,7 +167,6 @@ function dfa_combine_self(...$a):array {$a = df_args($a); return array_combine($
  * @see array_fill_keys()
  * @used-by df_vector_sum()
  * @param mixed $value
- * @return mixed[]
  */
 function dfa_fill(int $startIndex, int $length, $value):array {return !$length ? [] : array_fill($startIndex, $length, $value);}
 
