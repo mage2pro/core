@@ -50,7 +50,6 @@ final class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * 2015-12-30
 	 * @used-by \Df\Config\Backend\ArrayT::processI()
 	 * @used-by \Df\Config\Settings::_a()
-	 * @param mixed[] $itemsA
 	 * @throws DFE
 	 */
 	static function i(string $itemClass, array $itemsA):self {
