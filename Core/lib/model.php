@@ -38,4 +38,4 @@ function df_load($m, $id, bool $throw = true, $field = null) {/** @var M|null $r
  * @see \Df\Framework\Plugin\Model\AbstractModel::afterSave()
  * @param callable|array $callback
  */
-function df_on_save(M $m, $callback) {CallbackPool::attach(spl_object_hash($m), $callback);}
+function df_on_save(M $m, $callback):void {CallbackPool::attach(spl_object_hash($m), $callback);}
