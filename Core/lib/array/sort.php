@@ -130,6 +130,6 @@ function df_sort_a(array $a):array {asort($a); return $a;}
  * @param callable|null $get
  */
 function df_sort_names(array $a, string $l = '', callable $get = null):array {
-	$c = new \Collator($l); /** @var \Collator $c */
+	$c = new Collator($l); /** @var Collator $c */
 	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(!$get ? $a : $get($a), !$get ? $b : $get($b));});
 }
