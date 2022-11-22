@@ -218,9 +218,9 @@ function df_bool($v):bool {
 	 * Passing $strict = true to the @uses in_array() call is required here,
 	 * otherwise any true-compatible value (e.g., a non-empty string) will pass the check.
 	 */
-	return in_array($v, $no, true) ? false : (in_array($v, $yes, true) ? true :
-		df_error('A boolean value is expected, but got «%s».', df_dump($v))
-	);
+	return in_array($v, $no, true) ? false : (in_array($v, $yes, true) ? true : df_error(
+		'A boolean value is expected, but got «%s».', df_dump($v)
+	));
 }
 
 /**
