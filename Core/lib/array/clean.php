@@ -91,7 +91,6 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
  * @used-by \TFC\Core\B\Home\Slider::i()
  * @param mixed ...$k [optional]
- * @return mixed[]
  */
 function df_clean(array $r, ...$k):array {/** @var mixed[] $r */return df_clean_r(
 	$r, array_merge([false], df_args($k)), false
