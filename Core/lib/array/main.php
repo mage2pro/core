@@ -21,7 +21,7 @@ function df_array($v):array {return is_array($v) ? $v : [$v];}
  * 2015-12-30 Преобразует коллекцию или массив в карту.
  * @used-by \Df\Config\A::get()
  * @param string|\Closure $k
- * @param \Traversable|array(int|string => _DO) $items
+ * @param \Traversable|array(int|string => _DO) $a
  * @return mixed[]
  */
 function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
