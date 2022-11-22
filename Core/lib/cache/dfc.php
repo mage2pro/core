@@ -94,7 +94,6 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * 2017-01-01
  * Мы не можем кэшировать Closure самодостаточно, в отрыве от класса,
  * потому что Closure может обращаться к полям и методам класса через self и static.
- * @param mixed[] $a [optional]
  * 2017-01-01
  * При $unique = false Closure $f будет участвовать в расчёте ключа кэширования.
  * Это нужно в 2 ситуациях:
