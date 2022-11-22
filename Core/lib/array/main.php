@@ -287,10 +287,9 @@ function dfa_unpack(array $a) {return !($c = count($a)) ? null : (1 === $c ? $a[
  * @used-by \Df\Framework\Request::clean()
  * @used-by \Dfe\Markdown\Observer\Catalog\ControllerAction::processPost()
  * @param array(string => mixed) $a
- * @param string ...$k
  * @return array(string => mixed)
  */
-function dfa_unset(array $a, ...$k):array {return array_diff_key($a, array_flip(df_args($k)));}
+function dfa_unset(array $a, string ...$k):array {return array_diff_key($a, array_flip(df_args($k)));}
 
 /**
  * Алгоритм взят отсюда: https://php.net/manual/function.array-unshift.php#106570
