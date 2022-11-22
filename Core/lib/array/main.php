@@ -225,7 +225,6 @@ function dfa_ids($c):array {return df_map('df_id', $c);}
  * but now a new array is built by adding the unique elements. This can result in different numeric indexes.
  * https://www.php.net/manual/function.array-unique.php#refsect1-function.array-unique-changelog
  * @used-by \Df\Config\Backend\ArrayT::processI()
- * @param array $a
  */
 function dfa_repeated(array $a):array {return array_values(array_unique(array_diff_key($a, array_unique($a))));}
 
