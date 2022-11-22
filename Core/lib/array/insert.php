@@ -9,12 +9,10 @@
  * Достоинство этой функции перед @uses array_splice()
  * ещё и в отсутствии требования передачи первого параметра по ссылке.
  * 2016-11-24 Отныне функция правильно работает с ассоциативными массивами.
- * @param mixed[] $a
- * @param int $pos
  * @param mixed|mixed[] $add
  * @return mixed[]
  */
-function dfa_insert(array $a, $pos, $add):array {
+function dfa_insert(array $a, int $pos, $add):array {
 	if (!is_array($add) || array_is_list($add)) {
 		array_splice($a, $pos, 0, $add);
 	}
