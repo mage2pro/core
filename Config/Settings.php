@@ -437,7 +437,6 @@ abstract class Settings {
 	 * @used-by self::_matrix()
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
-	 * @return mixed[]
 	 */
 	private function json($k = null, $s = null):array {return df_eta(@df_json_decode($this->v($k ?: df_caller_f(), $s)));}
 
