@@ -101,9 +101,7 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * 2) В случаях, подобных @see dfac(), когда Closure передаётся в функцию в качестве параметра,
  * и поэтому Closure не уникальна.
  * 2017-08-11 The cache tags. A usage example: @see df_cache_get_simple()
- * @param bool $unique [optional]
- * 2017-01-02 Задавайте этот параметр в том случае, когда dfc() вызывается опосредованно. Например, так делает @see dfac().
- * @param int $offset [optional]
+ * 2017-01-02 Задавайте параметр $offset в том случае, когда dfc() вызывается опосредованно. Например, так делает @see dfac().
  * @used-by df_category_children_map()
  * @used-by df_google_init_service_account()
  * @used-by df_modules_my()
@@ -116,7 +114,7 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * @used-by \Df\Qa\Trace\Formatter::p()
  * @return mixed
  */
-function dfcf(Closure $f, array $a = [], array $tags = [], $unique = true, $offset = 0) {
+function dfcf(Closure $f, array $a = [], array $tags = [], bool $unique = true, int $offset = 0) {
 	/**
 	 * 2021-10-05
 	 * I do not use @see df_bt() to make the implementation faster. An implementation via df_bt() is:
