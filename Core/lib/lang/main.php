@@ -35,12 +35,11 @@ function df_b(array $args, bool $r) {return !$args ? $r : $args[intval(!$r)];}
 
 /**
  * 2016-02-09 Осуществляет ленивое ветвление только для первой ветки.
- * @param bool $cond
  * @param mixed|callable $onTrue
  * @param mixed|null $onFalse [optional]
  * @return mixed
  */
-function df_if1($cond, $onTrue, $onFalse = null) {return $cond ? df_call_if($onTrue) : $onFalse;}
+function df_if1(bool $cond, $onTrue, $onFalse = null) {return $cond ? df_call_if($onTrue) : $onFalse;}
 
 /**
  * 2016-02-09 Осуществляет ленивое ветвление только для второй ветки.
