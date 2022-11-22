@@ -90,7 +90,6 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \SpryngPaymentsApiPhp\Controller\TransactionController::refund()
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
  * @used-by \TFC\Core\B\Home\Slider::i()
- * @param mixed[] $r
  * @param mixed ...$k [optional]
  * @return mixed[]
  */
