@@ -357,10 +357,9 @@ function df_con_hier_suf_ta($c, $sufBase, $ta, $throw = true) {
  * @used-by \Df\StripeClone\Method::chargeNew()
  * @param string|object $c
  * @param string|string[] $suffix
- * @param string $method
  * @return mixed
  */
-function df_con_s($c, $suffix, $method, array $params = []) {return dfcf(
+function df_con_s($c, $suffix, string $method, array $params = []) {return dfcf(
 	function($c, $suffix, $method, array $params = []) {
 		$class = df_con($c, $suffix); /** @var string $class */
 		if (!method_exists($class, $method)) {
