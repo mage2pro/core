@@ -269,7 +269,6 @@ function dfa_unique_fast(array $a):array {return array_keys(@array_flip($a));}
  * [$v1, $v2] => [$v1, $v2]
  * [$v1, $v2, [$v3]] => [$v1, $v2, $v3]
  * @used-by dfp_iia()
- * @param mixed[] $a
  * @return mixed|mixed[]
  */
 function dfa_unpack(array $a) {return !($c = count($a)) ? null : (1 === $c ? $a[0] : dfa_flatten($a));}
