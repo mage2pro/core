@@ -201,10 +201,9 @@ function df_filter($a1, $a2):array { /** @var array $r */
  * @used-by \Stock2Shop\OrderExport\Payload::get()
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @param _DO|mixed[] $v
- * @param bool $clean [optional]
  * @return mixed
  */
-function dfa_remove_objects($v, $clean = true) {
+function dfa_remove_objects($v, bool $clean = true) {
 	$r = array_filter(is_array($v) ? $v : df_gd($v), function($v) {return
 		is_object($v) ? false : (!is_array($v) ? true : dfa_remove_objects($v))
 	;});
