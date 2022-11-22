@@ -180,11 +180,10 @@ function df_json_encode_partial($v):string {return df_json_encode($v, JSON_PARTI
  * @used-by \Df\Payment\W\Reader::testData()
  * @used-by \Dfe\TwoCheckout\Controller\Index\Index::execute()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::j()
- * @param string $p
  * @return array|bool|mixed|null
  * @throws DFE
  */
-function df_json_file_read($p) {return df_json_decode(df_file_read($p));}
+function df_json_file_read(string $p) {return df_json_decode(df_file_read($p));}
 
 /**
  * 2017-07-05
