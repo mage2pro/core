@@ -26,7 +26,6 @@
  * @used-by \TFC\GoogleShopping\Att\Brand::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/8)
  * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
  * @used-by frugue/core/view/frontend/templates/wishlist/item/column/image.phtml
- * @param array $a
  * @return mixed|null
  */
 function df_first(array $a) {return !$a ? null : reset($a);}
