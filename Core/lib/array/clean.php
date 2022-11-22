@@ -104,11 +104,8 @@ function df_clean(array $r, ...$k):array {/** @var mixed[] $r */return df_clean_
  * @used-by df_clean()
  * @used-by df_clean_r()
  * @used-by \Dfe\Sift\API\Client::_construct()
- * @param mixed[] $r
- * @param mixed[] $k
- * @return mixed[]
  */
-function df_clean_r(array $r, $k = [], bool $req = true):array {/** @var mixed[] $r */
+function df_clean_r(array $r, array $k = [], bool $req = true):array {/** @var mixed[] $r */
 	/** 2020-02-05 @see array_unique() does not work correctly here, even with the @see SORT_REGULAR flag. */
 	$k = array_merge($k, ['', null, []]);
 	if ($req) {
