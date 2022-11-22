@@ -252,10 +252,8 @@ function df_oqi_roots($oq) {return $oq->getAllVisibleItems();}
  * 2016-09-07
  * @used-by df_oqi_s()
  * @param O|Q $oq
- * @param Closure $f
- * @return mixed[]
  */
-function df_oqi_roots_m($oq, Closure $f) {return array_map($f, df_oqi_roots($oq));}
+function df_oqi_roots_m($oq, Closure $f):array {return array_map($f, df_oqi_roots($oq));}
 
 /**
  * 2016-03-09
