@@ -46,7 +46,6 @@ function df_int($v, $allowNull = true) {/** @var int|int[] $r */
  * @used-by df_fetch_col_int()
  * @used-by df_products_update()
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
- * @param mixed[] $v
  * @return int[]
  */
 function df_int_simple(array $v):array {return array_map('intval', $v);}
