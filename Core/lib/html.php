@@ -125,11 +125,10 @@ function df_tag_if(string $content, bool $condition, string $tag, $attributes = 
 /**
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
  * @param string[] $items
- * @param bool $isOrdered [optional]
  * @param string|null $cssList [optional]
  * @param string|null $cssItem [optional]
  */
-function df_tag_list(array $items, $isOrdered = false, $cssList = null, $cssItem = null):string {return df_tag(
+function df_tag_list(array $items, bool $isOrdered = false, $cssList = null, $cssItem = null):string {return df_tag(
 	$isOrdered ? 'ol' : 'ul'
 	,array_filter(['class' => $cssList])
 	,df_cc_n(array_map(function($i) use($cssItem) {return df_tag('li', array_filter(['class' => $cssItem]), $i);}, $items))

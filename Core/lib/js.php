@@ -58,10 +58,9 @@ function df_js($m, $s = null, array $p = []):string {$s = $s ?: 'main'; return d
  * 2) Another example: https://github.com/inkifi/map/blob/0.0.6/view/frontend/templates/create.phtml#L1-L2
  * @see df_js_x()
  * @see df_widget()
- * @param string $s
  * @param array(string => mixed) $p [optional]
  */
-function df_js_c($s, array $p = []):string {return df_js(null, 'Magento_Ui/js/core/app', ['components' => [
+function df_js_c(string $s, array $p = []):string {return df_js(null, 'Magento_Ui/js/core/app', ['components' => [
 	$s => ['component' => $s] + $p
 ]]);}
 
