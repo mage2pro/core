@@ -127,7 +127,6 @@ function df_sort_a(array $a):array {asort($a); return $a;}
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
- * @param callable|null $get
  */
 function df_sort_names(array $a, string $l = '', callable $get = null):array {
 	$c = new Collator($l); /** @var Collator $c */
