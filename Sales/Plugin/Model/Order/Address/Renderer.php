@@ -42,12 +42,8 @@ class Renderer extends Sb {
 	 * Поэтому пришлось делать этот плагин.
 	 *
 	 * @see \Magento\Sales\Model\Order\Address\Renderer::format()
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param Address $a
-	 * @param string $type
 	 */
-	function aroundFormat(Sb $sb, \Closure $f, Address $a, $type):string {/** @var string $r */
+	function aroundFormat(Sb $sb, \Closure $f, Address $a, string $type):string {/** @var string $r */
 		# 2016-08-17
 		# Убеждаемся, что firstname и lastname равны null,
 		# чтобы не ломать отображение адресов, для которых информация присутствует
