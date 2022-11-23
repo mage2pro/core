@@ -158,6 +158,7 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @return Checkbox|E
 	 */
 	final protected function checkbox(string $name, string $label = '', $v = null, string $note = '') {
+		/** @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::note() */
 		$data = is_array($v) ? $v + ['note' => $note] : (
 			is_bool($v) ? ['checked' => $v, 'note' => $note] : ['note' => $v]
 		);
@@ -400,7 +401,7 @@ class Fieldset extends FieldsetM implements ElementI {
 			$v = $v->toOptionArray();
 		}
 		if (!is_array($data)) {
-			$data = ['note' => $data];
+			$data = ['note' => $data]; /** @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::note() */
 		}
 		if (is_string($cfg)) { /** @var string $type */
 			# 2020-03-02, 2022-10-31
