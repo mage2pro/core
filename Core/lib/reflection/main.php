@@ -399,10 +399,8 @@ function df_cts($c, string $del = '\\'):string {/** @var string $r */
 /**
  * 2016-01-29
  * 2022-10-31 @deprecated It is unused.
- * @param string $c
- * @param string $del
  */
-function df_cts_lc($c, $del):string {return implode($del, df_explode_class_lc($c));}
+function df_cts_lc(string $c, string $del):string {return implode($del, df_explode_class_lc($c));}
 
 /**
  * 2016-04-11 Dfe_CheckoutCom => dfe_checkout_com
