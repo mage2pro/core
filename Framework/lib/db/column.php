@@ -70,7 +70,7 @@ function df_db_column_add(string $t, string $name, $dfn = null):void {
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
  * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
  */
-function df_db_column_drop(string $t, string $c) {
+function df_db_column_drop(string $t, string $c):void {
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
