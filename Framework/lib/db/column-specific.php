@@ -33,7 +33,7 @@ function df_dbc_o(string $name, $dfn = null):void {df_db_column_add('sales_order
  * @param string $name
  * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_oa($name, $dfn = null) {df_db_column_add('sales_order_address', ...func_get_args());}
+function df_dbc_oa($name, $dfn = null):void {df_db_column_add('sales_order_address', ...func_get_args());}
 
 /**
  * 2019-06-04 @todo Support df_call_a()
