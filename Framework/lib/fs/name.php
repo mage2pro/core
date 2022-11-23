@@ -92,10 +92,8 @@ function df_file_name(string $directory, string $template, string $ds = '-'):str
  * 		@see df_translit =>  allPay
  * 		@see df_translit_url => allPay
  * 		@see df_translit_url_lc => allpay
- * @param string $n
- * @param string $spaceSubstitute [optional]
  */
-function df_fs_name($n, $spaceSubstitute = '-'):string {
+function df_fs_name(string $n, string $spaceSubstitute = '-'):string {
 	$n = str_replace(' ', $spaceSubstitute, $n);
 	# «Remove anything which isn't a word, whitespace, number or any of the following caracters -_~,;:[]().
 	# If you don't need to handle multi-byte characters you can use preg_replace rather than mb_ereg_replace
