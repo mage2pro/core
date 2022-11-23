@@ -15,8 +15,7 @@ function df_db_or(...$cs):string {return implode(' OR ', array_map(function($c) 
  * @used-by df_fetch_col_max()
  * @used-by df_table_delete()
  * @param int|string|int[]|string[] $v
- * @param bool $not [optional]
  */
-function df_sql_predicate_simple($v, $not = false):string {return
+function df_sql_predicate_simple($v, bool $not = false):string {return
 	is_array($v) ? ($not ? 'NOT IN (?)' : 'IN (?)') : ($not ? '<> ?' : '= ?')
 ;}
