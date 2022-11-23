@@ -33,11 +33,9 @@ use Df\Framework\DB\ColumnType as T;
  * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
  * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
- * @param string $t
- * @param string $name
  * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_db_column_add($t, $name, $dfn = null) {
+function df_db_column_add(string $t, string $name, $dfn = null) {
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
