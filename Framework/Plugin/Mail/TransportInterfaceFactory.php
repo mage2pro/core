@@ -19,9 +19,6 @@ final class TransportInterfaceFactory {
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.2/lib/internal/Magento/Framework/Mail/TransportInterfaceFactory.php#L42-L51
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Mail/TransportInterfaceFactory.php#L42-L51
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param array $data [optional]
 	 */
 	function aroundCreate(Sb $sb, \Closure $f, array $data = []):string {
 		$container = new _DO; /** @var _DO $container */
