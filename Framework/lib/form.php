@@ -219,11 +219,10 @@ function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null)
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Framework\Form\Element\Url::m()
  * @param AE|E $e
- * @param bool $throw [optional]
  * @return string|null
  * @throws DFE
  */
-function df_fe_m(AE $e, $throw = true) {  /** @var string|null $r */
+function df_fe_m(AE $e, bool $throw = true) {  /** @var string|null $r */
 	$r = null;
 	$original = $e; /** @var AE|E $original */
 	while ($e && (!$e instanceof FS || !($r = dfa_deep($e->getData(), 'group/dfExtension')))) {
