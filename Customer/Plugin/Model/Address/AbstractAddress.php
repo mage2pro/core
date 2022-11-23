@@ -9,9 +9,8 @@ final class AbstractAddress {
 	 * Цель плагина — добавление возможности отключения необходимости платёжного адреса.
 	 * Это будет использоваться моими платёжными модулями.
 	 * Помимо этого плагина для данной функциональности нужны ещё 2:
-	 * @see \Df\Customer\Plugin\Model\ResourceModel\AddressRepository
-	 * @see \Df\Sales\Plugin\Model\Order\Address\Validator
-	 *
+	 * 		1) @see \Df\Customer\Plugin\Model\ResourceModel\AddressRepository
+	 * 		2) @see \Df\Sales\Plugin\Model\Order\Address\Validator
 	 * @see \Magento\Customer\Model\Address\AbstractAddress::validate()
 	 * @return bool|string[]
 	 */
