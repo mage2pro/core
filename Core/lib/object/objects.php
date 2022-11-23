@@ -72,9 +72,8 @@ function df_id($o, bool $allowNull = false) {/** @var int|string|null $r */
  * @used-by df_customer_backend_url()
  * @used-by df_order_backend_url()
  * @param object|int|string $o
- * @param bool $allowNull [optional]
  */
-function df_idn($o, $allowNull = false):int {return df_nat(df_id($o, $allowNull), $allowNull);}
+function df_idn($o, bool $allowNull = false):int {return df_nat(df_id($o, $allowNull), $allowNull);}
 
 /**
  * 2017-01-12
