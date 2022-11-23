@@ -14,7 +14,6 @@ class FileIterator extends I {
 	/**
 	 * 2017-07-26
 	 * @used-by \Df\Framework\Module\Dir\Reader::getComposerJsonFiles()
-	 * @param I $i
 	 * @param string[] $v
 	 */
 	final static function pathsSet(I $i, array $v):I {$i->paths = $v; return $i;}
