@@ -41,6 +41,7 @@ function df_conn(string $n = RC::DEFAULT_CONNECTION) {return df_db_resource()->g
 
 /**
  * 2020-11-22
+ * 2022-11-23 @see \Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION
  * @used-by \TFC\Image\Command\C3::p()
  * @return mixed
  */
