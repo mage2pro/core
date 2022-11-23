@@ -48,11 +48,8 @@ final class FactoryT {
 	 *		}
 	 *		$res[] = $methodInstance;
 	 * https://github.com/magento/magento2/blob/2.2.0-rc2.2/app/code/Magento/Payment/Helper/Data.php#L117-L167
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param string $c
-	 * @param array $d [optional]
-	 * @return M|IM
 	 */
-	function aroundCreate(Sb $sb, \Closure $f, $c, $d = []) {return is_a($c, M::class, true) ? M::sg($c) : $f($c, $d);}
+	function aroundCreate(Sb $sb, \Closure $f, string $c, array $d = []):IM {return
+		is_a($c, M::class, true) ? M::sg($c) : $f($c, $d)
+	;}
 }
