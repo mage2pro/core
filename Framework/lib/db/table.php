@@ -38,11 +38,9 @@ function df_table_delete(string $t, string $columnName, $values, bool $not = fal
 /**
  * 2015-04-12
  * 2019-01-12 @deprecated It is unused.
- * @param string $t
- * @param string $column
  * @param int|string|int[]|string[] $values
  */
-function df_table_delete_not($t, $column, $values) {df_table_delete($t, $column, $values, true);}
+function df_table_delete_not(string $t, string $column, $values) {df_table_delete($t, $column, $values, true);}
 
 /**
  * 2019-11-30
