@@ -99,10 +99,8 @@ function df_db_column_drop(string $t, string $c):void {
  *		return !!df_conn()->query($query)->fetchColumn();
  * It is also correct, I used it before I found the
  * @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::tableColumnExists() method.
- * @param string $table
- * @param string $column
  */
-function df_db_column_exists($table, $column):bool {return
+function df_db_column_exists(string $table, string $column):bool {return
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
@@ -117,22 +115,22 @@ function df_db_column_exists($table, $column):bool {return
 /**
  * 2016-11-04
  * Returns an associative array like:
-	{
-		"SCHEMA_NAME": null,
-		"TABLE_NAME": "customer_group",
-		"COLUMN_NAME": "test_7781",
-		"COLUMN_POSITION": 11,
-		"DATA_TYPE": "varchar",
-		"DEFAULT": null,
-		"NULLABLE": true,
-		"LENGTH": "255",
-		"SCALE": null,
-		"PRECISION": null,
-		"UNSIGNED": null,
-		"PRIMARY": false,
-		"PRIMARY_POSITION": null,
-		"IDENTITY": false
-	}
+ *	{
+ *		"SCHEMA_NAME": null,
+ *		"TABLE_NAME": "customer_group",
+ *		"COLUMN_NAME": "test_7781",
+ *		"COLUMN_POSITION": 11,
+ *		"DATA_TYPE": "varchar",
+ *		"DEFAULT": null,
+ *		"NULLABLE": true,
+ *		"LENGTH": "255",
+ *		"SCALE": null,
+ *		"PRECISION": null,
+ *		"UNSIGNED": null,
+ *		"PRIMARY": false,
+ *		"PRIMARY_POSITION": null,
+ *		"IDENTITY": false
+ *	}
  * @param string $table
  * @param string $column
  * @return array(string => string|int|null)
