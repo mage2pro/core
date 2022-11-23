@@ -65,8 +65,8 @@ function df_tuple(array $arrays):array {
  * @used-by df_find()
  * @used-by df_map()
  * @used-by dfak_transform()
- * @param array|callable|\Traversable $a
- * @param array|callable|\Traversable $b
+ * @param array|callable|Traversable $a
+ * @param array|callable|Traversable $b
  * @return array(int|string => mixed)
  */
 function dfaf($a, $b):array {
@@ -204,7 +204,7 @@ function dfa_flatten(array $a):array {
  * 2016-07-31
  * @uses df_id()
  * @used-by \Df\Config\Backend\ArrayT::processI()
- * @param \Traversable|array(int|string => _DO|AI) $c
+ * @param Traversable|array(int|string => _DO|AI) $c
  * @return int[]|string[]
  */
 function dfa_ids($c):array {return df_map('df_id', $c);}
