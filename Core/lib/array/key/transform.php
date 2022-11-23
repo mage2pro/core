@@ -69,8 +69,8 @@ function dfak_prefix(array $a, $p, $req = false):array {return dfak_transform($a
  * @used-by \Df\Sentry\Client::tags()
  * @used-by \Df\Sentry\Extra::adjust()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
- * @param array|callable|\Traversable $a1
- * @param array|callable|\Traversable $a2
+ * @param array|callable|Traversable $a1
+ * @param array|callable|Traversable $a2
  * @param bool $req [optional]
  * @return array(string => mixed)
  */
