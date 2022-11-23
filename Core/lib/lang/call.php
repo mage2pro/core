@@ -61,6 +61,8 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 /**
  * 2016-01-14
  * 2019-06-05 Parent functions with multiple different arguments are not supported!
+ * 2022-11-23 `callable` as an argument type is supported by PHP ≥ 5.4:
+ * https://github.com/mage2pro/core/issues/174#user-content-callable
  * @used-by df_camel_to_underscore()
  * @used-by df_e()
  * @used-by df_explode_camel()
@@ -73,7 +75,6 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
  * @used-by df_ucfirst()
  * @used-by df_ucwords()
  * @used-by df_underscore_to_camel()
- * @param callable $f
  * @param mixed[]|mixed[][] $parentArgs
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
