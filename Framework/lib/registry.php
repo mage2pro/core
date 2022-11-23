@@ -5,10 +5,9 @@ use Magento\Framework\Registry as R;
  * 2015-10-31
  * @used-by \MageKey\AdcPopup\Observer\QuoteAddAfter::execute()		tradefurniturecompany.co.uk
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
- * @param string $k
  * @param mixed $v
  */
-function df_register($k, $v):void {df_registry_o()->register($k, $v);}
+function df_register(string $k, $v):void {df_registry_o()->register($k, $v);}
 
 /**
  * 2015-10-31
