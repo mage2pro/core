@@ -64,7 +64,7 @@ function df_db_column_add(string $t, string $name, $dfn = null):void {
 /**
  * 2016-11-04
  * «How to delete (drop) a column from a database table?» https://mage2.pro/t/562
- * The function does nothing if the $column column is absent in the $table.
+ * The function does nothing if the $column column is absent in the $t.
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
@@ -94,13 +94,13 @@ function df_db_column_drop(string $t, string $c):void {
  * 2016-11-04
  * «How to programmatically check whether a database table contains a specified column?» https://mage2.pro/t/2241
  * My previous implementation:
- *		$table = df_table($table);
- *		$query = df_db_quote_into("SHOW COLUMNS FROM `{$table}` LIKE ?", $column);
+ *		$t = df_table($t);
+ *		$query = df_db_quote_into("SHOW COLUMNS FROM `{$t}` LIKE ?", $column);
  *		return !!df_conn()->query($query)->fetchColumn();
  * It is also correct, I used it before I found the
  * @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::tableColumnExists() method.
  */
-function df_db_column_exists(string $table, string $column):bool {return
+function df_db_column_exists(string $t, string $column):bool {return
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
@@ -109,7 +109,7 @@ function df_db_column_exists(string $table, string $column):bool {return
 	 * The custom table prefix could be set my a Magento 2 administrator
 	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
 	 */
-	df_conn()->tableColumnExists(df_table($table), $column)
+	df_conn()->tableColumnExists(df_table($t), $column)
 ;}
 
 /**
@@ -133,8 +133,8 @@ function df_db_column_exists(string $table, string $column):bool {return
  *	}
  * @return array(string => string|int|null)
  */
-function df_db_column_describe(string $table, string $column):array {return df_result_array(dfa(
-	df_conn()->describeTable(df_table($table)), $column
+function df_db_column_describe(string $t, string $column):array {return df_result_array(dfa(
+	df_conn()->describeTable(df_table($t)), $column
 ));}
 
 /**
@@ -144,11 +144,11 @@ function df_db_column_describe(string $table, string $column):array {return df_r
  * without repeating the column's definition: http://stackoverflow.com/questions/8553130
  * The Magento 2 core classes do not have such method too.
  * So, we implement such function ourself.
- * @param string $table
+ * @param string $t
  * @param string $from  The column should exist in the table!
  * @param string $to
  */
-function df_db_column_rename($table, $from, $to):void {
+function df_db_column_rename($t, $from, $to):void {
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
@@ -157,9 +157,9 @@ function df_db_column_rename($table, $from, $to):void {
 	 * The custom table prefix could be set my a Magento 2 administrator
 	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
 	 */
-	$table = df_table($table);
+	$t = df_table($t);
 	/** @var array(string => string|int|null) $definitionRaw */
-	$definitionRaw = df_db_column_describe($table, $from);
+	$definitionRaw = df_db_column_describe($t, $from);
 	/**
 	 * 2016-11-04
 	 * @var array(string => string|int|null) $definition
@@ -181,7 +181,7 @@ function df_db_column_rename($table, $from, $to):void {
 	 * We remove this comment, because the table will be renamed.
 	 */
 	unset($definition['comment']);
-	df_conn()->changeColumn($table, $from, $to, $definition);
+	df_conn()->changeColumn($t, $from, $to, $definition);
 	/**
 	 * 2016-11-04
 	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() call is not needed here,
