@@ -73,13 +73,11 @@ function df_fetch_col_int_unique(string $t, string $cSelect, $compareK = null, $
  * 2016-01-26 «How to get the maximum value of a database table's column programmatically»: https://mage2.pro/t/557
  * @used-by df_customer_att_pos_next()
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
- * @param string $t
- * @param string $col
  * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int|float
  */
-function df_fetch_col_max($t, $col, $compareK = null, $compareV = null) {
+function df_fetch_col_max(string $t, string $col, $compareK = null, $compareV = null) {
 	$s = df_db_from($t, "MAX($col)"); /** @var S $s */
 	if (is_array($compareK)) {
 		foreach ($compareK as $c => $v) {/** @var string $c */ /** @var string $v */
