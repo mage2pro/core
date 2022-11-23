@@ -116,13 +116,13 @@ function df_trim_text($s, $trim):string {return df_trim_text_left_right($s, $tri
 
 /**
  * 2016-10-28
+ * 2022-11-23 `callable` as an argument type is supported by PHP ≥ 5.4:
+ * https://github.com/mage2pro/core/issues/174#user-content-callable
  * @used-by df_trim_text_left()
  * @used-by df_trim_text_right()
- * @param string $s
  * @param string[] $trimA
- * @param callable $f
  */
-function df_trim_text_a($s, array $trimA, callable $f):string {
+function df_trim_text_a(string $s, array $trimA, callable $f):string {
 	$r = $s; /** @var string $r */
 	$l = mb_strlen($r); /** @var int $l */
 	foreach ($trimA as $trim) {/** @var string $trim */
