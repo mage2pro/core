@@ -50,11 +50,10 @@ function df_currency_convert_safe(float $a, $from = null, $to = null, $s = null)
 /**
  * 2016-09-05
  * @used-by df_oqi_price()
- * @param float $a
  * @param C|string|null $to
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  */
-function df_currency_convert_from_base($a, $to, $s = null):float {return df_currency_base($s)->convert($a, $to);}
+function df_currency_convert_from_base(float $a, $to, $s = null):float {return df_currency_base($s)->convert($a, $to);}
 
 /**
  * 2016-09-05
