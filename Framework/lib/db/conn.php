@@ -35,10 +35,9 @@ use Magento\Framework\DB\Adapter\Pdo\Mysql;
  * @used-by \Dfe\Markdown\DbRecord::save()
  * @used-by \Inkifi\Consolidation\Processor::updateDb()
  * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
- * @param string $n [optional]
  * @return Mysql|IAdapter
  */
-function df_conn($n = RC::DEFAULT_CONNECTION) {return df_db_resource()->getConnection($n);}
+function df_conn(string $n = RC::DEFAULT_CONNECTION) {return df_db_resource()->getConnection($n);}
 
 /**
  * 2020-11-22
