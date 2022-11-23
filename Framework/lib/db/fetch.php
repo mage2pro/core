@@ -26,14 +26,12 @@ function df_fetch(string $t, $cols = '*', $compareK = null, $compareV = null):ar
  * @used-by df_fetch_col_int()
  * @used-by \Df\Customer\AddAttribute\Customer::p()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
- * @param string $t
- * @param string $col
  * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function df_fetch_col($t, $col, $compareK = null, $compareV = null, $distinct = false):array {
+function df_fetch_col(string $t, string $col, $compareK = null, $compareV = null, $distinct = false):array {
 	$s = df_db_from($t, $col); /** @var S $s */
 	if (is_array($compareK)) {
 		foreach ($compareK as $c => $v) {/** @var string $c */ /** @var string $v */
