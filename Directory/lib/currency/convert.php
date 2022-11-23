@@ -69,11 +69,10 @@ function df_currency_convert_to_base(float $a, $from, $s = null):float {return $
  * «How to programmatically check whether a currency is allowed and has an exchange rate to the base currency?»
  * https://mage2.pro/t/1832
  * @used-by \Df\Framework\Validator\Currency::check()
- * @param string $iso3
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return string[]
  */
-function df_currency_has_rate($iso3, $s = null):array {return !!dfa(df_currencies_ctn($s), $iso3);}
+function df_currency_has_rate(string $iso3, $s = null):array {return !!dfa(df_currencies_ctn($s), $iso3);}
 
 /**
  * 2016-08-08
