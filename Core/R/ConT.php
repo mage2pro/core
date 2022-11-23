@@ -22,7 +22,6 @@ final class ConT {
 	 * @used-by df_con()
 	 * @used-by df_con_child()
 	 * @used-by df_con_sibling()
-	 * @param \Closure $f
 	 * @param object|string $c
 	 * @param string|string[] $suf
 	 * @param string|null $def [optional]
