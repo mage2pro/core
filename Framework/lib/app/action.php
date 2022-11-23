@@ -11,9 +11,8 @@ use Df\Core\Exception as DFE;
  * In this case, use @see df_rp_has().
  * @see df_rp_has()
  * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
- * @param string $s
  */
-function df_action_has($s):bool {return df_contains(df_action_name(), $s);}
+function df_action_has(string $s):bool {return df_contains(df_action_name(), $s);}
 
 /**
  * 2016-01-07
