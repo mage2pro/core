@@ -24,9 +24,8 @@ function df_trim_ds(string $p):string {return df_trim($p, '/\\');}
  * @used-by df_replace_store_code_in_url()
  * @used-by \Dfe\Salesforce\Test\Basic::url()
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
- * @param string $p
  */
-function df_trim_ds_left($p):string {return df_trim_left($p, '/\\');}
+function df_trim_ds_left(string $p):string {return df_trim_left($p, '/\\');}
 
 /**
  * 2016-10-14
