@@ -242,8 +242,8 @@ function df_fe_name_short(string $full):string {return df_last(df_clean(df_explo
  * @used-by df_fe_sibling_v()
  * @return AE|null
  */
-function df_fe_sibling(AE $e, string $name) {return $e->getForm()->getElement(
-	str_replace('/', '_', $e['field_config']['path']) . "_$name"
+function df_fe_sibling(AE $e, string $n) {return $e->getForm()->getElement(
+	str_replace('/', '_', $e['field_config']['path']) . "_$n"
 );}
 
 /**
@@ -251,7 +251,7 @@ function df_fe_sibling(AE $e, string $name) {return $e->getForm()->getElement(
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @return mixed
  */
-function df_fe_sibling_v(AE $e, string $name) {return df_fe_sibling($e, $name)['value'];}
+function df_fe_sibling_v(AE $e, string $n) {return df_fe_sibling($e, $n)['value'];}
 
 /**
  * 2016-01-29
