@@ -59,11 +59,10 @@ function df_currency_convert_from_base(float $a, $to, $s = null):float {return d
  * 2016-09-05
  * @used-by df_currency_convert()
  * @used-by \Frugue\Shipping\Method::collectRates()
- * @param float $a
  * @param C|string|null $from
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  */
-function df_currency_convert_to_base($a, $from, $s = null):float {return $a / df_currency_base($s)->convert(1, $from);}
+function df_currency_convert_to_base(float $a, $from, $s = null):float {return $a / df_currency_base($s)->convert(1, $from);}
 
 /**
  * 2016-06-30
