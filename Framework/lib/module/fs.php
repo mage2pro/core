@@ -120,12 +120,9 @@ function df_module_enum($m, $name, $req = true):array {return df_module_file($m,
  * @used-by df_module_json()  
  * @used-by \Df\Sentry\Client::send_http()
  * @param string|object|null $m
- * @param string $name
- * @param string $ext [optional]
- * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function df_module_file($m, $name, $ext = '', $req = true, Closure $parser = null):array {return dfcf(
+function df_module_file($m, string $name, string $ext = '', bool $req = true, Closure $parser = null):array {return dfcf(
 	function($m, $name, $ext = '', $req = true, Closure $parser = null) {return
 		file_exists($f = df_module_path_etc($m, df_file_ext_add($name, $ext)))
 			? (!$parser ? $f : $parser($f))
