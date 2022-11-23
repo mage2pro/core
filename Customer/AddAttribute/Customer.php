@@ -83,13 +83,10 @@ final class Customer {
 	 * @used-by self::checkbox()
 	 * @used-by self::select()
 	 * @used-by self::text()
-	 * @param string $input
-	 * @param string $name
-	 * @param string $label
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	private static function p($input, $name, $label, array $system = [], array $custom = []):void {
+	private static function p(string $input, string $name, string $label, array $system = [], array $custom = []):void {
 		$vBackend = dfa($custom, self::VISIBLE_IN_BACKEND, true); /** @var bool $vBackend */
 		$vFrontend = dfa($custom, self::VISIBLE_ON_FRONTEND, true); /** @var bool $vFrontend */
 		df_eav_setup()->addAttribute('customer', $name,
