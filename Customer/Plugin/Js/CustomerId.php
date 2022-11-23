@@ -21,7 +21,6 @@ final class CustomerId {
 	/**
 	 * 2019-11-17
 	 * @see \Magento\Customer\CustomerData\Customer::getSectionData()
-	 * @param Sb $sb
 	 * @param array(string => mixed) $r
 	 * @return array(string => mixed)
 	 */
