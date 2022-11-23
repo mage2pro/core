@@ -29,7 +29,7 @@ function df_hash_a(array $a):string {
  * https://php.net/manual/function.spl-object-hash.php#76220
  * Но мы сознательно идём на этот небольшой риск :-)
  * Этот риск совсем мал, потому что для моделей мы не используем spl_object_hash(), а используем getId().
- * 2016-10-26 @see \Closure является объектом, и к ней можно применять @see spl_object_hash(): https://3v4l.org/Ok2k8
+ * 2016-10-26 @see Closure является объектом, и к ней можно применять @see spl_object_hash(): https://3v4l.org/Ok2k8
  * 2018-08-11 It would be better to use a more robust hashing solution for closures: https://stackoverflow.com/a/14620643
  * 2022-11-17
  * `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
