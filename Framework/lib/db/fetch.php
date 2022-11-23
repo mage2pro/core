@@ -3,13 +3,12 @@ use Magento\Framework\DB\Select as S;
 
 /**
  * 2019-11-15
- * @param string $t
  * @param string|string[] $cols [optional]
  * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return array(array(string => string))
  */
-function df_fetch($t, $cols = '*', $compareK = null, $compareV = null):array {
+function df_fetch(string $t, $cols = '*', $compareK = null, $compareV = null):array {
 	$s = df_db_from($t, $cols); /** @var S $s */
 	if (is_array($compareK)) {
 		foreach ($compareK as $c => $v) {/** @var string $c */ /** @var string $v */
