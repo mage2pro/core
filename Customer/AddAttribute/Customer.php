@@ -32,13 +32,10 @@ final class Customer {
 	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Model/AttributeMetadataConverter.php#L64-L88
 	 * 2) @see \Magento\Customer\Setup\CustomerSetup::getDefaultEntities():
 	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Setup/CustomerSetup.php#L222-L231
-	 * @param string $name
-	 * @param string $label
-	 * @param string $sourceC
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function select($name, $label, $sourceC, array $system = [], array $custom = []):void {self::p(
+	static function select(string $name, string $label, string $sourceC, array $system = [], array $custom = []):void {self::p(
 		'select', $name, $label, $system + ['source' => $sourceC], $custom
 	);}
 
