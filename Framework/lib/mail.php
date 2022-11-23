@@ -29,10 +29,9 @@ function df_mail($to, string $subject, string $body):void {
 /**
  * 2019-06-20
  * @used-by \KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
- * @param int $id
  * @return Template|ITemplate
  */
-function df_mail_t($id) {return df_mail_tf()->get($id);}
+function df_mail_t(int $id) {return df_mail_tf()->get($id);}
 
 /**
  * 2019-06-20
