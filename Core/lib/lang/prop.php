@@ -80,10 +80,9 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @param object|null|ArrayAccess $o
  * @param mixed|string $v [optional]
  * @param string|mixed|null $d [optional]
- * @param string|null $type [optional]
  * @return mixed|object|ArrayAccess|null
  */
-function df_prop($o, $v = DF_N, $d = null, $type = null) {/** @var object|mixed|null $r */
+function df_prop($o, $v = DF_N, $d = null, string $type = '') {/** @var object|mixed|null $r */
 	/**
 	 * 2019-09-08
 	 * 1) My 1st solution was comparing $v with `null`,
