@@ -34,9 +34,7 @@ function df_customer_att_pos_next():int {return 10 + df_fetch_col_max('customer_
 /**
  * 2019-06-15
  * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
- * @param string $a
- * @param int $pos
  */
-function df_customer_att_pos_set($a, $pos):void {df_conn()->update(
+function df_customer_att_pos_set(string $a, int $pos):void {df_conn()->update(
 	df_table('customer_eav_attribute'), ['sort_order' => $pos], ['? = attribute_id' => df_att_code2id($a)]
 );}
