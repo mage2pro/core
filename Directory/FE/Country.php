@@ -31,5 +31,5 @@ class Country extends Dropdown {
 	 * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
 	 * @return array(array(string => string))
 	 */
-	function getValues() {return dfc($this, function():array {return df_countries_options(df_eta($this->dfValues()));});}
+	function getValues():array {return dfc($this, function():array {return df_countries_options(df_eta($this->dfValues()));});}
 }
