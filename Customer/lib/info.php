@@ -56,7 +56,6 @@ function df_ci_get($m = null, _DO $c = null) {
  * @used-by \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
  * @param string|object $m
  * @param mixed|null $info
- * @param C|null $c [optional]
  */
 function df_ci_save($m, $info, C $c = null):void {
 	$data = [df_class_second_lc($m) => $info]; /** @var array(string => string) $data */
