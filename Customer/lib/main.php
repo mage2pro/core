@@ -42,11 +42,10 @@ function df_are_customers_global():bool {return dfcf(function() {
  * @used-by \Stock2Shop\OrderExport\Payload::get()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @param string|int|DC|C|null $c [optional]
- * @param bool $throw [optional]
  * @return C|O|null|false
  * @throws NoSuchEntityException|DFE
  */
-function df_customer($c = null, $throw = false) {return df_try(function() use($c) {return
+function df_customer($c = null, bool $throw = false) {return df_try(function() use($c) {return
 	/** @var int|string|null $id */
 	/**
 	 * 2016-08-22
