@@ -13,8 +13,8 @@ final class AddressRepository {
 	 * Цель плагина — добавление возможности отключения необходимости платёжного адреса.
 	 * Это будет использоваться моими платёжными модулями.
 	 * Помимо этого плагина для данной функциональности нужны ещё 2:
-	 * @see \Df\Customer\Plugin\Model\Address\AbstractAddress
-	 * @see \Df\Sales\Plugin\Model\Order\Address\Validator
+	 * 		1) @see \Df\Customer\Plugin\Model\Address\AbstractAddress
+	 * 		2) @see \Df\Sales\Plugin\Model\Order\Address\Validator
 	 * @see \Magento\Customer\Model\ResourceModel\AddressRepository::save()
 	 * @param IA|CDA $address
 	 * @throws InputException
