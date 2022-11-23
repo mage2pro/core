@@ -533,9 +533,7 @@ class Fieldset extends FieldsetM implements ElementI {
 			 #		function getValue() {return $this->top()->getData('value');}
 			'value' => $this['value']
 		]); /** @var self $r */
-		# 2015-12-12
-		# Флаг анонимности филдсета.
-		# Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
+		# 2015-12-12 Флаг анонимности филдсета. Анонимные филдсеты не добавляют своё имя в качестве префикса имён полей.
 		$r->_anonymous = true;
 		if ($cssClass) {
 			$r->addClass($cssClass);
