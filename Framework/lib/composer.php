@@ -50,9 +50,9 @@ function df_package($m = null, $k = null, $d = null) {
  * 2020-06-16
  * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageParent()
  * @see \Magento\Framework\Config\Composer\Package::__construct()
- * @param \stdClass $json
+ * @param stdClass $json
  */
-function df_package_new(\stdClass $json):Package {return df_new_om(Package::class, ['json' => $json]);}
+function df_package_new(stdClass $json):Package {return df_new_om(Package::class, ['json' => $json]);}
 
 /**
  * 2017-04-16
