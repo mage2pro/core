@@ -23,9 +23,8 @@ final class Marker {
 	/**
 	 * 2021-12-12
 	 * @used-by \Df\Xml\X::importString()
-	 * @param string $s
 	 */
-	function unmark($s):string {return df_trim_text_left_right($s, $this->_begin, $this->_end);}
+	function unmark(string $s):string {return df_trim_text_left_right($s, $this->_begin, $this->_end);}
 
 	/**
 	 * 2021-12-12
