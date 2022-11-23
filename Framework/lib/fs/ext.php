@@ -19,10 +19,8 @@ function df_file_ext_add(string $f, string $ext = ''):string {return !$ext ? $f 
 /**
  * 2018-07-06
  * @used-by df_report()
- * @param string $f
- * @param string $ext
  */
-function df_file_ext_def($f, $ext):string {return ($e = df_file_ext($f)) ? $f : df_trim_right($f, '.') . ".$ext";}
+function df_file_ext_def(string $f, string $ext):string {return ($e = df_file_ext($f)) ? $f : df_trim_right($f, '.') . ".$ext";}
 
 /**
  * 2015-04-01
