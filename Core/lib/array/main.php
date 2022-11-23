@@ -133,8 +133,7 @@ function dfa_group(array $a, $k):array {
 
 /**
  * 2016-09-07
- * 2017-03-06
- * @uses mb_substr() корректно работает с $length = null
+ * 2017-03-06 @uses mb_substr() корректно работает с $length = null.
  * @used-by \Df\Payment\Charge::metadata()
  * @param string[] $a
  * @param int|null $length
