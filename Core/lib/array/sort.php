@@ -10,10 +10,9 @@
  * @used-by \Dfe\Qiwi\Signer::sign()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param array(int|string => mixed) $a
- * @param callable|null $f [optional]
  * @return array(int|string => mixed)
  */
-function df_ksort(array $a, $f = null):array {
+function df_ksort(array $a, callable $f = null):array {
 	// 2020-08-25
 	// «`exception.values.0.stacktrace.frames`: Discarded invalid value» / «Reason: expected an array» in Sentry:
 	// https://github.com/mage2pro/core/issues/139
@@ -42,7 +41,6 @@ function df_ksort_ci(array $a):array {ksort($a, SORT_FLAG_CASE|SORT_STRING); ret
  * @used-by df_ksort_r()
  * @used-by df_ksort_r_ci()
  * @param array(int|string => mixed) $a
- * @param callable|null $f [optional]
  * @return array(int|string => mixed)
  */
 function df_ksort_r(array $a, callable $f = null):array {return df_ksort(df_map_k(function($k, $v) use($f) {return
