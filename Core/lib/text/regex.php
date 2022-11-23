@@ -13,13 +13,10 @@ function df_preg_int(string $pattern, string $subject, bool $throwOnNotMatch = f
  * 2015-03-23 Добавил поддержку нескольких пар круглых скобок (в этом случае функция возвращает массив).
  * @used-by df_preg_prefix()
  * @used-by df_xml_parse_header()
- * @param string $pattern
- * @param string $subject
- * @param bool $throwOnNotMatch [optional]
  * @return string|string[]|null|bool
  */
-function df_preg_match($pattern, $subject, $throwOnNotMatch = false) {return R::i(
-	$pattern, $subject, $throwOnError = true, $throwOnNotMatch
+function df_preg_match(string $pattern, string $subject, bool $throwOnNotMatch = false) {return R::i(
+	$pattern, $subject, true, $throwOnNotMatch
 )->match();}
 
 /**
