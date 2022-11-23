@@ -273,6 +273,8 @@ function df_fe_uid(AE $e, string $suffix = ''):array {return ['data-ui-id' => E:
 
 /**
  * 2016-01-08
+ * @used-by \Df\Framework\Form\Element\Checkbox::getElementHtml()
+ * @used-by \Dfe\Markdown\FormElement::componentHtml()
  * @return array(string => string)
  */
 function df_fe_attrs(AE $e, string $uidSuffix = ''):array {return
