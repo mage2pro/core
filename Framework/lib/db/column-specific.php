@@ -16,10 +16,9 @@ function df_dbc_c(string $name, $dfn = null):void {df_db_column_add('customer_en
 /**
  * 2019-06-04 @todo Support df_call_a()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
- * @param string $name
  * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_ca($name, $dfn = null) {df_db_column_add('customer_address_entity', ...func_get_args());}
+function df_dbc_ca(string $name, $dfn = null) {df_db_column_add('customer_address_entity', ...func_get_args());}
 
 /**
  * 2019-06-04 @todo Support df_call_a()
