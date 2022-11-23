@@ -173,7 +173,7 @@ function df_strings_are_equal_ci(string $s1, string $s2):bool {return 0 === strc
 function df_t():T {return T::s();}
 
 /**
- * 2016-07-05
+ * 2016-07-05 $length - это длина уникальной части, без учёта $prefix.
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
@@ -192,10 +192,8 @@ function df_t():T {return T::s();}
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
- * @param int|null $length [optional]	Длина уникальной части, без учёта $prefix.
- * @param string $prefix [optional]
  */
-function df_uid($length = null, $prefix = ''):string {
+function df_uid(int $length = 0, string $prefix = ''):string {
 	# Важно использовать $more_entropy = true, потому что иначе на быстрых серверах
 	# (я заметил такое поведение при использовании Zend Server Enterprise и PHP 5.4)
 	# uniqid будет иногда возвращать одинаковые значения при некоторых двух последовательных вызовах.
