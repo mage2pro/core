@@ -77,10 +77,9 @@ function df_ends_with(string $haystack, $n):bool {return is_array($n)
  * @used-by \KingPalm\B2B\Schema::isCustom()
  * @used-by \Stock2Shop\OrderExport\Payload::payment()
  * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
- * @param string $haystack
- * @param string|string[] $needle
+ * @param string|string[] $n
  */
-function df_starts_with(string $haystack, $needle):bool {return is_array($needle)
-	? null !== df_find($needle, __FUNCTION__, [], [$haystack])
-	: $needle === mb_substr($haystack, 0, mb_strlen($needle))
+function df_starts_with(string $haystack, $n):bool {return is_array($n)
+	? null !== df_find($n, __FUNCTION__, [], [$haystack])
+	: $n === mb_substr($haystack, 0, mb_strlen($n))
 ;}
