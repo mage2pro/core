@@ -30,12 +30,8 @@ function df_preg_prefix(string $prefix, string $subject, bool $throwOnNotMatch =
 
 /**
  * 2022-10-31 @deprecated It is unused.
- * @param string $pattern
- * @param string $subject
- * @param bool $throwOnError [optional]
- * @return bool
  * @throws Exception
  */
-function df_preg_test($pattern, $subject, $throwOnError = true):bool {return R::i(
+function df_preg_test(string $pattern, string $subject, bool $throwOnError = true):bool {return R::i(
 	$pattern, $subject, $throwOnError, false
 )->test();}
