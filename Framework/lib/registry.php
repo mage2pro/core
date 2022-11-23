@@ -15,10 +15,9 @@ function df_register(string $k, $v):void {df_registry_o()->register($k, $v);}
  * @used-by \Dfe\Logo\Frontend::_toHtml()
  * @used-by \MageKey\AdcPopup\Observer\QuoteAddAfter::execute()		tradefurniturecompany.co.uk
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
- * @param string $k
  * @return mixed|null
  */
-function df_registry($k) {return df_registry_o()->registry($k);}
+function df_registry(string $k) {return df_registry_o()->registry($k);}
 
 /**
  * 2015-11-02 https://mage2.pro/t/95
