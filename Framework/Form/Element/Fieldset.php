@@ -623,10 +623,8 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * 2016-07-30
 	 * Синтаксис вызова таков: self::fdCssClass($data, 'df-fe-money');
 	 * В настоящее время нигде не используется.
-	 * @param array(string => mixed) $data
-	 * @param string $class
 	 */
-	private static function fdCssClass(&$data, $class):void {
+	private static function fdCssClass(array &$data, string $class):void {
 		$data[self::$FD__CSS_CLASS] = df_cc_s(dfa($data, self::$FD__CSS_CLASS), $class);
 	}
 
