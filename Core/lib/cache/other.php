@@ -6,9 +6,8 @@ use Magento\Framework\App\Cache\StateInterface as IState;
 /**
  * 2015-08-13 https://mage2.pro/t/52
  * 2021-03-06 @deprecated It is unused.
- * @param string $type
  */
-function df_cache_enabled($type):bool {
+function df_cache_enabled(string $type):bool {
 	$state = df_o(IState::class); /** @var IState|State $state */
 	return $state->isEnabled($type);
 }
