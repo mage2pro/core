@@ -16,9 +16,6 @@ final class HttpPlugin {
 	 *		}
 	 *		$subject->sendVary();
 	 * https://github.com/magento/magento2/blob/2.4.2/lib/internal/Magento/Framework/App/Response/HeaderManager.php#L34-L46
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param Http $http
 	 */
 	function aroundBeforeSendResponse(Sb $sb, \Closure $f, Http $http):void {
 		if (!headers_sent()) {
