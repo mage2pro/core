@@ -24,9 +24,8 @@ function df_cache_clean():void {
  * @see \Magento\Backend\Controller\Adminhtml\Cache\FlushAll::execute()
  * @uses \Magento\Framework\App\Cache\TypeList::cleanType()
  * @used-by \Df\API\Client::p()
- * @param string $tag
  */
-function df_cache_clean_tag($tag):void {
+function df_cache_clean_tag(string $tag):void {
 	df_cache()->clean([$tag]);
 	df_ram()->clean($tag);
 }
