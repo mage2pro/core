@@ -49,9 +49,8 @@ function df_class_check_abstract(string $c):bool {df_param_sne($c, 0); return (n
  * (похоже, getInstanceType как-то загружает код класса).
  * @used-by dfpm_c()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
- * @param string $c
  */
-function df_class_exists($c):bool {$c = df_ctr($c); return @class_exists($c);}
+function df_class_exists(string $c):bool {$c = df_ctr($c); return @class_exists($c);}
 
 /**
  * 2016-01-01
