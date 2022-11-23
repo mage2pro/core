@@ -81,10 +81,9 @@ function df_cache_load(string $key) {return df_cache()->load($key);}
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @used-by \Dfe\Color\Image::dominant()
  * @param mixed $data
- * @param string $key
  * @param string[] $tags [optional]
  * @param int|null $lifeTime [optional]
  */
-function df_cache_save($data, $key, $tags = [], $lifeTime = null):bool {return df_cache()->save(
+function df_cache_save($data, string $key, array $tags = [], $lifeTime = null):bool {return df_cache()->save(
 	$data, $key, $tags, $lifeTime
 );}
