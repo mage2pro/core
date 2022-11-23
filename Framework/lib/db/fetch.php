@@ -61,14 +61,12 @@ function df_fetch_col_int(string $t, string $cSelect, $compareK = null, $compare
 /**
  * 2015-04-13
  * 2019-01-12 @deprecated It is never used.
- * @param string $t
- * @param string $cSelect
  * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int[]|string[]
  */
-function df_fetch_col_int_unique($t, $cSelect, $compareK = null, $compareV = null):array {return df_fetch_col_int(
-	$t, $cSelect, $compareK, $compareV, $distinct = true
+function df_fetch_col_int_unique(string $t, string $cSelect, $compareK = null, $compareV = null):array {return df_fetch_col_int(
+	$t, $cSelect, $compareK, $compareV, true
 );}
 
 /**
