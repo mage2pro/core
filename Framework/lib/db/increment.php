@@ -15,9 +15,8 @@ function df_next_increment(string $t):int {return df_int(df_ie_helper()->getNext
 /**
  * 2015-10-12
  * 2019-01-12 It is never used.
- * @param string $t
  */
-function df_next_increment_old($t):int {
+function df_next_increment_old(string $t):int {
 	$s = df_select()->from('information_schema.tables', 'AUTO_INCREMENT'); /** @var Select $s */
 	$s->where('? = table_name', $t);
 	$s->where('? = table_schema', df_db_name());
