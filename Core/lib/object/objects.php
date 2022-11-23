@@ -236,10 +236,9 @@ function dfo($o, $k, $d = null) {return
  * @used-by \Df\Zoho\App::s()
  * @used-by \Df\ZohoBI\API\Facade::s()
  * @param string|object $caller
- * @param string|null $suf [optional]
  * @return object
  */
-function dfs_con($caller, $suf = null) {
+function dfs_con($caller, string $suf = '') {
 	$bt = df_bt(0, 2)[1]; /** @var array(string => mixed) $bt */
 	# 2020-02-25
 	# "«Undefined index: class in vendor/mage2pro/core/Core/lib/object/objects.php on line 214»":
@@ -247,7 +246,7 @@ function dfs_con($caller, $suf = null) {
 	if (!($owner = dfa($bt, 'class')) && !$suf) { /** @var string|null $owner */
 		df_error("The backtrace frame is invalid for dfs_con() because it lacks the `class` key:\n%s\nThe key should exist if the `suf` argument is not passed to dfs_con().", df_dump($bt));
 	}
-	return dfcf(function($owner, $m, $suf) {return
+	return dfcf(function($owner, $m, string $suf) {return
 		df_newa(df_con($m, $suf), $owner)
 	;}, [$owner, df_module_name_c($caller), $suf ?: df_class_suffix($owner)]);
 }
