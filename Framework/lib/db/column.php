@@ -156,8 +156,7 @@ function df_db_column_rename(string $t, string $from, string $to):void {
 	 * during Magento 2 intallation (see the «table_prefix» key in the app/etc/env.php file).
 	 */
 	$t = df_table($t);
-	/** @var array(string => string|int|null) $definitionRaw */
-	$definitionRaw = df_db_column_describe($t, $from);
+	$definitionRaw = df_db_column_describe($t, $from); /** @var array(string => string|int|null) $definitionRaw */
 	/**
 	 * 2016-11-04
 	 * @var array(string => string|int|null) $definition
