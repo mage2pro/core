@@ -68,10 +68,8 @@ function df_pad0(int $length, string $number):string {return str_pad($number, $l
  * @used-by df_path_absolute()
  * @used-by ikf_ite()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetElementHtml()
- * @param string $s
- * @param string $head
  */
-function df_prepend($s, $head):string {return df_starts_with($s, $head) ? $s : $head . $s;}
+function df_prepend(string $s, string $head):string {return df_starts_with($s, $head) ? $s : $head . $s;}
 
 /**
  * @used-by df_tab_multiline()
