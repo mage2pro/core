@@ -25,9 +25,8 @@ function df_db_credentials():array {return array_combine(
  *		);
  * https://github.com/magento/magento2/blob/2.2.0-RC1.6/app/code/Magento/Bundle/Setup/UpgradeSchema.php#L140-L145
  * 2017-08-02 For now it is never used.
- * @param string $t
  */
-function df_db_drop_pk($t):void {df_conn()->dropIndex(df_table($t), df_conn()->getPrimaryKeyName($t));}
+function df_db_drop_pk(string $t):void {df_conn()->dropIndex(df_table($t), df_conn()->getPrimaryKeyName($t));}
 
 /**
  * 2016-12-01
