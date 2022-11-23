@@ -15,10 +15,9 @@ final class Session extends SessionBase {
 	 * 2016-12-03, 2021-10-27
 	 * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
 	 * @used-by \Df\Sso\CustomerReturn::_execute()
-	 * @param string $v [optional]
 	 * @return self|string
 	 */
-	function ssoId($v = DF_N) {return df_prop($this, $v, []);}
+	function ssoId(string $v = DF_N) {return df_prop($this, $v, []);}
 
 	/**
 	 * 2016-12-02, 2021-10-27
