@@ -55,10 +55,9 @@ function df_remove_non_digits(string $s):string {return preg_replace('[\D]', '',
  * http://3v4l.org/9qvC4
  * @used-by df_phone_explode()
  * @used-by \Dfe\IPay88\Signer::adjust()
- * @param string $s
  * @param string|string[] ...$remove
  */
-function df_string_clean($s, ...$remove):string {return str_replace(dfa_flatten($remove), null, $s);}
+function df_string_clean(string $s, ...$remove):string {return str_replace(dfa_flatten($remove), null, $s);}
 
 /**
  * 2017-02-09
