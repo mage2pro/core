@@ -133,11 +133,10 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
  * @used-by \Df\Payment\Charge::text()
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::affix()
- * @param string $s
  * @param array(string => string) $variables
  * @param string|callable|null $onUnknown
  */
-function df_var($s, array $variables, $onUnknown = null):string {return preg_replace_callback(
+function df_var(string $s, array $variables, $onUnknown = null):string {return preg_replace_callback(
 	'#\{([^\}]*)\}#ui', function($m) use($variables, $onUnknown) {return
 		dfa($variables, dfa($m, 1, ''), $onUnknown)
 	;}, $s
