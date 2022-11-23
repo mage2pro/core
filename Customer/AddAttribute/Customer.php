@@ -18,12 +18,10 @@ final class Customer {
 	/**
 	 * 2019-06-11
 	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
-	 * @param string $name
-	 * @param string $label
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function hidden($name, $label, array $system = [], array $custom = []):void {self::p(
+	static function hidden(string $name, string $label, array $system = [], array $custom = []):void {self::p(
 		'hidden', $name, $label, $system, $custom
 	);}	
 
