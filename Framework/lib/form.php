@@ -267,11 +267,9 @@ function df_fe_top(AE $e) {return method_exists($e, 'top') ? $e->top() : $e;}
 
 /**
  * 2016-01-06
- * @param AE $e
- * @param string $suffix [optional]
  * @return array(string => string)
  */
-function df_fe_uid(AE $e, $suffix = null):array {return ['data-ui-id' => E::uidSt($e, $suffix)];}
+function df_fe_uid(AE $e, string $suffix = ''):array {return ['data-ui-id' => E::uidSt($e, $suffix)];}
 
 /**
  * 2016-01-08
