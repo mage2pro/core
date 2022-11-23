@@ -28,10 +28,8 @@ function df_next_increment_old(string $t):int {
  * «How to alter a database table»: https://mage2.pro/t/559
  * http://stackoverflow.com/a/970652
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
- * @param string $t
- * @param int $v
  */
-function df_next_increment_set($t, $v):void {
+function df_next_increment_set(string $t, int $v):void {
 	df_conn()->query(sprintf('ALTER TABLE %s AUTO_INCREMENT = %d', df_db_quote(df_table($t)), $v));
 	df_conn()->resetDdlCache($t);
 }
