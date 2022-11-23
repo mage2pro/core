@@ -49,7 +49,6 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @override
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::addElement()
 	 * @used-by \Magento\Framework\Data\Form\AbstractForm::addField()
-	 * @param AE $element
 	 * @param bool $after [optional]
 	 */
 	function addElement(AE $element, $after = false):self {
