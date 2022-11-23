@@ -139,16 +139,14 @@ function df_db_column_describe(string $t, string $column):array {return df_resul
 
 /**
  * 2016-11-04
- * «How to rename a database column?» https://mage2.pro/t/2240
+ * 1) «How to rename a database column?» https://mage2.pro/t/2240
  * Unfortunatyly, MySQL does not allow to rename a database column
  * without repeating the column's definition: http://stackoverflow.com/questions/8553130
  * The Magento 2 core classes do not have such method too.
  * So, we implement such function ourself.
- * @param string $t
- * @param string $from  The column should exist in the table!
- * @param string $to
+ * 2) The $from column should exist in the table!
  */
-function df_db_column_rename($t, $from, $to):void {
+function df_db_column_rename(string $t, string $from, string $to):void {
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
