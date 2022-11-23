@@ -145,9 +145,8 @@ abstract class Upgrade {
 	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
 	 * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
-	 * @param string $v
 	 */
-	final protected function v($v):bool {return -1 === version_compare($this->_context->getVersion(), $v);}
+	final protected function v(string $v):bool {return -1 === version_compare($this->_context->getVersion(), $v);}
 
 	/**
 	 * 2016-12-02
