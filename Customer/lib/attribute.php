@@ -10,9 +10,8 @@ function df_customer_att(string $c):Att {return df_eav_config()->getAttribute(df
  * 2016-06-04
  * @used-by \Df\Sso\Customer::dob()
  * @used-by \Df\Sso\CustomerReturn::customerData()
- * @param string $c
  */
-function df_customer_att_is_required($c):bool {return df_customer_att($c)->getIsRequired();}
+function df_customer_att_is_required(string $c):bool {return df_customer_att($c)->getIsRequired();}
 
 /**
  * 2019-06-15
