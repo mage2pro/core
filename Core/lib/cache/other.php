@@ -21,6 +21,8 @@ function df_cache_enabled($type):bool {
  * 2016-11-01
  * При вызове @see df_cache_get_simple синтаксис use для параметра $f использовать безопасно,
  * в отличие от @see dfc() и @see dfcf(), потому что ключ кэширования передаётся параметром $key.
+ * 2022-11-23 `callable` as an argument type is supported by PHP ≥ 5.4:
+ * https://github.com/mage2pro/core/issues/174#user-content-callable
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\API\Client::p()
  * @used-by \Df\GingerPaymentsBase\Api::idealBanks()
