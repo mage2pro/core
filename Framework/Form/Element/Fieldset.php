@@ -522,9 +522,8 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * https://github.com/mage2pro/core/tree/e7fcbd9c04a904e9e0d196c56e6a60d6eab0835a/Framework/Data/Form/Element/Fieldset.php#L443
 	 * @used-by self::fieldsetInline()
 	 * @param string|null $class [optional]
-	 * @param string|null $cssClass [optional]
 	 */
-	private function fieldset($class = null, $cssClass = null):self {
+	private function fieldset($class = null, string $cssClass = ''):self {
 		if (!$class) {
 			$class = __CLASS__;
 		}
