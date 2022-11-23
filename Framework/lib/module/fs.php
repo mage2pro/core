@@ -123,7 +123,7 @@ function df_module_enum($m, $name, $req = true):array {return df_module_file($m,
  * @return array(string => mixed)
  */
 function df_module_file($m, string $name, string $ext = '', bool $req = true, Closure $parser = null):array {return dfcf(
-	function($m, $name, $ext = '', $req = true, Closure $parser = null) {return
+	function($m, string $name, string $ext = '', $req = true, Closure $parser = null) {return
 		file_exists($f = df_module_path_etc($m, df_file_ext_add($name, $ext)))
 			? (!$parser ? $f : $parser($f))
 			: (!$req ? [] : df_error('The required file «%1» is absent.', $f))
