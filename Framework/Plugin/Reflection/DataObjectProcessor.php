@@ -8,13 +8,10 @@ class DataObjectProcessor {
 	/**
 	 * 2017-05-22
 	 * @see \Magento\Framework\Reflection\DataObjectProcessor::buildOutputDataArray()
-	 * @param Sb $sb
-	 * @param \Closure $f
      * @param object|DC $object
-     * @param string $type
 	 * @return array(string => mixed)
 	 */
-	function aroundBuildOutputDataArray(Sb $sb, \Closure $f, $object, $type):array {
+	function aroundBuildOutputDataArray(Sb $sb, \Closure $f, $object, string $type):array {
 		$r = $f($object, $type); /** @var array(string => mixed) $r */
 		if ($object instanceof DC) {
 			$r += df_clean([Schema::F__DF => df_api_object_get($object, Schema::F__DF)]);
