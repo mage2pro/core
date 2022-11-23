@@ -249,17 +249,15 @@ final class Regex extends \Df\Core\O {
 	private static $P__THROW_ON_NOT_MATCH = 'throw_on_not_match';
 
 	/**
-	 * @param string $pattern
-	 * @param string $subject
-	 * @param bool $throwOnError [optional]
-	 * @param bool $throwOnNotMatch [optional]
 	 */
-	static function i($pattern, $subject, $throwOnError = true, $throwOnNotMatch = false):self {return new self([
-		self::$P__PATTERN => $pattern
-		, self::$P__SUBJECT => $subject
-		, self::$P__THROW_ON_ERROR => $throwOnError
-		, self::$P__THROW_ON_NOT_MATCH => $throwOnNotMatch
-	]);}
+	static function i(string $pattern, string $subject, bool $throwOnError = true, bool $throwOnNotMatch = false):self {return
+		new self([
+			self::$P__PATTERN => $pattern
+			, self::$P__SUBJECT => $subject
+			, self::$P__THROW_ON_ERROR => $throwOnError
+			, self::$P__THROW_ON_NOT_MATCH => $throwOnNotMatch
+		])
+	;}
 
 	/**
 	 * Возвращает соответствие между числовыми кодами, возвращаемыми функцией @see preg_last_error(),
