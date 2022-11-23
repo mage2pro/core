@@ -189,11 +189,10 @@ function df_new_omd(string $c, array $d = []) {return df_om()->create($c, ['data
  * @see df_ic()
  * @used-by \Df\GingerPaymentsBase\Settings::os()
  * @used-by \Df\Payment\Settings::_options()
- * @param string|null $expectedClass [optional]
  * @param array(string => mixed) $params [optional]
  * @return _DO|object
  */
-function df_sc(string $resultClass, $expectedClass = null, array $params = [], string $cacheKeySuffix = '') {
+function df_sc(string $resultClass, string $expectedClass = '', array $params = [], string $cacheKeySuffix = '') {
 	static $cache; /** @var array(string => object) $cache */
 	$key = $resultClass . $cacheKeySuffix; /** @var string $key */
 	if (!isset($cache[$key])) {
