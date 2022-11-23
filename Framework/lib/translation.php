@@ -55,6 +55,5 @@ function df_translit_url(string $s):string {return trim(preg_replace('#[^0-9a-z]
  * 		@see df_translit =>  allPay
  * 		@see df_translit_url => allPay
  * 		@see df_translit_url_lc => allpay
- * @param string $s
  */
-function df_translit_url_lc($s):string {return strtolower(df_translit_url($s));}
+function df_translit_url_lc(string $s):string {return strtolower(df_translit_url($s));}
