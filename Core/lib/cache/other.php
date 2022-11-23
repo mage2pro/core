@@ -36,7 +36,7 @@ function df_cache_enabled(string $type):bool {
  * @param mixed ...$args [optional]
  * @return mixed
  */
-function df_cache_get_simple($k, callable $f, $tags = [], ...$args) {return
+function df_cache_get_simple($k, callable $f, array $tags = [], ...$args) {return
 	# 2016-11-01
 	# Осознанно передаём параметры $f и $args через use,
 	# потому что нам не нужно учитывать их в расчёте ключа кэша, ведь $k — уже готовый ключ.
