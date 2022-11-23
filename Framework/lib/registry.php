@@ -30,6 +30,5 @@ function df_registry_o():R {return df_o(R::class);}
 /**
  * 2020-03-01
  * @used-by \MageKey\AdcPopup\Observer\QuoteAddAfter::execute()		tradefurniturecompany.co.uk
- * @param string $k
  */
-function df_unregister($k):void {df_registry_o()->unregister($k);}
+function df_unregister(string $k):void {df_registry_o()->unregister($k);}
