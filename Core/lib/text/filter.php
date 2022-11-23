@@ -41,9 +41,8 @@ function df_normalize(string $s):string {return strtr($s, ["\r\n" => "\n", "\r" 
  * «+79.6-2» => «7962»
  * http://stackoverflow.com/a/35619532
  * 2022-10-31 @deprecated It is unused.
- * @param string $s
  */
-function df_remove_non_digits($s):string {return preg_replace('[\D]', '', $s);}
+function df_remove_non_digits(string $s):string {return preg_replace('[\D]', '', $s);}
 
 /**
  * 2015-03-03
