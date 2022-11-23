@@ -4,6 +4,7 @@ use Magento\Framework\Model\AbstractModel as Model;
 
 /**
  * 2016-08-22
+ * @used-by df_ci_save()
  */
 function df_eav_partial_save(Model $m):void {
 	$r = $m->getResource(); /** @var AbstractEntity $r */
@@ -16,11 +17,9 @@ function df_eav_partial_save(Model $m):void {
  * 2016-12-03
  * https://mage2.pro/t/2358
  * I implemented it by analogy with a similar solution for Magento 1.x: http://magento.stackexchange.com/a/86146
- * @param Model $m
- * @param string $attName
  * @param mixed $attValue
  */
-function df_eav_update(Model $m, $attName, $attValue):void {
+function df_eav_update(Model $m, string $attName, $attValue):void {
 	df_param_sne($attName, 1);
 	$m[$attName] = $attValue;
 	$r = df_ar($m->getResource(), AbstractEntity::class); /** @var AbstractEntity $r */
