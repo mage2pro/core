@@ -33,7 +33,6 @@ class Select2 extends Select {
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::setRenderer()
 	 * @used-by \Magento\Config\Block\System\Config\Form::_initElement()
 	 * https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Config/Block/System/Config/Form.php#L379
-	 * @param IRenderer $renderer
 	 */
 	function setRenderer(IRenderer $renderer):self {
 		/**
