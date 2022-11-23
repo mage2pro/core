@@ -49,14 +49,11 @@ function df_fetch_col(string $t, string $col, $compareK = null, $compareV = null
  * @used-by df_att_code2id()
  * @used-by df_fetch_col_int_unique()
  * @used-by \Mangoit\MediaclipHub\Model\ResourceModel\Modules::idByCode()
- * @param string $t
- * @param string $cSelect
  * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
- * @param bool $distinct [optional]
  * @return int[]|string[]
  */
-function df_fetch_col_int($t, $cSelect, $compareK = null, $compareV = null, $distinct = false):array {return
+function df_fetch_col_int(string $t, string $cSelect, $compareK = null, $compareV = null, bool $distinct = false):array {return
 	/** I do not use @see df_int() to make the function faster */
 	df_int_simple(df_fetch_col($t, $cSelect, $compareK, $compareV, $distinct))
 ;}
