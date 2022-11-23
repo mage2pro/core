@@ -1,6 +1,9 @@
 <?php
 /**
  * 2016-03-25 «charge.dispute.funds_reinstated» => [charge, dispute, funds, reinstated]
+ * @used-by df_explode_class()
+ * @used-by df_fe_name_short()
+ * @used-by \Df\Payment\W\F::c()
  * @param string[] $delimiters
  * @return string[]
  */
