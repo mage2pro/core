@@ -37,7 +37,6 @@ function df_dbc_oa(string $name, $dfn = null):void {df_db_column_add('sales_orde
 /**
  * 2019-06-04 @todo Support df_call_a()
  * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
- * @param string $name
  * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_qa($name, $dfn = null):void {df_db_column_add('quote_address', ...func_get_args());}
+function df_dbc_qa(string $name, $dfn = null):void {df_db_column_add('quote_address', ...func_get_args());}
