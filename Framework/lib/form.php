@@ -83,10 +83,9 @@ function df_fe_fc(AE $e, $k = null, $d = null) {return dfa(df_eta(df_fe_top($e)-
  * 2016-05-30
  * @used-by \Df\Framework\Form\Element\Multiselect::ordered()
  * @param AE|E $e
- * @param string $key
  * @param bool|null|callable $d [optional]
  */
-function df_fe_fc_b(AE $e, $key, $d = false):bool {return df_bool(df_fe_fc($e, $key, $d));}
+function df_fe_fc_b(AE $e, string $key, $d = false):bool {return df_bool(df_fe_fc($e, $key, $d));}
 
 /**
  * 2016-11-13
