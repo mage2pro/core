@@ -73,5 +73,5 @@ class Element extends AE implements ElementI {
 	 * возвращает атрибут и его значение уже в виже слитной строки, поэтому парсим её.
 	 * https://github.com/magento/magento2/blob/c58d2d/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L331-L338
 	 */
-	final static function uidSt(AE $e, $suf = ''):string {return df_trim(df_last(explode('=', $e->_getUiId($suf))), '"');}
+	final static function uidSt(AE $e, string $suf = ''):string {return df_trim(df_last(explode('=', $e->_getUiId($suf))), '"');}
 }
