@@ -35,6 +35,9 @@ function df_b(array $args, bool $r) {return !$args ? $r : $args[intval(!$r)];}
 
 /**
  * 2016-02-09 Осуществляет ленивое ветвление только для первой ветки.
+ * @used-by df_leaf()
+ * @used-by df_request()
+ * @used-by \Df\Framework\Form\Element\Checkbox::b()
  * @param mixed|callable $onTrue
  * @param mixed|null $onFalse [optional]
  * @return mixed
