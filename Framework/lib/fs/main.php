@@ -121,8 +121,7 @@ function df_file_write($p, string $contents, bool $append = false):void {
 			 * However ftell() returns int(0) even if the file is not empty.»
 			 */
 			if ($append && 0 !== filesize(BP . "/$relative")) {
-				# 2018-07-06 «PHP fwrite new line» https://stackoverflow.com/a/15130410
-				$contents = PHP_EOL . $contents;
+				$contents = PHP_EOL . $contents; # 2018-07-06 «PHP fwrite new line» https://stackoverflow.com/a/15130410
 			}
 			$file->write($contents);
 		}
