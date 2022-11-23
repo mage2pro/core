@@ -55,10 +55,9 @@ function df_explode_space(string $s):array {return df_trim(explode(' ', $s));}
 
 /**
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
- * @param string $url
  * @return string[]
  */
-function df_explode_url($url):array {return explode('/', $url);}
+function df_explode_url(string $url):array {return explode('/', $url);}
 
 /**
  * 2015-02-06
