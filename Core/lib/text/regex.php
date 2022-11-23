@@ -22,12 +22,9 @@ function df_preg_match(string $pattern, string $subject, bool $throwOnNotMatch =
 /**
  * 2018-11-11
  * @used-by \Dfe\TBCBank\Test\CaseT\Validator::t01()
- * @param string $prefix
- * @param string $subject
- * @param bool $throwOnNotMatch [optional]
  * @return int|null|bool
  */
-function df_preg_prefix($prefix, $subject, $throwOnNotMatch = false) {return df_preg_match(
+function df_preg_prefix(string $prefix, string $subject, bool $throwOnNotMatch = false) {return df_preg_match(
 	sprintf('#^%s([\S\s]*)#', preg_quote($prefix)), $subject, $throwOnNotMatch
 );}
 
