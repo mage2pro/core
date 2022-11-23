@@ -16,9 +16,8 @@ const DF_THIN_SPACE = ' ';
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
- * @param bool $v
  */
-function df_bts($v):string {return $v ? 'true' : 'false';}
+function df_bts(bool $v):string {return $v ? 'true' : 'false';}
 
 /**
  * 2017-11-08
