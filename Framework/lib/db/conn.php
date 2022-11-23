@@ -42,13 +42,12 @@ function df_conn(string $n = RC::DEFAULT_CONNECTION) {return df_db_resource()->g
 /**
  * 2020-11-22
  * @used-by \TFC\Image\Command\C3::p()
- * @param $n
  * @return mixed
  */
-function df_with_conn($n, F $f) {
+function df_with_conn(string $connectionName, F $f) {
 	try {
 		$prev = PRC::$CUSTOM;
-		PRC::$CUSTOM = $n;
+		PRC::$CUSTOM = $connectionName;
 		$r = $f(); /** @var mixed $r */
 	}
 	finally {PRC::$CUSTOM = $prev;}
