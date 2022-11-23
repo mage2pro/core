@@ -156,10 +156,9 @@ function df_string_debug($v):string {
 /**
  * https://php.net/manual/function.str-split.php#107658
  * 2022-10-31 @deprecated It is unused.
- * @param string $s
  * @return string[]
  */
-function df_string_split($s):array {return preg_split("//u", $s, -1, PREG_SPLIT_NO_EMPTY);}
+function df_string_split(string $s):array {return preg_split("//u", $s, -1, PREG_SPLIT_NO_EMPTY);}
 
 /**
  * @used-by \Df\PaypalClone\W\Event::validate()
