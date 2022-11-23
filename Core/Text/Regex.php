@@ -249,6 +249,9 @@ final class Regex extends \Df\Core\O {
 	private static $P__THROW_ON_NOT_MATCH = 'throw_on_not_match';
 
 	/**
+	 * @used-by df_preg_int()
+	 * @used-by df_preg_match()
+	 * @used-by df_preg_test()
 	 */
 	static function i(string $pattern, string $subject, bool $throwOnError = true, bool $throwOnNotMatch = false):self {return
 		new self([
