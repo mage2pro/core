@@ -50,7 +50,6 @@ function df_http_context():Context {return df_o(Context::class);}
  * http://devdocs.magento.com/guides/v2.0/install-gde/system-requirements.html#required-php-extensions
  * Поэтому мы вправе использовать здесь @uses file_get_contents
  * Note 3. The function returns the read data or FALSE on failure. https://php.net/manual/function.file-get-contents.php
- *
  * 2016-05-31
  * Стандартное время ожидание ответа сервера задаётся опцией default_socket_timeout:
  * https://php.net/manual/filesystem.configuration.php#ini.default-socket-timeout
@@ -60,15 +59,13 @@ function df_http_context():Context {return df_o(Context::class);}
  * Поэтому добавил возможность задавать нестандартное время ожидания ответа сервера:
  * http://stackoverflow.com/a/10236480
  * https://amitabhkant.com/2011/08/21/using-timeouts-with-file_get_contents-in-php/
- *
  * @used-by df_http_json()
  * @used-by \Df\GoogleFont\Fonts::responseA()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  *
  * @param array(string => string) $params [optional]
- * @return string|bool
  */
-function df_http_get(string $urlBase, array $params = [], int $timeout = 0) {
+function df_http_get(string $urlBase, array $params = [], int $timeout = 0):string {
 	$url = !$params ? $urlBase : $urlBase . '?' . http_build_query($params); /** @var string $url */
 	/**
 	 * 2016-05-31
@@ -77,9 +74,9 @@ function df_http_get(string $urlBase, array $params = [], int $timeout = 0) {
 	 * because the connected party did not properly respond after a period of time,
 	 * or established connection failed because connected host has failed to respond.»
 	 */
-	return @file_get_contents($url, null, stream_context_create(['http' => df_clean([
+	return df_assert_ne(false, @file_get_contents($url, null, stream_context_create(['http' => df_clean([
 		'ignore_errors' => true, 'timeout' => $timeout
-	])]));
+	])])));
 }
 
 /**
