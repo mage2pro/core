@@ -26,11 +26,8 @@ const DF_BEFORE = -1;
  * и даже может использоваться вместо @see \Magento\Framework\Data\Collection::walk(),
  * однако, в отличие от @see \Magento\Framework\Data\Collection::walk(),
  * она способна работать не только с коллекцией,
- * но также с массивом объектов и объектом, поддерживающим интерфейс @see \Traversable.
- *
- * 2016-07-31
- * При вызове с 2-мя параметрами эта функция идентична функции @see df_column()
- *
+ * но также с массивом объектов и объектом, поддерживающим интерфейс @see Traversable.
+ * 2016-07-31 При вызове с 2-мя параметрами эта функция идентична функции @see df_column()
  * 2017-07-09
  * Now the function accepts an array as $object.
  * Even in this case it differs from @see array_column(): array_column() misses the keys: https://3v4l.org/llMrL
@@ -38,7 +35,7 @@ const DF_BEFORE = -1;
  * @used-by df_category_names()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Core\GlobalSingletonDestructor::process()
- * @param \Traversable|array(int|string => _DO|array(string => mixed)) $c
+ * @param Traversable|array(int|string => _DO|array(string => mixed)) $c
  * @param string|callable $f
  * @param mixed ...$p
  */
@@ -47,7 +44,7 @@ function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {r
 /**
  * 2015-02-11
  * Эта функция аналогична @see array_map(), но обладает 3-мя дополнительными возможностями:
- * 1) её можно применять не только к массивам, но и к @see \Traversable.
+ * 1) её можно применять не только к массивам, но и к @see Traversable.
  * 2) она позволяет удобным способом передавать в $callback дополнительные параметры
  * 3) позволяет передавать в $callback ключи массива
  * до и после основного параметра (элемента массива).
@@ -76,8 +73,8 @@ function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {r
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
- * @param array|callable|\Traversable $a1
- * @param array|callable|\Traversable $a2
+ * @param array|callable|Traversable $a1
+ * @param array|callable|Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
  * @return array(int|string => mixed)
@@ -137,8 +134,8 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, b
  * @used-by \Dfe\PostFinance\Signer::sign()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
- * @param array|callable|\Traversable $a1
- * @param array|callable|\Traversable $a2
+ * @param array|callable|Traversable $a1
+ * @param array|callable|Traversable $a2
  * @return array(int|string => mixed)
  */
 function df_map_k($a1, $a2):array {return df_map($a1, $a2, [], [], DF_BEFORE);}
@@ -152,8 +149,8 @@ function df_map_k($a1, $a2):array {return df_map($a1, $a2, [], [], DF_BEFORE);}
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
- * @param array|callable|\Traversable $a1
- * @param array|callable|\Traversable $a2
+ * @param array|callable|Traversable $a1
+ * @param array|callable|Traversable $a2
  * @return array(int|string => mixed)
  * @throws DFE
  */
@@ -176,8 +173,8 @@ function df_map_kr($a1, $a2):array {return df_map($a1, $a2, [], [], DF_BEFORE, t
  * @used-by \Dfe\Spryng\Source\Account::fetch()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
  * @used-by \TFC\GoogleShopping\Products::atts() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
- * @param array|callable|\Traversable $a1
- * @param array|callable|\Traversable $a2
+ * @param array|callable|Traversable $a1
+ * @param array|callable|Traversable $a2
  * @return array(int|string => mixed)
  */
 function df_map_r($a1, $a2):array {return df_map($a1, $a2, [], [], 0, true);}
