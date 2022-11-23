@@ -24,8 +24,7 @@ final class Session extends SessionBase {
 	 * @used-by \Df\Customer\Observer\RegisterSuccess::execute()
 	 * @used-by \Df\Sso\Css::isRegCompletion()
 	 * @used-by \Df\Sso\CustomerReturn::_execute()
-	 * @param string $v [optional]
 	 * @return self|string
 	 */
-	function ssoProvider($v = DF_N) {return df_prop($this, $v, []);}
+	function ssoProvider(string $v = DF_N) {return df_prop($this, $v, []);}
 }
