@@ -45,9 +45,8 @@ function df_path_absolute(string $p, string $suf = ''):string {return df_prepend
  * 2017-05-08
  * @used-by \Df\Framework\Plugin\Session\SessionManager::beforeStart()
  * @used-by \Df\Sentry\Trace::info()
- * @param string $p
  */
-function df_path_is_internal($p):bool {return '' === $p || df_starts_with(df_path_n($p), df_path_n(BP));}
+function df_path_is_internal(string $p):bool {return '' === $p || df_starts_with(df_path_n($p), df_path_n(BP));}
 
 /**
  * Заменяет все сиволы пути на /
