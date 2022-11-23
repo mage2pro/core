@@ -43,11 +43,9 @@ function dfa_key_int(array $a):array {return dfak_transform($a, 'df_int');}
  * but it is applied recursively to nested arrays, so it could change keys their keys.
  * @used-by \Dfe\Sift\API\Client::_construct()
  * @param array(string => mixed) $a
- * @param string $p
- * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function dfak_prefix(array $a, $p, $req = false):array {return dfak_transform($a, function($k) use($p) {return
+function dfak_prefix(array $a, string $p, bool $req = false):array {return dfak_transform($a, function($k) use($p) {return
 	"$p$k"
 ;}, $req);}
 
