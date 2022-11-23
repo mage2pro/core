@@ -390,9 +390,8 @@ function df_con_sibling($c, $nameLast, string $def = '', bool $throw = true) {re
  * @used-by dfsm_code()
  * @used-by \Df\Payment\Method::getInfoBlockType()
  * @param string|object $c
- * @param string $del [optional]
  */
-function df_cts($c, $del = '\\'):string {/** @var string $r */
+function df_cts($c, string $del = '\\'):string {/** @var string $r */
 	$r = df_trim_interceptor(is_object($c) ? get_class($c) : ltrim($c, '\\'));
 	return '\\' === $del ? $r : str_replace('\\', $del, $r);
 }
