@@ -10,9 +10,8 @@ use Magento\Framework\App\Request\Http;
  * 2017-05-04
  * @used-by df_action_c_forward()
  * @used-by df_action_c_redirect()
- * @param string $c
  */
-function df_action_create($c):IAction {
+function df_action_create(string $c):IAction {
 	$f = df_o(ActionFactory::class); /** @var ActionFactory $f */
 	return $f->create($c);
 }
