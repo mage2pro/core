@@ -455,7 +455,6 @@ function df_explode_class_lc_camel($c):array {return df_lcfirst(df_explode_class
 /**
  * 2021-02-24
  * @used-by df_caller_c()
- * @param string $m
  * @return string[]
  */
-function df_explode_method($m):array {return explode('::', $m);}
+function df_explode_method(string $m):array {return explode('::', $m);}
