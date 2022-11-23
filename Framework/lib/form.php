@@ -99,10 +99,9 @@ function df_fe_fc_csv(AE $e, string $key, $d = 0):array {return df_csv_parse(df_
 /**
  * 2016-01-29
  * @param AE|E $e
- * @param string $key
  * @param int|null|callable $d [optional]
  */
-function df_fe_fc_i(AE $e, $key, $d = 0):int {return df_int(df_fe_fc($e, $key, $d));}
+function df_fe_fc_i(AE $e, string $key, $d = 0):int {return df_int(df_fe_fc($e, $key, $d));}
 
 /**
  * 2017-04-12 Видимо, @see df_fe_top() надо заменить на эту функцию.
