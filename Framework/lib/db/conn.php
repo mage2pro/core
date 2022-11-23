@@ -44,7 +44,6 @@ function df_conn($n = RC::DEFAULT_CONNECTION) {return df_db_resource()->getConne
  * 2020-11-22
  * @used-by \TFC\Image\Command\C3::p()
  * @param $n
- * @param Closure $f
  * @return mixed
  */
 function df_with_conn($n, F $f) {
