@@ -46,9 +46,8 @@ function df_format(...$args):string { /** @var string $r */
  * @used-by \Df\API\Client::p()
  * @used-by \Df\Qa\Failure\Error::main()
  * @param array(string => string) $a
- * @param int|null $pad [optional]
  */
-function df_kv(array $a, $pad = null):string {return df_cc_n(df_map_k(df_clean($a), function($k, $v) use($pad) {return
+function df_kv(array $a, int $pad = 0):string {return df_cc_n(df_map_k(df_clean($a), function($k, $v) use($pad) {return
 	(!$pad ? "$k: " : df_pad("$k:", $pad))
 	.(is_array($v) || (is_object($v) && !method_exists($v, '__toString')) ? "\n" . df_json_encode($v) : $v)
 ;}));}
