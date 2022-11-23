@@ -106,6 +106,5 @@ function df_string_clean(string $s, ...$remove):string {return str_replace(dfa_f
  * @used-by \Dfe\AlphaCommerceHub\Charge::textFilterStreet()
  * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
  * @used-by \Dfe\TBCBank\Charge::textFilter()
- * @param string $s
  */
-function df_translit($s):string {return transliterator_transliterate('Any-Latin; Latin-ASCII', $s);}
+function df_translit(string $s):string {return transliterator_transliterate('Any-Latin; Latin-ASCII', $s);}
