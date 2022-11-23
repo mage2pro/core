@@ -98,9 +98,8 @@ function df_media_path2url(string $p = ''):string {return df_store()->getBaseUrl
  * 2019-09-20        
  * @used-by df_product_image_path()
  * @see df_media_path2url()
- * @param string $u [optional]
  */
-function df_media_url2path($u = ''):string {return df_media_path_absolute(df_trim_text_left(
+function df_media_url2path(string $u = ''):string {return df_media_path_absolute(df_trim_text_left(
 	$u, df_store()->getBaseUrl(U::URL_TYPE_MEDIA)
 ));}
 
