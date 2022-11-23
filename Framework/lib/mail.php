@@ -11,10 +11,8 @@ use Magento\Framework\Mail\TransportInterface as ITransport;
  * @used-by \KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @param string|string[] $to
- * @param string $subject
- * @param string $body
  */
-function df_mail($to, $subject, $body) {
+function df_mail($to, string $subject, string $body):void {
 	$msg = df_new_om(Msg::class); /** @var Msg $msg */
 	df_map(function($to) use($msg) {
 		$msg->addTo($to);
