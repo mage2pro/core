@@ -13,10 +13,9 @@ function df_phrase($s):P {return $s instanceof P ? $s : __($s);}
  * @used-by df_map_to_options_t()
  * @uses __()
  * @param string[] $s
- * @param bool $now [optional]
  * @return string[]
  */
-function df_translate_a($s, $now = false):array {
+function df_translate_a(array $s,bool $now = false):array {
 	$r = array_map('__', $s); /** @var string[] $r */
 	return !$now ? $r : array_map('strval', $r);
 }
