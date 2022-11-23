@@ -37,10 +37,9 @@ function df_explode_n(string $s):array {return explode("\n", df_normalize(df_tri
  * @used-by df_url_trim_index()
  * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::pathA()
- * @param string $p
  * @return string[]
  */
-function df_explode_path($p):array {return df_explode_xpath(df_path_n($p));}
+function df_explode_path(string $p):array {return df_explode_xpath(df_path_n($p));}
 
 /**
  * 2022-11-17
