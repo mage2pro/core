@@ -84,6 +84,5 @@ function df_tab(...$args) {return df_call_a(function($text) {return "\t" . $text
  * @used-by \Df\Qa\Dumper::dumpArray()
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @used-by \Df\Typography\Css::render()
- * @param string $s
  */
-function df_tab_multiline($s):string {return df_cc_n(df_tab(df_explode_n($s)));}
+function df_tab_multiline(string $s):string {return df_cc_n(df_tab(df_explode_n($s)));}
