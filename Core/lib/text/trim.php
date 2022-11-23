@@ -178,9 +178,8 @@ function df_trim_text_left_right(string $s, string $left, string $right):string 
  * @used-by \Df\Framework\Form\Element\Fieldset::nameFull()
  * @used-by \Df\Oro\Test\Basic::t02_orders_stripe()
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
- * @param string $s
  * @param string|string[] $trim
  */
-function df_trim_text_right($s, $trim):string {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
+function df_trim_text_right(string $s, $trim):string {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
 	0 !== ($l = mb_strlen($trim)) && $trim === mb_substr($s, -$l) ? mb_substr($s, 0, -$l) : $s
 );}
