@@ -40,4 +40,4 @@ function df_dbc_oa(string $name, $dfn = null):void {df_db_column_add('sales_orde
  * @param string $name
  * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_qa($name, $dfn = null) {df_db_column_add('quote_address', ...func_get_args());}
+function df_dbc_qa($name, $dfn = null):void {df_db_column_add('quote_address', ...func_get_args());}
