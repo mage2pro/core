@@ -12,10 +12,9 @@ function df_c(...$elements):string {return implode(dfa_flatten($elements));}
  * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
- * @param string $glue
  * @param string|string[] ...$elements
  */
-function df_cc($glue, ...$elements):string {return implode($glue, dfa_flatten($elements));}
+function df_cc(string $glue, ...$elements):string {return implode($glue, dfa_flatten($elements));}
 
 /**
  * 2016-08-13
