@@ -123,7 +123,6 @@ function df_module_enum($m, $name, $req = true):array {return df_module_file($m,
  * @param string $name
  * @param string $ext [optional]
  * @param bool $req [optional]
- * @param Closure|null $parser [optional]
  * @return array(string => mixed)
  */
 function df_module_file($m, $name, $ext = '', $req = true, Closure $parser = null):array {return dfcf(
