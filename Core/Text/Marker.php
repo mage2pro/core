@@ -17,9 +17,8 @@ final class Marker {
 	/**
 	 * 2021-12-12
 	 * @used-by \Df\Xml\X::importString()
-	 * @param string|null $s
 	 */
-	function marked($s):string {return df_starts_with($s, $this->_begin) && df_ends_with($s, $this->_end);}
+	function marked(string $s):string {return df_starts_with($s, $this->_begin) && df_ends_with($s, $this->_end);}
 
 	/**
 	 * 2021-12-12
