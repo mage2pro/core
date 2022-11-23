@@ -70,10 +70,9 @@ function df_cache_get_simple($k, callable $f, array $tags = [], ...$args) {retur
  * 2015-08-13
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @used-by \Dfe\Color\Image::dominant()
- * @param string $key
  * @return string|false
  */
-function df_cache_load($key) {return df_cache()->load($key);}
+function df_cache_load(string $key) {return df_cache()->load($key);}
 
 /**
  * 2016-07-18
