@@ -9,7 +9,7 @@ final class ConT {
 	 * @param bool $allowAbstract
 	 * @return mixed
 	 */
-	static function p($allowAbstract, Closure $f) {
+	static function p($allowAbstract, \Closure $f) {
 		$prev = self::$allow_abstract; /** @var bool $prev */
 		self::$allow_abstract = $allowAbstract;
 		try {return $f();}
