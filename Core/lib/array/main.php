@@ -20,14 +20,14 @@ function df_array($v):array {return is_array($v) ? $v : [$v];}
  * 2015-12-30 Преобразует коллекцию или массив в карту.
  * @used-by \Df\Config\A::get()
  * @param string|Closure $k
- * @param \Traversable|array(int|string => _DO) $a
+ * @param Traversable|array(int|string => _DO) $a
  */
 function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
 
 /**
  * 2015-02-11
  * Эта функция отличается от @see iterator_to_array() тем, что допускает в качестве параметра
- * не только @see \Traversable, но и массив.
+ * не только @see Traversable, но и массив.
  * 2022-10-18
  * @uses iterator_to_array() allows an array as the first argument since PHP 8.2:
  * https://www.php.net/manual/migration82.other-changes.php#migration82.other-changes.functions.spl
@@ -35,7 +35,7 @@ function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
  * @used-by df_map()
  * @used-by dfa_select_ordered()
  * @used-by dfak_transform()
- * @param \Traversable|array $t
+ * @param Traversable|array $t
  */
 function df_ita($t):array {return is_array($t) ? $t : iterator_to_array($t);}
 
