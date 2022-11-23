@@ -31,7 +31,6 @@ function df_cache_enabled($type):bool {
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @param string|string[]|null $k
- * @param callable $f
  * @param string[] $tags [optional]
  * @param mixed ...$args [optional]
  * @return mixed
