@@ -123,9 +123,9 @@ function df_fetch_one(string $t, $cols, array $compare) {
  * 2015-11-03
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
- * @param string $t
- * @param string $cSelect
  * @param array(string => string) $compare
  * @return int|null
  */
-function df_fetch_one_int($t, $cSelect, $compare) {return !($r = df_fetch_one($t, $cSelect, $compare)) ? null : df_int($r);}
+function df_fetch_one_int(string $t, string $cSelect, array $compare) {return
+	!($r = df_fetch_one($t, $cSelect, $compare)) ? null : df_int($r)
+;}
