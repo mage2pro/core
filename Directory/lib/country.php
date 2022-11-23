@@ -112,10 +112,9 @@ function df_country_ctn(string $iso2, string $locale = ''):string {df_param_iso2
  * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
  * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @param string|null $c [optional]
  * @return string[]|bool
  */
-function df_eu($c = null) {
+function df_eu(string $c = '') {
 	$r = [
 		'AT', 'BE', 'BG', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'HR', 'IE',
 		'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB'
