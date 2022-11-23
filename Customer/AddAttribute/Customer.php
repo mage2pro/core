@@ -54,12 +54,10 @@ final class Customer {
 	/**
 	 * 2019-06-11
 	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
-	 * @param string $name
-	 * @param string $label
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function textarea($name, $label, array $system = [], array $custom = []):void {self::p(
+	static function textarea(string $name, string $label, array $system = [], array $custom = []):void {self::p(
 		'textarea', $name, $label, $system, $custom
 	);}
 
