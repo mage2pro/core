@@ -27,7 +27,7 @@ final class ConT {
 	 * @return string|null
 	 */
 	static function generic(\Closure $f, $c, $suf, string $def = '', bool $throw = true) {return dfcf(
-		function($f, $c, $suf, $def = null, $throw = true) {return /** @var string $result */
+		function($f, $c, $suf, string $def, $throw = true) {return /** @var string $result */
 			df_class_exists($result = df_ctr($f($c, $suf)))
 				? (self::$allow_abstract || !df_class_check_abstract($result) ? $result : (!$throw ? null :
 					df_error("The «{$result}» class is abstract.")
