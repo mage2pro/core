@@ -173,7 +173,7 @@ function df_filter($a1, $a2):array { /** @var array $r */
 	# https://3v4l.org/3O92j
 	# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
-	list($a, $f) = dfaf($a1, $a2); /** @var array|\Traversable $a */ /** @var callable $f */
+	list($a, $f) = dfaf($a1, $a2); /** @var array|Traversable $a */ /** @var callable $f */
 	$a = df_ita($a);
 	$r = array_filter(df_ita($a), $f);
 	/**
