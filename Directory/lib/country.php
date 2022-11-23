@@ -7,10 +7,9 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * 2016-05-20
  * @used-by df_countries_ctn()
  * @used-by df_country()
- * @param bool $allowedOnly [optional]
  * @param int|string|null|bool|IStore $s [optional]
  */
-function df_countries($allowedOnly = false, $s = null):CC {return !$allowedOnly ? CC::s() : df_countries_allowed($s);}
+function df_countries(bool $allowedOnly = false, $s = null):CC {return !$allowedOnly ? CC::s() : df_countries_allowed($s);}
 
 /**
  * 2016-05-20
