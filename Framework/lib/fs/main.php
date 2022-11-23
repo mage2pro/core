@@ -177,6 +177,5 @@ function df_fs_w(string $type) {return df_fs()->getDirectoryWrite($type);}
 /**
  * 2019-02-24
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload::_p()
- * @return Sftp
  */
 function df_sftp():Sftp {return df_o(Sftp::class);}
