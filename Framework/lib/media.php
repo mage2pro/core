@@ -91,9 +91,8 @@ function df_media_reader() {return df_fs_r(DL::MEDIA);}
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_media_url2path()
  * @see df_product_image_url()
- * @param string $p [optional]
  */
-function df_media_path2url($p = ''):string {return df_store()->getBaseUrl(U::URL_TYPE_MEDIA) . df_media_path_relative($p);}
+function df_media_path2url(string $p = ''):string {return df_store()->getBaseUrl(U::URL_TYPE_MEDIA) . df_media_path_relative($p);}
 
 /**
  * 2019-09-20        
