@@ -104,9 +104,8 @@ function df_om_config() {return df_o(IConfig::class);}
  * 2017-03-20
  * @used-by df_ctr()
  * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()
- * @param string $c
  */
-function df_vtr($c):string {return df_om_config()->getInstanceType($c);}
+function df_vtr(string $c):string {return df_om_config()->getInstanceType($c);}
 
 /**
  * 2017-03-20
