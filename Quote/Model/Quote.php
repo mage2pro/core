@@ -14,7 +14,6 @@ class Quote extends \Magento\Quote\Model\Quote {
 	 * https://github.com/mage2pro/core/issues/63
 	 * https://mage2.pro/t/5163
 	 * @used-by df_oq_country_sb()
-	 * @param \Closure $f
 	 * @param O|Q $oq
 	 * @return mixed|null
 	 */
