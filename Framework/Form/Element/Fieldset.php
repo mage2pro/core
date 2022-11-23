@@ -158,11 +158,11 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @param string|null $note [optional]
 	 * @return Checkbox|E
 	 */
-	final protected function checkbox(string $name, string $label = '', $value = null, $note = null) {
-		$data = is_array($value) ? $value + ['note' => $note] : (
-			is_bool($value)
-			? ['checked' => $value, 'note' => $note]
-			: ['note' => $value]
+	final protected function checkbox(string $name, string $label = '', $v = null, $note = null) {
+		$data = is_array($v) ? $v + ['note' => $note] : (
+			is_bool($v)
+			? ['checked' => $v, 'note' => $note]
+			: ['note' => $v]
 		);
 		return $this->field($name, Checkbox::class, $label, [
 			'checked' => Checkbox::b($this->v($name), df_bool(dfa($data, 'checked')))
