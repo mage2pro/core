@@ -64,14 +64,14 @@ abstract class Charge extends Operation {
 	 * 2016-09-07 Ключами результата являются человекопонятные названия переменных.
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\Stripe\P\Charge::p()
-	 * @param string|null $length [optional]
-	 * @param string|null $count [optional]
+	 * @param int|null $lK [optional]
+	 * @param int|null $lV [optional]
 	 * @return array(string => string)
 	 */
-	final protected function metadata($length = null, $count = null):array {
+	final protected function metadata($lK = null, $lV = null):array {
 		$k = $this->s()->metadata(); /** @var string[] $k */ /** @var array(string => string) $m */
 		$m = array_combine(dfa(Metadata::s()->map(), $k), dfa($this->vars(), $k));
-		return array_combine(dfa_chop(array_keys($m), $length), dfa_chop(array_values($m), $count));
+		return array_combine(dfa_chop(array_keys($m), $lK), dfa_chop(array_values($m), $lV));
 	}
 
 	/**
