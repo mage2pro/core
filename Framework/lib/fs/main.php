@@ -57,10 +57,8 @@ function df_file_read(string $p, bool $req = true):string {/** @var string $r */
  * @used-by \Df\GoogleFont\Fonts\Png::create()
  * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
  * @param string|string[] $p
- * @param string $contents
- * @param bool $append [optional]
  */
-function df_file_write($p, $contents, $append = false):void {
+function df_file_write($p, string $contents, bool $append = false):void {
 	/**
 	 * 2017-04-22
 	 * С не-строками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
