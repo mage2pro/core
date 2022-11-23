@@ -311,11 +311,10 @@ function df_con_hier_suf($c, string $suf, bool $throw = true) {/** @var string|n
  * @param object|string $c
  * @param string|string[] $sufBase
  * @param string|string[] $ta
- * @param bool $throw [optional]
  * @return string|null
  * @throws DFE
  */
-function df_con_hier_suf_ta($c, $sufBase, $ta, $throw = true) {
+function df_con_hier_suf_ta($c, $sufBase, $ta, bool $throw = true) {
 	$ta = df_array($ta);
 	$sufBase = df_cc_class($sufBase);
 	$result = null; /** @var string|null $result */
