@@ -45,6 +45,5 @@ function df_table_delete_not(string $t, string $column, $values) {df_table_delet
 /**
  * 2019-11-30
  * 2022-10-22 @deprecated It is unused.
- * @param string $t
  */
-function df_table_exists($t):bool {return df_conn()->isTableExists(df_table($t));}
+function df_table_exists(string $t):bool {return df_conn()->isTableExists(df_table($t));}
