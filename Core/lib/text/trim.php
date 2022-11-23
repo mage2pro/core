@@ -150,10 +150,9 @@ function df_trim_text_a(string $s, array $trimA, callable $f):string {
  * @used-by \Dfe\Qiwi\W\Event::pid()
  * @used-by \Dfe\Stripe\Facade\Token::trimmed()
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
- * @param string $s
  * @param string|string[] $trim
  */
-function df_trim_text_left($s, $trim):string {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
+function df_trim_text_left(string $s, $trim):string {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
 	$trim === mb_substr($s, 0, $l = mb_strlen($trim)) ? mb_substr($s, $l) : $s
 );}
 
