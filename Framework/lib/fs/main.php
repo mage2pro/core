@@ -140,9 +140,8 @@ function df_fs():Filesystem {return df_o(Filesystem::class);}
 /**
  * 2017-04-03 Портировал из РСМ. Никем не используется.
  * 2022-11-03 @deprecated It is unused.
- * @param string $p
  */
-function df_fs_delete($p):void {File::rmdirRecursive(df_param_sne($p, 0));}
+function df_fs_delete(string $p):void {File::rmdirRecursive(df_param_sne($p, 0));}
 
 /**
  * 2019-08-23
