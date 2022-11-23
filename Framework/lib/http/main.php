@@ -66,10 +66,9 @@ function df_http_context():Context {return df_o(Context::class);}
  * @used-by \Dfe\Robokassa\Api\Options::p()
  *
  * @param array(string => string) $params [optional]
- * @param int|null $timeout [optional]
  * @return string|bool
  */
-function df_http_get(string $urlBase, array $params = [], $timeout = null) {
+function df_http_get(string $urlBase, array $params = [], int $timeout = 0) {
 	$url = !$params ? $urlBase : $urlBase . '?' . http_build_query($params); /** @var string $url */
 	/**
 	 * 2016-05-31
