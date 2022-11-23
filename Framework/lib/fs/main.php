@@ -170,10 +170,9 @@ function df_fs_rf():DirectoryReadFactory {return df_o(DirectoryReadFactory::clas
  * @used-by df_file_write()
  * @used-by df_media_writer()
  * @used-by df_sync()
- * @param string $type
  * @return DirectoryWrite|IDirectoryWrite
  */
-function df_fs_w($type) {return df_fs()->getDirectoryWrite($type);}
+function df_fs_w(string $type) {return df_fs()->getDirectoryWrite($type);}
 
 /**
  * 2019-02-24
