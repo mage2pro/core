@@ -78,9 +78,8 @@ function df_db_version():string {return dfcf(function() {return df_conn()->fetch
  * Метод @see Varien_Db_Adapter_Pdo_Mysql::getPrimaryKeyName() возвращает не название колонки,
  * а слово «PRIMARY», поэтому он нам не подходит.
  * 2019-01-12 It is never used.
- * @param string $t
  * @return string|null
  */
-function df_primary_key($t) {return dfcf(function($t) {return df_first(df_eta(dfa_deep(
+function df_primary_key(string $t) {return dfcf(function($t) {return df_first(df_eta(dfa_deep(
 	df_conn()->getIndexList($t), 'PRIMARY/COLUMNS_LIST'
 )));}, func_get_args());}
