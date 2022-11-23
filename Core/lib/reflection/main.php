@@ -284,8 +284,7 @@ function df_con_hier($c, string $ar, bool $throw = true) {/** @var string|null $
  * @return string|null
  * @throws DFE
  */
-function df_con_hier_suf($c, string $suf, bool $throw = true) {
-	/** @var string|null $r */
+function df_con_hier_suf($c, string $suf, bool $throw = true) {/** @var string|null $r */
 	if (!($r = df_con($c, $suf, null, false))) {
 		# 2017-01-11 Используем df_cts(), чтобы отсечь окончание «\Interceptor».
 		/** @var string|false $parent */
