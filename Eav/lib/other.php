@@ -4,7 +4,6 @@ use Magento\Framework\Model\AbstractModel as Model;
 
 /**
  * 2016-08-22
- * @param Model $m
  */
 function df_eav_partial_save(Model $m):void {
 	$r = $m->getResource(); /** @var AbstractEntity $r */
