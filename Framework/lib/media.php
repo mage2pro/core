@@ -34,6 +34,7 @@ function df_img_is_jpeg(string $f):bool {return in_array(strtolower(df_file_ext(
  * 2018-11-24
  * $f is an image's path relative to the `pub/media` folder.
  * 2020-12-13 It is not used by `mage2pro/*` modules. I do not know who uses it.
+ * 2022-11-23 @deprecated It is unused.
  * @param int|null $w [optional]
  * @param int|null $h [optional]
  */
