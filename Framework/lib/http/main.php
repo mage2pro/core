@@ -65,12 +65,11 @@ function df_http_context():Context {return df_o(Context::class);}
  * @used-by \Df\GoogleFont\Fonts::responseA()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  *
- * @param $urlBase
  * @param array(string => string) $params [optional]
  * @param int|null $timeout [optional]
  * @return string|bool
  */
-function df_http_get($urlBase, array $params = [], $timeout = null) {
+function df_http_get(string $urlBase, array $params = [], $timeout = null) {
 	$url = !$params ? $urlBase : $urlBase . '?' . http_build_query($params); /** @var string $url */
 	/**
 	 * 2016-05-31
