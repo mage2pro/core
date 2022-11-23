@@ -18,10 +18,6 @@ final class QuoteAddressValidator {
 	 * @used-by \Magento\Checkout\Model\ShippingInformationManagement::saveAddressInformation():
 	 * 		$this->addressValidator->validateForCart($quote, $address);
 	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Checkout/Model/ShippingInformationManagement.php#L176
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param ICart $c
-	 * @param IQuoteAddress $a
 	 */
 	function aroundValidateForCart(Sb $sb, \Closure $f, ICart $c, IQuoteAddress $a):void {self::doValidate(
 		$a, $c->getCustomerId() ?: null
