@@ -19,7 +19,7 @@ use Traversable as T;
  * @used-by df_product_images_additional()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param \Traversable|array(int|string => _DO|array(string => mixed)) $c
- * @param string|\Closure $fv
+ * @param string|Closure $fv
  * @param string|null $fk [optional]
  * @return array(int|string => mixed)
  */
