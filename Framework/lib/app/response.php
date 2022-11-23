@@ -114,10 +114,11 @@ function df_response_cache_max():void {df_response_headers([
  * @used-by \Df\Framework\App\Action\Image::execute()
  * @used-by \Df\Framework\W\Result\Text::render()
  * @used-by \Df\Framework\W\Result\Xml::render()
- * @param string $contentType
  * @param IResult|wResult|IHttpResponse|HttpResponse|null $r [optional]
  */
-function df_response_content_type($contentType, $r = null):void {df_response($r)->setHeader('Content-Type', $contentType, true);}
+function df_response_content_type(string $contentType, $r = null):void {df_response($r)->setHeader(
+	'Content-Type', $contentType, true
+);}
 
 /**
  * 2015-11-29
