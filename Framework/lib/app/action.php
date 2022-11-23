@@ -74,6 +74,5 @@ function df_referer():string {return dfa($_SERVER, 'HTTP_REFERER');}
  * @see df_redirect_back()
  * @used-by \PPCs\Core\Plugin\Amazon\Payment\Observer\AddAmazonButton::aroundExecute()
  * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer()
- * @param string $s
  */
-function df_referer_ends_with($s):bool {return df_ends_with(df_referer(), $s);}
+function df_referer_ends_with(string $s):bool {return df_ends_with(df_referer(), $s);}
