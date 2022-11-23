@@ -18,8 +18,7 @@ class ArrayT extends Fieldset {
 	final function onFormInitialized():void {
 		parent::onFormInitialized();
 		$this->addClass('df-array');
-		# 2015-12-29 It is an invisible template row.
-		df_hide($this->field('template', $this->itemFormElement()));
+		df_hide($this->field('template', $this->itemFormElement())); # 2015-12-29 It is an invisible template row.
 		$itemId = 0; /** @var int $itemId */
 		foreach ($this->v() as $key => $data) {
 			/** @var string|int $key */ /** @var string|array(string => mixed) $data */
