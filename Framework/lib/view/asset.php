@@ -94,7 +94,7 @@ function df_asset_third_party($localPath):string {return "Df_Core::thirdParty/$l
  * @used-by vendor/alleswunder/core/view/frontend/templates/aw-logo.phtml
  * @used-by vendor/inkifi/map/view/frontend/templates/index.phtml
  * @param string $n		E.g.: 'AllesWunder_Core::i/aw-logo.png'
- * @param bool|\Closure|mixed $onE [optional]
+ * @param bool|Closure|mixed $onE [optional]
  * @return string|null
  * @throws DFE
  */
