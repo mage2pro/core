@@ -508,9 +508,8 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * У нас же имя будет: groups[frontend][fields][value__font][df_children][emphase__bold]
 	 * @used-by self::field()
 	 * @used-by self::fieldset()
-	 * @param string $name
 	 */
-	private function cn($name):string {return $this->nameFull() . "[{$name}]";}
+	private function cn(string $name):string {return $this->nameFull() . "[{$name}]";}
 
 	/**
 	 * 2015-12-29
