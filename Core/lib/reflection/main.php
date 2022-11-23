@@ -270,12 +270,10 @@ function df_con_heir($c, string $def) {return df_ar(df_con(df_module_name_c($c),
  * @used-by \Df\Payment\W\F::s()
  * @used-by \Df\Shipping\Method::s()
  * @param object|string $c
- * @param string $ar
- * @param bool $throw [optional]
  * @return string|null
  * @throws DFE
  */
-function df_con_hier($c, $ar, $throw = true) {/** @var string|null $r */ return
+function df_con_hier($c, string $ar, bool $throw = true) {/** @var string|null $r */ return
 	($r = df_con_hier_suf($c, df_class_suffix($ar), $throw)) ? df_ar($r, $ar) : null
 ;}
 
