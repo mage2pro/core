@@ -22,10 +22,9 @@
  *
  * @used-by dfa_key_uc()
  * @param array(string => mixed) $a
- * @param int $c
  * @return array(string => mixed)
  */
-function dfa_key_case(array $a, $c):array {return dfak_transform_r($a, function($k) use($c) {return
+function dfa_key_case(array $a, int $c):array {return dfak_transform_r($a, function($k) use($c) {return
 	mb_convert_case($k, $c, 'UTF-8')
 ;});}
 
