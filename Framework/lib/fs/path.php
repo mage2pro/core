@@ -64,9 +64,8 @@ function df_path_is_internal(string $p):bool {return '' === $p || df_starts_with
  * @used-by \Df\Sentry\Client::needSkipFrame()
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
- * @param string $p
  */
-function df_path_n($p):string {return str_replace(['\/', '\\'], '/', $p);}
+function df_path_n(string $p):string {return str_replace(['\/', '\\'], '/', $p);}
 
 /**
  * 2016-12-30 It replaces all path delimiters with @uses DS
