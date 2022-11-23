@@ -120,12 +120,11 @@ function df_prop($o, $v = DF_N, $d = null, string $type = '') {/** @var object|m
  * @used-by \Df\Backend\Model\Auth::loginByEmail()
  * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
  * @param object|ArrayAccess $o
- * @param string $k
  * @param mixed|string $v [optional]
  * @param string|mixed|null $d [optional]
  * @return mixed|object|ArrayAccess|null
  */
-function df_prop_k($o, $k, $v = DF_N, $d = null) {/** @var object|mixed|null $r */
+function df_prop_k($o, string $k, $v = DF_N, $d = null) {/** @var object|mixed|null $r */
 	/**
 	 * 2019-09-08
 	 * 1) My 1st solution was comparing $v with `null`,
