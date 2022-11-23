@@ -15,9 +15,8 @@ function df_ctr(string $c):string {return df_vtr(df_om_config()->getPreference($
 /**
  * 2017-03-20
  * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()
- * @param string $c
  */
-function df_is_virtual($c):bool {return !!dfa(df_virtual_types(), $c);}
+function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
 
 /**
  * 2015-08-13
