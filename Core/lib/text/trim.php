@@ -161,11 +161,10 @@ function df_trim_text_left(string $s, $trim):string {return is_array($trim) ? df
  * @used-by df_trim_text()
  * @used-by \Df\Core\Text\Marker::unmark()
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
- * @param string $s
- * @param string $left
- * @param string $right
  */
-function df_trim_text_left_right($s, $left, $right):string {return df_trim_text_right(df_trim_text_left($s, $left), $right);}
+function df_trim_text_left_right(string $s, string $left, string $right):string {return df_trim_text_right(
+	df_trim_text_left($s, $left), $right
+);}
 
 /**
  * It chops the $trim ending from the $s string.
