@@ -13,8 +13,6 @@ final class AbstractAddress {
 	 * @see \Df\Sales\Plugin\Model\Order\Address\Validator
 	 *
 	 * @see \Magento\Customer\Model\Address\AbstractAddress::validate()
-	 * @param Sb $sb
-	 * @param \Closure $f
 	 * @return bool|string[]
 	 */
 	function aroundValidate(Sb $sb, \Closure $f) {return S::disabled() && df_address_is_billing($sb) ? true : $f();}
