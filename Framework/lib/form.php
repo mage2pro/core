@@ -287,4 +287,4 @@ function df_fe_attrs(AE $e, string $uidSuffix = ''):array {return
  * 2015-12-14
  * @param AE|E $e
  */
-function df_hide(AE $e) {$e->setContainerClass('df-hidden');}
+function df_hide(AE $e):void {$e->setContainerClass('df-hidden');}
