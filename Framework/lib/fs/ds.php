@@ -12,9 +12,8 @@ function df_add_ds_right(string $p):string {return df_trim_ds_right($p) . '/';}
 /**
  * 2016-10-14
  * @used-by df_url_bp()
- * @param string $p
  */
-function df_trim_ds($p):string {return df_trim($p, '/\\');}
+function df_trim_ds(string $p):string {return df_trim($p, '/\\');}
 
 /**
  * 2015-11-30
