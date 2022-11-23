@@ -34,9 +34,8 @@ function df_action_c_redirect():Redirect {return df_action_create(Redirect::clas
  * @used-by \Mageplaza\Blog\Controller\Router::match() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/188)
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @param IRequest|Http $req
- * @param string $path
  */
-function df_router_redirect(IRequest $req, $path):Redirect {
+function df_router_redirect(IRequest $req, string $path):Redirect {
 	df_response()->setRedirect(df_url_frontend($path), 301);
 	$req->setDispatched(true);
 	return df_action_c_redirect();
