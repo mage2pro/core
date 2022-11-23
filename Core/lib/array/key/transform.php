@@ -66,10 +66,9 @@ function dfak_prefix(array $a, string $p, bool $req = false):array {return dfak_
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @param array|callable|Traversable $a1
  * @param array|callable|Traversable $a2
- * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function dfak_transform($a1, $a2, $req = false):array {
+function dfak_transform($a1, $a2, bool $req = false):array {
 	# 2020-03-02, 2022-10-31
 	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 	#		[$a, $b] = [1, 2];
