@@ -5,9 +5,8 @@
  * @used-by df_file_ext_def()
  * @used-by df_img_is_jpeg()
  * @used-by \TFC\Image\Command\C1::scan()
- * @param string $f
  */
-function df_file_ext($f):string {return pathinfo($f, PATHINFO_EXTENSION);}
+function df_file_ext(string $f):string {return pathinfo($f, PATHINFO_EXTENSION);}
 
 /**
  * 2020-06-28
