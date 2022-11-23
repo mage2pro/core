@@ -138,9 +138,8 @@ final class Regex extends \Df\Core\O {
 	 * @used-by self::getSubjectSplitted()
 	 * @used-by self::throwInternalError()
 	 * @used-by self::throwNotMatch()
-	 * @return bool
 	 */
-	private function isSubjectTooLongToReport() {return dfc($this, function() {return
+	private function isSubjectTooLongToReport():bool {return dfc($this, function() {return
 		$this->isSubjectMultiline() && $this->getSubjectMaxLinesToReport() < count($this->getSubjectSplitted())
 	;});}
 
