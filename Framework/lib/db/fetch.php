@@ -102,12 +102,11 @@ function df_fetch_col_max(string $t, string $col, $compareK = null, $compareV = 
  * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \Inkifi\Consolidation\Processor::mcid()
- * @param string $t
  * @param string|string[] $cols
  * @param array(string => string) $compare
  * @return string|null|array(string => mixed)
  */
-function df_fetch_one($t, $cols, $compare) {
+function df_fetch_one(string $t, $cols, array $compare) {
 	$s = df_db_from($t, $cols); /** @var S $s */
 	foreach ($compare as $c => $v) {/** @var string $c */ /** @var string $v */
 		$s->where('? = ' . $c, $v);
