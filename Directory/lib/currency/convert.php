@@ -27,12 +27,11 @@ use Magento\Store\Model\Store;
  * @used-by \Df\Payment\Currency::toBase()
  * @used-by \Df\Payment\Currency::toOrder()
  * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
- * @param float $a
  * @param C|string|null $from [optional]
  * @param C|string|null $to [optional]
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  */
-function df_currency_convert($a, $from = null, $to = null, $s = null):float {return df_currency_convert_from_base(
+function df_currency_convert(float $a, $from = null, $to = null, $s = null):float {return df_currency_convert_from_base(
 	df_currency_convert_to_base($a, $from, $s), $to, $s
 );}
 
