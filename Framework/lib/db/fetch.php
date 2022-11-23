@@ -60,7 +60,7 @@ function df_fetch_col_int(string $t, string $cSelect, $compareK = null, $compare
 
 /**
  * 2015-04-13
- * 2019-01-12 @deprecated It is never used.
+ * 2019-01-12 @deprecated It is unused.
  * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int[]|string[]
