@@ -50,10 +50,9 @@ function df_countries_options(array $filter = []):array {return dfcf(function(ar
  * @used-by df_country_code()
  * @used-by df_store_country()
  * @param C|string $c
- * @param bool $throw [optional]
  * @return C|null
  */
-function df_country($c, $throw = true) {return $c instanceof C ? $c : dfcf(function($iso2, $throw = true) {/** @var C|null $r */
+function df_country($c, bool $throw = true) {return $c instanceof C ? $c : dfcf(function($iso2, $throw = true) {/** @var C|null $r */
 	$r = !df_check_iso2($iso2) ? null : df_countries()->getItemById($iso2);
 	return $r || !$throw ? $r : df_error("Unable to detect a country by the «{$iso2}» code.");
 }, func_get_args());}
