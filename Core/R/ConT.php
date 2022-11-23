@@ -27,12 +27,12 @@ final class ConT {
 	 * @return string|null
 	 */
 	static function generic(\Closure $f, $c, $suf, string $def = '', bool $throw = true) {return dfcf(
-		function($f, $c, $suf, string $def, $throw = true) {return /** @var string $result */
-			df_class_exists($result = df_ctr($f($c, $suf)))
-				? (self::$allow_abstract || !df_class_check_abstract($result) ? $result : (!$throw ? null :
-					df_error("The «{$result}» class is abstract.")
+		function($f, $c, $suf, string $def, $throw = true) {return /** @var string $r */
+			df_class_exists($r = df_ctr($f($c, $suf)))
+				? (self::$allow_abstract || !df_class_check_abstract($r) ? $r : (!$throw ? null :
+					df_error("The «{$r}» class is abstract.")
 				))
-				: ($def ?: (!$throw ? null : df_error("The «{$result}» class is required.")))
+				: ($def ?: (!$throw ? null : df_error("The «{$r}» class is required.")))
 		;}, [$f, df_cts($c), $suf, $def, $throw]
 	);}
 
