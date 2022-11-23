@@ -6,12 +6,11 @@ use Magento\Framework\Model\AbstractModel as M;
 /**
  * @used-by df_sc()
  * @used-by \Df\Config\Backend\Serialized::processI()
- * @param string $resultClass
  * @param string|null|array(string => mixed) $a2 [optional]
  * @param array(string => mixed) $a3 [optional]
  * @return _DO|object
  */
-function df_ic($resultClass, $a2 = null, array $a3 = []) {
+function df_ic(string $resultClass, $a2 = null, array $a3 = []) {
 	/** @var string|null $expectedClass */ /** @var array(string => mixed) $params */
 	# 2020-03-02, 2022-10-31
 	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
