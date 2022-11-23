@@ -9,9 +9,8 @@ use Magento\Framework\DB\Select;
  * @used-by \Df\Payment\Source\Identification::get()
  * @used-by \Df\Sso\CustomerReturn::customerData()
  * @uses \Magento\ImportExport\Model\ResourceModel\Helper::getNextAutoincrement()
- * @param string $t
  */
-function df_next_increment($t):int {return df_int(df_ie_helper()->getNextAutoincrement(df_table($t)));}
+function df_next_increment(string $t):int {return df_int(df_ie_helper()->getNextAutoincrement(df_table($t)));}
 
 /**
  * 2015-10-12
