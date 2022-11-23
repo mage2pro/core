@@ -38,9 +38,8 @@ function df_cc_method($a1, $a2 = null):string {return df_ccc('::',
  * 2017-01-11
  * http://stackoverflow.com/a/666701
  * @used-by \Df\Payment\W\F::i()
- * @param string $c
  */
-function df_class_check_abstract($c):bool {df_param_sne($c, 0); return (new RC(df_ctr($c)))->isAbstract();}
+function df_class_check_abstract(string $c):bool {df_param_sne($c, 0); return (new RC(df_ctr($c)))->isAbstract();}
 
 /**
  * 2016-05-06
