@@ -224,13 +224,11 @@ function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null)
  */
 function df_fe_m(AE $e, bool $throw = true) {  /** @var string|null $r */
 	$r = null;
-	$original = $e; /** @var AE|E $original */
+	$orig = $e; /** @var AE|E $orig */
 	while ($e && (!$e instanceof FS || !($r = dfa_deep($e->getData(), 'group/dfExtension')))) {
 		$e = $e->getContainer();
 	}
-	return $r ?: (!$throw ? null : df_error(
-		"«dfExtension» tag is absent for the «{$original->getId()}» configuration element."
-	));
+	return $r ?: (!$throw ? null : df_error("«dfExtension» tag is absent for the «{$orig->getId()}» configuration element."));
 }
 
 /**
