@@ -73,11 +73,9 @@ class Currency extends Dropdown {
 	 * Текущая валюта может меняться динамически (в том числе посетителем магазина и сессией),
 	 * поэтому мы используем параметр $store, а не $scope
 	 * @used-by \Df\Payment\Currency::iso3()
-	 * @param string $code
 	 * @param null|string|int|S|Store $store [optional]
-	 * @param string|null $orderCurrency [optional]
 	 */
-	final static function v($code, $store = null, $orderCurrency = null):string {return dftr(
+	final static function v(string $code, $store = null, string $orderCurrency = ''):string {return dftr(
 		$code ?: self::$ORDER, self::map($store, $orderCurrency)
 	);}
 
@@ -85,11 +83,10 @@ class Currency extends Dropdown {
 	 * 2016-09-05
 	 * @used-by self::v()
 	 * @param null|string|int|S|Store $store [optional]
-	 * @param string|null $orderCurrency [optional]
 	 * @return array(string => string|null)
 	 */
-	private static function map($store = null, $orderCurrency = null):array {return dfcf(
-		function($store = null, $orderCurrency = null) {return [
+	private static function map($store = null, string $orderCurrency = ''):array {return dfcf(
+		function($store = null, string $orderCurrency = '') {return [
 			self::$BASE => df_currency_base_c($store)
 			,self::$ORDER => $orderCurrency ?: df_currency_current_c($store)
 		];}
