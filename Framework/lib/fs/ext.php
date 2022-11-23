@@ -13,9 +13,8 @@ function df_file_ext(string $f):string {return pathinfo($f, PATHINFO_EXTENSION);
  * @see df_strip_ext()
  * @used-by df_block()
  * @used-by df_module_file()
- * @param string|null $ext
  */
-function df_file_ext_add(string $f, $ext):string {return !$ext ? $f : df_append($f, ".$ext");}
+function df_file_ext_add(string $f, string $ext = ''):string {return !$ext ? $f : df_append($f, ".$ext");}
 
 /**
  * 2018-07-06
