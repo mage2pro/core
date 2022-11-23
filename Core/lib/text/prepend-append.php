@@ -48,7 +48,6 @@ function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT):str
 				break;
 			default:
 				df_error();
-				break;
 		}
 		$r = '';
 		for ($i = 0; $i < $left_pad; ++$i) {
