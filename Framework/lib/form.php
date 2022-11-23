@@ -240,11 +240,9 @@ function df_fe_name_short(string $full):string {return df_last(df_clean(df_explo
 /**
  * 2017-08-10
  * @used-by df_fe_sibling_v()
- * @param AE $e
- * @param string $name
  * @return AE|null
  */
-function df_fe_sibling(AE $e, $name) {return $e->getForm()->getElement(
+function df_fe_sibling(AE $e, string $name) {return $e->getForm()->getElement(
 	str_replace('/', '_', $e['field_config']['path']) . "_$name"
 );}
 
