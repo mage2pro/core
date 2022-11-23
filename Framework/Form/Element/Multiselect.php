@@ -107,7 +107,6 @@ class Multiselect extends _Multiselect implements ElementI {
 	 * How are the options set to a select/multiselect form element? https://mage2.pro/t/1615
 	 * How is @see \Magento\Config\Model\Config\Structure\Element\Field::getOptions()
 	 * implemented and used? https://mage2.pro/t/1616
-	 * @param array $values
 	 */
 	final function setValues(array $values):void {
 		$first = df_first($values); /** @var array(string => string)|null $first */
