@@ -25,7 +25,7 @@ function df_dbc_ca(string $name, $dfn = null):void {df_db_column_add('customer_a
  * @used-by \Df\Sales\Setup\UpgradeSchema::_process()
  * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_o(string $name, $dfn = null) {df_db_column_add('sales_order', ...func_get_args());}
+function df_dbc_o(string $name, $dfn = null):void {df_db_column_add('sales_order', ...func_get_args());}
 
 /**
  * 2019-06-04 @todo Support df_call_a()
