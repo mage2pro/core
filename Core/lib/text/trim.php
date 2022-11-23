@@ -10,9 +10,8 @@ use Df\Zf\Filter\StringTrim as Trim;
  * @used-by \Dfe\TwoCheckout\LineItem::adjustText()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @used-by \Dfe\YandexKassa\Result::attributes()
- * @param int|null $max [optional]
  */
-function df_chop(string $s, $max = null):string {return !$max || (mb_strlen($s = df_trim($s)) <= $max) ? $s :
+function df_chop(string $s, int $max = 0):string {return !$max || (mb_strlen($s = df_trim($s)) <= $max) ? $s :
 	df_trim_right(mb_substr($s, 0, $max - 1)) . '…'
 ;}
 
