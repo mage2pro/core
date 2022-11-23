@@ -173,11 +173,10 @@ function df_cld($c):string {return df_contains(df_cts($c) , '\\') ? '\\' : '_';}
  * @used-by \Df\Config\O::ct()
  * @used-by \Df\Payment\Method::codeS()
  * @param string|object $c
- * @param string $name
  * @param mixed|callable $def [optional]
  * @return mixed
  */
-function df_const($c, $name, $def = null) {return
+function df_const($c, string $name, $def = null) {return
 	defined($full = df_cts($c) . "::$name") ? constant($full) : df_call_if($def)
 ;}
 
