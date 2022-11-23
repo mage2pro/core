@@ -16,12 +16,10 @@ final class AddressRepository {
 	 * @see \Df\Customer\Plugin\Model\Address\AbstractAddress
 	 * @see \Df\Sales\Plugin\Model\Order\Address\Validator
 	 * @see \Magento\Customer\Model\ResourceModel\AddressRepository::save()
-	 * @param Sb $sb
-	 * @param \Closure $f
 	 * @param IA|CDA $address
 	 * @throws InputException
 	 */
-	function aroundSave(Sb $sb, \Closure $f, AI $address):IA {/** @var IA $r */
+	function aroundSave(Sb $sb, \Closure $f, IA $address):IA {/** @var IA $r */
 		/**
 		 * 2016-07-27
 		 * Адрес приобретает тип, только когда используется при оформлении заказа.
