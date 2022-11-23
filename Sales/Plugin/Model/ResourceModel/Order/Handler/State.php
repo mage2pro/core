@@ -73,10 +73,8 @@ final class State {
 	 */
 	function aroundCheck(Sb $sb, \Closure $f, O $o):string {
 		$f($o);
-		/** @var OP|null $op */
-		if (dfp_my($op = $o->getPayment())) {
-			/** @var CM|null $cm */
-			$cm = $op->getCreditmemo();
+		if (dfp_my($op = $o->getPayment())) {/** @var OP|null $op */
+			$cm = $op->getCreditmemo(); /** @var CM|null $cm */
 			if ($cm && !dff_eq0(floatval($op->getBaseAmountPaid()) - $cm->getBaseGrandTotal())) {
 				/**
 				 * 2017-01-19
