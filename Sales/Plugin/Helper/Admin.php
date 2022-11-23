@@ -8,12 +8,9 @@ final class Admin {
 	 * @see \Df\Payment\Method::tidFormat()
 	 * @see \Magento\Sales\Helper\Admin::escapeHtmlWithLinks()
 	 * @used-by \Magento\Sales\Block\Adminhtml\Transactions\Detail::_toHtml()
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param string $data
 	 * @param string[]|null $allowedTags [optional]
 	 */
-	function aroundEscapeHtmlWithLinks(Sb $sb, \Closure $f, $data, $allowedTags = null):string {return
+	function aroundEscapeHtmlWithLinks(Sb $sb, \Closure $f, string $data, $allowedTags = null):string {return
 		df_trans_is_my() ? $data : $f($data, $allowedTags)
 	;}
 }
