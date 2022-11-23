@@ -54,6 +54,4 @@ function df_ucfirst(...$args) {return df_call_a(function($s) {return
  * @param string|string[] ...$args
  * @return string|string[]
  */
-function df_ucwords(...$args) {return df_call_a(function($s) {return mb_convert_case(
-	$s, MB_CASE_TITLE, 'UTF-8'
-);}, $args);}
+function df_ucwords(...$args) {return df_call_a(function($s) {return mb_convert_case($s, MB_CASE_TITLE, 'UTF-8');}, $args);}
