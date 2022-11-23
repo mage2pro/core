@@ -69,10 +69,8 @@ function df_db_column_add(string $t, string $name, $dfn = null):void {
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
  * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
  * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
- * @param string $t
- * @param string $c
  */
-function df_db_column_drop($t, $c) {
+function df_db_column_drop(string $t, string $c) {
 	/**
 	 * 2016-11-04
 	 * @uses df_table() call is required here,
