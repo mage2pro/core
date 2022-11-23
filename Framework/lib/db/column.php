@@ -131,11 +131,9 @@ function df_db_column_exists(string $table, string $column):bool {return
  *		"PRIMARY_POSITION": null,
  *		"IDENTITY": false
  *	}
- * @param string $table
- * @param string $column
  * @return array(string => string|int|null)
  */
-function df_db_column_describe($table, $column):array {return df_result_array(dfa(
+function df_db_column_describe(string $table, string $column):array {return df_result_array(dfa(
 	df_conn()->describeTable(df_table($table)), $column
 ));}
 
