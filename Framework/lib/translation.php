@@ -37,9 +37,8 @@ function df_translate_a(array $s,bool $now = false):array {
  * 		@see df_translit_url_lc => allpay
  * @used-by df_translit_url_lc()
  * @used-by \Df\Sentry\Client::tags()
- * @param string $s
  */
-function df_translit_url($s):string {return trim(preg_replace('#[^0-9a-z]+#i', '-', df_translit($s)), '-');}
+function df_translit_url(string $s):string {return trim(preg_replace('#[^0-9a-z]+#i', '-', df_translit($s)), '-');}
 
 /**
  * 2016-10-31
