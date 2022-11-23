@@ -36,11 +36,10 @@ final class ColumnType {
 	 * https://github.com/magento/magento2/blob/2.3.1/lib/internal/Magento/Framework/DB/Adapter/Pdo/Mysql.php#L2438-L2440
 	 * That is why I use `boolean`, which is translated to `tinyint(1)` automatically.
 	 * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
-	 * @param string $c
 	 * @param array(string => string|int) $o [optional]
 	 * @return array(string => string|int)
 	 */
-	static function bool($c, array $o = []):array {return $o + [
+	static function bool(string $c, array $o = []):array {return $o + [
 		'comment' => $c, 'default' => 0, 'length' => 1, 'nullable' => false, 'type' => 'boolean'
 	];}
 
