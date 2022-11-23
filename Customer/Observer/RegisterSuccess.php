@@ -17,7 +17,6 @@ final class RegisterSuccess implements ObserverInterface {
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
-	 * @param O $o
 	 */
 	function execute(O $o):void {
 		$c = df_customer($o['customer']); /** @var Customer $c */

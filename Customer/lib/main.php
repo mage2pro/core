@@ -59,8 +59,7 @@ function df_customer($c = null, bool $throw = false) {return df_try(function() u
 	) : ($c instanceof C ? $c : (
 		($id =
 			$c instanceof O ? $c->getCustomerId() : (
-				is_int($c) || is_string($c) ? $c : (
-					$c instanceof DC ? $c->getId() : null)
+				is_int($c) || is_string($c) ? $c : ($c instanceof DC ? $c->getId() : null)
 			)
 		)
 			? df_customer_registry()->retrieve($id)
