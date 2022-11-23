@@ -28,10 +28,9 @@ function df_countries_allowed($s = null):CC {return dfcf(function($id) {return
  * Например: ['AU' => 'Австралия', 'AT' => 'Австрия']
  * @used-by df_countries_options()
  * @used-by df_country_ctn()
- * @param string|null $locale [optional]
  * @return array(string => string)
  */
-function df_countries_ctn($locale = null):array {return df_countries()->mapFromCodeToName($locale);}
+function df_countries_ctn(string $locale = ''):array {return df_countries()->mapFromCodeToName($locale);}
 
 /**
  * 2017-01-21
