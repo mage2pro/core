@@ -14,6 +14,5 @@ function df_directory():H {return df_o(H::class);}
  * 2015-10-12
  * @used-by \Df\Sso\CustomerReturn::register()
  * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
- * @param string $iso2
  */
-function df_is_postcode_required($iso2):bool {return !df_directory()->isZipCodeOptional($iso2);}
+function df_is_postcode_required(string $iso2):bool {return !df_directory()->isZipCodeOptional($iso2);}
