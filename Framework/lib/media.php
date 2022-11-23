@@ -4,15 +4,17 @@ use Magento\Framework\Filesystem\Directory\Read as R;
 use Magento\Framework\Filesystem\Directory\ReadInterface as IR;
 use Magento\Framework\Filesystem\Directory\Write as W;
 use Magento\Framework\Filesystem\Directory\WriteInterface as IW;
+use Magento\Framework\Image\AdapterFactory as FAdapter;
 use Magento\Framework\Image\Adapter\AbstractAdapter;
 use Magento\Framework\Image\Adapter\AdapterInterface as IAdapter;
-use Magento\Framework\Image\AdapterFactory as FAdapter;
+use Magento\Framework\Image\Adapter\Gd2;
+use Magento\Framework\Image\Adapter\ImageMagick;
 use Magento\Framework\UrlInterface as U;
 
 /**
  * 2018-11-24
  * @used-by df_img_resize()
- * @return IAdapter|AbstractAdapter
+ * @return IAdapter|AbstractAdapter|Gd2|ImageMagick
  */
 function df_img_adapter() {return df_img_adapter_f()->create();}
 
@@ -30,12 +32,12 @@ function df_img_is_jpeg(string $f):bool {return in_array(strtolower(df_file_ext(
 
 /**
  * 2018-11-24
+ * $f is an image's path relative to the `pub/media` folder.
  * 2020-12-13 It is not used by `mage2pro/*` modules. I do not know who uses it.
- * @param string $f An image's path relative to the `pub/media` folder
  * @param int|null $w [optional]
  * @param int|null $h [optional]
  */
-function df_img_resize($f, $w = null, $h = null):string {
+function df_img_resize(string $f, $w = null, $h = null):string {
 	$h = df_etn($h); $w = df_etn($w);
 	$srcDirR = dirname($f); /** @var string $srcDirR */
 	$dstDirR = df_cc_path($srcDirR, 'cache', "{$w}x{$h}"); /** @var string $dstDirR */
@@ -45,7 +47,7 @@ function df_img_resize($f, $w = null, $h = null):string {
 	if (!$mw->isFile($dstPathR)) {
 		$srcPathA = $mw->getAbsolutePath($f); /** @var string $srcPathA */
 		$dstPathA = $mw->getAbsolutePath($dstPathR); /** @var string $dstPathA */
-		$a = df_img_adapter(); /** @var IAdapter|AbstractAdapter $a */
+		$a = df_img_adapter(); /** @var IAdapter|AbstractAdapter|Gd2|ImageMagick $a */
 		$a->open($srcPathA);
 		$a->constrainOnly(true);
 		$a->keepTransparency(true);
