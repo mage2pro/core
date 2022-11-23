@@ -150,7 +150,6 @@ function dfad($o, $k = null, $d = null) {return is_null($k) ? $o : dfa(df_gd($o)
  * @used-by \Df\Payment\TM::res0()
  * @used-by \Dfe\CheckoutCom\Response::a()
  * @param object $o
- * @param F $f
  * @param string|string[]|null $k [optional]
  * @param mixed|callable|null $d [optional]
  * @return mixed
