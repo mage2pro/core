@@ -13,9 +13,6 @@ class Source {
 	 * in a «Compilation from source / Cannot read contents from file» error report»
 	 * @see \Magento\Framework\View\Asset\Source::getContent()
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/Asset/Source.php#L94-L108
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param ILocalAsset $a
 	 * @return bool|string
 	 */
 	function aroundGetContent(Sb $sb, \Closure $f, ILocalAsset $a) {/** @var bool|string $r */
