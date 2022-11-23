@@ -37,7 +37,9 @@ function df_adjust_paths_in_message(string $m):string {
  * @used-by df_product_images_path()
  * @used-by df_sync()
  */
-function df_path_absolute(string $p, string $suffix = ''):string {return df_prepend(df_trim_ds_left($suffix), df_fs_r($p)->getAbsolutePath());}
+function df_path_absolute(string $p, string $suf = ''):string {return df_prepend(
+	df_trim_ds_left($suf), df_fs_r($p)->getAbsolutePath()
+);}
 
 /**
  * 2017-05-08
