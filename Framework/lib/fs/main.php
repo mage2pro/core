@@ -35,10 +35,8 @@ function df_file():File {return df_o(File::class);}
  * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * @used-by \Dfe\Color\Image::dominant()
- * @param string $p
- * @param bool $req [optional]
  */
-function df_file_read($p, $req = true):string {/** @var string $r */
+function df_file_read(string $p, bool $req = true):string {/** @var string $r */
 	if (false === ($r = @file_get_contents($p)) && $req) {
 		df_error("Unable to read the file «{$p}».");
 	}
