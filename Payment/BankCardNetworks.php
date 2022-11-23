@@ -38,12 +38,10 @@ final class BankCardNetworks {
 	 * The function is implemented by analogy with @see \Magento\Payment\Model\CcConfigProvider::getIcons():
 	 * https://github.com/magento/magento2/blob/2.1.6/app/code/Magento/Payment/Model/CcConfigProvider.php#L58-L86
 	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
-	 * @param string $t
 	 * @param bool|\Closure|mixed $onE [optional]
-	 * @return string
 	 * @throws DFE
 	 */
-	static function url($t, $onE = true):string {return df_try(function() use($t) {return df_asset_url(
+	static function url(string $t, $onE = true):string {return df_try(function() use($t) {return df_asset_url(
 		# 2020-02-08
 		# 1) It is for the Magento's Braintree payment module.
 		# "An icon of the UnionPay bank card network is absent on the frontend Braintree payment form":
