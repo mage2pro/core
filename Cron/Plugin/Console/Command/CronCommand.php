@@ -14,10 +14,6 @@ final class CronCommand {
 	 * @see df_error()
 	 * @see \Symfony\Component\Console\Command\Command::run()
 	 * https://github.com/symfony/console/blob/v4.3.10/Command/Command.php#L189-L259
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param II $i
-	 * @param IO $o
 	 */
 	function aroundRun(Sb $sb, \Closure $f, II $i, IO $o):int {
 		try {return $f($i, $o);}
