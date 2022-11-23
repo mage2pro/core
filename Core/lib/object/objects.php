@@ -56,10 +56,9 @@ function df_ic(string $resultClass, $a2 = null, array $a3 = []) {
  * @used-by dfa_ids()
  * @see df_hash_o()
  * @param object|int|string $o
- * @param bool $allowNull [optional]
  * @return int|string|null
  */
-function df_id($o, $allowNull = false) {/** @var int|string|null $r */
+function df_id($o, bool $allowNull = false) {/** @var int|string|null $r */
 	$r = !is_object($o) ? $o : ($o instanceof M || method_exists($o, 'getId') ? $o->getId() : (
 		$o instanceof AI ? $o->id() : null
 	));
