@@ -99,8 +99,8 @@ function dfak_transform($a1, $a2, $req = false):array {
  * @used-by dfa_key_case()
  * @used-by dfak_prefix()
  * @used-by dfak_transform()
- * @param array|callable|\Traversable $a1
- * @param array|callable|\Traversable $a2
+ * @param array|callable|Traversable $a1
+ * @param array|callable|Traversable $a2
  * @return array(string => mixed)
  */
 function dfak_transform_r($a1, $a2):array {return dfak_transform($a1, $a2, true);}
