@@ -101,9 +101,9 @@ abstract class Upgrade {
 	 * @used-by \Df\Sales\Setup\Schema::sQuote()
 	 * @used-by \Df\Sales\Setup\Schema::sSales()
 	 */
-	final protected function sEav(string $c = EavSetup::class):EavSetup {return dfc($this, function($c) {return
-		df_new_om($c, ['setup' => $this->_setup])
-	;}, [$c]);}
+	final protected function sEav(string $c = EavSetup::class):EavSetup {return dfc($this, function($c) {return df_new_om(
+		$c, ['setup' => $this->_setup]
+	);}, [$c]);}
 
 	/**
 	 * 2018-03-21
