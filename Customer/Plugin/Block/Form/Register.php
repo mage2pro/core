@@ -22,9 +22,6 @@ final class Register {
 	 * не устанавливает значение атрибута «value» для <input type="password">.
 	 * Поэтому пароль мы устанавливаем посредством JavaScript:
 	 * https://github.com/mage2pro/core/blob/7e7db69/Sso/view/frontend/web/reg-completion.js#L7
-	 *
-	 * @param Sb $sb
-	 * @param _DO $r
 	 */
 	function afterGetFormData(Sb $sb, _DO $r):_DO {return $r->setData($r->getData()
 		+ (!df_my_local() ? [] : [
