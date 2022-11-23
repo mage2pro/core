@@ -28,12 +28,9 @@ function df_table($n):string {return dfcf(function($n) {return df_db_resource()-
 /**
  * 2015-04-12
  * @used-by df_table_delete_not()
- * @param string $t
- * @param string $columnName
  * @param int|string|int[]|string[] $values
- * @param bool $not [optional]
  */
-function df_table_delete($t, $columnName, $values, $not = false):void {
+function df_table_delete(string $t, string $columnName, $values, bool $not = false):void {
 	$condition = df_sql_predicate_simple($values, $not); /** @var string $condition */
 	df_conn()->delete(df_table($t), ["{$columnName} {$condition}" => $values]);
 }
