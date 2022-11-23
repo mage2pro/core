@@ -3,13 +3,10 @@ use Df\Core\Text\Regex as R;
 
 /**
  * @used-by \Df\Typography\Font::variantNumber()
- * @param string $pattern
- * @param string $subject
- * @param bool $throwOnNotMatch [optional]
  * @return int|null|bool
  */
-function df_preg_int($pattern, $subject, $throwOnNotMatch = false) {return R::i(
-	$pattern, $subject, $throwOnError = true, $throwOnNotMatch
+function df_preg_int(string $pattern, string $subject, bool $throwOnNotMatch = false) {return R::i(
+	$pattern, $subject, true, $throwOnNotMatch
 )->matchInt();}
 
 /**
