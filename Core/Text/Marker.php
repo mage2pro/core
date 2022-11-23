@@ -11,9 +11,8 @@ final class Marker {
 	/**
 	 * 2021-12-12
 	 * @used-by \Df\Xml\X::markAsCData()
-	 * @param string|null $s
 	 */
-	function mark($s):string {return $this->_begin . $s . $this->_end;}
+	function mark(string $s):string {return $this->_begin . $s . $this->_end;}
 
 	/**
 	 * 2021-12-12
