@@ -150,18 +150,18 @@ function df_clean_xml(array $a):array {return df_clean($a, [df_cdata('')]);}
 /**
  * 2016-11-08
  * Отличия этой функции от @uses array_filter():
- * 1) работает не только с массивами, но и с @see \Traversable
+ * 1) работает не только с массивами, но и с @see Traversable
  * 2) принимает аргументы в произвольном порядке.
  * Третий параметр — $flag — намеренно не реализовал,
- * потому что вроде бы для @see \Traversable он особого смысла не имеет,
- * а если у нас гарантирвоанно не @see \Traversable, а ассоциативный массив,
+ * потому что вроде бы для @see Traversable он особого смысла не имеет,
+ * а если у нас гарантирвоанно не @see Traversable, а ассоциативный массив,
  * то мы можем использовать array_filter вместо df_filter.
  * 2020-02-05 Now it correcly handles non-associative arrays.
  * @used-by df_clean_r()
  * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \TFC\Core\Plugin\Sales\Model\Order::afterGetParentItemsRandomCollection()
- * @param callable|array(int|string => mixed)|array[]\Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|\Traversable $a2
+ * @param callable|array(int|string => mixed)|array[]Traversable $a1
+ * @param callable|array(int|string => mixed)|array[]|Traversable $a2
  * @return array(int|string => mixed)
  */
 function df_filter($a1, $a2):array { /** @var array $r */
