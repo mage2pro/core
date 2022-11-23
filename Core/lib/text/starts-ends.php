@@ -22,13 +22,12 @@
  * @used-by \Df\Sentry\Trace::get_frame_context()
  * @used-by \Df\Zf\Validate\StringT\FloatT::isValid()
  * @used-by \Dfe\TBCBank\Facade\Charge::tokenIsNew()
- * @used-by \RWCandy\Captcha\Assert::email()       
- * @param string $haystack
- * @param string|string[] $needle
+ * @used-by \RWCandy\Captcha\Assert::email()
+ * @param string|string[] $n
  */
-function df_ends_with($haystack, $needle):bool {return is_array($needle)
-	? null !== df_find($needle, __FUNCTION__, [], [$haystack])
-	: 0 === ($l = mb_strlen($needle)) || $needle === mb_substr($haystack, -$l)
+function df_ends_with(string $haystack, $n):bool {return is_array($n)
+	? null !== df_find($n, __FUNCTION__, [], [$haystack])
+	: 0 === ($l = mb_strlen($n)) || $n === mb_substr($haystack, -$l)
 ;}
 
 /**
