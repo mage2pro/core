@@ -96,10 +96,8 @@ function df_trim_left(string $s, string $charlist = null):string {return ltrim($
  * @used-by df_chop()            
  * @used-by df_file_ext_def()
  * @used-by df_trim_ds_right()
- * @param string $s
- * @param string $charlist [optional]
  */
-function df_trim_right($s, $charlist = null):string {return rtrim($s, $charlist ?: " \t\n\r\0\x0B");}
+function df_trim_right(string $s, string $charlist = null):string {return rtrim($s, $charlist ?: " \t\n\r\0\x0B");}
 
 /**
  * It chops the $trim prefix or/and suffix from the $s string.
