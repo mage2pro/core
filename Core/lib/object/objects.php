@@ -163,12 +163,11 @@ function df_newa(string $c, string $expected = '', ...$args) {return df_ar(df_ne
  * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
- * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer() 
- * @param string $c
+ * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer()
  * @param array(string => mixed) $p [optional]
  * @return _DO|object
  */
-function df_new_om($c, array $p = []) {return df_om()->create($c, $p);}
+function df_new_om(string $c, array $p = []) {return df_om()->create($c, $p);}
 
 /**
  * 2017-04-08
