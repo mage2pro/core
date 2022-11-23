@@ -25,10 +25,9 @@ final class ConT {
 	 * @param object|string $c
 	 * @param string|string[] $suf
 	 * @param string|null $def [optional]
-	 * @param bool $throw [optional]
 	 * @return string|null
 	 */
-	static function generic(\Closure $f, $c, $suf, $def = null, $throw = true) {return dfcf(
+	static function generic(\Closure $f, $c, $suf, $def = null, bool $throw = true) {return dfcf(
 		function($f, $c, $suf, $def = null, $throw = true) {return /** @var string $result */
 			df_class_exists($result = df_ctr($f($c, $suf)))
 				? (self::$allow_abstract || !df_class_check_abstract($result) ? $result : (!$throw ? null :
