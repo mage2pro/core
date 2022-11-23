@@ -107,11 +107,8 @@ class AbstractElement extends Sb {
 	 * 2015-12-28 4) Добавляем класс, соответствующий типу элемента.
 	 * @see \Df\Framework\Form\Element\Font::onFormInitialized()
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml()
-	 * @param Sb|E $sb
-	 * @param \Closure $f
-	 * @param string|null $idSuffix
 	 */
-	function aroundGetLabelHtml(Sb $sb, \Closure $f, $idSuffix = ''):string {/** @var string $r */
+	function aroundGetLabelHtml(Sb $sb, \Closure $f, string $idSuffix = ''):string {/** @var string $r */
 		/** @var string|null|Phrase $l */
 		if (is_null($l = $sb->getLabel())) {
 			$r = '';
