@@ -30,6 +30,5 @@ function df_file_ext_def(string $f, string $ext):string {return ($e = df_file_ex
  * strips the full path and returns the base name only.
  * @see df_file_ext_add()
  * @used-by wolf_u2n()
- * @return string|null
  */
-function df_strip_ext(string $s) {return preg_replace('#\.[^.]*$#', '', $s);}
+function df_strip_ext(string $s):string {return preg_replace('#\.[^.]*$#', '', $s);}
