@@ -235,7 +235,7 @@ function df_fe_m(AE $e, bool $throw = true) {  /** @var string|null $r */
  * 2016-08-10 «groups[all_pay][groups][installment_sales][fields][plans][template][months]» => «months»
  * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
  */
-function df_fe_name_short(string $nameFull):string {return df_last(df_clean(df_explode_multiple(['[', ']'], $nameFull)));}
+function df_fe_name_short(string $full):string {return df_last(df_clean(df_explode_multiple(['[', ']'], $full)));}
 
 /**
  * 2017-08-10
