@@ -1,6 +1,8 @@
 <?php
 /**
  * 2016-01-29
+ * 2022-11-23 `callable` as an argument type is supported by PHP ≥ 5.4:
+ * https://github.com/mage2pro/core/issues/174#user-content-callable
  * @see df_sort()
  * @used-by df_ksort_r()
  * @used-by df_stores()
@@ -38,6 +40,8 @@ function df_ksort_ci(array $a):array {ksort($a, SORT_FLAG_CASE|SORT_STRING); ret
 
 /**
  * 2017-07-05
+ * 2022-11-23 `callable` as an argument type is supported by PHP ≥ 5.4:
+ * https://github.com/mage2pro/core/issues/174#user-content-callable
  * @used-by df_ksort_r()
  * @used-by df_ksort_r_ci()
  * @param array(int|string => mixed) $a

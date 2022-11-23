@@ -114,19 +114,18 @@ class O extends \Df\Core\O {
 	 * 2016-08-10
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
+	 * 2022-11-23 `callable` as an argument type is supported by PHP ≥ 5.4:
+	 * https://github.com/mage2pro/core/issues/174#user-content-callable
 	 * @used-by self::b()
 	 * @used-by self::f()
 	 * @used-by self::i()
 	 * @used-by self::nat()
 	 * @used-by self::nat0()
-	 * @param callable $f
 	 * @param mixed|null $d [optional]
 	 * @param string|null $k [optional]
 	 * @return mixed
 	 */
-	private function filter(callable $f, $d = null, $k = null) {return
-		dfc($this, function($f, $d, $k) {return
-			call_user_func($f, $this->v($d, $k))
-		;}, [$f, $d, $k ?: df_caller_f(1)])
-	;}
+	private function filter(callable $f, $d = null, $k = null) {return dfc($this, function($f, $d, $k) {return
+		call_user_func($f, $this->v($d, $k))
+	;}, [$f, $d, $k ?: df_caller_f(1)]);}
 }
