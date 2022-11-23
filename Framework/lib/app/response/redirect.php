@@ -20,11 +20,10 @@ function df_is_redirect():bool {return df_response()->isRedirect();}
  * @used-by df_redirect_to_home()
  * @used-by df_redirect_to_payment()
  * @used-by df_redirect_to_success()
- * @param string $path
  * @param array(string => mixed) $p [optional]
  * @return IResponseRedirect|ResponseRedirect
  */
-function df_redirect($path, $p = []) {
+function df_redirect(string $path, array $p = []) {
 	$r = df_response_redirect(); /** @var IResponseRedirect|ResponseRedirect $r */
 	/**
 	 * 2017-11-17
