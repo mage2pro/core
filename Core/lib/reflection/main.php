@@ -209,10 +209,9 @@ function df_con($c, $suf, string $def = '', bool $throw = true) {return ConT::ge
  * @param object|string $c
  * @param string|string[] $suf
  * @param string|null $def [optional]
- * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_child($c, $suf, $def = null, $throw = true) {return ConT::generic(
+function df_con_child($c, $suf, $def = null, bool $throw = true) {return ConT::generic(
 	function($c, $suf) {return df_cc(df_cld($c), $c, $suf);}, $c, $suf, $def, $throw
 );}
 
