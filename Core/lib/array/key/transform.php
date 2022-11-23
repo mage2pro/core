@@ -13,13 +13,11 @@
  *		[УЪраШна] => UA
  *		[Њазахстан] => KZ
  *	)
- *
  * 2017-02-01
  * Отныне стал использовать константы MB_CASE_LOWER и MB_CASE_UPPER вместо CASE_LOWER и CASE_UPPER.
  * Обратите внимание, что они имеют противоположные значения:
  * CASE_LOWER = 0, а MB_CASE_LOWER = 1
  * CASE_UPPER = 1, а MB_CASE_UPPER = 0.
- *
  * @used-by dfa_key_uc()
  * @param array(string => mixed) $a
  * @return array(string => mixed)
