@@ -25,9 +25,8 @@ function df_img_adapter_f():FAdapter {return df_o(FAdapter::class);}
 /**
  * 2020-12-13
  * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
- * @param string $f
  */
-function df_img_is_jpeg($f):bool {return in_array(strtolower(df_file_ext($f)), ['jpg', 'jpeg']);}
+function df_img_is_jpeg(string $f):bool {return in_array(strtolower(df_file_ext($f)), ['jpg', 'jpeg']);}
 
 /**
  * 2018-11-24
