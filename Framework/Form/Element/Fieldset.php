@@ -300,9 +300,8 @@ class Fieldset extends FieldsetM implements ElementI {
 	/**
 	 * 2015-11-17
 	 * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
-	 * @param string|null $cssClass [optional]
 	 */
-	final protected function fieldsetInline($cssClass = null):FInline {return $this->fieldset(FInline::class, $cssClass);}
+	final protected function fieldsetInline(string $cssClass = ''):FInline {return $this->fieldset(FInline::class, $cssClass);}
 
 	/**
 	 * 2015-12-28
