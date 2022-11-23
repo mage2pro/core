@@ -450,7 +450,6 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
-	 * @param \Closure $f
 	 * @return array(int => mixed)
 	 */
 	final protected function oiLeafs(\Closure $f):array {return df_oqi_leafs($this->o(), $f, $this->locale());}
