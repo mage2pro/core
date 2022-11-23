@@ -39,12 +39,11 @@ function df_currency_convert(float $a, $from = null, $to = null, $s = null):floa
  * 2017-04-15
  * @used-by \Dfe\Stripe\Method::minimumAmount()
  * @used-by \Dfe\TwoCheckout\Method::minimumAmount()
- * @param float $a
  * @param C|string|null $from [optional]
  * @param C|string|null $to [optional]
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  */
-function df_currency_convert_safe($a, $from = null, $to = null, $s = null):float {return df_try(
+function df_currency_convert_safe(float $a, $from = null, $to = null, $s = null):float {return df_try(
 	function() use($a, $from, $to, $s) {return df_currency_convert($a, $from, $to, $s);}, $a
 );}
 
