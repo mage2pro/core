@@ -7,9 +7,7 @@ class AbstractSimpleObject extends _P {
 	/**
 	 * 2017-05-22
 	 * @used-by df_api_object_get()
-	 * @param _P $o
-	 * @param string $k
 	 * @return mixed|null
 	 */
-	final static function get(_P $o, $k) {return $o->_get($k);}
+	final static function get(_P $o, string $k) {return $o->_get($k);}
 }
