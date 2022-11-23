@@ -249,11 +249,9 @@ function df_fe_sibling(AE $e, string $name) {return $e->getForm()->getElement(
 /**
  * 2017-08-10
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
- * @param AE $e
- * @param string $name
  * @return mixed
  */
-function df_fe_sibling_v(AE $e, $name) {return df_fe_sibling($e, $name)['value'];}
+function df_fe_sibling_v(AE $e, string $name) {return df_fe_sibling($e, $name)['value'];}
 
 /**
  * 2016-01-29
