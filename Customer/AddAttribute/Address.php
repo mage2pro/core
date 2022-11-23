@@ -10,10 +10,8 @@ final class Address {
 	 * 2019-06-03
 	 * @used-by \Verdepieno\Core\Setup\UpgradeData::_process()
 	 * @see \Df\Customer\AddAttribute\Customer::p()
-	 * @param string $name
-	 * @param string $label
 	 */
-	static function p($name, $label):void {
+	static function p(string $name, string $label):void {
 		# 2019-06-03
 		# Magento does not have a separate table for customer address attributes
 		# and stores them in the same table as customer attributes: `customer_eav_attribute`.
