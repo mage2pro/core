@@ -12,13 +12,9 @@ class Validator extends Sb {
 	 * Цель плагина — добавление возможности отключения необходимости платёжного адреса.
 	 * Это будет использоваться моими платёжными модулями.
 	 * Помимо этого плагина для данной функциональности нужны ещё 2:
-	 * @see \Df\Customer\Plugin\Model\Address\AbstractAddress
-	 * @see \Df\Customer\Plugin\Model\ResourceModel\AddressRepository
-	 *
+	 * 		1) @see \Df\Customer\Plugin\Model\Address\AbstractAddress
+	 * 		2) @see \Df\Customer\Plugin\Model\ResourceModel\AddressRepository
 	 * @see \Magento\Sales\Model\Order\Address\Validator::validate()
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param Address $a
 	 * @return string[]
 	 */
 	function aroundValidate(Sb $sb, \Closure $f, Address $a):array {return
