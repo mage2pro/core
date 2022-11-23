@@ -24,9 +24,8 @@ function df_bts(bool $v):string {return $v ? 'true' : 'false';}
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @see df_bts()
- * @param bool $v
  */
-function df_bts_yn($v):string {return $v ? 'yes' : 'no';}
+function df_bts_yn(bool $v):string {return $v ? 'yes' : 'no';}
 
 /**
  * Я так понимаю, здесь безопасно использовать @uses strpos вместо @see mb_strpos() даже для UTF-8.
