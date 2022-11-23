@@ -548,7 +548,7 @@ class Fieldset extends FieldsetM implements ElementI {
 	 * @used-by self::nameFull()
 	 * @used-by self::top()
 	 */
-	private function isTop():bool {return dfc($this, function() {return !$this->_parent instanceof self;});}
+	private function isTop():bool {return !$this->_parent instanceof self;}
 
 	/**
 	 * 2015-12-12
