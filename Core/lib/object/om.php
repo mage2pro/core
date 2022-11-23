@@ -9,9 +9,8 @@ use Magento\Framework\Interception\ObjectManager\Config\Developer;
 /**
  * 2017-03-20
  * @used-by df_class_exists()
- * @param string $c
  */
-function df_ctr($c):string {return df_vtr(df_om_config()->getPreference($c));}
+function df_ctr(string $c):string {return df_vtr(df_om_config()->getPreference($c));}
 
 /**
  * 2017-03-20
