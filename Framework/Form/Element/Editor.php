@@ -7,8 +7,6 @@ class Editor extends _P {
 	/**
 	 * 2016-01-06
 	 * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
-	 * @param _P $p
-	 * @param string $html
 	 */
-	final static function wrapIntoContainerSt(_P $p, $html):string {return $p->_wrapIntoContainer($html);}
+	final static function wrapIntoContainerSt(_P $p, string $html):string {return $p->_wrapIntoContainer($html);}
 }
