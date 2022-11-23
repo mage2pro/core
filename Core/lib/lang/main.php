@@ -127,7 +127,6 @@ function df_sync($id, callable $job, float $interval = 0.1) { /** @var mixed $r 
  * @used-by \Doormall\Shipping\Partner\Entity::locationM()
  * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
  * @used-by \TFC\GoogleShopping\Controller\Index\Index::execute() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
- * @param F $try
  * @param F|bool|mixed $onE [optional]
  * @return mixed
  * @throws E
