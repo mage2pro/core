@@ -72,9 +72,9 @@ function df_contains(string $haystack, ...$n):bool {/** @var bool $r */
  * 2015-08-24
  * 2022-10-31 @deprecated It is unused.
  * @param string $haystack
- * @param string $needle
+ * @param string $n
  */
-function df_contains_ci($haystack, $needle):bool {return df_contains(mb_strtoupper($haystack), mb_strtoupper($needle));}
+function df_contains_ci($haystack, $n):bool {return df_contains(mb_strtoupper($haystack), mb_strtoupper($n));}
 
 /**
  * Иногда я для разработки использую заплатку ядра для xDebug —
