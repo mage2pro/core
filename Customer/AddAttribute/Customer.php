@@ -8,12 +8,10 @@ final class Customer {
 	 * 2019-06-05
 	 * https://github.com/magento/magento2/blob/2.3.1/app/code/Magento/Customer/Setup/CustomerSetup.php#L331-L339
 	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
-	 * @param string $name
-	 * @param string $label
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function checkbox($name, $label, array $system = [], array $custom = []):void {self::p(
+	static function checkbox(string $name, string $label, array $system = [], array $custom = []):void {self::p(
 		'boolean', $name, $label, ['backend' => bBoolean::class] + $system, $custom
 	);}
 	
