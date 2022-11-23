@@ -33,9 +33,8 @@ function df_is_guid(string $s):bool {return 36 === strlen($s) && preg_match(
 /**
  * http://darklaunch.com/2009/05/06/php-normalize-newlines-line-endings-crlf-cr-lf-unix-windows-mac
  * @used-by df_explode_n()
- * @param string $s
  */
-function df_normalize($s):string {return strtr($s, ["\r\n" => "\n", "\r" => "\n"]);}
+function df_normalize(string $s):string {return strtr($s, ["\r\n" => "\n", "\r" => "\n"]);}
 
 /**
  * 2017-04-22
