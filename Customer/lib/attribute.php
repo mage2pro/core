@@ -16,9 +16,8 @@ function df_customer_att_is_required(string $c):bool {return df_customer_att($c)
 /**
  * 2019-06-15
  * @used-by \Df\Customer\AddAttribute\Customer::p()
- * @param string $a
  */
-function df_customer_att_pos_after($a):int {return 1 + (int)df_conn()->fetchOne(
+function df_customer_att_pos_after(string $a):int {return 1 + (int)df_conn()->fetchOne(
 	df_db_from(['ca' => 'customer_eav_attribute'], 'sort_order')
 		->joinInner(['a' => 'eav_attribute'], 'a.attribute_id = ca.attribute_id', [])
 		->where('? = a.attribute_code', $a)
