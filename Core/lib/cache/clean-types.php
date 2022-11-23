@@ -28,6 +28,5 @@ function df_cache_clean_pages():void {df_cache_clean_type(TPage::TYPE_IDENTIFIER
  * @used-by df_cache_clean_blocks()
  * @used-by df_cache_clean_cfg()
  * @used-by df_cache_clean_pages()
- * @param string $t
  */
-function df_cache_clean_type($t):void {df_cache_type_list()->cleanType($t);}
+function df_cache_clean_type(string $t):void {df_cache_type_list()->cleanType($t);}
