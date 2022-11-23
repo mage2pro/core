@@ -90,15 +90,13 @@ function df_db_column_drop(string $t, string $c):void {
 }
 
 /**
- * 2016-11-01
- * http://stackoverflow.com/a/7264865
+ * 2016-11-01 http://stackoverflow.com/a/7264865
  * 2016-11-04
- * «How to programmatically check whether a database table contains a specified column?»
- * https://mage2.pro/t/2241
+ * «How to programmatically check whether a database table contains a specified column?» https://mage2.pro/t/2241
  * My previous implementation:
-	$table = df_table($table);
-	$query = df_db_quote_into("SHOW COLUMNS FROM `{$table}` LIKE ?", $column);
-	return !!df_conn()->query($query)->fetchColumn();
+ *		$table = df_table($table);
+ *		$query = df_db_quote_into("SHOW COLUMNS FROM `{$table}` LIKE ?", $column);
+ *		return !!df_conn()->query($query)->fetchColumn();
  * It is also correct, I used it before I found the
  * @uses \Magento\Framework\DB\Adapter\Pdo\Mysql::tableColumnExists() method.
  * @param string $table
