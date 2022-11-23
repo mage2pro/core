@@ -9,10 +9,9 @@
  * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
  * @used-by \Df\Sso\Upgrade\Schema::_process()
  * @used-by \Dfe\FacebookLogin\Setup\UpgradeSchema::_process()
- * @param string $name
  * @param string|null|array(string => mixed) $dfn [optional]
  */
-function df_dbc_c($name, $dfn = null) {df_db_column_add('customer_entity', ...func_get_args());}
+function df_dbc_c(string $name, $dfn = null) {df_db_column_add('customer_entity', ...func_get_args());}
 
 /**
  * 2019-06-04 @todo Support df_call_a()
