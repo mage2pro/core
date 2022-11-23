@@ -285,6 +285,9 @@ function df_fe_attrs(AE $e, string $uidSuffix = ''):array {return
 
 /**
  * 2015-12-14
+ * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
+ * @used-by \Df\Framework\Form\Element\Fieldset::hide()
+ * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
  * @param AE|E $e
  */
 function df_hide(AE $e):void {$e->setContainerClass('df-hidden');}
