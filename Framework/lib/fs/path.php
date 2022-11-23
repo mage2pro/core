@@ -82,9 +82,7 @@ function df_path_n_real(string $p):string {return str_replace(['\/', '\\', '/'],
  * @used-by df_product_images_path_rel()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Df\Sentry\Trace::info()
- * @param string $p
- * @param string $b [optional]
  */
-function df_path_relative($p, $b = DL::ROOT):string {return df_trim_text_left(
+function df_path_relative(string $p, string $b = DL::ROOT):string {return df_trim_text_left(
 	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_fs_r($b)->getAbsolutePath())
 );}
