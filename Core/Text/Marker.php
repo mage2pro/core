@@ -5,10 +5,8 @@ final class Marker {
 	/**
 	 * 2021-12-12
 	 * @used-by \Df\Xml\X::marker()
-	 * @param string $begin
-	 * @param string $end
 	 */
-	function __construct($begin, $end) {$this->_begin = $begin; $this->_end = $end;}
+	function __construct(string $begin, string $end) {$this->_begin = $begin; $this->_end = $end;}
 
 	/**
 	 * 2021-12-12
