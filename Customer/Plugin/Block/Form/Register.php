@@ -23,12 +23,7 @@ final class Register {
 	 * Поэтому пароль мы устанавливаем посредством JavaScript:
 	 * https://github.com/mage2pro/core/blob/7e7db69/Sso/view/frontend/web/reg-completion.js#L7
 	 */
-	function afterGetFormData(Sb $sb, _DO $r):_DO {return $r->setData($r->getData()
-		+ (!df_my_local() ? [] : [
-			'dob' => '1982-07-08'
-			,'email' => 'test-customer@mage2.pro'
-			,'firstname' => 'Test'
-			,'lastname' => 'Customer'
-		])
-	);}
+	function afterGetFormData(Sb $sb, _DO $r):_DO {return $r->setData($r->getData() + (!df_my_local() ? [] : [
+		'dob' => '1982-07-08', 'email' => 'test-customer@mage2.pro', 'firstname' => 'Test','lastname' => 'Customer'
+	]));}
 }
