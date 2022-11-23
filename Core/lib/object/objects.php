@@ -179,11 +179,10 @@ function df_new_om(string $c, array $p = []) {return df_om()->create($c, $p);}
  * @used-by \Frugue\Shipping\Method::collectRates()
  * @used-by \KingPalm\B2B\Block\Registration::e()
  * @used-by \KingPalm\B2B\Block\Registration::form()
- * @param string $c
  * @param array(string => mixed) $d [optional]
  * @return _DO|object
  */
-function df_new_omd($c, array $d = []) {return df_om()->create($c, ['data' => $d]);}
+function df_new_omd(string $c, array $d = []) {return df_om()->create($c, ['data' => $d]);}
 
 /**
  * 2015-03-23
