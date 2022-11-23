@@ -273,11 +273,9 @@ function df_fe_uid(AE $e, string $suffix = ''):array {return ['data-ui-id' => E:
 
 /**
  * 2016-01-08
- * @param AE $e
- * @param string $uidSuffix [optional]
  * @return array(string => string)
  */
-function df_fe_attrs(AE $e, $uidSuffix = null):array {return
+function df_fe_attrs(AE $e, string $uidSuffix = ''):array {return
 	['id' => $e->getHtmlId(), 'name' => $e->getName()]
 	+ df_fe_uid($e, $uidSuffix)
 	+ dfa($e->getData(), $e->getHtmlAttributes())
