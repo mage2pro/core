@@ -10,13 +10,9 @@ final class CarrierFactoryT {
 	 * It forces the @see \Df\Shipping\Method descendants to be singletons:
 	 * @see \Magento\Shipping\Model\CarrierFactory::create()
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/CarrierFactory.php#L57-L80
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param string $c
 	 * @param int|null $sid [optional]
-	 * @return M|IM
 	 */
-	function aroundCreate(Sb $sb, \Closure $f, $c, $sid = null) {/** @var $r */
+	function aroundCreate(Sb $sb, \Closure $f, string $c, $sid = null):IM {/** @var $r */
 		if (!is_a($c, M::class, true)) {
 			$r = $f($c, $sid);
 		}
