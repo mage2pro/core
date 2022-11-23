@@ -59,8 +59,7 @@ final class ColumnType {
 	 * @used-by \Df\Customer\Setup\UpgradeSchema::_process()
 	 * @used-by \Df\Sales\Setup\UpgradeSchema::_process()
 	 * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
-	 * @param string $c
 	 * @return array(string => string|int)
 	 */
-	static function textLong($c):array {return self::text($c, ['length' => 65536]);}
+	static function textLong(string $c):array {return self::text($c, ['length' => 65536]);}
 }
