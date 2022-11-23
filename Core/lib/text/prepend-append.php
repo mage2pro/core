@@ -60,9 +60,8 @@ function df_pad(string $phrase, int $length, string $pattern = ' ', int $positio
  * Строковое представление может быть 16-ричным (код цвета), поэтому убрал @see df_int()
  * http://stackoverflow.com/a/1699980
  * @used-by df_rgb2hex()
- * @param int|string $number
  */
-function df_pad0(int $length, $number):string {return str_pad($number, $length, '0', STR_PAD_LEFT);}
+function df_pad0(int $length, string $number):string {return str_pad($number, $length, '0', STR_PAD_LEFT);}
 
 /**
  * 2016-03-08 It adds the $head prefix to the $s string if the prefix is absent in $s.
