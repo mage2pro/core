@@ -14,10 +14,6 @@ final class CanUseForCountry {
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Payment/Model/Checks/CanUseForCountry.php#L27-L36
 	 * https://github.com/magento/magento2/blob/2.2.2/app/code/Magento/Payment/Model/Checks/CanUseForCountry.php#L33-L42
 	 * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param IM $m
-	 * @param Q $q
 	 */
 	function aroundIsApplicable(Sb $sb, \Closure $f, IM $m, Q $q):string {return !dfp_my($m) ? $f($m, $q) : (
 		$m->canUseForCountry(df_oq_country_sb($q))
