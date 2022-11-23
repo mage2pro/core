@@ -193,10 +193,9 @@ function df_const($c, string $name, $def = null) {return
  * @used-by dfs_con()
  * @used-by \Df\Framework\Mail\TransportObserver::execute()
  * @param string|string[] $suf
- * @param string|null $def [optional]
  * @return string|null
  */
-function df_con($c, $suf, $def = null, bool $throw = true) {return ConT::generic(
+function df_con($c, $suf, string $def = '', bool $throw = true) {return ConT::generic(
 	function($c, $suf) {return
 		/** @var string $del */
 		# 2016-11-25 Применение df_cc() обязательно, потому что $suf может быть массивом.
