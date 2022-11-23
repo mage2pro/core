@@ -13,9 +13,8 @@ final class BillingAddress {
 	/**     
 	 * 2016-07-27
 	 * @used-by \Df\Payment\PlaceOrderInternal::_place()
-	 * @param bool $v [optional]
 	 */
-	static function disable($v = true):void {self::$_stack[]= $v;}
+	static function disable(bool $v = true):void {self::$_stack[]= $v;}
 	/**     
 	 * 2016-07-27
 	 * @used-by \Df\Customer\Plugin\Model\Address\AbstractAddress::aroundValidate()
