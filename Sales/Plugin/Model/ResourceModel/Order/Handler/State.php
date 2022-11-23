@@ -70,10 +70,6 @@ final class State {
 	 *
 	 * Как видно из этого кода, ядро будет в этой точке программы
 	 * повторно пытаться насильно установить нашему заказу состояние «Complete».
-	 *
-	 * @param Sb $sb
-	 * @param \Closure $f
-	 * @param O|DFO $o
 	 */
 	function aroundCheck(Sb $sb, \Closure $f, O $o):string {
 		$f($o);
