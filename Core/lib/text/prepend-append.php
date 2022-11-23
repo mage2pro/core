@@ -20,12 +20,8 @@ function df_n_prepend($s):string {return '' === $s ? '' : "\n$s";}
  * @used-by df_kv()
  * @used-by \Df\Qa\Trace\Formatter::param()
  * @used-by \Dfe\Moip\CardFormatter::label()
- * @param string $phrase
- * @param int $length
- * @param string $pattern
- * @param int $position
  */
-function df_pad($phrase, $length, $pattern = ' ', $position = STR_PAD_RIGHT):string {/** @var string $r */
+function df_pad(string $phrase, int $length, string $pattern = ' ', int $position = STR_PAD_RIGHT):string {/** @var string $r */
 	$encoding = 'UTF-8'; /** @var string $encoding */
 	$input_length = mb_strlen($phrase, $encoding); /** @var int $input_length */
 	$pad_string_length = mb_strlen($pattern, $encoding); /** @var int $pad_string_length */
