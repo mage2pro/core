@@ -91,11 +91,10 @@ function df_fe_fc_b(AE $e, string $key, $d = false):bool {return df_bool(df_fe_f
  * 2016-11-13
  * @used-by \Df\Directory\FE\Dropdown::dfValues()
  * @param AE|E $e
- * @param string $key
  * @param int|null|callable $d [optional]
  * @return string[]
  */
-function df_fe_fc_csv(AE $e, $key, $d = 0):array {return df_csv_parse(df_fe_fc($e, $key, $d));}
+function df_fe_fc_csv(AE $e, string $key, $d = 0):array {return df_csv_parse(df_fe_fc($e, $key, $d));}
 
 /**
  * 2016-01-29
