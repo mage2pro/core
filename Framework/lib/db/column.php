@@ -51,9 +51,7 @@ function df_db_column_add(string $t, string $name, $dfn = null) {
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.3.1/lib/internal/Magento/Framework/DB/Adapter/Pdo/Mysql.php#L977-L979
 	 */
-	df_conn()->addColumn(df_table($t), $name,
-		$dfn && !is_string($dfn) ? $dfn : T::text(is_string($dfn) ? $dfn : 'No comment')
-	);
+	df_conn()->addColumn(df_table($t), $name, $dfn && !is_string($dfn) ? $dfn : T::text(is_string($dfn) ? $dfn : 'No comment'));
 	/**
 	 * 2016-11-04
 	 * @see \Magento\Framework\DB\Adapter\Pdo\Mysql::resetDdlCache() call is not needed here,
