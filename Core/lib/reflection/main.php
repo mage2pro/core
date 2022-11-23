@@ -372,11 +372,9 @@ function df_con_s($c, $suffix, string $method, array $params = []) {return dfcf(
  * @used-by \Df\Payment\W\Handler::exceptionC()
  * @param object|string $c
  * @param string|string[] $nameLast
- * @param string|null $def [optional]
- * @param bool $throw [optional]
  * @return string|null
  */
-function df_con_sibling($c, $nameLast, $def = null, $throw = true) {return ConT::generic(
+function df_con_sibling($c, $nameLast, string $def = '', bool $throw = true) {return ConT::generic(
 	function($c, $nameLast) {return df_class_replace_last($c, $nameLast);}, $c, $nameLast, $def, $throw
 );}
 
