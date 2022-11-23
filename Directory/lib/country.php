@@ -68,9 +68,8 @@ function df_country_2_to_3(string $iso2):string {return df_result_sne(dfa(CC::s(
 /**
  * 2016-05-20 Конвертирует 3-символьный код страны (например, «RUS») в двухсимвольный («RU»).
  * @used-by \Dfe\Moip\Facade\Card::country()
- * @param string $iso3
  */
-function df_country_3_to_2($iso3):string {return df_result_sne(dfa(CC::s()->mapFrom3To2(), $iso3));}
+function df_country_3_to_2(string $iso3):string {return df_result_sne(dfa(CC::s()->mapFrom3To2(), $iso3));}
 
 /**
  * 2017-01-29
