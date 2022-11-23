@@ -45,7 +45,7 @@ function df_ksort_ci(array $a):array {ksort($a, SORT_FLAG_CASE|SORT_STRING); ret
  * @param callable|null $f [optional]
  * @return array(int|string => mixed)
  */
-function df_ksort_r(array $a, $f = null):array {return df_ksort(df_map_k(function($k, $v) use($f) {return
+function df_ksort_r(array $a, callable $f = null):array {return df_ksort(df_map_k(function($k, $v) use($f) {return
 	!is_array($v) ? $v : df_ksort_r($v, $f)
 ;}, $a), $f);}
 
