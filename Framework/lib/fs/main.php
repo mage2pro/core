@@ -154,10 +154,9 @@ function df_fs_dl():DL {return df_o(DL::class);}
  * 2015-11-30
  * @used-by df_media_reader()
  * @used-by df_path_relative()
- * @param string $p
  * @return DirectoryRead|IDirectoryRead
  */
-function df_fs_r($p) {return df_fs()->getDirectoryRead($p);}
+function df_fs_r(string $p) {return df_fs()->getDirectoryRead($p);}
 
 /**
  * 2020-06-16
