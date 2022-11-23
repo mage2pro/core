@@ -44,12 +44,10 @@ final class Customer {
 	 * @used-by \Df\Customer\Setup\UpgradeData::_process()
 	 * @used-by \Df\Sso\Upgrade\Data::att()
 	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
-	 * @param string $name
-	 * @param string $label
 	 * @param array(string => mixed) $system [optional]
 	 * @param array(string => mixed) $custom [optional]
 	 */
-	static function text($name, $label, array $system = [], array $custom = []):void {self::p(
+	static function text(string $name, string $label, array $system = [], array $custom = []):void {self::p(
 		'text', $name, $label, $system, $custom
 	);}
 
