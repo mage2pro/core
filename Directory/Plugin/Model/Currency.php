@@ -8,7 +8,6 @@ final class Currency {
 	 * "Auto-update the product carousel on a currency rates change
 	 * (Magento 2, PlazaThemes Grand theme)": https://github.com/sayitwithagift/core/issues/5
 	 * @see \Magento\Directory\Model\Currency::saveRates()
-	 * @param Sb $sb
 	 */
 	function afterSaveRates(Sb $sb):Sb {
 		df_cache_clean_blocks();
