@@ -48,7 +48,7 @@ function df_chop($s, $max = null):string {return !$max || (mb_strlen($s = df_tri
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
  * @param string|string[] $s
  * @param string $charlist [optional]
- * @param bool|mixed|\Closure $throw [optional]
+ * @param bool|mixed|Closure $throw [optional]
  * @return string|string[]
  */
 function df_trim($s, $charlist = null, $throw = false) {return df_try(function() use($s, $charlist, $throw) {
