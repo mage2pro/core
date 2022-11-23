@@ -107,9 +107,7 @@ function df_oqi_image($i):string {return df_product_image_url($i->getProduct());
  * @used-by \Dfe\Sift\Observer\Sales\OrderPlaceAfter::execute()
  * @used-by \Inkifi\Consolidation\Processor::pids()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
- *
  * @param O|Q $oq
- * @param Closure|null $f [optional]
  * @return array(int => mixed)|OI[]|QI[]
  */
 function df_oqi_leafs($oq, Closure $f = null, string $locale = ''):array {
