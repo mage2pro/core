@@ -87,8 +87,7 @@ class AbstractElement extends Sb {
 
 	/**
 	 * 2015-12-13
-	 * Отличия от модифицируемого метода
-	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml():
+	 * Отличия от модифицируемого метода @see \Magento\Framework\Data\Form\Element\AbstractElement::getLabelHtml():
 	 * 1) Добавляем свои классы для Font Awesome.
 	 * 2) При использовании Font Awesome не добавляем исходную подпись
 	 * (значением которой является класс Font Awesome)
