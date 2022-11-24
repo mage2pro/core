@@ -72,12 +72,10 @@ class AbstractElement extends Sb {
 	 * 2015-11-24
 	 * Many operations on the element require the form's existance, so we do them in
 	 * @see \Df\Framework\Form\ElementI::onFormInitialized()
-	 *
 	 * 2016-03-08
 	 * «@see \Magento\Framework\Data\Form\Element\AbstractElement::setForm() is called 3 times for the same element and form.»
 	 * https://mage2.pro/t/901
 	 * That is why we use $sb->{__METHOD__}.
-	 *
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::setForm()
 	 * @param Sb $sb
 	 * @param Sb $r
