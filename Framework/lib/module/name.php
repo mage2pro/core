@@ -42,10 +42,10 @@ function df_module_name($c = null, string $del = '_'):string {return dfcf(
 
 /**
  * 2017-01-04
- * $c could be:
- * 1) a module name. E.g.: «A_B».
- * 2) a class name. E.g.: «A\B\C».
- * 3) an object. It will be treated as case 2 after @see get_class()
+ * 		$c could be:
+ * 		1) a module name. E.g.: «A_B».
+ * 		2) a class name. E.g.: «A\B\C».
+ * 		3) an object. It will be treated as case 2 after @see get_class()
  * @used-by df_module_name_lc()
  * @used-by dfp_report()
  * @used-by dfs()
