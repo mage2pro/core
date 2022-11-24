@@ -17,10 +17,15 @@
  */
 function df_contents(string $f, $onE = true, $rs = null):string {return df_try(
 	/**
-	 * 2016-05-31
-	 * file_get_contents() can raise @see E_WARNING:
-	 * «failed to open stream: A connection attempt failed because the connected party did not properly respond
-	 * after a period of time, or established connection failed because connected host has failed to respond.»
+	 * 2016-05-31, 2022-10-14
+	 * file_get_contents() could generate @see E_WARNING: e.g.:
+	 * 	*) if the file is absent
+	 * 	*)  in the case of network errors:
+	 * 			«failed to open stream: A connection attempt failed
+	 * 			because the connected party did not properly respond after a period of time,
+	 * 			or established connection failed because connected host has failed to respond.»
+	 * https://www.php.net/manual/function.file-get-contents.php#refsect1-function.file-get-contents-errors
+	 * That is why I use the silence operator.
 	 */
 	function() use ($f, $rs):string {return df_assert_ne(false, @file_get_contents($f, null, $rs));}
 	,true !== $onE ? $onE : function() use ($f) {df_error(

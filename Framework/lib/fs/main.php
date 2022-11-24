@@ -21,14 +21,6 @@ function df_file():File {return df_o(File::class);}
 
 /**
  * 2022-10-14
- * file_get_contents() could generate @see E_WARNING: e.g.:
- * 	*) if the file is absent
- * 	*)  in the case of network errors:
- * 			«failed to open stream: A connection attempt failed
- * 			because the connected party did not properly respond after a period of time,
- * 			or established connection failed because connected host has failed to respond.»
- * https://www.php.net/manual/function.file-get-contents.php#refsect1-function.file-get-contents-errors
- * That is why I use the silence operator.
  * @used-by df_json_file_read()
  * @used-by df_magento_version_remote()
  * @used-by df_package()
