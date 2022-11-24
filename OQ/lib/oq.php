@@ -196,10 +196,9 @@ function df_oq_iid($oq):string {/** @var string $r */
  * @used-by \Df\Payment\Operation\Source::addressS()
  * @used-by \Dfe\Stripe\Init\Action::need3DS()
  * @param O|Q $oq
- * @param bool $empty [optional]
  * @return OA|QA|null
  */
-function df_oq_sa($oq, $empty = false) {/** @var OA|QA|null $r */
+function df_oq_sa($oq, bool $empty = false) {/** @var OA|QA|null $r */
 	if (df_is_o($oq)) {
 		$r = $oq->getShippingAddress() ?: (!$empty ? null : df_new_omd(OA::class, ['address_type' => OA::TYPE_SHIPPING]));
 	}
