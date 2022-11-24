@@ -3,8 +3,6 @@ namespace Df\Framework\Upgrade;
 use Magento\Framework\Setup\ModuleContextInterface as IModuleContext;
 use Magento\Framework\Setup\ModuleDataSetupInterface as IDataSetup;
 use Magento\Framework\Setup\UpgradeDataInterface;
-use Magento\Setup\Model\ModuleContext;
-use Magento\Setup\Module\DataSetup;
 /**
  * 2016-12-02
  * @see \Df\Customer\Setup\UpgradeData
