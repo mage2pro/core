@@ -56,9 +56,8 @@ function df_lang_zh_en():string {return df_lang_zh('zh', 'en');}
  * @used-by \Df\Intl\Js::_toHtml()
  * @used-by \Dfe\CurrencyFormat\O::postProcess()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
- * @param string|null $l [optional]
  */
-function df_locale($l = null):string {/** @var string $r */
+function df_locale(string $l = ''):string {/** @var string $r */
 	if ($l) {
 		$r = $l;
 	}
