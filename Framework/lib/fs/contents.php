@@ -7,6 +7,7 @@
  * @used-by df_module_enum()
  * @used-by df_request_body()
  * @used-by df_test_file_l()
+ * @used-by \Df\GoogleFont\Font\Variant::ttfPath()
  * @param string $f
  * @param Closure|bool|mixed $onE [optional]
  * @param ?resource $rs [optional]
