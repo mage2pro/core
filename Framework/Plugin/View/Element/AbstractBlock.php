@@ -5,10 +5,8 @@ use Magento\Framework\View\Element\AbstractBlock as Sb;
 class AbstractBlock {
 	/**
 	 * 2016-11-21
-	 * Цель плагина — устранение дефекта метода
-	 * @see \Magento\Framework\View\Element\AbstractBlock::extractModuleName(),
-	 * который работает некорректно (возвращает пустую строку),
-	 * если класс модуля не имеет префикса «Block»:
+	 * Цель плагина — устранение дефекта метода @see \Magento\Framework\View\Element\AbstractBlock::extractModuleName(),
+	 * который работает некорректно (возвращает пустую строку), если класс модуля не имеет префикса «Block»:
 	 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L846-L860
 	 * @see \Magento\Framework\View\Element\AbstractBlock::getModuleName()
 	 */
