@@ -15,13 +15,8 @@ final class AddStockDataToCollection {
 	/**
 	 * 2020-11-23
 	 * @see \Magento\InventoryCatalog\Model\ResourceModel\AddStockDataToCollection::execute()
-	 * @param Sb $sb
-	 * @param F $f
-	 * @param C $c
-	 * @param bool $skipAbsent
-	 * @param int $stockId
 	 */
-	function aroundExecute(Sb $sb, F $f, C $c, $skipAbsent, $stockId):void {
+	function aroundExecute(Sb $sb, F $f, C $c, bool $skipAbsent, int $stockId):void {
 		if (!self::$PRESERVE_ABSENT_F && !$c->getFlag(self::PRESERVE_ABSENT)) {
 			$f($c, $skipAbsent, $stockId);
 		}
