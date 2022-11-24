@@ -31,10 +31,8 @@ function df_intl_dic_read($m, string $locale = '', string $folder = ''):array {
  * 2022-10-16 @deprecated It is unused.
  * @param string|object $m
  * @param array(string => string) $data
- * @param string|null $folder [optional]
- * @param string|null $locale [optional]
  */
-function df_intl_dic_write($m, array $data, $locale = null, $folder = null):void {
+function df_intl_dic_write($m, array $data, string $locale = '', string $folder = ''):void {
 	$path = df_intl_dic_path($m, $locale, $folder); /** @var string $path */
 	$h = fopen($path, 'w'); /** @var resource $h */
 	df_map_k(function($k, $v) use($h) {/** @var string $k */ /** @var string $v */
