@@ -13,11 +13,9 @@ function df_intl_dic_path($m, string $l = '', string $folder = ''):string {retur
  * @see df_module_csv2()
  * @used-by \Df\Intl\Js::_toHtml()
  * @param string|object $m
- * @param string|null $folder [optional]
- * @param string|null $locale [optional]
  * @return array(string => string)|mixed
  */
-function df_intl_dic_read($m, $locale = null, $folder = null):array {
+function df_intl_dic_read($m, string $locale = '', string $folder = ''):array {
 	$p = df_intl_dic_path($m, $locale, $folder); /** @var string $p */
 	return df_try(function() use($p) {return df_csv_o()->getDataPairs($p);}, [])
 ;}
