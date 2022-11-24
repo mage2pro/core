@@ -98,13 +98,11 @@ function df_module_dir_reader():Reader {return df_o(Reader::class);}
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
  * @param string|object|null $m
- * @param string $name
- * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function df_module_enum($m, $name, $req = true):array {return df_module_file($m, $name, 'txt', $req, function($f) {return
-	df_explode_n(df_contents($f))
-;});}
+function df_module_enum($m, string $name, bool $req = true):array {return df_module_file($m, $name, 'txt', $req,
+	function(string $f):array {return df_explode_n(df_contents($f));}
+);}
 
 /**
  * 2017-09-01
