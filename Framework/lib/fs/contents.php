@@ -17,6 +17,12 @@
  */
 function df_contents(string $f, $onE = true, $rs = null):string {return df_try(
 	/**
+	 * 2015-11-27
+	 * Обратите внимание, что для использования @uses file_get_contents
+	 * с адресами https требуется расширение php_openssl интерпретатора PHP,
+	 * однако оно является системным требованием Magento 2:
+	 * http://devdocs.magento.com/guides/v2.0/install-gde/system-requirements.html#required-php-extensions
+	 * Поэтому мы вправе использовать здесь @uses file_get_contents
 	 * 2016-05-31, 2022-10-14
 	 * file_get_contents() could generate @see E_WARNING: e.g.:
 	 * 	*) if the file is absent
