@@ -15,11 +15,9 @@ use Magento\Framework\Module\Dir\Reader;
  * @used-by \Dfe\PostFinance\W\Event::optionTitle()
  * @used-by \Dfe\Qiwi\API\Validator::codes()
  * @param string|object|null $m
- * @param string $name
- * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function df_module_csv2($m, $name, $req = true):array {return df_module_file($m, $name, 'csv', $req,
+function df_module_csv2($m, string $name, bool $req = true):array {return df_module_file($m, $name, 'csv', $req,
 	function($f) {return df_csv_o()->getDataPairs($f);}
 );}
 
