@@ -12,10 +12,10 @@ use Magento\Store\Model\Store;
  * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
  * @param string|object|null $m
  * $m could be:
- * 1) A module name: «A_B»
- * 2) A class name: «A\B\C».
- * 3) An object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 		1) A module name: «A_B»
+ * 		2) A class name: «A\B\C».
+ * 		3) An object: it comes down to the case 2 via @see get_class()
+ * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @throws DFE
  */
 function df_route($m, string $path = '', bool $backend = false):string {
