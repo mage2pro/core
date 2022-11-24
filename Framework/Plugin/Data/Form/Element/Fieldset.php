@@ -25,7 +25,6 @@ class Fieldset {
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L347-L367
 	 *
 	 * @see \Magento\Framework\Data\Form\Element\Fieldset::addField()
-	 * @param Sb|El $sb
 	 * @param string $elementId
 	 * @param string $type
 	 * @param array(string => mixed) $config
