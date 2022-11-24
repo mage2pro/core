@@ -3,10 +3,9 @@ use Magento\Framework\View\Design\FileResolution\Fallback\TemplateFile as Resolv
 /**
  * 2017-05-11
  * @used-by \Dfe\Portal\Router::match()
- * @param string $path
  * @param string|object $m
  */
-function df_phtml_exists($path, $m):bool {
+function df_phtml_exists(string $path, $m):bool {
 	$m = df_module_name($m);
 	$params = ['module' => $m]; /** @var array(string => mixed) $params */
 	df_asset()->updateDesignParams($params);
