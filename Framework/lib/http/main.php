@@ -60,7 +60,6 @@ function df_http_context():Context {return df_o(Context::class);}
  * http://stackoverflow.com/a/10236480
  * https://amitabhkant.com/2011/08/21/using-timeouts-with-file_get_contents-in-php/
  * @used-by df_http_json()
- * @used-by \Df\GoogleFont\Fonts::responseA()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param array(string => string) $query [optional]
  * @param Closure|bool|mixed $onE [optional]
@@ -75,6 +74,7 @@ function df_http_get(string $url, array $query = [], int $timeout = 0, $onE = tr
  * 2016-04-13
  * @see df_request_body_json()
  * @used-by \Df\Core\Visitor::responseA()
+ * @used-by \Df\GoogleFont\Fonts::responseA()
  * @used-by \Dfe\AmazonLogin\Customer::res()
  * @used-by \Dfe\CurrencyConvert\Ecb::rates()
  * @used-by \Dfe\GoogleBackendLogin\Plugin\Backend\App\AbstractAction::beforeDispatch()
