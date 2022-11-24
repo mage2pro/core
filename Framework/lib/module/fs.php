@@ -18,7 +18,7 @@ use Magento\Framework\Module\Dir\Reader;
  * @return array(string => mixed)
  */
 function df_module_csv2($m, string $name, bool $req = true):array {return df_module_file($m, $name, 'csv', $req,
-	function($f) {return df_csv_o()->getDataPairs($f);}
+	function(string $f):array {return df_csv_o()->getDataPairs($f);}
 );}
 
 /**
