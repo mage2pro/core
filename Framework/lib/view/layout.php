@@ -27,7 +27,6 @@ use Magento\Framework\View\Model\Layout\Merge;
  * @return AbstractBlock|BlockInterface|Template
  */
 function df_block($c, $data = [], string $template = '', array $vars = []) {
-	/** @var string|null $template */
 	if (is_string($data)) {
 		$template = $data;
 		$data = [];
