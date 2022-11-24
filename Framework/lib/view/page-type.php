@@ -34,10 +34,8 @@ function df_is_catalog_product_view():bool {return df_handle('catalog_product_vi
  */
 function df_is_checkout():bool {return
 	df_is_checkout_multishipping()
-	# 2018-09-22 Aheadworks OneStepCheckout, MagePlaza OneStepCheckout
-	|| df_action_prefix('onestepcheckout')
-	# 2017-12-04 It eliminates the `checkout_cart` and `checkout_success` cases.
-	|| df_action_prefix('checkout_index')
+	|| df_action_prefix('onestepcheckout') # 2018-09-22 Aheadworks OneStepCheckout, MagePlaza OneStepCheckout
+	|| df_action_prefix('checkout_index') # 2017-12-04 It eliminates the `checkout_cart` and `checkout_success` cases.
 	# 2018-09-22
 	# "The Swissup's «Fire Checkout» module does not show Mage2.PRO payment methods
 	# on the frontend checkout screen": https://github.com/mage2pro/core/issues/79
