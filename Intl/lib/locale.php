@@ -11,9 +11,8 @@ use Magento\Framework\Locale\ResolverInterface as IResolver;
  * @used-by df_lang_zh()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge() 
  * @used-by \Frugue\Store\Block\Switcher::map()
- * @param string|null $locale [optional]
  */
-function df_lang($locale = null):string {return substr(df_locale($locale), 0, 2);}
+function df_lang(string $locale = ''):string {return substr(df_locale($locale), 0, 2);}
 
 /**            
  * 2017-04-15 
