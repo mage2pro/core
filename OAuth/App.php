@@ -56,7 +56,6 @@ abstract class App {
 	 * https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-oauth-code#refreshing-the-access-tokens
 	 * Note 3 (mine). It is string of 824 caracters.
 	 * @used-by \Df\OAuth\ReturnT\GeneralPurpose::_execute()
-	 * @var string $refreshToken
 	 * @throws DFE
 	 */
 	final function getAndSaveTheRefreshToken():void {
