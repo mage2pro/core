@@ -44,14 +44,13 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2017-06-29
+	 * $scope could be: «default», «websites», or «stores».
+	 * $scopeId could be «0».
 	 * @used-by \Df\OAuth\App::getAndSaveTheRefreshToken()
 	 * @see \Magento\Store\Model\ScopeInterface::SCOPE_STORES
 	 * @see \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITES
-	 * @param string $v
-	 * @param string $scope		«default», «websites», or «stores»
-	 * @param int $scopeId		E.g.: «0»
 	 */
-	final function refreshTokenSave($v, $scope, $scopeId):void {df_cfg_save(
+	final function refreshTokenSave(string $v, string $scope, int $scopeId):void {df_cfg_save(
 		"{$this->prefix()}/refreshToken", $v, $scope, $scopeId
 	);}
 }

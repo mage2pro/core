@@ -327,10 +327,9 @@ abstract class App {
 	 * @used-by self::getAndSaveTheRefreshToken()
 	 * @used-by \Df\OAuth\ReturnT\GeneralPurpose::_execute()
 	 * @used-by \Df\OAuth\ReturnT\GeneralPurpose::redirectUrl()
-	 * @param string $k
 	 * @return string|mixed
 	 */
-	final static function state($k) {return dfa(
+	final static function state(string $k) {return dfa(
 		dfcf(function() {return df_json_decode(df_request('state'));}, [], [], true, 1), $k
 	);}
 }
