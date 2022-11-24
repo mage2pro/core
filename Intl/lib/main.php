@@ -3,10 +3,8 @@
  * 2017-06-23
  * @used-by df_intl_dic_read()
  * @param string|object $m
- * @param string|null $folder [optional]
- * @param string|null $l [optional]
  */
-function df_intl_dic_path($m, $l = null, $folder = null):string {return df_cc_path(
+function df_intl_dic_path($m, string $l = '', string $folder = ''):string {return df_cc_path(
 	df_module_dir($m), $folder ?: 'i18n', df_locale($l) . '.csv'
 );}
 
