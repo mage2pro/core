@@ -35,9 +35,10 @@
  * @used-by \TFC\Blog\Plugin\Block\Post\ListPost::afterGetCustomBlogThemeVendor()
  * @param string|object|null $c [optional]
  */
-function df_module_name($c = null, string $del = '_'):string {return dfcf(function($c, $del) {return implode($del, array_slice(
-	df_explode_class($c), 0, 2
-));}, [$c ? df_cts($c) : 'Df\Core', $del]);}
+function df_module_name($c = null, string $del = '_'):string {return dfcf(
+	function(string $c, string $del):string {return implode($del, array_slice(df_explode_class($c), 0, 2));}
+	,[$c ? df_cts($c) : 'Df\Core', $del]
+);}
 
 /**
  * 2017-01-04
