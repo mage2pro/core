@@ -13,7 +13,6 @@ function df_nosid():array {return ['_nosid' => true];}
  * 2020-01-19
  * @see \Magento\Store\App\Response\Redirect::_getUrl()
  * @used-by \Frugue\Store\Switcher::params()
- * @param string|null $u [optional]
  * @return array(string => string)
  */
-function df_url_param_redirect($u = null):array {return [IA::PARAM_NAME_URL_ENCODED => df_url_h()->getEncodedUrl($u)];}
+function df_url_param_redirect(string $u = ''):array {return [IA::PARAM_NAME_URL_ENCODED => df_url_h()->getEncodedUrl($u)];}
