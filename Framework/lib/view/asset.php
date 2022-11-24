@@ -78,18 +78,17 @@ function df_asset_source():Source {return df_o(Source::class);}
 function df_asset_third_party(string $localPath):string {return "Df_Core::thirdParty/$localPath";}
 
 /**
- * 2019-02-11
+ * 2019-02-11 $n: 'AllesWunder_Core::i/aw-logo.png'
  * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \TFC\Core\B\Home\Slider::i()
  * @used-by vendor/alleswunder/core/view/frontend/templates/aw-logo.phtml
  * @used-by vendor/inkifi/map/view/frontend/templates/index.phtml
- * @param string $n		E.g.: 'AllesWunder_Core::i/aw-logo.png'
  * @param bool|Closure|mixed $onE [optional]
  * @return string|null
  * @throws DFE
  */
-function df_asset_url($n, $onE = null) {
+function df_asset_url(string $n, $onE = null) {
 	$f = df_asset()->createAsset($n); /** @var File $f */
 	return df_try(function() use($f, $n) {return df_asset_source()->findSource($f)
 		? $f->getUrl() : df_error("The asset $n does not exist.")
