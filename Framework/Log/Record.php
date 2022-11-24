@@ -39,10 +39,9 @@ final class Record {
 	 * 2021-09-08
 	 * @used-by self::e()
 	 * @used-by self::msg()
-	 * @param string $k [optional]
 	 * @return string|null
 	 */
-	private function d($k) {return $this->_d->a($k);}
+	private function d(string $k) {return $this->_d->a($k);}
 
 	/**
 	 * 2021-09-08
