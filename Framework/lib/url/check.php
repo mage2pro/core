@@ -29,9 +29,8 @@ function df_check_https($u):bool {return df_starts_with(strtolower($u), 'https')
  * $scheme = strtolower($uri[0]);
  * @used-by df_assert_https()
  * @used-by \Df\Framework\Form\Element\Url::messageForOthers()
- * @param string $u
  */
-function df_check_https_strict($u):bool {return 'https' === df_zuri($u)->getScheme();}
+function df_check_https_strict(string $u):bool {return 'https' === df_zuri($u)->getScheme();}
 
 /**
  * http://stackoverflow.com/a/15011528
