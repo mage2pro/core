@@ -57,7 +57,6 @@ function df_block($c, $data = [], string $template = '', array $vars = []) {
 
 /**
  * 2016-11-22
- * @param string|object|null $m
  * $m could be:
  * 		1) A module name: «A_B»
  * 		2) A class name: «A\B\C».
@@ -72,6 +71,7 @@ function df_block($c, $data = [], string $template = '', array $vars = []) {
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()   
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
+ * @param string|object|null $m
  * @param array $vars [optional]
  * @param array(string => mixed) $data [optional]
  */
