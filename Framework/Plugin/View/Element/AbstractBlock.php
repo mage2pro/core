@@ -11,9 +11,6 @@ class AbstractBlock {
 	 * если класс модуля не имеет префикса «Block»:
 	 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L846-L860
 	 * @see \Magento\Framework\View\Element\AbstractBlock::getModuleName()
-	 *
-	 * @param Sb $sb
-	 * @param string $r
 	 */
-	function afterGetModuleName(Sb $sb, $r):string {return $r ?: $sb['module_name'] = df_module_name($sb);}
+	function afterGetModuleName(Sb $sb, string $r):string {return $r ?: $sb['module_name'] = df_module_name($sb);}
 }
