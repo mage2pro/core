@@ -31,5 +31,5 @@ function df_module_m():MM {return df_o(MM::class);}
  * @return string[]
  */
 function df_modules_p(string $p):array {return dfcf(function($p) {return df_sort_names(array_filter(
-	df_module_list()->getNames(), function($m) use($p) {return df_starts_with($m, $p);}
+	df_module_list()->getNames(), function(string $m) use($p):bool {return df_starts_with($m, $p);}
 ));}, [$p]);}
