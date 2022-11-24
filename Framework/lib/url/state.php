@@ -30,7 +30,7 @@ function df_current_url():string {return df_url_o()->getCurrentUrl();}
  * @param int|string|null|bool|IStore $s [optional]
  * @return string|null
  */
-function df_domain_current($s = null, bool $www = false) {return dfcf(function($s = null, $www = false) {return
+function df_domain_current($s = null, bool $www = false) {return dfcf(function($s = null, bool $www = false) {return
 	!($base = df_store_url_web($s)) || !($r = df_domain($base, false)) ? null : (
 		$www ? $r : df_trim_text_left($r, 'www.')
 	)
