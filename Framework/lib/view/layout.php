@@ -59,13 +59,10 @@ function df_block($c, $data = [], string $template = '', array $vars = []) {
  * 2016-11-22
  * @param string|object|null $m
  * $m could be:
- * 1) A module name: «A_B»
- * 2) A class name: «A\B\C».
- * 3) An object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @param string $t [optional]
- * @param array $vars [optional]
- * @param array(string => mixed) $data [optional]
+ * 		1) A module name: «A_B»
+ * 		2) A class name: «A\B\C».
+ * 		3) An object: it comes down to the case 2 via @see get_class()
+ * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * Параметры $vars будут доступны в шаблоне в качестве переменных:
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
  *		extract($dictionary, EXTR_SKIP);
@@ -75,8 +72,10 @@ function df_block($c, $data = [], string $template = '', array $vars = []) {
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()   
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
+ * @param array $vars [optional]
+ * @param array(string => mixed) $data [optional]
  */
-function df_block_output($m, $t = null, array $vars = [], array $data = []):string {return !$t
+function df_block_output($m, string $t = '', array $vars = [], array $data = []):string {return !$t
 	? df_block($m, $data, null, $vars)->toHtml()
 	: df_block(
 		null
