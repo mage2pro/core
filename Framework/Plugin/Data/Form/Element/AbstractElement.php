@@ -53,10 +53,8 @@ class AbstractElement extends Sb {
 	 * places before_element_html into a <label>:
 	 * https://github.com/magento/magento2/blob/487f5f45/lib/internal/Magento/Framework/Data/Form/Element/AbstractElement.php#L350-L353
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
-	 * @param Sb $sb
-	 * @param string $r
 	 */
-	function afterGetElementHtml(Sb $sb, $r):string {return
+	function afterGetElementHtml(Sb $sb, string $r):string {return
 		df_starts_with($r, '<label class="addbefore"') ? $r : df_prepend($r, $sb->getBeforeElementHtml())
 	;}
 
