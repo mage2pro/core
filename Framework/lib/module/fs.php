@@ -163,10 +163,9 @@ function df_module_json($m, string $name, bool $req = true):array {return df_mod
  * 3) an object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string|object|null $m
- * @param string $localPath [optional]
  * @throws InvalidArgumentException
  */
-function df_module_path($m, $localPath = ''):string {return df_cc_path(df_module_dir($m), $localPath);}
+function df_module_path($m, string $localPath = ''):string {return df_cc_path(df_module_dir($m), $localPath);}
 
 /**
  * 2016-07-19
