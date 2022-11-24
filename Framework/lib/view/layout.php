@@ -18,7 +18,6 @@ use Magento\Framework\View\Model\Layout\Merge;
  * 2015-12-14
  * $c может быть как объектом, так и строкой: https://3v4l.org/udMMH
  * @param string|array(string => mixed) $data [optional]
- * @param string|null $template [optional]
  * 2016-11-22
  * @param array $vars [optional]
  * Параметры $vars будут доступны в шаблоне в качестве переменных:
@@ -27,7 +26,7 @@ use Magento\Framework\View\Model\Layout\Merge;
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
  * @return AbstractBlock|BlockInterface|Template
  */
-function df_block($c, $data = [], $template = null, array $vars = []) {
+function df_block($c, $data = [], string $template = '', array $vars = []) {
 	/** @var string|null $template */
 	if (is_string($data)) {
 		$template = $data;
