@@ -41,8 +41,8 @@ function df_asset_exists(string $name, string $m = '', string $ext = ''):bool {r
 /**
  * 2015-12-29
  * $name could be:
- * 1) a short name;
- * 2) a full name composed with @see df_asset_name(). In this case, the function returns $name without changes.
+ * 		1) a short name;
+ * 		2) a full name composed with @see df_asset_name(). In this case, the function returns $name without changes.
  * @used-by df_asset_exists()
  * @used-by df_block_output()
  * @used-by df_fe_init()
