@@ -40,11 +40,7 @@ final class Collator {
 	function afterCollate(Sb $sb, array $r):string {
 		if ($r) {
 			$my = array_flip(df_modules_my()); /** @var array(string => int) $my */
-			/**
-			 * @param F $f
-			 * @return int
-			 */
-			$f = function(F $f) use($my) {return dfa($my, $f->getModule(), -1);};
+			$f = function(F $f) use($my):int {return dfa($my, $f->getModule(), -1);};
 			$r = df_sort($r, function(F $a, F $b) use ($f) {return $f($a) - $f($b);});
 		}
 		return $r;
