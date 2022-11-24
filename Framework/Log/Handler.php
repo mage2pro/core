@@ -26,7 +26,6 @@ abstract class Handler {
 	/**
 	 * 2021-09-08
 	 * @used-by self::p()
-	 * @param Record $r
 	 */
 	private function __construct(Record $r) {$this->_r = $r;}
 
