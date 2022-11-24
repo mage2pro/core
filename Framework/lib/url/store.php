@@ -10,8 +10,7 @@ use Zend_Uri_Http as zUriH;
 function df_replace_store_code_in_url($s, string $u = ''):string {
 	$z = df_zuri($u ?: df_current_url()); /** @var zUriH $z */
 	$z->setPath('/' . df_cc_path(
-		df_store_code($s)
-		,df_trim_ds_left(df_trim_text_left(df_trim_ds_left($z->getPath()), df_store_code_from_url($u)))
+		df_store_code($s), df_trim_ds_left(df_trim_text_left(df_trim_ds_left($z->getPath()), df_store_code_from_url($u)))
 	));
 	return $z->getUri();
 }
