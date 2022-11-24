@@ -80,10 +80,9 @@ function df_http_get(string $url, array $query = [], int $timeout = 0):string {r
  * @used-by \Dfe\Paymill\Test\CaseT::token()
  * @used-by \Dfe\Salesforce\Test\Basic::t02_the_latest_version()
  * @param array(string => string) $params [optional]
- * @param int|null $timeout [optional]
  * @return array(string => mixed)
  */
-function df_http_json(string $urlBase, array $params = [], $timeout = null):array {return
+function df_http_json(string $urlBase, array $params = [], int $timeout = 0):array {return
 	/** @var string|bool $json */ /** @var bool|array|null $r */
 	false === ($json = df_http_get($urlBase, $params, $timeout))
 	|| !is_array($r = df_json_decode($json))
