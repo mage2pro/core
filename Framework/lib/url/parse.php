@@ -32,10 +32,9 @@ function df_url_base($u):string {return df_first(df_url_bp($u));}
  * 2017-02-13 «https://mage2.pro/sandbox/dfe-paymill» => [«https://mage2.pro»,  «sandbox/dfe-paymill»]
  * @used-by df_url_base()
  * @used-by df_url_trim_index()
- * @param string $u
  * @return string[]
  */
-function df_url_bp($u):array {
+function df_url_bp(string $u):array {
 	/** @var string $base */ /** @var string $path */
 	if (!df_check_url($u)) {
 		# 2020-03-02, 2022-10-31
