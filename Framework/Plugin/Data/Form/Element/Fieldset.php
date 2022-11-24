@@ -25,14 +25,12 @@ class Fieldset {
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form.php#L347-L367
 	 *
 	 * @see \Magento\Framework\Data\Form\Element\Fieldset::addField()
-	 * @param string $elementId
-	 * @param string $type
 	 * @param array(string => mixed) $config
 	 * @param bool $after [optional]
 	 * @param bool $isAdvanced [optional]
 	 * @return array(string|bool|array(string => mixed))
 	 */
-	function beforeAddField(Sb $sb, $elementId, $type, array $config, $after = false, $isAdvanced = false):array {
+	function beforeAddField(Sb $sb, string $elementId, string $type, array $config, $after = false, $isAdvanced = false):array {
 		$fc = dfa($config, 'field_config'); /** @var array(string => mixed)|null $fc */
 		# 2016-09-27
 		# Модуль Unirgy Dropship ошибочно пихает в $fc объект класса stdClass вместо массива:
