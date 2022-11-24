@@ -84,7 +84,7 @@ function df_http_get(string $url, array $query = [], int $timeout = 0):string {r
  * @param int|null $timeout [optional]
  * @return array(string => mixed)
  */
-function df_http_json($urlBase, array $params = [], $timeout = null):array {return
+function df_http_json(string $urlBase, array $params = [], $timeout = null):array {return
 	/** @var string|bool $json */ /** @var bool|array|null $r */
 	false === ($json = df_http_get($urlBase, $params, $timeout))
 	|| !is_array($r = df_json_decode($json))
