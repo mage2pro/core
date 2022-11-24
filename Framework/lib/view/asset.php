@@ -53,9 +53,8 @@ function df_asset_exists(string $name, string $m = '', string $ext = ''):bool {r
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @param string|object|null $m [optional]
- * @param string|null $extension [optional]
  */
-function df_asset_name(string $name = '', $m = null, $extension = null):string {return df_ccc(
+function df_asset_name(string $name = '', $m = null, string $extension = ''):string {return df_ccc(
 	'.', df_ccc('::', $m ? df_module_name($m) : null, $name ?: 'main'), $extension
 );}
 
