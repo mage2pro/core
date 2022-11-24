@@ -77,8 +77,6 @@ class AbstractElement extends Sb {
 	 * https://mage2.pro/t/901
 	 * That is why we use @uses dfc()
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::setForm()
-	 * @param Sb $sb
-	 * @param Sb $r
 	 */
 	function afterSetForm(Sb $sb, Sb $r):Sb {
 		if ($sb instanceof ElementI) {
