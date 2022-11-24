@@ -36,9 +36,6 @@ class DataProvider {
 	 * 2) он хрупок: другие программисты могут захотеть перекрыть ту же коллекцию.
 	 *
 	 * Наш подход намного лучше.
-	 *
-	 * @param Sb $sb
-	 * @param SearchResultInterface|ApiSearchResult|UiSearchResult $r
 	 */
 	function afterGetSearchResult(Sb $sb, SearchResultInterface $r):string {
 		df_dispatch('df_data_provider__search_result', [self::PROVIDER => $sb, self::RESULT => $r]);
