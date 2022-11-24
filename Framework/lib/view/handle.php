@@ -13,9 +13,8 @@ function df_handle(string $n):bool {return in_array($n, df_handles());}
 /**
  * 2017-08-25
  * 2022-11-03 @deprecated It is unused.
- * @param string $p
  */
-function df_handle_prefix($p):bool {return !!df_find(function($h) use($p) {return df_starts_with($h, $p);}, df_handles());}
+function df_handle_prefix(string $p):bool {return !!df_find(function($h) use($p) {return df_starts_with($h, $p);}, df_handles());}
 
 /**
  * 2015-12-21    
