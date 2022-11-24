@@ -29,10 +29,9 @@ function df_is_google_ua():bool {return df_request_ua(
  * @used-by \Stock2Shop\OrderExport\Payload::visitor()
  * @used-by vendor/emipro/socialshare/view/frontend/templates/socialshare.phtml (dxmoto.com)
  * https://github.com/dxmoto/site/issues/103
- * @param string ...$s [optional]
  * @return string|bool
  */
-function df_request_ua(...$s) {
+function df_request_ua(string ...$s) {
 	$r = df_request_header('user-agent'); /** @var string $r */
 	return !$s ? $r : df_contains($r, ...$s);
 }
