@@ -180,7 +180,8 @@ function df_module_path($m, string $localPath = ''):string {return df_cc_path(df
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by df_module_file()
  * @param string|object|null $m
- * @param string $localPath [optional]
  * @throws InvalidArgumentException
  */
-function df_module_path_etc($m, $localPath = ''):string {return df_cc_path(df_module_dir($m, Dir::MODULE_ETC_DIR), $localPath);}
+function df_module_path_etc($m, string $localPath = ''):string {return df_cc_path(
+	df_module_dir($m, Dir::MODULE_ETC_DIR), $localPath
+);}
