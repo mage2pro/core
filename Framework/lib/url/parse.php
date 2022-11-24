@@ -86,9 +86,8 @@ function df_url_trim_index(string $u):string {
  * 2016-05-30
  * @used-by df_domain()
  * @used-by df_replace_store_code_in_url()
- * @param string $u
  * @param F|bool|mixed $throw [optional]
  * @return zUri|zUriH|mixed
  * @throws E|zUriE
  */
-function df_zuri($u, $throw = true) {return df_try(function() use($u) {return zUri::factory($u);}, $throw);}
+function df_zuri(string $u, $throw = true) {return df_try(function() use($u) {return zUri::factory($u);}, $throw);}
