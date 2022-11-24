@@ -12,9 +12,8 @@ use Magento\Framework\Url\Helper\Data as H;
 /**
  * 2020-01-18
  * @used-by df_url_path()
- * @param string $url
  */
-function df_request_i($url):Req {return df_new_om(Req::class, ['uri' => $url]);}
+function df_request_i(string $url):Req {return df_new_om(Req::class, ['uri' => $url]);}
 
 /**
  * 2016-08-27 
