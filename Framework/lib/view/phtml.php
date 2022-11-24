@@ -6,9 +6,9 @@ use Magento\Framework\View\Design\FileResolution\Fallback\TemplateFile as Resolv
  * @param string|object $m
  */
 function df_phtml_exists(string $path, $m):bool {
-	$params = ['module' => ($m = df_module_name($m))]; /** @var array(string => mixed) $params */
-	df_asset()->updateDesignParams($params);
-	return !!df_phtml_resolver()->getFile($params['area'], $params['themeModel'], $path, $m);
+	$d = ['module' => ($m = df_module_name($m))]; /** @var array(string => mixed) $d */
+	df_asset()->updateDesignParams($d);
+	return !!df_phtml_resolver()->getFile($d['area'], $d['themeModel'], $path, $m);
 }
 
 /**
