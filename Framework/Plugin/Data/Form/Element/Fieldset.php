@@ -48,9 +48,7 @@ class Fieldset {
 			 * @see \Magento\Config\Model\Config\Structure\Element\Field::getType()
 			 */
 			$value = dfa($config, 'value'); /** @var mixed|null $value */
-			if ($path && $backendC && !B::processed($path)
-				&& is_a($type, El::class, true) && !is_null($value)
-			) {
+			if ($path && $backendC && !B::processed($path) && is_a($type, El::class, true) && !is_null($value)) {
 				/**
 				 * 2016-08-03
 				 * By analogy with @see \Magento\Config\Block\System\Config\Form::_initElement()
