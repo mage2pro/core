@@ -68,10 +68,9 @@ function df_module_csv2($m, string $name, bool $req = true):array {return df_mod
  * @used-by \Df\Intl\Js::_toHtml()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
  * @param string|object|null $m
- * @param string $type [optional]
  * @throws InvalidArgumentException
  */
-function df_module_dir($m, $type = ''):string {
+function df_module_dir($m, string $type = ''):string {
 	if ('Magento_Framework' !== ($m = df_module_name($m))) {
 		$r = df_module_dir_reader()->getModuleDir($type, $m);
 	}
