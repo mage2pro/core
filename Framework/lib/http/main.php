@@ -63,10 +63,11 @@ function df_http_context():Context {return df_o(Context::class);}
  * @used-by \Df\GoogleFont\Fonts::responseA()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param array(string => string) $query [optional]
+ * @param Closure|bool|mixed $onE [optional]
  */
-function df_http_get(string $url, array $query = [], int $timeout = 0):string {return df_contents(
+function df_http_get(string $url, array $query = [], int $timeout = 0, $onE = true):string {return df_contents(
 	!$query ? $url : $url . '?' . http_build_query($query)
-	,true
+	,$onE
 	,stream_context_create(['http' => df_clean(['ignore_errors' => true, 'timeout' => $timeout])])
 );}
 
@@ -80,10 +81,11 @@ function df_http_get(string $url, array $query = [], int $timeout = 0):string {r
  * @used-by \Dfe\Paymill\Test\CaseT::token()
  * @used-by \Dfe\Salesforce\Test\Basic::t02_the_latest_version()
  * @param array(string => string) $query [optional]
+ * @param Closure|bool|mixed $onE [optional]
  * @return array(string => mixed)
  */
-function df_http_json(string $url, array $query = [], int $timeout = 0):array {return
-	!is_array($r = df_json_decode(df_http_get($url, $query, $timeout))) ? [] : $r
+function df_http_json(string $url, array $query = [], int $timeout = 0, $onE = true):array {return
+	!is_array($r = df_json_decode(df_http_get($url, $query, $timeout, $onE))) ? [] : $r
 ;}
 
 /**
