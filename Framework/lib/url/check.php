@@ -43,9 +43,8 @@ function df_check_url(string $s):bool {return false !== filter_var($s, FILTER_VA
  * 2017-10-16    
  * @used-by df_asset_create()
  * @used-by df_js()
- * @param string $u
  */
-function df_check_url_absolute($u):bool {return df_starts_with($u, ['http', '//']);}
+function df_check_url_absolute(string $u):bool {return df_starts_with($u, ['http', '//']);}
 
 /**
  * 2018-05-11
