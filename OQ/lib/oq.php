@@ -202,7 +202,7 @@ function df_oq_sa($oq, bool $empty = false) {/** @var OA|QA|null $r */
 	if (df_is_o($oq)) {
 		$r = $oq->getShippingAddress() ?: (!$empty ? null : df_new_omd(OA::class, ['address_type' => OA::TYPE_SHIPPING]));
 	}
-	else if (df_is_q($oq)) {
+	elseif (df_is_q($oq)) {
 		/**
 		 * 2017-11-02
 		 * I implemented it by analogy with @see \Magento\Quote\Model\Quote::_getAddressByType()
