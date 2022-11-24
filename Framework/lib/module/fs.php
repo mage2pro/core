@@ -107,10 +107,10 @@ function df_module_enum($m, string $name, bool $req = true):array {return df_mod
 /**
  * 2017-09-01
  * $m could be:
- * 1) a module name: «A_B»
- * 2) a class name: «A\B\C».
- * 3) an object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 		1) a module name: «A_B»
+ * 		2) a class name: «A\B\C».
+ * 		3) an object: it comes down to the case 2 via @see get_class()
+ * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by df_module_csv2()
  * @used-by df_module_json()  
  * @used-by \Df\Sentry\Client::send_http()
