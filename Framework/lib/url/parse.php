@@ -65,9 +65,8 @@ function df_url_path(string $u):string {return df_trim_ds(df_request_i($u)->getP
 /**
  * 2017-02-13 It removes the following endinds: «/», «index/», «index/index/».
  * @used-by df_url_frontend()
- * @param string $u
  */
-function df_url_trim_index($u):string {
+function df_url_trim_index(string $u):string {
 	# 2020-03-02, 2022-10-31
 	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 	#		[$a, $b] = [1, 2];
