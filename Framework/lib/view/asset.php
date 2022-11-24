@@ -54,8 +54,8 @@ function df_asset_exists(string $name, string $m = '', string $ext = ''):bool {r
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @param string|object|null $m [optional]
  */
-function df_asset_name(string $name = '', $m = null, string $extension = ''):string {return df_ccc(
-	'.', df_ccc('::', $m ? df_module_name($m) : null, $name ?: 'main'), $extension
+function df_asset_name(string $name = '', $m = null, string $ext = ''):string {return df_ccc(
+	'.', df_ccc('::', $m ? df_module_name($m) : null, $name ?: 'main'), $ext
 );}
 
 /**
