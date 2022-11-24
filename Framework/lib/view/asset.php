@@ -74,9 +74,8 @@ function df_asset_source():Source {return df_o(Source::class);}
  * @used-by \Df\Framework\Form\Element\Table::onFormInitialized()
  * @used-by \Dfe\Markdown\FormElement::css()
  * @used-by \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
- * @param string $localPath
  */
-function df_asset_third_party($localPath):string {return "Df_Core::thirdParty/$localPath";}
+function df_asset_third_party(string $localPath):string {return "Df_Core::thirdParty/$localPath";}
 
 /**
  * 2019-02-11
