@@ -227,9 +227,8 @@ abstract class App {
 	 * 2017-07-11
 	 * @used-by self::token()
 	 * @see \Dfe\Dynamics365\Button::kExpiration()
-	 * @return string|null
 	 */
-	protected function kExpiration() {return null;}
+	protected function kExpiration():string {return '';}
 
 	/**
 	 * 2017-06-30
