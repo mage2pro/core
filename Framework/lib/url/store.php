@@ -18,10 +18,9 @@ function df_replace_store_code_in_url($s, string $u = ''):string {
 /**
  * 2020-01-18
  * @used-by df_replace_store_code_in_url()
- * @param string|null $u [optional]
  * @return string|null
  */
-function df_store_code_from_url($u = null) {
+function df_store_code_from_url(string $u = '') {
 	$c = df_first(df_clean(df_explode_path(df_url_path($u ?: df_current_url())))); /** @var string $c */
 	return !in_array($c, df_store_codes()) ? null : $c;
 }
