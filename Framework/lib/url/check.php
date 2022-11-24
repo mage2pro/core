@@ -37,10 +37,9 @@ function df_check_https_strict($u):bool {return 'https' === df_zuri($u)->getSche
  * http://stackoverflow.com/a/15011528
  * http://www.php.net/manual/en/function.filter-var.php
  * filter_var('/C/A/CA559AWLE574_1.jpg', FILTER_VALIDATE_URL) returns `false`.
- * @param $s $string
- * @return bool
+ * @used-by df_contents()
  */
-function df_check_url($s) {return false !== filter_var($s, FILTER_VALIDATE_URL);}
+function df_check_url(string $s):bool {return false !== filter_var($s, FILTER_VALIDATE_URL);}
 
 /**   
  * 2017-10-16    
