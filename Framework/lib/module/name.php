@@ -34,9 +34,8 @@
  * @used-by \Df\Sso\CustomerReturn::execute()
  * @used-by \TFC\Blog\Plugin\Block\Post\ListPost::afterGetCustomBlogThemeVendor()
  * @param string|object|null $c [optional]
- * @param string $del [optional]
  */
-function df_module_name($c = null, $del = '_'):string {return dfcf(function($c, $del) {return implode($del, array_slice(
+function df_module_name($c = null, string $del = '_'):string {return dfcf(function($c, $del) {return implode($del, array_slice(
 	df_explode_class($c), 0, 2
 ));}, [$c ? df_cts($c) : 'Df\Core', $del]);}
 
