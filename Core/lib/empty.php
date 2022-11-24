@@ -72,6 +72,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
 
 /**
  * 2016-08-04
+ * @used-by df_metadata()
  * @used-by dfa_deep()
  * @used-by \Df\Payment\Block\Info::si()
  * @param mixed $v

@@ -4,11 +4,10 @@ use Magento\Framework\View\Result\Page as ResultPage;
 use Magento\Framework\View\Result\PageFactory;
 /**
  * 2015-10-05
- * @param string $k
- * @param string|null $v
+ * @used-by \Dfe\GoogleBackendLogin\Block\Metadata::_construct()
  */
-function df_metadata($k, $v) {
-	if (!is_null($v) && '' !== $v) {
+function df_metadata(string $k, string $v):void {
+	if (!df_nes($v)) {
 		df_page_config()->setMetadata($k, $v);
 	}
 }
