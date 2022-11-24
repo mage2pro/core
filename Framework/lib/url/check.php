@@ -15,9 +15,8 @@ function df_assert_https(string $u, $msg = null):string {return df_check_https_s
 /**
  * 2016-07-16
  * @used-by df_zf_http()
- * @param string $u
  */
-function df_check_https($u):bool {return df_starts_with(strtolower($u), 'https');}
+function df_check_https(string $u):bool {return df_starts_with(strtolower($u), 'https');}
 
 /**
  * 2016-05-30
