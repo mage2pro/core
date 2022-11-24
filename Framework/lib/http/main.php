@@ -79,7 +79,6 @@ function df_http_get(string $url, array $query = [], int $timeout = 0):string {r
  * @used-by \Dfe\GoogleBackendLogin\Plugin\Backend\App\AbstractAction::beforeDispatch()
  * @used-by \Dfe\Paymill\Test\CaseT::token()
  * @used-by \Dfe\Salesforce\Test\Basic::t02_the_latest_version()
- * @param string $urlBase
  * @param array(string => string) $params [optional]
  * @param int|null $timeout [optional]
  * @return array(string => mixed)
