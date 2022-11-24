@@ -30,17 +30,13 @@ function df_asset_create(string $u):File {$a = df_asset(); return !df_check_url_
  * 1) By analogy with @see \Magento\Framework\View\Asset\File::getSourceFile():
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/Asset/File.php#L147-L156
  * 2) $name could be:
- * 1) a short name;
- * 2) a full name composed with @see df_asset_name()
+ * 		1) a short name;
+ * 		2) a full name composed with @see df_asset_name()
  * @used-by df_fe_init()
- * @param string|null $m [optional]
- * @param string|null $ext [optional]
  */
-function df_asset_exists(string $name, $m = null, $ext = null):bool {return dfcf(
-	function($name, $m = null, $ext = null) {return
-		!!df_asset_source()->findSource(df_asset_create(df_asset_name($name, $m, $ext)))
-	;}
-, func_get_args());}
+function df_asset_exists(string $name, string $m = '', string $ext = ''):bool {return !!df_asset_source()->findSource(
+	df_asset_create(df_asset_name($name, $m, $ext))
+);}
 
 /**
  * 2015-12-29
