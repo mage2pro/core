@@ -7,7 +7,6 @@ namespace Df\Core;
  * @see \Df\Config\A
  * @see \Df\Config\O
  * @see \Df\Core\Text\Regex
- * @see \Df\Core\Visitor
  * @see \Df\GoogleFont\Font
  * @see \Df\GoogleFont\Font\Variant
  * @see \Df\GoogleFont\Font\Variant\Preview\Params

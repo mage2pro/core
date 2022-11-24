@@ -1,6 +1,6 @@
 <?php
 namespace Df\Core;
-final class Visitor extends O {
+final class Visitor {
 	/**
 	 * На английском языке. Например: «Moscow».
 	 * @used-by \Dfe\TwoCheckout\Address::city()
@@ -111,22 +111,23 @@ final class Visitor extends O {
 	 * @return array(string => mixed)
 	 */
 	private function responseA():array {return dfc($this, function() {return df_http_json(
-		'http://geoip.mage2.pro/json/' . $this[self::$P__IP], [], 5, ''
+		"http://geoip.mage2.pro/json/$this->_ip", [], 5, ''
 	);});}
+
+	/**
+	 * 2022-11-24
+	 * @used-by self::responseA()
+	 * @used-by self::sp()
+	 * @var string
+	 */
+	private $_ip;
 
 	/**
 	 * 2016-05-20
 	 * @used-by df_visitor()
 	 * @used-by \Dfe\TwoCheckout\Address::visitor()
 	 */
-	static function sp(string $ip = ''):self {return dfcf(function(string $ip):self {return new self([
-		self::$P__IP => $ip ?: df_visitor_ip()
-	]);}, [$ip]);}
-
-	/**
-	 * @used-by self::responseA()
-	 * @used-by self::sp()
-	 * @var string
-	 */
-	private static $P__IP = 'ip';
+	static function sp(string $ip = ''):self {return dfcf(function(string $ip):self {
+		$r = new self; $r->_ip = $ip ?: df_visitor_ip(); return $r;
+	}, [$ip]);}
 }
