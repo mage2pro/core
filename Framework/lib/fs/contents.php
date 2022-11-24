@@ -3,6 +3,7 @@
  * 2022-11-24
  * @used-by df_file_read()
  * @used-by df_http_get()
+ * @used-by df_intl_dic_write()
  * @used-by df_module_enum()
  * @used-by df_request_body()
  * @used-by df_test_file_l()

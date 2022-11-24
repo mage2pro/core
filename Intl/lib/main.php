@@ -47,5 +47,5 @@ function df_intl_dic_write($m, array $data, $locale = null, $folder = null):void
 		;}, [$k, $v]), ',', chr(0));
 	}, $data);
 	fclose($h);
-	file_put_contents($path, str_replace(chr(0), '', file_get_contents($path)));
+	file_put_contents($path, str_replace(chr(0), '', df_contents($path)));
 ;}
