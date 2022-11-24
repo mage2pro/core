@@ -135,11 +135,8 @@ class Layout extends UiComponent {
 	 * @see \Magento\Framework\Stdlib\Cookie\PhpCookieReader::getCookie()
 	 * тупо смотрит в $_COOKIE (куки прошлого сеанса),
 	 * но не смотрит те новые куки, которые мы установили в этом сеансе.
-	 *
-	 * @param Sb $sb
-	 * @param bool $r
 	 */
-	function afterIsCacheable(Sb $sb, $r) {return $r && !dfc($this, function():bool {return
+	function afterIsCacheable(Sb $sb, bool $r):bool {return $r && !dfc($this, function():bool {return
 		!!df_find(function($h) {return df_starts_with($h, [
 			/**
 			 * 2016-11-21
