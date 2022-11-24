@@ -76,6 +76,7 @@ function df_assert_lt($highBound, $v, $m = null) {return $highBound >= $v ? $v :
 
 /**
  * @used-by df_action_name()
+ * @used-by df_contents()
  * @used-by df_file_name()
  * @used-by df_file_read()
  * @used-by df_http_get()

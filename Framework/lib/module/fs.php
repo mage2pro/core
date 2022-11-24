@@ -106,8 +106,8 @@ function df_module_dir_reader():Reader {return df_o(Reader::class);}
  * @return array(string => mixed)
  */
 function df_module_enum($m, $name, $req = true):array {return df_module_file($m, $name, 'txt', $req, function($f) {return
-	df_explode_n(file_get_contents($f)
-);});}
+	df_explode_n(file_get_contents($f))
+;});}
 
 /**
  * 2017-09-01
