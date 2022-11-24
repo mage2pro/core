@@ -19,7 +19,6 @@ class Currency implements \Df\Framework\IValidator {
 	 * @override
 	 * @see \Df\Framework\IValidator::check()
 	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
-	 * @param AE $e
 	 * @return true|string|string[]
 	 */
 	function check(AE $e) {return
