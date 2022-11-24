@@ -4,6 +4,7 @@ use Closure as F;
  * 2022-11-24
  * @used-by df_file_read()
  * @used-by df_http_get()
+ * @used-by df_request_body()
  * @used-by df_test_file_l()
  * @param string $f
  * @param F|bool|mixed $onE [optional]

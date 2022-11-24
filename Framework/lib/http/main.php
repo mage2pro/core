@@ -154,7 +154,7 @@ function df_request($k = null, $d = null) {$o = df_request_o(); return is_null($
  * @used-by df_request_body_json()
  * @used-by \Dfe\Sift\Controller\Index\Index::checkSignature()
  */
-function df_request_body():string {return df_assert_ne(false, file_get_contents('php://input'));}
+function df_request_body():string {return df_contents('php://input');}
 
 /**
  * 2017-03-09

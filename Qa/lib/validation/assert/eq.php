@@ -79,7 +79,6 @@ function df_assert_lt($highBound, $v, $m = null) {return $highBound >= $v ? $v :
  * @used-by df_contents()
  * @used-by df_file_name()
  * @used-by df_json_decode()
- * @used-by df_request_body()
  * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @param string|int|float|bool $neResult
