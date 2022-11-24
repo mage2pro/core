@@ -145,13 +145,11 @@ function df_module_file($m, string $name, string $ext = '', bool $req = true, Cl
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @param string|object|null $m
- * @param string $name
- * @param bool $req [optional]
  * @return array(string => mixed)
  */
-function df_module_json($m, $name, $req = true):array {return df_module_file($m, $name, 'json', $req, function($f) {return
-	df_json_file_read($f)
-;});}
+function df_module_json($m, string $name, bool $req = true):array {return df_module_file($m, $name, 'json', $req,
+	function(string $f):array {return df_json_file_read($f);}
+);}
 
 /**
  * 2015-11-15
