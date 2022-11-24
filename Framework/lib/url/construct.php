@@ -16,10 +16,9 @@ use Magento\Store\Model\Store;
  * 2) A class name: «A\B\C».
  * 3) An object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @param string|null $path [optional]
  * @throws DFE
  */
-function df_route($m, $path = null, bool $backend = false):string {
+function df_route($m, string $path = '', bool $backend = false):string {
 	/** @var string $route */
 	$route = df_route_config()->getRouteFrontName($m = df_module_name($m), $backend ? 'adminhtml' : 'frontend');
 	if ($m === $route) {
