@@ -40,7 +40,6 @@ abstract class Handler {
 	/**
 	 * 2021-09-08
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
-	 * @param Record $r
 	 */
 	final static function p(Record $r):bool {
 		$i = new static($r); /** @var self $i */
