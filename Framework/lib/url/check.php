@@ -58,6 +58,5 @@ function df_check_url_absolute(string $u):bool {return df_starts_with($u, ['http
  * @used-by \Magenest\QuickBooksDesktop\Observer\Adminhtml\Customer\Update::execute()
  * @used-by \Magenest\QuickBooksDesktop\Observer\Customer\Address::execute()
  * @used-by \Magenest\QuickBooksDesktop\Observer\Customer\Edit::execute()
- * @param string $s
  */
-function df_url_path_contains($s):bool {return df_rp_has($s);}
+function df_url_path_contains(string $s):bool {return df_rp_has($s);}
