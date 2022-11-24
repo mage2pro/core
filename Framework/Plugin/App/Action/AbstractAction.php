@@ -13,7 +13,6 @@ final class AbstractAction {
 	 * https://github.com/mage2pro/moip/blob/1.0.6/view/frontend/layout/df_payment_info.xml
 	 * @see \Magento\Framework\App\ActionInterface::execute()
 	 * @used-by \Magento\Framework\App\Action\Action::dispatch()
-	 * @param Sb $sb
 	 */
 	function beforeExecute(Sb $sb):void {
 		/** @var IRequest|Http $r */
