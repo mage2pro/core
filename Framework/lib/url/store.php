@@ -5,9 +5,8 @@ use Zend_Uri_Http as zUriH;
 /**           
  * 2020-01-19
  * @param null|string|int|IScope $s
- * @param string|null $u [optional]
  */
-function df_replace_store_code_in_url($s, $u = null):string {
+function df_replace_store_code_in_url($s, string $u = ''):string {
 	$z = df_zuri($u ?: df_current_url()); /** @var zUriH $z */
 	$z->setPath('/' . df_cc_path(
 		df_store_code($s)
