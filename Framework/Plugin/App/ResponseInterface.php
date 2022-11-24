@@ -13,9 +13,7 @@ final class ResponseInterface {
 	 * is subscribed on the absent event «controller_front_send_response_after»,
 	 * and so it is never called.
 	 * @see \Magento\Framework\App\ResponseInterface::sendResponse()
-	 * @param Sb $sb
-	 * @param int $r
 	 */
-	function afterSendResponse(Sb $sb, $r):int {df_dispatch('df_controller_front_send_response_after'); return $r;}
+	function afterSendResponse(Sb $sb, int $r):int {df_dispatch('df_controller_front_send_response_after'); return $r;}
 }
 
