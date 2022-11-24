@@ -4,6 +4,7 @@ use Zend_Uri_Http as zUriH;
 
 /**           
  * 2020-01-19
+ * 2022-11-24 @deprecated It is unused.
  * @param null|string|int|IScope $s
  */
 function df_replace_store_code_in_url($s, string $u = ''):string {
