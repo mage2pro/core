@@ -62,22 +62,13 @@ function df_http_context():Context {return df_o(Context::class);}
  * @used-by df_http_json()
  * @used-by \Df\GoogleFont\Fonts::responseA()
  * @used-by \Dfe\Robokassa\Api\Options::p()
- *
- * @param array(string => string) $params [optional]
+ * @param array(string => string) $query [optional]
  */
-function df_http_get(string $urlBase, array $params = [], int $timeout = 0):string {
-	$url = !$params ? $urlBase : $urlBase . '?' . http_build_query($params); /** @var string $url */
-	/**
-	 * 2016-05-31
-	 * file_get_contents() может возбудить @see E_WARNING:
-	 * «failed to open stream: A connection attempt failed
-	 * because the connected party did not properly respond after a period of time,
-	 * or established connection failed because connected host has failed to respond.»
-	 */
-	return df_assert_ne(false, @file_get_contents($url, null, stream_context_create(['http' => df_clean([
-		'ignore_errors' => true, 'timeout' => $timeout
-	])])));
-}
+function df_http_get(string $url, array $query = [], int $timeout = 0):string {return df_contents(
+	!$query ? $url : $url . '?' . http_build_query($query)
+	,true
+	,stream_context_create(['http' => df_clean(['ignore_errors' => true, 'timeout' => $timeout])])
+);}
 
 /**
  * 2016-04-13
