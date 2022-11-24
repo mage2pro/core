@@ -28,9 +28,8 @@ function df_module_m():MM {return df_o(MM::class);}
 /**
  * 2017-06-21
  * @used-by dfe_modules()
- * @param string $p
  * @return string[]
  */
-function df_modules_p($p):array {return dfcf(function($p) {return df_sort_names(array_filter(
+function df_modules_p(string $p):array {return dfcf(function($p) {return df_sort_names(array_filter(
 	df_module_list()->getNames(), function($m) use($p) {return df_starts_with($m, $p);}
 ));}, [$p]);}
