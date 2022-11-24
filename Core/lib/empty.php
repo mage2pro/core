@@ -64,12 +64,11 @@ function df_ftn($v) {return (false === $v) ? null : $v;}
 /**
  * 2022-10-15
  * @see df_nts()
- * @used-by df_file_read()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @param mixed|false $v
  * @return mixed|string
  */
-function df_fts($v) {return (false === $v) ? '' : $v;}
+function df_fts($v) {return false === $v ? '' : $v;}
 
 /**
  * 2016-08-04

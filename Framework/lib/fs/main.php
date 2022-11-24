@@ -36,10 +36,7 @@ function df_file():File {return df_o(File::class);}
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * @used-by \Dfe\Color\Image::dominant()
  */
-function df_file_read(string $p, bool $req = true):string {/** @var string $r */
-	df_assert_ne(false, ($r = @file_get_contents($p)) && $req, "Unable to read the file «{$p}».");
-	return df_fts($r);
-}
+function df_file_read(string $p, bool $req = true):string {return df_contents($p, $req ?: '');}
 
 /**
  * 2015-11-29
