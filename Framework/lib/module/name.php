@@ -79,6 +79,5 @@ function df_module_name_short($c):string {return df_explode_class($c)[1];}
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @see df_cts_lc_camel()
  * @param string|object $c
- * @param string $del [optional]
  */
-function df_module_name_lc($c, $del = '_'):string {return implode($del, df_explode_class_lc_camel(df_module_name_c($c)));}
+function df_module_name_lc($c, string $del = '_'):string {return implode($del, df_explode_class_lc_camel(df_module_name_c($c)));}
