@@ -23,13 +23,10 @@ final class SessionManager {
 	 * «How is the session initialized?» https://mage2.pro/t/3916
 	 */
 	function beforeStart(Sb $sb):void {
-		/**
-		 * 2017-12-30
-		 * "PHP 7.2: «Warning: ini_set(): A session is active.
-		 * You cannot change the session module's ini settings at this time
-		 * in mage2pro/core/Framework/Plugin/Session/SessionManager.php on line 47»":
-		 * https://github.com/mage2pro/core/issues/64
-		 */
+		# 2017-12-30
+		# "PHP 7.2: «Warning: ini_set(): A session is active. You cannot change the session module's ini settings at this time
+		# in mage2pro/core/Framework/Plugin/Session/SessionManager.php on line 47»":
+		# https://github.com/mage2pro/core/issues/64
 		if (!$sb->isSessionExists()) {
 			/**
 			 * 2017-05-08
