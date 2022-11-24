@@ -61,7 +61,6 @@ function df_abstract($caller):void {
  * @used-by df_extend()
  * @used-by df_fe_m()
  * @used-by df_file_name()
- * @used-by df_file_read()
  * @used-by df_float()
  * @used-by df_int()
  * @used-by df_invoice_by_trans()

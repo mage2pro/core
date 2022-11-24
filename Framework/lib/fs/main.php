@@ -37,9 +37,7 @@ function df_file():File {return df_o(File::class);}
  * @used-by \Dfe\Color\Image::dominant()
  */
 function df_file_read(string $p, bool $req = true):string {/** @var string $r */
-	if (false === ($r = @file_get_contents($p)) && $req) {
-		df_error("Unable to read the file «{$p}».");
-	}
+	df_assert_ne(false, ($r = @file_get_contents($p)) && $req, "Unable to read the file «{$p}».");
 	return df_fts($r);
 }
 
