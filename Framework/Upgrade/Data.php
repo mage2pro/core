@@ -55,8 +55,6 @@ abstract class Data extends \Df\Framework\Upgrade implements UpgradeDataInterfac
 	 *			}
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.6/setup/src/Magento/Setup/Model/Installer.php#L844-L881
-	 * @param DataSetup|IDataSetup $setup
-	 * @param IModuleContext|ModuleContext $context
 	 */
 	final function upgrade(IDataSetup $setup, IModuleContext $context):void {$this->process($setup, $context);}
 }
