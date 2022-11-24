@@ -21,7 +21,6 @@ final class SessionManager {
 	 * @see \Magento\Framework\Session\SessionManager::start()
 	 * https://github.com/magento/magento2/blob/2.1.6/lib/internal/Magento/Framework/Session/SessionManager.php#L161-L199
 	 * «How is the session initialized?» https://mage2.pro/t/3916
-	 * @param Sb $sb
 	 */
 	function beforeStart(Sb $sb):void {
 		/**
