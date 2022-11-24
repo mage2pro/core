@@ -77,12 +77,7 @@ function df_block($c, $data = [], string $template = '', array $vars = []) {
  */
 function df_block_output($m, string $t = '', array $vars = [], array $data = []):string {return !$t
 	? df_block($m, $data, null, $vars)->toHtml()
-	: df_block(
-		null
-		,$data
-		,df_asset_name($t, df_contains($t, '::') ? null : df_module_name($m))
-		,$vars
-	)->toHtml()
+	: df_block(null, $data, df_asset_name($t, df_contains($t, '::') ? null : df_module_name($m)), $vars)->toHtml()
 ;}
 
 /**
