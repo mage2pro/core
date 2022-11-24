@@ -20,9 +20,8 @@ use Magento\Store\Model\Store;
  */
 function df_route($m, string $path = '', bool $backend = false):string {
 	/** @var string $route */
-	$route = df_route_config()->getRouteFrontName($m = df_module_name($m), $backend ? 'adminhtml' : 'frontend');
-	if ($m === $route) {
-		df_error("df_route(): please define the route for the «{$m}» module in the module's «etc/frontend/routes.xml» file.");
+	if ($m === ($route = df_route_config()->getRouteFrontName($m = df_module_name($m), $backend ? 'adminhtml' : 'frontend'))) {
+		df_error("df_route(): please define a route for the «{$m}» module in the module's «etc/frontend/routes.xml» file.");
 	}
 	return df_cc_path($route, $path);
 }
