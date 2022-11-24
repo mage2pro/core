@@ -13,9 +13,8 @@ abstract class TransportObserver implements IOb {
 	 * @override
 	 * @see IOb::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
-	 * @param Ob $ob
 	 */
-	final function execute(Ob $ob) {
+	final function execute(Ob $ob):void {
 		if (dfs($this)->enable()) {
 			$ob[P::CONTAINER][P::K_TRANSPORT] = df_con($this, 'Transport');
 		}
