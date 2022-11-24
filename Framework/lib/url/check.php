@@ -5,11 +5,10 @@ use Magento\Framework\Exception\LocalizedException as LE;
 /**
  * 2016-07-12
  * @used-by df_webhook()
- * @param string $u
  * @param string|E $msg [optional]
  * @throws E|LE
  */
-function df_assert_https($u, $msg = null):string {return df_check_https_strict($u) ? $u : df_error(
+function df_assert_https(string $u, $msg = null):string {return df_check_https_strict($u) ? $u : df_error(
 	$msg ?: "The URL «{$u}» is invalid, because the system expects an URL which starts with «https://»."
 );}
 
