@@ -28,10 +28,8 @@ class AbstractElement extends Sb {
 	 * @see \Df\Framework\Form\Element\Text::getComment()
 	 * @used-by \Magento\Config\Block\System\Config\Form\Field::_renderValue()
 	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Config/Block/System/Config/Form/Field.php#L82-L84
-	 * @param Sb $sb
-	 * @param string $r
 	 */
-	function afterGetComment(Sb $sb, $r):string {
+	function afterGetComment(Sb $sb, string $r):string {
 		if ($vc = df_fe_fc($sb, 'dfValidator')) { /** @var string|null $vc */
 			$v = df_o($vc); /** @var \Df\Framework\IValidator $v */
 			if (true !== ($messages = $v->check($sb))) { /** @var string|string[]|true $messages */
