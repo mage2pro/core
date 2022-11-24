@@ -15,9 +15,8 @@ abstract class Xml extends \Df\Framework\W\Result {
 	 * @see \Dfe\Qiwi\Result::tag()
 	 * @see \Dfe\YandexKassa\Result::tag()
 	 * @see \TFC\GoogleShopping\Result::tag()
-	 * @return string
 	 */
-	abstract protected function tag();
+	abstract protected function tag():string;
 
 	/**
 	 * 2021-12-03
