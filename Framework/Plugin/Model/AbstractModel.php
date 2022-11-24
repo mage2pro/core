@@ -49,7 +49,6 @@ final class AbstractModel {
 	 *
 	 * @see df_on_save()
 	 * @see \Magento\Framework\Model\AbstractModel::afterSave()
-	 * @param Sb $sb
 	 * @param Sb|null $r
 	 */
 	function afterAfterSave(Sb $sb, $r):Sb {
