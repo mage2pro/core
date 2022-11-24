@@ -152,6 +152,7 @@ function df_request($k = null, $d = null) {$o = df_request_o(); return is_null($
 /**              
  * 2017-03-09
  * @used-by df_request_body_json()
+ * @used-by \Df\Qa\Context::base()
  * @used-by \Dfe\Sift\Controller\Index\Index::checkSignature()
  */
 function df_request_body():string {return df_contents('php://input');}

@@ -23,7 +23,7 @@ final class Context {
 				,'User-Agent' => df_request_ua()
 			] + (!df_request_o()->isPost() ? [] : df_clean([
 				# 2021-10-20 "Log the `php://input` data": https://github.com/mage2pro/core/issues/162
-				'php://input' => file_get_contents('php://input'), 'Post' => $_POST
+				'php://input' => df_request_body(), 'Post' => $_POST
 			])))
 		)
 	];}
