@@ -19,9 +19,8 @@ function df_asset():Repository {return df_o(Repository::class);}
  * @used-by \Df\Phone\Js::_toHtml()
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Moip\ConfigProvider::config()
- * @param string $u
  */
-function df_asset_create($u):File {$a = df_asset(); return !df_check_url_absolute($u)
+function df_asset_create(string $u):File {$a = df_asset(); return !df_check_url_absolute($u)
 	? $a->createAsset($u)
 	: $a->createRemoteAsset($u, dfa(['css' => 'text/css', 'js' => 'application/javascript'], df_file_ext($u)))
 ;}
