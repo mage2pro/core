@@ -26,9 +26,8 @@ function df_page_config():Config {return df_o(Config::class);}
  * «How to set the title for the current page programmatically?» https://mage2.pro/t/3908
  * «How is @uses \Magento\Framework\View\Page\Title::set() implemented and used?» https://mage2.pro/t/3909
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
- * @param string $s
  */
-function df_page_title($s):void {df_page_config()->getTitle()->set($s);}
+function df_page_title(string $s):void {df_page_config()->getTitle()->set($s);}
 
 /**
  * 2017-05-05
