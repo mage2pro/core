@@ -59,9 +59,8 @@ function df_url_bp(string $u):array {
  * @used-by \Df\API\Client::_p()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by \Frugue\Store\Plugin\UrlRewrite\Model\StoreSwitcher\RewriteUrl::aroundSwitch()
- * @param string $u
  */
-function df_url_path($u):string {return df_trim_ds(df_request_i($u)->getPathInfo());}
+function df_url_path(string $u):string {return df_trim_ds(df_request_i($u)->getPathInfo());}
 
 /**
  * 2017-02-13 It removes the following endinds: «/», «index/», «index/index/».
