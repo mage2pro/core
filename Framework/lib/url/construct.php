@@ -123,12 +123,10 @@ function df_url_staged(bool $test, string $tmpl, array $names, ...$args):string 
  * 2) A class name: «A\B\C».
  * 3) An object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @param string $suffix [optional]
- * @param bool $requireHTTPS [optional]
  * @param Store|int|string|null $s [optional]
  * @param array(string => string) $p [optional]
  */
-function df_webhook($m, $suffix = '', $requireHTTPS = false, $s = null, $p = []):string {
+function df_webhook($m, string $suffix = '', bool $requireHTTPS = false, $s = null, $p = []):string {
 	$path = df_route($m, $suffix); /** @var string $path */
 	$r = df_my_local()
 		? "https://mage2.pro/sandbox/$path" . (!$p ? '' : '?' . http_build_query($p))
