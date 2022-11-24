@@ -60,11 +60,10 @@ function df_module_name_c($c = null):string {return df_module_name($c, '\\');}
  * 2016-08-28 «Dfe\AllPay\W\Handler» => «AllPay»
  * 2016-10-20
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
+ * @used-by \Df\Payment\W\Reader::testData()
  * @param string|object $c
  */
-function df_module_name_short($c):string {return dfcf(
-	function(string $c):string {return df_explode_class($c)[1];}, [df_cts($c)]
-);}
+function df_module_name_short($c):string {return df_explode_class($c)[1];}
 
 /**
  * 2016-02-16 «Dfe\CheckoutCom\Method» => «dfe_checkout_com»
