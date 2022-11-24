@@ -16,9 +16,8 @@ abstract class Transport implements ITransport {
 	 * @used-by \Df\Framework\Plugin\Mail\TransportInterfaceFactory::aroundCreate()
 	 * @see \Magento\Framework\Mail\Template\TransportBuilder::getTransport():
 	 * 		$mailTransport = $this->mailTransportFactory->create(['message' => clone $this->message]);
-	 * @param IMessage|Message $message
 	 */
-    function __construct(IMessage $message) {$this->_message = $message;}
+    function __construct(IMessage $m) {$this->_message = $m;}
 
 	/**
 	 * 2018-01-28
