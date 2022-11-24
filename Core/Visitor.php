@@ -110,9 +110,9 @@ final class Visitor extends O {
 	 * @used-by self::r()
 	 * @return array(string => mixed)
 	 */
-	private function responseA():array {return dfc($this, function() {return df_try(function() {return
-		df_http_json('http://geoip.mage2.pro/json/' . $this[self::$P__IP], [], 5);
-	}, []);});}
+	private function responseA():array {return dfc($this, function() {return df_http_json(
+		'http://geoip.mage2.pro/json/' . $this[self::$P__IP], [], 5, ''
+	);});}
 
 	/**
 	 * 2016-05-20
