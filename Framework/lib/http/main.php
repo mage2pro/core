@@ -169,10 +169,9 @@ function df_request_body_json():string {return !($j = df_request_body()) ? [] : 
  * @used-by df_request_ua()
  * @used-by \Dfe\Qiwi\W\Reader::http()
  * @used-by \Dfe\Sift\Controller\Index\Index::checkSignature()
- * @param string $k
  * @return string|false
  */
-function df_request_header($k) {return df_request_o()->getHeader($k);}
+function df_request_header(string $k) {return df_request_o()->getHeader($k);}
 
 /**
  * 2021-06-05
