@@ -19,7 +19,7 @@ use Magento\Framework\View\Model\Layout\Merge;
  * $c может быть как объектом, так и строкой: https://3v4l.org/udMMH
  * @param string|array(string => mixed) $data [optional]
  * 2016-11-22
- * @param array $vars [optional]
+ * @param array(string => mixed) $vars [optional]
  * Параметры $vars будут доступны в шаблоне в качестве переменных:
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
  *		extract($dictionary, EXTR_SKIP);
