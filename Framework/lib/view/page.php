@@ -37,10 +37,8 @@ function df_page_title(string $s):void {df_page_config()->getTitle()->set($s);}
  * «How is the root HTML template (Magento_Theme::root.phtml) declared and implemented?»
  * https://mage2.pro/t/3900
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
- * @param string|null $template [optional]
- * @param string ...$handles [optional]
  */
-function df_page_result($template = null, ...$handles):ResultPage {
+function df_page_result(string $template = '', string ...$handles):ResultPage {
 	$f = df_o(PageFactory::class);/** @var PageFactory $f */
 	$r = $f->create(false, df_clean(['template' => $template])); /** @var ResultPage $r */
 	foreach ($handles as $h) {
