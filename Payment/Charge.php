@@ -81,9 +81,9 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItem()
 	 * @used-by \Dfe\Moip\P\Charge::p()
-	 * @param callable|string $filter [optional]
+	 * @param callable|string $f [optional]
 	 */
-	final protected function text(string $s, int $max = 0, $filter = 'textFilter'):string {
+	final protected function text(string $s, int $max = 0, $f = 'textFilter'):string {
 		$r = df_var($s, $this->vars()); /** @var string $r */
 		/**
 		 * 2017-11-22
@@ -91,7 +91,7 @@ abstract class Charge extends Operation {
 		 * because it will require to make @see textFilter() `public` instead of `protected`,
 		 * and I do not want an extra `public` method.
 		 */
-		return df_chop($filter instanceof \Closure ? $filter($r) : $this->$filter($r), $max);
+		return df_chop($f instanceof \Closure ? $f($r) : $this->$f($r), $max);
 	}
 
 	/**
