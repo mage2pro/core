@@ -93,7 +93,6 @@ abstract class Facade {
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @used-by \Dfe\TBCBank\Init\Action::isRecurring()
-	 * @param M $m
 	 */
 	static function s(M $m):self {return dfcf(function(M $m, $c) {
 		/**
