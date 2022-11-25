@@ -15,6 +15,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Df\API\Client::resPath()
  * @used-by \Df\Config\Backend::value()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
+ * @used-by \Df\Config\Plugin\Model\Config\Structure\Element\Iterator\Tab::beforeSetElements()
  * @used-by \Df\Core\O::offsetExists()
  * @used-by \Df\Core\O::offsetGet()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
