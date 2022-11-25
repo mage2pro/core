@@ -846,10 +846,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L314-L322
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::denyPayment()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L715-L730
-	 * @param II|I|OP $p
 	 * 2017-02-08
 	 * @see \Df\StripeClone\Method::denyPayment()
 	 * @see \Dfe\CheckoutCom\Method::denyPayment()
+	 * @param II|I|OP $p
 	 */
 	function denyPayment(II $p):bool {return false;}
 
