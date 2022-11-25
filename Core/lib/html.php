@@ -3,10 +3,9 @@ use Df\Core\Format\Html\Tag;
 /**
  * 2016-11-13
  * @used-by df_quote_russian()
- * @param string|string[] ...$args
  * @return string|string[]
  */
-function df_html_b(...$args) {return df_call_a(function($s) {return df_tag('b', [], $s);}, $args);}
+function df_html_b(string ...$args) {return df_call_a(function($s) {return df_tag('b', [], $s);}, $args);}
 
 /**
  * 2015-10-27
