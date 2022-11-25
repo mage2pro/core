@@ -81,11 +81,9 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItem()
 	 * @used-by \Dfe\Moip\P\Charge::p()
-	 * @param string $s
-	 * @param int|null $max [optional]
 	 * @param callable|string $filter [optional]
 	 */
-	final protected function text($s, $max = null, $filter = 'textFilter'):string {
+	final protected function text(string $s, int $max = 0, $filter = 'textFilter'):string {
 		$r = df_var($s, $this->vars()); /** @var string $r */
 		/**
 		 * 2017-11-22
