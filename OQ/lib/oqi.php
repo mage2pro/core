@@ -185,10 +185,8 @@ function df_oqi_leafs($oq, Closure $f = null, string $locale = ''):array {
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
- * @param bool $withTax [optional]
- * @param bool $withDiscount [optional]
  */
-function df_oqi_price($i, $withTax = false, $withDiscount = false):float {/** @var float $r */
+function df_oqi_price($i, bool $withTax = false, bool $withDiscount = false):float {/** @var float $r */
 	$r = floatval($withTax ? $i->getPriceInclTax() : (
 		df_is_oi($i) ? $i->getPrice() :
 			# 2017-04-20 У меня $i->getPrice() для quote item возвращает значение в учётной валюте: видимо, из-за дефекта ядра.
