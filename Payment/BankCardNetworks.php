@@ -18,11 +18,9 @@ final class BankCardNetworks {
 	 * All the mine and the core's bank card network logos have the 46x30  dimensions (in pixels).
 	 * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
 	 * @used-by \Dfe\Moip\CardFormatter::label()
-	 * @param int|null $w [optional]
-	 * @param int|null $h [optional]
 	 * @return array(string => int)
 	 */
-	static function dimensions($w = null, $h = null):array {return array_combine(['width', 'height'],
+	static function dimensions(int $w = 0, int $h = 0):array {return array_combine(['width', 'height'],
 		(!$w && !$h) ? [46, 30] : (
 			!$w ? [round(46 * $h / 30), $h] : (
 				!$h ? [$w, round(30 * $w / 46)] : [$w, $h]))
