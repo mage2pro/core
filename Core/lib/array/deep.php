@@ -20,6 +20,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Df\Config\Plugin\Model\Config\Structure\Element\Iterator\Tab::beforeSetElements()
  * @used-by \Df\Core\O::offsetExists()
  * @used-by \Df\Core\O::offsetGet()
+ * @used-by \Df\Payment\ConfigProvider::p()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Dfe\AllPay\W\Event::tlByCode()
  * @used-by \Dfe\AlphaCommerceHub\API\Validator::result()
