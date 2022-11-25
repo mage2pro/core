@@ -21,6 +21,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Dfe\AlphaCommerceHub\API\Validator::result()
  * @used-by \Dfe\CheckoutCom\Handler::r()
  * @used-by \Dfe\Stripe\Facade\Card::__construct()
+ * @used-by \Dfe\TwoCheckout\Method::charge()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @used-by \TemplateMonster\Megamenu\Observer\PrepareCategory::execute()  (frugue.com)
