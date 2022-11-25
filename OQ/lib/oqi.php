@@ -264,9 +264,7 @@ function df_oqi_roots_m($oq, Closure $f):array {return array_map($f, df_oqi_root
  * @param O|Q $oq
  */
 function df_oqi_s($oq, string $sep = ', '):string {return df_ccc($sep, df_oqi_roots_m($oq,
-	function($i) {/** @var OI|QI $i */return df_cc_s(
-		$i->getName(), 1 >= ($qty = df_oqi_qty($i)) ? null : "({$qty})"
-	);}
+	function($i):string {/** @var OI|QI $i */return df_cc_s($i->getName(), 1 >= ($qty = df_oqi_qty($i)) ? null : "({$qty})");}
 ));}
 
 /**
