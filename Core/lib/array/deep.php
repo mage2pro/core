@@ -29,6 +29,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Dfe\Dynamics365\API\Validator\JSON::short()
  * @used-by \Dfe\FacebookLogin\Customer::picture()
  * @used-by \Dfe\Moip\API\Validator::short()
+ * @used-by \Dfe\Moip\Facade\Card::country()
  * @used-by \Dfe\Stripe\Facade\Card::__construct()
  * @used-by \Dfe\TwoCheckout\Method::charge()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
