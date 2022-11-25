@@ -21,9 +21,8 @@ abstract class Charge extends Operation {
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
-	 * @param string $path [optional]
 	 */
-	final protected function callback($path = 'confirm'):string {return df_webhook($this->m(), $path);}
+	final protected function callback(string $path = 'confirm'):string {return df_webhook($this->m(), $path);}
 
 	/**
 	 * 2016-08-26
