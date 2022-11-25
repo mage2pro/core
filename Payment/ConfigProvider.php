@@ -33,9 +33,9 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * 2017-03-03
 	 * 2017-08-09 We can safely mark this method as «final» because the implemented interface does not have it.
 	 * https://github.com/mage2pro/core/issues/20
-	 * @param string|null $module [optional]
+	 * @param string|null $m [optional]
 	 */
-	final function __construct($module = null) {$this->_mc = df_module_name_c($module ?: $this);}
+	final function __construct($m = null) {$this->_mc = df_module_name_c($m ?: $this);}
 
 	/**
 	 * 2016-02-27
