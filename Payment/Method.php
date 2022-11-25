@@ -702,7 +702,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L192-L199
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::canUseForCurrency()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L484-L494
-	 * @param string $c
+	 * @param string $c 2022-11-26 We can not declare the argument's type because it is undeclared in the overriden method.
 	 */
 	final function canUseForCurrency($c):bool {return true;}
 
