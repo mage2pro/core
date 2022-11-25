@@ -5,7 +5,7 @@ use Df\Core\Format\Html\Tag;
  * @used-by df_quote_russian()
  * @return string|string[]
  */
-function df_html_b(string ...$args) {return df_call_a(function($s) {return df_tag('b', [], $s);}, $args);}
+function df_html_b(string ...$args) {return df_call_a(function(string $s) {return df_tag('b', [], $s);}, $args);}
 
 /**
  * 2015-10-27
