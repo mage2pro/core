@@ -355,7 +355,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2022-10-19
 	 * We can use `final` in the method's signature despite if M2 code generation
 	 * because the class implements @see INonInterceptable.
-	 * @param II $i
 	 * @param string|float $a
 	 * В спецификации PHPDoc интерфейса указано, что метод должен возвращать $this,
 	 * но реально возвращаемое значение ядром не используется.
