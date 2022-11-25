@@ -46,6 +46,7 @@ function df_eta($v):array {
  * @used-by df_customer_session_id()
  * @used-by df_img_resize()
  * @used-by df_slice()
+ * @used-by dfa_chop()
  * @param mixed $v
  * @return mixed|null
  */
