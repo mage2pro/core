@@ -886,10 +886,11 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L324-L332
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::getConfigData()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L742-L760
+	 * @param string $k 2022-11-26 We can not declare the argument's type because it is undeclared in the overriden method.
 	 * @param null|string|int|ScopeInterface $storeId [optional]
 	 * @return string|null
 	 */
-	final function getConfigData(string $k, $storeId = null) {
+	final function getConfigData($k, $storeId = null) {
 		static $map = [
 			/**
 			 * 2016-02-16
