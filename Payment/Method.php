@@ -825,6 +825,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-09-08
 	 * 2017-02-08 Конвертирует $a из валюты платежа в учётную.
+	 * @used-by dfp_refund()
 	 * @uses \Df\Payment\Currency::toBase()
 	 */
 	final function cToBase(float $a):float {return $this->convert($a);}
