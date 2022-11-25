@@ -6,11 +6,9 @@ final class Tab {
 	/**
 	 * 2015-11-14 Цель плагина — алфавитное упорядочивание моих модулей в разделе административных настроек модулей.
 	 * @see \Magento\Config\Model\Config\Structure\Element\Iterator\Tab::setElements()
-	 * @param Sb $sb
 	 * @param array(string => array(string => string)) $elements
-	 * @param string $scope
 	 */
-	function beforeSetElements(Sb $sb, array $elements, $scope):array {
+	function beforeSetElements(Sb $sb, array $elements, string $scope):array {
 		if ($sections = dfa_deep($elements, '_df/children')) {/** @var array(string => string)|null $sections */
 			uasort($sections,
 				/**
