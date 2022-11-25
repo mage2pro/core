@@ -677,9 +677,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Plugin\Model\Checks\CanUseForCountry::aroundIsApplicable()
 	 * @used-by \Magento\Payment\Model\Checks\CanUseForCountry::isApplicable()
 	 * How is a payment method's canUseForCountry() used? https://mage2.pro/t/682
-	 * @param string $c
 	 */
-	final function canUseForCountry($c):bool {return $this->canUseForCountryP($c);}
+	final function canUseForCountry(string $c):bool {return $this->canUseForCountryP($c);}
 	
 	/**
 	 * 2017-12-13
