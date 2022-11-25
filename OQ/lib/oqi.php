@@ -279,7 +279,6 @@ function df_oqi_s($oq, string $sep = ', '):string {return df_ccc($sep, df_oqi_ro
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
- * @param bool $asInteger [optional]
  * @return float|int
  */
 function df_oqi_tax_rate($i, bool $asInteger = false) {
