@@ -25,6 +25,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Dfe\AllPay\W\Event::tlByCode()
  * @used-by \Dfe\AlphaCommerceHub\API\Validator::result()
  * @used-by \Dfe\CheckoutCom\Handler::r()
+ * @used-by \Dfe\Dynamics365\API\Validator\JSON::short()
  * @used-by \Dfe\Stripe\Facade\Card::__construct()
  * @used-by \Dfe\TwoCheckout\Method::charge()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
