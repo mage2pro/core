@@ -38,9 +38,8 @@ function df_oqi_currency_c($i):string {return df_oq_currency_c(df_oq($i));}
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
  * @used-by \Dfe\YandexKassa\Charge::pTax()
  * @param OI|QI $i
- * @param int|null $max [optional]
  */
-function df_oqi_desc($i, $max = null):string {
+function df_oqi_desc($i, int $max = 0):string {
 	$p = df_oqi_top($i)->getProduct(); /** @var P|DFP $p */
 	return df_chop(strip_tags($p->getShortDescription() ?: $p->getDescription()) ?: $i->getName(), $max);
 }
