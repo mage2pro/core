@@ -14,9 +14,8 @@ final class Tab {
 				/**
 				 * @param array(string => string) $a
 				 * @param array(string => string) $b
-				 * @return int
 				 */
-				function($a, $b) {return strcasecmp(dfa($a, 'label'), dfa($b, 'label'));}
+				function(array $a, array $b):int {return strcasecmp(dfa($a, 'label'), dfa($b, 'label'));}
 			);
 			$elements['_df']['children'] = $sections;
 		}
