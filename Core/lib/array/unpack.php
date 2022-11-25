@@ -1,7 +1,7 @@
 <?php
 /**
  * 2022-11-26
- * 1) https://3v4l.org/ovSu2
+ * 1) https://3v4l.org/UkZQQ
  * 2) It is similar to @see dfa_unpack(), but df_arg() does not call dfa_flatten().
  * 3)
  * 		[$v] => $v
@@ -11,6 +11,7 @@
  * 		[$v1, $v2, [$v3]] => [$v1, $v2, [$v3]] - The difference from @see dfa_unpack()
  * @see df_args()
  * @see dfa_unpack()
+ * @used-by \Dfe\CheckoutCom\Response::a()
  * @return mixed|mixed[]
  */
 function df_arg(array $a) {return isset($a[0]) && !isset($a[1]) ? $a[0] : $a;}
