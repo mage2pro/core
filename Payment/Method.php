@@ -147,17 +147,16 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 				 * 2017-01-31
 				 * В настоящее время опция «Log the API requests and responses?»
 				 * присутствует у модулей allPay и SecurePay:
-				 * 1) allPay: https://github.com/mage2pro/allpay/blob/1.1.25/etc/adminhtml/system.xml?ts=4#L413-L426
-				 * 2) SecurePay: https://github.com/mage2pro/securepay/blob/1.1.17/etc/adminhtml/system.xml?ts=4#L156-L169
+				 * 		1) allPay: https://github.com/mage2pro/allpay/blob/1.1.25/etc/adminhtml/system.xml?ts=4#L413-L426
+				 * 		2) SecurePay: https://github.com/mage2pro/securepay/blob/1.1.17/etc/adminhtml/system.xml?ts=4#L156-L169
 				 * У остальных моих платёжных модулей этой опции пока нет,
 				 * там функциональность логирования пока включена намертво.
-				 *
 				 * 2017-02-01
 				 * До сегодняшнего дня Stripe-подобные модули для каждой платёжной операции
 				 * создавали как минимум (не считая webhooks) 3 записи в логах:
-				 * 1) Stripe: getConfigPaymentAction
-				 * 2) [Stripe] chargeNew
-				 * 3) Stripe: capture
+				 * 		1) Stripe: getConfigPaymentAction
+				 * 		2) [Stripe] chargeNew
+				 * 		3) Stripe: capture
 				 * №1 и №3 создавались как раз отсюда, из action()
 				 * Нам не нужно так много записей для единственной операции,
 				 * поэтому добавил сейчас возможность отключать логирование в action().
