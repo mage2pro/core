@@ -132,10 +132,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by self::void()
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @param string|\Closure $f
-	 * @param bool $log [optional]
 	 * @return mixed
 	 */
-	final function action($f, $log = true) {
+	final function action($f, bool $log = true) {
 		$result = null; /** @var mixed $result */
 		if (!$this->ii(self::WEBHOOK_CASE)) {
 			dfp_sentry_tags($this);
