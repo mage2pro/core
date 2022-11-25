@@ -12,6 +12,7 @@ use Df\Core\Exception as DFE;
  * Сегодня заметил, что успешно работают пути типа 'transactions/0'
  * в том случае, когда ключ верхнего уровня возвращает массив с целочисленными индексами.
  * @used-by df_fe_m()
+ * @used-by df_primary_key()
  * @used-by dfa()
  * @used-by \Df\API\Client::resPath()
  * @used-by \Df\Config\Backend::value()
