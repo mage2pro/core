@@ -88,7 +88,7 @@ abstract class Charge extends Operation {
 		/**
 		 * 2017-11-22
 		 * I intentionally do not use @see df_call() here,
-		 * because it will require to make @see textFilter() `public` instead of `protected`,
+		 * because it will require to make @see self::textFilter() `public` instead of `protected`,
 		 * and I do not want an extra `public` method.
 		 */
 		return df_chop($f instanceof \Closure ? $f($r) : $this->$f($r), $max);
