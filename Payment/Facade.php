@@ -25,7 +25,6 @@ abstract class Facade {
 	 * @see \Df\StripeClone\CardFormatter::__construct()
 	 * https://github.com/mage2pro/core/blob/2.8.25/StripeClone/CardFormatter.php#L53-L62
 	 * @used-by self::s()
-	 * @param M $m
 	 */
 	final protected function __construct(M $m) {$this->_m = $m;}
 
