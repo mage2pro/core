@@ -44,11 +44,10 @@ class Currency {
 	 * @used-by self::rateToPayment()
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @param null|string|int|IScope|Store $s [optional]
-	 * @param string|null $oc [optional]
 	 */
-	final function iso3($s = null, $oc = null):string {return dfc($this, function($s, $oc) {return CurrencyFE::v(
-		$this->_iso3($s), $s, $oc
-	);}, [$s, $oc]);}
+	final function iso3($s = null, string $oc = ''):string {return dfc($this, function($s, string $oc):string {return
+		CurrencyFE::v($this->_iso3($s), $s, $oc)
+	;}, [$s, $oc]);}
 
 	/**
 	 * 2016-09-07
