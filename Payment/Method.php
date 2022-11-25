@@ -833,6 +833,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-09-08
 	 * 2017-02-08 Конвертирует $a из валюты платежа в валюту заказа.
+	 * 2022-11-26 @deprecated It is unused.
 	 * @uses \Df\Payment\Currency::toOrder()
 	 */
 	final function cToOrder(float $a):float {return $this->convert($a);}
