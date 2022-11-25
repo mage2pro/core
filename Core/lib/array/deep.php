@@ -13,6 +13,8 @@ use Df\Core\Exception as DFE;
  * @used-by df_fe_m()
  * @used-by df_primary_key()
  * @used-by dfa()
+ * @used-by dfe_portal_module()
+ * @used-by dfe_portal_plugins()
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\API\Client::resPath()
  * @used-by \Df\Config\Backend::value()
