@@ -108,11 +108,9 @@ class Currency {
 	 * 2016-09-05 Конвертирует денежную величину в валюту «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by self::fromBase()
 	 * @used-by self::fromOrder()
-	 * @param float $a
-	 * @param string $from
 	 * @param O|Q $oq
 	 */
-	private function convert($a, $from, $oq):float {return df_currency_convert($a, $from, $this->oq($oq));}
+	private function convert(float $a, string $from, $oq):float {return df_currency_convert($a, $from, $this->oq($oq));}
 
 	/**
 	 * 2017-10-12
