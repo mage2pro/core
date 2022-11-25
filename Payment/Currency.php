@@ -72,7 +72,6 @@ class Currency {
 	 * Конвертирует $a из валюты платежа в учётную
 	 * ($oq используется только для определения магазина => настроек магазина).
 	 * @used-by \Df\Payment\Method::convert()
-	 * @param float $a
 	 * @param O|Q $oq
 	 */
 	final function toBase(float $a, $oq):float {return df_currency_convert($a, $this->oq($oq), df_currency_base($oq));}
