@@ -810,10 +810,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by dfp_due()
 	 * @used-by self::_void()
 	 * @used-by self::refund()
-	 * @param float $a
 	 * @uses \Df\Payment\Currency::fromBase()
 	 */
-	final function cFromBase($a):float {return $this->convert($a);}
+	final function cFromBase(float $a):float {return $this->convert($a);}
 
 	/**
 	 * 2016-09-07 The payment currency code for the current order or quote.
