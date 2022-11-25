@@ -32,10 +32,9 @@ class Currency {
 	 * 2017-02-08 Converts $a from the currency of $oq to the payment currency.
 	 * @used-by dfpex_from_doc()
 	 * @used-by \Df\Payment\ConfigProvider::amount()
-	 * @param float $a
 	 * @param O|Q $oq
 	 */
-	final function fromOrder($a, $oq):float {return $this->convert($a, df_oq_currency_c($oq), $oq);}
+	final function fromOrder(float $a, $oq):float {return $this->convert($a, df_oq_currency_c($oq), $oq);}
 
 	/**
 	 * 2016-09-05 «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
