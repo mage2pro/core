@@ -10,9 +10,8 @@ use Magento\Framework\File\Csv;
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()
  * @used-by \Dfe\FacebookLogin\Customer::responseA()
- * @param string|string[] ...$args
  */
-function df_csv(...$args):string {return implode(',', df_args($args));}
+function df_csv(string ...$args):string {return implode(',', df_args($args));}
 
 /**
  * 2017-06-21
