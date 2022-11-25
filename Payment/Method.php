@@ -108,8 +108,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @param II|I|OP $p
 	 */
 	final function acceptPayment(II $p):bool {
-		# 2016-03-15
-		# The obvious $this->charge($payment) is not quite correct, because no invoice will be created in such case.
+		# 2016-03-15 The obvious `$this->charge($payment)` is not quite correct, because no invoice will be created in such case.
 		$p->capture();
 		return true;
 	}
