@@ -3,6 +3,12 @@
  * 2022-11-26
  * 1) https://3v4l.org/ovSu2
  * 2) It is similar to @see dfa_unpack(), but df_arg() does not call dfa_flatten().
+ * 3)
+ * 		[$v] => $v
+ * 		[[$v]] => [$v]
+ * 		[[$v1, $v2]] => [$v1, $v2]
+ * 		[$v1, $v2] => [$v1, $v2]
+ * 		[$v1, $v2, [$v3]] => [$v1, $v2, [$v3]] - The difference from @see dfa_unpack()
  * @see df_args()
  * @see dfa_unpack()
  * @return mixed|mixed[]
@@ -35,7 +41,7 @@ function df_args(array $a):array {return !$a || !is_array($a[0]) ? $a : $a[0];}
  * 		[[$v]] => [$v]
  * 		[[$v1, $v2]] => [$v1, $v2]
  * 		[$v1, $v2] => [$v1, $v2]
- * 		[$v1, $v2, [$v3]] => [$v1, $v2, $v3]
+ * 		[$v1, $v2, [$v3]] => [$v1, $v2, $v3] - The difference from @see df_arg()
  * @used-by dfp_iia()
  * @return mixed|mixed[]
  */
