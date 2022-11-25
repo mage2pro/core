@@ -282,7 +282,7 @@ function df_oqi_s($oq, string $sep = ', '):string {return df_ccc($sep, df_oqi_ro
  * @param bool $asInteger [optional]
  * @return float|int
  */
-function df_oqi_tax_rate($i, $asInteger = false) {
+function df_oqi_tax_rate($i, bool $asInteger = false) {
 	$r = df_tax_rate(df_oqi_price($i, true), df_oqi_price($i));  /** @var float $r */
 	return !$asInteger ? $r : round(100 * $r);
 }
