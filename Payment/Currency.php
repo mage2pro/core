@@ -21,10 +21,9 @@ class Currency {
 	 * ($oq используется только для определения магазина => настроек магазина).
 	 * @used-by \Df\Payment\Method::convert()
 	 * @used-by \Df\Payment\Method::isAvailable()
-	 * @param float $a
 	 * @param O|Q $oq
 	 */
-	final function fromBase($a, $oq):float {return $this->convert($a, df_currency_base_c($oq), $oq);}
+	final function fromBase(float $a, $oq):float {return $this->convert($a, df_currency_base_c($oq), $oq);}
 
 	/**
 	 * 2016-09-05
