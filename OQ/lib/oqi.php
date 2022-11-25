@@ -313,10 +313,8 @@ function df_oqi_top($i) {return $i->getParentItem() ?: $i;}
  * 2018-12-19
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @param OI|QI $i
- * @param bool $withTax [optional]
- * @param bool $withDiscount [optional]
  */
-function df_oqi_total($i, $withTax = false, $withDiscount = false):float {return
+function df_oqi_total($i, bool $withTax = false, bool $withDiscount = false):float {return
 	df_oqi_price($i, $withTax, $withDiscount) * $i->getQtyOrdered()
 ;}
 
