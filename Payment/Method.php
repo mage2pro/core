@@ -1860,7 +1860,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\TwoCheckout\Method::charge()
 	 * @param array(string => mixed) $v
 	 */
-	final protected function iiaAdd(array $v):array {dfp_add_info($this->ii(), $v);}
+	final protected function iiaAdd(array $v):void {dfp_add_info($this->ii(), $v);}
 
 	/**
 	 * 2016-05-03
