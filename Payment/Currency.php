@@ -79,10 +79,8 @@ class Currency {
 	/**
 	 * 2016-09-07 Конвертирует $a из валюты платежа в валюту заказа $o.
 	 * @used-by \Df\Payment\Method::convert()
-	 * @param float $a
-	 * @param O $o
 	 */
-	final function toOrder($a, O $o):float {return df_currency_convert($a, $this->oq($o), $o->getOrderCurrencyCode());}
+	final function toOrder(float $a, O $o):float {return df_currency_convert($a, $this->oq($o), $o->getOrderCurrencyCode());}
 
 	/**
 	 * 2017-10-12
