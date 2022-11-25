@@ -855,6 +855,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-02-11
+	 * 2022-11-26 We can not declare the $transId argument type because it is undeclared in the overriden method.
 	 * @override
 	 * @see \Magento\Payment\Model\MethodInterface::fetchTransactionInfo()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L149-L158
@@ -862,10 +863,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L417-L428
 	 * USAGES
 	 * "How is a payment method's fetchTransactionInfo() used?" https://mage2.pro/t/678
-	 * @param string $transactionId
+	 * @param string $transId
 	 * @return array(string => mixed)
 	 */
-	final function fetchTransactionInfo(II $p, $transactionId):array {return [];}
+	final function fetchTransactionInfo(II $p, $transId):array {return [];}
 
 	/**
 	 * 2016-02-08
