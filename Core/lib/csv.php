@@ -59,8 +59,5 @@ function df_csv_parse_int($s):array {return df_int(df_csv_parse($s));}
  */
 function df_csv_pretty(string ...$args):string {return implode(', ', dfa_flatten($args));}
 
-/**
- * 2022-10-29 @deprecated It is unused.
- * @param string|string[] ...$args
- */
-function df_csv_pretty_quote(...$args):string {return df_csv_pretty(df_quote_russian(df_args($args)));}
+/** 2022-10-29 @deprecated It is unused. */
+function df_csv_pretty_quote(string ...$args):string {return df_csv_pretty(df_quote_russian(df_args($args)));}
