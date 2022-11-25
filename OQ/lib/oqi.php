@@ -270,8 +270,8 @@ function df_oqi_s($oq, string $sep = ', '):string {return df_ccc($sep, df_oqi_ro
 /**
  * 2017-03-06
  * Возвращает налоговую ставку для позиции заказа в процентах.
- * $asInteger == false: 17.5% => 17.5.
- * $asInteger == true: 17.5% => 1750
+ * 		$asInteger == false: 17.5% => 17.5.
+ * 		$asInteger == true: 17.5% => 1750
  * 2017-09-30
  * @todo Why do not just use \Magento\Sales\Model\Order\Item::getTaxPercent()?
  * I use it for Yandex.Kassa: @see \Dfe\YandexKassa\Charge::pTax()
