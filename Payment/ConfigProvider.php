@@ -203,7 +203,6 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @used-by \Dfe\IPay88\ConfigProvider::config()
 	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()
-	 * @param IOptions $o
 	 * @return array(string => mixed)
 	 */
 	final protected static function configOptions(IOptions $o):array {$s = $o->s(); /** @var Settings $s */ return [
