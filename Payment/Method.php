@@ -677,9 +677,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Plugin\Model\Checks\CanUseForCountry::aroundIsApplicable()
 	 * @used-by \Magento\Payment\Model\Checks\CanUseForCountry::isApplicable()
 	 * How is a payment method's canUseForCountry() used? https://mage2.pro/t/682
+	 * @param string $c
 	 */
-	final function canUseForCountry(string $c):bool {return $this->canUseForCountryP($c);}
-	
+	final function canUseForCountry($c):bool {return $this->canUseForCountryP($c);}
+
 	/**
 	 * 2017-12-13
 	 * "Provide an ability to the Magento backend users (merchants) to set up country restrictions separately
@@ -687,9 +688,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/mage2pro/alphacommercehub/issues/85
 	 * @used-by self::canUseForCountry()
 	 * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
-	 * @param string|null $p [optional]
 	 */
-	final function canUseForCountryP(string $c, $p = null):bool {
+	final function canUseForCountryP(string $c, string $p = ''):bool {
 		$p = !$p ? $p : df_add_ds_right($p);
 		return NWB::is($this->s("{$p}country_restriction"), $c, df_csv_parse($this->s("{$p}countries")));
 	}
