@@ -83,7 +83,6 @@ class Choice {
 	/**
 	 * 2017-04-17
 	 * @used-by self::s()
-	 * @param M $m
 	 */
 	private function __construct(M $m) {$this->_m = $m;}
 
