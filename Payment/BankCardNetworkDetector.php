@@ -18,10 +18,9 @@ final class BankCardNetworkDetector {
 	/**
 	 * 2018-12-18
 	 * @used-by \Dfe\Vantiv\Facade\Card::brandCode()
-	 * @param string $n
 	 * @return string|null
 	 */
-	static function p($n) {
+	static function p(string $n) {
 		$r = null;  /** @var string|null $r */
 		$types = [
 			self::AE => function($n) {return !!preg_match("/^3$|^3[47][0-9]{0,13}$/i", $n);}
