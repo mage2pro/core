@@ -257,14 +257,13 @@ function df_oqi_roots_m($oq, Closure $f):array {return array_map($f, df_oqi_root
  * будет содержать как настраиваемый товар, так и его простой вариант.
  * Простые варианты игнорируем (у них имена типа «New Very Prive-36-Almond»,
  * а нам удобнее видеть имена простыми, как у настраиваемого товара: «New Very Prive»).
+ * 2016-07-04 Добавил параметр $sep для модуля AllPay, где разделителем должен быть символ #.
  * @used-by \Df\Payment\Metadata::vars()
  * @used-by \Dfe\AllPay\Charge::pCharge()
  * @used-by \Dfe\IPay88\Charge::pCharge()
  * @param O|Q $oq
- * @param string $sep [optional] 2016-07-04 Добавил этот параметр для модуля AllPay,
- * где разделителем должен быть символ #.
  */
-function df_oqi_s($oq, $sep = ', '):string {return df_ccc($sep, df_oqi_roots_m($oq,
+function df_oqi_s($oq, string $sep = ', '):string {return df_ccc($sep, df_oqi_roots_m($oq,
 	function($i) {/** @var OI|QI $i */return df_cc_s(
 		$i->getName(), 1 >= ($qty = df_oqi_qty($i)) ? null : "({$qty})"
 	);}
