@@ -75,7 +75,7 @@ class Currency {
 	 * @param float $a
 	 * @param O|Q $oq
 	 */
-	final function toBase($a, $oq):float {return df_currency_convert($a, $this->oq($oq), df_currency_base($oq));}
+	final function toBase(float $a, $oq):float {return df_currency_convert($a, $this->oq($oq), df_currency_base($oq));}
 
 	/**
 	 * 2016-09-07 Конвертирует $a из валюты платежа в валюту заказа $o.
