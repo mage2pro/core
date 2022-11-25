@@ -1,7 +1,7 @@
 <?php
 /**
  * 2022-11-26
- * 1) https://3v4l.org/UkZQQ
+ * 1) https://3v4l.org/C09vn
  * 2) It is similar to @see dfa_unpack(), but df_arg() does not call dfa_flatten().
  * 3)
  * 		[$v] => $v

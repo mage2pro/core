@@ -110,9 +110,10 @@ function dfa(array $a, $k, $d = null) {return
 	# потому что получим «Notice: Undefined index».
 	# 2016-08-07
 	# В Closure мы можем безнаказанно передавать параметры, даже если closure их не поддерживает https://3v4l.org/9Sf7n
-	df_nes($k) ? $a : (is_array($k) ? dfa_select_ordered($a, $k) : (isset($a[$k]) ? $a[$k] : (
-		df_contains($k, '/') ? dfa_deep($a, $k, $d) : df_call_if($d, $k)
-	)))
+	df_nes($k) ? $a : (is_array($k)
+		? (!$k ? $a : dfa_select_ordered($a, $k)) # 2022-11-26 Added !$k
+		: (isset($a[$k]) ? $a[$k] : (df_contains($k, '/') ? dfa_deep($a, $k, $d) : df_call_if($d, $k)))
+	)
 ;}
 
 /**
