@@ -34,7 +34,6 @@ final class Metadata extends \Df\Config\Source {
 	 * 2016-03-14
 	 * 2017-03-06 Ключами результата являются системные имена переменных.
 	 * @used-by \Df\Payment\Charge::vars()
-	 * @param Store $s
 	 * @param O|Q $oq
 	 * @return array(string => string)
 	 */
