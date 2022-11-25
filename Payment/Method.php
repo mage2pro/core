@@ -860,13 +860,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L149-L158
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::fetchTransactionInfo()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L417-L428
-	 * @param II $payment
-	 * @param string $transactionId
-	 * @return array(string => mixed)
 	 * USAGES
 	 * "How is a payment method's fetchTransactionInfo() used?" https://mage2.pro/t/678
+	 * @param string $transactionId
+	 * @return array(string => mixed)
 	 */
-	final function fetchTransactionInfo(II $payment, $transactionId):array {return [];}
+	final function fetchTransactionInfo(II $p, $transactionId):array {return [];}
 
 	/**
 	 * 2016-02-08
