@@ -677,7 +677,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Plugin\Model\Checks\CanUseForCountry::aroundIsApplicable()
 	 * @used-by \Magento\Payment\Model\Checks\CanUseForCountry::isApplicable()
 	 * How is a payment method's canUseForCountry() used? https://mage2.pro/t/682
-	 * @param string $c
+	 * @param string $c 2022-11-26 We can not declare the argument's type because it is undeclared in the overriden method.
 	 */
 	final function canUseForCountry($c):bool {return $this->canUseForCountryP($c);}
 
