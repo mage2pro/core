@@ -56,9 +56,8 @@ function df_csv_parse_int($s):array {return df_int(df_csv_parse($s));}
  * @used-by \Df\Sentry\Client::send()
  * @used-by \Dfe\Moip\P\Reg::ga()
  * @used-by \Dfe\Sift\Payload\OQI::p()
- * @param string|string[] ...$args
  */
-function df_csv_pretty(...$args):string {return implode(', ', dfa_flatten($args));}
+function df_csv_pretty(string ...$args):string {return implode(', ', dfa_flatten($args));}
 
 /**
  * 2022-10-29 @deprecated It is unused.
