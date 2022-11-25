@@ -1090,10 +1090,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Df\Payment\Operation\Source\Order::ii()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
-	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
-	final function ii($k = null) {return dfad($this->getInfoInstance(), $k);}
+	final function ii(string $k = '') {return dfad($this->getInfoInstance(), $k);}
 
 	/**
 	 * 2016-03-06
