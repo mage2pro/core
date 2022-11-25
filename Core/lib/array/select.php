@@ -138,7 +138,7 @@ function dfac(F $f, $k = null, $d = null) {return dfa(dfcf($f, [], [], false, 1)
  * @param mixed|callable|null $d [optional]
  * @return _DO|AE|mixed
  */
-function dfad($o, $k = null, $d = null) {return is_null($k) ? $o : dfa(df_gd($o), $k, $d);}
+function dfad($o, $k = null, $d = null) {return df_nes($k) ? $o : dfa(df_gd($o), $k, $d);}
 
 /**
  * 2020-01-29
