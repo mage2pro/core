@@ -260,19 +260,6 @@ function dfa_repeated(array $a):array {return array_values(array_unique(array_di
 function dfa_unique_fast(array $a):array {return array_keys(@array_flip($a));}
 
 /**
- * 2020-01-29
- * @see df_args()
- * [$v] => $v
- * [[$v]] => [$v]
- * [[$v1, $v2]] => [$v1, $v2]
- * [$v1, $v2] => [$v1, $v2]
- * [$v1, $v2, [$v3]] => [$v1, $v2, $v3]
- * @used-by dfp_iia()
- * @return mixed|mixed[]
- */
-function dfa_unpack(array $a) {return !($c = count($a)) ? null : (1 === $c ? $a[0] : dfa_flatten($a));}
-
-/**
  * 2016-09-02
  * @see dfa_deep_unset()
  * @uses array_flip() correctly handles empty arrays.

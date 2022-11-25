@@ -4,21 +4,6 @@ use Exception as E;
 use Magento\Framework\App\Filesystem\DirectoryList;
 
 /**
- * 2015-12-25
- * Этот загадочный метод призван заменить код вида: `is_array($a) ? $a : func_get_args()`.
- * Теперь можно писать так: df_args(func_get_args()).
- * @used-by df_clean()
- * @used-by df_clean_keys()
- * @used-by df_csv()
- * @used-by df_csv_pretty_quote()
- * @used-by df_format()
- * @used-by dfa_combine_self()
- * @used-by dfa_unset()
- * @see dfa_unpack()
- */
-function df_args(array $a):array {return !$a || !is_array($a[0]) ? $a : $a[0];}
-
-/**
  * 2017-02-07
  * @used-by \Df\Payment\Block\Info::extended()
  * @used-by \Df\Payment\Method::test()
