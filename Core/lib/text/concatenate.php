@@ -8,13 +8,15 @@
 function df_c(...$a):string {return implode(dfa_flatten($a));}
 
 /**
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_ccc()
  * @used-by df_js_data()
  * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
+ * @param string|string[] $a
  */
-function df_cc(string $glue, string ...$a):string {return implode($glue, dfa_flatten($a));}
+function df_cc(string $glue, ...$a):string {return implode($glue, dfa_flatten($a));}
 
 /**
  * 2016-08-13
