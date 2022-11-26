@@ -138,11 +138,11 @@ function df_post_h():PostHelper {return df_o(PostHelper::class);}
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by \Wolf\Filter\Controller\Garage\Remove::execute()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
- * @param string|string[]|null $k [optional]
+ * @param string|string[] $k [optional]
  * @param string|null|callable $d [optional]
  * @return string|array(string => string)
  */
-function df_request($k = null, $d = null) {$o = df_request_o(); return is_null($k) ? $o->getParams() : (
+function df_request($k = '', $d = null) {$o = df_request_o(); return df_nes($k) ? $o->getParams() : (
 	is_array($k) ? dfa($o->getParams(), $k) : df_if1(is_null($r = $o->getParam($k)) || '' === $r, $d, $r)
 );}
 
