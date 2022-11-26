@@ -129,11 +129,10 @@ abstract class Settings {
 	/**
 	 * 2016-03-14
 	 * @used-by \Df\Payment\Settings\Options::allowed()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string[]
 	 */
-	final function csv($k = null, $s = null):array {return df_csv_parse($this->v($k ?: df_caller_f(), $s));}
+	final function csv(string $k = '', $s = null):array {return df_csv_parse($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2016-08-04
