@@ -19,25 +19,25 @@ function df_desc(string $s1, string $s2):string {return df_es($s1) ? $s2 : (df_e
  * @used-by df_error_create()
  * @used-by \Df\Core\Exception::comment()
  * @used-by \Df\Payment\W\Exception::__construct()
- * @param mixed ...$args
+ * @param mixed ...$a
  */
-function df_format(...$args):string { /** @var string $r */
-	$args = df_args($args);
+function df_format(...$a):string { /** @var string $r */
+	$a = df_args($a);
 	$r = null;
-	switch (count($args)) {
+	switch (count($a)) {
 		case 0:
 			$r = '';
 			break;
 		case 1:
-			$r = $args[0];
+			$r = $a[0];
 			break;
 		case 2:
-			if (is_array($args[1])) {
-				$r = strtr($args[0], $args[1]);
+			if (is_array($a[1])) {
+				$r = strtr($a[0], $a[1]);
 			}
 			break;
 	}
-	return !is_null($r) ? $r : df_sprintf($args);
+	return !is_null($r) ? $r : df_sprintf($a);
 }
 
 /**
