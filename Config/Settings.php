@@ -169,10 +169,9 @@ abstract class Settings {
 
 	/**
 	 * 2015-12-26
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final function nat($k = null, $s = null):int {return df_nat($this->v($k ?: df_caller_f(), $s));}
+	final function nat(string $k = '', $s = null):int {return df_nat($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-26
