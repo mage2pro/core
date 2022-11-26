@@ -79,6 +79,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
  * @used-by dfa_deep()
  * @used-by dfad()
  * @used-by \Df\Payment\Block\Info::si()
+ * @used-by \Df\Payment\Method::s()
  * @param mixed $v
  */
 function df_nes($v):bool {return is_null($v) || '' === $v;}

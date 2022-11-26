@@ -1528,20 +1528,19 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\AlphaCommerceHub\Method::optionTitle()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::urlBase()
 	 * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
-	 * @param string|null $k [optional]
 	 * @param mixed|callable $d [optional]
 	 * @return Settings|mixed
 	 */
-	function s($k = null, $d = null) {
-		$r = dfc($this, function() { /** @var Settings $r */
+	function s(string $k = '', $d = null) {
+		$r = dfc($this, function() {
 			if (!($c = df_con_hier($this, Settings::class, false))) { /** @var string $c */
 				df_error('Unable to find a proper «Settings» class for the «%s» payment module.',
 					df_module_name($this)
 				);
 			}
 			return new $c($this);
-		});
-		return is_null($k) ? $r : $r->v($k, null, $d);
+		}); /** @var Settings $r */
+		return df_nes($k) ? $r : $r->v($k, null, $d);
 	}
 
 	/**
