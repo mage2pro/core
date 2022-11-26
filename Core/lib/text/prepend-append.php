@@ -72,10 +72,12 @@ function df_pad0(int $length, string $number):string {return str_pad($number, $l
 function df_prepend(string $s, string $head):string {return df_starts_with($s, $head) ? $s : $head . $s;}
 
 /**
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_tab_multiline()
+ * @param string|string[] $a
  * @return string|string[]|array(string => string)
  */
-function df_tab(string ...$a) {return df_call_a(function(string $s):string {return "\t" . $s;}, $a);}
+function df_tab(...$a) {return df_call_a(function(string $s):string {return "\t" . $s;}, $a);}
 
 /**
  * @used-by \Df\Core\Format\Html\Tag::content()
