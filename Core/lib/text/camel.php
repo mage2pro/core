@@ -47,14 +47,16 @@ function df_camel_to_underscore(...$a) {return df_call_a(function(string $s):str
  * Note 3.
  * Today I have changed «?=[A-Z0-9]» => «?=[A-Z0-9]», so now it handles the cases with digits, e.g.:
  * «Dynamics365» => [«Dynamics», «365»]
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_api_name()
  * @used-by df_camel_to_underscore()
  * @used-by df_explode_class_camel()
+ * @param string|string[] $a
  * @return string[]|string[][]
  */
-function df_explode_camel(string ...$args):array {return df_call_a(function($name) {return preg_split(
+function df_explode_camel(...$a):array {return df_call_a(function($name) {return preg_split(
 	'#(?<=[a-z])(?=[A-Z0-9])#x', $name
-);}, $args);}
+);}, $a);}
 
 /**
  * 2016-08-10
