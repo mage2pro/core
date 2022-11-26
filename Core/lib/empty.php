@@ -92,6 +92,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
  * @used-by dfa()
  * @used-by dfa_deep()
  * @used-by dfad()
+ * @used-by dftr()
  * @used-by \Df\Framework\Log\Record::msg()
  * @used-by \Df\Payment\Block\Info::si()
  * @used-by \Df\Payment\Method::s()

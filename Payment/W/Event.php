@@ -30,11 +30,11 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-01-06
 	 * 2017-03-18 The type of the current transaction.
 	 * 2017-08-30
-	 * If you want to ignore an event in @see \Df\Payment\W\Strategy\ConfirmPending::_handle(), then:
-	 * 1) Return `true` from @see \Df\Payment\W\Event::isSuccessful()
-	 * 2) Return any value except \Df\Payment\W\Event::T_AUTHORIZE and \Df\Payment\W\Event::T_CAPTURE
-	 * from @see \Df\Payment\W\Event::ttCurrent().
-	 * This value will be the current transaction suffix:
+	 * 1) If you want to ignore an event in @see \Df\Payment\W\Strategy\ConfirmPending::_handle(), then:
+	 * 		1) Return `true` from @see \Df\Payment\W\Event::isSuccessful()
+	 * 		2) Return any value except \Df\Payment\W\Event::T_AUTHORIZE and \Df\Payment\W\Event::T_CAPTURE
+	 * 		from @see \Df\Payment\W\Event::ttCurrent().
+	 * 2) This value will be the current transaction suffix:
 	 * @used-by \Df\PaypalClone\W\Nav::id()
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * so it should be unique in a payment processing cycle:

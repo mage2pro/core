@@ -294,6 +294,7 @@ function dfa_unshift_assoc(&$a, string $k, $v):void  {
 
 /**
  * 2016-09-05
+ * 2022-11-27 Added the df_nes() check.
  * @used-by df_cfg_save()
  * @used-by df_url_bp()
  * @used-by ikf_pw_country()
@@ -322,4 +323,4 @@ function dfa_unshift_assoc(&$a, string $k, $v):void  {
  * @param array(int|string => mixed) $map
  * @return int|string|mixed
  */
-function dftr($v, array $map) {return dfa($map, $v, $v);}
+function dftr($v, array $map) {return df_nes($v) ? $v : dfa($map, $v, $v);}
