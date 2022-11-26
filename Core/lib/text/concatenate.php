@@ -2,8 +2,10 @@
 /**
  * 2016-10-17
  * 2022-10-31 @deprecated It is unused.
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * @param string|string[] $a
  */
-function df_c(string ...$a):string {return implode(dfa_flatten($a));}
+function df_c(...$a):string {return implode(dfa_flatten($a));}
 
 /**
  * @see df_ccc()
