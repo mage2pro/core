@@ -152,11 +152,11 @@ function dfad($o, $k = '', $d = null) {return df_nes($k) ? $o : dfa(df_gd($o), $
  * @used-by \Df\Payment\TM::res0()
  * @used-by \Dfe\CheckoutCom\Response::a()
  * @param object $o
- * @param string|string[]|null $k [optional]
+ * @param string|string[] $k [optional]
  * @param mixed|callable|null $d [optional]
  * @return mixed
  */
-function dfaoc($o, F $f, $k = null, $d = null) {return dfa(dfc($o, $f, [], false, 1), $k, $d);}
+function dfaoc($o, F $f, $k = '', $d = null) {return dfa(dfc($o, $f, [], false, 1), $k, $d);}
 
 /**
  * 2015-02-08
