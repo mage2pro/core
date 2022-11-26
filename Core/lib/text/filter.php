@@ -7,9 +7,8 @@
  * потому что они используют @uses htmlspecialchars() со вторым параметром @see ENT_COMPAT,
  * в результате чего одиночные кавычки не экранируются.
  * Ядро Magento не использует одиночные кавычки при формировании HTML
- * (в частности, в шаблонах *.phtml), поэтому, видимо, их устраивает режим ENT_COMPAT.
- * Российская сборка Magento использует при формировании HTML одиночные кавычки,
- * поэтому нам нужен режим ENT_QUOTES.
+ * (в частности, в шаблонах *.phtml), поэтому, видимо, их устраивает режим  @see ENT_COMPAT.
+ * Российская сборка Magento использует при формировании HTML одиночные кавычки, поэтому нам нужен режим @see ENT_QUOTES.
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_ejs()
