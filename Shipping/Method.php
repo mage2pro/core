@@ -588,24 +588,24 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	/**
 	 * 2018-04-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * @see \Df\Payment\Method::s()
+	 * @see \Df\Shipping\Settings::scopeDefault()
 	 * @used-by dfss()
 	 * @used-by self::getConfigData()
 	 * @used-by self::isActive()
-	 * @see \Df\Shipping\Settings::scopeDefault()
-	 * @param string|null $k [optional]
 	 * @param mixed|callable $d [optional]
 	 * @return Settings|mixed
 	 */
-	function s($k = null, $d = null) {
-		$r = dfc($this, function() { /** @var Settings $r */
+	function s(string $k = '', $d = null) {
+		$r = dfc($this, function() {
 			if (!($c = df_con_hier($this, Settings::class, false))) { /** @var string $c */
 				df_error('Unable to find a proper «Settings» class for the «%s» shipping module.',
 					df_module_name($this)
 				);
 			}
 			return new $c($this);
-		});
-		return is_null($k) ? $r : $r->v($k, null, $d);
+		}); /** @var Settings $r */
+		return df_nes($k) ? $r : $r->v($k, null, $d);
 	}
 
 	/**

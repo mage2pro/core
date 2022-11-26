@@ -1509,6 +1509,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2017-07-02
 	 * Сегодня заметил, что параметр scope сюда никто не передаёт, поэтому убрал его.
 	 * @see \Df\Payment\Settings::scopeDefault()
+	 * @see \Df\Shipping\Method::s()
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by dfps()
 	 * @used-by self::action()
