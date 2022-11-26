@@ -38,6 +38,7 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-01-18
+	 * 2022-11-27 The result could be an empty string.
 	 * @used-by self::signatureProvided()
 	 * @see \Dfe\AllPay\W\Event::k_signature()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::k_signature()
@@ -48,9 +49,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Robokassa\W\Event::k_signature()
 	 * @see \Dfe\SecurePay\W\Event::k_signature()
 	 * @see \Dfe\YandexKassa\W\Event::k_signature()
-	 * @return string|null
 	 */
-	abstract protected function k_signature();
+	abstract protected function k_signature():string;
 
 	/**
 	 * 2017-01-18
