@@ -64,9 +64,8 @@ class O extends \Df\Core\O {
 	 * 2016-08-10
 	 * @uses df_nat0()
 	 * @param int|callable $d [optional]
-	 * @param string|null $k [optional]
 	 */
-	final protected function nat0($d = 0, $k = null):int {return $this->filter('df_nat0', $d, $k);}
+	final protected function nat0($d = 0, string $k = ''):int {return $this->filter('df_nat0', $d, $k);}
 
 	/**
 	 * 2015-12-30
