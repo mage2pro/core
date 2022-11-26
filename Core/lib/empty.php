@@ -5,6 +5,7 @@
  * @used-by df_leaf()
  * @used-by df_leaf_sne()
  * @used-by sift_prefix()
+ * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Df\Payment\W\Handler::log()
  * @param mixed $v
  */

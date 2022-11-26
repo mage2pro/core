@@ -117,20 +117,15 @@ abstract class Settings extends \Df\API\Settings {
 	 * @used-by \Df\Payment\CustomerReturn::execute()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\CheckoutCom\Response::messageC()
-	 * @param string|null $m [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final function messageFailure($m = null, $s = null):string {return df_var(
+	final function messageFailure(string $m = '', $s = null):string {return df_var(
 		$this->v(null, $s, function() use($m) {return df_cc_br(
 			'Sorry, the payment attempt is failed.'
-			,!$m ? null : "The payment service's message is «<b>{originalMessage}</b>»."
+			,df_es($m) ? $m : "The payment service's message is «<b>{originalMessage}</b>»."
 			,'Please try again, or try another payment method.'
 		);})
-		/**
-		 * 2017-12-03
-		 * The Checkout.com module uses the `message` key:
-		 * @used-by \Dfe\CheckoutCom\Response::messageC()
-		 */
+		/** 2017-12-03 The Checkout.com module uses the `message` key: @used-by \Dfe\CheckoutCom\Response::messageC() */
 		,array_fill_keys(['message', 'originalMessage'], $m)
 	);}
 

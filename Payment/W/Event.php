@@ -201,9 +201,8 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @see \Df\PaypalClone\W\Event::statusT()
 	 * @see \Dfe\Stripe\W\Event\Source::statusT()
-	 * @return string|null
 	 */
-	function statusT() {return null;}
+	function statusT():string {return '';}
 
 	/**
 	 * 2017-03-10
