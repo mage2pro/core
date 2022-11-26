@@ -50,8 +50,7 @@ function df_remove_non_digits(string $s):string {return preg_replace('[\D]', '',
  *	 	strtr($s, array_fill_keys($wordsToRemove, ''))
  * Он корректен, но новый алгоритм быстрее, потому что не требует вызова нестандартных функций.
  * https://php.net/str_replace
- * «If replace has fewer values than search,
- * then an empty string is used for the rest of replacement values.»
+ * «If replace has fewer values than search, then an empty string is used for the rest of replacement values.»
  * http://3v4l.org/9qvC4
  * @used-by df_phone_explode()
  * @used-by \Dfe\IPay88\Signer::adjust()
