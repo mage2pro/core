@@ -102,10 +102,9 @@ final class TM {
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
 	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
-	 * @param string ...$k
 	 * @return Ev|string|null
 	 */
-	function responseF(...$k) {return $this->response(...$k);}
+	function responseF(string ...$k) {return $this->response(...$k);}
 
 	/**
 	 * 2016-07-18
