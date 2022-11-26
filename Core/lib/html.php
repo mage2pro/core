@@ -11,6 +11,7 @@ function df_html_b(...$a) {return df_call_a(function(string $s) {return df_tag('
 
 /**
  * 2015-10-27
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_fa_link()
  * @used-by df_fe_init()
  * @used-by \Df\Phone\Js::_toHtml()
@@ -20,10 +21,11 @@ function df_html_b(...$a) {return df_call_a(function(string $s) {return df_tag('
  * @used-by \Dfe\Markdown\FormElement::css()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
+ * @param string|string[] $a
  */
-function df_link_inline(string ...$args):string {return df_call_a(function($res) {return df_resource_inline(
+function df_link_inline(...$a):string {return df_call_a(function($res) {return df_resource_inline(
 	$res, function($url) {return df_tag('link', ['href' => $url, 'rel' => 'stylesheet', 'type' => 'text/css'], null, false);}
-);}, $args);}
+);}, $a);}
 
 /**
  * 2015-12-11
