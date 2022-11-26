@@ -17,19 +17,16 @@ use Zend_Date as ZD;
  */
 function df_date(ZD $date = null):ZD {return $date ?: ZD::now();}
 
-/**
- * 2022-10-29 @deprecated It is unused.
- * @param int|int[] ...$args
- */
-function df_date_create(...$args):ZD {
-	$numberOfArguments = count($args); /** @var int $numberOfArguments */
+/** 2022-10-29 @deprecated It is unused. */
+function df_date_create(int ...$a):ZD {
+	$numberOfArguments = count($a); /** @var int $numberOfArguments */
 	$paramKeys = ['year', 'month', 'day', 'hour', 'minute', 'second']; /** @var string[] $paramKeys */
 	$countOfParamKeys = count($paramKeys); /** @var int $countOfParamKeys */
 	df_assert_between($numberOfArguments, 1, $countOfParamKeys);
 	if ($countOfParamKeys > $numberOfArguments) {
-		$args = array_merge($args, array_fill(0, $countOfParamKeys - $numberOfArguments, 0));
+		$a = array_merge($a, array_fill(0, $countOfParamKeys - $numberOfArguments, 0));
 	}
-	return new ZD(array_combine($paramKeys, $args));
+	return new ZD(array_combine($paramKeys, $a));
 }
 
 /**
