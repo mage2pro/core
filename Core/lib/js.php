@@ -72,10 +72,9 @@ function df_js_c(string $s, array $p = []):string {return df_js(null, 'Magento_U
  *			'google' => $s->keyGoogle(), 'mapBox' => $s->keyMapBox(), 'openCage' => $s->keyOpenCage()
  *		]]);
  * https://github.com/inkifi/map/blob/0.1.5/view/frontend/templates/create.phtml#L4-L6
- * @param string|string[] $n
- * @param mixed $v
+ * @param array(string => mixed) $v
  */
-function df_js_data($n, $v):string {return df_tag('script', ['type' => 'text/javascript'], sprintf(
+function df_js_data(string $n, array $v):string {return df_tag('script', ['type' => 'text/javascript'], sprintf(
 	"window.%s = %s;", df_cc('.', $n), df_ejs($v)
 ));}
 
