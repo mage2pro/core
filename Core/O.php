@@ -73,11 +73,11 @@ class O implements \ArrayAccess {
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Create::t02()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Get::t01()
 	 * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t01()
-	 * @param string|string[]|null $k [optional]
+	 * @param string|string[] $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	function a($k = null, $d = null) {return dfa($this->_a, $k, $d);}
+	function a($k = '', $d = null) {return dfa($this->_a, $k, $d);}
 
 	/**
 	 * 2017-07-13
