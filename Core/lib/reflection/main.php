@@ -24,6 +24,8 @@ function df_cc_class(...$a):string {return implode('\\', df_clean(dfa_flatten($a
  * Мы используем это в модулях Stripe и Checkout.com.
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_cc_class()
+ * @used-by df_con_hier_suf_ta()
+ * @used-by \Dfe\CheckoutCom\Handler::p()
  * @param string|string[] $a
  */
 function df_cc_class_uc(...$a):string {return df_cc_class(df_ucfirst(dfa_flatten($a)));}
@@ -325,20 +327,18 @@ function df_con_hier_suf($c, string $suf, bool $throw = true) {/** @var string|n
 function df_con_hier_suf_ta($c, $sufBase, $ta, bool $throw = true) {
 	$ta = df_array($ta);
 	$sufBase = df_cc_class($sufBase);
-	$result = null; /** @var string|null $result */
+	$r = null; /** @var string|null $r */
 	$taCopy = $ta; /** @var string[] $taCopy */
 	$count = count($ta); /** @var int $count */
-	while (-1 < $count && !($result = df_con($c, df_cc_class_uc($sufBase, $ta), null, false))) {
+	while (-1 < $count && !($r = df_con($c, df_cc_class_uc($sufBase, $ta), null, false))) {
 		array_pop($ta); $count--;
 	}
 	# 2017-01-11 Используем df_cts(), чтобы отсечь окончание «\Interceptor».
 	/** @var string|false $parent */
-	if (!$result && ($parent = get_parent_class(df_cts($c)))) {
-		$result = df_con_hier_suf_ta($parent, $sufBase, $taCopy, $throw);
+	if (!$r && ($parent = get_parent_class(df_cts($c)))) {
+		$r = df_con_hier_suf_ta($parent, $sufBase, $taCopy, $throw);
 	}
-	return $result || !$throw ? $result :
-		df_error("The «%s» class is required.", df_cc_class_uc(df_module_name_c($c), $sufBase, $ta))
-	;
+	return $r || !$throw ? $r : df_error("The «%s» class is required.", df_cc_class_uc(df_module_name_c($c), $sufBase, $ta));
 }
 
 /**
