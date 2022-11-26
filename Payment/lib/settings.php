@@ -37,7 +37,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Dfe\Vantiv\API\Client::_construct()
  * @used-by \Dfe\Vantiv\API\Client::proxy()
  * @param M|II|OP|QP|O|Q|T|object|string|null $m
- * @param string|null $k [optional]
  * @return S|mixed
  */
-function dfps($m, $k = null) {return dfp_my($m = dfpm($m)) ? $m->s($k) : $m->getConfigData($k);}
+function dfps($m, string $k = '') {return dfp_my($m = dfpm($m)) ? $m->s($k) : $m->getConfigData($k);}
