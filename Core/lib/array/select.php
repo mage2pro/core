@@ -84,8 +84,6 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @used-by \Dfe\AlphaCommerceHub\W\Event::providerRespL()
  * @used-by \Dfe\AmazonLogin\Customer::res()
  * @used-by \Dfe\CurrencyFormat\O::postProcess()
- * @used-by \Dfe\IPay88\Signer\Request::values()
- * @used-by \Dfe\IPay88\Signer\Response::values()
  * @used-by \Dfe\Robokassa\Signer\Request::values()
  * @used-by \Dfe\Robokassa\Signer\Response::values()
  * @used-by \Dfe\SecurePay\Signer\Request::values()
