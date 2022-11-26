@@ -18,9 +18,9 @@ function df_lang(string $locale = ''):string {return substr(df_locale($locale), 
  * 2017-04-15 
  * @used-by df_lang_ru_en() 
  * @used-by \Df\Config\Source\EnableYN::toOptionArray()
- * @param mixed ...$args
+ * @param mixed ...$a
  */
-function df_lang_ru(...$args):bool {return df_b($args, 'ru' === df_lang());}
+function df_lang_ru(...$a):bool {return df_b($a, 'ru' === df_lang());}
 
 /**               
  * 2017-09-03    
