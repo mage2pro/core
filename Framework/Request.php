@@ -5,24 +5,19 @@ final class Request {
 	/**
 	 * 2017-01-01 Возвращает параметры запроса без приставки «df-».
 	 * @used-by \Df\Payment\W\Reader::http()
-	 * @param string|null $k [optional]
 	 * @param mixed|null|callable $d [optional]
-	 * @return array(string => mixed)|mixed|null
+	 * @return array(string => mixed)
 	 */
-	static function clean($k = null, $d = null) {return dfac(function() {return dfa_unset(
-		df_request(), self::extraKeysRaw()
-	);}, $k, $d);}
+	static function clean() {return dfa_unset(df_request(), self::extraKeysRaw());}
 
 	/**
 	 * 2017-01-01 Возвращает параметры запроса с приставкой «df-», при этом удалив эту приставку.
 	 * @used-by \Df\Payment\W\Reader::__construct()
-	 * @param string|null $k [optional]
-	 * @param mixed|null|callable $d $key [optional]
-	 * @return array(string => mixed)|mixed|null
+	 * @return array(string => mixed)
 	 */
-	static function extra($k = null, $d = null) {return dfac(function() {return dfak_transform(
+	static function extra() {return dfak_transform(
 		function($k) {return df_trim_text_left($k, 'df-');}, dfa(df_request(), self::extraKeysRaw())
-	);}, $k, $d);}
+	);}
 
 	/**
 	 * 2017-01-01
