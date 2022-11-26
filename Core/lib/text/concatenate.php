@@ -2,9 +2,8 @@
 /**
  * 2016-10-17
  * 2022-10-31 @deprecated It is unused.
- * @param string|string[] ...$elements
  */
-function df_c(...$elements):string {return implode(dfa_flatten($elements));}
+function df_c(string ...$a):string {return implode(dfa_flatten($a));}
 
 /**
  * @see df_ccc()
