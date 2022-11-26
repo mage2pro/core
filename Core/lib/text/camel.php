@@ -60,9 +60,8 @@ function df_explode_camel(string ...$args):array {return df_call_a(function($nam
  * refund_issuED => RefundIssued
  * @see df_camel_to_underscore()
  * @used-by \Dfe\TwoCheckout\Handler::p()
- * @param string|string[] ...$args
  * @return string|string[]
  */
-function df_underscore_to_camel(...$args) {return df_call_a(function($s) {return implode(
+function df_underscore_to_camel(string ...$args) {return df_call_a(function($s) {return implode(
 	df_ucfirst(explode('_', mb_strtolower($s)))
 );}, $args);}
