@@ -31,7 +31,7 @@ function df_cache_enabled(string $type):bool {
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
- * @param string|string[]|null $k
+ * @param string|string[] $k
  * @param string[] $tags [optional]
  * @param mixed ...$args [optional]
  * @return mixed
