@@ -11,12 +11,14 @@
  * Российская сборка Magento использует при формировании HTML одиночные кавычки,
  * поэтому нам нужен режим ENT_QUOTES.
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_ejs()
  * @used-by cs_quote_description() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/107)
  * @used-by Dfe_Stripe/view/frontend/templates/multishipping.phtml
+ * @param string|string[] $a
  * @return string|string[]
  */
-function df_e(string ...$a) {return df_call_a(function(string $s):string {return htmlspecialchars(
+function df_e(...$a) {return df_call_a(function(string $s):string {return htmlspecialchars(
 	$s, ENT_QUOTES, 'UTF-8', false
 );}, $a);}
 
