@@ -15,9 +15,8 @@ function df_cc_class(string ...$args):string {return implode('\\', df_clean(dfa_
  * df_cc_class_uc('aa', ['bb', 'cc']) => Aa\Bb\Cc
  * Мы используем это в модулях Stripe и Checkout.com.
  * @see df_cc_class()
- * @param string|string[] ...$args
  */
-function df_cc_class_uc(...$args):string {return df_cc_class(df_ucfirst(dfa_flatten($args)));}
+function df_cc_class_uc(string ...$args):string {return df_cc_class(df_ucfirst(dfa_flatten($args)));}
 
 /**
  * 2016-08-10 Если класс не указан, то вернёт название функции. Поэтому в качестве $a1 можно передавать null.
