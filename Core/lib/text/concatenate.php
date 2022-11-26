@@ -20,12 +20,14 @@ function df_cc(string $glue, ...$a):string {return implode($glue, dfa_flatten($a
 
 /**
  * 2016-08-13
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Dfe\AllPay\Choice::title()
  * @used-by \Dfe\Square\API\Validator::short()
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
+ * @param string|string[] $a
  */
-function df_cc_br(string ...$a):string {return df_ccc("<br>", dfa_flatten($a));}
+function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
 
 /**
  * @used-by df_api_rr_failed()
