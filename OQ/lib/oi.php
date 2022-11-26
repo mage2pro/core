@@ -7,13 +7,12 @@ use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OIC;
 /**
  * 2019-02-27 @deprecated It is unused.
  * @param string|OI $v
- * @param string|null $k[optional]
  */
-function df_oi($v, $k = null):OI {
+function df_oi($v, string $k = ''):OI {
 	if (df_is_oi($v)) {
 		$r = $v;
 	}
-	elseif (is_null($k)) {
+	elseif (df_nes($k)) {
 		$r = df_oi_r()->get($v);
 	}
 	else {

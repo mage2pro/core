@@ -74,6 +74,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
 /**
  * 2016-08-04
  * @used-by df_metadata()
+ * @used-by df_oi()
  * @used-by dfa()
  * @used-by dfa_deep()
  * @used-by dfad()
