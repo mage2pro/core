@@ -63,8 +63,7 @@ function dfpm(...$args) {return dfcf(function(...$args) {
 		if (!$src->getMethod()) {
 			df_error(
 				'You can not use the dfpm() function without arguments here '
-				.'because the current customer has not chosen a payment method '
-				.'for the current quote yet.'
+				.'because the current customer has not chosen a payment method for the current quote yet.'
 			);
 		}
 	}
