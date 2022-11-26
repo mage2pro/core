@@ -73,10 +73,9 @@ function df_prepend(string $s, string $head):string {return df_starts_with($s, $
 
 /**
  * @used-by df_tab_multiline()
- * @param string|string[] ...$args
  * @return string|string[]|array(string => string)
  */
-function df_tab(...$args) {return df_call_a(function($text) {return "\t" . $text;}, $args);}
+function df_tab(string ...$a) {return df_call_a(function($text) {return "\t" . $text;}, $a);}
 
 /**
  * @used-by \Df\Core\Format\Html\Tag::content()
