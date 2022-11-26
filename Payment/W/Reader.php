@@ -62,11 +62,11 @@ class Reader implements IEvent {
 	 * @used-by self::error()
 	 * @used-by self::rr()
 	 * @used-by self::t()
-	 * @param string|string[]|null $k [optional]
+	 * @param string|string[] $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final function r($k = null, $d = null) {return dfa($this->_req, $k, $d);}
+	final function r($k = '', $d = null) {return dfa($this->_req, $k, $d);}
 
 	/**
 	 * 2017-01-12

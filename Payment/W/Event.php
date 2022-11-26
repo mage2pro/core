@@ -170,11 +170,11 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\TBCBank\W\Event::rrn()
 	 * @used-by \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
 	 * @used-by \Dfe\YandexKassa\Result::attributes()
-	 * @param string|string[]|null $k [optional]
+	 * @param string|string[] $k [optional]
 	 * @param string|null $d [optional]
 	 * @return string|int|mixed|null|array(string => mixed)
 	 */
-	final function r($k = null, $d = null) {return $this->_r->r($k, $d);}
+	final function r($k = '', $d = null) {return $this->_r->r($k, $d);}
 
 	/**
 	 * 2017-03-13
