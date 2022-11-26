@@ -112,9 +112,8 @@ function df_cc_path_t(string ...$a):string {return df_append(df_cc_path(dfa_flat
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @used-by \TFC\GoogleShopping\Att\Price::format() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/6)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
- * @param string|string[] ...$args
  */
-function df_cc_s(...$args):string {return df_ccc(' ', dfa_flatten($args));}
+function df_cc_s(string ...$a):string {return df_ccc(' ', dfa_flatten($a));}
 
 /**
  * @see df_cc()
