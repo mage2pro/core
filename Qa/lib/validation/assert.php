@@ -257,24 +257,18 @@ function df_bool($v):bool {
  * потому что правый операнд instanceof может быть строковой переменной, но не может быть просто строкой!
  * https://php.net/manual/language.operators.type.php#example-148
  * 2021-05-31 @deprecated It is unused.
- * @param mixed $v
- * @param string|string[] $class
+ * 2022-11-26
+ * `object` as an argument type is not supported by PHP < 7.2:
+ * https://github.com/mage2pro/core/issues/174#user-content-object
+ * @param object $v
  */
-function df_is($v, $class):bool {/** @var bool $r */
-	if (2 < func_num_args()) {
-		$arguments = func_get_args(); /** @var mixed[] $arguments */
-		$class = df_tail($arguments); /** @var string[] $classes */
-	}
-	if (!is_array($class)) {
-		$r = $v instanceof $class;
-	}
-	else {
-		$r = false;
-		foreach ($class as $classItem) {/** @var string $classItem */
-			if ($v instanceof $classItem) {
-				$r = true;
-				break;
-			}
+function df_is($v, string ...$cc):bool {/** @var bool $r */
+	df_find()
+	$r = false;
+	foreach ($cc as $c) {/** @var string $c */
+		if ($v instanceof $c) {
+			$r = true;
+			break;
 		}
 	}
 	return $r;

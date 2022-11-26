@@ -3,6 +3,9 @@ use Df\Core\Exception as DFE;
 
 /**
  * 2016-10-25 Оказалось, что в ядре нет такой функции.
+ * 2022-11-26
+ * @see array_search() looks only for a static value (does not support a comparison closure):
+ * https://www.php.net/manual/function.array-search.php
  * @used-by df_bt_has()
  * @used-by df_ends_with()
  * @used-by df_handle_prefix()
