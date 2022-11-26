@@ -164,13 +164,12 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\AllPay\Settings::hashIV()
 	 * @used-by \Dfe\AllPay\Settings::hashKey()
 	 * @used-by \Dfe\SecurePay\Settings::transactionPassword()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses self::p()
 	 * @return mixed
 	 */
-	final protected function testablePV($k = null, $s = null, $d = null) {return $this->testableGeneric(
+	final protected function testablePV(string $k = '', $s = null, $d = null) {return $this->testableGeneric(
 		$k ?: df_caller_f(), ['p', 'v'], $s, $d
 	);}
 
