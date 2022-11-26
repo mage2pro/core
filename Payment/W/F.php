@@ -88,12 +88,11 @@ class F {
 	 * 2022-11-10 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
 	 * @used-by self::event()
 	 * @used-by self::handler()
-	 * @param string $base
 	 * @param mixed ...$a
 	 * @return object
 	 * @throws Critical|Ignored
 	 */
-	private function aspect($base, ...$a) {return dfc($this, function($base, ...$a) {return
+	private function aspect(string $base, ...$a) {return dfc($this, function(string $base, ...$a) {return
 		df_newa($this->c(df_class_l($base)), $base, ...$a)
 	;}, func_get_args());}
 
@@ -116,7 +115,7 @@ class F {
 	private function c(string $a, bool $critical = false):string {
 		$r = $this->_r; /** @var R $r */
 		$m = $this->_m; /** @var M $m */
-		$t = $r->t(); /** @var string|null $t */
+		$t = $r->t(); /** @var string $t */
 		/**
 		 * 2017-03-16
 		 * @uses \Dfe\AllPay\W\F::sufEvent()
@@ -140,10 +139,9 @@ class F {
 	/**
 	 * 2017-03-15 Cпуск по иерархии наследования.
 	 * @used-by self::c()
-	 * @param string|null ...$s
 	 * @return string|null
 	 */
-	private function try_(...$s) {return df_con_hier_suf($this->_m, df_cc_class_uc('W', $s), false);}
+	private function try_(string $s) {return df_con_hier_suf($this->_m, df_cc_class_uc('W', $s), false);}
 
 	/**
 	 * 2017-03-15 Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.

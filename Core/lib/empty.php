@@ -5,6 +5,7 @@
  * @used-by df_leaf()
  * @used-by df_leaf_sne()
  * @used-by sift_prefix()
+ * @used-by \Df\Payment\W\Handler::log()
  * @param mixed $v
  */
 function df_es($v):bool {return '' === $v;}

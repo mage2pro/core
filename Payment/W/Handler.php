@@ -210,7 +210,7 @@ abstract class Handler implements IMA {
 		else {
 			$ev = $this->_e; /** @var Event $ev */
 			$v = df_ccc(': ', "[{$title}] {$ev->tl()}", $ev->statusT());
-			$suffix = is_null($t = $ev->t()) ? null : df_fs_name($t); /** @var string|null $t $suffix */
+			$suffix = df_es($t = $ev->t()) ? '' : df_fs_name($t); /** @var string $t $suffix */
 		}
 		df_sentry_m($m)->user(['id' => $title]);
 		dfp_sentry_tags($m);
