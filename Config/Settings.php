@@ -353,12 +353,11 @@ abstract class Settings {
 	/**
 	 * 2016-01-29 $i — номер строки, $j — номер столбца.
 	 * @used-by \Dfe\SalesSequence\Settings::affix()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param string|null $d [optonal]
 	 * @return string|null
 	 */
-	final protected function _matrix(int $i, int $j, $k = null, $s = null, $d = null) {return
+	final protected function _matrix(int $i, int $j, string $k = '', $s = null, $d = null) {return
 		dfa(dfa(dfc($this, function($k, $s) {return
 			$this->json($k, $s)
 		;}, [$k ?: df_caller_f(), df_scope_code($this->scope($s))]), $i, []), $j, $d)
