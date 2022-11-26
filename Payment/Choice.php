@@ -53,13 +53,6 @@ class Choice {
 	final protected function req(string ...$k) {return $this->tm()->req(...$k);}
 
 	/**
-	 * 2017-04-17 Возвращает параметры ответа на первичный запрос магазина к ПС.
-	 * 2017-11-20 @deprecated It is unused.
-	 * @return array(string => string)|string|null
-	 */
-	final protected function res0(string ...$k) {return $this->tm()->res0(...$k);}
-
-	/**
 	 * 2017-04-17
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\AllPay\Choice::title()
