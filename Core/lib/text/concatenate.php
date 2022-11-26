@@ -92,9 +92,8 @@ function df_cc_path(string ...$a):string {return df_ccc('/', dfa_flatten($a));}
 /**
  * 2016-05-31
  * @used-by \Df\GoogleFont\Fonts\Fs::baseRelative()
- * @param string|string[] ...$args
  */
-function df_cc_path_t(...$args):string {return df_append(df_cc_path(dfa_flatten($args)), '/');}
+function df_cc_path_t(string ...$a):string {return df_append(df_cc_path(dfa_flatten($a)), '/');}
 
 /**
  * 2016-08-10
