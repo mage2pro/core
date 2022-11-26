@@ -111,7 +111,15 @@ function dfa(array $a, $k, $d = null) {return
 	# 2016-08-07
 	# В Closure мы можем безнаказанно передавать параметры, даже если closure их не поддерживает https://3v4l.org/9Sf7n
 	df_nes($k) ? $a : (is_array($k)
-		? (!$k ? $a : dfa_select_ordered($a, $k)) # 2022-11-26 Added !$k
+		/**
+		 * 2022-11-26
+		 * Added `!$k`.
+		 * @see df_arg() relies on it if its argument is an empty array:
+		 *		df_arg([]) => []
+		 *		dfa($a, df_arg([])) => $a
+		 * https://3v4l.org/C09vn
+		 */
+		? (!$k ? $a : dfa_select_ordered($a, $k))
 		: (isset($a[$k]) ? $a[$k] : (df_contains($k, '/') ? dfa_deep($a, $k, $d) : df_call_if($d, $k)))
 	)
 ;}
