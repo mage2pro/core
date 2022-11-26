@@ -182,11 +182,10 @@ class Reader implements IEvent {
 	/**
 	 * 2017-03-10
 	 * @used-by self::testData()
-	 * @param string|null $k
 	 * @param string|null $d
 	 * @return array(string => mixed)|mixed|null
 	 */
-	private function test($k = null, $d = null) {return dfa($this->_test, $k, $d);}
+	private function test(string $k = '', $d = null) {return dfa($this->_test, $k, $d);}
 
 	/**
 	 * 2017-03-11
