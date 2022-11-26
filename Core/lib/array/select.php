@@ -118,6 +118,7 @@ function dfa(array $a, $k, $d = null) {return
 
 /**
  * 2020-01-29
+ * @see dfaoc()
  * @used-by df_credentials()
  * @used-by dfe_portal_module()
  * @used-by \Df\Framework\Request::clean()
@@ -145,6 +146,7 @@ function dfad($o, $k = null, $d = null) {return df_nes($k) ? $o : dfa(df_gd($o),
  * 2020-01-29
  * 2022-11-17
  * `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
+ * @see dfac()
  * @used-by \Df\Config\A::get()
  * @used-by \Df\Framework\Form\Element\Fieldset::v()
  * @used-by \Df\Payment\TM::req()

@@ -41,7 +41,8 @@ final class TM {
 	 * 2017-03-22 Возвращает параметры первичного запроса магазина к ПС.
 	 * 2017-11-12
 	 * It returns data of the first request to the PSP's API (from the current payment's first transaction).
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
+	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Df\Payment\Choice::req()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
@@ -51,10 +52,9 @@ final class TM {
 	 * @used-by \Dfe\TBCBank\Block\Info::ciId()
 	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
-	 * @param string|string[]|null $k [optional]
 	 * @return string|null|array(string => string)
 	 */
-	function req($k = null) {return dfaoc($this, function() {return df_trd($this->tReq(), M::IIA_TR_REQUEST);}, $k);}
+	function req(string ...$k) {return dfaoc($this, function() {return df_trd($this->tReq(), M::IIA_TR_REQUEST);}, df_arg($k));}
 
 	/**
 	 * 2016-07-13

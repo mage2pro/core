@@ -31,6 +31,7 @@ use Df\Core\RAM;
  * ---
  * @used-by dfaoc()
  * @see df_prop()
+ * @see dfaoc()
  * @param object $o
  * @return mixed
  */
@@ -102,6 +103,7 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * и поэтому Closure не уникальна.
  * 2017-08-11 The cache tags. A usage example: @see df_cache_get_simple()
  * 2017-01-02 Задавайте параметр $offset в том случае, когда dfc() вызывается опосредованно. Например, так делает @see dfac().
+ * @see dfac()
  * @used-by df_category_children_map()
  * @used-by df_google_init_service_account()
  * @used-by df_modules_my()

@@ -50,7 +50,7 @@ class Choice {
 	 * @used-by \Dfe\AlphaCommerceHub\Choice::id()
 	 * @return array(string => string)|string|null
 	 */
-	final protected function req(string ...$k) {return $this->tm()->req(df_arg($k));}
+	final protected function req(string ...$k) {return $this->tm()->req(...$k);}
 
 	/**
 	 * 2017-04-17 Возвращает параметры ответа на первичный запрос магазина к ПС.
