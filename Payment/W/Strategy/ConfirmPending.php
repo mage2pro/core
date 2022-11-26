@@ -88,8 +88,7 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 			 */
 			if ($succ = !df_request(Operation::FAILURE) && $e->isSuccessful()) { /** @var bool $succ */
 				df_redirect_to_success();
-				dftr();
-				if ($action = dfa([Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C], $e->ttCurrent())) {
+				if ($action = dfa_strict([Ev::T_AUTHORIZE => AC::A, Ev::T_CAPTURE => AC::C], $e->ttCurrent())) {
 					/** @var string|null $action */
 					$op->setIsTransactionClosed(AC::C === $action);
 					/**

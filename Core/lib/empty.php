@@ -91,6 +91,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
  * @used-by df_oi()
  * @used-by dfa()
  * @used-by dfa_deep()
+ * @used-by dfa_strict()
  * @used-by dfad()
  * @used-by dftr()
  * @used-by \Df\Framework\Log\Record::msg()

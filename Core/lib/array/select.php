@@ -58,6 +58,7 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @used-by df_trd()
  * @used-by df_visitor_ip()
  * @used-by dfa_prepend()
+ * @used-by dfa_strict()
  * @used-by dfac()
  * @used-by dfad()
  * @used-by dfaoc()
@@ -115,6 +116,14 @@ function dfa(array $a, $k, $d = null) {return
 		: (isset($a[$k]) ? $a[$k] : (df_contains($k, '/') ? dfa_deep($a, $k, $d) : df_call_if($d, $k)))
 	)
 ;}
+
+/**
+ * 2022-11-27
+ * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @param string|int|null $k
+ * @return array|mixed|null
+ */
+function dfa_strict(array $a, $k) {return df_nes($k) ? null : dfa($a, $k);}
 
 /**
  * 2020-01-29
