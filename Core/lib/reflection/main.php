@@ -25,7 +25,10 @@ function df_cc_class(...$a):string {return implode('\\', df_clean(dfa_flatten($a
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_cc_class()
  * @used-by df_con_hier_suf_ta()
+ * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()
+ * @used-by \Df\Payment\W\F::try_()
  * @used-by \Dfe\CheckoutCom\Handler::p()
+ * @used-by \Dfe\Moip\Method::getInfoBlockType()
  * @param string|string[] $a
  */
 function df_cc_class_uc(...$a):string {return df_cc_class(df_ucfirst(dfa_flatten($a)));}
