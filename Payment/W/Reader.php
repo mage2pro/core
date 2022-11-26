@@ -163,7 +163,9 @@ class Reader implements IEvent {
 	 * @throws Critical
 	 */
 	private function error($reason):void {
-		($r = $this->r()) ? df_sentry_extra($this, 'Request', $r) : null;
+		if ($r = $this->r()) {
+			df_sentry_extra($this, 'Request', $r);
+		}
 		throw new Critical($this->_m, $this, "The request is invalid because $reason.");
 	}
 
