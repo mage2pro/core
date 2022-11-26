@@ -35,12 +35,11 @@ function df_strtoupper(string ...$a) {return df_call_a(function(string $s):strin
  * @used-by df_underscore_to_camel()
  * @used-by \Dfe\TwoCheckout\LineItem::build()
  * @used-by \Df\Config\Source\LetterCase::apply()
- * @param string|string[] ...$args
  * @return string|string[]
  */
-function df_ucfirst(...$args) {return df_call_a(function($s) {return
+function df_ucfirst(string ...$a) {return df_call_a(function(string $s):string {return
 	mb_strtoupper(mb_substr($s, 0, 1)) . mb_substr($s, 1)
-;}, $args);}
+;}, $a);}
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucwords()
