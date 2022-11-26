@@ -222,5 +222,5 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-03-18
 	 * @used-by self::validate()
 	 */
-	private function signatureProvided():string {return $this->rr($this->k_signature());}
+	private function signatureProvided():string {return $this->rr($this->k_signature(), '');}
 }
