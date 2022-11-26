@@ -341,7 +341,7 @@ abstract class Client {
 	 * @throws DFE
 	 * @return array(string => mixed)
 	 */
-	private function _p() {
+	private function _p():array {
 		$c = $this->_c; /** @var C $c */
 		$c->setHeaders($this->headers());
 		$c->setUri($this->url());
