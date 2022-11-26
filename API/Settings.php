@@ -197,13 +197,12 @@ abstract class Settings extends \Df\Config\Settings {
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @used-by self::merchantID()
 	 * @used-by self::publicKey()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses self::v()
 	 * @return mixed
 	 */
-	private function probablyTestable($k = null, $s = null, $d = null) {
+	private function probablyTestable(string $k = '', $s = null, $d = null) {
 		$k = $k ?: df_caller_f();
 		return $this->testableGeneric($k, 'v', $s, function() use($k, $s, $d) {return $this->v($k, $s, $d);});
 	}
