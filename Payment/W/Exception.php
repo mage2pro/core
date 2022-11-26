@@ -21,12 +21,10 @@ abstract class Exception extends \Df\Payment\Exception {
  	 * @used-by \Df\Payment\W\Reader::error()
 	 * @see \Df\Payment\W\Exception\Ignored::__construct()
 	 * @see \Df\PaypalClone\W\Exception\InvalidSignature::__construct()
-	 * @param M $m
-	 * @param IEvent $event
-	 * @param mixed ...$args
+	 * @param mixed ...$a
 	 */
-	function __construct(M $m, IEvent $event, ...$args) {
-		$this->_event = $event; $this->_m = $m; parent::__construct(df_format(...$args));
+	function __construct(M $m, IEvent $event, ...$a) {
+		$this->_event = $event; $this->_m = $m; parent::__construct(df_format(...$a));
 	}
 
 	/**
