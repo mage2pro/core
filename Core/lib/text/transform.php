@@ -23,10 +23,9 @@ function df_strtolower(string ...$a) {return df_call_a(function(string $s):strin
  * 2016-05-19
  * @see df_lcfirst
  * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
- * @param string|string[] ...$args
  * @return string|string[]
  */
-function df_strtoupper(...$args) {return df_call_a(function($s) {return mb_strtoupper($s);}, $args);}
+function df_strtoupper(string ...$a) {return df_call_a(function(string $s):string {return mb_strtoupper($s);}, $a);}
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
