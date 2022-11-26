@@ -114,10 +114,10 @@ function df_new(string $c, ...$a) {return new $c(...$a);}
  * @used-by \Df\API\Facade::p()
  * @used-by \Df\Payment\W\F::aspect()
  * @used-by \Df\Zf\Validate\StringT\Parser::getZendValidator()
- * @param mixed ...$args
+ * @param mixed ...$a
  * @return object
  */
-function df_newa(string $c, string $expected = '', ...$args) {return df_ar(df_new($c, ...$args), $expected);}
+function df_newa(string $c, string $expected = '', ...$a) {return df_ar(df_new($c, ...$a), $expected);}
 
 /**
  * 2016-01-06
