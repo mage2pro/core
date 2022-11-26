@@ -121,12 +121,11 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-12-24
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses b()
 	 */
-	final protected function testableB($k = null, $s = null, $d = null):bool {return $this->testableGeneric(
+	final protected function testableB(string $k = '', $s = null, $d = null):bool {return $this->testableGeneric(
 		$k ?: df_caller_f(), 'b', $s, $d
 	);}
 
