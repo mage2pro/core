@@ -130,6 +130,7 @@ function df_cc_path_t(...$a):string {return df_append(df_cc_path(dfa_flatten($a)
 function df_cc_s(...$a):string {return df_ccc(' ', dfa_flatten($a));}
 
 /**
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_cc()
  * @used-by df_asset_name()
  * @used-by df_cc_br()
@@ -151,5 +152,6 @@ function df_cc_s(...$a):string {return df_ccc(' ', dfa_flatten($a));}
  * @used-by \Dfe\AllPay\Charge::productUrls()
  * @used-by \Dfe\AmazonLogin\Customer::url()
  * @used-by \Dfe\TwoCheckout\Charge::liDiscount()
+ * @param string|string[] $a
  */
-function df_ccc(string $glue, string ...$a):string {return implode($glue, df_clean(dfa_flatten($a)));}
+function df_ccc(string $glue, ...$a):string {return implode($glue, df_clean(dfa_flatten($a)));}
