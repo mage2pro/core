@@ -25,11 +25,10 @@ final class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * @used-by \Dfe\CurrencyFormat\Settings::get()
 	 * @used-by \Dfe\Sift\Settings::pm()
 	 * @used-by \Doormall\Shipping\Settings::partners()
-	 * @param string|null $k [optional]
 	 * @return ArrayItem|array(string => ArrayItem)|null
 	 * @throws DFE
 	 */
-	function get($k = null) {return dfaoc($this, function() {
+	function get(string $k = '') {return dfaoc($this, function() {
 		$c = $this[self::$P__ITEM_CLASS]; /** @var string $c */
 		return df_index(
 			function(ArrayItem $o) {return $o->id();}
