@@ -25,11 +25,13 @@ function df_strtolower(...$a) {return df_call_a(function(string $s):string {retu
 
 /**
  * 2016-05-19
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_lcfirst
  * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
+ * @param string|string[] $a
  * @return string|string[]
  */
-function df_strtoupper(string ...$a) {return df_call_a(function(string $s):string {return mb_strtoupper($s);}, $a);}
+function df_strtoupper(...$a) {return df_call_a(function(string $s):string {return mb_strtoupper($s);}, $a);}
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
