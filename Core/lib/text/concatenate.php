@@ -60,9 +60,8 @@ function df_cc_br(string ...$a):string {return df_ccc("<br>", dfa_flatten($a));}
  * @used-by \Wyomind\SimpleGoogleShopping\Model\Observer::checkToGenerate(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/26)
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml
  * @used-by vendor/mage2pro/portal/view/frontend/templates/root.phtml
- * @param string|string[] ...$args
  */
-function df_cc_n(...$args):string {return df_ccc("\n", dfa_flatten($args));}
+function df_cc_n(string ...$a):string {return df_ccc("\n", dfa_flatten($a));}
 
 /**
  * 2015-12-01 Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
