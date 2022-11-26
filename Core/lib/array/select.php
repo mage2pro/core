@@ -2,7 +2,6 @@
 use Closure as F;
 use Magento\Config\Model\Config\Structure\AbstractElement as AE;
 use Magento\Framework\DataObject as _DO;
-use Traversable as T;
 
 /**
  * 2015-02-11
@@ -120,10 +119,25 @@ function dfa(array $a, $k, $d = null) {return
 /**
  * 2022-11-27
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
  * @param string|int|null $k
  * @return array|mixed|null
  */
-function dfa_strict(array $a, $k) {return df_nes($k) ? null : dfa($a, $k);}
+function dfa_strict(array $a, $k, bool $throw = true) {/** @var mixed $r */
+	if (df_nes($k)) {
+		if ($throw) {
+			df_error('[dfa_strict] The key is required but is not provided.');
+		}
+		$r = null;
+	}
+	else {
+		$r = dfa($a, $k);
+		if (is_null($r) && $throw) {
+			df_error("[dfa_strict] The array does not have a value for the key «{$k}».");
+		}
+	}
+	return $r;
+}
 
 /**
  * 2020-01-29
