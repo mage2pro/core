@@ -43,9 +43,8 @@ class O extends \Df\Core\O {
 	 * @used-by \Doormall\Shipping\Partner\Entity::fee()
 	 * @uses df_float()
 	 * @param float|callable $d [optional]
-	 * @param string|null $k [optional]
 	 */
-	final protected function f($d = 0.0, $k = null):float {return $this->filter('df_float', $d, $k);}
+	final protected function f($d = 0.0, string $k = ''):float {return $this->filter('df_float', $d, $k);}
 
 	/**
 	 * 2016-08-10
