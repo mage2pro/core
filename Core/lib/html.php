@@ -18,9 +18,8 @@ function df_html_b(string ...$args) {return df_call_a(function(string $s) {retur
  * @used-by \Dfe\Markdown\FormElement::css()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
- * @param string|string[] ...$args
  */
-function df_link_inline(...$args):string {return df_call_a(function($res) {return df_resource_inline(
+function df_link_inline(string ...$args):string {return df_call_a(function($res) {return df_resource_inline(
 	$res, function($url) {return df_tag('link', ['href' => $url, 'rel' => 'stylesheet', 'type' => 'text/css'], null, false);}
 );}, $args);}
 
