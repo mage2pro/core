@@ -302,10 +302,10 @@ abstract class Info extends _P {
 	 * @used-by \Df\StripeClone\Block\Info::cardNumberLabel()
 	 * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
-	 * @param mixed ...$args [optional]
+	 * @param mixed ...$a [optional]
 	 * @return bool|mixed
 	 */
-	final protected function extended(...$args) {return df_b($args, !$this->isSecureMode());}
+	final protected function extended(...$a) {return df_b($a, !$this->isSecureMode());}
 
 	/**
 	 * 2016-05-21   
