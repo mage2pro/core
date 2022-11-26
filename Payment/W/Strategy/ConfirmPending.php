@@ -149,9 +149,7 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 					# У меня-то он логируется в Sentry, но вот администратор магазина его не видит.
 					df_order_comment($o, $msg, true, true);
 					$this->h()->responder()->setError($msg);
-					# 2016-05-06
-					# «How to redirect a customer to the checkout payment step?»
-					# https://mage2.pro/t/1523
+					# 2016-05-06 «How to redirect a customer to the checkout payment step?» https://mage2.pro/t/1523
 					df_redirect_to_payment();
 				}
 			}
