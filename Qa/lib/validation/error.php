@@ -172,7 +172,7 @@ function df_error(...$a):void {
 /**
  * 2016-07-31
  * @used-by df_error()
- * @used-by df_error_create_html()
+ * @used-by df_error_html()
  * @used-by \Df\API\Client::_p()
  * @param string|string[]|mixed|E|Phrase|null $m [optional]
  */
