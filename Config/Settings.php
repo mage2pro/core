@@ -119,14 +119,12 @@ abstract class Settings {
 	final function b(string $k = '', $s = null, bool $d = false):int {return df_bool($this->v($k ?: df_caller_f(), $s, $d));}
 
 	/**
-	 * 2016-03-09
-	 * Может возвращать строку или false.
+	 * 2016-03-09 Может возвращать строку или false.
 	 * @used-by \Dfe\Stripe\Settings::prefill()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @return string|false
 	 */
-	final function bv($k= null, $s = null) {return $this->v($k ?: df_caller_f(), $s) ?: false;}
+	final function bv(string $k = '', $s = null) {return $this->v($k ?: df_caller_f(), $s) ?: false;}
 
 	/**
 	 * 2016-03-14
