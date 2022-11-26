@@ -174,10 +174,9 @@ class Reader implements IEvent {
 	/**
 	 * 2017-03-15
 	 * @used-by self::rr()
-	 * @param $k
 	 * @throws Critical
 	 */
-	private function errorP($k):void {$this->error("the required parameter `{$k}` is absent");}
+	private function errorP(string $k):void {$this->error("the required parameter `{$k}` is absent");}
 
 	/**
 	 * 2017-03-10
