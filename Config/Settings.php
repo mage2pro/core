@@ -391,10 +391,9 @@ abstract class Settings {
 	 * 2017-10-20 $v can be null in the @see \Df\Payment\Settings\_3DS::enable_() case.
 	 * @used-by \Df\Payment\Settings\_3DS::countries()
 	 * @param string|null $v
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final protected function nwbn(string $suf, $v, $k = null, $s = null):bool {return
+	final protected function nwbn(string $suf, $v, string $k = '', $s = null):bool {return
 		!is_null($v) && NWB::isNegative($this->v($k = $k ?: df_caller_f(), $s), $v, $this->csv("{$k}_$suf", $s))
 	;}
 
