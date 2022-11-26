@@ -56,12 +56,12 @@ function df_explode_camel(string ...$args):array {return df_call_a(function($nam
 
 /**
  * 2016-08-10
- * REFUND_ISSUED => RefundIssued
- * refund_issuED => RefundIssued
+ * 		REFUND_ISSUED => RefundIssued
+ * 		refund_issuED => RefundIssued
  * @see df_camel_to_underscore()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @return string|string[]
  */
-function df_underscore_to_camel(string ...$args) {return df_call_a(function($s) {return implode(
-	df_ucfirst(explode('_', mb_strtolower($s)))
-);}, $args);}
+function df_underscore_to_camel(string ...$a) {return df_call_a(function(string $s) {return implode(df_ucfirst(explode(
+	'_', mb_strtolower($s)
+)));}, $a);}
