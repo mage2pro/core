@@ -50,7 +50,6 @@ final class TM {
 	 * @used-by \Dfe\SecurePay\Refund::process()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @used-by \Dfe\TBCBank\Block\Info::ciId()
-	 * @used-by \Dfe\TBCBank\Block\Info::prepare()
 	 * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @return string|null|array(string => string)
 	 */
