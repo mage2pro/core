@@ -207,10 +207,9 @@ function df_error_create($m = null):DFE {return
  * @used-by df_should_not_be_here()
  * @used-by \Df\OAuth\App::validateResponse()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
- * @param string|string[] ...$args
  * @throws DFE
  */
-function df_error_html(...$args):void {df_header_utf(); throw df_error_create(...$args)->markMessageAsHtml();}
+function df_error_html(string ...$a):void {df_header_utf(); throw df_error_create(...$a)->markMessageAsHtml();}
 
 /**
  * 2016-07-27
