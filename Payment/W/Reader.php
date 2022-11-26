@@ -159,10 +159,9 @@ class Reader implements IEvent {
 	/**
 	 * 2017-03-10
 	 * @used-by self::errorP()
-	 * @param string $reason
 	 * @throws Critical
 	 */
-	private function error($reason):void {
+	private function error(string $reason):void {
 		if ($r = $this->r()) {
 			df_sentry_extra($this, 'Request', $r);
 		}
