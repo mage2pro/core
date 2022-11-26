@@ -217,9 +217,8 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\AllPay\Method::getInfoBlockType()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::statusExpected()
 	 * @used-by \Dfe\YandexKassa\Result::tag()
-	 * @return string|null
 	 */
-	final function t() {return $this->_r->t();}
+	final function t():string {return $this->_r->t();}
 
 	/**
 	 * 2017-03-10 Type label.

@@ -82,15 +82,14 @@ class Reader implements IEvent {
 	/**
 	 * 2017-03-10
 	 * Some PSP send only one type of notifications.
-	 * In such case, a notification does not denote its own type, and this method returns null.
+	 * In such case, a notification does not denote its own type, and this method returns ''.
 	 * 2017-03-13 The result is in our internal format, not in the PSP format.
 	 * @used-by self::tl()
 	 * @used-by \Df\Payment\W\Event::t()
 	 * @used-by \Df\Payment\W\F::c()
 	 * @used-by \Dfe\AllPay\W\Reader::isOffline()
-	 * @return string|null
 	 */
-	final function t() {return dfc($this, function() {return is_null($r = $this->tRaw()) ? null : $this->te2i($r);});}
+	final function t():string {return dfc($this, function() {return df_es($r = $this->tRaw()) ? '' : $this->te2i($r);});}
 
 	/**
 	 * 2017-03-12 Type label.

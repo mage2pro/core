@@ -2,11 +2,10 @@
 namespace Df\Payment\W;
 use Df\Payment\IMA;
 use Df\Payment\Method as M;
-use Df\Payment\Settings as S;
 use Df\Payment\W\Exception\NotForUs;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
-use Magento\Store\Model\Store;
+use \Exception as E;
 /**
  * 2016-07-09 Портировал из Российской сборки Magento.
  * @see \Df\GingerPaymentsBase\W\Handler
@@ -105,7 +104,7 @@ abstract class Handler implements IMA {
 			$this->log();
 			$this->responder()->setNotForUs(df_xts($e));
 		}
-		catch (\Exception $e) {
+		catch (E $e) {
 			$this->log();
 			$this->log($e);
 			# 2016-07-15
@@ -185,9 +184,8 @@ abstract class Handler implements IMA {
 	 * 2016-12-26
 	 * 2017-03-30 Используем @uses dfc(), чтобы метод игнорировал повторный вызов с прежним параметром.
 	 * @used-by self::handle()
-	 * @param \Exception|null $e [optional]
 	 */
-	private function log(\Exception $e = null):void {dfc($this, function(\Exception $e = null) {
+	private function log(E $e = null):void {dfc($this, function(E $e = null) {
 		/**
 		 * 2017-03-30
 		 * Намеренно не используем здесь @see self::m(),
@@ -196,7 +194,7 @@ abstract class Handler implements IMA {
 		 */
 		$m = $this->_f->m(); /** @var M $m */
 		$title = dfpm_title($m); /** @var string $title */
-		/** @var \Exception|string $v */ /** @var string|null $suffix */
+		/** @var E|string $v */ /** @var string|null $suffix */
 		if ($e) {
 			# 2020-03-02, 2022-10-31
 			# 1) Symmetric array destructuring requires PHP ≥ 7.1:
