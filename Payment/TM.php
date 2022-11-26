@@ -86,12 +86,9 @@ final class TM {
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::url()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
-	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	function res0(string ...$k) {return dfaoc($this, function() {return df_trd(
-		$this->tReq(), M::IIA_TR_RESPONSE
-	);}, df_arg($k));}
+	function res0(string $k = '') {return dfaoc($this, function() {return df_trd($this->tReq(), M::IIA_TR_RESPONSE);}, $k);}
 
 	/**
 	 * 2016-07-18
