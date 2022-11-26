@@ -26,11 +26,11 @@ final class Operation implements \ArrayAccess {
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t05()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t06()
 	 * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t07()
-	 * @param string|string[]|null $k [optional]
+	 * @param string|string[] $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	function a($k = null, $d = null) {return $this->_res->a($k, $d);}
+	function a($k = '', $d = null) {return $this->_res->a($k, $d);}
 
 	/**
 	 * 2017-07-13
