@@ -163,10 +163,9 @@ abstract class Settings {
 	 * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
 	 * @used-by \Dfe\TwitterTimeline\Settings::limit()
 	 * @used-by \Dfe\YandexKassa\Settings::scid()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final function i($k = null, $s = null):int {return df_int($this->v($k ?: df_caller_f(), $s));}
+	final function i(string $k = '', $s = null):int {return df_int($this->v($k ?: df_caller_f(), $s));}
 
 	/**
 	 * 2015-12-26
