@@ -99,10 +99,10 @@ function df_idn($o, bool $allowNull = false):int {return df_nat(df_id($o, $allow
  * @used-by \Df\Zoho\API\Client::i()
  * @used-by \Dfe\CheckoutCom\Handler::p()
  * @used-by \Dfe\TwoCheckout\Handler::p()
- * @param mixed ...$args
+ * @param mixed ...$a
  * @return object
  */
-function df_new(string $c, ...$args) {return new $c(...$args);}
+function df_new(string $c, ...$a) {return new $c(...$a);}
 
 /**
  * 2017-01-12
