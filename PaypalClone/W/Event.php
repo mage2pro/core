@@ -116,9 +116,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Qiwi\W\Event::isSuccessful()
 	 * @see \Dfe\YandexKassa\W\Event::isSuccessful()
 	 */
-	function isSuccessful():bool {return dfc($this, function() {return
-		strval($this->statusExpected()) === strval($this->status())
-	;});}
+	function isSuccessful():bool {return dfc($this, function() {return strval($this->statusExpected()) === $this->status();});}
 
 	/**
 	 * 2017-01-02
@@ -206,7 +204,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\YandexKassa\W\Event::isSuccessful()
 	 * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
 	 */
-	final protected function status():string {return ($k = $this->k_status()) ? $this->rr($k, '') : '';}
+	final protected function status():string {return ($k = $this->k_status()) ? strval($this->rr($k)) : '';}
 
 	/**
 	 * 2016-08-27
