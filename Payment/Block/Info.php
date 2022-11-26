@@ -331,10 +331,9 @@ abstract class Info extends _P {
 	 * 2016-05-21
 	 * @used-by self::getCacheKeyInfo()
 	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
-	 * @param string ...$k
 	 * @return mixed|array(string => mixed)
 	 */
-	final protected function iia(...$k) {return dfp_iia($this->ii(), ...$k);}
+	final protected function iia(string ...$k) {return dfp_iia($this->ii(), ...$k);}
 
 	/**
 	 * 2016-05-23
