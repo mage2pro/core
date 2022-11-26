@@ -194,7 +194,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
 	 * @used-by self::isSuccessful()
 	 * @used-by self::statusT()
-	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\Dragonpay\W\Event::isSuccessful()
 	 * @used-by \Dfe\Dragonpay\W\Event::ttCurrent()
 	 * @used-by \Dfe\PostFinance\W\Event::isSuccessful()
