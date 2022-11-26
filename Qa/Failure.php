@@ -46,14 +46,10 @@ abstract class Failure {
 	/**
 	 * @used-by self::report()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
-	 * @param string|string[] $items
 	 */
-	protected function sections($items):string {
-		if (!is_array($items)) {
-			$items = func_get_args();
-		}
+	protected function sections(string ...$a):string {
 		static $s; if (!$s) {$s = "\n" . str_repeat('*', 36) . "\n";}; /** @var string $s */
-		return implode($s, array_filter(df_trim($items)));
+		return implode($s, array_filter(df_trim($a)));
 	}
 
 	/**
