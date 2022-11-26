@@ -69,9 +69,9 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * @used-by self::__construct()
-	 * @param mixed ...$args
+	 * @param mixed ...$a
 	 */
-	final function comment(...$args):void {$this->_comments[]= df_format($args);}
+	final function comment(...$a):void {$this->_comments[]= df_format($a);}
 
 	/**
 	 * @used-by \Df\Qa\Failure\Exception::preface()
