@@ -30,9 +30,9 @@ final class Record {
 	 * @param string|string[]|null $s [optional]
 	 * @return string|bool
 	 */
-	function msg($s = null) {
+	function msg($s = '') {
 		$r = $this->d('message'); /** @var string $r */
-		return null === $s ? $r : df_starts_with($r, $s);
+		return df_nes($s) ? $r : df_starts_with($r, $s);
 	}
 
 	/**
