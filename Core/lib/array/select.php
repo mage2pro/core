@@ -122,11 +122,11 @@ function dfa(array $a, $k, $d = null) {return
  * @used-by df_credentials()
  * @used-by dfe_portal_module()
  * @used-by \Df\Framework\Request::extra()
- * @param string|string[]|null $k [optional]
+ * @param string|string[] $k [optional]
  * @param mixed|callable|null $d [optional]
  * @return mixed
  */
-function dfac(F $f, $k = null, $d = null) {return dfa(dfcf($f, [], [], false, 1), $k, $d);}
+function dfac(F $f, $k = '', $d = null) {return dfa(dfcf($f, [], [], false, 1), $k, $d);}
 
 /**
  * 2020-01-29     
