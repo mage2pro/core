@@ -329,7 +329,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2016-05-21
-	 * @used-by \Dfe\TwoCheckout\Block\Info::cardNumber()
+	 * @used-by self::getCacheKeyInfo()
 	 * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
 	 * @param string ...$k
 	 * @return mixed|array(string => mixed)
