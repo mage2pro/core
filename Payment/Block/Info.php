@@ -490,9 +490,8 @@ abstract class Info extends _P {
 	 * @used-by \Dfe\Robokassa\Block\Info::prepare()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @param string|Phrase|null|array(string => string) $k
-	 * @param string|null $v [optional]
 	 */
-	final protected function si($k, $v = null):void {
+	final protected function si($k, string $v = ''):void {
 		is_array($k)
 		# 2016-11-17
 		# К сожалению, нельзя использовать [$this, __FUNCTION__], потому что метод si() — protected.
