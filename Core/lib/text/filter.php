@@ -16,7 +16,9 @@
  * @used-by Dfe_Stripe/view/frontend/templates/multishipping.phtml
  * @return string|string[]
  */
-function df_e(string ...$a) {return df_call_a(function($s) {return htmlspecialchars($s, ENT_QUOTES, 'UTF-8', false);}, $a);}
+function df_e(string ...$a) {return df_call_a(function(string $s):string {return htmlspecialchars(
+	$s, ENT_QUOTES, 'UTF-8', false
+);}, $a);}
 
 /**
  * 2019-01-11
