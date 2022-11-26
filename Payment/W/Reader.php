@@ -69,17 +69,6 @@ class Reader implements IEvent {
 	final function r($k = '', $d = null) {return dfa($this->_req, $k, $d);}
 
 	/**
-	 * 2017-01-12
-	 * @used-by self::t()
-	 * @used-by \Df\Payment\W\Event::rr()
-	 * @param string|string[]|null $k [optional]
-	 * @param mixed|null $d [optional]
-	 * @return array(string => mixed)|mixed
-	 * @throws Critical
-	 */
-	final function rr($k = null, $d = null) {return !is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k);}
-
-	/**
 	 * 2017-03-10
 	 * Some PSP send only one type of notifications.
 	 * In such case, a notification does not denote its own type, and this method returns null.
@@ -177,6 +166,16 @@ class Reader implements IEvent {
 	 * @throws Critical
 	 */
 	private function errorP(string $k):void {$this->error("the required parameter `{$k}` is absent");}
+
+	/**
+	 * 2017-01-12
+	 * @used-by self::tRaw()
+	 * @param string|string[]|null $k [optional]
+	 * @param mixed|null $d [optional]
+	 * @return array(string => mixed)|mixed
+	 * @throws Critical
+	 */
+	private function rr($k = null, $d = null) {return !is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k);}
 
 	/**
 	 * 2017-03-10
