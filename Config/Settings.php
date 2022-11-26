@@ -344,10 +344,9 @@ abstract class Settings {
 	 * @used-by \Dfe\Frontend\Settings\ProductView\StockStatus::font()
 	 * @used-by \Dfe\Frontend\Settings\ProductView\Title::font()
 	 * @used-by \Dfe\Frontend\Settings\ProductView\Wishlist::font()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final protected function _font($k = null, $s = null):Font {return dfc($this, function($k, $s) {return
+	final protected function _font(string $k = '', $s = null):Font {return dfc($this, function($k, $s) {return
 		new Font($this->json($k, $s))
 	;}, [$k ?: df_caller_f(), df_scope_code($this->scope($s))]);}
 
