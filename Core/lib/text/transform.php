@@ -15,10 +15,9 @@ function df_lcfirst(string ...$a) {return df_call_a(function(string $s):string {
 /**
  * 2016-05-22
  * 2022-10-31 @deprecated It is unused.
- * @param string|string[] ...$args
  * @return string|string[]
  */
-function df_strtolower(...$args) {return df_call_a(function($s) {return mb_strtolower($s);}, $args);}
+function df_strtolower(string ...$a) {return df_call_a(function(string $s):string {return mb_strtolower($s);}, $a);}
 
 /**
  * 2016-05-19
