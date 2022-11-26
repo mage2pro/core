@@ -135,11 +135,11 @@ function dfac(F $f, $k = '', $d = null) {return dfa(dfcf($f, [], [], false, 1), 
  * @used-by \Df\Payment\Block\Info::ii()
  * @used-by \Df\Payment\Method::ii()
  * @param _DO|AE $o
- * @param string|string[]|null $k [optional]
+ * @param string|string[] $k [optional]
  * @param mixed|callable|null $d [optional]
  * @return _DO|AE|mixed
  */
-function dfad($o, $k = null, $d = null) {return df_nes($k) ? $o : dfa(df_gd($o), $k, $d);}
+function dfad($o, $k = '', $d = null) {return df_nes($k) ? $o : dfa(df_gd($o), $k, $d);}
 
 /**
  * 2020-01-29
