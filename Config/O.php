@@ -124,7 +124,7 @@ class O extends \Df\Core\O {
 	 * @param mixed|null $d [optional]
 	 * @return mixed
 	 */
-	private function filter(callable $f, $d = null, string $k = '') {return dfc($this, function($f, $d, $k) {return
+	private function filter(callable $f, $d = null, string $k = '') {return dfc($this, function($f, $d, string $k) {return
 		call_user_func($f, $this->v($d, $k))
 	;}, [$f, $d, $k ?: df_caller_f(1)]);}
 }
