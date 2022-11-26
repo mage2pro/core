@@ -74,9 +74,8 @@ class Choice {
 	 * 2017-04-17
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\GingerPaymentsBase\Choice::title()
-	 * @param string|null $k [optional]
 	 */
-	protected function s($k = null):Settings {return $this->_m->s($k);}
+	protected function s(string $k = ''):Settings {return $this->_m->s($k);}
 
 	/**
 	 * 2017-04-17
