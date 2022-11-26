@@ -38,7 +38,7 @@ function dfpex_args($a0, $a1 = null):array {return ($a1
  * @param float $a
  * @param mixed ...$args
  */
-function dfpex_from_doc($a, ...$args):float {
+function dfpex_from_doc(float $a, ...$args):float {
 	# 2020-03-02, 2022-10-31
 	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 	#		[$a, $b] = [1, 2];
