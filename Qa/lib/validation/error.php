@@ -176,27 +176,26 @@ function df_error(...$a):void {
  * @used-by \Df\API\Client::_p()
  * @param string|string[]|mixed|E|Phrase|null $m [optional]
  */
-function df_error_create($m = null):DFE {return
-	$m instanceof E ? DFE::wrap($m) :
-		new DFE($m instanceof Phrase ? $m : (
-			/**
-			 * 2019-12-16
-			 * I have changed `!$m` to `is_null($m)`.
-			 * It passes an empty string ('') directly to @uses \Df\Core\Exception::__construct()
-			 * and it prevents @uses \Df\Core\Exception::__construct() from calling @see df_bt_log()
-			 * @see \Df\Core\Exception::__construct():
-			 *		if (is_null($m)) {
-			 *			$m = __($prev ? df_xts($prev) : 'No message');
-			 *			# 2017-02-20 To facilite the «No message» diagnostics.
-			 *			if (!$prev) {
-			 *				df_bt_log();
-			 *			}
-			 *		}
-			 */
-			is_null($m) ? null : (is_array($m) ? implode("\n\n", $m) : (
-				df_contains($m, '%1') ? __($m, ...df_tail(func_get_args())) : df_format(func_get_args())
-			))
+function df_error_create($m = null):DFE {return $m instanceof E ? DFE::wrap($m) :
+	new DFE($m instanceof Phrase ? $m : (
+		/**
+		 * 2019-12-16
+		 * I have changed `!$m` to `is_null($m)`.
+		 * It passes an empty string ('') directly to @uses \Df\Core\Exception::__construct()
+		 * and it prevents @uses \Df\Core\Exception::__construct() from calling @see df_bt_log()
+		 * @see \Df\Core\Exception::__construct():
+		 *		if (is_null($m)) {
+		 *			$m = __($prev ? df_xts($prev) : 'No message');
+		 *			# 2017-02-20 To facilite the «No message» diagnostics.
+		 *			if (!$prev) {
+		 *				df_bt_log();
+		 *			}
+		 *		}
+		 */
+		is_null($m) ? null : (is_array($m) ? implode("\n\n", $m) : (
+			df_contains($m, '%1') ? __($m, ...df_tail(func_get_args())) : df_format(func_get_args())
 		))
+	))
 ;}
 
 /**
