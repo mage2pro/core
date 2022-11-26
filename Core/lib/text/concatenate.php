@@ -20,9 +20,8 @@ function df_cc(string $glue, string ...$a):string {return implode($glue, dfa_fla
  * @used-by \Dfe\AllPay\Choice::title()
  * @used-by \Dfe\Square\API\Validator::short()
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
- * @param string|string[] ...$args
  */
-function df_cc_br(...$args):string {return df_ccc("<br>", dfa_flatten($args));}
+function df_cc_br(string ...$a):string {return df_ccc("<br>", dfa_flatten($a));}
 
 /**
  * @used-by df_api_rr_failed()
