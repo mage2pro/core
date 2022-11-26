@@ -109,7 +109,7 @@ function df_tag(string $tag, $attrs = [], $content = null, $multiline = null):st
  * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
  * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
  */
-function df_tag_ab(string $s, string $url):string {return df_tag('a', ['href' => $url, 'target' => '_blank'], $s);}
+function df_tag_ab(string $s, string $u):string {return df_tag('a', ['href' => $u, 'target' => '_blank'], $s);}
 
 /**
  * 2016-10-24          
