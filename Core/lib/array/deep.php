@@ -43,12 +43,12 @@ use Df\Core\Exception as DFE;
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @used-by \TemplateMonster\Megamenu\Observer\PrepareCategory::execute()  (frugue.com)
  * @param array(string => mixed) $a
- * @param string|string[]|null $path
+ * @param string|string[] $path
  * @param mixed $d [optional]
  * @return mixed|null
  * @throws DFE
  */
-function dfa_deep(array $a, $path, $d = null) {/** @var mixed|null $r */ /** @var string[] $pathParts */
+function dfa_deep(array $a, $path = '', $d = null) {/** @var mixed|null $r */ /** @var string[] $pathParts */
 	if (df_nes($path)) {
 		$r = $a;
 	}
