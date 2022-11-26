@@ -48,7 +48,7 @@ abstract class Failure {
 	 * @used-by \Df\Qa\Failure\Exception::postface()
 	 */
 	protected function sections(string ...$a):string {
-		static $s; if (!$s) {$s = "\n" . str_repeat('*', 36) . "\n";}; /** @var string $s */
+		static $s; $s = $s ? $s : "\n" . str_repeat('*', 36) . "\n"; /** @var string $s */
 		return implode($s, array_filter(df_trim($a)));
 	}
 
