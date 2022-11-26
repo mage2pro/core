@@ -62,10 +62,12 @@ function df_explode_camel(...$a):array {return df_call_a(function($name) {return
  * 2016-08-10
  * 		REFUND_ISSUED => RefundIssued
  * 		refund_issuED => RefundIssued
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_camel_to_underscore()
  * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @param string|string[] $a
  * @return string|string[]
  */
-function df_underscore_to_camel(string ...$a) {return df_call_a(function(string $s):string {return implode(df_ucfirst(explode(
+function df_underscore_to_camel(...$a) {return df_call_a(function(string $s):string {return implode(df_ucfirst(explode(
 	'_', mb_strtolower($s)
 )));}, $a);}
