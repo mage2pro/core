@@ -117,7 +117,6 @@ final class TM {
 	/**
 	 * 2017-03-05
 	 * @used-by self::s()
-	 * @param M $m
 	 */
 	private function __construct(M $m) {$this->_ii = $m->getInfoInstance(); $this->_m = $m;}
 
