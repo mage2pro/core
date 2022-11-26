@@ -48,10 +48,9 @@ function df_camel_to_underscore(string ...$a) {return df_call_a(function($s) {re
  * @used-by df_api_name()
  * @used-by df_camel_to_underscore()
  * @used-by df_explode_class_camel()
- * @param string|string[] ...$args
  * @return string[]|string[][]
  */
-function df_explode_camel(...$args):array {return df_call_a(function($name) {return preg_split(
+function df_explode_camel(string ...$args):array {return df_call_a(function($name) {return preg_split(
 	'#(?<=[a-z])(?=[A-Z0-9])#x', $name
 );}, $args);}
 
