@@ -13,12 +13,13 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Payment\TM::res0()
  * @used-by \Df\Payment\TM::responses()
  * @used-by \Dfe\SecurePay\Signer\Response::values()
- * @param T $t
- * @param string|null $k [optional]
+ * @param T $t]
  * @param mixed|null $d [optional]
  * @return array(string => mixed)|mixed
  */
-function df_trd(T $t, $k = null, $d = null):array {return dfa(df_eta($t->getAdditionalInformation(T::RAW_DETAILS)), $k, $d);}
+function df_trd(T $t, string $k = '', $d = null):array {return dfa(
+	df_eta($t->getAdditionalInformation(T::RAW_DETAILS)), $k, $d
+);}
 
 /**
  * 2016-07-10
