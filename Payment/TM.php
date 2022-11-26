@@ -126,10 +126,9 @@ final class TM {
 	 * @used-by self::responseL()
 	 * @uses df_first()
 	 * @uses df_last()
-	 * @param string ...$k
 	 * @return Ev|string|null
 	 */
-	private function response(...$k) {
+	private function response(string ...$k) {
 		$ev = dfc($this, function($f) {return
  			call_user_func($f, $this->responses())
 		;}, [dfa(['L' => 'df_last', 'F' => 'df_first'], substr(df_caller_f(), -1))]); /** @var Ev|null $ev */
