@@ -118,8 +118,10 @@ function dfa(array $a, $k, $d = null) {return
 
 /**
  * 2022-11-27
+ * $throw = false in @see \Df\Payment\W\Strategy\ConfirmPending::_handle().
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
+ * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
  * @param string|int|null $k
  * @return array|mixed|null
  */
