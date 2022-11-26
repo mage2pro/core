@@ -3,15 +3,17 @@ use Magento\Framework\File\Csv;
 /**
  * 2015-02-07
  * 2020-08-13
- * df_csv(['aaa', 'bbb', 'ccc']) → 'aaa,bbb,ccc'
- * df_csv_pretty(['aaa', 'bbb']) → 'aaa, bbb, ccc'
+ * 		df_csv(['aaa', 'bbb', 'ccc']) → 'aaa,bbb,ccc'
+ * 		df_csv_pretty(['aaa', 'bbb']) → 'aaa, bbb, ccc'
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_csv()
  * @used-by df_oro_get_list()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()
  * @used-by \Dfe\FacebookLogin\Customer::responseA()
+ * @param string|string[] $a
  */
-function df_csv(string ...$args):string {return implode(',', df_args($args));}
+function df_csv(...$a):string {return implode(',', df_args($a));}
 
 /**
  * 2017-06-21
@@ -48,16 +50,21 @@ function df_csv_parse_int($s):array {return df_int(df_csv_parse($s));}
 /**
  * 2015-02-07
  * 2020-08-13
- * df_csv(['aaa', 'bbb', 'ccc']) → 'aaa,bbb,ccc'
- * df_csv_pretty(['aaa', 'bbb']) → 'aaa, bbb, ccc'
+ * 		df_csv(['aaa', 'bbb', 'ccc']) → 'aaa,bbb,ccc'
+ * 		df_csv_pretty(['aaa', 'bbb']) → 'aaa, bbb, ccc'
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_csv()
  * @used-by dfe_modules_log()
  * @used-by \Df\Framework\Validator\Currency::message()
  * @used-by \Df\Sentry\Client::send()
  * @used-by \Dfe\Moip\P\Reg::ga()
  * @used-by \Dfe\Sift\Payload\OQI::p()
+ * @param string|string[] $a
  */
-function df_csv_pretty(string ...$args):string {return implode(', ', dfa_flatten($args));}
+function df_csv_pretty(...$a):string {return implode(', ', dfa_flatten($a));}
 
-/** 2022-10-29 @deprecated It is unused. */
-function df_csv_pretty_quote(string ...$args):string {return df_csv_pretty(df_quote_russian(df_args($args)));}
+/**
+ * 2022-10-29 @deprecated It is unused.
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ */
+function df_csv_pretty_quote(...$a):string {return df_csv_pretty(df_quote_russian(df_args($a)));}
