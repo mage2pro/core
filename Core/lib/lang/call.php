@@ -93,8 +93,7 @@ function df_call_a(callable $f, array $parentArgs, $pAppend = [], $pPrepend = []
 	 * We should return an array in the 1st and 3rd cases, and a scalar result in the 2nd case.
 	 */
 	if (1 === count($parentArgs)) {
-		# 2019-06-05 It is the 1st or the 2nd case: a single argument (a scalar or an array).
-		$parentArgs = $parentArgs[0];
+		$parentArgs = $parentArgs[0]; # 2019-06-05 It is the 1st or the 2nd case: a single argument (a scalar or an array).
 	}
 	return
 		!is_array($parentArgs) # 2019-06-05 It is the 2nd case: a single scalar (non-array) argument
