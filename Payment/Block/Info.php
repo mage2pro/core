@@ -314,18 +314,18 @@ abstract class Info extends _P {
 	 * on the frontend «multishipping/checkout/overview» page:
 	 * this page is shown to the customer just before an order placement.
 	 * An example of a «multishipping/checkout/overview» page: https://mage2.pro/t/4403
-	 * @used-by self::getCacheKeyInfo()
+	 * @used-by self::choice()
 	 * @used-by self::iia()
 	 * @used-by self::isTest()
 	 * @used-by self::m()
 	 * @used-by self::o()
 	 * @used-by self::option()
+	 * @used-by self::rTable()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
-	 * @param string|null $k [optional]
 	 * @return II|I|OP|QP|mixed
 	 */
-	final protected function ii($k = null) {return dfad($this->_i ?: df_order_last()->getPayment(), $k);}
+	final protected function ii(string $k = '') {return dfad($this->_i ?: df_order_last()->getPayment(), $k);}
 
 	/**
 	 * 2016-05-21
