@@ -177,6 +177,7 @@ abstract class Settings {
 
 	/**
 	 * 2015-12-26
+	 * 2022-11-26 @deprecated It is unused.
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 */
