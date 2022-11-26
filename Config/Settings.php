@@ -351,16 +351,14 @@ abstract class Settings {
 	;}, [$k ?: df_caller_f(), df_scope_code($this->scope($s))]);}
 
 	/**
-	 * 2016-01-29
+	 * 2016-01-29 $i — номер строки, $j — номер столбца.
 	 * @used-by \Dfe\SalesSequence\Settings::affix()
-	 * @param int $i Номер строки
-	 * @param int $j Номер столбца
 	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param string|null $d [optonal]
 	 * @return string|null
 	 */
-	final protected function _matrix($i, $j, $k = null, $s = null, $d = null) {return
+	final protected function _matrix(int $i, int $j, $k = null, $s = null, $d = null) {return
 		dfa(dfa(dfc($this, function($k, $s) {return
 			$this->json($k, $s)
 		;}, [$k ?: df_caller_f(), df_scope_code($this->scope($s))]), $i, []), $j, $d)
