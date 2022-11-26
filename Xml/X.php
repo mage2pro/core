@@ -370,19 +370,18 @@ final class X extends MX {
 	 * 2022-11-15 @deprecated It is unused.
 	 * @override
 	 * @see \SimpleXMLElement::xpath()
-	 * @param string|string[] $path
+	 * @param string|string[] $p
 	 * @return X[]
 	 */
 	#[\ReturnTypeWillChange]
-	function xpath($path):array {
+	function xpath($p):array {
 		if (1 < func_num_args()) {
-			$path = df_cc_path(func_get_args());
+			$p = df_cc_path(func_get_args());
 		}
-		elseif (is_array($path)) {
-			$path = df_cc_path($path);
+		elseif (is_array($p)) {
+			$p = df_cc_path($p);
 		}
-		df_param_sne($path, 0);
-		return parent::xpath($path);
+		return parent::xpath(df_param_sne($p, 0));
 	}
 
 	/**

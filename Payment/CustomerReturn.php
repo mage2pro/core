@@ -58,8 +58,7 @@ class CustomerReturn extends Action {
 				df_order_comment($o, $msg, true, true);
 			}
 			# 2016-07-14
-			# Show an explanation message to the customer
-			# when it returns to the store after an unsuccessful payment attempt.
+			# Show an explanation message to the customer when it returns to the store after an unsuccessful payment attempt.
 			df_checkout_error($msg);
 			# 2016-05-06 «How to redirect a customer to the checkout payment step?» https://mage2.pro/t/1523
 			df_redirect_to_payment();
