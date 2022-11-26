@@ -194,8 +194,7 @@ function df_error_create($m = null):DFE {return
 			 *		}
 			 */
 			is_null($m) ? null : (is_array($m) ? implode("\n\n", $m) : (
-				df_contains($m, '%1') ? __($m, ...df_tail(func_get_args())) :
-					df_format(func_get_args())
+				df_contains($m, '%1') ? __($m, ...df_tail(func_get_args())) : df_format(func_get_args())
 			))
 		))
 ;}
