@@ -29,9 +29,8 @@ class O extends \Df\Core\O {
 	 * @used-by \Dfe\CurrencyFormat\O::delimitSymbolFromAmount()
 	 * @used-by \Dfe\CurrencyFormat\O::showDecimals()
 	 * @param bool|callable $d [optional]
-	 * @param string|null $k [optional]
 	 */
-	final protected function b($d = false, $k = null):bool {return $this->filter(
+	final protected function b($d = false, string $k = ''):bool {return $this->filter(
 		function($v) use($d) {return Checkbox::b($v, $d);}, $d, $k
 	);}
 
