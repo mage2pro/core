@@ -84,10 +84,9 @@ class O extends \Df\Core\O {
 	 * @used-by \Doormall\Shipping\Partner\Entity::id()
 	 * @used-by \Doormall\Shipping\Partner\Entity::title()
 	 * @param mixed|callable $d [optional]
-	 * @param string|null $k [optional]
 	 * @return mixed
 	 */
-	final protected function v($d = null, $k = null) {
+	final protected function v($d = null, string $k = '') {
 		$k = $k ?: df_caller_f();
 		return $this->a(df_const($this, $k, $k), $d);
 	}
