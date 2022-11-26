@@ -39,7 +39,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * so it should be unique in a payment processing cycle:
 	 * a particular payment can not have multiple transactions with the same suffix.
-	 * 2022-11-10 The result could be `null` @see \Dfe\Moip\W\Event::ttCurrent()
+	 * 2022-11-10 The result could be an empty string: @see \Dfe\Moip\W\Event::ttCurrent()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\PaypalClone\W\Nav::id()
 	 * @used-by \Df\StripeClone\W\Nav::id()
@@ -54,9 +54,8 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
 	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
 	 * @see \Dfe\TBCBank\W\Event::ttCurrent()
-	 * @return string|null
 	 */
-	abstract function ttCurrent();
+	abstract function ttCurrent():string;
 
 	/**
 	 * 2017-03-10
