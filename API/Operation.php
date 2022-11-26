@@ -83,11 +83,11 @@ final class Operation implements \ArrayAccess {
 	 * 2017-07-13
 	 * @used-by \CanadaSatellite\Bambora\Action::check() (https://github.com/canadasatellite-ca/bambora)
 	 * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
-	 * @param string|string[]|null $k [optional]
+	 * @param string|string[] $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	function req($k = null, $d = null) {return $this->_req->a($k, $d);}
+	function req($k = '', $d = null) {return $this->_req->a($k, $d);}
 
 	/**
 	 * 2019-04-05
