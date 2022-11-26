@@ -90,7 +90,9 @@ final class TM {
 	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	function res0($k = null) {return dfaoc($this, function() {return df_trd($this->tReq(), M::IIA_TR_RESPONSE);}, $k);}
+	function res0(string ...$k) {return dfaoc($this, function() {return df_trd(
+		$this->tReq(), M::IIA_TR_RESPONSE
+	);}, df_arg($k));}
 
 	/**
 	 * 2016-07-18

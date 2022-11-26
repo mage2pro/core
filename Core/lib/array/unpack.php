@@ -13,6 +13,7 @@
  * @see dfa_unpack()
  * @used-by df_contains()
  * @used-by \Df\Payment\TM::req()
+ * @used-by \Df\Payment\TM::res0()
  * @used-by \Dfe\CheckoutCom\Response::a()
  * @return mixed|mixed[]
  */
