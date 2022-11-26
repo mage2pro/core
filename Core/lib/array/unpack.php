@@ -12,6 +12,7 @@
  * @see df_args()
  * @see dfa_unpack()
  * @used-by df_contains()
+ * @used-by \Df\Payment\Choice::req()
  * @used-by \Dfe\CheckoutCom\Response::a()
  * @return mixed|mixed[]
  */

@@ -48,10 +48,9 @@ class Choice {
 	 * 2017-04-17 Возвращает параметры первичного запроса магазина к ПС.
 	 * @used-by \Df\GingerPaymentsBase\Choice::option()
 	 * @used-by \Dfe\AlphaCommerceHub\Choice::id()
-	 * @param string|string[]|null $k [optional]
 	 * @return array(string => string)|string|null
 	 */
-	final protected function req($k = null) {return $this->tm()->req($k);}
+	final protected function req(string ...$k) {return $this->tm()->req(df_arg($k));}
 
 	/**
 	 * 2017-04-17 Возвращает параметры ответа на первичный запрос магазина к ПС.
