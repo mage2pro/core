@@ -11,6 +11,7 @@
  * 		[$v1, $v2, [$v3]] => [$v1, $v2, [$v3]] - The difference from @see dfa_unpack()
  * @see df_args()
  * @see dfa_unpack()
+ * @used-by df_contains()
  * @used-by \Dfe\CheckoutCom\Response::a()
  * @return mixed|mixed[]
  */
