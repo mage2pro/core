@@ -35,15 +35,17 @@ function df_strtoupper(...$a) {return df_call_a(function(string $s):string {retu
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_lcfirst
  * @used-by df_assert_gd()
  * @used-by df_cc_class_uc()
  * @used-by df_underscore_to_camel()
  * @used-by \Dfe\TwoCheckout\LineItem::build()
  * @used-by \Df\Config\Source\LetterCase::apply()
+ * @param string|string[] $a
  * @return string|string[]
  */
-function df_ucfirst(string ...$a) {return df_call_a(function(string $s):string {return
+function df_ucfirst(...$a) {return df_call_a(function(string $s):string {return
 	mb_strtoupper(mb_substr($s, 0, 1)) . mb_substr($s, 1)
 ;}, $a);}
 
