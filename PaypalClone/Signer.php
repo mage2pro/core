@@ -57,10 +57,9 @@ abstract class Signer {
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
 	 * @used-by \Dfe\YandexKassa\Signer::sign()
 	 * @param string|string[] $k [optional]
-	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
 	 */
-	final protected function v($k = '', $d = null) {return dfa($this->_v, $k, $d);}
+	final protected function v($k = '') {return dfa($this->_v, $k);}
 
 	/**
 	 * 2017-03-13   
