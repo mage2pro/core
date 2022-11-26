@@ -12,7 +12,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Shipping\Action::s()
  * @used-by \Doormall\Shipping\Plugin\Sales\Model\Order::afterGetShippingDescription()
  * @param M|II|OP|QP|O|Q|T|object|string|null $m
- * @param string|null $k [optional]
  * @return S|mixed
  */
-function dfss($m, $k = null) {return dfsm($m)->s($k);}
+function dfss($m, string $k = '') {return dfsm($m)->s($k);}
