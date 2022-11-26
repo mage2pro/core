@@ -121,6 +121,7 @@ abstract class Settings extends \Df\Config\Settings {
 
 	/**
 	 * 2016-12-24
+	 * @used-by \Dfe\Omise\Settings::_3DS()
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @uses b()
@@ -147,12 +148,11 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Square\Settings::accessToken()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
 	 * @used-by \Dfe\TwoCheckout\Settings::secretWord()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @return mixed
 	 */
-	final protected function testableP($k = null, $s = null, $d = null) {return $this->testableGeneric(
+	final protected function testableP(string $k = '', $s = null, $d = null) {return $this->testableGeneric(
 		$k ?: df_caller_f(), 'p', $s, $d
 	);}
 
