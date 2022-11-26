@@ -5,9 +5,9 @@
  * @used-by \TFC\GoogleShopping\Products::atts() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @return string|string[]
  */
-function df_camel_to_underscore(string ...$args) {return df_call_a(function($s) {return implode(
+function df_camel_to_underscore(string ...$a) {return df_call_a(function($s) {return implode(
 	'_', df_lcfirst(df_explode_camel($s))
-);}, $args);}
+);}, $a);}
 
 /**
  * «YandexMarket» => array(«Yandex», «Market»)
