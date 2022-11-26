@@ -9,8 +9,8 @@ use Df\Payment\Url;
  * @used-by \Dfe\Vantiv\API\Client::urlBase()
  * @param string|object $m
  * @param string[] $stages
- * @param mixed ...$args [optional]
+ * @param mixed ...$a [optional]
  */
-function dfp_url_api($m, string $url, array $stages = [], bool $test = null, ...$args):string {return Url::f($m, $stages)->url(
-	$url, $test, ...$args
+function dfp_url_api($m, string $url, array $stages = [], bool $test = null, ...$a):string {return Url::f($m, $stages)->url(
+	$url, $test, ...$a
 );}
