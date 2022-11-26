@@ -9,6 +9,7 @@ use Df\Core\Exception as DFE;
  * @used-by df_bt_has()
  * @used-by df_ends_with()
  * @used-by df_handle_prefix()
+ * @used-by df_is()
  * @used-by df_modules_my()
  * @used-by df_oq_sa()
  * @used-by df_sales_email_sending()

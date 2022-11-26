@@ -262,14 +262,4 @@ function df_bool($v):bool {
  * https://github.com/mage2pro/core/issues/174#user-content-object
  * @param object $v
  */
-function df_is($v, string ...$cc):bool {/** @var bool $r */
-	df_find()
-	$r = false;
-	foreach ($cc as $c) {/** @var string $c */
-		if ($v instanceof $c) {
-			$r = true;
-			break;
-		}
-	}
-	return $r;
-}
+function df_is($v, string ...$cc):bool {return !!df_find($cc, function(string $c) use($v):bool {return $v instanceof $c;});}
