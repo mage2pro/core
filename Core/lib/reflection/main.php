@@ -22,9 +22,11 @@ function df_cc_class(...$a):string {return implode('\\', df_clean(dfa_flatten($a
  * 2016-03-25
  * Применение @uses dfa_flatten() делает возможным вызовы типа: `df_cc_class_uc('aa', ['bb', 'cc'])` => Aa\Bb\Cc
  * Мы используем это в модулях Stripe и Checkout.com.
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_cc_class()
+ * @param string|string[] $a
  */
-function df_cc_class_uc(string ...$args):string {return df_cc_class(df_ucfirst(dfa_flatten($args)));}
+function df_cc_class_uc(...$a):string {return df_cc_class(df_ucfirst(dfa_flatten($a)));}
 
 /**
  * 2016-08-10 Если класс не указан, то вернёт название функции. Поэтому в качестве $a1 можно передавать null.
