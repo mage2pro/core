@@ -72,10 +72,9 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\TBCBank\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::valid()
-	 * @param string|null $k [optional]
 	 * @return array(string => mixed)|string
 	 */
-	final protected function r($k = null) {return is_null($k) ? $this->_r : dfa($this->_r, $k);}
+	final protected function r(string $k = '') {return dfa($this->_r, $k);}
 
 	/**
 	 * 2017-07-06
