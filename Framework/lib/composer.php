@@ -28,11 +28,11 @@ function df_core_version():string {return dfcf(function() {return df_package_ver
  * @used-by dfe_portal_module()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @param string|object|null $m [optional]
- * @param string|string[]|null $k [optional]
+ * @param string|string[] $k [optional]
  * @param mixed|null $d [optional]
  * @return string|array(string => mixed)|null
  */
-function df_package($m = null, $k = null, $d = null) {
+function df_package($m = null, $k = '', $d = null) {
 	static $cache; /** @var array(string => array(string => mixed)) $cache */
 	if (!isset($cache[$m = df_module_name($m)])) {
 		$packagePath = df_module_path($m); /** @var string $packagePath */
