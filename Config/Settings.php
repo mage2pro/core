@@ -169,6 +169,8 @@ abstract class Settings {
 
 	/**
 	 * 2015-12-26
+	 * @used-by \Df\Config\Source\WaitPeriodType::calculate()
+	 * @used-by \Dfe\AllPay\InstallmentSales\Plan\Entity::numPayments()
 	 * @param null|string|int|S|Store $s [optional]
 	 */
 	final function nat(string $k = '', $s = null):int {return df_nat($this->v($k ?: df_caller_f(), $s));}
