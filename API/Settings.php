@@ -111,12 +111,11 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Dfe\Square\Settings::publicKey()
 	 * @used-by \Dfe\TwoCheckout\Settings::accountNumber()
 	 * @used-by \Dfe\TwoCheckout\Settings::init()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @return mixed
 	 */
-	final protected function testable($k = null, $s = null, $d = null) {return $this->testableGeneric(
+	final protected function testable(string $k = '', $s = null, $d = null) {return $this->testableGeneric(
 		$k ?: df_caller_f(), 'v', $s, $d
 	);}
 
