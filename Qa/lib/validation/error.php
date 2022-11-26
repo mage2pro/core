@@ -148,12 +148,12 @@ function df_abstract($caller):void {
  * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
- * @param string|string[]|mixed|E|Phrase|null ...$args
+ * @param string|string[]|mixed|E|Phrase|null ...$a
  * @throws DFE
  */
-function df_error(...$args):void {
+function df_error(...$a):void {
 	df_header_utf();
-	$e = df_error_create(...$args); /** @var DFE $e */
+	$e = df_error_create(...$a); /** @var DFE $e */
 	/**
 	 * 2020-02-15
 	 * 1) "The Cron log (`magento.cron.log`) should contain a backtrace for every exception logged":
