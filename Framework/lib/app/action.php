@@ -24,7 +24,7 @@ function df_action_has(string $s):bool {return df_contains(df_action_name(), $s)
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  */
-function df_action_is(string ...$names):bool {return ($a = df_action_name()) && in_array($a, dfa_flatten($names));}
+function df_action_is(string ...$a):bool {return ($n = df_action_name()) && in_array($n, dfa_flatten($a));}
 
 /**
  * 2015-09-02
