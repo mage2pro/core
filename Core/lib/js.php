@@ -66,8 +66,8 @@ function df_js_c(string $s, array $p = []):string {return df_js(null, 'Magento_U
 
 /**
  * 2018-05-21
- * @used-by vendor/inkifi/map/view/frontend/templates/create.phtml
  * 2020-01-16
+ * @used-by vendor/inkifi/map/view/frontend/templates/create.phtml:
  *		echo df_js_data('inkifiMap', ['keys' => [
  *			'google' => $s->keyGoogle(), 'mapBox' => $s->keyMapBox(), 'openCage' => $s->keyOpenCage()
  *		]]);
