@@ -126,9 +126,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Df\Payment\W\Event::statusT()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @return string|null
 	 */
-	final function statusT() {return ($k = $this->k_statusT()) ? $this->r($k) : dftr(
+	final function statusT():string {return ($k = $this->k_statusT()) ? $this->r($k) : dftr(
 		$this->status(), df_module_json($this, 'statuses', false)
 	);}
 
@@ -206,9 +205,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\Qiwi\W\Event::ttCurrent()
 	 * @used-by \Dfe\YandexKassa\W\Event::isSuccessful()
 	 * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
-	 * @return string|null
 	 */
-	final protected function status() {return ($k = $this->k_status()) ? $this->rr($k) : null;}
+	final protected function status():string {return ($k = $this->k_status()) ? $this->rr($k, '') : '';}
 
 	/**
 	 * 2016-08-27
