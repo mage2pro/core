@@ -109,6 +109,7 @@ function df_cc_path_t(...$a):string {return df_append(df_cc_path(dfa_flatten($a)
 
 /**
  * 2016-08-10
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_block_output()
  * @used-by df_cli_cmd()
  * @used-by df_log_l()
@@ -124,8 +125,9 @@ function df_cc_path_t(...$a):string {return df_append(df_cc_path(dfa_flatten($a)
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @used-by \TFC\GoogleShopping\Att\Price::format() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/6)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
+ * @param string|string[] $a
  */
-function df_cc_s(string ...$a):string {return df_ccc(' ', dfa_flatten($a));}
+function df_cc_s(...$a):string {return df_ccc(' ', dfa_flatten($a));}
 
 /**
  * @see df_cc()
