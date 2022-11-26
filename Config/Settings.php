@@ -316,12 +316,11 @@ abstract class Settings {
 	 * @used-by \Inkifi\Mediaclip\Settings::url()
 	 * @used-by \Inkifi\Pwinty\Settings::id()
 	 * @used-by \Inkifi\Pwinty\Settings::key()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @return array|string|null|mixed
 	 */
-	final function v($k = null, $s = null, $d = null) {return df_cfg(
+	final function v(string $k = '', $s = null, $d = null) {return df_cfg(
 		$this->prefix() . '/' . self::phpNameToKey($k ?: df_caller_f()), $this->scope($s), $d
 	);}
 
