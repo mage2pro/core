@@ -111,11 +111,9 @@ class F {
 	 * 1) @see self::trySuf()
 	 * 2) смотрите цикл while в методе c().
 	 * @used-by self::aspect()
-	 * @param string $a
-	 * @param bool $critical [optional]
 	 * @throws Critical|Ignored
 	 */
-	private function c($a, $critical = false):string {
+	private function c(string $a, bool $critical = false):string {
 		$r = $this->_r; /** @var R $r */
 		$m = $this->_m; /** @var M $m */
 		$t = $r->t(); /** @var string|null $t */
