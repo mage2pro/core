@@ -101,7 +101,9 @@ class O extends \Df\Core\O {
 	 * @param mixed|null $d
 	 * @return string|null
 	 */
-	final protected function v0($d = null, string $k = '') {return '0' !== ($r = $this->v(null, $k ?: df_caller_f())) ? $r : $d;}
+	final protected function v0($d = null, string $k = '') {return
+		'0' !== ($r = $this->v(null, $k ?: df_caller_f())) ? $r : $d
+	;}
 
 	/**
 	 * 2016-08-10
