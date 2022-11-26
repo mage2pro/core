@@ -30,6 +30,7 @@ function df_cc(string $glue, ...$a):string {return implode($glue, dfa_flatten($a
 function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
 
 /**
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_api_rr_failed()
  * @used-by df_fe_init()
  * @used-by df_kv()
@@ -66,11 +67,13 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
  * @used-by \Wyomind\SimpleGoogleShopping\Model\Observer::checkToGenerate(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/26)
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml
  * @used-by vendor/mage2pro/portal/view/frontend/templates/root.phtml
+ * @param string|string[] $a
  */
-function df_cc_n(string ...$a):string {return df_ccc("\n", dfa_flatten($a));}
+function df_cc_n(...$a):string {return df_ccc("\n", dfa_flatten($a));}
 
 /**
  * 2015-12-01 Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_config_e()
  * @used-by df_db_credentials()
  * @used-by df_fs_etc()
@@ -92,8 +95,9 @@ function df_cc_n(string ...$a):string {return df_ccc("\n", dfa_flatten($a));}
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @used-by \TFC\Image\Command\C1::image()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
+ * @param string|string[] $a
  */
-function df_cc_path(string ...$a):string {return df_ccc('/', dfa_flatten($a));}
+function df_cc_path(...$a):string {return df_ccc('/', dfa_flatten($a));}
 
 /**
  * 2016-05-31
