@@ -207,12 +207,11 @@ abstract class Settings {
 	 * @used-by \Inkifi\Map\Settings::keyGoogle()
 	 * @used-by \Inkifi\Map\Settings::keyMapBox()
 	 * @used-by \Inkifi\Map\Settings::keyOpenCage()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 * @param mixed|callable $d [optional]
 	 * @return string|null
 	 */
-	final function p($k = null, $s = null, $d = null) {
+	final function p(string $k = '', $s = null, $d = null) {
 		$r = $this->v($k ?: df_caller_f(), $s); /** @var string|mixed $r */
 		return df_if2($r, df_encryptor()->decrypt($r), $d);
 	}
