@@ -35,9 +35,9 @@ function df_lang_ru_en():string {return df_lang_ru('ru', 'en');}
  * 2018-04-21
  * @used-by df_lang_zh_en()
  * @used-by \Doormall\Shipping\Partner\Entity::title()
- * @param mixed ...$args
+ * @param mixed ...$a
  */
-function df_lang_zh(...$args):bool {return df_b($args, 'zh' === df_lang());}
+function df_lang_zh(...$a):bool {return df_b($a, 'zh' === df_lang());}
 
 /**
  * 2018-04-24
