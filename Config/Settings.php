@@ -378,10 +378,9 @@ abstract class Settings {
 	 * 2016-06-09
 	 * Если опция не задана, но метод возвращает «да».
 	 * Если опция задана, то смотрим уже тип ограничения: белый или чёрный список.
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final protected function nwb(string $suf, string $v, $k = null, $s = null):bool {return NWB::is(
+	final protected function nwb(string $suf, string $v, string $k = '', $s = null):bool {return NWB::is(
 		$this->v($k = $k ?: df_caller_f(), $s), $v, $this->csv("{$k}_$suf", $s)
 	);}
 
