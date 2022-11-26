@@ -50,17 +50,15 @@ class O extends \Df\Core\O {
 	 * 2016-08-10
 	 * @uses df_int()
 	 * @param int|callable $d [optional]
-	 * @param string|null $k [optional]
 	 */
-	final protected function i($d = 0, $k = null):int {return $this->filter('df_int', $d, $k);}
+	final protected function i($d = 0, string $k = ''):int {return $this->filter('df_int', $d, $k);}
 
 	/**
 	 * 2016-08-10
 	 * @uses df_nat()
 	 * @param int|callable $d [optional]
-	 * @param string|null $k [optional]
 	 */
-	final protected function nat($d = null, $k = null):int {return $this->filter('df_nat', $d, $k);}
+	final protected function nat($d = null, string $k = ''):int {return $this->filter('df_nat', $d, $k);}
 
 	/**
 	 * 2016-08-10
