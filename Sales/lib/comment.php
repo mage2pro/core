@@ -8,12 +8,8 @@ use Magento\Sales\Model\Order\Status\History;
  * @used-by \Df\Payment\CustomerReturn::execute()   
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
- * @param O $o
- * @param $text
- * @param $visibleOnFront
- * @param $customerNotified
  */
-function df_order_comment(O $o, $text, $visibleOnFront = false, $customerNotified = false):void {
+function df_order_comment(O $o, string $text, bool $visibleOnFront = false, bool $customerNotified = false):void {
 	$h = $o->addStatusHistoryComment(__($text)); /** @var History|IHistory $h */
 	$h->setIsVisibleOnFront($visibleOnFront);
 	$h->setIsCustomerNotified($customerNotified);
