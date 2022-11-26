@@ -10,7 +10,7 @@ interface IEvent {
 	 * 2017-03-11
 	 * @see \Df\Payment\W\Event::r()
 	 * @see \Df\Payment\W\Reader::r()
-	 * @param string|null $k
+	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d
 	 * @return array(string => mixed)|mixed|null
 	 */
