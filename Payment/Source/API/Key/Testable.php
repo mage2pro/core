@@ -10,9 +10,9 @@ abstract class Testable extends \Df\Payment\Source\API\Key {
 	 * 2017-02-15 Первый аргумент — для тестового режима, второй — для промышленного.
 	 * @used-by self::tkey()
 	 * @used-by \Dfe\Spryng\Source\Account::fetch()
-	 * @param mixed ...$args [optional]
+	 * @param mixed ...$a [optional]
 	 */
-	final protected function test(...$args):bool {return df_b($args, $this->_test());}
+	final protected function test(...$a):bool {return df_b($a, $this->_test());}
 
 	/**
 	 * 2017-02-15
