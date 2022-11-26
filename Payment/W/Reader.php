@@ -112,7 +112,6 @@ class Reader implements IEvent {
 	 * 2017-03-23 Использую именно @uses array_key_exists(), чтобы для ПС с единственным типом оповещений писать ?df-type=
 	 * @used-by self::t()
 	 * @used-by \Df\Payment\W\Event::tl()
-	 * @used-by \Df\Payment\W\Reader::tRaw()
 	 */
 	final function tRaw():string {return array_key_exists('type', $this->_test) ? $this->_test['type'] : (
 		df_es($kt = $this->kt()) ? '' : $this->rr($kt)
