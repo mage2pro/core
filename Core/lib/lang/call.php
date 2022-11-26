@@ -97,8 +97,7 @@ function df_call_a(callable $f, array $parentArgs, $pAppend = [], $pPrepend = []
 		$parentArgs = $parentArgs[0];
 	}
 	return
-		# 2019-06-05 It is the 2nd case: a single scalar (non-array) argument
-		!is_array($parentArgs)
+		!is_array($parentArgs) # 2019-06-05 It is the 2nd case: a single scalar (non-array) argument
 		? call_user_func_array($f, array_merge($pPrepend, [$parentArgs], $pAppend))
 		: df_map($f, $parentArgs, $pAppend, $pPrepend, $keyPosition
 	);
