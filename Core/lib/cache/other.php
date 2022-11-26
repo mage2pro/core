@@ -63,7 +63,7 @@ function df_cache_get_simple($k, callable $f, array $tags = [], ...$args) {retur
 		 * (I have checked it in the both XDebug enabled and disabled cases).
 		 * 2019-01-23 The previous code was: df_caller_mm(1).
 		 */
-	}, [md5(!$k ? df_hash_a([df_caller_m(), $args]) : (is_array($k) ? df_hash_a($k) : $k))], $tags)
+	}, [md5(df_nes($k) ? df_hash_a([df_caller_m(), $args]) : (is_array($k) ? df_hash_a($k) : $k))], $tags)
 ;}
 
 /**
