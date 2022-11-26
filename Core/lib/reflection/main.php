@@ -6,9 +6,8 @@ use ReflectionClass as RC;
 /**
  * 2016-02-08 Применение @uses dfa_flatten() делает возможным вызовы типа: df_cc_class_uc('Aa', ['Bb', 'Cb']) => Aa\Bb\Cb
  * @see df_cc_class_uc()
- * @param string|string[] ...$args
  */
-function df_cc_class(...$args):string {return implode('\\', df_clean(dfa_flatten($args)));}
+function df_cc_class(string ...$args):string {return implode('\\', df_clean(dfa_flatten($args)));}
 
 /**
  * 2016-03-25
