@@ -114,10 +114,9 @@ abstract class Settings {
 	 * @used-by \Dfe\TBCBank\Settings::tokenization()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @used-by \Dfe\YandexKassa\Charge::pTax()
-	 * @param string|null $k [optional]
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final function b($k = null, $s = null, bool $d = false):int {return df_bool($this->v($k ?: df_caller_f(), $s, $d));}
+	final function b(string $k = '', $s = null, bool $d = false):int {return df_bool($this->v($k ?: df_caller_f(), $s, $d));}
 
 	/**
 	 * 2016-03-09
