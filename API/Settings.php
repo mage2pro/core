@@ -233,7 +233,6 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by self::testablePV()
 	 * @uses \Df\Config\Settings::p()
 	 * @uses \Df\Config\Settings::v()
-	 * @param string|null $k [optional]
 	 * @param string|string[] $f [optional]
 	 * $f может быть массивом,
 	 * и тогда первое значение его — метод для промышленного режима, а второе значение — метод для тестового режима.
@@ -241,7 +240,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param mixed|callable $d [optional]
 	 * @return mixed
 	 */
-	private function testableGeneric($k = null, $f = 'v', $s = null, $d = null) {return call_user_func(
+	private function testableGeneric(string $k = '', $f = 'v', $s = null, $d = null) {return call_user_func(
 		[$this, is_string($f) ? $f : $f[intval($this->test($s))]]
 		,($this->test($s) ? 'test' : 'live') . self::phpNameToKey(ucfirst($k ?: df_caller_f()))
 		,$s, $d
