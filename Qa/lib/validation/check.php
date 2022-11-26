@@ -43,15 +43,6 @@ function df_check_iso2($v):bool {return \Df\Zf\Validate\StringT\Iso2::s()->isVal
  */
 function df_check_s($v):bool {return \Df\Zf\Validate\StringT::s()->isValid($v);}
 
-/**
- * @used-by df_desc()
- * @used-by df_leaf()
- * @used-by df_leaf_sne()
- * @used-by sift_prefix()
- * @param mixed $v
- */
-function df_es($v):bool {return '' === $v;}
-
 /** 2022-10-15 @see is_iterable() has been added to PHP 7.1: https://www.php.net/manual/function.is-iterable.php */
 if (!function_exists('is_iterable')) {
 	/**

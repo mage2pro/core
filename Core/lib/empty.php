@@ -1,5 +1,15 @@
 <?php
 /**
+ * @see df_nes()
+ * @used-by df_desc()
+ * @used-by df_leaf()
+ * @used-by df_leaf_sne()
+ * @used-by sift_prefix()
+ * @param mixed $v
+ */
+function df_es($v):bool {return '' === $v;}
+
+/**
  * 2017-04-26
  * @used-by df_caller_entry()
  * @used-by df_ci_get()
@@ -73,6 +83,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
 
 /**
  * 2016-08-04
+ * @see df_es()
  * @used-by df_cache_get_simple()
  * @used-by df_deployment_cfg()
  * @used-by df_metadata()
@@ -83,6 +94,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
  * @used-by \Df\Framework\Log\Record::msg()
  * @used-by \Df\Payment\Block\Info::si()
  * @used-by \Df\Payment\Method::s()
+ * @used-by \Df\Payment\W\Reader::tl_()
  * @used-by \Df\Shipping\Method::s()
  * @param mixed $v
  */

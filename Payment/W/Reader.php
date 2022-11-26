@@ -69,6 +69,17 @@ class Reader implements IEvent {
 	final function r($k = '', $d = null) {return dfa($this->_req, $k, $d);}
 
 	/**
+	 * 2017-01-12
+	 * @used-by self::tRaw()
+	 * @used-by \Df\Payment\W\Event::rr()
+	 * @param string|string[]|null $k [optional]
+	 * @param mixed|null $d [optional]
+	 * @return array(string => mixed)|mixed
+	 * @throws Critical
+	 */
+	final function rr($k = null, $d = null) {return !is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k);}
+
+	/**
 	 * 2017-03-10
 	 * Some PSP send only one type of notifications.
 	 * In such case, a notification does not denote its own type, and this method returns null.
@@ -94,19 +105,18 @@ class Reader implements IEvent {
 	 * 2017-03-10
 	 * @used-by self::tl()
 	 * @used-by \Df\Payment\W\Event::tl_()
-	 * @param string|null $t
 	 */
-	final function tl_($t):string {return !is_null($t) ? $t : 'Confirmation';}
+	final function tl_(string $t):string {return !df_nes($t) ? $t : 'Confirmation';}
 
 	/**
 	 * 2017-03-13 Returns a value in the PSP format.
 	 * 2017-03-23 Использую именно @uses array_key_exists(), чтобы для ПС с единственным типом оповещений писать ?df-type=
 	 * @used-by self::t()
 	 * @used-by \Df\Payment\W\Event::tl()
-	 * @return string|null
+	 * @used-by \Df\Payment\W\Reader::tRaw()
 	 */
-	final function tRaw() {return array_key_exists('type', $this->_test) ? $this->_test['type'] : (
-		is_null($kt = $this->kt()) ? null : $this->rr($kt)
+	final function tRaw():string {return array_key_exists('type', $this->_test) ? $this->_test['type'] : (
+		df_es($kt = $this->kt()) ? '' : $this->rr($kt)
 	);}
 
 	/**
@@ -128,9 +138,8 @@ class Reader implements IEvent {
 	 * @see \Dfe\Paymill\W\Reader::kt()
 	 * @see \Dfe\Stripe\W\Reader::kt()
 	 * @see \Dfe\YandexKassa\W\Reader::kt()
-	 * @return string|null
 	 */
-	protected function kt() {return null;}
+	protected function kt():string {return '';}
 
 	/**
 	 * 2017-12-08
@@ -166,16 +175,6 @@ class Reader implements IEvent {
 	 * @throws Critical
 	 */
 	private function errorP(string $k):void {$this->error("the required parameter `{$k}` is absent");}
-
-	/**
-	 * 2017-01-12
-	 * @used-by self::tRaw()
-	 * @param string|string[]|null $k [optional]
-	 * @param mixed|null $d [optional]
-	 * @return array(string => mixed)|mixed
-	 * @throws Critical
-	 */
-	private function rr($k = null, $d = null) {return !is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k);}
 
 	/**
 	 * 2017-03-10

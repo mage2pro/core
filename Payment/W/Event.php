@@ -259,9 +259,8 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by self::tl()
 	 * @used-by \Df\Payment\W\Event::tl_()
 	 * @see \Dfe\AllPay\W\Event::tl_()
-	 * @param string|null $t
 	 */
-	protected function tl_($t):string {return $this->_r->tl_($t);}
+	protected function tl_(string $t):string {return $this->_r->tl_($t);}
 
 	/**
 	 * 2017-03-10
