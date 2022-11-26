@@ -14,12 +14,9 @@
  * @see df_ejs()
  * @used-by cs_quote_description() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/107)
  * @used-by Dfe_Stripe/view/frontend/templates/multishipping.phtml
- * @param string|string[] ...$args
  * @return string|string[]
  */
-function df_e(...$args) {return df_call_a(function($text) {return htmlspecialchars(
-	$text, ENT_QUOTES, 'UTF-8', false
-);}, $args);}
+function df_e(string ...$a) {return df_call_a(function($s) {return htmlspecialchars($s, ENT_QUOTES, 'UTF-8', false);}, $a);}
 
 /**
  * 2019-01-11
