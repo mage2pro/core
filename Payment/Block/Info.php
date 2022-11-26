@@ -468,9 +468,8 @@ abstract class Info extends _P {
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
-	 * @param string|null $k [optional]
 	 */
-	protected function s($k = null):Settings {return $this->m()->s($k);}
+	protected function s(string $k = ''):Settings {return $this->m()->s($k);}
 
 	/**
 	 * 2016-11-17
