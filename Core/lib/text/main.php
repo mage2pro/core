@@ -32,6 +32,7 @@ function df_bts_yn(bool $v):string {return $v ? 'yes' : 'no';}
  * http://stackoverflow.com/questions/13913411/mb-strpos-vs-strpos-whats-the-difference
  * 2015-04-17 Добавлена возможность указывать в качестве $needle массив.
  * 2022-10-14 @see str_contains() has been added to PHP 8: https://www.php.net/manual/function.str-contains.php
+ * 2022-11-26 We can not declare the argument as `string ...$n` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_block_output()
  * @used-by df_is_bin_magento()
  * @used-by df_request_ua()
@@ -48,8 +49,9 @@ function df_bts_yn(bool $v):string {return $v ? 'yes' : 'no';}
  * @used-by \DxMoto\Core\Observer\CanLog::execute()
  * @used-by \RWCandy\Captcha\Assert::name()
  * @used-by \TFC\Core\Observer\CanLog::execute()
+ * @param string|string[] $n
  */
-function df_contains(string $haystack, string ...$n):bool {/** @var bool $r */
+function df_contains(string $haystack, ...$n):bool {/** @var bool $r */
 	# 2017-07-10 This branch is exclusively for optimization.
 	# 2022-11-26 The previous (also correct) condition was: `1 === count($n) && !is_array($n0 = $n[0])`
 	if (!is_array($n0 = df_arg($n))) {
