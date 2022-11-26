@@ -5,9 +5,12 @@ use ReflectionClass as RC;
 
 /**
  * 2016-02-08 Применение @uses dfa_flatten() делает возможным вызовы типа: df_cc_class_uc('Aa', ['Bb', 'Cb']) => Aa\Bb\Cb
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_cc_class_uc()
+ * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @param string|string[] $a
  */
-function df_cc_class(string ...$args):string {return implode('\\', df_clean(dfa_flatten($args)));}
+function df_cc_class(...$a):string {return implode('\\', df_clean(dfa_flatten($a)));}
 
 /**
  * 2016-03-25
