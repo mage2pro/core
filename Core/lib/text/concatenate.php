@@ -86,9 +86,8 @@ function df_cc_n(string ...$a):string {return df_ccc("\n", dfa_flatten($a));}
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @used-by \TFC\Image\Command\C1::image()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
- * @param string|string[] ...$args
  */
-function df_cc_path(...$args):string {return df_ccc('/', dfa_flatten($args));}
+function df_cc_path(string ...$a):string {return df_ccc('/', dfa_flatten($a));}
 
 /**
  * 2016-05-31
