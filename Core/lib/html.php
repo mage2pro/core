@@ -105,11 +105,11 @@ function df_tag(string $tag, $attrs = [], $content = null, $multiline = null):st
 /**
  * 2016-11-17
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
+ * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
  * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
+ * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
  */
-function df_tag_ab(string $text, string ...$url):string {return df_tag(
-	'a', ['href' => implode($url), 'target' => '_blank'], $text
-);}
+function df_tag_ab(string $s, string $url):string {return df_tag('a', ['href' => $url, 'target' => '_blank'], $s);}
 
 /**
  * 2016-10-24          
