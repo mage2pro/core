@@ -39,7 +39,7 @@ abstract class Validator extends Exception {
 	 * 2017-07-06
 	 * @override
 	 * @see \Df\Core\Exception::__construct()
-	 * @used-by \Df\API\Client::p()
+	 * @used-by \Df\API\Client::_p()
 	 * @param mixed $r
 	 */
 	final function __construct($r) {$this->_r = $r;}
