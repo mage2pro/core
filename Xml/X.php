@@ -190,12 +190,13 @@ final class X extends MX {
 	 * дана рекомендация использования функции @see spl_object_hash(), однако это слишком сложно,
 	 * и неочевидно, ускорит ли работу системы (также могут быть проблемы с расходом оперативной памяти).
 	 * 2022-11-15 @deprecated It is unused.
+	 * 2022-11-26 We can not declare the $path argument type because it is undeclared in the overriden method.
 	 * @override
 	 * @see \Magento\Framework\Simplexml\Element::descend()
-	 * @param string|string[] $path
+	 * @param string|string[] $p
 	 * @return X|null
 	 */
-	function descend($path) {return df_ftn(parent::descend($path));}
+	function descend($p) {return df_ftn(parent::descend($p));}
 
 	/**
 	 * @used-by df_xml_g()
