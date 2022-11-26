@@ -60,7 +60,6 @@ abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-03-10
 	 * @used-by \Df\Payment\W\F::event()
-	 * @param Reader $r
 	 */
 	final function __construct(Reader $r) {$this->_r = $r;}
 
