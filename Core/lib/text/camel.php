@@ -62,6 +62,6 @@ function df_explode_camel(string ...$args):array {return df_call_a(function($nam
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @return string|string[]
  */
-function df_underscore_to_camel(string ...$a) {return df_call_a(function(string $s) {return implode(df_ucfirst(explode(
+function df_underscore_to_camel(string ...$a) {return df_call_a(function(string $s):string {return implode(df_ucfirst(explode(
 	'_', mb_strtolower($s)
 )));}, $a);}
