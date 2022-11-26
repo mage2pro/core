@@ -7,6 +7,12 @@ use ReflectionClass as RC;
  * 2016-02-08 Применение @uses dfa_flatten() делает возможным вызовы типа: df_cc_class_uc('Aa', ['Bb', 'Cb']) => Aa\Bb\Cb
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_cc_class_uc()
+ * @used-by df_cc_class_uc()
+ * @used-by df_class_suffix()
+ * @used-by df_con_hier_suf()
+ * @used-by df_con_hier_suf_ta()
+ * @used-by \Df\Payment\W\F::c()
+ * @used-by \Dfe\AllPay\Method::getInfoBlockType()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string|string[] $a
  */
