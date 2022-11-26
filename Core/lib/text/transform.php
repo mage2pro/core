@@ -47,7 +47,8 @@ function df_ucfirst(string ...$a) {return df_call_a(function(string $s):string {
  * https://php.net/manual/function.mb-convert-case.php#refsect1-function.mb-convert-case-parameters
  * @see df_ucfirst
  * @used-by \Df\Config\Source\LetterCase::apply()
- * @param string|string[] ...$args
  * @return string|string[]
  */
-function df_ucwords(...$args) {return df_call_a(function($s) {return mb_convert_case($s, MB_CASE_TITLE, 'UTF-8');}, $args);}
+function df_ucwords(string ...$a) {return df_call_a(function(string $s):string {return mb_convert_case(
+	$s, MB_CASE_TITLE, 'UTF-8'
+);}, $a);}
