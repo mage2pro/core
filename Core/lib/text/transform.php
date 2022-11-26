@@ -6,12 +6,11 @@
  * @used-by df_class_second_lc() 
  * @used-by df_explode_class_lc() 
  * @used-by df_explode_class_lc_camel()
- * @param string|string[] ...$args
  * @return string|string[]
  */
-function df_lcfirst(...$args) {return df_call_a(function($s) {return
+function df_lcfirst(string ...$a) {return df_call_a(function(string $s):string {return
 	mb_strtolower(mb_substr($s, 0, 1)) . mb_substr($s, 1)
-;}, $args);}
+;}, $a);}
 
 /**
  * 2016-05-22
