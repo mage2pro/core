@@ -1,13 +1,15 @@
 <?php
 /**
  * 2021-12-20
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @see df_underscore_to_camel()
  * @used-by \TFC\GoogleShopping\Products::atts() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
+ * @param string|string[] $a
  * @return string|string[]
  */
-function df_camel_to_underscore(string ...$a) {return df_call_a(function($s) {return implode(
-	'_', df_lcfirst(df_explode_camel($s))
-);}, $a);}
+function df_camel_to_underscore(...$a) {return df_call_a(function(string $s):string {return implode(
+	'_', df_lcfirst(df_explode_camel($s)
+));}, $a);}
 
 /**
  * «YandexMarket» => array(«Yandex», «Market»)

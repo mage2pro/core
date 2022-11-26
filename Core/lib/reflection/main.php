@@ -124,6 +124,7 @@ function df_class_my($c):bool {return in_array(df_class_f($c), ['Df', 'Dfe', 'Df
  * 2016-07-10 «Df\PaypalClone\W\Handler» => «Df\PaypalClone\Request».
  * 2022-11-26
  * We can not declare the argument as `string ...$newSuffix` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * @used-by df_con_sibling()
  * @param string|object $c
  * @param string|string[] $newSuffix
  */
