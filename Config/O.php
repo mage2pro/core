@@ -99,10 +99,9 @@ class O extends \Df\Core\O {
 	 * @used-by \Dfe\Sift\PM\Entity::sGateway()
 	 * @used-by \Dfe\Sift\PM\Entity::sType()
 	 * @param mixed|null $d
-	 * @param string|null $k
 	 * @return string|null
 	 */
-	final protected function v0($d = null, $k = null) {return '0' !== ($r = $this->v(null, $k ?: df_caller_f())) ? $r : $d;}
+	final protected function v0($d = null, string $k = '') {return '0' !== ($r = $this->v(null, $k ?: df_caller_f())) ? $r : $d;}
 
 	/**
 	 * 2016-08-10
