@@ -8,8 +8,8 @@
  * @return string|string[]
  */
 function df_camel_to_underscore(...$a) {return df_call_a(function(string $s):string {return implode(
-	'_', df_lcfirst(df_explode_camel($s)
-));}, $a);}
+	'_', df_lcfirst(df_explode_camel($s))
+);}, $a);}
 
 /**
  * «YandexMarket» => array(«Yandex», «Market»)
