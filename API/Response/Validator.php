@@ -40,9 +40,9 @@ abstract class Validator extends Exception {
 	 * @override
 	 * @see \Df\Core\Exception::__construct()
 	 * @used-by \Df\API\Client::_p()
-	 * @param mixed $r
+	 * @param array(string => mixed) $r
 	 */
-	final function __construct($r) {$this->_r = $r;}
+	final function __construct(array $r) {$this->_r = $r;}
 
 	/**
 	 * 2017-12-03
@@ -73,7 +73,7 @@ abstract class Validator extends Exception {
 	 * @used-by \Inkifi\Pwinty\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::valid()
 	 * @param string|null $k [optional]
-	 * @return mixed
+	 * @return  array(string => mixed)|string
 	 */
 	final protected function r($k = null) {return is_null($k) ? $this->_r : dfa($this->_r, $k);}
 
@@ -82,7 +82,7 @@ abstract class Validator extends Exception {
 	 * @used-by self::__construct()
 	 * @used-by self::long()
 	 * @used-by self::r()
-	 * @var mixed
+	 * @var array(string => mixed)
 	 */
 	private $_r;
 }

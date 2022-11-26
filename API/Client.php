@@ -339,7 +339,7 @@ abstract class Client {
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
 	 * @used-by self::p()
 	 * @throws DFE
-	 * @return mixed
+	 * @return array(string => mixed)
 	 */
 	private function _p() {
 		$c = $this->_c; /** @var C $c */
