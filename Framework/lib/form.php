@@ -73,11 +73,10 @@ function df_fa_link():string {return df_link_inline(df_fa());}
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @param AE|E $e
- * @param string|null $k [optional]
  * @param string|null|callable $d [optional]
  * @return string|null|array(string => mixed)
  */
-function df_fe_fc(AE $e, $k = null, $d = null) {return dfa(df_eta(df_fe_top($e)->getFieldConfig()), $k, $d);}
+function df_fe_fc(AE $e, string $k = '', $d = null) {return dfa(df_eta(df_fe_top($e)->getFieldConfig()), $k, $d);}
 
 /**
  * 2016-05-30

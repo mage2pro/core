@@ -206,12 +206,12 @@ class Fieldset extends FieldsetM implements ElementI {
 
 	/**
 	 * 2015-11-17
-	 * @used-by \Df\Framework\Form\Element\ArrayT::itemType()
-	 * @param string|null $k [optional]
+	 * @used-by \Df\Config\Backend::label()
+	 * @used-by \Df\Framework\Form\Element\ArrayT::itemFormElement()
 	 * @param string|null|callable $d [optional]
 	 * @return string|null|array(string => mixed)
 	 */
-	final protected function fc($k = null, $d = null) {return df_fe_fc($this, $k, $d);}
+	final protected function fc(string $k = '', $d = null) {return df_fe_fc($this, $k, $d);}
 
 	/**
 	 * 2015-11-17
