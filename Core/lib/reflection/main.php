@@ -121,11 +121,13 @@ function df_class_llc($c):string {return strtolower(df_class_l($c));}
 function df_class_my($c):bool {return in_array(df_class_f($c), ['Df', 'Dfe', 'Dfr']);}
 
 /**
- * 2016-07-10
- * Df\PaypalClone\W\Handler => Df\PaypalClone\Request
+ * 2016-07-10 «Df\PaypalClone\W\Handler» => «Df\PaypalClone\Request».
+ * 2022-11-26
+ * We can not declare the argument as `string ...$newSuffix` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @param string|object $c
+ * @param string|string[] $newSuffix
  */
-function df_class_replace_last($c, string ...$newSuffix):string {return implode(df_cld($c), array_merge(
+function df_class_replace_last($c, ...$newSuffix):string {return implode(df_cld($c), array_merge(
 	df_head(df_explode_class($c)), dfa_flatten($newSuffix)
 ));}
 
