@@ -116,7 +116,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Qiwi\W\Event::isSuccessful()
 	 * @see \Dfe\YandexKassa\W\Event::isSuccessful()
 	 */
-	function isSuccessful():bool {return dfc($this, function() {return strval($this->statusExpected()) === $this->status();});}
+	function isSuccessful():bool {return dfc($this, function() {return $this->statusExpected() === $this->status();});}
 
 	/**
 	 * 2017-01-02
@@ -203,20 +203,19 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\YandexKassa\W\Event::isSuccessful()
 	 * @used-by \Dfe\YandexKassa\W\Event::ttCurrent()
 	 */
-	final protected function status():string {return ($k = $this->k_status()) ? strval($this->rr($k)) : '';}
+	final protected function status():string {return strval(dfa_strict($this->rr(), $this->k_status(), ''));}
 
 	/**
 	 * 2016-08-27
-	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
+	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать ''.
 	 * @used-by self::isSuccessful()
 	 * @see \Dfe\AllPay\W\Event::statusExpected()
 	 * @see \Dfe\AllPay\W\Event\Offline::statusExpected()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::statusExpected()
 	 * @see \Dfe\IPay88\W\Event::statusExpected()
 	 * @see \Dfe\SecurePay\W\Event::statusExpected()
-	 * @return int|null
 	 */
-	protected function statusExpected() {return null;}
+	protected function statusExpected():string {return '';}
 
 	/**
 	 * 2017-03-18
