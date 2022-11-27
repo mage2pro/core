@@ -150,6 +150,8 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\PaypalClone\W\Event::validate()
 	 * @used-by \Dfe\AllPay\Block\Info\ATM::paymentId()
 	 * @used-by \Dfe\AllPay\Block\Info\Barcode::paymentId()
+	 * @used-by \Dfe\AllPay\Block\Info\CVS::paymentId()
+	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @used-by \Dfe\AllPay\W\Event\BankCard::numPayments()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Event::currencyName()
