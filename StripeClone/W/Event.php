@@ -80,7 +80,6 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return mixed|int|string|null|array(string => mixed)
-	 * @throws Critical
 	 */
 	final function ro($k = null, $d = null) {return $this->rr(df_cc_path($this->roPath(), $k), $d);}
 
