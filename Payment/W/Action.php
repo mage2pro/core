@@ -122,8 +122,8 @@ class Action extends \Df\Payment\Action {
 	private function ignoredLog(Ignored $e):void {
 		if (df_my()) {
 			dfp_sentry_tags($m = $e->m()); /** @var string $m */
-			$req = $e->event()->r(); /** @var array(string => mixed) $req */
 			$ev = $e->event(); /** @var Event $ev */
+			$req = $ev->r(); /** @var array(string => mixed) $req */
 			$label = $ev->tl(); /** @var string $label */
 			df_sentry($m, "[{$e->mTitle()}] {$label}: ignored", ['extra' => $req]);
 			df_log_l($m, $req, $ev->t());

@@ -62,6 +62,7 @@ class Reader implements IEvent {
 	 * @used-by self::error()
 	 * @used-by self::rr()
 	 * @used-by self::t()
+	 * @used-by \Df\Payment\W\Event::r()
 	 * @param string|string[] $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null

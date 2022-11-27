@@ -10,7 +10,6 @@ interface IEvent {
 	 * 2017-03-11
 	 * @see \Df\Payment\W\Event::r()
 	 * @see \Df\Payment\W\Reader::r()
-	 * @used-by \Df\Payment\W\Action::execute()
 	 * @param string|string[]|null $k [optional]
 	 * @param string|null $d
 	 * @return array(string => mixed)|mixed|null
@@ -19,7 +18,6 @@ interface IEvent {
 
 	/**
 	 * 2017-03-11 Type label.
-	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @see \Df\Payment\W\Event::tl()
 	 * @see \Df\Payment\W\Reader::tl()
 	 */

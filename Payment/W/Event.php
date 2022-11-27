@@ -146,6 +146,7 @@ abstract class Event implements IEvent, IMA {
 	 * @override
 	 * @see \Df\Payment\W\IEvent::r()
 	 * @used-by \Df\Payment\TM::response()
+	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @used-by \Df\Payment\W\Exception::r()
 	 * @used-by \Df\Payment\W\Handler::r()
 	 * @used-by \Df\PaypalClone\W\Event::validate()
