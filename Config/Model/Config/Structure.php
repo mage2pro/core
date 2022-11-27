@@ -10,6 +10,6 @@ class Structure extends \Magento\Config\Model\Config\Structure {
 		if (!isset($s->_data['tabs'])) {
 			$s->getTabs();
 		}
-		return df_nts(dfa(dfa($s->_data['tabs'], $tabName, []), $tabProperty));
+		return dfa_deep($s->_data['tabs'], [$tabName, $tabProperty], '');
 	}
 }

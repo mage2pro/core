@@ -110,7 +110,6 @@ function df_nes($v):bool {return is_null($v) || '' === $v;}
  * @used-by df_trim()
  * @used-by sift_prefix()
  * @used-by \Df\API\Facade::p()
- * @used-by \Df\Config\Model\Config\Structure::tab()
  * @used-by \Df\Qa\Trace\Frame::class_()
  * @used-by \Df\Qa\Trace\Frame::function_()
  * @used-by \Df\Typography\Font::variantNumber()
