@@ -70,7 +70,6 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\Sift\API\Validator\Event::long()
 	 * @used-by \Dfe\Sift\API\Validator\Event::valid()
 	 * @used-by \Dfe\Sift\API\Validator\GetDecisions::long()
-	 * @used-by \Dfe\Sift\API\Validator\GetDecisions::short()
 	 * @used-by \Dfe\Sift\API\Validator\GetDecisions::valid()
 	 * @used-by \Dfe\TBCBank\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::long()
