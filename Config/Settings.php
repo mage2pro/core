@@ -357,11 +357,10 @@ abstract class Settings {
 	 * @param string|null $d [optonal]
 	 * @return string|null
 	 */
-	final protected function _matrix(int $i, int $j, string $k = '', $s = null, $d = null) {return
-		dfa(dfa(dfc($this, function($k, $s) {return
-			$this->json($k, $s)
-		;}, [$k ?: df_caller_f(), df_scope_code($this->scope($s))]), $i, []), $j, $d)
-	;}
+	final protected function _matrix(int $i, int $j, string $k = '', $s = null, $d = null) {return dfa_deep(
+		dfc($this, function($k, $s) {return $this->json($k, $s);}, [$k ?: df_caller_f(), df_scope_code($this->scope($s))])
+		,[$i, $j], $d
+	);}
 
 	/**
 	 * 2016-07-31
