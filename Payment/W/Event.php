@@ -155,6 +155,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\AllPay\W\Event\BankCard::authTime()
 	 * @used-by \Dfe\AllPay\W\Event\BankCard::numPayments()
 	 * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()
+	 * @used-by \Dfe\AllPay\W\Event\Offline::paidTime()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Event::currencyName()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Event::ttCurrent()
