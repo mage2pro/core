@@ -48,7 +48,9 @@ final class SessionManager {
 			 */
 			$o = df_session_config()->getOptions();
 			if ('files' === dfa($o, 'session.save_handler') && df_path_is_internal(dfa($o, 'session.save_path'))) {
+				# 2022-11-27 https://www.php.net/manual/session.configuration.php#ini.session.gc-probability
 				ini_set('session.gc_probability', 1);
+				# 2022-11-27 https://www.php.net/manual/session.configuration.php#ini.session.gc-divisor
 				ini_set('session.gc_divisor', 100);
 			}
 		}
