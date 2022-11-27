@@ -118,8 +118,8 @@ function dfa(array $a, $k, $d = null) {return
 
 /**
  * 2022-11-27
- * $throw = false in @see \Df\Payment\W\Strategy\ConfirmPending::_handle().
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by \Df\PaypalClone\W\Event::idE()
  * @used-by \Df\PaypalClone\W\Event::signatureProvided()
  * @used-by \Df\PaypalClone\W\Event::status()
  * @used-by \Dfe\Qiwi\W\Event::ttCurrent()

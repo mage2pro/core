@@ -83,7 +83,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
 	 * @see \Dfe\Qiwi\W\Event::idE()
 	 */
-	function idE():string {return ($k = $this->k_idE()) ? $this->rr($k) : "{$this->pid()}e";}
+	function idE():string {return dfa_strict($this->rr(), $this->k_idE(), "{$this->pid()}e");}
 
 	/**
 	 * 2016-08-27
