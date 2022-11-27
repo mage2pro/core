@@ -53,7 +53,7 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-01-18
-	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать null.
+	 * 2017-04-16 Некоторые ПС (Robokassa) не возвращают статуса. Для таких ПС метод должен возвращать ''.
 	 * @used-by self::status()
 	 * @see \Dfe\AllPay\W\Event::k_status()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::k_status()
@@ -64,9 +64,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Robokassa\W\Event::k_status()
 	 * @see \Dfe\SecurePay\W\Event::k_status()
 	 * @see \Dfe\YandexKassa\W\Event::k_status()
-	 * @return string|null
 	 */
-	abstract protected function k_status();
+	abstract protected function k_status():string;
 
 	/**
 	 * 2017-03-16 The payment's identifier in the PSP.
