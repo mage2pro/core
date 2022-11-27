@@ -171,7 +171,6 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\PostFinance\W\Event::cardholder()
 	 * @used-by \Dfe\PostFinance\W\Event::option()
 	 * @used-by \Dfe\PostFinance\W\Event::optionTitle()
-	 * @used-by \Dfe\Qiwi\W\Handler::amount()
 	 * @used-by \Dfe\Robokassa\W\Event::optionTitle()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 * @used-by \Dfe\Stripe\W\Event\Source::isSuccessful()

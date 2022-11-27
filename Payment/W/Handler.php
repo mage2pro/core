@@ -163,6 +163,7 @@ abstract class Handler implements IMA {
 	/**
 	 * 2017-01-01
 	 * @used-by self::log()
+	 * @used-by \Dfe\Qiwi\W\Handler::amount()
 	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
