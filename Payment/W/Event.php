@@ -165,6 +165,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\AlphaCommerceHub\W\Event::providerResps()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Event::ttCurrent()
 	 * @used-by \Dfe\Dragonpay\Block\Info::prepare()
+	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\W\Event::option()
 	 * @used-by \Dfe\PostFinance\W\Event::cardNumber()
 	 * @used-by \Dfe\PostFinance\W\Event::cardholder()
