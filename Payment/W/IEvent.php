@@ -3,6 +3,7 @@ namespace Df\Payment\W;
 /**
  * 2017-03-11
  * @used-by \Df\Payment\W\Exception::__construct()
+ * @used-by \Df\Payment\W\Exception::event()
  * @see \Df\Payment\W\Event
  * @see \Df\Payment\W\Reader
  */
