@@ -80,11 +80,9 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Dfe\Stripe\W\Event\Source::statusT()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
-	 * @param string|string[]|null $k [optional]
-	 * @param mixed|null $d [optional]
 	 * @return mixed|int|string|null|array(string => mixed)
 	 */
-	final function ro($k = null, $d = null) {return $this->rr(df_cc_path($this->roPath(), $k), $d);}
+	final function ro(string $k = '') {return $this->rr(df_cc_path($this->roPath(), $k));}
 
 	/**
 	 * 2017-02-14
