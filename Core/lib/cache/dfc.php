@@ -105,6 +105,7 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * 2017-01-02 Задавайте параметр $offset в том случае, когда dfc() вызывается опосредованно. Например, так делает @see dfac().
  * @see dfac()
  * @used-by df_category_children_map()
+ * @used-by df_currency()
  * @used-by df_google_init_service_account()
  * @used-by df_modules_my()
  * @used-by df_product_images_path_rel()

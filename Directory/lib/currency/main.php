@@ -15,22 +15,9 @@ use NumberFormatter as NF;
  * @used-by df_currency_base()
  * @param C|string $c [optional]
  */
-function df_currency($c = ''):C {/** @var C $r */
-	if (!$c) {
-		$r = df_currency_base();
-	}
-	elseif ($c instanceof C) {
-		$r = $c;
-	}
-	else {
-		static $cache; /** @var array(string => Currency) $cache */
-		if (!isset($cache[$c])) {
-			$cache[$c] = df_new_om(C::class)->load($c);
-		}
-		$r = $cache[$c];
-	}
-	return $r;
-}
+function df_currency($c = ''):C {return !$c ? df_currency_base() : ($c instanceof C ? $c :
+	dfcf(function(string $c):C {return df_new_om(C::class)->load($c);}, [$c])
+);}
 
 /**
  * 2016-07-04 «How to programmatically get the base currency's ISO code for a store?» https://mage2.pro/t/1841
