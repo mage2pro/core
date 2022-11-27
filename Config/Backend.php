@@ -159,7 +159,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 * @return string|null
 	 */
 	final protected function fc(string $k, bool $req = true) {
-		$r = dfad(df_config_field($this), $k); /** @var string|null $r */
+		$r = dfad(df_config_field($this), $k); /** @var string|null $r */ /** 2022-11-27 @see dfa_strict() */
 		if ($req && is_null($r)) {
 			# 2020-07-08
 			# "[df_assert_class_exists] The argument «unknown» is rejected by the «df_param_sne» validator":
