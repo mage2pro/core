@@ -329,7 +329,5 @@ abstract class App {
 	 * @used-by \Df\OAuth\ReturnT\GeneralPurpose::redirectUrl()
 	 * @return string|mixed
 	 */
-	final static function state(string $k) {return dfa(
-		dfcf(function() {return df_json_decode(df_request('state'));}, [], [], true, 1), $k
-	);}
+	final static function state(string $k) {return dfac(function() {return df_json_decode(df_request('state'));}, $k);}
 }
