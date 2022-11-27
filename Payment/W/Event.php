@@ -177,7 +177,6 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\TBCBank\Block\Info::cardData()
 	 * @used-by \Dfe\TBCBank\W\Event::_3dsStatus()
 	 * @used-by \Dfe\TBCBank\W\Event::cardId()
-	 * @used-by \Dfe\TBCBank\W\Event::isSuccessful()
 	 * @used-by \Dfe\TBCBank\W\Event::paymentStatus()
 	 * @used-by \Dfe\TBCBank\W\Event::rrn()
 	 * @used-by \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
