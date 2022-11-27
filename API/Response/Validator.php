@@ -75,6 +75,7 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\Square\API\Validator::errors()
 	 * @used-by \Dfe\TBCBank\API\Validator::long()
 	 * @used-by \Dfe\Vantiv\API\Validator::long()
+	 * @used-by \Dfe\Vantiv\API\Validator::valid()
 	 * @used-by \Inkifi\Pwinty\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::valid()
 	 * @return array(string => mixed)|string
