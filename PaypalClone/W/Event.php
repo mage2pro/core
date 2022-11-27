@@ -123,9 +123,9 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 */
-	final function statusT():string {return ($k = $this->k_statusT()) ? $this->r($k) : dftr(
+	final function statusT():string {return dfa_strict($this->r(), $this->k_statusT(), function() {return dftr(
 		$this->status(), df_module_json($this, 'statuses', false)
-	);}
+	);});}
 
 	/**
 	 * 2017-08-15 The type of the current transaction.
