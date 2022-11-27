@@ -31,9 +31,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Robokassa\W\Event::k_idE()
 	 * @see \Dfe\SecurePay\W\Event::k_idE()
 	 * @see \Dfe\YandexKassa\W\Event::k_idE()
-	 * @return string|null
 	 */
-	abstract protected function k_idE();
+	abstract protected function k_idE():string;
 
 	/**
 	 * 2017-01-18
