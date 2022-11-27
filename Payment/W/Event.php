@@ -150,6 +150,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\Payment\W\Exception::r()
 	 * @used-by \Df\Payment\W\Handler::r()
 	 * @used-by \Df\Payment\W\Nav::op()
+	 * @used-by \Df\PaypalClone\W\Event::statusT()
 	 * @used-by \Df\PaypalClone\W\Event::validate()
 	 * @used-by \Dfe\AllPay\Block\Info\ATM::paymentId()
 	 * @used-by \Dfe\AllPay\Block\Info\Barcode::paymentId()
