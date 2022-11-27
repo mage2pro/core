@@ -188,7 +188,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\PaypalClone\W\Event::signatureProvided()
 	 * @used-by \Df\PaypalClone\W\Event::status()
 	 * @used-by \Df\StripeClone\W\Event::ro()
-	 * @return array(string => mixed)|mixed
+	 * @return mixed|null
 	 */
 	final function rr(string $k = '') {return $this->_r->rr($k);}
 
