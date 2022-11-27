@@ -183,9 +183,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Dragonpay\W\Event::k_statusT()
 	 * @see \Dfe\IPay88\W\Event::k_statusT()
 	 * @see \Dfe\SecurePay\W\Event::k_statusT()
-	 * @return string|null
 	 */
-	protected function k_statusT() {return null;}
+	protected function k_statusT():string {return '';}
 
 	/**
 	 * 2017-03-18

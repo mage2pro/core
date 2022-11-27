@@ -14,7 +14,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	/**
 	 * 2017-01-06
 	 * 2017-03-18 Тип родительской транзакции
-	 * 2022-11-10 The result could be `null` @see \Dfe\Moip\W\Event::ttParent()
+	 * 2022-11-10 The result could be an empty string: @see \Dfe\Moip\W\Event::ttParent()
 	 * @used-by \Df\StripeClone\W\Nav::pidAdapt()
 	 * @see \Df\GingerPaymentsBase\W\Event::ttParent()
 	 * @see \Dfe\Moip\W\Event::ttParent()
@@ -26,9 +26,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttParent()
 	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttParent()
 	 * @see \Dfe\TBCBank\W\Event::ttParent()
-	 * @return string|null
 	 */
-	abstract function ttParent();
+	abstract function ttParent():string;
 
 	/**
 	 * 2017-01-04
