@@ -8,7 +8,7 @@
  * @param int|null $i [optional]
  * @return string|string[]
  */
-function df_cli_argv($i = null) {return dfa(dfa($_SERVER, 'argv', []), $i);}
+function df_cli_argv($i = null) {return dfa_deep($_SERVER, ['argv', $i]);}
 
 /**
  * 2020-05-24

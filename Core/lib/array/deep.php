@@ -10,6 +10,8 @@ use Df\Core\Exception as DFE;
  * 2017-03-28
  * Сегодня заметил, что успешно работают пути типа 'transactions/0'
  * в том случае, когда ключ верхнего уровня возвращает массив с целочисленными индексами.
+ * 2022-11-27 dfa_deep(['a' => ['b' => 3]], ['a', null]) will return ['b' => 3]. @see df_cli_argv()
+ * @used-by df_cli_argv()
  * @used-by df_fe_m()
  * @used-by df_primary_key()
  * @used-by dfa()
