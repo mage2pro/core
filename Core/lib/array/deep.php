@@ -28,7 +28,6 @@ use Df\Core\Exception as DFE;
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Dfe\AllPay\W\Event::tlByCode()
  * @used-by \Dfe\CheckoutCom\Handler::r()
- * @used-by \Dfe\Dynamics365\API\Validator\JSON::short()
  * @used-by \Dfe\FacebookLogin\Customer::picture()
  * @used-by \Dfe\Moip\API\Validator::short()
  * @used-by \Dfe\Moip\Facade\Card::country()
