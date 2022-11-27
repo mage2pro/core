@@ -69,12 +69,15 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-01-04
-	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::isPending()
+	 * @used-by \Dfe\Omise\W\Event\Charge\Complete::isPending()
+	 * @used-by \Dfe\Omise\W\Event\Refund::idBase()
 	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::amount()
 	 * @used-by \Dfe\Omise\W\Handler\Refund\Create::eTransId()
+	 * @used-by \Dfe\Paymill\W\Event\Refund::idBase()
 	 * @used-by \Dfe\Paymill\W\Handler\Refund\Succeeded::amount()
 	 * @used-by \Dfe\Paymill\W\Handler\Refund\Succeeded::eTransId()
 	 * @used-by \Dfe\Stripe\W\Event\Source::checkIgnored()
+	 * @used-by \Dfe\Stripe\W\Event\Source::statusT()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::amount()
 	 * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
 	 * @param string|string[]|null $k [optional]
