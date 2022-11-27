@@ -28,9 +28,9 @@ function df_currency_base_c($s = null):string {return df_currency_base($s)->getC
  * @used-by df_currency_by_country_c()
  * @used-by df_currency_name()
  * @used-by df_currency_num()   
- * @param C|string|null $c [optional]
+ * @param C|string $c [optional]
  */
-function df_currency_code($c = null):string {return df_currency($c)->getCode();}
+function df_currency_code($c = ''):string {return df_currency($c)->getCode();}
 
 /**
  * 2016-09-05
@@ -50,9 +50,9 @@ function df_currency_current_c($s = null):string {return df_currency_current($s)
  * https://github.com/sokil/php-isocodes/blob/8cd8c1f0/databases/iso_4217.json
  * @used-by \Dfe\TBCBank\Charge::common()
  * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
- * @param string|C|string[]|C[]|null $c
+ * @param C|string $c [optional]
  */
-function df_currency_num(string $c = ''):string {return dfa(df_currency_nums(), df_currency_code($c));}
+function df_currency_num($c = ''):string {return dfa(df_currency_nums(), df_currency_code($c));}
 
 /**
  * 2018-09-26  

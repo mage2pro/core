@@ -13,9 +13,9 @@ use NumberFormatter as NF;
 /**
  * 2016-07-04 «How to load a currency by its ISO code?» https://mage2.pro/t/1840
  * @used-by df_currency_base()
- * @param C|string|null $c [optional]
+ * @param C|string $c [optional]
  */
-function df_currency($c = null):C {/** @var C $r */
+function df_currency($c = ''):C {/** @var C $r */
 	if (!$c) {
 		$r = df_currency_base();
 	}
