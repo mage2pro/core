@@ -23,9 +23,7 @@ abstract class Exception extends \Df\Payment\Exception {
 	 * @see \Df\PaypalClone\W\Exception\InvalidSignature::__construct()
 	 * @param mixed ...$a
 	 */
-	function __construct(M $m, IEvent $event, ...$a) {
-		$this->_event = $event; $this->_m = $m; parent::__construct(df_format(...$a));
-	}
+	function __construct(M $m, IEvent $e, ...$a) {$this->_event = $e; $this->_m = $m; parent::__construct(df_format(...$a));}
 
 	/**
 	 * 2017-03-11
