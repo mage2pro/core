@@ -273,8 +273,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 		 */
 		$iia = $o['additional_data'] ?: $o->getData();
 		foreach ($this->iiaKeys() as $k) {/** @var string $k */
-			$v = dfa($iia, $k); /** @var string|null $v */
-			if (!is_null($v)) {
+			if (!is_null($v = dfa($iia, $k))) {/** @var string|null $v */
 				$this->iiaSet($k, $v);
 			}
 		}
