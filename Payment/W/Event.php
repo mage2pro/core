@@ -139,7 +139,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 * @see \Dfe\Qiwi\W\Event::pid()
 	 */
-	function pid():string {return $this->rr($this->k_pid());}
+	function pid():string {return $this->rr(df_assert_sne($this->k_pid()));}
 
 	/**
 	 * 2017-03-10
