@@ -72,12 +72,10 @@ class Reader implements IEvent {
 	 * 2017-01-12
 	 * @used-by self::tRaw()
 	 * @used-by \Df\Payment\W\Event::rr()
-	 * @param string|string[]|null $k [optional]
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed
-	 * @throws Critical
 	 */
-	final function rr($k = null, $d = null) {return !is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k);}
+	final function rr(string $k = '', $d = null) {return !is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k);}
 
 	/**
 	 * 2017-03-10
