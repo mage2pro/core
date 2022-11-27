@@ -161,21 +161,19 @@ abstract class Handler implements IMA {
 	final function op():OP {return $this->_nav->op();}
 
 	/**
-	 * 2017-01-01
-	 * @used-by self::log()
-	 * @used-by \Dfe\Qiwi\W\Handler::amount()
-	 * @param string|string[]|null $k [optional]
-	 * @param mixed|null $d [optional]
-	 * @return array(string => mixed)|mixed|null
-	 */
-	final function r($k = null, $d = null) {return $this->_e->r($k, $d);}
-
-	/**
 	 * 2017-11-18
 	 * @used-by self::handle()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 */
 	final function responder():Responder {return $this->_f->responder();}
+
+	/**
+	 * 2017-01-01
+	 * @used-by self::log()
+	 * @used-by \Dfe\Qiwi\W\Handler::amount()
+	 * @return array(string => mixed)|mixed|null
+	 */
+	final protected function r(string $k = '') {return $this->_e->r($k);}
 
 	/**
 	 * 2016-12-26
