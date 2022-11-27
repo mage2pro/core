@@ -75,7 +75,9 @@ class Reader implements IEvent {
 	 * @param mixed|null $d [optional]
 	 * @return array(string => mixed)|mixed
 	 */
-	final function rr(string $k = '', $d = null) {return !is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k);}
+	final function rr(string $k = '', $d = null) {
+		return !is_null($r = $this->r($k, $d)) ? $r : $this->errorP($k);
+	}
 
 	/**
 	 * 2017-03-10
@@ -169,6 +171,7 @@ class Reader implements IEvent {
 	/**
 	 * 2017-03-15
 	 * @used-by self::rr()
+	 * @used-by self::testData()
 	 * @throws Critical
 	 */
 	private function errorP(string $k):void {$this->error("the required parameter `{$k}` is absent");}
