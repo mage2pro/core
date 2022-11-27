@@ -52,7 +52,7 @@ function df_currency_current_c($s = null):string {return df_currency_current($s)
  * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
  * @param string|C|string[]|C[]|null $c
  */
-function df_currency_num($c = null):string {return dfa(df_currency_nums(), df_currency_code($c));}
+function df_currency_num(string $c = ''):string {return dfa(df_currency_nums(), df_currency_code($c));}
 
 /**
  * 2018-09-26  
