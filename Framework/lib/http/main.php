@@ -73,7 +73,7 @@ function df_http_get(string $url, array $query = [], int $timeout = 0, $onE = tr
 /**
  * 2016-04-13
  * @see df_request_body_json()
- * @used-by \Df\Core\Visitor::responseA()
+ * @used-by \Df\Core\Visitor::r()
  * @used-by \Df\GoogleFont\Fonts::responseA()
  * @used-by \Dfe\AmazonLogin\Customer::res()
  * @used-by \Dfe\CurrencyConvert\Ecb::rates()

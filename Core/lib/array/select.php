@@ -179,6 +179,7 @@ function dfad($o, $k = '', $d = null) {return df_nes($k) ? $o : dfa(df_gd($o), $
  * `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * @see dfac()
  * @used-by \Df\Config\A::get()
+ * @used-by \Df\Core\Visitor::r()
  * @used-by \Df\Framework\Form\Element\Fieldset::v()
  * @used-by \Df\Payment\TM::req()
  * @used-by \Df\Payment\TM::res0()
