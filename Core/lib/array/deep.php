@@ -27,7 +27,6 @@ use Df\Core\Exception as DFE;
  * @used-by \Df\Payment\ConfigProvider::p()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Dfe\AllPay\W\Event::tlByCode()
- * @used-by \Dfe\AlphaCommerceHub\API\Validator::result()
  * @used-by \Dfe\CheckoutCom\Handler::r()
  * @used-by \Dfe\Dynamics365\API\Validator\JSON::short()
  * @used-by \Dfe\FacebookLogin\Customer::picture()

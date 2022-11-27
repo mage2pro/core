@@ -158,6 +158,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Dfe\AllPay\W\Event\Offline::paidTime()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Event::currencyName()
+	 * @used-by \Dfe\AlphaCommerceHub\W\Event::providerResps()
 	 * @used-by \Dfe\AlphaCommerceHub\W\Event::ttCurrent()
 	 * @used-by \Dfe\Dragonpay\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\W\Event::option()
