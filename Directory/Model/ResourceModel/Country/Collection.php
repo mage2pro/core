@@ -11,13 +11,10 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	 * А мы, по сути, берём реализацию из @see \Magento\Framework\Data\Collection::getItemById()
 	 * @override
 	 * @see \Magento\Directory\Model\ResourceModel\Country\Collection::getItemById()
-	 * @param string $idValue
+	 * @param string $id
 	 * @return C|null
 	 */
-	function getItemById($idValue) {
-		$this->load();
-		return dfa($this->_items, $idValue);
-	}
+	function getItemById($id) {$this->load(); return dfa($this->_items, $id);}
 
 	/**
 	 * 2016-05-20
