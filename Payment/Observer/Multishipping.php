@@ -46,8 +46,7 @@ final class Multishipping implements ObserverInterface {
 			/**
 			 * 2017-08-28
 			 * I intentionally do not use @see dfp_my() here, 
-			 * because this function will instantiate a @see \Df\Payment\Method instance
-			 * (or use a previously cached instance). 
+			 * because this function will instantiate a @see \Df\Payment\Method instance (or use a previously cached instance).
 			 */
 			if (df_starts_with(($code = $p->getMethod()), 'dfe_')) { /** @var string $code */
 				Method::sgReset();
