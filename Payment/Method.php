@@ -1657,10 +1657,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2016-08-20
 	 * @used-by \Df\Payment\Block\Info::siID()
 	 * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
-	 * @param T $t
-	 * @param bool $e [optional]
 	 */
-	final function tidFormat(T $t, $e = false):string {
+	final function tidFormat(T $t, bool $e = false):string {
 		$id = $t->getTxnId(); /** @var string $id */
 		return df_tag_if(!$e ? $id : $this->tid()->i2e($id), $url = $this->transUrl($t), 'a', [/** @var string|null $url */
 			'href' => $url, 'target' => '_blank', 'title' => __(
