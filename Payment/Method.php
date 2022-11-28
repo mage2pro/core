@@ -1931,9 +1931,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @uses \Df\Payment\Currency::fromOrder()
 	 * @uses \Df\Payment\Currency::toBase()
 	 * @uses \Df\Payment\Currency::toOrder()
-	 * @param float $a
 	 */
-	private function convert($a):float {return call_user_func(
+	private function convert(float $a):float {return call_user_func(
 		[$this->currency(), lcfirst(substr(df_caller_f(), 1))], $a, $this->oq()
 	);}
 
