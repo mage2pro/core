@@ -7,12 +7,6 @@ class Config extends \Magento\Paypal\Model\Config {
 	 * 1) It adds Russia to the «Merchant Country» list: https://github.com/magento/magento2/issues/1489
 	 * 2) «PayPal currency list needs to be updated»: https://github.com/magento/magento2/issues/2157
 	 * @override
-	 * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-	 * @param \Magento\Directory\Helper\Data $directoryHelper
-	 * @param \Magento\Store\Model\StoreManagerInterface $storeManager
-	 * @param \Magento\Payment\Model\Source\CctypeFactory $cctypeFactory
-	 * @param \Magento\Paypal\Model\CertFactory $certFactory
-	 * @param array $params
 	 */
 	function __construct(
 		\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
