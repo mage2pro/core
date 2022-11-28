@@ -64,14 +64,14 @@ final class CapturePreauthorized extends \Df\Payment\W\Strategy {
 	 */
 	private function invoice() {
 		$invoiceService = df_o(InvoiceService::class); /** @var InvoiceService $invoiceService */
-		/** @var Invoice|DfInvoice $result */
-		if (!($result = $invoiceService->prepareInvoice($this->o()))) {
+		/** @var Invoice|DfInvoice $r */
+		if (!($r = $invoiceService->prepareInvoice($this->o()))) {
 			throw new LE(__('We can\'t save the invoice right now.'));
 		}
-		if (!$result->getTotalQty()) {
+		if (!$r->getTotalQty()) {
 			throw new LE(__('You can\'t create an invoice without products.'));
 		}
-		df_register('current_invoice', $result);
+		df_register('current_invoice', $r);
 		/**
 		 * 2016-03-26
 		 * @used-by \Magento\Sales\Model\Order\Invoice::register()
@@ -80,8 +80,8 @@ final class CapturePreauthorized extends \Df\Payment\W\Strategy {
 		 * а не @see \Magento\Sales\Model\Order\Invoice::CAPTURE_OFFINE,
 		 * чтобы была создана транзакция capture.
 		 */
-		$result->setRequestedCaptureCase(Invoice::CAPTURE_ONLINE);
-		$result->register();
-		return $result;
+		$r->setRequestedCaptureCase(Invoice::CAPTURE_ONLINE);
+		$r->register();
+		return $r;
 	}
 }
