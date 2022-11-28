@@ -140,7 +140,7 @@ class Action {
 	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
 	 * @used-by \Df\PaypalClone\Init\Action::transId()
 	 * @used-by \Dfe\Qiwi\Init\Action::transId()
-	 * @used-by \Dfe\Stripe\Init\Action::transId()
+	 * @used-by \Dfe\Stripe\Init\Action::transId+
 	 * @used-by \Dfe\TBCBank\Init\Action::transId()
 	 */
 	final protected function e2i(string $id, string $t = ''):string {return $this->m()->tid()->e2i($id, $t);}
@@ -187,14 +187,12 @@ class Action {
 	protected function preconfigured():string {return dfc($this, function() {
 		$s = $this->s(); /** @var S $s */
 		$key = 'actionFor' . (df_customer_is_new($this->oq()->getCustomerId()) ? 'New' : 'Returned'); /** @var string $key */
-		/**
-		 * 2018-10-06
-		 * The `action` key is used by the TBC Bank module:
-		 * https://github.com/mage2pro/tbc-bank/blob/1.0.1/etc/adminhtml/system.xml#L85-L96
-		 * 2019-09-29
-		 * The `action` key with the `df-null` value is now used by the ACH module:
-		 * https://github.com/mage2pro/ach/blob/0.0.9/etc/config.xml#L12
-		 */
+		# 2018-10-06
+		# The `action` key is used by the TBC Bank module:
+		# https://github.com/mage2pro/tbc-bank/blob/1.0.1/etc/adminhtml/system.xml#L85-L96
+		# 2019-09-29
+		# The `action` key with the `df-null` value is now used by the ACH module:
+		# https://github.com/mage2pro/ach/blob/0.0.9/etc/config.xml#L12
 		return df_n_get($s->v($key, null, function() use($s) {return $s->v('payment_action') ?: $s->v('action');}) ?: AC::C);
 	});}
 
