@@ -29,9 +29,8 @@ abstract class Action extends \Df\Payment\Init\Action {
 	 * @see \Df\Payment\Init\Action::transId()
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by self::action()
-	 * @return string|null
 	 */
-	final protected function transId() {return $this->e2i(df_first($this->charge()));}
+	final protected function transId():string {return $this->e2i(df_first($this->charge()));}
 
 	/**
 	 * 2017-03-21
