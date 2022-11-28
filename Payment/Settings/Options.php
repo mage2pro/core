@@ -38,17 +38,18 @@ final class Options {
 
 	/**
 	 * 2016-08-07
+	 * @param bool $force [optional]
+	 * $force = `true` is passed by:
+	 * 		@see \Dfe\AllPay\ConfigProvider::config()
+	 * 		@see \Dfe\IPay88\ConfigProvider::options()
+	 * 		@see \Dfe\YandexKassa\ConfigProvider::options()
+	 * @used-by \Dfe\AllPay\ConfigProvider::config()
 	 * @used-by \Df\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AllPay\ConfigProvider::config()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
-	 * @param bool $force [optional]
-	 * The `true` value is passed by:
-	 * @used-by \Dfe\AllPay\ConfigProvider::config()
-	 * @used-by \Dfe\IPay88\ConfigProvider::options()
-	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return array(<value> => <label>)
 	 */
-	function o($force = false):array {return !self::needShow($this->_s) && !$force ? [] : $this->_source->options(
+	function o(bool $force = false):array {return !self::needShow($this->_s) && !$force ? [] : $this->_source->options(
 		!$this->isLimited() ? null : $this->allowed()
 	);}
 
