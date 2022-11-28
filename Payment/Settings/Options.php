@@ -8,8 +8,6 @@ final class Options {
 	/**
 	 * 2017-03-03
 	 * @used-by \Df\Payment\Settings::_options()
-	 * @param S $s  
-	 * @param Source $source
 	 */
 	function __construct(S $s, Source $source) {$this->_s = $s; $this->_source = $source;}
 
