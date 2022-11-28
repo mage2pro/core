@@ -57,7 +57,6 @@ final class Options {
 	 * 2017-09-19 «Where to ask for a payment option?»
 	 * @used-by self::o()
 	 * @used-by \Df\Payment\ConfigProvider::configOptions()
-	 * @param S $s
 	 */
 	static function needShow(S $s):bool {return OL::MAGENTO === $s->v('optionsLocation', null, OL::MAGENTO);}
 
