@@ -7,6 +7,7 @@
  * @used-by df_leaf_sne()
  * @used-by df_param_sne()
  * @used-by df_report()
+ * @used-by df_result_sne()
  * @used-by sift_prefix()
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Df\Payment\W\Exception\Ignored::message()

@@ -52,8 +52,7 @@ function df_result_sne(string $v, int $sl = 0):string {$sl++;
 	/**
 	 * Раньше тут стояло `$method->assertParamIsString($v, $ord, $sl)`
 	 * При второй попытке тут стояло `if (!$v)`, что тоже неправильно, ибо непустая строка '0' не проходит такую валидацию.
-	 * 2022-11-10
-	 * @see df_param_sne()
+	 * 2022-11-10 @see df_param_sne()
 	 */
-	return '' !== strval($v) ? $v : Q::raiseErrorResult(__FUNCTION__, [Q::NES], $sl);
+	return !df_es(strval($v)) ? $v : Q::raiseErrorResult(__FUNCTION__, [Q::NES], $sl);
 }
