@@ -45,11 +45,9 @@ function df_result_s($v, $sl = 0):string {return df_check_s($v) ? $v : Q::raiseE
  * @used-by \Dfe\FacebookLogin\Customer::picture()
  * @used-by \Dfe\IPay88\Method::option()
  * @used-by \Dfe\Robokassa\Method::option()
- * @param string $v
- * @param int $sl [optional]
  * @throws DFE
  */
-function df_result_sne($v, $sl = 0):string {$sl++;
+function df_result_sne(string $v, int $sl = 0):string {$sl++;
 	df_result_s($v, $sl);
 	/**
 	 * Раньше тут стояло `$method->assertParamIsString($v, $ord, $sl)`
