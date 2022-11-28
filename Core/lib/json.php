@@ -82,7 +82,7 @@ function df_json_decode($s, bool $throw = true) {/** @var mixed|bool|null $r */
 	# «an empty string is no longer considered valid JSON»:
 	# https://www.php.net/manual/migration70.incompatible.php#migration70.incompatible.other.json-to-jsond
 	# 2022-11-24 `json_decode(false)` and `json_decode('')` return `NULL`: https://3v4l.org/PCdlG
-	if ('' === $s || is_null($s)) {
+	if (df_nes($s)) {
 		$r = $s;
 	}
 	else {
