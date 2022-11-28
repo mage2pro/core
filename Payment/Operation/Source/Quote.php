@@ -27,11 +27,12 @@ final class Quote extends \Df\Payment\Operation\Source {
 	 * Мы намеренно передаваём этот идентификатор локальным (без приставки с именем модуля)
 	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
 	 * ведь там все идентификаторы имели бы одинаковую приставку.
+	 * 2022-11-28 Actually, the result is an integer.
 	 * @override
 	 * @see \Df\Payment\Operation\Source::id()
 	 * @used-by \Df\Payment\Operation::id()
 	 */
-	function id():int {return df_assert($this->_q->getId());}
+	function id():string {return (string)df_assert($this->_q->getId());}
 
 	/**
 	 * 2017-04-09
