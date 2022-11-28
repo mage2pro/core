@@ -84,13 +84,11 @@ function dfp_container_add(II $p, string $k, string $v):void {$p->setAdditionalI
  * Пока эта функция имеет лишь вспомогательное значение:
  * @used-by dfp_container_add()
  * @used-by dfp_container_has()
+ * 2017-03-11 Формально возвращает array(string => mixed), но реально — string[].
  * @param II|OP|QP $p
- * @param string $k
  * @return string[]
- * 2017-03-11
- * Формально возвращает array(string => mixed), но реально — string[].
  */
-function dfp_container_get(II $p, $k):array {/** @var string $j */ return
+function dfp_container_get(II $p, string $k):array {/** @var string $j */ return
 	!($j = $p->getAdditionalInformation($k)) ? [] : df_json_decode($j)
 ;}
 
@@ -99,10 +97,8 @@ function dfp_container_get(II $p, $k):array {/** @var string $j */ return
  * @used-by \Df\Payment\W\Strategy\Refund::_handle()
  * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
  * @param II|OP|QP $p
- * @param string $k
- * @param string $v
  */
-function dfp_container_has(II $p, $k, $v):bool {return in_array($v, dfp_container_get($p, $k));}
+function dfp_container_has(II $p, string $k, string $v):bool {return in_array($v, dfp_container_get($p, $k));}
 
 /**
  * 2016-08-08
