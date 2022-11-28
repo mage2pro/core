@@ -14,14 +14,12 @@ final class Quote extends \Df\Payment\Operation\Source {
 	function __construct(M $m, IQ $q) {$this->_m = $m; $this->_q = $q;}
 
 	/**
-	 * 2017-04-08
-	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * 2017-04-08 Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @override
 	 * @see \Df\Payment\Operation\Source::amount()
 	 * @used-by \Df\Payment\Operation::amount()
-	 * @return float|null
 	 */
-	function amount() {return dfp_due($this->_m, $this->_q);}
+	function amount():float {return dfp_due($this->_m, $this->_q);}
 
 	/**
 	 * 2017-04-09

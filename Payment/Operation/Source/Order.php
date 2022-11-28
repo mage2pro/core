@@ -25,9 +25,8 @@ class Order extends Source {
 	 * @override
 	 * @see \Df\Payment\Operation\Source::amount()
 	 * @used-by \Df\Payment\Operation::amount()
-	 * @return float|null
 	 */
-	final function amount() {return dfp_due($this->_m);}
+	final function amount():float {return dfp_due($this->_m);}
 
 	/**
 	 * 2016-09-06
