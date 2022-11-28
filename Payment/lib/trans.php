@@ -37,7 +37,7 @@ function df_trans_by_payment($p, string $ordering) {return dfcf(function($pid, $
 	# Раньше стояла проверка: `df_assert_eq(1, count($txnIds));`
 	# Однако при разработке платёжных модулей бывает, что у первых транзакций данные не всегда корректны.
 	# Негоже из-за этого падать, лучше вернуть просто первую транзакцию, как нас и просят.
-	$s->order("transaction_id {$ordering}");
+	$s->order("transaction_id $ordering");
 	/** @var int|null $id */
 	return !($id = df_conn()->fetchOne($s, 'transaction_id')) ? null : df_trans_r()->get($id);
 }, [df_idn($p), $ordering]);}
