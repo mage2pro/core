@@ -20,9 +20,7 @@ function df_tm($m):TM {return TM::s($m);}
 /**
  * 2017-03-23
  * @used-by \Dfe\AllPay\Method::getInfoBlockType()
- * @used-by \Dfe\AllPay\Choice::title()
  * @param string|object $m
- * @param string ...$k
  * @return Event|string|null
  */
-function df_tmf($m, ...$k) {return df_tm($m)->responseF(...$k);}
+function df_tmf($m, string ...$k) {return df_tm($m)->responseF(...$k);}
