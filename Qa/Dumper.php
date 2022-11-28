@@ -10,10 +10,7 @@ final class Dumper {
 		is_array($v) ? $this->dumpArray($v) : (is_bool($v) ? df_bts($v) : (is_string($v) ? $v : print_r($v, true)))
 	);}
 
-	/**
-	 * @used-by self::dump()
-	 * @param mixed $a
-	 */
+	/** @used-by self::dump() */
 	private function dumpArray(array $a):string {return "[\n" . df_tab_multiline($this->dumpArrayElements($a)) . "\n]";}
 
 	/**
