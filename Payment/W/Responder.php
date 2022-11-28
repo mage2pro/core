@@ -51,7 +51,6 @@ class Responder {
 	/**
 	 * 2017-01-17
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @param Ignored $e
 	 */
 	final function setIgnored(Ignored $e):void {$this->set(Text::i($e->message()));}
 
