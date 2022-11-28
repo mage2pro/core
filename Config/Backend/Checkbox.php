@@ -10,13 +10,14 @@ use Df\Config\Backend;
  */
 class Checkbox extends Backend {
 	/**
-	 * 2015-12-21 Когда чекбокс установлен, то в массиве приходит пустая строка, а когда не установлен, то null.
+	 * 2015-12-21
 	 * @override
 	 * @see \Df\Config\Backend::dfSaveBefore()
 	 * @used-by \Df\Config\Backend::save()
 	 */
 	final protected function dfSaveBefore():void {
-		if ('' === $this->getValue()) {
+		# 2015-12-21 Когда чекбокс установлен, то в массиве приходит пустая строка, а когда не установлен, то `null`.
+		if (df_es($this->getValue())) {
 			$this->setValue(true);
 		}
 		parent::dfSaveBefore();

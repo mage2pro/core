@@ -9,6 +9,7 @@
  * @used-by df_report()
  * @used-by df_result_sne()
  * @used-by sift_prefix()
+ * @used-by \Df\Config\Backend\Checkbox::dfSaveBefore()
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Df\Payment\W\Exception\Ignored::message()
  * @used-by \Df\Payment\W\Handler::log()
