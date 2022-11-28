@@ -142,10 +142,9 @@ class Action {
 	 * @used-by \Dfe\Qiwi\Init\Action::transId()
 	 * @used-by \Dfe\Stripe\Init\Action::transId()
 	 * @used-by \Dfe\TBCBank\Init\Action::transId()
-	 * @param string $id
 	 * @param string|null $t [optional]
 	 */
-	final protected function e2i($id, $t = null):string {return $this->m()->tid()->e2i($id, $t);}
+	final protected function e2i(string $id, $t = null):string {return $this->m()->tid()->e2i($id, $t);}
 
 	/**
 	 * 2017-09-10
