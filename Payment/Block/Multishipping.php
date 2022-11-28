@@ -24,7 +24,6 @@ abstract class Multishipping extends _P {
 	 *		return $block;
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.0-rc2.1/app/code/Magento/Payment/Helper/Data.php#L169-L181
-	 * @param M $m
 	 */
 	function setMethod(M $m):void {$this->_m = $m;}
 
