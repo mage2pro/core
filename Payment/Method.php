@@ -1698,9 +1698,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 */
 	final function validate():self {
 		if (!$this->canUseForCountry(dfp_oq($this->ii())->getBillingAddress()->getCountryId())) {
-			throw new LE(__(
-				'You can\'t use the payment type you selected to make payments to the billing country.'
-			));
+			throw new LE(__('You can\'t use the payment type you selected to make payments to the billing country.'));
 		}
 		if ($this->test()) {
 			$this->iiaSet(self::II__TEST, true);
