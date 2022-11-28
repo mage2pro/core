@@ -13,7 +13,9 @@ use Magento\Payment\Model\Method\Substitution;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\ResourceModel\Order\Creditmemo\Grid\Collection as CreditmemoGC;
 use Magento\Sales\Model\ResourceModel\Order\Grid\Collection as OrderGC;
-use Magento\Sales\Model\ResourceModel\Order\Invoice\Grid\Collection as InvoiceGC;
+# 2022-11-28
+# The `Magento\Sales\Model\ResourceModel\Order\Invoice\Grid\Collection` class has been deleted from Magento since 2.4.0:
+# https://mage2.pro/t/6338
 /**
  * 2016-07-28
  * Событие: df_data_provider__search_result
