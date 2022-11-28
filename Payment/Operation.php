@@ -185,10 +185,9 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Moip\P\Preorder::pItems()
 	 * @see \Dfe\SecurePay\Charge::amountFormat()
 	 * @see \Dfe\SecurePay\Refund::amountFormat()
-	 * @param float $a
 	 * @return float|int|string
 	 */
-	protected function amountFormat($a) {return $this->m()->amountFormat($a);}
+	protected function amountFormat(float $a) {return $this->m()->amountFormat($a);}
 
 	/**
 	 * 2016-08-22
