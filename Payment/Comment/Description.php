@@ -57,10 +57,9 @@ class Description extends \Df\Config\Comment {
 	/**
 	 * 2017-09-11
 	 * @used-by self::locations()
-	 * @param string $text
 	 * @param array(string => string|bool) $o
 	 */
-	private function a($text, array $o):string {return df_tag_if($text, dfa($o, 'url'), 'a', [
+	private function a(string $text, array $o):string {return df_tag_if($text, dfa($o, 'url'), 'a', [
 		'target' => '_blank', 'title' => dfa($o, 'title'), 'href' => dfa($o, 'url')
 	]);}
 
