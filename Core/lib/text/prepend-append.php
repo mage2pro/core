@@ -10,7 +10,7 @@ function df_append(string $s, string $tail):string {return df_ends_with($s, $tai
  * 2015-12-25
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  */
-function df_n_prepend(string $s):string {return '' === $s ? '' : "\n$s";}
+function df_n_prepend(string $s):string {return df_es($s) ? $s : "\n$s";}
 
 /**
  * Аналог @see str_pad() для Unicode: http://stackoverflow.com/a/14773638
