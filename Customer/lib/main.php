@@ -42,10 +42,11 @@ function df_are_customers_global():bool {return dfcf(function() {
  * @used-by \Stock2Shop\OrderExport\Payload::get()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @param string|int|DC|C|null $c [optional]
+ * @param Closure|bool|mixed $onE [optional]
  * @return C|O|null|false
  * @throws NoSuchEntityException|DFE
  */
-function df_customer($c = null, bool $throw = false) {return df_try(function() use($c) {return
+function df_customer($c = null, $onE = false) {return df_try(function() use($c) {return
 	/** @var int|string|null $id */
 	/**
 	 * 2016-08-22
@@ -65,7 +66,7 @@ function df_customer($c = null, bool $throw = false) {return df_try(function() u
 			? df_customer_registry()->retrieve($id)
 			: df_error('df_customer(): the argument of type %s is unrecognizable.', df_type($c))
 	))
-;}, $throw);}
+;}, $onE);}
 
 /**
  * 2016-08-24 By analogy with @see \Magento\Backend\Block\Dashboard\Tab\Customers\Newest::getRowUrl()
