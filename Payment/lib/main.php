@@ -54,7 +54,7 @@ function dfp_action(OP $p, string $action):void {DfOP::action($p, $action);}
  * @used-by \Df\Payment\Observer\Multishipping::execute()
  * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
  * @param II|OP|QP $p
- * @param array $info
+ * @param array(string => string) $info
  */
 function dfp_add_info(II $p, array $info):void {
 	foreach ($info as $k => $v) {/** @var string $k */ /** @var string $v */
