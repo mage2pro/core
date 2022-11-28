@@ -124,15 +124,12 @@ function dfp_refund(P $p, string $tid, $a = null) {
 	 */
 	$cm = df_try(
 		function() use($cml) {return $cml->load();}
-		/**
-		 * 2017-10-21
-		 * The lennyshoe.com website is experiencing the following error here:
-		 * «Could not save credit memo»:
-		 * «Division by zero in magento/module-sales/Model/Order/Creditmemo/Item.php»
-		 * https://github.com/mage2pro/stripe/issues/43
-		 * I am unable to reproduce it myself.
-		 * 2022-11-09 The PHPStorm warning is intentionally ignored here.
-		 */
+		# 2017-10-21
+		# The lennyshoe.com website is experiencing the following error here: «Could not save credit memo»:
+		# «Division by zero in magento/module-sales/Model/Order/Creditmemo/Item.php»
+		# https://github.com/mage2pro/stripe/issues/43
+		# I am unable to reproduce it myself.
+		# 2022-11-09 The PHPStorm warning is intentionally ignored here.
 		,function(\Exception $e) {return 'lennyshoe.com' === df_domain_current() ? null : df_error($e);}
 	); /** @var CM|false $cm */
 	/**
