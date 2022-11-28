@@ -35,7 +35,6 @@ final class Method {
 
 	/**
 	 * @used-by df_assert_sne()
-	 * @used-by df_param_s()
 	 * @used-by df_param_sne()
 	 * @param string $v
 	 * @param int $sl [optional]
@@ -111,12 +110,6 @@ final class Method {
 	 * @used-by df_result_sne()
 	 */
 	const NES = 'A non-empty string is required, but got an empty one.';
-
-	/**
-	 * 2017-04-22
-	 * @used-by df_param_s()
-	 */
-	const S = 'A string is required.';
 
 	/**
 	 * Объект @see Frame конструируется на основе $o + 2,
