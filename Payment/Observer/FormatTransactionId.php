@@ -18,7 +18,6 @@ final class FormatTransactionId implements ObserverInterface {
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
-	 * @param O $o
 	 */
 	function execute(O $o):void {
 		/** @var IMethod|Method $m */ /** @var Transaction $t */
