@@ -10,15 +10,6 @@ use ReflectionParameter as RP;
 use Zend_Validate_Interface as Vd;
 final class Method {
 	/**
-	 * @used-by df_param_integer()
-	 * @param int $v
-	 * @param int $ord
-	 * @param int $sl [optional]
-	 * @throws E
-	 */
-	static function assertParamIsInteger(int $v, int $ord, int $sl = 0):int {return self::vp(VInt::s(), $v, $ord, ++$sl);}
-
-	/**
 	 * @used-by df_param_iso2()
 	 * @param string $v
 	 * @param int $ord
