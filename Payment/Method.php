@@ -1589,7 +1589,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L42-L47
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::setStore()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L270-L276
-	 *
 	 * 2017-01-11
 	 * Заманчиво было бы здесь, в единой точке, устанавливать в Sentry
 	 * общую для всех платёжных операций модуля информацию:
@@ -1601,8 +1600,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * когда платёжные модули инициализируются пакетно, скопом.
 	 * Поэтому общую инициализацию Sentry мы размещаем не здесь,
 	 * а непосредственно перед платёжной операцией: @see action()
-	 *
-	 * 2017-03-14
+	 * 2022-11-28 We can not declare the argument's type because it is undeclared in the overriden method.
 	 * @used-by self::setInfoInstance()
 	 * @param int $storeId
 	 */
