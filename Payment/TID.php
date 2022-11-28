@@ -39,10 +39,8 @@ final class TID {
 	 * @used-by \Df\StripeClone\Method::i2e()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
-	 * @param string $id
-	 * @param bool $force [optional]
 	 */
-	function i2e($id, $force = false):string {
+	function i2e(string $id, bool $force = false):string {
 		/**
 		 * 2017-12-07
 		 * @todo Unfortunately, I forgot why I did this prohibition.
