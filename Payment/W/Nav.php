@@ -14,8 +14,9 @@ abstract class Nav {
 	/**
 	 * 2016-07-20
 	 * 2017-01-04
-	 * Внутренний полный идентификатор текущей транзакции.
-	 * Он используется лишь для присвоения его транзакции (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
+	 * The method returns the full identifier of the current payment trasaction.
+	 * It is used only to assign it to the current transaction,
+	 * so in future we can navigate the transaction by the identifier.
 	 * 2022-11-10 It can return an empty string: @see \Dfe\Stripe\W\Nav\Source::id()
 	 * @used-by self::op()
 	 * @see \Df\PaypalClone\W\Nav::id()
@@ -64,7 +65,7 @@ abstract class Nav {
 	 * @throws NotForUs
 	 */
 	final function op() {return dfc($this, function() {
-		$result = dfp_webhook_case(dfp($this->p())); /** @var OP $result */
+		$r = dfp_webhook_case(dfp($this->p())); /** @var OP $r */
 		/**
 		 * 2017-01-16
 		 * A) Этот код:
@@ -114,12 +115,16 @@ abstract class Nav {
 		 *	}
 		 *	return $payment->getTransactionId();
 		 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Model/Order/Payment/Transaction/Manager.php#L73-L80
+		 * 2022-11-28
+		 * @uses df_etn() is required:
+		 * @see \Magento\Sales\Model\Order\Payment\Transaction\Builder::build():
+		 * 		if ($this->isPaymentExists() && $this->transactionId !== null) {
 		 */
-		$result->setTransactionId($this->id());
+		$r->setTransactionId(df_etn($this->id()));
 		/** 2016-07-12 @used-by \Magento\Sales\Model\Order\Payment\Transaction\Builder::linkWithParentTransaction() */
-		$result->setParentTransactionId($this->pid());
-		df_trd_set($result, $this->_e->r());
-		return $result;
+		$r->setParentTransactionId($this->pid());
+		df_trd_set($r, $this->_e->r());
+		return $r;
 	});}
 
 	/**

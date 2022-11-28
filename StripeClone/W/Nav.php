@@ -15,9 +15,9 @@ use Magento\Tests\NamingConvention\true\string;
 class Nav extends \Df\Payment\W\Nav {
 	/**
 	 * 2017-01-06
-	 * Внутренний полный идентификатор текущей транзакции.
-	 * Он используется лишь для присвоения его транзакции
-	 * (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
+	 * The method returns the full identifier of the current payment trasaction.
+	 * It is used only to assign it to the current transaction,
+	 * so in future we can navigate the transaction by the identifier.
 	 * @override
 	 * @see \Df\Payment\W\Nav::id()
 	 * @used-by \Df\Payment\W\Nav::op()
