@@ -52,8 +52,7 @@ class Action {
 		 * Транзакция может записываться и без перенаправления:
 		 * например, при выборе опции Bank Transfer модулей Kassa Compleet и Ginger Payments.
 		 */
-		if ($id = $this->transId() /** @var string|null $id */) {
-			$result = null;
+		if ($id = $this->transId() /** @var string $id */) {
 			$m->ii()->setTransactionId($id); # 2016-07-10 Сохраняем информацию о транзакции.
 			if (!$this->forceGet()) {
 				/**
@@ -264,7 +263,7 @@ class Action {
 	 * осуществляют проверку 3D Secure с перенаправлением браузера.
 	 * Они записывают первичную транзакцию в методе @see \Df\StripeClone\Method::chargeNew()
 	 * https://github.com/mage2pro/core/blob/2.4.0/StripeClone/Method.php#L117-L164
-	 * В этом случае мы намеренно не перекрываем метод transId(), и он возвращает null.
+	 * В этом случае мы намеренно не перекрываем метод transId(), и он возвращает ''.
 	 * Таким образом @used-by action() не будет записывать первичную транзакцию,
 	 * и запись первичной транзакции будет происходить только в @see \Df\StripeClone\Method::chargeNew()
 	 * @used-by self::action()
@@ -273,9 +272,8 @@ class Action {
 	 * @see \Dfe\Qiwi\Init\Action::transId()
 	 * @see \Dfe\Stripe\Init\Action::transId()
 	 * @see \Dfe\TBCBank\Init\Action::transId()
-	 * @return string|null
 	 */
-	protected function transId() {return null;}
+	protected function transId():string {return '';}
 
 	/**
 	 * 2017-03-21
