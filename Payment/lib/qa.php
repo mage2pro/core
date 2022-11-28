@@ -4,6 +4,7 @@ use Magento\Payment\Model\MethodInterface as IM;
 
 /**
  * 2016-07-14 Поддержка тегов HTML обеспечивается шаблоном Df_Checkout/messages
+ * 2022-11-28 @deprecated It is unused.
  * @param string|null $m [optional]
  */
 function dfp_error($m = null):void {df_checkout_error(dfp_error_message($m));}

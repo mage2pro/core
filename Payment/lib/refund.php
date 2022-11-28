@@ -159,21 +159,14 @@ function dfp_refund(P $p, string $tid, $a = null) {
 		 */
 		$cm->getOrder()->setData(O::PAYMENT, $p);
 		$cms = df_new_om(ICMS::class); /** @var ICMS|CMS $cms */
-		/**
-		 * 2017-10-21
-		 * The lennyshoe.com website is experiencing the following error here sometimes:
-		 * «Could not save credit memo»: «The most money available to refund is <...>»
-		 * https://github.com/mage2pro/stripe/issues/42
-		 * I am unable to reproduce it myself.
-		 */
+		# 2017-10-21
+		# The lennyshoe.com website is experiencing the following error here sometimes:
+		# «Could not save credit memo»: «The most money available to refund is <...>»
+		# https://github.com/mage2pro/stripe/issues/42
+		# I am unable to reproduce it myself.
 		$cms->refund($cm, false);
-		/**
-		 * 2016-03-28
-		 * @todo Надо отослать покупателю письмо-оповещение о возврате оплаты.
-		 * 2016-05-15
-		 * Что интересно, при возврате из административной части Magento 2
-		 * покупатель тоже не получает уведомление.
-		 */
+		# 2016-03-28 @todo Надо отослать покупателю письмо-оповещение о возврате оплаты.
+		# 2016-05-15 Что интересно, при возврате из административной части Magento 2 покупатель тоже не получает уведомление.
 		$r = $cm->getId();
 	}
 	/**
