@@ -37,7 +37,6 @@ final class ColumnPrepare implements ObserverInterface {
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
-	 * @param O $o
 	 */
 	function execute(O $o):void {
 		$c = $o[Plugin::COLUMN]; /** @var Column $c */
