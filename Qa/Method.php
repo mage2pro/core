@@ -2,7 +2,6 @@
 namespace Df\Qa;
 use Df\Qa\Trace\Frame;
 use Df\Zf\Validate\ArrayT as VArray;
-use Df\Zf\Validate\IntT as VInt;
 use Df\Zf\Validate\StringT as VString;
 use Df\Zf\Validate\StringT\Iso2 as VIso2;
 use Exception as E;
@@ -140,7 +139,6 @@ final class Method {
 	private static function throwException($message, $sl = 0):void {df_error(new E($message, ++$sl));}
 	
 	/**
-	 * @used-by self::assertParamIsInteger()
 	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $ord
