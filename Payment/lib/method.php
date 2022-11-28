@@ -99,9 +99,8 @@ function dfpm(...$args) {return dfcf(function(...$args) {
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  * @used-by \Df\Payment\Method::sg()
  * @param string|object $c
- * @param bool $allowAbstract [optional]
  */
-function dfpm_c($c, $allowAbstract = false):string {return dfcf(function($c, $allowAbstract = false) {return
+function dfpm_c($c, bool $allowAbstract = false):string {return dfcf(function($c, $allowAbstract = false) {return
 	ConT::p($allowAbstract, function() use($c) {return df_con_heir($c, M::class);})
 ;}, func_get_args());}
 
