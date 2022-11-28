@@ -43,12 +43,10 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\SecurePay\Refund::p()
 	 * @used-by \Dfe\Stripe\P\_3DS::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
-	 * @param _Source|SOrder|SQuote|SCreditmemo|M $src
+	 * @param _Source|SOrder|SQuote|SCreditmemo|M $s
 	 */
-	final function __construct($src) {
-		$this->_src = !$src instanceof M ? $src : (
-			df_is_o($src->oq()) ? new SOrder($src) : new SQuote($src, $src->oq())
-		);
+	final function __construct($s) {
+		$this->_src = !$s instanceof M ? $s : (df_is_o($s->oq()) ? new SOrder($s) : new SQuote($s, $s->oq()));
 	}
 
 	/**
