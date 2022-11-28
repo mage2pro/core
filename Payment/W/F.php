@@ -74,7 +74,6 @@ class F {
 	 * 2) Загрузить эту транзакцию из БД.
 	 * 3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
-	 * @param M $m
 	 * @param array(string => mixed)|null $req [optional]
 	 */
 	private function __construct(M $m, $req = null) {
