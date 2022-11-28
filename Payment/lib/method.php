@@ -106,6 +106,7 @@ function dfpm_c($c, bool $allowAbstract = false):string {return dfcf(function($c
 
 /**
  * 2016-08-25
+ * @used-by dfpm_code()
  * @param string|object $c
  * @param mixed ...$params [optional]
  * @return mixed
