@@ -60,9 +60,8 @@ abstract class Handler implements IMA {
 	 * @see \Dfe\Stripe\W\Handler\Charge\Captured::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::strategyC()
 	 * @see \Dfe\TBCBank\W\Handler::strategyC()
-	 * @return string|null
 	 */
-	abstract protected function strategyC();
+	abstract protected function strategyC():string;
 
 	/**
 	 * 2017-01-01
@@ -95,7 +94,7 @@ abstract class Handler implements IMA {
 				$this->log();
 			}
 			$this->_e->validate();
-			if ($c = $this->strategyC()) { /** @var string|null $c */
+			if ($c = $this->strategyC()) { /** @var string $c */
 				Strategy::handle($c, $this);
 			}
 		}
