@@ -12,7 +12,6 @@ final class _3DS extends \Df\Config\Settings {
 	 * @used-by \Dfe\AlphaCommerceHub\Settings\Card::_3ds()
 	 * @used-by \Dfe\CheckoutCom\Settings::_3ds()
 	 * @used-by \Dfe\Stripe\Settings::_3ds()
-	 * @param S $s
 	 */
 	function __construct(S $s) {$this->_s = $s;}
 
