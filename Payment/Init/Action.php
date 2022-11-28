@@ -277,7 +277,6 @@ class Action {
 
 	/**
 	 * 2017-03-21
-	 * @param M $m
 	 */
 	private function __construct(M $m) {$this->_m = $m;}
 
