@@ -13,7 +13,6 @@ class Order extends Source {
 	 * 2017-04-08
 	 * @used-by \Df\Payment\Operation::__construct()
 	 * @used-by \Dfe\SecurePay\Refund::p()
-	 * @param M $m
 	 * 2016-09-05
 	 * Размер транзакции в валюте платёжных транзакций, которая настраивается администратором опцией
 	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
