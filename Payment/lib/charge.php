@@ -15,7 +15,6 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\Collection as IC;
  * @used-by \Df\StripeClone\Method::charge()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Dfe\CheckoutCom\Method::capturePreauthorized()
- * @param M $m
  * @param O|Q|I|CM|null $d [optional]
  */
 function dfp_due(M $m, $d = null):float {
