@@ -1829,6 +1829,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-03-06
+	 * 2022-11-28 A call with mutliple arguments: @see \Dfe\Vantiv\Method::card()
 	 * @used-by \Df\GingerPaymentsBase\Method::bank()
 	 * @used-by \Df\GingerPaymentsBase\Method::option()
 	 * @used-by \Dfe\AllPay\Method::option()
@@ -1837,10 +1838,9 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @used-by \Dfe\TwoCheckout\Method::_refund()
 	 * @used-by \Dfe\Vantiv\Method::card()
-	 * @param string ...$k
 	 * @return mixed|array(string => mixed)
 	 */
-	final protected function iia(...$k) {return dfp_iia($this->ii(), ...$k);}
+	final protected function iia(string ...$k) {return dfp_iia($this->ii(), ...$k);}
 
 	/**
 	 * 2016-07-10
