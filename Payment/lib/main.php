@@ -133,7 +133,7 @@ function dfp_last2($a):string {return substr(strval(round(100 * df_float($a))), 
 /**
  * 2016-08-14
  * 2017-01-06
- * Эта функция устанавливает платежу специальный временный флаг
+ * 1) Эта функция устанавливает платежу специальный временный флаг
  * (этот флаг присутствует на протяжении обработки текущего запроса HTTP,
  * но не сохраняется в базе данных), который в последующем говорит платёжному модулю о том,
  * что инициатором данной платёжной транзакции является платёжная система
@@ -143,11 +143,13 @@ function dfp_last2($a):string {return substr(strval(round(100 * df_float($a))), 
  * либо действия покупателя в случае оффлайнового способа оплаты),
  * а не Magento (не действия покупателя в магазине
  * и не действия работника магазина в административной части Magento).
- *
- * В такой ситуации модуль должен выполнять лишь ту часть платёжной операции,
+ * 2) В такой ситуации модуль должен выполнять лишь ту часть платёжной операции,
  * которая относится к Magento, но модуль не должен запрашивать выполнение этой операции
  * на стороне платёжной системы, потому что на стороне платёжной системы
  * эта операция уже выполнена, и платёжная система как раз нас об этом уведомляет.
+ * 2017-03-17
+ * Если не указать $p = null, то null не будет допустимым аргументом для $p: https://3v4l.org/mW5Lm
+ * А если указать — то будет: https://3v4l.org/1d6Gq
  * @used-by \Df\Payment\W\Nav::op()
  * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
@@ -155,10 +157,6 @@ function dfp_last2($a):string {return substr(strval(round(100 * df_float($a))), 
  * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::op()
  * @see \Df\Payment\Method::action()
  * @param II|OP|QP|null $p [optional]
- * @param bool $v [optional]
- * 2017-03-17
- * Если не указать = null, то null не будет допустимым аргументом: https://3v4l.org/mW5Lm
- * А если указать — то будет: https://3v4l.org/1d6Gq
  * @return II|OP|QP|null
  */
-function dfp_webhook_case(II $p = null, $v = true) {if ($p) {$p[M::WEBHOOK_CASE] = $v;} return $p;}
+function dfp_webhook_case(II $p = null, bool $v = true) {if ($p) {$p[M::WEBHOOK_CASE] = $v;} return $p;}
