@@ -42,11 +42,10 @@ class Action extends \Df\Payment\Action {
 	 */
 	function execute() {
 		$m = $this->module(); /** @var string $m */
-		$f = null; /** @var F|null $f */
 		$responder = null; /** @var Responder|null $responder */
 		$r = null; /** @var wResult|null $r */
 		try {
-			$f = F::s(($o = df_order_last(false)) ? dfpm($o) : $m); /** @var O|null $o */
+			$f = F::s(($o = df_order_last(false)) ? dfpm($o) : $m); /** @var F|null $f */ /** @var O|null $o */
 			$responder = $f->responder();
 			$ev = $f->e(); /** @var Event $ev */
 			if ($type = $ev->checkIgnored()) { /** @var string $type */
