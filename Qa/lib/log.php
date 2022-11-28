@@ -92,7 +92,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
 /**
  * 2017-04-03
  * 2017-04-22
- * С не-строками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
+ * С не-строковым значением $m @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
  * потому что там стоит код: $lenData = strlen($data);
  * 2018-07-06 The `$append` parameter has been added.
  * 2020-02-14 If $append is `true`, then $m will be written on a new line.
@@ -103,13 +103,9 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
  * @used-by \Df\Qa\Failure\Error::log()
  * @used-by \Inkifi\Mediaclip\H\Logger::l()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
- * @param string $f
- * @param string $m
- * @param bool $append [optional]
  */
-function df_report($f, $m, $append = false):void {
+function df_report(string $f, string $m, bool $append = false):void {
 	if ('' !== $m) {
-		df_param_s($m, 1);
 		$f = df_file_ext_def($f, 'log');
 		$p = BP . '/var/log'; /** @var string $p */
 		df_file_write($append ? "$p/$f" : df_file_name($p, $f), $m, $append);
