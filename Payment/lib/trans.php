@@ -22,10 +22,9 @@ function df_trans($t = null, bool $throw = true):T {/** @var T|int|null $r */
  * @see dfp()
  * @used-by \Df\Payment\TM::tReq()
  * @param OP|int $p
- * @param string $ordering
  * @return T|null
  */
-function df_trans_by_payment($p, $ordering) {return dfcf(function($pid, $ordering) {
+function df_trans_by_payment($p, string $ordering) {return dfcf(function($pid, $ordering) {
 	/** @var Select $s */
 	$s = df_db_from('sales_payment_transaction', 'transaction_id')->where('? = payment_id', $pid);
 	# 2016-08-17
