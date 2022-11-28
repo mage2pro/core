@@ -150,5 +150,5 @@ class Checkbox extends _P {
 	 * @param mixed $v
 	 * @param bool|callable $d [optional]
 	 */
-	final static function b($v, $d = false):bool {return df_if1(is_null($v), $d, '' === $v || df_bool($v));}
+	final static function b($v, $d = false):bool {return is_null($v) ? $d : '' === $v || df_bool($v);}
 }

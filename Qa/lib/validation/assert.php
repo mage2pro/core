@@ -193,8 +193,9 @@ function df_assert_traversable($v, $m = null) {return is_iterable($v) ? $v : df_
 
 /**
  * @used-by \Df\Config\Settings::b()
- * @used-by \Df\Payment\Comment\Description::locations()
+ * @used-by \Df\Framework\Form\Element\Checkbox::b()
  * @used-by \Df\Payment\Comment\Description::getCommentText()
+ * @used-by \Df\Payment\Comment\Description::locations()
  * @used-by \Df\Shipping\Settings::enable()
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
