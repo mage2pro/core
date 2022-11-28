@@ -52,9 +52,8 @@ abstract class Settings extends \Df\API\Settings {
 	 * It is implemented by analogy with @see \Magento\Payment\Model\Checks\TotalMinMax::isApplicable()
 	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
 	 * @used-by \Dfe\Moip\ConfigProvider::config()
-	 * @param string $opt
 	 */
-	final function applicableForQuoteByMinMaxTotal($opt):bool {
+	final function applicableForQuoteByMinMaxTotal(string $opt):bool {
 		$a = df_quote()->getBaseGrandTotal(); /** @var float $a */
         $max = $this->v("$opt/" . T::MAX_ORDER_TOTAL); /** @var float $max */
 		$min = $this->v("$opt/" . T::MIN_ORDER_TOTAL); /** @var float $min */
