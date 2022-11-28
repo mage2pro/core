@@ -25,9 +25,8 @@ abstract class Source implements \Df\Payment\IMA {
 	 * @see \Df\Payment\Operation\Source\Order::amount()
 	 * @see \Df\Payment\Operation\Source\Quote::amount()
 	 * @used-by \Df\Payment\Operation::amount()
-	 * @return float|null
 	 */
-	abstract function amount();
+	abstract function amount():float;
 
 	/**
 	 * 2017-04-07
