@@ -170,15 +170,13 @@ function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
- * @param string $v
- * @param int $sl [optional]
  * @throws DFE
  */
-function df_assert_sne($v, $sl = 0):string {
+function df_assert_sne(string $v, int $sl = 0):string {
 	$sl++;
 	Q::assertValueIsString($v, $sl);
 	# The previous code `if (!$v)` was wrong because it rejected the '0' string.
-	return !df_es(strval($v)) ? $v : Q::raiseErrorVariable(__FUNCTION__, $ms = [Q::NES], $sl);
+	return !df_es($v) ? $v : Q::raiseErrorVariable(__FUNCTION__, [Q::NES], $sl);
 }
 
 /**
