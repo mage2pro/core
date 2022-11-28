@@ -1755,7 +1755,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\Robokassa\Method::amountFactor()
 	 * @see \Dfe\TwoCheckout\Method::amountFactor()
 	 */
-	protected function amountFactor():int {return df_find(function($factor, $list) {return
+	protected function amountFactor():int {return df_find(function(int $factor, string $list) {return
 		in_array($this->cPayment(), df_csv_parse($list)) ? $factor : null
 	;}, $this->amountFactorTable(), [], [], DF_BEFORE) ?: 100;}
 
