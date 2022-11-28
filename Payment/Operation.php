@@ -267,11 +267,9 @@ abstract class Operation implements IMA {
 	 * 2017-02-18
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\Spryng\P\Reg::p()
-	 * @param string $m
-	 * @param string $f
 	 * @return string|null
 	 */
-	final protected function customerGender($m, $f) {return dfa(
+	final protected function customerGender(string $m, string $f) {return dfa(
 		[G::MALE => $m, G::FEMALE => $f], $this->o()->getCustomerGender()
 	);}
 

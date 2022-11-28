@@ -39,8 +39,7 @@ final class TM {
 	/**
 	 * 2017-03-05
 	 * 2017-03-22 Возвращает параметры первичного запроса магазина к ПС.
-	 * 2017-11-12
-	 * It returns data of the first request to the PSP's API (from the current payment's first transaction).
+	 * 2017-11-12 It returns data of the first request to the PSP's API (from the current payment's first transaction).
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
 	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Df\Payment\Choice::req()
