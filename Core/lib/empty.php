@@ -5,6 +5,7 @@
  * @used-by df_desc()
  * @used-by df_leaf()
  * @used-by df_leaf_sne()
+ * @used-by df_param_sne()
  * @used-by df_report()
  * @used-by sift_prefix()
  * @used-by \Df\Payment\Settings::messageFailure()
