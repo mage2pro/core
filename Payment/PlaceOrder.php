@@ -53,6 +53,8 @@ final class PlaceOrder {
 	 * $qp в поле @see \Magento\Framework\DataObject::_data содержит код способа оплаты,
 	 * а также ту дополнительную информацию, которую передала клиентская часть модуля оплаты.
 	 * Например: [additional_data => [], method => "dfe_klarna"].
+	 * @used-by self::guest()
+	 * @used-by self::registered()
 	 * @param int|string $cartId
 	 * @param mixed ...$a
 	 * 2017-04-04 Важно возвращать именно string: @see dfw_encode()

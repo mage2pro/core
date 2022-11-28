@@ -14,10 +14,10 @@ use \Exception as E;
 final class PlaceOrderInternal {
 	/**
 	 * 2017-03-12
+	 * @used-by \Df\Payment\PlaceOrder::p()
 	 * @param int|string $cartId
-	 * @param bool $isGuest
 	 */
-	private function __construct($cartId, $isGuest) {$this->_cartId = $cartId; $this->_isGuest = $isGuest;}
+	private function __construct($cartId, bool $isGuest) {$this->_cartId = $cartId; $this->_isGuest = $isGuest;}
 
 	/**
 	 * 2016-07-18
