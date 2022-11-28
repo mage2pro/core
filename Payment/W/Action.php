@@ -116,7 +116,6 @@ class Action extends \Df\Payment\Action {
 	 * Аналогично поступаю и с @see \Df\Payment\Method::action():
 	 * @see \Df\StripeClone\Method::needLogActions()
 	 * @used-by self::execute()
-	 * @param Ignored $e
 	 */
 	private function ignoredLog(Ignored $e):void {
 		if (df_my()) {
