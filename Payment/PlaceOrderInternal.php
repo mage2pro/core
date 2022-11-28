@@ -141,11 +141,10 @@ final class PlaceOrderInternal {
 	 * @used-by \Df\Payment\PlaceOrder::guest()
 	 * @used-by \Df\Payment\PlaceOrder::registered()
 	 * @param int|string $cartId
-	 * @param bool $isGuest
 	 * @return string|mixed[]
 	 * @throws CouldNotSave|LE
 	 */
-	static function p($cartId, $isGuest) {return (new self($cartId, $isGuest))->_place();}
+	static function p($cartId, bool $isGuest) {return (new self($cartId, $isGuest))->_place();}
 
 	/**
 	 * 2017-03-21
