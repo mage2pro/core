@@ -156,11 +156,17 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-09-07 Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * 2022-11-28
+	 * @todo I thought to return only a `string` (not `float` or `int`),
+	 * but the numeric value is used in calculations by 2 modules:
+	 * 		1) @see \Dfe\AlphaCommerceHub\Charge::pOrderItems()
+	 * 		2) @see \Dfe\YandexKassa\Charge::pTaxLeafs()
 	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::testAmountF()
 	 * @used-by \Df\StripeClone\P\Charge::amountAndCurrency()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
+	 * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\SecurePay\Refund::process()
