@@ -45,8 +45,7 @@ abstract class Operation implements IMA {
 	 * @param _Source|SOrder|SQuote|SCreditmemo|M $src
 	 * 2016-09-05
 	 * Размер транзакции в валюте платёжных транзакций,
-	 * которая настраивается администратором опцией
-	 * «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * которая настраивается администратором опцией «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
 	final function __construct($src) {
 		$this->_src = !$src instanceof M ? $src : (
