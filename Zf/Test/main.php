@@ -3,10 +3,10 @@ namespace Df\Zf\Test;
 use Zend\Stdlib\PriorityQueue as Q;
 # 2017-07-07
 class main extends \Df\Core\TestCase {
-	/** @test 2017-07-07 */
+	/** 2017-07-07 @test */
 	function t00():void {}
 
-	/** @test 2017-07-07 */
+	/** 2017-07-07 @test */
 	function t01():void {
 		/** @var Q $q */
 		$q = new Q;
