@@ -58,7 +58,6 @@ final class VoidT implements ObserverInterface {
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
-	 * @param Observer $ob
 	 */
 	function execute(Observer $ob):void {
 		if (dfp_my($op = $ob['payment'])) { /** @var OP $op */
