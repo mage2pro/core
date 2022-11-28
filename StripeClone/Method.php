@@ -577,7 +577,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * for each transaction inside the merchant interface: https://mage2.pro/t/2847
 	 * @see \Df\Payment\Method::transUrl()
 	 * @used-by \Df\Payment\Method::tidFormat()
-	 * @param T $t
 	 * @return string|null                                                 
 	 */
 	final protected function transUrl(T $t) {return !($b = $this->transUrlBase($t)) ? null :
