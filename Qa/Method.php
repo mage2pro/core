@@ -16,7 +16,7 @@ final class Method {
 	 * @param int $sl [optional]
 	 * @throws E
 	 */
-	static function assertParamIsInteger($v, $ord, $sl = 0):int {return self::vp(VInt::s(), $v, $ord, ++$sl);}
+	static function assertParamIsInteger(int $v, int $ord, int $sl = 0):int {return self::vp(VInt::s(), $v, $ord, ++$sl);}
 
 	/**
 	 * @used-by df_param_iso2()
