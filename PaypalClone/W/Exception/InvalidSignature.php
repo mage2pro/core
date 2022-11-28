@@ -12,11 +12,8 @@ final class InvalidSignature extends \Df\Payment\W\Exception\Critical {
 	 * @override
 	 * @see \Df\Payment\W\Exception::__construct()
 	 * @used-by \Df\Payment\W\F::c()
-	 * @param Ev $ev
-	 * @param string $expected
-	 * @param string $provided
 	 */
-	function __construct(Ev $ev, $expected, $provided) {
+	function __construct(Ev $ev, string $expected, string $provided) {
 		$this->_expected = $expected;
 		$this->_provided = $provided;
 		parent::__construct($ev->m(), $ev);
