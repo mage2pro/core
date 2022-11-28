@@ -16,7 +16,7 @@ interface IEvent {
 	 * @param string|null $d
 	 * @return array(string => mixed)|mixed|null
 	 */
-	function r($k = null, $d = null);
+	function r($k = '', $d = null);
 
 	/**
 	 * 2017-03-11 Type label.
