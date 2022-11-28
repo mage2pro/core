@@ -33,6 +33,7 @@ use Zend_Date as ZD;
 abstract class Operation implements IMA {
 	/**
 	 * 2017-03-12
+	 * @see \Df\Payment\Operation::__construct()
 	 * @used-by \Df\GingerPaymentsBase\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\StripeClone\P\Charge::sn()
@@ -43,9 +44,6 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Stripe\P\_3DS::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::p()
 	 * @param _Source|SOrder|SQuote|SCreditmemo|M $src
-	 * 2016-09-05
-	 * Размер транзакции в валюте платёжных транзакций,
-	 * которая настраивается администратором опцией «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 */
 	final function __construct($src) {
 		$this->_src = !$src instanceof M ? $src : (
