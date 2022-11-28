@@ -43,11 +43,9 @@ function dfp($v) {return $v instanceof II ? $v : ($v instanceof IM ? $v->getInfo
  * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action() 
- * @param OP $p
- * @param string $action
+ * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action()
  */
-function dfp_action(OP $p, $action):void {DfOP::action($p, $action);}
+function dfp_action(OP $p, string $action):void {DfOP::action($p, $action);}
 
 /**
  * 2016-05-20
