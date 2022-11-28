@@ -164,9 +164,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Robokassa\Charge::k_Email()
 	 * @see \Dfe\SecurePay\Charge::k_Email()
 	 * @see \Dfe\YandexKassa\Charge::k_Email()
-	 * @return string|null
 	 */
-	protected function k_Email() {return null;}
+	protected function k_Email():string {return '';}
 
 	/**
 	 * 2017-08-19

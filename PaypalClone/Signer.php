@@ -72,7 +72,6 @@ abstract class Signer {
 	/**
 	 * 2016-08-27
 	 * @used-by \Df\PaypalClone\Charge::p()
-	 * @param IMA $caller
 	 * @param array(string => mixed) $p
 	 */
 	final static function signRequest(IMA $caller, array $p):string {return self::_sign($caller, $p);}
