@@ -17,7 +17,6 @@ class Responder {
 	/**
 	 * 2017-09-12
 	 * @used-by \Df\Payment\W\F::responder()
-	 * @param F $f
 	 */
 	final function __construct(F $f) {$this->_f = $f;}
 
