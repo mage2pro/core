@@ -106,10 +106,8 @@ abstract class Strategy {
 	 * 2017-03-18
 	 * @used-by self::delegate()
 	 * @used-by \Df\Payment\W\Handler::handle()
-	 * @param string $class
-	 * @param Handler $h
 	 */
-	final static function handle($class, Handler $h):void {
+	final static function handle(string $class, Handler $h):void {
 		$i = df_ar(new $class($h), __CLASS__); /** @var self $i */
 		$i->_handle();
 	}
