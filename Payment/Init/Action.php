@@ -296,7 +296,6 @@ class Action {
 	 * @used-by \Dfe\TBCBank\Charge::pCharge()
 	 * @used-by \Dfe\TBCBank\W\Event::ttCurrent()
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
-	 * @param M $m
 	 */
 	final static function sg(M $m):self {return dfcf(function(M $m) {
 		$c = df_con_hier($m, self::class); /** @var string $c */
