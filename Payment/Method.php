@@ -860,10 +860,12 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/MethodInterface.php#L149-L158
 	 * @see \Magento\Payment\Model\Method\AbstractMethod::fetchTransactionInfo()
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L417-L428
-	 * USAGES: "How is a payment method's fetchTransactionInfo() used?" https://mage2.pro/t/678
+	 * USAGES
+	 * "How is a payment method's fetchTransactionInfo() used?" https://mage2.pro/t/678
+	 * @param string $transId
 	 * @return array(string => mixed)
 	 */
-	final function fetchTransactionInfo(II $p, string $transId):array {return [];}
+	final function fetchTransactionInfo(II $p, $transId):array {return [];}
 
 	/**
 	 * 2016-02-08
@@ -1503,8 +1505,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 
 	/**
 	 * 2016-07-13
-	 * 2017-07-02
-	 * Сегодня заметил, что параметр scope сюда никто не передаёт, поэтому убрал его.
+	 * 2017-07-02 Сегодня заметил, что параметр scope сюда никто не передаёт, поэтому убрал его.
 	 * @see \Df\Payment\Settings::scopeDefault()
 	 * @see \Df\Shipping\Method::s()
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
