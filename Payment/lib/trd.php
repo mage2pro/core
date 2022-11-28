@@ -13,7 +13,6 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by \Df\Payment\TM::res0()
  * @used-by \Df\Payment\TM::responses()
  * @used-by \Dfe\SecurePay\Signer\Response::values()
- * @param T $t]
  * @param mixed|null $d [optional]
  * @return array(string => mixed)|mixed
  */
