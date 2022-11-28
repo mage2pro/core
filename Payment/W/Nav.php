@@ -156,9 +156,8 @@ abstract class Nav {
 	 * @used-by self::op()
 	 * @used-by self::p()
 	 * @used-by \Df\Payment\W\Strategy::parentId()
-	 * @return string
 	 */
-	final function pid() {return dfc($this, function() {return $this->pidAdapt($this->_e->pid());});}
+	final function pid():string {return dfc($this, function() {return $this->pidAdapt($this->_e->pid());});}
 
 	/**
 	 * 2017-03-15
