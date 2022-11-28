@@ -80,7 +80,7 @@ function df_cfg_delete(string $path, string $scope, int $scopeId):void {df_cfg_r
  * @used-by \Df\Config\Settings::vv()
  * @param array|string|null|mixed $v
  */
-function df_cfg_empty($v):bool {return is_null($v) || '' === $v;}
+function df_cfg_empty($v):bool {return !df_nes($v);}
 
 /**
  * 2016-02-09
