@@ -9,8 +9,7 @@ use Magento\Sales\Model\Order\Payment\Transaction;
  * 2016-08-20
  * Событие: sales_order_payment_transaction_html_txn_id
  * @see \Magento\Sales\Model\Order\Payment\Transaction::getHtmlTxnId()
- * How is the «sales_order_payment_transaction_html_txn_id» event triggered and handled?
- * https://mage2.pro/t/1965
+ * How is the «sales_order_payment_transaction_html_txn_id» event triggered and handled? https://mage2.pro/t/1965
  */
 final class FormatTransactionId implements ObserverInterface {
 	/**
