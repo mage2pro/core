@@ -56,7 +56,7 @@ final class Tag {
 						$v = htmlspecialchars(
 							str_replace("'", '&#39;', !is_array($v) ? $v : df_cc_s($v)), ENT_NOQUOTES, 'UTF-8', false
 						);
-						return '' === $v ? '' : "{$k}='{$v}'";
+						return df_es($v) ? $v : "{$k}='{$v}'";
 					}, $this->_attrs
 				))
 			)
