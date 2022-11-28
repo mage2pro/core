@@ -11,7 +11,6 @@ final class Nvp {
 	 * https://github.com/beverageuniverse/core/issues/5
 	 * @see \Magento\Paypal\Model\Api\Nvp::callDoExpressCheckoutPayment()
 	 * @see \Magento\Paypal\Model\Express::_placeOrder()
-	 * @param Sb $sb
 	 */
 	function beforeCallDoExpressCheckoutPayment(Sb $sb):void {
 		if (self::eligible($a = $sb['address'])) {/** @var OA $a */
