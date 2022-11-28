@@ -68,9 +68,10 @@ final class TID {
 	 * и перевожу посредством @uses md5() к унифицированному виду
 	 * (гарантированном не содержащему дефисов и других неожиданных символов).
 	 * @used-by self::e2i()
-	 * @param string $id
 	 */
-	private function md5($id):string {return self::$MD5 . substr(md5($this->_m->getCode() . $id), 0, -strlen(self::$MD5));}
+	private function md5(string $id):string {return
+		self::$MD5 . substr(md5($this->_m->getCode() . $id), 0, -strlen(self::$MD5))
+	;}
 
 	/**
 	 * 2017-03-22
