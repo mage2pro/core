@@ -89,7 +89,6 @@ abstract class Strategy {
 	/**
 	 * 2017-01-06
 	 * @used-by self::handle()
-	 * @param Handler $h
 	 */
 	private function __construct(Handler $h) {$this->_h = $h;}
 
