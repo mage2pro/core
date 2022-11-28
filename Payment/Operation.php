@@ -135,10 +135,9 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Stripe\P\Address::p()
 	 * @used-by \Dfe\TwoCheckout\Charge::pCharge()
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
-	 * @param bool $empty [optional]
 	 * @return OA|QA
 	 */
-	final protected function addressS($empty = false) {return $this->_src->addressS($empty);}
+	final protected function addressS(bool $empty = false) {return $this->_src->addressS($empty);}
 
 	/**
 	 * 2016-07-02
