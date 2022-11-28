@@ -29,7 +29,6 @@ final class SearchResult implements ObserverInterface {
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * @used-by \Magento\Framework\Event\Invoker\InvokerDefault::_callObserverMethod()
-	 * @param Ob $o
 	 */
 	function execute(Ob $o):void {
 		$provider = $o[Plugin::PROVIDER]; /** @var Provider $provider */
