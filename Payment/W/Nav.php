@@ -191,9 +191,8 @@ abstract class Nav {
 	 * Это всё нам ещё предстоит!
 	 * @used-by \Df\PaypalClone\W\Nav::e2i()
 	 * @used-by \Df\StripeClone\W\Nav::e2i()
-	 * @return M
 	 */
-	protected function mPartial() {return $this->_e->m();}
+	protected function mPartial():M {return $this->_e->m();}
 
 	/**
 	 * 2017-03-15
