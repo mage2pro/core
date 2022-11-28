@@ -10,8 +10,6 @@ final class Ignored extends \Df\Payment\W\Exception {
 	 * @see \Df\Payment\W\Exception::__construct()
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Payment\W\F::c()
-	 * @param M $m
-	 * @param R $r
 	 * @param string|null $type
 	 */
 	function __construct(M $m, R $r, $type) {$this->_type = $type; parent::__construct($m, $r);}
