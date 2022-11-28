@@ -28,6 +28,7 @@ class Description extends \Df\Config\Comment {
 	 *			return $comment;
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.8/app/code/Magento/Config/Model/Config/Structure/Element/Field.php#L106-L126
+	 * 2022-11-28 We can not declare the argument's type because it is undeclared in the overriden method.
 	 * @param string $v
 	 */
 	function getCommentText($v):string {
