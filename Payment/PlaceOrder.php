@@ -24,30 +24,26 @@ final class PlaceOrder {
 	 * The arguments are arrived from Df_Checkout/js/action/place-order:
 	 * https://github.com/mage2pro/core/blob/2.4.24/Checkout/view/frontend/web/js/action/place-order.js#L64-L66
 	 * 2017-04-20
-	 * $qp в поле @see \Magento\Framework\DataObject::_data содержит код способа оплаты,
+	 * 1) $qp в поле @see \Magento\Framework\DataObject::_data содержит код способа оплаты,
 	 * а также ту дополнительную информацию, которую передала клиентская часть модуля оплаты.
 	 * Например: [additional_data => [], method => "dfe_klarna"].
-	 * @param string $cartId
-	 * For the quest customers $cartId is a string like «63b25f081bfb8e4594725d8a58b012f7».
-	 * @param string $email
+	 * 2) For a guest customer $cartId is a string like «63b25f081bfb8e4594725d8a58b012f7».
 	 * @param IQP|QP $qp
 	 * @param IQA|QA|null $ba
 	 * 2017-04-04 Важно возвращать именно string: @see dfw_encode()
 	 * @throws CouldNotSave|LE
 	 */
-	function guest($cartId, $email, IQP $qp, IQA $ba = null):string {return $this->p(
+	function guest(string $cartId, string $email, IQP $qp, IQA $ba = null):string {return $this->p(
 		true, $cartId, $email, $qp, $ba
 	);}
 
 	/**
 	 * 2016-05-04
-	 * 2017-04-04
-	 * @param int $cartId
 	 * @param IQP|QP $qp
 	 * @param IQA|QA|null $ba
 	 * @throws CouldNotSave|LE
 	 */
-	function registered($cartId, IQP $qp, IQA $ba = null):string {return $this->p(false, $cartId, $qp, $ba);}
+	function registered(int $cartId, IQP $qp, IQA $ba = null):string {return $this->p(false, $cartId, $qp, $ba);}
 
 	/**
 	 * 2017-04-05
