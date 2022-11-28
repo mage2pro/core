@@ -15,4 +15,4 @@ function dfp_h():H {return df_o(H::class);}
  * @used-by dfp()
  * @return IRepository|Repository
  */
-function dfp_r() {return df_o(IRepository::class);}
+function dfp_r():IRepository {return df_o(IRepository::class);}
