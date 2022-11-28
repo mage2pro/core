@@ -25,21 +25,17 @@ function df_trans($t = null, bool $throw = true):T {/** @var T|int|null $r */
  * @return T|null
  */
 function df_trans_by_payment($p, string $ordering) {return dfcf(function($pid, $ordering) {
-	/** @var Select $s */
-	$s = df_db_from('sales_payment_transaction', 'transaction_id')->where('? = payment_id', $pid);
+	$s = df_db_from('sales_payment_transaction', 'transaction_id')->where('? = payment_id', $pid); /** @var Select $s */
 	# 2016-08-17
-	# Раньше здесь стояло условие
-	# $select->where('parent_txn_id IS NULL');
+	# Раньше здесь стояло условие `$select->where('parent_txn_id IS NULL');`
 	# потому что код использовался только для получения первой (родительской) транзакции.
 	# Убрал это условие, потому что даже для первой транзакции оно не нужно:
-	# ниже ведь используется операция order, и транзакция с минимальным идентификатором
-	# и будет родительской.
+	# ниже ведь используется операция order, и транзакция с минимальным идентификатором и будет родительской.
 	# Для $ordering = last условие $select->where('parent_txn_id IS NULL'); и вовсе ошибочно:
 	# оно отбраковывает все дочерние транзакции.
 	# 2016-07-28
-	# Раньше стояла проверка: df_assert_eq(1, count($txnIds));
-	# Однако при разработке платёжных модулей бывает,
-	# что у первых транзакций данные не всегда корректны.
+	# Раньше стояла проверка: `df_assert_eq(1, count($txnIds));`
+	# Однако при разработке платёжных модулей бывает, что у первых транзакций данные не всегда корректны.
 	# Негоже из-за этого падать, лучше вернуть просто первую транзакцию, как нас и просят.
 	$s->order("transaction_id {$ordering}");
 	/** @var int|null $id */
