@@ -142,10 +142,9 @@ abstract class Nav {
 	 * Надо вернуть код HTTP 200 и человекопонятное сообщение: мол, запрос — не для нашего магазина.
 	 * @used-by self::op()
 	 * @used-by \Dfe\SecurePay\Signer\Response::values()
-	 * @return T
 	 * @throws NotForUs
 	 */
-	final function p() {return dfc($this, function() {/** @var string $id */return
+	final function p():T {return dfc($this, function() {/** @var string $id */return
 		df_transx($id = $this->pid(), false) ?: df_error(new NotForUs(
 			"It seems like this notification is not for our store "
 			."because it refers to a transaction «{$id}», which is absent in the store's database."
