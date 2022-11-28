@@ -1824,7 +1824,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Пока данная функциональность используется модулем Stripe.
 	 * @used-by self::action()
 	 * @see \Dfe\Stripe\Method::convertException()
-	 * @param E $e
 	 */
 	protected function convertException(E $e):E {return $e;}
 
