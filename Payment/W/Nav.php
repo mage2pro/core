@@ -16,13 +16,12 @@ abstract class Nav {
 	 * 2017-01-04
 	 * Внутренний полный идентификатор текущей транзакции.
 	 * Он используется лишь для присвоения его транзакции (чтобы в будущем мы смогли найти эту транзакцию по её идентификатору).
-	 * 2022-11-10 It can return `null`: @see \Dfe\Stripe\W\Nav\Source::id()
+	 * 2022-11-10 It can return an empty string: @see \Dfe\Stripe\W\Nav\Source::id()
 	 * @used-by self::op()
 	 * @see \Df\PaypalClone\W\Nav::id()
 	 * @see \Df\StripeClone\W\Nav::id()
-	 * @return string|null
 	 */
-	abstract protected function id();
+	abstract protected function id():string;
 
 	/**
 	 * 2017-01-05
