@@ -8,8 +8,6 @@ use Magento\Quote\Model\Quote\Payment as QP;
 final class Quote extends \Df\Payment\Operation\Source {
 	/**
 	 * 2017-04-08
-	 * @param M $m
-	 * @param IQ|Q $q
 	 */
 	function __construct(M $m, IQ $q) {$this->_m = $m; $this->_q = $q;}
 
