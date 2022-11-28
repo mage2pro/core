@@ -149,11 +149,10 @@ final class PlaceOrderInternal {
 	 * 2017-03-21
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by \Dfe\CheckoutCom\Method::need3DS()
-	 * @param string $url
 	 * @param array(string => mixed) $p [optional]
 	 * @param bool $forceGet [optional]
 	 */
-	static function setRedirectData(M $m, $url, array $p = [], $forceGet = false):array {$m->iiaSet(
+	static function setRedirectData(M $m, string $url, array $p = [], $forceGet = false):array {$m->iiaSet(
 		self::$REDIRECT_DATA, ['forceGet' => $forceGet, 'p' => $p, 'url' => $url]
 	);}
 
