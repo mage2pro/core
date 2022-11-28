@@ -35,7 +35,6 @@ function dfpex_args($a0, $a1 = null):array {return ($a1
  * Converts $a from a sales document currency to the payment currency.
  * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
  * @used-by \Df\Payment\Operation\Source::cFromDoc()
- * @param float $a
  * @param mixed ...$args
  */
 function dfpex_from_doc(float $a, ...$args):float {
