@@ -42,9 +42,8 @@ abstract class Settings extends \Df\API\Settings {
 	 * https://github.com/mage2pro/alphacommercehub/issues/85
 	 * 2) It is implemented by analogy with @see \Magento\Payment\Model\Checks\CanUseForCountry::isApplicable()
 	 * @used-by \Dfe\AlphaCommerceHub\ConfigProvider::option()
-	 * @param string $opt
 	 */
-	final function applicableForQuoteByCountry($opt):bool {return $this->m()->canUseForCountryP(
+	final function applicableForQuoteByCountry(string $opt):bool {return $this->m()->canUseForCountryP(
 		df_oq_country_sb(df_quote()), $opt
 	);}
 
