@@ -59,11 +59,10 @@ abstract class Nav {
 	 *	return !$id ? null : df_load(Payment::class, $id);
 	 * https://github.com/mage2pro/core/blob/1.11.6/Payment/Transaction.php?ts=4#L16-L29
 	 * @used-by \Df\Payment\W\Handler::op()
-	 * @return OP
 	 * @throws DFE
 	 * @throws NotForUs
 	 */
-	final function op() {return dfc($this, function() {
+	final function op():OP {return dfc($this, function() {
 		$r = dfp_webhook_case(dfp($this->p())); /** @var OP $r */
 		/**
 		 * 2017-01-16
