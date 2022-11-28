@@ -1,14 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
-/**
- * @used-by \Df\Qa\Trace\Frame::methodParameter()
- * @param int $v
- * @param int $ord	zero-based
- * @param int $sl [optional]
- * @throws DFE
- */
-function df_param_integer($v, $ord, $sl = 0):int {return Q::assertParamIsInteger($v, $ord, ++$sl);}
 
 /**
  * @used-by df_country_ctn()
