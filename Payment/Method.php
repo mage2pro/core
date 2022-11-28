@@ -1912,7 +1912,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by self::tidFormat()
 	 * @see \Df\GingerPaymentsBase\Method::transUrl()
 	 * @see \Df\StripeClone\Method::transUrl()
-	 * @param T $t
 	 * @return string|null
 	 */
 	protected function transUrl(T $t) {return null;}
