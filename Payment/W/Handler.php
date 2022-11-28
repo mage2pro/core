@@ -60,8 +60,6 @@ abstract class Handler implements IMA {
 	/**
 	 * 2017-01-01
 	 * @used-by \Df\Payment\W\F::handler()
-	 * @param F $f
-	 * @param Event $e
 	 */
 	final function __construct(F $f, Event $e) {$this->_e = $e; $this->_f = $f; $this->_nav = $f->nav();}
 
