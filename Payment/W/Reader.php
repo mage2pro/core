@@ -25,7 +25,6 @@ class Reader implements IEvent {
 	 * 		3) По транзакции получить II.
 	 * Это всё нам ещё предстоит!
 	 * @used-by \Df\Payment\W\F::__construct()
-	 * @param M $m
 	 * @param array(string => mixed)|null $req [optional]
 	 * *) null в качестве значения $req означает, что $req должен быть взят из запроса HTTP,
 	 * *) массив в качестве значения $req означает прямую инициализацию $req:
