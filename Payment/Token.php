@@ -17,10 +17,8 @@ final class Token {
 	/**
 	 * 2017-08-28
 	 * @used-by \Df\StripeClone\Payer::newCard()
-	 * @param string $methodCode
-	 * @param string $cardId
 	 */
-	static function exchangedSet($methodCode, $cardId):void {self::$_exchanged[$methodCode] = $cardId;}
+	static function exchangedSet(string $methodCode, string $cardId):void {self::$_exchanged[$methodCode] = $cardId;}
 
 	/**
 	 * 2017-08-28    
