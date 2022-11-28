@@ -210,9 +210,8 @@ abstract class Operation implements IMA {
 	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @used-by self::cFromDocF()
 	 * @used-by \Dfe\CheckoutCom\Charge::cProduct()
-	 * @param float $a
 	 */
-	final protected function cFromDoc($a):float {return $this->_src->cFromDoc($a);}
+	final protected function cFromDoc(float $a):float {return $this->_src->cFromDoc($a);}
 
 	/**
 	 * 2016-08-17 The payment currency code: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
