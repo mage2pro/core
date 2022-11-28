@@ -68,10 +68,9 @@ abstract class Operation implements IMA {
 	 * @used-by \Dfe\Vantiv\Charge::pCharge()
 	 * @used-by \Dfe\YandexKassa\Charge::pLoan()
 	 * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
-	 * @param float $a
 	 * @return float|int|string
 	 */
-	final function cFromDocF($a) {return $this->amountFormat($this->cFromDoc($a));}
+	final function cFromDocF(float $a) {return $this->amountFormat($this->cFromDoc($a));}
 
 	/**
 	 * 2016-08-31
