@@ -277,6 +277,7 @@ class Action {
 
 	/**
 	 * 2017-03-21
+	 * @used-by self::sg()
 	 */
 	private function __construct(M $m) {$this->_m = $m;}
 
