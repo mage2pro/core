@@ -12,25 +12,6 @@ use Df\Qa\Method as Q;
 function df_param_iso2($v, $ord, $sl = 0):string {return Q::assertParamIsIso2($v, $ord, ++$sl);}
 
 /**
- * 2017-04-22
- * @used-by df_report()
- * @param string $v
- * @param int $ord	zero-based
- * @param int $sl [optional]
- * @throws DFE
- */
-function df_param_s($v, $ord, $sl = 0):string {$sl++;
-	/**
-	 * Раньше тут стояло `$method->assertParamIsString($v, $ord, $sl)`
-	 * При второй попытке тут стояло `if (!$v)`, что тоже неправильно, ибо непустая строка '0' не проходит такую валидацию.
-	 * 2022-11-10
-	 * @see df_param_sne()
-	 * @see df_result_sne()
-	 */
-	return Q::assertValueIsString($v, $sl) ? $v : Q::raiseErrorParam(__FUNCTION__, [Q::S], $ord, $sl);
-}
-
-/**
  * @used-by df_assert_class_exists()
  * @used-by df_class_check_abstract()
  * @used-by df_date_from_db()
