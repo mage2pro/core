@@ -38,7 +38,6 @@ final class Identification extends \Df\Config\Source {
 	 * 2016-08-27 Метод должен возвращать неизменное значение для конкретного заказа.
 	 * @used-by \Df\PaypalClone\Charge::id()
 	 * @used-by \Dfe\Qiwi\Charge::id()
-	 * @param O $o
 	 * @throws DFE
 	 */
 	static function get(O $o):string {
