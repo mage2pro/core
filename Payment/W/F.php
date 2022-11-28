@@ -145,11 +145,10 @@ class F {
 	/**
 	 * 2017-03-15 Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.
 	 * @used-by self::c()
-	 * @param string $a
 	 * @param string[] $ta
 	 * @return string|null
 	 */
-	private function tryTA($a, array $ta) {return df_con_hier_suf_ta($this->_m, ['W', $a], $ta, false);}
+	private function tryTA(string $a, array $ta) {return df_con_hier_suf_ta($this->_m, ['W', $a], $ta, false);}
 
 	/**
 	 * 2017-03-13
