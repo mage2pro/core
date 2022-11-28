@@ -53,7 +53,7 @@ final class InvalidSignature extends \Df\Payment\W\Exception\Critical {
 	 * @used-by self::message()
 	 * @used-by self::messageD()
 	 */
-	private function _message(bool $full):string {return 'Invalid signature.' . (!$full ? null :
+	private function _message(bool $full):string {return 'Invalid signature.' . (!$full ? '' :
 		"\nExpected: «{$this->_expected}».\nProvided: «{$this->_provided}»."
 	);}
 
