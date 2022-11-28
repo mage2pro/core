@@ -163,9 +163,8 @@ abstract class Nav {
 	 * 2017-03-15
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Df\StripeClone\W\Nav::id()
-	 * @return Event
 	 */
-	protected function e() {return $this->_e;}
+	protected function e():Event {return $this->_e;}
 
 	/**
 	 * 2017-01-04
