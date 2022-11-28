@@ -96,7 +96,6 @@ abstract class Signer {
 	 * 2016-08-27
 	 * @used-by self::signRequest()
 	 * @used-by self::signResponse()
-	 * @param IMA $caller
 	 * @param array(string => mixed) $v
 	 */
 	private static function _sign(IMA $caller, array $v):string {/** @var self $i */
