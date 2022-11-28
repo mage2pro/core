@@ -178,7 +178,7 @@ function df_assert_sne($v, $sl = 0):string {
 	$sl++;
 	Q::assertValueIsString($v, $sl);
 	# The previous code `if (!$v)` was wrong because it rejected the '0' string.
-	return '' !== strval($v) ? $v : Q::raiseErrorVariable(__FUNCTION__, $ms = [Q::NES], $sl);
+	return !df_es(strval($v)) ? $v : Q::raiseErrorVariable(__FUNCTION__, $ms = [Q::NES], $sl);
 }
 
 /**

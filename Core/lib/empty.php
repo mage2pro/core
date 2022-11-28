@@ -1,9 +1,11 @@
 <?php
 /**
  * @see df_nes()
+ * @used-by df_assert_sne()
  * @used-by df_desc()
  * @used-by df_leaf()
  * @used-by df_leaf_sne()
+ * @used-by df_report()
  * @used-by sift_prefix()
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Df\Payment\W\Exception\Ignored::message()

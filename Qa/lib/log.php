@@ -105,7 +105,7 @@ function df_log_l($m, $p2, $p3 = [], $p4 = null) {
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  */
 function df_report(string $f, string $m, bool $append = false):void {
-	if ('' !== $m) {
+	if (!df_es($m)) {
 		$f = df_file_ext_def($f, 'log');
 		$p = BP . '/var/log'; /** @var string $p */
 		df_file_write($append ? "$p/$f" : df_file_name($p, $f), $m, $append);
