@@ -13,6 +13,7 @@
  * @used-by \Df\Payment\W\Exception\Ignored::message()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Typography\Css::rule()
+ * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
  * @param mixed $v
  */
 function df_es($v):bool {return '' === $v;}
