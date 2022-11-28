@@ -34,9 +34,8 @@ abstract class Source implements \Df\Payment\IMA {
 	 * @see \Df\Payment\Operation\Source\Order::id()
 	 * @see \Df\Payment\Operation\Source\Quote::id()
 	 * @used-by \Df\Payment\Operation::id()
-	 * @return string|int
 	 */
-	abstract function id();
+	abstract function id():string;
 
 	/**
 	 * 2017-04-07
