@@ -160,6 +160,7 @@ abstract class Operation implements IMA {
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::testAmountF()
 	 * @used-by \Df\StripeClone\P\Charge::amountAndCurrency()
+	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Qiwi\Charge::pBill()
 	 * @used-by \Dfe\SecurePay\Refund::process()
