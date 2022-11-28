@@ -40,9 +40,8 @@ final class Token {
 	 * @used-by \Dfe\Stripe\Facade\Token::trimmed()
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @param II|OP|QP|O|Q $p
-	 * @param bool $required [optional]
 	 */
-	static function get($p, $required = true):string {
+	static function get($p, bool $required = true):string {
 		$r = dfp_iia($p, self::KEY); /** @var string|bool $r */
 		return !$required ? $r : df_result_sne($r);
 	}
