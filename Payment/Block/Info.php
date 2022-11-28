@@ -289,10 +289,9 @@ abstract class Info extends _P {
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
 	 * @used-by \Dfe\PostFinance\Block\Info::prepare()
 	 * @used-by \Dfe\SecurePay\Block\Info::prepare()
-	 * @param string ...$k
 	 * @return Event|string|null
 	 */
-	protected function e(...$k) {return $this->tm()->responseF(...$k);}
+	protected function e(string ...$k) {return $this->tm()->responseF(...$k);}
 
 	/**
 	 * 2017-03-25
