@@ -32,8 +32,6 @@ use Magento\Sales\Model\Order as O;
  * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
- *
- * @param O $o
  */
 function dfp_mail(O $o):void {
 	/**
