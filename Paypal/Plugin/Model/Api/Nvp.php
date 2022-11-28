@@ -7,8 +7,7 @@ use Magento\Sales\Model\Order\Address as OA;
 final class Nvp {
 	/**
 	 * 2019-10-16
-	 * "The PayPal payment method on the Magento's checkout page is broken":
-	 * https://github.com/beverageuniverse/core/issues/5
+	 * "The PayPal payment method on the Magento's checkout page is broken": https://github.com/beverageuniverse/core/issues/5
 	 * @see \Magento\Paypal\Model\Api\Nvp::callDoExpressCheckoutPayment()
 	 * @see \Magento\Paypal\Model\Express::_placeOrder()
 	 */
