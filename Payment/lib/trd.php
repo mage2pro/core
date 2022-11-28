@@ -25,10 +25,9 @@ function df_trd(T $t, string $k = '', $d = null):array {return dfa(
  * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::getTransactionAdditionalInfo()
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
- * @is                             
  * @used-by \Df\Payment\Method::iiaSetTRR()
  * @used-by \Df\Payment\W\Nav::op()
  * @param II|OP|QP|null $p
  * @param array(string => mixed) $v
  */
-function df_trd_set(II $p, array $v):array {$p->setTransactionAdditionalInfo(T::RAW_DETAILS, df_ksort($v));}
+function df_trd_set(II $p, array $v):void {$p->setTransactionAdditionalInfo(T::RAW_DETAILS, df_ksort($v));}
