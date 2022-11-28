@@ -70,7 +70,6 @@ function df_trans_is_test($t = null, $rt = true, $rf = false) {return dfp_is_tes
  * 2016-07-13
  * @used-by df_trans()
  * @used-by df_trans_by_payment()
- * @return TR
  */
 function df_trans_r():TR {return df_o(TR::class);}
 
