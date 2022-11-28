@@ -2021,7 +2021,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @uses \Dfe\IPay88\Method::CODE
 	 * @uses \Dfe\TwoCheckout\Method::CODE
 	 */
-	final static function codeS():string {return dfcf(function($c) {return df_const(
+	final static function codeS():string {return dfcf(function(string $c):string {return df_const(
 		$c, 'CODE', function() use($c) {return df_module_name_lc($c);}
 	);}, [static::class]);}
 
