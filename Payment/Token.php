@@ -10,10 +10,9 @@ final class Token {
 	/**
 	 * 2017-08-28       
 	 * @used-by \Df\Payment\Observer\Multishipping::execute()
-	 * @param string $methodCode
 	 * @return string|null
 	 */
-	static function exchangedGet($methodCode) {return dfa(self::$_exchanged, $methodCode);}
+	static function exchangedGet(string $methodCode) {return dfa(self::$_exchanged, $methodCode);}
 
 	/**
 	 * 2017-08-28
