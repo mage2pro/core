@@ -94,7 +94,6 @@ class Responder {
 	 * @used-by self::error()
 	 * @used-by self::ignored()
 	 * @used-by self::notForUs()
-	 * @param wResult $v
 	 */
 	final protected function set(wResult $v):void {$this->_response = $v;}
 
