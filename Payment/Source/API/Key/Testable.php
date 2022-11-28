@@ -18,9 +18,8 @@ abstract class Testable extends \Df\Payment\Source\API\Key {
 	 * 2017-02-15
 	 * @used-by \Dfe\Square\Source\Location::apiKeyName()
 	 * @used-by \Dfe\Spryng\Source\Account::apiKeyName()
-	 * @param string $name
 	 */
-	final protected function tkey($name):string {return "{$this->test('test', 'live')}$name";}
+	final protected function tkey(string $name):string {return "{$this->test('test', 'live')}$name";}
 
 	/**
 	 * 2017-03-28
