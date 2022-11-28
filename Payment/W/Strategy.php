@@ -27,9 +27,8 @@ abstract class Strategy {
 	/**
 	 * 2017-11-10
 	 * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
-	 * @param string $c
 	 */
-	final protected function delegate($c):void {self::handle($c, $this->_h);}
+	final protected function delegate(string $c):void {self::handle($c, $this->_h);}
 
 	/**
 	 * 2017-03-18
