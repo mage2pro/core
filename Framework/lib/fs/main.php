@@ -36,6 +36,9 @@ function df_file_read(string $p, bool $req = true):string {return df_contents($p
  * @see \Magento\Framework\Filesystem\Directory\Write::openFile() creates the parent directories automatically:
  * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Filesystem/Directory/Write.php#L247
  * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
+ * 2017-04-22
+ * С не-строковым значением $contents @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
+ * потому что там стоит код: $lenData = strlen($data);
  * 2018-07-06 The `$append` parameter has been added. 
  * 2020-02-14 If $append is `true`, then $contents will be written on a new line. 
  * @used-by df_report()
@@ -46,12 +49,6 @@ function df_file_read(string $p, bool $req = true):string {return df_contents($p
  * @param string|string[] $p
  */
 function df_file_write($p, string $contents, bool $append = false):void {
-	/**
-	 * 2017-04-22
-	 * С не-строками @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
-	 * потому что там стоит код: $lenData = strlen($data);
-	 */
-	df_param_s($contents, 1);
 	/** @var string $type */ /** @var string $relative */
 	# 2020-03-02, 2022-10-31
 	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
