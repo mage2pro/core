@@ -12,6 +12,7 @@
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Df\Payment\W\Exception\Ignored::message()
  * @used-by \Df\Payment\W\Handler::log()
+ * @used-by \Df\Typography\Css::rule()
  * @param mixed $v
  */
 function df_es($v):bool {return '' === $v;}
@@ -78,11 +79,12 @@ function df_etn($v) {return $v ?: null;}
  * @param mixed|false $v
  * @return mixed|null
  */
-function df_ftn($v) {return (false === $v) ? null : $v;}
+function df_ftn($v) {return false === $v ? null : $v;}
 
 /**
  * 2022-10-15
  * @see df_nts()
+ * @used-by \Df\Typography\Css::rule()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @param mixed|false $v
  * @return mixed|string
