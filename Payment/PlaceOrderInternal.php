@@ -138,8 +138,7 @@ final class PlaceOrderInternal {
 
 	/**
 	 * 2016-07-18
-	 * @used-by \Df\Payment\PlaceOrder::guest()
-	 * @used-by \Df\Payment\PlaceOrder::registered()
+	 * @used-by \Df\Payment\PlaceOrder::p()
 	 * @param int|string $cartId
 	 * @return string|mixed[]
 	 * @throws CouldNotSave|LE
