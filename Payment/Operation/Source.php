@@ -21,8 +21,7 @@ use Magento\Store\Model\Store;
  */
 abstract class Source implements \Df\Payment\IMA {
 	/**
-	 * 2017-04-07
-	 * Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
+	 * 2017-04-07 Размер транзакции в платёжной валюте: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
 	 * @see \Df\Payment\Operation\Source\Order::amount()
 	 * @see \Df\Payment\Operation\Source\Quote::amount()
 	 * @used-by \Df\Payment\Operation::amount()
