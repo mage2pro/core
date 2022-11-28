@@ -57,7 +57,6 @@ final class TID {
 	/**
 	 * 2017-03-22
 	 * @used-by self::s()
-	 * @param M $m
 	 */
 	private function __construct(M $m) {$this->_m = $m;}
 
