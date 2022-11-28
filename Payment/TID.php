@@ -87,7 +87,7 @@ final class TID {
 	 * @used-by \Df\Payment\Method::tid()
 	 * @param string|object $m
 	 */
-	static function s($m):self {return dfcf(function(M $m) {return new self($m);}, [dfpm($m)]);}
+	static function s($m):self {return dfcf(function(M $m):self {return new self($m);}, [dfpm($m)]);}
 
 	/**
 	 * 2017-03-22
