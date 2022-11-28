@@ -48,7 +48,6 @@ abstract class Nav {
 	/**
 	 * 2017-03-15
 	 * @used-by \Df\Payment\W\F::aspect()
-	 * @param Event $e
 	 */
 	final function __construct(Event $e) {$this->_e = $e;}
 
