@@ -60,11 +60,11 @@ abstract class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2016-08-27
 	 * 2017-09-25
-	 * The method can return `null` if the request does not need a signature.
+	 * The method can return an empty string if the request does not need a signature.
 	 * Currently, only the Yandex.Kassa charge requests do not use a signature:
 	 * @see \Dfe\YandexKassa\Charge::k_Signature()
 	 * https://tech.yandex.com/money/doc/payment-solution/payment-form/payment-form-http-docpage
-	 * 2022-11-10 \Dfe\AlphaCommerceHub\Charge::k_Signature() returns `null` too.
+	 * 2022-11-10 @see \Dfe\AlphaCommerceHub\Charge::k_Signature() returns '' too.
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @see \Dfe\AllPay\Charge::k_Signature()
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_Signature()
@@ -74,9 +74,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Robokassa\Charge::k_Signature()
 	 * @see \Dfe\SecurePay\Charge::k_Signature()
 	 * @see \Dfe\YandexKassa\Charge::k_Signature()
-	 * @return string|null
 	 */
-	abstract protected function k_Signature();
+	abstract protected function k_Signature():string;
 
 	/**
 	 * 2016-08-27
@@ -148,13 +147,12 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2017-08-19
 	 * @used-by self::p()
 	 * @see \Dfe\AlphaCommerceHub\Charge::k_Currency()
-	 * @see \Dfe\Dragonpay\Charge::k_RequestId()
-	 * @see \Dfe\IPay88\Charge::k_RequestId()
-	 * @see \Dfe\PostFinance\Charge::k_RequestId()
-	 * @see \Dfe\SecurePay\Charge::k_RequestId()
-	 * @return string|null
+	 * @see \Dfe\Dragonpay\Charge::k_Currency()
+	 * @see \Dfe\IPay88\Charge::k_Currency()
+	 * @see \Dfe\PostFinance\Charge::k_Currency()
+	 * @see \Dfe\SecurePay\Charge::k_Currency()
 	 */
-	protected function k_Currency() {return null;}
+	protected function k_Currency():string {return '';}
 
 	/**
 	 * 2017-08-19
