@@ -6,6 +6,7 @@
  * @used-by df_leaf_sne()
  * @used-by sift_prefix()
  * @used-by \Df\Payment\Settings::messageFailure()
+ * @used-by \Df\Payment\W\Exception\Ignored::message()
  * @used-by \Df\Payment\W\Handler::log()
  * @param mixed $v
  */
