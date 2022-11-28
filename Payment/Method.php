@@ -2044,9 +2044,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 *
 	 * @used-by dfpm()
 	 * @used-by \Df\Payment\Plugin\Model\Method\FactoryT::aroundCreate()
-	 * @param string $c
 	 */
-	final static function sg($c):self {return dfcf(function($c) {return new $c;}, [dfpm_c($c)]);}
+	final static function sg(string $c):self {return dfcf(function($c) {return new $c;}, [dfpm_c($c)]);}
 
 	/**
 	 * 2017-08-28
