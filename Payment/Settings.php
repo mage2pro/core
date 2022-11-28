@@ -32,7 +32,6 @@ abstract class Settings extends \Df\API\Settings {
 	 * @used-by \Df\Payment\Method::s()
 	 * @used-by \Dfe\AlphaCommerceHub\Settings::card()
 	 * @used-by \Dfe\Moip\Settings::boleto()
-	 * @param M $m
 	 */
 	final function __construct(M $m) {$this->_m = $m;}
 
