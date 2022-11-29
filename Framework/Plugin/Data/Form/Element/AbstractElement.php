@@ -112,7 +112,7 @@ class AbstractElement extends Sb {
 			 * function getLabelHtml($suffix = 0)
 			 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Data/Form/Element/Multiline.php#L59
 			 */
-			if ('' === $idSuffix && $sb instanceof Multiline) {
+			if (df_es($idSuffix) && $sb instanceof Multiline) {
 				$idSuffix = 0;
 			}
 			$classA = ['label', "admin__field-label df-element-{$sb->getType()}"]; /** @var string[] $classA */
