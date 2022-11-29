@@ -26,7 +26,7 @@ function df_float($v, $allowNull = true) {/** @var int|int[] $r */
 	elseif (is_int($v)) {
 		$r = floatval($v);
 	}
-	elseif ($allowNull && (is_null($v) || ('' === $v))) {
+	elseif ($allowNull && (df_nes($v))) {
 		$r = 0.0;
 	}
 	else {
