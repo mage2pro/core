@@ -190,7 +190,7 @@ class Fieldset extends FieldsetM implements ElementI {
 		 *			&:before {content: "\f035";}
 		 *		}
 		 */
-		if (!is_null($label) && '' === (string)$label) {
+		if (!is_null($label) && df_es($label)) {
 			$label = 'Color';
 		}
 		return $this->field('' === $name ? 'color' : $name, Color::class, $label, $data);
