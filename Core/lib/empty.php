@@ -106,6 +106,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
  * @used-by df_json_decode()
  * @used-by df_metadata()
  * @used-by df_oi()
+ * @used-by df_request()
  * @used-by dfa()
  * @used-by dfa_deep()
  * @used-by dfa_strict()
