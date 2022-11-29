@@ -14,6 +14,7 @@
  * @used-by \Df\Config\Backend\Checkbox::dfSaveBefore()
  * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Framework\Form\Element\Fieldset::color()
+ * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::aroundGetLabelHtml()
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Df\Payment\W\Exception\Ignored::message()
  * @used-by \Df\Payment\W\Handler::log()
