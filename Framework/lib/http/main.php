@@ -143,7 +143,7 @@ function df_post_h():PostHelper {return df_o(PostHelper::class);}
  * @return string|array(string => string)
  */
 function df_request($k = '', $d = null) {$o = df_request_o(); return df_nes($k) ? $o->getParams() : (
-	is_array($k) ? dfa($o->getParams(), $k) : df_if1(is_null($r = $o->getParam($k)) || '' === $r, $d, $r)
+	is_array($k) ? dfa($o->getParams(), $k) : df_if1(is_null($r = $o->getParam($k)) || df_es($r), $d, $r)
 );}
 
 /**              
