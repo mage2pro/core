@@ -193,7 +193,7 @@ class Fieldset extends FieldsetM implements ElementI {
 		if (!is_null($label) && df_es($label)) {
 			$label = 'Color';
 		}
-		return $this->field('' === $name ? 'color' : $name, Color::class, $label, $data);
+		return $this->field(df_es($name) ? 'color' : $name, Color::class, $label, $data);
 	}
 
 	/**
