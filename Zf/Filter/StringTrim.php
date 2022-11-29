@@ -18,7 +18,7 @@ final class StringTrim extends \Zend_Filter_StringTrim {
 	 * @param string $charlist
 	 */
 	protected function _unicodeTrim($s, $charlist = '\\\\s'):string {/** @var string $r */
-		if ('' === $s) {
+		if (df_es($s)) {
 			$r = $s;
 		}
 		else {
