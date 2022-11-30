@@ -190,7 +190,12 @@ final class Client {
 			# 2020-07-08
 			# «Undefined index: message in vendor/mage2pro/core/Sentry/Client.php on line 186»:
 			# https://github.com/mage2pro/core/issues/104
-			,'message' => substr(dfa($data, 'message'), 0, self::MESSAGE_LIMIT)
+			# 2022-11-30
+			# «Deprecated Functionality: substr():
+			# Passing null to parameter #1 ($string) of type string is deprecated
+			# in vendor/justuno.com/core/Sentry/Client.php on line 187»:
+			# https://github.com/justuno-com/core/issues/378
+			,'message' => substr(dfa($data, 'message', ''), 0, self::MESSAGE_LIMIT)
 			,'platform' => 'php'
 			,'project' => $this->_projectId
 			,'sdk' => $this->sdk
