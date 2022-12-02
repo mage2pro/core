@@ -25,12 +25,8 @@ final class Text {
 		if (!is_array($quotes)) {
 			df_error("An unknown quote: «{$t}».");
 		}
-		/**
-		 * 2016-11-13 It injects the value $s inside quotes.
-		 * @param string $s
-		 * @return string
-		 */
-		$f = function($s) use($quotes) {return implode($s, $quotes);};
+		# 2016-11-13 It injects the value $s inside quotes.
+		$f = function(string $s) use($quotes):string {return implode($s, $quotes);};
 		return !is_array($s) ? $f($s) : array_map($f, $s);
 	}
 
