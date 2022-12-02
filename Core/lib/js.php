@@ -111,10 +111,9 @@ function df_js_inline_url(string $res, bool $async = false):string {return df_re
  * @used-by vendor/kingpalm/adult/view/frontend/templates/popup.phtml
  * @see df_widget()
  * @param string|object|null $m
- * @param string|null $s [optional]
  * @param array(string => mixed) $p [optional]
  */
-function df_js_x(string $selector, $m, $s = null, array $p = []):string {return df_tag(
+function df_js_x(string $selector, $m, string $s = '', array $p = []):string {return df_tag(
 	'script', ['type' => 'text/x-magento-init'], df_json_encode([$selector => [
 		df_cc_path(is_null($m) ? null : df_module_name($m), $s ?: 'main') => $p
 	]])
