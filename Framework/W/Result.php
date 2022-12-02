@@ -104,6 +104,7 @@ abstract class Result implements ResultInterface {
 
 	/**
 	 * 2016-08-24 Set response code to result
+	 * 2022-12-01 We can not declare arguments types because they are undeclared in the overriden method.
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\Controller\ResultInterface::setHttpResponseCode()
