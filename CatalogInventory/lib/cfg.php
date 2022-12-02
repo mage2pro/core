@@ -33,9 +33,8 @@ function df_msi_allowed_for_pt() {return df_o(IAllowedForPT::class);}
  * 2021-10-11
  * @used-by df_assert_qty_supported()
  * @param P|string $t
- * @throws bool
  */
-function df_pt_has_qty($t) {
+function df_pt_has_qty($t):bool {
 	$t = is_string($t) ? $t : $t->getTypeId();
 	return df_msi() ? df_msi_allowed_for_pt()->execute($t) : df_stock_cfg()->isQty($t);
 }
