@@ -111,7 +111,7 @@ function df_clean_r(array $r, array $k = [], bool $req = true):array {/** @var m
 	if ($req) {
 		$r = df_map($r, function($v) use($k) {return !is_array($v) ? $v : df_clean_r($v, $k);});
 	}
-	return df_filter($r, function($v) use($k) {return !in_array($v, $k, true);});
+	return df_filter($r, function($v) use($k):bool {return !in_array($v, $k, true);});
 }
 
 /**
