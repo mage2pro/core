@@ -137,7 +137,7 @@ function dfa_deep_slice(array $a, int $l):array {return 1 === $l ? (array_is_lis
  * @param string|string[] $path
  * @throws DFE
  */
-function dfa_deep_unset(array &$a, $path) {
+function dfa_deep_unset(array &$a, $path):void {
 	if (!is_array($path)) {
 		df_param_sne($path, 1);
 		/**
