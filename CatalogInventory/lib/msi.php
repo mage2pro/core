@@ -10,7 +10,7 @@ use Magento\Store\Model\Website as W;
  * @used-by df_pt_has_qty()
  * @used-by df_qty()
  */
-function df_msi():bool {return dfcf(function() {return df_module_enabled('Magento_Inventory');});}
+function df_msi():bool {return df_module_enabled('Magento_Inventory');}
 
 /**
  * 2019-11-22
