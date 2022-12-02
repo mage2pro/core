@@ -90,7 +90,7 @@ final class Tag {
 	/**
 	 * 2022-11-21
 	 * @used-by self::__construct()
-	 * @used-by self:: content()
+	 * @used-by self::content()
 	 * @var string|null|string[]
 	 */
 	private $_content;	
