@@ -48,7 +48,7 @@ final class RAM {
 	 * @param string[] $tags [optional]
 	 * @return mixed
 	 */
-	function set(string $k, $v, $tags = []) {
+	function set(string $k, $v, array $tags = []) {
 		if ($v instanceof ICached) {
 			$tags += $v->tags();
 		}
