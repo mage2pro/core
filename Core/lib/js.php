@@ -102,10 +102,10 @@ function df_js_inline_url(string $res, bool $async = false):string {return df_re
 /**
  * 2019-06-01
  * $m could be:
- * 1) A module name: «A_B»
- * 2) A class name: «A\B\C».
- * 3) An object: it comes down to the case 2 via @see get_class()
- * 4) `null`.
+ * 		1) A module name: «A_B»
+ * 		2) A class name: «A\B\C».
+ * 		3) An object: it comes down to the case 2 via @see get_class()
+ * 		4) `null`.
  * @used-by df_js()
  * @used-by \KingPalm\B2B\Block\RegionJS\Frontend::_toHtml()
  * @used-by vendor/kingpalm/adult/view/frontend/templates/popup.phtml
