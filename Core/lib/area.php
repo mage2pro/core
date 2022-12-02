@@ -8,8 +8,8 @@ use Magento\Framework\App\Area as A;
  * @used-by df_area_code_is()
  * @used-by df_area_code_set_d()
  * @param F|bool|mixed $onE [optional]
- * @return mixed
- * @throws \Exception
+ * @return string|null
+ * @throws Exception
  */
 function df_area_code($onE = null) {return df_try(function() {return df_app_state()->getAreaCode();}, $onE);}
 
