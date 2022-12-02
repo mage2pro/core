@@ -13,7 +13,6 @@ use Zend_Date as ZD;
  * @used-by df_num_days()
  * @used-by df_year()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
- * @param ZD|null $d [optional]
  */
 function df_date(ZD $d = null):ZD {return $d ?: ZD::now();}
 
