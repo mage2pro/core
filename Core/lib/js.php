@@ -42,7 +42,6 @@ function df_ejs($v):string {return !is_string($v) ? df_json_encode($v) : df_quot
  * @used-by \KingPalm\B2B\Block\RegionJS\Backend::_toHtml()
  * @used-by \RWCandy\Captcha\Js()
  * @param string|object|null $m
- * @param string|null $s [optional]
  * @param array(string => mixed) $p [optional]
  */
 function df_js($m, string $s = '', array $p = []):string {$s = $s ?: 'main'; return df_js_x(
