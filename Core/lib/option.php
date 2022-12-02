@@ -21,10 +21,9 @@ function df_a_to_options(array $a):array {return is_null($f = df_first($a)) || i
  * @used-by \Df\Config\Source\Block::map()
  * @used-by \Dfe\ZohoCRM\Source\Domain::map()
  * @param array(string => string) $tail
- * @param string|null $l [optional]
  * @return array(int => string)
  */
-function df_map_0(array $tail, $l = null):array {return [0 => $l ?: '-- select a value --'] + $tail;}
+function df_map_0(array $tail, string $l = ''):array {return [0 => $l ?: '-- select a value --'] + $tail;}
 
 /**
  * 2015-02-11 Превращает массив вида ['value' => 'label'] в массив вида [['value' => '', 'label' => '']].
