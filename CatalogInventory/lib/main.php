@@ -21,7 +21,7 @@ function df_qty($p):float {
 	else {
 		$i = df_o(IQty::class); /** @var IQty|Qty $i */
 		$sku = $p->getSku(); /** @var string $sku */
-		$r = array_sum(array_map(function($sid) use($i, $sku) {return $i->execute($sku, $sid);}, df_msi_stock_ids($p)));
+		$r = array_sum(array_map(function($sid) use($i, $sku):float {return $i->execute($sku, $sid);}, df_msi_stock_ids($p)));
 	}
 	return $r;
 }
