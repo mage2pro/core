@@ -57,6 +57,7 @@ function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {r
  * @used-by df_db_credentials()
  * @used-by df_mail()
  * @used-by df_prices()
+ * @used-by df_qty()
  * @used-by ikf_api_oi()
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Catalog\Model\Product::afterGetPreconfiguredValues() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/83)
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Model\Order::afterCanInvoice() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/256)
