@@ -72,9 +72,9 @@ function df_checkout_session() {return df_o(Session::class);}
  * @return O|null
  * @throws DFE
  */
-function df_order_last(bool $required = true) {
+function df_order_last(bool $req = true) {
 	$s = df_checkout_session(); /** @var Session|DfSession $s */
-	return $s->getLastRealOrderId() ? $s->getLastRealOrder() : (!$required ? null : df_error());
+	return $s->getLastRealOrderId() ? $s->getLastRealOrder() : (!$req ? null : df_error());
 }
 
 /**
