@@ -24,7 +24,7 @@ class Js extends _P {
 	 *		$html = $this->_afterToHtml($html);
 	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L643-L689
 	 */
-	final protected function _toHtml():string {return df_js(__CLASS__, null, [
+	final protected function _toHtml():string {return df_js(__CLASS__, '', [
 		'dic' => df_intl_dic_read($this, null, 'dic')
 		 # 2017-11-14
 		 # "Magento 2.0.x: «Script error for: Magento_Ui/js/lib/knockout/template/renderer»"
