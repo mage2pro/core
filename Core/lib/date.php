@@ -13,9 +13,9 @@ use Zend_Date as ZD;
  * @used-by df_num_days()
  * @used-by df_year()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
- * @param ZD|null $date [optional]
+ * @param ZD|null $d [optional]
  */
-function df_date(ZD $date = null):ZD {return $date ?: ZD::now();}
+function df_date(ZD $d = null):ZD {return $d ?: ZD::now();}
 
 /** 2022-10-29 @deprecated It is unused. */
 function df_date_create(int ...$a):ZD {
