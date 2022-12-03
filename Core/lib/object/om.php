@@ -79,7 +79,7 @@ function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @return mixed
  */
-function df_o(string $t) {return dfcf(function($t) {return df_om()->get($t);}, [$t]);}
+function df_o(string $t) {return dfcf(function(string $t) {return df_om()->get($t);}, [$t]);}
 
 /**
  * 2015-08-13
