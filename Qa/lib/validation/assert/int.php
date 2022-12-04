@@ -70,7 +70,6 @@ function df_nat($v, bool $allow0 = false):int {/** @var int $r */
  * @used-by df_year()
  * @used-by \Df\Qa\Failure\Error::type()
  * @param mixed $v
- * @return int
  * @throws DFE
  */
 function df_nat0($v):int {return df_nat($v, $allow0 = true);}
