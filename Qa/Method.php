@@ -118,14 +118,11 @@ final class Method {
 	
 	/**
 	 * @used-by self::assertParamIsIso2()
-	 * @param Vd $vd
 	 * @param mixed $v
-	 * @param int $ord
-	 * @param int $sl
 	 * @return mixed
 	 * @throws E
 	 */
-	private static function vp(Vd $vd, $v, $ord, $sl = 1) {return $vd->isValid($v) ? $v : self::raiseErrorParam(
+	private static function vp(Vd $vd, $v, int $ord, int $sl = 1) {return $vd->isValid($v) ? $v : self::raiseErrorParam(
 		get_class($vd), $vd->getMessages(), $ord, ++$sl
 	);}
 
