@@ -147,7 +147,6 @@ final class Method {
 	
 	/**
 	 * @used-by self::assertValueIsArray()
-	 * @used-by self::assertValueIsString()
 	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $sl
