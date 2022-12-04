@@ -72,4 +72,4 @@ function df_nat($v, bool $allow0 = false):int {/** @var int $r */
  * @param mixed $v
  * @throws DFE
  */
-function df_nat0($v):int {return df_nat($v, $allow0 = true);}
+function df_nat0($v):int {return df_nat($v, true);}
