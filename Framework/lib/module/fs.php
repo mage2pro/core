@@ -124,10 +124,10 @@ function df_module_file($m, string $name, string $ext = '', bool $req = true, Cl
 /**
  * 2017-01-27
  * $m could be:
- * 1) a module name: «A_B»
- * 2) a class name: «A\B\C».
- * 3) an object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 		1) a module name: «A_B»
+ * 		2) a class name: «A\B\C».
+ * 		3) an object: it comes down to the case 2 via @see get_class()
+ * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @see df_module_csv2()
  * @see df_module_enum()
  * @used-by df_currency_nums()
