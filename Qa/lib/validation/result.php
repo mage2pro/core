@@ -18,11 +18,10 @@ function df_result_array($v, $sl = 0):array {return Q::assertResultIsArray($v, +
  * @see df_assert_sne()
  * @see df_param_sne()
  * @see df_result_sne()
- * @param string $v
- * @param int $sl [optional]
+ * @param mixed $v
  * @throws DFE
  */
-function df_result_s($v, $sl = 0):string {return df_check_s($v) ? $v : Q::raiseErrorResult(
+function df_result_s($v, int $sl = 0):string {return df_check_s($v) ? $v : Q::raiseErrorResult(
 	__FUNCTION__, [sprintf('A string is required, but got %s.', df_type($v))], ++$sl
 );}
 
