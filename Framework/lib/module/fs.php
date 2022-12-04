@@ -25,20 +25,17 @@ function df_module_csv2($m, string $name, bool $req = true):array {return df_mod
  * 2015-08-14
  * https://mage2.pro/t/57
  * https://mage2.ru/t/92
-
  * 2015-09-02
  * @uses \Magento\Framework\Module\Dir\Reader::getModuleDir()
  * uses `/` insteads @see DIRECTORY_SEPARATOR as the path separator, so I use `/` too.
- *
  * 2016-11-17
  * 1) $m could be:
- * 1.1) a module name: «A_B»
- * 1.2) a class name: «A\B\C».
- * 1.3) an object: it comes down to the case 2 via @see get_class()
- * 1.4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 		1.1) a module name: «A_B»
+ * 		1.2) a class name: «A\B\C».
+ * 		1.3) an object: it comes down to the case 2 via @see get_class()
+ * 		1.4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * 2) The function does not cache its result because is is already cached by
  * @uses \Magento\Framework\Module\Dir\Reader::getModuleDir().
- *
  * 2019-12-31
  * 1) The result is the full filesystem path of the module, e.g.
  * «C:/work/clients/royalwholesalecandy.com-2019-12-08/code/vendor/mage2pro/core/Intl».
@@ -60,7 +57,6 @@ function df_module_csv2($m, string $name, bool $req = true):array {return df_mod
  *		$path .= '/' . $type;
  *	}
  * https://github.com/magento/magento2/blob/2.3.3/lib/internal/Magento/Framework/Module/Dir.php#L54-L65
- *
  * @used-by df_intl_dic_path()
  * @used-by df_module_path()
  * @used-by df_module_path_etc()

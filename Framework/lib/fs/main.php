@@ -60,17 +60,14 @@ function df_file_write($p, string $contents, bool $append = false):void {
 	# https://stackoverflow.com/a/28233499
 	list($type, $relative) = is_array($p) ? $p : [DL::ROOT, df_path_relative($p)];
 	$writer = df_fs_w($type); /** @var DirectoryWrite|IDirectoryWrite $writer */
-	/**
-	 * 2018-07-06
-	 * Note 1.
-	 * https://php.net/manual/function.fopen.php#refsect1-function.fopen-parameters
-	 * 'w':	Open for writing only;
-	 * 		place the file pointer at the beginning of the file and truncate the file to zero length.
-	 * 		If the file does not exist, attempt to create it.
-	 * 'a'	Open for writing only; place the file pointer at the end of the file.
-	 * 		If the file does not exist, attempt to create it.
-	 * 		In this mode, fseek() has no effect, writes are always appended.
-	 */
+	# 2018-07-06
+	# «'w':	Open for writing only;
+	# 		place the file pointer at the beginning of the file and truncate the file to zero length.
+	# 		If the file does not exist, attempt to create it.
+	# 'a'	Open for writing only; place the file pointer at the end of the file.
+	# 		If the file does not exist, attempt to create it.
+	# 		In this mode, fseek() has no effect, writes are always appended.»
+	# https://php.net/manual/function.fopen.php#refsect1-function.fopen-parameters
 	$file = $writer->openFile($relative, $append ? 'a' : 'w'); /** @var IFileWrite|FileWrite $file */
 	/**
 	 * 2015-11-29
