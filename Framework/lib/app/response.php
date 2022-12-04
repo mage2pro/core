@@ -116,9 +116,7 @@ function df_response_cache_max():void {df_response_headers([
  * @used-by \Df\Framework\W\Result\Xml::render()
  * @param IResult|wResult|IHttpResponse|HttpResponse|null $r [optional]
  */
-function df_response_content_type(string $contentType, $r = null):void {df_response($r)->setHeader(
-	'Content-Type', $contentType, true
-);}
+function df_response_content_type(string $t, $r = null):void {df_response($r)->setHeader('Content-Type', $t, true);}
 
 /**
  * 2015-11-29
