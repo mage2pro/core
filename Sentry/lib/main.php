@@ -158,7 +158,7 @@ function df_sentry_extra_f($v):void {df_sentry_m(df_caller_c())->extra([df_calle
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * @param string|object|null $m
  */
-function df_sentry_m($m) {return dfcf(function($m):Sentry {
+function df_sentry_m($m):Sentry {return dfcf(function($m):Sentry {
 	$r = null; /** @var Sentry $r */
 	/** @var array(string => $r) $a */ /** @var array(string => string)|null $sa */
 	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
