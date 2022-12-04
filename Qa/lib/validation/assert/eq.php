@@ -1,7 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
 use Exception as E;
-
 /**
  * @used-by df_vector_sum()
  * @param string|int|float|bool $expected
