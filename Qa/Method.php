@@ -35,16 +35,12 @@ final class Method {
 	/**
 	 * @used-by df_param_sne()
 	 * @used-by self::vp()
-	 * @param string $method
-	 * @param array $messages
-	 * @param int $ord  zero-based
-	 * @param int $sl
 	 * @throws E
 	 */
-	static function raiseErrorParam($method, array $messages, $ord, $sl = 1):void {
+	static function raiseErrorParam(string $method, array $messages, int $ord, int $sl = 1) {
 		$frame = self::caller($sl); /** @var Frame $frame */
 		$name = 'unknown'; /** @var string $name */
-		if (!is_null($ord) && $frame->methodR()) {/** @var RP $param */
+		if ($frame->methodR()) {/** @var RP $param */
 			$name = $frame->methodParameter($ord)->getName();
 		}
 		$messagesS = df_cc_n($messages); /** @var string $messagesS */
