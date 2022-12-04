@@ -1,7 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
-
 /**
  * @used-by df_db_column_describe()
  * @used-by \Df\GoogleFont\Fonts::responseA()
