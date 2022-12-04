@@ -34,12 +34,11 @@ function df_log($v, $m = null):void {df_log_l($m, $v); df_sentry($m, $v);}
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \CanadaSatellite\Bambora\Model\PaymentManagement::savePaymentInformationAndPlaceOrder() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
- * @param E $e
  * @param string|object|null $m [optional]
  * @param string|mixed[] $d [optional]
  * @param string|bool|null $suf [optional]
  */
-function df_log_e($e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $suf ?: df_caller_f(1));}
+function df_log_e(E $e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $suf ?: df_caller_f(1));}
 
 /**
  * 2017-01-11
