@@ -174,7 +174,6 @@ function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
  */
 function df_assert_sne(string $v, int $sl = 0):string {
 	$sl++;
-	Q::assertValueIsString($v, $sl);
 	# The previous code `if (!$v)` was wrong because it rejected the '0' string.
 	return !df_es($v) ? $v : Q::raiseErrorVariable(__FUNCTION__, [Q::NES], $sl);
 }
