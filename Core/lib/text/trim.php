@@ -88,7 +88,7 @@ function df_trim($s, $charlist = null, $throw = false) {return df_try(function()
  * @used-by \Df\Config\Settings::phpNameToKey()
  * @used-by \Dfe\PostFinance\W\Event::cardNumber()
  */
-function df_trim_left(string $s, string $charlist = null):string {return ltrim($s, $charlist ?: " \t\n\r\0\x0B");}
+function df_trim_left(string $s, string $charlist = ''):string {return ltrim($s, $charlist ?: " \t\n\r\0\x0B");}
 
 /**
  * Пусть пока будет так. Потом, если потребуется, добавлю дополнительную обработку спецсимволов Unicode.
