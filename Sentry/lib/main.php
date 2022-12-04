@@ -145,10 +145,10 @@ function df_sentry_extra_f($v):void {df_sentry_m(df_caller_c())->extra([df_calle
 /**
  * 2016-12-22
  * $m could be:
- * 1) a module name: «A_B»
- * 2) a class name: «A\B\C».
- * 3) an object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 		1) a module name: «A_B»
+ * 		2) a class name: «A\B\C».
+ * 		3) an object: it comes down to the case 2 via @see get_class()
+ * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by df_sentry()
  * @used-by df_sentry_extra()
  * @used-by df_sentry_extra_f()
