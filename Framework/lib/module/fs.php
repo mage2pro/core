@@ -170,10 +170,10 @@ function df_module_path($m, string $localPath = ''):string {return df_cc_path(df
  * use `/` insteads @see DIRECTORY_SEPARATOR as the path separator, so I use `/` too.
  * 2016-11-17
  * $m could be:
- * 1) a module name: «A_B»
- * 2) a class name: «A\B\C».
- * 3) an object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 		1) a module name: «A_B»
+ * 		2) a class name: «A\B\C».
+ * 		3) an object: it comes down to the case 2 via @see get_class()
+ * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by df_module_file()
  * @param string|object|null $m
  * @throws InvalidArgumentException
