@@ -154,10 +154,10 @@ function df_module_json($m, string $name, bool $req = true):array {return df_mod
  * use `/` insteads @see DIRECTORY_SEPARATOR as the path separator, so I use `/` too.
  * 2016-11-17
  * $m could be:
- * 1) a module name: «A_B»
- * 2) a class name: «A\B\C».
- * 3) an object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 		1) a module name: «A_B»
+ * 		2) a class name: «A\B\C».
+ * 		3) an object: it comes down to the case 2 via @see get_class()
+ * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @param string|object|null $m
  * @throws InvalidArgumentException
  */
