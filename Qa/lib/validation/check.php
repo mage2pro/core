@@ -39,7 +39,7 @@ function df_check_iso2($v):bool {return \Df\Zf\Validate\StringT\Iso2::s()->isVal
 
 /**
  * @used-by df_result_s()
- * @param string $v
+ * @param mixed $v
  */
 function df_check_s($v):bool {return \Df\Zf\Validate\StringT::s()->isValid($v);}
 
