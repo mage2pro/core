@@ -34,15 +34,6 @@ final class Method {
 	static function assertValueIsArray($v, $sl = 0):array {return self::vv(VArray::s(), $v, ++$sl);}
 
 	/**
-	 * @used-by df_assert_sne()
-	 * @used-by df_param_sne()
-	 * @param string $v
-	 * @param int $sl [optional]
-	 * @throws E
-	 */
-	static function assertValueIsString($v, int $sl = 0):string {return self::vv(VString::s(), $v, ++$sl);}
-
-	/**
 	 * @used-by df_param_sne()
 	 * @used-by self::vp()
 	 * @param string $method
