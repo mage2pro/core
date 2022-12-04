@@ -38,7 +38,7 @@ function df_log($v, $m = null):void {df_log_l($m, $v); df_sentry($m, $v);}
  * @param string|mixed[] $d [optional]
  * @param string|bool|null $suf [optional]
  */
-function df_log_e(E $e, $m = null, $d = [], $suf = null) {df_log_l($m, $e, $d, $suf ?: df_caller_f(1));}
+function df_log_e(E $e, $m = null, $d = [], $suf = null):void {df_log_l($m, $e, $d, $suf ?: df_caller_f(1));}
 
 /**
  * 2017-01-11
