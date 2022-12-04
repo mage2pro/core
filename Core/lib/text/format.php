@@ -45,6 +45,7 @@ function df_format(...$a):string { /** @var string $r */
  * @used-by df_api_rr_failed()
  * @used-by \Df\API\Client::p()
  * @used-by \Df\Qa\Failure\Error::main()
+ * @used-by \Df\Sentry\Client::send_http()
  * @param array(string => string) $a
  */
 function df_kv(array $a, int $pad = 0):string {return df_cc_n(df_map_k(df_clean($a), function($k, $v) use($pad) {return
