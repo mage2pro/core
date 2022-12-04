@@ -68,7 +68,7 @@ function df_log_e(E $e, $m = null, $d = [], $suf = null):void {df_log_l($m, $e, 
  * @param string|mixed[]|E $p3 [optional]
  * @param string|bool|null $p4 [optional]
  */
-function df_log_l($m, $p2, $p3 = [], $p4 = null) {
+function df_log_l($m, $p2, $p3 = [], $p4 = null):void {
 	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string|null $suf */ /** @var string|null $pref */
 	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, null] : [null, $p2, $p3, $p4];
 	if (!$m && $e) {
