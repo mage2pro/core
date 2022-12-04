@@ -38,7 +38,6 @@ function df_lxts($e) {return !$e instanceof E ? __($e) : df_xts(df_lx($e));}
  * 2016-07-18
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Qa\Failure\Exception::trace()
- * @param E $e
  */
 function df_xf(E $e):E {while ($e->getPrevious()) {$e = $e->getPrevious();} return $e;}
 
