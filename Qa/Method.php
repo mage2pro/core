@@ -37,7 +37,7 @@ final class Method {
 	 * @used-by self::vp()
 	 * @throws E
 	 */
-	static function raiseErrorParam(string $method, array $messages, int $ord, int $sl = 1) {
+	static function raiseErrorParam(string $method, array $messages, int $ord, int $sl = 1):void {
 		$frame = self::caller($sl); /** @var Frame $frame */
 		$name = 'unknown'; /** @var string $name */
 		if ($frame->methodR()) {/** @var RP $param */
