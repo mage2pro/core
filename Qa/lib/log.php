@@ -21,7 +21,7 @@ use Magento\Framework\DataObject as _DO;
  * @param _DO|mixed[]|mixed|E $v
  * @param string|object|null $m [optional]
  */
-function df_log($v, $m = null) {df_log_l($m, $v); df_sentry($m, $v);}
+function df_log($v, $m = null):void {df_log_l($m, $v); df_sentry($m, $v);}
 
 /**
  * 2017-01-11
