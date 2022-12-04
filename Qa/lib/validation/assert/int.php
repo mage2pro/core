@@ -1,7 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
 use Df\Zf\Validate\StringT\IntT;
-
 /**
  * @see df_is_int()
  * @used-by df_product_id()
