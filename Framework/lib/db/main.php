@@ -71,7 +71,9 @@ function df_db_name():string {return dfa(df_db_credentials(), C::KEY_NAME);}
  * @see \Magento\Backup\Model\ResourceModel\Helper::getHeader()
  * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Backup/Model/ResourceModel/Helper.php#L178
  */
-function df_db_version():string {return dfcf(function() {return df_conn()->fetchRow("SHOW VARIABLES LIKE 'version'")['Value'];});}
+function df_db_version():string {return dfcf(function() {return
+	df_conn()->fetchRow("SHOW VARIABLES LIKE 'version'")['Value']
+;});}
 
 /**
  * 2015-08-23
