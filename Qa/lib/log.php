@@ -2,7 +2,6 @@
 use Df\Qa\Failure\Exception as QE;
 use Exception as E;
 use Magento\Framework\DataObject as _DO;
-
 /**
  * @used-by ikf_endpoint()	inkifi.com
  * @used-by \Df\Config\Backend::save()
