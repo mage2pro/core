@@ -7,10 +7,10 @@ use Magento\User\Model\User;
 /**
  * 2016-12-22
  * $m could be:
- * 1) A module name: «A_B»
- * 2) A class name: «A\B\C».
- * 3) An object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 		1) A module name: «A_B»
+ * 		2) A class name: «A\B\C».
+ * 		3) An object: it comes down to the case 2 via @see get_class()
+ * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by df_log()
  * @used-by dfe_modules_log()
  * @used-by dfp_report()
