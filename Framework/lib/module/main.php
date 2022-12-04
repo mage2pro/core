@@ -7,9 +7,8 @@ use Magento\Framework\Module\ModuleListInterface as IML;
  * 2019-11-21
  * @used-by df_log_l()
  * @used-by df_msi()
- * @param string|object $m
  */
-function df_module_enabled($m):bool {return df_module_m()->isEnabled(df_module_name($m));}
+function df_module_enabled(string $m):bool {return df_module_m()->isEnabled(df_module_name($m));}
 
 /**
  * 2017-04-01
