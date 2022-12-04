@@ -10,6 +10,7 @@ final class StringT extends \Df\Zf\Validate implements \Zend_Filter_Interface {
 	function filter($v):string {return is_null($v) || is_int($v) ? strval($v) : $v;}
 
 	/**
+	 * @used-by df_check_s()
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
 	 * @param mixed $v
