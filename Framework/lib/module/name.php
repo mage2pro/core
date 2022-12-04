@@ -35,9 +35,9 @@
  * @used-by \TFC\Blog\Plugin\Block\Post\ListPost::afterGetCustomBlogThemeVendor()
  * @param string|object|null $c [optional]
  */
-function df_module_name($c = null, string $del = '_'):string {return dfcf(
-	function(string $c, string $del):string {return implode($del, array_slice(df_explode_class($c), 0, 2));}
-	,[$c ? df_cts($c) : 'Df\Core', $del]
+function df_module_name($c = null, string $d = '_'):string {return dfcf(
+	function(string $c, string $d):string {return implode($d, array_slice(df_explode_class($c), 0, 2));}
+	,[$c ? df_cts($c) : 'Df\Core', $d]
 );}
 
 /**
@@ -80,4 +80,4 @@ function df_module_name_short($c):string {return df_explode_class($c)[1];}
  * @see df_cts_lc_camel()
  * @param string|object $c
  */
-function df_module_name_lc($c, string $del = '_'):string {return implode($del, df_explode_class_lc_camel(df_module_name_c($c)));}
+function df_module_name_lc($c, string $d = '_'):string {return implode($d, df_explode_class_lc_camel(df_module_name_c($c)));}
