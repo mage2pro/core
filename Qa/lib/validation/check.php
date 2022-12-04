@@ -39,6 +39,13 @@ function df_is_nat($v):bool {return df_is_int($v) && 0 < $v;}
 function df_check_iso2($v):bool {return \Df\Zf\Validate\StringT\Iso2::s()->isValid($v);}
 
 /**
+ * 2015-02-16
+ * Раньше здесь стояло просто `is_string($value)`
+ * Однако интерпретатор PHP способен неявно и вполне однозначно (без двусмысленностей, как, скажем, с вещественными числами)
+ * конвертировать целые числа и `null` в строки,
+ * поэтому пусть целые числа и `null` всегда проходят валидацию как строки.
+ * 2016-07-01 Добавил `|| $value instanceof Phrase`
+ * 2017-01-13 Добавил `|| is_bool($value)`
  * @used-by df_result_s()
  * @param mixed $v
  */
