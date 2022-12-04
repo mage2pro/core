@@ -117,6 +117,7 @@ final class Method {
 	private static function throwException($message, $sl = 0):void {df_error(new E($message, ++$sl));}
 	
 	/**
+	 * @used-by self::assertParamIsIso2()
 	 * @param Vd $vd
 	 * @param mixed $v
 	 * @param int $ord
