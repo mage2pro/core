@@ -19,7 +19,7 @@ use Magento\Framework\Event\ManagerInterface as IManager;
  * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
  * @param array(string => mixed) $d
  */
-function df_dispatch(string $ev, array $d = []):array {
+function df_dispatch(string $ev, array $d = []):void {
 	$m = df_o(IManager::class); /** @var IManager|Manager $m */
 	$m->dispatch($ev, $d);
 }
