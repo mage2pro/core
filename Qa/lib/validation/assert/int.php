@@ -54,10 +54,9 @@ function df_int_simple(array $v):array {return array_map('intval', $v);}
  * @used-by \Df\Config\O::nat()
  * @used-by \Df\Config\Settings::nat()
  * @param mixed $v
- * @param bool $allow0 [optional]
  * @throws DFE
  */
-function df_nat($v, $allow0 = false):int {/** @var int $r */
+function df_nat($v, bool $allow0 = false):int {/** @var int $r */
 	$r = df_int($v, $allow0);
 	$allow0 ? df_assert_ge(0, $r) : df_assert_gt0($r);
 	return $r;
