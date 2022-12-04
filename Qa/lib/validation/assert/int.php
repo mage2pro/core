@@ -10,11 +10,10 @@ use Df\Zf\Validate\StringT\IntT;
  * @used-by \Inkifi\Pwinty\API\Entity\Shipment::items()
  * @used-by \TFC\GoogleShopping\Att\Brand::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/8)
  * @param mixed|mixed[] $v
- * @param bool $allowNull [optional]
  * @return int|int[]
  * @throws DFE
  */
-function df_int($v, $allowNull = true) {/** @var int|int[] $r */
+function df_int($v, bool $allowNull = true) {/** @var int|int[] $r */
 	if (is_array($v)) {
 		$r = df_map(__FUNCTION__, $v, $allowNull);
 	}
