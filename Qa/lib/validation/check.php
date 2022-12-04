@@ -1,4 +1,5 @@
 <?php
+use Magento\Framework\Phrase;
 /**
  * 2021-03-22
  * @used-by df_assert_between()
@@ -41,7 +42,7 @@ function df_check_iso2($v):bool {return \Df\Zf\Validate\StringT\Iso2::s()->isVal
  * @used-by df_result_s()
  * @param mixed $v
  */
-function df_check_s($v):bool {return \Df\Zf\Validate\StringT::s()->isValid($v);}
+function df_check_s($v):bool {return is_string($v) || is_int($v) || is_null($v) || is_bool($v) || $v instanceof Phrase;}
 
 /** 2022-10-15 @see is_iterable() has been added to PHP 7.1: https://www.php.net/manual/function.is-iterable.php */
 if (!function_exists('is_iterable')) {

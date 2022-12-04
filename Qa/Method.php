@@ -2,7 +2,6 @@
 namespace Df\Qa;
 use Df\Qa\Trace\Frame;
 use Df\Zf\Validate\ArrayT as VArray;
-use Df\Zf\Validate\StringT as VString;
 use Df\Zf\Validate\StringT\Iso2 as VIso2;
 use Exception as E;
 use ReflectionParameter as RP;

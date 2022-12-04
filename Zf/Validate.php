@@ -2,12 +2,10 @@
 namespace Df\Zf;
 /**
  * @see \Df\Zf\Validate\ArrayT
- * @see \Df\Zf\Validate\StringT
  * @see \Df\Zf\Validate\StringT\IntT
  * @see \Df\Zf\Validate\StringT\Iso2
  * @see \Df\Zf\Validate\StringT\Parser
  * @used-by \Df\Zf\Validate\ArrayT::s()
- * @used-by \Df\Zf\Validate\StringT::s()
  * @used-by \Df\Zf\Validate\StringT\IntT::s()
  * @used-by \Df\Zf\Validate\StringT\Iso2::s()
  * @used-by \Df\Zf\Validate\StringT\FloatT::s()
@@ -16,7 +14,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 	/**
 	 * @used-by self::message()
 	 * @see \Df\Zf\Validate\ArrayT::expected()
-	 * @see \Df\Zf\Validate\StringT::expected()
 	 * @see \Df\Zf\Validate\StringT\FloatT::expected()
 	 * @see \Df\Zf\Validate\StringT\IntT::expected()
 	 * @see \Df\Zf\Validate\StringT\Iso2::expected()
@@ -42,7 +39,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 
 	/**
 	 * @used-by \Df\Zf\Validate\ArrayT::isValid()
-	 * @used-by \Df\Zf\Validate\StringT::isValid()
 	 * @used-by \Df\Zf\Validate\StringT\FloatT::isValid()
 	 * @used-by \Df\Zf\Validate\StringT\IntT::isValid()
 	 * @used-by \Df\Zf\Validate\StringT\Iso2::isValid()
