@@ -117,9 +117,8 @@ final class Method {
 	 * @used-by self::raiseErrorParam()
 	 * @used-by self::raiseErrorResult()
 	 * @used-by self::raiseErrorVariable()
-	 * @param int $o [optional]
 	 */
-	private static function caller($o):Frame {return Frame::i(df_bt(0, 3 + $o)[2 + $o]);}
+	private static function caller(int $o):Frame {return Frame::i(df_bt(0, 3 + $o)[2 + $o]);}
 
 	/**
 	 * 2015-01-28
