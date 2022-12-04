@@ -43,10 +43,10 @@ function df_are_customers_global():bool {return dfcf(function() {
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @param string|int|DC|C|null $c [optional]
  * @param Closure|bool|mixed $onE [optional]
- * @return C|O|null|false
+ * @return C|null
  * @throws NoSuchEntityException|DFE
  */
-function df_customer($c = null, $onE = false) {return df_try(function() use($c) {return
+function df_customer($c = null, $onE = null) {return df_try(function() use($c) {return
 	/** @var int|string|null $id */
 	/**
 	 * 2016-08-22
