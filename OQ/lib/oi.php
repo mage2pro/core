@@ -3,7 +3,6 @@ use Magento\Sales\Api\OrderItemRepositoryInterface as IOIR;
 use Magento\Sales\Model\Order\Item as OI;
 use Magento\Sales\Model\Order\ItemRepository as OIR;
 use Magento\Sales\Model\ResourceModel\Order\Item\Collection as OIC;
-
 /**
  * 2019-02-27 @deprecated It is unused.
  * @param string|OI $v

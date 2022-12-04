@@ -13,7 +13,6 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Address as OA;
 use Magento\Sales\Model\Order\Item as OI;
 use Magento\Sales\Model\Order\Payment as OP;
-
 /**
  * 2021-05-31
  * 2021-06-03 @deprecated It is unused.
