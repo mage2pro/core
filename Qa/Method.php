@@ -47,7 +47,6 @@ final class Method {
 	/**
 	 * @used-by df_result_s()
 	 * @used-by df_result_sne()
-	 * @used-by self::vr()
 	 * @throws E
 	 */
 	static function raiseErrorResult(string $vd, array $messages, int $sl = 1):void {
