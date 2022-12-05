@@ -104,11 +104,9 @@ final class Method {
 	 * 2015-01-28
 	 * Раньше тут стояло throw $e, что приводило к отображению на экране диагностического сообщения в неверной кодировке.
 	 * @uses df_error() точнее: эта функция в режиме разработчика отсылает браузеру заголовок HTTP о требуемой кодировке.
-	 * @param string $message
-	 * @param int $sl [optional]
 	 * @throws E
 	 */
-	private static function throwException($message, $sl = 0):void {df_error(new E($message, ++$sl));}
+	private static function throwException(string $message, int $sl = 0):void {df_error(new E($message, ++$sl));}
 	
 	/**
 	 * @used-by self::assertParamIsIso2()
