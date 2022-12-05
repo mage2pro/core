@@ -131,6 +131,7 @@ function df_db_column_exists(string $t, string $column):bool {return
  *		"PRIMARY_POSITION": null,
  *		"IDENTITY": false
  *	}
+ * 2022-12-05: We do not need to check that the result is an array: https://3v4l.org/pBUvg
  * @return array(string => string|int|null)
  */
 function df_db_column_describe(string $t, string $column):array {return dfa(df_conn()->describeTable(df_table($t)), $column);}
