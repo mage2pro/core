@@ -133,9 +133,7 @@ function df_db_column_exists(string $t, string $column):bool {return
  *	}
  * @return array(string => string|int|null)
  */
-function df_db_column_describe(string $t, string $column):array {return df_result_array(dfa(
-	df_conn()->describeTable(df_table($t)), $column
-));}
+function df_db_column_describe(string $t, string $column):array {return dfa(df_conn()->describeTable(df_table($t)), $column);}
 
 /**
  * 2016-11-04
