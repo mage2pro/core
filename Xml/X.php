@@ -386,6 +386,7 @@ final class X extends MX {
 	}
 
 	/**
+	 * 2022-12-05: We do not need to check that the result is an array: https://3v4l.org/pBUvg
 	 * @used-by self::map()
 	 * @used-by self::xpathMap()
 	 * @param string|string[] $path
@@ -399,9 +400,7 @@ final class X extends MX {
 			$path = df_cc_path($path);
 		}
 		df_param_sne($path, 0);
-		$r = parent::xpath($path); /** @var X[] $r */
-		df_result_array($r);
-		return $r;
+		return parent::xpath($path);
 	}
 
 	/**
