@@ -104,6 +104,9 @@ final class Method {
 	 * 2015-01-28
 	 * Раньше тут стояло throw $e, что приводило к отображению на экране диагностического сообщения в неверной кодировке.
 	 * @uses df_error() точнее: эта функция в режиме разработчика отсылает браузеру заголовок HTTP о требуемой кодировке.
+	 * @used-by self::raiseErrorParam()
+	 * @used-by self::raiseErrorResult()
+	 * @used-by self::raiseErrorVariable()
 	 * @throws E
 	 */
 	private static function throwException(string $message, int $sl = 0):void {df_error(new E($message, ++$sl));}
