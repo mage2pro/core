@@ -2,7 +2,6 @@
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
 /**
- * @used-by \Df\GoogleFont\Fonts::responseA()
  * @used-by \Df\Xml\X::asCanonicalArray()
  * @used-by \Dfe\FacebookLogin\Customer::responseJson()
  * @param array $v
