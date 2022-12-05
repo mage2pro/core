@@ -17,14 +17,6 @@ final class Method {
 	static function assertParamIsIso2($v, $ord, $sl = 0):string {return self::vp(VIso2::s(), $v, $ord, ++$sl);}
 
 	/**
-	 * @used-by df_result_array()
-	 * @param array $v
-	 * @param int $sl [optional]
-	 * @throws E
-	 */
-	static function assertResultIsArray($v, $sl = 0):array {return self::vr(VArray::s(), $v, ++$sl);}
-
-	/**
 	 * @used-by df_assert_array()
 	 * @param array $v
 	 * @param int $sl [optional]
@@ -119,18 +111,6 @@ final class Method {
 	 */
 	private static function vp(Vd $vd, $v, int $ord, int $sl = 1) {return $vd->isValid($v) ? $v : self::raiseErrorParam(
 		get_class($vd), $vd->getMessages(), $ord, ++$sl
-	);}
-
-	/**
-	 * @used-by self::assertResultIsArray()
-	 * @param Vd $vd
-	 * @param mixed $v
-	 * @param int $sl
-	 * @return mixed
-	 * @throws E
-	 */
-	private static function vr(Vd $vd, $v, $sl = 1) {return $vd->isValid($v) ? $v : self::raiseErrorResult(
-		get_class($vd), $vd->getMessages(), ++$sl
 	);}
 	
 	/**

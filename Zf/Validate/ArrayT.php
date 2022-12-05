@@ -25,7 +25,6 @@ final class ArrayT extends \Df\Zf\Validate implements \Zend_Filter_Interface {
 	protected function expected():string {return 'an array';}
 
 	/**
-	 * @used-by \Df\Qa\Method::assertResultIsArray()
 	 * @used-by \Df\Qa\Method::assertValueIsArray()
 	 */
 	static function s():self {static $r; return $r ? $r : $r = new self;}
