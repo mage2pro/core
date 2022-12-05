@@ -71,12 +71,9 @@ final class Method {
 	/**
 	 * @used-by df_assert_sne()
 	 * @used-by self::vv()
-	 * @param string $vd
-	 * @param array $messages
-	 * @param int $sl
 	 * @throws E
 	 */
-	static function raiseErrorVariable($vd, array $messages, $sl = 1):void {
+	static function raiseErrorVariable(string $vd, array $messages, int $sl = 1):void {
 		$messagesS = df_cc_n($messages); /** @var string $messagesS */
 		$method = self::caller($sl)->method(); /** @var string $method */
 		self::throwException(
