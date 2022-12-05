@@ -2,15 +2,6 @@
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
 /**
- * @used-by \Df\Xml\X::asCanonicalArray()
- * @used-by \Dfe\FacebookLogin\Customer::responseJson()
- * @param array $v
- * @param int $sl [optional]
- * @throws DFE
- */
-function df_result_array($v, $sl = 0):array {return Q::assertResultIsArray($v, ++$sl);}
-
-/**
  * Раньше тут стояло: Q::assertResultIsString($v, ++$sl)
  * @used-by \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
  * @see df_assert_sne()

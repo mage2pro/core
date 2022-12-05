@@ -74,6 +74,7 @@ function df_assert($cond, $m = null) {return $cond ?: df_error($m);}
  * @used-by df_wishlist_item_candidates()
  * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
  * @used-by \Df\Xml\X::importArray()
+ * @used-by \Dfe\FacebookLogin\Customer::responseJson()
  * @param array $v
  * @param int $sl [optional]
  * @throws DFE
