@@ -131,7 +131,7 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 				 * "@see \Df\Payment\W\Action should optionally make the same processing
 				 * as @see \Df\Payment\CustomerReturn": https://github.com/mage2pro/core/issues/52
 				 * Note 2.
-				 * I have implemented it by analowi with @see \Df\Payment\CustomerReturn::execute():
+				 * I have implemented it by analogy with @see \Df\Payment\CustomerReturn::execute():
 				 *		if ($o && $o->canCancel()) {
 				 *			$o->cancel()->save();
 				 *		}
