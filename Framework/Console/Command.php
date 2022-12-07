@@ -16,7 +16,6 @@ abstract class Command extends _P implements INonInterceptable {
 	/**
 	 * 2020-10-25
 	 * @used-by self::execute()
-	 * @see \TFC\GoogleShopping\Command\C1::p()
 	 * @see \TFC\Image\Command\C1::p()
 	 * @see \TFC\Image\Command\C2::p()
 	 * @see \TFC\Image\Command\C3::p()
