@@ -41,6 +41,7 @@ function df_ejs($v):string {return !is_string($v) ? df_json_encode($v) : df_quot
  * @used-by \Dfe\Stripe\Block\Js::_toHtml()
  * @used-by \KingPalm\B2B\Block\RegionJS\Backend::_toHtml()
  * @used-by \RWCandy\Captcha\Js()
+ * @used-by \TFC\Core\B\Checkout\Success::_toHtml() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/42)
  * @param string|object|null $m
  * @param array(string => mixed) $p [optional]
  */
