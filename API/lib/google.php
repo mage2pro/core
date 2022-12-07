@@ -12,7 +12,6 @@
  * Instead, it uses a key file that only your application can access.»
  * https://developers.google.com/shopping-content/guides/how-tos/service-accounts
  * @used-by \Dfe\Color\Image::__construct()
- * @used-by \TFC\GoogleShopping\Command\C1::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @used-by \TFC\Image\Command\C1::p()
  * @used-by \TFC\Image\Command\C2::p()
  * @used-by \TFC\Image\Command\C3::p()
