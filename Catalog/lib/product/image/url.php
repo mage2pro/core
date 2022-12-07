@@ -6,7 +6,6 @@ use Magento\Catalog\Model\Product as P;
  * 2021-11-30
  * @see df_product_image_url()
  * @used-by \TFC\GoogleShopping\Att\AdditionalImageLink::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
- * @used-by \TFC\GoogleShopping\Command\C1::gp() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @return string[]
  */
 function df_product_images_additional(P $p, int $limit = 0):array {
