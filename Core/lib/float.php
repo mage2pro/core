@@ -70,6 +70,7 @@ function dff_chop0($v):string {
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
  * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L30
  * @param float|string|int $a
  * @param float|string|int $b
  */
