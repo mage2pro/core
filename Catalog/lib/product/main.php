@@ -35,7 +35,6 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by \Inkifi\Mediaclip\T\CaseT\Product::t02()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
- * @used-by \TFC\GoogleShopping\Command\C1::gp() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param int|string|P|OI|QI $p
  * @param int|string|null|bool|IStore $s [optional]
  * @throws NSE
