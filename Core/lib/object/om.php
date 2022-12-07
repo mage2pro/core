@@ -77,6 +77,7 @@ function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
  * @used-by \Mageplaza\Blog\Controller\Router::match() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/190)
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
+ * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L20
  * @return mixed
  */
 function df_o(string $t) {return dfcf(function(string $t) {return df_om()->get($t);}, [$t]);}
