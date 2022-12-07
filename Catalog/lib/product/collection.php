@@ -7,7 +7,7 @@ use Magento\Catalog\Model\ResourceModel\Product\Collection as C;
 /**
  * 2019-09-18
  * @see df_category_c()
- * @used-by vendor/tradefurniturecompany/report/view/frontend/templates/index.phtml:16
+ * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L17
  * @used-by df_product_c()
  * @used-by \TFC\Image\Command\C3::pc()
  * @used-by \TFC\Image\Command\C3::pcL()
