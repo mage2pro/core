@@ -30,7 +30,6 @@ final class Formatter {
 	/**     
 	 * 2020-02-27          
 	 * @used-by self::p()
-	 * @param Frame $f
 	 */
 	private static function frame(F $f):string {/** @var string $r */
 		try {
