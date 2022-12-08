@@ -252,7 +252,7 @@ final class Client {
 			,'X-Sentry-Auth' => 'Sentry ' . df_csv_pretty(df_map_k(df_clean([
 				'sentry_timestamp' => sprintf('%F', microtime(true))
 				,'sentry_client' => $this->getUserAgent()
-				,'sentry_version' => self::PROTOCOL
+				,'sentry_version' => 6
 				,'sentry_key' => $this->_keyPublic
 				,'sentry_secret' => $this->_keyPrivate
 			]), function($k, $v) {return "$k=$v";}))
@@ -429,5 +429,4 @@ final class Client {
 	 * @used-by \Df\Sentry\Trace::info()
 	 */
 	const MESSAGE_LIMIT = 1024;
-	const PROTOCOL = '6';
 }
