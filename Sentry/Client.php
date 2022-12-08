@@ -347,24 +347,25 @@ final class Client {
 
 	/** @used-by self::captureException() */
 	private function translateSeverity(string $s):string {
+
 		switch ($s) {
-			case E_COMPILE_ERROR:      return Client::ERROR;
-			case E_COMPILE_WARNING:    return Client::WARN;
-			case E_CORE_ERROR:         return Client::ERROR;
-			case E_CORE_WARNING:       return Client::WARN;
-			case E_ERROR:              return Client::ERROR;
-			case E_NOTICE:             return Client::INFO;
-			case E_PARSE:              return Client::ERROR;
-			case E_RECOVERABLE_ERROR:  return Client::ERROR;
-			case E_STRICT:             return Client::INFO;
-			case E_USER_ERROR:         return Client::ERROR;
-			case E_USER_NOTICE:        return Client::INFO;
-			case E_USER_WARNING:       return Client::WARN;
-			case E_WARNING:            return Client::WARN;
-			case E_DEPRECATED:         return Client::WARN;
-			case E_USER_DEPRECATED:    return Client::WARN;
+			case E_COMPILE_ERROR:      return self::ERROR;
+			case E_COMPILE_WARNING:    return self::WARN;
+			case E_CORE_ERROR:         return self::ERROR;
+			case E_CORE_WARNING:       return self::WARN;
+			case E_ERROR:              return self::ERROR;
+			case E_NOTICE:             return self::INFO;
+			case E_PARSE:              return self::ERROR;
+			case E_RECOVERABLE_ERROR:  return self::ERROR;
+			case E_STRICT:             return self::INFO;
+			case E_USER_ERROR:         return self::ERROR;
+			case E_USER_NOTICE:        return self::INFO;
+			case E_USER_WARNING:       return self::WARN;
+			case E_WARNING:            return self::WARN;
+			case E_DEPRECATED:         return self::WARN;
+			case E_USER_DEPRECATED:    return self::WARN;
 		}
-		return Client::ERROR;
+		return self::ERROR;
 	}
 
 	/**
