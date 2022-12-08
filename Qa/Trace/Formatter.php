@@ -65,11 +65,10 @@ final class Formatter {
 	 * @used-by self::p()
 	 * https://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP: http://3v4l.org/OipEQ
-	 * @return string|null
 	 */
-	private static function param(array $p) {/** @var string|null $r */ /** @var string|null $v */
+	private static function param(array $p):string {/** @var string $r */ /** @var string|null $v */
 		if (!($v = $p[1])) {
-			$r = null;
+			$r = '';
 		}
 		else {
 			$label = $p[0]; /** @var string $label */
