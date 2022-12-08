@@ -231,7 +231,7 @@ final class Client {
 	 * @used-by self::send()
 	 * @param array(string => mixed) $data
 	 */
-	private function encode(&$data):string {
+	private function encode(array &$data):string {
 		$r = df_json_encode($data);
 		if (function_exists('gzcompress')) {
 			$r = gzcompress($r);
@@ -243,6 +243,7 @@ final class Client {
 	 * 2020-06-27
 	 * @used-by self::__construct()
 	 * @used-by self::capture()
+	 * @param array(string => mixed) $data
 	 */
 	private function send(array &$data):void {
 		$domain = 1000 > $this->_projectId ? 'log.mage2.pro' : 'sentry.io'; /** @var string $domain */ # 2018-08-25
