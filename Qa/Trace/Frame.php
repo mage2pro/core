@@ -53,7 +53,7 @@ final class Frame extends \Df\Core\O {
 	 * $ordering is zero-based
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 */
-	function methodParameter(int $ordering):RP {return dfc($this, function($ordering) {/** @var RP $r */
+	function methodParameter(int $ordering):RP {return dfc($this, function(int $ordering) {/** @var RP $r */
 		df_assert($m = $this->methodR()); /** @var RM|null $m */
 		if ($ordering >= count($m->getParameters())) { # Параметр должен существовать
 			df_error(
