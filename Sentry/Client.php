@@ -15,7 +15,6 @@ final class Client {
 		$this->_user = null;
 		$this->context = new Context;
 		$this->curl_path = 'curl';
-		$this->extra_data = [];
 		$this->logger = 'php';
 		$this->site = dfa($_SERVER, 'SERVER_NAME');
 		$this->tags = [];
@@ -209,7 +208,7 @@ final class Client {
 		 */
 		$data['tags'] += $this->context->tags + $this->tags;
 		/** @var array(string => mixed) $extra */
-		$extra = $data['extra'] + $this->context->extra + $this->extra_data;
+		$extra = $data['extra'] + $this->context->extra;
 		# 2017-01-03
 		# Этот полный JSON в конце массива может быть обрублен в интерфейсе Sentry
 		# (и, соответственно, так же обрублен при просмотре события в формате JSON
@@ -387,7 +386,6 @@ final class Client {
 	}
 	
 	public $context;
-	public $extra_data;
 
 	/**
 	 * 2020-06-28
