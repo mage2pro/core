@@ -430,5 +430,4 @@ final class Client {
 	 */
 	const MESSAGE_LIMIT = 1024;
 	const PROTOCOL = '6';
-	const WARNING = 'warning';
 }
