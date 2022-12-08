@@ -8,7 +8,6 @@ final class Formatter {
 	 * 2020-02-27
 	 * @used-by df_bt_s()
 	 * @used-by \Df\Qa\Failure::postface()
-	 * @param T $t
 	 */
 	static function p(T $t):string {return dfcf(function($t) {
 		$count = count($t); /** @var int $count */
