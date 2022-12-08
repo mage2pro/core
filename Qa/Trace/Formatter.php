@@ -11,7 +11,7 @@ final class Formatter {
 	 */
 	static function p(T $t):string {return dfcf(function(T $t):string {
 		$count = count($t); /** @var int $count */
-		return implode(df_map_k($t, function($index, F $frame) use($count) {
+		return implode(df_map_k($t, function(int $index, F $frame) use($count) {
 			$index++;
 			$r = self::frame($frame); /** @var string $r */
 			if ($index !== $count) {
