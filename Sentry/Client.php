@@ -34,10 +34,8 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by df_sentry()
-	 * @param string $m
-	 * @param array $d
 	 */
-	function captureMessage($m, array $d):void {$this->capture([
+	function captureMessage(string $m, array $d):void {$this->capture([
 		'message' => $m, 'sentry.interfaces.Message' => ['formatted' => $m, 'message' => $m, 'params' => []]
 	] + $d);}
 
