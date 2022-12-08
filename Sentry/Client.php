@@ -377,7 +377,7 @@ final class Client {
 			$d['request'] = $this->serializer->serialize($d['request']);
 		}
 		if (!empty($d['user'])) {
-			$d['user'] = $this->serializer->serialize($d['user'], 3);
+			$d['user'] = $this->serializer->serialize($d['user']);
 		}
 		if (!empty($d['extra'])) {
 			$d['extra'] = $this->serializer->serialize($d['extra']);
