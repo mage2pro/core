@@ -243,9 +243,8 @@ final class Client {
 	 * 2020-06-27
 	 * @used-by self::__construct()
 	 * @used-by self::capture()
-	 * @param array $data
 	 */
-	private function send(&$data):void {
+	private function send(array &$data):void {
 		$domain = 1000 > $this->_projectId ? 'log.mage2.pro' : 'sentry.io'; /** @var string $domain */ # 2018-08-25
 		$this->send_http("https://$domain/api/{$this->_projectId}/store/", $this->encode($data), [
 			'Content-Type' => 'application/octet-stream'
