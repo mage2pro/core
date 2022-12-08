@@ -9,7 +9,7 @@ final class Formatter {
 	 * @used-by df_bt_s()
 	 * @used-by \Df\Qa\Failure::postface()
 	 */
-	static function p(T $t):string {return dfcf(function($t) {
+	static function p(T $t):string {return dfcf(function(T $t):string {
 		$count = count($t); /** @var int $count */
 		return implode(df_map_k($t, function($index, F $frame) use($count) {
 			$index++;
