@@ -41,13 +41,13 @@ final class Tag {
 					function(string $k, $v):string {
 						df_param_sne($k, 0);
 						/**
-						 * 2015-04-16 Передавать в качестве $value массив имеет смысл, например, для атрибута «class».
+						 * 2015-04-16 Передавать в качестве $v массив имеет смысл, например, для атрибута «class».
 						 * 2016-11-29
 						 * Не использую @see df_e(), чтобы сохранить двойные кавычки (data-mage-init)
 						 * и в то же время сконвертировать одинарные
 						 * (потому что значения атрибутов мы ниже обрамляем именно одинарными).
 						 * 2017-09-11
-						 * Today I have notices that `&apos;` does not work for me
+						 * Today I have noticed that `&apos;` does not work for me
 						 * on the Magento 2 backend configuration pages:
 						 * @see \Df\Payment\Comment\Description::a()
 						 * So I switched to the `&#39;` solution.
