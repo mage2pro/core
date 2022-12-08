@@ -1,7 +1,6 @@
 <?php
 namespace Df\Sentry;
 use Df\Core\Exception as DFE;
-use JMS\Serializer\Annotation as Serializer;
 use Magento\Framework\App\ErrorHandler;
 use \Exception as E;
 final class Client {
