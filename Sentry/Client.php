@@ -263,11 +263,10 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by self::send()
-	 * @param string $url
 	 * @param array $data
 	 * @param array $headers
 	 */
-	private function send_http($url, $data, $headers = []):void {
+	private function send_http(string $url, $data, $headers = []):void {
 		# 2022-10-16 https://www.php.net/manual/migration80.incompatible.php#migration80.incompatible.resource2object
 		$c = curl_init($url); /** @var resource|\CurlHandle $c */
 		try {
