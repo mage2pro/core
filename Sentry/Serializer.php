@@ -9,11 +9,9 @@ class Serializer {
 	 * 2020-06-28
 	 * @used-by \Df\Sentry\Trace::info()
 	 * @param mixed $v
-	 * @param int $max_depth
-	 * @param int $_depth
 	 * @return array|bool|false|float|int|string|string[]|null
 	 */
-	function serialize($v, $max_depth=3, $_depth=0) {
+	function serialize($v, int $max_depth = 3, int $_depth = 0) {
 		if ((is_array($v) || 'stdClass' === (is_object($v) ? get_class($v) : null)) && $_depth < $max_depth) {
 			$new = [];
 			foreach ($v as $k => $iv) {
