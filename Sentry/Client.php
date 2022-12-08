@@ -382,13 +382,13 @@ final class Client {
 		if (!empty($d['extra'])) {
 			$d['extra'] = $this->serializer->serialize($d['extra']);
 		}
-		if (!empty($d['tags'])) {
-			foreach ($d['tags'] as $key => $value) {
-				$d['tags'][$key] = @(string)$value;
-			}
-		}
 		if (!empty($d['contexts'])) {
 			$d['contexts'] = $this->serializer->serialize($d['contexts'], 5);
+		}
+		if (!empty($d['tags'])) {
+			foreach ($d['tags'] as $k => $v) {
+				$d['tags'][$k] = @(string)$v;
+			}
 		}
 	}
 	
