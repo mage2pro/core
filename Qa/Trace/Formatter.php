@@ -65,7 +65,6 @@ final class Formatter {
 	 * @used-by self::p()
 	 * https://php.net/manual/language.types.callable.php#113447
 	 * Проверял, что это действительно допустимо, на различных версиях интерпретатора PHP: http://3v4l.org/OipEQ
-	 * @param array $p
 	 * @return string|null
 	 */
 	private static function param(array $p) {/** @var string|null $r */ /** @var string|null $v */
