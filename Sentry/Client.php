@@ -125,7 +125,7 @@ final class Client {
 		}
 		$result = [
 			'method' => df_request_method(),
-			'url' => $this->get_current_url(),
+			'url' => df_current_url(),
 			'query_string' => dfa($_SERVER, 'QUERY_STRING'),
 		];
 		# dont set this as an empty array as PHP will treat it as a numeric array
@@ -344,47 +344,6 @@ final class Client {
 			mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
 		);
 		return str_replace('-', '', $uuid);
-	}
-
-	/**
-	 * Return the URL for the current request
-	 * @used-by self::get_http_data()
-	 * @return string|null
-	 */
-	private function get_current_url() {
-		# When running from commandline the REQUEST_URI is missing.
-		if (!isset($_SERVER['REQUEST_URI'])) {
-			return null;
-		}
-		# HTTP_HOST is a client-supplied header that is optional in HTTP 1.0
-		$host = (!empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST']
-			: (!empty($_SERVER['LOCAL_ADDR'])  ? $_SERVER['LOCAL_ADDR']
-			: (!empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : '')));
-
-		$httpS = $this->isHttps() ? 's' : '';
-		return "http{$httpS}://{$host}{$_SERVER['REQUEST_URI']}";
-	}
-
-	/**
-	 * Was the current request made over https?
-	 * @used-by self::get_current_url()
-	 */
-	private function isHttps():bool {
-		if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
-			return true;
-		}
-
-		if (!empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443) {
-			return true;
-		}
-
-		if (!empty($this->trust_x_forwarded_proto) &&
-			!empty($_SERVER['X-FORWARDED-PROTO']) &&
-			$_SERVER['X-FORWARDED-PROTO'] === 'https') {
-			return true;
-		}
-
-		return false;
 	}
 
 	/**

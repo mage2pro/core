@@ -8,6 +8,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by df_replace_store_code_in_url()
  * @used-by df_store_code_from_url()
  * @used-by \Df\OAuth\FE\Button::onFormInitialized()
+ * @used-by \Df\Sentry\Client::get_http_data()
  * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
  */
 function df_current_url():string {return df_url_o()->getCurrentUrl();}
