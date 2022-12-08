@@ -346,23 +346,12 @@ final class Client {
 	}
 
 	/** @used-by self::captureException() */
-	private function translateSeverity(string $s):string {return dfa([
-		E_COMPILE_ERROR => self::ERROR
-		,E_COMPILE_WARNING => self::WARN
-		,E_CORE_ERROR => self::ERROR
-		,E_CORE_WARNING => self::WARN
-		,E_DEPRECATED => self::WARN
-		,E_ERROR => self::ERROR
-		,E_NOTICE => self::INFO
-		,E_PARSE => self::ERROR
-		,E_RECOVERABLE_ERROR => self::ERROR
-		,E_STRICT => self::INFO
-		,E_USER_DEPRECATED => self::WARN
-		,E_USER_ERROR => self::ERROR
-		,E_USER_NOTICE => self::INFO
-		,E_USER_WARNING => self::WARN
-		,E_WARNING => self::WARN
-	], $s, self::ERROR);}
+	private function translateSeverity(string $s):string {return in_array($s, [E_NOTICE, E_STRICT, E_USER_NOTICE])
+		? self::INFO
+		: (in_array($s, [E_COMPILE_WARNING, E_CORE_WARNING, E_DEPRECATED, E_USER_DEPRECATED, E_USER_WARNING, E_WARNING])
+			? self::WARN : self::ERROR
+		)
+	;}
 
 	/**
 	 * 2016-12-23
