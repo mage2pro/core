@@ -7,7 +7,8 @@ namespace Df\Sentry;
 class Serializer {
 	/**
 	 * 2020-06-28
-	 * @used-by \Df\Sentry\Trace::info()
+	 * @used-by Client::sanitize()
+	 * @used-by Trace::info()
 	 * @param mixed $v
 	 * @return array|bool|false|float|int|string|string[]|null
 	 */
