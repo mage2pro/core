@@ -23,7 +23,6 @@ final class Client {
 		$this->tags = [];
 		$this->timeout = 2;
 		$this->trust_x_forwarded_proto = null;
-
 		$this->sdk = ['name' => 'mage2.pro', 'version' => df_core_version()];
 		$this->serializer = new Serializer;
 		$this->transaction = new TransactionStack;
