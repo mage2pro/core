@@ -347,7 +347,6 @@ final class Client {
 
 	/** @used-by self::captureException() */
 	private function translateSeverity(string $s):string {
-		dfa_strict()
 		switch ($s) {
 			case E_COMPILE_ERROR:      return self::ERROR;
 			case E_COMPILE_WARNING:    return self::WARN;

@@ -295,6 +295,7 @@ function dfa_unshift_assoc(&$a, string $k, $v):void  {
 /**
  * 2016-09-05
  * 2022-11-27 Added the df_nes() check.
+ * @see dfa_strict()
  * @used-by df_cfg_save()
  * @used-by df_url_bp()
  * @used-by ikf_pw_country()
