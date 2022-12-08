@@ -17,7 +17,6 @@ final class Client {
 		$this->curl_path = 'curl';
 		$this->extra_data = [];
 		$this->logger = 'php';
-		$this->severity_map = null;
 		$this->site = dfa($_SERVER, 'SERVER_NAME');
 		$this->tags = [];
 		$this->timeout = 2;
@@ -348,9 +347,6 @@ final class Client {
 
 	/** @used-by self::captureException() */
 	private function translateSeverity(string $s):string {
-		if (is_array($this->severity_map) && isset($this->severity_map[$s])) {
-			return $this->severity_map[$s];
-		}
 		switch ($s) {
 			case E_COMPILE_ERROR:      return Client::ERROR;
 			case E_COMPILE_WARNING:    return Client::WARN;
@@ -412,7 +408,6 @@ final class Client {
 	
 	public $context;
 	public $extra_data;
-	public $severity_map;
 
 	/**
 	 * 2020-06-28
