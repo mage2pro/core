@@ -346,15 +346,12 @@ final class Client {
 		return str_replace('-', '', $uuid);
 	}
 
-	/**
-	 * @used-by self::captureException()
-	 * @param string $severity  PHP E_$x error constant
-	 */
-	private function translateSeverity($severity):string {
-		if (is_array($this->severity_map) && isset($this->severity_map[$severity])) {
-			return $this->severity_map[$severity];
+	/** @used-by self::captureException() */
+	private function translateSeverity(string $s):string {
+		if (is_array($this->severity_map) && isset($this->severity_map[$s])) {
+			return $this->severity_map[$s];
 		}
-		switch ($severity) {
+		switch ($s) {
 			case E_COMPILE_ERROR:      return Client::ERROR;
 			case E_COMPILE_WARNING:    return Client::WARN;
 			case E_CORE_ERROR:         return Client::ERROR;
@@ -368,12 +365,8 @@ final class Client {
 			case E_USER_NOTICE:        return Client::INFO;
 			case E_USER_WARNING:       return Client::WARN;
 			case E_WARNING:            return Client::WARN;
-		}
-		if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
-			switch ($severity) {
 			case E_DEPRECATED:         return Client::WARN;
 			case E_USER_DEPRECATED:    return Client::WARN;
-		  }
 		}
 		return Client::ERROR;
 	}
