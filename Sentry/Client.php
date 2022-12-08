@@ -349,7 +349,7 @@ final class Client {
 	private function translateSeverity(string $s):string {return in_array($s, [E_NOTICE, E_STRICT, E_USER_NOTICE])
 		? self::INFO
 		: (in_array($s, [E_COMPILE_WARNING, E_CORE_WARNING, E_DEPRECATED, E_USER_DEPRECATED, E_USER_WARNING, E_WARNING])
-			? self::WARN : self::ERROR
+			? 'warning' : self::ERROR
 		)
 	;}
 
@@ -430,6 +430,5 @@ final class Client {
 	 */
 	const MESSAGE_LIMIT = 1024;
 	const PROTOCOL = '6';
-	const WARN = 'warning';
 	const WARNING = 'warning';
 }
