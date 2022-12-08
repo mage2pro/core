@@ -373,17 +373,11 @@ final class Client {
 	 * @param array(string => mixed) $d
 	 */
 	private function sanitize(array &$d):void {
-		if (!empty($d['request'])) {
-			$d['request'] = $this->serializer->serialize($d['request']);
-		}
-		if (!empty($d['user'])) {
-			$d['user'] = $this->serializer->serialize($d['user']);
-		}
-		if (!empty($d['extra'])) {
-			$d['extra'] = $this->serializer->serialize($d['extra']);
-		}
-		if (!empty($d['contexts'])) {
-			$d['contexts'] = $this->serializer->serialize($d['contexts'], 5);
+		foreach(['request', 'user', 'extra', ['contexts', 5]] as $k) {
+			list($k, $depth) = is_array($k) ? $k : [$k, 3];
+			if (!empty($d[$k])) {
+				$d[$k] = $this->serializer->serialize($d[$k], $depth);
+			}
 		}
 		if (!empty($d['tags'])) {
 			foreach ($d['tags'] as $k => $v) {
