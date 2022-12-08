@@ -13,7 +13,7 @@ final class Client {
 		$this->_keyPublic = $keyPublic;
 		$this->_keyPrivate = $keyPrivate;
 		$this->_user = null;
-		$this->context = new Context;
+		$this->_context = new Context;
 		$this->curl_path = 'curl';
 		$this->logger = 'php';
 		$this->site = dfa($_SERVER, 'SERVER_NAME');
@@ -46,7 +46,7 @@ final class Client {
 	 * @used-by df_sentry_extra_f()
 	 * @param array(string => mixed) $a
 	 */
-	function extra(array $a):void {$this->context->extra = array_merge_recursive($this->context->extra, $a);}
+	function extra(array $a):void {$this->_context->extra = array_merge_recursive($this->_context->extra, $a);}
 
 	/**
 	 * 2017-01-10 «/» can not be used in a tag.
@@ -57,7 +57,7 @@ final class Client {
 	 * @uses df_translit_url()
 	 * @param array(string => string) $a
 	 */
-	function tags(array $a):void {$this->context->tags = dfak_transform($a, 'df_translit_url') + $this->context->tags;}
+	function tags(array $a):void {$this->_context->tags = dfak_transform($a, 'df_translit_url') + $this->_context->tags;}
 
 	/**
 	 * @used-by df_sentry_m()
@@ -66,7 +66,7 @@ final class Client {
 	 * @param array(string => mixed) $data
 	 */
 	function user(array $d, bool $merge = true):void {
-		$this->context->user = $d + (!$merge || !$this->context->user ? [] : $this->context->user);
+		$this->_context->user = $d + (!$merge || !$this->_context->user ? [] : $this->_context->user);
 	}
 
 	/**
@@ -145,7 +145,7 @@ final class Client {
 	 * @return array|array[]|null[]
 	 */
 	private function get_user_data():array {
-		$user = $this->context->user;
+		$user = $this->_context->user;
 		if ($user === null) {
 			if (!function_exists('session_id') || !session_id()) {
 				return [];
@@ -206,9 +206,9 @@ final class Client {
 		 * а массив extra хоть и может быть многомерен, однако вряд ли для нас имеет смысл
 		 * слияние его элементов на внутренних уровнях вложенности.
 		 */
-		$data['tags'] += $this->context->tags + $this->tags;
+		$data['tags'] += $this->_context->tags + $this->tags;
 		/** @var array(string => mixed) $extra */
-		$extra = $data['extra'] + $this->context->extra;
+		$extra = $data['extra'] + $this->_context->extra;
 		# 2017-01-03
 		# Этот полный JSON в конце массива может быть обрублен в интерфейсе Sentry
 		# (и, соответственно, так же обрублен при просмотре события в формате JSON
