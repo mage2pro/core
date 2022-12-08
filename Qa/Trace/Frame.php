@@ -85,8 +85,7 @@ final class Frame extends \Df\Core\O {
 	 */
 	private function isClosure():bool {return df_ends_with($this->function_(), '{closure}');}
 
-	/**           
-	 * 2020-02-27 `self $previous` works even in PHP 5.0.0: https://3v4l.org/pTl8l
+	/**
 	 * @used-by \Df\Qa\Method::caller()
 	 * @used-by \Df\Qa\Trace::__construct()
 	 * @param array(string => string|int) $a
