@@ -384,7 +384,17 @@ final class Client {
 			}
 		}
 	}
-	
+
+	/**
+	 * 2022-12-09
+	 * @used-by self::__construct()
+	 * @used-by self::extra()
+	 * @used-by self::tags()
+	 * @used-by self::user()
+	 * @used-by self::get_user_data()
+	 * @used-by self::capture()
+	 * @var Context
+	 */
 	private $_context;
 
 	/**
@@ -393,6 +403,7 @@ final class Client {
 	 * @var string
 	 */
 	private $_keyPrivate;
+
 	/**
 	 * 2020-06-28
 	 * @used-by self::__construct()
@@ -400,6 +411,7 @@ final class Client {
 	 * @var string
 	 */
 	private $_keyPublic;
+
 	/**
 	 * 2020-06-28
 	 * @used-by self::__construct()
@@ -408,6 +420,7 @@ final class Client {
 	 * @var int
 	 */
 	private $_projectId;
+	
 	private $serializer;
 	/**
 	 * 2022-12-09
