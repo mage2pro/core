@@ -370,25 +370,25 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by self::capture()
-	 * @param $data
+	 * @param array(string => mixed) $d
 	 */
-	private function sanitize(&$data):void {
-		if (!empty($data['request'])) {
-			$data['request'] = $this->serializer->serialize($data['request']);
+	private function sanitize(array &$d):void {
+		if (!empty($d['request'])) {
+			$d['request'] = $this->serializer->serialize($d['request']);
 		}
-		if (!empty($data['user'])) {
-			$data['user'] = $this->serializer->serialize($data['user'], 3);
+		if (!empty($d['user'])) {
+			$d['user'] = $this->serializer->serialize($d['user'], 3);
 		}
-		if (!empty($data['extra'])) {
-			$data['extra'] = $this->serializer->serialize($data['extra']);
+		if (!empty($d['extra'])) {
+			$d['extra'] = $this->serializer->serialize($d['extra']);
 		}
-		if (!empty($data['tags'])) {
-			foreach ($data['tags'] as $key => $value) {
-				$data['tags'][$key] = @(string)$value;
+		if (!empty($d['tags'])) {
+			foreach ($d['tags'] as $key => $value) {
+				$d['tags'][$key] = @(string)$value;
 			}
 		}
-		if (!empty($data['contexts'])) {
-			$data['contexts'] = $this->serializer->serialize($data['contexts'], 5);
+		if (!empty($d['contexts'])) {
+			$d['contexts'] = $this->serializer->serialize($d['contexts'], 5);
 		}
 	}
 	
