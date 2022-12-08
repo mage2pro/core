@@ -8,11 +8,8 @@ final class Client {
 	/**
 	 * 2020-06-27
 	 * @used-by df_sentry_m()
-	 * @param int $projectId
-	 * @param string $keyPublic
-	 * @param string $keyPrivate
 	 */
-	function __construct($projectId, $keyPublic, $keyPrivate) {
+	function __construct(int $projectId, string $keyPublic, string $keyPrivate) {
 		$this->_projectId = $projectId;
 		$this->_keyPublic = $keyPublic;
 		$this->_keyPrivate = $keyPrivate;
