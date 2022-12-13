@@ -57,7 +57,7 @@ final class Method {
 		self::throwException(
 			"[{$method}]\nThe validator «{$vd}» has catched a variable with an invalid value."
 			."\nThe diagnostic message:\n{$messagesS}\n\n"
-			, $sl
+			,$sl
 		);
 	}
 

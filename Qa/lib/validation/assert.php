@@ -75,11 +75,8 @@ function df_assert($cond, $m = null) {return $cond ?: df_error($m);}
  * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
  * @used-by \Df\Xml\X::importArray()
  * @used-by \Dfe\FacebookLogin\Customer::responseJson()
- * @param array $v
- * @param int $sl [optional]
- * @throws DFE
  */
-function df_assert_array($v, $sl = 0):array {return Q::assertValueIsArray($v, ++$sl);}
+function df_assert_array(array $a):array {return $a;}
 
 /**
  * 2017-02-18
