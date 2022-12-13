@@ -35,7 +35,6 @@ abstract class Validate implements \Zend_Validate_Interface {
 	;}
 
 	/**
-	 * @used-by \Df\Zf\Validate\ArrayT::isValid()
 	 * @used-by \Df\Zf\Validate\StringT\FloatT::isValid()
 	 * @used-by \Df\Zf\Validate\StringT\IntT::isValid()
 	 * @used-by \Df\Zf\Validate\StringT\Iso2::isValid()
