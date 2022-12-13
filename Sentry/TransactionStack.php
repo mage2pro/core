@@ -23,7 +23,6 @@ final class TransactionStack {
 	/**
 	 * 2022-11-11
 	 * @used-by \Df\Sentry\Client::__construct()
-	 * @param string $c
 	 */
-	function push($c):void {$this->stack[] = $c;}
+	function push(string $c):void {$this->stack[] = $c;}
 }
