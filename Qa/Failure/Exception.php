@@ -48,7 +48,6 @@ final class Exception extends \Df\Qa\Failure {
 
 	/**
 	 * @used-by df_log_l()
-	 * @param E $e
 	 */
 	static function i(E $e):self {$r = new self; $r->_e = DFE::wrap($e); return $r;}
 }
