@@ -20,7 +20,6 @@ function df_bt($p = 0, int $limit = 0):array {return is_array($p) ? $p : ($p ins
 /**
  * 2020-05-25
  * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
- * @param E|null $e [optional]
  */
 function df_bt_has(string $c, string $m = '', E $e = null):bool {
 	list($c, $m) = $m ? [$c, $m] : explode('::', $c);
