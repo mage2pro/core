@@ -10,8 +10,8 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by \Df\Qa\Failure::report()
 	 */
 	protected function main():string {return df_cc_n(
-		"[{$this->type(true)}] {$this->info('message')}"
-		,df_kv(['File' => $this->info('file'), 'Line' => $this->info('line')])
+		"[{$this::type(true)}] {$this::info('message')}"
+		,df_kv(['File' => $this::info('file'), 'Line' => $this::info('line')])
 	);}
 
 	/**
