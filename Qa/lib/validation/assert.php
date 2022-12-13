@@ -92,11 +92,10 @@ function df_assert_assoc(array $a):array {return df_is_assoc($a) ? $a : df_error
  * @param int|float $v
  * @param int|float|null $min
  * @param int|float|null $max
- * @param bool $inclusive [optional]
  * @return int|float
  * @throws DFE
  */
-function df_assert_between($v, $min, $max, $inclusive = true) {
+function df_assert_between($v, $min, $max, bool $inclusive = true) {
 	if (!df_between($v, $min, $max, $inclusive)) {
 		list($o1, $o2) = !$inclusive ? ['>', '<'] : ['≥', '≤']; /** @var string $o1 */ /** @var string $o2 */
 		df_error("The value «{$v}» is not allowed. An allowed value should be $o1 $min and $o2 $max.");
