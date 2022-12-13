@@ -12,6 +12,7 @@ namespace Df\Zf\Filter;
  */
 final class StringTrim extends \Zend_Filter_StringTrim {
 	/**
+	 * 2022-12-14 We can not declare arguments types because they are undeclared in the overriden method.
 	 * @override
 	 * @see \Zend_Filter_StringTrim::_unicodeTrim()
 	 * @param string $s
