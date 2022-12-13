@@ -10,7 +10,6 @@ use Magento\Framework\Phrase as P;
  * @used-by \Df\Payment\Method::action()
  * @used-by \Dfe\CheckoutCom\Method::leh()
  * @used-by \Dfe\TwoCheckout\Method::api()
- * @param E $e
  */
 function df_lx(E $e):LE {return $e instanceof LE ? $e : new LE(__(df_xts($e)), $e);}
 
