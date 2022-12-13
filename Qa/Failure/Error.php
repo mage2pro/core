@@ -3,8 +3,7 @@ namespace Df\Qa\Failure;
 final class Error extends \Df\Qa\Failure {
 	/**
 	 * 2015-04-04
-	 * Обратите внимание, что статичные методы @uses type() и @uses info()
-	 * мы намеренно вызываем нестатично ради синтаксиса {}, и мы вправе это делать: http://3v4l.org/jro9u
+	 * 2022-12-14 PHP supports "{$this::t()}" (unlike "{$this->t()}") since PHP 5.3: https://3v4l.org/HBFTd
 	 * @override
 	 * @see \Df\Qa\Failure::main()
 	 * @used-by \Df\Qa\Failure::report()
