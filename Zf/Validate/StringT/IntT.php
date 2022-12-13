@@ -5,7 +5,7 @@ final class IntT extends \Df\Zf\Validate {
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
 	 * @used-by df_int()
-	 * @param string $v
+	 * @param mixed $v
 	 */
 	function isValid($v):bool {
 		$this->v($v);
