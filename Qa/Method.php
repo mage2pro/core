@@ -99,16 +99,4 @@ final class Method {
 	private static function vp(Vd $vd, $v, int $ord, int $sl = 1) {return $vd->isValid($v) ? $v : self::raiseErrorParam(
 		get_class($vd), $vd->getMessages(), $ord, ++$sl
 	);}
-	
-	/**
-	 * @used-by self::assertValueIsArray()
-	 * @param Vd $vd
-	 * @param mixed $v
-	 * @param int $sl
-	 * @return mixed
-	 * @throws E
-	 */
-	private static function vv(Vd $vd, $v, $sl = 1) {return $vd->isValid($v) ? $v : self::raiseErrorVariable(
-		get_class($vd), $vd->getMessages(), ++$sl
-	);}
 }
