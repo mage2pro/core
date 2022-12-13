@@ -98,10 +98,9 @@ final class Error extends \Df\Qa\Failure {
 	/**
 	 * @used-by self::main()
 	 * @used-by self::type()
-	 * @param string $key
 	 * @return string|int
 	 */
-	private static function info($key) {return dfa(error_get_last(), $key);}
+	private static function info(string $key) {return dfa(error_get_last(), $key);}
 
 	/** @used-by self::check() */
 	private static function isFatal():bool {
