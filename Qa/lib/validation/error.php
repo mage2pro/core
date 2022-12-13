@@ -213,10 +213,9 @@ function df_error_html(string ...$a):void {df_header_utf(); throw df_error_creat
  * 2016-07-27
  * 2022-10-28 @deprecated It is unused.
  * @see df_should_not_be_here()
- * @param string $m
  * @throws DFE
  */
-function df_not_implemented($m):void {df_error("The method «{$m}» is not implemented yet.");}
+function df_not_implemented(string $m):void {df_error("The method «{$m}» is not implemented yet.");}
 
 /**
  * @see df_not_implemented()
