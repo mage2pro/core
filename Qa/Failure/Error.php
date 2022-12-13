@@ -147,10 +147,9 @@ final class Error extends \Df\Qa\Failure {
 	/**
 	 * @used-by self::isFatal()
 	 * @used-by self::main()
-	 * @param bool $asString [optional]
 	 * @return int|string
 	 */
-	private static function type($asString = false) {
+	private static function type(bool $asString = false) {
 		$r = df_nat0(self::info('type')); /** @var int|string $r */
 		return !$asString ? $r : dfa(self::map(), $r);
 	}
