@@ -87,7 +87,7 @@ final class Trace {
 		$context_lines = 5; /** @const int $context_lines */
 		/** @var array(string => mixed) $r */
 		$r = ['filename' => $file, 'line' => '', 'lineno' => $line, 'prefix' => [], 'suffix' => []];
-		if (!is_null($file) && !is_null($line)) {
+		if ($file && $line) {
 			# Code which is eval'ed have a modified filename.. Extract the
 			# correct filename + linenumber from the string.
 			$matches = [];
