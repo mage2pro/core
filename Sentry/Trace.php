@@ -81,11 +81,9 @@ final class Trace {
 	 *		"suffix": [<5 next lines of the source code>]
 	 *	}
 	 * @used-by self::info()
-	 * @param $file
-	 * @param $line
 	 * @return array(string => mixed)
 	 */
-	private static function code($file, $line):array {
+	private static function code(string $file, int $line):array {
 		$context_lines = 5; /** @const int $context_lines */
 		/** @var array(string => mixed) $r */
 		$r = ['filename' => $file, 'line' => '', 'lineno' => $line, 'prefix' => [], 'suffix' => []];
