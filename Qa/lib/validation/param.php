@@ -4,12 +4,9 @@ use Df\Qa\Method as Q;
 
 /**
  * @used-by df_country_ctn()
- * @param string $v
- * @param int $ord	zero-based
- * @param int $sl [optional]
  * @throws DFE
  */
-function df_param_iso2($v, $ord, $sl = 0):string {return Q::assertParamIsIso2($v, $ord, ++$sl);}
+function df_param_iso2(string $v, int $ord, int $sl = 0):string {return Q::assertParamIsIso2($v, $ord, ++$sl);}
 
 /**
  * @used-by df_assert_class_exists()
