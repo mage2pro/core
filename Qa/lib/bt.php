@@ -20,11 +20,10 @@ function df_bt($p = 0, int $limit = 0):array {return is_array($p) ? $p : ($p ins
 /**
  * 2020-05-25
  * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
- * @param string $c
  * @param string|null $m [optional]
  * @param E|null $e [optional]
  */
-function df_bt_has($c, $m = null, E $e = null):bool {
+function df_bt_has(string $c, $m = null, E $e = null):bool {
 	list($c, $m) = $m ? [$c, $m] : explode('::', $c);
 	return !!df_find(function(array $i) use($c, $m) {return $c === dfa($i, 'class') && $m === dfa($i, 'function');}, df_bt($e));
 }
