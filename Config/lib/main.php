@@ -77,7 +77,6 @@ function df_cfg_delete(string $path, string $scope, int $scopeId):void {df_cfg_r
 /**
  * 2016-11-12
  * @used-by df_cfg()
- * @used-by \Df\Config\Settings::vv()
  * @param array|string|null|mixed $v
  */
 function df_cfg_empty($v):bool {return !df_nes($v);}

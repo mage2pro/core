@@ -49,7 +49,6 @@ final class Method {
 
 	/**
 	 * @used-by df_assert_sne()
-	 * @used-by self::vv()
 	 * @throws E
 	 */
 	static function raiseErrorVariable(string $vd, array $messages, int $sl = 1):void {
