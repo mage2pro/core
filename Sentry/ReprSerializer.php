@@ -1,10 +1,7 @@
 <?php
 namespace Df\Sentry;
-/**
- * Serializes a value into a representation that should reasonably suggest
- * both the type and value, and be serializable into JSON.
- * @package raven
- */
+# Serializes a value into a representation that should reasonably suggest
+# both the type and value, and be serializable into JSON.
 final class ReprSerializer extends Serializer {
 	/**
 	 * 2020-06-28

@@ -420,7 +420,7 @@ final class Client {
 	 * @var int
 	 */
 	private $_projectId;
-	
+
 	private $serializer;
 	/**
 	 * 2022-12-09
