@@ -7,9 +7,9 @@ final class Trace {
 	 * 2020-06-27
 	 * @used-by \Df\Sentry\Client::capture()
 	 * @used-by \Df\Sentry\Client::captureException()
-	 * @param $frames
+	 * @param array(array(string => mixed)) $frames
 	 */
-	static function info($frames):array {
+	static function info(array $frames):array {
 		$serializer = new Serializer;
 		$reprSerializer = new ReprSerializer;
 		$r = [];
