@@ -44,7 +44,6 @@ function df_es($v):bool {return '' === $v;}
  * @used-by \Df\Config\Settings::json()
  * @used-by \Df\Directory\FE\Country::getValues()
  * @used-by \Df\Xml\X::importString()
- * @used-by \Df\Zf\Validate\ArrayT::filter()
  * @used-by \Dfe\AllPay\Total\Quote::iiAdd()
  * @used-by \Dfe\AllPay\Total\Quote::iiGet()
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()
