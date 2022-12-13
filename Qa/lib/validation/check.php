@@ -8,9 +8,8 @@ use Magento\Framework\Phrase;
  * @param int|string $v
  * @param int|float|null $min
  * @param int|float|null $max
- * @param bool $inclusive [optional]
  */
-function df_between($v, $min, $max, $inclusive = true):bool {return
+function df_between($v, $min, $max, bool $inclusive = true):bool {return
 	$inclusive ? $v >= $min && $v <= $max : $v > $min && $v < $max
 ;}
 
