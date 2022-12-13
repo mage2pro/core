@@ -9,12 +9,9 @@ use Zend_Validate_Interface as Vd;
 final class Method {
 	/**
 	 * @used-by df_param_iso2()
-	 * @param string $v
-	 * @param int $ord
-	 * @param int $sl [optional]
 	 * @throws E
 	 */
-	static function assertParamIsIso2($v, $ord, $sl = 0):string {return self::vp(VIso2::s(), $v, $ord, ++$sl);}
+	static function assertParamIsIso2(string $v, int $ord, int $sl = 0):string {return self::vp(VIso2::s(), $v, $ord, ++$sl);}
 
 	/**
 	 * @used-by df_assert_array()
