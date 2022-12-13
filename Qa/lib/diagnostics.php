@@ -1,9 +1,6 @@
 <?php
-/**
- * 2017-04-03
- * @param bool $cond [optional]
- */
-function df_break($cond = true) {$cond && function_exists('xdebug_break') ? xdebug_break() : null;}
+/** 2017-04-03 */
+function df_break(bool $cond = true):void {$cond && function_exists('xdebug_break') ? xdebug_break() : null;}
 
 /**
  * 2017-01-25
