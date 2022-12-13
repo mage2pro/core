@@ -13,14 +13,6 @@ final class Method {
 	static function assertParamIsIso2(string $v, int $ord, int $sl = 0):string {return self::vp(VIso2::s(), $v, $ord, ++$sl);}
 
 	/**
-	 * @used-by df_assert_array()
-	 * @param array $v
-	 * @param int $sl [optional]
-	 * @throws E
-	 */
-	static function assertValueIsArray($v, $sl = 0):array {return self::vv(VArray::s(), $v, ++$sl);}
-
-	/**
 	 * @used-by df_param_sne()
 	 * @used-by self::vp()
 	 * @throws E
