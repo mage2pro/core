@@ -19,7 +19,7 @@ final class Trace {
 			$next = $count === $i + 1 ? [] : $frames[$i + 1]; /** @var array(string => mixed) $next */
 			/** @var string $file */
 			if (array_key_exists('file', $frame)) {
-				$context = self::code($frame['file'], $frame['line']);
+				$context = self::code((string)$frame['file'], (int)$frame['line']);
 				$file = $frame['file'];
 			}
 			else {
