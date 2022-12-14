@@ -62,7 +62,6 @@ function df_order_backend_url($o):string {return df_url_backend_ns('sales/order/
 /**
  * 2016-05-07
  * @used-by df_order()
- * @param OP $p
  * @return O|DFO
  * @throws LE
  */
