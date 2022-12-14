@@ -49,4 +49,3 @@ final class ImportDataBefore implements ObserverInterface {
 	 */
 	private static $_data;
 }
-
