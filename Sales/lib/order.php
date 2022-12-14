@@ -110,7 +110,6 @@ function df_order_r() {return df_o(IOrderRepository::class);}
  * Поэтому сначала смотрим, имеется ли у заказа способ доставки,
  * вызывая @uses \Magento\Sales\Model\Order::getShippingMethod() с параметром $asObject = false
  * @used-by \Dfe\Stripe\P\Address::p()
- * @param O $o
  */
 function df_order_shipping_title(O $o):string {return /** @var string $c */
 	!$o->getShippingMethod() || !($c = $o->getShippingMethod(true)['method']) ? '' :
