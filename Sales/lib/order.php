@@ -47,8 +47,7 @@ function df_order($o = null):O {return df_is_o($o) ? $o : (
 );}
 
 /**
- * 2016-05-21
- * How to get an order backend URL programmatically? https://mage2.pro/t/1639
+ * 2016-05-21 How to get an order backend URL programmatically? https://mage2.pro/t/1639
  * 2016-05-22
  * Даже если включена опция «Add Secret Key to URLs», адреса без ключей всё равно работают.
  * https://mage2.pro/tags/backend-url-secret-key
