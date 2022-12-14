@@ -12,11 +12,10 @@ use Exception as E;
  * @used-by \Mageside\CanadaPostShipping\Model\Carrier::_getQuotes() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/137)
  * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Controller\Adminhtml\Product\MassUpdateProducts::beforeExecute()
  * @param mixed|mixed[] $v
- * @param bool $allowNull [optional]
  * @return float|float[]
  * @throws DFE
  */
-function df_float($v, $allowNull = true) {/** @var int|int[] $r */
+function df_float($v, bool $allowNull = true) {/** @var int|int[] $r */
 	if (is_array($v)) {
 		$r = df_map(__FUNCTION__, $v, $allowNull);
 	}
