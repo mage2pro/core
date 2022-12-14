@@ -66,22 +66,22 @@ function df_order_backend_url($o):string {return df_url_backend_ns('sales/order/
  * @throws LE
  */
 function df_order_by_payment(OP $p) {return dfcf(function(OP $p) {
-	$result = $p->getOrder(); /** @var O|DFO $result */
+	$r = $p->getOrder(); /** @var O|DFO $r */
 	# 2016-05-08
 	# Раньше здесь стояла проверка !$result->getId()
 	# Это оказалось не совсем правильным, потому что в оплаты размещаемого в данный момент заказа
 	# у этого заказа ещё нет идентификатора (потому что он не сохранён),
 	# но вот increment_id для него создаётся заранее
 	# (в том числе, чтобы другие объекты, да и платёжные модули могли к нему привязываться).
-	if (!$result->getIncrementId()) {
+	if (!$r->getIncrementId()) {
 		throw new LE(__('The order no longer exists.'));
 	}
 	/**
 	 * 2016-03-26
 	 * Очень важно! Иначе order создаст свой экземпляр payment: @used-by \Magento\Sales\Model\Order::getPayment()
 	 */
-	$result[IO::PAYMENT] = $p;
-	return $result;
+	$r[IO::PAYMENT] = $p;
+	return $r;
 }, [$p]);}
 
 /**
