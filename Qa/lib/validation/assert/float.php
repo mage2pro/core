@@ -63,6 +63,7 @@ function df_float($v, bool $allowNull = true) {/** @var int|int[] $r */
 }
 
 /**
+ * 2022-12-14 @deprecated It is unused.
  * @param mixed $v
  * @return float|null
  * @throws DFE
