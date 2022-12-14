@@ -20,7 +20,7 @@ final class QuoteAddressValidator {
 	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Checkout/Model/ShippingInformationManagement.php#L176
 	 */
 	function aroundValidateForCart(Sb $sb, \Closure $f, ICart $c, IQuoteAddress $a):void {self::doValidate(
-		$a, $c->getCustomerId() ?: null
+		$a, $c->getCustomerId() ?: 0
 	);}
 
 	/**
@@ -30,10 +30,9 @@ final class QuoteAddressValidator {
 	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Quote/Model/QuoteAddressValidator.php#L55-L102
 	 * https://github.com/magento/magento2/blob/2.4.2/app/code/Magento/Quote/Model/QuoteAddressValidator.php#L55-L102
 	 * @used-by self::aroundValidateForCart()
-	 * @param int|null $customerId
 	 * @throws NSE
 	 */
-	private static function doValidate(IQuoteAddress $address, $customerId):void {
+	private static function doValidate(IQuoteAddress $address, int $customerId):void {
 		if ($customerId) {
 			$customer = df_customer_rep()->getById($customerId);
 			if (!$customer->getId()) {
