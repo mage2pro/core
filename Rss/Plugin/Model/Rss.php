@@ -9,7 +9,6 @@ final class Rss {
 	/**
 	 * 2020-10-04
 	 * @see \Magento\Rss\Model\Rss::getFeeds()
-	 * @param Sb $sb
 	 * @param array(string => mixed) $r
 	 */
 	function afterGetFeeds(Sb $sb, array $r):string {return df_map($r, function($v) {return
