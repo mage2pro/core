@@ -18,10 +18,9 @@ function df_sales_email_sending():bool {return !!df_find(function(array $i) {ret
 
 /**
  * 2016-01-29
- * @param string $t
  * @return int|false
  */
-function df_sales_entity_type_index($t) {return array_search($t, array_values(df_sales_entity_types()));}
+function df_sales_entity_type_index(string $t) {return array_search($t, array_values(df_sales_entity_types()));}
 
 /**
  * 2016-01-11
