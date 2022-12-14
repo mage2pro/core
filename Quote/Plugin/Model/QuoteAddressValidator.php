@@ -30,7 +30,6 @@ final class QuoteAddressValidator {
 	 * https://github.com/magento/magento2/blob/2.3.5-p2/app/code/Magento/Quote/Model/QuoteAddressValidator.php#L55-L102
 	 * https://github.com/magento/magento2/blob/2.4.2/app/code/Magento/Quote/Model/QuoteAddressValidator.php#L55-L102
 	 * @used-by self::aroundValidateForCart()
-	 * @param IQuoteAddress $address
 	 * @param int|null $customerId
 	 * @throws NSE
 	 */
