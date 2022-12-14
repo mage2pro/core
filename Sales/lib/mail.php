@@ -34,7 +34,6 @@ function df_mail_invoice(I $i):void {
  * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
  * @used-by dfp_mail()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @param O $o
  * @throws ME
  */
 function df_mail_order(O $o):void {
