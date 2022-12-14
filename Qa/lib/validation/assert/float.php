@@ -64,12 +64,10 @@ function df_float($v, bool $allowNull = true) {/** @var int|int[] $r */
 
 /**
  * @param mixed $v
- * @param bool $allow0 [optional]
- * @param bool $throw [optional]
  * @return float|null
  * @throws DFE
  */
-function df_float_positive($v, $allow0 = false, $throw = true) {/** @var float|null $r */
+function df_float_positive($v, bool $allow0 = false, bool $throw = true) {/** @var float|null $r */
 	if (!$throw) {
 		try {$r = df_float_positive($v, $allow0, true);}
 		catch (E $e) {$r = null;}
