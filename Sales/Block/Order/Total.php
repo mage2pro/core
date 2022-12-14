@@ -23,14 +23,9 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * 2016-08-14 Add new total to totals array after specific total or before last total by default.
 	 * 2017-03-25 В настоящее время никем не используется.
 	 * @uses \Magento\Sales\Block\Order\Totals::addTotal()
-	 * @param string $code
-	 * @param string $label
-	 * @param float $value
-	 * @param float $valueBase
-	 * @param string|null $after [optional]
 	 */
-	final protected function addAfter($code, $label, $value, $valueBase, $after = null):void {$this->add(
-		'addTotal', $code, $label, $value, $valueBase, $after
+	final protected function addAfter(string $code, string $l, float $v, float $vBase, string $after = ''):void {$this->add(
+		'addTotal', $code, $l, $v, $vBase, $after
 	);}
 
 	/**
