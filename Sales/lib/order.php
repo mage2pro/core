@@ -78,8 +78,7 @@ function df_order_by_payment(OP $p) {return dfcf(function(OP $p) {
 	}
 	/**
 	 * 2016-03-26
-	 * Очень важно! Иначе order создаст свой экземпляр payment:
-	 * @used-by \Magento\Sales\Model\Order::getPayment()
+	 * Очень важно! Иначе order создаст свой экземпляр payment: @used-by \Magento\Sales\Model\Order::getPayment()
 	 */
 	$result[IO::PAYMENT] = $p;
 	return $result;
