@@ -253,7 +253,6 @@ function df_throw_404():void {throw new NFE(__('Page not found.'));}
  *		else {
  *			Mage::log($errorMessage, Zend_Log::ERR);
  *		}
- * @param bool $r [optional]
  * @throws DFE
  */
-function df_throw_last_error($r = false):void {$r ?: \Df\Qa\Failure\Error::throwLast();}
+function df_throw_last_error(bool $r = false):void {$r ?: \Df\Qa\Failure\Error::throwLast();}
