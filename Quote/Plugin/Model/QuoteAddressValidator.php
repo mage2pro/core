@@ -32,31 +32,31 @@ final class QuoteAddressValidator {
 	 * @used-by self::aroundValidateForCart()
 	 * @throws NSE
 	 */
-	private static function doValidate(IQuoteAddress $address, int $customerId):void {
+	private static function doValidate(IQuoteAddress $a, int $customerId):void {
 		if ($customerId) {
 			$customer = df_customer_rep()->getById($customerId);
 			if (!$customer->getId()) {
 				throw new NSE(__('Invalid customer id %1', $customerId));
 			}
 		}
-		if ($address->getCustomerAddressId()) {
+		if ($a->getCustomerAddressId()) {
 			//Existing address cannot belong to a guest
 			if (!$customerId) {
-				throw new NSE(__('Invalid customer address id %1', $address->getCustomerAddressId()));
+				throw new NSE(__('Invalid customer address id %1', $a->getCustomerAddressId()));
 			}
 			//Validating address ID
 			try {
-				df_customer_address_rep()->getById($address->getCustomerAddressId());
+				df_customer_address_rep()->getById($a->getCustomerAddressId());
 			}
 			catch (NSE $e) {
-				throw new NSE(__('Invalid address id %1', $address->getId()));
+				throw new NSE(__('Invalid address id %1', $a->getId()));
 			}
 			//Finding available customer's addresses
 			$applicableAddressIds = array_map(
 				function (ICustomerAddress $a) {return $a->getId();}, df_customer_rep()->getById($customerId)->getAddresses()
 			);
-			if (!in_array($address->getCustomerAddressId(), $applicableAddressIds)) {
-				throw new NSE(__('Invalid customer address id %1', $address->getCustomerAddressId()));
+			if (!in_array($a->getCustomerAddressId(), $applicableAddressIds)) {
+				throw new NSE(__('Invalid customer address id %1', $a->getCustomerAddressId()));
 			}
 		}
 	}
