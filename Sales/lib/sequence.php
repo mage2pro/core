@@ -15,11 +15,10 @@ function df_sales_seq_m():Manager {return df_o(Manager::class);}
  * @used-by df_sales_seq_next()
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::aroundGetSequence()
- * @param string $entityType
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return MetaM|Meta
  */
-function df_sales_seq_meta($entityType, $s = null) {return dfcf(function($entityType, $sid) {
+function df_sales_seq_meta(string $entityType, $s = null) {return dfcf(function($entityType, $sid) {
 	$r = df_o(MetaR::class); /** @var MetaR $r */
 	/**
 	 * 2016-01-26
