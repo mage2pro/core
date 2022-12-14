@@ -32,14 +32,9 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 	 * 2016-08-14 Add new total to totals array before specific total or after first total by default.
 	 * @used-by \Dfe\AllPay\Block\Total::initTotals()
 	 * @uses \Magento\Sales\Block\Order\Totals::addTotalBefore()
-	 * @param string $code
-	 * @param string $label
-	 * @param float $value
-	 * @param float $valueBase
-	 * @param string|null $before [optional]
 	 */
-	final protected function addBefore($code, $label, $value, $valueBase, $before = null):void {$this->add(
-		'addTotalBefore', $code, $label, $value, $valueBase, $before
+	final protected function addBefore(string $code, string $l, float $v, float $vBase, string $before = ''):void {$this->add(
+		'addTotalBefore', $code, $l, $v, $vBase, $before
 	);}
 
 	/**
@@ -50,16 +45,12 @@ abstract class Total extends \Magento\Framework\View\Element\AbstractBlock {
 
 	/**
 	 * 2016-08-14
-	 * @param string $method
-	 * @param string $code
-	 * @param string $label
-	 * @param float $value
-	 * @param float $valueBase
-	 * @param string|null $position [optional]
+	 * @used-by self::addAfter()
+	 * @used-by self::addBefore()
 	 */
-	private function add($method, $code, $label, $value, $valueBase, $position = null):void {call_user_func(
+	private function add(string $method, string $code, string $l, float $v, float $vBase, string $pos = ''):void {call_user_func(
 		[$this->getParentBlock(), $method]
-		,new _DO(['code' => $code, 'label' => __($label), 'value' => $value, 'base_value' => $valueBase])
-		,$position
+		,new _DO(['code' => $code, 'label' => __($l), 'value' => $v, 'base_value' => $vBase])
+		,$pos
 	);}
 }
