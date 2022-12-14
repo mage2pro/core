@@ -48,7 +48,6 @@ function df_mail_order(O $o):void {
  * @see \Magento\Sales\Model\AbstractNotifier::notify()
  * @see df_mail_order()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
- * @param Shipment $sh
  * @throws ME
  */
 function df_mail_shipment(Shipment $sh):void {
