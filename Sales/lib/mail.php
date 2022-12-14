@@ -17,7 +17,6 @@ use Magento\Sales\Model\ResourceModel\Order\Status\History\Collection as HC;
  * @used-by dfp_mail()
  * @used-by \Df\Payment\W\Strategy\CapturePreauthorized::_handle()
  * @used-by \Dfe\CheckoutCom\Handler\Charge\Captured::process()
- * @param I $i
  * @throws ME
  */
 function df_mail_invoice(I $i):void {
