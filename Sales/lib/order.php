@@ -121,6 +121,5 @@ function df_order_shipping_title(O $o):string {return /** @var string $c */
  * @used-by \Df\Payment\Observer\VoidT::execute()
  * @used-by \Df\Sales\Model\Order\Payment::processActionS()
  * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
- * @param string $state
  */
-function df_order_ds($state):string {return df_order_config()->getStateDefaultStatus($state);}
+function df_order_ds(string $s):string {return df_order_config()->getStateDefaultStatus($s);}
