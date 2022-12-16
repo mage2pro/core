@@ -8,7 +8,6 @@ use Magento\Framework\DataObject as _DO;
  * @see df_ci_add()
  * @used-by df_oi_save()
  * @used-by \Doormall\Shipping\Observer\QuoteSubmitBefore::execute()
- * @param _DO|O $o
  * @param array(string => mixed) $info
  */
 function df_oi_add(_DO $o, array $info):void {
