@@ -20,7 +20,6 @@ function df_oi_add(_DO $o, array $info):void {
  * @used-by df_oi_add()
  * @used-by \Doormall\Shipping\Plugin\Sales\Model\Order::afterGetShippingDescription()
  * @param string|object|null $m [optional]
- * @param _DO|O|null $o [optional]
  * @return string|array(string => mixed)|null
  */
 function df_oi_get($m = null, _DO $o = null) {
