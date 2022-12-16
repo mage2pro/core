@@ -19,10 +19,8 @@ class Payment extends OP {
 	 * Вызов этого метода приводит к добавлению транзакции:
 	 * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
 	 * @used-by dfp_action()
-	 * @param OP $op
-	 * @param string $action
 	 */
-	final static function action(OP $op, $action):void {
+	final static function action(OP $op, string $action):void {
 		$op->processAction($action, $o = df_order($op));
 		$op->updateOrder($o, O::STATE_PROCESSING, df_order_ds(O::STATE_PROCESSING), true);
 	}	
