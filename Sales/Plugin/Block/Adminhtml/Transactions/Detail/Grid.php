@@ -11,11 +11,8 @@ final class Grid {
 	 * 2) длиные значения не обрезались после 250 символов.
 	 * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::addColumn()
 	 * @used-by \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::_prepareColumns()
-	 * @param Sb $sb
-	 * @param string $columnId
-	 * @param array $column
 	 */
-	function beforeAddColumn(Sb $sb, $columnId, array $column):array {
+	function beforeAddColumn(Sb $sb, string $columnId, array $column):array {
 		/**
 		 * 2017-01-13
 		 * 1) Административная таблица транзакции состоит из 2-х колонок: «key» и «value».
