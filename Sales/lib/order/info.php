@@ -32,7 +32,6 @@ function df_oi_get($m = null, _DO $o = null) {
  * @see df_ci_save()
  * @param string|object $m
  * @param mixed|null $info
- * @param O|null $o [optional]
  */
 function df_oi_save($m, $info, O $o = null):void {
 	$data = [df_class_second_lc($m) => $info]; /** @var array(string => string) $data */
