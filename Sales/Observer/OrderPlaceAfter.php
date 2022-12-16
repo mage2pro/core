@@ -20,7 +20,6 @@ final class OrderPlaceAfter implements ObserverInterface {
 	 * @override
 	 * @see ObserverInterface::execute()
 	 * What events are triggered on an order placement? https://mage2.pro/t/3573
-	 * @param O $o
 	 */
 	function execute(O $o):void {
 		try {
