@@ -1,6 +1,5 @@
 <?php
 namespace Df\Sales\Plugin\Model\ResourceModel\Order\Handler;
-use Df\Sales\Model\Order as DFO;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Creditmemo as CM;
 use Magento\Sales\Model\Order\Payment as OP;
