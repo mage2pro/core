@@ -18,7 +18,7 @@ function df_sales_seq_m():Manager {return df_o(Manager::class);}
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return MetaM|Meta
  */
-function df_sales_seq_meta(string $entityType, $s = null) {return dfcf(function($entityType, $sid) {
+function df_sales_seq_meta(string $entityType, $s = null) {return dfcf(function(string $entityType, $sid) {
 	$r = df_o(MetaR::class); /** @var MetaR $r */
 	/**
 	 * 2016-01-26
