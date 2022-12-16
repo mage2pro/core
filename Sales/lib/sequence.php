@@ -46,6 +46,6 @@ function df_sales_seq_meta(string $entityType, $s = null) {return dfcf(function(
  * @param string $entityTypeCode
  * @param int|string|null|bool|StoreInterface $store [optional]
  */
-function df_sales_seq_next($entityTypeCode, $store = null):string {return df_next_increment(
+function df_sales_seq_next(string $entityTypeCode, $store = null):string {return df_next_increment(
 	df_sales_seq_meta($entityTypeCode, $store)->getSequenceTable()
 );}
