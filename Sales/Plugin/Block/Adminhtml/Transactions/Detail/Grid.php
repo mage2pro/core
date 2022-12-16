@@ -12,7 +12,6 @@ final class Grid {
 	 * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::addColumn()
 	 * @used-by \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::_prepareColumns()
 	 * @param Sb $sb
-	 * @param array(string => array(string => string)) $elements
 	 * @param string $columnId
 	 * @param array $column
 	 */
