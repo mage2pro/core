@@ -6,9 +6,8 @@ use Df\Security\BlackList as B;
  * @used-by \CanadaSatellite\Bambora\Action::check()  (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/14)
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Customer\Api\AccountManagementInterface::aroundIsEmailAvailable() (canadasatellite.ca, https://github.com/canadasatellite-ca/core/issues/1)
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
- * @param string|null $ip [optional]
  */
-function df_ban($ip = null):void {
+function df_ban(string $ip = ''):void {
 	if (!df_is_backend()) {
 		B::add($ip);
 		df_403();
