@@ -129,7 +129,6 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return $this;
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L279-L323
-	 * @param _DO $r
 	 * @return self|false|Error
 	 */
 	final function checkAvailableShipCountries(_DO $r) {return $this;}
