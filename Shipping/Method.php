@@ -610,9 +610,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	/**
 	 * 2018-04-17
 	 * @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates()
-	 * @param string $v
 	 */
-	final function setActiveFlag($v):void {}
+	final function setActiveFlag(string $v):void {}
 
 	/**
 	 * 2018-04-17
