@@ -21,9 +21,8 @@ final class BlackList {
 	 * 2021-09-16
 	 * @used-by self::add()
 	 * @used-by self::has()
-	 * @param string|null $v [optional]
 	 */
-	private static function ip($v = null):string {return $v ?: df_visitor_ip();}
+	private static function ip(string $v = ''):string {return $v ?: df_visitor_ip();}
 
 	/**
 	 * 2021-09-16
