@@ -50,9 +50,8 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * This commit is applied to Magento ≥ 2.3.0.
 	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
 	 * @used-by self::getSuggestsFromModules()
-	 * @param string $f
 	 */
-	private function getModuleComposerPackageMy($f):Package {return $this->getModuleComposerPackageParent(
+	private function getModuleComposerPackageMy(string $f):Package {return $this->getModuleComposerPackageParent(
 		false === strpos($f, 'mage2pro') || file_exists($f) ? $f : preg_replace(
 			'#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f)
 		)
