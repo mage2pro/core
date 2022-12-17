@@ -258,7 +258,6 @@ abstract class CustomerReturn extends \Df\OAuth\ReturnT {
 	/**
 	 * 2015-10-12 Регистрация нового покупателя.
 	 * @used-by self::mc()
-	 * @param MC $mc
 	 */
 	private function register(MC $mc):void {
 		# 2015-10-12
