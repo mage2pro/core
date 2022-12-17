@@ -166,7 +166,6 @@ abstract class Button extends _P {
 	 * 2016-11-24
 	 * Передаём static::class как аргумент, чтобы потомки этого класса имели индивидуальный кэш:
 	 * https://github.com/mage2pro/core/blob/ab34df/Core/lib/cache.php?ts=4#L151-L160
-	 * @return Settings
 	 */
 	private static function sModule():Settings {return dfcf(function($c) {return Settings::convention($c);}, [static::class]);}
 
