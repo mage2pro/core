@@ -84,7 +84,6 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *
 	 * @see \Doormall\Shipping\Method::collectRates()
 	 * @see \Frugue\Shipping\Method::collectRates()
-	 * @param Req $req
 	 */
 	abstract function collectRates(Req $req):Res;
 
