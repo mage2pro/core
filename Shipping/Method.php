@@ -544,7 +544,6 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * @used-by self::proccessAdditionalValidation()
 	 * @used-by \Magento\Shipping\Model\Shipping::collectCarrierRates()
 	 * https://github.com/magento/magento2/blob/2.2.6/app/code/Magento/Shipping/Model/Shipping.php#L262-L262
-	 * @param _DO $r
 	 * @return self|false|Error
 	 */
 	final function processAdditionalValidation(_DO $r) {return $this;}
