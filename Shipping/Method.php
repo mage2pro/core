@@ -561,6 +561,7 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return new \Magento\Framework\DataObject();
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L164-L175
+	 * 2022-12-17 We can not declare the argument's type because it is undeclared in the overriden method.
 	 * @param _DO $r
 	 */
 	final function requestToShipment($r):_DO {return new _DO;}
