@@ -37,9 +37,8 @@ function dfsm(...$args) {return dfcf(function(...$args) {
  * @used-by dspm()
  * @used-by \Df\Shipping\Method::sg()
  * @param string|object $c
- * @param bool $allowAbstract [optional]
  */
-function dfsm_c($c, $allowAbstract = false):string {return dfcf(function($c, $allowAbstract = false) {return
+function dfsm_c($c, bool $allowAbstract = false):string {return dfcf(function($c, $allowAbstract = false) {return
 	ConT::p($allowAbstract, function() use($c) {return df_con_heir($c, M::class);})
 ;}, func_get_args());}
 
