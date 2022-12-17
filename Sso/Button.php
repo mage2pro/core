@@ -88,9 +88,7 @@ abstract class Button extends _P {
 	 * @used-by self::id()
 	 * @used-by \Df\Sso\Button\Js::jsOptions()
 	 */
-	final protected function cssClass():string {return dfc($this, function() {return implode(
-		'-', df_explode_class_lc_camel($this)
-	);});}
+	final protected function cssClass():string {return implode('-', df_explode_class_lc_camel($this));}
 
 	/**
 	 * 2016-11-29
