@@ -197,6 +197,7 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *			return $this;
 	 *		}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Shipping.php#L311-L313
+	 * 2022-12-17 We can not declare the argument's type because it is undeclared in the overriden method.
 	 * @param string $k
 	 * @return mixed
 	 */
