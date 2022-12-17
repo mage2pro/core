@@ -13,9 +13,8 @@ final class BlackList {
 	/**
 	 * 2021-09-16
 	 * @used-by \Df\Framework\Plugin\App\Http::aroundLaunch()
-	 * @param string|null $ip [optional]
 	 */
-	static function has($ip = null):bool {return dfa(self::load(), self::ip($ip));}
+	static function has(string $ip = ''):bool {return dfa(self::load(), self::ip($ip));}
 
 	/**
 	 * 2021-09-16
