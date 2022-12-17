@@ -30,10 +30,9 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	/**
 	 * 2020-06-16
 	 * @used-by self::getModuleComposerPackageMy()
-	 * @param string $moduleDir
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
-	private function getModuleComposerPackageParent($moduleDir):Package {
+	private function getModuleComposerPackageParent(string $moduleDir):Package {
 		foreach ([$moduleDir, $moduleDir . DIRECTORY_SEPARATOR . '..'] as $dir) {/** @var IRead $directory */
 			$directory = df_fs_rf()->create($dir);
 			if ($directory->isExist('composer.json') && $directory->isReadable('composer.json')) {
