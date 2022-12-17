@@ -421,6 +421,7 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return false;
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L543-L551
+	 * 2022-12-17 We can not declare the argument's type because it is undeclared in the overriden method.
 	 */
 	final function isCityRequired():bool {return false;}
 
