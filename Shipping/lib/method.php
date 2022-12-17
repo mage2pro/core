@@ -46,11 +46,10 @@ function dfsm_c($c, bool $allowAbstract = false):string {return dfcf(function($c
  * 2018-04-21
  * @used-by dfsm_code()
  * @param string|object $c
- * @param string $method
  * @param mixed ...$params [optional]
  * @return mixed
  */
-function dfsm_call_s($c, $method, ...$params) {return df_con_s($c, 'Method', $method, $params);}
+function dfsm_call_s($c, string $method, ...$params) {return df_con_s($c, 'Method', $method, $params);}
 
 /**
  * 2018-04-21
