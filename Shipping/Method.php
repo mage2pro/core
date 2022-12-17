@@ -670,9 +670,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *
 	 * @used-by dfsm()
 	 * @used-by \Df\Shipping\Plugin\Model\CarrierFactoryT::aroundCreate()
-	 * @param string $c
 	 */
-	final static function sg($c):self {return dfcf(function($c) {return new $c;}, [dfsm_c($c)]);}
+	final static function sg(string $c):self {return dfcf(function($c) {return new $c;}, [dfsm_c($c)]);}
 
 	/**
 	 * 2018-04-17
