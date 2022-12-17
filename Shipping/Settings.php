@@ -1,13 +1,7 @@
 <?php
 namespace Df\Shipping;
-use Df\Config\Source as ConfigSource;
-use Df\Core\Exception as DFE;
 use Df\Shipping\Method as M;
 use Magento\Framework\App\ScopeInterface as S;
-use Magento\Payment\Model\Checks\TotalMinMax as T;
-use Magento\Quote\Model\Quote as Q;
-use Magento\Sales\Model\Order as O;
-use Magento\Store\Model\Store;
 /**
  * 2018-04-21
  * @see \Frugue\Shipping\Settings
