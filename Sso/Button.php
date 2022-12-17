@@ -131,7 +131,7 @@ abstract class Button extends _P {
 	 * 2017-05-07
 	 * Earlier I had used the «default.xml» layout to add my «Df_Sso::main.css» asset:
 	 * https://github.com/mage2pro/core/blob/2.6.3/Sso/view/frontend/layout/default.xml#L6-L8
-	 *	<head><css src='Df_Sso::main.css'/></head>
+	 *		<head><css src='Df_Sso::main.css'/></head>
 	 * It had a drawback: the asset had been added to every page even if there were no SSO modules enabled.
 	 * «How is Magento\Framework\View\Page\Config::addPageAsset() implemented and used?»
 	 * https://mage2.pro/t/3907
