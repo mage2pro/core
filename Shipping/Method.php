@@ -385,6 +385,7 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return $weight;
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L512-L531
+	 * 2022-12-17 We can not declare the argument's type because it is undeclared in the overriden method.
 	 * @param float $weight
 	 */
 	final function getTotalNumOfBoxes($weight):float {return $weight;}
