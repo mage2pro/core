@@ -14,6 +14,5 @@ function df_setup() {return df_o(ISetup::class);}
  * @used-by \Df\OAuth\Setup\UpgradeSchema::_process()
  * @see \Magento\Setup\Model\ModuleRegistryUninstaller::removeModulesFromDb()
  * @see \Magento\Setup\Model\ModuleRegistryUninstaller::removeModulesFromDeploymentConfig()
- * @param string $m
- */
-function df_uninstall($m):void {df_setup()->deleteTableRow('setup_module', 'module', $m);}
+ * @param string $ */
+function df_uninstall(string $m):void {df_setup()->deleteTableRow('setup_module', 'module', $m);}
