@@ -618,9 +618,8 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 * @used-by \Df\Shipping\Plugin\Model\CarrierFactoryT::aroundCreate()
 	 * @used-by \Magento\Shipping\Model\CarrierFactory::create()
 	 * @used-by \Magento\Shipping\Model\CarrierFactory::get()
-	 * @param string $carrierCode
 	 */
-	final function setId($carrierCode):void {}
+	final function setId(string $carrierCode):void {}
 
 	/**
 	 * 2018-04-17
