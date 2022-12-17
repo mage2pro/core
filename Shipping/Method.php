@@ -272,7 +272,6 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return [];
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L611-L621
-	 * @param _DO $p|null
 	 */
 	final function getContentTypes(_DO $p = null):array {return [];}
 
