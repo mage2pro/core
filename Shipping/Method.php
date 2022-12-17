@@ -345,8 +345,10 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		);
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L449-L476
+	 * 2022-12-17 We can not declare the argument's type because it is undeclared in the overriden method.
+	 * @param float $cost
 	 */
-	final function getFinalPriceWithHandlingFee(float $cost):float {return $cost;}
+	final function getFinalPriceWithHandlingFee($cost):float {return $cost;}
 
 	/**
 	 * 2022-10-19
