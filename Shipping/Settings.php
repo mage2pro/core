@@ -19,7 +19,6 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @override
 	 * @see \Df\Config\Settings::__construct()
 	 * @used-by \Df\Shipping\Method::s()
-	 * @param M $m
 	 */
 	final function __construct(M $m) {$this->_m = $m;}
 
