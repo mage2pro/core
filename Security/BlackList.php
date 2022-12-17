@@ -6,9 +6,8 @@ final class BlackList {
 	/**
 	 * 2021-09-16
 	 * @used-by df_ban()
-	 * @param string $ip [optional]
 	 */
-	static function add($ip = null):void {self::save([self::ip($ip) => time() + 60 * 60 * 24 * 30] + self::load());}
+	static function add(string $ip = ''):void {self::save([self::ip($ip) => time() + 60 * 60 * 24 * 30] + self::load());}
 
 	/**
 	 * 2021-09-16
