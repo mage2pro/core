@@ -304,7 +304,6 @@ abstract class Method implements IC, IAC, INonInterceptable {
 	 *		return [];
 	 *	}
 	 * https://github.com/magento/magento2/blob/2.2.3/app/code/Magento/Shipping/Model/Carrier/AbstractCarrier.php#L267-L277
-	 * @param _DO $p|null
 	 */
 	final function getDeliveryConfirmationTypes(_DO $p = null):array {return [];}
 
