@@ -208,7 +208,7 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16 Вычленяет «italic» из «italic»
 	 * @used-by self::style()
 	 */
-	private function variantWord():string {return dfc($this, function() {return str_replace(
+	private function variantWord():string {return dfc($this, function():string {return str_replace(
 		$this->variantNumber(), '', $this->variant()
 	);});}
 
