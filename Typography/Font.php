@@ -173,7 +173,7 @@ final class Font extends \Df\Config\O {
 	 * @used-by self::css()
 	 * @used-by self::letter_spacing()
 	 */
-	private function size():Size {return dfc($this, function($k) {return new Size($this[$k]);}, [df_caller_f()]);}
+	private function size():Size {return dfc($this, function(string $k):Size  {return new Size($this[$k]);}, [df_caller_f()]);}
 
 	/**
 	 * 2015-12-16
