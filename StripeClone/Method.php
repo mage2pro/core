@@ -751,10 +751,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by self::charge()
 	 * @used-by self::e2i()
 	 * @used-by self::transUrl()
-	 * @param string $id
-	 * @return string
 	 */
-	private function i2e($id) {return $this->tid()->i2e($id);}
+	private function i2e(string $id):string {return $this->tid()->i2e($id);}
 
 	/**
 	 * 2016-12-27
