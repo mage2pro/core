@@ -59,7 +59,6 @@ function df_zf_http_last_req(C $c):string {
 /**
  * 2018-11-11
  * @used-by df_zf_http()
- * @param C $c
  */
 function df_zf_http_skip_certificate_verifications(C $c):void {
 	/**
