@@ -152,9 +152,8 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Square\Facade\Charge::tokenIsNew()
 	 * @see \Dfe\Stripe\Facade\Charge::tokenIsNew()
 	 * @see \Dfe\TBCBank\Facade\Charge::tokenIsNew()
-	 * @param string $id
 	 */
-	function tokenIsNew($id):bool {return !df_starts_with($id, $this->cardIdPrefix());}
+	function tokenIsNew(string $id):bool {return !df_starts_with($id, $this->cardIdPrefix());}
 
 	/**
 	 * 2017-02-11
