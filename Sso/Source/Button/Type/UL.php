@@ -20,9 +20,8 @@ class UL extends \Df\Config\Source {
 	/**
 	 * 2016-11-30
 	 * @used-by \Df\Sso\Button::loggedOut()
-	 * @param string $t
 	 */
-	final static function isLink($t):bool {return self::$L === $t;}
+	final static function isLink(string $t):bool {return self::$L === $t;}
 
 	/**
 	 * 2016-11-30
