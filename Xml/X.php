@@ -14,6 +14,7 @@ final class X extends MX {
 	 * https://stackoverflow.com/a/9391673
 	 * https://stackoverflow.com/a/43566078
 	 * 2022-11-15 We can not declare the $k argument type with PHP < 8: https://3v4l.org/ptpUM
+	 * 2022-12-20 We can not declare arguments types because they are undeclared in the overriden method.
 	 * @override
 	 * @see \SimpleXMLElement::addAttribute()
 	 * @used-by self::addAttributes()
