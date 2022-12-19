@@ -85,7 +85,6 @@ class CardFormatter {
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @param string|object $m
-	 * @param C $c
 	 */
 	final static function s($m, C $c):self {return dfcf(function($m, C $c) {
 		/**
