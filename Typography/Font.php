@@ -156,7 +156,7 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @used-by self::css()
 	 */
-	private function scaleRule():string {return dfc($this, function() {return sprintf('scale(%.2f,%.2f)',
+	private function scaleRule():string {return dfc($this, function():string {return sprintf('scale(%.2f,%.2f)',
 		$this->scale_horizontal() / 100, $this->scale_vertical() / 100
 	);});}
 
