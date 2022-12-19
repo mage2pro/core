@@ -26,12 +26,11 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Stripe\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Vantiv\Facade\Charge::capturePreauthorized()
-	 * @param string $id
 	 * @param int|float $a
 	 * The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
 	 * @return object
 	 */
-	abstract function capturePreauthorized($id, $a);
+	abstract function capturePreauthorized(string $id, $a);
 
 	/**
 	 * 2017-02-10
