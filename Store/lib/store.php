@@ -182,8 +182,8 @@ function df_store_url_web($s = null):string {return df_store_url($s, U::URL_TYPE
  * в зависимости от того, загружается ли страница из кэша или нет.
  * Для модуля Dfe\SalesSequence нам нужен фиксированный порядок.     
  * @used-by df_scope_stores()
- * @param bool $withDefault [optional]
- * @param bool $codeKey [optional]
- * @return array|IStore[]
+ * @return IStore[]
  */
-function df_stores($withDefault = false, $codeKey = false) {return df_ksort(df_store_m()->getStores($withDefault, $codeKey));}
+function df_stores(bool $withDefault = false, bool $codeKey = false):array {return df_ksort(df_store_m()->getStores(
+	$withDefault, $codeKey
+));}
