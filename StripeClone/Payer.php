@@ -26,7 +26,7 @@ class Payer extends \Df\Payment\Facade {
 	 * 2) If a PSP supports the cards saving here,
 	 * but the customer is already registered and has chosen to pay with an alleady registered card,
 	 * then the method returns the card ID, but with the $this->token() code:
-	 * @uses token() returns a card ID in this case.
+	 * @uses self::token() returns a card ID in this case.
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 */
 	final function cardId():string {return
