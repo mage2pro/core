@@ -37,16 +37,16 @@ function df_link_inline(...$a) {return df_call_a(function(string $res):string {r
  * применяет одни и те же правила несколько раз (хотя, видимо, не делает повторных обращений к серверу
  * при включенном в браузере кэшировании браузерных ресурсов).
  * 2016-03-23
- * Добавил обработку пустой строки $resource.
+ * Добавил обработку пустой строки $u.
  * Нам это нужно, потому что пустую строку может вернуть @see \Df\Typography\Font::link()
  * https://mage2.pro/t/1010
  * @used-by df_js_inline_url()
  * @used-by df_link_inline()
  */
-function df_resource_inline(string $r, Closure $f):string {
+function df_resource_inline(string $u, Closure $f):string {
 	static $c; /** @var array(string => bool) $c */
-	if (!$r || isset($c[$r])) {$result = '';}
-	else {$c[$r] = true; $result = $f(df_asset_create($r)->getUrl());}
+	if (!$u || isset($c[$u])) {$result = '';}
+	else {$c[$u] = true; $result = $f(df_asset_create($u)->getUrl());}
 	return $result;
 }
 
