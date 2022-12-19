@@ -8,12 +8,8 @@ final class Emulation {
 	 * @see \Magento\Store\Model\App\Emulation::startEnvironmentEmulation()
 	 * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/App/Emulation.php#L104-L158
 	 * https://github.com/magento/magento2/blob/2.4.3/app/code/Magento/Store/Model/App/Emulation.php#L111-L165
-	 * @param Sb $sb
-	 * @param integer $storeId
-	 * @param string $area
-	 * @param bool $force
 	 */
-	function beforeStartEnvironmentEmulation(Sb $sb, $storeId, $area, $force):void {
+	function beforeStartEnvironmentEmulation(Sb $sb, int $storeId, string $area, bool $force):void {
 		if (!$this->_initial) {
 			$this->_initial = ['area' => $area, 'force' => $force, 'storeId' => $storeId, 'trace' => df_bt_log()];
 		}
