@@ -23,7 +23,6 @@ class CustomerReturn extends \Df\Framework\Form\Element\Url {
 	 * @override
 	 * @see \Df\Framework\Form\Element\Url::url()
 	 * @used-by \Df\Framework\Form\Element\Url::messageForOthers()
-	 * @return string
 	 */
 	final protected function url():string {
 		$isBackend = df_fe_fc_b($this, 'dfWebhook_backend'); /** @var bool $isBackend */
