@@ -100,7 +100,7 @@ class Payer extends \Df\Payment\Facade {
 	 * @used-by self::customerId()
 	 * @return string[]
 	 */
-	private function newCard():array {return dfc($this, function() {
+	private function newCard():array {return dfc($this, function():array {
 		$m = $this->m(); /** @var Method $m */
 		$isCard = $m->isCard(); /** @var bool $isCard */
 		df_assert(!$isCard || $this->tokenIsNew());
