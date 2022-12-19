@@ -158,9 +158,8 @@ function df_store_names(bool $withDefault = false, bool $codeKey = false):array 
  * @used-by df_store_url_link()
  * @used-by df_store_url_web()
  * @param int|string|null|bool|IStore $s
- * @param string $type
  */
-function df_store_url($s, $type):string {return df_store($s)->getBaseUrl($type);}
+function df_store_url($s, string $type):string {return df_store($s)->getBaseUrl($type);}
 
 /**
  * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
