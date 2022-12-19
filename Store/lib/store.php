@@ -128,10 +128,9 @@ function df_store_id($store = null):int {return df_store($store)->getId();}
  * 2016-01-11
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
  * @used-by \Dfe\SalesSequence\Config\Next\Backend::nextNumbersFromDb()
- * @param bool $withDefault [optional]
  * @return int[]
  */
-function df_store_ids($withDefault = false):array {return array_keys(df_stores($withDefault));}
+function df_store_ids(bool $withDefault = false):array {return array_keys(df_stores($withDefault));}
 
 /**
  * 2017-02-07              
