@@ -585,10 +585,9 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2016-12-28
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by self::charge()
-	 * @param bool $capture
 	 * @return object|array(string => mixed)
 	 */
-	private function chargeNew($capture) {return dfc($this, function($capture) {
+	private function chargeNew(bool $capture) {return dfc($this, function($capture) {
 		$fc = $this->fCharge(); /** @var fCharge $fc */
 		/**
 		 * 2017-06-11
