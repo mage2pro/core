@@ -20,6 +20,6 @@ class MessagePlugin extends _P {
 		# 2021-06-04
 		# "«Unable to unserialize value» on the `sales/guest/view` page":
 		# https://github.com/canadasatellite-ca/site/issues/139
-		df_try(function() {return parent::getCookiesMessages();}, []), 0, 10
+		df_try(function():array {return parent::getCookiesMessages();}, []), 0, 10
 	);}
 }
