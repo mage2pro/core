@@ -147,11 +147,9 @@ function df_store_m() {return df_o(IStoreManager::class);}
  * @see df_store_codes()  
  * @see df_category_names()
  * @used-by \Dfe\SalesSequence\Config\Next\Element::rows()
- * @param bool $withDefault [optional]
- * @param bool $codeKey [optional]
  * @return string[]
  */
-function df_store_names($withDefault = false, $codeKey = false):array {return array_map(
+function df_store_names(bool $withDefault = false, bool $codeKey = false):array {return array_map(
 	function(IStore $store) {return $store->getName();}, df_stores($withDefault, $codeKey)
 );}
 
