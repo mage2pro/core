@@ -16,9 +16,8 @@ final class UNL extends UL {
 	 * 2016-11-29
 	 * @used-by \Df\Sso\Button::isNative()
 	 * @used-by \Dfe\AmazonLogin\Settings\Button::label()
-	 * @return bool
 	 */
-	static function isNative(string $type) {return self::$N === $type;}
+	static function isNative(string $type):bool {return self::$N === $type;}
 
 	/** 2016-11-29 */
 	private static $N = 'N';
