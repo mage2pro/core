@@ -201,7 +201,6 @@ function df_leaf_s(CX $e = null, $d = ''):string {return (string)df_leaf($e, $d)
  * @used-by \Df\Xml\X::map()
  * @used-by \Df\Xml\X::xpathMap()
  * @used-by \Dfe\SecurePay\Refund::process()
- * @param CX|null $e [optional]
  * @param string|callable $d [optional]
  */
 function df_leaf_sne(CX $e = null, $d = ''):string {/** @var string $r */
