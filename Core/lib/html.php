@@ -45,9 +45,9 @@ function df_link_inline(...$a) {return df_call_a(function(string $res):string {r
  */
 function df_resource_inline(string $u, Closure $f):string {
 	static $c; /** @var array(string => bool) $c */
-	if (!$u || isset($c[$u])) {$result = '';}
-	else {$c[$u] = true; $result = $f(df_asset_create($u)->getUrl());}
-	return $result;
+	if (!$u || isset($c[$u])) {$r = '';}
+	else {$c[$u] = true; $r = $f(df_asset_create($u)->getUrl());}
+	return $r;
 }
 
 /**
