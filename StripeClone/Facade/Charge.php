@@ -93,12 +93,11 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Stripe\Facade\Charge::refund()
 	 * @see \Dfe\TBCBank\Facade\Charge::refund()
 	 * @see \Dfe\Vantiv\Facade\Charge::refund()
-	 * @param string $id
 	 * @param int|float $a
 	 * The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
 	 * @return object
 	 */
-	abstract function refund($id, $a);
+	abstract function refund(string $id, $a);
 
 	/**
 	 * 2017-02-10 Метод должен вернуть библиотечный объект API платёжной системы.
