@@ -41,11 +41,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * *) и.т.п.
 	 * Конкретные данные сообщения расположены внутри иерархии по некоему пути.
 	 * Этот путь и возвращает наш метод.
-	 *
 	 * 2017-02-14
-	 * Если конкретные данные сообщения расположены прямо на верхнем уровне иерархии,
-	 * то метод должен вернуть null или пустую строку.
-	 *
+	 * Если конкретные данные сообщения расположены прямо на верхнем уровне иерархии, то метод должен вернуть пустую строку.
 	 * @used-by self::k_pid()
 	 * @used-by self::ro()
 	 * @see \Df\GingerPaymentsBase\W\Event::roPath()
@@ -54,9 +51,8 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * @see \Dfe\Paymill\W\Event::roPath()
 	 * @see \Dfe\Stripe\W\Event::roPath()
 	 * @see \Dfe\TBCBank\W\Event::roPath()
-	 * @return string|null
 	 */
-	abstract protected function roPath();
+	abstract protected function roPath():string;
 
 	/**
 	 * 2017-01-17
