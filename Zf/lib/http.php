@@ -48,7 +48,7 @@ function df_zf_http_last_req(C $c):string {
 	 */
 	$sA = explode("\r\n\r\n", $s);
 	$a = df_clean(df_explode_n($sA[0])); /** @var string[] $a */
-	return df_cc_n(array_merge([df_first($a)], array_map(function($s) {
+	return df_cc_n(array_merge([df_first($a)], array_map(function(string $s):string {
 		if (df_starts_with($s, $b = 'Authorization:')) {
 			$s = "$b <...>";
 		}
