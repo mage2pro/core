@@ -28,7 +28,6 @@ class Payer extends \Df\Payment\Facade {
 	 * then the method returns the card ID, but with the $this->token() code:
 	 * @uses token() returns a card ID in this case.
 	 * @used-by \Df\StripeClone\P\Charge::request()
-	 * @return string
 	 */
 	final function cardId():string {return
 		!$this->tokenIsNew() || $this->tokenIsSingleUse() ? $this->token() : df_last($this->newCard())
