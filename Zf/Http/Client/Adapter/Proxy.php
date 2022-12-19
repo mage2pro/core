@@ -15,6 +15,7 @@ namespace Df\Zf\Http\Client\Adapter;
 final class Proxy extends \Zend_Http_Client_Adapter_Proxy {
     /**
      * Preform handshaking with HTTPS proxy using CONNECT method
+	 * 2022-12-20 We can not declare arguments types because they are undeclared in the overriden method.
      * @overide
 	 * @see \Zend_Http_Client_Adapter_Proxy::connectHandshake()
 	 * @used-by \Zend_Http_Client_Adapter_Proxy::write()
