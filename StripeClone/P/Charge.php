@@ -19,8 +19,7 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * 2017-02-11
 	 * 2017-02-18 Ключ, значением которого является токен банковской карты.
 	 * 2017-10-09 The key name of a bank card token or of a saved bank card ID.
-	 * 2022-11-13
-	 * The result could be an empty string: @see \Dfe\Moip\P\Charge::k_CardId()
+	 * 2022-11-13 The result could be an empty string: @see \Dfe\Moip\P\Charge::k_CardId()
 	 * @used-by self::request()
 	 * @used-by \Df\StripeClone\P\Reg::k_CardId()
 	 * @see \Dfe\Moip\P\Charge::k_CardId()
