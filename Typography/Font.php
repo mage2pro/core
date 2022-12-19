@@ -200,7 +200,7 @@ final class Font extends \Df\Config\O {
 	 * @used-by self::variantWord()
 	 * @used-by self::weight()
 	 */
-	private function variantNumber():string {return dfc($this, function() {return df_nts(df_preg_int(
+	private function variantNumber():string {return dfc($this, function():string {return df_nts(df_preg_int(
 		'#\d+#', $this->variant()
 	));});}
 
