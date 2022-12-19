@@ -275,6 +275,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2022-11-17
 	 * `object` as an argument type is not supported by PHP < 7.2:
 	 * https://github.com/mage2pro/core/issues/174#user-content-object
+	 * 2022-12-19 We can not declare arguments types because they are undeclared in the overriden method.
 	 * @override
 	 * @see \Df\Payment\Method::initialize()
 	 * @param string $action
