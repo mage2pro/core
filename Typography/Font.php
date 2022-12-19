@@ -28,10 +28,10 @@ final class Font extends \Df\Config\O {
 	/**
 	 * 2015-12-16
 	 * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
-	 */
-	function css(string $selector):string {/** @var string $result */
+	 */s
+	function css(string $selector):string {/** @var string $r */
 		if (!$this->enabled()) {
-			$result = '';
+			$r = '';
 		}
 		else {
 			$css = Css::i($selector); /** @var Css $css */
@@ -83,9 +83,9 @@ final class Font extends \Df\Config\O {
 			if ('default' !== $this->family()) {
 				$css->rule('font-family', df_quote_single($this->family()));
 			}
-			$result = $css->render();
+			$r = $css->render();
 		}
-		return $result;
+		return $r;
 	}
 
 	/**
