@@ -40,7 +40,6 @@ abstract class Method extends \Df\Payment\Method {
 	 * @see \Dfe\Stripe\Method::transUrlBase()
 	 * @see \Dfe\TBCBank\Method::transUrlBase()
 	 * @see \Dfe\Vantiv\Method::transUrlBase()
-	 * @param T $t
 	 */
 	abstract protected function transUrlBase(T $t):string;
 
