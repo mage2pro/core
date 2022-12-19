@@ -7,7 +7,6 @@ class Store {
 	 * «Admin» store title is untranslatable on admin attribute edit page neither by a dictionary nor manually:
 	 * https://mage2.pro/t/99
 	 * @see AbstractFrontend::getName()
-	 * @param string $r
 	 */
-	function afterGetName(Sb $sb, $r):string {return 'Admin' === $r ? __($r) : $r;}
+	function afterGetName(Sb $sb, string $r):string {return 'Admin' === $r ? __($r) : $r;}
 }
