@@ -97,7 +97,6 @@ final class Font extends \Df\Config\O {
 	/**
 	 * @used-by self::css()
 	 * @used-by self::link()
-	 * @return string
 	 */
 	function family():string {return df_first($this->familyA());}
 
