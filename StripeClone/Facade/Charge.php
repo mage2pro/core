@@ -94,7 +94,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Stripe\Facade\Charge::refund()
 	 * @see \Dfe\TBCBank\Facade\Charge::refund()
 	 * @see \Dfe\Vantiv\Facade\Charge::refund()
-	 * @param int|float|null $a
+	 * @param int|float $a
 	 * @return object
 	 */
 	abstract function refund(string $id, $a);
