@@ -8,10 +8,9 @@ use Zend_Http_Client as C;
  * @used-by \Dfe\BlackbaudNetCommunity\Url::check()
  * @used-by \Dfe\Dynamics365\Test\OAuth::discovery()
  * @used-by \Dfe\SecurePay\Refund::process()
- * @param string|null $url [optional]
  * @param array(string => mixed)|null $config [optional]
  */
-function df_zf_http($url = null, $config = []):C {
+function df_zf_http(string $url, array $config = []):C {
 	$r = new C($url, $config + [
 		'timeout' => 120
 		/**
