@@ -15,9 +15,7 @@ use Magento\Framework\DataObject as _DO;
  * то используйте именно @see array_filter(),
  * потому что встроенная функция @see array_filter() в силу реализации на языке С
  * будет работать на порядки быстрее, нежели @see df_clean().
- *
  * 2015-01-22 Теперь из исходного массива будут удаляться элементы, чьим значением является пустой массив.
- *
  * 2016-11-22
  * К сожалению, короткое решение array_diff($a, array_merge(['', null, []], df_args($remove)))
  * приводит к сбою: «Array to string conversion» в случае многомерности одного из аргументов:
@@ -27,9 +25,7 @@ use Magento\Framework\DataObject as _DO;
  * В то же время и предудущая (использованная годами) реализация слишком громоздка:
  * https://github.com/mage2pro/core/blob/1.9.14/Core/lib/array.php?ts=4#L31-L54
  * Современная версия интерпретатора PHP позволяет её сократить.
- *
  * 2017-02-13 Добавил в список удаления «false».
- *
  * @see df_clean_r()
  * @used-by df_cc_class()
  * @used-by df_ccc()
