@@ -139,15 +139,13 @@ abstract class Charge extends \Df\Payment\Charge {
 			# https://support.stripe.com/questions/does-stripe-support-dynamic-descriptors
 			,$i->k_DSD() => $i->s()->dsd()
 		] + $i->amountAndCurrency(), $k_Excluded);
-		/**
-		 * 2017-11-12
-		 * Some Stripe's sources are single-use: https://stripe.com/docs/sources#single-use-or-reusable
-		 * «Stripe API Documentation» → «Payment Methods Supported by the Sources API» →
-		 * «Single-use or reusable»:
-		 * «If a source can only be used once, this parameter is set to `single_use`
-		 * and a source must be created each time a customer makes a payment.
-		 * Such sources should not be attached to customers and should be charged directly instead.»
-		 */
+		# 2017-11-12
+		# Some Stripe's sources are single-use: https://stripe.com/docs/sources#single-use-or-reusable
+		# «Stripe API Documentation» → «Payment Methods Supported by the Sources API» →
+		# «Single-use or reusable»:
+		# «If a source can only be used once, this parameter is set to `single_use`
+		# and a source must be created each time a customer makes a payment.
+		# Such sources should not be attached to customers and should be charged directly instead.»
 		$k_CustomerId = $i->k_CustomerId(); /** @var string|null $k_CustomerId */
 		/** @var string|null $customerId */
 		if (($customerId = $payer->customerId()) && !in_array($k_CustomerId, $k_Excluded)) {
