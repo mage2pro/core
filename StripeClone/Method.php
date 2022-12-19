@@ -766,7 +766,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @param array(string => mixed) $req [optional]
 	 */
 	private function transInfo($res, array $req = []) {
-		$resA = fO::s($this)->toArray($res); /** @var array(string => mixed) $responseA */
+		$resA = fO::s($this)->toArray($res); /** @var array(string => mixed) $resA */
 		if ($this->s()->log()) {
 			# 2017-01-12, 2017-12-07
 			# I log the both request and its response to Sentry, but I log only response to the local log
