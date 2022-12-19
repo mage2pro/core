@@ -111,7 +111,7 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16 http://stackoverflow.com/questions/4659345
 	 * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
 	 */
-	function link():string {return dfc($this, function() {return $this->familyIsStandard() ? '' :
+	function link():string {return dfc($this, function():string {return $this->familyIsStandard() ? '' :
 		'//fonts.googleapis.com/css?family=' . urlencode($this->family())
 	;});}
 
