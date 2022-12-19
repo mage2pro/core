@@ -9,7 +9,7 @@ abstract class Parser extends \Df\Zf\Validate {
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
 	 * @see \Df\Zf\Validate\StringT\FloatT::isValid()
-	 * @param string $v
+	 * @param mixed $v
 	 */
 	function isValid($v):bool {
 		$this->v($v);
