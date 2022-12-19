@@ -110,10 +110,9 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * @see \Dfe\Stripe\Facade\Charge::void()
 	 * @see \Dfe\TBCBank\Facade\Charge::void()
 	 * @see \Dfe\Vantiv\Facade\Charge::void()
-	 * @param string $id
 	 * @return object
 	 */
-	abstract function void($id);
+	abstract function void(string $id);
 
 	/**
 	 * 2017-02-11 Возвращает использованную при платеже банковскую карту.
