@@ -43,9 +43,8 @@ abstract class Charge extends \Df\Payment\Charge {
 	 * @see \Dfe\Spryng\P\Charge::k_DSD()
 	 * @see \Dfe\Square\P\Charge::k_DSD()
 	 * @see \Dfe\Stripe\P\Charge::k_DSD()
-	 * @return string|null
 	 */
-	abstract protected function k_DSD();
+	abstract protected function k_DSD():string;
 
 	/**
 	 * 2017-10-09
