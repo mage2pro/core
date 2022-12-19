@@ -24,8 +24,10 @@ function df_html_b(...$a) {return df_call_a(function(string $s) {return df_tag('
  * @param string|string[] $a
  * @return string|string[]
  */
-function df_link_inline(...$a) {return df_call_a(function($res) {return df_resource_inline(
-	$res, function($url) {return df_tag('link', ['href' => $url, 'rel' => 'stylesheet', 'type' => 'text/css'], null, false);}
+function df_link_inline(...$a) {return df_call_a(function(string $res):string {return df_resource_inline(
+	$res, function(string $url):string {return df_tag(
+		'link', ['href' => $url, 'rel' => 'stylesheet', 'type' => 'text/css'], null, false
+	);}
 );}, $a);}
 
 /**
