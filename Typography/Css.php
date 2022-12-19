@@ -43,5 +43,5 @@ final class Css extends \Df\Core\O {
 	 * @used-by \Df\Typography\Font::css()
 	 * @used-by \Dfe\Frontend\Block\ProductView\Css::customCss()
 	 */
-	static function i(string $prefix = ''):string {return new self([self::$P__PREFIX => $prefix]);}
+	static function i(string $p = ''):string {return new self([self::$P__PREFIX => $p]);}
 }
