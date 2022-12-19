@@ -587,7 +587,7 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by self::charge()
 	 * @return object|array(string => mixed)
 	 */
-	private function chargeNew(bool $capture) {return dfc($this, function($capture) {
+	private function chargeNew(bool $capture) {return dfc($this, function(bool $capture) {
 		$fc = $this->fCharge(); /** @var fCharge $fc */
 		/**
 		 * 2017-06-11
