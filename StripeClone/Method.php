@@ -557,9 +557,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * 2017-07-30
 	 * 2017-08-02 For now, it is never overriden.
 	 * @used-by self::chargeNew()
-	 * @return string
 	 */
-	final protected function transPrefixForRedirectCase() {return Ev::T_3DS;}
+	final protected function transPrefixForRedirectCase():string {return Ev::T_3DS;}
 
 	/**
 	 * 2016-08-20
