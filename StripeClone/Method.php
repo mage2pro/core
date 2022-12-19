@@ -763,15 +763,15 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by self::charge()
 	 * @used-by self::chargeNew()
 	 * @param object $res
-	 * @param array(string => mixed) $request [optional]
+	 * @param array(string => mixed) $req [optional]
 	 */
-	private function transInfo($res, array $request = []) {
+	private function transInfo($res, array $req = []) {
 		$resA = fO::s($this)->toArray($res); /** @var array(string => mixed) $responseA */
 		if ($this->s()->log()) {
 			# 2017-01-12, 2017-12-07
 			# I log the both request and its response to Sentry, but I log only response to the local log
 			dfp_report($this, $resA, df_caller_f());
 		}
-		$this->iiaSetTRR($request, $resA);
+		$this->iiaSetTRR($req, $resA);
 	}
 }
