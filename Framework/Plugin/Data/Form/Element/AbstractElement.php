@@ -55,7 +55,7 @@ class AbstractElement extends Sb {
 	 * @see \Magento\Framework\Data\Form\Element\AbstractElement::getElementHtml()
 	 */
 	function afterGetElementHtml(Sb $sb, string $r):string {return
-		df_starts_with($r, '<label class="addbefore"') ? $r : df_prepend($r, $sb->getBeforeElementHtml())
+		df_starts_with($r, '<label class="addbefore"') ? $r : df_prepend($r, (string)$sb->getBeforeElementHtml())
 	;}
 
 	/**
