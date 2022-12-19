@@ -739,11 +739,8 @@ abstract class Method extends \Df\Payment\Method {
 	 * @used-by self::_refund()
 	 * @used-by self::charge()
 	 * @used-by self::chargeNew()
-	 * @param string $id
-	 * @param string $type
-	 * @return string
 	 */
-	private function e2i($id, $type) {return $this->tid()->e2i($id, $type);}
+	private function e2i(string $id, string $type):string {return $this->tid()->e2i($id, $type);}
 
 	/**
 	 * 2016-08-20
