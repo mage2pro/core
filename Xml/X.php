@@ -18,7 +18,6 @@ final class X extends MX {
 	 * @see \SimpleXMLElement::addAttribute()
 	 * @used-by self::addAttributes()
 	 * @used-by self::addChildX()
-	 * @param string $k
 	 * @param string|null $v [optional]
 	 * @param string|null $ns [optional]
 	 */
