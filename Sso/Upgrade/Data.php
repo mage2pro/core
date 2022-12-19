@@ -34,10 +34,8 @@ abstract class Data extends \Df\Framework\Upgrade\Data {
 	 * 2015-10-10
 	 * @used-by self::_process()
 	 * @used-by \Dfe\FacebookLogin\Setup\UpgradeData::_process()
-	 * @param string $name
-	 * @param string $l
 	 */
-	final protected function att($name, $l):void {Add::text(
+	final protected function att(string $name, string $l):void {Add::text(
 		$name, "{$this->labelPrefix()} $l", [], [Add::VISIBLE_ON_FRONTEND => false]
 	);}
 }
