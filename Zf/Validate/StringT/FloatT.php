@@ -5,7 +5,7 @@ final class FloatT extends Parser {
 	 * @override
 	 * @see \Zend_Validate_Interface::isValid()
 	 * @used-by df_float()
-	 * @param string $v
+	 * @param mixed $v
 	 */
 	function isValid($v):bool {
 		$this->v($v);
