@@ -179,7 +179,7 @@ final class Font extends \Df\Config\O {
 	 * 2015-12-16
 	 * @used-by self::css()
 	 */
-	private function style():string {return dfc($this, function() {return dfa(
+	private function style():string {return dfc($this, function():string {return dfa(
 		['regular' => 'normal', 'italic' => 'italic']
 		, $this->variantWord()
 		, $this->italic() ? 'italic' : ''
