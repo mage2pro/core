@@ -138,9 +138,10 @@ class F {
 	/**
 	 * 2017-03-15 Cпуск по иерархии наследования.
 	 * @used-by self::c()
+	 * @param string|null ...$s
 	 * @return string|null
 	 */
-	private function try_(string $s) {return df_con_hier_suf($this->_m, df_cc_class_uc('W', $s), false);}
+	private function try_(...$s) {return df_con_hier_suf($this->_m, df_cc_class_uc('W', $s), false);}
 
 	/**
 	 * 2017-03-15 Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.

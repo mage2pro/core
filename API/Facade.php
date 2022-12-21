@@ -223,8 +223,8 @@ abstract class Facade {
 	 * @see \Dfe\Vantiv\API\Facade::path()
 	 * @see \Inkifi\Mediaclip\API\Facade\User::path()
 	 */
-	protected function path(string $id, string $suffix = ''):string {return df_cc_path(
-		$this->prefix(), strtolower(df_class_l($this)) . 's', urlencode($id), $suffix
+	protected function path(string $id, string $suf = ''):string {return df_cc_path(
+		$this->prefix(), strtolower(df_class_l($this)) . 's', urlencode($id), $suf
 	);}
 
 	/**

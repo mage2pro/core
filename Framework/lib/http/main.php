@@ -24,7 +24,7 @@ function df_header_utf():void {df_is_cli() || headers_sent() ?: header('Content-
  * @return array(string => string)
  */
 function df_headers(array $a = []):array {return dfak_transform($a + [
-	'Author' => 'Dmitry Fedyuk', 'EMail' => 'admin@mage2.pro', 'Website' => 'https://mage2.pro'
+	'Author' => 'Dmitrii Fediuk', 'EMail' => 'admin@mage2.pro', 'Website' => 'https://mage2.pro'
 ], function($k) {return "X-Mage2.PRO-{$k}";});}
 
 /**             
