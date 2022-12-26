@@ -86,6 +86,7 @@ function df_url_trim_index(string $u):string {
  * 2016-05-30
  * @used-by df_domain()
  * @used-by df_replace_store_code_in_url()
+ * @used-by \Dfe\FacebookLogin\Customer::requestBasic()
  * @param F|bool|mixed $throw [optional]
  * @return zUri|zUriH|mixed
  * @throws E|zUriE
