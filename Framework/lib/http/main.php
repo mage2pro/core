@@ -120,7 +120,7 @@ function df_post_h():PostHelper {return df_o(PostHelper::class);}
  * @used-by \Dfe\AmazonLogin\Customer::validate()
  * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::execute()
- * @used-by \Dfe\FacebookLogin\Customer::request()
+ * @used-by \Dfe\FacebookLogin\Customer::req()
  * @used-by \Dfe\FacebookLogin\Customer::token()
  * @used-by \Dfe\IPay88\Controller\CustomerReturn\Index::isSuccess()
  * @used-by \Dfe\IPay88\Controller\CustomerReturn\Index::message()

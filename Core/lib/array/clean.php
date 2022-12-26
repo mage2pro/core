@@ -63,7 +63,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Dfe\Customer\Plugin\Customer\Model\Address\AbstractAddress::afterValidate()
  * @used-by \Dfe\Dynamics365\API\Facade::productpricelevels()
  * @used-by \Dfe\Dynamics365\Button::pExtra()
- * @used-by \Dfe\FacebookLogin\Customer::request()
+ * @used-by \Dfe\FacebookLogin\Customer::req()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::kl_order_lines()
  * @used-by \Dfe\Markdown\Modifier::modifyData()
  * @used-by \Dfe\Moip\API\Validator::long()
