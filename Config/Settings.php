@@ -463,6 +463,7 @@ abstract class Settings {
 	 * @used-by self::child()
 	 * @used-by self::convention()
 	 * @used-by \CanadaSatellite\Amelia\Block::_toHtml() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
+	 * @used-by \Dfe\FacebookLogin\Customer::req()
 	 * @used-by \Dfe\Sift\API\B\Event::p()
 	 * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
 	 * @used-by \Dfe\Sift\Controller\Index\Index::checkSignature()
