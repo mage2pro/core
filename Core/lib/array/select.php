@@ -186,6 +186,7 @@ function dfad($o, $k = '', $d = null) {return df_nes($k) ? $o : dfa(df_gd($o), $
  * @used-by \Df\Payment\TM::req()
  * @used-by \Df\Payment\TM::res0()
  * @used-by \Dfe\CheckoutCom\Response::a()
+ * @used-by \Dfe\FacebookLogin\Customer::r()
  * @param object $o
  * @param string|string[] $k [optional]
  * @param mixed|callable|null $d [optional]
