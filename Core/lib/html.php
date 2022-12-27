@@ -76,6 +76,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * 2016-05-30 From now on $attrs could be a string. It is the same as ['class' => $attrs].
  * @used-by cs_quote_description() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/107)
  * @used-by df_caller_mh()
+ * @used-by df_flag_tag()
  * @used-by df_html_b()
  * @used-by df_js_data()
  * @used-by df_js_inline_r()
