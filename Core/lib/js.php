@@ -97,7 +97,7 @@ function df_js_inline_r(string $n):string {return df_tag('script', ['type' => 't
  */
 function df_js_inline_url(string $res, bool $async = false):string {return df_resource_inline(
 	$res, function(string $url) use($async):string {return df_tag(
-		'script', ['src' => $url, 'type' => 'text/javascript'] + (!$async ? [] : ['async' => 'async']), null, false
+		'script', ['src' => $url, 'type' => 'text/javascript'] + (!$async ? [] : ['async' => 'async']), '', false
 	);}
 );}
 
