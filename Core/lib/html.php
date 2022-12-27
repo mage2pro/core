@@ -98,10 +98,10 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/selected_car_onsearchresultpage.phtml
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L31
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
- * @param string|null|string[] $content [optional]
+ * @param string|string[] $content [optional]
  * @param bool|null $multiline [optional]
  */
-function df_tag(string $tag, $attrs = [], $content = null, $multiline = null):string {
+function df_tag(string $tag, $attrs = [], $content = '', $multiline = null):string {
 	$t = new Tag($tag, is_array($attrs) ? $attrs : ['class' => $attrs], $content, $multiline); /** @vat Tag $t */
 	return $t->render();
 }
