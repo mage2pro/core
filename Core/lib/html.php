@@ -26,7 +26,7 @@ function df_html_b(...$a) {return df_call_a(function(string $s) {return df_tag('
  */
 function df_link_inline(...$a) {return df_call_a(function(string $res):string {return df_resource_inline(
 	$res, function(string $url):string {return df_tag(
-		'link', ['href' => $url, 'rel' => 'stylesheet', 'type' => 'text/css'], null, false
+		'link', ['href' => $url, 'rel' => 'stylesheet', 'type' => 'text/css'], '', false
 	);}
 );}, $a);}
 
