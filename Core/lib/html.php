@@ -77,6 +77,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by cs_quote_description() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/107)
  * @used-by df_caller_mh()
  * @used-by df_html_b()
+ * @used-by df_js_inline_r()
  * @used-by df_js_data()
  * @used-by df_js_x()
  * @used-by df_kv_table()
