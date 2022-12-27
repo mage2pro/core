@@ -80,6 +80,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by df_kv_table()
  * @used-by df_tag_list()
  * @used-by \AlbumEnvy\Popup\Content::_toHtml()
+ * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Framework\Console\Command::execute()
  * @used-by \Dfe\Klarna\Button::_toHtml()
