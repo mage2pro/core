@@ -5,10 +5,10 @@ final class Tag {
 	 * 2022-11-21
 	 * @used-by df_tag()
 	 * @param array(string => string) $attrs [optional]
-	 * @param string|null|string[] $content [optional]
+	 * @param string|string[] $content [optional]
 	 * @param bool|null $multiline [optional]
 	 */	
-	function __construct(string $tag, array $attrs = [], $content = null, $multiline = null) {
+	function __construct(string $tag, array $attrs = [], $content = '', $multiline = null) {
 		$this->_tag = strtolower($tag);	
 		$this->_attrs = $attrs;	
 		$this->_content = $content;	
