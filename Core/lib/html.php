@@ -83,6 +83,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
  * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::inner1()
  * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::innerRow()
+ * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::note()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
  * @used-by \Df\Framework\Console\Command::execute()
  * @used-by \Dfe\Klarna\Button::_toHtml()
