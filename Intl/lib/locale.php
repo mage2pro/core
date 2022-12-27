@@ -47,12 +47,12 @@ function df_lang_zh_en():string {return df_lang_zh('zh', 'en');}
 
 /**
  * 2015-08-15               
- * @used-by df_currency_name()  
+ * @used-by df_currency_name()
+ * @used-by df_geo()
  * @used-by df_intl_dic_path()
  * @used-by df_lang()
  * @used-by df_lang_ru()  
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
- * @used-by \Df\Geo\Client::s()
  * @used-by \Df\Intl\Js::_toHtml()
  * @used-by \Dfe\CurrencyFormat\O::postProcess()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
