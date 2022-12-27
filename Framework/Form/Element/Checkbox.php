@@ -75,7 +75,7 @@ class Checkbox extends _P {
 		$this->unsetData('value');
 		$result = ''; /** @var string $result */
 		$htmlId = $this->getHtmlId();
-		/** @var string|null $label */ /** @var string|null $before */ /** @var string|null $after */
+		/** @var string|null $label */ /** @var string $before */ /** @var string $after */
 		# 2020-03-02, 2022-10-31
 		# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 		#		[$a, $b] = [1, 2];
@@ -86,7 +86,7 @@ class Checkbox extends _P {
 		# https://stackoverflow.com/a/28233499
 		list($before, $after) =
 			!($label = $this[self::LABEL]) ? [$this->getBeforeElementHtml(), $this->getAfterElementHtml()] : (
-				!!$this[self::LABEL_POSITION_BEFORE] ? [$label, null] : [null, $label]
+				!!$this[self::LABEL_POSITION_BEFORE] ? [$label, ''] : ['', $label]
 			)
 		;
 		if ($before) {
