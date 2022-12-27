@@ -103,6 +103,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by \Df\Payment\Block\Info::msgUnconfirmed()
  * @used-by \Df\Payment\Block\Info::rCustomerAccount()
  * @used-by \Df\Payment\Block\Info::rCheckoutSuccess()
+ * @used-by \Df\Payment\Block\Info::rBackend()
  * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\PostFinance\Block\Info::prepare()
  * @used-by \Dfe\Stripe\Block\Form::_toHtml()
