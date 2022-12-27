@@ -97,6 +97,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by \Df\Config\Plugin\Block\System\Config\Form\Fieldset::aroundRender()
  * @used-by \Df\Framework\Console\Command::execute()
  * @used-by \Df\Framework\Form\Element\Checkbox::getElementHtml()
+ * @used-by \Df\Framework\Form\Element\Url::getElementHtml()
  * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\PostFinance\Block\Info::prepare()
  * @used-by \Dfe\Stripe\Block\Form::_toHtml()
