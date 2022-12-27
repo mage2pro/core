@@ -114,6 +114,8 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by \Dfe\Logo\Plugin\Catalog\Block\Product\View\Options::aroundGetOptionHtml()
  * @used-by \Dfe\Markdown\FormElement::componentHtml()
  * @used-by \Dfe\Moip\CardFormatter::label()
+ * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
+ * @used-by \Dfe\Moip\FE\Webhooks::getElementHtml()
  * @used-by \Dfe\PostFinance\Block\Info::prepare()
  * @used-by \Dfe\Stripe\Block\Form::_toHtml()
  * @used-by \Frugue\Shipping\Header::_toHtml()
