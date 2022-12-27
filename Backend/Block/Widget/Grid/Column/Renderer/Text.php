@@ -55,11 +55,9 @@ class Text extends AbstractRenderer {
 		elseif (is_bool($v)) {
 			$v = df_bts($v);
 		}
-		/**
-		 * 2017-01-13
-		 * Результат должен быть строкой, потому что он используется в шаблоне *.phtml с оператором echo:
-		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Backend/view/adminhtml/templates/widget/grid/extended.phtml#L194
-		 */
+		 # 2017-01-13
+		 # Результат должен быть строкой, потому что он используется в шаблоне *.phtml с оператором echo:
+		 # https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Backend/view/adminhtml/templates/widget/grid/extended.phtml#L194
 		return df_result_s(df_check_json_complex($v) || df_check_xml($v) ? df_tag('pre', [], $v) : $v);
 	}
 }
