@@ -367,9 +367,8 @@ abstract class Info extends _P {
 	 * @used-by self::rCheckoutSuccess()
 	 * @see \Df\GingerPaymentsBase\Block\Info::msgCheckoutSuccess()
 	 * @see \Dfe\Moip\Block\Info\Boleto::msgCheckoutSuccess()
-	 * @return string|null
 	 */
-	protected function msgCheckoutSuccess() {return 'Not implemented.';}
+	protected function msgCheckoutSuccess():string {return 'Not implemented.';}
 
 	/**
 	 * 2017-03-29
