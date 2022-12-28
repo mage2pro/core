@@ -672,7 +672,7 @@ abstract class Info extends _P {
 	 * 2017-08-24
 	 * @used-by self::_toHtml()
 	 */
-	private function rMultishipping():Phrase {return $this->m()->getTitle();}
+	private function rMultishipping():string {return (string)$this->m()->getTitle();}
 
 	/**
 	 * 2017-03-25
