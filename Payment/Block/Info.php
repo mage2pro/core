@@ -197,9 +197,8 @@ abstract class Info extends _P {
 	 *		}
 	 *		$html = $this->_afterToHtml($html);
 	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L643-L689
-	 * @return string|null
 	 */
-	final protected function _toHtml() {return
+	final protected function _toHtml():string {return
 		(
 			!($m = $this->m()) instanceof M
 			/**
@@ -211,7 +210,7 @@ abstract class Info extends _P {
 			 */
 			|| !($с = dfpm_c($this, true))
 			|| !is_a($m, $с)
-		) ? null : (
+		) ? '' : (
 			$this->_pdf ? $this->rPDF() : (
 				df_sales_email_sending() ? $this->rEmail() : (
 					df_is_checkout_success() ? $this->rCheckoutSuccess() : (
