@@ -576,10 +576,9 @@ abstract class Info extends _P {
 	 * Проверки нам нужны, чтобы блок одного модуля не отображался после оплаты другим.
 	 * https://github.com/mage2pro/core/blob/2.4.9/Checkout/view/frontend/web/success.less#L5
 	 * @used-by self::_toHtml()
-	 * @return string|null
 	 */
-	private function rCheckoutSuccess() {/** @var M|IM $m */ return
-		!($s = $this->msgCheckoutSuccess()) ? null : df_tag('div', 'df-checkout-success', $s)
+	private function rCheckoutSuccess():string {/** @var M|IM $m */ return
+		!($s = $this->msgCheckoutSuccess()) ? '' : df_tag('div', 'df-checkout-success', $s)
 	;}
 
 	/**
