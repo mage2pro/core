@@ -1913,9 +1913,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by self::tidFormat()
 	 * @see \Df\GingerPaymentsBase\Method::transUrl()
 	 * @see \Df\StripeClone\Method::transUrl()
-	 * @return string|null
 	 */
-	protected function transUrl(T $t) {return null;}
+	protected function transUrl(T $t):string {return '';}
 
 	/**
 	 * 2017-03-30 Цель этого метода — запретить использовать для класса оператор new вне класса.
