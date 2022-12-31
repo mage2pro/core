@@ -73,6 +73,7 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @used-by \Df\Framework\Request::extra()
  * @used-by \Df\GoogleFont\Exception::message()
  * @used-by \Df\GoogleFont\Font\Variant\Preview\Params::fromRequest()
+ * @used-by \Df\GoogleFont\Fonts::get()
  * @used-by \Df\Payment\Charge::metadata()
  * @used-by \Df\Payment\W\Reader::r()
  * @used-by \Df\Payment\W\Reader::test()
