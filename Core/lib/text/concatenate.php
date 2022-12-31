@@ -70,7 +70,7 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
  * @param string|string[] $a
  */
-function df_cc_n(...$a):string {return df_ccc("\n", dfa_flatten($a));}
+function df_cc_n(...$a):string {return df_ccc("\n", $a);}
 
 /**
  * 2015-12-01 Отныне всегда используем / вместо DIRECTORY_SEPARATOR.

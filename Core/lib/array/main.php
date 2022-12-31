@@ -162,7 +162,6 @@ function dfa_fill(int $startIndex, int $length, $v):array {return !$length ? [] 
  * @used-by df_cc_br()
  * @used-by df_cc_class()
  * @used-by df_cc_class_uc()
- * @used-by df_cc_n()
  * @used-by df_cc_path()
  * @used-by df_cc_path_t()
  * @used-by df_cc_s()

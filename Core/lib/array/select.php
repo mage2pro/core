@@ -71,6 +71,7 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @used-by \Df\Framework\Log\Dispatcher::handle()
  * @used-by \Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()
  * @used-by \Df\Framework\Request::extra()
+ * @used-by \Df\GoogleFont\Exception::message()
  * @used-by \Df\GoogleFont\Font\Variant\Preview\Params::fromRequest()
  * @used-by \Df\Payment\Charge::metadata()
  * @used-by \Df\Payment\W\Reader::r()
