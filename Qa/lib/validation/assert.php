@@ -57,6 +57,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by df_oqi_amount()
  * @used-by dfaf()
  * @used-by \Df\GoogleFont\Font::variant()
+ * @used-by \Df\GoogleFont\Fonts::get()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\Event::oi()
