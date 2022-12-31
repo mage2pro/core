@@ -8,7 +8,6 @@ namespace Df\Core;
  * @see \Df\Config\O
  * @see \Df\Core\Text\Regex
  * @see \Df\GoogleFont\Font
- * @see \Df\GoogleFont\Font\Variant
  * @see \Df\GoogleFont\Font\Variant\Preview\Params
  * @see \Df\GoogleFont\Fonts
  * @see \Df\GoogleFont\Fonts\Png
