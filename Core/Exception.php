@@ -227,6 +227,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * то вызываем метод @see \Df\Core\Exception::standard().
 	 * Этот метод конвертирует исключительную ситуацию в стандартную,
 	 * и стандартная среда её успешно обработает.
+     * @used-by \Df\GoogleFont\Fonts::responseA()
 	 */
 	function standard():E {return dfc($this, function() {return new E($this->message(), 0, $this);});}
 
