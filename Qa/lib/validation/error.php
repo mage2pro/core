@@ -113,7 +113,6 @@ function df_abstract($caller):void {
  * @used-by \Df\Framework\Form\Element\Text::getValue()
  * @used-by \Df\Geo\Client::onError()
  * @used-by \Df\GingerPaymentsBase\Api::req()
- * @used-by \Df\GoogleFont\Font::variant()
  * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Df\Payment\Method::getInfoBlockType()
  * @used-by \Df\Payment\Method::getInfoInstance()
