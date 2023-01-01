@@ -61,7 +61,7 @@ function df_img_resize(string $f, $w = null, $h = null):string {
 /**
  * 2015-11-30                                      
  * @used-by df_media_url2path()
- * @used-by \Df\GoogleFont\Fonts\Fs::baseAbsolute()
+ * @used-by \Df\GoogleFont\Fonts\Fs::absolute()
  * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_product_image_path2abs()
