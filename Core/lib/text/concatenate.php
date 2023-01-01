@@ -103,7 +103,7 @@ function df_cc_path(...$a):string {return df_ccc('/', dfa_flatten($a));}
 /**
  * 2016-05-31
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
- * @used-by \Df\GoogleFont\Fonts\Fs::baseRelative()
+ * @used-by \Df\GoogleFont\Fonts\Fs::absolute()
  * @param string|string[] $a
  */
 function df_cc_path_t(...$a):string {return df_append(df_cc_path(dfa_flatten($a)), '/');}
