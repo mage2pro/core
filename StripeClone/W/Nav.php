@@ -1,6 +1,5 @@
 <?php
 namespace Df\StripeClone\W;
-use Magento\Tests\NamingConvention\true\string;
 /**
  * 2017-03-15
  * 2017-03-26, 2017-11-10

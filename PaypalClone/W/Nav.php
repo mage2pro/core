@@ -1,6 +1,5 @@
 <?php
 namespace Df\PaypalClone\W;
-use Magento\Tests\NamingConvention\true\string;
 /**
  * 2017-03-15
  * 2017-09-14 It is used as a base for the \Dfe\Qiwi\W\Nav virtual type.
