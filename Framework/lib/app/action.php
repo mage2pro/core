@@ -62,12 +62,14 @@ function df_action_prefix($p):bool {return df_starts_with(df_action_name(), $p);
  * 2019-12-26
  * @see \Magento\Store\App\Response\Redirect::getRefererUrl():
  * 		df_response_redirect()->getRefererUrl()
+ * 2023-01-28
+ * «Return value of df_referer() must be of the type string, null returned»: https://github.com/mage2pro/core/issues/177
  * @used-by df_context()
  * @used-by df_referer_ends_with()
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
  * @used-by https://github.com/royalwholesalecandy/core/issues/58#issuecomment-569049731
  */
-function df_referer():string {return dfa($_SERVER, 'HTTP_REFERER');}
+function df_referer():string {return dfa($_SERVER, 'HTTP_REFERER', '');}
 
 /**
  * 2019-11-04
