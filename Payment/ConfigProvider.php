@@ -77,8 +77,8 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	/**
 	 * 2016-08-27
 	 * 2023-01-28
-	 * «Declaration of Df\Payment\ConfigProvider::s(): Df\Payment\Settings must be compatible with Df\Config\ISettings::s()»:
-	 * https://github.com/mage2pro/core/issues/180
+	 * «Declaration of Df\Payment\ConfigProvider::s(): Df\Payment\Settings
+	 * must be compatible with Df\Config\ISettings::s(): Df\Config\Settings»: https://github.com/mage2pro/core/issues/180
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Config\ISettings::s()
