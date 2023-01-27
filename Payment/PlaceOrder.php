@@ -28,10 +28,14 @@ final class PlaceOrder {
 	 * а также ту дополнительную информацию, которую передала клиентская часть модуля оплаты.
 	 * Например: [additional_data => [], method => "dfe_klarna"].
 	 * 2) For a guest customer $cartId is a string like «63b25f081bfb8e4594725d8a58b012f7».
+	 * 2023-01-28
+	 * «Method's return type must be specified using @return annotation. See Df\Payment\PlaceOrder::guest()»
+	 * on `bin/magento setup:upgrade`: https://github.com/mage2pro/core/issues/179
 	 * @param IQP|QP $qp
 	 * @param IQA|QA|null $ba
 	 * 2017-04-04 Важно возвращать именно string: @see dfw_encode()
 	 * @throws CouldNotSave|LE
+	 * @return string
 	 */
 	function guest(string $cartId, string $email, IQP $qp, IQA $ba = null):string {return $this->p(
 		true, $cartId, $email, $qp, $ba
@@ -39,9 +43,13 @@ final class PlaceOrder {
 
 	/**
 	 * 2016-05-04
+	 * 2023-01-28
+	 * «Method's return type must be specified using @return annotation» on `bin/magento setup:upgrade`:
+	 * https://github.com/mage2pro/core/issues/179
 	 * @param IQP|QP $qp
 	 * @param IQA|QA|null $ba
 	 * @throws CouldNotSave|LE
+	 * @return string
 	 */
 	function registered(int $cartId, IQP $qp, IQA $ba = null):string {return $this->p(false, $cartId, $qp, $ba);}
 
