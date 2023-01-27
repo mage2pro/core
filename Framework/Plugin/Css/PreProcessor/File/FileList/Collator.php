@@ -36,8 +36,9 @@ final class Collator {
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/View/File/FileList.php#L72-L81
 	 * https://github.com/magento/magento2/blob/2.3.4/lib/internal/Magento/Framework/View/File/FileList.php#L72-L81
 	 * @param array(string => F) $r
+	 * @return F[]
 	 */
-	function afterCollate(Sb $sb, array $r):string {
+	function afterCollate(Sb $sb, array $r):array {
 		if ($r) {
 			$my = array_flip(df_modules_my()); /** @var array(string => int) $my */
 			$f = function(F $f) use($my):int {return dfa($my, $f->getModule(), -1);};
