@@ -60,11 +60,16 @@ abstract class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	/**
 	 * 2016-08-27
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
+	 * 2023-01-28
+	 * «Declaration of Df\Shipping\ConfigProvider::s(): Df\Shipping\Settings
+	 * must be compatible with Df\Config\ISettings::s(): Df\Config\Settings»:
+	 * https://github.com/mage2pro/core/issues/183
 	 * @override
 	 * @see \Df\Config\ISettings::s()
 	 * @used-by self::getConfig()
+	 * @return S
 	 */
-	function s():S {return $this->m()->s();}
+	function s():\Df\Config\Settings {return $this->m()->s();}
 
 	/**
 	 * 2017-02-07
