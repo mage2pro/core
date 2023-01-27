@@ -11,9 +11,12 @@ final class BlackList {
 
 	/**
 	 * 2021-09-16
+	 * 2023-01-27
+	 * «Return value of Df\Security\BlackList::has() must be of the type boolean, null returned»:
+	 * https://github.com/mage2pro/core/issues/176
 	 * @used-by \Df\Framework\Plugin\App\Http::aroundLaunch()
 	 */
-	static function has(string $ip = ''):bool {return dfa(self::load(), self::ip($ip));}
+	static function has(string $ip = ''):bool {return array_key_exists(self::ip($ip), self::load());}
 
 	/**
 	 * 2021-09-16

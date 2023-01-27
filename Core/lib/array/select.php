@@ -78,7 +78,6 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @used-by \Df\Payment\W\Reader::r()
  * @used-by \Df\Payment\W\Reader::test()
  * @used-by \Df\PaypalClone\Signer::v()
- * @used-by \Df\Security\BlackList::has()
  * @used-by \Df\Sentry\Client::__construct()
  * @used-by \Df\Sentry\Client::capture()
  * @used-by \Df\Sentry\Client::get_http_data()
