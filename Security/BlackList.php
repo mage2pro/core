@@ -27,8 +27,8 @@ final class BlackList {
 	 * @used-by self::add()
 	 * @return array(string => int)
 	 */
-	private static function load():array {$t = time(); /** @var int $t */return array_filter(
-		($j = df_cfg(self::$K)) ? df_json_decode($j) : [], function($v) use($t) {return $t < $v;}
+	private static function load():array {$t = time(); /** @var int $t */ return array_filter(
+		($j = df_cfg(self::$K)) ? df_json_decode($j) : [], function(int $v) use($t):bool {return $t < $v;}
 	);}
 
 	/**
