@@ -76,6 +76,9 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 
 	/**
 	 * 2016-08-27
+	 * 2023-01-28
+	 * «Declaration of Df\Payment\ConfigProvider::s(): Df\Payment\Settings must be compatible with Df\Config\ISettings::s()»:
+	 * https://github.com/mage2pro/core/issues/180
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @override
 	 * @see \Df\Config\ISettings::s()
@@ -86,8 +89,9 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	 * @used-by \Dfe\AllPay\ConfigProvider::options()
 	 * @used-by \Dfe\IPay88\ConfigProvider::options()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
+	 * @return S
 	 */
-	function s():S {return $this->m()->s();}
+	function s():\Df\Config\Settings {return $this->m()->s();}
 
 	/**
 	 * 2017-04-17 The result amount is in the payment currency.
