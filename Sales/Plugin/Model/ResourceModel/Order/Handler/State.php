@@ -70,7 +70,7 @@ final class State {
 	 * Как видно из этого кода, ядро будет в этой точке программы
 	 * повторно пытаться насильно установить нашему заказу состояние «Complete».
 	 */
-	function aroundCheck(Sb $sb, \Closure $f, O $o):string {
+	function aroundCheck(Sb $sb, \Closure $f, O $o):Sb {
 		$f($o);
 		if (dfp_my($op = $o->getPayment())) {/** @var OP|null $op */
 			$cm = $op->getCreditmemo(); /** @var CM|null $cm */
@@ -83,8 +83,7 @@ final class State {
 				 * в состояние «Complete» методом @see \Magento\Sales\Model\Order\Payment::refund().
 				 */
 				$o->setState(O::STATE_PROCESSING)->setStatus(df_order_ds(O::STATE_PROCESSING));
-				# 2017-01-19
-				# https://github.com/mage2pro/core/blob/1.11.25/Payment/lib/refund.php#L77-L134
+				# 2017-01-19 https://github.com/mage2pro/core/blob/1.11.25/Payment/lib/refund.php#L77-L134
 			}
 		}
 		return $sb;
