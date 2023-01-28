@@ -101,7 +101,7 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by self::type()
 	 * @return string|int
 	 */
-	private static function info(string $k) {return dfa(error_get_last(), $k);}
+	private static function info(string $k) {return str_replace(BP . DS, '', dfa(error_get_last(), $k));}
 
 	/** @used-by self::check() */
 	private static function isFatal():bool {
@@ -148,7 +148,9 @@ final class Error extends \Df\Qa\Failure {
 	/**
 	 * 2023-01-28
 	 */
-	private static function msg():string {return self::info('message');}
+	private static function msg():string {
+		return self::info('message');
+	}
 
 	/**
 	 * @used-by self::isFatal()
