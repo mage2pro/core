@@ -81,6 +81,7 @@ function df_path_n_real(string $p):string {return str_replace(['\/', '\\', '/'],
  * @used-by df_file_write()
  * @used-by df_media_path_relative
  * @used-by df_product_images_path_rel()
+ * @used-by \Df\Qa\Failure\Error::preface()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Df\Sentry\Trace::info()
  */

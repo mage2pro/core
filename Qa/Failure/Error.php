@@ -18,7 +18,7 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by self::report()
 	 */
 	protected function preface():string {return df_kv(
-		df_context() + ['File' => $this::info('file'), 'Line' => $this::info('line')]
+		df_context() + ['File' => df_path_relative($this::info('file')), 'Line' => $this::info('line')]
 	);}
 
 	/**
@@ -145,7 +145,7 @@ final class Error extends \Df\Qa\Failure {
 	}
 
 	/**
-	 * 2023-01-28
+	 * 2023-01-28 The stack trace returned by @see error_get_last() is chopped.
 	 * @used-by self::main()
 	 */
 	private static function msg():string {return df_adjust_paths_in_message(self::info('message'));}
