@@ -27,7 +27,7 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by \Df\Qa\Failure::report()
 	 * @used-by self::report()
 	 */
-	protected function preface():string {return df_json_encode(df_context());}
+	protected function preface():string {return df_kv(df_context());}
 
 	/**
 	 * @override

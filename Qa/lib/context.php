@@ -5,7 +5,7 @@
  * @used-by \Df\Qa\Failure\Error::preface()
  * @return array(string => mixed)
  */
-function df_context():array {return [
+function df_context():array {return
 	['mage2pro/core' => df_core_version(), 'Magento' => df_magento_version(), 'PHP' => phpversion()]
 	+ (df_is_cli()
 		? ['Command' => df_cli_cmd()]
@@ -20,4 +20,4 @@ function df_context():array {return [
 			,'User-Agent' => df_request_ua()
 		] + (!df_request_o()->isPost() ? [] : ['Post' => $_POST]))
 	)
-];}
+;}
