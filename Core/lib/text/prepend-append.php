@@ -15,7 +15,6 @@ function df_n_prepend(string $s):string {return df_es($s) ? $s : "\n$s";}
 /**
  * Аналог @see str_pad() для Unicode: http://stackoverflow.com/a/14773638
  * @used-by df_kv()
- * @used-by \Df\Qa\Trace\Formatter::param()
  * @used-by \Dfe\Moip\CardFormatter::label()
  */
 function df_pad(string $phrase, int $length, string $pattern = ' ', int $position = STR_PAD_RIGHT):string {/** @var string $r */

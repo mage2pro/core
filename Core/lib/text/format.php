@@ -45,6 +45,7 @@ function df_format(...$a):string { /** @var string $r */
  * @used-by df_api_rr_failed()
  * @used-by \Df\API\Client::p()
  * @used-by \Df\Qa\Failure\Error::preface()
+ * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Df\Sentry\Client::send_http()
  * @param array(string => string) $a
  */
