@@ -5,6 +5,19 @@ use ReflectionParameter as RP;
 final class Frame extends \Df\Core\O {
 	/**
 	 * 2015-04-03 Путь к файлу отсутствует при вызовах типа @see call_user_func()
+	 * 2023-01-28
+	 * 1) The 'file' key can be absent in a stack frame, e.g.:
+	 *	{
+	 *		"function": "loadClass",
+	 *		"class": "Composer\\Autoload\\ClassLoader",
+	 *		"type": "->",
+	 *		"args": ["Df\\Framework\\Plugin\\App\\Router\\ActionList\\Interceptor"]
+	 *	},
+	 *	{
+	 *		"function": "spl_autoload_call",
+	 *		"args": ["Df\\Framework\\Plugin\\App\\Router\\ActionList\\Interceptor"]
+	 *	},
+	 * 2) @see \Df\Qa\Trace::__construct()
 	 * @used-by \Df\Qa\Trace\Formatter::frame()
 	 * @return string|null
 	 */
