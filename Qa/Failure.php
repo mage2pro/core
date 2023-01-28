@@ -33,7 +33,6 @@ abstract class Failure {
 	/**
 	 * @used-by self::report()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
-	 * @see \Df\Qa\Failure\Error::postface()
 	 * @see \Df\Qa\Failure\Exception::postface()
 	 */
 	protected function postface():string {return Formatter::p(new Trace(array_slice($this->trace(), $this->stackLevel())));}

@@ -8,17 +8,7 @@ final class Error extends \Df\Qa\Failure {
 	 * @see \Df\Qa\Failure::main()
 	 * @used-by \Df\Qa\Failure::report()
 	 */
-	protected function main():string {return df_cc_n(
-		"[{$this::type(true)}] {$this::msg()}"
-	);}
-
-	/**
-	 * 2023-01-28
-	 * @override
-	 * @see \Df\Qa\Failure::postface()
-	 * @used-by \Df\Qa\Failure::report()
-	 */
-	protected function postface():string {return df_kv(['File' => $this::info('file'), 'Line' => $this::info('line')]);}
+	protected function main():string {return "[{$this::type(true)}] {$this::msg()}";}
 
 	/**
 	 * 2020-09-25 "Enrich data logged by my `register_shutdown_function` handler": https://github.com/mage2pro/core/issues/144
@@ -27,7 +17,9 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by \Df\Qa\Failure::report()
 	 * @used-by self::report()
 	 */
-	protected function preface():string {return df_kv(df_context());}
+	protected function preface():string {return df_kv(
+		df_context() + ['File' => $this::info('file'), 'Line' => $this::info('line')]
+	);}
 
 	/**
 	 * @override
@@ -108,7 +100,7 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by self::type()
 	 * @return string|int
 	 */
-	private static function info(string $k) {return str_replace(BP . DS, '', dfa(error_get_last(), $k));}
+	private static function info(string $k) {return dfa(error_get_last(), $k);}
 
 	/** @used-by self::check() */
 	private static function isFatal():bool {
@@ -154,10 +146,9 @@ final class Error extends \Df\Qa\Failure {
 
 	/**
 	 * 2023-01-28
+	 * @used-by self::main()
 	 */
-	private static function msg():string {
-		return self::info('message');
-	}
+	private static function msg():string {return df_adjust_paths_in_message(self::info('message'));}
 
 	/**
 	 * @used-by self::isFatal()

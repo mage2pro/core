@@ -44,7 +44,6 @@ function df_format(...$a):string { /** @var string $r */
  * 2017-07-09
  * @used-by df_api_rr_failed()
  * @used-by \Df\API\Client::p()
- * @used-by \Df\Qa\Failure\Error::main()
  * @used-by \Df\Qa\Failure\Error::preface()
  * @used-by \Df\Sentry\Client::send_http()
  * @param array(string => string) $a
