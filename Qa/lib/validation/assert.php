@@ -54,6 +54,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by df_assert_qty_supported()
  * @used-by df_config_field()
  * @used-by df_module_dir()
+ * @used-by df_module_file_name()
  * @used-by df_oqi_amount()
  * @used-by dfaf()
  * @used-by \Df\GoogleFont\Font::variant()

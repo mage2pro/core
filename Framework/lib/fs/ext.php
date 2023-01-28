@@ -12,7 +12,7 @@ function df_file_ext(string $f):string {return pathinfo($f, PATHINFO_EXTENSION);
  * 2020-06-28
  * @see df_strip_ext()
  * @used-by df_block()
- * @used-by df_module_file()
+ * @used-by df_module_file_name()
  */
 function df_file_ext_add(string $f, string $ext = ''):string {return !$ext ? $f : df_append($f, ".$ext");}
 

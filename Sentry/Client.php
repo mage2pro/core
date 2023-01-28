@@ -282,7 +282,7 @@ final class Client {
 			$errno = curl_errno($c);
 			# CURLE_SSL_CACERT || CURLE_SSL_CACERT_BADFILE
 			if ($errno == 60 || $errno == 77) {
-				curl_setopt($c, CURLOPT_CAINFO, df_module_file($this, 'cacert.pem'));
+				curl_setopt($c, CURLOPT_CAINFO, df_module_file_name($this, 'cacert.pem'));
 				curl_exec($c);
 			}
 		}

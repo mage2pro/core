@@ -1,25 +1,7 @@
 <?php
+use Closure as F;
 use Magento\Framework\Module\Dir;
 use Magento\Framework\Module\Dir\Reader;
-
-/**
- * 2017-09-01
- * @see df_intl_dic_read()
- * @see df_module_enum()
- * @see df_module_json()
- * $m could be:
- * 1) A module name: «A_B»
- * 2) A class name: «A\B\C».
- * 3) An object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @used-by \Dfe\PostFinance\W\Event::optionTitle()
- * @used-by \Dfe\Qiwi\API\Validator::codes()
- * @param string|object|null $m
- * @return array(string => mixed)
- */
-function df_module_csv2($m, string $name, bool $req = true):array {return df_module_file($m, $name, 'csv', $req,
-	function(string $f):array {return df_csv_o()->getDataPairs($f);}
-);}
 
 /**
  * 2015-08-14
@@ -72,80 +54,30 @@ function df_module_dir($m, string $type = ''):string {
 	}
 	else {
 		$r = df_framework_path();
-		df_assert(!$type); # 2019-12-31 'Magento_Framework' is not a module, so it does not have subpaths specific for modules.
+		# 2019-12-31 'Magento_Framework' is not a module, so it does not have subpaths specific for modules.
+		df_assert(!$type);
 	}
 	return $r;
 }
 
 /**
- * 2019-12-31
- * @used-by df_module_dir()
- */
-function df_module_dir_reader():Reader {return df_o(Reader::class);}
-
-/**
- * 2020-02-02
- * @see df_module_csv2()
- * @see df_module_json()
- * $m could be:
- * 1) A module name: «A_B»
- * 2) A class name: «A\B\C».
- * 3) An object: it comes down to the case 2 via @see get_class()
- * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
- * @param string|object|null $m
- * @return array(string => mixed)
- */
-function df_module_enum($m, string $name, bool $req = true):array {return df_module_file($m, $name, 'txt', $req,
-	function(string $f):array {return df_explode_n(df_contents($f));}
-);}
-
-/**
- * 2017-09-01
+ * 2023-09-28
  * $m could be:
  * 		1) a module name: «A_B»
  * 		2) a class name: «A\B\C».
  * 		3) an object: it comes down to the case 2 via @see get_class()
  * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @used-by df_module_csv2()
- * @used-by df_module_json()  
+ * @used-by df_module_file_read()
  * @used-by \Df\Sentry\Client::send_http()
  * @param string|object|null $m
- * @return array(string => mixed)
+ * @param F|bool|mixed $onE [optional]
  */
-function df_module_file($m, string $name, string $ext = '', bool $req = true, Closure $parser = null):array {return dfcf(
-	function($m, string $name, string $ext = '', $req = true, Closure $parser = null):array {return
-		file_exists($f = df_module_path_etc($m, df_file_ext_add($name, $ext)))
-			? (!$parser ? $f : $parser($f))
-			: (!$req ? [] : df_error('The required file «%1» is absent.', $f))
-	;}, func_get_args()
-);}
-
-/**
- * 2017-01-27
- * $m could be:
- * 		1) a module name: «A_B»
- * 		2) a class name: «A\B\C».
- * 		3) an object: it comes down to the case 2 via @see get_class()
- * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @see df_module_csv2()
- * @see df_module_enum()
- * @used-by df_currency_nums()
- * @used-by df_sentry_m()
- * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/settings.phtml
- * @used-by \Df\PaypalClone\W\Event::statusT()
- * @used-by \Dfe\AllPay\W\Event::tlByCode()
- * @used-by \Dfe\CheckoutCom\Source\Prefill::config()
- * @used-by \Dfe\IPay88\Source\Option::all()
- * @used-by \Dfe\IPay88\Source\Option::map()
- * @used-by \Dfe\YandexKassa\Source\Option::map()
- * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
- * @param string|object|null $m
- * @return array(string => mixed)
- */
-function df_module_json($m, string $name, bool $req = true):array {return df_module_file($m, $name, 'json', $req,
-	function(string $f):array {return df_json_file_read($f);}
-);}
+function df_module_file_name($m, string $name, string $ext = '', $onE = true):string {
+	$r = df_module_path_etc($m, df_file_ext_add($name, $ext));
+	return df_fts(df_try(
+		function() use($r):string {df_assert(file_exists($r), "The required file «{$r}» is absent."); return $r;}, $onE
+	));
+}
 
 /**
  * 2015-11-15
@@ -174,7 +106,7 @@ function df_module_path($m, string $localPath = ''):string {return df_cc_path(df
  * 		2) a class name: «A\B\C».
  * 		3) an object: it comes down to the case 2 via @see get_class()
  * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @used-by df_module_file()
+ * @used-by df_module_file_name()
  * @param string|object|null $m
  * @throws InvalidArgumentException
  */

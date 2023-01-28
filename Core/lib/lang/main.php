@@ -91,6 +91,7 @@ function df_sync($id, callable $job, float $interval = 0.1) { /** @var mixed $r 
  * @used-by df_intl_dic_read()
  * @used-by df_layout_update()    
  * @used-by df_magento_version_remote()
+ * @used-by df_module_file_name()
  * @used-by df_phone()
  * @used-by df_product_att()
  * @used-by df_product_att_val_s()

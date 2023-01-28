@@ -107,6 +107,7 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * @used-by df_category_children_map()
  * @used-by df_currency()
  * @used-by df_google_init_service_account()
+ * @used-by df_module_file_read()
  * @used-by df_modules_my()
  * @used-by df_product_images_path_rel()
  * @used-by dfac()
