@@ -18,6 +18,22 @@ final class Trace {
 			$frame = $frames[$i];  /** @var array(string => mixed) $frame */
 			$next = $count === $i + 1 ? [] : $frames[$i + 1]; /** @var array(string => mixed) $next */
 			/** @var string $file */
+			/**
+			 * 2023-01-28
+			 * The 'file' key can be absent in a stack frame, e.g.:
+			 *	{
+			 *		"function": "loadClass",
+			 *		"class": "Composer\\Autoload\\ClassLoader",
+			 *		"type": "->",
+			 *		"args": ["Df\\Framework\\Plugin\\App\\Router\\ActionList\\Interceptor"]
+			 *	},
+			 *	{
+			 *		"function": "spl_autoload_call",
+			 *		"args": ["Df\\Framework\\Plugin\\App\\Router\\ActionList\\Interceptor"]
+			 *	},
+			 * @see \Df\Qa\Trace::__construct()
+			 * @see \Df\Qa\Trace\Frame::filePath()
+			 */
 			if (array_key_exists('file', $frame)) {
 				$context = self::code((string)$frame['file'], (int)$frame['line']);
 				$file = $frame['file'];
