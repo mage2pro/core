@@ -14,9 +14,13 @@ class ActionList extends Sb {
 	 *	}
 	 * @see \Magento\Framework\App\Router\Base::matchAction()
 	 * https://github.com/magento/magento2/blob/2.1.5/lib/internal/Magento/Framework/App/Router/Base.php#L296-L298
+	 * 2023-01-28
+	 * «Argument 4 passed to Df\Framework\Plugin\App\Router\ActionList\Interceptor::aroundGet()
+	 * must be of the type string, null given»: https://github.com/mage2pro/core/issues/185
+	 * @param string|null $area
 	 * @return string|null
 	 */
-	function aroundGet(Sb $sb, \Closure $f, string $m, string $area, string $ns, string $action) {return
+	function aroundGet(Sb $sb, \Closure $f, string $m, $area, string $ns, string $action) {return
 		$f($m, $area, $ns, $action) ?: (
 			'Df' !== substr($m, 0, 2) || !df_is_virtual(
 				$c = df_cc_class_uc(df_module_name_c($m), 'Controller', 'adminhtml' === $area ? $area : null, $ns, $action)
