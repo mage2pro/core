@@ -25,7 +25,10 @@ class Js extends _P {
 	 * https://github.com/magento/magento2/blob/2.2.0/lib/internal/Magento/Framework/View/Element/AbstractBlock.php#L643-L689
 	 */
 	final protected function _toHtml():string {return df_js(__CLASS__, '', [
-		'dic' => df_intl_dic_read($this, null, 'dic')
+		# 2023-01-28
+		# «Argument 2 passed to df_intl_dic_read() must be of the type string, null given,
+		# called in vendor/mage2pro/core/Intl/Js.php on line 28»: https://github.com/mage2pro/core/issues/191
+		'dic' => df_intl_dic_read($this, '', 'dic')
 		 # 2017-11-14
 		 # "Magento 2.0.x: «Script error for: Magento_Ui/js/lib/knockout/template/renderer»"
 		 # https://github.com/mage2pro/core/issues/47
