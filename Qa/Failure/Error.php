@@ -9,7 +9,7 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by \Df\Qa\Failure::report()
 	 */
 	protected function main():string {return df_cc_n(
-		"[{$this::type(true)}] {$this::info('message')}"
+		"[{$this::type(true)}] {$this::msg()}"
 		,df_kv(['File' => $this::info('file'), 'Line' => $this::info('line')])
 	);}
 
@@ -97,6 +97,7 @@ final class Error extends \Df\Qa\Failure {
 
 	/**
 	 * @used-by self::main()
+	 * @used-by self::msg()
 	 * @used-by self::type()
 	 * @return string|int
 	 */
@@ -143,6 +144,11 @@ final class Error extends \Df\Qa\Failure {
 		}
 		return $r;
 	}
+
+	/**
+	 * 2023-01-28
+	 */
+	private static function msg():string {return self::info('message');}
 
 	/**
 	 * @used-by self::isFatal()
