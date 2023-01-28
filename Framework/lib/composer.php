@@ -41,7 +41,12 @@ function df_package($m = null, $k = '', $d = null) {
 			$packagePath = dirname($packagePath);
 		}
 		$filePath = "$packagePath/composer.json"; /** @var string $filePath */
-		$cache[$m] = df_eta(df_json_decode(df_file_read($filePath)));
+        # 2023-01-28
+        # 1) The `composer.json` file can be absent for a module, e.g.:
+        # https://github.com/elgentos/magento2-regenerate-catalog-urls/tree/0.2.14/Iazel/RegenProductUrl
+        # 2) "«Unable to read the file vendor/elgentos/regenerate-catalog-urls/Iazel/RegenProductUrl/composer.json»
+        # on `bin/magento setup:static-content:deploy`": https://github.com/tradefurniturecompany/site/issues/240
+		$cache[$m] = df_eta(df_json_decode(df_file_read($filePath, false)));
 	}
 	return dfa($cache[$m], $k, $d);
 }
