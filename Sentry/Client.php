@@ -260,11 +260,13 @@ final class Client {
 
 	/**
 	 * 2020-06-27
+	 * 2023-01-28
+	 * «Argument 2 passed to Df\Sentry\Client::send_http() must be of the type array, string given,
+	 * called in vendor/mage2pro/core/Sentry/Client.php on line 257»: https://github.com/mage2pro/core/issues/194
 	 * @used-by self::send()
-	 * @param array(string => mixed) $data
 	 * @param array(string => mixed) $headers
 	 */
-	private function send_http(string $url, array $data, array $headers = []):void {
+	private function send_http(string $url, string $data, array $headers = []):void {
 		# 2022-10-16 https://www.php.net/manual/migration80.incompatible.php#migration80.incompatible.resource2object
 		$c = curl_init($url); /** @var resource|\CurlHandle $c */
 		try {
