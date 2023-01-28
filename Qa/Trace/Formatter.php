@@ -33,10 +33,9 @@ final class Formatter {
 	 */
 	private static function frame(F $f):string {/** @var string $r */
 		try {
-			$resultA = array_filter(array_map([__CLASS__, 'param'], [
+			$r = df_cc_n(array_filter(array_map([__CLASS__, 'param'], [
 				['Location', df_cc(':', df_path_relative($f->filePath()), $f->line())], ['Callee', $f->method()]
-			])); /** @var string[] $resultA */ /** @uses self::param() */
-			$r = df_cc_n($resultA);
+			]))); /** @uses self::param() */
 		}
 		catch (\Exception $e) {
 			$r = df_xts($e);
