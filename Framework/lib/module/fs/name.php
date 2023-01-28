@@ -61,7 +61,7 @@ function df_module_dir($m, string $type = ''):string {
 }
 
 /**
- * 2023-09-28
+ * 2023-01-28
  * $m could be:
  * 		1) a module name: «A_B»
  * 		2) a class name: «A\B\C».
