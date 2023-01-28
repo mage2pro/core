@@ -100,7 +100,7 @@ final class Error extends \Df\Qa\Failure {
 	 * @used-by self::type()
 	 * @return string|int
 	 */
-	private static function info(string $key) {return dfa(error_get_last(), $key);}
+	private static function info(string $k) {return dfa(error_get_last(), $k);}
 
 	/** @used-by self::check() */
 	private static function isFatal():bool {
