@@ -10,8 +10,15 @@ final class Error extends \Df\Qa\Failure {
 	 */
 	protected function main():string {return df_cc_n(
 		"[{$this::type(true)}] {$this::msg()}"
-		,df_kv(['File' => $this::info('file'), 'Line' => $this::info('line')])
 	);}
+
+	/**
+	 * 2023-01-28
+	 * @override
+	 * @see \Df\Qa\Failure::postface()
+	 * @used-by \Df\Qa\Failure::report()
+	 */
+	protected function postface():string {return df_kv(['File' => $this::info('file'), 'Line' => $this::info('line')]);}
 
 	/**
 	 * 2020-09-25 "Enrich data logged by my `register_shutdown_function` handler": https://github.com/mage2pro/core/issues/144

@@ -33,6 +33,7 @@ abstract class Failure {
 	/**
 	 * @used-by self::report()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
+	 * @see \Df\Qa\Failure\Error::postface()
 	 * @see \Df\Qa\Failure\Exception::postface()
 	 */
 	protected function postface():string {return Formatter::p(new Trace(array_slice($this->trace(), $this->stackLevel())));}
@@ -47,7 +48,7 @@ abstract class Failure {
 	 * @used-by self::report()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
 	 */
-	protected function sections(string ...$a):string {
+	final protected function sections(string ...$a):string {
 		static $s; $s = $s ? $s : "\n" . str_repeat('*', 36) . "\n"; /** @var string $s */
 		return implode($s, array_filter(df_trim($a)));
 	}
