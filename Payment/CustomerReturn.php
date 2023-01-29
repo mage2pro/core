@@ -39,7 +39,7 @@ class CustomerReturn extends Action {
 		/**
 		 * 2019-07-04
 		 * @uses \Magento\Checkout\Model\Session::getLastRealOrder() always returns an order,
-		 * even if \Magento\Checkout\Model\Session::getLastRealOrderId() returns null.
+		 * even if \Magento\Checkout\Model\Session::getLastRealOrderId() returns `null`.
 		 * That is why I have added  `$o->getId()` condition.
 		 */
 		if (($o = $ss->getLastRealOrder()) && $o->getId() && !$o->isCanceled() && $this->isSuccess()) {
