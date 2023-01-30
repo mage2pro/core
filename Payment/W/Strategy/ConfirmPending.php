@@ -117,8 +117,7 @@ class ConfirmPending extends \Df\Payment\W\Strategy {
 				 * @uses \Magento\Sales\Model\Order\Payment\Transaction::TYPE_PAYMENT —
 				 * это единственная транзакции без специального назначения,
 				 * и поэтому мы можем безопасно его использовать.
-				 * 2017-01-16
-				 * Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
+				 * 2017-01-16 Идентификатор и данные транзакции мы уже установили в методе @see \Df\Payment\W\Nav::op()
 				 */
 				$op->addTransaction(T::TYPE_PAYMENT);
 				if ($o->canCancel()) {
