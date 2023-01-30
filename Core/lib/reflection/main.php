@@ -418,10 +418,14 @@ function df_cts_lc(string $c, string $del):string {return implode($del, df_explo
 
 /**
  * 2016-04-11 Dfe_CheckoutCom => dfe_checkout_com
+ * 2023-01-30
+ * «Argument 1 passed to df_cts_lc_camel() must be of the type string, object given,
+ * called in vendor/mage2pro/core/Qa/lib/log.php on line 121»: https://github.com/mage2pro/core/issues/204
  * @see df_module_name_lc()
  * @used-by df_report_prefix()
+ * @param string|object $c
  */
-function df_cts_lc_camel(string $c, string $del):string {return implode($del, df_explode_class_lc_camel($c));}
+function df_cts_lc_camel($c, string $del):string {return implode($del, df_explode_class_lc_camel($c));}
 
 /**
  * @used-by df_class_f()
