@@ -30,7 +30,11 @@ final class RegisterSuccess implements ObserverInterface {
 			 */
 			$c->save();
 		}
-		$s->ssoId(null);
+		# 2023-01-30
+		# «Argument 1 passed to Df\Customer\Session::ssoId() must be of the type string, null given,
+		# called in vendor/mage2pro/core/Customer/Observer/RegisterSuccess.php on line 33»:
+		# https://github.com/mage2pro/core/issues/202
+		$s->ssoId('');
 		$s->ssoProvider(null);
 		$s->needConfirm(df_customer_is_need_confirm($c));
 	}
