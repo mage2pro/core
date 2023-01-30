@@ -56,6 +56,7 @@ function df_checkout_message(string $s, bool $success):void {
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @used-by \PPCs\Core\Plugin\Checkout\Controller\Onepage\Success::beforeDispatch()
+ * @used-by \TFC\Realex\Redirector::is() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
  * @return Session|DfSession
  */
 function df_checkout_session() {return df_o(Session::class);}
