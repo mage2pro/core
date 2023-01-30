@@ -13,7 +13,7 @@ use Magento\Framework\DataObject as _DO;
  * @param _DO|C $c
  * @param array(string => mixed) $info
  */
-function df_ci_add(_DO $c, array $info):array {
+function df_ci_add(_DO $c, array $info):void {
 	$c[Schema::F__DF] = df_json_encode(df_extend(df_eta(df_ci_get(null, $c)), $info));
 }
 
