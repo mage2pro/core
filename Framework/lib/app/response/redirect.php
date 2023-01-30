@@ -86,6 +86,7 @@ function df_redirect_to_home():void {df_redirect('/');}
  * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by \TFC\Realex\Redirector::restoreQuote() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
  */
 function df_redirect_to_payment():void {df_redirect('checkout', ['_fragment' => 'payment']);}
 
