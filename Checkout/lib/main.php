@@ -58,6 +58,7 @@ function df_checkout_message(string $s, bool $success):void {
  * @used-by \PPCs\Core\Plugin\Checkout\Controller\Onepage\Success::beforeDispatch()
  * @used-by \TFC\Realex\Redirector::is() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
  * @used-by \TFC\Realex\Redirector::restoreQuote() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
+ * @used-by \TFC\Realex\Redirector::set() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
  * @return Session|DfSession
  */
 function df_checkout_session() {return df_o(Session::class);}
