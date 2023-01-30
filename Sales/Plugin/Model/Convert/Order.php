@@ -13,10 +13,9 @@ final class Order {
 	 * 2021-10-10
 	 * @see \Magento\Sales\Model\Convert\Order::toInvoice()
 	 * @used-by \Magento\Sales\Model\Service\InvoiceService::prepareInvoice()
-	 * @return array(string => mixed)
 	 */
-	function aroundToInvoice(Sb $sb, F $f, O $o):array {
-		$r = $f($o); /** @var I $i */
+	function aroundToInvoice(Sb $sb, F $f, O $o):I {
+		$r = $f($o); /** @var I $r */
 		$r->getItemsCollection()->load();
 		return $r;
 	}
