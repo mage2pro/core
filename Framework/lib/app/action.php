@@ -21,6 +21,7 @@ function df_action_has(string $s):bool {return df_contains(df_action_name(), $s)
  * @used-by \Dfe\Markdown\Modifier::modifyData()
  * @used-by \Inkifi\Consolidation\Plugin\Backend\Block\Widget\Button\Toolbar::beforePushButtons()
  * @used-by \SayItWithAGift\Core\Plugin\Newsletter\Model\Subscriber::beforePrepare()
+ * @used-by \TFC\Realex\Observer\Predispatch\Arrival::execute() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  */
