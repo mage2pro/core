@@ -1,6 +1,7 @@
 <?php
 namespace Df\Framework\Plugin\Mail;
 use Magento\Framework\DataObject as _DO;
+use Magento\Framework\Mail\TransportInterface as ITransport;
 use Magento\Framework\Mail\TransportInterfaceFactory as Sb;
 # 2018-01-28
 final class TransportInterfaceFactory {
@@ -20,7 +21,7 @@ final class TransportInterfaceFactory {
 	 * https://github.com/magento/magento2/blob/2.2.2/lib/internal/Magento/Framework/Mail/TransportInterfaceFactory.php#L42-L51
 	 * https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Mail/TransportInterfaceFactory.php#L42-L51
 	 */
-	function aroundCreate(Sb $sb, \Closure $f, array $data = []):string {
+	function aroundCreate(Sb $sb, \Closure $f, array $data = []):ITransport {
 		$container = new _DO; /** @var _DO $container */
 		/** 2018-01-28 @used-by \Df\Framework\Mail\TransportObserver::execute() */
 		df_dispatch('df_mail_transport', [self::CONTAINER => $container]);
