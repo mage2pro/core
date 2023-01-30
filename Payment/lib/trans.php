@@ -9,10 +9,14 @@ use Magento\Sales\Model\Order\Payment\Transaction\Repository as TR;
 /**
  * 2016-11-17
  * 2017-01-05 Для загрузки транзакции по «txn_id» используйте @see df_transx()
+ * @used-by df_trans_is_my()
+ * @used-by df_trans_is_test()
+ * @used-by \Df\Payment\Test\trans::t01()
  * @param T|int|null $t
  * @throws DFE
+ * @return T|null
  */
-function df_trans($t = null, bool $throw = true):T {/** @var T|int|null $r */
+function df_trans($t = null, bool $throw = true) {/** @var T|int|null $r */
 	$r = is_null($t) ? df_trans_current() : ($t instanceof T ? $t : df_trans_r()->get($t));
 	return !$throw ? $r : df_ar($r, T::class);
 }
