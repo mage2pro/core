@@ -1862,6 +1862,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\CheckoutCom\Method::iiaKeys()
 	 * @see \Dfe\IPay88\Method::iiaKeys()
 	 * @see \Dfe\Qiwi\Method::iiaKeys()
+	 * @see \Dfe\Robokassa\Method::iiaKeys()
 	 * @see \Dfe\Square\Method::iiaKeys()
 	 * @see \Dfe\TBCBank\Method::iiaKeys()
 	 * @see \Dfe\TwoCheckout\Method::iiaKeys()
