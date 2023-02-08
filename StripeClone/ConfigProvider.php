@@ -142,6 +142,7 @@ class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
 	 * @see \Dfe\Moip\ConfigProvider::config()
 	 * @see \Dfe\Paymill\ConfigProvider::config()
+	 * @see \Dfe\Spryng\ConfigProvider::config()
 	 * @see \Dfe\Stripe\ConfigProvider::config()
 	 * @see \Dfe\TwoCheckout\ConfigProvider::config()
 	 * @return array(string => mixed)
