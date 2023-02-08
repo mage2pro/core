@@ -210,6 +210,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @see \Dfe\IPay88\Method::amountFormat()
 	 * @see \Dfe\Qiwi\Method::amountFormat()
 	 * @see \Dfe\Robokassa\Method::amountFormat()
+	 * @see \Dfe\SecurePay\Method::amountFormat()
 	 * @see \Dfe\TwoCheckout\Method::amountFormat()
 	 * @see \Dfe\YandexKassa\Method::amountFormat()
 	 * @return float|int|string
