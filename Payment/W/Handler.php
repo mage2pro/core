@@ -53,6 +53,7 @@ abstract class Handler implements IMA {
 	 * @see \Dfe\Qiwi\W\Handler::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Captured::strategyC()
 	 * @see \Dfe\Stripe\W\Handler\Charge\Refunded::strategyC()
+	 * @see \Dfe\Stripe\W\Handler\Source::strategyC()
 	 * @see \Dfe\TBCBank\W\Handler::strategyC()
 	 */
 	abstract protected function strategyC():string;
