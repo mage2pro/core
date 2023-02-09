@@ -21,6 +21,7 @@ abstract class Strategy {
 	 * @see \Df\Payment\W\Strategy\CapturePreauthorized::_handle()
 	 * @see \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @see \Df\Payment\W\Strategy\Refund::_handle()
+	 * @see \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
 	 */
 	abstract protected function _handle():void;
 

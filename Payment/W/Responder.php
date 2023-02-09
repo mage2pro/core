@@ -86,6 +86,7 @@ class Responder {
 	 * @used-by self::setNotForUs()
 	 * @see \Dfe\AllPay\W\Responder::notForUs()
 	 * @see \Dfe\Qiwi\W\Responder::notForUs()
+     * @see \Dfe\YandexKassa\W\Responder::notForUs()
 	 */
 	protected function notForUs(string $m):wResult {return Text::i($m);}
 
