@@ -53,6 +53,7 @@ abstract class Event implements IEvent, IMA {
 	 * @see \Dfe\Paymill\W\Event\Transaction\Succeeded::ttCurrent()
 	 * @see \Dfe\Stripe\W\Event\Charge\Captured::ttCurrent()
 	 * @see \Dfe\Stripe\W\Event\Charge\Refunded::ttCurrent()
+	 * @see \Dfe\Stripe\W\Event\Source::ttCurrent()
 	 * @see \Dfe\TBCBank\W\Event::ttCurrent()
 	 */
 	abstract function ttCurrent():string;
