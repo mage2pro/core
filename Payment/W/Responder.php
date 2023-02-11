@@ -77,6 +77,7 @@ class Responder {
 	 * @used-by self::setError()
 	 * @see \Dfe\AllPay\W\Responder::error()
 	 * @see \Dfe\Qiwi\W\Responder::error()
+     * @see \Dfe\YandexKassa\W\Responder::error()
 	 * @param \Exception|string $e
 	 */
 	protected function error($e):wResult {return self::defaultError($e);}
@@ -106,6 +107,7 @@ class Responder {
 	 * @see \Dfe\IPay88\W\Responder::success()
 	 * @see \Dfe\Qiwi\W\Responder::success()
 	 * @see \Dfe\Robokassa\W\Responder::success()
+     * @see \Dfe\YandexKassa\W\Responder::success()
 	 */
 	protected function success():wResult {return Text::i('success');}
 
