@@ -7,8 +7,8 @@ use Df\Config\Settings\IProxy;
 use Df\Core\Exception as DFE;
 use Df\Zf\Http\Client as C;
 use Df\Zf\Http\Client\Adapter\Proxy as aProxy;
-use Zend\Filter\FilterChain;
-use Zend\Filter\FilterInterface as IFilter;
+use Laminas\Filter\FilterChain;
+use Laminas\Filter\FilterInterface as IFilter;
 use Magento\Store\Model\Store;
 use Zend_Http_Client_Adapter_Socket as aSocket;
 /**

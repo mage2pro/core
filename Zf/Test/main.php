@@ -1,6 +1,6 @@
 <?php
 namespace Df\Zf\Test;
-use Zend\Stdlib\PriorityQueue as Q;
+use Laminas\Stdlib\PriorityQueue as Q;
 # 2017-07-07
 class main extends \Df\Core\TestCase {
 	/** 2017-07-07 @test */
