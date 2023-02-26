@@ -73,7 +73,7 @@ function df_locale(string $l = ''):string {/** @var string $r */
 			 * 2015-10-22
 			 * df_request_o()->isAjax() здесь не работает:
 			 * `RequireJS text plugin (lib/web/requirejs/text.js) does not set «X-Requested-With» HTTP header
-			 * so the @see \Zend\Http\Request::isXmlHttpRequest() method returns a wrong value`:
+			 * so the @see \Laminas\Http\Request::isXmlHttpRequest() method returns a wrong value`:
 			 * https://github.com/magento/magento2/issues/2159
 			 */
 			if ($fileName === \Magento\Translation\Model\Js\Config::DICTIONARY_FILE_NAME) {

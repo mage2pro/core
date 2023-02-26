@@ -175,7 +175,7 @@ and `Magento\Framework\Logger\Handler\Syslog` seems to be useless too. -->
 	</type>
 <!-- 2018-01-28
 The purpose of this plugin is to provide an ability to my Dfe_Mailgun and Dfe_SMTP modules
-to use an alternative mail transport instead of \Zend\Mail\Transport\Sendmail
+to use an alternative mail transport instead of \Laminas\Mail\Transport\Sendmail
 @see \Magento\Email\Model\Transport::__construct():
 	$this->zendTransport = new Sendmail($parameters);
 https://github.com/magento/magento2/blob/1a81e05b/app/code/Magento/Email/Model/Transport.php#L73

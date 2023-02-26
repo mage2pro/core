@@ -163,8 +163,8 @@ function df_request_body_json():string {return !($j = df_request_body()) ? [] : 
 
 /**
  * 2016-12-25
- * The @uses \Zend\Http\Request::getHeader() method is insensitive to the argument's letter case:
- * @see \Zend\Http\Headers::createKey()
+ * The @uses \Laminas\Http\Request::getHeader() method is insensitive to the argument's letter case:
+ * @see \Laminas\Http\Headers::createKey()
  * https://github.com/zendframework/zendframework/blob/release-2.4.6/library/Zend/Http/Headers.php#L462-L471
  * @used-by df_request_ua()
  * @used-by \Dfe\Qiwi\W\Reader::http()
