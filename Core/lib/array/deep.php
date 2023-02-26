@@ -26,7 +26,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Df\Core\O::offsetExists()
  * @used-by \Df\Core\O::offsetGet()
  * @used-by \Df\GingerPaymentsBase\Block\Info::psDetails()
- * @used-by \Df\Oro\Test\Basic::t02_orders_stripe()
+ * @used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
  * @used-by \Df\Payment\ConfigProvider::p()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Dfe\AllPay\W\Event::tlByCode()

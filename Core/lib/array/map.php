@@ -169,7 +169,7 @@ function df_map_kr($a1, $a2):array {return df_map($a1, $a2, [], [], DF_BEFORE, t
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFrom3To2()
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @used-by \Df\Framework\Form\Element\Multiselect::getElementHtml()
- * @used-by \Df\Oro\Test\Basic::t02_orders_stripe()
+ * @used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
  * @used-by \Df\ZohoBI\Source\Organization::fetch()
  * @used-by \Dfe\PostFinance\Source\Hash\Algorithm::map()
  * @used-by \Dfe\Spryng\Source\Account::fetch()
