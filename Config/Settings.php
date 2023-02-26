@@ -102,6 +102,7 @@ abstract class Settings {
 
 	/**
 	 * 2015-11-09
+	 * @used-by self::enable()
 	 * @used-by \CanadaSatellite\Amelia\Settings::sticky() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
 	 * @used-by \Df\API\Settings::test()
 	 * @used-by \Df\Payment\Settings\_3DS::disable_()
@@ -153,7 +154,7 @@ abstract class Settings {
 	 * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
 	 * @param null|string|int|S $s [optional]
 	 */
-	function enable($s = null):bool {return $this->b(null, $s);}
+	function enable($s = null):bool {return $this->b('', $s);}
 
 	/**
 	 * 2015-11-09
