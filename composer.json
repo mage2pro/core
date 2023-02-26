@@ -1,6 +1,6 @@
 {
 	"name": "mage2pro/core"
-	,"version": "9.3.7"
+	,"version": "9.3.8"
 	,"description": "Mage2.PRO core package."
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro"
@@ -12,8 +12,8 @@
 		,"role": "Developer"
 	}]
 	,"require": {
-		"zendframework/zend-filter": "*"
-		,"zendframework/zend-stdlib": "*"
+		"laminas/laminas-filter": "*"
+		,"laminas/laminas-stdlib": "*"
 		,"magento/framework": ">=100.0.0"
 		,"magento/module-sample-data": ">=100.0.0"
 		,"phpunit/phpunit": "*"
