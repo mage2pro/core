@@ -173,7 +173,7 @@ abstract class Source extends SourceBase {
 	 * 2017-03-28
 	 * @used-by self::sibling()
 	 * @used-by \Df\Payment\Source\API\Key\Testable::_test()
-	 * @used-by \Df\ZohoBI\Source\Organization::app()
+	 * @used-by \Dfe\ZohoBI\Source\Organization::app()
 	 * @return string[]
 	 */
 	final protected function pathA():array {return dfc($this, function() {return df_explode_path($this->_path);});}

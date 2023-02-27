@@ -3,7 +3,7 @@ namespace Df\API\Response;
 use Df\API\Exception;
 /**
  * 2017-07-05
- * @see \Df\ZohoBI\API\Validator
+ * @see \Dfe\ZohoBI\API\Validator
  * @see \Dfe\AlphaCommerceHub\API\Validator
  * @see \Dfe\Dynamics365\API\Validator\JSON
  * @see \Dfe\Moip\API\Validator
@@ -20,7 +20,7 @@ abstract class Validator extends Exception {
 	/**
 	 * 2017-07-06
 	 * @used-by \Df\API\Client::_p()
-	 * @see \Df\ZohoBI\API\Validator::valid()
+	 * @see \Dfe\ZohoBI\API\Validator::valid()
 	 * @see \Dfe\AlphaCommerceHub\API\Validator::valid()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::valid()
 	 * @see \Dfe\Moip\API\Validator::valid()
@@ -56,9 +56,9 @@ abstract class Validator extends Exception {
 	 * 2017-07-06
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
-	 * @used-by \Df\ZohoBI\API\Validator::message()
-	 * @used-by \Df\ZohoBI\API\Validator::rs()
-	 * @used-by \Df\ZohoBI\API\Validator::valid()
+	 * @used-by \Dfe\ZohoBI\API\Validator::message()
+	 * @used-by \Dfe\ZohoBI\API\Validator::rs()
+	 * @used-by \Dfe\ZohoBI\API\Validator::valid()
 	 * @used-by \Dfe\AlphaCommerceHub\API\Validator::result()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::long()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::message()

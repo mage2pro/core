@@ -19,7 +19,7 @@ use Magento\Store\Model\Store;
  * @see \Df\Payment\Settings\_3DS
  * @see \Df\Shipping\Settings
  * @see \Df\Sso\Settings
- * @see \Df\Zoho\Settings
+ * @see \Dfe\Zoho\Settings
  * @see \Dfe\AllPay\InstallmentSales\Settings
  * @see \Dfe\AmazonLogin\Settings\Credentials
  * @see \Dfe\BackendLoginAutocomplete\Settings
@@ -63,7 +63,7 @@ abstract class Settings {
 	 * @see \Df\Payment\Settings::prefix()
 	 * @see \Df\Payment\Settings\_3DS::prefix()
 	 * @see \Df\Shipping\Settings::prefix()
-	 * @see \Df\Zoho\Settings::prefix()
+	 * @see \Dfe\Zoho\Settings::prefix()
 	 * @see \Dfe\AllPay\InstallmentSales\Settings::prefix()
 	 * @see \Dfe\AmazonLogin\Settings::prefix()
 	 * @see \Dfe\AmazonLogin\Settings\Credentials::prefix()
@@ -159,7 +159,7 @@ abstract class Settings {
 	/**
 	 * 2015-11-09
 	 * @used-by \AlbumEnvy\Popup\Settings::content()
-	 * @used-by \Df\ZohoBI\Settings::organization()
+	 * @used-by \Dfe\ZohoBI\Settings::organization()
 	 * @used-by \Dfe\Qiwi\Settings::apiID()
 	 * @used-by \Dfe\SalesSequence\Settings::padLength()
 	 * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
@@ -196,7 +196,7 @@ abstract class Settings {
 	 * @used-by \Dfe\Oro\Settings\General::key()
 	 * @used-by \Df\Payment\Settings::testableGeneric()
 	 * @used-by \Df\Payment\Settings\Proxy::password()
-	 * @used-by \Df\Zoho\Settings::token()
+	 * @used-by \Dfe\Zoho\Settings::token()
 	 * @used-by \Dfe\AmazonLogin\Settings\Credentials::secret()
 	 * @used-by \Dfe\BlackbaudNetCommunity\Settings::privateKey()
 	 * @used-by \Dfe\CurrencyConvert\Settings::accessKey()

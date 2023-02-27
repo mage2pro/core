@@ -263,7 +263,7 @@ function df_con_child($c, $suf, string $def = '', bool $throw = true) {return Co
  * @used-by \Df\StripeClone\P\Charge::sn()
  * @used-by \Df\StripeClone\P\Preorder::request()
  * @used-by \Df\StripeClone\P\Reg::request()
- * @used-by \Df\Zoho\API\Client::i()
+ * @used-by \Dfe\Zoho\API\Client::i()
  * @param object|string $c
  * @return string|null
  */

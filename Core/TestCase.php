@@ -8,7 +8,7 @@ use Magento\Framework\App\Http;
  * @see \Df\Catalog\Test\product\attribute
  * @see \Dfe\Geo\Test\TestCase
  * @see \Df\Payment\TestCase
- * @see \Df\Zoho\Test\TestCase
+ * @see \Dfe\Zoho\Test\TestCase
  * @see \Dfe\BlackbaudNetCommunity\Test\Main
  * @see \Dfe\Dynamics365\Test\TestCase
  * @see \Dfe\Portal\Test\TestCase

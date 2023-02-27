@@ -13,7 +13,7 @@ use Magento\Store\Model\Store;
 use Zend_Http_Client_Adapter_Socket as aSocket;
 /**
  * 2017-07-05
- * @see \Df\Zoho\API\Client
+ * @see \Dfe\Zoho\API\Client
  * @see \Dfe\AlphaCommerceHub\API\Client
  * @see \Dfe\Dynamics365\API\Client
  * @see \Dfe\Moip\API\Client
@@ -32,7 +32,7 @@ abstract class Client {
 	 * 2017-07-05
 	 * @used-by self::__construct()
 	 * @used-by self::url()
-	 * @see \Df\ZohoBI\API\Client::urlBase()
+	 * @see \Dfe\ZohoBI\API\Client::urlBase()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::urlBase()
 	 * @see \Dfe\Dynamics365\API\Client::urlBase()
 	 * @see \Dfe\Moip\API\Client::urlBase()
@@ -52,7 +52,7 @@ abstract class Client {
 	/**
 	 * 2017-07-02
 	 * @used-by \Df\API\Facade::p()
-	 * @used-by \Df\Zoho\API\Client::i()
+	 * @used-by \Dfe\Zoho\API\Client::i()
 	 * @used-by \Dfe\Dynamics365\API\Facade::metadata()
 	 * @used-by \Dfe\Dynamics365\API\Facade::p()
 	 * @param string|array(string => mixed) $p [optional]
@@ -143,7 +143,7 @@ abstract class Client {
 	/**
 	 * 2017-07-06
 	 * @used-by self::__construct()
-	 * @see \Df\Zoho\API\Client::_construct()
+	 * @see \Dfe\Zoho\API\Client::_construct()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::_construct()
 	 * @see \Dfe\Dynamics365\API\Client\JSON::_construct()
 	 * @see \Dfe\Moip\API\Client::_construct()
@@ -180,7 +180,7 @@ abstract class Client {
 	/**
 	 * 2017-07-08
 	 * @used-by self::__construct()
-	 * @see \Df\ZohoBI\API\Client::commonParams()
+	 * @see \Dfe\ZohoBI\API\Client::commonParams()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::commonParams()
 	 * @return array(string => mixed)
 	 */
@@ -190,7 +190,7 @@ abstract class Client {
 	 * 2017-07-05
 	 * @used-by self::__construct()
 	 * @used-by self::_p()
-	 * @see \Df\ZohoBI\API\Client::headers()
+	 * @see \Dfe\ZohoBI\API\Client::headers()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::headers()
 	 * @see \Dfe\Dynamics365\API\Client::headers()
 	 * @see \Dfe\Moip\API\Client::headers()
@@ -249,7 +249,7 @@ abstract class Client {
 
 	/**
 	 * 2017-07-06
-	 * @used-by \Df\Zoho\API\Client::_construct()
+	 * @used-by \Dfe\Zoho\API\Client::_construct()
 	 * @used-by \Dfe\Dynamics365\API\Client\JSON::_construct()
 	 * @used-by \Dfe\Moip\API\Client::_construct()
 	 * @used-by \Dfe\Qiwi\API\Client::_construct()
@@ -265,7 +265,7 @@ abstract class Client {
 	 * 2017-07-05 A descendant class can return null if it does not need to validate the responses.
 	 * @used-by self::_p()
 	 * @see \Dfe\AlphaCommerceHub\API\Client::responseValidatorC()
-	 * @see \Df\ZohoBI\API\Client::responseValidatorC()
+	 * @see \Dfe\ZohoBI\API\Client::responseValidatorC()
 	 * @see \Dfe\Dynamics365\API\Client\JSON::responseValidatorC()
 	 * @see \Dfe\Moip\API\Client::responseValidatorC()
 	 * @see \Dfe\Qiwi\API\Client::responseValidatorC()

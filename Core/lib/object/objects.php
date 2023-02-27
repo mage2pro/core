@@ -96,7 +96,7 @@ function df_idn($o, bool $allowNull = false):int {return df_nat(df_id($o, $allow
  * @used-by \Df\StripeClone\P\Charge::sn()
  * @used-by \Df\StripeClone\P\Preorder::request()
  * @used-by \Df\StripeClone\P\Reg::request()
- * @used-by \Df\Zoho\API\Client::i()
+ * @used-by \Dfe\Zoho\API\Client::i()
  * @used-by \Dfe\CheckoutCom\Handler::p()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param mixed ...$a
@@ -233,8 +233,8 @@ function dfo($o, $k, $d = null) {return
  * The result should be a descendant of the $owner, and should exist (it is not defaulted to $owner).
  * 2022-10-31 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
  * @used-by df_oauth_app()
- * @used-by \Df\Zoho\App::s()
- * @used-by \Df\ZohoBI\API\Facade::s()
+ * @used-by \Dfe\Zoho\App::s()
+ * @used-by \Dfe\ZohoBI\API\Facade::s()
  * @param string|object $caller
  * @return object
  */

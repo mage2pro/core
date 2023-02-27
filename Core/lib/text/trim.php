@@ -146,7 +146,7 @@ function df_trim_text_a(string $s, array $trimA, callable $f):string {
  * @used-by \Df\Framework\Request::extra()
  * @used-by \Df\PaypalClone\Signer::_sign()
  * @used-by \Df\Qa\Trace\Frame::__toString()
- * @used-by \Df\Zoho\App::title()
+ * @used-by \Dfe\Zoho\App::title()
  * @used-by \Dfe\Qiwi\W\Event::pid()
  * @used-by \Dfe\Stripe\Facade\Token::trimmed()
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()

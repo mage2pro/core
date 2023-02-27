@@ -144,8 +144,8 @@ function df_cfg_save_cc(string $path, string $v, string $scope = 'default', int 
  * 2018-01-28
  * @used-by \Df\Core\TestCase::s()
  * @used-by \Df\Sso\CustomerReturn::execute()
- * @used-by \Df\Zoho\API\Client::ss()
- * @used-by \Df\Zoho\App::ss()
+ * @used-by \Dfe\Zoho\API\Client::ss()
+ * @used-by \Dfe\Zoho\App::ss()
  * @used-by \Df\Framework\Mail\TransportObserver::execute()
  * @param object|string $m
  */

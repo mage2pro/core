@@ -3,14 +3,14 @@ namespace Df\Config\Source;
 /**
  * 2017-07-02
  * @see \Df\Config\Source\API\Key
- * @see \Df\ZohoBI\Source\Organization
+ * @see \Dfe\ZohoBI\Source\Organization
  * @see \Dfe\Dynamics365\Source\PriceList
  */
 abstract class API extends \Df\Config\Source {
 	/**
 	 * 2017-07-02
 	 * @used-by self::map()
-	 * @see \Df\ZohoBI\Source\Organization::fetch()
+	 * @see \Dfe\ZohoBI\Source\Organization::fetch()
 	 * @see \Dfe\Dynamics365\Source\PriceList::fetch()
 	 * @see \Dfe\Spryng\Source\Account::fetch()
 	 * @see \Dfe\Square\Source\Location::fetch()
@@ -22,7 +22,7 @@ abstract class API extends \Df\Config\Source {
 	 * 2017-07-02
 	 * @used-by self::map()
 	 * @see \Df\Config\Source\API\Key::isRequirementMet()
-	 * @see \Df\ZohoBI\Source\Organization::isRequirementMet()
+	 * @see \Dfe\ZohoBI\Source\Organization::isRequirementMet()
 	 * @see \Dfe\Dynamics365\Source\PriceList::isRequirementMet()
 	 */
 	abstract protected function isRequirementMet():bool;
@@ -31,7 +31,7 @@ abstract class API extends \Df\Config\Source {
 	 * 2017-07-02
 	 * @used-by map()
 	 * @see \Df\Config\Source\API\Key::requirement()
-	 * @see \Df\ZohoBI\Source\Organization::requirement()
+	 * @see \Dfe\ZohoBI\Source\Organization::requirement()
 	 * @see \Dfe\Dynamics365\Source\PriceList::requirement()
 	 * @return string
 	 */

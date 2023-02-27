@@ -5,7 +5,7 @@
  * @used-by dfp_methods()
  * @used-by \Df\Config\Source\LetterCase::map()
  * @used-by \Dfe\GoogleFont\Font\Variant\Preview::text()
- * @used-by \Df\ZohoBI\Source\Organization::fetch()
+ * @used-by \Dfe\ZohoBI\Source\Organization::fetch()
  * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
  * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()
  * @used-by \Dfe\CheckoutCom\Response::messageC()

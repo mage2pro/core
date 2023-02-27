@@ -30,7 +30,7 @@ abstract class Exception extends \Df\Core\Exception {
 	/**
 	 * 2017-07-09
 	 * @used-by \Df\API\Client::_p()
-	 * @see \Df\ZohoBI\API\Validator::short()
+	 * @see \Dfe\ZohoBI\API\Validator::short()
 	 * @see \Dfe\AlphaCommerceHub\API\Validator::short()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::short()
 	 * @see \Dfe\Moip\API\Validator::short()
