@@ -1,18 +1,18 @@
 <?php
 namespace Df\Framework\App\Action;
 # 2015-11-29
-/** @see \Df\GoogleFont\Controller\Index\Preview */
+/** @see \Dfe\GoogleFont\Controller\Index\Preview */
 abstract class Image extends \Magento\Framework\App\Action\Action {
 	/**
 	 * 2015-11-29 Содержимое файла картинки. Например, его можно получить посредством @see file_get_contents()
-	 * @see \Df\GoogleFont\Controller\Index\Preview::contents()
+	 * @see \Dfe\GoogleFont\Controller\Index\Preview::contents()
 	 * @used-by self::execute()
 	 */
 	abstract protected function contents():string;
 
 	/**
 	 * 2015-11-29 E.g.: 'png'
-	 * @see \Df\GoogleFont\Controller\Index\Preview::type()
+	 * @see \Dfe\GoogleFont\Controller\Index\Preview::type()
 	 * @used-by self::execute()
 	 */
 	abstract protected function type():string;

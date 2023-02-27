@@ -13,7 +13,7 @@ use Magento\Framework\Phrase;
  * то ядро может показать её сообщение на экране, а в противном случае — не показать.
  * Бывает ещё, что в противном случае сообщение всё-таки показывается, но с другим форматированием.
  * @see \Df\API\Exception
- * @see \Df\GoogleFont\Exception
+ * @see \Dfe\GoogleFont\Exception
  * @see \Df\Payment\Exception
  * @see \Df\Payment\W\Exception\NotForUs
  * @see \Dfe\FacebookLogin\Exception
@@ -122,7 +122,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * По этой причине данный метод @see message(), несмотря на его некую громоздкость,
 	 * нам действительно нужен.
 	 * @used-by df_xts()
-	 * @see \Df\GoogleFont\Exception::message()
+	 * @see \Dfe\GoogleFont\Exception::message()
 	 * @see \Df\Payment\W\Exception\Ignored::message()
 	 * @see \Dfe\FacebookLogin\Exception::message()
 	 * @see \Dfe\Klarna\Exception::message()
@@ -227,7 +227,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * то вызываем метод @see \Df\Core\Exception::standard().
 	 * Этот метод конвертирует исключительную ситуацию в стандартную,
 	 * и стандартная среда её успешно обработает.
-     * @used-by \Df\GoogleFont\Fonts::responseA()
+     * @used-by \Dfe\GoogleFont\Fonts::responseA()
 	 */
 	function standard():E {return dfc($this, function() {return new E($this->message(), 0, $this);});}
 

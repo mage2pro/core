@@ -57,8 +57,8 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by df_module_file_name()
  * @used-by df_oqi_amount()
  * @used-by dfaf()
- * @used-by \Df\GoogleFont\Font::variant()
- * @used-by \Df\GoogleFont\Fonts::get()
+ * @used-by \Dfe\GoogleFont\Font::variant()
+ * @used-by \Dfe\GoogleFont\Fonts::get()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\Event::oi()
@@ -75,7 +75,7 @@ function df_assert($cond, $m = null) {return $cond ?: df_error($m);}
 
 /**
  * @used-by df_wishlist_item_candidates()
- * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
+ * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
  * @used-by \Df\Xml\X::importArray()
  * @used-by \Dfe\FacebookLogin\Customer::responseJson()
  */
@@ -142,10 +142,10 @@ function df_assert_in($v, array $a, $m = null) {
 
 /**
  * 2017-01-14       
- * @used-by \Df\GoogleFont\Font\Variant\Preview::box()
- * @used-by \Df\GoogleFont\Fonts\Png::colorAllocateAlpha()
- * @used-by \Df\GoogleFont\Fonts\Png::image()
- * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
+ * @used-by \Dfe\GoogleFont\Font\Variant\Preview::box()
+ * @used-by \Dfe\GoogleFont\Fonts\Png::colorAllocateAlpha()
+ * @used-by \Dfe\GoogleFont\Fonts\Png::image()
+ * @used-by \Dfe\GoogleFont\Fonts\Sprite::draw()
  * @used-by \Df\Xml\X::asXMLPart()
  * @param mixed $v
  * @param string|E $m [optional]

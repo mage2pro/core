@@ -7,8 +7,8 @@
  * @used-by df_module_enum()
  * @used-by df_request_body()
  * @used-by df_test_file_l()
- * @used-by \Df\GoogleFont\Font\Variant::ttfPath()
- * @used-by \Df\GoogleFont\Fonts\Png::contents()
+ * @used-by \Dfe\GoogleFont\Font\Variant::ttfPath()
+ * @used-by \Dfe\GoogleFont\Fonts\Png::contents()
  * @used-by \Dfe\Salesforce\Test\Basic::t02_the_latest_version()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
  * @param string $f

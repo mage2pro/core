@@ -25,7 +25,7 @@ function df_cache_enabled(string $type):bool {
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\API\Client::p()
  * @used-by \Df\GingerPaymentsBase\Api::idealBanks()
- * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
+ * @used-by \Dfe\GoogleFont\Controller\Index\Index::execute()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()

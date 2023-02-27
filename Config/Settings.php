@@ -13,7 +13,7 @@ use Magento\Store\Model\Store;
  * @see \Df\API\Settings
  * @see \Df\Config\Settings\Configurable
  * @see \Dfe\Facebook\Settings
- * @see \Df\Google\Settings
+ * @see \Dfe\Google\Settings
  * @see \Df\OAuth\Settings
  * @see \Df\Payment\Settings
  * @see \Df\Payment\Settings\_3DS
@@ -58,7 +58,7 @@ abstract class Settings {
 	 * @see \Dfe\Amazon\Settings::prefix()
 	 * @see \Df\Config\Settings\Configurable::prefix()
 	 * @see \Dfe\Facebook\Settings::prefix()
-	 * @see \Df\Google\Settings::prefix()
+	 * @see \Dfe\Google\Settings::prefix()
 	 * @see \Dfe\Oro\Settings\General::prefix()
 	 * @see \Df\Payment\Settings::prefix()
 	 * @see \Df\Payment\Settings\_3DS::prefix()
@@ -259,7 +259,7 @@ abstract class Settings {
 	 * @used-by \Df\GingerPaymentsBase\ConfigProvider::config()
 	 * @used-by \Df\GingerPaymentsBase\Settings::btId()
 	 * @used-by \Df\GingerPaymentsBase\Settings::domain()
-	 * @used-by \Df\Google\Settings::clientId()
+	 * @used-by \Dfe\Google\Settings::clientId()
 	 * @used-by \Df\OAuth\Settings::clientId()
 	 * @used-by \Df\OAuth\Settings::refreshToken()
 	 * @used-by \Dfe\Oro\Settings\General::username()

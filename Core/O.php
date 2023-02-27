@@ -7,10 +7,10 @@ namespace Df\Core;
  * @see \Df\Config\A
  * @see \Df\Config\O
  * @see \Df\Core\Text\Regex
- * @see \Df\GoogleFont\Font
- * @see \Df\GoogleFont\Font\Variant\Preview\Params
- * @see \Df\GoogleFont\Fonts
- * @see \Df\GoogleFont\Fonts\Png
+ * @see \Dfe\GoogleFont\Font
+ * @see \Dfe\GoogleFont\Font\Variant\Preview\Params
+ * @see \Dfe\GoogleFont\Fonts
+ * @see \Dfe\GoogleFont\Fonts\Png
  * @see \Df\Qa\Trace\Frame
  * @see \Df\Sso\Customer
  * @see \Df\Typography\Css
@@ -36,9 +36,9 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\Config\A::i()
 	 * @used-by \Df\Core\Text\Regex::i()
 	 * @used-by \Df\Framework\Log\Record::__construct()
-	 * @used-by \Df\GoogleFont\Font\Variant::i()
-	 * @used-by \Df\GoogleFont\Font\Variant\Preview\Params::fromRequest()
-	 * @used-by \Df\GoogleFont\Fonts\Sprite::i()
+	 * @used-by \Dfe\GoogleFont\Font\Variant::i()
+	 * @used-by \Dfe\GoogleFont\Font\Variant\Preview\Params::fromRequest()
+	 * @used-by \Dfe\GoogleFont\Fonts\Sprite::i()
 	 * @used-by \Df\Qa\Failure\Error::i()
 	 * @used-by \Df\Qa\Failure\Exception::i()
 	 * @used-by \Df\Typography\Font::size()

@@ -4,7 +4,7 @@
  * @used-by dfp_card_format_last4()
  * @used-by dfp_methods()
  * @used-by \Df\Config\Source\LetterCase::map()
- * @used-by \Df\GoogleFont\Font\Variant\Preview::text()
+ * @used-by \Dfe\GoogleFont\Font\Variant\Preview::text()
  * @used-by \Df\ZohoBI\Source\Organization::fetch()
  * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
  * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()

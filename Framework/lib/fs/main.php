@@ -24,7 +24,7 @@ function df_file():File {return df_o(File::class);}
  * @used-by df_json_file_read()
  * @used-by df_magento_version_remote()
  * @used-by df_package()
- * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
+ * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * @used-by \Dfe\Color\Image::dominant()
  */
@@ -43,9 +43,9 @@ function df_file_read(string $p, bool $req = true):string {return df_contents($p
  * 2020-02-14 If $append is `true`, then $contents will be written on a new line. 
  * @used-by df_report()
  * @used-by df_sync()
- * @used-by \Df\GoogleFont\Font\Variant::ttfPath()
- * @used-by \Df\GoogleFont\Fonts\Png::create()
- * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
+ * @used-by \Dfe\GoogleFont\Font\Variant::ttfPath()
+ * @used-by \Dfe\GoogleFont\Fonts\Png::create()
+ * @used-by \Dfe\GoogleFont\Fonts\Sprite::draw()
  * @param string|string[] $p
  */
 function df_file_write($p, string $contents, bool $append = false):void {

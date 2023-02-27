@@ -95,7 +95,7 @@ function df_response_ar($a1 = null, $a2 = null):array {return
 /**
  * 2015-12-09
  * @used-by \Df\Framework\App\Action\Image::execute()
- * @used-by \Df\GoogleFont\Controller\Index\Index::execute()
+ * @used-by \Dfe\GoogleFont\Controller\Index\Index::execute()
  */
 function df_response_cache_max():void {df_response_headers([
 	'Cache-Control' => 'max-age=315360000'

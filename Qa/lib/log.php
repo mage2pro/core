@@ -6,9 +6,9 @@ use Magento\Framework\DataObject as _DO;
  * @used-by ikf_endpoint()	inkifi.com
  * @used-by \Df\Config\Backend::save()
  * @used-by \Df\Config\Backend\Serialized::processA()
- * @used-by \Df\GoogleFont\Fonts\Png::url()
- * @used-by \Df\GoogleFont\Fonts\Sprite::datumPoints()
- * @used-by \Df\GoogleFont\Fonts\Sprite::draw()
+ * @used-by \Dfe\GoogleFont\Fonts\Png::url()
+ * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
+ * @used-by \Dfe\GoogleFont\Fonts\Sprite::draw()
  * @used-by \Df\OAuth\ReturnT::execute()
  * @used-by \Df\Payment\Method::action()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
