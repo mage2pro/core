@@ -222,6 +222,7 @@ abstract class Facade {
 	 * @see \Dfe\TBCBank\API\Facade::path()
 	 * @see \Dfe\Vantiv\API\Facade::path()
 	 * @see \Inkifi\Mediaclip\API\Facade\User::path()
+     * @see \Dfe\Sift\API\Facade\GetDecisions::path()
 	 */
 	protected function path(string $id, string $suf = ''):string {return df_cc_path(
 		$this->prefix(), strtolower(df_class_l($this)) . 's', urlencode($id), $suf
