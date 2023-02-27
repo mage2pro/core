@@ -32,7 +32,7 @@ function df_ejs($v):string {return !is_string($v) ? df_json_encode($v) : df_quot
  * @used-by \Df\Checkout\B\Messages::_toHtml()
  * @used-by \Df\Checkout\B\Payment::_toHtml()
  * @used-by \Df\Intl\Js::_toHtml()
- * @used-by \Df\Phone\Js::_toHtml()
+ * @used-by \Dfe\Phone\Js::_toHtml()
  * @used-by \Df\Sso\Css::_toHtml()
  * @used-by \Dfe\AmazonLogin\Button::loggedIn()
  * @used-by \Dfe\Customer\Block::_toHtml()

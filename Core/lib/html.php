@@ -14,7 +14,7 @@ function df_html_b(...$a) {return df_call_a(function(string $s) {return df_tag('
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_fa_link()
  * @used-by df_fe_init()
- * @used-by \Df\Phone\Js::_toHtml()
+ * @used-by \Dfe\Phone\Js::_toHtml()
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
  * @used-by \Dfe\Klarna\Button::_toHtml()

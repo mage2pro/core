@@ -16,7 +16,7 @@ function df_asset():Repository {return df_o(Repository::class);}
  * http://stackoverflow.com/questions/4659345
  * @used-by df_asset_exists()
  * @used-by df_resource_inline()
- * @used-by \Df\Phone\Js::_toHtml()
+ * @used-by \Dfe\Phone\Js::_toHtml()
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Moip\ConfigProvider::config()
  */
