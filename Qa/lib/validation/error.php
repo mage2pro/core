@@ -111,7 +111,7 @@ function df_abstract($caller):void {
  * @used-by \Df\Core\Text\Regex::throwInternalError()
  * @used-by \Df\Core\Text\Regex::throwNotMatch()
  * @used-by \Df\Framework\Form\Element\Text::getValue()
- * @used-by \Df\Geo\Client::onError()
+ * @used-by \Dfe\Geo\Client::onError()
  * @used-by \Df\GingerPaymentsBase\Api::req()
  * @used-by \Df\Payment\BankCardNetworks::url()
  * @used-by \Df\Payment\Method::getInfoBlockType()

@@ -6,7 +6,7 @@ use Magento\Framework\App\Http;
 /**
  * 2016-11-10 Вынуждены использовать PHPUnit 4, потому что иначе будет сбой компиляции: https://mage2.pro/t/2260
  * @see \Df\Catalog\Test\product\attribute
- * @see \Df\Geo\Test\TestCase
+ * @see \Dfe\Geo\Test\TestCase
  * @see \Df\Payment\TestCase
  * @see \Df\Zoho\Test\TestCase
  * @see \Dfe\BlackbaudNetCommunity\Test\Main

@@ -72,7 +72,7 @@ function df_eta($v):array {
  * @used-by df_img_resize()
  * @used-by df_slice()
  * @used-by dfa_chop()
- * @used-by \Df\Geo\Client::__construct()
+ * @used-by \Dfe\Geo\Client::__construct()
  * @used-by \Df\Payment\W\Nav::op()
  * @param mixed $v
  * @return mixed|null
