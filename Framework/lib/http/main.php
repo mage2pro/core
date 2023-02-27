@@ -19,7 +19,7 @@ function df_header_utf():void {df_is_cli() || headers_sent() ?: header('Content-
 /**
  * 2017-02-26      
  * @used-by df_response_sign()
- * @used-by \Df\GingerPaymentsBase\Api::__construct()
+ * @used-by \Dfe\GingerPaymentsBase\Api::__construct()
  * @param array(string => string) $a [optional]
  * @return array(string => string)
  */

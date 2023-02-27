@@ -3,9 +3,9 @@ namespace Df\StripeClone\W;
 /**
  * 2017-03-15
  * 2017-03-26, 2017-11-10
- * It is used as a base for the \Df\GingerPaymentsBase\W\Nav virtual type:
+ * It is used as a base for the \Dfe\GingerPaymentsBase\W\Nav virtual type:
  * https://github.com/mage2pro/ginger-payments-base/blob/1.2.3/etc/di.xml#L6
- * I use it because @see \Df\GingerPaymentsBase\Method does not inherit from @see \Df\StripeClone\Method,
+ * I use it because @see \Dfe\GingerPaymentsBase\Method does not inherit from @see \Df\StripeClone\Method,
  * so @see \Df\Payment\W\F::c() will not resolve the `Nav` class to \Df\StripeClone\W\Nav automatically.
  * 2018-09-28 It is used as a base for the \Dfe\TBCBank\W\Nav virtual type.
  * @see \Dfe\Stripe\W\Nav\Source

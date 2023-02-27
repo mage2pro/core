@@ -28,7 +28,7 @@ function dfp_error_message($m = ''):string {return nl2br(df_cc_n(
 /**
  * 2016-09-08
  * @used-by \CanadaSatellite\Bambora\Action::check() (https://github.com/canadasatellite-ca/bambora)
- * @used-by \Df\GingerPaymentsBase\Init\Action::res()
+ * @used-by \Dfe\GingerPaymentsBase\Init\Action::res()
  * @used-by \Df\Payment\CustomerReturn::execute()
  * @used-by \Df\Payment\Init\Action::action()
  * @used-by \Df\StripeClone\Method::transInfo()

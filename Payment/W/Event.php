@@ -12,7 +12,7 @@ abstract class Event implements IEvent, IMA {
 	/**
 	 * 2017-01-16
 	 * @used-by self::pid()
-	 * @see \Df\GingerPaymentsBase\W\Event::k_pid()
+	 * @see \Dfe\GingerPaymentsBase\W\Event::k_pid()
 	 * @see \Df\StripeClone\W\Event::k_pid()
 	 * @see \Dfe\AllPay\W\Event::k_pid()
 	 * @see \Dfe\AlphaCommerceHub\W\Event::k_pid()
@@ -43,7 +43,7 @@ abstract class Event implements IEvent, IMA {
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Df\PaypalClone\W\Nav::id()
 	 * @used-by \Df\StripeClone\W\Nav::id()
-	 * @see \Df\GingerPaymentsBase\W\Event::ttCurrent()
+	 * @see \Dfe\GingerPaymentsBase\W\Event::ttCurrent()
 	 * @see \Df\PaypalClone\W\Event::ttCurrent()
 	 * @see \Dfe\Moip\W\Event::ttCurrent()
 	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttCurrent()
@@ -341,8 +341,8 @@ abstract class Event implements IEvent, IMA {
 	 * 2017-03-26
 	 * Первичная транзакция.
 	 * Она всегда соответствует неподтверждённому состоянию платежа.
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
-	 * @used-by \Df\GingerPaymentsBase\W\Event::ttParent()
+	 * @used-by \Dfe\GingerPaymentsBase\Init\Action::transId()
+	 * @used-by \Dfe\GingerPaymentsBase\W\Event::ttParent()
 	 */
 	const T_INIT = 'init';
 

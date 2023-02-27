@@ -187,7 +187,7 @@ function df_new_omd(string $c, array $d = []) {return df_om()->create($c, ['data
 /**
  * 2015-03-23
  * @see df_ic()
- * @used-by \Df\GingerPaymentsBase\Settings::os()
+ * @used-by \Dfe\GingerPaymentsBase\Settings::os()
  * @used-by \Df\Payment\Settings::_options()
  * @param array(string => mixed) $params [optional]
  * @return _DO|object

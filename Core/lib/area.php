@@ -79,7 +79,7 @@ function df_area_code_set_f():void {df_app_state()->setAreaCode(A::AREA_FRONTEND
  * @used-by df_store()
  * @used-by \Df\Config\Settings::scope()
  * @used-by \Df\Framework\Form\Element\Fieldset::addField()
- * @used-by \Df\GingerPaymentsBase\Block\Info::msgUnconfirmed()
+ * @used-by \Dfe\GingerPaymentsBase\Block\Info::msgUnconfirmed()
  * @used-by \Df\Payment\Block\Info::getIsSecureMode()
  * @used-by \Df\Payment\Block\Info::getTemplate()
  * @used-by \Df\Payment\Method::getFormBlockType()

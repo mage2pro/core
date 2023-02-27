@@ -19,7 +19,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 
 /**
  * 2016-05-06
- * @see \Df\GingerPaymentsBase\Block\Info
+ * @see \Dfe\GingerPaymentsBase\Block\Info
  * @see \Df\StripeClone\Block\Info
  * @see \Dfe\ACH\Block\Info
  * @see \Dfe\AllPay\Block\Info
@@ -204,7 +204,7 @@ abstract class Info extends _P {
 			/**
 			 * 2017-04-01
 			 * Результат вполне может быть абстрактным:
-			 * например, если текущий класс — @see \Df\GingerPaymentsBase\Block\Info
+			 * например, если текущий класс — @see \Dfe\GingerPaymentsBase\Block\Info
 			 * @var string $с
 			 * @var string|null $s
 			 */
@@ -247,8 +247,8 @@ abstract class Info extends _P {
 	/**
 	 * 2017-04-17
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::bt()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 */
@@ -257,7 +257,7 @@ abstract class Info extends _P {
 	/**
 	 * 2017-04-17
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\AllPay\Block\Info::prepareDic()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
@@ -319,7 +319,7 @@ abstract class Info extends _P {
 	 * @used-by self::o()
 	 * @used-by self::option()
 	 * @used-by self::rTable()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::btInstructions()
 	 * @used-by \Dfe\Square\Block\Info::prepare()
 	 * @return II|I|OP|QP|mixed
 	 */
@@ -355,7 +355,7 @@ abstract class Info extends _P {
 	 * @used-by self::siID()
 	 * @used-by self::titleB()
 	 * @used-by self::tm()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::option()
 	 * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
 	 * @used-by \Df\StripeClone\Block\Info::cf()
 	 * @used-by \Dfe\Vantiv\Block\Info::card()
@@ -365,7 +365,7 @@ abstract class Info extends _P {
 	/**
 	 * 2017-03-29
 	 * @used-by self::rCheckoutSuccess()
-	 * @see \Df\GingerPaymentsBase\Block\Info::msgCheckoutSuccess()
+	 * @see \Dfe\GingerPaymentsBase\Block\Info::msgCheckoutSuccess()
 	 * @see \Dfe\Moip\Block\Info\Boleto::msgCheckoutSuccess()
 	 */
 	protected function msgCheckoutSuccess():string {return 'Not implemented.';}
@@ -373,7 +373,7 @@ abstract class Info extends _P {
 	/**
 	 * 2017-03-29
 	 * @used-by self::rUnconfirmed()
-	 * @see \Df\GingerPaymentsBase\Block\Info::msgUnconfirmed()
+	 * @see \Dfe\GingerPaymentsBase\Block\Info::msgUnconfirmed()
 	 * @see \Dfe\ACH\Block\Info::msgUnconfirmed()
 	 */
 	protected function msgUnconfirmed():string {return df_tag('div', 'df-unconfirmed-text', __(
@@ -396,7 +396,7 @@ abstract class Info extends _P {
 	 * (Df\Payment\Block\Info::prepare)»
 	 * Поэтому был вынужден убрать «abstract».
 	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
-	 * @see \Df\GingerPaymentsBase\Block\Info::prepare()
+	 * @see \Dfe\GingerPaymentsBase\Block\Info::prepare()
 	 * @see \Df\StripeClone\Block\Info::prepare()
 	 * @see \Dfe\ACH\Block\Info::prepare()
 	 * @see \Dfe\AllPay\Block\Info::prepare()
@@ -434,7 +434,7 @@ abstract class Info extends _P {
 	 * Этот метод инициализирирует информацию о ещё не подтверждённом платёжной системой
 	 * или находящемся на модерации (review) в интернет-магазине платеже.
 	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
-	 * @see \Df\GingerPaymentsBase\Block\Info::prepareUnconfirmed()
+	 * @see \Dfe\GingerPaymentsBase\Block\Info::prepareUnconfirmed()
 	 * @see \Dfe\ACH\Block\Info::prepareUnconfirmed()
 	 * @see \Dfe\AllPay\Block\Info\BankCard::prepareUnconfirmed()
 	 * @see \Dfe\AllPay\Block\Info\Offline::prepareUnconfirmed()
@@ -462,8 +462,8 @@ abstract class Info extends _P {
 	/**
 	 * 2017-02-18
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::bt()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::bt()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 */
 	protected function s(string $k = ''):Settings {return $this->m()->s($k);}
@@ -476,7 +476,7 @@ abstract class Info extends _P {
 	 * Ключи потом будут автоматически переведены методом @see \Df\Payment\Info\Entry::nameT()
 	 * Значения переведены не будут!
 	 * @used-by self::siEx()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
 	 * @used-by \Dfe\IPay88\Block\Info::prepare()
@@ -498,7 +498,7 @@ abstract class Info extends _P {
 	/**
 	 * 2016-11-17
 	 * @used-by self::siID()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepare()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::prepare()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Dfe\AllPay\Block\Info::prepare()
 	 * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
@@ -520,7 +520,7 @@ abstract class Info extends _P {
 
 	/**
 	 * 2017-03-29
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Df\StripeClone\Block\Info::prepare()
 	 */
 	final protected function siID():void {$this->siEx(
@@ -539,8 +539,8 @@ abstract class Info extends _P {
 	 * @used-by self::confirmed()
 	 * @used-by self::e()
 	 * @used-by self::siID()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::option()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::option()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::res0()
 	 * @used-by \Df\StripeClone\Block\Info::cardData()
 	 * @used-by \Dfe\AllPay\Block\Info\Offline::custom()
 	 * @used-by \Dfe\Dragonpay\Block\Info::prepare()

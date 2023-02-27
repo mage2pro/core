@@ -253,7 +253,7 @@ function df_con_child($c, $suf, string $def = '', bool $throw = true) {return Co
  * @used-by dfpm_c()
  * @used-by dfsm_c()
  * @used-by \Df\API\Facade::p()
- * @used-by \Df\GingerPaymentsBase\Settings::os()
+ * @used-by \Dfe\GingerPaymentsBase\Settings::os()
  * @used-by \Df\Payment\Currency::f()
  * @used-by \Df\Payment\Facade::s()
  * @used-by \Df\PaypalClone\Charge::p()

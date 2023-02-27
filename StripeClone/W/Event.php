@@ -3,7 +3,7 @@ namespace Df\StripeClone\W;
 use Df\Payment\W\Exception\Critical;
 /**
  * 2017-03-15
- * @see \Df\GingerPaymentsBase\W\Event
+ * @see \Dfe\GingerPaymentsBase\W\Event
  * @see \Dfe\Moip\W\Event
  * @see \Dfe\Omise\W\Event
  * @see \Dfe\Paymill\W\Event
@@ -16,7 +16,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-03-18 Тип родительской транзакции
 	 * 2022-11-10 The result could be an empty string: @see \Dfe\Moip\W\Event::ttParent()
 	 * @used-by \Df\StripeClone\W\Nav::pidAdapt()
-	 * @see \Df\GingerPaymentsBase\W\Event::ttParent()
+	 * @see \Dfe\GingerPaymentsBase\W\Event::ttParent()
 	 * @see \Dfe\Moip\W\Event::ttParent()
 	 * @see \Dfe\Omise\W\Event\Charge\Capture::ttParent()
 	 * @see \Dfe\Omise\W\Event\Charge\Complete::ttParent()
@@ -45,7 +45,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * Если конкретные данные сообщения расположены прямо на верхнем уровне иерархии, то метод должен вернуть пустую строку.
 	 * @used-by self::k_pid()
 	 * @used-by self::ro()
-	 * @see \Df\GingerPaymentsBase\W\Event::roPath()
+	 * @see \Dfe\GingerPaymentsBase\W\Event::roPath()
 	 * @see \Dfe\Moip\W\Event::roPath()
 	 * @see \Dfe\Omise\W\Event::roPath()
 	 * @see \Dfe\Paymill\W\Event::roPath()
@@ -56,7 +56,7 @@ abstract class Event extends \Df\Payment\W\Event {
 
 	/**
 	 * 2017-01-17
-	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
+	 * @used-by \Dfe\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\StripeClone\W\Nav::id()
 	 * @see \Dfe\Omise\W\Event\Refund::idBase()
 	 * @see \Dfe\Paymill\W\Event\Refund::idBase()
@@ -96,7 +96,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * 2017-03-26
 	 * df_cc_path() нам нужна, потому что roPath() может возвращать null
 	 * в том случае, когда основные данные события расположены на верхнем уровне вложенности:
-	 * @see \Df\GingerPaymentsBase\W\Event::roPath()
+	 * @see \Dfe\GingerPaymentsBase\W\Event::roPath()
 	 * @override
 	 * @see \Df\Payment\W\Event::k_pid()
 	 * @used-by \Df\Payment\W\Event::pid()
@@ -111,7 +111,7 @@ abstract class Event extends \Df\Payment\W\Event {
 	 * "An initial reusable source for a card which requires a 3D Secure verification': https://mage2.pro/t/4893
 	 * "A derived single-use 3D Secure source": https://mage2.pro/t/4894
 	 * @used-by self::k_pid()
-	 * @see \Df\GingerPaymentsBase\W\Event::k_pidSuffix()
+	 * @see \Dfe\GingerPaymentsBase\W\Event::k_pidSuffix()
 	 * @see \Dfe\Omise\W\Event\Refund::k_pidSuffix()
 	 * @see \Dfe\Paymill\W\Event\Refund::k_pidSuffix()
 	 * @see \Dfe\TBCBank\W\Event::k_pidSuffix()

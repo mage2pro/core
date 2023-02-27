@@ -120,7 +120,7 @@ function df_sentry($m, $v, array $context = []):void {
  * 2.4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by \Auctane\Api\Model\Action\Export::_getBillingInfo() (caremax.com.au, https://github.com/caremax-com-au/site/issues/1)
  * @used-by \Auctane\Api\Model\Action\Export::writeOrderXml() (caremax.com.au, https://github.com/caremax-com-au/site/issues/1)
- * @used-by \Df\GingerPaymentsBase\Init\Action::req()
+ * @used-by \Dfe\GingerPaymentsBase\Init\Action::req()
  * @used-by \Df\Payment\W\Reader::error()
  * @used-by \Df\StripeClone\Method::charge()
  * @used-by \Df\StripeClone\Method::chargeNew()

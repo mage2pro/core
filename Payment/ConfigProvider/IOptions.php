@@ -2,7 +2,7 @@
 namespace Df\Payment\ConfigProvider;
 /**
  * 2017-09-18
- * @see \Df\GingerPaymentsBase\ConfigProvider
+ * @see \Dfe\GingerPaymentsBase\ConfigProvider
  * @see \Dfe\AllPay\ConfigProvider
  * @see \Dfe\IPay88\ConfigProvider
  * @see \Dfe\Robokassa\ConfigProvider
@@ -15,7 +15,7 @@ interface IOptions extends \Df\Config\ISettings{
 	 * 1) ['a label' => 'a value']
 	 * 2) [['label' => 'a label', 'value' => 'a value', 'children' => <...>]]
 	 * @used-by \Df\Payment\ConfigProvider::configOptions()
-	 * @see \Df\GingerPaymentsBase\ConfigProvider::options()
+	 * @see \Dfe\GingerPaymentsBase\ConfigProvider::options()
 	 * @see \Dfe\AllPay\ConfigProvider::options()
 	 * @see \Dfe\IPay88\ConfigProvider::options()
 	 * @see \Dfe\Robokassa\ConfigProvider::options()

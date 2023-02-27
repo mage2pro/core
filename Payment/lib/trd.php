@@ -8,7 +8,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2017-10-10
  * I have added @uses df_eta() to support the legacy Square transactions
  * (before the `Df_StripeClone` module usage): @see \Dfe\Square\Block\Info::prepare()
- * @used-by \Df\GingerPaymentsBase\Method::transUrl()
+ * @used-by \Dfe\GingerPaymentsBase\Method::transUrl()
  * @used-by \Df\Payment\TM::req()
  * @used-by \Df\Payment\TM::res0()
  * @used-by \Df\Payment\TM::responses()

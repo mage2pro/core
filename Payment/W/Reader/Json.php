@@ -2,7 +2,7 @@
 namespace Df\Payment\W\Reader;
 /**
  * 2017-03-09
- * @see \Df\GingerPaymentsBase\W\Reader
+ * @see \Dfe\GingerPaymentsBase\W\Reader
  * @see \Dfe\Omise\W\Reader
  * @see \Dfe\Paymill\W\Reader
  * @see \Dfe\Stripe\W\Reader

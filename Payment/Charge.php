@@ -2,7 +2,7 @@
 namespace Df\Payment;
 /**
  * 2016-07-02
- * @see \Df\GingerPaymentsBase\Charge
+ * @see \Dfe\GingerPaymentsBase\Charge
  * @see \Df\PaypalClone\Charge
  * @see \Df\StripeClone\P\Charge
  * @see \Dfe\CheckoutCom\Charge
@@ -16,7 +16,7 @@ abstract class Charge extends Operation {
 	/**
 	 * 2016-08-27
 	 * @used-by self::customerReturnRemote()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
@@ -26,7 +26,7 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-08-26
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\Robokassa\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
@@ -44,7 +44,7 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2017-03-06
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
@@ -61,7 +61,7 @@ abstract class Charge extends Operation {
 
 	/**
 	 * 2016-09-07 Ключами результата являются человекопонятные названия переменных.
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\Stripe\P\Charge::p()
 	 * @return array(string => string)
 	 */

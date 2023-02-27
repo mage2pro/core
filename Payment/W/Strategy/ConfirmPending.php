@@ -10,7 +10,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-01-15
- * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
+ * @used-by \Dfe\GingerPaymentsBase\W\Handler::strategyC()
  * @used-by \Df\PaypalClone\W\Handler::strategyC()
  * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
  * @used-by \Dfe\Qiwi\W\Handler::strategyC()

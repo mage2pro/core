@@ -209,7 +209,7 @@ return {
 	/**
 	 * 2016-08-16
 	 * @used-by dfFormCssClassesS()
-	 * @see Df_GingerPaymentsBase/main::dfFormCssClasses()
+	 * @see Dfe_GingerPaymentsBase/main::dfFormCssClasses()
 	 * https://github.com/mage2pro/ginger-payments-base/blob/0.1.0/view/frontend/web/main.js?ts=4#L47
 	 * @see Df_Payment/card::dfFormCssClasses()
 	 * https://github.com/mage2pro/core/blob/2.0.25/Payment/view/frontend/web/card.js?ts=4#L76

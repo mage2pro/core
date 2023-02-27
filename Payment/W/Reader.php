@@ -127,7 +127,7 @@ class Reader implements IEvent {
 	/**
 	 * 2017-03-10
 	 * @used-by self::tRaw()
-	 * @see \Df\GingerPaymentsBase\W\Reader::kt()
+	 * @see \Dfe\GingerPaymentsBase\W\Reader::kt()
 	 * @see \Dfe\AllPay\W\Reader::kt()
 	 * @see \Dfe\Omise\W\Reader::kt()
 	 * @see \Dfe\Paymill\W\Reader::kt()

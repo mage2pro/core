@@ -9,7 +9,7 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-03-21 The class is not abstract: it is directly used by some my modules (e.g.: Stripe, Paymill).
- * @see \Df\GingerPaymentsBase\Init\Action
+ * @see \Dfe\GingerPaymentsBase\Init\Action
  * @see \Df\PaypalClone\Init\Action
  * @see \Dfe\Omise\Init\Action
  * @see \Dfe\Qiwi\Init\Action
@@ -62,8 +62,8 @@ class Action {
 				 * В этом случае данный вызов @uses \Df\Payment\Method::iiaSetTRR()
 				 * безвреден (он ничего не сделает), а параметры запроса сохраняются в транзакции
 				 * каким-то другим методом, например:
-				 * @see \Df\GingerPaymentsBase\Init\Action::req()
-				 * @see \Df\GingerPaymentsBase\Init\Action::res()
+				 * @see \Dfe\GingerPaymentsBase\Init\Action::req()
+				 * @see \Dfe\GingerPaymentsBase\Init\Action::res()
 				 * @see \Dfe\Qiwi\Init\Action::preorder()
 				 */
 				$m->iiaSetTRR($p);
@@ -136,7 +136,7 @@ class Action {
 
 	/**
 	 * 2017-03-26
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::transId()
+	 * @used-by \Dfe\GingerPaymentsBase\Init\Action::transId()
 	 * @used-by \Df\PaypalClone\Init\Action::transId()
 	 * @used-by \Dfe\Qiwi\Init\Action::transId()
 	 * @used-by \Dfe\Stripe\Init\Action::transId+
@@ -157,8 +157,8 @@ class Action {
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by self::e2i()
 	 * @used-by self::token()
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
+	 * @used-by \Dfe\GingerPaymentsBase\Init\Action::req()
+	 * @used-by \Dfe\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\PaypalClone\Init\Action::charge()
 	 * @used-by \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Qiwi\Init\Action::redirectUrl()
@@ -220,7 +220,7 @@ class Action {
 	 * который принимает решение о необходимости проверки 3D Secure
 	 * на основании конкретного параметра $charge.
 	 * @used-by self::action()
-	 * @see \Df\GingerPaymentsBase\Init\Action::redirectUrl()
+	 * @see \Dfe\GingerPaymentsBase\Init\Action::redirectUrl()
 	 * @see \Dfe\AllPay\Init\Action::redirectUrl()
 	 * @see \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @see \Dfe\Dragonpay\Init\Action::redirectUrl()
@@ -240,7 +240,7 @@ class Action {
 	 * 2017-03-21
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by self::preconfigured()
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
+	 * @used-by \Dfe\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Dfe\AlphaCommerceHub\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Omise\Init\Action::redirectUrl()
 	 * @used-by \Dfe\Stripe\Init\Action::need3DS()
@@ -267,7 +267,7 @@ class Action {
 	 * Таким образом @used-by action() не будет записывать первичную транзакцию,
 	 * и запись первичной транзакции будет происходить только в @see \Df\StripeClone\Method::chargeNew()
 	 * @used-by self::action()
-	 * @see \Df\GingerPaymentsBase\Init\Action::transId()
+	 * @see \Dfe\GingerPaymentsBase\Init\Action::transId()
 	 * @see \Df\PaypalClone\Init\Action::transId()
 	 * @see \Dfe\Qiwi\Init\Action::transId()
 	 * @see \Dfe\Stripe\Init\Action::transId()

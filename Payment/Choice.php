@@ -10,7 +10,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 /**
  * 2017-04-17
- * @see \Df\GingerPaymentsBase\Choice
+ * @see \Dfe\GingerPaymentsBase\Choice
  * @see \Dfe\AllPay\Choice
  * @see \Dfe\AlphaCommerceHub\Choice
  * @see \Dfe\IPay88\Choice
@@ -23,7 +23,7 @@ class Choice {
 	 * 2017-04-17
 	 * @used-by \Df\Payment\Block\Info::choiceT()
 	 * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
-	 * @see \Df\GingerPaymentsBase\Choice::title()
+	 * @see \Dfe\GingerPaymentsBase\Choice::title()
 	 * @see \Dfe\AllPay\Choice::title()
 	 * @see \Dfe\IPay88\Choice::title()
 	 * @see \Dfe\Moip\Choice::title()
@@ -36,7 +36,7 @@ class Choice {
 	 * 2017-04-17
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by self::tm()
-	 * @used-by \Df\GingerPaymentsBase\Choice::optionCodeI()
+	 * @used-by \Dfe\GingerPaymentsBase\Choice::optionCodeI()
 	 * @used-by \Dfe\AllPay\Choice::title()
 	 * @used-by \Dfe\AlphaCommerceHub\Choice::title()
 	 * @used-by \Dfe\Moip\Choice::title()
@@ -46,7 +46,7 @@ class Choice {
 
 	/**
 	 * 2017-04-17 Возвращает параметры первичного запроса магазина к ПС.
-	 * @used-by \Df\GingerPaymentsBase\Choice::option()
+	 * @used-by \Dfe\GingerPaymentsBase\Choice::option()
 	 * @used-by \Dfe\AlphaCommerceHub\Choice::id()
 	 * @return array(string => string)|string|null
 	 */
@@ -66,7 +66,7 @@ class Choice {
 	/**
 	 * 2017-04-17
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\GingerPaymentsBase\Choice::title()
+	 * @used-by \Dfe\GingerPaymentsBase\Choice::title()
 	 */
 	protected function s(string $k = ''):Settings {return $this->_m->s($k);}
 

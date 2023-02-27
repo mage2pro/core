@@ -70,7 +70,7 @@ function df_oqi_tax($i):float {return df_oqi_amount($i);}
 
 /**
  * 2017-02-01
- * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
+ * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
@@ -209,7 +209,7 @@ function df_oqi_price($i, bool $withTax = false, bool $withDiscount = false):flo
  * @used-by df_oqi_is_leaf()                           
  * @used-by df_oqi_price()
  * @used-by df_oqi_s()
- * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
+ * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
@@ -275,7 +275,7 @@ function df_oqi_s($oq, string $sep = ', '):string {return df_ccc($sep, df_oqi_ro
  * 2017-09-30
  * @todo Why do not just use \Magento\Sales\Model\Order\Item::getTaxPercent()?
  * I use it for Yandex.Kassa: @see \Dfe\YandexKassa\Charge::pTax()
- * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
+ * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
  * @used-by \Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
@@ -319,7 +319,7 @@ function df_oqi_total($i, bool $withTax = false, bool $withDiscount = false):flo
 
 /**
  * 2017-02-01
- * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
+ * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
  * @used-by \Dfe\AllPay\Charge::productUrls()
  * @used-by \Dfe\CheckoutCom\Charge::cProduct()
  * @used-by \Stock2Shop\OrderExport\Payload::items()

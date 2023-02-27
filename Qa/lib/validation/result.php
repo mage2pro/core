@@ -19,7 +19,7 @@ function df_result_s($v, int $sl = 0):string {return df_check_s($v) ? $v : Q::ra
  * @used-by df_country_3_to_2()
  * @used-by df_dts()
  * @used-by \Df\API\Settings::merchantID()
- * @used-by \Df\GingerPaymentsBase\Method::option()
+ * @used-by \Dfe\GingerPaymentsBase\Method::option()
  * @used-by \Df\Payment\Operation::id()
  * @used-by \Df\Payment\Operation\Source::customerEmail()
  * @used-by \Df\Payment\Operation\Source\Creditmemo::id()

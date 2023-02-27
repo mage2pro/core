@@ -18,7 +18,7 @@ namespace Df\Config;
  * @see \Df\Config\Source\NoWhiteBlack
  * @see \Df\Config\Source\SizeUnit
  * @see \Df\Config\Source\WaitPeriodType
- * @see \Df\GingerPaymentsBase\Source\Option
+ * @see \Dfe\GingerPaymentsBase\Source\Option
  * @see \Df\Payment\Metadata
  * @see \Df\Payment\Source
  * @see \Df\Payment\Source\AC
@@ -56,7 +56,7 @@ abstract class Source extends SourceBase {
 	 * @see \Df\Config\Source\NoWhiteBlack::map()
 	 * @see \Df\Config\Source\SizeUnit::map()
 	 * @see \Df\Config\Source\WaitPeriodType::map()
-	 * @see \Df\GingerPaymentsBase\Source\Option::map()
+	 * @see \Dfe\GingerPaymentsBase\Source\Option::map()
 	 * @see \Df\Payment\Metadata::map()
 	 * @see \Df\Payment\Source\AC::map()
 	 * @see \Df\Payment\Source\Identification::map()
@@ -97,7 +97,7 @@ abstract class Source extends SourceBase {
 
 	/**
 	 * 2016-08-07
-	 * @used-by \Df\GingerPaymentsBase\Source\Option::optionsTest()
+	 * @used-by \Dfe\GingerPaymentsBase\Source\Option::optionsTest()
 	 * @used-by \Df\Payment\Settings\Options::o()
 	 * @param string[]|null $k [optional]
 	 * @return array(<value> => <label>)

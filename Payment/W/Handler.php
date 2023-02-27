@@ -8,7 +8,7 @@ use Magento\Sales\Model\Order\Payment as OP;
 use \Exception as E;
 /**
  * 2016-07-09 Портировал из Российской сборки Magento.
- * @see \Df\GingerPaymentsBase\W\Handler
+ * @see \Dfe\GingerPaymentsBase\W\Handler
  * @see \Df\PaypalClone\W\Handler
  * @see \Dfe\Dragonpay\W\Handler
  * @see \Dfe\Omise\W\Handler\Charge\Capture
@@ -42,7 +42,7 @@ abstract class Handler implements IMA {
 	 * 5) Для реализации такой системы из двух параллельных иерархий
 	 * я вынес в стратегию иерархию обработчиков разных типов платежей.
 	 * @used-by self::handle()
-	 * @see \Df\GingerPaymentsBase\W\Handler::strategyC()
+	 * @see \Dfe\GingerPaymentsBase\W\Handler::strategyC()
 	 * @see \Df\PaypalClone\W\Handler::strategyC()
 	 * @see \Dfe\Dragonpay\W\Handler::strategyC()
 	 * @see \Dfe\Omise\W\Handler\Charge\Capture::strategyC()
@@ -67,7 +67,7 @@ abstract class Handler implements IMA {
 	/**
 	 * 2017-03-15
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
-	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
+	 * @used-by \Dfe\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\Payment\W\Strategy::e()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
 	 * @used-by \Dfe\Omise\W\Handler\Charge\Complete::strategyC()
@@ -121,7 +121,7 @@ abstract class Handler implements IMA {
 	 * @override
 	 * @see \Df\Payment\IMA::m()
 	 * @used-by self::handle()
-	 * @used-by \Df\GingerPaymentsBase\W\Handler::strategyC()
+	 * @used-by \Dfe\GingerPaymentsBase\W\Handler::strategyC()
 	 * @used-by \Df\Payment\W\Handler::log()
 	 * @used-by \Df\Payment\W\Strategy::m()
 	 */

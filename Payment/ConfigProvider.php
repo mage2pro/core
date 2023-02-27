@@ -7,7 +7,7 @@ use Df\Payment\Source\Options\DisplayMode;
 use Magento\Checkout\Model\ConfigProviderInterface as IConfigProvider;
 /**
  * 2016-08-04
- * @see \Df\GingerPaymentsBase\ConfigProvider
+ * @see \Dfe\GingerPaymentsBase\ConfigProvider
  * @see \Df\StripeClone\ConfigProvider
  * @see \Df\Payment\ConfigProvider\BankCard
  * @see \Dfe\ACH\ConfigProvider
@@ -105,7 +105,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 	/**
 	 * 2016-08-04
 	 * @used-by \Df\Payment\ConfigProvider::getConfig()
-	 * @see \Df\GingerPaymentsBase\ConfigProvider::config()
+	 * @see \Dfe\GingerPaymentsBase\ConfigProvider::config()
 	 * @see \Df\Payment\ConfigProvider\BankCard::config()
 	 * @see \Df\StripeClone\ConfigProvider::config()
 	 * @see \Dfe\ACH\ConfigProvider::config()
@@ -203,7 +203,7 @@ class ConfigProvider implements IConfigProvider, \Df\Config\ISettings {
 
 	/**
 	 * 2017-09-18
-	 * @used-by \Df\GingerPaymentsBase\ConfigProvider::config()
+	 * @used-by \Dfe\GingerPaymentsBase\ConfigProvider::config()
 	 * @used-by \Dfe\IPay88\ConfigProvider::config()
 	 * @used-by \Dfe\Robokassa\ConfigProvider::config()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::config()

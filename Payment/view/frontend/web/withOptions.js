@@ -1,6 +1,6 @@
 /**
  * 2017-03-02
- * @see Df_GingerPaymentsBase https://github.com/mage2pro/ginger-payments-base/tree/1.1.3/view/frontend/web/main.js
+ * @see Dfe_GingerPaymentsBase https://github.com/mage2pro/ginger-payments-base/tree/1.1.3/view/frontend/web/main.js
  * @see Dfe_AllPay/main https://github.com/mage2pro/allpay/tree/1.6.7/view/frontend/web/main.js
  * @see Dfe_IPay88/main https://github.com/mage2pro/ipay88/tree/1.1.3/view/frontend/web/main.js
  * @see Dfe_Robokassa/main https://github.com/mage2pro/robokassa/tree/1.0.3/view/frontend/web/main.js
@@ -65,7 +65,7 @@ return parent.extend({
 	 * @override
 	 * @see Df_Payment/mixin::dfData()
 	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/mixin.js#L130-L137
-	 * @see Df_GingerPaymentsBase/main::dfData()
+	 * @see Dfe_GingerPaymentsBase/main::dfData()
 	 * https://github.com/mage2pro/ginger-payments-base/blob/1.1.3/view/frontend/web/main.js#L36-L38
 	 * @returns {Object}
 	 */
@@ -83,7 +83,7 @@ return parent.extend({
 		// @used-by dfData()
 		// @used-by Df_Payment/withOptions
 		// https://github.com/mage2pro/core/blob/2.0.36/Payment/view/frontend/web/template/withOptions.html?ts=4#L12
-		// @used-by Df_GingerPaymentsBase/main::dfData()
+		// @used-by Dfe_GingerPaymentsBase/main::dfData()
 		// https://github.com/mage2pro/ginger-payments-base/blob/0.2.3/view/frontend/web/main.js?ts=4#L65
 		// @used-by Dfe_AllPay/main::iPlans()
 		// https://github.com/mage2pro/allpay/blob/1.2.0/view/frontend/web/main.js?ts=4#L50
@@ -164,7 +164,7 @@ return parent.extend({
 	 * https://github.com/mage2pro/core/blob/2.0.35/Payment/view/frontend/web/template/null.html
 	 * @used-by Df_Payment/withOptions
 	 * https://github.com/mage2pro/core/blob/2.0.35/Payment/view/frontend/web/template/withOptions.html?ts=4#L20
-	 * @see Df_GingerPaymentsBase/main::optionAfter()
+	 * @see Dfe_GingerPaymentsBase/main::optionAfter()
 	 * https://github.com/mage2pro/ginger-payments-base/blob/0.1.9/view/frontend/web/main.js?ts=4#L42-L52
 	 * @param {String} v
 	 * @returns {?String}

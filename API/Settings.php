@@ -43,7 +43,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2017-02-08
 	 * @uses probablyTestableP()
 	 * @used-by ikf_pw_api()
-	 * @used-by \Df\GingerPaymentsBase\Settings::api()
+	 * @used-by \Dfe\GingerPaymentsBase\Settings::api()
 	 * @used-by \Dfe\AlphaCommerceHub\API\Client::commonParams()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 * @used-by \Dfe\CheckoutCom\Settings::api()
@@ -83,7 +83,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * 2016-03-02
 	 * @used-by ikf_pw_api()
 	 * @used-by self::testableGeneric()
-	 * @used-by \Df\GingerPaymentsBase\Settings::options()
+	 * @used-by \Dfe\GingerPaymentsBase\Settings::options()
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Method::test()
 	 * @used-by \Df\Payment\PlaceOrderInternal::message()

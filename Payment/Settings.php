@@ -8,7 +8,7 @@ use Magento\Payment\Model\Checks\TotalMinMax as T;
 use Magento\Store\Model\Store;
 /**
  * 2017-02-15
- * @see \Df\GingerPaymentsBase\Settings
+ * @see \Dfe\GingerPaymentsBase\Settings
  * @see \Df\Payment\Settings\BankCard
  * @see \Df\Payment\Settings\Proxy
  * @see \Dfe\ACH\Settings
@@ -160,7 +160,7 @@ abstract class Settings extends \Df\API\Settings {
 
 	/**
 	 * 2017-03-03
-	 * @used-by \Df\GingerPaymentsBase\Settings::options()
+	 * @used-by \Dfe\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AllPay\Settings::options()
 	 * @used-by \Dfe\AlphaCommerceHub\Settings::options()
 	 * @used-by \Dfe\IPay88\Settings::options()
@@ -175,7 +175,7 @@ abstract class Settings extends \Df\API\Settings {
 	 * 2017-03-27
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by self::applicableForQuoteByCountry()
-	 * @used-by \Df\GingerPaymentsBase\Settings::options()
+	 * @used-by \Dfe\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AlphaCommerceHub\Settings::card()
 	 * @used-by \Dfe\Moip\Settings::boleto()
 	 * @used-by \Dfe\TBCBank\Settings::proxy()
@@ -208,7 +208,7 @@ abstract class Settings extends \Df\API\Settings {
 	 * @override
 	 * @see \Df\API\Settings::titleB()
 	 * @used-by \Df\API\Settings::key()
-	 * @used-by \Df\GingerPaymentsBase\Settings::api()
+	 * @used-by \Dfe\GingerPaymentsBase\Settings::api()
 	 */
 	final protected function titleB():string {return dfpm_title($this);}
 

@@ -24,7 +24,7 @@ function df_cache_enabled(string $type):bool {
  * https://github.com/mage2pro/core/issues/174#user-content-callable
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\API\Client::p()
- * @used-by \Df\GingerPaymentsBase\Api::idealBanks()
+ * @used-by \Dfe\GingerPaymentsBase\Api::idealBanks()
  * @used-by \Dfe\GoogleFont\Controller\Index\Index::execute()
  * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by \Dfe\Robokassa\Api\Options::p()

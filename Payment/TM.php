@@ -40,8 +40,8 @@ final class TM {
 	 * 2017-03-05
 	 * 2017-03-22 Возвращает параметры первичного запроса магазина к ПС.
 	 * 2017-11-12 It returns data of the first request to the PSP's API (from the current payment's first transaction).
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::prepareCommon()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::btInstructions()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::prepareCommon()
 	 * @used-by \Df\Payment\Choice::req()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::_refund()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::charge()
@@ -77,7 +77,7 @@ final class TM {
 
 	/**
 	 * 2017-03-29 It returns a response to the primary request to the PSP API.
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::res0()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::res0()
 	 * @used-by \Df\StripeClone\Block\Info::cardData()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
 	 * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()

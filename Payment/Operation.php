@@ -34,7 +34,7 @@ abstract class Operation implements IMA {
 	/**
 	 * 2017-03-12
 	 * @see \Df\Payment\Operation::__construct()
-	 * @used-by \Df\GingerPaymentsBase\Charge::p()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\StripeClone\P\Charge::sn()
 	 * @used-by \Df\StripeClone\P\Reg::request()
@@ -54,8 +54,8 @@ abstract class Operation implements IMA {
 	 * Converts $a from a sales document currency to the payment currency,
 	 * and then formats the result according to the payment service rules.
 	 * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_shipping()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_discount()
 	 * @used-by \Dfe\TwoCheckout\Charge::lineItem_shipping()
@@ -92,7 +92,7 @@ abstract class Operation implements IMA {
 	 * платёжный адрес у заказа всегда присутствует,
 	 * просто при requireBillingAddress = false платёжный адрес является вырожденным:
 	 * он содержит только email покупателя.
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\Moip\P\Charge::v_CardId()
 	 * @used-by \Dfe\PostFinance\Charge::pCharge()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
@@ -157,7 +157,7 @@ abstract class Operation implements IMA {
 	 * but the numeric value is used in calculations by 2 modules:
 	 * 		1) @see \Dfe\AlphaCommerceHub\Charge::pOrderItems()
 	 * 		2) @see \Dfe\YandexKassa\Charge::pTaxLeafs()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\PaypalClone\Charge::testAmountF()
 	 * @used-by \Df\StripeClone\P\Charge::amountAndCurrency()
@@ -211,9 +211,9 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-08-17 The payment currency code: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_products()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pOrderLines_shipping()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_shipping()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\StripeClone\P\Charge::amountAndCurrency()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
@@ -237,7 +237,7 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2017-02-18
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\Moip\P\Reg::p()
 	 * @used-by \Dfe\Spryng\P\Reg::p()
 	 * @param string $format [optional]
@@ -249,7 +249,7 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-08-26
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
@@ -263,7 +263,7 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2017-02-18
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\Spryng\P\Reg::p()
 	 * @return string|null
 	 */
@@ -273,7 +273,7 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-08-24
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Reg::p()
@@ -283,7 +283,7 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-08-26
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Spryng\P\Reg::p()
 	 * @used-by \Dfe\Square\P\Reg::p()
@@ -293,7 +293,7 @@ abstract class Operation implements IMA {
 
 	/**
 	 * 2016-08-26
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
 	 * @used-by \Dfe\SecurePay\Charge::pCharge()
 	 * @used-by \Dfe\Spryng\P\Reg::p()
 	 * @used-by \Dfe\Square\P\Reg::p()
@@ -337,7 +337,7 @@ abstract class Operation implements IMA {
 	 * https://github.com/mage2pro/allpay/blob/1.1.31/Charge.php?ts=4#L365-L378
 	 *
 	 * @see self::customerReturnRemoteWithFailure()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Dfe\AllPay\Charge::pCharge()
 	 * @used-by \Dfe\IPay88\Charge::pCharge()
 	 * @used-by \Dfe\Moip\P\Preorder::pCheckoutPreferences()
@@ -372,7 +372,7 @@ abstract class Operation implements IMA {
 	 * для удобства работы с этими идентификаторами в интерфейсе платёжной системы:
 	 * ведь там все идентификаторы имели бы одинаковую приставку.
 	 * 2017-09-04 Our local (without the module prefix) internal payment ID.
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCharge()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCharge()
 	 * @used-by \Df\PaypalClone\Charge::p()
 	 * @used-by \Dfe\CheckoutCom\Charge::_build()
 	 * @used-by \Dfe\CheckoutCom\Charge::metaData()
@@ -400,7 +400,7 @@ abstract class Operation implements IMA {
 	/**
 	 * 2017-03-06
 	 * @used-by self::oiLeafs()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pCustomer()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
 	 */
 	final protected function locale():string {return dfc($this, function() {return df_locale_by_country(
 		$this->addressBS()->getCountryId()

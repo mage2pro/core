@@ -131,7 +131,7 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
  * 2016-03-09 Замещает переменные в тексте.
  * 2016-08-07 Сегодня разработал аналогичные функции для JavaScript: df.string.template() и df.t().
  * @used-by df_file_name()
- * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
+ * @used-by \Dfe\GingerPaymentsBase\Block\Info::btInstructions()
  * @used-by \Df\Payment\Charge::text()
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::affix()

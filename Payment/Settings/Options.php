@@ -44,7 +44,7 @@ final class Options {
 	 * 		@see \Dfe\IPay88\ConfigProvider::options()
 	 * 		@see \Dfe\YandexKassa\ConfigProvider::options()
 	 * @used-by \Dfe\AllPay\ConfigProvider::config()
-	 * @used-by \Df\GingerPaymentsBase\Settings::options()
+	 * @used-by \Dfe\GingerPaymentsBase\Settings::options()
 	 * @used-by \Dfe\AllPay\ConfigProvider::config()
 	 * @used-by \Dfe\YandexKassa\ConfigProvider::options()
 	 * @return array(<value> => <label>)

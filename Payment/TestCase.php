@@ -2,7 +2,7 @@
 namespace Df\Payment;
 /**
  * 2017-02-28
- * @see \Df\GingerPaymentsBase\Test\CaseT
+ * @see \Dfe\GingerPaymentsBase\Test\CaseT
  * @see \Dfe\AlphaCommerceHub\Test\CaseT
  * @see \Dfe\Klarna\Test\Charge
  * @see \Dfe\Moip\Test\CaseT

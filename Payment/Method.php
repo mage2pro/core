@@ -44,7 +44,7 @@ use \Exception as E;
  * https://mage2.pro/t/4892
  * 3) «Cannot call private Dfe\IPay88\Method::__construct()
  * in generated/code/Dfe/IPay88/Method/Interceptor.php» https://mage2.pro/t/topic/4913
- * @see \Df\GingerPaymentsBase\Method
+ * @see \Dfe\GingerPaymentsBase\Method
  * @see \Df\PaypalClone\Method
  * @see \Df\StripeClone\Method
  * @see \Dfe\ACH\Method
@@ -70,7 +70,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * причём '*' — это лимиты по умолчанию.
 	 * В случаях №2 и №4 min и/или max может быть равно null: это означает отсутствие лимита.
 	 * @used-by self::isAvailable()
-	 * @see \Df\GingerPaymentsBase\Method::amountLimits()
+	 * @see \Dfe\GingerPaymentsBase\Method::amountLimits()
 	 * @see \Dfe\ACH\Method::amountLimits()
 	 * @see \Dfe\AllPay\Method::amountLimits()
 	 * @see \Dfe\AlphaCommerceHub\Method::amountLimits()
@@ -222,7 +222,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * Конвертирует денежную величину из формата платёжной системы в обычное число.
 	 * Обратная операция по отношению к @see amountFormat()
 	 * @used-by dfp_refund()
-	 * @used-by \Df\GingerPaymentsBase\Block\Info::btInstructions()
+	 * @used-by \Dfe\GingerPaymentsBase\Block\Info::btInstructions()
 	 * @used-by \Dfe\Stripe\Method::amountLimits()
 	 * @param float|int|string $a
 	 */
@@ -1118,8 +1118,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * потому что ранее я порой ненароком забывал сконвертировать какой-нибудь массив в JSON
 	 * перед записью, и при отображении это приводило к сбою «array to string conversion».
 	 *
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::req()
-	 * @used-by \Df\GingerPaymentsBase\Init\Action::res()
+	 * @used-by \Dfe\GingerPaymentsBase\Init\Action::req()
+	 * @used-by \Dfe\GingerPaymentsBase\Init\Action::res()
 	 * @used-by \Df\Payment\Init\Action::action()
 	 * @used-by \Df\StripeClone\Method::transInfo()
 	 * @used-by \Dfe\AlphaCommerceHub\Method::transInfo()
@@ -1675,7 +1675,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * @used-by self::action()
 	 * @used-by self::getInfoBlockType()
 	 * @used-by self::getTitle()
-	 * @used-by \Df\GingerPaymentsBase\Charge::pClient()
+	 * @used-by \Dfe\GingerPaymentsBase\Charge::pClient()
 	 * @used-by \Df\Payment\Block\Info::titleB()
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 */
@@ -1832,8 +1832,8 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-03-06
 	 * 2022-11-28 A call with mutliple arguments: @see \Dfe\Vantiv\Method::card()
-	 * @used-by \Df\GingerPaymentsBase\Method::bank()
-	 * @used-by \Df\GingerPaymentsBase\Method::option()
+	 * @used-by \Dfe\GingerPaymentsBase\Method::bank()
+	 * @used-by \Dfe\GingerPaymentsBase\Method::option()
 	 * @used-by \Dfe\AllPay\Method::option()
 	 * @used-by \Dfe\Moip\Method::taxID()
 	 * @used-by \Dfe\Qiwi\Method::phone()
@@ -1855,7 +1855,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-05-03
 	 * @used-by self::assignData()
-	 * @see \Df\GingerPaymentsBase\Method::iiaKeys()
+	 * @see \Dfe\GingerPaymentsBase\Method::iiaKeys()
 	 * @see \Df\StripeClone\Method::iiaKeys()
 	 * @see \Dfe\ACH\Method::iiaKeys()
 	 * @see \Dfe\AllPay\Method::iiaKeys()
@@ -1913,7 +1913,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-08-20
 	 * @used-by self::tidFormat()
-	 * @see \Df\GingerPaymentsBase\Method::transUrl()
+	 * @see \Dfe\GingerPaymentsBase\Method::transUrl()
 	 * @see \Df\StripeClone\Method::transUrl()
 	 */
 	protected function transUrl(T $t):string {return '';}
@@ -1986,7 +1986,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	/**
 	 * 2016-12-29
 	 * @used-by self::iiaSetTRR()
-	 * @used-by \Df\GingerPaymentsBase\Method::transUrl()
+	 * @used-by \Dfe\GingerPaymentsBase\Method::transUrl()
 	 * @used-by \Df\Payment\TM::res0()
 	 * @used-by \Dfe\Stripe\Block\Info::cardData()
 	 */
