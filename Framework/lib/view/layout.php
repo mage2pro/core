@@ -66,7 +66,7 @@ function df_block($c, $data = [], string $template = '', array $vars = []) {
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
  *		extract($dictionary, EXTR_SKIP);
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
- * @used-by \Df\Facebook\I::init()
+ * @used-by \Dfe\Facebook\I::init()
  * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()   
  * @used-by \Inkifi\Map\HTML::tiles()

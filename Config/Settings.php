@@ -12,7 +12,7 @@ use Magento\Store\Model\Store;
  * @see \Dfe\Amazon\Settings
  * @see \Df\API\Settings
  * @see \Df\Config\Settings\Configurable
- * @see \Df\Facebook\Settings
+ * @see \Dfe\Facebook\Settings
  * @see \Df\Google\Settings
  * @see \Df\OAuth\Settings
  * @see \Df\Payment\Settings
@@ -57,7 +57,7 @@ abstract class Settings {
 	 * @see \CanadaSatellite\Amelia\Settings::prefix() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
 	 * @see \Dfe\Amazon\Settings::prefix()
 	 * @see \Df\Config\Settings\Configurable::prefix()
-	 * @see \Df\Facebook\Settings::prefix()
+	 * @see \Dfe\Facebook\Settings::prefix()
 	 * @see \Df\Google\Settings::prefix()
 	 * @see \Dfe\Oro\Settings\General::prefix()
 	 * @see \Df\Payment\Settings::prefix()
@@ -255,7 +255,7 @@ abstract class Settings {
 	 * @used-by \Dfe\Amazon\Settings::merchantId()
 	 * @used-by \Df\API\Settings::probablyTestable()
 	 * @used-by \Df\Config\Source\WaitPeriodType::calculate()
-	 * @used-by \Df\Facebook\Settings::appId()
+	 * @used-by \Dfe\Facebook\Settings::appId()
 	 * @used-by \Df\GingerPaymentsBase\ConfigProvider::config()
 	 * @used-by \Df\GingerPaymentsBase\Settings::btId()
 	 * @used-by \Df\GingerPaymentsBase\Settings::domain()
