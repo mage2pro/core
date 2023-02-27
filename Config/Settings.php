@@ -9,7 +9,7 @@ use Magento\Store\Model\Store;
  * 2015-11-09
  * @see \AlbumEnvy\Popup\Settings
  * @see \CanadaSatellite\Amelia\Settings (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
- * @see \Df\Amazon\Settings
+ * @see \Dfe\Amazon\Settings
  * @see \Df\API\Settings
  * @see \Df\Config\Settings\Configurable
  * @see \Df\Facebook\Settings
@@ -55,7 +55,7 @@ abstract class Settings {
 	 * @used-by \Df\Config\Settings::v()
 	 * @see \AlbumEnvy\Popup\Settings::prefix()
 	 * @see \CanadaSatellite\Amelia\Settings::prefix() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
-	 * @see \Df\Amazon\Settings::prefix()
+	 * @see \Dfe\Amazon\Settings::prefix()
 	 * @see \Df\Config\Settings\Configurable::prefix()
 	 * @see \Df\Facebook\Settings::prefix()
 	 * @see \Df\Google\Settings::prefix()
@@ -252,7 +252,7 @@ abstract class Settings {
 	 * @used-by self::nwbn()
 	 * @used-by self::p()
 	 * @used-by \CanadaSatellite\Amelia\Settings::url()  (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
-	 * @used-by \Df\Amazon\Settings::merchantId()
+	 * @used-by \Dfe\Amazon\Settings::merchantId()
 	 * @used-by \Df\API\Settings::probablyTestable()
 	 * @used-by \Df\Config\Source\WaitPeriodType::calculate()
 	 * @used-by \Df\Facebook\Settings::appId()

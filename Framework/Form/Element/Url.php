@@ -3,7 +3,7 @@ namespace Df\Framework\Form\Element;
 use Df\Framework\Form\Element;
 /**
  * 2016-05-30
- * @see \Df\Amazon\FE\JsOrigin
+ * @see \Dfe\Amazon\FE\JsOrigin
  * @see \Df\Framework\Form\Element\Webhook 
  * @see \Df\Payment\FE\CustomerReturn
  * @see \Df\Sso\FE\CustomerReturn
@@ -87,7 +87,7 @@ abstract class Url extends Element {
 	 *	</field>
 	 * https://github.com/mage2pro/yandex-kassa/blob/0.1.9/etc/adminhtml/system.xml#L106-L131
 	 * @used-by self::messageForOthers()
-	 * @see \Df\Amazon\FE\JsOrigin::url() 
+	 * @see \Dfe\Amazon\FE\JsOrigin::url() 
 	 * @see \Df\Payment\FE\CustomerReturn::url()
 	 * @see \Df\Sso\FE\CustomerReturn::url()
 	 */
@@ -97,7 +97,7 @@ abstract class Url extends Element {
 	 * 2016-05-30
 	 * @used-by self::messageForOthers()
 	 * @used-by self::url()
-	 * @used-by \Df\Amazon\FE\JsOrigin::url()
+	 * @used-by \Dfe\Amazon\FE\JsOrigin::url()
 	 */
 	final protected function requireHttps():bool {return dfc($this, function() {return
 		!df_is_localhost() && df_fe_fc_b($this, 'dfWebhook_requireHTTPS')

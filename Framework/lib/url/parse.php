@@ -20,7 +20,7 @@ function df_domain(string $u, bool $www = false, $throw = true) {return
 
 /**
  * 2016-05-31
- * @used-by \Df\Amazon\FE\JsOrigin::url()
+ * @used-by \Dfe\Amazon\FE\JsOrigin::url()
  */
 function df_url_base(string $u):string {return df_first(df_url_bp($u));}
 
