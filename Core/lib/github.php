@@ -14,6 +14,7 @@ function df_github_repo_version(string $repo):string {return df_github_request("
 
 /**
  * 2017-05-10 https://developer.github.com/v3/repos/releases/#get-the-latest-release
+ * 2023-03-02 https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-the-latest-release
  * @used-by df_github_repo_version()
  * @return string|null|array(string => mixed)
  */
@@ -22,8 +23,18 @@ function df_github_request(string $path, string $k = '', $params = []) {
 		# 2017-06-28
 		# «Difference between the Accept and Content-Type HTTP headers»
 		# https://webmasters.stackexchange.com/questions/31212
-		->setHeaders('accept', 'application/json')
-		->setParameterGet(['access_token' => df_github_token()] + $params)
+		->setHeaders([
+			'accept' => 'application/json'
+			# 2023-03-02
+			# 1) https://developer.github.com/changes/2020-02-10-deprecating-auth-through-query-param/#changes-to-make
+			# 2) https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-the-latest-release
+			,'authorization' => 'token ' . df_github_token()
+			# 2023-03-02
+			# It is not required but nice to have.
+			# https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28#get-the-latest-release
+			,'X-GitHub-Api-Version' => '2022-11-28'
+		])
+		->setParameterGet($params)
 	; /** @var C $c */
 	return dfa(df_json_decode($c->request()->getBody()), $k);
 }
