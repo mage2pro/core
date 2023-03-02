@@ -1,6 +1,8 @@
 <?php
 use Df\Core\Exception as DFE;
+use Magento\Framework\View\Asset\AssetInterface as IAsset;
 use Magento\Framework\View\Asset\File;
+use Magento\Framework\View\Asset\Remote;
 use Magento\Framework\View\Asset\Repository;
 use Magento\Framework\View\Asset\Source;
 /**
@@ -12,15 +14,18 @@ use Magento\Framework\View\Asset\Source;
 function df_asset():Repository {return df_o(Repository::class);}
 
 /**
- * 2015-10-27
- * http://stackoverflow.com/questions/4659345
+ * 2015-10-27 http://stackoverflow.com/questions/4659345
+ * 2023-03-02
+ * «Return value of df_asset_create() must be an instance of Magento\Framework\View\Asset\File,
+ * instance of Magento\Framework\View\Asset\Remote returned»: https://github.com/mage2pro/core/issues/214
  * @used-by df_asset_exists()
  * @used-by df_resource_inline()
  * @used-by \Dfe\Phone\Js::_toHtml()
  * @used-by \Dfe\Customer\Block::_toHtml()
  * @used-by \Dfe\Moip\ConfigProvider::config()
+ * @return IAsset|File|Remote
  */
-function df_asset_create(string $u):File {$a = df_asset(); return !df_check_url_absolute($u)
+function df_asset_create(string $u):IAsset {$a = df_asset(); return !df_check_url_absolute($u)
 	? $a->createAsset($u)
 	: $a->createRemoteAsset($u, dfa(['css' => 'text/css', 'js' => 'application/javascript'], df_file_ext($u)))
 ;}
