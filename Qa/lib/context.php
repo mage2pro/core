@@ -18,6 +18,10 @@ function df_context():array {return
 			,'URL' => df_current_url()
 			# 2021-04-18 "Include the visitor's `User-Agent` to Mage2.PRO reports": https://github.com/mage2pro/core/issues/152
 			,'User-Agent' => df_request_ua()
-		] + (!df_request_o()->isPost() ? [] : ['Post' => $_POST]))
+			] + (!df_request_o()->isPost() ? [] : df_clean([
+				# 2021-10-20 "Log the `php://input` data": https://github.com/mage2pro/core/issues/162
+				'php://input' => df_request_body(), 'Post' => $_POST
+			]))
+		)
 	)
 ;}

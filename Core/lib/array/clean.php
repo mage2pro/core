@@ -51,7 +51,6 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
  * @used-by \Df\Payment\Method::iiaSetTRR()
  * @used-by \Df\Payment\W\F::c()
- * @used-by \Df\Qa\Context::base()
  * @used-by \Df\Sentry\Client::capture()
  * @used-by \Df\Sentry\Client::send()
  * @used-by \Df\Sso\Button\Js::attributes()
