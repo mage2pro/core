@@ -78,7 +78,17 @@ class Dom extends \Magento\Framework\Config\Dom {
 		}
 		/** @var Doc $r */
 		try {$r = parent::_initDom($xml);}
-		finally {$r->schema = $defaultSchema;}
+		finally {
+			# 2023-07-17
+			# 1) I have had a wrong code for 7 years:
+			#		$r->schema = $defaultSchema;
+			# https://github.com/mage2pro/core/blob/9.5.0/Framework/Config/Dom.php#L81
+			# 2) I have noticed the mistake only with PHH 8.2:
+			# "[PHP 8.2] «Creation of dynamic property DOMDocument::$schema is deprecated
+			# in vendor/mage2pro/core/Framework/Config/Dom.php on line 81»":
+			# https://github.com/mage2pro/core/issues/215
+			$this->schema = $defaultSchema;
+		}
 		return $r;
 	}
 }
