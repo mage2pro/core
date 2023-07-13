@@ -68,7 +68,7 @@ class Dom extends \Magento\Framework\Config\Dom {
 		# 		if ($schema && df_starts_with($schema, 'urn:')
 		# Однако сторонние модули используют хуёвые невалидные схемы типа
 		# «urn:magento:framework:Backend/etc/system_file.xsd», что приводило к сбоям.
-		if ($schema && 'urn:magento:module:Df_Config:etc/system_file.xsd' === $schema) {
+		if ('urn:magento:module:Df_Config:etc/system_file.xsd' === $schema) {
 			/**
 			 * Переводить схему в формат файлового пути необязательно:
 			 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/lib/internal/Magento/Framework/Config/Dom/UrnResolver.php#L69-L71
