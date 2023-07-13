@@ -134,7 +134,6 @@ function df_abstract($caller):void {
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Df\Xml\X::addChild()
  * @used-by \Df\Xml\X::importString()
- * @used-by \Df\Zf\Filter\StringTrim::_splitUtf8()
  * @used-by \Dfe\AmazonLogin\Customer::validate()
  * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
  * @used-by \Dfe\SecurePay\Refund::process()

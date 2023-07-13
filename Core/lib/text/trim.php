@@ -1,5 +1,8 @@
 <?php
-use Df\Zf\Filter\StringTrim as Trim;
+# 2023-07-13
+# 1) [Magento 2.4.6] «Class "Zend_Filter_StringTrim" not found»: https://github.com/mage2pro/core/issues/216
+# 2) "The Zend Framework 1 dependency has been removed from Magento 2 ≥ 2.4.6 since 2022-12-09": https://mage2.pro/t/6366
+use Zend\Filter\StringTrim as Trim;
 /**
  * 2017-06-09
  * @used-by df_oqi_desc()

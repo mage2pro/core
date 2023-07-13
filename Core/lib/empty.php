@@ -19,7 +19,6 @@
  * @used-by \Df\Payment\W\Exception\Ignored::message()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Typography\Css::rule()
- * @used-by \Df\Zf\Filter\StringTrim::_unicodeTrim()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
  * @param mixed $v
  */
