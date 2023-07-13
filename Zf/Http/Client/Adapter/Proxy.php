@@ -5,7 +5,7 @@ namespace Df\Zf\Http\Client\Adapter;
  * It fixes the issue:
  * «SSL operation failed with code 1. OpenSSL Error messages:
  * error:14094410:SSL routines:ssl3_read_bytes:sslv3 alert handshake failure».
- * The issue is caised by the following code in the `magento/zendframework1` package < 1.14.1:
+ * The issue is caused by the following code in the `magento/zendframework1` package < 1.14.1:
  * https://github.com/magento/zf1/blob/1.14.0/library/Zend/Http/Client/Adapter/Proxy.php#L299-L304
  * https://github.com/magento/zf1/blob/1.13.1/library/Zend/Http/Client/Adapter/Proxy.php#L299-L304
  * I have fixed the issue by using the @see \Zend_Http_Client_Adapter_Proxy::connectHandshake() method
