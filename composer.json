@@ -18,6 +18,6 @@
 		,"magento/module-sample-data": ">=100.0.0"
 		,"magento/zendframework1": "*"
 		,"phpunit/phpunit": "*"
-}
+	}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Df\\": ""}}
 }
