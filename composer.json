@@ -20,4 +20,5 @@
 		,"phpunit/phpunit": "*"
 	}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Df\\": ""}}
+	,"keywords": ["Magento 2"]
 }
