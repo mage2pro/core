@@ -158,8 +158,9 @@ function df_sentry_extra_f($v):void {df_sentry_m(df_caller_c())->extra([df_calle
  * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * @param string|object|null $m
  */
-function df_sentry_m($m):Sentry {return dfcf(function($m):Sentry {
+function df_sentry_m($m):Sentry {return dfcf(function(string $m):Sentry {
 	$r = null; /** @var Sentry $r */
+	$isCore = 'Df_Core' === $m; /** @var bool $isCore */
 	/** @var array(string => $r) $a */ /** @var array(string => string)|null $sa */
 	if (($a = df_module_json($m, 'df', false)) && ($sa = dfa($a, 'sentry'))) {
 		$r = new Sentry(intval($sa['id']), $sa['key1'], $sa['key2']);
@@ -173,16 +174,13 @@ function df_sentry_m($m):Sentry {return dfcf(function($m):Sentry {
 				: ['id' => df_customer_session_id()]
 			))
 		)) + ['ip_address' => df_visitor_ip()], false);
-		$r->tags([
-			'Core' => df_core_version()
-			,'Magento' => df_magento_version()
-			,'MySQL' => df_db_version()
-			,'PHP' => phpversion()
-		]);
+		$r->tags(
+			['Core' => df_core_version(), 'Magento' => df_magento_version(), 'MySQL' => df_db_version(), 'PHP' => phpversion()]
+			# 2023-07-15 "Improve diagnostic messages": https://github.com/JustunoCom/m2/issues/49
+		 	+ ($isCore ? [] : ['Module' => $m, 'Module Version' => df_package_version($m)])
+		);
 	}
-	return $r ?: ($m !== 'Df_Core' ? df_sentry_m('Df_Core') :
-		df_error('Sentry settings for Df_Core are absent.')
-	);
+	return $r ?: (!$isCore ? df_sentry_m('Df_Core') : df_error('Sentry settings for Df_Core are absent.'));
 }, [df_sentry_module($m)]);}
 
 /**
