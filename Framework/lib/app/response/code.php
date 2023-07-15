@@ -32,7 +32,6 @@ function df_500() {return df_response_code(500);}
  * @used-by df_400()
  * @used-by df_403()
  * @used-by df_500()
- * @param int $v
  * @return IResponse|HttpResponse
  */
-function df_response_code($v) {return df_response()->setHttpResponseCode($v);}
+function df_response_code(int $v) {return df_response()->setHttpResponseCode($v);}
