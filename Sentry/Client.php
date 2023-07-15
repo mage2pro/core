@@ -260,9 +260,6 @@ final class Client {
 
 	/**
 	 * 2020-06-27
-	 * 2023-01-28
-	 * «Argument 2 passed to Df\Sentry\Client::send_http() must be of the type array, string given,
-	 * called in vendor/mage2pro/core/Sentry/Client.php on line 257»: https://github.com/mage2pro/core/issues/194
 	 * @used-by self::send()
 	 * @param array(string => mixed) $headers
 	 */
@@ -275,6 +272,20 @@ final class Client {
 				function($k, $v) {return df_kv([$k => $v]);}, $headers + ['Expect' => ''])
 			);
 			curl_setopt($c, CURLOPT_POST, 1);
+			/**
+			 * 2023-01-28
+			 * «Argument 2 passed to Df\Sentry\Client::send_http() must be of the type array, string given,
+			 * called in vendor/mage2pro/core/Sentry/Client.php on line 257»: https://github.com/mage2pro/core/issues/194
+			 * 2023-07-15
+			 * 1) `CURLOPT_POSTFIELDS`:
+			 *		«The full dmata to post in a HTTP "POST" operation.
+			 *		This paraeter can either be passed as a urlencoded string like 'para1=val1&para2=val2&...'
+			 *		or as an array with the field name as key and field data as value.
+			 *		If value is an array, the `Content-Type` header will be set to `multipart/form-data`.
+			 *		Files can be sent using CURLFile or CURLStringFile, in which case value must be an array.»
+			 * https://www.php.net/manual/function.curl-setopt.php
+			 * 2) In my case the value is always a string: @see self::encode()
+			 */
 			curl_setopt($c, CURLOPT_POSTFIELDS, $data);
 			curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt_array($c, $this->get_curl_options());
