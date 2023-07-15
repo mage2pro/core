@@ -290,9 +290,8 @@ final class Client {
 			curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt_array($c, $this->get_curl_options());
 			curl_exec($c);
-			$errno = curl_errno($c);
-			# CURLE_SSL_CACERT || CURLE_SSL_CACERT_BADFILE
-			if ($errno == 60 || $errno == 77) {
+			# 2023-07-15 https://www.php.net/manual/curl.constants.php
+			if (in_array(curl_errno($c), [CURLE_SSL_CACERT, CURLE_SSL_CACERT_BADFILE])) {
 				curl_setopt($c, CURLOPT_CAINFO, df_module_file_name($this, 'cacert.pem'));
 				curl_exec($c);
 			}
