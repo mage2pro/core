@@ -57,6 +57,7 @@ function df_log_e(E $e, $m = null, $d = [], $suf = null):void {df_log_l($m, $e, 
  * @used-by \Df\Payment\W\Action::ignoredLog()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Qa\Trace\Formatter::frame()
+ * @used-by \Df\Sentry\Client::send_http()
  * @used-by \Df\Store\Plugin\Model\App\Emulation::beforeStartEnvironmentEmulation()
  * @used-by \Dfe\Klarna\Api\Checkout::_html()
  * @used-by \Hotlink\Brightpearl\Model\Api\Transport::_submit() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/site/issues/122)

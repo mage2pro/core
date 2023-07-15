@@ -290,10 +290,13 @@ final class Client {
 			curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt_array($c, $this->get_curl_options());
 			curl_exec($c);
-			# 2023-07-15 https://www.php.net/manual/curl.constants.php
-			if (in_array(curl_errno($c), [CURLE_SSL_CACERT, CURLE_SSL_CACERT_BADFILE])) {
-				curl_setopt($c, CURLOPT_CAINFO, df_module_file_name($this, 'cacert.pem'));
-				curl_exec($c);
+			# 2023-07-15
+			if ($err = curl_errno($c)) {
+				df_log_l($this, [
+					'URL' => $url
+					,'cURL error' => ['code' => $err, 'message' => curl_error($c)]
+					,'Headers' => $headers
+				], 'sentry');
 			}
 		}
 		finally {
@@ -309,8 +312,11 @@ final class Client {
 	private function get_curl_options():array {
 		$r = [
 			CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4
-			,CURLOPT_SSL_VERIFYHOST => 2
-			,CURLOPT_SSL_VERIFYPEER => true
+			# 2023-07-15
+			# 1) "The Sentry's TLS certificate (`cacert.pem`) has expired": https://github.com/mage2pro/core/issues/221
+			# 2) We do not need to verify Sentry clients: we accept logs from all clients.
+			,CURLOPT_SSL_VERIFYHOST => 0
+			,CURLOPT_SSL_VERIFYPEER => false
 			,CURLOPT_USERAGENT => $this->getUserAgent()
 			,CURLOPT_VERBOSE => false
 		];

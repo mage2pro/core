@@ -68,7 +68,6 @@ function df_module_dir($m, string $type = ''):string {
  * 		3) an object: it comes down to the case 2 via @see get_class()
  * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by df_module_file_read()
- * @used-by \Df\Sentry\Client::send_http()
  * @param string|object|null $m
  * @param F|bool|mixed $onE [optional]
  */
