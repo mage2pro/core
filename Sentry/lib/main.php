@@ -180,7 +180,7 @@ function df_sentry_m($m):Sentry {return dfcf(function(string $m):Sentry {
 		 	+ ($isCore ? [] : ['Module' => $m, 'Module Version' => df_package_version($m)])
 		);
 	}
-	return $r ?: (!$isCore ? df_sentry_m('Df_Core') : df_error('Sentry settings for Df_Core are absent.'));
+	return $r ?: (!$isCore ? df_sentry_m('Df_Core') : df_error('Sentry settings for `Df_Core` are absent.'));
 }, [df_sentry_module($m)]);}
 
 /**
