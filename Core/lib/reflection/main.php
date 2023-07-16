@@ -301,7 +301,7 @@ function df_con_hier($c, string $ar, bool $throw = true) {/** @var string|null $
  * @throws DFE
  */
 function df_con_hier_suf($c, string $suf, bool $throw = true) {/** @var string|null $r */
-	if (!($r = df_con($c, $suf, null, false))) {
+	if (!($r = df_con($c, $suf, '', false))) {
 		# 2017-01-11 Используем df_cts(), чтобы отсечь окончание «\Interceptor».
 		if ($parent = get_parent_class(df_cts($c))) {/** @var string|false $parent */
 			$r = df_con_hier_suf($parent, $suf, $throw);
@@ -336,7 +336,7 @@ function df_con_hier_suf_ta($c, $sufBase, $ta, bool $throw = true) {
 	$r = null; /** @var string|null $r */
 	$taCopy = $ta; /** @var string[] $taCopy */
 	$count = count($ta); /** @var int $count */
-	while (-1 < $count && !($r = df_con($c, df_cc_class_uc($sufBase, $ta), null, false))) {
+	while (-1 < $count && !($r = df_con($c, df_cc_class_uc($sufBase, $ta), '', false))) {
 		array_pop($ta); $count--;
 	}
 	# 2017-01-11 Используем df_cts(), чтобы отсечь окончание «\Interceptor».
