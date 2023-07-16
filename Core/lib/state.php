@@ -1,6 +1,5 @@
 <?php
-use Magento\Framework\App\ProductMetadata;
-use Magento\Framework\App\ProductMetadataInterface;
+use Composer\InstalledVersions as IV;
 use Magento\Framework\App\State;
 /**
  * 2015-09-20
@@ -52,11 +51,29 @@ function df_is_windows():bool {return dfcf(function() {return 'WIN' === strtoupp
  * https://mage2.pro/t/5480
  * 2) Now Magento 2.3 (installed with Git) returns the «dev-2.3-develop» string from the
  * @see \Magento\Framework\App\ProductMetadata::getVersion() method.
+ * 2023-07-16
+ * 1) @see \Magento\Framework\App\ProductMetadata::getVersion() has stopped working correctly for Magento installed via Git:
+ * https://github.com/mage2pro/core/issues/229
+ * 2) «Script error for "Magento_Ui/js/lib/ko/template/renderer"»: https://github.com/mage2pro/core/issues/228
  * @used-by df_context()
  * @used-by df_sentry()
  */
 function df_magento_version():string {return dfcf(function() {return df_trim_text_left(
-	df_magento_version_m()->getVersion(), 'dev-'
+	/**
+	 * 2023-07-16
+	 * @uses \Composer\InstalledVersions::getRootPackage() returns:
+	 *	{
+	 *		"aliases": [],
+	 *		"dev": true,
+	 *		"install_path": "C:\\work\\clients\\m\\latest\\code\\vendor\\composer/../../",
+	 *		"name": "magento/magento2ce",
+	 *		"pretty_version": "dev-2.4-develop",
+	 *		"reference": "1bdf9dfaf502ab38f5174f33b05c0690f67bf572",
+	 *		"type": "project",
+	 *		"version": "dev-2.4-develop"
+	 *	}
+	 */
+	dfa(IV::getRootPackage(), 'pretty_version'), 'dev-'
 );});}
 
 /**
@@ -64,23 +81,6 @@ function df_magento_version():string {return dfcf(function() {return df_trim_tex
  * @used-by \Df\Intl\Js::_toHtml()
  */
 function df_magento_version_ge(string $v):bool {return version_compare(df_magento_version(), $v, 'ge');}
-
-/**
- * 2016-06-25 https://mage2.pro/t/543
- * 2022-11-22 @deprecated It is unused.
- */
-function df_magento_version_full() {
-	$v = df_magento_version_m(); /** @var ProductMetadata|ProductMetadataInterface $v */
-	return df_cc_s($v->getName(), $v->getEdition(), 'Edition', $v->getVersion());
-}
-
-/**
- * 2016-06-25
- * @used-by df_magento_version()
- * @used-by df_magento_version_full()
- * @return ProductMetadata|ProductMetadataInterface
- */
-function df_magento_version_m() {return df_o(ProductMetadataInterface::class);}
 
 /**
  * 2017-05-13 https://mage2.pro/t/2615
