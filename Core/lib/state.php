@@ -61,7 +61,8 @@ function df_is_windows():bool {return dfcf(function() {return 'WIN' === strtoupp
 function df_magento_version():string {return dfcf(function() {return df_trim_text_left(
 	/**
 	 * 2023-07-16
-	 * @uses \Composer\InstalledVersions::getRootPackage() returns:
+	 * 1) https://getcomposer.org/doc/07-runtime.md#installed-versions
+	 * 2) @uses \Composer\InstalledVersions::getRootPackage() returns:
 	 *	{
 	 *		"aliases": [],
 	 *		"dev": true,
