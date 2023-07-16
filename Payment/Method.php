@@ -2035,7 +2035,6 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * потому что вызов @uses class_exists(interceptor) приводит к созданию interceptor'а
 	 * (как минимум — в developer mode), даже если его раньше не было.
 	 * 2) У нас потомки Method объявлены как final.
-	 *
 	 * Замечание №2.
 	 * Каждый потомок Method является объектом-одиночкой: @see \Df\Payment\Method::sg(),
 	 * но вот info instance в него может устанавливаться разный: @see \Df\Payment\Method::setInfoInstance()
@@ -2043,11 +2042,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/mage2pro/core/blob/2.4.13/Payment/Observer/DataProvider/SearchResult.php#L52-L65
 	 * Аналогично, в Method может устанавливаться разный store: @see \Df\Payment\Method::setStore()
 	 * Поэтому будьте осторожны с кэшированием внутри Method!
-	 *
+	 * 2023-07-17
+	 * «Df\Payment\Method::sg(): Argument #1 ($c) must be of type string, Dfe\Stripe\Block\Js given,
+	 * called in vendor/mage2pro/core/Payment/lib/method.php on line 82»: https://github.com/mage2pro/core/issues/224
 	 * @used-by dfpm()
 	 * @used-by \Df\Payment\Plugin\Model\Method\FactoryT::aroundCreate()
+	 * @param string|object $c
 	 */
-	final static function sg(string $c):self {return dfcf(function($c) {return new $c;}, [dfpm_c($c)]);}
+	final static function sg($c):self {return dfcf(function(string $c):self {return new $c;}, [dfpm_c($c)]);}
 
 	/**
 	 * 2017-08-28
