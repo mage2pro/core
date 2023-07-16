@@ -56,7 +56,11 @@ function df_is_windows():bool {return dfcf(function() {return 'WIN' === strtoupp
  * https://github.com/mage2pro/core/issues/229
  * 2) «Script error for "Magento_Ui/js/lib/ko/template/renderer"»: https://github.com/mage2pro/core/issues/228
  * @used-by df_context()
+ * @used-by df_magento_version_ge()
  * @used-by df_sentry()
+ * @used-by df_sentry_m()
+ * @used-by \Dfe\CheckoutCom\Charge::pMetadata()
+ * @used-by \Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
  */
 function df_magento_version():string {return dfcf(function() {return df_trim_text_left(
 	/**
