@@ -196,10 +196,14 @@ abstract class Settings extends \Df\API\Settings {
 
 	/**
 	 * 2017-03-27
+	 * 2023-07-17
+	 * We should not convert `null` to `0` because @see \Magento\Framework\App\Config\ScopeCodeResolver::resolve()
+	 * distinguishes between `null` and `0`:
+	 * https://github.com/magento/magento2/blob/2.4.7-beta1/lib/internal/Magento/Framework/App/Config/ScopeCodeResolver.php#L34-L65
 	 * @override
 	 * @see \Df\Config\Settings::scopeDefault()
 	 * @used-by \Df\Config\Settings::scope()
-	 * @return int|S|Store|null|string
+	 * @return int|null
 	 */
 	protected function scopeDefault() {return $this->_m->getStore();}
 

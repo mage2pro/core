@@ -1067,8 +1067,16 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * https://github.com/magento/magento2/blob/6ce74b2/app/code/Magento/Payment/Model/Method/AbstractMethod.php#L278-L284
 	 * 2016-09-07 Для самого себя я использую метод @see store()
 	 * @used-by \Df\Payment\Settings::scopeDefault()
+	 * 2023-07-17
+	 * 1) «Df\Payment\Method::getStore():
+	 * Return value must be of type int, null returned in vendor/mage2pro/core/Payment/Method.php:1071»:
+	 *  https://github.com/mage2pro/core/issues/227
+	 * 2) We should not convert `null` to `0` because @see \Magento\Framework\App\Config\ScopeCodeResolver::resolve()
+	 * distinguishes between `null` and `0`:
+	 * https://github.com/magento/magento2/blob/2.4.7-beta1/lib/internal/Magento/Framework/App/Config/ScopeCodeResolver.php#L34-L65
+	 * @return int|null
 	 */
-	final function getStore():int {return $this->_storeId;}
+	final function getStore() {return $this->_storeId;}
 
 	/**
 	 * 2016-02-08
