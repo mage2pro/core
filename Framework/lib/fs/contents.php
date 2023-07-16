@@ -32,8 +32,12 @@ function df_contents(string $f, $onE = true, $rs = null):string {return df_try(
 	 * 			or established connection failed because connected host has failed to respond.»
 	 * https://www.php.net/manual/function.file-get-contents.php#refsect1-function.file-get-contents-errors
 	 * That is why I use the silence operator.
+	 * 2023-07-16
+	 * «file_get_contents(): Passing null to parameter #2 ($use_include_path) of type bool is deprecated
+	 * in vendor/mage2pro/core/Framework/lib/fs/contents.php on line 36»:
+	 * https://github.com/mage2pro/core/issues/230
 	 */
-	function() use ($f, $rs):string {return df_assert_ne(false, @file_get_contents($f, null, $rs));}
+	function() use ($f, $rs):string {return df_assert_ne(false, @file_get_contents($f, false, $rs));}
 	,true !== $onE ? $onE : function() use ($f) {df_error(
 		'Unable to read the %s «%s».', df_check_url($f) ? 'URL' : 'file', $f
 	);}
