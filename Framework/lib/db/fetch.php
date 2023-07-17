@@ -91,8 +91,15 @@ function df_fetch_col_max(string $t, string $col, $compareK = null, $compareV = 
 	 * 2016-03-01
 	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
 	 * https://mage2.pro/t/853
+	 * 2023-07-07
+	 * The previous code:
+	 * 		return df_conn()->fetchOne($s, $col) ?: 0;
+	 * It seems to be wrong, and led to the error:
+	 * "[Magento 2.4.7] «Invalid parameter number: number of bound variables does not match number of tokens,
+	 * query was: SELECT MAX(sort_order) FROM `customer_eav_attribute`» on `bin/magento setup:upgrade`":
+	 * https://github.com/mage2pro/core/issues/231
 	 */
-	return df_conn()->fetchOne($s, $col) ?: 0;
+	return df_conn()->fetchOne($s) ?: 0;
 }
 
 /**
