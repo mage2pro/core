@@ -37,10 +37,9 @@ function df_route($m, string $path = '', bool $backend = false):string {
  * @used-by \Frugue\Shipping\Header::_toHtml()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
- * @param string|null $path [optional]
  * @param array(string => mixed) $p [optional]
  */
-function df_url($path = null, array $p = []):string {return df_url_o()->getUrl($path, df_nosid() + $p);}
+function df_url(string $path = '', array $p = []):string {return df_url_o()->getUrl($path, df_nosid() + $p);}
 
 /**
  * 2015-11-28
@@ -52,10 +51,9 @@ function df_url($path = null, array $p = []):string {return df_url_o()->getUrl($
  * поэтому используем @uses df_url_backend_new()       
  * @used-by df_url_backend_ns()
  * @used-by \Df\Framework\Validator\Currency::message()
- * @param string|null $path [optional]
  * @param array(string => mixed) $p [optional]
  */
-function df_url_backend($path = null, array $p = []):string {return df_url_trim_index(df_url_backend_new()->getUrl(
+function df_url_backend(string $path = '', array $p = []):string {return df_url_trim_index(df_url_backend_new()->getUrl(
 	$path, df_nosid() + $p
 ));}
 
@@ -67,10 +65,9 @@ function df_url_backend($path = null, array $p = []):string {return df_url_trim_
  * @used-by \Df\OAuth\App::pCommon()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @used-by df_cm_backend_url()
- * @param string|null $path [optional]
  * @param array(string => mixed) $p [optional]
  */
-function df_url_backend_ns($path = null, array $p = []):string {return df_url_backend($path, ['_nosecret' => true] + $p);}
+function df_url_backend_ns(string $path = '', array $p = []):string {return df_url_backend($path, ['_nosecret' => true] + $p);}
 
 /**
  * 2015-11-28
@@ -80,11 +77,10 @@ function df_url_backend_ns($path = null, array $p = []):string {return df_url_ba
  * @used-by df_webhook()
  * @used-by \Df\Sso\FE\CustomerReturn::url()
  * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @param string|null $path [optional]
  * @param array(string => mixed) $p [optional]
  * @param Store|int|string|null $store [optional]
  */
-function df_url_frontend($path = null, array $p = [], $store = null):string {return df_url_trim_index(
+function df_url_frontend(string $path = '', array $p = [], $store = null):string {return df_url_trim_index(
 	df_url_frontend_o()->getUrl($path, df_nosid() + $p + (is_null($store) ? [] : ['_store' => df_store($store)]))
 );}
 
