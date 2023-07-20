@@ -233,5 +233,15 @@ function dfa_select_ordered($a, array $k):array {
 	 * @var array(string => string) $resultWithGarbage
 	 */
 	$resultWithGarbage = dfa_merge_numeric($resultKeys, df_ita($a));
-	return array_intersect_key($resultWithGarbage, $resultKeys);
+	/**
+	 * 2023-07-20
+	 * 1) Today I found a bug (at least, in PHP 8.2) in this old function.
+	 * 		$a: {"EUR": "Euro", "USD": "US Dollar"}
+	 * 		$k: ["CAD", "PHP", "USD"]
+	 * 		Result (wrong because it is not a subset of $a): {"CAD": null, "PHP": null, "USD": "US Dollar"}
+	 * 2) It led to the error: «df_option(): Argument #2 ($l) must be of type string, null given»:
+	 * https://github.com/mage2pro/core/issues/238
+	 * 3) So I have added @uses df_clean_null()
+	 */
+	return df_clean_null(array_intersect_key($resultWithGarbage, $resultKeys));
 }
