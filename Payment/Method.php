@@ -1670,7 +1670,10 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	final function tidFormat(T $t, bool $e = false):string {
 		$id = $t->getTxnId(); /** @var string $id */
         # 2022-12-28 https://3v4l.org/S8kDN
-		return df_tag_if(!$e ? $id : $this->tid()->i2e($id), $url = $this->transUrl($t), 'a', [/** @var string|null $url */
+		# 2023-07-20
+		# «df_tag_if(): Argument #2 ($condition) must be of type bool, null given»:
+		# https://github.com/mage2pro/core/issues/237
+		return df_tag_if(!$e ? $id : $this->tid()->i2e($id), !!($url = $this->transUrl($t)), 'a', [/** @var string|null $url */
 			'href' => $url, 'target' => '_blank', 'title' => __(
 				'View the transaction in the %1 interface', $this->getTitle()
 			)

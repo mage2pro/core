@@ -156,6 +156,7 @@ function df_tag_ab(string $s, string $u):string {return df_tag('a', ['href' => $
  * @used-by \Df\Payment\Method::tidFormat()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Sso\Button::_toHtml()
+ * @used-by \Df\Sso\Button::loggedOut()
  * @param string|array(string => string|string[]|int|null) $attributes [optional]
  * @param bool|string $multiline [optional]
  */

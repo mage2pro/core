@@ -56,10 +56,14 @@ class Description extends \Df\Config\Comment {
 
 	/**
 	 * 2017-09-11
+	 * 2023-07-20
+	 * «df_tag_if(): Argument #2 ($condition) must be of type bool, null given,
+	 * called in vendor/mage2pro/core/Payment/Comment/Description.php on line 62»:
+	 * https://github.com/mage2pro/core/issues/237
 	 * @used-by self::locations()
 	 * @param array(string => string|bool) $o
 	 */
-	private function a(string $text, array $o):string {return df_tag_if($text, dfa($o, 'url'), 'a', [
+	private function a(string $text, array $o):string {return df_tag_if($text, !!dfa($o, 'url'), 'a', [
 		'target' => '_blank', 'title' => dfa($o, 'title'), 'href' => dfa($o, 'url')
 	]);}
 
