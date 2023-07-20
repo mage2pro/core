@@ -215,7 +215,10 @@ abstract class Settings {
 	 */
 	final function p(string $k = '', $s = null, $d = null) {
 		$r = $this->v($k ?: df_caller_f(), $s); /** @var string|mixed $r */
-		return df_if2($r, df_encryptor()->decrypt($r), $d);
+		# 2023-07-20
+		# «df_if2(): Argument #1 ($cond) must be of type bool, null given,
+		# called in vendor/mage2pro/core/Config/Settings.php on line 218»: https://github.com/mage2pro/core/issues/239
+		return df_if2(!!$r, df_encryptor()->decrypt($r), $d);
 	}
 
 	/**
