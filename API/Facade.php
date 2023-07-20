@@ -77,7 +77,7 @@ abstract class Facade {
 	 * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Get::p()
 	 * @used-by \Inkifi\Pwinty\API\B\Order\Validate::p()
-	 * @param int|string $id
+	 * @param int|string|null $id
 	 * @param FacadeOptions|null $opt [optional]
 	 */
 	final function get($id, string $suffix = '', FacadeOptions $opt = null):Op {return $this->p($id, null, $suffix, $opt);}
@@ -142,7 +142,7 @@ abstract class Facade {
 	 * @used-by \Dfe\Square\API\Facade\Transaction::capture()
 	 * @used-by \Dfe\Square\API\Facade\Transaction::void_()
 	 * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
-	 * @param int|string|array(string => mixed) $p [optional]
+	 * @param int|string|array(string => mixed)|null $p [optional]
 	 * @param string|null $method [optional]
 	 * @throws DFE
 	 */
