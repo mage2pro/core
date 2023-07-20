@@ -40,7 +40,6 @@ use Magento\Framework\DataObject as _DO;
  * @used-by df_store_code_from_url()
  * @used-by df_zf_http_last_req() 
  * @used-by \Df\API\Facade::p()
- * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Framework\Log\Dispatcher::handle()
  * @used-by \Df\Framework\Plugin\Reflection\DataObjectProcessor::aroundBuildOutputDataArray()
  * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
@@ -98,6 +97,7 @@ function df_clean(array $r, ...$k):array {/** @var mixed[] $r */return df_clean_
  * 2) I does not remove `false`.
  * @used-by df_clean()
  * @used-by df_clean_r()
+ * @used-by \Df\Core\Html\Tag::__construct()
  * @used-by \Dfe\Sift\API\Client::_construct()
  */
 function df_clean_r(array $r, array $k = [], bool $req = true):array {/** @var mixed[] $r */

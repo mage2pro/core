@@ -12,7 +12,6 @@
  * @used-by df_result_sne()
  * @used-by sift_prefix()
  * @used-by \Df\Config\Backend\Checkbox::dfSaveBefore()
- * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Framework\Form\Element\Fieldset::color()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::aroundGetLabelHtml()
  * @used-by \Df\Payment\Settings::messageFailure()

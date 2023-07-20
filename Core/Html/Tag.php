@@ -9,8 +9,34 @@ final class Tag {
 	 * @param bool|null $multiline [optional]
 	 */	
 	function __construct(string $tag, array $attrs = [], $content = '', $multiline = null) {
-		$this->_tag = strtolower($tag);	
-		$this->_attrs = $attrs;	
+		$this->_tag = strtolower($tag);
+		/**
+		 * 2023-07-20
+		 * 1) «str_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated
+		 * in mage2pro/core/Core/Format/Html/Tag.php on line 57»: https://github.com/mage2pro/core/issues/234
+		 * 2) $attrs can contain `null` values e.g.:
+		 *	{
+		 *		"autocomplete": "new-password",
+		 *		"checked": null,
+		 *		"class": " df-checkbox",
+		 *		"data-action": null,
+		 *		"data-form-part": null,
+		 *		"data-role": null,
+		 *		"data-ui-id": "checkbox-groups-common-fields-test-value",
+		 *		"disabled": false,
+		 *		"id": "df_amazon_common_test",
+		 *		"name": "groups[common][fields][test][value]",
+		 *		"onchange": null,
+		 *		"onclick": null,
+		 *		"style": null,
+		 *		"tabindex": null,
+		 *		"title": null,
+		 *		"type": "checkbox"
+		 *	}
+		 * 3) I use @see df_clean_r() to remove garbage values like `[null]`.
+		 * It allows me to simplify @see self::openTagWithAttributesAsText()
+		 */
+		$this->_attrs = df_clean_r($attrs, [false]);
 		$this->_content = $content;	
 		$this->_multiline = !is_null($multiline) ? $multiline : 1 < count($attrs);
 	}
@@ -36,10 +62,22 @@ final class Tag {
 			$this->_multiline ? 'df_tab_multiline' : 'df_nop'
 			,implode(
 				$this->_multiline ? "\n" :  ' '
-				,df_clean(df_map_k(
+				/**
+				 * 2023-07-20
+				 * I removed @see df_clean()
+				 * because @see self::$_attrs can not contaon garbage values anymore
+				 * because I call `df_clean_r($attrs, [false])` in @see self::__construct()
+				 */
+				,df_map_k(
 					/** 2022-11-21 @param string|string[] $v */
 					function(string $k, $v):string {
 						df_param_sne($k, 0);
+						/**
+						 * 2023-07-20
+						 * $v can not be a garbage anymore
+						 * because I call `df_clean_r($attrs, [false])` in @see self::__construct()
+						 */
+						df_assert($v);
 						/**
 						 * 2015-04-16 Передавать в качестве $v массив имеет смысл, например, для атрибута «class».
 						 * 2016-11-29
@@ -56,9 +94,16 @@ final class Tag {
 						$v = htmlspecialchars(
 							str_replace("'", '&#39;', !is_array($v) ? $v : df_cc_s($v)), ENT_NOQUOTES, 'UTF-8', false
 						);
-						return df_es($v) ? $v : "{$k}='{$v}'";
+						/**
+						 * 2023-07-20
+						 * The previous code was:
+						 * 		return df_es($v) ? $v : "{$k}='{$v}'";
+						 * $v can not be an empty string anymore
+						 * because I call `df_clean_r($attrs, [false])` in @see self::__construct()
+						 */
+						return "{$k}='{$v}'";
 					}, $this->_attrs
-				))
+				)
 			)
 		)
 	);}
