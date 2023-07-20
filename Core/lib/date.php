@@ -262,7 +262,7 @@ function df_month(ZD $d = null):int {return df_nat0(df_date($d)->toString(ZD::MO
  * 2016-07-09 http://stackoverflow.com/a/28447380
  * 2023-07-20
  * 1) «DateTime::__construct(): Passing null to parameter #1 ($datetime) of type string is deprecated»:
- * https://3v4l.org/v3Ar5
+ * https://github.com/mage2pro/core/issues/241
  * 2) The 2nd parameter (timezone) can be `null`: https://3v4l.org/m76dH
  * @used-by \Dfe\AllPay\Charge::pCharge()
  * @used-by \Dfe\CheckoutCom\Charge::pMetadata()
