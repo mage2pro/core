@@ -128,7 +128,7 @@ function df_js_x(string $selector, $m, string $s = '', array $p = []):string {re
  * https://github.com/magento/magento2/blob/2.1.2/lib/web/mage/apply/main.js#L69-L70
  * Пример: https://github.com/magento/magento2/blob/2.1.2/app/code/Magento/Checkout/view/frontend/templates/cart/minicart.phtml#L30-L38
  * @see json_encode всегда использует двойные кавычки,
- * а @see \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
+ * а @see \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * всегда обрамляет значение в одинарные кавычки,
  * поэтому df_widget() всегда совместима с @see df_tag()
  * 2017-04-21

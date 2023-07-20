@@ -47,7 +47,7 @@ function df_if1(bool $cond, $onTrue, $onFalse = null) {return $cond ? df_call_if
 function df_if2(bool $cond, $onTrue, $onFalse = null) {return $cond ? $onTrue : df_call_if($onFalse);}
 
 /**
- * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
+ * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * @param mixed $v
  * @return mixed
  */

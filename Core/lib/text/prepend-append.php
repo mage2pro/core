@@ -79,8 +79,8 @@ function df_prepend(string $s, string $head):string {return df_starts_with($s, $
 function df_tab(...$a) {return df_call_a(function(string $s):string {return "\t" . $s;}, $a);}
 
 /**
- * @used-by \Df\Core\Format\Html\Tag::content()
- * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
+ * @used-by \Df\Core\Html\Tag::content()
+ * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Qa\Dumper::dumpArray()
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @used-by \Df\Typography\Css::render()

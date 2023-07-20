@@ -1,5 +1,5 @@
 <?php
-use Df\Core\Format\Html\Tag;
+use Df\Core\Html\Tag;
 /**
  * 2016-11-13
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
@@ -72,7 +72,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
 
 /**
  * 2015-04-16
- * From now on you can pass an array as an attribute's value: @see \Df\Core\Format\Html\Tag::getAttributeAsText()
+ * From now on you can pass an array as an attribute's value: @see \Df\Core\Html\Tag::getAttributeAsText()
  * It can be useful for attrivutes like `class`.
  * 2016-05-30 From now on $attrs could be a string. It is the same as ['class' => $attrs].
  * @used-by cs_quote_description() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/107)

@@ -1,5 +1,5 @@
 <?php
-namespace Df\Core\Format\Html;
+namespace Df\Core\Html;
 final class Tag {
 	/**
 	 * 2022-11-21

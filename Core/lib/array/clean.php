@@ -40,7 +40,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by df_store_code_from_url()
  * @used-by df_zf_http_last_req() 
  * @used-by \Df\API\Facade::p()
- * @used-by \Df\Core\Format\Html\Tag::openTagWithAttributesAsText()
+ * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Framework\Log\Dispatcher::handle()
  * @used-by \Df\Framework\Plugin\Reflection\DataObjectProcessor::aroundBuildOutputDataArray()
  * @used-by \Dfe\GingerPaymentsBase\Charge::pCustomer()
