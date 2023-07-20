@@ -91,7 +91,12 @@ abstract class Url extends Element {
 	 * @see \Df\Payment\FE\CustomerReturn::url()
 	 * @see \Df\Sso\FE\CustomerReturn::url()
 	 */
-	protected function url():string {return df_webhook($this->m(), df_fe_fc($this, 'dfWebhook_suffix'), $this->requireHttps());}
+	protected function url():string {return df_webhook(
+		# 2023-07-20
+		# «df_webhook(): Argument #2 ($suffix) must be of type string, null given,
+		# called in vendor/mage2pro/core/Framework/Form/Element/Url.php on line 94»: https://github.com/mage2pro/core/issues/236
+		$this->m(), df_fe_fc($this, 'dfWebhook_suffix', ''), $this->requireHttps()
+	);}
 
 	/**
 	 * 2016-05-30

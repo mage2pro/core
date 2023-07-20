@@ -117,6 +117,7 @@ function df_url_staged(bool $test, string $tmpl, array $names, ...$args):string 
  * @used-by \Df\Framework\Form\Element\Url::url()
  * @used-by \Df\Payment\Charge::callback()
  * @used-by \Dfe\Moip\Backend\Enable::dfSaveAfter()
+ * @used-by \Dfe\Moip\Test\CaseT\Notification::create()
  * @param string|object|null $m
  * $m could be:
  * 1) A module name: «A_B»
