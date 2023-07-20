@@ -283,9 +283,9 @@ final class X extends MX {
 						$childNode->importArray($childData, $wrapInCData);
 					}
 					else {
-						# null означает, что метод importString() не должен создавать дочерний тэг $key,
+						# '' означает, что метод importString() не должен создавать дочерний тэг $key,
 						# а должен добавить текст в качестве единственного содержимого текущего тэга.
-						$childNode->importString(null, $childData, $wrapInCData);
+						$childNode->importString('', $childData, $wrapInCData);
 					}
 				}
 			}
@@ -465,33 +465,21 @@ final class X extends MX {
 
 	/**
 	 * @used-by self::importArray()
-	 * @param string|null $key
-	 * @param mixed $value
+	 * @param mixed $v
 	 * @param string[]|bool $wrapInCData [optional]
 	 */
-	private function importString($key, $value, $wrapInCData = []):void {
+	private function importString(string $k, $v, $wrapInCData = []):void {
 		$needWrapInCData = !is_array($wrapInCData) && !!$wrapInCData; /** @var bool $needWrapInCData */
 		$wrapInCData = df_eta($wrapInCData);
-		# `null` означает, что метод `importString` не должен создавать дочерний тэг `$key`,
+		# '' означает, что метод `importString` не должен создавать дочерний тэг `$k`,
 		# а должен добавить текст в качестве единственного содержимого текущего тэга.
-		if (!is_null($key)) {
-			df_param_sne($key, 0);
-		}
-		$keyAsString =
-			is_null($key)
-			? $this->getName()
-			/**
-			 * Раньше тут стояло df_string($key).
-			 * Убрал @see df_string() для ускорения модуля Яндекс.Маркет.
-			 * Более того, выше стоит проверка df_param_s, так что если $key не null, то $key гарантированно строка.
-			 */
-			: $key
-		; /** @var string $keyAsString */
-		$valueIsString = is_string($value); /** @var bool $valueIsString */
-		$valueAsString = null; /** @var string $valueAsString */
-		try {$valueAsString = $valueIsString ? $value : df_string($value);}
-		catch (E $e) {df_error("Unable to convert the value of the key «{$keyAsString}» to a string.\n%s", df_xts($e));}
-		if ($valueIsString && $valueAsString) {
+		$kIsEmpty = df_es($k); /** @var bool $kIsEmpty */
+		$kAsString = $kIsEmpty ? $this->getName() : $k; /** @var string $kAsString */
+		$vIsString = is_string($v); /** @var bool $vIsString */
+		$vAsString = ''; /** @var string $vAsString */
+		try {$vAsString = $vIsString ? $v : df_string($v);}
+		catch (E $e) {df_error("Unable to convert the value of the key «{$kAsString}» to a string.\n%s", df_xts($e));}
+		if ($vIsString && $vAsString) {
 			/**
 			 * Поддержка синтаксиса
 			 *	 [
@@ -499,31 +487,31 @@ final class X extends MX {
 			 *			df_cdata($this->getAddress()->format(Mage_Customer_Model_Attribute_Data::OUTPUT_FORMAT_TEXT))
 			 *	 ]
 			 * Обратите внимание, что проверка на синтаксис[[]] должна предшествовать
-			 * проверке на принадлежность ключа $keyAsString в массиве $wrapInCData,
+			 * проверке на принадлежность ключа $kAsString в массиве $wrapInCData,
 			 * потому что при соответствии синтаксису[[]] нам надо удалить из значения символы[[]].
 			 * Обратите внимание, что нам нужно выполнить проверку на синтаксис df_cdata ([[]])
 			 * даже при $needWrapInCData = true, потому что маркеры [[ и ]] из данных надо удалять.
 			 */
-			if (self::marker()->marked($valueAsString)) {
-				$valueAsString = self::marker()->unmark($valueAsString);
+			if (self::marker()->marked($vAsString)) {
+				$vAsString = self::marker()->unmark($vAsString);
 				$needWrapInCData = true;
 			}
-			$needWrapInCData = $needWrapInCData || in_array($keyAsString, $wrapInCData) || df_needs_cdata($valueAsString);
+			$needWrapInCData = $needWrapInCData || in_array($kAsString, $wrapInCData) || df_needs_cdata($vAsString);
 		}
 		$needWrapInCData
-			? (is_null($key) ? $this->cdata($valueAsString) : $this->addChildText($keyAsString, $valueAsString))
+			? ($kIsEmpty ? $this->cdata($vAsString) : $this->addChildText($kAsString, $vAsString))
 			: (
-				is_null($key)
-				? $this->setValue($valueAsString)
+				$kIsEmpty
+				? $this->setValue($vAsString)
 				: $this->addChild(
-					$keyAsString
+					$kAsString
 					/**
 					 * Обратите внимание, что мы намеренно не добавляем htmlspecialchars:
 					 * пусть вместо этого источник данных помечает те даннные, которые
 					 * могут содержать неразрешённые в качестве содержимого тегов XML
 					 * значения посредством @see df_cdata()
 					 */
-					,$valueAsString
+					,$vAsString
 				)
 			)
 		;
