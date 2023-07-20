@@ -67,11 +67,10 @@ function df_log_e(E $e, $m = null, $d = [], $suf = null):void {df_log_l($m, $e, 
  * @param string|object|null $m
  * @param string|mixed[]|E $p2
  * @param string|mixed[]|E $p3 [optional]
- * @param string|bool|null $p4 [optional]
  */
-function df_log_l($m, $p2, $p3 = [], $p4 = null):void {
-	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string|null $suf */ /** @var string|null $pref */
-	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, null] : [null, $p2, $p3, $p4];
+function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
+	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string $suf */ /** @var string $pref */
+	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, ''] : [null, $p2, $p3, $p4];
 	if (!$m && $e) {
 		/** @var array(string => string) $en */
 		$en = df_caller_entry($e, function(array $e) {return ($c = dfa($e, 'class')) && df_module_enabled($c);});
@@ -113,11 +112,12 @@ function df_report(string $f, string $m, bool $append = false):void {
 
 /**
  * 2020-01-31
+ * 2023-07-19
+ * «mb_strtolower(): Passing null to parameter #1 ($string) of type string is deprecated
+ * in vendor/mage2pro/core/Qa/lib/log.php on line 122»: https://github.com/mage2pro/core/issues/233
  * @used-by df_log_l()
  * @param string|object|null $m [optional]
- * @param string|null $pref [optional]
- * @return string|null
  */
-function df_report_prefix($m = null, $pref = null) {return df_ccc('--',
+function df_report_prefix($m = null, string $pref = ''):string {return df_ccc('--',
 	mb_strtolower($pref), !$m ? null : df_cts_lc_camel($m, '-')
 );}
