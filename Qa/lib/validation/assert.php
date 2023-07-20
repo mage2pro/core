@@ -57,6 +57,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by df_module_file_name()
  * @used-by df_oqi_amount()
  * @used-by dfaf()
+ * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Dfe\GoogleFont\Font::variant()
  * @used-by \Dfe\GoogleFont\Fonts::get()
  * @used-by \Dfe\AlphaCommerceHub\Method::charge()
