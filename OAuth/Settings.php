@@ -40,7 +40,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @param null|string|int|S|Store|array(string, int) $s [optional]
 	 * @return string|null
 	 */
-	final function refreshToken($s = null) {return $this->v(null, $s);}
+	final function refreshToken($s = null) {return $this->v('', $s);}
 
 	/**
 	 * 2017-06-29

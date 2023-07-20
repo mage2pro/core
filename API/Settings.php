@@ -37,7 +37,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Inkifi\Pwinty\API\Client::headers()
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final function merchantID($s = null):string {return df_result_sne($this->probablyTestable(null, $s));}
+	final function merchantID($s = null):string {return df_result_sne($this->probablyTestable('', $s));}
 
 	/**
 	 * 2017-02-08

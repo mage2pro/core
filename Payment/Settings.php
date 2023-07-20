@@ -77,7 +77,7 @@ abstract class Settings extends \Df\API\Settings {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
 	 */
-	final function dsd():string {return $this->v(null, null, function() {return $this->v('statement');});}
+	final function dsd():string {return $this->v('', null, function() {return $this->v('statement');});}
 
 	/**
 	 * 2016-12-27
@@ -117,7 +117,7 @@ abstract class Settings extends \Df\API\Settings {
 	 * @param null|string|int|S|Store $s [optional]
 	 */
 	final function messageFailure(string $m = '', $s = null):string {return df_var(
-		$this->v(null, $s, function() use($m) {return df_cc_br(
+		$this->v('', $s, function() use($m) {return df_cc_br(
 			'Sorry, the payment attempt is failed.'
 			,df_es($m) ? $m : "The payment service's message is «<b>{originalMessage}</b>»."
 			,'Please try again, or try another payment method.'
