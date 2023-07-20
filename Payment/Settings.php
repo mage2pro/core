@@ -102,7 +102,7 @@ abstract class Settings extends \Df\API\Settings {
 	 * 2016-12-26
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 */
-	final function log():bool {return $this->b(null, null, true);}
+	final function log():bool {return $this->b('', null, true);}
 
 	/**
 	 * 2016-08-27
@@ -154,7 +154,7 @@ abstract class Settings extends \Df\API\Settings {
 	 * @used-by \Df\Payment\ConfigProvider::config()
 	 * @used-by \Df\Payment\Method::requireBillingAddress()
 	 */
-	final function requireBillingAddress():bool {return $this->b(null, null, function() {return
+	final function requireBillingAddress():bool {return $this->b('', null, function() {return
 		$this->b('askForBillingAddress', null, true)
 	;});}
 

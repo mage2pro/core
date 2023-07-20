@@ -96,7 +96,7 @@ abstract class Settings extends \Df\Config\Settings {
 	 * @used-by \Inkifi\Pwinty\API\Client::urlBase()
 	 * @param null|string|int|S $s [optional]
 	 */
-	final function test($s = null):bool {return $this->b(null, $s);}
+	final function test($s = null):bool {return $this->b('', $s);}
 
 	/**
 	 * 2016-11-12
