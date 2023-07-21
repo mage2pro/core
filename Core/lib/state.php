@@ -1,6 +1,6 @@
 <?php
-use Composer\InstalledVersions as IV;
 use Magento\Framework\App\State;
+
 /**
  * 2015-09-20
  * @used-by df_area_code()
@@ -43,59 +43,6 @@ function df_is_localhost():bool {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []
  * 2020-06-27 @deprecated It is unused.
  */
 function df_is_windows():bool {return dfcf(function() {return 'WIN' === strtoupper(substr(PHP_OS, 0, 3));});}
-
-/**
- * 2016-06-25 https://mage2.pro/t/543
- * 2018-04-17
- * 1) «Magento 2.3 has removed its version information from the `composer.json` files since 2018-04-05»:
- * https://mage2.pro/t/5480
- * 2) Now Magento 2.3 (installed with Git) returns the «dev-2.3-develop» string from the
- * @see \Magento\Framework\App\ProductMetadata::getVersion() method.
- * 2023-07-16
- * 1) @see \Magento\Framework\App\ProductMetadata::getVersion() has stopped working correctly for Magento installed via Git:
- * https://github.com/mage2pro/core/issues/229
- * 2) «Script error for "Magento_Ui/js/lib/ko/template/renderer"»: https://github.com/mage2pro/core/issues/228
- * @used-by df_context()
- * @used-by df_magento_version_ge()
- * @used-by df_sentry()
- * @used-by df_sentry_m()
- * @used-by \Dfe\CheckoutCom\Charge::pMetadata()
- * @used-by \Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
- */
-function df_magento_version():string {return dfcf(function() {return df_trim_text_left(
-	/**
-	 * 2023-07-16
-	 * 1) https://getcomposer.org/doc/07-runtime.md#installed-versions
-	 * 2) @uses \Composer\InstalledVersions::getRootPackage() returns:
-	 *	{
-	 *		"aliases": [],
-	 *		"dev": true,
-	 *		"install_path": "C:\\work\\clients\\m\\latest\\code\\vendor\\composer/../../",
-	 *		"name": "magento/magento2ce",
-	 *		"pretty_version": "dev-2.4-develop",
-	 *		"reference": "1bdf9dfaf502ab38f5174f33b05c0690f67bf572",
-	 *		"type": "project",
-	 *		"version": "dev-2.4-develop"
-	 *	}
-	 */
-	dfa(IV::getRootPackage(), 'pretty_version'), 'dev-'
-);});}
-
-/**
- * 2016-08-24
- * @used-by \Df\Intl\Js::_toHtml()
- */
-function df_magento_version_ge(string $v):bool {return version_compare(df_magento_version(), $v, 'ge');}
-
-/**
- * 2017-05-13 https://mage2.pro/t/2615
- * 2022-10-14 @deprecated It is unused. And it is slow.
- */
-function df_magento_version_remote(string $url):string {return dfcf(function($url) {return df_try(function() use($url) {
-	/** @var string[] $a */
-	$a = df_explode_space(df_string_clean(df_trim_text_left(df_file_read("$url/magento_version"), 'Magento/'), '(', ')'));
-	return 2 !== count($a) ? [] : array_combine(['version', 'edition'], $a);
-});}, [df_trim_ds_right($url)]);}
 
 /**
  * 2017-04-17
