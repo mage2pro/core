@@ -192,7 +192,7 @@ abstract class Handler implements IMA {
 			# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 			# https://stackoverflow.com/a/28233499
 			list($v, $suffix) = [$e, 'exception'];
-			df_log_e($e, $m);
+			df_log($e, $m);
 		}
 		else {
 			$ev = $this->_e; /** @var Event $ev */

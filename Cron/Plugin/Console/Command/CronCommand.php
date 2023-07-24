@@ -18,7 +18,7 @@ final class CronCommand {
 	function aroundRun(Sb $sb, \Closure $f, II $i, IO $o):int {
 		try {return $f($i, $o);}
 		catch (\Exception $e) {
-			df_log_e($e, $this);
+			df_log($e, $this);
 			throw $e;
 		}
 	}

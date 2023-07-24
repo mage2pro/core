@@ -33,16 +33,14 @@ final class Formatter {
 	 */
 	private static function frame(F $f):string {/** @var string $r */
 		try {
-			$r = df_kv([
-				'Location' => df_cc(':', df_path_relative($f->filePath()), $f->line()), 'Callee' => $f->method()
-			], 13);
+			$r = df_kv(['Location' => df_cc(':', df_path_relative($f->filePath()), $f->line()), 'Callee' => $f->method()], 13);
 		}
 		catch (\Exception $e) {
 			$r = df_xts($e);
 			/**
 			 * 2020-02-20
 			 * 1) «Function include() does not exist»: https://github.com/tradefurniturecompany/site/issues/60
-			 * 2) It is be dangerous to call @see df_log_e() here, because it will inderectly return us here,
+			 * 2) It is be dangerous to call @see df_log() here, because it will inderectly return us here,
 			 * and it could be an infinite loop.
 			 */
 			static $loop = false;
@@ -51,7 +49,7 @@ final class Formatter {
 			}
 			else {
 				$loop = true;
-				df_log_e($e, __CLASS__);
+				df_log($e, __CLASS__);
 				$loop = false;
 			}
 		}

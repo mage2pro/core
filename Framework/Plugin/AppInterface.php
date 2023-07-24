@@ -52,5 +52,5 @@ final class AppInterface {
 	 *		return true;
 	 * https://github.com/magento/magento2/blob/2.4.3/lib/internal/Magento/Framework/App/StaticResource.php#L194-L214
 	 */
-	function beforeCatchException(Sb $sb, B $b, E $e):void {df_log_e($e);}
+	function beforeCatchException(Sb $sb, B $b, E $e):void {df_log($e);}
 }

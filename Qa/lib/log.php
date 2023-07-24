@@ -3,17 +3,23 @@ use Df\Qa\Failure\Exception as QE;
 use Exception as E;
 use Magento\Framework\DataObject as _DO;
 /**
+ * @used-by df_error()
  * @used-by ikf_endpoint()	inkifi.com
  * @used-by \Df\Config\Backend::save()
  * @used-by \Df\Config\Backend\Serialized::processA()
+ * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
+ * @used-by \Df\Framework\Plugin\AppInterface::beforeCatchException() (https://github.com/mage2pro/core/issues/160)
  * @used-by \Dfe\GoogleFont\Fonts\Png::url()
  * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
  * @used-by \Dfe\GoogleFont\Fonts\Sprite::draw()
  * @used-by \Df\OAuth\ReturnT::execute()
  * @used-by \Df\Payment\Method::action()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
+ * @used-by \Df\Payment\W\Action::execute()
+ * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Qa\Failure::log()
  * @used-by \Df\Qa\Failure\Error::check()
+ * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
@@ -25,25 +31,7 @@ function df_log($v, $m = null):void {df_log_l($m, $v); df_sentry($m, $v);}
 
 /**
  * 2017-01-11
- * 2020-09-09 We need `df_caller_f(1)` (I checked it) because it is nested inside `df_log_l()`.
- * @used-by df_error()
- * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
- * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
- * @used-by \Df\Framework\Plugin\AppInterface::beforeCatchException() (https://github.com/mage2pro/core/issues/160)
- * @used-by \Df\Payment\W\Action::execute()
- * @used-by \Df\Payment\W\Handler::log()
- * @used-by \Df\Qa\Trace\Formatter::frame()
- * @used-by \CanadaSatellite\Bambora\Model\PaymentManagement::savePaymentInformationAndPlaceOrder() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
- * @param string|object|null $m [optional]
- * @param string|mixed[] $d [optional]
- * @param string|bool|null $suf [optional]
- */
-function df_log_e(E $e, $m = null, $d = [], $suf = null):void {df_log_l($m, $e, $d, $suf ?: df_caller_f(1));}
-
-/**
- * 2017-01-11
  * @used-by df_log()
- * @used-by df_log_e()
  * @used-by dfp_report()
  * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
  * @used-by \Amasty\Checkout\Model\Optimization\LayoutJsDiffProcessor::moveArray(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/120)
