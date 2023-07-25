@@ -54,8 +54,9 @@ function df_check_s($v):bool {return is_string($v) || is_int($v) || is_null($v) 
 if (!function_exists('is_iterable')) {
 	/**
 	 * 2016-08-09 http://stackoverflow.com/questions/31701517#comment59189177_31701556
-	 * @used-by dfaf()
 	 * @used-by df_assert_traversable()
+	 * @used-by df_find()
+	 * @used-by dfaf()
 	 * @param Traversable|array $v
 	 */
 	function is_iterable($v):bool {return is_array($v) || $v instanceof Traversable;}

@@ -33,7 +33,7 @@ use Df\Core\Exception as DFE;
  * @return mixed|null
  * @throws DFE
  */
-function df_find($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0) {
+function df_find($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, bool $nested = false) {
 	# 2020-03-02, 2022-10-31
 	# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 	#		[$a, $b] = [1, 2];
@@ -59,6 +59,18 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0) 
 		if ($fr = call_user_func_array($f, array_merge($pPrepend, $primaryArgument, $pAppend))) {
 			$r = !is_bool($fr) ? $fr : $v;
 			break;
+		}
+	}
+	# 2023-07-25
+	# 1) "Adapt `df_find` to the nested search": https://github.com/mage2pro/core/issues/251
+	# 2) I implement the nested seach in a separate loop to minimize recursions.
+	if (null === $r && $nested) {
+		foreach ($a as $v) {/** @var int|string $k */ /** @var mixed $v */ /** @var mixed[] $primaryArgument */
+			if (is_iterable($v)) {
+				if ($r = df_find($v, $f, $pAppend, $pPrepend, $keyPosition, true)) {
+					break;
+				}
+			}
 		}
 	}
 	return $r;
