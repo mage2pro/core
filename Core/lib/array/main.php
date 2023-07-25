@@ -31,13 +31,14 @@ function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
  * 2022-10-18
  * @uses iterator_to_array() allows an array as the first argument since PHP 8.2:
  * https://www.php.net/manual/migration82.other-changes.php#migration82.other-changes.functions.spl
+ * 2023-07-26 "Replace `array|Traversable` with `iterable`": https://github.com/mage2pro/core/issues/255
  * @used-by df_filter()
  * @used-by df_map()
  * @used-by dfa_select_ordered()
  * @used-by dfak_transform()
- * @param Traversable|array $t
+ * @param iterable $i
  */
-function df_ita($t):array {return is_array($t) ? $t : iterator_to_array($t);}
+function df_ita($i):array {return is_array($i) ? $i : iterator_to_array($i);}
 
 /**
  * http://en.wikipedia.org/wiki/Tuple
