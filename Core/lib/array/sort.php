@@ -7,7 +7,7 @@
  * @used-by df_ksort_r()
  * @used-by df_stores()
  * @used-by df_trd_set()
- * @used-by \Df\Qa\Dumper::dumpArrayElements()
+ * @used-by \Df\Qa\Dumper::dumpIterableElements()
  * @used-by \Dfe\Dynamics365\API\Facade::p()
  * @used-by \Dfe\Qiwi\Signer::sign()
  * @used-by \Dfe\Robokassa\Api\Options::p()

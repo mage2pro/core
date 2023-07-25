@@ -81,7 +81,7 @@ function df_tab(...$a) {return df_call_a(function(string $s):string {return "\t"
 /**
  * @used-by \Df\Core\Html\Tag::content()
  * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
- * @used-by \Df\Qa\Dumper::dumpArray()
+ * @used-by \Df\Qa\Dumper::dumpIterable()
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @used-by \Df\Typography\Css::render()
  */

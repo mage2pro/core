@@ -130,7 +130,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, b
  * @used-by dfe_modules_log()
  * @used-by dfp_methods()
  * @used-by \Df\Payment\ConfigProvider::configOptions()
- * @used-by \Df\Qa\Dumper::dumpArrayElements()
+ * @used-by \Df\Qa\Dumper::dumpIterableElements()
  * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Df\Sentry\Client::send()
  * @used-by \Dfe\PostFinance\Signer::sign()
