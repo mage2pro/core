@@ -8,9 +8,9 @@ final class Trace implements \IteratorAggregate, \Countable {
 	 * 2020-02-27
 	 * @used-by df_bt_s()
 	 * @used-by \Df\Qa\Failure::postface()
-	 * @param array(string => int|string) $frames
+	 * @param array(string => int|string) $ff
 	 */
-	function __construct(array $frames) {
+	function __construct(array $ff) {
 		$this->_frames = [];
 		/**
 		 * 2017-07-01
@@ -40,10 +40,8 @@ final class Trace implements \IteratorAggregate, \Countable {
 		 * 3) @see \Df\Qa\Trace\Frame::filePath()
 		 * 2023-07-26 "Implement `df_filter_tail()`": https://github.com/mage2pro/core/issues/263
 		 */
-		$frames = df_filter_tail($frames, function(array $f):array {return df_starts_with(dfa($f, 'file', ''), 'phar://');});
-		foreach ($frames as $frameA) { /** @var array(string => string|int) $frameA */
-			$this->_frames[]= F::i($frameA);
-		}
+		$ff = df_filter_tail($ff, function(array $f):array {return df_starts_with(dfa($f, 'file', ''), 'phar://');});
+		$this->_frames = df_map($ff, function(array $f):F {return F::i($f);});
 	}
 
 	/**
