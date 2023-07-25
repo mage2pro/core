@@ -33,8 +33,12 @@ function df_caller_entry($p = 0, F $predicate = null):array {
 	 * 3) the function who calls df_caller_f, df_caller_m, or \Df\Framework\Log\Dispatcher::handle: it should be the result.
 	 * So the offset is 2.
 	 * The previous code failed the @see \Df\API\Facade::p() method in the inkifi.com store.
+	 * 2023-07-26
+	 * 1) "`df_caller_entry()` detects the current entry incorrectly": https://github.com/mage2pro/core/issues/260
+	 * 2) We do not need `2 + $offset` anymore because the current implementation of @uses df_bt() already uses `1 + $p`.
+	 * So I changed `df_bt(df_bt_inc($p, 2))` to `df_bt(df_bt_inc($p))`
 	 */
-	$bt = df_bt(df_bt_inc($p, 2)); /** @var array(int => array(string => mixed)) $bt */
+	$bt = df_bt(df_bt_inc($p)); /** @var array(int => array(string => mixed)) $bt */
 	while ($r = array_shift($bt)) {/** @var array(string => string|int)|null $r */
 		$f = $r['function']; /** @var string $f */
 		# 2017-03-28
