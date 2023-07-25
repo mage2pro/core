@@ -44,7 +44,9 @@ function dfp_error_message($m = ''):string {return nl2br(df_cc_n(
  */
 function dfp_report($m, $d, string $title = '', string $suffix = ''):void {
 	dfp_sentry_tags($m);
-	df_sentry($m, $title ?: dfpm_title($m), ['extra' => is_array($d) ? $d : ['Payment Data' => $d]]);
+	# 2023-07-25
+	# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`": https://github.com/mage2pro/core/issues/249
+	df_sentry($m, $title ?: dfpm_title($m), is_array($d) ? $d : ['Payment Data' => $d]);
 	df_log_l(df_module_name_c($m), $d, $suffix);
 }
 

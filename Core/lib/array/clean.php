@@ -38,6 +38,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by df_kv_table()
  * @used-by df_oro_get_list()
  * @used-by df_page_result()
+ * @used-by df_sentry()
  * @used-by df_store_code_from_url()
  * @used-by df_zf_http_last_req() 
  * @used-by \Df\API\Facade::p()

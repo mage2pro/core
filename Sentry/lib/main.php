@@ -29,7 +29,7 @@ use Magento\User\Model\User;
  * @param _DO|mixed[]|mixed|E $v
  * @param array(string => mixed) $context [optional]
  */
-function df_sentry($m, $v, array $context = []):void {
+function df_sentry($m, $v, array $extra = []):void {
 	/** @var string[] $domainsToSkip */
 	static $domainsToSkip = ['pumpunderwear.com', 'quanticlo.com', 'sanasafinaz.com'];
 	if ($v instanceof E || !in_array(df_domain_current(), $domainsToSkip)) {
@@ -72,6 +72,9 @@ function df_sentry($m, $v, array $context = []):void {
 				df_core_version(), df_domain_current(), df_magento_version(), df_package_version($m), df_store_code()
 			]
 		];
+		# 2023-07-25
+		# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`": https://github.com/mage2pro/core/issues/249
+		$context = df_clean(['extra' => $extra]);
 		# 2017-01-09
 		if ($v instanceof DFE) {
 			$context = df_extend($context, $v->sentryContext());

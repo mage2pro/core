@@ -410,7 +410,10 @@ abstract class Client {
 			); /** @var DFE $e2 */
 			if (!$this->_silent) {
 				df_log_l($m, $e2);
-				df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
+				# 2023-07-25
+				# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`":
+				# https://github.com/mage2pro/core/issues/249
+				df_sentry($m, $short, ['Request' => $req, 'Response' => $long]);
 			}
 			throw $e2;
 		}

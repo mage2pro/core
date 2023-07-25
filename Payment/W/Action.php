@@ -122,7 +122,10 @@ class Action extends \Df\Payment\Action {
 			$ev = $e->event(); /** @var Event $ev */
 			$req = $ev->r(); /** @var array(string => mixed) $req */
 			$label = $ev->tl(); /** @var string $label */
-			df_sentry($m, "[{$e->mTitle()}] {$label}: ignored", ['extra' => $req]);
+			# 2023-07-25
+			# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`":
+			# https://github.com/mage2pro/core/issues/249
+			df_sentry($m, "[{$e->mTitle()}] {$label}: ignored", $req);
 			df_log_l($m, $req, $ev->t());
 		}
 	}

@@ -27,5 +27,7 @@ function dfe_modules_info():array {return dfcf(function() {return df_map_kr(dfe_
  */
 function dfe_modules_log():void {df_sentry(null
 	,sprintf('%s: %s', df_domain_current(), df_csv_pretty(array_keys(dfe_modules_info())))
-	,['extra' => ['Backend URL' => df_url_backend_ns()]]
+	# 2023-07-25
+	# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`": https://github.com/mage2pro/core/issues/249
+	,['Backend URL' => df_url_backend_ns()]
 );}

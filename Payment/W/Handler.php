@@ -201,8 +201,10 @@ abstract class Handler implements IMA {
 		}
 		df_sentry_m($m)->user(['id' => $title]);
 		dfp_sentry_tags($m);
-		df_sentry($m, $v, ['extra' => ($data = $this->r())]); /** @var string $data */
-		df_log_l($m, $data, $suffix);
+		# 2023-07-25
+		# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`": https://github.com/mage2pro/core/issues/249
+		df_sentry($m, $v, $d = $this->r()); /** @var mixed $d */
+		df_log_l($m, $d, $suffix);
 	}, [$e]);}
 
 	/**
