@@ -32,7 +32,7 @@ function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
  * @uses iterator_to_array() allows an array as the first argument since PHP 8.2:
  * https://www.php.net/manual/migration82.other-changes.php#migration82.other-changes.functions.spl
  * 2023-07-26 "Replace `array|Traversable` with `iterable`": https://github.com/mage2pro/core/issues/255
- * @used-by df_filter()
+ * @used-by df_filter_f()
  * @used-by df_map()
  * @used-by dfa_select_ordered()
  * @used-by dfak_transform()
@@ -63,7 +63,7 @@ function df_tuple(array $arrays):array {
 
 /**
  * 2017-02-18 [array|callable, array|callable] => [array, callable]
- * @used-by df_filter()
+ * @used-by df_filter_f()
  * @used-by df_find()
  * @used-by df_map()
  * @used-by dfak_transform()
