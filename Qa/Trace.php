@@ -11,7 +11,6 @@ final class Trace implements \IteratorAggregate, \Countable {
 	 * @param array(string => int|string) $ff
 	 */
 	function __construct(array $ff) {
-		$this->_frames = [];
 		/**
 		 * 2017-07-01
 		 * Сегодня при обработке исключительной ситуации при запуске теста из PHPUnit
