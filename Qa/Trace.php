@@ -12,7 +12,7 @@ final class Trace implements \IteratorAggregate, \Countable {
 	 */
 	function __construct(array $ff) {
 		# 2023-07-26 "`df_error_create` should be excluded from exceptions traces": https://github.com/mage2pro/core/issues/262
-		$ff = df_filter_head($ff, function(array $f):array {return 'df_error_create' === dfa($f, 'function');});
+		$ff = df_filter_head($ff, function(array $f):bool {return 'df_error_create' === dfa($f, 'function');});
 		/**
 		 * 2017-07-01
 		 * Сегодня при обработке исключительной ситуации при запуске теста из PHPUnit
@@ -41,7 +41,7 @@ final class Trace implements \IteratorAggregate, \Countable {
 		 * 3) @see \Df\Qa\Trace\Frame::filePath()
 		 * 2023-07-26 "Implement `df_filter_tail()`": https://github.com/mage2pro/core/issues/263
 		 */
-		$ff = df_filter_tail($ff, function(array $f):array {return df_starts_with(dfa($f, 'file', ''), 'phar://');});
+		$ff = df_filter_tail($ff, function(array $f):bool {return df_starts_with(dfa($f, 'file', ''), 'phar://');});
 		$this->_frames = df_map($ff, function(array $f):F {return F::i($f);});
 	}
 
