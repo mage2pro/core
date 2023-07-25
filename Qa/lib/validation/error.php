@@ -91,6 +91,7 @@ function df_abstract($caller):void {
  * @used-by df_try()
  * @used-by df_xml_children()
  * @used-by df_xml_parse()
+ * @used-by dfa_assert_keys()
  * @used-by dfaf()
  * @used-by dfc()
  * @used-by dfp()
