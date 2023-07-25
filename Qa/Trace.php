@@ -11,6 +11,8 @@ final class Trace implements \IteratorAggregate, \Countable {
 	 * @param array(string => int|string) $ff
 	 */
 	function __construct(array $ff) {
+		# 2023-07-26 "`df_error_create` should be excluded from exceptions traces": https://github.com/mage2pro/core/issues/262
+		$ff = df_filter_head($ff, function(array $f):array {return 'df_error_create' === dfa($f, 'function');});
 		/**
 		 * 2017-07-01
 		 * Сегодня при обработке исключительной ситуации при запуске теста из PHPUnit
