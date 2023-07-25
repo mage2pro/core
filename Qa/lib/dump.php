@@ -1,9 +1,9 @@
 <?php
 use Df\Qa\Dumper;
 /**
- * Обратите внимание, что мы намеренно не используем для @uses Df_Core_Dumper
- * объект-одиночку, потому что нам надо вести учёт выгруженных объектов,
- * чтобы не попасть в бесконечную рекурсию при циклических ссылках.
+ * We do not use @uses \Df\Qa\Dumper as a singleton
+ * because @see \Df\Qa\Dumper::dumpObject()
+ * uses the @see \Df\Qa\Dumper::$_dumped property to avoid a recursion.
  * @see df_type()
  * @used-by df_assert_eq()
  * @used-by df_bool()
