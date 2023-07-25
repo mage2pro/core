@@ -214,6 +214,7 @@ final class Client {
 		# (и, соответственно, так же обрублен при просмотре события в формате JSON
 		# по ссылке в шапке экрана события в Sentry),
 		# однако всё равно удобно видеть данные в JSON, пусть даже в обрубленном виде.
+		/** 2023-07-25 @used-by \Df\Sentry\Extra::adjust() */
 		$data['extra'] = Extra::adjust($extra) + ['_json' => df_json_encode($extra)];
 		$data = df_clean($data);
 		if ($trace && !isset($data['stacktrace']) && !isset($data['exception'])) {

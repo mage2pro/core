@@ -118,7 +118,6 @@ function df_json_decode($s, bool $throw = true) {/** @var mixed|bool|null $r */
  * @used-by df_json_prettify()
  * @used-by df_kv()
  * @used-by df_kv_table()
- * @used-by df_log_l()
  * @used-by df_oi_add()
  * @used-by df_widget()
  * @used-by dfp_container_add()

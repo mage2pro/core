@@ -78,10 +78,9 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 	if (is_array($d)) {
 		$d = df_extend($d, ['Mage2.PRO' => df_context()]);
 	}
-	$d = !$d ? null : (is_string($d) ? $d : df_json_encode($d));
 	df_report(
 		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m, $pref), '{date}--{time}'), $suf) .  '.log'
-		,df_cc_n($d, !$e ? null : ['EXCEPTION', QE::i($e)->report(), "\n\n"], df_bt_s(1))
+		,df_cc_n(!$d ? '' : df_dump($d), !$e ? null : ['EXCEPTION', QE::i($e)->report(), "\n\n"], df_bt_s(1))
 	);
 }
 
