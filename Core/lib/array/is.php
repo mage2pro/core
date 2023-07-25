@@ -59,6 +59,7 @@ function df_is_assoc(array $a):bool {return !$a || !array_is_list($a);}
 /**
  * 2023-07-25
  * @uses is_object()
- * @used-by \Df\Qa\Dumper::dumpArray()
+ * @used-by \Df\Qa\Dumper::dumpIterable()
+ * @param iterable $a
  */
-function dfa_has_objects(array $a):bool {return !!df_find($a, 'is_object', [], [], true);}
+function dfa_has_objects($a):bool {return !!df_find($a, 'is_object', [], [], true);}
