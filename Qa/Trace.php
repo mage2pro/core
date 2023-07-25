@@ -12,37 +12,36 @@ final class Trace implements \IteratorAggregate, \Countable {
 	 */
 	function __construct(array $frames) {
 		$this->_frames = [];
+		/**
+		 * 2017-07-01
+		 * Сегодня при обработке исключительной ситуации при запуске теста из PHPUnit
+		 * столкнулся с проблемой, что стек вызовов внутри файла PHPUnit в формате Phar
+		 * в моём случае содержал какие-то бинарные символы, из-за которых падала моя функция @see df_trim()
+		 * @see \Df\Zf\Filter\StringTrim::_splitUtf8()
+		 * Я эту проблему решил тем, что теперь df_trim() по-умолчанию
+		 * в случае исключительной ситуации просто возвращет исходную строку,
+		 * а не возбуждает исключительную ситуацию.
+		 * Однако мне в стеке вызовов в любом случае не нужна бинарная каша,
+		 * поэтому я отсекаю ту часть стека, которая находится внутри Phar.
+		 * 2023-01-28
+		 * 1) The 'file' key can be absent in a stack frame, e.g.:
+		 *	{
+		 *		"function": "loadClass",
+		 *		"class": "Composer\\Autoload\\ClassLoader",
+		 *		"type": "->",
+		 *		"args": ["Df\\Framework\\Plugin\\App\\Router\\ActionList\\Interceptor"]
+		 *	},
+		 *	{
+		 *		"function": "spl_autoload_call",
+		 *		"args": ["Df\\Framework\\Plugin\\App\\Router\\ActionList\\Interceptor"]
+		 *	},
+		 * 2) «Argument 1 passed to df_starts_with() must be of the type string, null given,
+		 * called in vendor/mage2pro/core/Qa/Trace.php on line 28»: https://github.com/mage2pro/core/issues/186
+		 * 3) @see \Df\Qa\Trace\Frame::filePath()
+		 * 2023-07-26 "Implement `df_filter_tail()`": https://github.com/mage2pro/core/issues/263
+		 */
+		$frames = df_filter_tail($frames, function(array $f):array {return df_starts_with(dfa($f, 'file', ''), 'phar://');});
 		foreach ($frames as $frameA) { /** @var array(string => string|int) $frameA */
-			/**
-			 * 2017-07-01
-			 * Сегодня при обработке исключительной ситуации при запуске теста из PHPUnit
-			 * столкнулся с проблемой, что стек вызовов внутри файла PHPUnit в формате Phar
-			 * в моём случае содержал какие-то бинарные символы, из-за которых падала моя функция @see df_trim()
-			 * @see \Df\Zf\Filter\StringTrim::_splitUtf8()
-			 * Я эту проблему решил тем, что теперь df_trim() по-умолчанию
-			 * в случае исключительной ситуации просто возвращет исходную строку,
-			 * а не возбуждает исключительную ситуацию.
-			 * Однако мне в стеке вызовов в любом случае не нужна бинарная каша,
-			 * поэтому я отсекаю ту часть стека, которая находится внутри Phar.
-			 * 2023-01-28
-			 * 1) The 'file' key can be absent in a stack frame, e.g.:
-			 *	{
-			 *		"function": "loadClass",
-			 *		"class": "Composer\\Autoload\\ClassLoader",
-			 *		"type": "->",
-			 *		"args": ["Df\\Framework\\Plugin\\App\\Router\\ActionList\\Interceptor"]
-			 *	},
-			 *	{
-			 *		"function": "spl_autoload_call",
-			 *		"args": ["Df\\Framework\\Plugin\\App\\Router\\ActionList\\Interceptor"]
-			 *	},
-			 * 2) «Argument 1 passed to df_starts_with() must be of the type string, null given,
-			 * called in vendor/mage2pro/core/Qa/Trace.php on line 28»: https://github.com/mage2pro/core/issues/186
-			 * 3) @see \Df\Qa\Trace\Frame::filePath()
-			 */
-			if (df_starts_with(dfa($frameA, 'file', ''), 'phar://')) {
-				break;
-			}
 			$this->_frames[]= F::i($frameA);
 		}
 	}
