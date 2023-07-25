@@ -60,7 +60,7 @@ final class Dumper {
 			$this->_dumped[$hash] = true;
 			$r = !df_has_gd($o)
 				? sprintf("%s %s", get_class($o), df_json_encode_partial($o))
-				: sprintf("%s(%s\n)", get_class($o), df_tab_multiline($this->dumpArrayElements($o->getData())))
+				: sprintf("%s(\n%s\n)", get_class($o), df_tab_multiline($this->dumpArrayElements($o->getData())))
 			;
 		}
 		return $r;
