@@ -83,7 +83,7 @@ function df_extend(array $defaults, array $newValues):array {/** @var array(stri
 				,[
 					'{defaultValue}' => df_t()->singleLine(df_dump($defaultValue))
 					,'{newType}' => gettype($newValue)
-					,'{newValue}' => ($newValue)
+					,'{newValue}' => df_dump($newValue)
 				]
 			);
 		}
