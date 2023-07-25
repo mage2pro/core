@@ -55,7 +55,7 @@ function df_filter_f($a1, $a2, $fA):array {/** @var array $r */
 }
 
 /**
- * 2023-07-26 "Implement `dfa_trim_tail()`": https://github.com/mage2pro/core/issues/263
+ * 2023-07-26 "Implement `df_filter_tail()`": https://github.com/mage2pro/core/issues/263
  * @param callable|array(int|string => mixed)|array[]Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|Traversable $a2
  * @return array(int|string => mixed)
