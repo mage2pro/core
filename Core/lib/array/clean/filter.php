@@ -23,6 +23,7 @@ function df_filter($a1, $a2):array {return df_filter_f($a1, $a2, 'array_filter')
 /**
  * 2023-07-26
  * @used-by df_filter()
+ * @used-by df_filter_head()
  * @used-by df_filter_tail()
  * @param callable|array(int|string => mixed)|array[]Traversable $a1
  * @param callable|array(int|string => mixed)|array[]|Traversable $a2
@@ -53,6 +54,24 @@ function df_filter_f($a1, $a2, $fA):array {/** @var array $r */
 	 */
 	return df_is_assoc($a) ? $r : array_values($r);
 }
+
+/**
+ * 2023-07-26 "Implement `df_filter_head()`": https://github.com/mage2pro/core/issues/264
+ * @used-by \Df\Qa\Trace::__construct()
+ * @param callable|array(int|string => mixed)|array[]Traversable $a1
+ * @param callable|array(int|string => mixed)|array[]|Traversable $a2
+ * @return array(int|string => mixed)
+ */
+function df_filter_head($a1, $a2):array {return df_filter_f($a1, $a2, function(array $a, $f):array {
+	$r = [];
+	foreach ($a as $k => $v) {/** @var int|string $k */ /** @var mixed $v */
+		if (!$r && call_user_func($f, $v)) {
+			continue;
+		}
+		$r[$k] = $v;
+	}
+	return $r;
+});}
 
 /**
  * 2023-07-26 "Implement `df_filter_tail()`": https://github.com/mage2pro/core/issues/263
