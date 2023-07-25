@@ -36,6 +36,7 @@ function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
  * @used-by df_map()
  * @used-by dfa_select_ordered()
  * @used-by dfak_transform()
+ * @used-by \Df\Qa\Dumper::dumpObject()
  * @param iterable $i
  */
 function df_ita($i):array {return is_array($i) ? $i : iterator_to_array($i);}

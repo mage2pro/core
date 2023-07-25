@@ -57,7 +57,8 @@ if (!function_exists('is_iterable')) {
 	 * @used-by df_assert_traversable()
 	 * @used-by df_find()
 	 * @used-by dfaf()
-	 * @param Traversable|array $v
+	 * @used-by \Df\Qa\Dumper::dumpObject()
+	 * @param mixed $v
 	 */
 	function is_iterable($v):bool {return is_array($v) || $v instanceof Traversable;}
 }
