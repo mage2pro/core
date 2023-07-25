@@ -57,6 +57,7 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @used-by df_request_method()
  * @used-by df_trd()
  * @used-by df_visitor_ip()
+ * @used-by dfa_has_keys()
  * @used-by dfa_prepend()
  * @used-by dfa_strict()
  * @used-by dfac()
