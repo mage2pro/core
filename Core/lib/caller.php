@@ -5,6 +5,7 @@ use Exception as E;
 /**
  * 2017-11-19
  * @used-by df_abstract()
+ * @used-by df_caller_module()
  * @used-by df_sentry_ext_f()
  */
 function df_caller_c(int $o = 0):string {return df_first(df_explode_method(df_caller_m(++$o)));}
@@ -110,7 +111,7 @@ function df_caller_m(int $o = 0):string {
 	$bt = df_caller_entry(++$o); /** @var array(string => int) $bt */
 	$class = dfa($bt, 'class'); /** @var string $class */
 	if (!$class) {
-		df_log_l(null, $m = "df_caller_m(): no class.\nbt is:\n$bt", __FUNCTION__); /** @var string $m */
+		df_log($m = "df_caller_m(): no class.\nbt is:\n$bt", __FUNCTION__); /** @var string $m */
 		df_error($m);
 	}
 	return "$class::{$bt['function']}";
@@ -129,3 +130,12 @@ function df_caller_mh():string {return df_tag('b', [], df_caller_ml(1));}
  * @used-by df_caller_mh()
  */
 function df_caller_ml(int $o = 0):string {return df_caller_m(++$o) . '()';}
+
+/**
+ * 2023-07-25
+ * @used-by df_log()
+ * @used-by df_log_l()
+ * @used-by df_sentry()
+ * @used-by df_sentry_m()
+ */
+function df_caller_module(int $o = 0):string {return df_module_name(df_caller_c(++$o));}

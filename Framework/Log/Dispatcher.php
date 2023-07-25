@@ -71,6 +71,9 @@ class Dispatcher extends _P {
 				 * https://github.com/mage2pro/core/issues/160
 				 */
 				if (B::class != $c || 'run' !== $f) {
+					# 2023-07-25
+					# I intentionally do not pass these messages to Sentry
+					# because I afraid that they could be too numerous in some third-party websites.
 					df_log_l(
 						$c
 						/** @var E|null $prev */

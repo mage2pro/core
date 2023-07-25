@@ -3,6 +3,7 @@ use Df\Core\Exception as DFE;
 use Exception as E;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase as P;
+
 /**
  * 2016-03-17
  * @used-by df_lxh()
@@ -34,6 +35,21 @@ function df_lxh(callable $f) {/** @var mixed $r */try {$r = $f();} catch (E $e) 
 function df_lxts($e) {return !$e instanceof E ? __($e) : df_xts(df_lx($e));}
 
 /**
+ * 2023-07-25
+ * @used-by df_log_l()
+ * @used-by df_x_module()
+ */
+function df_x_entry(E $e):array {return df_caller_entry($e, function(array $a):bool {return
+	($c = dfa($a, 'class')) && df_module_enabled($c)
+;});}
+
+/**
+ * 2023-07-25
+ * @used-by df_log()
+ */
+function df_x_module(E $e):string {return df_module_name(dfa(df_x_entry($e), 'class'));}
+
+/**
  * 2016-07-18
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Qa\Failure\Exception::trace()
@@ -51,8 +67,6 @@ function df_xf(E $e):E {while ($e->getPrevious()) {$e = $e->getPrevious();} retu
  * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Payment\W\Handler::handle()
- * @used-by \Df\Qa\Failure\Error::check()
- * @used-by \Df\Qa\Failure\Error::log()
  * @used-by \Df\Qa\Trace\Formatter::frame()
  * @used-by \Df\Xml\X::addChild()
  * @used-by \Df\Xml\X::importString()

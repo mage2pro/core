@@ -33,7 +33,8 @@ function df_sentry($m, $v, array $context = []):void {
 	/** @var string[] $domainsToSkip */
 	static $domainsToSkip = ['pumpunderwear.com', 'quanticlo.com', 'sanasafinaz.com'];
 	if ($v instanceof E || !in_array(df_domain_current(), $domainsToSkip)) {
-		$m = df_sentry_module($m);
+        # 2020-09-09, 2023-07-25 We need `df_caller_module(1)` (I checked it) because it is nested inside `df_sentry_module()`.
+		$m = df_sentry_module($m ?: df_caller_module(1));
 		static $d; /** @var array(string => mixed) $d */
 		$d = $d ?: [
 			/**
@@ -180,7 +181,8 @@ function df_sentry_m($m):Sentry {return dfcf(function(string $m):Sentry {
 		);
 	}
 	return $r ?: (!$isCore ? df_sentry_m('Df_Core') : df_error('Sentry settings for `Df_Core` are absent.'));
-}, [df_sentry_module($m)]);}
+# 2020-09-09, 2023-07-25 We need `df_caller_module(2)` because it is nested inside `df_sentry_module()` and `dfcf`.
+}, [df_sentry_module($m ?: df_caller_module(2))]);}
 
 /**
  * 2017-03-15

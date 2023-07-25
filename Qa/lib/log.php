@@ -3,8 +3,10 @@ use Df\Qa\Failure\Exception as QE;
 use Exception as E;
 use Magento\Framework\DataObject as _DO;
 /**
+ * @used-by df_caller_m()
  * @used-by df_error()
  * @used-by ikf_endpoint()	inkifi.com
+ * @used-by \Df\API\Client::_p()
  * @used-by \Df\Config\Backend::save()
  * @used-by \Df\Config\Backend\Serialized::processA()
  * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
@@ -27,7 +29,11 @@ use Magento\Framework\DataObject as _DO;
  * @param _DO|mixed[]|mixed|E $v
  * @param string|object|null $m [optional]
  */
-function df_log($v, $m = null):void {df_log_l($m, $v); df_sentry($m, $v);}
+function df_log($v, $m = null):void {
+	$m = $m ? df_module_name($m) : ($v instanceof E ? df_x_module($v) : df_caller_module());
+	df_log_l($m, $v);
+	df_sentry($m, $v);
+}
 
 /**
  * 2017-01-11
@@ -38,7 +44,6 @@ function df_log($v, $m = null):void {df_log_l($m, $v); df_sentry($m, $v);}
  * @used-by \Auctane\Api\Model\Action\Export::addXmlElement(caremax.com.au, https://github.com/caremax-com-au/site/issues/1)
  * @used-by \CanadaSatellite\Bambora\Facade::api() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems()	tradefurniturecompany.co.uk
- * @used-by \Df\API\Client::_p()
  * @used-by \Df\Framework\Log\Dispatcher::handle()
  * @used-by \Df\Framework\Plugin\View\Asset\Source::aroundGetContent()
  * @used-by \Df\Payment\W\Action::execute()
@@ -59,10 +64,14 @@ function df_log($v, $m = null):void {df_log_l($m, $v); df_sentry($m, $v);}
 function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string $suf */ /** @var string $pref */
 	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, ''] : [null, $p2, $p3, $p4];
-	if (!$m && $e) {
-		/** @var array(string => string) $en */
-		$en = df_caller_entry($e, function(array $e) {return ($c = dfa($e, 'class')) && df_module_enabled($c);});
-		list($m, $suf) = [dfa($en, 'class'), dfa($en, 'function', 'exception')];
+	if (!$m) {
+		if (!$e) {
+			$m = df_caller_module();
+		}
+		else {
+			$en = df_x_entry($e); /** @var array(string => string) $en */
+			list($m, $suf) = [dfa($en, 'class'), dfa($en, 'function', 'exception')];
+		}
 	}
 	$suf = $suf ?: df_caller_f();
 	if (is_array($d)) {
@@ -107,5 +116,5 @@ function df_report(string $f, string $m, bool $append = false):void {
  * @param string|object|null $m [optional]
  */
 function df_report_prefix($m = null, string $pref = ''):string {return df_ccc('--',
-	mb_strtolower($pref), !$m ? null : df_cts_lc_camel($m, '-')
+	mb_strtolower($pref), !$m ? null : df_module_name_lc($m, '-')
 );}

@@ -25,7 +25,7 @@ class Source {
 			# 2019-12-30 Dmitrii Fediuk https://github.com/mage2pro
 			# «Unable to resolve the source file for 'frontend/bs_eren/bs_eren3/en_US/quickview/bxslider.js'»
 			# https://github.com/royalwholesalecandy/core/issues/70
-			df_log_l($this, df_cc_n("Unable to resolve the source file for {$a->getFilePath()}", df_referer()));
+			df_log_l($a->getModule(), df_cc_n("Unable to resolve the source file for {$a->getFilePath()}", df_referer()));
 			throw new ENotFound(new Phrase('Unable to resolve the source file for "%1"', [$a->getFilePath()]), 0, $e);
 		}
 		return $r;

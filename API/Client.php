@@ -378,10 +378,11 @@ abstract class Client {
 				$req = df_zf_http_last_req($c); /** @var string $req */
 				$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
 				$path = df_url_path($this->url()); /** @var string $path */
-				df_log_l($m,
+				df_log(
 					(!$path ? 'A' : "A `{$path}`") . " {$title} API request has succeeded\n"
 					. "Request:\n$req\nResponse:\n"
 					. (!df_check_json($resBody) ? $resBody : df_json_prettify($resBody))
+					, $m
 				);
 			}
 		}
@@ -399,19 +400,19 @@ abstract class Client {
 			$req = df_zf_http_last_req($c); /** @var string $req */
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
 			$path = df_url_path($this->url()); /** @var string $path */
-			$ex = df_error_create(
+			$e2 = df_error_create(
 				(!$path ? 'A' : "A `{$path}`")
 				. " {$title} API request has failed"
 				. ($short ? ": «{$short}»" : ' without error messages') . ".\n"
 				. ($long === $short ? "Request:\n$req" : df_kv([
 					'The full error description' => $long, 'Request' => $req
 				]))
-			); /** @var DFE $ex */
+			); /** @var DFE $e2 */
 			if (!$this->_silent) {
-				df_log_l($m, $ex);
+				df_log_l($m, $e2);
 				df_sentry($m, $short, ['extra' => ['Request' => $req, 'Response' => $long]]);
 			}
-			throw $ex;
+			throw $e2;
 		}
 		return $r;
 	}

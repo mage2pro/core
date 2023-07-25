@@ -18,7 +18,10 @@ final class CronCommand {
 	function aroundRun(Sb $sb, \Closure $f, II $i, IO $o):int {
 		try {return $f($i, $o);}
 		catch (\Exception $e) {
-			df_log($e, $this);
+			# 2023-07-25
+			# I intentionally do not pass Cron errors to Sentry
+			# because I afraid that they could be too numerous in some third-party websites.
+			df_log_l($this, $e);
 			throw $e;
 		}
 	}

@@ -15,10 +15,12 @@
  * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
  * @used-by df_asset_name()
  * @used-by df_block_output()
+ * @used-by df_caller_module()
  * @used-by df_con()
  * @used-by df_fe_init()
  * @used-by df_js()
  * @used-by df_js_x()
+ * @used-by df_log()
  * @used-by df_module_dir()
  * @used-by df_module_enabled()
  * @used-by df_module_name_c()
