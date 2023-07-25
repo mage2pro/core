@@ -29,10 +29,11 @@ use Magento\Framework\DataObject as _DO;
  * @param _DO|mixed[]|mixed|E $v
  * @param string|object|null $m [optional]
  */
-function df_log($v, $m = null):void {
-	$m = $m ? df_module_name($m) : ($v instanceof E ? df_x_module($v) : df_caller_module());
-	df_log_l($m, $v);
-	df_sentry($m, $v);
+function df_log($v, $m = null, array $d = []):void {
+	$isE = $v instanceof E; /** @var bool $isE */
+	$m = $m ? df_module_name($m) : ($isE ? df_x_module($v) : df_caller_module());
+	df_log_l($m, ...($isE ? [$v, $d] : [!$d ? $v : (is_array($v) ? ['extra' => $d] + $v : (['message' => $v] + $d)), []]));
+	df_sentry($m, $v, $d);
 }
 
 /**
