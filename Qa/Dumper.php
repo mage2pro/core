@@ -11,7 +11,12 @@ final class Dumper {
 	);}
 
 	/** @used-by self::dump() */
-	private function dumpArray(array $a):string {return "[\n" . df_tab_multiline($this->dumpArrayElements($a)) . "\n]";}
+	private function dumpArray(array $a):string {return
+        # 2023-07-25
+        # "Return JSON from `\Df\Qa\Dumper::dumpArray()` for arrays without object elements":
+        # https://github.com/mage2pro/core/issues/252
+        !dfa_has_objects($a) ? df_json_encode($a) : "[\n" . df_tab_multiline($this->dumpArrayElements($a)) . "\n]"
+    ;}
 
 	/**
 	 * Эта функция имеет 2 отличия от @see print_r():

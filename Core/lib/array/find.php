@@ -14,6 +14,7 @@ use Df\Core\Exception as DFE;
  * @used-by df_oq_sa()
  * @used-by df_sales_email_sending()
  * @used-by df_starts_with()
+ * @used-by dfa_has_objects()
  * @used-by ikf_oi_pid()
  * @used-by mnr_recurring()
  * @used-by \Df\Framework\Plugin\View\Layout::afterIsCacheable()
