@@ -1,5 +1,6 @@
 <?php
 namespace Df\Qa;
+/** 2023-07-25 @todo Use YAML instead of JSON for `df_dump()` https://github.com/mage2pro/core/issues/254 */
 final class Dumper {
 	/**
 	 * @used-by df_dump()
