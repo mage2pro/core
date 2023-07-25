@@ -108,13 +108,20 @@ function df_caller_f(int $o = 0):string {return df_caller_entry(++$o)['function'
  * @used-by df_sentry_extra_f()
  */
 function df_caller_m(int $o = 0):string {
-	$bt = df_caller_entry(++$o); /** @var array(string => int) $bt */
-	$class = dfa($bt, 'class'); /** @var string $class */
-	if (!$class) {
-		df_log($m = "df_caller_m(): no class.\nbt is:\n$bt", __FUNCTION__); /** @var string $m */
-		df_error($m);
+	$e = df_caller_entry(++$o); /** @var array(string => int) $e */
+	foreach (['class', 'function'] as $k) { /** @var string $k */
+		if (!dfa($e, $k)) {
+			# 2023-07-26
+			# 1) «Array to string conversion in vendor/mage2pro/core/Core/lib/caller.php on line 114»
+			# https://github.com/mage2pro/core/issues/257
+			# 2) The pevious implementation seems to be never worked:
+			# https://github.com/mage2pro/core/tree/9.8.4/Core/lib/caller.php#L114
+			$m = "df_caller_m(): the «{$k}» key is absent.\nThe entry:\n" . df_dump($e); /** @var string $m */
+			df_log($m);
+			df_error($m);
+		}
 	}
-	return "$class::{$bt['function']}";
+	return df_cc_method($e);
 }
 
 /**

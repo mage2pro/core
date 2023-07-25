@@ -7,6 +7,7 @@ use Df\Qa\Dumper;
  * @see df_type()
  * @used-by df_assert_eq()
  * @used-by df_bool()
+ * @used-by df_caller_m()
  * @used-by df_extend()
  * @used-by df_log_l()
  * @used-by df_sentry()
