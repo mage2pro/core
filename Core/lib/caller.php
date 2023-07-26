@@ -1,5 +1,4 @@
 <?php
-use Closure as F;
 use Exception as E;
 
 /**
