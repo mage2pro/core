@@ -397,6 +397,7 @@ function df_xml_node(string $tag, array $attr = [], array $contents = []):X {
 }
 
 /**
+ * @used-by df_module_name_by_path()
  * @used-by df_xml_g()
  * @used-by df_xml_node()
  * @used-by df_xml_parse_a()
