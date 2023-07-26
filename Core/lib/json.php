@@ -174,6 +174,7 @@ function df_json_encode_partial($v):string {return df_json_encode($v, JSON_PARTI
 
 /**
  * 2022-10-15
+ * 2023-07-26 `df_json_file_read` should accept internal paths: https://github.com/mage2pro/core/issues/278
  * @used-by df_credentials()
  * @used-by df_module_json()
  * @used-by \Df\Payment\W\Reader::testData()
