@@ -76,10 +76,11 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 	}
 	if (!$suf) {
 		# 2023-07-26
-		# "If `df_log_l()` is called from a `*.phtml`,
+		# 1) "If `df_log_l()` is called from a `*.phtml`,
 		# then the `*.phtml`'s base name  should be used as the log file name suffix instead of `df_log_l`":
 		# https://github.com/mage2pro/core/issues/269
-		$entry = $e ? df_x_entry($e) : df_caller_entry(); /** @var array(string => string|int) $entry */
+		# 2) 2023-07-26 "Add the `$skip` optional parameter to `df_caller_entry()`": https://github.com/mage2pro/core/issues/281
+		$entry = $e ? df_x_entry($e) : df_caller_entry(0, null, ['df_log']); /** @var array(string => string|int) $entry */
 		$suf = df_bt_entry_is_phtml($entry) ? basename(df_bt_entry_file($entry)) : df_caller_f();
 	}
 	if (is_array($d)) {
