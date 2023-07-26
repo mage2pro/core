@@ -59,6 +59,7 @@ function df_path_is_internal(string $p):bool {return df_es($p) || df_starts_with
  * @used-by df_class_file()
  * @used-by df_explode_path()
  * @used-by df_file_name()
+ * @used-by df_path_abs()
  * @used-by df_path_is_internal()
  * @used-by df_path_relative()
  * @used-by df_product_image_url()

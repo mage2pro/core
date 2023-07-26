@@ -80,6 +80,7 @@ function df_cc_n(...$a):string {return df_ccc("\n", ...$a);}
  * @used-by df_img_resize()
  * @used-by df_js()
  * @used-by df_js_x()
+ * @used-by df_path_abs()
  * @used-by df_product_image_path2abs()
  * @used-by df_replace_store_code_in_url()
  * @used-by \Df\API\Client::url()
