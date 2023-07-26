@@ -60,8 +60,8 @@ function df_module_name_by_path(string $f):string {/** @var string $r */
 	}
 	else {
 		$p = df_cc_path('vendor', $a, 'etc/module.xml');
-		$pa = df_path_abs($p);
-		$x = df_xml_parse(df_contents($pa));
+		# 2023-07-26 "`df_contents()` should accept internal paths": https://github.com/mage2pro/core/issues/273
+		$x = df_xml_parse(df_contents($p));
 		$r = $x->{'module'}['name'];
 	}
 	return $r;
