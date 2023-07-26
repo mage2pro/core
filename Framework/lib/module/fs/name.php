@@ -55,7 +55,7 @@ function df_module_dir($m, string $type = ''):string {
 	else {
 		$r = df_framework_path();
 		# 2019-12-31 'Magento_Framework' is not a module, so it does not have subpaths specific for modules.
-		df_assert(!$type);
+		df_assert(!$type, "`Magento_Framework` is not a module, so it does not have subpaths specific for modules.");
 	}
 	return $r;
 }
