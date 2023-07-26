@@ -18,7 +18,6 @@
  * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
  * @used-by \Dfe\Salesforce\Test\Basic::t02_the_latest_version()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
- * @param string $f
  * @param Closure|bool|mixed $onE [optional]
  * @param ?resource $rs [optional]
  */
