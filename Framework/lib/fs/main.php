@@ -142,7 +142,7 @@ function df_fs_dl():DL {return df_o(DL::class);}
  * @used-by df_sys_path_abs()
  * @return DirectoryRead|IDirectoryRead
  */
-function df_fs_r(string $code) {return df_fs()->getDirectoryRead($code);}
+function df_fs_r(string $type) {return df_fs()->getDirectoryRead($type);}
 
 /**
  * 2020-06-16
