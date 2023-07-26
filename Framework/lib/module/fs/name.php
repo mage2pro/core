@@ -87,7 +87,7 @@ function df_module_file_name($m, string $name, string $ext = '', $onE = true):st
 /**
  * 2015-11-15
  * 2015-09-02
- * @uses df_module_dir() and indirectly called @see \Magento\Framework\Module\Dir\Reader::getModuleDir()
+ * @uses df_module_dir() and an indirectly called @see \Magento\Framework\Module\Dir\Reader::getModuleDir()
  * use `/` insteads @see DIRECTORY_SEPARATOR as the path separator, so I use `/` too.
  * 2016-11-17
  * $m could be:
