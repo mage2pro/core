@@ -76,21 +76,5 @@ function df_path_n_real(string $p):string {return str_replace(['\/', '\\', '/'],
  * @used-by \Df\Sentry\Trace::info()
  */
 function df_path_relative(string $p, string $type = DL::ROOT):string {return df_trim_text_left(
-	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_fs_r($type)->getAbsolutePath())
-);}
-
-/**
- * 2015-12-06 A @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() result ends with «/».
- * 2023-07-26
- * 1) "`df_path_absolute` → `df_sys_path_abs`": https://github.com/mage2pro/core/issues/272
- * 2) "`df_fs_r()` can not be used with an arbitrary path
- * because of `\Magento\Framework\Filesystem\DirectoryList::assertCode()`": https://github.com/mage2pro/core/issues/271
- * 3) "`df_path_absolute()` is wrongly implemented": https://github.com/mage2pro/core/issues/270
- * @used-by df_media_path_absolute()
- * @used-by df_product_image_tmp_path2abs()
- * @used-by df_product_images_path()
- * @used-by df_sync()
- */
-function df_sys_path_abs(string $p, string $suf = ''):string {return df_prepend(
-	df_trim_ds_left($suf), df_fs_r($p)->getAbsolutePath()
+	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_sys_reader($type)->getAbsolutePath())
 );}

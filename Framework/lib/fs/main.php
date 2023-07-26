@@ -1,9 +1,7 @@
 <?php
 use Magento\Framework\App\Filesystem\DirectoryList as DL;
 use Magento\Framework\Filesystem;
-use Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
 use Magento\Framework\Filesystem\Directory\ReadFactory as DirectoryReadFactory;
-use Magento\Framework\Filesystem\Directory\ReadInterface as IDirectoryRead;
 use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
 use Magento\Framework\Filesystem\Directory\WriteInterface as IDirectoryWrite;
 use Magento\Framework\Filesystem\File\Write as FileWrite;
@@ -113,7 +111,7 @@ function df_file_write($p, string $contents, bool $append = false):void {
 
 /**
  * 2015-11-29
- * @used-by df_fs_r()
+ * @used-by df_sys_reader()
  * @used-by df_fs_w()
  */
 function df_fs():Filesystem {return df_o(Filesystem::class);}
@@ -130,19 +128,6 @@ function df_fs_delete(string $p):void {File::rmdirRecursive(df_param_sne($p, 0))
  * @used-by df_mkdir_log()
  */
 function df_fs_dl():DL {return df_o(DL::class);}
-
-/**
- * 2015-11-30
- * 2023-07-26
- * "`df_fs_r()` can not be used with an arbitrary path
- *  because of `\Magento\Framework\Filesystem\DirectoryList::assertCode()`": https://github.com/mage2pro/core/issues/271
- * @see \Magento\Framework\Filesystem\DirectoryList::assertCode()
- * @used-by df_media_reader()
- * @used-by df_path_relative()
- * @used-by df_sys_path_abs()
- * @return DirectoryRead|IDirectoryRead
- */
-function df_fs_r(string $type) {return df_fs()->getDirectoryRead($type);}
 
 /**
  * 2020-06-16

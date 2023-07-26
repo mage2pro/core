@@ -79,7 +79,7 @@ function df_media_path_relative(string $p):string {return df_path_relative($p, D
  * 2020-12-13 @deprecated It is unused.
  * @return R|IR
  */
-function df_media_reader() {return df_fs_r(DL::MEDIA);}
+function df_media_reader() {return df_sys_reader(DL::MEDIA);}
 
 /**
  * 2015-12-01 https://mage2.pro/t/153
