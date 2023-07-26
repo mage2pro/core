@@ -42,6 +42,31 @@ function df_module_name($c = null, string $d = '_'):string {return dfcf(
 	,[$c ? df_cts($c) : 'Df\Core', $d]
 );}
 
+
+/**
+ * 2023-07-26
+ * @used-by df_caller_module()
+ */
+function df_module_name_by_path(string $f):string {/** @var string $r */
+	$f = df_path_relative($f);
+	$f2 = df_trim_text_left($f, ['app/code/', 'vendor/']);
+	$err = "Unable to detect the module for the file: `$f`"; /** @var string $err */
+	df_assert_ne($f, $f2, $err);
+	$isVendor = df_starts_with($f, 'vendor'); /** @var bool $isVendor */
+	$a = array_slice(df_explode_xpath($f2), 0, 2); /** @var string[] $a */
+	df_assert_eq(2, count($a), $err);
+	if (!$isVendor) {
+		$r = implode('_', $a);
+	}
+	else {
+		$p = df_cc_path('vendor', $a, 'etc/module.xml');
+		$pa = df_path_absolute($p);
+		$x = df_xml_parse(df_file_read($pa));
+		$r = $x->{'module'}['name'];
+	}
+	return $r;
+}
+
 /**
  * 2017-01-04
  * 		$c could be:

@@ -17,9 +17,10 @@ function df_caller_c(int $o = 0):string {return df_first(df_explode_method(df_ca
  * @used-by df_log_l()
  * @used-by \Df\Framework\Log\Dispatcher::handle()
  * @param E|int|null|array(array(string => string|int)) $p [optional]
+ * @param callable|null $f [optional]
  * @return array(string => string|int)
  */
-function df_caller_entry($p = 0, F $predicate = null):array {
+function df_caller_entry($p = 0, $f = null):array {
 	/**
 	 * 2018-04-24
 	 * I do not understand why did I use `2 + $offset` here before.
@@ -40,12 +41,12 @@ function df_caller_entry($p = 0, F $predicate = null):array {
 	 */
 	$bt = df_bt(df_bt_inc($p)); /** @var array(int => array(string => mixed)) $bt */
 	while ($r = array_shift($bt)) {/** @var array(string => string|int)|null $r */
-		$f = $r['function']; /** @var string $f */
+		$f2 = $r['function']; /** @var string $f2 */
 		# 2017-03-28
 		# Надо использовать именно df_contains(),
 		# потому что PHP 7 возвращает просто строку «{closure}», а PHP 5.6 и HHVM — «A::{closure}»: https://3v4l.org/lHmqk
 		# 2020-09-24 I added "unknown" to evaluate expressions in IntelliJ IDEA's with xDebug.
-		if (!df_contains($f, '{closure}') && !in_array($f, ['dfc', 'dfcf', 'unknown']) && (!$predicate || $predicate($r))) {
+		if (!df_contains($f2, '{closure}') && !in_array($f2, ['dfc', 'dfcf', 'unknown']) && (!$f || call_user_func($f, $r))) {
 			break;
 		}
 	}
@@ -116,12 +117,12 @@ function df_caller_f(int $o = 0):string {return df_caller_entry(++$o)['function'
  * @used-by df_prop()
  * @used-by df_sentry_extra_f()
  */
-function df_caller_m(int $o = 0):string {return df_cc_method(df_assert(df_caller_entry(++$o, function(array $e):bool {return
+function df_caller_m(int $o = 0):string {return df_cc_method(df_assert(df_caller_entry(++$o,
 	# 2023-07-26
 	# "«The required key «class» is absent» is `df_log()` is called from `*.phtml`":
 	# https://github.com/mage2pro/core/issues/259
-	dfa_has_keys($e, ['class', 'function'])
-;})));}
+	'df_bt_entry_is_method' /** @uses df_bt_entry_is_method() */
+)));}
 
 /**
  * 2016-08-29
@@ -139,9 +140,26 @@ function df_caller_ml(int $o = 0):string {return df_caller_m(++$o) . '()';}
 
 /**
  * 2023-07-25
+ * 2023-07-26
+ * The previous implementation:
+ * 		return df_module_name(df_caller_c(++$o))
+ * https://github.com/mage2pro/core/blob/9.9.5/Core/lib/caller.php#L147
  * @used-by df_log()
  * @used-by df_log_l()
  * @used-by df_sentry()
  * @used-by df_sentry_m()
  */
-function df_caller_module(int $o = 0):string {return df_module_name(df_caller_c(++$o));}
+function df_caller_module(int $o = 0):string {
+	$e = df_assert(df_caller_entry(++$o, function(array $e):bool {return
+		# 2023-07-26
+		# "«The required key «class» is absent» is `df_log()` is called from `*.phtml`":
+		# https://github.com/mage2pro/core/issues/259
+		df_bt_entry_is_method($e)
+		# 2023-07-26
+		# "If `df_log()` is called from a `*.phtml`,
+		# then the `*.phtml`'s module should be used as the log source instead of `Magento_Framework`":
+		# https://github.com/mage2pro/core/issues/268
+		|| df_bt_entry_is_phtml($e)
+	;}));
+	return df_bt_entry_is_method($e) ? df_module_name(df_cc_method($e)) : df_module_name_by_path($e['file']);
+}
