@@ -140,6 +140,7 @@ function df_trim_text_a(string $s, array $trimA, callable $f):string {
  * @used-by df_magento_version()
  * @used-by df_magento_version_remote()
  * @used-by df_media_url2path()
+ * @used-by df_module_name_by_path()
  * @used-by df_oqi_amount()
  * @used-by df_path_relative()
  * @used-by df_product_image_path2rel()
