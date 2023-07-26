@@ -17,5 +17,6 @@ function df_bt_entry_is_method(array $e):bool {return dfa_has_keys($e, ['class',
  * 2023-07-26
  * @see dfa()
  * @used-by df_caller_module()
+ * @used-by df_log_l()
  */
 function df_bt_entry_is_phtml(array $e):bool {return df_ends_with(df_bt_entry_file($e), '.phtml');}
