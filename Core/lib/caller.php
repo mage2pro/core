@@ -105,22 +105,23 @@ function df_caller_f(int $o = 0):string {return df_caller_entry(++$o)['function'
  * 2017-03-28
  * The df_caller_mm() implementation: https://github.com/mage2pro/core/blob/6.7.3/Core/lib/caller.php#L155-L169
  * 2020-07-08 The function's new implementation is from the previous df_caller_mm() function.
+ * 2023-07-26
+ * 1) «Array to string conversion in vendor/mage2pro/core/Core/lib/caller.php on line 114»
+ * https://github.com/mage2pro/core/issues/257
+ * 2) The pevious error handling never worked correctly:
+ * https://github.com/mage2pro/core/tree/9.8.4/Core/lib/caller.php#L114
  * @used-by df_cache_get_simple()
  * @used-by df_caller_c()
  * @used-by df_caller_ml()
  * @used-by df_prop()
  * @used-by df_sentry_extra_f()
  */
-function df_caller_m(int $o = 0):string {
-	$e = df_caller_entry(++$o); /** @var array(string => int) $e */
+function df_caller_m(int $o = 0):string {return df_cc_method(df_assert(df_caller_entry(++$o, function(array $e):bool {return
 	# 2023-07-26
-	# 1) «Array to string conversion in vendor/mage2pro/core/Core/lib/caller.php on line 114»
-	# https://github.com/mage2pro/core/issues/257
-	# 2) The pevious implementation seems to be never worked:
-	# https://github.com/mage2pro/core/tree/9.8.4/Core/lib/caller.php#L114
-	dfa_assert_keys($e, ['class', 'function']);
-	return df_cc_method($e);
-}
+	# "«The required key «class» is absent» is `df_log()` is called from `*.phtml`":
+	# https://github.com/mage2pro/core/issues/259
+	dfa_has_keys($e, ['class', 'function'])
+;})));}
 
 /**
  * 2016-08-29
