@@ -33,6 +33,17 @@ function df_adjust_paths_in_message(string $m):string {
 }
 
 /**
+ * 2023-07-25 "`df_path_absolute()` is wrongly implemented": https://github.com/mage2pro/core/issues/270
+ * @see df_sys_path_abs()
+ */
+function df_path_abs(string $p):string {
+	$bp = df_path_n(BP);
+	$p = df_path_n($p);
+	/** 2023-07-26 Similar to @see df_prepend() */
+	return df_starts_with($p, $bp) ? $p : df_cc_path($bp, df_trim_ds_left($p));
+}
+
+/**
  * 2017-05-08
  * @used-by \Df\Framework\Plugin\Session\SessionManager::beforeStart()
  * @used-by \Df\Sentry\Trace::info()

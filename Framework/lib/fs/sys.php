@@ -9,6 +9,7 @@ use Magento\Framework\Filesystem\Directory\ReadInterface as IDirectoryRead;
  * 2) "`df_sys_reader()` can not be used with an arbitrary path
  * because of `\Magento\Framework\Filesystem\DirectoryList::assertCode()`": https://github.com/mage2pro/core/issues/271
  * 3) "`df_path_absolute()` is wrongly implemented": https://github.com/mage2pro/core/issues/270
+ * @see df_path_abs()
  * @used-by df_media_path_absolute()
  * @used-by df_product_image_tmp_path2abs()
  * @used-by df_product_images_path()
