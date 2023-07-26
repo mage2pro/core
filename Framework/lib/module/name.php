@@ -45,6 +45,9 @@ function df_module_name($c = null, string $d = '_'):string {return dfcf(
 
 /**
  * 2023-07-26
+ * "If `df_log()` is called from a `*.phtml`,
+ * then the `*.phtml`'s module should be used as the log source instead of `Magento_Framework`":
+ * https://github.com/mage2pro/core/issues/268
  * @used-by df_caller_module()
  */
 function df_module_name_by_path(string $f):string {/** @var string $r */
