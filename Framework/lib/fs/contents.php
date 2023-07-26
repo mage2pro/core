@@ -1,14 +1,21 @@
 <?php
 /**
  * 2022-11-24
- * @used-by df_file_read()
+ * 2023-07-26 "Unify `df_contents` and `df_file_read`": https://github.com/mage2pro/core/issues/275
  * @used-by df_http_get()
  * @used-by df_intl_dic_write()
+ * @used-by df_json_file_read()
+ * @used-by df_magento_version_remote()
  * @used-by df_module_enum()
+ * @used-by df_module_name_by_path()
+ * @used-by df_package()
  * @used-by df_request_body()
  * @used-by df_test_file_l()
+ * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
+ * @used-by \Dfe\Color\Image::dominant()
  * @used-by \Dfe\GoogleFont\Font\Variant::ttfPath()
  * @used-by \Dfe\GoogleFont\Fonts\Png::contents()
+ * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
  * @used-by \Dfe\Salesforce\Test\Basic::t02_the_latest_version()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
  * @param string $f
@@ -42,14 +49,3 @@ function df_contents(string $f, $onE = true, $rs = null):string {return df_try(
 		'Unable to read the %s «%s».', df_check_url($f) ? 'URL' : 'file', $f
 	);}
 );}
-
-/**
- * 2022-10-14
- * @used-by df_json_file_read()
- * @used-by df_magento_version_remote()
- * @used-by df_package()
- * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
- * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
- * @used-by \Dfe\Color\Image::dominant()
- */
-function df_file_read(string $p, bool $req = true):string {return df_contents($p, $req ?: '');}

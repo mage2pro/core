@@ -182,7 +182,7 @@ function df_json_encode_partial($v):string {return df_json_encode($v, JSON_PARTI
  * @return array|bool|mixed|null
  * @throws DFE
  */
-function df_json_file_read(string $p) {return df_json_decode(df_file_read($p));}
+function df_json_file_read(string $p) {return df_json_decode(df_contents($p));}
 
 /**
  * 2017-07-05
