@@ -1,6 +1,7 @@
 <?php
 /**
  * 2023-07-26 "Implement `df_bt_entry_file()`": https://github.com/mage2pro/core/issues/279
+ * @used-by df_log_l()
  * @used-by df_bt_entry_is_phtml()
  */
 function df_bt_entry_file(array $e):string {return $e['file'];}

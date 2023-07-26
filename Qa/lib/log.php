@@ -80,7 +80,7 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 		# then the `*.phtml`'s base name  should be used as the log file name suffix instead of `df_log_l`":
 		# https://github.com/mage2pro/core/issues/269
 		$entry = $e ? df_x_entry($e) : df_caller_entry(); /** @var array(string => string|int) $entry */
-		$suf = df_bt_entry_is_phtml($entry) ? basename($entry['file']) : df_caller_f();
+		$suf = df_bt_entry_is_phtml($entry) ? basename(df_bt_entry_file($entry)) : df_caller_f();
 	}
 	if (is_array($d)) {
 		$d = df_extend($d, ['Mage2.PRO' => df_context()]);
