@@ -42,3 +42,14 @@ function df_contents(string $f, $onE = true, $rs = null):string {return df_try(
 		'Unable to read the %s «%s».', df_check_url($f) ? 'URL' : 'file', $f
 	);}
 );}
+
+/**
+ * 2022-10-14
+ * @used-by df_json_file_read()
+ * @used-by df_magento_version_remote()
+ * @used-by df_package()
+ * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
+ * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
+ * @used-by \Dfe\Color\Image::dominant()
+ */
+function df_file_read(string $p, bool $req = true):string {return df_contents($p, $req ?: '');}

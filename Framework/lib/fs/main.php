@@ -18,17 +18,6 @@ use Magento\Framework\Filesystem\Io\Sftp;
 function df_file():File {return df_o(File::class);}
 
 /**
- * 2022-10-14
- * @used-by df_json_file_read()
- * @used-by df_magento_version_remote()
- * @used-by df_package()
- * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
- * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
- * @used-by \Dfe\Color\Image::dominant()
- */
-function df_file_read(string $p, bool $req = true):string {return df_contents($p, $req ?: '');}
-
-/**
  * 2015-11-29
  * 2015-11-30
  * @see \Magento\Framework\Filesystem\Directory\Write::openFile() creates the parent directories automatically:
