@@ -34,9 +34,8 @@ final class Trace {
 			 * @see \Df\Qa\Trace::__construct()
 			 * @see \Df\Qa\Trace\Frame::filePath()
 			 */
-			if (array_key_exists('file', $frame)) {
-				$context = self::code((string)$frame['file'], (int)$frame['line']);
-				$file = $frame['file'];
+			if ($file = df_bt_entry_file($frame)) {
+				$context = self::code($file, (int)$frame['line']);
 			}
 			else {
 				$file = '';

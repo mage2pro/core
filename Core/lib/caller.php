@@ -160,5 +160,5 @@ function df_caller_module(int $o = 0):string {
 		# https://github.com/mage2pro/core/issues/268
 		|| df_bt_entry_is_phtml($e)
 	;}));
-	return df_bt_entry_is_method($e) ? df_module_name(df_cc_method($e)) : df_module_name_by_path($e['file']);
+	return df_bt_entry_is_method($e) ? df_module_name(df_cc_method($e)) : df_module_name_by_path(df_bt_entry_file($e));
 }
