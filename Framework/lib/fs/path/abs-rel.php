@@ -35,6 +35,8 @@ function df_adjust_paths_in_message(string $m):string {
 /**
  * 2023-07-25 "`df_path_absolute()` is wrongly implemented": https://github.com/mage2pro/core/issues/270
  * @see df_sys_path_abs()
+ * @used-by df_contents()
+ * @used-by df_module_name_by_path()
  */
 function df_path_abs(string $p):string {
 	$bp = df_path_n(BP);
