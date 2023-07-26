@@ -79,7 +79,7 @@ function df_eta($v):array {
 function df_etn($v) {return $v ?: null;}
 
 /**
- * 2023-07-26
+ * 2023-07-26 "Implement `df_ets()`": https://github.com/mage2pro/core/issues/280
  * @used-by df_log_l()
  * @param mixed $v
  * @return mixed|string
