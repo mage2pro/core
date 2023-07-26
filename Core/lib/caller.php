@@ -10,6 +10,7 @@ function df_caller_c(int $o = 0):string {return df_first(df_explode_method(df_ca
 
 /**
  * 2017-03-28 If the function is called from a closure, then it will go up through the stask until it leaves all closures.
+ * 2023-07-26 "Add the `$skip` optional parameter to `df_caller_entry()`": https://github.com/mage2pro/core/issues/281
  * @used-by df_caller_f()
  * @used-by df_caller_m()
  * @used-by df_caller_module()
@@ -19,7 +20,7 @@ function df_caller_c(int $o = 0):string {return df_first(df_explode_method(df_ca
  * @param callable|null $f [optional]
  * @return array(string => string|int)
  */
-function df_caller_entry($p = 0, $f = null):array {
+function df_caller_entry($p = 0, $f = null, array $skip = []):array {
 	/**
 	 * 2018-04-24
 	 * I do not understand why did I use `2 + $offset` here before.
@@ -45,7 +46,12 @@ function df_caller_entry($p = 0, $f = null):array {
 		# Надо использовать именно df_contains(),
 		# потому что PHP 7 возвращает просто строку «{closure}», а PHP 5.6 и HHVM — «A::{closure}»: https://3v4l.org/lHmqk
 		# 2020-09-24 I added "unknown" to evaluate expressions in IntelliJ IDEA's with xDebug.
-		if (!df_contains($f2, '{closure}') && !in_array($f2, ['dfc', 'dfcf', 'unknown']) && (!$f || call_user_func($f, $r))) {
+		if (
+			!df_contains($f2, '{closure}')
+			# 2023-07-26 "Add the `$skip` optional parameter to `df_caller_entry()`": https://github.com/mage2pro/core/issues/281
+			&& !in_array($f2, array_merge(['dfc', 'dfcf', 'unknown'], $skip))
+			&& (!$f || call_user_func($f, $r))
+		) {
 			break;
 		}
 	}
@@ -149,7 +155,9 @@ function df_caller_ml(int $o = 0):string {return df_caller_m(++$o) . '()';}
  * @used-by df_sentry_m()
  */
 function df_caller_module(int $o = 0):string {
-	$e = df_assert(df_caller_entry(++$o, function(array $e):bool {return
+	$e = df_assert(df_caller_entry(++$o, function(array $e):bool {
+		xdebug_break();
+		return
 		# 2023-07-26
 		# "«The required key «class» is absent» is `df_log()` is called from `*.phtml`":
 		# https://github.com/mage2pro/core/issues/259
