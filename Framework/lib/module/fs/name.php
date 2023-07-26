@@ -70,16 +70,19 @@ function df_module_dir($m, string $type = ''):string {
  * 		2) a class name: «A\B\C».
  * 		3) an object: it comes down to the case 2 via @see get_class()
  * 		4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 2023-07-26
+ * `df_sentry_m()` fails: «`Magento_Framework` is not a module, so it does not have subpaths specific for modules»:
+ * https://github.com/mage2pro/core/issues/267
  * @used-by df_module_file_read()
  * @param string|object|null $m
  * @param F|bool|mixed $onE [optional]
  */
-function df_module_file_name($m, string $name, string $ext = '', $onE = true):string {
-	$r = df_module_path_etc($m, df_file_ext_add($name, $ext));
-	return df_fts(df_try(
-		function() use($r):string {df_assert(file_exists($r), "The required file «{$r}» is absent."); return $r;}, $onE
-	));
-}
+function df_module_file_name($m, string $name, string $ext = '', $onE = true):string {return df_fts(df_try(
+	function() use($m, $name, $ext):string {
+		$r = df_module_path_etc($m, df_file_ext_add($name, $ext));
+		df_assert(file_exists($r), "The required file «{$r}» is absent."); return $r;
+	}, $onE
+));}
 
 /**
  * 2015-11-15
