@@ -79,6 +79,14 @@ function df_eta($v):array {
 function df_etn($v) {return $v ?: null;}
 
 /**
+ * 2023-07-26
+ * @used-by df_log_l()
+ * @param mixed $v
+ * @return mixed|string
+ */
+function df_ets($v) {return $v ?: '';}
+
+/**
  * @used-by df_fetch_one()
  * @used-by df_parent_name()
  * @used-by \Df\Xml\X::descend()

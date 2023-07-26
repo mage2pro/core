@@ -64,7 +64,7 @@ function df_log($v, $m = null, array $d = []):void {
  */
 function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string $suf */ /** @var string $pref */
-	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, ''] : [null, $p2, $p3, $p4];
+	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, ''] : [null, $p2, df_ets($p3), $p4];
 	if (!$m) {
 		if (!$e) {
 			$m = df_caller_module();
