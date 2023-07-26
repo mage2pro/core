@@ -38,7 +38,7 @@ function df_product_image_path2rel(string $abs):string {return df_trim_text_left
  * @used-by \TFC\Image\Command\C1::images()
  * @used-by \TFC\Image\Command\C3::p()
  */
-function df_product_images_path():string {return df_path_absolute(DL::MEDIA, 'catalog/product');}
+function df_product_images_path():string {return df_sys_path_abs(DL::MEDIA, 'catalog/product');}
 
 /**
  * 2020-11-22 «pub/media/catalog/product»
@@ -51,6 +51,6 @@ function df_product_images_path_rel():string {return dfcf(function() {return df_
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @see df_media_path_absolute()
  */
-function df_product_image_tmp_path2abs(string $rel):string {return df_path_absolute(
+function df_product_image_tmp_path2abs(string $rel):string {return df_sys_path_abs(
 	DL::MEDIA, 'tmp/catalog/product/' . df_trim_ds_left($rel)
 );}

@@ -64,7 +64,7 @@ function df_pad0(int $length, string $number):string {return str_pad($number, $l
 
 /**
  * 2016-03-08 It adds the $head prefix to the $s string if the prefix is absent in $s.
- * @used-by df_path_absolute()
+ * @used-by df_sys_path_abs()
  * @used-by ikf_ite()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetElementHtml()
  */

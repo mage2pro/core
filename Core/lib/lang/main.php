@@ -63,7 +63,7 @@ function df_nop($v) {return $v;}
 function df_sync($id, callable $job, float $interval = 0.1) { /** @var mixed $r */
 	$intervalI = round(1000000 * $interval); /** @var int $intervalI */
 	$nameShort = 'df-core-sync-' . md5(is_object($id) ? get_class($id) : $id) . '.lock'; /** @var string $nameShort */
-	$name = df_path_absolute(DirectoryList::TMP, $nameShort); /** @var string $name */
+	$name = df_sys_path_abs(DirectoryList::TMP, $nameShort); /** @var string $name */
 	while(file_exists($name)) {
 		usleep($intervalI);
 	}

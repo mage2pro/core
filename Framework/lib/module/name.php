@@ -60,7 +60,7 @@ function df_module_name_by_path(string $f):string {/** @var string $r */
 	}
 	else {
 		$p = df_cc_path('vendor', $a, 'etc/module.xml');
-		$pa = df_path_absolute($p);
+		$pa = df_sys_path_abs($p);
 		$x = df_xml_parse(df_file_read($pa));
 		$r = $x->{'module'}['name'];
 	}

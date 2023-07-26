@@ -35,10 +35,11 @@ function df_adjust_paths_in_message(string $m):string {
 /**
  * 2015-12-06 A @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() result ends with «/».
  * @used-by df_media_path_absolute()
+ * @used-by df_product_image_tmp_path2abs()
  * @used-by df_product_images_path()
  * @used-by df_sync()
  */
-function df_path_absolute(string $p, string $suf = ''):string {return df_prepend(
+function df_sys_path_abs(string $p, string $suf = ''):string {return df_prepend(
 	df_trim_ds_left($suf), df_fs_r($p)->getAbsolutePath()
 );}
 

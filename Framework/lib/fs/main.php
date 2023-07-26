@@ -134,7 +134,7 @@ function df_fs_dl():DL {return df_o(DL::class);}
 /**
  * 2015-11-30
  * @used-by df_media_reader()
- * @used-by df_path_absolute()
+ * @used-by df_sys_path_abs()
  * @used-by df_path_relative()
  * @return DirectoryRead|IDirectoryRead
  */

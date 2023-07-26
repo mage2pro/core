@@ -66,7 +66,7 @@ function df_img_resize(string $f, $w = null, $h = null):string {
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_product_image_path2abs()
  */
-function df_media_path_absolute(string $p = ''):string {return df_path_absolute(DL::MEDIA, $p);}
+function df_media_path_absolute(string $p = ''):string {return df_sys_path_abs(DL::MEDIA, $p);}
 
 /**
  * 2015-11-30 Левый «/» мы убираем.
