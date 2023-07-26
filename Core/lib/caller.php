@@ -5,7 +5,6 @@ use Exception as E;
 /**
  * 2017-11-19
  * @used-by df_abstract()
- * @used-by df_caller_module()
  * @used-by df_sentry_ext_f()
  */
 function df_caller_c(int $o = 0):string {return df_first(df_explode_method(df_caller_m(++$o)));}
