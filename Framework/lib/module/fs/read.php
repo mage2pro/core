@@ -54,7 +54,13 @@ function df_module_enum($m, string $name, $onE = true):array {return df_module_f
  * @return array(string => mixed)
  */
 function df_module_file_read($m, string $name, string $ext, F $parser, $onE = true):array {return dfcf(
-	function($m, string $name, string $ext, F $parser, $onE = true):array {
+	# 2023-07-26
+	# 1) The previous code was $onE = true:
+	# https://github.com/mage2pro/core/blob/9.9.4/Framework/lib/module/fs/read.php#L57
+	# 2) It led to the error:
+	# `df_sentry_m()` fails: «`Magento_Framework` is not a module, so it does not have subpaths specific for modules»:
+	# https://github.com/mage2pro/core/issues/267
+	function($m, string $name, string $ext, F $parser, $onE):array {
 		$f = df_module_file_name($m, $name, $ext, $onE);
 		return !$f ? [] : $parser($f);
 	}, func_get_args()
@@ -83,6 +89,6 @@ function df_module_file_read($m, string $name, string $ext, F $parser, $onE = tr
  * @param F|bool|mixed $onE [optional]
  * @return array(string => mixed)
  */
-function df_module_json($m, string $name, $onE = true):array {return df_module_file_read($m, $name, 'json',
-	function(string $f):array {return df_json_file_read($f);}, $onE
+function df_module_json($m, string $name, $onE = true):array {return df_module_file_read(
+	$m, $name, 'json', function(string $f):array {return df_json_file_read($f);}, $onE
 );}
