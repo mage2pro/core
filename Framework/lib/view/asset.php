@@ -25,7 +25,7 @@ function df_asset():Repository {return df_o(Repository::class);}
  * @used-by \Dfe\Moip\ConfigProvider::config()
  * @return IAsset|File|Remote
  */
-function df_asset_create(string $u):IAsset {$a = df_asset(); return !df_check_url_absolute($u)
+function df_asset_create(string $u):IAsset {$a = df_asset(); return !df_is_url_absolute($u)
 	? $a->createAsset($u)
 	: $a->createRemoteAsset($u, dfa(['css' => 'text/css', 'js' => 'application/javascript'], df_file_ext($u)))
 ;}

@@ -32,7 +32,7 @@ function df_url_base(string $u):string {return df_first(df_url_bp($u));}
  */
 function df_url_bp(string $u):array {
 	/** @var string $base */ /** @var string $path */
-	if (!df_check_url($u)) {
+	if (!df_is_url($u)) {
 		# 2020-03-02, 2022-10-31
 		# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 		#		[$a, $b] = [1, 2];

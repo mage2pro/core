@@ -23,7 +23,7 @@
  */
 function df_contents(string $f, $onE = true, $rs = null):string {
 	# 2023-07-26 "`df_contents()` should accept internal paths": https://github.com/mage2pro/core/issues/273
-	if (!df_check_url($f)) {
+	if (!df_is_url($f)) {
 		$f = df_path_abs($f);
 	}
 	return df_try(
@@ -50,7 +50,7 @@ function df_contents(string $f, $onE = true, $rs = null):string {
 		 */
 		function() use ($f, $rs):string {return df_assert_ne(false, @file_get_contents($f, false, $rs));}
 		,true !== $onE ? $onE : function() use ($f) {df_error(
-			'Unable to read the %s «%s».', df_check_url($f) ? 'URL' : 'file', $f
+			'Unable to read the %s «%s».', df_is_url($f) ? 'URL' : 'file', $f
 		);}
 	);
 }
