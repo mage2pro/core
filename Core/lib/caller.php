@@ -155,9 +155,7 @@ function df_caller_ml(int $o = 0):string {return df_caller_m(++$o) . '()';}
  * @used-by df_sentry_m()
  */
 function df_caller_module(int $o = 0):string {
-	$e = df_assert(df_caller_entry(++$o, function(array $e):bool {
-		xdebug_break();
-		return
+	$e = df_assert(df_caller_entry(++$o, function(array $e):bool {return
 		# 2023-07-26
 		# "«The required key «class» is absent» is `df_log()` is called from `*.phtml`":
 		# https://github.com/mage2pro/core/issues/259
