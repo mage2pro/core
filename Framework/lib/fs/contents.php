@@ -24,7 +24,7 @@
 function df_contents(string $f, $onE = true, $rs = null):string {
 	# 2023-07-26
 	# 1) "`df_contents()` should accept internal paths": https://github.com/mage2pro/core/issues/273
-	# 2) df_is_url('php://input') returns 'true':
+	# 2) df_is_url('php://input') returns `true`:
 	# https://github.com/mage2pro/core/issues/277
 	# https://3v4l.org/mTt87
 	if (!df_is_url($f)) {
