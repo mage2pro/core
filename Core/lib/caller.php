@@ -38,8 +38,12 @@ function df_caller_entry($p = 0, $f = null, array $skip = []):array {
 	 * 1) "`df_caller_entry()` detects the current entry incorrectly": https://github.com/mage2pro/core/issues/260
 	 * 2) We do not need `2 + $offset` anymore because the current implementation of @uses df_bt() already uses `1 + $p`.
 	 * So I changed `df_bt(df_bt_inc($p, 2))` to `df_bt(df_bt_inc($p))`
+	 * 2023-07-27
+	 * We really need `2 + $offset`.
+	 * 1) The first entry in df_bt() is the caller of df_bt(). It is `df_caller_entry` in our case.
+	 * 2) The second entry in df_bt() is the caller of `df_caller_entry`. It should be skipped too.
 	 */
-	$bt = df_bt(df_bt_inc($p)); /** @var array(int => array(string => mixed)) $bt */
+	$bt = df_bt(df_bt_inc($p, 2)); /** @var array(int => array(string => mixed)) $bt */
 	while ($r = array_shift($bt)) {/** @var array(string => string|int)|null $r */
 		$f2 = $r['function']; /** @var string $f2 */
 		# 2017-03-28
