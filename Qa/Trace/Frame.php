@@ -92,31 +92,39 @@ final class Frame extends \Df\Core\O {
 	 */
 	function url():string {return dfc($this, function():string {
 		$r = ''; /** @var string $r */
-		if (df_starts_with($p = $this->file(), 'vendor/magento/')) {/** @var string $p */
-			$pa = df_slice(df_explode_path($p), 2); /** @var string[] $pa */
+		$pa = df_explode_path($this->file()); /** @var string[] $pa */
+		if ('vendor' === array_shift($pa)) {
+			$vendor = array_shift($pa); /** @var string $vendor */
 			$m = array_shift($pa); /** @var string $m */
+			$url = function(string $rep, string $v, string $prefix = '') use($pa):string {return
+				df_cc_path("https://github.com/$rep/tree/$v", $prefix, $pa)
+				. (!($l = $this->line()) ? '' : "#L$l")
+			;};
+			# 2023-07-27
+			# 1Add GitHub links to backtrace frames related to the `mage2pro/core` repository":
+			# https://github.com/mage2pro/core/issues/287
+			if ('mage2pro' === $vendor && 'core' === $m) {
+				$r = $url('mage2pro/core', df_core_version());
+			}
 			# 2023-07-27
 			# 1) "Add GitHub links to backtrace frames related to the `magento/magento2` repository"
 			# https://github.com/mage2pro/core/issues/286
 			# 2) @TODO "Add GitHub links to backtrace frames related to the `mage2pro/core` repository":
 			# https://github.com/mage2pro/core/issues/287
-			/** @var string $pResult */
-			if ('framework' === $m) {
-				$pResult = 'lib/internal/Magento/Framework';
+			elseif ('magento' === $vendor) {
+				/** @var string $prefix */
+				if ('framework' === $m) {
+					$prefix = 'lib/internal/Magento/Framework';
+				}
+				else {
+					$ma = explode('-', $m); /** @var string[] $ma */
+					df_assert(df_starts_with($m, 'module-'));
+					df_assert_eq('module', array_shift($ma));
+					$m = implode(df_ucfirst($ma));
+					$prefix = "app/code/Magento/$m";
+				}
+				$r = $url('magento/magento2', df_magento_version(), $prefix);
 			}
-			else {
-				$ma = explode('-', $m); /** @var string[] $ma */
-				df_assert(df_starts_with($m, 'module-'));
-				df_assert_eq('module', array_shift($ma));
-				$m = implode(df_ucfirst($ma));
-				$pResult = "app/code/Magento/$m";
-			}
-			$r = df_cc_path(
-				'https://github.com/magento/magento2/tree'
-				,df_magento_version()
-				,$pResult
-				,$pa
-			) . (!($l = $this->line()) ? '' : "#L$l");
 		}
 		return $r;
 	});}

@@ -6,6 +6,7 @@ use Magento\Framework\Config\Composer\Package;
  * @used-by df_context()
  * @used-by df_sentry()
  * @used-by df_sentry_m()
+ * @used-by \Df\Qa\Trace\Frame::url()
  * @used-by \Df\Sentry\Client::__construct()
  * @used-by \Df\Sentry\Client::getUserAgent()
  * @used-by \Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
