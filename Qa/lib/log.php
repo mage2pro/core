@@ -81,7 +81,7 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 		# https://github.com/mage2pro/core/issues/269
 		# 2) 2023-07-26 "Add the `$skip` optional parameter to `df_caller_entry()`": https://github.com/mage2pro/core/issues/281
 		$entry = $e ? df_x_entry($e) : df_caller_entry(0, null, ['df_log']); /** @var array(string => string|int) $entry */
-		$suf = df_bt_entry_is_phtml($entry) ? basename(df_bt_entry_file($entry)) : df_caller_f();
+		$suf = df_bt_entry_is_phtml($entry) ? basename(df_bt_entry_file($entry)) : df_bt_entry_func($entry);
 	}
 	df_report(
 		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m, $pref), '{date}--{time}'), $suf) .  '.log'

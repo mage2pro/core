@@ -44,6 +44,7 @@ function df_caller_entry($p = 0, $f = null, array $skip = []):array {
 	 * 2) The second entry in df_bt() is the caller of `df_caller_entry`. It should be skipped too.
 	 */
 	$bt = df_bt(df_bt_inc($p, 2)); /** @var array(int => array(string => mixed)) $bt */
+	$skip = array_merge($skip, ['dfc', 'dfcf', 'unknown']);
 	while ($r = array_shift($bt)) {/** @var array(string => string|int)|null $r */
 		$f2 = $r['function']; /** @var string $f2 */
 		# 2017-03-28
@@ -53,7 +54,7 @@ function df_caller_entry($p = 0, $f = null, array $skip = []):array {
 		if (
 			!df_contains($f2, '{closure}')
 			# 2023-07-26 "Add the `$skip` optional parameter to `df_caller_entry()`": https://github.com/mage2pro/core/issues/281
-			&& !in_array($f2, array_merge(['dfc', 'dfcf', 'unknown'], $skip))
+			&& !in_array($f2, $skip)
 			&& (!$f || call_user_func($f, $r))
 		) {
 			break;
@@ -68,7 +69,6 @@ function df_caller_entry($p = 0, $f = null, array $skip = []):array {
  * 2017-01-12
  * The df_caller_ff() implementation: https://github.com/mage2pro/core/blob/6.7.3/Core/lib/caller.php#L113-L123
  * 2020-07-08 The function's new implementation is from the previous df_caller_ff() function.
- * @used-by df_log_l()
  * @used-by df_oqi_amount()
  * @used-by df_prop()
  * @used-by \Df\API\Facade::p()
