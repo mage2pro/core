@@ -33,7 +33,7 @@ final class Formatter {
 	 */
 	private static function frame(F $f):string {/** @var string $r */
 		try {
-			$r = df_kv(['Location' => df_cc(':', df_path_relative($f->filePath()), $f->line()), 'Callee' => $f->method()], 13);
+			$r = df_kv(['Location' => df_cc(':', df_path_relative($f->filePath()), $f->line()), 'Caller' => $f->method()], 13);
 		}
 		catch (\Exception $e) {
 			$r = df_xts($e);
