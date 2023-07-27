@@ -83,18 +83,20 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 		$entry = $e ? df_x_entry($e) : df_caller_entry(0, null, ['df_log']); /** @var array(string => string|int) $entry */
 		$suf = df_bt_entry_is_phtml($entry) ? basename(df_bt_entry_file($entry)) : df_caller_f();
 	}
-	if (is_array($d)) {
-		$d = df_extend($d, ['Mage2.PRO' => df_context()]);
-	}
 	df_report(
 		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m, $pref), '{date}--{time}'), $suf) .  '.log'
 		# 2023-07-26
 		# "`df_log_l()` should use the exception's trace instead of `df_bt_s(1)` for exceptions":
 		# https://github.com/mage2pro/core/issues/261
 		,df_cc_n(
-			!$d ? '' : df_dump($d)
-			,!$e ? null : ['EXCEPTION', QE::i($e)->report(), "\n\n"]
-			,[$e ? null : "\n", df_bt_s($e ?: 1)]
+			# 2023-07-28
+			# "`df_log_l` does not log the context if the message is not an array":
+			# https://github.com/mage2pro/core/issues/289
+			df_map('df_dump', is_array($d)
+				? [df_extend($d, ['Mage2.PRO' => df_context()])]
+				: [$d, df_context()])  /** @uses df_dump() */
+			,!$e ? '' : ['EXCEPTION', QE::i($e)->report(), "\n\n"]
+			,$e ? null : "\n" . df_bt_s($e ?: 1)
 		)
 	);
 }
