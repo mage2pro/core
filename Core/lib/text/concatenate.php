@@ -148,6 +148,7 @@ function df_cc_s(...$a):string {return df_ccc(' ', dfa_flatten($a));}
  * @used-by \Df\Payment\TID::e2i()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Payment\W\Reader::testData()
+ * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Dfe\AllPay\Block\Info\BankCard::custom()
  * @used-by \Dfe\AllPay\Charge::pIgnorePayment()
  * @used-by \Dfe\AllPay\Charge::productUrls()

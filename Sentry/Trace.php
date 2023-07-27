@@ -32,7 +32,7 @@ final class Trace {
 			 *		"args": ["Df\\Framework\\Plugin\\App\\Router\\ActionList\\Interceptor"]
 			 *	},
 			 * @see \Df\Qa\Trace::__construct()
-			 * @see \Df\Qa\Trace\Frame::filePath()
+			 * @see \Df\Qa\Trace\Frame::file()
 			 */
 			if ($file = df_bt_entry_file($frame)) {
 				$context = self::code($file, (int)$frame['line']);

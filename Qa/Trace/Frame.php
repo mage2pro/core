@@ -22,17 +22,18 @@ final class Frame extends \Df\Core\O {
 	 * called in vendor/mage2pro/core/Qa/Trace/Formatter.php on line 37»: https://github.com/mage2pro/core/issues/187
 	 * @see df_bt_entry_file()
 	 * @see \Df\Sentry\Trace::info()
+	 * @used-by self::url()
 	 * @used-by \Df\Qa\Trace\Formatter::p()
 	 */
-	function filePath():string {return (string)$this['file'];}
+	function file():string {return dfc($this, function() {return !($r = (string)$this['file'])? $r : df_path_relative($r);});}
 
 	/**
 	 * 2015-04-03 Строка отсутствует при вызовах типа @see call_user_func()
 	 * @see df_bt_entry_line()
+	 * @used-by self::url()
 	 * @used-by \Df\Qa\Trace\Formatter::p()
-	 * @return int|null
 	 */
-	function line() {return $this['line'];}
+	function line():int {return (int)$this['line'];}
 
 	/**
 	 * 2015-04-03 Для простых функций (не методов) вернёт название функции.
@@ -84,6 +85,39 @@ final class Frame extends \Df\Core\O {
 		df_assert(($r = dfa($m->getParameters(), $ordering)) instanceof RP);
 		return $r;
 	}, [$ordering]);}
+
+	/**
+	 * 2023-07-27 "Add GitHub links to backtrace frames": https://github.com/mage2pro/core/issues/285
+	 * @used-by \Df\Qa\Trace\Formatter::p()
+	 */
+	function url():string {return dfc($this, function():string {
+		$r = ''; /** @var string $r */
+		if (df_starts_with($p = $this->file(), 'vendor/magento/')) {/** @var string $p */
+			$pa = df_slice(df_explode_path($p), 2); /** @var string[] $pa */
+			$m = array_shift($pa); /** @var string $m */
+			# 2023-07-27
+			# "Add GitHub links to backtrace frames related to the `magento/magento2` repository"
+			# https://github.com/mage2pro/core/issues/286
+			/** @var string $pResult */
+			if ('framework' === $m) {
+				$pResult = 'lib/internal/Magento/Framework';
+			}
+			else {
+				$ma = explode('-', $m); /** @var string[] $ma */
+				df_assert(df_starts_with($m, 'module-'));
+				df_assert_eq('module', array_shift($ma));
+				$m = implode(df_ucfirst($ma));
+				$pResult = "app/code/Magento/$m";
+			}
+			$r = df_cc_path(
+				'https://github.com/magento/magento2/tree'
+				,df_magento_version()
+				,$pResult
+				,$pa
+			) . (!($l = $this->line()) ? '' : "#L$l");
+		}
+		return $r;
+	});}
 
 	/**
 	 * @used-by self::methodR()

@@ -76,6 +76,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by \Df\Payment\Operation\Source\Quote::id()
  * @used-by \Df\Qa\Failure\Error::throwLast()
  * @used-by \Df\Qa\Trace\Frame::methodParameter()
+ * @used-by \Df\Qa\Trace\Frame::url()
  * @used-by \Df\StripeClone\Payer::newCard()
  * @used-by \Df\Typography\Font::validate()
  * @used-by \Dfe\AllPay\InstallmentSales\Plan\Entity::validate()

@@ -20,6 +20,7 @@ use Magento\Framework\App\ProductMetadataInterface as IMetadata;
  * @used-by df_magento_version_ge()
  * @used-by df_sentry()
  * @used-by df_sentry_m()
+ * @used-by \Df\Qa\Trace\Frame::url()
  * @used-by \Dfe\CheckoutCom\Charge::pMetadata()
  * @used-by \Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
  */

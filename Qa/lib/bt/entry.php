@@ -1,7 +1,7 @@
 <?php
 /**
  * 2023-07-26 "Implement `df_bt_entry_file()`": https://github.com/mage2pro/core/issues/279
- * @see \Df\Qa\Trace\Frame::filePath()
+ * @see \Df\Qa\Trace\Frame::file()
  * @see \Df\Sentry\Trace::info()
  * @used-by df_bt()
  * @used-by df_log_l()
@@ -26,7 +26,7 @@ function df_bt_entry_file(array $e):string {return
 	 *	},
 	 * 2) «Argument 1 passed to df_starts_with() must be of the type string, null given,
 	 * called in vendor/mage2pro/core/Qa/Trace.php on line 28»: https://github.com/mage2pro/core/issues/186
-	 * 3) @see \Df\Qa\Trace\Frame::filePath()
+	 * 3) @see \Df\Qa\Trace\Frame::file()
 	 */
 	dfa($e, 'file', '')
 ;}

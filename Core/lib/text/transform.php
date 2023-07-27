@@ -40,8 +40,9 @@ function df_strtoupper(...$a) {return df_call_a(function(string $s):string {retu
  * @used-by df_assert_gd()
  * @used-by df_cc_class_uc()
  * @used-by df_underscore_to_camel()
- * @used-by \Dfe\TwoCheckout\LineItem::build()
  * @used-by \Df\Config\Source\LetterCase::apply()
+ * @used-by \Df\Qa\Trace\Frame::url()
+ * @used-by \Dfe\TwoCheckout\LineItem::build()
  * @param string|string[] $a
  * @return string|string[]
  */

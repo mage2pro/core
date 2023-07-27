@@ -16,6 +16,7 @@ function df_head(array $a):array {return array_slice($a, 0, -1);}
  * so I convert `0` and other empty values to `null`.
  * @used-by df_bt()
  * @used-by df_product_images_additional()
+ * @used-by \Df\Qa\Trace\Frame::url()
  */
 function df_slice(array $a, int $offset, int $length = 0):array {return array_slice($a, $offset, df_etn($length));}
 
