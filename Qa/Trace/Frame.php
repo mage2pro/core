@@ -28,6 +28,7 @@ final class Frame extends \Df\Core\O {
 
 	/**
 	 * 2015-04-03 Строка отсутствует при вызовах типа @see call_user_func()
+	 * @see df_bt_entry_line()
 	 * @used-by \Df\Qa\Trace\Formatter::frame()
 	 * @return int|null
 	 */

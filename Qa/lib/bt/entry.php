@@ -3,6 +3,7 @@
  * 2023-07-26 "Implement `df_bt_entry_file()`": https://github.com/mage2pro/core/issues/279
  * @see \Df\Qa\Trace\Frame::filePath()
  * @see \Df\Sentry\Trace::info()
+ * @used-by df_bt()
  * @used-by df_log_l()
  * @used-by df_bt_entry_is_phtml()
  * @used-by df_caller_module()
@@ -29,6 +30,13 @@ function df_bt_entry_file(array $e):string {return
 	 */
 	dfa($e, 'file', '')
 ;}
+
+/**
+ * 2023-07-27 `line` is absent in @see call_user_func() calls.
+ * @see \Df\Qa\Trace\Frame::line()
+ * @used-by df_bt()
+ */
+function df_bt_entry_line(array $e):int {return dfa($e, 'line', 0);}
 
 /**
  * 2023-07-26
