@@ -3,6 +3,7 @@ use Exception as E;
 
 /**
  * 2021-10-04
+ * 2023-07-27  The first entry in the result is the caller of df_bt().
  * @used-by df_bt_has()
  * @used-by df_bt_s()
  * @used-by df_caller_entry()
@@ -13,7 +14,7 @@ use Exception as E;
  */
 function df_bt($p = 0, int $limit = 0):array {
 	$r = is_array($p) ? $p : ($p instanceof E ? $p->getTrace() :
-		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, !$limit ? 0 : 2 + $p + $limit)
+		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, !$limit ? 0 : 1 + $p + $limit)
 	);
 	# 2023-07-27 "Shift the `file` and `line` keys to an entry back in `df_bt()`": https://github.com/mage2pro/core/issues/283
 	list($f, $l) = ['', 0]; /** @var string $f */ /** @var int $l */
@@ -22,11 +23,7 @@ function df_bt($p = 0, int $limit = 0):array {
 		$e = ['file' => $f, 'line' => $l] + $e;
 		list($f, $l) = [$f2, $l2];
 	}
-	# 2023-07-28
-	# We skip:
-	# 	1) The first entry: `df_bt`.
-	# 	2) The second entry: who called df_bt() (he does not need himself in the result).
-	$r = df_slice($r, 2);
+	$r = df_slice($r, 1); # 2023-07-28 We skip the first entry: `df_bt`.
 	return is_array($p) || $p instanceof E ? $r : df_slice($r, $p, $limit);
 }
 
