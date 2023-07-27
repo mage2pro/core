@@ -13,17 +13,21 @@ use Exception as E;
  */
 function df_bt($p = 0, int $limit = 0):array {
 	$r = is_array($p) ? $p : ($p instanceof E ? $p->getTrace() :
-		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, !$limit ? 0 : 1 + $p + $limit)
+		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, !$limit ? 0 : 2 + $p + $limit)
 	);
-	# 2023-07-27 "Shift the `file` and `line` keys an entry back in `df_bt()`": https://github.com/mage2pro/core/issues/283
+	# 2023-07-27 "Shift the `file` and `line` keys to an entry back in `df_bt()`": https://github.com/mage2pro/core/issues/283
 	list($f, $l) = ['', 0]; /** @var string $f */ /** @var int $l */
 	foreach ($r as &$e) {/** @var array(string => int|string) $e */
 		list($f2, $l2) = [df_bt_entry_file($e), df_bt_entry_line($e)]; /** @var string $f2 */ /** @var int $l2 */
 		$e = ['file' => $f, 'line' => $l] + $e;
 		list($f, $l) = [$f2, $l2];
 	}
-	$r = df_tail($r);
-	return is_array($p) || $p instanceof E ? $r : df_slice($r, $p, $limit - 1);
+	# 2023-07-28
+	# We skip:
+	# 	1) The first entry: `df_bt`.
+	# 	2) The second entry: who called df_bt() (he does not need himself in the result).
+	$r = df_slice($r, 2);
+	return is_array($p) || $p instanceof E ? $r : df_slice($r, $p, $limit);
 }
 
 /**
