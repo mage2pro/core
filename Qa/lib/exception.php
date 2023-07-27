@@ -67,7 +67,7 @@ function df_xf(E $e):E {while ($e->getPrevious()) {$e = $e->getPrevious();} retu
  * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Payment\W\Handler::handle()
- * @used-by \Df\Qa\Trace\Formatter::frame()
+ * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Df\Xml\X::addChild()
  * @used-by \Df\Xml\X::importString()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()

@@ -12,7 +12,7 @@ function df_c(...$a):string {return implode(dfa_flatten($a));}
  * @see df_ccc()
  * @used-by df_js_data()
  * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
- * @used-by \Df\Qa\Trace\Formatter::frame()
+ * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
  * @param string|string[] $a
  */
@@ -50,7 +50,7 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
  * @used-by \Df\Qa\Method::raiseErrorParam()
  * @used-by \Df\Qa\Method::raiseErrorResult()
  * @used-by \Df\Qa\Method::raiseErrorVariable()
- * @used-by \Df\Qa\Trace\Formatter::frame()
+ * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Df\Typography\Css::render()
  * @used-by \Dfe\AllPay\Block\Info\Barcode::paymentId()
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()

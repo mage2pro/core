@@ -9,33 +9,13 @@ final class Formatter {
 	 * @used-by df_bt_s()
 	 * @used-by \Df\Qa\Failure::postface()
 	 */
-	static function p(T $t):string {return dfcf(function(T $t):string {
-		$count = count($t); /** @var int $count */
-		return implode(df_map_k($t, function(int $index, F $frame) use($count):string {
-			$index++;
-			$r = self::frame($frame); /** @var string $r */
-			if ($index !== $count) {
-				$indexS = (string)$index; /** @var string $indexS */
-				$indexLength = strlen($indexS); /** @var int $indexLength */
-				$delimiterLength = 36; /** @var int $delimiterLength */
-				$fillerLength = $delimiterLength - $indexLength; /** @var int $fillerLength */
-				$fillerLengthL = floor($fillerLength / 2); /** @var int $fillerLengthL */
-				$fillerLengthR = $fillerLength - $fillerLengthL; /** @var int $fillerLengthR */
-				$r .= "\n" . str_repeat('*', $fillerLengthL) . $indexS . str_repeat('*', $fillerLengthR) . "\n";
+	static function p(T $t):string {return dfcf(function(T $t):string {return df_try(
+		function() use($t) {return df_cc_n(df_map_k($t,
+			function(int $i, F $f):string {
+				$i++; return "$i\t{$f->method()}\n\t" . df_cc(':', df_path_relative($f->filePath()), $f->line());
 			}
-			return $r;
-		}));
-	}, [$t]);}
-
-	/**     
-	 * 2020-02-27          
-	 * @used-by self::p()
-	 */
-	private static function frame(F $f):string {/** @var string $r */
-		try {
-			$r = df_kv(['Location' => df_cc(':', df_path_relative($f->filePath()), $f->line()), 'Caller' => $f->method()], 13);
-		}
-		catch (\Exception $e) {
+		));}
+		,function(\Exception $e) {
 			$r = df_xts($e);
 			/**
 			 * 2020-02-20
@@ -53,6 +33,5 @@ final class Formatter {
 				$loop = false;
 			}
 		}
-		return $r;		
-	}
+	);}, [$t]);}
 }

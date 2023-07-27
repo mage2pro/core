@@ -104,6 +104,7 @@ function df_sync($id, callable $job, float $interval = 0.1) { /** @var mixed $r 
  * @used-by \Dfe\GoogleFont\Font\Variant\Preview::box()
  * @used-by \Dfe\GoogleFont\Fonts\Png::url()
  * @used-by \Df\Payment\BankCardNetworks::url()
+ * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Df\Qa\Trace\Frame::methodR()
  * @used-by \Df\Theme\Controller\Result\MessagePlugin::getCookiesMessages()
  * @used-by \Dfe\CheckoutCom\Method::leh()

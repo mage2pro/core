@@ -22,14 +22,14 @@ final class Frame extends \Df\Core\O {
 	 * called in vendor/mage2pro/core/Qa/Trace/Formatter.php on line 37»: https://github.com/mage2pro/core/issues/187
 	 * @see df_bt_entry_file()
 	 * @see \Df\Sentry\Trace::info()
-	 * @used-by \Df\Qa\Trace\Formatter::frame()
+	 * @used-by \Df\Qa\Trace\Formatter::p()
 	 */
 	function filePath():string {return (string)$this['file'];}
 
 	/**
 	 * 2015-04-03 Строка отсутствует при вызовах типа @see call_user_func()
 	 * @see df_bt_entry_line()
-	 * @used-by \Df\Qa\Trace\Formatter::frame()
+	 * @used-by \Df\Qa\Trace\Formatter::p()
 	 * @return int|null
 	 */
 	function line() {return $this['line'];}
@@ -41,6 +41,7 @@ final class Frame extends \Df\Core\O {
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @used-by \Df\Qa\Method::raiseErrorResult()
 	 * @used-by \Df\Qa\Method::raiseErrorVariable()
+	 * @used-by \Df\Qa\Trace\Formatter::p()
 	 */
 	function method():string {return df_cc_method($this->class_(), $this->function_());}
 
