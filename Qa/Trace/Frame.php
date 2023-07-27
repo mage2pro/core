@@ -96,8 +96,10 @@ final class Frame extends \Df\Core\O {
 			$pa = df_slice(df_explode_path($p), 2); /** @var string[] $pa */
 			$m = array_shift($pa); /** @var string $m */
 			# 2023-07-27
-			# "Add GitHub links to backtrace frames related to the `magento/magento2` repository"
+			# 1) "Add GitHub links to backtrace frames related to the `magento/magento2` repository"
 			# https://github.com/mage2pro/core/issues/286
+			# 2) @TODO "Add GitHub links to backtrace frames related to the `mage2pro/core` repository":
+			# https://github.com/mage2pro/core/issues/287
 			/** @var string $pResult */
 			if ('framework' === $m) {
 				$pResult = 'lib/internal/Magento/Framework';
