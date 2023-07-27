@@ -91,7 +91,11 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 		# 2023-07-26
 		# "`df_log_l()` should use the exception's trace instead of `df_bt_s(1)` for exceptions":
 		# https://github.com/mage2pro/core/issues/261
-		,df_cc_n(!$d ? '' : df_dump($d), !$e ? null : ['EXCEPTION', QE::i($e)->report(), "\n\n"], df_bt_s($e ?: 1))
+		,df_cc_n(
+			!$d ? '' : df_dump($d)
+			,!$e ? null : ['EXCEPTION', QE::i($e)->report(), "\n\n"]
+			,[$e ? null : "\n", df_bt_s($e ?: 1)]
+		)
 	);
 }
 
