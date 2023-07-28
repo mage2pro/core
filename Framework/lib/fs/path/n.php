@@ -23,5 +23,6 @@ function df_path_n(string $p):string {return str_replace(['\/', '\\'], '/', $p);
  * 2016-12-30 It replaces all path delimiters with @uses DS
  * 2021-12-17 https://3v4l.org/OGUh6
  * @see df_path_n()
+ * @used-by \Df\Payment\W\Reader::testData()
  */
 function df_path_n_real(string $p):string {return str_replace(['\/', '\\', '/'], DS, $p);}
