@@ -1,7 +1,6 @@
 <?php
 use Closure as F;
 use Magento\Framework\Module\Dir;
-use Magento\Framework\Module\Dir\Reader;
 
 /**
  * 2015-08-14
