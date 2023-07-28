@@ -84,6 +84,33 @@ function df_module_file_name($m, string $name, string $ext = '', $onE = true):st
 ));}
 
 /**
+ * 2023-07-26
+ * "If `df_log()` is called from a `*.phtml`,
+ * then the `*.phtml`'s module should be used as the log source instead of `Magento_Framework`":
+ * https://github.com/mage2pro/core/issues/268
+ * @used-by df_caller_module()
+ */
+function df_module_name_by_path(string $f):string {/** @var string $r */
+	$f = df_path_relative($f);
+	$f2 = df_trim_text_left($f, ['app/code/', 'vendor/']);
+	$err = "Unable to detect the module for the file: `$f`"; /** @var string $err */
+	df_assert_ne($f, $f2, $err);
+	$isVendor = df_starts_with($f, 'vendor'); /** @var bool $isVendor */
+	$a = array_slice(df_explode_xpath($f2), 0, 2); /** @var string[] $a */
+	df_assert_eq(2, count($a), $err);
+	if (!$isVendor) {
+		$r = implode('_', $a);
+	}
+	else {
+		$p = df_cc_path('vendor', $a, 'etc/module.xml');
+		# 2023-07-26 "`df_contents()` should accept internal paths": https://github.com/mage2pro/core/issues/273
+		$x = df_xml_parse(df_contents($p));
+		$r = (string)$x->{'module'}['name'];
+	}
+	return $r;
+}
+
+/**
  * 2015-11-15
  * 2015-09-02
  * @uses df_module_dir() and an indirectly called @see \Magento\Framework\Module\Dir\Reader::getModuleDir()
