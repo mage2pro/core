@@ -6,7 +6,7 @@ use Magento\Framework\Api\AbstractSimpleObject as _P;
 class AbstractSimpleObject extends _P {
 	/**
 	 * 2017-05-22
-	 * @used-by df_api_object_get()
+	 * @used-by df_api_o_get()
 	 * @return mixed|null
 	 */
 	final static function get(_P $o, string $k) {return $o->_get($k);}
