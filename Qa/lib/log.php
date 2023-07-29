@@ -96,7 +96,7 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 				? [df_extend($d, ['Mage2.PRO' => df_context()])]
 				: [$d, df_context()])  /** @uses df_dump() */
 			,!$e ? '' : ['EXCEPTION', QE::i($e)->report(), "\n\n"]
-			,$e ? null : "\n" . df_bt_s($e ?: 1)
+			,($e ? null : "\n") . df_bt_s($e ?: 1)
 		)
 	);
 }
