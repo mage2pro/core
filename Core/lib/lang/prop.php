@@ -116,6 +116,10 @@ function df_prop($o, $v = DF_N, $d = null, string $type = '') {/** @var object|m
 
 /**
  * 2022-10-28
+ * 2023-07-29
+ * 1) @noinspection PhpVariableVariableInspection
+ * 2) "Suppress the «Variable variable used» inspection for the code intended for PHP < 8.2":
+ * https://github.com/mage2pro/core/issues/294
  * @used-by df_prop()
  * @used-by \Df\Backend\Model\Auth::loginByEmail()
  * @used-by \Df\User\Plugin\Model\User::aroundAuthenticate()
