@@ -240,13 +240,17 @@ final class Client {
 
 	/**
 	 * 2020-06-27
+	 * 2023-07-29
+	 * "`Df\Sentry\Client::send()`:
+	 * «Reference is unnecessary because the argument is neither assigned nor further passed by reference»":
+	 * https://github.com/mage2pro/core/issues/293
 	 * @used-by self::__construct()
 	 * @used-by self::capture()
-	 * @param array(string => mixed) $data
+	 * @param array(string => mixed) $d
 	 */
-	private function send(array &$data):void {
+	private function send(array $d):void {
 		$domain = 1000 > $this->_projectId ? 'log.mage2.pro' : 'sentry.io'; /** @var string $domain */ # 2018-08-25
-		$this->send_http("https://$domain/api/{$this->_projectId}/store/", $this->encode($data), [
+		$this->send_http("https://$domain/api/{$this->_projectId}/store/", $this->encode($d), [
 			'Content-Type' => 'application/octet-stream'
 			,'User-Agent' => $this->getUserAgent()
 			,'X-Sentry-Auth' => 'Sentry ' . df_csv_pretty(df_map_k(df_clean([
