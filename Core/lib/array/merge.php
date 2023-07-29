@@ -46,16 +46,16 @@ function df_merge_not_empty(array $a1, array $a2):array {return array_filter($a2
  * @used-by df_sentry()
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @used-by \Dfe\TBCBank\Test\CaseT\Regular::t02()
- * @param array(string => mixed) $defaults
+ * @param array(string => mixed) $old
  * @param array(string => mixed) $newValues
  * @return array(string => mixed)
  * @throws DFE
  */
-function dfa_merge_r(array $defaults, array $newValues):array {/** @var array(string => mixed) $r */
+function dfa_merge_r(array $old, array $newValues):array {
 	# Здесь ошибочно было бы $r = [], потому что если ключ отсутствует в $newValues, то тогда он не попадёт в $r.
-	$r = $defaults;
+	$r = $old; /** @var array(string => mixed) $r */
 	foreach ($newValues as $key => $newValue) {/** @var int|string $key */ /** @var mixed $newValue */
-		$defaultValue = dfa($defaults, $key); /** @var mixed $defaultValue */
+		$defaultValue = dfa($old, $key); /** @var mixed $defaultValue */
 		if (!is_array($defaultValue)) {
 			# 2016-08-23 unset добавил сегодня.
 			if (is_null($newValue)) {
