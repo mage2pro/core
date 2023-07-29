@@ -3,31 +3,21 @@ use Df\Core\Exception as DFE;
 
 /**
  * 2015-02-18
- * По смыслу функция @see df_extend() аналогична методу @see \Magento\Framework\Simplexml\Element::extend()
+ * 1) По смыслу функция @see df_extend() аналогична методу @see \Magento\Framework\Simplexml\Element::extend()
  * и предназначена для слияния настроечных опций,
  * только, в отличие от @see \Magento\Framework\Simplexml\Element::extend(),
  * @see df_extend() сливает не XML, а ассоциативные массивы.
- *
- * Обратите внимание, что вместо @see df_extend() нельзя использовать ни
+ * 3) Вместо @see df_extend() нельзя использовать ни
  * @see array_replace_recursive(), ни @see array_merge_recursive(),
  * ни тем более @see array_replace() и @see array_merge()
- * Нерекурсивные аналоги отметаются сразу, потому что не способны сливать вложенные структуры.
- * Но и стандартные рекурсивные функции тоже не подходят:
- *
- * 1)
- * array_merge_recursive(array('width' => 180), array('width' => 200))
- * вернёт: array(array('width' => array(180, 200)))
+ * 3.1) Нерекурсивные аналоги отметаются сразу, потому что не способны сливать вложенные структуры.
+ * 3.2) Но и стандартные рекурсивные функции тоже не подходят:
+ * 3.2.1) array_merge_recursive(['width' => 180], ['width' => 200]) вернёт: ['width' => [180, 200]]
  * https://php.net/manual/function.array-merge-recursive.php
- * Наша функция df_extend(array('width' => 180), array('width' => 200))
- * вернёт array('width' => 200)
- *
- * 2)
- * array_replace_recursive(array('x' => array('A', 'B')), array('x' => 'C'))
- * вернёт: array('x' => array('С', 'B'))
+ * 3.2.2) Наша функция df_extend(['width' => 180], ['width' => 200])вернёт ['width' => 200]
+ * 3.2.3) array_replace_recursive(['x' => ['A', 'B']], ['x' => 'C']) вернёт: ['x' => ['С', 'B']]
  * https://php.net/manual/function.array-replace-recursive.php
- * Наша функция df_extend(array('x' => array('A', 'B')), array('x' => 'C'))
- * вернёт array('x' => 'C')
- *
+ * 3.2.4) Наша функция df_extend(['x' => ['A', 'B']], ['x' => 'C']) вернёт ['x' => 'C']
  * 2018-11-13
  * 1) df_extend(
  *		['TBCBank' => ['1111' => ['a' => 'b']]]
@@ -39,7 +29,6 @@ use Df\Core\Exception as DFE;
  *		,['TBCBank' => [2222 => ['c' => 'd']]]
  * )
  * is: 'TBCBank' => [1111 => ['a' => 'b'], 2222 => ['c' => 'd']]
- *
  * @used-by df_ci_add()
  * @used-by df_extend()
  * @used-by df_log()

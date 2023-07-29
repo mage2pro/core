@@ -32,7 +32,7 @@ use Magento\Framework\DataObject as _DO;
 function df_log($v, $m = null, array $d = []):void {
 	$isE = $v instanceof E; /** @var bool $isE */
 	$m = $m ? df_module_name($m) : ($isE ? df_x_module($v) : df_caller_module());
-	df_log_l($m, ...($isE ? [$v, $d] : [!$d ? $v : (is_array($v) ? df_extend($v, $d) : (['message' => $v] + $d)), []]));
+	df_log_l($m, ...($isE ? [$v, $d] : [!$d ? $v : (df_extend($d, is_array($v) ? $v : ['message' => $v])), []]));
 	df_sentry($m, $v, $d);
 }
 
