@@ -207,15 +207,8 @@ final class Client {
 		 * слияние его элементов на внутренних уровнях вложенности.
 		 */
 		$data['tags'] += $this->_context->tags + $this->tags;
-		/** @var array(string => mixed) $extra */
-		$extra = $data['extra'] + $this->_context->extra;
-		# 2017-01-03
-		# Этот полный JSON в конце массива может быть обрублен в интерфейсе Sentry
-		# (и, соответственно, так же обрублен при просмотре события в формате JSON
-		# по ссылке в шапке экрана события в Sentry),
-		# однако всё равно удобно видеть данные в JSON, пусть даже в обрубленном виде.
-		/** 2023-07-25 @used-by \Df\Sentry\Extra::adjust() */
-		$data['extra'] = Extra::adjust($extra) + ['_dump' => df_dump($extra)];
+		$extra = $data['extra'] + $this->_context->extra; /** @var array(string => mixed) $extra */
+		$data['extra']  = Extra::fits($extraS = df_dump($extra)) ? ['_dump' => $extraS] : Extra::adjust($extra);
 		$data = df_clean($data);
 		if ($trace && !isset($data['stacktrace']) && !isset($data['exception'])) {
 			$data['stacktrace'] = ['frames' => Trace::info($trace)];
