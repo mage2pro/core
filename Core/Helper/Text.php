@@ -68,7 +68,7 @@ final class Text {
 	 * The length of str will be the same as the return value's.»
 	 * https://php.net/strtr
 	 * Новый алгоритм взял отсюда: http://stackoverflow.com/a/20717751
-	 * @used-by df_extend()
+	 * @used-by dfa_merge_r()
 	 */
 	function singleLine(string $s):string {return str_replace(["\r\n", "\r", "\n", "\t"], ' ', $s);}
 

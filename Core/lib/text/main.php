@@ -166,7 +166,7 @@ function df_string_split(string $s):array {return preg_split("//u", $s, -1, PREG
 function df_strings_are_equal_ci(string $s1, string $s2):bool {return 0 === strcmp(mb_strtolower($s1), mb_strtolower($s2));}
 
 /**
- * @used-by df_extend()
+ * @used-by dfa_merge_r()
  * @used-by df_quote_double()
  * @used-by df_quote_russian()
  * @used-by df_quote_single()

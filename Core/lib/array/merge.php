@@ -2,35 +2,44 @@
 use Df\Core\Exception as DFE;
 
 /**
+ * Оба входных массива должны быть ассоциативными
+ * 2022-10-31 @deprecated It is unused.
+ * @param array(string => mixed) $a1
+ * @param array(string => mixed) $a2
+ * @return array(string => mixed)
+ */
+function df_merge_not_empty(array $a1, array $a2):array {return array_filter($a2) + $a1;}
+
+/**
  * 2015-02-18
- * 1) По смыслу функция @see df_extend() аналогична методу @see \Magento\Framework\Simplexml\Element::extend()
+ * 1) По смыслу функция @see dfa_merge_r() аналогична методу @see \Magento\Framework\Simplexml\Element::extend()
  * и предназначена для слияния настроечных опций,
  * только, в отличие от @see \Magento\Framework\Simplexml\Element::extend(),
- * @see df_extend() сливает не XML, а ассоциативные массивы.
- * 3) Вместо @see df_extend() нельзя использовать ни
+ * @see dfa_merge_r() сливает не XML, а ассоциативные массивы.
+ * 3) Вместо @see dfa_merge_r() нельзя использовать ни
  * @see array_replace_recursive(), ни @see array_merge_recursive(),
  * ни тем более @see array_replace() и @see array_merge()
  * 3.1) Нерекурсивные аналоги отметаются сразу, потому что не способны сливать вложенные структуры.
  * 3.2) Но и стандартные рекурсивные функции тоже не подходят:
  * 3.2.1) array_merge_recursive(['width' => 180], ['width' => 200]) вернёт: ['width' => [180, 200]]
  * https://php.net/manual/function.array-merge-recursive.php
- * 3.2.2) Наша функция df_extend(['width' => 180], ['width' => 200])вернёт ['width' => 200]
+ * 3.2.2) Наша функция dfa_merge_r(['width' => 180], ['width' => 200]) вернёт ['width' => 200]
  * 3.2.3) array_replace_recursive(['x' => ['A', 'B']], ['x' => 'C']) вернёт: ['x' => ['С', 'B']]
  * https://php.net/manual/function.array-replace-recursive.php
- * 3.2.4) Наша функция df_extend(['x' => ['A', 'B']], ['x' => 'C']) вернёт ['x' => 'C']
+ * 3.2.4) Наша функция dfa_merge_r(['x' => ['A', 'B']], ['x' => 'C']) вернёт ['x' => 'C']
  * 2018-11-13
- * 1) df_extend(
+ * 1) dfa_merge_r(
  *		['TBCBank' => ['1111' => ['a' => 'b']]]
  *		,['TBCBank' => ['2222' => ['c' => 'd']]]
  * )
  * is: 'TBCBank' => ['1111' => ['a' => 'b'], '2222' => ['c' => 'd']]
- * 2) df_extend(
+ * 2) dfa_merge_r(
  *		['TBCBank' => [1111 => ['a' => 'b']]]
  *		,['TBCBank' => [2222 => ['c' => 'd']]]
  * )
  * is: 'TBCBank' => [1111 => ['a' => 'b'], 2222 => ['c' => 'd']]
  * @used-by df_ci_add()
- * @used-by df_extend()
+ * @used-by dfa_merge_r()
  * @used-by df_log()
  * @used-by df_log_l()
  * @used-by df_oi_add()
@@ -42,7 +51,7 @@ use Df\Core\Exception as DFE;
  * @return array(string => mixed)
  * @throws DFE
  */
-function df_extend(array $defaults, array $newValues):array {/** @var array(string => mixed) $r */
+function dfa_merge_r(array $defaults, array $newValues):array {/** @var array(string => mixed) $r */
 	# Здесь ошибочно было бы $r = [], потому что если ключ отсутствует в $newValues, то тогда он не попадёт в $r.
 	$r = $defaults;
 	foreach ($newValues as $key => $newValue) {/** @var int|string $key */ /** @var mixed $newValue */
@@ -57,7 +66,7 @@ function df_extend(array $defaults, array $newValues):array {/** @var array(stri
 			}
 		}
 		elseif (is_array($newValue)) {
-			$r[$key] = df_extend($defaultValue, $newValue);
+			$r[$key] = dfa_merge_r($defaultValue, $newValue);
 		}
 		elseif (is_null($newValue)) {
 			unset($r[$key]);
@@ -66,7 +75,7 @@ function df_extend(array $defaults, array $newValues):array {/** @var array(stri
 			# Если значение по умолчанию является массивом, а новое значение не является массивом,
 			# то это наверняка говорит об ошибке программиста.
 			df_error(
-				"df_extend: the default value of key «{$key}» is an array {defaultValue},"
+				"dfa_merge_r: the default value of key «{$key}» is an array {defaultValue},"
 				. "\nbut the programmer mistakenly tries to substitute it"
 				. ' with the value {newValue} of type «{newType}».'
 				. "\nThe new value should be an array or `null`."
@@ -80,15 +89,6 @@ function df_extend(array $defaults, array $newValues):array {/** @var array(stri
 	}
 	return $r;
 }
-
-/**
- * Оба входных массива должны быть ассоциативными
- * 2022-10-31 @deprecated It is unused.
- * @param array(string => mixed) $a1
- * @param array(string => mixed) $a2
- * @return array(string => mixed)
- */
-function df_merge_not_empty(array $a1, array $a2):array {return array_filter($a2) + $a1;}
 
 /**
  * 2015-02-11

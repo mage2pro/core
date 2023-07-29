@@ -39,7 +39,7 @@ final class Client {
 	/**
 	 * 2017-01-10
 	 * 2019-05-20
-	 * I intentionally use array_merge_recursive() instead of @see df_extend()
+	 * I intentionally use array_merge_recursive() instead of @see dfa_merge_r()
 	 * because I want values to be merged for a duplicate key.
 	 * I is needed for @see df_sentry_extra_f()
 	 * @used-by df_sentry_extra()
@@ -201,7 +201,7 @@ final class Client {
 		 * 2017-01-10
 		 * 1) $this->tags — это теги, которые были заданы в конструкторе: @see self::__construct()
 		 * Они имеют наинизший приоритет.
-		 * 2) Намеренно использую здесь + вместо @see df_extend(),
+		 * 2) Намеренно использую здесь + вместо @see dfa_merge_r(),
 		 * потому что массив tags должен быть одномерным (и поэтому для него + достаточно),
 		 * а массив extra хоть и может быть многомерен, однако вряд ли для нас имеет смысл
 		 * слияние его элементов на внутренних уровнях вложенности.

@@ -32,7 +32,7 @@ use Magento\Framework\DataObject as _DO;
 function df_log($v, $m = null, array $d = []):void {
 	$isE = $v instanceof E; /** @var bool $isE */
 	$m = $m ? df_module_name($m) : ($isE ? df_x_module($v) : df_caller_module());
-	df_log_l($m, ...($isE ? [$v, $d] : [!$d ? $v : (df_extend($d, is_array($v) ? $v : ['message' => $v])), []]));
+	df_log_l($m, ...($isE ? [$v, $d] : [!$d ? $v : (dfa_merge_r($d, is_array($v) ? $v : ['message' => $v])), []]));
 	df_sentry($m, $v, $d);
 }
 
@@ -93,7 +93,7 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 			# "`df_log_l` does not log the context if the message is not an array":
 			# https://github.com/mage2pro/core/issues/289
 			df_map('df_dump', is_array($d)
-				? [df_extend($d, ['Mage2.PRO' => df_context()])]
+				? [dfa_merge_r($d, ['Mage2.PRO' => df_context()])]
 				: [$d, df_context()])  /** @uses df_dump() */
 			,!$e ? '' : ['EXCEPTION', QE::i($e)->report(), "\n\n"]
 			,($e ? null : "\n") . df_bt_s($e ?: 1)

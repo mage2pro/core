@@ -77,9 +77,9 @@ function df_sentry($m, $v, array $extra = []):void {
 		$context = df_clean(['extra' => $extra]);
 		# 2017-01-09
 		if ($v instanceof DFE) {
-			$context = df_extend($context, $v->sentryContext());
+			$context = dfa_merge_r($context, $v->sentryContext());
 		}
-		$context = df_extend($d, $context);
+		$context = dfa_merge_r($d, $context);
 		if ($v instanceof E) {
 			# 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-exceptions
 			df_sentry_m($m)->captureException($v, $context);

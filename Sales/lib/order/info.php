@@ -11,7 +11,7 @@ use Magento\Framework\DataObject as _DO;
  * @param array(string => mixed) $info
  */
 function df_oi_add(_DO $o, array $info):void {
-	$o[Schema::F__DF] = df_json_encode(df_extend(df_eta(df_oi_get(null, $o)), $info));
+	$o[Schema::F__DF] = df_json_encode(dfa_merge_r(df_eta(df_oi_get(null, $o)), $info));
 }
 
 /**

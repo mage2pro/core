@@ -6,7 +6,7 @@ use Magento\Framework\DataObject as _DO;
 
 /**
  * 2016-08-22
- * 2016-08-23 Если значением ключа в $info будет null, то предыдущий ключ удалится: @see df_extend()
+ * 2016-08-23 Если значением ключа в $info будет null, то предыдущий ключ удалится: @see dfa_merge_r()
  * @see dfp_add_info()
  * @used-by df_ci_save()
  * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
@@ -14,7 +14,7 @@ use Magento\Framework\DataObject as _DO;
  * @param array(string => mixed) $info
  */
 function df_ci_add(_DO $c, array $info):void {
-	$c[Schema::F__DF] = df_json_encode(df_extend(df_eta(df_ci_get(null, $c)), $info));
+	$c[Schema::F__DF] = df_json_encode(dfa_merge_r(df_eta(df_ci_get(null, $c)), $info));
 }
 
 /**
