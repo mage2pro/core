@@ -22,10 +22,9 @@ final class Extra {
 			# 2023-07-29
 			# 1) In 2016, the limit was 512 bytes.
 			# "How to disable data clipping in the «Additional Data» block?": https://forum.sentry.io/t/694
-			# 2) Now I noticed that Sentry accepts more bytes for an attribute.
-			# 3) I do not know the exact limit, but 1700 bytes are not clipped.
+			# 2) Today I noticed that Sentry accepts up to 16400 bytes per a field.
 			/** @var iterable|null $vi */
-			if ($l <= 512 || is_null($vi = is_iterable($v) ? $v : (df_has_gd($v) ? df_gd($v) : null))) {
+			if ($l <= 16400 || is_null($vi = is_iterable($v) ? $v : (df_has_gd($v) ? df_gd($v) : null))) {
 				$r[$k] = $vs;
 			}
 			else {
