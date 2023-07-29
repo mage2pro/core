@@ -52,7 +52,7 @@ final class Text {
 	function removeLineBreaks(string $s):string {return str_replace(["\r\n", "\r", "\n"], ' ', $s);}
 
 	/**
-	 * 2015-03-03 Алгоритм аналогичен @see removeLineBreaks()
+	 * 2015-03-03 Алгоритм аналогичен @see self::removeLineBreaks()
 	 * 2015-07-07
 	 * Раньше алгоритм был таким: `strtr($text, "\r\n", '  ')`.
 	 * Однако он не совсем правилен, потому что если перенос строки записан в формате Windows
@@ -68,7 +68,7 @@ final class Text {
 	 * The length of str will be the same as the return value's.»
 	 * https://php.net/strtr
 	 * Новый алгоритм взял отсюда: http://stackoverflow.com/a/20717751
-	 * @used-by dfa_merge_r()
+	 * 2023-07-29 @deprecated It is unused.
 	 */
 	function singleLine(string $s):string {return str_replace(["\r\n", "\r", "\n", "\t"], ' ', $s);}
 

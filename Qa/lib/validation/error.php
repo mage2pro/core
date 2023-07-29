@@ -59,7 +59,6 @@ function df_abstract($caller):void {
  * @used-by df_country_ctn()
  * @used-by df_customer()
  * @used-by df_date_from_db()
- * @used-by dfa_merge_r()
  * @used-by df_fe_m()
  * @used-by df_file_name()
  * @used-by df_float()

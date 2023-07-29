@@ -38,12 +38,12 @@ function dfa_merge_numeric(array $r, array $b):array {
  * ни тем более @see array_replace() и @see array_merge()
  * 3.1) Нерекурсивные аналоги отметаются сразу, потому что не способны сливать вложенные структуры.
  * 3.2) Но и стандартные рекурсивные функции тоже не подходят:
- * 3.2.1) array_merge_recursive(['width' => 180], ['width' => 200]) вернёт: ['width' => [180, 200]]
- * https://php.net/manual/function.array-merge-recursive.php
- * 3.2.2) Наша функция dfa_merge_r(['width' => 180], ['width' => 200]) вернёт ['width' => 200]
- * 3.2.3) array_replace_recursive(['x' => ['A', 'B']], ['x' => 'C']) вернёт: ['x' => ['С', 'B']]
- * https://php.net/manual/function.array-replace-recursive.php
- * 3.2.4) Наша функция dfa_merge_r(['x' => ['A', 'B']], ['x' => 'C']) вернёт ['x' => 'C']
+ * 		3.2.1) array_merge_recursive(['width' => 180], ['width' => 200]) вернёт: ['width' => [180, 200]]
+ * 		https://php.net/manual/function.array-merge-recursive.php
+ * 		3.2.2) Наша функция dfa_merge_r(['width' => 180], ['width' => 200]) вернёт ['width' => 200]
+ * 		3.2.3) array_replace_recursive(['x' => ['A', 'B']], ['x' => 'C']) вернёт: ['x' => ['С', 'B']]
+ * 		https://php.net/manual/function.array-replace-recursive.php
+ * 		3.2.4) Наша функция dfa_merge_r(['x' => ['A', 'B']], ['x' => 'C']) вернёт ['x' => 'C']
  * 2018-11-13
  * 1) dfa_merge_r(
  *		['TBCBank' => ['1111' => ['a' => 'b']]]
@@ -72,32 +72,18 @@ function dfa_merge_r(array $old, array $new):array {
 	# Здесь ошибочно было бы $r = [], потому что если ключ отсутствует в $new, то тогда он не попадёт в $r.
 	$r = $old; /** @var array(string => mixed) $r */
 	foreach ($new as $k => $newV) {/** @var int|string $k */ /** @var mixed $newV */
-		$oldV = dfa($old, $k); /** @var mixed $oldV */
-		if (!is_array($oldV)) {
-			# 2016-08-23 unset добавил сегодня.
-			if (is_null($newV)) {
-				unset($r[$k]);
+		if (is_null($newV))	{
+			unset($r[$k]); ## 2016-08-23
+		}
+		else {
+			/** 2023-07-29 I have removed @see dfa() to improve speed. */
+			$oldV = isset($old[$k]) ? $old[$k] : null; /** @var mixed $oldV */
+			if (is_array($oldV) && is_array($newV)) {
+				$r[$k] = dfa_merge_r($oldV, $newV);
 			}
 			else {
 				$r[$k] = $newV;
 			}
-		}
-		elseif (is_array($newV)) {
-			$r[$k] = dfa_merge_r($oldV, $newV);
-		}
-		elseif (is_null($newV)) {
-			unset($r[$k]);
-		}
-		else {
-			# Если значение по умолчанию является массивом, а новое значение не является массивом,
-			# то это наверняка говорит об ошибке программиста.
-			df_error(
-				"dfa_merge_r: the default value of key «{$k}» is an array {defaultValue},"
-				. "\nbut the programmer mistakenly tries to substitute it"
-				. ' with the value {newValue} of type «{newType}».'
-				. "\nThe new value should be an array or `null`."
-				,['{oldV}' => df_t()->singleLine(df_dump($oldV)), '{newType}' => gettype($newV),' {newV}' => df_dump($newV)]
-			);
 		}
 	}
 	return $r;
