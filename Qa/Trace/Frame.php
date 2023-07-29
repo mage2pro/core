@@ -38,7 +38,6 @@ final class Frame extends \Df\Core\O {
 	/**
 	 * 2015-04-03 Для простых функций (не методов) вернёт название функции.
 	 * @used-by self::methodParameter()
-	 * @used-by Formatter::frame()
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @used-by \Df\Qa\Method::raiseErrorResult()
 	 * @used-by \Df\Qa\Method::raiseErrorVariable()
