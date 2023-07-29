@@ -96,11 +96,7 @@ function dfa_merge_r(array $old, array $new):array {
 				. "\nbut the programmer mistakenly tries to substitute it"
 				. ' with the value {newValue} of type «{newType}».'
 				. "\nThe new value should be an array or `null`."
-				,[
-					'{defaultValue}' => df_t()->singleLine(df_dump($oldV))
-					,'{newType}' => gettype($newV)
-					,'{newV}' => df_dump($newV)
-				]
+				,['{oldV}' => df_t()->singleLine(df_dump($oldV)), '{newType}' => gettype($newV),' {newV}' => df_dump($newV)]
 			);
 		}
 	}
