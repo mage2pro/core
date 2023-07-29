@@ -11,6 +11,23 @@ use Df\Core\Exception as DFE;
 function df_merge_not_empty(array $a1, array $a2):array {return array_filter($a2) + $a1;}
 
 /**
+ * 2017-10-28
+ * Plain `array_merge($r, $b)` works wronly, if $b contains contains SOME numeric-string keys like "99":
+ * https://github.com/mage2pro/core/issues/40#issuecomment-340139933
+ * https://stackoverflow.com/a/5929671
+ * @used-by dfa_select_ordered()
+ * @param array(string|int => mixed) $r
+ * @param array(string|int => mixed) $b
+ * @return array(string|int => mixed)
+ */
+function dfa_merge_numeric(array $r, array $b):array {
+	foreach ($b as $k => $v) {
+		$r[$k] = $v;
+	}
+	return $r;
+}
+
+/**
  * 2015-02-18
  * 1) По смыслу функция @see dfa_merge_r() аналогична методу @see \Magento\Framework\Simplexml\Element::extend()
  * и предназначена для слияния настроечных опций,
@@ -86,36 +103,6 @@ function dfa_merge_r(array $old, array $newValues):array {
 				]
 			);
 		}
-	}
-	return $r;
-}
-
-/**
- * 2015-02-11
- * Эта функция отличается от @see array_merge() только тем,
- * что все вместо нескольких параметров принимает массив из параметров.
- * Это бывает удобно в функциональном программировании, например:
- * @used-by Df_Dataflow_Model_Registry_MultiCollection::getEntities()
- * @used-by Df_Dellin_Model_Request_Rate::getDates()
- * 2022-10-31 @deprecated It is unused.
- * @param array(int|string => mixed) ...$arrays
- * @return array(int|string => mixed)
- */
-function df_merge_single(array $arrays):array {return array_merge(...$arrays); }
-
-/**
- * 2017-10-28
- * Plain `array_merge($r, $b)` works wronly, if $b contains contains SOME numeric-string keys like "99":
- * https://github.com/mage2pro/core/issues/40#issuecomment-340139933
- * https://stackoverflow.com/a/5929671
- * @used-by dfa_select_ordered()
- * @param array(string|int => mixed) $r
- * @param array(string|int => mixed) $b
- * @return array(string|int => mixed)
- */
-function dfa_merge_numeric(array $r, array $b):array {
-	foreach ($b as $k => $v) {
-		$r[$k] = $v;
 	}
 	return $r;
 }
