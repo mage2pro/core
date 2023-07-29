@@ -1,6 +1,4 @@
 <?php
-use Closure as F;
-
 /**
  * 2016-11-08
  * Отличия этой функции от @uses array_filter():
