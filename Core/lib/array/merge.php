@@ -42,6 +42,7 @@ use Df\Core\Exception as DFE;
  *
  * @used-by df_ci_add()
  * @used-by df_extend()
+ * @used-by df_log()
  * @used-by df_log_l()
  * @used-by df_oi_add()
  * @used-by df_sentry()
