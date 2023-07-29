@@ -22,7 +22,7 @@ use Df\Qa\Dumper;
  * @used-by \Dfe\Portal\Test\Basic::t02()
  * @used-by \Dfe\Robokassa\Test\Basic::t01()
  * @used-by \Hotlink\Brightpearl\Model\Api\Transport::_submit() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/site/issues/122)
- * @param \Magento\Framework\DataObject|mixed[]|mixed $v
+ * @param mixed $v
  */
 function df_dump($v):string {return Dumper::i()->dump($v);}
 
