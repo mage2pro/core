@@ -27,7 +27,7 @@ use Magento\User\Model\User;
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param string|object|null $m
  * @param _DO|mixed[]|mixed|E $v
- * @param array(string => mixed) $context [optional]
+ * @param array(string => mixed) $extra [optional]
  */
 function df_sentry($m, $v, array $extra = []):void {
 	/** @var string[] $domainsToSkip */
