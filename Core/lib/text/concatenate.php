@@ -143,6 +143,7 @@ function df_cc_s(...$a):string {return df_ccc(' ', dfa_flatten($a));}
  * @used-by df_log_l()
  * @used-by df_oqi_s()
  * @used-by df_report_prefix()
+ * @used-by df_sentry()
  * @used-by df_url_bp()
  * @used-by \Df\Payment\Comment\Description::locations()
  * @used-by \Df\Payment\TID::e2i()

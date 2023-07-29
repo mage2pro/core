@@ -15,6 +15,8 @@ function df_caller_c(int $o = 0):string {return df_first(df_explode_method(df_ca
  * @used-by df_caller_m()
  * @used-by df_caller_module()
  * @used-by df_log_l()
+ * @used-by df_sentry()
+ * @used-by df_x_entry()
  * @used-by \Df\Framework\Log\Dispatcher::handle()
  * @param E|int|null|array(array(string => string|int)) $p [optional]
  * @param callable|null $f [optional]

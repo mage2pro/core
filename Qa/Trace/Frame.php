@@ -22,14 +22,24 @@ final class Frame extends \Df\Core\O {
 	 * called in vendor/mage2pro/core/Qa/Trace/Formatter.php on line 37»: https://github.com/mage2pro/core/issues/187
 	 * @see df_bt_entry_file()
 	 * @see \Df\Sentry\Trace::info()
+	 * @used-by self::isPHTML()
 	 * @used-by self::url()
+	 * @used-by df_sentry()
 	 * @used-by \Df\Qa\Trace\Formatter::p()
 	 */
 	function file():string {return dfc($this, function() {return !($r = (string)$this['file'])? $r : df_path_relative($r);});}
 
 	/**
+	 * 2023-07-30
+	 * @see df_bt_entry_is_phtml()
+	 * @used-by df_sentry()
+	 */
+	function isPHTML():bool {return dfc($this, function() {return df_ends_with($this->file(), '.phtml');});}
+
+	/**
 	 * 2015-04-03 Строка отсутствует при вызовах типа @see call_user_func()
 	 * @see df_bt_entry_line()
+	 * @used-by df_sentry()
 	 * @used-by self::url()
 	 * @used-by \Df\Qa\Trace\Formatter::p()
 	 */
@@ -37,6 +47,7 @@ final class Frame extends \Df\Core\O {
 
 	/**
 	 * 2015-04-03 Для простых функций (не методов) вернёт название функции.
+	 * @used-by df_sentry()
 	 * @used-by self::methodParameter()
 	 * @used-by \Df\Qa\Method::raiseErrorParam()
 	 * @used-by \Df\Qa\Method::raiseErrorResult()
@@ -147,6 +158,7 @@ final class Frame extends \Df\Core\O {
 	private function isClosure():bool {return df_ends_with($this->function_(), '{closure}');}
 
 	/**
+	 * @used-by df_sentry()
 	 * @used-by \Df\Qa\Method::caller()
 	 * @used-by \Df\Qa\Trace::__construct()
 	 * @param array(string => string|int) $a

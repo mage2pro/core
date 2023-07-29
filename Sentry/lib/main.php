@@ -1,5 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
+use Df\Qa\Trace\Frame;
 use Df\Sentry\Client as Sentry;
 use Exception as E;
 use Magento\Framework\DataObject as _DO;
@@ -73,7 +74,14 @@ function df_sentry($m, $v, array $extra = []):void {
 			df_sentry_m($m)->captureException($v, $context);
 		}
 		else {
-			$v = df_dump($v);
+			if ($v) {
+				$v = df_dump($v);
+			}
+			else {
+				# 2023-07-30 If not pass a title, the Sentry will use the «<unlabeled event>» title.
+				$f = Frame::i(df_caller_entry(1, null, ['df_log'])); /** @var Frame $f */
+				$v = $f->isPHTML() ? df_ccc(':', $f->file(), $f->line()) : "{$f->method()}()";
+			}
 			# 2017-04-16
 			# Добавляем заголовок события к «fingerprint», потому что иначе сообщения с разными заголовками
 			# (например: «Robokassa: action» и «[Robokassa] request») будут сливаться вместе.

@@ -54,7 +54,7 @@ function df_bt_entry_is_method(array $e):bool {return dfa_has_keys($e, ['class',
 
 /**
  * 2023-07-26
- * @see dfa()
+ * @see \Df\Qa\Trace\Frame::isPHTML()
  * @used-by df_caller_module()
  * @used-by df_log_l()
  */
