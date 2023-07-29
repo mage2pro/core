@@ -138,7 +138,6 @@ function df_json_decode($s, bool $throw = true) {/** @var mixed|bool|null $r */
  * @used-by \Df\Security\BlackList::save()
  * @used-by \Df\Sentry\Client::capture()
  * @used-by \Df\Sentry\Client::encode()
- * @used-by \Df\Sentry\Extra::adjust()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
  * @used-by \Dfe\Color\Plugin\Swatches\Model\Swatch::beforeBeforeSave()

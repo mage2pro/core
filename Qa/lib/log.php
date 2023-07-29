@@ -33,7 +33,7 @@ function df_log($v, $m = null, array $d = []):void {
 	$isE = $v instanceof E; /** @var bool $isE */
 	$m = $m ? df_module_name($m) : ($isE ? df_x_module($v) : df_caller_module());
 	df_log_l($m, ...($isE ? [$v, $d] : [!$d ? $v : (dfa_merge_r($d, is_array($v) ? $v : ['message' => $v])), []]));
-	df_sentry($m, $v, $d);
+	df_sentry($m, ...($isE || !is_array($v) ? [$v, $d] : ['', dfa_merge_r($d, $v)]));
 }
 
 /**

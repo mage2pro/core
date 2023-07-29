@@ -35,19 +35,11 @@ function df_sentry($m, $v, array $extra = []):void {
 	if ($v instanceof E || !in_array(df_domain_current(), $domainsToSkip)) {
         # 2020-09-09, 2023-07-25 We need `df_caller_module(1)` (I checked it) because it is nested inside `df_sentry_module()`.
 		$m = df_sentry_module($m ?: df_caller_module(1));
-		static $d; /** @var array(string => mixed) $d */
-		$d = $d ?: [
-			/**
-			 * 2016-12-23
-			 * The name of the transaction (or culprit) which caused this exception.
-			 * For example, in in a web app, this might be the route name: /welcome/
-			 * https://docs.sentry.io/clientdev/attributes/#optional-attributes
-			 * Мне удобно здесь видеть домен магазина.
-			 */
-			//'culprit' => df_domain_current()
-			# 2016-22-22
-			# https://docs.sentry.io/clients/php/usage/#optional-attributes
-			'extra' => []
+		# 2016-22-22 https://docs.sentry.io/clients/php/usage/#optional-attributes
+		# 2023-07-25
+		# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`": https://github.com/mage2pro/core/issues/249
+		$context = [
+			'extra' => $extra
 			/**
 			 * 2016-12-25
 			 * Чтобы события разных магазинов не группировались вместе.
@@ -72,43 +64,38 @@ function df_sentry($m, $v, array $extra = []):void {
 				df_core_version(), df_domain_current(), df_magento_version(), df_package_version($m), df_store_code()
 			]
 		];
-		# 2023-07-25
-		# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`": https://github.com/mage2pro/core/issues/249
-		$context = df_clean(['extra' => $extra]);
 		# 2017-01-09
 		if ($v instanceof DFE) {
 			$context = dfa_merge_r($context, $v->sentryContext());
 		}
-		$context = dfa_merge_r($d, $context);
 		if ($v instanceof E) {
 			# 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-exceptions
 			df_sentry_m($m)->captureException($v, $context);
 		}
 		else {
 			$v = df_dump($v);
+			# 2017-04-16
+			# Добавляем заголовок события к «fingerprint», потому что иначе сообщения с разными заголовками
+			# (например: «Robokassa: action» и «[Robokassa] request») будут сливаться вместе.
+			$context['fingerprint'][]= $v;
+			/**
+			 * 2016-12-23
+			 * «The record severity. Defaults to error.»
+			 * https://docs.sentry.io/clientdev/attributes/#optional-attributes
+			 *
+			 * @used-by \Df\Sentry\Client::capture():
+			 *	if (!isset($data['level'])) {
+			 *		$data['level'] = self::ERROR;
+			 *	}
+			 * https://github.com/mage2pro/sentry/blob/1.6.4/lib/Raven/Client.php#L640-L642
+			 * При использовании @see \Df\Sentry\Client::DEBUG у сообщения в списке сообщений
+			 * в интерфейсе Sentry не будет никакой метки.
+			 * При использовании @see \Df\Sentry\Client::INFO у сообщения в списке сообщений
+			 * в интерфейсе Sentry будет синяя метка «Info».
+			 */
+			$context['level'] = Sentry::DEBUG;
 			# 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-other-errors
-			df_sentry_m($m)->captureMessage($v, [
-				# 2017-04-16
-				# Добавляем заголовок события к «fingerprint», потому что иначе сообщения с разными заголовками
-				# (например: «Robokassa: action» и «[Robokassa] request») будут сливаться вместе.
-				'fingerprint' => array_merge(dfa($context, 'fingerprint', []), [$v])
-				/**
-				 * 2016-12-23
-				 * «The record severity. Defaults to error.»
-				 * https://docs.sentry.io/clientdev/attributes/#optional-attributes
-				 *
-				 * @used-by \Df\Sentry\Client::capture():
-				 *	if (!isset($data['level'])) {
-				 *		$data['level'] = self::ERROR;
-				 *	}
-				 * https://github.com/mage2pro/sentry/blob/1.6.4/lib/Raven/Client.php#L640-L642
-				 * При использовании @see \Df\Sentry\Client::DEBUG у сообщения в списке сообщений
-				 * в интерфейсе Sentry не будет никакой метки.
-				 * При использовании @see \Df\Sentry\Client::INFO у сообщения в списке сообщений
-				 * в интерфейсе Sentry будет синяя метка «Info».
-				 */
-				,'level' => Sentry::DEBUG
-			] + $context);
+			df_sentry_m($m)->captureMessage($v, $context);
 		}
 	}
 }

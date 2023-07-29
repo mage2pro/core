@@ -64,8 +64,8 @@ function dfak_prefix(array $a, string $p, bool $req = false):array {return dfak_
  * @used-by \Df\Sentry\Client::tags()
  * @used-by \Df\Sentry\Extra::adjust()
  * @used-by \Dfe\YandexKassa\Charge::pLoan()
- * @param array|callable|Traversable $a1
- * @param array|callable|Traversable $a2
+ * @param iterable|callable $a1
+ * @param iterable|callable $a2
  * @return array(string => mixed)
  */
 function dfak_transform($a1, $a2, bool $req = false):array {
@@ -77,7 +77,7 @@ function dfak_transform($a1, $a2, bool $req = false):array {
 	# https://3v4l.org/3O92j
 	# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
-	list($a, $f) = dfaf($a1, $a2); /** @var array|Traversable $a */ /** @var callable $f */
+	list($a, $f) = dfaf($a1, $a2); /** @var iterable $a */ /** @var callable $f */
 	$a = df_ita($a);
 	$l = array_is_list($a); /** @var bool $l */
 	return df_map_kr($a, function($k, $v) use($f, $req, $l) {return [
