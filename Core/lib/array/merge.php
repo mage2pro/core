@@ -64,14 +64,14 @@ function dfa_merge_numeric(array $r, array $b):array {
  * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
  * @used-by \Dfe\TBCBank\Test\CaseT\Regular::t02()
  * @param array(string => mixed) $old
- * @param array(string => mixed) $newValues
+ * @param array(string => mixed) $new
  * @return array(string => mixed)
  * @throws DFE
  */
-function dfa_merge_r(array $old, array $newValues):array {
-	# Здесь ошибочно было бы $r = [], потому что если ключ отсутствует в $newValues, то тогда он не попадёт в $r.
+function dfa_merge_r(array $old, array $new):array {
+	# Здесь ошибочно было бы $r = [], потому что если ключ отсутствует в $new, то тогда он не попадёт в $r.
 	$r = $old; /** @var array(string => mixed) $r */
-	foreach ($newValues as $key => $newValue) {/** @var int|string $key */ /** @var mixed $newValue */
+	foreach ($new as $key => $newValue) {/** @var int|string $key */ /** @var mixed $newValue */
 		$defaultValue = dfa($old, $key); /** @var mixed $defaultValue */
 		if (!is_array($defaultValue)) {
 			# 2016-08-23 unset добавил сегодня.
