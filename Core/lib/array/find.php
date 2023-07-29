@@ -13,6 +13,7 @@ use Df\Core\Exception as DFE;
  * 3) Using `iterable` as an argument type requires PHP ≥ 7.1: https://3v4l.org/SNUMI
  * @used-by df_bt_has()
  * @used-by df_ends_with()
+ * @used-by df_find()
  * @used-by df_handle_prefix()
  * @used-by df_is()
  * @used-by df_modules_my()
