@@ -72,8 +72,8 @@ function dfa_merge_r(array $old, array $new):array {
 	# Здесь ошибочно было бы $r = [], потому что если ключ отсутствует в $new, то тогда он не попадёт в $r.
 	$r = $old; /** @var array(string => mixed) $r */
 	foreach ($new as $k => $newV) {/** @var int|string $k */ /** @var mixed $newV */
-		$defaultValue = dfa($old, $k); /** @var mixed $defaultValue */
-		if (!is_array($defaultValue)) {
+		$oldV = dfa($old, $k); /** @var mixed $oldV */
+		if (!is_array($oldV)) {
 			# 2016-08-23 unset добавил сегодня.
 			if (is_null($newV)) {
 				unset($r[$k]);
@@ -83,7 +83,7 @@ function dfa_merge_r(array $old, array $new):array {
 			}
 		}
 		elseif (is_array($newV)) {
-			$r[$k] = dfa_merge_r($defaultValue, $newV);
+			$r[$k] = dfa_merge_r($oldV, $newV);
 		}
 		elseif (is_null($newV)) {
 			unset($r[$k]);
@@ -97,7 +97,7 @@ function dfa_merge_r(array $old, array $new):array {
 				. ' with the value {newValue} of type «{newType}».'
 				. "\nThe new value should be an array or `null`."
 				,[
-					'{defaultValue}' => df_t()->singleLine(df_dump($defaultValue))
+					'{defaultValue}' => df_t()->singleLine(df_dump($oldV))
 					,'{newType}' => gettype($newV)
 					,'{newV}' => df_dump($newV)
 				]
