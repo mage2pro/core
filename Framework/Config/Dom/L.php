@@ -1,10 +1,10 @@
 <?php
-namespace Df\Framework\Config;
+namespace Df\Framework\Config\Dom;
 use Magento\Framework\Config\Dom as _P;
 use \DOMDocument as Doc;
 # 2023-08-01
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation */
-final class DomL {
+final class L {
 	/**
 	 * 2023-08-01
 	 * @see \Magento\Framework\Config\Dom::_initDom()

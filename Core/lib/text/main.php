@@ -43,7 +43,7 @@ function df_bts_yn(bool $v):string {return $v ? 'yes' : 'no';}
  * @used-by \CanadaSatellite\Bambora\Facade::api() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Core\Plugin\Mageplaza\Blog\Helper\Data::afterGetBlogUrl() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
  * @used-by \Df\Cron\Model\LoggerHandler::p()
- * @used-by \Df\Framework\Config\DomL::validate()
+ * @used-by \Df\Framework\Config\Dom\L::validate()
  * @used-by \Df\Sentry\Trace::get_frame_context()
  * @used-by \Df\Xml\X::k()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::parse()
