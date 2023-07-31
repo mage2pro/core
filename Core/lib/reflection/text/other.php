@@ -1,7 +1,5 @@
 <?php
-
-
-
+use ReflectionClass as RC;
 
 /**
  * 2016-01-01
