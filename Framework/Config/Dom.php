@@ -11,11 +11,11 @@ use \DOMDocument as Doc;
  *
  * Перекрытие происходит только для @used-by \Magento\Config\Model\Config\Structure\Reader
  * https://mage2.pro/t/215
-	<type name='Magento\Config\Model\Config\Structure\Reader'>
-		<arguments>
-			<argument name='domDocumentClass' xsi:type='string'>Df\Framework\Config\Dom</argument>
-		</arguments>
-	</type>
+ *	<type name='Magento\Config\Model\Config\Structure\Reader'>
+ *		<arguments>
+ *			<argument name='domDocumentClass' xsi:type='string'>Df\Framework\Config\Dom</argument>
+ *		</arguments>
+ *	</type>
  */
 class Dom extends \Magento\Framework\Config\Dom {
 	/**
