@@ -49,8 +49,10 @@ class Dom extends \Magento\Framework\Config\Dom {
 	}
 
 	/**
+	 * 2015-11-15
 	 * @override
 	 * @see \Magento\Framework\Config\Dom::_initDom()
+	 * @used-by \Magento\Framework\Config\Dom::__construct()
 	 * @param string $xml
 	 * @throws \Magento\Framework\Config\Dom\ValidationException
 	 */
