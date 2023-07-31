@@ -117,7 +117,7 @@ function df_con_hier_suf($c, string $suf, bool $throw = true) {/** @var string|n
 			df_error('df_con_hier_suf(): %s.',
 				!df_class_exists($expected = df_cc_class(df_module_name_c($c), $suf))
 				? "ascended to the absent class «{$expected}»"
-				: (df_class_check_abstract($expected) ? "ascended to the abstract class «{$expected}»" :
+				: (df_is_abstract($expected) ? "ascended to the abstract class «{$expected}»" :
 					"unknown error"
 				)
 			);

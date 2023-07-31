@@ -10,7 +10,7 @@ function df_param_iso2(string $v, int $ord, int $sl = 0):string {return Q::asser
 
 /**
  * @used-by df_assert_class_exists()
- * @used-by df_class_check_abstract()
+ * @used-by df_is_abstract()
  * @used-by df_date_from_db()
  * @used-by df_eav_update()
  * @used-by df_fs_delete()
