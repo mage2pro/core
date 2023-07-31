@@ -28,6 +28,7 @@ function dfr_prop($o, string $n):RP {
  * 2) https://stackoverflow.com/a/11604967
  * @see df_call_parent()
  * @see dfr_prop_set()
+ * @used-by \Df\Framework\Config\DomL::init()
  * @param object $o
  * @return mixed
  */
@@ -37,6 +38,7 @@ function dfr_prop_get($o, string $n) {return dfr_prop($o, $n)->getValue($o);}
  * 2023-08-01 "Implement `dfr_prop_set()`": https://github.com/mage2pro/core/issues/300
  * @see df_call_parent()
  * @see dfr_prop_get()
+ * @used-by \Df\Framework\Config\DomL::init()
  * @param object $o
  * @param mixed $v
  */

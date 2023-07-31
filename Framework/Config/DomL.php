@@ -2,11 +2,16 @@
 namespace Df\Framework\Config;
 use Magento\Framework\Config\Dom as _P;
 use \DOMDocument as Doc;
-# 2023-07-31
+# 2023-08-01
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation */
-class DomL extends _P {
-	final static function init(_P $o, string $xml) {
-		$defaultSchema = $o->schema; /** @var string $defaultSchema */
+final class DomL {
+	/**
+	 * 2023-08-01
+	 * @see \Magento\Framework\Config\Dom::_initDom()
+	 * @used-by \Df\Framework\Config\Dom::_initDom()
+	 */
+	static function init(_P $o, string $xml):Doc {
+		$defaultSchema = dfr_prop_get($o, 'schema'); /** @var string $defaultSchema */
 		$doc = new Doc; /** @var Doc $doc */
 		$doc->loadXML($xml);
 		# Возвращает строку вида: «urn:magento:module:Magento_Config:etc/system_file.xsd»
@@ -25,7 +30,7 @@ class DomL extends _P {
 			 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/lib/internal/Magento/Framework/Config/Dom/UrnResolver.php#L69-L71
 			 * https://github.com/magento/magento2/blob/2335247d4ae2dc1e0728ee73022b0a244ccd7f4c/lib/internal/Magento/Framework/Config/Dom/UrnResolver.php#L26-L55
 			 */
-			$o->schema = $schema;
+			dfr_prop_set($o, 'schema', $schema);
 		}
 		/** @var Doc $r */
 		try {
@@ -40,8 +45,32 @@ class DomL extends _P {
 			# "[PHP 8.2] «Creation of dynamic property DOMDocument::$schema is deprecated
 			# in vendor/mage2pro/core/Framework/Config/Dom.php on line 81»":
 			# https://github.com/mage2pro/core/issues/215
-			$o->schema = $defaultSchema;
+			dfr_prop_set($o, 'schema', $defaultSchema);
 		}
 		return $r;
+	}
+
+	/**
+	 * 2015-11-15
+	 * @see \Magento\Framework\Config\Dom::validate(
+	 * @used-by \Df\Framework\Config\Dom::validate()
+	 */
+	static function validate(_P $o, string $schemaFileName, array &$errors = []):bool {
+		df_call_parent($o, 'validate', $schemaFileName, $errors);
+		return !array_filter($errors, function($m) {/** @var string $m */
+			# 2015-11-15
+			# Не отключаем валидацию составного файла полностью,
+			# а лишь убираем их диагностического отчёта сообщения о сбоях в наших полях.
+			return
+				# 2015-11-15
+				# «Element 'dfSample': This element is not expected. Line: 55»
+				# https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Config/etc/system_file.xsd#L207
+				!df_contains($m, 'Element \'df')
+				# 2015-12-29
+				# https://github.com/mage2pro/core/tree/57607cc23405c3dcde50999d063b2a7f49499260/Config/etc/system_file.xsd#L70
+				# «Element 'field', attribute 'dfItemFormElement': The attribute 'dfItemFormElement' is not allowed.»
+				&& !df_contains($m, 'attribute \'df')
+			;
+		});
 	}
 }

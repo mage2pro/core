@@ -8,6 +8,8 @@ use ReflectionMethod as RM;
  * 3) https://3v4l.org/usLci
  * @see dfr_prop_get()
  * @see dfr_prop_set()
+ * @used-by \Df\Framework\Config\DomL::init()
+ * @used-by \Df\Framework\Config\DomL::validate()
  * @param object $o
  * @param mixed ...$a [optional]
  * @return mixed
