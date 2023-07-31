@@ -20,6 +20,4 @@ namespace Df\Variable\Model\Config\Structure;
  * https://github.com/magento/magento2/tree/2.0.0/app/code/Magento/Variable
  * So I can implement a fix similar to https://github.com/mage2pro/core/blob/10.1.6/Config/etc/di.xml#L14-L28
  */
-class Dom extends \Magento\Variable\Model\Config\Structure\Dom {
-
-}
+class Dom extends \Magento\Variable\Model\Config\Structure\Dom {use \Df\Framework\Config\Dom\T;}
