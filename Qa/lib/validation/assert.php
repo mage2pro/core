@@ -71,7 +71,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by df_xml_child()
  * @used-by dfaf()
  * @used-by dfp_oq()
- * @used-by dfr_prop_get()
+ * @used-by dfr_prop()
  * @used-by \Df\Config\A::i()
  * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Framework\Form\Element\Fieldset::select()

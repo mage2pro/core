@@ -6,6 +6,8 @@ use ReflectionMethod as RM;
  * 1) "Implement `df_call_parent()`": https://github.com/mage2pro/core/issues/298
  * 2) https://stackoverflow.com/a/50469869
  * 3) https://3v4l.org/usLci
+ * @see dfr_prop_get()
+ * @see dfr_prop_set()
  * @param object $o
  * @param mixed ...$a [optional]
  * @return mixed
