@@ -23,7 +23,17 @@ class Dom extends \Magento\Framework\Config\Dom {
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\Config\Dom::validate()
-	 * @used-by \Magento\Config\Model\Config\Structure\Reader::_readFiles()
+	 * @used-by \Magento\Config\Model\Config\Structure\Reader::_readFiles():
+	 *	if ($this->validationState->isValidationRequired()) {
+	 *		$errors = [];
+	 *		if ($configMerger && !$configMerger->validate($this->_schemaFile, $errors)) {
+	 *			$message = "Invalid Document \n";
+	 *			throw new LocalizedException(
+	 *				new \Magento\Framework\Phrase($message . implode("\n", $errors))
+	 *			);
+	 *		}
+	 *	}
+	 * https://github.com/magento/magento2/blob/2.4.7-beta1/app/code/Magento/Config/Model/Config/Structure/Reader.php#L111-L116
 	 * @param string $schemaFileName
 	 * @param array $errors
 	 * @throws \Exception
