@@ -1,23 +1,7 @@
 <?php
-use ReflectionClass as RC;
 
-/**
- * 2017-01-11 http://stackoverflow.com/a/666701
- * @used-by \Df\Payment\W\F::i()
- */
-function df_class_check_abstract(string $c):bool {df_param_sne($c, 0); return (new RC(df_ctr($c)))->isAbstract();}
 
-/**
- * 2016-05-06
- * By analogy with https://github.com/magento/magento2/blob/135f967/lib/internal/Magento/Framework/ObjectManager/TMap.php#L97-L99
- * 2016-05-23
- * Намеренно не объединяем строки в единное выражение, чтобы собака @ не подавляла сбои первой строки.
- * Такие сбои могут произойти при синтаксических ошибках в проверяемом классе
- * (похоже, getInstanceType как-то загружает код класса).
- * @used-by dfpm_c()
- * @used-by \Df\Payment\Block\Info::checkoutSuccess()
- */
-function df_class_exists(string $c):bool {$c = df_ctr($c); return @class_exists($c);}
+
 
 /**
  * 2016-01-01
@@ -149,88 +133,3 @@ function df_cld($c):string {return df_contains(df_cts($c) , '\\') ? '\\' : '_';}
 function df_const($c, string $name, $def = null) {return
 	defined($full = df_cts($c) . "::$name") ? constant($full) : df_call_if($def)
 ;}
-
-/**
- * 2015-08-14 @uses get_class() does not add the leading slash `\` before the class name: http://3v4l.org/HPF9R
- * 2015-09-01
- * @uses ltrim() correctly handles Cyrillic letters: https://3v4l.org/rrNL9
- * 		echo ltrim('\\Путь\\Путь\\Путь', '\\');  => Путь\Путь\Путь
- * 2016-10-20 $c is required here because it is used by @used-by get_class(): https://3v4l.org/k6Hd5
- * @used-by df_explode_class()
- * @used-by df_interceptor()
- * @used-by df_module_name()
- * @used-by dfsm_code()
- * @used-by \Df\Payment\Method::getInfoBlockType()
- * @param string|object $c
- */
-function df_cts($c, string $del = '\\'):string {/** @var string $r */
-	$r = df_trim_interceptor(is_object($c) ? get_class($c) : ltrim($c, '\\'));
-	return '\\' === $del ? $r : str_replace('\\', $del, $r);
-}
-
-/**
- * 2016-01-29
- * 2022-10-31 @deprecated It is unused.
- */
-function df_cts_lc(string $c, string $del):string {return implode($del, df_explode_class_lc($c));}
-
-/**
- * 2016-04-11 Dfe_CheckoutCom => dfe_checkout_com
- * 2023-01-30
- * «Argument 1 passed to df_cts_lc_camel() must be of the type string, object given,
- * called in vendor/mage2pro/core/Qa/lib/log.php on line 121»: https://github.com/mage2pro/core/issues/204
- * 2023-07-23 @deprecated It is unused.
- * @see df_module_name_lc()
- * @param string|object $c
- */
-function df_cts_lc_camel($c, string $del):string {return implode($del, df_explode_class_lc_camel($c));}
-
-/**
- * @used-by df_class_f()
- * @used-by df_class_l()
- * @used-by df_class_replace_last()
- * @used-by df_class_second()
- * @used-by df_class_suffix()
- * @used-by df_cts_lc()
- * @used-by df_explode_class_lc()
- * @param string|object $c
- * @return string[]
- */
-function df_explode_class($c):array {return df_explode_multiple(['\\', '_'], df_cts($c));}
-
-/**
- * 2016-04-11 Dfe_CheckoutCom => [Dfe, Checkout, Com]
- * 2016-10-20
- * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
- * @used-by df_explode_class_lc_camel()
- * @param string|object $c
- * @return string[]
- */
-function df_explode_class_camel($c):array {return dfa_flatten(df_explode_camel(explode('\\', df_cts($c))));}
-
-/**
- * 2016-01-14
- * 2016-10-20
- * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
- * @param string|object $c
- * @return string[]
- */
-function df_explode_class_lc($c):array {return df_lcfirst(df_explode_class($c));}
-
-/**
- * 2016-04-11
- * 2016-10-20
- * 1) Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
- * 2) Dfe_CheckoutCom => [dfe, checkout, com]
- * @used-by df_module_name_lc()
- * @param string|object $c
- * @return string[]
- */
-function df_explode_class_lc_camel($c):array {return df_lcfirst(df_explode_class_camel($c));}
-
-/**
- * 2021-02-24
- * @used-by df_caller_c()
- * @return string[]
- */
-function df_explode_method(string $m):array {return explode('::', $m);}
