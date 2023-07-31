@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+<!-- 2023-07-31
+1) [`/admin/catalog/category/` / `Magento_Variable`]:
+«The XML in file "vendor/mage2pro/<…>/etc/adminhtml/system.xml" is invalid» /
+«Element 'dfExtension': This element is not expected»: https://github.com/mage2pro/core/issues/297
+2) The falure is caused by the `Magento_Variable` module:
+<virtualType
+	name="Magento\Variable\Model\Config\Structure\ReaderVirtual"
+	type="Magento\Config\Model\Config\Structure\Reader"
+>
+	<arguments>
+		<argument name="domDocumentClass" xsi:type="string">Magento\Variable\Model\Config\Structure\Dom</argument>
+	</arguments>
+</virtualType>
+https://github.com/magento/magento2/blob/2.4.7-beta1/app/code/Magento/Variable/etc/di.xml#L56-L60
+3) The `Magento_Variable` module exists in Magento since 2.0.0:
+https://github.com/magento/magento2/tree/2.0.0/app/code/Magento/Variable
+So I can implement a fix similar to https://github.com/mage2pro/core/blob/10.1.6/Config/etc/di.xml#L14-L28 -->
+	<type name='Magento\Variable\Model\Config\Structure\ReaderVirtual'>
+		<arguments>
+			<argument name='domDocumentClass' xsi:type='string'>Df\Variable\Model\Config\Structure\Dom</argument>
+		</arguments>
+	</type>
+</config>
