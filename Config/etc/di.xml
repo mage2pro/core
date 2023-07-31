@@ -12,20 +12,16 @@ But it does not break the compilation process, I have checked it in Magento 2.1.
 		<plugin name='Df\Config\Plugin\Model\Config\PathValidator' type='Df\Config\Plugin\Model\Config\PathValidator'/>
 	</type>
 <!-- 2015-11-15
-Цель перекрытия — устранение дефекта
-https://github.com/magento/magento2/issues/2372
+1) Цель перекрытия — устранение дефекта https://github.com/magento/magento2/issues/2372
 «Magento 2 ignores XML schema location in the etc/adminhtml/system.xml documents
 and always uses the Magento/Config/etc/system_file.xsd schema instead».
-
-Сначала пробовал так:
+2) Сначала пробовал так:
 	<preference for='Magento\Framework\Config\Dom' type='Df\Framework\Config\Dom' />
 но это не работет:
 https://mage2.pro/t/214
 https://github.com/magento/magento2/issues/2373
-«\Magento\Framework\Config\Reader\Filesystem::_createConfigMerger()
-uses the «new» keyword instead of the Object Manager
-even after the Object Manager has already been initialized,
-so it breaks a dependency injection possibility» -->
+«\Magento\Framework\Config\Reader\Filesystem::_createConfigMerger() uses the «new» keyword instead of the Object Manager
+even after the Object Manager has already been initialized, so it breaks a dependency injection possibility» -->
 	<type name='Magento\Config\Model\Config\Structure\Reader'>
 		<arguments><argument name='domDocumentClass' xsi:type='string'>Df\Framework\Config\Dom</argument></arguments>
 	</type>
