@@ -23,6 +23,7 @@ class Dom extends \Magento\Framework\Config\Dom {
 	 * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
 	 * @override
 	 * @see \Magento\Framework\Config\Dom::validate()
+	 * @used-by \Magento\Config\Model\Config\Structure\Reader::_readFiles()
 	 * @param string $schemaFileName
 	 * @param array $errors
 	 * @throws \Exception
