@@ -19,7 +19,6 @@
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Typography\Css::rule()
  * @used-by \Df\Xml\X::importString()
- * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
  * @param mixed $v
  */
 function df_es($v):bool {return '' === $v;}
@@ -128,6 +127,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
  * @used-by \Df\Payment\Method::s()
  * @used-by \Df\Payment\W\Reader::tl_()
  * @used-by \Df\Shipping\Method::s()
+ * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
  * @param mixed $v
  */
 function df_nes($v):bool {return is_null($v) || '' === $v;}
