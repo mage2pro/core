@@ -71,26 +71,18 @@ class Dispatcher extends _P {
 				 * https://github.com/mage2pro/core/issues/160
 				 */
 				if (B::class != $c || 'run' !== $f) {
+					$ef = $rc->ef(); /** @var E|null $ef */
+					$args = [null, $ef ?: $d, $ef ? $rc->extra() : []]; /** @var mixed  $args */
 					# 2023-07-25
 					# I intentionally do not pass these messages to Sentry
 					# because I afraid that they could be too numerous in some third-party websites.
-					df_log_l(
-						$c
-						/** @var E|null $prev */
-						,df_clean($d) + (!$rc->e(AlreadyExists::class) || !($prev = $rc->e()->getPrevious()) ? [] : [
-							'prev' => $prev->getMessage()
-						])
-						,$f
-						,$rc->e() ? 'exception' : dfa($d, 'level_name')
-					);
-					/**
-					 * 2023-08-01
-					 * "`Df\Framework\Log\Dispatcher::handle()` should pass to Sentry the records
-					 * with level ≥ @see \Monolog\Logger::ERROR (`ERROR`, `CRITICAL`, `ALERT`, `EMERGENCY`)":
-					 * https://github.com/mage2pro/core/issues/304
-					 */
+					df_log_l(...$args);
+					# 2023-08-01
+					# "`Df\Framework\Log\Dispatcher::handle()` should pass to Sentry the records
+					# with level ≥ `Monolog\Logger::ERROR` (`ERROR`, `CRITICAL`, `ALERT`, `EMERGENCY`)":
+					# https://github.com/mage2pro/core/issues/304
 					if (L::ERROR <= $rc->level()) {
-						df_sentry(null, ($ef = $rc->ef()) ?: $d, $ef ? $rc->extra() : []); /** @var E $ef */
+						df_sentry(...$args);
 					}
 				}
 				$r = true; # 2020-09-24 The pevious code was: `$r = parent::handle($d);`
