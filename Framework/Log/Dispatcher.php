@@ -83,6 +83,15 @@ class Dispatcher extends _P {
 						,$f
 						,$rc->e() ? 'exception' : dfa($d, 'level_name')
 					);
+					/**
+					 * 2023-08-01
+					 * "`Df\Framework\Log\Dispatcher::handle()` should pass to Sentry the records
+					 * with level ≥ @see \Monolog\Logger::ERROR (`ERROR`, `CRITICAL`, `ALERT`, `EMERGENCY`)":
+					 * https://github.com/mage2pro/core/issues/304
+					 */
+					if (L::ERROR <= $rc->level()) {
+						df_sentry(null, ($ef = $rc->ef()) ?: $d, $ef ? $rc->extra() : []); /** @var E $ef */
+					}
 				}
 				$r = true; # 2020-09-24 The pevious code was: `$r = parent::handle($d);`
 			}

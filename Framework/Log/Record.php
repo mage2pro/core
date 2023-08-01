@@ -13,6 +13,7 @@ final class Record {
 
 	/**
 	 * 2021-09-08
+	 * @used-by self::ef()
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
 	 * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @param string|null $e [optional]
@@ -22,6 +23,25 @@ final class Record {
 		$r = $this->d('context/exception'); /** @var E|null $r */
 		return !$r || !$e ? $r : $r instanceof $e;
 	}
+
+	/**
+	 * 2023-08-01
+	 * @used-by \Df\Framework\Log\Dispatcher::handle()
+	 * @return E|null
+	 */
+	function ef() {return !($e = $this->e()) ? null : df_xf($e);}
+
+	/**
+	 * 2023-08-01
+	 * @used-by \Df\Framework\Log\Dispatcher::handle()
+	 */
+	function extra():array {return $this->d('extra');}
+
+	/**
+	 * 2023-08-01
+	 * @used-by \Df\Framework\Log\Dispatcher::handle()
+	 */
+	function level():int {return $this->d('level');}
 
 	/**
 	 * 2021-09-08
@@ -38,6 +58,8 @@ final class Record {
 	/**
 	 * 2021-09-08
 	 * @used-by self::e()
+	 * @used-by self::extra()
+	 * @used-by self::level()
 	 * @used-by self::msg()
 	 * @return string|null
 	 */

@@ -16,6 +16,7 @@ use Magento\User\Model\User;
  * @used-by dfe_modules_log()
  * @used-by dfp_report()
  * @used-by \Df\API\Client::_p()
+ * @used-by \Df\Framework\Log\Dispatcher::handle()
  * @used-by \Df\Payment\Method::action()
  * @used-by \Df\Payment\W\Action::ignoredLog()
  * @used-by \Df\Payment\W\Handler::log()

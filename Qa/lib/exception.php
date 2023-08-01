@@ -52,6 +52,7 @@ function df_x_module(E $e):string {return df_module_name(dfa(df_x_entry($e), 'cl
 
 /**
  * 2016-07-18
+ * @used-by \Df\Framework\Log\Record::ef()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Qa\Failure\Exception::trace()
  */
