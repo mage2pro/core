@@ -46,6 +46,7 @@ function df_x_entry(E $e):array {return df_caller_entry($e, function(array $a):b
 /**
  * 2023-07-25
  * @used-by df_log()
+ * @used-by df_sentry()
  */
 function df_x_module(E $e):string {return df_module_name(dfa(df_x_entry($e), 'class'));}
 
