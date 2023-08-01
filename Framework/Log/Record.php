@@ -40,11 +40,13 @@ final class Record {
 	/**
 	 * 2023-08-01
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
+	 * @used-by \Df\Framework\Log\Handler\BrokenReference::_p()
 	 */
 	function level():int {return $this->d('level');}
 
 	/**
 	 * 2021-09-08
+	 * @used-by \Df\Framework\Log\Handler\BrokenReference::_p()
 	 * @used-by \Df\Framework\Log\Handler\Cookie::_p()
 	 * @used-by \Df\Framework\Log\Handler\PayPal::_p()
 	 * @param string|string[]|null $s [optional]
