@@ -50,7 +50,7 @@ function df_block($c, $data = [], string $template = '', array $vars = []) {
 		$r->assign($vars);
 	}
 	if ($template && $r instanceof Template) {
-		$r->setTemplate(df_file_ext_add($template, 'phtml'));
+		$r->setTemplate(df_phtml_add_ext($template));
 	}
 	return $r;
 }
