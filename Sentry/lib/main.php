@@ -33,7 +33,8 @@ use Magento\User\Model\User;
 function df_sentry($m, $v, array $extra = []):void {
 	/** @var string[] $domainsToSkip */
 	static $domainsToSkip = ['pumpunderwear.com', 'quanticlo.com', 'sanasafinaz.com'];
-	if ($v instanceof E || !in_array(df_domain_current(), $domainsToSkip)) {
+	$isE = $v instanceof E; /** @var bool $isE */
+	if ($isE || !in_array(df_domain_current(), $domainsToSkip)) {
         # 2020-09-09, 2023-07-25 We need `df_caller_module(1)` (I checked it) because it is nested inside `df_sentry_module()`.
 		$m = df_sentry_module($m ?: df_caller_module(1));
 		# 2016-22-22 https://docs.sentry.io/clients/php/usage/#optional-attributes
@@ -69,7 +70,7 @@ function df_sentry($m, $v, array $extra = []):void {
 		if ($v instanceof DFE) {
 			$context = dfa_merge_r($context, $v->sentryContext());
 		}
-		if ($v instanceof E) {
+		if ($isE) {
 			# 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-exceptions
 			df_sentry_m($m)->captureException($v, $context);
 		}
