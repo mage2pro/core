@@ -11,7 +11,5 @@ final class BrokenReference extends \Df\Framework\Log\Handler {
 	 * @see \Df\Framework\Log\Handler::_p()
 	 * @used-by \Df\Framework\Log\Handler::p()
 	 */
-	protected function _p():bool {/** @var string  $m */return
-		L::INFO === $this->r()->level() && $this->r()->msg('Broken reference:')
-	;}
+	protected function _p():bool {return L::INFO === $this->r()->level() && $this->r()->msg('Broken reference:');}
 }
