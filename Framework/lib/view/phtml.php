@@ -2,6 +2,7 @@
 use Magento\Framework\View\Design\FileResolution\Fallback\TemplateFile as Resolver;
 /**
  * 2023-08-01
+ * @used-by df_bt_entry_is_phtml()
  */
 function df_is_phtml(string $f):bool {return df_ends_with($f, '.phtml');}
 
