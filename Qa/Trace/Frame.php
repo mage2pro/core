@@ -34,7 +34,7 @@ final class Frame extends \Df\Core\O {
 	 * @see df_bt_entry_is_phtml()
 	 * @used-by df_sentry()
 	 */
-	function isPHTML():bool {return dfc($this, function() {return df_ends_with($this->file(), '.phtml');});}
+	function isPHTML():bool {return dfc($this, function() {return df_is_phtml($this->file());});}
 
 	/**
 	 * 2015-04-03 Строка отсутствует при вызовах типа @see call_user_func()

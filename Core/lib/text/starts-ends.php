@@ -19,7 +19,6 @@
  * @used-by \Df\Cron\Model\LoggerHandler::p()
  * @used-by \Df\Paypal\Plugin\Model\Api\Nvp::eligible()
  * @used-by \Df\Qa\Trace\Frame::isClosure()
- * @used-by \Df\Qa\Trace\Frame::isPHTML()
  * @used-by \Df\Sentry\Client::needSkipFrame()
  * @used-by \Df\Sentry\Trace::get_frame_context()
  * @used-by \Df\Zf\Validate\StringT\FloatT::isValid()
