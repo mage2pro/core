@@ -34,7 +34,7 @@ final class L {
 		}
 		/** @var Doc $r */
 		try {
-			$r = df_call_parent($o, '_initDom', $xml);
+			$r = df_call_parent($o, '_initDom', [$xml]);
 		}
 		finally {
 			# 2023-07-17
@@ -56,7 +56,16 @@ final class L {
 	 * @used-by \Df\Framework\Config\Dom::validate()
 	 */
 	static function validate(_P $o, string $schemaFileName, array &$errors = []):bool {
-		df_call_parent($o, 'validate', $schemaFileName, $errors);
+		/**
+		 * 2023-08-01
+		 * 1) «Magento\Framework\Config\Dom::validate():
+		 * Argument #2 ($errors) must be passed by reference, value given
+		 * in vendor/mage2pro/core/Core/lib/reflection\parent.php on line 30»: https://github.com/mage2pro/core/issues/301
+		 * 2) «@see ReflectionMethod::invoke() cannot be used when reference parameters are expected.
+		 * @uses ReflectionMethod::invokeArgs() has to be used instead (passing references in the argument list).»:
+		 * https://www.php.net/manual/reflectionmethod.invoke.php#refsect1-reflectionmethod.invoke-notes
+		 */
+		df_call_parent($o, 'validate', [$schemaFileName, &$errors]);
 		return !array_filter($errors, function($m) {/** @var string $m */
 			# 2015-11-15
 			# Не отключаем валидацию составного файла полностью,

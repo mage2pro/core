@@ -11,10 +11,9 @@ use ReflectionMethod as RM;
  * @used-by \Df\Framework\Config\Dom\L::init()
  * @used-by \Df\Framework\Config\Dom\L::validate()
  * @param object $o
- * @param mixed ...$a [optional]
  * @return mixed
  */
-function df_call_parent($o, string $m, ...$a) {
+function df_call_parent($o, string $m, array $a = []) {
 	$rc = new RC($c = get_class($o)); /** @var RC $rc */ /** @var string $c */
 	$rc2 = df_assert($rc->getParentClass(), "`{$c}` does not have a parent."); /** @var RC $rc2 */
 	df_assert($rc2->hasMethod($m), "The `{$rc2->getName()}` class does not have the `{$m}` method.");
@@ -27,5 +26,14 @@ function df_call_parent($o, string $m, ...$a) {
 	 * That is why I use @noinspection PhpExpressionResultUnusedInspection
 	 */
 	$rm->setAccessible(true);
-	return $rm->invoke($o, ...$a);
+	/**
+	 * 2023-08-01
+	 * 1) «Magento\Framework\Config\Dom::validate():
+	 * Argument #2 ($errors) must be passed by reference, value given
+	 * in vendor/mage2pro/core/Core/lib/reflection\parent.php on line 30»: https://github.com/mage2pro/core/issues/301
+	 * 2) «@see ReflectionMethod::invoke() cannot be used when reference parameters are expected.
+	 * @uses ReflectionMethod::invokeArgs() has to be used instead (passing references in the argument list).»:
+	 * https://www.php.net/manual/reflectionmethod.invoke.php#refsect1-reflectionmethod.invoke-notes
+	 */
+	return $rm->invokeArgs($o, $a);
 }
