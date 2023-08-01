@@ -13,16 +13,6 @@ use ReflectionClass as RC;
 function df_class_file($c):string {return df_path_n((new RC(df_cts(df_ctr($c))))->getFileName());}
 
 /**
- * 2016-01-01
- * 2016-10-20
- * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
- * https://3v4l.org/k6Hd5
- * @used-by \Df\Config\Plugin\Model\Config\SourceFactory::aroundCreate()
- * @param string|object $c
- */
-function df_class_my($c):bool {return in_array(df_class_f($c), ['Df', 'Dfe', 'Dfr']);}
-
-/**
  * 2016-07-10 «Df\PaypalClone\W\Handler» => «Df\PaypalClone\Request».
  * 2022-11-26
  * We can not declare the argument as `string ...$newSuffix` because such a syntax will reject arrays: https://3v4l.org/jFdPm

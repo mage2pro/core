@@ -14,6 +14,16 @@ use ReflectionClass as RC;
 function df_class_exists(string $c):bool {$c = df_ctr($c); return @class_exists($c);}
 
 /**
+ * 2016-01-01
+ * 2016-10-20
+ * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
+ * https://3v4l.org/k6Hd5
+ * @used-by \Df\Config\Plugin\Model\Config\SourceFactory::aroundCreate()
+ * @param string|object $c
+ */
+function df_class_my($c):bool {return in_array(df_class_f($c), ['Df', 'Dfe', 'Dfr']);}
+
+/**
  * 2017-01-11 http://stackoverflow.com/a/666701
  * @used-by df_con_hier_suf()
  * @used-by \Df\Core\R\ConT::generic()
