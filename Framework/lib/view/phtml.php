@@ -1,6 +1,11 @@
 <?php
 use Magento\Framework\View\Design\FileResolution\Fallback\TemplateFile as Resolver;
 /**
+ * 2023-08-01
+ */
+function df_is_phtml(string $f):bool {return df_ends_with($f, '.phtml');}
+
+/**
  * 2017-05-11
  * @used-by \Dfe\Portal\Router::match()
  * @param string|object $m

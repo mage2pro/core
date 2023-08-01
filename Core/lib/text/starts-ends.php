@@ -9,6 +9,7 @@
  * @used-by df_append()
  * @used-by df_ends_with()
  * @used-by df_is_bin_magento()
+ * @used-by df_is_phtml()
  * @used-by df_referer_ends_with()
  * @used-by mnr_recurring_is()
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Customer\Api\AccountManagementInterface::aroundIsEmailAvailable() (canadasatellite.ca, https://github.com/canadasatellite-ca/core/issues/1)
