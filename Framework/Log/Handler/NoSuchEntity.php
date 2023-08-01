@@ -1,6 +1,5 @@
 <?php
 namespace Df\Framework\Log\Handler;
-use Exception as E;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
 /**
