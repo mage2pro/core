@@ -89,6 +89,7 @@ function df_cc_n(...$a):string {return df_ccc("\n", ...$a);}
  * @used-by \Df\Config\Comment::groupPath()
  * @used-by \Df\Config\Source::sibling()
  * @used-by \Df\Intl\Js::_toHtml()
+ * @used-by \Dfe\Portal\Router::match()
  * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  * @used-by \Inkifi\Mediaclip\API\Client::urlBase()
