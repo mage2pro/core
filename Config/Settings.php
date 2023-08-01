@@ -141,12 +141,11 @@ abstract class Settings {
 	 * 2017-02-05
 	 * @see \Df\Shipping\Settings::enable()
 	 * @see \Dfe\BackendLoginAutocomplete\Settings::enable()
+	 * @used-by dfe_portal_enabled()
 	 * @used-by \AlbumEnvy\Popup\Content::_toHtml()
 	 * @used-by \CanadaSatellite\Amelia\Block::_toHtml() (canadasatellite.ca, https://github.com/canadasatellite-ca/amelia/issues/1)
 	 * @used-by \Df\Framework\Mail\TransportObserver::execute()
 	 * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
-	 * @used-by \Dfe\Portal\Plugin\Store\Model\PathConfig::afterGetDefaultPath()
-	 * @used-by \Dfe\Portal\Plugin\Theme\Model\View\Design::aroundGetConfigurationDesignTheme()
 	 * @used-by \Dfe\Sift\Observer::f()
 	 * @used-by \Dfe\Stripe\Block\Js::_toHtml()
 	 * @used-by \Dfe\TBCBank\API\Client::proxy()
@@ -463,6 +462,8 @@ abstract class Settings {
 
 	/**
 	 * 2016-07-12 https://php.net/manual/function.get-called-class.php#115790
+	 * @used-by dfe_portal_enabled()
+	 * @used-by dfe_portal_module_name()
 	 * @used-by ikf_pw_api()
 	 * @used-by self::child()
 	 * @used-by self::convention()
