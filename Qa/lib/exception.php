@@ -21,6 +21,7 @@ function df_is_x($v):bool {return $v instanceof E;}
  * @used-by df_xts()
  * @used-by df_xtsd()
  * @used-by \Df\Core\Exception::__construct()
+ * @used-by \Dfe\YandexKassa\W\Responder::error()
  */
 function df_is_th($v):bool {return $v instanceof T;}
 
@@ -102,6 +103,7 @@ function df_xf(T $t):T {while ($t->getPrevious()) {$t = $t->getPrevious();} retu
  * @used-by \Df\Xml\X::importString()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
  * @used-by \Dfe\Square\Source\Location::exception()
+ * @used-by \Dfe\YandexKassa\Result::attributes()
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
