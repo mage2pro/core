@@ -2,9 +2,9 @@
 namespace Df\Qa;
 use Df\Qa\Trace\Frame;
 use Df\Zf\Validate\StringT\Iso2 as VIso2;
-use Exception as E;
-use ReflectionParameter as RP;
 use Zend_Validate_Interface as Vd;
+use \Exception as E;
+use \ReflectionParameter as RP;
 final class Method {
 	/**
 	 * @used-by df_param_iso2()
