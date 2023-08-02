@@ -61,6 +61,7 @@ final class Error extends \Df\Qa\Failure {
 				df_report('mage2.pro/{date}--{time}.log', $this->report());
 				$inProcess = false;
 			}
+			# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 			catch (Th $th) {
 				df_log($th);
 				throw $th;
@@ -78,6 +79,7 @@ final class Error extends \Df\Qa\Failure {
 				self::i()->log();
 			}
 		}
+		# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 		catch (Th $th) {
 			df_log($th);
 		}
