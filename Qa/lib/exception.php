@@ -10,14 +10,17 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @see df_is_th()
  * @used-by df_lx()
  * @used-by df_lxts()
+ * @used-by \Df\Core\Exception::__construct()
  */
 function df_is_x($v):bool {return $v instanceof E;}
 
 /**
  * 2023-08-02
  * @see df_is_x()
+ * @used-by df_error_create()
  * @used-by df_xts()
  * @used-by df_xtsd()
+ * @used-by \Df\Core\Exception::__construct()
  */
 function df_is_th($v):bool {return $v instanceof T;}
 

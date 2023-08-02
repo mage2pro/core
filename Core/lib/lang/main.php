@@ -1,7 +1,7 @@
 <?php
 use Closure as F;
-use Exception as E;
 use Magento\Framework\App\Filesystem\DirectoryList;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2017-02-07
@@ -116,9 +116,9 @@ function df_sync($id, callable $job, float $interval = 0.1) { /** @var mixed $r 
  * @used-by \TFC\GoogleShopping\Controller\Index\Index::execute() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param F|bool|mixed $onE [optional]
  * @return mixed
- * @throws E
+ * @throws Th
  */
 function df_try(F $try, $onE = null) {
 	try {return $try();} 
-	catch(E $e) {return $onE instanceof F ? $onE($e) : (true === $onE ? df_error($e) : $onE);}
+	catch(Th $th) {return $onE instanceof F ? $onE($th) : (true === $onE ? df_error($th) : $onE);}
 }

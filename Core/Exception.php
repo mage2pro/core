@@ -1,8 +1,9 @@
 <?php
 namespace Df\Core;
-use \Exception as E;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase;
+use \Exception as E;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-07-31
  * Унаследовал наш класс от @see \Magento\Framework\Exception\LocalizedException
@@ -39,11 +40,11 @@ class Exception extends LE implements \ArrayAccess {
 		elseif ($arg0 instanceof Phrase) {
 			$m = $arg0;
 		}
-		elseif (is_string($arg0)) {
-			$m = __($arg0);
-		}
-		elseif ($arg0 instanceof E) {
+		elseif (df_is_x($arg0)) {
 			$prev = $arg0;
+		}
+		elseif (is_string($arg0) || df_is_th($arg0)) {
+			$m = __($arg0);
 		}
 		$arg1 = dfa($args, 1); /** @var int|string|E|Phrase|null $arg1 */
 		if (!is_null($arg1)) {
@@ -277,5 +278,5 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by df_error_create()
 	 * @used-by \Df\Qa\Failure\Exception::i()
 	 */
-	final static function wrap(E $e):self {return $e instanceof self ? $e : new self($e);}
+	final static function wrap(Th $th):self {return $th instanceof self ? $th : new self($th);}
 }

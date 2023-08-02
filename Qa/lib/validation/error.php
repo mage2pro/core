@@ -1,8 +1,8 @@
 <?php
 use Df\Core\Exception as DFE;
-use Exception as E;
 use Magento\Framework\Exception\NotFoundException as NFE;
 use Magento\Framework\Phrase;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-08-27
  * Параметр $caller нам реально нужен,
@@ -147,7 +147,7 @@ function df_abstract($caller):void {
  * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
- * @param string|string[]|mixed|E|Phrase|null ...$a
+ * @param string|string[]|mixed|Th|Phrase|null ...$a
  * @throws DFE
  */
 function df_error(...$a):void {
@@ -173,9 +173,9 @@ function df_error(...$a):void {
  * @used-by df_error()
  * @used-by df_error_html()
  * @used-by \Df\API\Client::_p()
- * @param string|string[]|mixed|E|Phrase|null $m [optional]
+ * @param string|string[]|mixed|Th|Phrase|null $m [optional]
  */
-function df_error_create($m = null):DFE {return $m instanceof E ? DFE::wrap($m) :
+function df_error_create($m = null):DFE {return df_is_th($m) ? DFE::wrap($m) :
 	new DFE($m instanceof Phrase ? $m : (
 		/**
 		 * 2019-12-16
