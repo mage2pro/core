@@ -130,7 +130,8 @@ function dfp_refund(P $p, string $tid, $a = null) {
 		# https://github.com/mage2pro/stripe/issues/43
 		# I am unable to reproduce it myself.
 		# 2022-11-09 The PHPStorm warning is intentionally ignored here.
-		,function(\Exception $e) {return 'lennyshoe.com' === df_domain_current() ? null : df_error($e);}
+		# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+		,function(Throwable $th) {return 'lennyshoe.com' === df_domain_current() ? null : df_error($th);}
 	); /** @var CM|false $cm */
 	/**
 	 * 2016-12-30
