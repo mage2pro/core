@@ -35,12 +35,13 @@ class Responder {
 
 	/**
 	 * 2017-09-13
+	 * 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @param \Exception|string $e
+	 * @param \Throwable|string $t
 	 */
-	final function setError($e):void {$this->set($this->error($e));}
+	final function setError($t):void {$this->set($this->error($t));}
 
 	/**
 	 * 2017-09-13

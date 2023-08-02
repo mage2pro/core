@@ -57,13 +57,14 @@ class Action extends \Df\Payment\Action {
 			$this->ignoredLog($e);
 			$responder->setIgnored($e);
 		}
-		catch (\Exception $e) {
-			df_log($e, $m);
+		# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+		catch (\Throwable $th) {
+			df_log($th, $m);
 			if ($responder) {
-				$responder->setError($e);
+				$responder->setError($th);
 			}
 			else {
-				$r = Responder::defaultError($e);
+				$r = Responder::defaultError($th);
 			}
 		}
 		$r = $r ?: $responder->get();
