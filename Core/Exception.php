@@ -275,6 +275,7 @@ class Exception extends LE implements \ArrayAccess {
 	private $_stackLevelsCountToSkip = 0;
 
 	/**
+	 * 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @used-by df_error_create()
 	 * @used-by \Df\Qa\Failure\Exception::i()
 	 */
