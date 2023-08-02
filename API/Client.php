@@ -1,6 +1,6 @@
 <?php
 namespace Df\API;
-use Df\API\Exception as E;
+use Df\API\Exception as eAPI;
 use Df\API\Exception\HTTP as eHTTP;
 use Df\API\Response\Validator;
 use Df\Config\Settings\IProxy;
@@ -11,6 +11,7 @@ use Laminas\Filter\FilterChain;
 use Laminas\Filter\FilterInterface as IFilter;
 use Magento\Store\Model\Store;
 use Zend_Http_Client_Adapter_Socket as aSocket;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2017-07-05
  * @see \Dfe\Zoho\API\Client
@@ -386,7 +387,8 @@ abstract class Client {
 				);
 			}
 		}
-		catch (\Exception $e) {
+		# 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+		catch (Th $th) {
 			/** @var string $long */ /** @var string $short */
 			# 2020-03-02, 2022-10-31
 			# 1) Symmetric array destructuring requires PHP ≥ 7.1:
@@ -396,7 +398,7 @@ abstract class Client {
 			# https://3v4l.org/3O92j
 			# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 			# https://stackoverflow.com/a/28233499
-			list($long, $short) = $e instanceof E ? [$e->long(), $e->short()] : [null, df_xts($e)];
+			list($long, $short) = $th instanceof eAPI ? [$th->long(), $th->short()] : [null, df_xts($th)];
 			$req = df_zf_http_last_req($c); /** @var string $req */
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
 			$path = df_url_path($this->url()); /** @var string $path */
