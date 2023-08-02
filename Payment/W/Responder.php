@@ -4,6 +4,7 @@ use Df\Framework\W\Result as wResult;
 use Df\Framework\W\Result\Text;
 use Df\Payment\W\Exception\Ignored;
 use Magento\Framework\Phrase;
+use \Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2017-09-12
  * @see \Dfe\AllPay\W\Responder
@@ -39,7 +40,7 @@ class Responder {
 	 * @used-by \Df\Payment\W\Action::execute()
 	 * @used-by \Df\Payment\W\Handler::handle()
 	 * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
-	 * @param \Throwable|string $t
+	 * @param Th|string $t
 	 */
 	final function setError($t):void {$this->set($this->error($t));}
 
@@ -75,13 +76,14 @@ class Responder {
 
 	/**
 	 * 2017-09-13
+	 * 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @used-by self::setError()
 	 * @see \Dfe\AllPay\W\Responder::error()
 	 * @see \Dfe\Qiwi\W\Responder::error()
      * @see \Dfe\YandexKassa\W\Responder::error()
-	 * @param \Exception|string $e
+	 * @param Th|string $t
 	 */
-	protected function error($e):wResult {return self::defaultError($e);}
+	protected function error($t):wResult {return self::defaultError($t);}
 
 	/**
 	 * 2017-01-04
@@ -131,9 +133,10 @@ class Responder {
 
 	/**
 	 * 2017-09-13
+	 * 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @used-by self::error()
 	 * @used-by \Df\Payment\W\Action::execute()
-	 * @param \Exception|string $e
+	 * @param Th|string $t
 	 */
-	final static function defaultError($e):wResult {return Text::i(df_lxts($e))->setHttpResponseCode(500);}
+	final static function defaultError($t):wResult {return Text::i(df_lxts($t))->setHttpResponseCode(500);}
 }
