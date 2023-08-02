@@ -4,6 +4,7 @@ use DateTimeZone as DTZ;
 use Magento\Framework\App\ScopeInterface as ScopeA;
 use Magento\Store\Model\Store;
 use Zend_Date as ZD;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-07-19
  * @used-by df_day_of_week_as_digit()
@@ -107,7 +108,7 @@ function df_date_min(ZD $d1, ZD $d2):ZD {return df_date_lt($d1, $d2) ? $d1 : $d2
  * @used-by \Dfe\AllPay\W\Event::time()
  * @param string|null $fmt [optional]
  * @return ZD|null
- * @throws Exception
+ * @throws Th
  */
 function df_date_parse(string $dateS, bool $throw = true, $fmt = null, string $tz = '') {
 	/** @var string $defaultTZ */
@@ -131,9 +132,9 @@ function df_date_parse(string $dateS, bool $throw = true, $fmt = null, string $t
 			$r->setTimezone($defaultTZ);
 		}
 	}
-	catch (Exception $e) {
+	catch (Th $th) {
 		if ($throw) {
-			throw $e;
+			throw $th;
 		}
 		$r = null;
 	}
