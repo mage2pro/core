@@ -8,8 +8,8 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
 /**
  * 2023-08-02
  * @see df_is_th()
- * @used-by df_lx()
  * @used-by df_lxts()
+ * @used-by df_th_as_prev()
  * @used-by \Df\Core\Exception::__construct()
  */
 function df_is_x($v):bool {return $v instanceof E;}
@@ -32,7 +32,7 @@ function df_is_th($v):bool {return $v instanceof T;}
  * @used-by \Dfe\CheckoutCom\Method::leh()
  * @used-by \Dfe\TwoCheckout\Method::api()
  */
-function df_lx(T $t):LE {return $t instanceof LE ? $t : new LE(__(df_xts($t)), df_is_x($t) ? $t : null);}
+function df_lx(T $t):LE {return $t instanceof LE ? $t : new LE(__(df_xts($t)), df_th_as_prev($t));}
 
 /**
  * 2016-03-17
@@ -53,6 +53,14 @@ function df_lxh(callable $f) {/** @var mixed $r */try {$r = $f();} catch (T $t) 
  * @return P|string
  */
 function df_lxts($e) {return !df_is_x($e) ? __($e) : df_xts(df_lx($e));}
+
+/**
+ * 2023-08-03
+ * @used-by df_lx()
+ * @used-by \Df\Payment\PlaceOrderInternal::_place()
+ * @return E|null
+ */
+function df_th_as_prev(T $t) {return df_is_x($t) ? $t : null;}
 
 /**
  * 2023-07-25

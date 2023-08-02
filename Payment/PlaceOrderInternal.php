@@ -9,7 +9,7 @@ use Magento\Quote\Api\CartManagementInterface as IQM;
 use Magento\Quote\Api\Data\CartInterface as IQuote;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdMask;
-use \Exception as E;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 # 2016-07-18
 final class PlaceOrderInternal {
 	/**
@@ -35,7 +35,7 @@ final class PlaceOrderInternal {
 			try {$oid = df_quote_m()->placeOrder($this->qid());}
 			finally {BA::restore();}
 		}
-		catch (E $e) {throw new CouldNotSave(__($this->message($e)), $e);}
+		catch (Th $th) {throw new CouldNotSave(__($this->message($th)), df_th_as_prev($th));}
 		/**
 		 * 2018-04-14
 		 * The previous code was:
@@ -55,16 +55,16 @@ final class PlaceOrderInternal {
 	 * 2016-07-18
 	 * 2016-10-24 Сообщение для покупателя функция возвращает, а сообщение для администратора — логирует.
 	 * @used-by self::_place()
-	 * @param E|DFPE $e
+	 * @param Th|DFPE $th
 	 */
-	private function message(E $e):string {
-		$isShipping = df_xts($e) === (string)__('Please specify a shipping method.'); /** @var bool $isShipping */
+	private function message(Th $th):string {
+		$isShipping = df_xts($th) === (string)__('Please specify a shipping method.'); /** @var bool $isShipping */
 		/** @var bool $isSpecific */
-		if (!($isSpecific = $e instanceof DFPE)) {
-			$e = df_xf($e);
+		if (!($isSpecific = $th instanceof DFPE)) {
+			$e = df_xf($th);
 		}
 		if (!$isShipping) {
-			df_log($e);
+			df_log($th);
 		}
 		# 2020-03-02, 2022-10-31
 		# 1) Symmetric array destructuring requires PHP ≥ 7.1:
