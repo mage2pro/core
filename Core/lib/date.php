@@ -3,8 +3,8 @@ use DateTime as DT;
 use DateTimeZone as DTZ;
 use Magento\Framework\App\ScopeInterface as ScopeA;
 use Magento\Store\Model\Store;
+use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 use Zend_Date as ZD;
-use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-07-19
  * @used-by df_day_of_week_as_digit()

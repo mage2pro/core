@@ -1,7 +1,7 @@
 <?php
 use Closure as F;
 use Magento\Framework\App\Filesystem\DirectoryList;
-use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2017-02-07

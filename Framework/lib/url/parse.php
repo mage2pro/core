@@ -1,6 +1,6 @@
 <?php
 use Closure as F;
-use Exception as E;
+use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 use Zend_Uri as zUri;
 use Zend_Uri_Exception as zUriE;
 use Zend_Uri_Http as zUriH;
@@ -12,7 +12,7 @@ use Zend_Uri_Http as zUriH;
  * @used-by Dfe_PortalStripe::view/frontend/templates/page/customers.phtml
  * @param F|bool|mixed $throw [optional]
  * @return string|null
- * @throws E|zUriE
+ * @throws Th|zUriE
  */
 function df_domain(string $u, bool $www = false, $throw = true) {return
 	!($r = df_zuri($u, $throw)->getHost()) ? null : ($www ? $r : df_trim_text_left($r, 'www.'))

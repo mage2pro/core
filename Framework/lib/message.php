@@ -3,7 +3,7 @@ use Magento\Framework\Message\Manager as MM;
 use Magento\Framework\Message\ManagerInterface as IMM;
 use Magento\Framework\Message\MessageInterface as IM;
 use Magento\Framework\Phrase as P;
-use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2016-08-02

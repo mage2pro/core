@@ -2,7 +2,7 @@
 use Df\Core\Exception as DFE;
 use Magento\Framework\Exception\NotFoundException as NFE;
 use Magento\Framework\Phrase;
-use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-08-27
  * Параметр $caller нам реально нужен,
