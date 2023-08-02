@@ -1,7 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
 use Df\Zf\Validate\StringT\FloatT;
-use Exception as E;
 
 /**
  * @used-by df_float_positive()
@@ -71,7 +70,7 @@ function df_float($v, bool $allowNull = true) {/** @var int|int[] $r */
 function df_float_positive($v, bool $allow0 = false, bool $throw = true) {/** @var float|null $r */
 	if (!$throw) {
 		try {$r = df_float_positive($v, $allow0, true);}
-		catch (E $e) {$r = null;}
+		catch (\Throwable) {$r = null;}
 	}
 	else {
 		$r = df_float($v, $allow0);
