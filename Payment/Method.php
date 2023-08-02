@@ -172,7 +172,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 				# да и их диагностические сообщения — это не всегда то, что нам нужно.
 				# По этой причине мы их конвертируем в свои.
 				# Пока данная функциональность используется модулем Stripe.
-				df_log($e = $this->convertException($th));
+				df_log($th = $this->convertException($th));
 				/**
 				 * 2016-03-17
 				 * Чтобы система показала наше сообщение вместо общей фразы типа
@@ -189,7 +189,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 				 * So I write it in the 2 lines as a workaround: $e = df_lx($e); throw $e;
 				 * 2022-11-10 @noinspection PhpUnnecessaryLocalVariableInspection
 				 */
-				$e = df_lx($th); throw $e;
+				$th = df_lx($th); throw $th;
 			}
 		}
 		return $result;
