@@ -22,7 +22,7 @@ use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
 use Magento\Store\Model\Store;
-use \Exception as E;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-02-08
  * 2017-03-30
@@ -165,14 +165,14 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 					df_sentry($this, "{$this->titleB()}: $actionS");
 				}
 			}
-			catch (E $e) {
+			catch (Th $th) {
 				# 2017-01-10
 				# Конвертация исключительных ситуаций библиотеки платёжной системы в наши.
 				# Исключительные ситуации библиотеки платёжной системы имеют свою внутреннуюю структуру,
 				# да и их диагностические сообщения — это не всегда то, что нам нужно.
 				# По этой причине мы их конвертируем в свои.
 				# Пока данная функциональность используется модулем Stripe.
-				df_log($e = $this->convertException($e));
+				df_log($e = $this->convertException($th));
 				/**
 				 * 2016-03-17
 				 * Чтобы система показала наше сообщение вместо общей фразы типа
@@ -189,7 +189,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 				 * So I write it in the 2 lines as a workaround: $e = df_lx($e); throw $e;
 				 * 2022-11-10 @noinspection PhpUnnecessaryLocalVariableInspection
 				 */
-				$e = df_lx($e); throw $e;
+				$e = df_lx($th); throw $e;
 			}
 		}
 		return $result;
@@ -1835,10 +1835,11 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * да и их диагностические сообщения — это не всегда то, что нам нужно.
 	 * По этой причине мы их конвертируем в свои.
 	 * Пока данная функциональность используется модулем Stripe.
+	 * 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @used-by self::action()
 	 * @see \Dfe\Stripe\Method::convertException()
 	 */
-	protected function convertException(E $e):E {return $e;}
+	protected function convertException(Th $th):Th {return $th;}
 
 	/**
 	 * 2016-03-06
