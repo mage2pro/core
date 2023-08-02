@@ -1,7 +1,7 @@
 <?php
 use Df\Qa\Failure\Exception as QE;
-use Exception as E;
 use Magento\Framework\DataObject as _DO;
+use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * @used-by df_caller_m()
  * @used-by df_error()
@@ -27,14 +27,14 @@ use Magento\Framework\DataObject as _DO;
  * @used-by \Dfe\GoogleFont\Fonts\Sprite::draw()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
  * @used-by \Dfe\Sift\Observer::f()
- * @param _DO|mixed[]|mixed|E $v
+ * @param _DO|mixed[]|mixed|T $v
  * @param string|object|null $m [optional]
  */
 function df_log($v, $m = null, array $d = []):void {
-	$isE = $v instanceof E; /** @var bool $isE */
-	$m = $m ? df_module_name($m) : ($isE ? df_x_module($v) : df_caller_module());
-	df_log_l($m, ...($isE ? [$v, $d] : [!$d ? $v : (dfa_merge_r($d, is_array($v) ? $v : ['message' => $v])), []]));
-	df_sentry($m, ...($isE || !is_array($v) ? [$v, $d] : ['', dfa_merge_r($d, $v)]));
+	$isT = df_is_th($v); /** @var bool $isT */
+	$m = $m ? df_module_name($m) : ($isT ? df_x_module($v) : df_caller_module());
+	df_log_l($m, ...($isT ? [$v, $d] : [!$d ? $v : (dfa_merge_r($d, is_array($v) ? $v : ['message' => $v])), []]));
+	df_sentry($m, ...($isT || !is_array($v) ? [$v, $d] : ['', dfa_merge_r($d, $v)]));
 }
 
 /**
