@@ -96,6 +96,7 @@ abstract class Handler implements IMA {
 			$this->log();
 			$this->responder()->setNotForUs(df_xts($e));
 		}
+		# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 		catch (Th $th) {
 			$this->log();
 			$this->log($th);
