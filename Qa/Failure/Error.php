@@ -1,5 +1,6 @@
 <?php
 namespace Df\Qa\Failure;
+use \Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 final class Error extends \Df\Qa\Failure {
 	/**
 	 * 2015-04-04
@@ -60,9 +61,9 @@ final class Error extends \Df\Qa\Failure {
 				df_report('mage2.pro/{date}--{time}.log', $this->report());
 				$inProcess = false;
 			}
-			catch (\Exception $e) {
-				df_log($e);
-				throw $e;
+			catch (Th $th) {
+				df_log($th);
+				throw $th;
 			}
 		}
 	}
@@ -77,8 +78,8 @@ final class Error extends \Df\Qa\Failure {
 				self::i()->log();
 			}
 		}
-		catch (\Exception $e) {
-			df_log($e);
+		catch (Th $th) {
+			df_log($th);
 		}
 	}
 
