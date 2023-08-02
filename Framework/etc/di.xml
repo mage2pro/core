@@ -67,6 +67,12 @@ because `Magento\Framework\App\Cache\Frontend\Factory` is initialized before thi
 	<type name='Magento\Framework\App\ResourceConnection'>
 		<plugin name='Df\Framework\Plugin\App\ResourceConnection' type='Df\Framework\Plugin\App\ResourceConnection'/>
 	</type>
+<!-- 2023-08-02
+"Log errors passed to \Magento\Framework\App\Bootstrap::terminate() in the developer mode":
+https://github.com/mage2pro/core/issues/309 -->
+	<type name='Magento\Framework\App\Response\HttpInterface'>
+		<plugin name='Df\Framework\Plugin\App\Response\HttpInterface' type='Df\Framework\Plugin\App\Response\HttpInterface'/>
+	</type>
 <!-- 2015-12-07
 Цель плагина — поддержка события «df_controller_front_send_response_after».
 *) "Incosistency: the event «controller_front_send_response_after» is removed from Magento 2, but the event «controller_front_send_response_before» is left": https://mage2.pro/t/288
