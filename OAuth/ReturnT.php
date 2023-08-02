@@ -27,7 +27,8 @@ abstract class ReturnT extends _P {
 	 */
 	function execute():Redirect {
 		try {$this->_execute();}
-		catch (\Exception $e) {df_log($e); df_message_error($e);}
+		# 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+		catch (\Throwable $th) {df_log($th); df_message_error($th);}
 		$this->postProcess();
 		return $this->resultRedirectFactory->create()->setUrl($this->redirectUrl());
 	}
