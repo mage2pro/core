@@ -1,7 +1,7 @@
 <?php
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
-use Exception as E;
+use \Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2016-11-10
@@ -21,7 +21,7 @@ use Exception as E;
  * @used-by \Df\Payment\W\Strategy\Refund::_handle()
  * @param string|object $v
  * @param string|object|null $c [optional]
- * @param string|E|null $m [optional]
+ * @param string|Th|null $m [optional]
  * @return string|object
  * @throws DFE
  */
@@ -102,7 +102,7 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
  * @param mixed $cond
- * @param string|E|null $m [optional]
+ * @param string|Th|null $m [optional]
  * @return mixed
  * @throws DFE
  */
@@ -145,7 +145,7 @@ function df_assert_between($v, $min, $max, bool $inclusive = true) {
  * 2016-08-03
  * @used-by df_ar()
  * @used-by \Df\Config\Backend\Serialized::entityC()
- * @param string|E $m [optional]
+ * @param string|Th $m [optional]
  * @throws DFE
  */
 function df_assert_class_exists(string $c, $m = null):string {
@@ -160,7 +160,7 @@ function df_assert_class_exists(string $c, $m = null):string {
  * @used-by \Dfe\Omise\W\Event\Charge\Complete::isPending()
  * @param string|float|int|bool|null $v
  * @param array(string|float|int|bool|null) $a
- * @param string|E $m [optional]
+ * @param string|Th $m [optional]
  * @return string|float|int|bool|null
  * @throws DFE
  */
@@ -183,7 +183,7 @@ function df_assert_in($v, array $a, $m = null) {
  * @used-by \Dfe\GoogleFont\Fonts\Sprite::draw()
  * @used-by \Df\Xml\X::asXMLPart()
  * @param mixed $v
- * @param string|E $m [optional]
+ * @param string|Th $m [optional]
  * @return mixed
  * @throws DFE
  */
@@ -215,7 +215,7 @@ function df_assert_sne(string $v, int $sl = 0):string {
  * 2016-08-09
  * @used-by dfaf()
  * @param Traversable|array $v
- * @param string|E $m [optional]
+ * @param string|Th $m [optional]
  * @return Traversable|array
  * @throws DFE
  */
