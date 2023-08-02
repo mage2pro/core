@@ -1,5 +1,5 @@
 <?php
-use Exception as E;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2017-11-19
@@ -18,7 +18,7 @@ function df_caller_c(int $o = 0):string {return df_first(df_explode_method(df_ca
  * @used-by df_sentry()
  * @used-by df_x_entry()
  * @used-by \Df\Framework\Log\Dispatcher::handle()
- * @param E|int|null|array(array(string => string|int)) $p [optional]
+ * @param Th|int|null|array(array(string => string|int)) $p [optional]
  * @param callable|null $f [optional]
  * @return array(string => string|int)
  */

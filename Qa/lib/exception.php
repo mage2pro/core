@@ -3,6 +3,23 @@ use Df\Core\Exception as DFE;
 use Exception as E;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase as P;
+use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+
+/**
+ * 2023-08-02
+ * @see df_is_th()
+ * @used-by df_lx()
+ * @used-by df_lxts()
+ */
+function df_is_x($v):bool {return $v instanceof E;}
+
+/**
+ * 2023-08-02
+ * @see df_is_x()
+ * @used-by df_xts()
+ * @used-by df_xtsd()
+ */
+function df_is_th($v):bool {return $v instanceof T;}
 
 /**
  * 2016-03-17
@@ -12,7 +29,7 @@ use Magento\Framework\Phrase as P;
  * @used-by \Dfe\CheckoutCom\Method::leh()
  * @used-by \Dfe\TwoCheckout\Method::api()
  */
-function df_lx(E $e):LE {return $e instanceof LE ? $e : new LE(__(df_xts($e)), $e);}
+function df_lx(T $t):LE {return $t instanceof LE ? $t : new LE(__(df_xts($t)), df_is_x($t) ? $t : null);}
 
 /**
  * 2016-03-17
@@ -23,23 +40,23 @@ function df_lx(E $e):LE {return $e instanceof LE ? $e : new LE(__(df_xts($e)), $
  * @return mixed
  * @throws LE
  */
-function df_lxh(callable $f) {/** @var mixed $r */try {$r = $f();} catch (E $e) {throw df_lx($e);} return $r;}
+function df_lxh(callable $f) {/** @var mixed $r */try {$r = $f();} catch (T $t) {throw df_lx($t);} return $r;}
 
 /**
  * 2016-07-20
  * @used-by \Df\Payment\W\Responder::defaultError()
  * @used-by \Dfe\AllPay\W\Responder::error()
- * @param E|string $e
+ * @param T|string $e
  * @return P|string
  */
-function df_lxts($e) {return !$e instanceof E ? __($e) : df_xts(df_lx($e));}
+function df_lxts($e) {return !df_is_x($e) ? __($e) : df_xts(df_lx($e));}
 
 /**
  * 2023-07-25
  * @used-by df_log_l()
  * @used-by df_x_module()
  */
-function df_x_entry(E $e):array {return df_caller_entry($e, function(array $a):bool {return
+function df_x_entry(T $t):array {return df_caller_entry($t, function(array $a):bool {return
 	($c = dfa($a, 'class')) && df_module_enabled($c)
 ;});}
 
@@ -48,7 +65,7 @@ function df_x_entry(E $e):array {return df_caller_entry($e, function(array $a):b
  * @used-by df_log()
  * @used-by df_sentry()
  */
-function df_x_module(E $e):string {return df_module_name(dfa(df_x_entry($e), 'class'));}
+function df_x_module(T $t):string {return df_module_name(dfa(df_x_entry($t), 'class'));}
 
 /**
  * 2016-07-18
@@ -56,7 +73,7 @@ function df_x_module(E $e):string {return df_module_name(dfa(df_x_entry($e), 'cl
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Qa\Failure\Exception::trace()
  */
-function df_xf(E $e):E {while ($e->getPrevious()) {$e = $e->getPrevious();} return $e;}
+function df_xf(T $t):T {while ($t->getPrevious()) {$t = $t->getPrevious();} return $t;}
 
 /**
  * @used-by df_lx()
@@ -77,10 +94,10 @@ function df_xf(E $e):E {while ($e->getPrevious()) {$e = $e->getPrevious();} retu
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
- * @param E|P|string $e
+ * @param T|P|string $t
  */
-function df_xts($e):string {return df_adjust_paths_in_message(
-	!$e instanceof E ? $e : ($e instanceof DFE ? $e->message() : $e->getMessage())
+function df_xts($t):string {return df_adjust_paths_in_message(
+	!df_is_th($t) ? $t : ($t instanceof DFE ? $t->message() : $t->getMessage())
 );}
 
 /**
@@ -88,8 +105,8 @@ function df_xts($e):string {return df_adjust_paths_in_message(
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Dfe\Klarna\Test\Charge::t01()
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
- * @param E|string $e
+ * @param T|string $t
  */
-function df_xtsd($e):string {return df_adjust_paths_in_message(
-	!$e instanceof E ? $e : ($e instanceof DFE ? $e->messageD() : $e->getMessage())
+function df_xtsd($t):string {return df_adjust_paths_in_message(
+	!df_is_th($t) ? $t : ($t instanceof DFE ? $t->messageD() : $t->getMessage())
 );}
