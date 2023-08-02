@@ -5,13 +5,11 @@ use Df\Framework\Log\Handler\BrokenReference as BrokenReferenceH;
 use Df\Framework\Log\Handler\Cookie as CookieH;
 use Df\Framework\Log\Handler\NoSuchEntity as NoSuchEntityH;
 use Df\Framework\Log\Handler\PayPal as PayPalH;
-use Exception as E;
 use Magento\Framework\App\Bootstrap as B;
 use Magento\Framework\DataObject as O;
-# 2021-09-08 https://github.com/magento/magento2/blob/2.0.0/lib/internal/Magento/Framework/Exception/AlreadyExistsException.php
-use Magento\Framework\Exception\AlreadyExistsException as AlreadyExists;
 use Magento\Framework\Logger\Handler\System as _P;
 use Monolog\Logger as L;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2019-10-13
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -72,7 +70,7 @@ class Dispatcher extends _P {
 				 * https://github.com/mage2pro/core/issues/160
 				 */
 				if (B::class != $c || 'run' !== $f) {
-					$ef = $rc->ef(); /** @var E|null $ef */
+					$ef = $rc->ef(); /** @var Th|null $ef */
 					$args = [null, $ef ?: $d, $ef ? $rc->extra() : []]; /** @var mixed  $args */
 					# 2023-07-25
 					# I intentionally do not pass these messages to Sentry
