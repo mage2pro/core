@@ -3,6 +3,7 @@ use Magento\Framework\Message\Manager as MM;
 use Magento\Framework\Message\ManagerInterface as IMM;
 use Magento\Framework\Message\MessageInterface as IM;
 use Magento\Framework\Phrase as P;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2016-08-02
@@ -23,7 +24,7 @@ function df_message_add(string $s, string $type):void {df_message_m()->addMessag
  * @used-by \Df\Config\Backend\Serialized::processA()
  * @used-by \Df\OAuth\ReturnT::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
- * @param string|P|Exception $m
+ * @param string|P|Th $m
  */
 function df_message_error($m):void {df_message_add(df_xts($m), IM::TYPE_ERROR);}
 

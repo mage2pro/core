@@ -1,8 +1,9 @@
 <?php
 namespace Df\Config;
 use Magento\Config\Model\Config\Structure\AbstractElement as ConfigElement;
-use Magento\Config\Model\Config\Structure\Element\Section;
 use Magento\Config\Model\Config\Structure\ElementInterface as IConfigElement;
+use Magento\Config\Model\Config\Structure\Element\Section;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-08-03
  * Since Magento 2.1.0, a backend model is created
@@ -52,8 +53,9 @@ class Backend extends \Magento\Framework\App\Config\Value {
 	 */
 	function save():self {
 		try {$this->dfSaveBefore(); parent::save();}
-		catch (\Exception $e) {
-			df_log($e);
+		# 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+		catch (Th $th) {
+			df_log($th);
 			/**
 			 * 2017-09-27
 			 * Previously, I had the following code here: throw df_lx($e);
@@ -65,7 +67,7 @@ class Backend extends \Magento\Framework\App\Config\Value {
 			 * I use the same solution here: \Df\Payment\Method::action()
 			 * 2017-10-19 Previously, I had the following code here: $e = df_lx($e); throw $e;
 			 */
-			df_message_error($e);
+			df_message_error($th);
 		}
 		finally {
 			/**
