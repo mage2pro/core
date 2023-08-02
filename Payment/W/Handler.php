@@ -5,7 +5,7 @@ use Df\Payment\Method as M;
 use Df\Payment\W\Exception\NotForUs;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Payment as OP;
-use \Exception as E;
+use \Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-07-09 Портировал из Российской сборки Magento.
  * @see \Dfe\GingerPaymentsBase\W\Handler
@@ -96,9 +96,9 @@ abstract class Handler implements IMA {
 			$this->log();
 			$this->responder()->setNotForUs(df_xts($e));
 		}
-		catch (E $e) {
+		catch (Th $th) {
 			$this->log();
-			$this->log($e);
+			$this->log($th);
 			# 2016-07-15
 			# Раньше тут стояло
 			#	if ($this->_order) {
@@ -111,7 +111,7 @@ abstract class Handler implements IMA {
 			# В случае сбоя платёжная система будет присылать повторные оповещения —
 			# вот пусть и присылает, авось мы к тому времени уже починим программу,
 			# если поломка была на нашей строне.
-			$this->responder()->setError($e);
+			$this->responder()->setError($th);
 		}
 	}
 
@@ -170,9 +170,10 @@ abstract class Handler implements IMA {
 	/**
 	 * 2016-12-26
 	 * 2017-03-30 Используем @uses dfc(), чтобы метод игнорировал повторный вызов с прежним параметром.
+	 * 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @used-by self::handle()
 	 */
-	private function log(E $e = null):void {dfc($this, function(E $e = null) {
+	private function log(Th $th = null):void {dfc($this, function(Th $th = null) {
 		/**
 		 * 2017-03-30
 		 * Намеренно не используем здесь @see self::m(),
@@ -181,8 +182,8 @@ abstract class Handler implements IMA {
 		 */
 		$m = $this->_f->m(); /** @var M $m */
 		$title = dfpm_title($m); /** @var string $title */
-		/** @var E|string $v */ /** @var string|null $suffix */
-		if ($e) {
+		/** @var Th|string $v */ /** @var string|null $suffix */
+		if ($th) {
 			# 2020-03-02, 2022-10-31
 			# 1) Symmetric array destructuring requires PHP ≥ 7.1:
 			#		[$a, $b] = [1, 2];
@@ -191,8 +192,8 @@ abstract class Handler implements IMA {
 			# https://3v4l.org/3O92j
 			# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 			# https://stackoverflow.com/a/28233499
-			list($v, $suffix) = [$e, 'exception'];
-			df_log($e, $m);
+			list($v, $suffix) = [$th, 'exception'];
+			df_log($th, $m);
 		}
 		else {
 			$ev = $this->_e; /** @var Event $ev */
@@ -205,7 +206,7 @@ abstract class Handler implements IMA {
 		# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`": https://github.com/mage2pro/core/issues/249
 		df_sentry($m, $v, $d = $this->r()); /** @var mixed $d */
 		df_log_l($m, $d, $suffix);
-	}, [$e]);}
+	}, [$th]);}
 
 	/**
 	 * 2017-03-10
