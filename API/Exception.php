@@ -23,7 +23,6 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @see \Dfe\Vantiv\API\Validator::long()
 	 * @see \Inkifi\Mediaclip\API\Validator::long()
 	 * @see \Inkifi\Pwinty\API\Validator::long()
-	 * @return string
 	 */
 	abstract function long():string;
 
