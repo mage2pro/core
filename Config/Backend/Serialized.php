@@ -2,6 +2,7 @@
 namespace Df\Config\Backend;
 use Df\Config\Backend;
 use Df\Config\O as E;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2015-12-07
  * Вообще, в ядре есть свои схожие классы
@@ -133,8 +134,9 @@ class Serialized extends Backend {
 		 * В частности, @uses \Df\Config\A::get()
 		 * вызывает у объектов метод @see \Df\Config\ArrayItem::getId(),
 		 * который может приводить к сбою при некорректности данных.
+		 * 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 		 */
-		catch (\Exception $e) {
+		catch (Th $th) {
 			/**
 			 * 2016-08-02
 			 * Если некорректость данных обнаружена при их сохранении,
@@ -154,12 +156,12 @@ class Serialized extends Backend {
 			 * который с релизом модуля больше никогда не понадобится.
 			 */
 			if ($this->isSaving()) {
-				throw $e;
+				throw $th;
 			}
 			$r = [];
 			//df_cfg_delete($this->getPath());
 			//df_cfg_save($this->getPath(), null, );
-			df_log($e);
+			df_log($th);
 			df_message_error(__(
 				"The store's database contains incorrect data for the «<b>%1</b>» option."
 				."<br/>The data for this options are reset.", $this->label()
