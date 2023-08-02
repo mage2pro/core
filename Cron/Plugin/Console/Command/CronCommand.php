@@ -17,12 +17,13 @@ final class CronCommand {
 	 */
 	function aroundRun(Sb $sb, \Closure $f, II $i, IO $o):int {
 		try {return $f($i, $o);}
-		catch (\Exception $e) {
+		# 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+		catch (\Throwable $th) {
 			# 2023-07-25
 			# I intentionally do not pass Cron errors to Sentry
 			# because I afraid that they could be too numerous in some third-party websites.
-			df_log_l($this, $e);
-			throw $e;
+			df_log_l($this, $th);
+			throw $th;
 		}
 	}
 }
