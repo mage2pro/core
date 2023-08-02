@@ -1,5 +1,6 @@
 <?php
 namespace Df\Config\Source;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2017-07-02
  * @see \Df\Config\Source\API\Key
@@ -39,11 +40,12 @@ abstract class API extends \Df\Config\Source {
 
 	/**
 	 * 2017-02-15
+	 * 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @used-by self::map()
 	 * @see \Dfe\Square\Source\Location::exception()
 	 * @return array(string => string)
 	 */
-	protected function exception(\Exception $e):array {return ['error' => $e->getMessage()];}
+	protected function exception(Th $th):array {return ['error' => $th->getMessage()];}
 
 	/**
 	 * 2017-07-02
