@@ -1,4 +1,6 @@
 <?php
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+
 /**  
  * 2020-02-04
  * @used-by dfp_card_format_last4()
@@ -73,7 +75,7 @@ function df_kv_table(array $a):string {return df_tag('table', [], df_map_k(
 /**
  * @used-by df_format()
  * @param string|mixed[] $s
- * @throws Exception
+ * @throws Th
  */
 function df_sprintf($s):string {/** @var string $r */ /** @var mixed[] $args */
 	# 2020-03-02, 2022-10-31
@@ -86,14 +88,15 @@ function df_sprintf($s):string {/** @var string $r */ /** @var mixed[] $args */
 	# https://stackoverflow.com/a/28233499
 	list($s, $args) = is_array($s) ? [df_first($s), $s] : [$s, func_get_args()];
 	try {$r = df_sprintf_strict($args);}
-	catch (Exception $e) {$r = $s;}
+	# 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+	catch (Th $th) {$r = $s;}
 	return $r;
 }
 
 /**
  * @used-by df_sprintf()
  * @param string|mixed[] $s
- * @throws Exception
+ * @throws Th
  */
 function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $args */
 	# 2020-03-02, 2022-10-31
@@ -110,7 +113,8 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
 	}
 	else {
 		try {$r = vsprintf($s, df_tail($args));}
-		catch (Exception $e) {
+		# 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+		catch (Th $th) {
 			static $inProcess = false; /** @var bool $inProcess */
 			if (!$inProcess) {
 				$inProcess = true;
@@ -118,7 +122,7 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
 					'df_sprintf_strict failed: «{message}».'
 					. "\nPattern: {$s}."
 					. "\nParameters:\n{params}."
-					,['{message}' => df_xts($e), '{params}' => print_r(df_tail($args), true)]
+					,['{message}' => df_xts($th), '{params}' => print_r(df_tail($args), true)]
 				);
 			}
 		}
