@@ -17,8 +17,11 @@ function df_is_x($v):bool {return $v instanceof E;}
 /**
  * 2023-08-02
  * @see df_is_x()
+ * @used-by df_bt()
+ * @used-by df_bt_inc()
  * @used-by df_error_create()
  * @used-by df_log()
+ * @used-by df_log_l()
  * @used-by df_xts()
  * @used-by df_xtsd()
  * @used-by \Df\Core\Exception::__construct()

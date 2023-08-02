@@ -60,18 +60,18 @@ function df_log($v, $m = null, array $d = []):void {
  * @used-by \Mageside\CanadaPostShipping\Model\Carrier::_doRatesRequest() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/25)
  * @used-by \Wyomind\SimpleGoogleShopping\Model\Observer::checkToGenerate(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/26)
  * @param string|object|null $m
- * @param string|mixed[]|E $p2
- * @param string|mixed[]|E $p3 [optional]
+ * @param string|mixed[]|T $p2
+ * @param string|mixed[]|T $p3 [optional]
  */
 function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
-	/** @var E|null $e */ /** @var array|string|mixed $d */ /** @var string $suf */ /** @var string $pref */
-	list($e, $d, $suf, $pref) = $p2 instanceof E ? [$p2, $p3, $p4, ''] : [null, $p2, df_ets($p3), $p4];
+	/** @var T|null $t */ /** @var array|string|mixed $d */ /** @var string $suf */ /** @var string $pref */
+	list($t, $d, $suf, $pref) = df_is_th($p2) ? [$p2, $p3, $p4, ''] : [null, $p2, df_ets($p3), $p4];
 	if (!$m) {
-		if (!$e) {
+		if (!$t) {
 			$m = df_caller_module();
 		}
 		else {
-			$en = df_x_entry($e); /** @var array(string => string) $en */
+			$en = df_x_entry($t); /** @var array(string => string) $en */
 			list($m, $suf) = [dfa($en, 'class'), dfa($en, 'function', 'exception')];
 		}
 	}
@@ -81,7 +81,7 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 		# then the `*.phtml`'s base name  should be used as the log file name suffix instead of `df_log_l`":
 		# https://github.com/mage2pro/core/issues/269
 		# 2) 2023-07-26 "Add the `$skip` optional parameter to `df_caller_entry()`": https://github.com/mage2pro/core/issues/281
-		$entry = $e ? df_x_entry($e) : df_caller_entry(0, null, ['df_log']); /** @var array(string => string|int) $entry */
+		$entry = $t ? df_x_entry($t) : df_caller_entry(0, null, ['df_log']); /** @var array(string => string|int) $entry */
 		$suf = df_bt_entry_is_phtml($entry) ? basename(df_bt_entry_file($entry)) : df_bt_entry_func($entry);
 	}
 	df_report(
@@ -96,8 +96,8 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 			df_map('df_dump', is_array($d)
 				? [dfa_merge_r($d, ['Mage2.PRO' => df_context()])]
 				: [$d, df_context()])  /** @uses df_dump() */
-			,!$e ? '' : ['EXCEPTION', QE::i($e)->report(), "\n\n"]
-			,($e ? null : "\n") . df_bt_s($e ?: 1)
+			,!$t ? '' : ['EXCEPTION', QE::i($t)->report(), "\n\n"]
+			,($t ? null : "\n") . df_bt_s($t ?: 1)
 		)
 	);
 }
