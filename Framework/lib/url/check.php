@@ -1,12 +1,12 @@
 <?php
-use Exception as E;
 use Magento\Framework\Exception\LocalizedException as LE;
+use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2016-07-12
  * @used-by df_webhook()
- * @param string|E $msg [optional]
- * @throws E|LE
+ * @param string|Th $msg [optional]
+ * @throws Th|LE
  */
 function df_assert_https(string $u, $msg = null):string {return df_check_https_strict($u) ? $u : df_error(
 	$msg ?: "The URL «{$u}» is invalid, because the system expects an URL which starts with «https://»."
