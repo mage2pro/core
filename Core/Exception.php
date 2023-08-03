@@ -40,10 +40,10 @@ class Exception extends LE implements \ArrayAccess {
 		elseif ($arg0 instanceof Phrase) {
 			$m = $arg0;
 		}
-		elseif (df_is_x($arg0)) {
-			$prev = $arg0;
+		elseif (df_is_th($arg0)) {
+			$prev = df_th2x($arg0);
 		}
-		elseif (is_string($arg0) || df_is_th($arg0)) {
+		elseif (is_string($arg0)) {
 			$m = __($arg0);
 		}
 		$arg1 = dfa($args, 1); /** @var int|string|E|Phrase|null $arg1 */

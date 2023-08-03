@@ -10,7 +10,6 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @see df_is_th()
  * @used-by df_lxts()
  * @used-by df_th2x()
- * @used-by \Df\Core\Exception::__construct()
  */
 function df_is_x($v):bool {return $v instanceof E;}
 
@@ -63,6 +62,7 @@ function df_lxts($e) {return !df_is_x($e) ? __($e) : df_xts(df_lx($e));}
 /**
  * 2023-08-03
  * @used-by df_lx()
+ * @used-by \Df\Core\Exception::__construct()
  * @used-by \Df\Payment\PlaceOrderInternal::_place()
  */
 function df_th2x(T $t):E {return df_is_x($t) ? $t : new E(df_xts($t), $t->getCode(), $t);}
