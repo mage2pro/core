@@ -59,7 +59,7 @@ abstract class API extends \Df\Config\Source {
 		$r = df_map_0([], ($met = $this->isRequirementMet()) ? null : $this->requirement());
 		if ($met) {
 			try {$r += $this->fetch();}
-			catch (\Exception $e) {$r = $this->exception($e);}
+			catch (Th $t) {$r = $this->exception($t);}
 		}
 		return $r;
 	}
