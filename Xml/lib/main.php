@@ -417,7 +417,7 @@ function df_xml_parse($x, bool $throw = true) {/** @var X $r */
 		df_param_sne($x, 0);
 		$r = null;
 		try {$r = new X($x);}
-		catch (\Exception $e) {
+		catch (\Throwable $th) {
 			if ($throw) {
 				df_error(
 					"При синтаксическом разборе документа XML произошёл сбой:\n"
@@ -425,7 +425,7 @@ function df_xml_parse($x, bool $throw = true) {/** @var X $r */
 					. "********************\n"
 					. "%s\n"
 					. "********************\n"
-					, df_xts($e)
+					, df_xts($th)
 					, df_trim($x)
 				);
 			}
