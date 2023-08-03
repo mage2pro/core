@@ -191,11 +191,12 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * The top-level keys are bank card tokens there, and their values form the corresponding bank card labels.
 	 * So the TBCBank module (unlike the rest modules) does not do any API requests
 	 * to retrieve a customer's saved cards.
+	 * 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Payer::newCard()  
 	 * @used-by \Dfe\Stripe\Method::cardType()
 	 * @param string|array(string => mixed) $d
 	 * @return object|array(string => mixed)|null
 	 */
-	final function get($d) {try {return $this->_get($d);} catch (\Exception $e) {return null;}}
+	final function get($d) {try {return $this->_get($d);} catch (\Throwable $e) {return null;}}
 }
