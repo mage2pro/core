@@ -35,7 +35,7 @@ final class PlaceOrderInternal {
 			try {$oid = df_quote_m()->placeOrder($this->qid());}
 			finally {BA::restore();}
 		}
-		catch (Th $th) {throw new CouldNotSave(__($this->message($th)), df_th_as_prev($th));}
+		catch (Th $th) {throw new CouldNotSave(__($this->message($th)), df_th2x($th));}
 		/**
 		 * 2018-04-14
 		 * The previous code was:
