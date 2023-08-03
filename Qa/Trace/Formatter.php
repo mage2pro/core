@@ -15,8 +15,9 @@ final class Formatter {
 			# 2023-07-27 "Add GitHub links to backtrace frames": https://github.com/mage2pro/core/issues/285
 			,$f->url() ?: df_ccc(':', $f->file(), $f->line())
 		]);}));}
-		,function(\Exception $e) {
-			$r = df_xts($e);
+		# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+		,function(\Throwable $th) {
+			$r = df_xts($th);
 			/**
 			 * 2020-02-20
 			 * 1) «Function include() does not exist»: https://github.com/tradefurniturecompany/site/issues/60
@@ -25,11 +26,11 @@ final class Formatter {
 			 */
 			static $loop = false;
 			if ($loop) {
-				df_log_l(__CLASS__, "$r\n{$e->getTraceAsString()}", df_class_l(__CLASS__));
+				df_log_l(__CLASS__, "$r\n{$th->getTraceAsString()}", df_class_l(__CLASS__));
 			}
 			else {
 				$loop = true;
-				df_log($e, __CLASS__);
+				df_log($th, __CLASS__);
 				$loop = false;
 			}
 		}
