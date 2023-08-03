@@ -477,7 +477,7 @@ final class X extends MX {
 		$vIsString = is_string($v); /** @var bool $vIsString */
 		$vAsString = ''; /** @var string $vAsString */
 		try {$vAsString = $vIsString ? $v : df_string($v);}
-		catch (E $e) {df_error("Unable to convert the value of the key «{$kAsString}» to a string.\n%s", df_xts($e));}
+		catch (Th $th) {df_error("Unable to convert the value of the key «{$kAsString}» to a string.\n%s", df_xts($th));}
 		if ($vIsString && $vAsString) {
 			/**
 			 * Поддержка синтаксиса
