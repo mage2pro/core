@@ -29,10 +29,10 @@ abstract class Command extends _P implements INonInterceptable {
 	final protected function execute(I $i, O $o):int {$this->_i = $i; $this->_o = $o; return df_try(
 		function() {$this->p(); return Cli::RETURN_SUCCESS;}
 		# 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
-		,function(\Throwable $th) use($o) {
-			$o->writeln(df_tag('error', [], $th->getMessage()));
+		,function(\Throwable $t) use($o) {
+			$o->writeln(df_tag('error', [], df_xts($t)));
 			if (O::VERBOSITY_VERBOSE <= $o->getVerbosity()) {
-				$o->writeln($th->getTraceAsString());
+				$o->writeln($t->getTraceAsString());
 			}
 			return Cli::RETURN_FAILURE;
 		}
