@@ -2,9 +2,9 @@
 use Df\Core\Exception as DFE;
 use Df\Qa\Trace\Frame;
 use Df\Sentry\Client as Sentry;
-use Exception as E;
 use Magento\Framework\DataObject as _DO;
 use Magento\User\Model\User;
+use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-12-22
  * $m could be:
@@ -28,16 +28,17 @@ use Magento\User\Model\User;
  * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param string|object|null $m
- * @param _DO|mixed[]|mixed|E $v
+ * @param _DO|mixed[]|mixed|T $v
  * @param array(string => mixed) $extra [optional]
  */
 function df_sentry($m, $v, array $extra = []):void {
 	/** @var string[] $domainsToSkip */
 	static $domainsToSkip = ['pumpunderwear.com', 'quanticlo.com', 'sanasafinaz.com'];
-	$isE = $v instanceof E; /** @var bool $isE */
-	if ($isE || !in_array(df_domain_current(), $domainsToSkip)) {
+	# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+	$isT = df_is_th($v); /** @var bool $isT */
+	if ($isT || !in_array(df_domain_current(), $domainsToSkip)) {
         # 2020-09-09, 2023-07-25 We need `df_caller_module(1)` (I checked it) because it is nested inside `df_sentry_module()`.
-		$m = df_sentry_module($m ?: ($isE ? df_x_module($v) : df_caller_module(1)));
+		$m = df_sentry_module($m ?: ($isT ? df_x_module($v) : df_caller_module(1)));
 		# 2016-22-22 https://docs.sentry.io/clients/php/usage/#optional-attributes
 		# 2023-07-25
 		# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`": https://github.com/mage2pro/core/issues/249
@@ -71,7 +72,7 @@ function df_sentry($m, $v, array $extra = []):void {
 		if ($v instanceof DFE) {
 			$context = dfa_merge_r($context, $v->sentryContext());
 		}
-		if ($isE) {
+		if ($isT) {
 			# 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-exceptions
 			df_sentry_m($m)->captureException($v, $context);
 		}

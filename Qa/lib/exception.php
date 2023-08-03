@@ -22,6 +22,7 @@ function df_is_x($v):bool {return $v instanceof E;}
  * @used-by df_error_create()
  * @used-by df_log()
  * @used-by df_log_l()
+ * @used-by df_sentry()
  * @used-by df_xts()
  * @used-by df_xtsd()
  * @used-by \Df\Core\Exception::__construct()
@@ -120,6 +121,7 @@ function df_xts($t):string {return df_adjust_paths_in_message(
 /**
  * 2016-10-24
  * @used-by \Df\Payment\PlaceOrderInternal::message()
+ * @used-by \Df\Sentry\Client::captureException()
  * @used-by \Dfe\Klarna\Test\Charge::t01()
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
  * @param T|string $t

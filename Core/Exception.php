@@ -156,7 +156,6 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by self::messageSentry()
 	 * @used-by \Df\Payment\PlaceOrderInternal::message()
 	 * @used-by \Df\Qa\Failure\Exception::main()
-	 * @used-by \Df\Sentry\Client::captureException()
 	 * @see \Df\PaypalClone\W\Exception\InvalidSignature::messageD()
 	 * @see \Dfe\Omise\Exception\Charge::messageD()
 	 */

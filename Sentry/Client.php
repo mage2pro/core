@@ -2,7 +2,7 @@
 namespace Df\Sentry;
 use Df\Core\Exception as DFE;
 use Magento\Framework\App\ErrorHandler;
-use \Exception as E;
+use \Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 final class Client {
 	/**
 	 * 2020-06-27
@@ -71,34 +71,35 @@ final class Client {
 
 	/**
 	 * 2020-06-28
+	 * 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @used-by df_sentry()
-	 * @param E|DFE $e
+	 * @param Th|DFE $e
 	 * @param array(string => mixed) $data
 	 */
-	function captureException(E $e, array $data):void {
-		$eOriginal = $e; /** @var E $eOriginal */
+	function captureException(Th $t, array $data):void {
+		$tOriginal = $t; /** @var Th $tOriginal */
 		do {
-			$isDFE = $e instanceof DFE; /** @var bool $isDFE */
+			$isDFE = $t instanceof DFE; /** @var bool $isDFE */
 			$dataI = [
-				'type' => $isDFE ? $e->sentryType() : get_class($e)
-				,'value' => $this->serializer->serialize($isDFE ? $e->messageD() : $e->getMessage())
+				'type' => $isDFE ? $t->sentryType() : get_class($t)
+				,'value' => $this->serializer->serialize(df_xtsd($t))
 			];
-			$trace = $e->getTrace();
+			$trace = $t->getTrace();
 			$needAddCurrentFrame = !self::needSkipFrame($trace[0]); /** @var bool $needAddCurrentFrame */
 			while (self::needSkipFrame($trace[0])) {
 				array_shift($trace);
 			}
 			if ($needAddCurrentFrame) {
-				array_unshift($trace, ['file' => $e->getFile(), 'line' => $e->getLine()]);
+				array_unshift($trace, ['file' => $t->getFile(), 'line' => $t->getLine()]);
 			}
 			$dataI['stacktrace'] = ['frames' => Trace::info($trace)];
 			$exceptions[] = $dataI;
-		} while ($e = $e->getPrevious());
+		} while ($t = $t->getPrevious());
 		$data['exception'] = ['values' => array_reverse($exceptions)];
 		if (empty($data['level'])) {
-			if (method_exists($eOriginal, 'getSeverity')) {
+			if (method_exists($tOriginal, 'getSeverity')) {
 				/** 2020-06-28 @uses \ErrorException::getSeverity() */
-				$data['level'] = $this->translateSeverity($eOriginal->getSeverity());
+				$data['level'] = $this->translateSeverity($tOriginal->getSeverity());
 			}
 			else {
 				$data['level'] = self::ERROR;
