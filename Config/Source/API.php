@@ -45,7 +45,7 @@ abstract class API extends \Df\Config\Source {
 	 * @see \Dfe\Square\Source\Location::exception()
 	 * @return array(string => string)
 	 */
-	protected function exception(Th $th):array {return ['error' => $th->getMessage()];}
+	protected function exception(Th $t):array {return ['error' => df_xts($t)];}
 
 	/**
 	 * 2017-07-02
