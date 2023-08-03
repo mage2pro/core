@@ -48,7 +48,7 @@ class Exception extends LE implements \ArrayAccess {
 		}
 		$arg1 = dfa($args, 1); /** @var int|string|E|Phrase|null $arg1 */
 		if (!is_null($arg1)) {
-			if ($arg1 instanceof E) {
+			if (df_is_th($arg1)) {
 				$prev = $arg1;
 			}
 			elseif (is_int($prev)) {
