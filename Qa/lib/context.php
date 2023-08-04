@@ -15,6 +15,7 @@ function df_context():array {return
 			,'Referer' => df_referer()
 			# 2021-06-05 "Log the request method": https://github.com/mage2pro/core/issues/154
 			,'Request Method' => df_request_method()
+			,'Time' => df_dts(null, 'y-MM-dd HH:mm:ss') # 2023-08-04 https://github.com/mage2pro/core/issues/312
 			,'URL' => df_current_url()
 			# 2021-04-18 "Include the visitor's `User-Agent` to Mage2.PRO reports": https://github.com/mage2pro/core/issues/152
 			,'User-Agent' => df_request_ua()
