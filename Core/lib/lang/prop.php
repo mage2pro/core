@@ -9,6 +9,7 @@
  * @used-by \Df\API\Client::logging()
  * @used-by \Df\API\FacadeOptions::resC()
  * @used-by \Df\API\FacadeOptions::silent()
+ * @used-by \Df\Core\Json::bSort()
  * @used-by \Df\Checkout\Session::customer()
  * @used-by \Df\Checkout\Session::messages()
  * @used-by \Df\Customer\Session::needConfirm()
@@ -60,6 +61,7 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Df\API\FacadeOptions::silent()
  * @used-by \Df\Checkout\Session::customer()
  * @used-by \Df\Checkout\Session::messages()
+ * @used-by \Df\Core\Json::bSort()
  * @used-by \Df\Customer\Session::needConfirm()
  * @used-by \Df\Customer\Session::ssoId()
  * @used-by \Df\Customer\Session::ssoProvider()
@@ -102,7 +104,10 @@ function df_prop($o, $v = DF_N, $d = null, string $type = '') {/** @var object|m
 	}
 	else {# 2019-09-08 A static call.
 		$k = df_caller_m();
-		static $s; /** @var array(string => mixed) $s */
+		# 2023-08-04
+		# «dfa(): Argument #1 ($a) must be of type array, null given,
+		# called in vendor/mage2pro/core/Core/lib/lang/prop.php on line 109»: https://github.com/mage2pro/core/issues/314
+		static $s = []; /** @var array(string => mixed) $s */
 		if ($isGet) {
 			$r = dfa($s, $k, $d);
 		}
