@@ -28,7 +28,14 @@ function df_backend_session():SessionB {return df_o(SessionB::class);}
  * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @return User|null
  */
-function df_backend_user() {return df_backend_session()->getUser();}
+function df_backend_user() {return
+	# 2023-08-05
+	# "«Area code not set: Area code must be set before starting a session»
+	# in `lib/internal/Magento/Framework/App/State.php:149` on `static/adminhtml/Magento/backend/en_US/moment.min.js.map`":
+	# https://github.com/mage2pro/core/issues/316
+	!df_area_code() ? null
+	: df_backend_session()->getUser()
+;}
 
 /**
  * 2020-02-11

@@ -7,6 +7,7 @@ use Magento\Framework\App\Area as A;
  * 2021-03-23 It returns «crontab» for Cron jobs.
  * @used-by df_area_code_is()
  * @used-by df_area_code_set_d()
+ * @used-by df_backend_user()
  * @param F|bool|mixed $onE [optional]
  * @return string|null
  * @throws Exception
