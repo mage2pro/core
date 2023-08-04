@@ -19,7 +19,7 @@ function df_area_code($onE = null) {return df_try(function() {return df_app_stat
  * Будьте осторожны: если мы обрабатываем асинхронный запрос к серверу,
  * то @uses \Magento\Framework\App\State::getAreaCode()
  * вернёт не «frontend» или «adminhtml», а, например, «webapi_rest».
- * 2017-04-02 «Area code is not set» on a df_area_code_is() call: https://mage2.pro/t/3581
+ * 2017-04-02 «Area code is not set» on a df_area_code_is() call»: https://mage2.pro/t/3581
  * @used-by df_is_backend()
  * @used-by df_is_frontend()
  * @used-by df_is_rest()
