@@ -84,6 +84,7 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 		$entry = $t ? df_x_entry($t) : df_caller_entry(0, null, ['df_log']); /** @var array(string => string|int) $entry */
 		$suf = df_bt_entry_is_phtml($entry) ? basename(df_bt_entry_file($entry)) : df_bt_entry_func($entry);
 	}
+	$c = df_context(); /** @var array(string => mixed) $c */
 	df_report(
 		df_ccc('--', 'mage2.pro/' . df_ccc('-', df_report_prefix($m, $pref), '{date}--{time}'), $suf) .  '.log'
 		# 2023-07-26
@@ -93,10 +94,8 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 			# 2023-07-28
 			# "`df_log_l` does not log the context if the message is not an array":
 			# https://github.com/mage2pro/core/issues/289
-			/** @uses df_dump() */
-			df_json_dont_sort(function() use($d) {$c = df_context(); /** @var array(string => mixed) $c */ return
-				df_map('df_dump', !$d ? $c : (is_array($d) ? [dfa_merge_r($d, ['Mage2.PRO' => $c])] : [$d, $c]))
-			;})
+			/** @uses df_dump_ds() */
+			df_map('df_dump_ds', !$d ? [$c] : (is_array($d) ? [dfa_merge_r($d, ['Mage2.PRO' => $c])] : [$d, $c]))
 			,!$t ? '' : ['EXCEPTION', QE::i($t)->report(), "\n\n"]
 			,($t ? null : "\n") . df_bt_s($t ?: 1)
 		)

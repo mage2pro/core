@@ -8,7 +8,7 @@ use Df\Qa\Dumper;
  * @used-by df_assert_eq()
  * @used-by df_bool()
  * @used-by df_caller_m()
- * @used-by df_log_l()
+ * @used-by df_dump_ds()
  * @used-by df_sentry()
  * @used-by df_type()
  * @used-by dfa_assert_keys()
@@ -26,6 +26,12 @@ use Df\Qa\Dumper;
  * @param mixed $v
  */
 function df_dump($v):string {return Dumper::i()->dump($v);}
+
+/**
+ * 2023-08-04
+ * @used-by df_log_l()
+ */
+function df_dump_ds($v):string {return df_json_dont_sort(function() use($v):string {return df_dump($v);});}
 
 /**
  * 2015-04-05

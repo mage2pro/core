@@ -114,7 +114,7 @@ function df_json_decode($s, bool $throw = true) {/** @var mixed|bool|null $r */
 /**
  * 2023-08-04 "Implement `df_json_dont_sort()`": https://github.com/mage2pro/core/issues/313
  * @see df_json_sort()
- * @used-by df_log_l()
+ * @used-by df_dump_ds()
  * @return mixed
  */
 function df_json_dont_sort(F $f) {/** @var mixed $r */
