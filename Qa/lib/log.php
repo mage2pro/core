@@ -93,9 +93,8 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 			# 2023-07-28
 			# "`df_log_l` does not log the context if the message is not an array":
 			# https://github.com/mage2pro/core/issues/289
-			df_map('df_dump', is_array($d)
-				? [dfa_merge_r($d, ['Mage2.PRO' => df_context()])]
-				: [$d, df_context()])  /** @uses df_dump() */
+			/** @uses df_dump() */
+			df_map('df_dump', is_array($d) ? [dfa_merge_r($d, ['Mage2.PRO' => df_context()])] : [$d, df_context()])
 			,!$t ? '' : ['EXCEPTION', QE::i($t)->report(), "\n\n"]
 			,($t ? null : "\n") . df_bt_s($t ?: 1)
 		)
