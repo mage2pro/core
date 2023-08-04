@@ -13,7 +13,6 @@ use Zend_Date as ZD;
  * @used-by df_month()
  * @used-by df_num_days()
  * @used-by df_year()
- * @used-by \Dfe\Vantiv\Charge::pCharge()
  */
 function df_date(ZD $d = null):ZD {return $d ?: ZD::now();}
 
@@ -53,7 +52,7 @@ function df_date_from_timestamp_14(string $timestamp, $offsetType = null):ZD {
 	df_assert_eq(1, preg_match($pattern, $timestamp, $matches));
 	$hour = df_nat0(dfa($matches, 4)); /** @var int $hour */
 	if ($offsetType) {
-		$offsetFromGMT = df_round(df_int(df_dts(ZD::now(), ZD::TIMEZONE_SECS)) / 3600); /** @var int $offsetFromGMT */
+		$offsetFromGMT = df_round(df_int(df_dts(null, ZD::TIMEZONE_SECS)) / 3600); /** @var int $offsetFromGMT */
 		$hour += $offsetFromGMT;
 		if ('UTC' === df_assert_in($offsetType, ['UTC', 'GMT'])) {
 			$hour++;
@@ -203,11 +202,13 @@ function df_days_off($s = null):array {return dfcf(function($s = null) {return d
  * 2) Несмотря на свою спецификацию, @uses ZD::toString() может вернуть не только строку, но и FALSE.
  * http://www.php.net/manual/en/function.date.php
  * https://php.net/gmdate
+ * @used-by df_context()
  * @used-by df_date_from_timestamp_14()
  * @used-by df_dtss()
  * @used-by df_file_name()
  * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
  * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()
+ * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \TFC\GoogleShopping\Result::contents() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param string|null $fmt [optional]
  * @param Zend_Locale|string|null $l [optional]
