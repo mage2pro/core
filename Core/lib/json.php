@@ -1,5 +1,7 @@
 <?php
+use Closure as F;
 use Df\Core\Exception as DFE;
+use Df\Core\Json as J;
 /**
  * 2016-07-18
  * Видел решение здесь: http://stackoverflow.com/a/6041773
@@ -110,6 +112,20 @@ function df_json_decode($s, bool $throw = true) {/** @var mixed|bool|null $r */
 }
 
 /**
+ * 2023-08-04 "Implement `df_json_dont_sort()`": https://github.com/mage2pro/core/issues/313
+ * @see df_json_sort()
+ * @used-by df_log_l()
+ * @return mixed
+ */
+function df_json_dont_sort(F $f) {/** @var mixed $r */
+	$prev = J::bSort(); /** @var bool $prev */
+	J::bSort(false);
+	try {$r = $f();}
+	finally {J::bSort($prev);}
+	return $r;
+}
+
+/**
  * 2015-12-06
  * @used-by df_ci_add()
  * @used-by df_ejs()
@@ -195,9 +211,10 @@ function df_json_prettify($j):string {return df_json_encode(df_json_decode($j));
  * I use @uses df_is_assoc() check,
  * because otherwise @uses df_ksort_r_ci() will convert the numeric arrays to associative ones,
  * and their numeric keys will be ordered as strings.
+ * @see df_json_dont_sort()
  * @used-by df_json_decode()
  * @used-by df_json_encode()
  * @param mixed $v
  * @return mixed
  */
-function df_json_sort($v) {return !is_array($v) ? $v : df_ksort_r_ci($v);}
+function df_json_sort($v) {return !is_array($v) || !J::bSort() ? $v : df_ksort_r_ci($v);}
