@@ -14,7 +14,7 @@ final class HttpInterface {
 	 */
 	function beforeSetBody(Sb $sb, $v):void {
 		if ($v instanceof T) {
-			df_log(null, $v);
+			df_log($v);
 		}
 	}
 }
