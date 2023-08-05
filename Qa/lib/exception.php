@@ -1,6 +1,6 @@
 <?php
 use Df\Core\Exception as DFE;
-use Exception as E;
+use Exception as X;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase as P;
 use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
@@ -11,7 +11,7 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by df_lxts()
  * @used-by df_th2x()
  */
-function df_is_x($v):bool {return $v instanceof E;}
+function df_is_x($v):bool {return $v instanceof X;}
 
 /**
  * 2023-08-02
@@ -54,10 +54,10 @@ function df_lxh(callable $f) {/** @var mixed $r */try {$r = $f();} catch (T $t) 
  * 2016-07-20
  * @used-by \Df\Payment\W\Responder::defaultError()
  * @used-by \Dfe\AllPay\W\Responder::error()
- * @param T|string $e
+ * @param T|string $t
  * @return P|string
  */
-function df_lxts($e) {return !df_is_x($e) ? __($e) : df_xts(df_lx($e));}
+function df_lxts($t) {return !df_is_x($t) ? __($t) : df_xts(df_lx($t));}
 
 /**
  * 2023-08-03
@@ -65,15 +65,15 @@ function df_lxts($e) {return !df_is_x($e) ? __($e) : df_xts(df_lx($e));}
  * @used-by \Df\Core\Exception::__construct()
  * @used-by \Df\Payment\PlaceOrderInternal::_place()
  */
-function df_th2x(T $t):E {return df_is_x($t) ? $t : new E(df_xts($t), $t->getCode(), $t);}
+function df_th2x(T $t):X {return df_is_x($t) ? $t : new X(df_xts($t), $t->getCode(), $t);}
 
 /**
  * 2023-07-25
  * @used-by df_log_l()
  * @used-by df_x_module()
  */
-function df_x_entry(T $t):array {return df_caller_entry($t, function(array $a):bool {return
-	($c = dfa($a, 'class')) && df_module_enabled($c)
+function df_x_entry(T $t):array {return df_caller_entry($t, function(array $e):bool {return
+	($c = dfa($e, 'class')) && df_module_enabled($c)
 ;});}
 
 /**
