@@ -8,13 +8,17 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
 /**
  * 2016-09-06
  * 2023-08-05
- * 1) «Refused to load the stylesheet 'https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css'
+ * 1.1) «Refused to load the stylesheet 'https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css'
  * because it violates the following Content Security Policy directive:
  * "style-src *.adobe.com *.aptrinsic.com fonts.googleapis.com 'self' 'unsafe-inline'".
  * Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback.»:
  * https://github.com/mage2pro/core/issues/319
- * 2) https://magento.stackexchange.com/a/312254
- * 3) https://github.com/mage2pro/core/blob/10.2.8/Framework/etc/csp_whitelist.xml#L1-L20
+ * 1.2) https://magento.stackexchange.com/a/312254
+ * 1.3) https://github.com/mage2pro/core/blob/10.2.8/Framework/etc/csp_whitelist.xml#L1-L20
+ * 2.1) «Refused to load the font 'https://maxcdn.bootstrapcdn.com/font-awesome/latest/fonts/fontawesome-webfont.woff2?v=4.7.0'
+ * because it violates the following Content Security Policy directive:
+ * "font-src fonts.gstatic.com data: 'self' 'unsafe-inline'"»: https://github.com/mage2pro/core/issues/320
+ * 2.2) https://github.com/mage2pro/core/blob/10.2.9/Framework/etc/csp_whitelist.xml#L8-L16
  * @used-by df_fa_link()
  * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
  * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
