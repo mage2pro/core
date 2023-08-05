@@ -5,6 +5,7 @@ use Magento\Framework\Module\ModuleListInterface as IML;
 
 /**
  * 2019-11-21
+ * @used-by df_caller_module()
  * @used-by df_log_l()
  * @used-by df_msi()
  */

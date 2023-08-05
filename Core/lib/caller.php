@@ -165,7 +165,11 @@ function df_caller_module(int $o = 0):string {
 		# 2023-07-26
 		# "«The required key «class» is absent» is `df_log()` is called from `*.phtml`":
 		# https://github.com/mage2pro/core/issues/259
-		df_bt_entry_is_method($e)
+		# 2023-08-05
+		# 1) "«Module 'Monolog_Logger' is not correctly registered» in `lib/internal/Magento/Framework/Module/Dir.php:62`":
+		# https://github.com/mage2pro/core/issues/318
+		# 2) `Monolog_Logger` is not a Magento module, so I added `df_module_enabled()`.
+		df_bt_entry_is_method($e) && df_module_enabled(df_bt_entry_class($e))
 		# 2023-07-26
 		# "If `df_log()` is called from a `*.phtml`,
 		# then the `*.phtml`'s module should be used as the log source instead of `Magento_Framework`":
