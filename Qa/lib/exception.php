@@ -72,8 +72,8 @@ function df_th2x(T $t):X {return df_is_x($t) ? $t : new X(df_xts($t), $t->getCod
  * @used-by df_log_l()
  * @used-by df_x_module()
  */
-function df_x_entry(T $t):array {return df_caller_entry($t, function(array $e):bool {return
-	($c = dfa($e, 'class')) && df_module_enabled($c)
+function df_x_entry(T $t):array {return df_caller_entry($t, function(array $e):bool {return /** @var string|null $c */
+	($c = df_bt_entry_class($e)) && df_module_enabled($c)
 ;});}
 
 /**

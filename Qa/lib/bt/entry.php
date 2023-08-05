@@ -3,6 +3,7 @@
  * 2023-08-05
  * @see \Df\Qa\Trace\Frame::class_()
  * @used-by df_caller_module()
+ * @used-by df_x_entry()
  */
 function df_bt_entry_class(array $e):string {return dfa($e, 'class', '');}
 
