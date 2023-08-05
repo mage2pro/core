@@ -140,12 +140,14 @@ final class Frame extends \Df\Core\O {
 	});}
 
 	/**
+	 * @see df_bt_entry_class()
 	 * @used-by self::methodR()
 	 * @used-by self::method()
 	 */
 	private function class_():string {return df_nts($this['class']);}
 	
 	/**
+	 * @see df_bt_entry_func()
 	 * @used-by self::methodR()
 	 * @used-by self::method()
 	 */
