@@ -41,6 +41,7 @@ function df_bt_has(string $c, string $m = '', Th $t = null):bool {
  * @used-by df_bt_log()
  * @used-by df_bt_s()
  * @used-by df_caller_entry()
+ * @used-by df_caller_module()
  * @param Th|int|null|array(array(string => string|int)) $p
  * @return Th|int
  */

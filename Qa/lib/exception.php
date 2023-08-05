@@ -68,22 +68,6 @@ function df_lxts($t) {return !df_is_x($t) ? __($t) : df_xts(df_lx($t));}
 function df_th2x(T $t):X {return df_is_x($t) ? $t : new X(df_xts($t), $t->getCode(), $t);}
 
 /**
- * 2023-07-25
- * @used-by df_log_l()
- * @used-by df_x_module()
- */
-function df_x_entry(T $t):array {return df_caller_entry($t, function(array $e):bool {return /** @var string|null $c */
-	($c = df_bt_entry_class($e)) && df_module_enabled($c)
-;});}
-
-/**
- * 2023-07-25
- * @used-by df_log()
- * @used-by df_sentry()
- */
-function df_x_module(T $t):string {return df_module_name(dfa(df_x_entry($t), 'class'));}
-
-/**
  * 2016-07-18
  * @used-by \Df\Framework\Log\Record::ef()
  * @used-by \Df\Payment\PlaceOrderInternal::message()

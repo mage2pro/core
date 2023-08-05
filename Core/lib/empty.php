@@ -26,6 +26,7 @@ function df_es($v):bool {return '' === $v;}
 /**
  * 2017-04-26
  * @used-by df_caller_entry()
+ * @used-by df_caller_entry_m()
  * @used-by df_ci_get()
  * @used-by df_fe_fc()
  * @used-by df_fetch_one()

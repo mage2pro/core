@@ -1,17 +1,16 @@
 <?php
-use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2017-03-28 If the function is called from a closure, then it will go up through the stask until it leaves all closures.
  * 2023-07-26 "Add the `$skip` optional parameter to `df_caller_entry()`": https://github.com/mage2pro/core/issues/281
+ * @used-by df_caller_entry_m()
  * @used-by df_caller_f()
  * @used-by df_caller_m()
- * @used-by df_caller_module()
  * @used-by df_log_l()
  * @used-by df_sentry()
- * @used-by df_x_entry()
  * @used-by \Df\Framework\Log\Dispatcher::handle()
- * @param Th|int|null|array(array(string => string|int)) $p [optional]
+ * @param T|int|null|array(array(string => string|int)) $p [optional]
  * @param callable|null $f [optional]
  * @return array(string => string|int)
  */
@@ -57,3 +56,25 @@ function df_caller_entry($p = 0, $f = null, array $skip = []):array {
 	}
 	return df_eta($r); /** 2021-10-05 @uses array_shift() returns `null` for an empty array */
 }
+
+/**
+ * 2023-08-05
+ * @used-by df_caller_module()
+ * @used-by df_log_l()
+ * @param T|int $p
+ */
+function df_caller_entry_m($p = 0):array {return df_eta(df_caller_entry(df_bt_inc($p), function(array $e):bool {return
+	# 2023-07-26
+	# "«The required key «class» is absent» is `df_log()` is called from `*.phtml`":
+	# https://github.com/mage2pro/core/issues/259
+	# 2023-08-05
+	# 1) "«Module 'Monolog_Logger' is not correctly registered» in `lib/internal/Magento/Framework/Module/Dir.php:62`":
+	# https://github.com/mage2pro/core/issues/318
+	# 2) `Monolog_Logger` is not a Magento module, so I added `df_module_enabled()`.
+	($c = df_bt_entry_class($e)) && df_module_enabled($c) /** @var string|null $c */
+	# 2023-07-26
+	# "If `df_log()` is called from a `*.phtml`,
+	# then the `*.phtml`'s module should be used as the log source instead of `Magento_Framework`":
+	# https://github.com/mage2pro/core/issues/268
+	|| df_bt_entry_is_phtml($e)
+;}));}

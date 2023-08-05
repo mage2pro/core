@@ -38,7 +38,7 @@ function df_sentry($m, $v, array $extra = []):void {
 	$isT = df_is_th($v); /** @var bool $isT */
 	if ($isT || !in_array(df_domain_current(), $domainsToSkip)) {
         # 2020-09-09, 2023-07-25 We need `df_caller_module(1)` (I checked it) because it is nested inside `df_sentry_module()`.
-		$m = df_sentry_module($m ?: ($isT ? df_x_module($v) : df_caller_module(1)));
+		$m = df_sentry_module($m ?: ($isT ? df_caller_module($v) : df_caller_module(1)));
 		# 2016-22-22 https://docs.sentry.io/clients/php/usage/#optional-attributes
 		# 2023-07-25
 		# "Change the 3rd argument of `df_sentry` from `$context` to `$extra`": https://github.com/mage2pro/core/issues/249

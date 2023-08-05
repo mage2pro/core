@@ -1,4 +1,6 @@
 <?php
+use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+
 /**
  * 2017-11-19
  * @used-by df_abstract()
@@ -100,23 +102,9 @@ function df_caller_ml(int $o = 0):string {return df_caller_m(++$o) . '()';}
  * @used-by df_log_l()
  * @used-by df_sentry()
  * @used-by df_sentry_m()
+ * @param T|int $p
  */
-function df_caller_module(int $o = 0):string {
-	$e = df_assert(df_caller_entry(++$o, function(array $e):bool {return
-		# 2023-07-26
-		# "«The required key «class» is absent» is `df_log()` is called from `*.phtml`":
-		# https://github.com/mage2pro/core/issues/259
-		# 2023-08-05
-		# 1) "«Module 'Monolog_Logger' is not correctly registered» in `lib/internal/Magento/Framework/Module/Dir.php:62`":
-		# https://github.com/mage2pro/core/issues/318
-		# 2) `Monolog_Logger` is not a Magento module, so I added `df_module_enabled()`.
-		($c = df_bt_entry_class($e)) && df_module_enabled($c) /** @var string|null $c */
-		# 2023-07-26
-		# "If `df_log()` is called from a `*.phtml`,
-		# then the `*.phtml`'s module should be used as the log source instead of `Magento_Framework`":
-		# https://github.com/mage2pro/core/issues/268
-		|| df_bt_entry_is_phtml($e)
-	;}));
+function df_caller_module($p = 0):string {return !($e = df_caller_entry_m(df_bt_inc($p))) ? 'Df_Core' : (
 	# 2023-08-05 «Module 'Monolog_Logger::addRecord' is not correctly registered»: https://github.com/mage2pro/core/issues/317
-	return df_bt_entry_is_method($e) ? df_module_name(df_bt_entry_class($e)) : df_module_name_by_path(df_bt_entry_file($e));
-}
+	df_bt_entry_is_method($e) ? df_module_name(df_bt_entry_class($e)) : df_module_name_by_path(df_bt_entry_file($e))
+);}

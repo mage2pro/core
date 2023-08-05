@@ -32,7 +32,7 @@ use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": h
  */
 function df_log($v, $m = null, array $d = []):void {
 	$isT = df_is_th($v); /** @var bool $isT */
-	$m = $m ? df_module_name($m) : ($isT ? df_x_module($v) : df_caller_module());
+	$m = $m ? df_module_name($m) : ($isT ? df_caller_module($v) : df_caller_module());
 	df_log_l($m, ...($isT ? [$v, $d] : [!$d ? $v : (dfa_merge_r($d, is_array($v) ? $v : ['message' => $v])), []]));
 	df_sentry($m, ...($isT || !is_array($v) ? [$v, $d] : ['', dfa_merge_r($d, $v)]));
 }
@@ -66,22 +66,14 @@ function df_log($v, $m = null, array $d = []):void {
 function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 	/** @var T|null $t */ /** @var array|string|mixed $d */ /** @var string $suf */ /** @var string $pref */
 	list($t, $d, $suf, $pref) = df_is_th($p2) ? [$p2, $p3, $p4, ''] : [null, $p2, df_ets($p3), $p4];
-	if (!$m) {
-		if (!$t) {
-			$m = df_caller_module();
-		}
-		else {
-			$en = df_x_entry($t); /** @var array(string => string) $en */
-			list($m, $suf) = [dfa($en, 'class'), dfa($en, 'function', 'exception')];
-		}
-	}
+	$m = $m ?: ($t ? df_caller_module($t) : df_caller_module());
 	if (!$suf) {
 		# 2023-07-26
 		# 1) "If `df_log_l()` is called from a `*.phtml`,
 		# then the `*.phtml`'s base name  should be used as the log file name suffix instead of `df_log_l`":
 		# https://github.com/mage2pro/core/issues/269
 		# 2) 2023-07-26 "Add the `$skip` optional parameter to `df_caller_entry()`": https://github.com/mage2pro/core/issues/281
-		$entry = $t ? df_x_entry($t) : df_caller_entry(0, null, ['df_log']); /** @var array(string => string|int) $entry */
+		$entry = $t ? df_caller_entry_m($t) : df_caller_entry(0, null, ['df_log']); /** @var array(string => string|int) $entry */
 		$suf = df_bt_entry_is_phtml($entry) ? basename(df_bt_entry_file($entry)) : df_bt_entry_func($entry);
 	}
 	$c = df_context(); /** @var array(string => mixed) $c */

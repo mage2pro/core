@@ -2,8 +2,8 @@
 /**
  * 2023-08-05
  * @see \Df\Qa\Trace\Frame::class_()
+ * @used-by df_caller_entry_m()
  * @used-by df_caller_module()
- * @used-by df_x_entry()
  */
 function df_bt_entry_class(array $e):string {return dfa($e, 'class', '');}
 
@@ -63,7 +63,7 @@ function df_bt_entry_is_method(array $e):bool {return dfa_has_keys($e, ['class',
 /**
  * 2023-07-26
  * @see \Df\Qa\Trace\Frame::isPHTML()
- * @used-by df_caller_module()
  * @used-by df_log_l()
+ * @used-by df_caller_entry_m()
  */
 function df_bt_entry_is_phtml(array $e):bool {return df_is_phtml(df_bt_entry_file($e));}
