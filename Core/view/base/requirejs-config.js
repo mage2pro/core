@@ -1,6 +1,10 @@
 var config = {paths: {
 	'df': 'Df_Core/my/all'
 	,'dfHasValue': 'Df_Core/my/hasValue'
+	// 2023-08-05
+	// «Refused to load the script 'https://cdn.jsdelivr.net/lodash/4.14.1/lodash.js'
+	// because it violates the following Content Security Policy directive: "script-src <…>"»:
+	// https://github.com/mage2pro/core/issues/321
 	,'df-lodash': 'https://cdn.jsdelivr.net/lodash/4.14.1/lodash'
 	,'df-lodash-local': 'Df_Core/thirdParty/lodash'
 	// 2019-08-01 https://github.com/flesler/jquery.scrollTo
@@ -8,8 +12,7 @@ var config = {paths: {
 	,'df-uniform': 'Df_Core/my/uniform'
 	/**
 	 * 2017-10-18
-	 * Note 1.
-	 * «JavaScript Unicode 8.0 Normalization - NFC, NFD, NFKC, NFKD»: https://github.com/walling/unorm
+	 * Note 1. «JavaScript Unicode 8.0 Normalization - NFC, NFD, NFKC, NFKD»: https://github.com/walling/unorm
 	 * Note 2.
 	 * `The ineligible characters should be automatically replaced by the corresponding eligible ones
 	 * while prefilling the cardholder's name
