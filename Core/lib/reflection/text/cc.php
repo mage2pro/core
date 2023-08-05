@@ -32,7 +32,6 @@ function df_cc_class_uc(...$a):string {return df_cc_class(df_ucfirst(dfa_flatten
 /**
  * 2016-08-10 Если класс не указан, то вернёт название функции. Поэтому в качестве $a1 можно передавать `null`.
  * @used-by df_caller_m()
- * @used-by df_caller_module()
  * @used-by df_rest_action()
  * @used-by \Df\Qa\Trace\Frame::method()
  * @param string|object|null|array(object|string)|array(string = string) $a1

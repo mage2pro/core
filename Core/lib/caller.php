@@ -172,5 +172,6 @@ function df_caller_module(int $o = 0):string {
 		# https://github.com/mage2pro/core/issues/268
 		|| df_bt_entry_is_phtml($e)
 	;}));
-	return df_bt_entry_is_method($e) ? df_module_name(df_cc_method($e)) : df_module_name_by_path(df_bt_entry_file($e));
+	# 2023-08-05 «Module 'Monolog_Logger::addRecord' is not correctly registered»: https://github.com/mage2pro/core/issues/317
+	return df_bt_entry_is_method($e) ? df_module_name(df_bt_entry_class($e)) : df_module_name_by_path(df_bt_entry_file($e));
 }

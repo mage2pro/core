@@ -1,5 +1,12 @@
 <?php
 /**
+ * 2023-08-05
+ * @see \Df\Qa\Trace\Frame::class_()
+ * @used-by df_caller_module()
+ */
+function df_bt_entry_class(array $e):string {return dfa($e, 'class', '');}
+
+/**
  * 2023-07-26 "Implement `df_bt_entry_file()`": https://github.com/mage2pro/core/issues/279
  * @see \Df\Qa\Trace\Frame::file()
  * @see \Df\Sentry\Trace::info()

@@ -38,6 +38,7 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @see dfad()
  * @see dfaoc()
  * @see dfo()
+ * @used-by df_caller_module()
  * @used-by df_bt_entry_file()
  * @used-by df_bt_entry_func()
  * @used-by df_bt_entry_line()
