@@ -9,7 +9,7 @@ use Magento\Sales\Model\Order\Address\Renderer as Sb;
 # 2016-08-17
 # 2023-08-06
 # "Prevent interceptors generation for the plugins extended from interceptable classes":
-#https://github.com/mage2pro/core/issues/327
+# https://github.com/mage2pro/core/issues/327
 class Renderer extends Sb implements \Magento\Framework\ObjectManager\NoninterceptableInterface {
 	/** 2016-04-05 */
 	function __construct() {}

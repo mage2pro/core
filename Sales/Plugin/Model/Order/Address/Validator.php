@@ -3,7 +3,10 @@ namespace Df\Sales\Plugin\Model\Order\Address;
 use Df\Customer\Settings\BillingAddress as S;
 use Magento\Sales\Model\Order\Address;
 use Magento\Sales\Model\Order\Address\Validator as Sb;
-class Validator extends Sb {
+# 2023-08-06
+# "Prevent interceptors generation for the plugins extended from interceptable classes":
+# https://github.com/mage2pro/core/issues/327
+class Validator extends Sb implements \Magento\Framework\ObjectManager\NoninterceptableInterface {
 	/** 2016-04-05 */
 	function __construct() {}
 

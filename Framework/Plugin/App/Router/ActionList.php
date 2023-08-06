@@ -4,7 +4,7 @@ use Magento\Framework\App\Router\ActionList as Sb;
 # 2017-03-19
 # 2023-08-06
 # "Prevent interceptors generation for the plugins extended from interceptable classes":
-#https://github.com/mage2pro/core/issues/327
+# https://github.com/mage2pro/core/issues/327
 class ActionList extends Sb implements \Magento\Framework\ObjectManager\NoninterceptableInterface {
 	/**
 	 * 2017-03-19

@@ -10,7 +10,7 @@ use Magento\Framework\Data\Form\Element\Fieldset as FEM;
 # мы получаем возможность вызывать методы с областью доступа protected у переменной $s.
 # 2023-08-06
 # "Prevent interceptors generation for the plugins extended from interceptable classes":
-#https://github.com/mage2pro/core/issues/327
+# https://github.com/mage2pro/core/issues/327
 /** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Fieldset extends Sb implements \Magento\Framework\ObjectManager\NoninterceptableInterface {
 	/**
