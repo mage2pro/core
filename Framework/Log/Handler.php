@@ -6,6 +6,7 @@ namespace Df\Framework\Log;
  * @see \Df\Framework\Log\Handler\Cookie
  * @see \Df\Framework\Log\Handler\NoSuchEntity
  * @see \Df\Framework\Log\Handler\PayPal
+ * @see \Df\Framework\Log\Handler\RequestPathIsWrong
  */
 abstract class Handler {
 	/**
