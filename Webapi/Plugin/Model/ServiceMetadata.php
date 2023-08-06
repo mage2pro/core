@@ -2,7 +2,10 @@
 namespace Df\Webapi\Plugin\Model;
 use Magento\Webapi\Model\ServiceMetadata as Sb;
 # 2016-10-06
-class ServiceMetadata extends Sb {
+# 2023-08-06
+# "Prevent interceptors generation for the plugins extended from interceptable classes":
+# https://github.com/mage2pro/core/issues/327
+class ServiceMetadata extends Sb implements \Magento\Framework\ObjectManager\NoninterceptableInterface {
 	/** @override */
 	function __construct() {}
 
