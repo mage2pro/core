@@ -34,6 +34,7 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\API\Facade::p()
 	 * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::render()
 	 * @used-by \Df\Config\A::i()
+	 * @used-by \Df\Config\Settings::_font()
 	 * @used-by \Df\Core\Text\Regex::i()
 	 * @used-by \Df\Framework\Log\Record::__construct()
 	 * @used-by \Dfe\GoogleFont\Font\Variant::i()
