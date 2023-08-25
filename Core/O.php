@@ -80,6 +80,12 @@ class O implements \ArrayAccess {
 	function a($k = '', $d = null) {return dfa($this->_a, $k, $d);}
 
 	/**
+	 * 2023-08-25
+	 * @used-by \Dfe\Frontend\Block\ProductView\Css::fonts()
+	 */
+	function isEmpty():bool {return !$this->_a;}
+
+	/**
 	 * 2017-07-13
 	 * @used-by \Df\API\Operation::j()
 	 * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
@@ -153,6 +159,7 @@ class O implements \ArrayAccess {
 	 * 2017-07-13
 	 * @used-by self::__construct()
 	 * @used-by self::a()
+	 * @used-by self::isEmpty()
 	 * @var array(string => mixed)
 	 */
 	private $_a;
