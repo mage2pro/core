@@ -2,6 +2,7 @@
 namespace Df\Typography;
 use Df\Config\Source\LetterCase;
 use Df\Core\Exception as DFE;
+/** @used-by \Df\Config\Settings::_font() */
 final class Font extends \Df\Config\O {
 	/**
 	 * 2016-08-03
