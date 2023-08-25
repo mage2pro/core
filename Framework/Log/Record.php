@@ -48,6 +48,7 @@ final class Record {
 	 * 2021-09-08
 	 * @used-by \Df\Framework\Log\Handler\BrokenReference::_p()
 	 * @used-by \Df\Framework\Log\Handler\Cookie::_p()
+	 * @used-by \Df\Framework\Log\Handler\JsMap::_p()
 	 * @used-by \Df\Framework\Log\Handler\PayPal::_p()
 	 * @param string|string[]|null $s [optional]
 	 * @return string|bool
