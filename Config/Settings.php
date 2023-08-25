@@ -351,7 +351,7 @@ abstract class Settings {
 	 * @used-by \Dfe\Frontend\Settings\ProductView\Wishlist::font()
 	 * @param null|string|int|S|Store $s [optional]
 	 */
-	final protected function _font(string $k = '', $s = null):Font {xdebug_break(); return dfc($this, function($k, $s) {return
+	final protected function _font(string $k = '', $s = null):Font {return dfc($this, function($k, $s) {return
 		new Font($this->json($k, $s))
 	;}, [$k ?: df_caller_f(), df_scope_code($this->scope($s))]);}
 
