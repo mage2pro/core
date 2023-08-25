@@ -13,7 +13,7 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  * @return array(array(string => mixed))
  */
 function df_bt($p = 0, int $limit = 0):array {
-	$r = is_array($p) ? $p : (df_is_th($p) ? $p->getTrace() :
+	$r = is_array($p) ? $p : (df_is_th($p) ? df_bt_th($p) :
 		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, !$limit ? 0 : 1 + $p + $limit)
 	);
 	# 2023-07-27 "Shift the `file` and `line` keys to an entry back in `df_bt()`": https://github.com/mage2pro/core/issues/283
@@ -23,7 +23,14 @@ function df_bt($p = 0, int $limit = 0):array {
 		$e = ['file' => $f, 'line' => $l] + $e;
 		list($f, $l) = [$f2, $l2];
 	}
-	$r = df_slice($r, 1); # 2023-07-28 We skip the first entry: `df_bt`.
+	/**
+	 * 2023-07-28 We skip the first entry: `df_bt`.
+	 * 2023-08-25
+	 * For the @see \Throwable case we do not need to skip df_bt() (because it is absent in the trace),
+	 * but we still need to skip the first frame because it is empty after we shifted the `file` and `line` keys (see above).
+	 * The first frame was artificial: @see df_bt_th()
+	 */
+	$r = df_slice($r, 1);
 	return is_array($p) || df_is_th($p) ? $r : df_slice($r, $p, $limit);
 }
 
