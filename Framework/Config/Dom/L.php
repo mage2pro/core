@@ -63,7 +63,7 @@ final class L {
 		 * in vendor/mage2pro/core/Core/lib/reflection\parent.php on line 30»: https://github.com/mage2pro/core/issues/301
 		 * 2) «@see ReflectionMethod::invoke() cannot be used when reference parameters are expected.
 		 * @uses ReflectionMethod::invokeArgs() has to be used instead (passing references in the argument list).»:
-		 * https://www.php.net/manual/reflectionmethod.invoke.php#refsect1-reflectionmethod.invoke-notes
+		 * https://php.net/manual/reflectionmethod.invoke.php#refsect1-reflectionmethod.invoke-notes
 		 */
 		df_call_parent($o, 'validate', [$schemaFileName, &$errors]);
 		return !array_filter($errors, function($m) {/** @var string $m */

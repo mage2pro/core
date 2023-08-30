@@ -32,7 +32,7 @@
 function df_first(array $a) {return !$a ? null : reset($a);}
 
 /**
- * 2019-08-21 https://www.php.net/manual/en/function.array-key-first.php
+ * 2019-08-21 https://php.net/manual/en/function.array-key-first.php
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @param array(int|string => mixed) $a
  * @return string|int|null

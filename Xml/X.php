@@ -10,7 +10,7 @@ final class X extends MX {
 
 	/**
 	 * 2021-12-13
-	 * https://www.php.net/manual/en/simplexmlelement.addattribute.php
+	 * https://php.net/manual/en/simplexmlelement.addattribute.php
 	 * https://stackoverflow.com/a/9391673
 	 * https://stackoverflow.com/a/43566078
 	 * 2022-11-15 We can not declare the $k argument type with PHP < 8: https://3v4l.org/ptpUM
@@ -176,7 +176,7 @@ final class X extends MX {
 		/**
 		 * 2021-12-13
 		 * @uses \DOMDocument::saveXML() can return `false`:
-		 * https://www.php.net/manual/domdocument.savexml.php#refsect1-domdocument.savexml-returnvalues
+		 * https://php.net/manual/domdocument.savexml.php#refsect1-domdocument.savexml-returnvalues
 		 */
 		return df_assert_nef($dom->ownerDocument->saveXML($dom->ownerDocument->documentElement));
 	}

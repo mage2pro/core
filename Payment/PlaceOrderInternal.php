@@ -72,7 +72,7 @@ final class PlaceOrderInternal {
 		# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 		# We should support PHP 7.0.
 		# https://3v4l.org/3O92j
-		# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+		# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 		# https://stackoverflow.com/a/28233499
 		list($mc, $md) =
 			$isSpecific

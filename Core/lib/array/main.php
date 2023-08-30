@@ -30,7 +30,7 @@ function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
  * не только @see Traversable, но и массив.
  * 2022-10-18
  * @uses iterator_to_array() allows an array as the first argument since PHP 8.2:
- * https://www.php.net/manual/migration82.other-changes.php#migration82.other-changes.functions.spl
+ * https://php.net/manual/migration82.other-changes.php#migration82.other-changes.functions.spl
  * 2023-07-26 "Replace `array|Traversable` with `iterable`": https://github.com/mage2pro/core/issues/255
  * @used-by df_filter_f()
  * @used-by df_map()
@@ -204,7 +204,7 @@ function dfa_ids($c):array {return df_map('df_id', $c);}
  * 2) If flags is @see SORT_STRING (it is by default),
  * formerly array has been copied and non-unique elements have been removed (without packing the array afterwards),
  * but now a new array is built by adding the unique elements. This can result in different numeric indexes.
- * https://www.php.net/manual/function.array-unique.php#refsect1-function.array-unique-changelog
+ * https://php.net/manual/function.array-unique.php#refsect1-function.array-unique-changelog
  * @used-by \Df\Config\Backend\ArrayT::processI()
  */
 function dfa_repeated(array $a):array {return array_values(array_unique(array_diff_key($a, array_unique($a))));}

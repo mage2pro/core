@@ -5,7 +5,7 @@
  * @see df_append()
  * @see df_starts_with()
  * @see df_trim_text_right()
- * 2022-10-14 @see str_ends_with() has been added to PHP 8: https://www.php.net/manual/function.str-ends-with.php
+ * 2022-10-14 @see str_ends_with() has been added to PHP 8: https://php.net/manual/function.str-ends-with.php
  * @used-by df_append()
  * @used-by df_ends_with()
  * @used-by df_is_bin_magento()
@@ -36,7 +36,7 @@ function df_ends_with(string $haystack, $n):bool {return is_array($n)
  * Утверждают, что код ниже работает быстрее, чем return 0 === mb_strpos($haystack, $needle);
  * http://stackoverflow.com/a/10473026
  * http://stackoverflow.com/a/834355
- * 2022-10-14 @see str_starts_with() has been added to PHP 8: https://www.php.net/manual/function.str-starts-with.php
+ * 2022-10-14 @see str_starts_with() has been added to PHP 8: https://php.net/manual/function.str-starts-with.php
  * 2022-11-12 It returns `true` if $needle is an empty string: https://3v4l.org/R3WhEH
  * @see df_ends_with()
  * @see df_prepend()

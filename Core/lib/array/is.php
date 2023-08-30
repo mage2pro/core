@@ -1,5 +1,5 @@
 <?php
-/** 2022-10-17 @see array_is_list() has been added to PHP 8.1: https://www.php.net/manual/function.array-is-list.php **/
+/** 2022-10-17 @see array_is_list() has been added to PHP 8.1: https://php.net/manual/function.array-is-list.php **/
 if (!function_exists('array_is_list')) {
 	/**
 	 * 2015-02-07
@@ -46,7 +46,7 @@ if (!function_exists('array_is_list')) {
 /**
  * 2015-02-07
  * 2017-10-29 It returns `true` for an empty array.
- * 2022-10-17 @uses array_is_list() has been added to PHP 8.1: https://www.php.net/manual/function.array-is-list.php
+ * 2022-10-17 @uses array_is_list() has been added to PHP 8.1: https://php.net/manual/function.array-is-list.php
  * @used-by df_assert_assoc()
  * @used-by df_call()
  * @used-by df_clean()

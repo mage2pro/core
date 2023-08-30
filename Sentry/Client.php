@@ -263,7 +263,7 @@ final class Client {
 	 * @param array(string => mixed) $headers
 	 */
 	private function send_http(string $url, string $data, array $headers = []):void {
-		# 2022-10-16 https://www.php.net/manual/migration80.incompatible.php#migration80.incompatible.resource2object
+		# 2022-10-16 https://php.net/manual/migration80.incompatible.php#migration80.incompatible.resource2object
 		$c = curl_init($url); /** @var resource|\CurlHandle $c */
 		try {
 			curl_setopt($c, CURLOPT_HTTPHEADER, df_map_k(
@@ -282,7 +282,7 @@ final class Client {
 			 *		or as an array with the field name as key and field data as value.
 			 *		If value is an array, the `Content-Type` header will be set to `multipart/form-data`.
 			 *		Files can be sent using CURLFile or CURLStringFile, in which case value must be an array.»
-			 * https://www.php.net/manual/function.curl-setopt.php
+			 * https://php.net/manual/function.curl-setopt.php
 			 * 2) In my case the value is always a string: @see self::encode()
 			 */
 			curl_setopt($c, CURLOPT_POSTFIELDS, $data);

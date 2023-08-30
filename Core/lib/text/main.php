@@ -31,7 +31,7 @@ function df_bts_yn(bool $v):string {return $v ? 'yes' : 'no';}
  * Я так понимаю, здесь безопасно использовать @uses strpos вместо @see mb_strpos() даже для UTF-8.
  * http://stackoverflow.com/questions/13913411/mb-strpos-vs-strpos-whats-the-difference
  * 2015-04-17 Добавлена возможность указывать в качестве $needle массив.
- * 2022-10-14 @see str_contains() has been added to PHP 8: https://www.php.net/manual/function.str-contains.php
+ * 2022-10-14 @see str_contains() has been added to PHP 8: https://php.net/manual/function.str-contains.php
  * 2022-11-26 We can not declare the argument as `string ...$n` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_block_output()
  * @used-by df_is_bin_magento()

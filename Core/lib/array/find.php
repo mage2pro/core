@@ -5,11 +5,11 @@ use Df\Core\Exception as DFE;
  * 2016-10-25 Оказалось, что в ядре нет такой функции.
  * 2022-11-26
  * @see array_search() looks only for a static value (does not support a comparison closure):
- * https://www.php.net/manual/function.array-search.php
+ * https://php.net/manual/function.array-search.php
  * 2023-07-26
  * 1) "Replace `array|Traversable` with `iterable`": https://github.com/mage2pro/core/issues/255
- * 2) https://www.php.net/manual/language.types.iterable.php
- * https://www.php.net/manual/en/migration82.other-changes.php#migration82.other-changes.core
+ * 2) https://php.net/manual/language.types.iterable.php
+ * https://php.net/manual/en/migration82.other-changes.php#migration82.other-changes.core
  * 3) Using `iterable` as an argument type requires PHP ≥ 7.1: https://3v4l.org/SNUMI
  * @used-by df_bt_has()
  * @used-by df_ends_with()
@@ -47,7 +47,7 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, 
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	# We should support PHP 7.0.
 	# https://3v4l.org/3O92j
-	# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
 	list($a, $f) = dfaf($a1, $a2); /** @var iterable $a */ /** @var callable $f */
 	$pAppend = df_array($pAppend); $pPrepend = df_array($pPrepend);

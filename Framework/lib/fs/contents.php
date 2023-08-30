@@ -45,7 +45,7 @@ function df_contents(string $f, $onE = true, $rs = null):string {
 		 * 			«failed to open stream: A connection attempt failed
 		 * 			because the connected party did not properly respond after a period of time,
 		 * 			or established connection failed because connected host has failed to respond.»
-		 * https://www.php.net/manual/function.file-get-contents.php#refsect1-function.file-get-contents-errors
+		 * https://php.net/manual/function.file-get-contents.php#refsect1-function.file-get-contents-errors
 		 * That is why I use the silence operator.
 		 * 2023-07-16
 		 * «file_get_contents(): Passing null to parameter #2 ($use_include_path) of type bool is deprecated

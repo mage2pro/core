@@ -1,7 +1,7 @@
 <?php
 /**
  * 2022-10-30
- * @uses round() returns a float, not an int: https://www.php.net/manual/function.round.php
+ * @uses round() returns a float, not an int: https://php.net/manual/function.round.php
  * @used-by df_date_from_timestamp_14()
  * @used-by df_num_days()
  * @param float|int $v

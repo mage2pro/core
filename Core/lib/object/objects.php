@@ -18,7 +18,7 @@ function df_ic(string $resultClass, $a2 = null, array $a3 = []) {
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	# We should support PHP 7.0.
 	# https://3v4l.org/3O92j
-	# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
 	list($expectedClass, $params) = is_array($a2) ? [null, $a2] : [$a2, $a3];
 	return df_ar(new $resultClass($params), $expectedClass);
@@ -223,7 +223,7 @@ function df_sc(string $resultClass, string $expectedClass = '', array $params = 
 function dfo($o, $k, $d = null) {return
 	# 2022-10-29
 	# It works even in PHP 8.2 (despite dynamic properties are deprecated since PHP 8.2): https://3v4l.org/2Q8Fm
-	# https://www.php.net/manual/migration82.deprecated.php#migration82.deprecated.core.dynamic-properties
+	# https://php.net/manual/migration82.deprecated.php#migration82.deprecated.core.dynamic-properties
 	isset($o->{$k}) ? $o->{$k} : df_call_if($d, $k)
 ;}
 

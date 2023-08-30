@@ -49,7 +49,7 @@ final class Report implements \IteratorAggregate, \Countable {
 	 * 2016-08-09
 	 * @override
 	 * @see \IteratorAggregate::getIterator()
-	 * https://www.php.net/manual/iteratoraggregate.getiterator.php
+	 * https://php.net/manual/iteratoraggregate.getiterator.php
 	 */
 	function getIterator():AI {return new AI($this->_items);}
 

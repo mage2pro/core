@@ -22,7 +22,7 @@ function df_call_parent($o, string $m, array $a = []) {
 	 * 2023-08-01
 	 * 1) https://stackoverflow.com/a/17174448
 	 * 2) «As of PHP 8.1.0, calling this method has no effect; all methods are invokable by default»:
-	 * https://www.php.net/manual/reflectionmethod.setaccessible.php#refsect1-reflectionmethod.setaccessible-description
+	 * https://php.net/manual/reflectionmethod.setaccessible.php#refsect1-reflectionmethod.setaccessible-description
 	 * That is why I use @noinspection PhpExpressionResultUnusedInspection
 	 */
 	$rm->setAccessible(true);
@@ -33,7 +33,7 @@ function df_call_parent($o, string $m, array $a = []) {
 	 * in vendor/mage2pro/core/Core/lib/reflection\parent.php on line 30»: https://github.com/mage2pro/core/issues/301
 	 * 2) «@see ReflectionMethod::invoke() cannot be used when reference parameters are expected.
 	 * @uses ReflectionMethod::invokeArgs() has to be used instead (passing references in the argument list).»:
-	 * https://www.php.net/manual/reflectionmethod.invoke.php#refsect1-reflectionmethod.invoke-notes
+	 * https://php.net/manual/reflectionmethod.invoke.php#refsect1-reflectionmethod.invoke-notes
 	 */
 	return $rm->invokeArgs($o, $a);
 }

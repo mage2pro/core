@@ -50,7 +50,7 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
 	/**
 	 * 2022-10-17
 	 * 1) Dynamic properties are deprecated since PHP 8.2:
-	 * https://www.php.net/manual/migration82.deprecated.php#migration82.deprecated.core.dynamic-properties
+	 * https://php.net/manual/migration82.deprecated.php#migration82.deprecated.core.dynamic-properties
 	 * https://wiki.php.net/rfc/deprecate_dynamic_properties
 	 * 2) @see df_prop_k()
 	 * @var mixed $r

@@ -40,7 +40,7 @@ final class A extends \Df\Core\O implements \IteratorAggregate, \Countable {
 	 * 2015-12-30
 	 * @override
 	 * @see \IteratorAggregate::getIterator()
-	 * https://www.php.net/manual/iteratoraggregate.getiterator.php
+	 * https://php.net/manual/iteratoraggregate.getiterator.php
 	 * @throws DFE
 	 */
 	function getIterator():AI {return new AI($this->get());}

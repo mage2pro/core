@@ -136,7 +136,7 @@ function df_response_headers($a1 = null, $a2 = null) {
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	# We should support PHP 7.0.
 	# https://3v4l.org/3O92j
-	# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
 	list($a, $r) = df_response_ar($a1, $a2);
 	array_walk($a, function($v, $k) use($r) {$r->setHeader($k, $v, true);});
@@ -159,7 +159,7 @@ function df_response_sign($a1 = null, $a2 = null) {
 	# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 	# We should support PHP 7.0.
 	# https://3v4l.org/3O92j
-	# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
 	list($a, $r) = df_response_ar($a1, $a2);
 	return df_response_headers($r, df_headers($a));

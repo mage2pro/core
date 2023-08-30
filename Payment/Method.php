@@ -1275,7 +1275,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 				# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
 				# We should support PHP 7.0.
 				# https://3v4l.org/3O92j
-				# https://www.php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+				# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 				# https://stackoverflow.com/a/28233499
 				list($min, $max) = $limitsForCurrency; /** @var int|float|null $min */ /** @var int|float|null $max */
 				$r = (is_null($min) || $a >= $min) && (is_null($max) || $a <= $max);

@@ -15,7 +15,7 @@ function dfr_prop($o, string $n):RP {
 	 * 2023-08-01
 	 * 1) https://stackoverflow.com/a/17174448
 	 * 2) «As of PHP 8.1.0, calling this method has no effect; all methods are invokable by default»:
-	 * https://www.php.net/manual/reflectionmethod.setaccessible.php#refsect1-reflectionmethod.setaccessible-description
+	 * https://php.net/manual/reflectionmethod.setaccessible.php#refsect1-reflectionmethod.setaccessible-description
 	 * That is why I use @noinspection PhpExpressionResultUnusedInspection
 	 */
 	$r->setAccessible(true);
