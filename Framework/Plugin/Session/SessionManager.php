@@ -9,13 +9,11 @@ final class SessionManager {
 	 * The autocleaning is broken when filesystem is used to save the sessions
 	 * (is is by default, another option is the Magento database),
 	 * and these files are stored inside the Magento installation folder (it is by default too).
-	 * If the session files are stored in a global operating system defined location
-	 * like «/var/lib/php/sessions», then the autocleaning is not broken
-	 * because it is doing by the operating system:
+	 * If the session files are stored in a global operating system defined location like «/var/lib/php/sessions»,
+	 * then the autocleaning is not broken because it is doing by the operating system:
 	 * 1) «the garbage collection is set up to be done by cron jobs on some systems (i.e. Ubuntu/Debian»
 	 * http://stackoverflow.com/a/2952173
-	 * 2) «As Ubuntu has it's own garbage cleaning via cron (/etc/cron.d/php5) <...>»
-	 * http://stackoverflow.com/a/8003905
+	 * 2) «As Ubuntu has it's own garbage cleaning via cron (/etc/cron.d/php5) <...>»: http://stackoverflow.com/a/8003905
 	 * My previous solution is described here:
 	 * https://github.com/magento-russia/3/blob/2016-11-22/app/code/local/Df/Core/Boot.php?ts=4#L155-L188
 	 * @see \Magento\Framework\Session\SessionManager::start()
