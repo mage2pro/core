@@ -5,9 +5,11 @@ use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": 
 
 /**
  * 2017-02-07
+ * @used-by df_lang_zh()
  * @used-by df_lang_ru()
  * @used-by \Df\Payment\Block\Info::extended()
  * @used-by \Df\Payment\Method::test()
+ * @used-by \Df\Payment\Source\API\Key\Testable::test()
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @used-by \Dfe\Paymill\Settings::test3DS()
  * $args — массив либо пустой, либо из 2 элементов с целочисленными индексами 0 и 1.
