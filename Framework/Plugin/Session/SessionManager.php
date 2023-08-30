@@ -8,7 +8,7 @@ final class SessionManager {
 	 * Our purpose is to fix the expired session files autocleaning if needed.
 	 * The autocleaning is broken when filesystem is used to save the sessions
 	 * (is is by default, another option is the Magento database),
-	 * and these files are store inside the Magento installation folder (it is by default too).
+	 * and these files are stored inside the Magento installation folder (it is by default too).
 	 * If the session files are stored in a global operating system defined location
 	 * like «/var/lib/php/sessions», then the autocleaning is not broken
 	 * because it is doing by the operating system:
