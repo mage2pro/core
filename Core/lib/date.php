@@ -32,7 +32,7 @@ function df_date_create(int ...$a):ZD {
  * @used-by \Df\Payment\Operation::customerDob()
  * @see df_date_to_db()
  * @return ZD|null
- * @throws Exception
+ * @throws Th
  */
 function df_date_from_db(string $s, bool $onE = true) {
 	df_param_sne($s, 0); return df_try(function() use($s):ZD {return new ZD($s, ZD::ISO_8601);}, $onE);
