@@ -70,9 +70,8 @@ function df_currency_convert_to_base(float $a, $from, $s = null):float {return $
  * https://mage2.pro/t/1832
  * @used-by \Df\Framework\Validator\Currency::check()
  * @param int|string|null|bool|StoreInterface $s [optional]
- * @return string[]
  */
-function df_currency_has_rate(string $iso3, $s = null):array {return !!dfa(df_currencies_ctn($s), $iso3);}
+function df_currency_has_rate(string $iso3, $s = null):bool {return !!dfa(df_currencies_ctn($s), $iso3);}
 
 /**
  * 2016-08-08
