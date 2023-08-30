@@ -5,6 +5,7 @@ use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": 
 
 /**
  * 2017-02-07
+ * @used-by df_lang_ru()
  * @used-by \Df\Payment\Block\Info::extended()
  * @used-by \Df\Payment\Method::test()
  * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()

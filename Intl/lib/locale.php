@@ -20,7 +20,7 @@ function df_lang(string $locale = ''):string {return substr(df_locale($locale), 
  * @used-by \Df\Config\Source\EnableYN::toOptionArray()
  * @param mixed ...$a
  */
-function df_lang_ru(...$a):bool {return df_b($a, 'ru' === df_lang());}
+function df_lang_ru(...$a):string {return df_b($a, 'ru' === df_lang());}
 
 /**               
  * 2017-09-03    
