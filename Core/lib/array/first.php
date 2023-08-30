@@ -71,6 +71,7 @@ function df_first_key(array $a) {
  * @used-by \Df\Core\Text\Regex::match()
  * @used-by \Df\Customer\Settings\BillingAddress::disabled()
  * @used-by \Df\Framework\Form\Element::uidSt()
+ * @used-by \Df\Framework\Plugin\Session\SessionManager::beforeStart()
  * @used-by \Df\Payment\Operation::customerNameL()
  * @used-by \Df\Payment\Source\API\Key\Testable::_test()
  * @used-by \Df\Payment\TM::response()
