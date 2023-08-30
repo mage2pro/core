@@ -46,7 +46,18 @@ final class SessionManager {
 			 */
 			$o = df_session_config()->getOptions();
 			if ('files' === dfa($o, 'session.save_handler')) {
-				if (df_path_is_internal(dfa($o, 'session.save_path'))) {
+				# 2023-08-30
+				# 1) «Argument 1 passed to df_path_is_internal() must be of the type string, null given,
+				# called in vendor/mage2pro/core/Framework/Plugin/Session/SessionManager.php on line 50»:
+				# https://github.com/mage2pro/core/issues/226
+				# 2) The `session.save_path` option can be absent:
+				# https://php.net/manual/session.configuration.php#session.configuration
+				# 3) The absent or empty `session.save_path` option means `/tmp` (so it is not an internal Magento path):
+				# https://php.net/manual//session.configuration.php#ini.session.save-path
+				# 4) The `session.save_path` option supports a format with `;`:
+				# https://php.net/manual//session.configuration.php#ini.session.save-path
+				/** @var string $p */
+				if (($p = df_last(explode(';', dfa($o, 'session.save_path', '')))) && df_path_is_internal($p)) {
 					# 2022-11-27 https://php.net/manual/session.configuration.php#ini.session.gc-probability
 					ini_set('session.gc_probability', 1);
 					# 2022-11-27 https://php.net/manual/session.configuration.php#ini.session.gc-divisor
