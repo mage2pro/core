@@ -37,7 +37,11 @@ class Multiselect extends _Multiselect implements ElementI {
 			;
 			$selectedA = $this->getValue();
 			if (!is_array($selectedA)) {
-				$selectedA = explode(',', $selectedA);
+				# 2023-08-30
+				# «explode(): Passing null to parameter #2 ($string) of type string is deprecated
+				# in vendor/mage2pro/core/Framework/Form/Element/Multiselect.php on line 40»:
+				# https://github.com/mage2pro/core/issues/336
+				$selectedA = explode(',', (string)$selectedA);
 			}
 			if ($options = $this->getValues()) {
 				# 2017-09-23 BEGIN PATCH
