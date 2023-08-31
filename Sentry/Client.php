@@ -73,7 +73,7 @@ final class Client {
 	 * 2020-06-28
 	 * 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @used-by df_sentry()
-	 * @param Th|DFE $e
+	 * @param Th|DFE $t
 	 * @param array(string => mixed) $data
 	 */
 	function captureException(Th $t, array $data):void {
