@@ -42,7 +42,7 @@ final class Error extends \Df\Qa\Failure {
 
 	/**
 	 * @used-by self::check()
-	 * @throws \Exception
+	 * @throws Th
 	 */
 	private function log():void {
 		# 2015-04-04
