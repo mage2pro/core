@@ -125,7 +125,6 @@ function df_abstract($caller):void {
  * @used-by \Df\Payment\W\Nav::p()
  * @used-by \Df\Payment\W\Reader::testData()
  * @used-by \Df\PaypalClone\W\Event::validate()
- * @used-by \Df\Qa\Failure\Error::throwLast()
  * @used-by \Df\Qa\Method::throwException()
  * @used-by \Df\Qa\Trace\Frame::methodParameter()
  * @used-by \Df\Shipping\Method::s()
@@ -242,16 +241,3 @@ function df_should_not_be_here():void {df_error_html('The method %s is not allow
  * @throws NFE
  */
 function df_throw_404():void {throw new NFE(__('Page not found.'));}
-
-/**
- * Эта функция используется, как правило, при отключенном режиме разработчика.
- * @see mageCoreErrorHandler():
- *		if (Mage::getIsDeveloperMode()) {
- *			throw new Exception($errorMessage);
- *		}
- *		else {
- *			Mage::log($errorMessage, Zend_Log::ERR);
- *		}
- * @throws DFE
- */
-function df_throw_last_error(bool $r = false):void {$r ?: \Df\Qa\Failure\Error::throwLast();}

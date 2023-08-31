@@ -76,7 +76,8 @@ final class Error extends \Df\Qa\Failure {
 	static function check():void {
 		try {
 			if (error_get_last() && self::isFatal()) {
-				self::i()->log();
+				$i = new self;
+				$i->log();
 			}
 		}
 		# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
@@ -84,18 +85,6 @@ final class Error extends \Df\Qa\Failure {
 			df_log($th);
 		}
 	}
-
-	/** @used-by df_throw_last_error() */
-	static function throwLast():void {
-		df_assert(error_get_last());
-		df_error(self::i()->main());
-	}
-
-	/**
-	 * @used-by self::check()
-	 * @used-by self::throwLast()
-	 */
-	private static function i():self {return new self;}
 
 	/**
 	 * @used-by self::main()
