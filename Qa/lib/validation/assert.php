@@ -1,7 +1,7 @@
 <?php
 use Df\Core\Exception as DFE;
 use Df\Qa\Method as Q;
-use \Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2016-11-10
