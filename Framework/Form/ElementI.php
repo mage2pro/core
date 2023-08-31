@@ -25,5 +25,3 @@ interface ElementI {
 	const AFTER = 'after';
 	const BEFORE = 'before';
 }
-
-
