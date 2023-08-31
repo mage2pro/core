@@ -89,6 +89,6 @@ function df_url_trim_index(string $u):string {
  * @used-by \Dfe\FacebookLogin\Customer::requestBasic()
  * @param F|bool|mixed $throw [optional]
  * @return zUri|zUriH|mixed
- * @throws E|zUriE
+ * @throws Th|zUriE
  */
 function df_zuri(string $u, $throw = true) {return df_try(function() use($u) {return zUri::factory($u);}, $throw);}
