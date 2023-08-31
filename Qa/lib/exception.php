@@ -7,14 +7,6 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
 
 /**
  * 2023-08-02
- * @see df_is_th()
- * @used-by df_lxts()
- * @used-by df_th2x()
- */
-function df_is_x($v):bool {return $v instanceof X;}
-
-/**
- * 2023-08-02
  * @see df_is_x()
  * @used-by df_bt()
  * @used-by df_bt_inc()
@@ -28,6 +20,14 @@ function df_is_x($v):bool {return $v instanceof X;}
  * @used-by \Dfe\YandexKassa\W\Responder::error()
  */
 function df_is_th($v):bool {return $v instanceof T;}
+
+/**
+ * 2023-08-02
+ * @see df_is_th()
+ * @used-by df_lxts()
+ * @used-by df_th2x()
+ */
+function df_is_x($v):bool {return $v instanceof X;}
 
 /**
  * 2016-03-17
