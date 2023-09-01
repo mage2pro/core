@@ -123,6 +123,11 @@ function df_sort_a(array $a):array {asort($a); return $a;}
 
 /**
  * 2017-02-02 http://stackoverflow.com/a/7930575
+ * 2022-11-30
+ *  «Deprecated Functionality: Collator::__construct():
+ *  Passing null to parameter #1 ($locale) of type string is deprecated
+ *  in vendor/justuno.com/core/lib/Core/array/sort.php on line 102»:
+ *  https://github.com/justuno-com/core/issues/379
  * @used-by df_countries_options()
  * @used-by df_modules_p()
  * @used-by df_oqi_leafs()
@@ -131,7 +136,7 @@ function df_sort_a(array $a):array {asort($a); return $a;}
  * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  */
-function df_sort_names(array $a, string $l = '', Closure $get = null):array {
+function df_sort_names(array $a, string $l = '', callable $get = null):array {
 	$c = new Collator($l); /** @var Collator $c */
 	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(!$get ? $a : $get($a), !$get ? $b : $get($b));});
 }
