@@ -59,6 +59,7 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
 	if (!($hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : @class_exists('WeakMap'))) {
 		# 2017-01-12 ... works correctly here: https://3v4l.org/0shto
 		# 2022-10-17 The ternary operator works correctly here: https://3v4l.org/MutM4
+		/** @noinspection PhpVariableVariableInspection */
 		$r = property_exists($o, $k) ? $o->$k : $o->$k = $f(...$a);
 	}
 	else {
