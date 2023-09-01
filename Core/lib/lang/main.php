@@ -122,6 +122,6 @@ function df_sync($id, callable $job, float $interval = 0.1) { /** @var mixed $r 
  * @throws Th
  */
 function df_try(F $try, $onE = null) {
-	try {return $try();} 
+	try {return $try();}
 	catch(Th $th) {return $onE instanceof F ? $onE($th) : (true === $onE ? df_error($th) : $onE);}
 }
