@@ -107,6 +107,7 @@ function df_sort(array $a, $f = null):array {
 		if (!$f instanceof Closure) {
 			$f = function($a, $b) use($f) {return !is_object($a) ? $a - $b : $a->$f() - $b->$f();};
 		}
+		/** @noinspection PhpUsageOfSilenceOperatorInspection */
 		$isList ? @usort($a, $f) : @uasort($a, $f);
 	}
 	return $a;
