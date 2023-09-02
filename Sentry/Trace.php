@@ -106,14 +106,14 @@ final class Trace {
 			# Code which is eval'ed have a modified filename.. Extract the
 			# correct filename + linenumber from the string.
 			$matches = [];
-			if ($matched = preg_match("/^(.*?)\((\d+)\) : eval\(\)'d code$/", $file, $matches)) {
+			if (preg_match("/^(.*?)\((\d+)\) : eval\(\)'d code$/", $file, $matches)) {
 				$r = ['filename' => $file = $matches[1], 'lineno' => $line = $matches[2]] + $r;
 			}
 			# In the case of an anonymous function, the filename is sent as:
 			# "</path/to/filename>(<lineno>) : runtime-created function"
 			# Extract the correct filename + linenumber from the string.
 			$matches = [];
-			if ($matched = preg_match("/^(.*?)\((\d+)\) : runtime-created function$/", $file, $matches)) {
+			if (preg_match("/^(.*?)\((\d+)\) : runtime-created function$/", $file, $matches)) {
 				$r = ['filename' => $file = $matches[1], 'lineno' => $line = $matches[2]] + $r;
 			}
 			try {
