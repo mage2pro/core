@@ -25,4 +25,15 @@ final class TransactionStack {
 	 * @used-by \Df\Sentry\Client::__construct()
 	 */
 	function push(string $c):void {$this->stack[] = $c;}
+
+	/**
+	 * 2023-09-03
+	 * «Creation of dynamic property Justuno\Core\Sentry\TransactionStack::$stack is deprecated
+	 * in vendor/justuno.com/core/Sentry/TransactionStack.php on line 8»: https://github.com/justuno-com/core/issues/411
+	 * @used-by self::__construct()
+	 * @used-by self::peek()
+	 * @used-by self::push()
+	 * @var string[]
+	 */
+	private $stack;
 }
