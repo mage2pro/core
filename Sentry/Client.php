@@ -13,13 +13,6 @@ final class Client {
 		$this->_keyPublic = $keyPublic;
 		$this->_keyPrivate = $keyPrivate;
 		$this->_context = new Context;
-		$this->curl_path = 'curl';
-		$this->logger = 'php';
-		$this->site = dfa($_SERVER, 'SERVER_NAME');
-		$this->tags = [];
-		$this->timeout = 2;
-		$this->trust_x_forwarded_proto = null;
-		$this->sdk = ['name' => 'mage2.pro', 'version' => df_core_version()];
 		$this->serializer = new Serializer;
 		$this->transaction = new TransactionStack;
 		if (!df_is_cli() && isset($_SERVER['PATH_INFO'])) {
@@ -188,9 +181,9 @@ final class Client {
 			,'message' => substr(dfa($data, 'message', ''), 0, self::MESSAGE_LIMIT)
 			,'platform' => 'php'
 			,'project' => $this->_projectId
-			,'sdk' => $this->sdk
-			,'site' => $this->site
-			,'tags' => $this->tags
+			,'sdk' => ['name' => 'mage2.pro', 'version' => df_core_version()]
+			,'site' => dfa($_SERVER, 'SERVER_NAME')
+			,'tags' => []
 			,'timestamp' => gmdate('Y-m-d\TH:i:s\Z')
 		];
 		if (!df_is_cli()) {
@@ -199,14 +192,12 @@ final class Client {
 		$data += $this->get_user_data();
 		/**
 		 * 2017-01-10
-		 * 1) $this->tags — это теги, которые были заданы в конструкторе: @see self::__construct()
-		 * Они имеют наинизший приоритет.
-		 * 2) Намеренно использую здесь + вместо @see dfa_merge_r(),
+		 * Намеренно использую здесь + вместо @see dfa_merge_r(),
 		 * потому что массив tags должен быть одномерным (и поэтому для него + достаточно),
 		 * а массив extra хоть и может быть многомерен, однако вряд ли для нас имеет смысл
 		 * слияние его элементов на внутренних уровнях вложенности.
 		 */
-		$data['tags'] += $this->_context->tags + $this->tags;
+		$data['tags'] += $this->_context->tags;
 		$extra = $data['extra'] + $this->_context->extra; /** @var array(string => mixed) $extra */
 		$data['extra']  = Extra::fits($extraS = df_dump($extra)) ? ['_dump' => $extraS] : Extra::adjust($extra);
 		$data = df_clean($data);
@@ -321,12 +312,12 @@ final class Client {
 		/** @var int $t */
 		if (!defined('CURLOPT_TIMEOUT_MS')) {
 			# fall back to the lower-precision timeout.
-			$t = max(1, ceil($this->timeout));
+			$t = 2;
 			$r += [CURLOPT_CONNECTTIMEOUT => $t, CURLOPT_TIMEOUT => $t];
 		}
 		else {
 			# MS is available in curl >= 7.16.2
-			$t = max(1, ceil(1000 * $this->timeout));
+			$t = 2000;
 			# some versions of PHP 5.3 don't have this defined correctly
 			if (!defined('CURLOPT_CONNECTTIMEOUT_MS')) {
 				//see http://stackoverflow.com/questions/9062798/php-curl-timeout-is-not-working/9063006#9063006
@@ -438,6 +429,15 @@ final class Client {
 	private $_projectId;
 
 	private $serializer;
+
+	/**
+	 * 2023-09-03
+	 * @used-by self::__construct()
+	 * @used-by self::capture()
+	 * @var TransactionStack
+	 */
+	private $transaction;
+
 	/**
 	 * 2022-12-09
 	 * @used-by df_sentry()
