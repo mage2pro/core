@@ -157,7 +157,7 @@ function df_fe_fs(AE $e):FS {
  * @param array(string => string) $params [optional]
  * @param string|null $path [optional]
  */
-function df_fe_init(AE $e, $class = null, $css = [], $params = [], $path = null) {
+function df_fe_init(AE $e, $class = null, $css = [], array $params = [], $path = null):void {
 	$class = df_cts($class ?: $e);
 	$moduleName = df_module_name($class); /** @var string $moduleName */
 	# 2015-12-29
