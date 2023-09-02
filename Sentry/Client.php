@@ -12,7 +12,6 @@ final class Client {
 		$this->_projectId = $projectId;
 		$this->_keyPublic = $keyPublic;
 		$this->_keyPrivate = $keyPrivate;
-		$this->_user = null;
 		$this->_context = new Context;
 		$this->curl_path = 'curl';
 		$this->logger = 'php';
