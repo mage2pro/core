@@ -70,7 +70,12 @@ function df_float($v, bool $allowNull = true) {/** @var int|int[] $r */
 function df_float_positive($v, bool $allow0 = false, bool $throw = true) {/** @var float|null $r */
 	if (!$throw) {
 		try {$r = df_float_positive($v, $allow0, true);}
-		catch (\Throwable) {$r = null;}
+		# 2023-11-27
+		# PHP < 8 requires a variable declaration:
+ 		# «unexpected ')', expecting '|' or variable (T_VARIABLE)
+		# in vendor/mage2pro/core/Qa/lib/validation\assert/float.php on line 73»:
+		# https://github.com/mage2pro/core/issues/337
+		catch (\Throwable $t) {$r = null;}
 	}
 	else {
 		$r = df_float($v, $allow0);
