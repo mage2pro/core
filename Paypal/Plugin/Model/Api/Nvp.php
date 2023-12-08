@@ -32,12 +32,16 @@ final class Nvp {
 	/**
 	 * 2019-10-16
 	 * 2019-12-14
-	 * $a can be null at least in Magento 2.2.5:
+	 * $a can be `null` at least in Magento 2.2.5:
 	 * «Call to a member function getEmail() on null in vendor/mage2pro/core/Paypal/Plugin/Model/Api/Nvp.php:43»:
 	 * https://github.com/royalwholesalecandy/core/issues/41
+	 * 2023-12-08
+	 * $a->getEmail() can be `null` too:
+	 * «Argument 1 passed to df_ends_with() must be of the type string, null given,
+	 * called in vendor/mage2pro/core/Paypal/Plugin/Model/Api/Nvp.php on line 42»: https://github.com/mage2pro/core/issues/338
 	 * @used-by self::beforeCallDoExpressCheckoutPayment()
 	 * @used-by self::beforeCallSetExpressCheckout()
 	 * @param OA|QA|null $a
 	 */
-	private static function eligible($a):bool {return $a && df_ends_with($a->getEmail(), '@mage2.pro');}
+	private static function eligible($a):bool {return $a && df_ends_with(df_nts($a->getEmail()), '@mage2.pro');}
 }
