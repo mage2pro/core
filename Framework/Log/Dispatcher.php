@@ -89,7 +89,23 @@ class Dispatcher extends _P {
 					# with level ≥ `Monolog\Logger::ERROR` (`ERROR`, `CRITICAL`, `ALERT`, `EMERGENCY`)":
 					# https://github.com/mage2pro/core/issues/304
 					if (L::ERROR <= $rc->level()) {
-						df_sentry(...$args);
+						# 2023-12-08
+						# 1) Symmetric array destructuring requires PHP ≥ 7.1:
+						#		[$a, $b] = [1, 2];
+						# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+						# We should support PHP 7.0.
+						# https://3v4l.org/3O92j
+						# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+						# https://stackoverflow.com/a/28233499
+						list($v, $extra) = [$args[1], $args[2]];
+						# 2023-12-08
+						# "Set a proper title instead of `[` for Sentry messages like
+						# «Unable to proceed: the maintenance mode is enabled»": https://github.com/mage2pro/core/issues/339
+						if (is_array($v) && !$extra && ($m = dfa($v, 'message')) && is_string($m)) {/** @var string|null $m */
+							$extra = $v;
+							$v = $m;
+						}
+						df_sentry(null, $v, $extra);
 					}
 				}
 				$r = true; # 2020-09-24 The pevious code was: `$r = parent::handle($d);`
