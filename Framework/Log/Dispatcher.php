@@ -107,6 +107,36 @@ class Dispatcher extends _P {
 						}
 						df_sentry(null, $v, $extra);
 					}
+					/**
+					 * 2023-12-09
+					 * 1) Some errors are logged twice: by @see \Df\Framework\Log\Dispatcher::handle()
+					 * and @see \Df\Framework\Plugin\AppInterface::beforeCatchException():
+					 * https://github.com/mage2pro/core/issues/342
+					 * 2) @see \Magento\Framework\App\Bootstrap::run():
+					 * 		$this->objectManager->get(LoggerInterface::class)->error($e->getMessage());
+					 * 		if (!$application->catchException($this, $e)) {
+					 * 			throw $e;
+					 * 		}
+					 * https://github.com/magento/magento2/blob/2.4.7-beta2/lib/internal/Magento/Framework/App/Bootstrap.php#L269-L272
+					 * 3) The call stack:
+					 * 3.1) @see \Magento\Framework\App\Bootstrap::run()
+					 * 		$this->objectManager->get(LoggerInterface::class)->error($e->getMessage());
+					 * https://github.com/magento/magento2/blob/2.4.5/lib/internal/Magento/Framework/App/Bootstrap.php#L269
+					 * 3.2) @see \Magento\Framework\Logger\LoggerProxy::error()
+					 * 		$this->getLogger()->error($message, $context);
+					 * https://github.com/magento/magento2/blob/2.4.5/lib/internal/Magento/Framework/Logger/LoggerProxy.php#L126
+					 * 3.3) @see \Monolog\Logger::error()
+					 * 		$this->addRecord(static::ERROR, (string) $message, $context);
+					 * https://github.com/Seldaek/monolog/blob/2.9.2/src/Monolog/Logger.php#L650
+					 * 3.4) @see \Monolog\Logger::addRecord()
+					 * 		if (true === $handler->handle($record)) {
+					 * https://github.com/Seldaek/monolog/blob/2.9.2/src/Monolog/Logger.php#L399
+					 * 4) Magento ≥ 2.4.6 passes the exception to loggers:
+					 * 		$context = $this->addExceptionToContext($message, $context);
+					 * https://github.com/magento/magento2/blob/2.4.6/lib/internal/Magento/Framework/Logger/LoggerProxy.php#L129
+					 * We can not use it because we need to support outdated Magento versions.
+					 */
+					Latest::register($rc);
 				}
 				$r = true; # 2020-09-24 The pevious code was: `$r = parent::handle($d);`
 			}

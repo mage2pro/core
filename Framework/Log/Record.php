@@ -41,6 +41,7 @@ final class Record {
 	 * 2023-08-01
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
 	 * @used-by \Df\Framework\Log\Handler\BrokenReference::_p()
+	 * @used-by \Df\Framework\Log\Latest::register()
 	 */
 	function level():int {return $this->d('level');}
 
@@ -50,6 +51,7 @@ final class Record {
 	 * @used-by \Df\Framework\Log\Handler\Cookie::_p()
 	 * @used-by \Df\Framework\Log\Handler\JsMap::_p()
 	 * @used-by \Df\Framework\Log\Handler\PayPal::_p()
+	 * @used-by \Df\Framework\Log\Latest::register()
 	 * @param string|string[]|null $s [optional]
 	 * @return string|bool
 	 */

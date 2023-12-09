@@ -1,6 +1,7 @@
 <?php
 namespace Df\Framework\Plugin;
 use Df\Framework\Log\Handler\JsMap;
+use Df\Framework\Log\Latest;
 use Magento\Framework\AppInterface as Sb;
 use Magento\Framework\App\Bootstrap as B;
 use \Exception as E;
@@ -54,8 +55,23 @@ final class AppInterface {
 	 * https://github.com/magento/magento2/blob/2.4.3/lib/internal/Magento/Framework/App/StaticResource.php#L194-L214
 	 */
 	function beforeCatchException(Sb $sb, B $b, E $e):void {
-		# 2023-08-25 "Prevent logging of «Requested path <…>.js.map is wrong»": https://github.com/mage2pro/core/issues/323
-		if (!JsMap::is($e->getMessage())) {
+		/**
+		 * 2023-08-25 "Prevent logging of «Requested path <…>.js.map is wrong»": https://github.com/mage2pro/core/issues/323
+		 * 2023-12-09
+		 * 1) Some errors are logged twice: by @see \Df\Framework\Log\Dispatcher::handle()
+		 * and @see \Df\Framework\Plugin\AppInterface::beforeCatchException(): https://github.com/mage2pro/core/issues/342
+		 * 2) @see \Magento\Framework\App\Bootstrap::run():
+		 * 		$this->objectManager->get(LoggerInterface::class)->error($e->getMessage());
+		 * 		if (!$application->catchException($this, $e)) {
+		 * 			throw $e;
+		 * 		}
+		 * https://github.com/magento/magento2/blob/2.4.7-beta2/lib/internal/Magento/Framework/App/Bootstrap.php#L269-L272
+		 * 3) Magento ≥ 2.4.6 passes the exception to loggers:
+		 *        $context = $this->addExceptionToContext($message, $context);
+		 *  https://github.com/magento/magento2/blob/2.4.6/lib/internal/Magento/Framework/Logger/LoggerProxy.php#L129
+		 *  We can not use it because we need to support outdated Magento versions.
+		 */
+		if (!JsMap::is($e->getMessage()) && !Latest::registered($e)) {
 			df_log($e);
 		}
 	}
