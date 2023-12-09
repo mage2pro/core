@@ -1,6 +1,5 @@
 <?php
 namespace Df\Framework\Plugin;
-use Df\Framework\Log\Handler\JsMap;
 use Df\Framework\Log\Latest;
 use Magento\Framework\AppInterface as Sb;
 use Magento\Framework\App\Bootstrap as B;
@@ -56,7 +55,6 @@ final class AppInterface {
 	 */
 	function beforeCatchException(Sb $sb, B $b, E $e):void {
 		/**
-		 * 2023-08-25 "Prevent logging of «Requested path <…>.js.map is wrong»": https://github.com/mage2pro/core/issues/323
 		 * 2023-12-09
 		 * 1) Some errors are logged twice: by @see \Df\Framework\Log\Dispatcher::handle()
 		 * and @see \Df\Framework\Plugin\AppInterface::beforeCatchException(): https://github.com/mage2pro/core/issues/342
@@ -71,7 +69,7 @@ final class AppInterface {
 		 *  https://github.com/magento/magento2/blob/2.4.6/lib/internal/Magento/Framework/Logger/LoggerProxy.php#L129
 		 *  We can not use it because we need to support outdated Magento versions.
 		 */
-		if (!JsMap::is($e->getMessage()) && !Latest::registered($e)) {
+		if (!Latest::registered($e)) {
 			df_log($e);
 		}
 	}
