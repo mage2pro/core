@@ -4,6 +4,7 @@ use Df\Cron\Model\LoggerHandler as CronH;
 use Df\Framework\Log\Handler\BrokenReference as BrokenReferenceH;
 use Df\Framework\Log\Handler\Cookie as CookieH;
 use Df\Framework\Log\Handler\JsMap as JsMapH;
+use Df\Framework\Log\Handler\Maintenance as MaintenanceH;
 use Df\Framework\Log\Handler\NoSuchEntity as NoSuchEntityH;
 use Df\Framework\Log\Handler\PayPal as PayPalH;
 use Magento\Framework\App\Bootstrap as B;
@@ -54,6 +55,7 @@ class Dispatcher extends _P {
 			|| CookieH::p($rc)
 			|| JsMapH::p($rc)
 			|| NoSuchEntityH::p($rc)
+			|| MaintenanceH::p($rc)
 			|| PayPalH::p($rc))
 		) {
 			# 2020-08-30
