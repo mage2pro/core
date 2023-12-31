@@ -48,7 +48,9 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
 /**
  * 2019-04-05
  * 2019-09-08 Now it supports static properties.
- * 2023-12-31 For static properties, pass `null` as the first argument, e.g.: @see \Df\Core\Json::bSort()
+ * 2023-12-31 For static properties, pass `null` as the first argument, e.g.:
+ * 		@see \Df\Core\Json::bSort()
+ * 		@see \Df\Paypal\Plugin\Model\Payflow\Service\Gateway::req()
  * @used-by \CanadaSatellite\Bambora\Response::authCode() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Bambora\Response::avsResult() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Bambora\Response::errorType() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
@@ -66,6 +68,7 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
  * @used-by \Df\Customer\Session::needConfirm()
  * @used-by \Df\Customer\Session::ssoId()
  * @used-by \Df\Customer\Session::ssoProvider()
+ * @used-by \Df\Paypal\Plugin\Model\Payflow\Service\Gateway::req()
  * @used-by \Df\Zf\Validate::v()
  * @used-by \Dfe\Sift\API\Client::cfg()
  * @used-by \Dfe\TBCBank\Session::data()
