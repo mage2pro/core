@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+<!-- 2023-12-21
+1) «Areas and application entry points»:
+https://github.com/AdobeDocs/commerce-php/blob/cf2534a3/src/pages/development/build/dependency-injection-file.md#areas-and-application-entry-points
+2) «What is an area?» https://mage2.pro/t/1666/2 -->
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+<!-- 2023-12-21
+"Log diagnostic data for «The payment couldn't be processed at this time» error of PayPal Payflow":
+https://github.com/mage2pro/core/issues/344 -->
+	<type name='Magento\Paypal\Model\Payflow\Service\Gateway'>
+		<plugin
+			name='Df\Paypal\Plugin\Model\Payflow\Service\Gateway'
+			type='Df\Paypal\Plugin\Model\Payflow\Service\Gateway'
+		/>
+	</type>
+	<type name='Magento\Paypal\Model\Payflow\Service\Response\Validator\ResponseValidator'>
+		<plugin
+			name='Df\Paypal\Plugin\Model\Payflow\Service\Response\Validator\ResponseValidator'
+			type='Df\Paypal\Plugin\Model\Payflow\Service\Response\Validator\ResponseValidator'
+		/>
+	</type>
+</config>

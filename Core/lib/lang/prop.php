@@ -15,6 +15,7 @@
  * @used-by \Df\Customer\Session::needConfirm()
  * @used-by \Df\Customer\Session::ssoId()
  * @used-by \Df\Customer\Session::ssoProvider()
+ * @used-by \Df\Paypal\Plugin\Model\Payflow\Service\Gateway::req()
  * @used-by \Df\Zf\Validate::v()
  * @used-by \Dfe\Sift\API\Client::cfg()
  * @used-by \Dfe\TBCBank\Session::data()

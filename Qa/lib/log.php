@@ -17,6 +17,7 @@ use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Payment\W\Action::execute()
  * @used-by \Df\Payment\W\Handler::log()
+ * @used-by \Df\Paypal\Plugin\Model\Payflow\Service\Response\Validator\ResponseValidator::log()
  * @used-by \Df\Qa\Failure::log()
  * @used-by \Df\Qa\Failure\Error::check()
  * @used-by \Df\Qa\Trace\Formatter::p()
