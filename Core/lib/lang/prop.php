@@ -48,6 +48,7 @@ function df_n_set($v) {return is_null($v) ? DF_N : $v;}
 /**
  * 2019-04-05
  * 2019-09-08 Now it supports static properties.
+ * 2023-12-31 For static properties, pass `null` as the first argument, e.g.: @see \Df\Core\Json::bSort()
  * @used-by \CanadaSatellite\Bambora\Response::authCode() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Bambora\Response::avsResult() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Bambora\Response::errorType() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
