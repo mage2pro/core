@@ -128,6 +128,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
+ * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/header.phtml (https://github.com/cabinetsbay/site/issues/98)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/selected_car_onsearchresultpage.phtml
