@@ -145,20 +145,26 @@ function df_trim_text_a(string $s, array $trimA, callable $f):string {
  * @used-by df_path_relative()
  * @used-by df_product_image_path2rel()
  * @used-by df_replace_store_code_in_url()
+ * @used-by df_trim_text_left()
  * @used-by df_trim_text_left_right()
  * @used-by dfpm_code_short()
  * @used-by dfsm_code_short()
  * @used-by \Df\Framework\Request::extra()
  * @used-by \Df\PaypalClone\Signer::_sign()
  * @used-by \Df\Qa\Trace\Frame::__toString()
- * @used-by \Dfe\Zoho\App::title()
  * @used-by \Dfe\Qiwi\W\Event::pid()
  * @used-by \Dfe\Stripe\Facade\Token::trimmed()
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
+ * @used-by \Dfe\Zoho\App::title()
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::images() (https://github.com/cabinetsbay/site/issues/97)
+ * @param string|string[] $s
  * @param string|string[] $trim
+ * @return string|string[]
  */
-function df_trim_text_left(string $s, $trim):string {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
-	$trim === mb_substr($s, 0, $l = mb_strlen($trim)) ? mb_substr($s, $l) : $s
+function df_trim_text_left($s, $trim) {return is_array($s) ? df_map(__FUNCTION__, $s, [$trim]) : (
+	is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
+		$trim === mb_substr($s, 0, $l = mb_strlen($trim)) ? mb_substr($s, $l) : $s
+	)
 );}
 
 /**
@@ -179,12 +185,17 @@ function df_trim_text_left_right(string $s, string $left, string $right):string 
  * @used-by df_oqi_amount()
  * @used-by df_trim_interceptor()
  * @used-by df_trim_text_left_right()
+ * @used-by df_trim_text_right()
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\Framework\Form\Element\Fieldset::nameFull()
  * @used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
+ * @param string|string[] $s
  * @param string|string[] $trim
+ * @return string|string[]
  */
-function df_trim_text_right(string $s, $trim):string {return is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
-	0 !== ($l = mb_strlen($trim)) && $trim === mb_substr($s, -$l) ? mb_substr($s, 0, -$l) : $s
+function df_trim_text_right($s, $trim) {return is_array($s) ? df_map(__FUNCTION__, $s, [$trim]) :(
+	is_array($trim) ? df_trim_text_a($s, $trim, __FUNCTION__) : (
+		0 !== ($l = mb_strlen($trim)) && $trim === mb_substr($s, -$l) ? mb_substr($s, 0, -$l) : $s
+	)
 );}

@@ -18,6 +18,7 @@ function df_array($v):array {return is_array($v) ? $v : [$v];}
 
 /**
  * 2015-12-30 Преобразует коллекцию или массив в карту.
+ * @used-by df_mvars()
  * @used-by \Df\Config\A::get()
  * @param string|Closure $k
  * @param Traversable|array(int|string => _DO) $a
