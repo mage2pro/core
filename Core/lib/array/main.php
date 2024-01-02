@@ -22,7 +22,7 @@ function df_array($v):array {return is_array($v) ? $v : [$v];}
  * @param string|Closure $k
  * @param Traversable|array(int|string => _DO) $a
  */
-function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
+function df_index($k, $a):array {return array_combine(df_column($a, $k), df_ita($a));}
 
 /**
  * 2015-02-11
@@ -33,6 +33,7 @@ function df_index($k, $a):array {return array_combine(df_column($a, $k), $a);}
  * https://php.net/manual/migration82.other-changes.php#migration82.other-changes.functions.spl
  * 2023-07-26 "Replace `array|Traversable` with `iterable`": https://github.com/mage2pro/core/issues/255
  * @used-by df_filter_f()
+ * @used-by df_index()
  * @used-by df_map()
  * @used-by dfa_select_ordered()
  * @used-by dfak_transform()
