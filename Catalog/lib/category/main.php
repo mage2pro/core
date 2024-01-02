@@ -12,6 +12,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @see df_product()
  * @used-by df_category_children()
  * @used-by df_category_children_map()
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::parent() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
