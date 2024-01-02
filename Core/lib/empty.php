@@ -53,6 +53,7 @@ function df_es($v):bool {return '' === $v;}
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @used-by \Mangoit\MediaclipHub\Helper\Data::getMediaClipProjects()
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::images() (https://github.com/cabinetsbay/site/issues/98)
  * @param mixed|null $v
  */
 function df_eta($v):array {

@@ -92,6 +92,7 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * @used-by \Df\Payment\TM::tResponses()
  * @used-by \Dfe\Color\Image::probabilities()
  * @used-by \Dfe\Robokassa\Api\Options::p()
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::images() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @param array(int|string => mixed) $a
