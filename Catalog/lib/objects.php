@@ -23,5 +23,7 @@ function df_catalog_locator() {
 /**
  * 2020-10-30
  * @used-by app/design/frontend/TradeFurnitureCompany/default/Magento_Catalog/templates/category/description.phtml
+ * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/header.phtml
+ * 		(https://github.com/cabinetsbay/site)
  */
 function df_catalog_output():OutputH {return df_o(OutputH::class);}
