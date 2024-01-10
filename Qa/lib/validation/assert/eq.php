@@ -64,6 +64,8 @@ function df_assert_le($highBound, $v, $m = null) {return $highBound >= $v ? $v :
 );}
 
 /**
+ * @used-by df_num_calendar_days_by_num_working_days()
+ * @used-by \Df\Qa\Trace\Frame::methodParameter()
  * @used-by \RWCandy\Captcha\Assert::name()
  * @param int|float $highBound
  * @param int|float $v
