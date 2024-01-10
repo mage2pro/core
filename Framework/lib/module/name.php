@@ -76,11 +76,11 @@ function df_module_name_short($c):string {return df_explode_class($c)[1];}
  * 		1) a module name. E.g.: «A_B».
  * 		2) a class name. E.g.: «A\B\C».
  * 		3) an object. It will be treated as case 2 after @see get_class()
+ * @see df_cts_lc_camel()
  * @used-by df_report_prefix()
  * @used-by \Df\Payment\Method::codeS()
  * @used-by \Df\Shipping\Method::getCarrierCode()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
- * @see df_cts_lc_camel()
  * @param string|object $c
  */
 function df_module_name_lc($c, string $d = '_'):string {return implode($d, df_explode_class_lc_camel(df_module_name_c($c)));}
