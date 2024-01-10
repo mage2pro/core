@@ -92,7 +92,7 @@ function df_module_file_name($m, string $name, string $ext = '', $onE = true):st
  */
 function df_module_name_by_path(string $f):string {/** @var string $r */
 	$f = df_path_relative($f);
-	$f2 = df_trim_text_left($f, ['app/code/', 'vendor/']);
+	$f2 = df_trim_text_left($f, ['app/code/', 'vendor/']); /** @var string $f2 */
 	$err = "Unable to detect the module for the file: `$f`"; /** @var string $err */
 	df_assert_ne($f, $f2, $err);
 	$isVendor = df_starts_with($f, 'vendor'); /** @var bool $isVendor */
