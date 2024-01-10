@@ -47,13 +47,6 @@ function df_bt_entry_file(array $e):string {return
 function df_bt_entry_func(array $e):string {return dfa($e, 'function', '');}
 
 /**
- * 2023-07-27 `line` is absent in @see call_user_func() calls.
- * @see \Df\Qa\Trace\Frame::line()
- * @used-by df_bt()
- */
-function df_bt_entry_line(array $e):int {return dfa($e, 'line', 0);}
-
-/**
  * 2023-07-26
  * @used-by df_caller_m()
  * @used-by df_caller_module()
@@ -67,3 +60,10 @@ function df_bt_entry_is_method(array $e):bool {return dfa_has_keys($e, ['class',
  * @used-by df_caller_entry_m()
  */
 function df_bt_entry_is_phtml(array $e):bool {return df_is_phtml(df_bt_entry_file($e));}
+
+/**
+ * 2023-07-27 `line` is absent in @see call_user_func() calls.
+ * @see \Df\Qa\Trace\Frame::line()
+ * @used-by df_bt()
+ */
+function df_bt_entry_line(array $e):int {return dfa($e, 'line', 0);}
