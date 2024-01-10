@@ -56,7 +56,11 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
 	 * @var mixed $r
 	 */
 	static $hasWeakMap; /** @var bool $hasWeakMap */
-	if (!($hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : @class_exists('WeakMap'))) {
+	# 2024-01-10
+	# 1) The previous code: `@class_exists('WeakMap')`.
+	# 2) I changed the code by analogy with
+	# https://github.com/thehcginstitute-com/m1/blob/2024-01-10-2/app/code/local/Df/Core/lib/cache/dfc.php#L58-L62
+	if (!($hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : class_exists('WeakMap', false))) {
 		# 2017-01-12 ... works correctly here: https://3v4l.org/0shto
 		# 2022-10-17 The ternary operator works correctly here: https://3v4l.org/MutM4
 		/** @noinspection PhpVariableVariableInspection */

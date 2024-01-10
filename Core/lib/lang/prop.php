@@ -168,7 +168,11 @@ function df_prop_k($o, string $k, $v = DF_N, $d = null) {/** @var object|mixed|n
 		 * 2) @see dfc()
 		 */
 		static $hasWeakMap; /** @var bool $hasWeakMap */
-		if (!($hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : @class_exists('WeakMap'))) {
+		# 2024-01-10
+		# 1) The previous code: `@class_exists('WeakMap')`.
+		# 2) I changed the code by analogy with
+		# https://github.com/thehcginstitute-com/m1/blob/2024-01-10-2/app/code/local/Df/Core/lib/cache/dfc.php#L58-L62
+		if (!($hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : class_exists('WeakMap', false))) {
 			if (!isset($o->$a)) {
 				$o->$a = [];
 			}
