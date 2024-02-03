@@ -27,6 +27,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Df\API\Exception\HTTP::__construct()
 	 * @see \Df\API\Response\Validator::__construct()
 	 * @used-by df_error_create()
+	 * @used-by self::wrap()
 	 * @param mixed ...$args
 	 */
 	function __construct(...$args) {
