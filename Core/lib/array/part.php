@@ -25,6 +25,10 @@ function df_slice(array $a, int $offset, int $length = 0):array {return array_sl
  * Обратите внимание, что если исходный массив содержит меньше 2 элементов, то функция вернёт пустой массив.
  * @see df_first()
  * @see df_last()
+ * @used-by df_error_create()
+ * @used-by df_sprintf_strict()
+ * @used-by df_zf_http_last_req()
+ * @used-by \Df\Core\Text\Regex::match()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
  */
 function df_tail(array $a):array {return array_slice($a, 1);}
