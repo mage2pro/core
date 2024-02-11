@@ -47,7 +47,7 @@ class Dispatcher extends _P {
 	 * @see \Monolog\Handler\AbstractProcessingHandler::handle()
 	 * @param array(string => mixed) $d
 	 */
-	function handle(array $d):bool {
+	function handle(array $d):bool {/** @var bool $r */
 		$rc = new Record($d); /** @var Record $rc */
 		if (
 			!($r = BrokenReferenceH::p($rc)
@@ -80,34 +80,42 @@ class Dispatcher extends _P {
 				 * https://github.com/mage2pro/core/issues/160
 				 */
 				if (B::class != $c || 'run' !== $f) {
-					$ef = $rc->ef(); /** @var Th|null $ef */
-					$args = [null, $ef ?: $d, $ef ? $rc->extra() : []]; /** @var mixed  $args */
-					# 2023-07-25
-					# I intentionally do not pass these messages to Sentry
-					# because I afraid that they could be too numerous in some third-party websites.
-					df_log_l(...$args);
-					# 2023-08-01
-					# "`Df\Framework\Log\Dispatcher::handle()` should pass to Sentry the records
-					# with level ≥ `Monolog\Logger::ERROR` (`ERROR`, `CRITICAL`, `ALERT`, `EMERGENCY`)":
-					# https://github.com/mage2pro/core/issues/304
-					if (L::ERROR <= $rc->level()) {
-						# 2023-12-08
-						# 1) Symmetric array destructuring requires PHP ≥ 7.1:
-						#		[$a, $b] = [1, 2];
-						# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
-						# We should support PHP 7.0.
-						# https://3v4l.org/3O92j
-						# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
-						# https://stackoverflow.com/a/28233499
-						list($v, $extra) = [$args[1], $args[2]];
-						# 2023-12-08
-						# "Set a proper title instead of `[` for Sentry messages like
-						# «Unable to proceed: the maintenance mode is enabled»": https://github.com/mage2pro/core/issues/339
-						if (is_array($v) && !$extra && ($m = dfa($v, 'message')) && is_string($m)) {/** @var string|null $m */
-							$extra = $v;
-							$v = $m;
+					# 2024-02-11
+					# "`Monolog\Logger::INFO`-level messages should not be logged as separate files":
+					# https://github.com/mage2pro/core/issues/347
+					if (L::INFO >= $rc->level()) {
+						parent::handle($d);
+					}
+					else {
+						$ef = $rc->ef(); /** @var Th|null $ef */
+						$args = [null, $ef ?: $d, $ef ? $rc->extra() : []]; /** @var mixed  $args */
+						# 2023-07-25
+						# I intentionally do not pass these messages to Sentry
+						# because I afraid that they could be too numerous in some third-party websites.
+						df_log_l(...$args);
+						# 2023-08-01
+						# "`Df\Framework\Log\Dispatcher::handle()` should pass to Sentry the records
+						# with level ≥ `Monolog\Logger::ERROR` (`ERROR`, `CRITICAL`, `ALERT`, `EMERGENCY`)":
+						# https://github.com/mage2pro/core/issues/304
+						if (L::ERROR <= $rc->level()) {
+							# 2023-12-08
+							# 1) Symmetric array destructuring requires PHP ≥ 7.1:
+							#		[$a, $b] = [1, 2];
+							# https://github.com/mage2pro/core/issues/96#issuecomment-593392100
+							# We should support PHP 7.0.
+							# https://3v4l.org/3O92j
+							# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
+							# https://stackoverflow.com/a/28233499
+							list($v, $extra) = [$args[1], $args[2]];
+							# 2023-12-08
+							# "Set a proper title instead of `[` for Sentry messages like
+							# «Unable to proceed: the maintenance mode is enabled»": https://github.com/mage2pro/core/issues/339
+							if (is_array($v) && !$extra && ($m = dfa($v, 'message')) && is_string($m)) {/** @var string|null $m */
+								$extra = $v;
+								$v = $m;
+							}
+							df_sentry(null, $v, $extra);
 						}
-						df_sentry(null, $v, $extra);
 					}
 				}
 				$r = true; # 2020-09-24 The pevious code was: `$r = parent::handle($d);`
