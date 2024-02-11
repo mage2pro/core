@@ -1,5 +1,4 @@
 <?php
-use Df\Framework\Log\Dispatcher;
 use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
@@ -74,9 +73,10 @@ function df_caller_entry_m($p = 0):array {return df_eta(df_caller_entry(df_bt_in
 		# https://github.com/mage2pro/core/issues/318
 		# 2) `Monolog_Logger` is not a Magento module, so I added `df_module_enabled()`.
 		&& df_module_enabled($c) /** @var string|null $c */
-		# 2024-02-11 "`df_caller_entry_m()` should skip `Df\Framework\Log\Dispatcher`":
-		# https://github.com/mage2pro/core/issues/349
-		&& Dispatcher::class !== $c
+		# 2024-02-11
+		# 1) "`df_caller_entry_m()` should skip `Df\Framework\Log\Dispatcher`": https://github.com/mage2pro/core/issues/349
+		# 2) "`df_caller_entry_m()` should skip `Df\Framework\Log\*` classes": https://github.com/mage2pro/core/issues/350
+		&& !df_starts_with($c, 'Df\Framework\Log\\')
 	# 2023-07-26
 	# "If `df_log()` is called from a `*.phtml`,
 	# then the `*.phtml`'s module should be used as the log source instead of `Magento_Framework`":
