@@ -119,6 +119,7 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * @used-by dfac()
  * @used-by \Df\Core\Session::s()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
+ * @used-by \Df\Framework\Log\Handler\Info::lb()
  * @used-by \Df\OAuth\App::state()
  * @used-by \Df\Payment\Url::f()
  * @used-by \Df\Qa\Trace\Formatter::p()

@@ -62,6 +62,7 @@ class O implements \ArrayAccess {
 	 * @used-by \Df\Config\Backend\ArrayT::processI()
 	 * @used-by \Df\Config\O::v()
 	 * @used-by \Df\Core\Html\Tag::attributes()
+	 * @used-by \Df\Framework\Log\Record::a()
 	 * @used-by \Df\Framework\Log\Record::d()
 	 * @used-by \Dfe\TwoCheckout\Exception::message()
 	 * @used-by \Dfe\TwoCheckout\Exception::messageC()

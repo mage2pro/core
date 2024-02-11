@@ -4,6 +4,7 @@ namespace Df\Framework\Log;
  * 2021-09-08
  * @see \Df\Framework\Log\Handler\BrokenReference
  * @see \Df\Framework\Log\Handler\Cookie
+ * @see \Df\Framework\Log\Handler\Info
  * @see \Df\Framework\Log\Handler\JsMap
  * @see \Df\Framework\Log\Handler\Maintenance
  * @see \Df\Framework\Log\Handler\NoSuchEntity
@@ -15,6 +16,7 @@ abstract class Handler {
 	 * @used-by self::p()
 	 * @see \Df\Framework\Log\Handler\BrokenReference::_p()
 	 * @see \Df\Framework\Log\Handler\Cookie::_p()
+	 * @see \Df\Framework\Log\Handler\Info::_p()
 	 * @see \Df\Framework\Log\Handler\JsMap::_p()
 	 * @see \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @see \Df\Framework\Log\Handler\PayPal::_p()
@@ -25,6 +27,7 @@ abstract class Handler {
 	 * 2021-08-09
 	 * @used-by \Df\Framework\Log\Handler\BrokenReference::_p()
 	 * @used-by \Df\Framework\Log\Handler\Cookie::_p()
+	 * @used-by \Df\Framework\Log\Handler\Info::_p()
 	 * @used-by \Df\Framework\Log\Handler\JsMap::_p()
 	 * @used-by \Df\Framework\Log\Handler\Maintenance::_p()
 	 * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()

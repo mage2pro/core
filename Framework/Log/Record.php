@@ -12,6 +12,12 @@ final class Record {
 	function __construct(array $d) {$this->_d = new O($d);}
 
 	/**
+	 * 2024-02-11
+	 * @used-by \Df\Framework\Log\Handler\Info::_p()
+	 */
+	function a():array {return $this->_d->a();}
+
+	/**
 	 * 2021-09-08
 	 * @used-by self::ef()
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
@@ -41,6 +47,7 @@ final class Record {
 	 * 2023-08-01
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
 	 * @used-by \Df\Framework\Log\Handler\BrokenReference::_p()
+	 * @used-by \Df\Framework\Log\Handler\Info::_p()
 	 * @used-by \Df\Framework\Log\Latest::register()
 	 */
 	function level():int {return $this->d('level');}
@@ -74,6 +81,7 @@ final class Record {
 	/**
 	 * 2021-09-08
 	 * @used-by self::__construct()
+	 * @used-by self::a()
 	 * @used-by self::d()
 	 * @var O
 	 */

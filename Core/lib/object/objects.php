@@ -148,6 +148,7 @@ function df_newa(string $c, string $expected = '', ...$a) {return df_ar(df_new($
  * @used-by \Df\Customer\AddAttribute\Address::p()
  * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
  * @used-by \Df\Directory\Model\Country::c()
+ * @used-by \Df\Framework\Log\Handler\Info::lb()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
  * @used-by \Df\Framework\Upgrade::sEav()
  * @used-by \Df\Payment\ConfigProvider::p()

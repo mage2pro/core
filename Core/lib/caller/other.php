@@ -102,6 +102,7 @@ function df_caller_ml(int $o = 0):string {return df_caller_m(++$o) . '()';}
  * @used-by df_log_l()
  * @used-by df_sentry()
  * @used-by df_sentry_m()
+ * @used-by \Df\Framework\Log\Handler\Info::lb()
  * @param T|int $p
  */
 function df_caller_module($p = 0):string {return !($e = df_caller_entry_m(df_bt_inc($p))) ? 'Df_Core' : (

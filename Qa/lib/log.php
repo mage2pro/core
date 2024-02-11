@@ -124,6 +124,7 @@ function df_report(string $f, string $m, bool $append = false):void {
  * «mb_strtolower(): Passing null to parameter #1 ($string) of type string is deprecated
  * in vendor/mage2pro/core/Qa/lib/log.php on line 122»: https://github.com/mage2pro/core/issues/233
  * @used-by df_log_l()
+ * @used-by \Df\Framework\Log\Handler\Info::lb()
  * @param string|object|null $m [optional]
  */
 function df_report_prefix($m = null, string $pref = ''):string {return df_ccc('--',
