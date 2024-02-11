@@ -13,7 +13,8 @@ final class Formatter {
 		function() use($t) {return df_cc("\n\n", df_map_k($t, function(int $i, F $f):string {$i++; return df_ccc("\n\t", [
 			"$i\t" . $f->method()
 			# 2023-07-27 "Add GitHub links to backtrace frames": https://github.com/mage2pro/core/issues/285
-			,$f->url() ?: df_ccc(':', $f->file(), $f->line())
+			,$f->url() ?: ''
+			,df_ccc(':', $f->file(), $f->line())
 		]);}));}
 		# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 		,function(\Throwable $th) {
