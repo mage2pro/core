@@ -256,10 +256,21 @@ https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/etc/di.xml
 1) он неуниверсален и каждую конкретную коллекцию надо перекрывать отдельно.
 2) он хрупок: другие программисты могут захотеть перекрыть ту же коллекцию.
 
-Наш подход намного лучше. -->
+Наш подход намного лучше.
+2024-02-11
+1)  "«Undefined array key "base_discount_amount" in vendor/magento/module-sales/Ui/Component/Listing/Column/Price.php
+on line 90» if the `Mirasvit_OrderGrid`, `Mirasvit_ExtraPayment`, or `Mirasvit_OrderTag` modules are used":
+https://github.com/mage2pro/core/issues/346
+2) It happened because `\Df\Payment\Observer\DataProvider\SearchResult::execute()`
+implicitly loads the order grid collection via an `df_map()` call:
+https://github.com/mage2pro/core/blob/10.5.5/Payment/Observer/DataProvider/SearchResult.php#L50
+3) The collection was loaded before the Mirasvit modules added their custom columns to the collection
+(by their own plugins to `Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider`).
+3) I fixed it by  `sortOrder='1000'`. -->
 	<type name='Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider'>
 		<plugin
 			name='Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider'
+			sortOrder='1000'
 			type='Df\Framework\Plugin\View\Element\UiComponent\DataProvider\DataProvider'
 		/>
 	</type>
