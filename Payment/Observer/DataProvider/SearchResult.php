@@ -34,7 +34,7 @@ final class SearchResult implements ObserverInterface {
 	 */
 	function execute(Ob $o):void {
 		$provider = $o[Plugin::PROVIDER]; /** @var Provider $provider */
-		/** @var ISearchResult|ApiSearchResult|UiSearchResult|OrderGC|InvoiceGC|CreditmemoGC $result */
+		/** @var ISearchResult|ApiSearchResult|UiSearchResult|OrderGC|CreditmemoGC $result */
 		$result = $o[Plugin::RESULT];
 		# 2017-08-02 For now, we do not handle «sales_order_invoice_grid_data_source»
 		# and «sales_order_creditmemo_grid_data_source».
@@ -55,7 +55,7 @@ final class SearchResult implements ObserverInterface {
 					 * Как оказалось, наличие приставки «dfe_» ешё не гарантирует,
 					 * что @uses dfpm() (вызываемый ниже опосредованно через dfpm_title())
 					 * действительно вернёт наследника @see \Df\Payment\Method
-					 * Возможна ситуация, когда админтратор установил какой-либо из моих патёжных модулей,
+					 * Возможна ситуация, когда администратор установил какой-либо из моих патёжных модулей,
 					 * сделал платёж посредством него, а затем либо удалил модуль,
 					 * либо из-за каких-то некорректных действий модуль стал отключенным,
 					 * и вот тогда M2 вернёт не наследника @see \Df\Payment\Method,
