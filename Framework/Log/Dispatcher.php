@@ -50,15 +50,20 @@ class Dispatcher extends _P {
 	 */
 	function handle(array $d):bool {/** @var bool $r */
 		$rc = new Record($d); /** @var Record $rc */
-		if (
-			!($r = BrokenReferenceH::p($rc)
+		if (!($r =
+			# 2024-03-04
+			# "`\Df\Framework\Log\Dispatcher::handle()` should not log Cron errors
+			# because they are logged by `\Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()`""
+			# https://github.com/mage2pro/core/issues/357
+			df_is_cron()
+			|| BrokenReferenceH::p($rc)
 			|| CronH::p($d)
 			|| CookieH::p($rc)
 			|| JsMapH::p($rc)
 			|| NoSuchEntityH::p($rc)
 			|| MaintenanceH::p($rc)
-			|| PayPalH::p($rc))
-		) {
+			|| PayPalH::p($rc)
+		)) {
 			# 2020-08-30
 			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
 			# https://github.com/mage2pro/core/issues/140

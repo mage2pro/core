@@ -124,6 +124,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
  * @used-by dfa_strict()
  * @used-by dfad()
  * @used-by dftr()
+ * @used-by \Df\Framework\Log\Latest::registered()
  * @used-by \Df\Framework\Log\Record::msg()
  * @used-by \Df\Payment\Block\Info::si()
  * @used-by \Df\Payment\Method::s()

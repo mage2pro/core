@@ -48,7 +48,7 @@ final class Record {
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
 	 * @used-by \Df\Framework\Log\Handler\BrokenReference::_p()
 	 * @used-by \Df\Framework\Log\Handler\Info::_p()
-	 * @used-by \Df\Framework\Log\Latest::register()
+	 * @used-by \Df\Framework\Log\Latest\Record::id()
 	 */
 	function level():int {return $this->d('level');}
 
@@ -59,7 +59,7 @@ final class Record {
 	 * @used-by \Df\Framework\Log\Handler\JsMap::_p()
 	 * @used-by \Df\Framework\Log\Handler\Maintenance::_p()
 	 * @used-by \Df\Framework\Log\Handler\PayPal::_p()
-	 * @used-by \Df\Framework\Log\Latest::register()
+	 * @used-by \Df\Framework\Log\Latest\Record::id()
 	 * @param string|string[]|null $s [optional]
 	 * @return string|bool
 	 */

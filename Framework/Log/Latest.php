@@ -1,7 +1,9 @@
 <?php
 namespace Df\Framework\Log;
-use Monolog\Logger as L;
-use \Exception as E;
+use Df\Framework\Log\Latest\O;
+use Df\Framework\Log\Latest\Record as LR;
+use Df\Framework\Log\Latest\Throwable as LT;
+use \Throwable As T;
 /**
  * 2023-12-09
  * 1) Some errors are logged twice: by @see \Df\Framework\Log\Dispatcher::handle()
@@ -18,26 +20,34 @@ final class Latest {
 	/**
 	 * 2023-12-09
 	 * @used-by \Df\Framework\Plugin\AppInterface::beforeCatchException()
+	 * @param T|Record $o
 	 */
-	static function registered(E $e):bool {
+	static function registered($o):bool {
 		$v = self::$v;
 		self::$v = null;
-		return $v === $e->getMessage();
+		return !df_nes($v) && $v === self::o($o)->id();
 	}
 
 	/**
 	 * 2023-12-09
+	 * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
+	 * @param T|Record $o
 	 */
-	static function register(Record $r):void {
-		if (L::ERROR === $r->level()) {
-			self::$v = $r->msg();
-		}
-	}
+	static function register($o):void {self::$v = self::o($o)->id();}
+
+	/**
+	 * 2024-03-04
+	 * @used-by self::register()
+	 * @used-by self::registered()
+	 * @param T|Record $o
+	 */
+	private static function o($o):O {return $o instanceof T ? new LT($o) : ($o instanceof Record ? new LR($o) : df_error());}
 
 	/**
 	 * 2023-12-09
 	 * @used-by self::register()
+	 * @used-by self::registered()
 	 * @var string|null
 	 */
 	private static $v;
