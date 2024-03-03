@@ -23,6 +23,7 @@ function df_b(array $args, bool $r) {return !$args ? $r : $args[intval(!$r)];}
  * @see df_prop()
  * @see dfc()
  * @see dfcf()
+ * @used-by df_error()
  * @used-by df_sprintf_strict()
  * @used-by \Df\Qa\Failure\Error::log()
  */

@@ -162,7 +162,10 @@ function df_error(...$a):void {
 	 * 2020-02-17 @see \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
 	 */
 	if (df_is_cron()) {
-		df_log($e, 'Df_Cron');
+		# 2024-03-03
+		# "An endless loop `df_error` → `df_log` → … → `df_module_file_name` → … → `df_error`":
+		# https://github.com/mage2pro/core/issues/353
+		df_no_rec(function() use($e):void {df_log($e, 'Df_Cron');});
 	}
 	throw $e;
 }
