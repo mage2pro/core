@@ -53,6 +53,8 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
  * https://github.com/mage2pro/core/blob/5.5.7/Core/Exception.php#L61-L67
  * @used-by df_assert_qty_supported()
  * @used-by df_call_parent()
+ * @used-by df_caller_m()
+ * @used-by df_caller_mf()
  * @used-by df_catalog_locator()
  * @used-by df_config_field()
  * @used-by df_configurable_children()

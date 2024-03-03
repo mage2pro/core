@@ -7,6 +7,7 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by df_caller_entry_m()
  * @used-by df_caller_f()
  * @used-by df_caller_m()
+ * @used-by df_caller_mf()
  * @used-by df_log_l()
  * @used-by df_sentry()
  * @used-by \Df\Framework\Log\Dispatcher::handle()

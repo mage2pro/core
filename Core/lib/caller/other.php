@@ -79,6 +79,12 @@ function df_caller_m(int $o = 0):string {return df_cc_method(df_assert(df_caller
 )));}
 
 /**
+ * 2024-03-03
+ * @used-by df_no_rec()
+ */
+function df_caller_mf(int $o = 0):string {return df_cc_method(df_assert(df_caller_entry(++$o)));}
+
+/**
  * 2016-08-29
  * @used-by df_abstract()
  * @used-by df_should_not_be_here()

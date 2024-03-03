@@ -117,26 +117,20 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
 		catch (Th $th) {
 			/**
 			 * 2024-03-03
-			 * 1) A similar code: @see \Df\Qa\Failure\Error::log()
-			 * 2) The previous (wrong) code:
+			 * The previous (wrong) code:
 			 * 		static $inProcess = false;
 			 * 		if (!$inProcess) {
 			 * https://github.com/mage2pro/core/blob/10.6.0/Core/lib/text/format.php#L118-L119
 			 * https://3v4l.org/a6oIr
 			 */
-			static $inProcess; /** @var bool $inProcess */
-			if (!$inProcess) {
-				$inProcess = true;
-				try {
-					df_error(
-						'df_sprintf_strict failed: «{message}».'
-						. "\nPattern: {$s}."
-						. "\nParameters:\n{params}."
-						,['{message}' => df_xts($th), '{params}' => print_r(df_tail($args), true)]
-					);
-				}
-				finally {$inProcess = false;}
-			}
+			df_no_rec(function() use($s, $th, $args):void {
+				df_error(
+					'df_sprintf_strict failed: «{message}».'
+					. "\nPattern: {$s}."
+					. "\nParameters:\n{params}."
+					,['{message}' => df_xts($th), '{params}' => print_r(df_tail($args), true)]
+				);
+			});
 		}
 	}
 	return $r;

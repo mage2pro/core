@@ -55,19 +55,14 @@ final class Error extends \Df\Qa\Failure {
 		# поэтому try... catch с целью записи отчёта крайне важно:
 		# без этого при сбое асинхроноого запроса диагностичекское сообщение о сбое окажется утраченным.
 		/** 2024-03-03 A similar code: @see df_sprintf_strict() */
-		static $inProcess;
-		if (!$inProcess) {
-			$inProcess = true;
-			try {
-				df_report('mage2.pro/{date}--{time}.log', $this->report());
-			}
+		df_no_rec(function():void {
+			try {df_report('mage2.pro/{date}--{time}.log', $this->report());}
 			# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 			catch (Th $th) {
 				df_log($th);
 				throw $th;
 			}
-			finally {$inProcess = false;}
-		}
+		});
 	}
 
 	/**
