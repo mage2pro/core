@@ -22,34 +22,6 @@ use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": 
 function df_b(array $args, bool $r) {return !$args ? $r : $args[intval(!$r)];}
 
 /**
- * Осуществляет ленивое ветвление.
- * @used-by df_cfg()
- * @param mixed|callable $onTrue
- * @param mixed|null|callable $onFalse [optional]
- * @return mixed
- */
-function df_if(bool $cond, $onTrue, $onFalse = null) {return $cond ? df_call_if($onTrue) : df_call_if($onFalse);}
-
-/**
- * 2016-02-09 Осуществляет ленивое ветвление только для первой ветки.
- * @used-by df_leaf()
- * @used-by df_request()
- * @param mixed|callable $onTrue
- * @param mixed|null $onFalse [optional]
- * @return mixed
- */
-function df_if1(bool $cond, $onTrue, $onFalse = null) {return $cond ? df_call_if($onTrue) : $onFalse;}
-
-/**
- * 2016-02-09 Осуществляет ленивое ветвление только для второй ветки.
- * @used-by \Df\Config\Settings::p()
- * @param mixed $onTrue
- * @param mixed|null|callable $onFalse [optional]
- * @return mixed
- */
-function df_if2(bool $cond, $onTrue, $onFalse = null) {return $cond ? $onTrue : df_call_if($onFalse);}
-
-/**
  * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * @param mixed $v
  * @return mixed
