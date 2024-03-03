@@ -37,7 +37,7 @@ final class Exception extends \Df\Qa\Failure {
 	 * @used-by \Df\Qa\Failure::postface()
 	 * @return array(array(string => string|int))
 	 */
-	protected function trace():array {return df_bt_th(df_xf($this->_e));}
+	protected function trace():array {return df_bt(df_xf($this->_e));}
 
 	/**
 	 * 2021-10-04

@@ -12,10 +12,13 @@ final class Trace implements \IteratorAggregate, \Countable {
 	 */
 	function __construct(array $ff) {
 		$ff = df_bt_filter_head($ff, [
+			# 2024-03-04
+			# "Skip the leading `df_error()` from the logged backtraces": https://github.com/mage2pro/core/issues/355
+			'df_error'
 			# 2023-07-26
-			# "`df_error_create` should be excluded from exceptions traces": https://github.com/mage2pro/core/issues/262
-			'df_error_create'
-			# 2023-07-27 "`df_log` should be excluded from exceptions traces": https://github.com/mage2pro/core/issues/284
+			# "Skip the leading `df_error_create()` from the logged backtraces": https://github.com/mage2pro/core/issues/262
+			,'df_error_create'
+			# 2023-07-27 "Skip the leading `df_log()` from the logged backtraces": https://github.com/mage2pro/core/issues/284
 			,'df_log'
 		]);
 		/**

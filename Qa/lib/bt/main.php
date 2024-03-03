@@ -8,6 +8,7 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by df_bt_s()
  * @used-by df_caller_entry()
  * @used-by dfs_con()
+ * @used-by \Df\Qa\Failure\Exception::trace()
  * @used-by \Df\Qa\Method::caller()
  * @param Th|int|null|array(array(string => string|int)) $p [optional]
  * @return array(array(string => mixed))
