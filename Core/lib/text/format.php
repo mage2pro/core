@@ -115,6 +115,15 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
 		try {$r = vsprintf($s, df_tail($args));}
 		# 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 		catch (Th $th) {
+			/**
+			 * 2024-03-03
+			 * 1) A similar code: @see \Df\Qa\Failure\Error::log()
+			 * 2) The previous (wrong) code:
+			 * 		static $inProcess = false;
+			 * 		if (!$inProcess) {
+			 * https://github.com/mage2pro/core/blob/10.6.0/Core/lib/text/format.php#L118-L119
+			 * https://3v4l.org/a6oIr
+			 */
 			static $inProcess = false; /** @var bool $inProcess */
 			if (!$inProcess) {
 				$inProcess = true;

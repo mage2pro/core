@@ -54,6 +54,7 @@ final class Error extends \Df\Qa\Failure {
 		# (много таких запросов делает, например, страница оформления заказа),
 		# поэтому try... catch с целью записи отчёта крайне важно:
 		# без этого при сбое асинхроноого запроса диагностичекское сообщение о сбое окажется утраченным.
+		/** 2024-03-03 A similar code: @see df_sprintf_strict() */
 		static $inProcess;
 		if (!$inProcess) {
 			$inProcess = true;
