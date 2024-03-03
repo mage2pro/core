@@ -34,6 +34,7 @@ function df_bts_yn(bool $v):string {return $v ? 'yes' : 'no';}
  * 2022-10-14 @see str_contains() has been added to PHP 8: https://php.net/manual/function.str-contains.php
  * 2022-11-26 We can not declare the argument as `string ...$n` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_block_output()
+ * @used-by df_bt_filter_head()
  * @used-by df_is_bin_magento()
  * @used-by df_request_ua()
  * @used-by df_rp_has()

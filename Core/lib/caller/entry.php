@@ -39,23 +39,7 @@ function df_caller_entry($p = 0, $f = null, array $skip = []):array {
 	 * 2) The second entry in df_bt() is the caller of `df_caller_entry`. It should be skipped too.
 	 */
 	$bt = df_bt(df_bt_inc($p, 2)); /** @var array(int => array(string => mixed)) $bt */
-	$skip = array_merge($skip, ['dfc', 'dfcf', 'unknown']);
-	while ($r = array_shift($bt)) {/** @var array(string => string|int)|null $r */
-		$f2 = $r['function']; /** @var string $f2 */
-		# 2017-03-28
-		# Надо использовать именно df_contains(),
-		# потому что PHP 7 возвращает просто строку «{closure}», а PHP 5.6 и HHVM — «A::{closure}»: https://3v4l.org/lHmqk
-		# 2020-09-24 I added "unknown" to evaluate expressions in IntelliJ IDEA's with xDebug.
-		if (
-			!df_contains($f2, '{closure}')
-			# 2023-07-26 "Add the `$skip` optional parameter to `df_caller_entry()`": https://github.com/mage2pro/core/issues/281
-			&& !in_array($f2, $skip)
-			&& (!$f || call_user_func($f, $r))
-		) {
-			break;
-		}
-	}
-	return df_eta($r); /** 2021-10-05 @uses array_shift() returns `null` for an empty array */
+	return df_eta(df_first(df_bt_filter_head($bt, $skip, $f)));
 }
 
 /**
