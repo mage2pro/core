@@ -89,8 +89,8 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 			# https://github.com/mage2pro/core/issues/289
 			/** @uses df_dump_ds() */
 			df_map('df_dump_ds', !$d ? [$c] : (is_array($d) ? [dfa_merge_r($d, ['Mage2.PRO' => $c])] : [$d, $c]))
-			,!$t ? '' : ['EXCEPTION', QE::i($t)->report(), "\n\n"]
-			,($t ? null : "\n") . df_bt_s($t ?: 1)
+			,!$t ? '' : ['EXCEPTION', QE::i($t)->report()]
+			,$t ? null : "\n" . df_bt_s(1)
 		)
 	);
 }
