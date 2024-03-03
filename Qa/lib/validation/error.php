@@ -151,7 +151,7 @@ function df_abstract($caller):void {
  */
 function df_error(...$a):void {
 	df_header_utf();
-	$e = df_error_create(...$a); /** @var DFE $e */
+	throw df_error_create(...$a);
 	/**
 	 * 2020-02-15
 	 * 1) "The Cron log (`magento.cron.log`) should contain a backtrace for every exception logged":
@@ -160,14 +160,35 @@ function df_error(...$a):void {
 	 * https://3v4l.org/qhd7m
 	 * So we have a correct backtrace even without throwing the exception.
 	 * 2020-02-17 @see \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
+	 * 2024-03-03
+	 * 1) "An endless loop `df_error` → `df_log` → … → `df_module_file_name` → … → `df_error`":
+	 * https://github.com/mage2pro/core/issues/353
+	 * 2) The previous code:
+	 * 		if (df_is_cron()) {
+	 * 			df_no_rec(function() use($e):void {df_log($e, 'Df_Cron');});
+	 * 		}
+	 * https://github.com/mage2pro/core/blob/10.6.4/Qa/lib/validation/error.php#L164-L169
+	 * 3) We do not need to log the exception here because it will be logged in 2 places:
+	 * 3.1) @see \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
+	 * https://github.com/mage2pro/core/blob/10.6.4/Cron/Plugin/Console/Command/CronCommand.php#L19-L27
+	 * 3.2) @see \Magento\Framework\Console\Cli::doRun():
+	 * 		try {
+	 * 			$exitCode = parent::doRun($input, $output);
+	 * 		}
+	 * 		catch (\Exception $e) {
+	 * 			$errorMessage = $e->getMessage() . PHP_EOL . $e->getTraceAsString();
+	 * 			$this->logger->error($errorMessage);
+	 * 			$this->initException = $e;
+	 * 		}
+	 * https://github.com/magento/magento2/blob/2.4.7-beta2/lib/internal/Magento/Framework/Console/Cli.php#L115-L121
+	 * `$this->logger->error($errorMessage);` will be logged by @see \Df\Framework\Log\Dispatcher::handle()
+	 * 4) "The required file «vendor/mage2pro/core/Cron/etc/df.json» is absent":
+	 * https://github.com/mage2pro/core/issues/352
+	 * @see df_module_file_name()
+	 * https://github.com/mage2pro/core/blob/10.6.4/Framework/lib/module/fs/name.php#L79-L84
+	 * This error should not be logged at all, because `df_module_file_name()` is called with `$onE = false`,
+	 * and `Df_Core` module is used instead of `Df_Cron`: @see df_sentry_m().
 	 */
-	if (df_is_cron()) {
-		# 2024-03-03
-		# "An endless loop `df_error` → `df_log` → … → `df_module_file_name` → … → `df_error`":
-		# https://github.com/mage2pro/core/issues/353
-		df_no_rec(function() use($e):void {df_log($e, 'Df_Cron');});
-	}
-	throw $e;
 }
 
 /**
