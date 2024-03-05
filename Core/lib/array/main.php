@@ -212,25 +212,6 @@ function dfa_ids($c):array {return df_map('df_id', $c);}
 function dfa_repeated(array $a):array {return array_values(array_unique(array_diff_key($a, array_unique($a))));}
 
 /**
- * 2019-01-28
- * @used-by \Dfe\Vantiv\API\Client::_construct()
- * @param array(int|string => mixed) $a
- * @param string[] $k
- * @param mixed|null $d [optional]
- * @return mixed|null
- */
-function dfa_seq(array $a, array $k, $d = null) {
-	$r = null; /** @var @var mixed|null $r */
-	foreach ($k as $ki) { /** @var string $ki */
-		$r = dfa($a, $ki);
-		if (!is_null($r)) {
-			break;
-		}
-	}
-	return is_null($r) ? $d : $r;
-}
-
-/**
  * Работает в разы быстрее, чем @see array_unique()
  * «Just found that array_keys(array_flip($array)); is amazingly faster than array_unique();.
   * About 80% faster on 100 element array,

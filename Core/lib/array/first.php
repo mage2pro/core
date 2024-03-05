@@ -13,6 +13,7 @@
  * @used-by df_caller_entry()
  * @used-by df_store_code_from_url()
  * @used-by dfa_group()
+ * @used-by dfa_try()
  * @used-by dfe_alphacommercehub_fix_amount_bug()
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Catalog\Model\Product::afterGetPreconfiguredValues() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/83)
  * @used-by \Df\Customer\AddAttribute\Customer::p()
