@@ -32,6 +32,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @used-by \Inkifi\Mediaclip\Event::_areAllOIAvailableForDownload()
  * @used-by \Inkifi\Mediaclip\Event::oi()
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::parent() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
  * @param iterable|callable $a1
  * @param iterable|callable $a2
