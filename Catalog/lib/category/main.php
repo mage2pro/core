@@ -31,6 +31,12 @@ function df_category($c, $s = false):C {return $c instanceof C ? $c : df_categor
 function df_category_id($c):int {return df_int($c instanceof C ? $c->getId() : $c);}
 
 /**
+ * 2024-03-10
+ * @uses \Magento\Catalog\Model\Category::getLevel() can return a string (e.g., "3").
+ */
+function df_category_level(C $c):int {return (int)$c->getLevel();}
+
+/**
  * 2020-02-05
  * @see df_store_names()
  * @used-by \Dfe\Sift\Payload\OQI::p()
