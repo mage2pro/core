@@ -36,6 +36,7 @@ function df_category_id($c):int {return df_int($c instanceof C ? $c->getId() : $
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::getRootCategoryName() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::level() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::parent() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by \Sharapov\Cabinetsbay\Block\Product\ListProduct::level() (https://github.com/cabinetsbay/site/issues/98)
  */
 function df_category_level(C $c):int {return (int)$c->getLevel();}
 
