@@ -12,7 +12,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @see df_product()
  * @used-by df_category_children()
  * @used-by df_category_children_map()
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::parent3() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
@@ -34,9 +34,10 @@ function df_category_id($c):int {return df_int($c instanceof C ? $c->getId() : $
  * 2024-03-10
  * @uses \Magento\Catalog\Model\Category::getLevel() can return a string (e.g., "3").
  * @used-by cb_category_is_l2() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by cb_category_is_l3() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::getRootCategoryName() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::level() (https://github.com/cabinetsbay/site/issues/98)
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::parent3() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Sharapov\Cabinetsbay\Block\Product\ListProduct::level() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/product/list.phtml:45 (https://github.com/cabinetsbay/site/issues/98)
  */
