@@ -10,6 +10,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 /**
  * 2019-09-08
  * @see df_product()
+ * @used-by df_category_ancestor_at_level()
  * @used-by df_category_children()
  * @used-by df_category_children_map()
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3() (https://github.com/cabinetsbay/site/issues/98)
