@@ -54,6 +54,7 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @used-by df_github_request()
  * @used-by df_log_l()
  * @used-by df_magento_version()
+ * @used-by df_module_name_by_path()
  * @used-by df_mvar()
  * @used-by df_oi_get()
  * @used-by df_package()

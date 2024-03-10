@@ -92,20 +92,32 @@ function df_module_file_name($m, string $name, string $ext = '', $onE = true):st
  */
 function df_module_name_by_path(string $f):string {/** @var string $r */
 	$f = df_path_relative($f);
-	$f2 = df_trim_text_left($f, ['app/code/', 'vendor/']); /** @var string $f2 */
 	$err = "Unable to detect a module for the file: `$f`"; /** @var string $err */
-	df_assert_ne($f, $f2, $err);
-	$isVendor = df_starts_with($f, 'vendor'); /** @var bool $isVendor */
-	$a = array_slice(df_explode_xpath($f2), 0, 2); /** @var string[] $a */
-	df_assert_eq(2, count($a), $err);
-	if (!$isVendor) {
-		$r = implode('_', $a);
+	# 2024-03-10
+	# 1) "`df_module_name_by_path()` should properly handle `*.phtml` files in the `app/design` folder":
+	# https://github.com/mage2pro/core/issues/359
+	# 2) «Unable to detect a module for the file:
+	# `app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/header.phtml`»:
+	# https://github.com/mage2pro/core/issues/358
+	if (df_starts_with($f, 'app/design')) {
+		$r = dfa(df_explode_xpath($f), 5);
+		df_assert(df_module_enabled($r), $err);
 	}
 	else {
-		$p = df_cc_path('vendor', $a, 'etc/module.xml');
-		# 2023-07-26 "`df_contents()` should accept internal paths": https://github.com/mage2pro/core/issues/273
-		$x = df_xml_parse(df_contents($p));
-		$r = (string)$x->{'module'}['name'];
+		$f2 = df_trim_text_left($f, ['app/code/', 'vendor/']); /** @var string $f2 */
+		df_assert_ne($f, $f2, $err);
+		$isVendor = df_starts_with($f, 'vendor'); /** @var bool $isVendor */
+		$a = array_slice(df_explode_xpath($f2), 0, 2); /** @var string[] $a */
+		df_assert_eq(2, count($a), $err);
+		if (!$isVendor) {
+			$r = implode('_', $a);
+		}
+		else {
+			$p = df_cc_path('vendor', $a, 'etc/module.xml');
+			# 2023-07-26 "`df_contents()` should accept internal paths": https://github.com/mage2pro/core/issues/273
+			$x = df_xml_parse(df_contents($p));
+			$r = (string)$x->{'module'}['name'];
+		}
 	}
 	return $r;
 }
