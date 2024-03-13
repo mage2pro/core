@@ -26,7 +26,7 @@ function df_cms_block($b):B {return $b instanceof B ? $b : df_cms_block_r()->get
  * @see \Magento\Cms\Model\ResourceModel\Block::getBlockId()
  * @used-by \AlbumEnvy\Popup\Settings::content()
  * @param int|string $id
- * @param Closure|bool|mixed $onE [optional]
+ * @param Closure|bool|string $onE [optional]
  * @throws NSE
  */
 function df_cms_block_content($id, $onE = ''):string {return df_try(function() use($id):string {return
