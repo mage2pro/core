@@ -71,13 +71,13 @@ function df_block($c, $data = [], string $template = '', array $vars = []) {
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()   
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
- * @param string|object|null $m
+ * @param string|object|null $c
  * @param array $vars [optional]
  * @param array(string => mixed) $data [optional]
  */
-function df_block_output($m, string $t = '', array $vars = [], array $data = []):string {return !$t
-	? df_block($m, $data, null, $vars)->toHtml()
-	: df_block(null, $data, df_asset_name($t, df_contains($t, '::') ? null : df_module_name($m)), $vars)->toHtml()
+function df_block_output($c, string $t = '', array $vars = [], array $data = []):string {return !$t
+	? df_block($c, $data, null, $vars)->toHtml()
+	: df_block(null, $data, df_asset_name($t, df_contains($t, '::') ? null : df_module_name($c)), $vars)->toHtml()
 ;}
 
 /**
