@@ -6,22 +6,30 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
 
 /**
  * 2018-05-21
- * @see df_block()
+ * 2024-03-13
+ * 1) @see df_block()
+ * 2) $id can be a numeric ID or a literal ID:
+ * @see \Magento\Cms\Model\ResourceModel\Block::load()
+ * @see \Magento\Cms\Model\ResourceModel\Block::getBlockId()
  * @used-by df_cms_block_content()
- * @param B|int $b
+ * @param B|int|string $b
  * @throws NSE
  */
 function df_cms_block($b):B {return $b instanceof B ? $b : df_cms_block_r()->getById($b);}
 
 /**
  * 2018-05-21
- * @see df_block_output()
+ * 2024-03-13
+ * 1) @see df_block_output()
+ * 2) $id can be a numeric ID or a literal ID:
+ * @see \Magento\Cms\Model\ResourceModel\Block::load()
+ * @see \Magento\Cms\Model\ResourceModel\Block::getBlockId()
  * @used-by \AlbumEnvy\Popup\Settings::content()
+ * @param int|string $id
  * @param Closure|bool|mixed $onE [optional]
- * @return string|null
  * @throws NSE
  */
-function df_cms_block_content(int $id, $onE = null) {return df_try(function() use($id) {return
+function df_cms_block_content($id, $onE = ''):string {return df_try(function() use($id):string {return
 	df_cms_block($id)->getContent()
 ;}, $onE);}
 
