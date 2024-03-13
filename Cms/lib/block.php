@@ -6,6 +6,7 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
 
 /**
  * 2018-05-21
+ * @see df_block()
  * @used-by df_cms_block_content()
  * @param B|int $b
  * @throws NSE
@@ -14,6 +15,7 @@ function df_cms_block($b):B {return $b instanceof B ? $b : df_cms_block_r()->get
 
 /**
  * 2018-05-21
+ * @see df_block_output()
  * @used-by \AlbumEnvy\Popup\Settings::content()
  * @param Closure|bool|mixed $onError [optional]
  * @return string|null
