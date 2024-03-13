@@ -17,13 +17,13 @@ function df_cms_block($b):B {return $b instanceof B ? $b : df_cms_block_r()->get
  * 2018-05-21
  * @see df_block_output()
  * @used-by \AlbumEnvy\Popup\Settings::content()
- * @param Closure|bool|mixed $onError [optional]
+ * @param Closure|bool|mixed $onE [optional]
  * @return string|null
  * @throws NSE
  */
-function df_cms_block_content(int $id, $onError = null) {return df_try(function() use($id) {return
+function df_cms_block_content(int $id, $onE = null) {return df_try(function() use($id) {return
 	df_cms_block($id)->getContent()
-;}, $onError);}
+;}, $onE);}
 
 /**
  * 2018-05-21
