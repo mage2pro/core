@@ -1,8 +1,8 @@
 <?php
 /**
  * 2016-10-17
- * 2022-10-31 @deprecated It is unused.
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/view.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @param string|string[] $a
  */
 function df_c(...$a):string {return implode(dfa_flatten($a));}
