@@ -68,6 +68,7 @@ function df_block($c, $data = [], string $template = '', array $vars = []) {
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
+ * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/view.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @param string|object|null $c
  * @param array $vars [optional]
  * @param array(string => mixed) $data [optional]
