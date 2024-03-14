@@ -1,5 +1,6 @@
 <?php
 use Magento\Catalog\Api\CategoryRepositoryInterface as ICategoryRepository;
+use Magento\Catalog\Helper\Category as H;
 use Magento\Catalog\Model\Category as C;
 use Magento\Catalog\Model\CategoryRepository;
 use Magento\Catalog\Model\Product as P;
@@ -22,6 +23,13 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 function df_category($c, $s = false):C {return $c instanceof C ? $c : df_category_r()->get(
 	$c, false === $s ? null : df_store_id(true === $s ? null : $s)
 );}
+
+/**
+ * 2024-03-14
+ * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/view.phtml (https://github.com/cabinetsbay/site/issues/112)
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/l3.phtml (https://github.com/cabinetsbay/site/issues/112)
+ */
+function df_category_h():H {return df_o(H::class);}
 
 /**
  * 2021-11-30 @deprecated It is unused.
