@@ -22,9 +22,9 @@ use Magento\Framework\View\Element\Template;
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
  * @return AbstractBlock|BlockInterface|Template
  */
-function df_block($c, $data = [], string $template = '', array $vars = []) {
+function df_block($c, $data = [], string $t = '', array $vars = []) {
 	if (is_string($data)) {
-		$template = $data;
+		$t = $data;
 		$data = [];
 	}
 	/**
@@ -45,8 +45,8 @@ function df_block($c, $data = [], string $template = '', array $vars = []) {
 		# 2016-11-22
 		$r->assign($vars);
 	}
-	if ($template && $r instanceof Template) {
-		$r->setTemplate(df_phtml_add_ext($template));
+	if ($t && $r instanceof Template) {
+		$r->setTemplate(df_phtml_add_ext($t));
 	}
 	return $r;
 }
