@@ -27,7 +27,6 @@ function df_category($c, $s = false):C {return $c instanceof C ? $c : df_categor
 /**
  * 2024-03-14
  * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/view.phtml (https://github.com/cabinetsbay/site/issues/112)
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/l3.phtml (https://github.com/cabinetsbay/site/issues/112)
  */
 function df_category_h():H {return df_o(H::class);}
 
