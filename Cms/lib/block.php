@@ -25,7 +25,7 @@ function df_cms_block($b):B {return $b instanceof B ? $b : df_cms_block_r()->get
  * @see \Magento\Cms\Model\ResourceModel\Block::load()
  * @see \Magento\Cms\Model\ResourceModel\Block::getBlockId()
  * @used-by \AlbumEnvy\Popup\Settings::content()
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/faq.phtml (https://github.com/cabinetsbay/site/issues/112)
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/top.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @param int|string $id
  * @param Closure|bool|string $onE [optional]
  * @throws NSE
