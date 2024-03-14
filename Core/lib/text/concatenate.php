@@ -63,10 +63,11 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
  * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
  * @used-by \Wyomind\SimpleGoogleShopping\Model\Observer::checkToGenerate(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/26)
+ * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml
  * @used-by vendor/mage2pro/portal/view/frontend/templates/root.phtml
- * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
- * @param string|string[] $a
+ * @param string|array(string) $a
  */
 function df_cc_n(...$a):string {return df_ccc("\n", ...$a);}
 
