@@ -75,9 +75,10 @@ function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {r
  * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
- * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
+ * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/view.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/site/issues/112)
+ * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param array|callable|Traversable $a1
  * @param array|callable|Traversable $a2
  * @param mixed|mixed[] $pAppend [optional]
