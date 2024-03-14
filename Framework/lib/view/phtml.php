@@ -12,7 +12,7 @@ function df_is_phtml(string $f):bool {return df_ends_with($f, '.phtml');}
  * @used-by df_block()
  * @used-by df_phtml_exists()
  */
-function df_phtml_add_ext(string $f):string {return df_file_ext_add($f, '.phtml');}
+function df_phtml_add_ext(string $f):string {return df_file_ext_add($f, 'phtml');}
 
 /**
  * 2017-05-11
