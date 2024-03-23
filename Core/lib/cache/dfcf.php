@@ -30,6 +30,7 @@ use Df\Core\RAM;
  * @used-by df_category_children_map()
  * @used-by df_cli_user()
  * @used-by df_con_s()
+ * @used-by df_core_version()
  * @used-by df_countries_allowed()
  * @used-by df_countries_options()
  * @used-by df_country()
