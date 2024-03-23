@@ -14,6 +14,7 @@ function df_category_c():CC {return df_new_om(CC::class);}
  * https://github.com/JustunoCom/m2/blob/1.7.3/Controller/Response/Catalog.php#L97
  * @noinspection PhpParamsInspection
  * @used-by df_category_children_map()
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/l3.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @param C|int $c
  * @param string|string[] $a [optional]
  */
