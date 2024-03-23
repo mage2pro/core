@@ -119,6 +119,7 @@ use Df\Core\RAM;
  * @used-by \Dfe\Facebook\I::init()
  * @used-by \Dfe\Robokassa\Api\Options::map()
  * @used-by \Dfe\Robokassa\Api\Options::p()
+ * @used-by \Dfe\Sift\Payload\Promotion\Discount::desc()
  * @return mixed
  */
 function dfcf(Closure $f, array $a = [], array $tags = [], bool $unique = true, int $offset = 0) {
