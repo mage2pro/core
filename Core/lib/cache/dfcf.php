@@ -102,10 +102,10 @@ use Df\Core\RAM;
  * @used-by \Df\Payment\Url::f()
  * @used-by \Df\Payment\W\F::s()
  * @used-by \Df\Qa\Trace\Formatter::p()
+ * @used-by \Df\Shipping\Method::codeS()
  * @used-by \Dfe\AllPay\W\Event::time()
  * @used-by \Dfe\Color\Image::optsM()
  * @used-by \Dfe\Color\Image::palette()
- * @used-by \Df\Shipping\Method::codeS()
  * @return mixed
  */
 function dfcf(Closure $f, array $a = [], array $tags = [], bool $unique = true, int $offset = 0) {
