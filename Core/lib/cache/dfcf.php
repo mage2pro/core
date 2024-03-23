@@ -47,6 +47,7 @@ use Df\Core\RAM;
  * @used-by df_magento_version_remote()
  * @used-by df_module_file_read()
  * @used-by df_modules_my()
+ * @used-by df_modules_p()
  * @used-by df_msi_website2stockId()
  * @used-by df_mvars()
  * @used-by df_my_local()
