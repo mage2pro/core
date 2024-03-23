@@ -62,6 +62,7 @@ use Df\Core\RAM;
  * @used-by df_product_images_path_rel()
  * @used-by df_table()
  * @used-by dfac()
+ * @used-by df_trans_by_payment()
  * @used-by dfe_modules_info()
  * @used-by dfe_packages()
  * @used-by dfp_due()
