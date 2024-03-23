@@ -1,5 +1,5 @@
 <?php
-use Magento\Framework\App\ResourceConnection as RC;
+use Magento\Framework\App\ResourceConnection as R;
 use Magento\Framework\DB\Ddl\Trigger;
 use Magento\Framework\DB\Select;
 use Magento\Framework\DB\Transaction;
@@ -9,7 +9,7 @@ use Magento\Framework\DB\Transaction;
  * @used-by df_conn()
  * @used-by df_table()
  */
-function df_db_resource():RC {return df_o(RC::class);}
+function df_db_resource():R {return df_o(R::class);}
 
 /**
  * 2016-03-26
