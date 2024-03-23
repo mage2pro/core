@@ -93,6 +93,7 @@ use Df\Core\RAM;
  * @used-by \Df\Payment\Method::codeS()
  * @used-by \Df\Payment\Method::sg()
  * @used-by \Df\Payment\TID::s()
+ * @used-by \Df\Payment\TM::s()
  * @used-by \Df\Payment\Url::f()
  * @used-by \Df\Payment\W\F::s()
  * @used-by \Df\Qa\Trace\Formatter::p()
