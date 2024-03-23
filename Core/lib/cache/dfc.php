@@ -69,6 +69,10 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
 	}
 	else {
 		static $map; /** @var WeakMap $map */
+		# 2024-03-23
+		# "[IntelliJ IDEA] «'WeakMap' is available starting with 8.0 PHP version»":
+		# https://github.com/thehcginstitute-com/m1/issues/529
+		/** @noinspection PhpElementIsNotAvailableInCurrentPhpVersionInspection */
 		$map = $map ?: new WeakMap;
 		if (!$map->offsetExists($o)) {
 			$map[$o] = [];
