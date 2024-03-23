@@ -122,6 +122,8 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * @used-by df_product_images_path_rel()
  * @used-by df_table()
  * @used-by dfac()
+ * @used-by \Df\API\Facade::s()
+ * @used-by \Df\Config\Source\WaitPeriodType::calculate()
  * @used-by \Df\Core\Session::s()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
  * @used-by \Df\Framework\Log\Handler\Info::lb()
@@ -131,7 +133,6 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * @used-by \Dfe\AllPay\W\Event::time()
  * @used-by \Dfe\Color\Image::optsM()
  * @used-by \Dfe\Color\Image::palette()
- * @used-by \Df\API\Facade::s()
  * @return mixed
  */
 function dfcf(Closure $f, array $a = [], array $tags = [], bool $unique = true, int $offset = 0) {
