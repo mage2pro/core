@@ -72,6 +72,7 @@ use Df\Core\RAM;
  * @used-by df_webserver()
  * @used-by dfac()
  * @used-by dfe_modules_info()
+ * @used-by dfe_moip_phone()
  * @used-by dfe_packages()
  * @used-by dfp_due()
  * @used-by dfp_methods()
