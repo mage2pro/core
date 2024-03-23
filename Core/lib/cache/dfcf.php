@@ -104,6 +104,7 @@ use Df\Core\RAM;
  * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Df\Shipping\Method::codeS()
  * @used-by \Df\Shipping\Method::sg()
+ * @used-by \Df\Sso\Button::sModule()
  * @used-by \Dfe\AllPay\W\Event::time()
  * @used-by \Dfe\Color\Image::optsM()
  * @used-by \Dfe\Color\Image::palette()
