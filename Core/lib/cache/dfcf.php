@@ -45,6 +45,7 @@ use Df\Core\RAM;
  * @used-by df_domain_current()
  * @used-by df_google_init_service_account()
  * @used-by df_is_windows()
+ * @used-by df_locale()
  * @used-by df_magento_version()
  * @used-by df_magento_version_remote()
  * @used-by df_module_file_read()
