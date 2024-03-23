@@ -32,6 +32,7 @@ use Df\Core\RAM;
  * @used-by df_con_s()
  * @used-by df_countries_allowed()
  * @used-by df_countries_options()
+ * @used-by df_country()
  * @used-by df_currency()
  * @used-by df_customer_is_new()
  * @used-by df_currencies_ctn()
