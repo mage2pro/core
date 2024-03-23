@@ -33,13 +33,13 @@ function df_db_drop_pk(string $t):void {df_conn()->dropIndex(df_table($t), df_co
  * 1) $cols could be:
  * 1.1) a string to fetch a single column;
  * 1.2) an array to fetch multiple columns.
- * @see \Zend_Db_Select::_tableCols()
+ * @see Zend_Db_Select::_tableCols()
  *		if (!is_array($cols)) {
  *			$cols = array($cols);
  *		}
  * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Db/Select.php#L929-L931
  * 2) The function always returns @see Select
- * I added @see \Zend_Db_Select to the PHPDoc return type declaration just for my IDE convenience.
+ * I added @see Zend_Db_Select to the PHPDoc return type declaration just for my IDE convenience.
  * @used-by df_customer_att_pos_after()
  * @used-by df_customer_is_new()
  * @used-by df_fetch()
