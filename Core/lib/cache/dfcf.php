@@ -106,6 +106,7 @@ use Df\Core\RAM;
  * @used-by \Df\Shipping\Method::sg()
  * @used-by \Df\Sso\Button::sModule()
  * @used-by \Df\Sso\Css::isAccConfirmation()
+ * @used-by \Df\Sso\Css::isRegCompletion()
  * @used-by \Dfe\AllPay\W\Event::time()
  * @used-by \Dfe\Color\Image::optsM()
  * @used-by \Dfe\Color\Image::palette()
