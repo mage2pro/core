@@ -113,6 +113,7 @@ use Df\Core\RAM;
  * @used-by \Dfe\AllPay\W\Event::time()
  * @used-by \Dfe\Color\Image::optsM()
  * @used-by \Dfe\Color\Image::palette()
+ * @used-by \Dfe\Facebook\I::init()
  * @return mixed
  */
 function dfcf(Closure $f, array $a = [], array $tags = [], bool $unique = true, int $offset = 0) {
