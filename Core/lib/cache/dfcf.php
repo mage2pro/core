@@ -25,12 +25,12 @@ use Df\Core\RAM;
  * 2017-01-02 Задавайте параметр $offset в том случае, когда dfc() вызывается опосредованно. Например, так делает @see dfac().
  * @see df_no_rec()
  * @see dfac()
+ * @used-by df_are_customers_global()
  * @used-by df_cache_get_simple()
  * @used-by df_category_children_map()
  * @used-by df_cli_user()
  * @used-by df_con_s()
  * @used-by df_currency()
- * @used-by df_are_customers_global()
  * @used-by df_days_off()
  * @used-by df_google_init_service_account()
  * @used-by df_is_windows()
