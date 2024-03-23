@@ -108,6 +108,7 @@ use Df\Core\RAM;
  * @used-by \Df\Sso\Button::sModule()
  * @used-by \Df\Sso\Css::isAccConfirmation()
  * @used-by \Df\Sso\Css::isRegCompletion()
+ * @used-by \Df\StripeClone\CardFormatter::s()
  * @used-by \Df\StripeClone\P\Charge::sn()
  * @used-by \Dfe\AllPay\W\Event::time()
  * @used-by \Dfe\Color\Image::optsM()
