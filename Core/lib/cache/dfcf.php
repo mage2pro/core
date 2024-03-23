@@ -41,6 +41,7 @@ use Df\Core\RAM;
  * @used-by df_currency_nums()
  * @used-by df_days_off()
  * @used-by df_db_version()
+ * @used-by df_domain_current()
  * @used-by df_google_init_service_account()
  * @used-by df_is_windows()
  * @used-by df_magento_version()
