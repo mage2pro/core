@@ -75,7 +75,6 @@ use Df\Core\RAM;
  * @used-by \Df\Core\Visitor::sp()
  * @used-by \Df\Directory\FE\Currency::map()
  * @used-by \Df\Framework\Log\Handler\Info::lb()
- * @used-by \Df\Framework\Log\Handler\Info::lb()
  * @used-by \Df\OAuth\App::state()
  * @used-by \Df\Payment\Url::f()
  * @used-by \Df\Qa\Trace\Formatter::p()
