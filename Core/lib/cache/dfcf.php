@@ -55,6 +55,7 @@ use Df\Core\RAM;
  * @used-by \Df\Core\R\ConT::generic()
  * @used-by \Df\Core\Session::s()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
+ * @used-by \Df\Core\Visitor::sp()
  * @used-by \Df\Framework\Log\Handler\Info::lb()
  * @used-by \Df\OAuth\App::state()
  * @used-by \Df\Payment\Url::f()
