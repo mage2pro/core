@@ -62,6 +62,8 @@ use Df\Core\RAM;
  * @used-by df_primary_key()
  * @used-by df_product_att_options()
  * @used-by df_product_images_path_rel()
+ * @used-by df_sales_seq_meta()
+ * @used-by df_sentry_m()
  * @used-by df_table()
  * @used-by df_trans_by_payment()
  * @used-by df_transx()
