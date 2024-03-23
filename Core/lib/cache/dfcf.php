@@ -86,6 +86,7 @@ use Df\Core\RAM;
  * @used-by \Df\Framework\Log\Handler\Info::lb()
  * @used-by \Df\Framework\Request::extraKeysRaw()
  * @used-by \Df\OAuth\App::state()
+ * @used-by \Df\Payment\Choice::f()
  * @used-by \Df\Payment\Init\Action::sg()
  * @used-by \Df\Payment\Url::f()
  * @used-by \Df\Payment\W\F::s()
