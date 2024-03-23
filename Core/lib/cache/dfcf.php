@@ -32,6 +32,7 @@ use Df\Core\RAM;
  * @used-by df_con_s()
  * @used-by df_currency()
  * @used-by df_customer_is_new()
+ * @used-by df_currencies_ctn()
  * @used-by df_currency_nums()
  * @used-by df_days_off()
  * @used-by df_google_init_service_account()
