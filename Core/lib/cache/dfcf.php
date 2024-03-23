@@ -37,6 +37,7 @@ use Df\Core\RAM;
  * @used-by df_modules_my()
  * @used-by df_msi_website2stockId()
  * @used-by df_mvars()
+ * @used-by df_my_local()
  * @used-by df_o()
  * @used-by df_product_att_options()
  * @used-by df_product_images_path_rel()
