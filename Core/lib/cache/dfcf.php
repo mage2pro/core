@@ -103,6 +103,7 @@ use Df\Core\RAM;
  * @used-by \Df\Payment\W\F::s()
  * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Df\Shipping\Method::codeS()
+ * @used-by \Df\Shipping\Method::sg()
  * @used-by \Dfe\AllPay\W\Event::time()
  * @used-by \Dfe\Color\Image::optsM()
  * @used-by \Dfe\Color\Image::palette()
