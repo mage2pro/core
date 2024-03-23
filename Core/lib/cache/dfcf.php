@@ -74,6 +74,7 @@ use Df\Core\RAM;
  * @used-by dfe_modules_info()
  * @used-by dfe_moip_phone()
  * @used-by dfe_packages()
+ * @used-by dfe_portal_plugins()
  * @used-by dfp_due()
  * @used-by dfp_methods()
  * @used-by dfpm()
