@@ -58,6 +58,7 @@ use Df\Core\RAM;
  * @used-by df_my_local()
  * @used-by df_o()
  * @used-by df_oq_customer_name()
+ * @used-by df_order_by_payment()
  * @used-by df_primary_key()
  * @used-by df_product_att_options()
  * @used-by df_product_images_path_rel()
