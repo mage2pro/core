@@ -65,6 +65,7 @@ use Df\Core\RAM;
  * @used-by dfe_modules_info()
  * @used-by dfe_packages()
  * @used-by dfp_due()
+ * @used-by dfp_methods()
  * @used-by dfpm()
  * @used-by dfpm_c()
  * @used-by dfpm_code()
