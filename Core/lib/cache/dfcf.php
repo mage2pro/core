@@ -32,6 +32,7 @@ use Df\Core\RAM;
  * @used-by df_currency()
  * @used-by df_days_off()
  * @used-by df_google_init_service_account()
+ * @used-by df_is_windows()
  * @used-by df_module_file_read()
  * @used-by df_modules_my()
  * @used-by df_msi_website2stockId()
