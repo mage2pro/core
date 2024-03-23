@@ -61,6 +61,7 @@ use Df\Core\RAM;
  * @used-by df_table()
  * @used-by dfac()
  * @used-by dfe_modules_info()
+ * @used-by dfe_packages()
  * @used-by dfs_con()
  * @used-by \Df\API\Facade::s()
  * @used-by \Df\Config\Settings::_a()
