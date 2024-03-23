@@ -27,6 +27,7 @@ use Df\Core\RAM;
  * @see dfac()
  * @used-by df_cache_get_simple()
  * @used-by df_category_children_map()
+ * @used-by df_cli_user()
  * @used-by df_con_s()
  * @used-by df_currency()
  * @used-by df_google_init_service_account()
