@@ -117,6 +117,7 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * @used-by df_module_file_read()
  * @used-by df_modules_my()
  * @used-by df_mvars()
+ * @used-by df_product_att_options()
  * @used-by df_product_images_path_rel()
  * @used-by df_table()
  * @used-by dfac()
@@ -126,6 +127,10 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * @used-by \Df\OAuth\App::state()
  * @used-by \Df\Payment\Url::f()
  * @used-by \Df\Qa\Trace\Formatter::p()
+ * @used-by \Dfe\AllPay\W\Event::time()
+ * @used-by \Dfe\Color\Image::optsM()
+ * @used-by \Dfe\Color\Image::palette()
+ * @used-by \Df\API\Facade::s()
  * @return mixed
  */
 function dfcf(Closure $f, array $a = [], array $tags = [], bool $unique = true, int $offset = 0) {
