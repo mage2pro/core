@@ -56,6 +56,7 @@ use Df\Core\RAM;
  * @used-by df_product_images_path_rel()
  * @used-by df_table()
  * @used-by dfac()
+ * @used-by dfe_modules_info()
  * @used-by dfs_con()
  * @used-by \Df\API\Facade::s()
  * @used-by \Df\Config\Settings::_a()
