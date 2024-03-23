@@ -88,6 +88,7 @@ use Df\Core\RAM;
  * @used-by \Df\OAuth\App::state()
  * @used-by \Df\Payment\Init\Action::sg()
  * @used-by \Df\Payment\Url::f()
+ * @used-by \Df\Payment\W\F::s()
  * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Dfe\AllPay\W\Event::time()
  * @used-by \Dfe\Color\Image::optsM()
