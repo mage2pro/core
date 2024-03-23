@@ -118,6 +118,7 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
  * @used-by df_modules_my()
  * @used-by df_mvars()
  * @used-by df_product_images_path_rel()
+ * @used-by df_table()
  * @used-by dfac()
  * @used-by \Df\Core\Session::s()
  * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
