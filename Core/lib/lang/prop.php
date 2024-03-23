@@ -192,6 +192,9 @@ function df_prop_k($o, string $k, $v = DF_N, $d = null) {/** @var object|mixed|n
 		}
 		else {
 			static $map; /** @var WeakMap $map */
+			# 2024-03-23
+			# "[IntelliJ IDEA] «'WeakMap' is available starting with 8.0 PHP version»":
+			# https://github.com/thehcginstitute-com/m1/issues/529
 			$map = $map ?: new WeakMap;
 			if (!$map->offsetExists($o)) {
 				$map[$o] = [];
