@@ -9,8 +9,6 @@ function df_cms_filter_provider():FP {return df_o(FP::class);}
 
 /**
  * 2024-03-25
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::getCabinetAssembly() (https://github.com/cabinetsbay/site/issues/98)
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::getMatchingStyles() (https://github.com/cabinetsbay/site/issues/98)
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::getSpecifications() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3a() (https://github.com/cabinetsbay/site/issues/98)
  */
 function df_cms_filter_page(string $s):string {return df_cms_filter_provider()->getPageFilter()->filter($s);}
