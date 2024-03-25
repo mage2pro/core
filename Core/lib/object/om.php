@@ -32,6 +32,7 @@ function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_category_h()
  * @used-by df_checkout_h()
  * @used-by df_cms_block_r()
+ * @used-by df_cms_fp()
  * @used-by df_component_r()
  * @used-by df_config_field()
  * @used-by df_customer_address_rep()
