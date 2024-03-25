@@ -140,7 +140,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, b
  * @used-by \Df\Sentry\Client::send()
  * @used-by \Dfe\PostFinance\Signer::sign()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/105)
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs/overview.phtml (https://github.com/cabinetsbay/site/issues/105)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param array|callable|Traversable $a1
  * @param array|callable|Traversable $a2
