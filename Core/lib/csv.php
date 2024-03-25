@@ -35,6 +35,7 @@ function df_csv_o():Csv {return df_new_om(Csv::class);}
  * @used-by \Df\Payment\Method::canUseForCountryP()
  * @used-by \Dfe\CheckoutCom\Handler::isInitiatedByMyself()
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::getMatchingProducts() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param string|null $s
  * @return string[]
