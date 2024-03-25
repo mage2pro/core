@@ -42,6 +42,7 @@ function df_csv_o():Csv {return df_new_om(Csv::class);}
 function df_csv_parse($s, string $d = ','):array {return !$s ? [] : df_trim(explode($d, $s));}
 
 /**
+ * @used-by df_days_off()
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/site/issues/98)
  * @param string|null $s
  * @return int[]
