@@ -65,7 +65,7 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
  * @used-by \Wyomind\SimpleGoogleShopping\Model\Observer::checkToGenerate(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/26)
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/site/issues/112)
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/105)
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs/overview.phtml (https://github.com/cabinetsbay/site/issues/105)
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml
  * @used-by vendor/mage2pro/portal/view/frontend/templates/root.phtml
  * @param string|array(string) $a
