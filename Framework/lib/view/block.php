@@ -68,6 +68,7 @@ function df_block($c, $data = [], string $t = '', array $vars = []) {
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
+ * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/header.phtml (https://github.com/cabinetsbay/site/issues/105)
  * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/view.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/l3.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @param string|object|null $c
