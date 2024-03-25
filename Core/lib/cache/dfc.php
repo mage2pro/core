@@ -29,10 +29,11 @@ use Df\Core\RAM;
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
  * @used-by \Df\Sso\Button::_prepareLayout()
  * ---
- * @used-by dfaoc()
  * @see df_no_rec()
  * @see df_prop()
  * @see dfaoc()
+ * @used-by dfaoc()
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::title() (https://github.com/cabinetsbay/site/issues/105)
  * @param object $o
  * @return mixed
  */
