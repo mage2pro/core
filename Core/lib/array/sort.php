@@ -85,7 +85,7 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * По этой причине добавил собаку.
  * @see df_ksort()
  * @used-by df_json_sort()
- * @used-by df_sort_names()
+ * @used-by df_sort_l()
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()
  * @used-by \Df\Payment\Info\Report::sort()
@@ -138,7 +138,7 @@ function df_sort_a(array $a):array {asort($a); return $a;}
  * @used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
  */
-function df_sort_names(array $a, string $l = '', callable $get = null):array {
+function df_sort_l(array $a, string $l = '', callable $get = null):array {
 	$c = new Collator($l); /** @var Collator $c */
 	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(!$get ? $a : $get($a), !$get ? $b : $get($b));});
 }

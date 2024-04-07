@@ -110,7 +110,7 @@ function df_oqi_image($i):string {return df_product_image_url($i->getProduct());
  * @return array(int => mixed)|OI[]|QI[]
  */
 function df_oqi_leafs($oq, Closure $f = null, string $locale = ''):array {
-	$r = df_sort_names(array_values(array_filter(
+	$r = df_sort_l(array_values(array_filter(
 		$oq->getItems(), function($i) {/** @var OI|QI $i */ return df_oqi_is_leaf($i);}
 	)), $locale, function($i) {/** @var OI|QI $i */ return $i->getName();}); /** @var OI[]|QI[] $r */
 	/**

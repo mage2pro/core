@@ -45,7 +45,7 @@ class Collection extends \Magento\Directory\Model\ResourceModel\Country\Collecti
 	final function mapFromCodeToName(string $l = ''):array {return dfc($this, function($l) {
 		$needTranslate = 'en_US' !== $l; /** @var bool $needTranslate */
 		$zL = new zL($l); /** @var zL $zL */
-		return df_sort_names(df_map_r($this, function(C $c) use($needTranslate, $zL) {return [
+		return df_sort_l(df_map_r($this, function(C $c) use($needTranslate, $zL) {return [
 			$iso2 = $c->getId() /** @var string $iso2 */
 			,!$needTranslate ? $c->getName() : (zL::getTranslation($iso2, 'country', $zL) ?: $c->getName())];
 		}), $l);
