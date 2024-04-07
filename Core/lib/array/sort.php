@@ -78,7 +78,7 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * 2016-07-18
  * 2016-08-10
  * С сегодняшнего дня я использую функцию @see df_caller_f(),
- * которая, в свою очередь, использует @debug_backtrace()
+ * которая, в свою очередь, использует @debug_backtrace().
  * Это приводит к сбою: «Warning: usort(): Array was modified by the user comparison function».
  * http://stackoverflow.com/questions/3235387
  * https://bugs.php.net/bug.php?id=50688
