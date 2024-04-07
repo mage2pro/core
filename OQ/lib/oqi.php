@@ -109,10 +109,10 @@ function df_oqi_image($i):string {return df_product_image_url($i->getProduct());
  * @param O|Q $oq
  * @return array(int => mixed)|OI[]|QI[]
  */
-function df_oqi_leafs($oq, Closure $f = null, string $locale = ''):array {
+function df_oqi_leafs($oq, Closure $f = null, string $l = ''):array {
 	$r = df_sort_l(array_values(array_filter(
 		$oq->getItems(), function($i) {/** @var OI|QI $i */ return df_oqi_is_leaf($i);}
-	)), $locale, function($i) {/** @var OI|QI $i */ return $i->getName();}); /** @var OI[]|QI[] $r */
+	)), $l, function($i) {/** @var OI|QI $i */ return $i->getName();}); /** @var OI[]|QI[] $r */
 	/**
 	 * 2020-02-04 
 	 * If we got here from the `sales_order_place_after` event, then the order is not yet saved,
