@@ -53,7 +53,7 @@ function df_zf_http_last_req(C $c):string {
 			$s = "$b <...>";
 		}
 		return $s;
-	}, df_sort_l(df_tail($a)))), df_tail($sA));
+	}, df_sort(df_tail($a)))), df_tail($sA));
 }
 
 /**

@@ -42,7 +42,7 @@ function df_countries_ctn(string $locale = ''):array {return df_countries()->map
  * @return array(array(string => string))
  */
 function df_countries_options(array $filter = []):array {return dfcf(function(array $filter = []) {return df_map_to_options(
-	df_sort_l(dfa(df_countries_ctn(), df_etn($filter)))
+	df_sort(dfa(df_countries_ctn(), df_etn($filter)))
 );}, func_get_args());}
 
 /**

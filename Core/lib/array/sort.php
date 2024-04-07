@@ -83,15 +83,37 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * http://stackoverflow.com/questions/3235387
  * https://bugs.php.net/bug.php?id=50688
  * По этой причине добавил собаку.
+ * 2022-11-30
+ * «Deprecated Functionality: Collator::__construct():
+ * Passing null to parameter #1 ($locale) of type string is deprecated
+ * in vendor/justuno.com/core/lib/Core/array/sort.php on line 102»:
+ * https://github.com/justuno-com/core/issues/379
+ * 2024-04-08
+ * 1) From now on, it is locale-aware (previously, I had a separate locale-aware df_sort_l() / df_sort_names() function).
+ * 2) $isGet = true in:
+ * 		@used-by df_oqi_leafs()
+ * 		@used-by dfe_portal_stripe_customers()
+ * 		@used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
+ * 3) $l is used in:
+ * 		@used-by df_oqi_leafs()
+ * 		@used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @see df_ksort()
+ * @used-by df_countries_options()
  * @used-by df_json_sort()
+ * @used-by df_modules_p()
+ * @used-by df_oqi_leafs()
  * @used-by df_sort_l()
+ * @used-by df_zf_http_last_req()
+ * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\Config\Backend\ArrayT::processI()
+ * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @used-by \Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()
  * @used-by \Df\Payment\Info\Report::sort()
  * @used-by \Df\Payment\TM::tResponses()
  * @used-by \Dfe\Color\Image::probabilities()
+ * @used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
  * @used-by \Dfe\Robokassa\Api\Options::p()
+ * @used-by \Dfe\YandexKassa\Source\Option::map()
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::images() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
@@ -99,14 +121,19 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * @param Closure|string|null $f [optional]
  * @return array(int|string => mixed)
  */
-function df_sort(array $a, $f = null):array {
+function df_sort(array $a, $f = null, bool $isGet = false, string $l = ''):array {
+	# 2017-02-02 http://stackoverflow.com/a/7930575
+	$c = new Collator($l); /** @var Collator $c */
 	$isList = array_is_list($a); /** @var bool $isList */
 	if (!$f) {
-		$isList ? sort($a) : asort($a);
+		$isList ? $c->sort($a) : $c->asort($a);
 	}
 	else {
-		if (!$f instanceof Closure) {
-			$f = function($a, $b) use($f) {return !is_object($a) ? $a - $b : $a->$f() - $b->$f();};
+		if ($isGet) {
+			$f = function($a, $b) use($c, $f):int {return $c->compare(!$f ? $a : $f($a), !$f ? $b : $f($b));};
+		}
+		elseif (!$f instanceof Closure) {
+			$f = function($a, $b) use($f):int {return !is_object($a) ? $a - $b : $a->$f() - $b->$f();};
 		}
 		/** @noinspection PhpUsageOfSilenceOperatorInspection */
 		$isList ? @usort($a, $f) : @uasort($a, $f);
@@ -121,24 +148,3 @@ function df_sort(array $a, $f = null):array {
  * @return array(int|string => mixed)
  */
 function df_sort_a(array $a):array {asort($a); return $a;}
-
-/**
- * 2017-02-02 http://stackoverflow.com/a/7930575
- * 2022-11-30
- * «Deprecated Functionality: Collator::__construct():
- * Passing null to parameter #1 ($locale) of type string is deprecated
- * in vendor/justuno.com/core/lib/Core/array/sort.php on line 102»:
- * https://github.com/justuno-com/core/issues/379
- * @used-by df_countries_options()
- * @used-by df_modules_p()
- * @used-by df_oqi_leafs()
- * @used-by df_zf_http_last_req()
- * @used-by dfe_portal_stripe_customers()
- * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
- * @used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
- * @used-by \Dfe\YandexKassa\Source\Option::map()
- */
-function df_sort_l(array $a, string $l = '', callable $get = null):array {
-	$c = new Collator($l); /** @var Collator $c */
-	return df_sort($a, function($a, $b) use($c, $get) {return $c->compare(!$get ? $a : $get($a), !$get ? $b : $get($b));});
-}
