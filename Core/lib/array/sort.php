@@ -90,11 +90,12 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * https://github.com/justuno-com/core/issues/379
  * 2024-04-08
  * 1) From now on, it is locale-aware (previously, I had a separate locale-aware df_sort_l() / df_sort_names() function).
- * 2) $isGet = true in:
+ * 2) https://3v4l.org/iV0BT
+ * 3) $isGet = true in:
  * 		@used-by df_oqi_leafs()
  * 		@used-by dfe_portal_stripe_customers()
  * 		@used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
- * 3) $l is used in:
+ * 4) $l is used in:
  * 		@used-by df_oqi_leafs()
  * 		@used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @see df_ksort()
