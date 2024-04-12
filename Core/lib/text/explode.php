@@ -10,7 +10,7 @@
 function df_explode_multiple(array $delimiters, string $s):array {
 	$main = array_shift($delimiters); /** @var string $main */
 	# 2016-03-25
-	# «If search is an array and replace is a string, then this replacement string is used for every value of search.»
+	# «If `search` is an array and `replace` is a string, then this replacement string is used for every value of `search`.»
 	# https://php.net/manual/function.str-replace.php
 	return explode($main, str_replace($delimiters, $main, $s));
 }
