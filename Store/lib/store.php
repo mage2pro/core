@@ -14,32 +14,24 @@ use Magento\Store\Model\StoreResolver;
  * 2015-02-04
  * Обратите внимание, что вряд ли мы вправе кэшировать результат при парметре $store = null,
  * ведь текущий магазин может меняться.
- *
- * 2015-11-04
- * By analogy with @see \Magento\Store\Model\StoreResolver::getCurrentStoreId()
- * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/StoreResolver.php#L82
- *
  * 2015-08-10
  * Доработал алгоритм.
  * Сначала мы смотрим, не находимся ли мы в административной части,
  * и нельзя ли при этом узнать текущий магазин из веб-адреса.
  * By analogy with @see Mage_Adminhtml_Block_Catalog_Product_Grid::_getStore()
- *
  * 2015-11-04
- * При нахождении в административном интерфейсе
- * и при отсутствии в веб-адресе идентификатора магазина
+ * 1) By analogy with @see \Magento\Store\Model\StoreResolver::getCurrentStoreId()
+ * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/StoreResolver.php#L82
+ * 2.1) При нахождении в административном интерфейсе и при отсутствии в веб-адресе идентификатора магазина
  * этот метод вернёт витрину по-умолчанию, а не витрину «admin».
- *
- * Не знаю, правильно ли это, то так делает этот метод в Российской сборке для Magento 1.x,
+ * Не знаю, правильно ли это, но так делает этот метод в Российской сборке для Magento 1.x,
  * поэтому решил пока не менять поведение.
- *
- * В Magento 2 же стандартный метод \Magento\Store\Model\StoreManager::getStore()
+ * 2.2) В Magento 2 стандартный метод \Magento\Store\Model\StoreManager::getStore()
  * при вызове без параметров возвращает именно витрину по умолчанию, а не витрину «admin»:
  * https://github.com/magento/magento2/issues/2254
  * «The call for \Magento\Store\Model\StoreManager::getStore() without parameters
  * inside the backend returns the default frontend store, not the «admin» store,
  * which is inconsistent with Magento 1.x behavior and I think it will lead to developer mistakes.»
- *
  * @used-by df_address_store()
  * @used-by df_currencies_codes_allowed()
  * @used-by df_currencies_ctn()
