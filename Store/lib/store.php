@@ -53,7 +53,7 @@ use Magento\Store\Model\StoreResolver;
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param int|string|null|bool|IStore|O $v [optional]
  * @return IStore|Store
- * @throws NSE|\Exception
+ * @throws NSE|Exception
  * https://github.com/magento/magento2/issues/2222
  */
 function df_store($v = null) {/** @var string|null $c */return
