@@ -155,19 +155,29 @@ function df_tag(string $tag, $attrs = [], $content = '', $multiline = null):stri
 function df_tag_ab(string $s, string $u):string {return df_tag('a', ['href' => $u, 'target' => '_blank'], $s);}
 
 /**
- * 2016-10-24          
+ * 2016-10-24
+ * @used-by df_tag_if_ne()
  * @used-by \Df\Payment\Comment\Description::a()
  * @used-by \Df\Payment\Method::tidFormat()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Sso\Button::_toHtml()
  * @used-by \Df\Sso\Button::loggedOut()
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/133)
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
  * @param bool|string $multiline [optional]
  */
 function df_tag_if(string $content, bool $condition, string $tag, $attrs = [], $multiline = null):string {return
 	!$condition ? $content : df_tag($tag, $attrs, $content, $multiline)
 ;}
+
+/**
+ * 2024-04-14
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/133)
+ * @param string|array(string => string|string[]|int|null) $attrs [optional]
+ * @param bool|string $multiline [optional]
+ */
+function df_tag_if_ne(string $content, string $tag, $attrs = [], $multiline = null):string {return df_tag_if(
+	$content, !df_es(df_trim($content)), $tag, $attrs, $multiline
+);}
 
 /**
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
