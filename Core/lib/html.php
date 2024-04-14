@@ -163,21 +163,15 @@ function df_tag_ab(string $s, string $u):string {return df_tag('a', ['href' => $
  * @used-by \Df\Sso\Button::_toHtml()
  * @used-by \Df\Sso\Button::loggedOut()
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
- * @param bool|string $multiline [optional]
  */
-function df_tag_if(string $content, bool $condition, string $tag, $attrs = [], $multiline = null):string {return
-	!$condition ? $content : df_tag($tag, $attrs, $content, $multiline)
-;}
+function df_tag_if(string $s, bool $cond, string $tag, $attrs = []):string {return !$cond ? $s : df_tag($tag, $attrs, $s);}
 
 /**
  * 2024-04-14
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/133)
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
- * @param bool|string $multiline [optional]
  */
-function df_tag_if_ne(string $content, string $tag, $attrs = [], $multiline = null):string {return df_tag_if(
-	$content, !df_est($content), $tag, $attrs, $multiline
-);}
+function df_tag_if_ne(string $s, string $tag, $attrs = []):string {return df_tag_if($s, !df_est($s), $tag, $attrs);}
 
 /**
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
