@@ -176,7 +176,7 @@ function df_tag_if(string $content, bool $condition, string $tag, $attrs = [], $
  * @param bool|string $multiline [optional]
  */
 function df_tag_if_ne(string $content, string $tag, $attrs = [], $multiline = null):string {return df_tag_if(
-	$content, !df_es(df_trim($content)), $tag, $attrs, $multiline
+	$content, !df_est($content), $tag, $attrs, $multiline
 );}
 
 /**

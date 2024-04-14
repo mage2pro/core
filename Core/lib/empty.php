@@ -10,7 +10,6 @@
  * @used-by df_path_is_internal()
  * @used-by df_report()
  * @used-by df_result_sne()
- * @used-by df_tag_if_ne()
  * @used-by sift_prefix()
  * @used-by \Df\Config\Backend\Checkbox::dfSaveBefore()
  * @used-by \Df\Framework\Form\Element\Fieldset::color()
@@ -23,6 +22,13 @@
  * @param mixed $v
  */
 function df_es($v):bool {return '' === $v;}
+
+/**
+ * 2024-04-14
+ * @used-by df_tag_if_ne()
+ * @param mixed $v
+ */
+function df_est($v):bool {return df_es(df_trim($v));}
 
 /**
  * 2017-04-26
