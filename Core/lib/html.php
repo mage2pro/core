@@ -162,11 +162,11 @@ function df_tag_ab(string $s, string $u):string {return df_tag('a', ['href' => $
  * @used-by \Df\Sso\Button::_toHtml()
  * @used-by \Df\Sso\Button::loggedOut()
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/133)
- * @param string|array(string => string|string[]|int|null) $attributes [optional]
+ * @param string|array(string => string|string[]|int|null) $attrs [optional]
  * @param bool|string $multiline [optional]
  */
-function df_tag_if(string $content, bool $condition, string $tag, $attributes = [], $multiline = null):string {return
-	!$condition ? $content : df_tag($tag, $attributes, $content, $multiline)
+function df_tag_if(string $content, bool $condition, string $tag, $attrs = [], $multiline = null):string {return
+	!$condition ? $content : df_tag($tag, $attrs, $content, $multiline)
 ;}
 
 /**
