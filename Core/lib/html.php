@@ -161,6 +161,7 @@ function df_tag_ab(string $s, string $u):string {return df_tag('a', ['href' => $
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Sso\Button::_toHtml()
  * @used-by \Df\Sso\Button::loggedOut()
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/133)
  * @param string|array(string => string|string[]|int|null) $attributes [optional]
  * @param bool|string $multiline [optional]
  */
