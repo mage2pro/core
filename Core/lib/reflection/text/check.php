@@ -11,6 +11,7 @@ use ReflectionClass as RC;
  * @used-by df_con_hier_suf()
  * @used-by \Df\Core\R\ConT::generic()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
+ * @used-by \Df\Payment\W\F::c()
  */
 function df_class_exists(string $c):bool {$c = df_ctr($c); return @class_exists($c);}
 
