@@ -9,6 +9,7 @@ use ReflectionClass as RC;
  * Такие сбои могут произойти при синтаксических ошибках в проверяемом классе
  * (похоже, getInstanceType как-то загружает код класса).
  * @used-by df_con_hier_suf()
+ * @used-by \Df\Core\R\ConT::generic()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  */
 function df_class_exists(string $c):bool {$c = df_ctr($c); return @class_exists($c);}
