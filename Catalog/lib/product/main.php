@@ -67,6 +67,7 @@ function df_product_action():Action {return df_o(Action::class);}
  * @throws NotFound|\Exception
  */
 function df_product_current($onError = null) {return df_try(function() {return
+	# 2019-08-01 `df_catalog_locator()` is available only in the backend.
 	df_is_backend() ? df_catalog_locator()->getProduct() : (df_registry('current_product') ?: df_error())
 ;}, $onError);}
 

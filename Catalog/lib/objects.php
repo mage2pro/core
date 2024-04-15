@@ -16,7 +16,7 @@ function df_catalog_h():H {return df_o(H::class);}
  * @throws DFE
  */
 function df_catalog_locator() {
-	df_assert(df_is_backend()); # 2019-08-01 Locator is available only in backend.
+	df_assert(df_is_backend()); # 2019-08-01 Locator is available only in the backend.
 	return df_o(ILocator::class);
 }
 
