@@ -16,7 +16,9 @@ function df_catalog_h():H {return df_o(H::class);}
  * @throws DFE
  */
 function df_catalog_locator() {
-	df_assert(df_is_backend()); # 2019-08-01 Locator is available only in the backend.
+	# 2019-08-01 `Magento\Catalog\Model\Locator\LocatorInterface` is available only in the backend.
+	# 2024-04-15 https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/Catalog/etc/adminhtml/di.xml#L10
+	df_assert(df_is_backend());
 	return df_o(ILocator::class);
 }
 
