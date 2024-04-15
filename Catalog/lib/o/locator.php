@@ -21,5 +21,6 @@ function df_catalog_locator() {
 
 /**
  * 2024-04-15
+ * @used-by df_product_current()
  */
 function df_catalog_locator_exists():bool {return df_class_exists(ILocator::class);}
