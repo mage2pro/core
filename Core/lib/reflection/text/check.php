@@ -8,7 +8,7 @@ use ReflectionClass as RC;
  * Намеренно не объединяем строки в единное выражение, чтобы собака @ не подавляла сбои первой строки.
  * Такие сбои могут произойти при синтаксических ошибках в проверяемом классе
  * (похоже, getInstanceType как-то загружает код класса).
- * @used-by dfpm_c()
+ * @used-by df_con_hier_suf()
  * @used-by \Df\Payment\Block\Info::checkoutSuccess()
  */
 function df_class_exists(string $c):bool {$c = df_ctr($c); return @class_exists($c);}
