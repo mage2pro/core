@@ -18,3 +18,8 @@ function df_catalog_locator() {
 	df_assert(df_is_backend());
 	return df_o(ILocator::class);
 }
+
+/**
+ * 2024-04-15
+ */
+function df_catalog_locator_exists():bool {return df_class_exists(ILocator::class);}
