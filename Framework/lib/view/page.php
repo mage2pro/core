@@ -16,6 +16,7 @@ function df_metadata(string $k, string $v):void {
  * 2015-10-05
  * @used-by df_metadata()
  * @used-by df_page_title()
+ * @used-by \CabinetsBay\Core\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/core/issues/5)
  * @used-by \Df\Sso\Button::_prepareLayout()
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
  */
