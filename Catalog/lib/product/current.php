@@ -6,7 +6,7 @@ use Magento\Framework\Exception\NotFoundException as NotFound;
  * @used-by df_product_current_id()
  * @param Closure|bool|mixed $onError
  * @return P|null
- * @throws NotFound|\Exception
+ * @throws NotFound|Exception
  */
 function df_product_current($onError = null) {return df_try(function() {return
 	# 2019-08-01 `df_catalog_locator()` is available only in the backend.
