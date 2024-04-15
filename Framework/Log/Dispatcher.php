@@ -12,6 +12,7 @@ use Magento\Framework\App\Bootstrap as B;
 use Magento\Framework\DataObject as O;
 use Magento\Framework\Logger\Handler\System as _P;
 use Monolog\Logger as L;
+use Psr\Log\LoggerInterface as IL;
 use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2019-10-13
@@ -50,6 +51,7 @@ class Dispatcher extends _P {
 	 */
 	function handle(array $d):bool {/** @var bool $r */
 		$rc = new Record($d); /** @var Record $rc */
+		$willHandledLater = false; /** @var bool $willHandledLater */
 		if (!($r =
 			# 2024-03-04
 			# "`\Df\Framework\Log\Dispatcher::handle()` should not log Cron errors
@@ -73,7 +75,17 @@ class Dispatcher extends _P {
 			df_dispatch('df_can_log', [self::P_MESSAGE => $d, self::P_RESULT => ($o = new O)]); /** @var O $o */
 			if (!($r = !!$o[self::V_SKIP])) {
 				$e = df_caller_entry(0, function(array $e) {return
-					!($c = dfa($e, 'class')) || !is_a($c, L::class, true) && !is_a($c, __CLASS__, true)
+					!($c = dfa($e, 'class'))
+					/**
+					 * 2024-04-15
+					 * 1) Previously, I mistakenly used `\Monolog\Logger::class` instead of `\Psr\Log\LoggerInterface::class`.
+					 * It was wrong because $c is actually @see \Magento\Framework\Logger\LoggerProxy (in Magento 2.4.4)
+					 * and `\Magento\Framework\Logger\LoggerProxy` is not inherited from @see \Monolog\Logger.
+					 * 2) "`Df\Framework\Log\Dispatcher::handle()` mistakenly handles exceptions
+					 * passed from `Magento\Framework\App\Bootstrap::run()` in Magento 2.4.4":
+					 * https://github.com/mage2pro/core/issues/362
+					 */
+					|| !is_a($c, IL::class, true) && !is_a($c, __CLASS__, true)
 				;}); /** @var array(string => int) $e */
 				$c = dfa($e, 'class'); /** @var string|null c */
 				$f = dfa($e, 'function'); /** @var string|null $f */
@@ -86,7 +98,7 @@ class Dispatcher extends _P {
 				 * https://github.com/mage2pro/core/issues/160
 				 */
 				if (
-					(B::class != $c || 'run' !== $f)
+					!($willHandledLater = B::class === $c && 'run' === $f)
 					# 2024-02-11
 					# 1) "The `Monolog\Logger::INFO`-level messages should not be logged as separate files":
 					# https://github.com/mage2pro/core/issues/347
@@ -159,7 +171,9 @@ class Dispatcher extends _P {
 		 * then @see \Df\Framework\Plugin\AppInterface::beforeCatchException() should skip it too:
 		 * https://github.com/mage2pro/core/issues/343
 		 */
-		Latest::register($rc);
+		if (!$willHandledLater) {
+			Latest::register($rc);
+		}
 		return $r;
 	}
 
