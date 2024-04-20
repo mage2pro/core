@@ -10,6 +10,7 @@ use Magento\Catalog\Model\Locator\RegistryLocator;
  * 1) https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/Catalog/etc/adminhtml/di.xml#L10
  * 2) `Magento\Catalog\Model\Locator\LocatorInterface` is absent in Magento < 2.1:
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Catalog/Model/Locator/LocatorInterface.php
+ * 2024-04-20 @see df_catalog_layer()
  * @used-by df_product_current()
  * @return ILocator|RegistryLocator
  * @throws DFE
