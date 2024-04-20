@@ -27,6 +27,7 @@ function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_cart()
  * @used-by df_cart_h()
  * @used-by df_catalog_h()
+ * @used-by df_catalog_layer()
  * @used-by df_catalog_locator()
  * @used-by df_catalog_output()
  * @used-by df_category_h()
