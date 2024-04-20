@@ -5,7 +5,6 @@ use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": 
  * 2017-04-15
  * @used-by df_area_code()
  * @used-by df_asset_url()
- * @used-by df_category_current()
  * @used-by df_cms_block_content()
  * @used-by df_contents()
  * @used-by df_currency_convert_safe()
