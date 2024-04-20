@@ -8,4 +8,6 @@ use Magento\Framework\Exception\NotFoundException as NotFound;
  * @return C|null
  * @throws NotFound|Exception
  */
-function df_category_current($onError = null) {return df_try(function() {return null;}, $onError);}
+function df_category_current($onError = null) {return df_try(function() {return
+	df_catalog_layer()->getCurrentCategory()
+;}, $onError);}
