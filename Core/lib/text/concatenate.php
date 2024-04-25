@@ -130,6 +130,7 @@ function df_cc_path_t(...$a):string {return df_append(df_cc_path(dfa_flatten($a)
  * @used-by \KingPalm\B2B\Block\Registration::region()
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @used-by \TFC\GoogleShopping\Att\Price::format() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/6)
+ * @used-by app/code/WeltPixel/QuickCart/view/frontend/templates/checkout/cart/item/price/sidebar.phtml (https://github.com/cabinetsbay/site/issues/145)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param string|string[] $a
  */
