@@ -81,6 +81,7 @@ function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L20
+ * @used-by app/code/WeltPixel/QuickCart/view/frontend/templates/checkout/cart/item/price/sidebar.phtml (https://github.com/cabinetsbay/site/issues/145)
  * @return mixed
  */
 function df_o(string $t) {return dfcf(function(string $t) {return df_om()->get($t);}, [$t]);}
