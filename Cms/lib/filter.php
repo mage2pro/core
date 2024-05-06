@@ -1,6 +1,5 @@
 <?php
 use Magento\Cms\Model\Template\FilterProvider as FP;
-use Magento\Framework\Filter\Template as F;
 /**
  * 2024-03-25
  * @used-by df_cms_filter_page()
