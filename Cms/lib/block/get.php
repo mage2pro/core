@@ -18,6 +18,10 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
  * 2) @see \Magento\Cms\Model\GetBlockByIdentifier is available in Magento ≥ 2.3.
  * @used-by df_cms_block_content()
  * @param B|int|string $b
+ * @param Closure|bool|string $onE [optional]
+ * @return B|null
  * @throws NSE
  */
-function df_cms_block($b):B {return $b instanceof B ? $b : df_cms_block_r()->getById($b);}
+function df_cms_block($b, $onE = null) {return $b instanceof B ? $b : df_try(function() use($b):B {return
+	df_cms_block_r()->getById($b)
+;}, $onE);}
