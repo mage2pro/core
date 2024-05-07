@@ -1,7 +1,7 @@
 <?php
 /**
  * 2019-03-27
- * @used-by \CabinetsBay\Core\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/core/issues/5)
+ * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/core/issues/5)
  * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
  */
 function df_is_catalog_product_list():bool {return df_handle('catalog_category_view');}
