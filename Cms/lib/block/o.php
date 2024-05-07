@@ -4,7 +4,7 @@ use Magento\Cms\Model\ResourceModel\Block\Collection as C;
 
 /**
  * 2018-05-21
- * @used-by df_cms_block()
+ * @used-by df_cms_block_get()
  */
 function df_cms_block_r():BR {return df_o(BR::class);}
 

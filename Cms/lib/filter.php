@@ -11,7 +11,7 @@ function df_cms_filter_provider():FP {return df_o(FP::class);}
 /**
  * 2024-05-06
  * @see df_cms_filter_page()
- * @used-by df_cms_block_output()
+ * @used-by df_cms_block()
  */
 function df_cms_filter_block(string $s):string {return df_cms_filter_provider()->getBlockFilter()->filter($s);}
 

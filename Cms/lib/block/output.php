@@ -17,6 +17,6 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
  * @param int|string $id
  * @throws NSE
  */
-function df_cms_block_output($id):string {return
-	($b = df_cms_block($id)) && $b->isActive() ? df_cms_filter_block($b->getContent()) : '';
+function df_cms_block($id):string {return
+	($b = df_cms_block_get($id)) && $b->isActive() ? df_cms_filter_block($b->getContent()) : '';
 }
