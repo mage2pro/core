@@ -7,8 +7,18 @@ use Magento\Catalog\Model\ResourceModel\Category\Collection as CC;
  * @see df_pc()
  * @see df_product_c()
  * @used-by df_category_children()
+ * @param int[]|int|string|null $ids [optional]
  */
-function df_category_c():CC {return df_new_om(CC::class);}
+function df_category_c($ids = null, bool $activeOnly = true):CC {
+	$r = df_new_om(CC::class); /** @var CC $r */
+	if (null !== $ids) {
+		$r->addIdFilter($ids);
+	}
+	if ($activeOnly) {
+		$r->addIsActiveFilter();
+	}
+	return $r;
+}
 
 /**
  * 2021-11-30
