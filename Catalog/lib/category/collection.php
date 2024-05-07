@@ -23,14 +23,13 @@ function df_category_c($ids = null, bool $activeOnly = true):CC {
 /**
  * 2021-11-30
  * https://github.com/JustunoCom/m2/blob/1.7.3/Controller/Response/Catalog.php#L97
- * @noinspection PhpParamsInspection
  * @used-by df_category_children_map()
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/l3.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @param C|int $c
  * @param string|string[] $a [optional]
  */
 function df_category_children($c, $a = '*'):CC {return
-	df_category_c()->addIsActiveFilter()->addIdFilter(df_category($c)->getChildren())->addAttributeToSelect($a)
+	df_category_c(df_category($c)->getChildren())->addAttributeToSelect($a)
 ;}
 
 /**
