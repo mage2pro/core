@@ -3,6 +3,7 @@ use Magento\Catalog\Model\Category as C;
 use Magento\Catalog\Model\ResourceModel\Category\Collection as CC;
 /**
  * 2021-11-30
+ * 2024-05-07 "Improve `df_category_c()`": https://github.com/mage2pro/core/issues/366
  * @see df_pc()
  * @see df_product_c()
  * @used-by df_category_children()
