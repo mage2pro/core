@@ -44,6 +44,7 @@ function df_csv_parse($s, string $d = ','):array {return !$s ? [] : df_trim(expl
 /**
  * @used-by df_days_off()
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/home.phtml (https://github.com/cabinetsbay/site/issues/146)
  * @param string|null $s
  * @return int[]
  */

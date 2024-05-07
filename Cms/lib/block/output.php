@@ -11,9 +11,9 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
  * @see \Magento\Cms\Model\ResourceModel\Block::getBlockId()
  * 2024-05-06 "Improve `df_cms_block*` functions": https://github.com/mage2pro/core/issues/365
  * @used-by \AlbumEnvy\Popup\Settings::content()
- * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Theme/templates/homepage.phtml (https://github.com/cabinetsbay/site/issues/146)
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/bottom.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/top.phtml (https://github.com/cabinetsbay/site/issues/112)
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/home.phtml (https://github.com/cabinetsbay/site/issues/146)
  * @param int|string $id
  * @throws NSE
  */
