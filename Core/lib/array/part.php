@@ -30,6 +30,6 @@ function df_slice(array $a, int $offset, int $length = 0):array {return array_sl
  * @used-by df_zf_http_last_req()
  * @used-by \Df\Core\Text\Regex::match()
  * @used-by \Doormall\Shipping\Partner\Entity::locations()
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/132)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/132)
  */
 function df_tail(array $a):array {return array_slice($a, 1);}

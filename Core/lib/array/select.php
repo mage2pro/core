@@ -103,7 +103,7 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @used-by \TFC\Core\Observer\CanLog::execute()
  * @used-by \TFC\GoogleShopping\Att\Brand::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/8)
  * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/133)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/133)
  * @param array(int|string => mixed) $a
  * @param string|string[]|int|null $k
  * @param mixed|callable $d

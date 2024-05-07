@@ -78,7 +78,7 @@ function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {r
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/view.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/site/issues/112)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/site/issues/112)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param array|callable|Traversable $a1
  * @param array|callable|Traversable $a2
@@ -140,7 +140,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, b
  * @used-by \Df\Sentry\Client::send()
  * @used-by \Dfe\PostFinance\Signer::sign()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/catalog/category/tabs/overview.phtml (https://github.com/cabinetsbay/site/issues/105)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs/overview.phtml (https://github.com/cabinetsbay/site/issues/105)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param array|callable|Traversable $a1
  * @param array|callable|Traversable $a2
