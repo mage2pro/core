@@ -53,7 +53,9 @@ function df_each($c, $f, ...$p):array {return df_map(function($v) use($f, $p) {r
  *		df_map('Df_Cms_Model_ContentsMenu_Applicator::i', $this->getCmsRootNodes())
  * эквивалентно
  *		$this->getCmsRootNodes()->walk('Df_Cms_Model_ContentsMenu_Applicator::i')
- * 2024-05-08 `array_map([__CLASS__, 'f'], [1, 2, 3])` for a private `f` is allowed: https://3v4l.org/29Zim
+ * 2024-05-08
+ * 1) `array_map([__CLASS__, 'f'], [1, 2, 3])` for a private `f` is allowed: https://3v4l.org/29Zim
+ * 2) `is_callable([__CLASS__, 'f'])` for a private `f` is allowed too: https://3v4l.org/ctZJG
  * @used-by df_clean_r()
  * @used-by df_db_credentials()
  * @used-by df_mail()

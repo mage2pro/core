@@ -79,7 +79,8 @@ function dfaf($a, $b):array {
 	# https://github.com/tradefurniturecompany/site/issues/36
 	# 2024-05-08
 	# 1) https://php.watch/versions/8.2/partially-supported-callable-deprecation
-	# 2) `is_callable([__CLASS__, 'f'])` is OK: https://3v4l.org/ctZJG
+	# 2.1) `is_callable([__CLASS__, 'f'])` for a private `f` is allowed: https://3v4l.org/ctZJG
+	# 2.2) `array_map([__CLASS__, 'f'], [1, 2, 3])` for a private `f` is allowed too: https://3v4l.org/29Zim
 	$ca = is_callable($a); /** @var bool $ca */
 	$cb = is_callable($b); /** @var bool $ca */
 	if (!$ca || !$cb) {
