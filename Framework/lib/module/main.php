@@ -9,6 +9,7 @@ use Magento\Framework\Module\ModuleListInterface as IML;
  * @used-by df_log_l()
  * @used-by df_module_name_by_path()
  * @used-by df_msi()
+ * @used-by \Sharapov\Cabinetsbay\Setup\InstallData::install() (https://github.com/cabinetsbay/site/issues/98)
  */
 function df_module_enabled(string $m):bool {return df_module_m()->isEnabled(df_module_name($m));}
 
