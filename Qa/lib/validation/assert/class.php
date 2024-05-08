@@ -36,3 +36,15 @@ function df_ar($v, $c = null, $m = null) {return dfcf(function($v, $c = null, $m
 	}
 	return $v;
 }, func_get_args());}
+
+/**
+ * 2016-08-03
+ * @used-by df_ar()
+ * @used-by \Df\Config\Backend\Serialized::entityC()
+ * @param string|Th $m [optional]
+ * @throws DFE
+ */
+function df_assert_class_exists(string $c, $m = null):string {
+	df_param_sne($c, 0);
+	return df_class_exists($c) ? $c : df_error($m ?: "The required class «{$c}» does not exist.");
+}
