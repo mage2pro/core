@@ -5,6 +5,7 @@ use Magento\Framework\Module\ModuleListInterface as IML;
 
 /**
  * 2024-05-08 "Implement `df_assert_module_enabled()`": https://github.com/mage2pro/core/issues/367
+ * @used-by df_module_name_by_path()
  */
 function df_assert_module_enabled(string $m):string {return df_assert(df_module_enabled($m), "The `{$m}` module must be enabled.");}
 
@@ -12,7 +13,6 @@ function df_assert_module_enabled(string $m):string {return df_assert(df_module_
  * 2019-11-21
  * @used-by df_caller_entry_m()
  * @used-by df_log_l()
- * @used-by df_module_name_by_path()
  * @used-by df_msi()
  * @used-by \Sharapov\Cabinetsbay\Setup\InstallData::install() (https://github.com/cabinetsbay/site/issues/98)
  */

@@ -100,8 +100,7 @@ function df_module_name_by_path(string $f):string {/** @var string $r */
 	# `app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/category/header.phtml`»:
 	# https://github.com/mage2pro/core/issues/358
 	if (df_starts_with($f, 'app/design')) {
-		$r = dfa(df_explode_xpath($f), 5);
-		df_assert_module_enabled($r);
+		df_assert_module_enabled($r = dfa(df_explode_xpath($f), 5));
 	}
 	else {
 		$f2 = df_trim_text_left($f, ['app/code/', 'vendor/']); /** @var string $f2 */
