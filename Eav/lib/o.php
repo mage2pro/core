@@ -16,6 +16,7 @@ function df_eav_config():Config {return df_o(Config::class);}
  * 2015-10-06
  * @used-by \Df\Customer\AddAttribute\Address::p()
  * @used-by \Df\Customer\AddAttribute\Customer::p()
+ * @used-by \Sharapov\Cabinetsbay\Setup\InstallData::a() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
  */
 function df_eav_setup():EavSetup {return df_o(EavSetup::class);}
