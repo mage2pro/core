@@ -15,6 +15,7 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  *			}
  *		}
  * https://github.com/mage2pro/core/blob/5.5.7/Core/Exception.php#L61-L67
+ * @used-by df_assert_module_enabled()
  * @used-by df_assert_qty_supported()
  * @used-by df_call_parent()
  * @used-by df_caller_m()
