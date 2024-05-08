@@ -4,6 +4,11 @@ use Magento\Framework\Module\ModuleList as ML;
 use Magento\Framework\Module\ModuleListInterface as IML;
 
 /**
+ * 2024-05-08 "Implement `df_assert_module_enabled()`": https://github.com/mage2pro/core/issues/367
+ */
+function df_assert_module_enabled(string $m) {df_assert(df_module_enabled($m), "The `{$m}` module must be enabled.");}
+
+/**
  * 2019-11-21
  * @used-by df_caller_entry_m()
  * @used-by df_log_l()
