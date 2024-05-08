@@ -77,7 +77,9 @@ function dfaf($a, $b):array {
 	# 2020-02-15
 	# "A variable is expected to be a traversable or an array, but actually it is a «object»":
 	# https://github.com/tradefurniturecompany/site/issues/36
-	# 2024-05-08 https://php.watch/versions/8.2/partially-supported-callable-deprecation
+	# 2024-05-08
+	# 1) https://php.watch/versions/8.2/partially-supported-callable-deprecation
+	# 2) `is_callable([__CLASS__, 'f'])` is OK: https://3v4l.org/ctZJG
 	$ca = is_callable($a); /** @var bool $ca */
 	$cb = is_callable($b); /** @var bool $ca */
 	if (!$ca || !$cb) {
