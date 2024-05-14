@@ -125,7 +125,7 @@ function df_string($v):string {
 }
 
 /**
- * @used-by \Df\Zf\Validate\Type::_message()
+ * @used-by \Df\Zf\Validate::message()
  * @param mixed $v
  */
 function df_string_debug($v):string {
