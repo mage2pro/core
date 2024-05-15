@@ -64,6 +64,7 @@ function df_csv_parse_int($s):array {return df_int(df_csv_parse($s));}
  * @used-by \Df\Config\Backend\ArrayT::processI()
  * @used-by \Df\Framework\Validator\Currency::message()
  * @used-by \Df\Sentry\Client::send()
+ * @used-by \Dfe\Geo\Client::all()
  * @used-by \Dfe\Moip\P\Reg::ga()
  * @used-by \Dfe\Sift\Payload\OQI::p()
  * @param string|string[] $a
