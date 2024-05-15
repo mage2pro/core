@@ -1,11 +1,7 @@
 <?php
-use Magento\Customer\Api\AddressRepositoryInterface as IAddressRep;
-use Magento\Customer\Helper\Address as AddressH;
 use Magento\Customer\Model\Address as CA;
-use Magento\Customer\Model\AddressRegistry;
 use Magento\Customer\Model\Address\AbstractAddress as AA;
 use Magento\Customer\Model\Customer;
-use Magento\Customer\Model\ResourceModel\AddressRepository as AddressRep;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address as QA;
 use Magento\Sales\Model\Order;
