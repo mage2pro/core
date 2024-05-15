@@ -21,11 +21,7 @@ use Magento\Store\Model\Store;
  * @see \Magento\Sales\Model\Order\Address
  */
 
-/**
- * 2019-06-01
- * @used-by \KingPalm\B2B\Block\Registration::region()
- */
-function df_address_h():AddressH {return df_o(AddressH::class);}
+
 
 /**
  * 2016-04-04
@@ -37,12 +33,7 @@ function df_address_owner($a) {return df_is_ca($a) ? $a->getCustomer() : (
 	df_is_qa($a) ? $a->getQuote() : (df_is_oa($a) ? $a->getOrder() : null)
 );}
 
-/**
- * 2016-04-05
- * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
- * @used-by \Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
- */
-function df_address_registry():AddressRegistry {return df_o(AddressRegistry::class);}
+
 
 /**
  * 2016-04-04  
@@ -54,9 +45,3 @@ function df_address_store($a) {/** @var Customer|Quote|null $owner */return
 	($owner = df_address_owner($a)) ? df_store($owner->getStore()) : null
 ;}
 
-/**
- * 2021-05-07
- * @used-by \Df\Quote\Plugin\Model\QuoteAddressValidator::doValidate()
- * @return IAddressRep|AddressRep
- */
-function df_customer_address_rep() {return df_o(IAddressRep::class);}
