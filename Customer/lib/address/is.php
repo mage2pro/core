@@ -11,8 +11,7 @@ use Magento\Sales\Model\Order\Address as OA;
  * @see \Magento\Customer\Model\Data\Address
  * @see \Magento\Customer\Api\Data\AddressInterface
  * а не используется в контексте оформления заказа, то такой адрес ещё типа не имеет,
- * и в будущем, в зависимости от контекста,
- * может использоваться и как адрес доставки, и как платёжный адрес.
+ * и в будущем, в зависимости от контекста, может использоваться и как адрес доставки, и как платёжный адрес.
  * @used-by \Df\Customer\Plugin\Model\Address\AbstractAddress::aroundValidate()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
  * @used-by \Df\Sales\Plugin\Model\Order\Address\Validator::aroundValidate()
