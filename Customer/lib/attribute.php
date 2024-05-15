@@ -1,10 +1,13 @@
 <?php
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute as A;
+use Magento\Eav\Model\Entity\Attribute\AttributeInterface as IA;
 /**       
  * 2016-06-04
+ * 2024-05-15 "Improve `df_customer_att()`": https://github.com/mage2pro/core/issues/371
  * @used-by df_customer_att_is_required()
+ * @param string|int|IA $a
  */
-function df_customer_att(string $c):A {return df_eav_config()->getAttribute(df_eav_customer(), $c);}
+function df_customer_att($a):A {return df_eav_config()->getAttribute(df_eav_customer(), $a);}
 
 /**      
  * 2016-06-04
