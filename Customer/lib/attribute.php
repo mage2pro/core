@@ -8,8 +8,9 @@ use Magento\Eav\Model\Entity\Attribute\AttributeInterface as IA;
  * 2) `print_r([2 => 'numeric', '2' => 'literal']);` => «Array ([2] => literal)»: https://3v4l.org/jatMt
  * @used-by df_customer_att_is_required()
  * @param string|int|IA $a
+ * @return IA|A
  */
-function df_customer_att($a):A {return df_eav_config()->getAttribute(df_eav_customer(), $a);}
+function df_customer_att($a):IA {return df_eav_config()->getAttribute(df_eav_customer(), $a);}
 
 /**      
  * 2016-06-04
