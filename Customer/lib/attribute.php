@@ -5,8 +5,7 @@ use Magento\Eav\Model\Entity\Attribute\AttributeInterface as IA;
  * 2016-06-04
  * 2024-05-15
  * 1) "Improve `df_customer_att()`": https://github.com/mage2pro/core/issues/371
- * 2) `print_r([2 => 'numeric', '2' => 'literal']);` => «Array ([2] => literal)»
- * https://3v4l.org/jatMt
+ * 2) `print_r([2 => 'numeric', '2' => 'literal']);` => «Array ([2] => literal)»: https://3v4l.org/jatMt
  * @used-by df_customer_att_is_required()
  * @param string|int|IA $a
  */
