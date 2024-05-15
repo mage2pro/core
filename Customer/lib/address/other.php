@@ -15,11 +15,10 @@ use Magento\Store\Model\Store;
 
 /**
  * 2017-04-22
- * An UML relationship between the address classes:
+ * Relationshis between address classes: https://mage2.pro/t/3634
  * @see \Magento\Customer\Model\Address
  * @see \Magento\Quote\Model\Quote\Address
  * @see \Magento\Sales\Model\Order\Address
- * https://mage2.pro/t/3634
  */
 
 /**
