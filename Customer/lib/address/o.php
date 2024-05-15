@@ -22,4 +22,4 @@ function df_address_registry():Reg {return df_o(Reg::class);}
  * @used-by \Df\Quote\Plugin\Model\QuoteAddressValidator::doValidate()
  * @return IRep|Rep
  */
-function df_customer_address_rep() {return df_o(IRep::class);}
+function df_address_rep() {return df_o(IRep::class);}

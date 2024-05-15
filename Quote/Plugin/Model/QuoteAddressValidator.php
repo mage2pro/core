@@ -46,7 +46,7 @@ final class QuoteAddressValidator {
 			}
 			//Validating address ID
 			try {
-				df_customer_address_rep()->getById($a->getCustomerAddressId());
+				df_address_rep()->getById($a->getCustomerAddressId());
 			}
 			catch (NSE $e) {
 				throw new NSE(__('Invalid address id %1', $a->getId()));
