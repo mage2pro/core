@@ -96,6 +96,12 @@ function df_etn($v) {return $v ?: null;}
 function df_ets($v) {return $v ?: '';}
 
 /**
+ * 2024-05-16 "Implement `df_fnes()`": https://github.com/mage2pro/core/issues/374
+ * @used-by df_att_val()
+ */
+function df_fnes($v):bool {return is_null($v) || '' === $v || false === $v;}
+
+/**
  * @used-by df_fetch_one()
  * @used-by df_parent_name()
  * @used-by \Df\Xml\X::descend()
