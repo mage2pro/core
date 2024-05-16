@@ -15,23 +15,15 @@ function df_att_code2id(string $c):int {return df_first(df_fetch_col_int(
  * 2024-05-16 "Implement `df_att_val_s()`": https://github.com/mage2pro/core/issues/373
  * @uses \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource::getOptionText()
  */
-function df_att_val(M $m, A $a, string $k, string $d = ''):string {
-	if (df_nes($r = $m[$a->getAttributeCode()])) {
-		$r = $d;
-	}
-	elseif ($a->usesSource()) {
-		$r = $a->getSource()->getOptionText($prev = $r); /** @var string $prev */
+function df_att_val(M $m, A $a, string $k, string $d = ''):string {return df_nes($r = $m[$a->getAttributeCode()]) ? $d : (
+	!$a->usesSource() ? $r : (
 		/**
 		 * 2020-01-31
 		 * @see \Magento\Eav\Model\Entity\Attribute\Source\Table::getOptionText() can return an empty array
 		 * for an attribute's value (e.g., for the `description` attribute), if the value contains a comma.
 		 */
-		if (is_array($r)) {
-			$r = $prev;
-		}
-		else {
-			$r = df_nes(df_ftn($r)) ? $d : $r;
-		}
-	}
-	return $r;
-}
+		is_array($r = $a->getSource()->getOptionText($prev = $r)) ? $prev : (
+			df_nes(df_ftn($r)) ? $d : $r
+		)
+	)
+);}
