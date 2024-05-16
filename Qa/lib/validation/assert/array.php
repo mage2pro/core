@@ -20,6 +20,7 @@ function df_assert_assoc(array $a):array {return df_is_assoc($a) ? $a : df_error
 
 /**
  * 2017-01-14 Отныне функция возвращает $v: это позволяет нам значительно сократить код вызова функции.
+ * @used-by df_assert_address_type()
  * @used-by df_date_from_timestamp_14()
  * @used-by \Dfe\Zoho\App::title()
  * @used-by \Dfe\Omise\W\Event\Charge\Complete::isPending()
