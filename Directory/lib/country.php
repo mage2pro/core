@@ -1,7 +1,9 @@
 <?php
+use Closure as F;
 use Df\Directory\Model\Country as C;
 use Df\Directory\Model\ResourceModel\Country\Collection as CC;
 use Magento\Store\Api\Data\StoreInterface as IStore;
+use Throwable as Th;
 
 /**
  * 2016-05-20
@@ -96,10 +98,13 @@ function df_country_codes_allowed($s = null):array {return df_csv_parse(df_cfg('
  * @used-by \Dfe\IPay88\Block\Info::prepare()
  * @used-by \Dfe\Klarna\Test\Charge::t01()
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
+ * @param F|bool|mixed $onE [optional]
  */
-function df_country_ctn(string $iso2):string {df_param_iso2($iso2, 0); return
-	dfa(df_countries_ctn(), strtoupper($iso2)) ?: df_error("Unable to find out the name of the country «{$iso2}».")
-;}
+function df_country_ctn(string $iso2, $onE = true):string {df_param_iso2($iso2, 0); return df_try(
+	function() use($iso2):string {return
+		dfa(df_countries_ctn(), strtoupper($iso2)) ?: df_error("Unable to find out the name of the country «{$iso2}».")
+	;}, $onE
+);}
 
 /**
  * 2018-04-13

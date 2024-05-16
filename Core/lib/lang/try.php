@@ -1,12 +1,13 @@
 <?php
 use Closure as F;
-use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2017-04-15
  * @used-by df_area_code()
  * @used-by df_asset_url()
  * @used-by df_cms_block_get()
  * @used-by df_contents()
+ * @used-by df_country_ctn()
  * @used-by df_currency_convert_safe()
  * @used-by df_customer()
  * @used-by df_customer_group_name()
@@ -40,9 +41,9 @@ use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by \TFC\GoogleShopping\Controller\Index\Index::execute() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param F|bool|mixed $onE [optional]
  * @return mixed
- * @throws Th
+ * @throws T
  */
 function df_try(F $try, $onE = null) {
 	try {return $try();}
-	catch(Th $th) {return $onE instanceof F ? $onE($th) : (true === $onE ? df_error($th) : $onE);}
+	catch(T $t) {return $onE instanceof F ? $onE($t) : (true === $onE ? df_error($t) : $onE);}
 }
