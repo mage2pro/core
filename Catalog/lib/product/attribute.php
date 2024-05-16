@@ -67,5 +67,5 @@ function df_product_att_val_s(P $p, string $c, $onE = ''):string {return df_try(
 	 * @see \Magento\Eav\Model\Entity\Attribute\Source\Table::getOptionText() can return an empty array
 	 * for an attribute's value (e.g., for the `description` attribute), if the value contains a comma.
 	 */
-	return false === $r || is_array($r) ? $v : $r;
+	return strval(false === $r || is_array($r) ? $v : $r);
 }, $onE);}
