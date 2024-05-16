@@ -19,7 +19,10 @@ final class Css extends \Df\Core\O {
 	 * @used-by \Dfe\Frontend\Block\ProductView\Css::customCss()
 	 */
 	function rule(string $n, string $v, string $selector = ''):void {
-		if (!df_es(df_fts($v))) {
+		# 2024-05-16
+		# 1) https://3v4l.org/0S7Su
+		# 2) https://3v4l.org/ai3sF
+		if (!df_es($v)) {
 			$this->_blocks[$this[self::$P__PREFIX] . $selector][]= "$n: $v !important;";
 		}
 	}
