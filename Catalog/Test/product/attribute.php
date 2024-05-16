@@ -7,9 +7,9 @@ class attribute extends \Df\Core\TestCase {
 	function t00():void {}
 
 	/** 2020-01-31 @test */
-	function df_product_att_val_s():void {
+	function df_product_att_val():void {
 		$p = df_product(45); /** @var P $p */
-		echo df_product_att_val_s($p, 'description');
-		echo df_product_att_val_s($p, 'color');
+		echo df_product_att_val($p, 'description');
+		echo df_product_att_val($p, 'color');
 	}
 }

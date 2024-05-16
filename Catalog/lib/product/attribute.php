@@ -14,7 +14,7 @@ function df_product_atts_r():R {return df_o(R::class);}
 /**
  * 2019-08-21                   
  * @used-by df_product_att_options()
- * @used-by df_product_att_val_s()
+ * @used-by df_product_att_val()
  * @param F|bool|mixed $onE [optional]
  * @return A|null
  * @throws NSE
@@ -55,17 +55,8 @@ function df_product_sku2id(string $sku):int {return (int)df_product_res()->getId
  * 2020-01-31
  * @see \Magento\Catalog\Model\Product::getAttributeText()
  * @uses \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource::getOptionText()
- * @used-by \Df\Catalog\Test\product\attribute::df_product_att_val_s()
+ * @used-by \Df\Catalog\Test\product\attribute::df_product_att_val()
  * @used-by \Dfe\Sift\Payload\OQI::p()
  * @throws NSE
  */
-function df_product_att_val_s(P $p, string $c, string $d = ''):string {return df_try(function() use($p, $c):string {
-	/** @var string|false|string[] $r */ /** @var string|int $v */
-	$r = df_product_att($c)->getSource()->getOptionText($v = $p[$c]);
-	/**
-	 * 2020-01-31
-	 * @see \Magento\Eav\Model\Entity\Attribute\Source\Table::getOptionText() can return an empty array
-	 * for an attribute's value (e.g., for the `description` attribute), if the value contains a comma.
-	 */
-	return strval(false === $r || is_array($r) ? $v : $r);
-}, $onE);}
+function df_product_att_val(P $p, string $c, string $d = ''):string {return df_att_val($p, df_product_att($c), $d);}
