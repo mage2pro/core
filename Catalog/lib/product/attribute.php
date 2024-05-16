@@ -57,10 +57,9 @@ function df_product_sku2id(string $sku):int {return (int)df_product_res()->getId
  * @uses \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource::getOptionText()
  * @used-by \Df\Catalog\Test\product\attribute::df_product_att_val_s()
  * @used-by \Dfe\Sift\Payload\OQI::p()
- * @param F|bool|mixed $onE [optional]
  * @throws NSE
  */
-function df_product_att_val_s(P $p, string $c, $onE = ''):string {return df_try(function() use($p, $c):string {
+function df_product_att_val_s(P $p, string $c, string $d = ''):string {return df_try(function() use($p, $c):string {
 	/** @var string|false|string[] $r */ /** @var string|int $v */
 	$r = df_product_att($c)->getSource()->getOptionText($v = $p[$c]);
 	/**
