@@ -39,11 +39,11 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/site/issues/136)
  * @used-by \TFC\GoogleShopping\Controller\Index\Index::execute() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
- * @param F|bool|mixed $onE [optional]
+ * @param F|T|bool|mixed $onE [optional]
  * @return mixed
  * @throws T
  */
 function df_try(F $try, $onE = null) {
 	try {return $try();}
-	catch(T $t) {return $onE instanceof F ? $onE($t) : (true === $onE ? df_error($t) : $onE);}
+	catch(T $t) {return $onE instanceof F ? $onE($t) : (df_is_th($onE) || true === $onE ? df_error($t) : $onE);}
 }
