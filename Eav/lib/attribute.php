@@ -8,3 +8,10 @@
 function df_att_code2id(string $c):int {return df_first(df_fetch_col_int(
 	'eav_attribute', 'attribute_id', 'attribute_code', $c
 ));}
+
+/**
+ * 2024-05-16 "Implement `df_att_val_s()`": https://github.com/mage2pro/core/issues/373
+ */
+function df_att_val():string {
+
+}
