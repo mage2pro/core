@@ -53,7 +53,8 @@ function df_product_sku2id(string $sku):int {return (int)df_product_res()->getId
 
 /**
  * 2020-01-31
- * @see \Magento\Catalog\Model\Product::getAttributeText() 
+ * @see \Magento\Catalog\Model\Product::getAttributeText()
+ * @uses \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource::getOptionText()
  * @used-by \Df\Catalog\Test\product\attribute::df_product_att_val_s()
  * @used-by \Dfe\Sift\Payload\OQI::p()
  * @param F|bool|mixed $onE [optional]
