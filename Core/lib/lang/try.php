@@ -18,7 +18,6 @@ use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by df_module_file_name()
  * @used-by df_phone()
  * @used-by df_product_att()
- * @used-by df_product_att_val_s()
  * @used-by df_zuri()
  * @used-by dfp_refund()
  * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
