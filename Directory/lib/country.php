@@ -3,7 +3,6 @@ use Closure as F;
 use Df\Directory\Model\Country as C;
 use Df\Directory\Model\ResourceModel\Country\Collection as CC;
 use Magento\Store\Api\Data\StoreInterface as IStore;
-use Throwable as Th;
 
 /**
  * 2016-05-20
