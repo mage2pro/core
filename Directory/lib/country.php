@@ -97,11 +97,8 @@ function df_country_codes_allowed($s = null):array {return df_csv_parse(df_cfg('
  * @used-by \Dfe\Klarna\Test\Charge::t01()
  * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
  */
-function df_country_ctn(string $iso2, string $locale = ''):string {df_param_iso2($iso2, 0); return
-	dfa(df_countries_ctn($locale), strtoupper($iso2)) ?: df_error(
-		'Unable to find out the name of the country with the ISO code «%1» for the locale «%2».',
-		$iso2 ,df_locale($locale)
-	)
+function df_country_ctn(string $iso2):string {df_param_iso2($iso2, 0); return
+	dfa(df_countries_ctn(), strtoupper($iso2)) ?: df_error("Unable to find out the name of the country «{$iso2}».")
 ;}
 
 /**
