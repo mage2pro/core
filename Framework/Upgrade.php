@@ -45,6 +45,7 @@ abstract class Upgrade {
 	 * @see \Justuno\M2\Setup\UpgradeSchema::_process()
 	 * @see \KingPalm\B2B\Setup\UpgradeData::_process()
 	 * @see \KingPalm\B2B\Setup\UpgradeSchema::_process()
+	 * @see \Sharapov\Cabinetsbay\Setup\UpgradeData::_process() (https://github.com/cabinetsbay/site/issues/98)
 	 * @see \Verdepieno\Core\Setup\UpgradeData::_process()
 	 * @see \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 */
