@@ -170,7 +170,7 @@ function df_tag_if(string $s, bool $cond, string $tag, $attrs = []):string {retu
 
 /**
  * 2024-04-14
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/133)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs.phtml (https://github.com/cabinetsbay/catalog/issues/9)
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
  */
 function df_tag_if_ne(string $s, string $tag, $attrs = []):string {return df_tag_if($s, !df_est($s), $tag, $attrs);}
