@@ -20,7 +20,7 @@ function df_category_ancestor_at_level(C $c, int $l) {return $l > ($l2 = df_cate
  * @used-by cb_category_is_l2() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by cb_category_is_l3() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by df_category_ancestor_at_level()
- * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/core/issues/5)
+ * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/3)
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::level() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Sharapov\Cabinetsbay\Block\Product\ListProduct::level() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by app/design/frontend/Cabinetsbay/cabinetsbay_default/Magento_Catalog/templates/product/list.phtml:45 (https://github.com/cabinetsbay/site/issues/98)
