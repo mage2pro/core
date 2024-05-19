@@ -59,7 +59,7 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::title() (https://github.com/cabinetsbay/site/issues/141)
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::title() (https://github.com/cabinetsbay/catalog/issues/5)
  * @used-by \TFC\Core\B\Home\Slider::i() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()
