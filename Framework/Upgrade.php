@@ -145,6 +145,7 @@ abstract class Upgrade {
 	 * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
 	 * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
 	 * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
+	 * @used-by \Sharapov\Cabinetsbay\Setup\UpgradeData::_process() (https://github.com/cabinetsbay/site/issues/98)
 	 * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
 	 */
 	final protected function v(string $v):bool {return -1 === version_compare($this->_context->getVersion(), $v);}
