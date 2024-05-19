@@ -147,7 +147,7 @@ function df_abstract($caller):void {
  * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/site/issues/136)
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/catalog/issues/6)
  * @param string|string[]|mixed|Th|Phrase|null ...$a
  * @throws DFE
  */

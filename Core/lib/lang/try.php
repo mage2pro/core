@@ -37,7 +37,7 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by \Dfe\Square\Facade\Customer::_get()
  * @used-by \Doormall\Shipping\Partner\Entity::locationM()
  * @used-by \Inkifi\Mediaclip\API\Facade\User::projects()
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/site/issues/136)
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/catalog/issues/6)
  * @used-by \TFC\GoogleShopping\Controller\Index\Index::execute() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param F|T|bool|mixed $onE [optional]
  * @return mixed
