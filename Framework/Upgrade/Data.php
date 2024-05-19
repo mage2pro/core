@@ -9,6 +9,7 @@ use Magento\Framework\Setup\UpgradeDataInterface;
  * @see \Df\Sso\Upgrade\Data
  * @see \Dfe\IPay88\Setup\UpgradeData
  * @see \KingPalm\B2B\Setup\UpgradeData
+ * @see \Sharapov\Cabinetsbay\Setup\UpgradeData (https://github.com/cabinetsbay/site/issues/98)
  * @see \Verdepieno\Core\Setup\UpgradeData
  */
 abstract class Data extends \Df\Framework\Upgrade implements UpgradeDataInterface {
