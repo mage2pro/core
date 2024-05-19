@@ -145,7 +145,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, b
  * @used-by \Dfe\PostFinance\Signer::sign()
  * @used-by \Sharapov\Cabinetsbay\Setup\UpgradeData::p100() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs/overview.phtml (https://github.com/cabinetsbay/site/issues/105)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs/overview.phtml (https://github.com/cabinetsbay/catalog/issues/22)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param array|callable|Traversable $a1
  * @param array|callable|Traversable $a2
