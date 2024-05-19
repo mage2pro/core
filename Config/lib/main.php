@@ -48,7 +48,7 @@ use Magento\Store\Model\Store;
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing/sortbilling.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/shipping/sortshipping.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/home.phtml (https://github.com/cabinetsbay/site/issues/146)
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/home.phtml (https://github.com/cabinetsbay/core/issues/8)
  * @param string|string[] $k
  * @param null|string|int|ScopeA|Store|IConfigData|ConfigData|array(int|string) $scope [optional]
  * @param mixed|callable $d [optional]

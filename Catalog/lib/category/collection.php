@@ -7,7 +7,7 @@ use Magento\Catalog\Model\ResourceModel\Category\Collection as CC;
  * @see df_pc()
  * @see df_product_c()
  * @used-by df_category_children()
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/home.phtml (https://github.com/cabinetsbay/site/issues/146)
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/home.phtml (https://github.com/cabinetsbay/core/issues/8)
  * @param int[]|int|string|null $ids [optional]
  */
 function df_category_c($ids = null, bool $activeOnly = true):CC {

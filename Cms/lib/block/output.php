@@ -13,7 +13,7 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
  * @used-by \AlbumEnvy\Popup\Settings::content()
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/bottom.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/top.phtml (https://github.com/cabinetsbay/catalog/issues/18)
- * @used-by vendor/cabinetsbay/core/view/frontend/templates/home.phtml (https://github.com/cabinetsbay/site/issues/146)
+ * @used-by vendor/cabinetsbay/core/view/frontend/templates/home.phtml (https://github.com/cabinetsbay/core/issues/8)
  * @param int|string $id
  * @throws NSE
  */
