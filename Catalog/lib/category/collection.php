@@ -25,7 +25,7 @@ function df_category_c($ids = null, bool $activeOnly = true):CC {
  * 2021-11-30
  * https://github.com/JustunoCom/m2/blob/1.7.3/Controller/Response/Catalog.php#L97
  * @used-by df_category_children_map()
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3.phtml (https://github.com/cabinetsbay/site/issues/112)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @param C|int $c
  * @param string|string[] $a [optional]
  */

@@ -132,7 +132,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by app/code/WeltPixel/QuickCart/view/frontend/templates/checkout/cart/item/price/sidebar.phtml (https://github.com/cabinetsbay/site/issues/145)
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L31
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/Magento/Tax/item/price/unit.phtml (https://github.com/cabinetsbay/site/issues/143)
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/site/issues/112)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs.phtml (https://github.com/cabinetsbay/site/issues/105)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs/overview.phtml (https://github.com/cabinetsbay/site/issues/105)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml

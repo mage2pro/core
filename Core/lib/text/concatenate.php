@@ -2,7 +2,7 @@
 /**
  * 2016-10-17
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/view.phtml (https://github.com/cabinetsbay/site/issues/112)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/view.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @param string|string[] $a
  */
 function df_c(...$a):string {return implode(dfa_flatten($a));}
@@ -67,7 +67,7 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
  * @used-by app/code/WeltPixel/QuickCart/view/frontend/templates/checkout/cart/item/price/sidebar.phtml (https://github.com/cabinetsbay/site/issues/145)
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/Magento/Tax/item/price/unit.phtml (https://github.com/cabinetsbay/site/issues/143)
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/site/issues/112)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs/overview.phtml (https://github.com/cabinetsbay/site/issues/105)
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml
  * @used-by vendor/mage2pro/portal/view/frontend/templates/root.phtml
