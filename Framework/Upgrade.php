@@ -101,6 +101,7 @@ abstract class Upgrade {
 	 * 2016-08-14
 	 * @used-by \Df\Sales\Setup\Schema::sQuote()
 	 * @used-by \Df\Sales\Setup\Schema::sSales()
+	 * @used-by \Sharapov\Cabinetsbay\Setup\UpgradeData::p101() (https://github.com/cabinetsbay/site/issues/98)
 	 */
 	final protected function sEav(string $c = EavSetup::class):EavSetup {return dfc($this, function($c) {return df_new_om(
 		$c, ['setup' => $this->_setup]
