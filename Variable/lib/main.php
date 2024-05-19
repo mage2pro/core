@@ -12,7 +12,7 @@ function df_mvar(string $c) {return dfa(df_mvars(), $c);}
 /**
  * 2024-01-02
  * @used-by df_mvar_n()
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::images() (https://github.com/cabinetsbay/site/issues/97)
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::images() (https://github.com/cabinetsbay/catalog/issues/2)
  * @param string|string[] $c
  * @return string|string[]
  */

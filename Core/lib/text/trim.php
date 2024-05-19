@@ -157,7 +157,7 @@ function df_trim_text_a(string $s, array $trimA, callable $f):string {
  * @used-by \Dfe\Stripe\Facade\Token::trimmed()
  * @used-by \Dfe\TwitterTimeline\Block::_toHtml()
  * @used-by \Dfe\Zoho\App::title()
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::images() (https://github.com/cabinetsbay/site/issues/97)
+ * @used-by \Sharapov\Cabinetsbay\Block\Category\View::images() (https://github.com/cabinetsbay/catalog/issues/2)
  * @param string|string[] $s
  * @param string|string[] $trim
  * @return string|string[]
