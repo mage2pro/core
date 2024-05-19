@@ -87,7 +87,7 @@ function df_media_reader() {return df_sys_reader(DL::MEDIA);}
  * @used-by \Dfe\GoogleFont\Fonts\Png::url()
  * @used-by \Dfe\Markdown\FormElement::config()
  * @used-by \TemplateMonster\FilmSlider\Block\Widget\FilmSlider::addUrl() (frugue.com)
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/tabs/overview.phtml (https://github.com/cabinetsbay/catalog/issues/22)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l3/tabs/overview.phtml (https://github.com/cabinetsbay/catalog/issues/22)
  * @used-by app/design/frontend/TradeFurnitureCompany/default/Magento_Theme/templates/finance.phtml (tradefurniturecompany.co.uk)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_media_url2path()
