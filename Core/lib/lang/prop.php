@@ -150,69 +150,76 @@ function df_prop_k($o, string $k, $v = DF_N, $d = null) {/** @var object|mixed|n
 	 * It is wrong because the $v argument is alwaus passed to df_prop()
 	 */
 	$isGet = DF_N === $v; /** @vae bool $isGet */
-	if ($o instanceof ArrayAccess) {
+	/**
+	 * 2024-05-20
+	 * 1) "Remove the special `ArrayAccess` case's handling from `df_prop_k()`": https://github.com/mage2pro/core/issues/377
+	 * 2) I removed the special @see ArrayAccess case's handling,
+	 * because sometimes (e.g., in the @see \Df\Core\Exception case)
+	 * I do not want the object's primary data to be polluted by `df_prop_k()`.
+	 * The previous code:
+	 * 		if ($o instanceof ArrayAccess) {
+	 * 			if ($isGet) {
+	 * 				$r = !$o->offsetExists($k) ? $d : $o->offsetGet($k);
+	 * 			}
+	 * 			else {
+	 *				$o->offsetSet($k, $v);
+	 * 				$r = $o;
+	 * 			}
+	 * 		}
+	 * https://github.com/mage2pro/core/blob/10.9.9/Core/lib/lang/prop.php#L153-L161
+	 */
+	$a = '_' . __FUNCTION__; /** @var string $a */
+	/**
+	 * 2022-10-18
+	 * 1) Dynamic properties are deprecated since PHP 8.2:
+	 * https://php.net/manual/migration82.deprecated.php#migration82.deprecated.core.dynamic-properties
+	 * https://wiki.php.net/rfc/deprecate_dynamic_properties
+	 * 2) @see dfc()
+	 */
+	static $hasWeakMap; /** @var bool $hasWeakMap */
+	# 2024-01-10
+	# 1) The previous code: `@class_exists('WeakMap')`.
+	# 2) I changed the code by analogy with
+	# https://github.com/thehcginstitute-com/m1/blob/2024-01-10-2/app/code/local/Df/Core/lib/cache/dfc.php#L58-L62
+	if (!($hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : class_exists('WeakMap', false))) {
+		if (!isset($o->$a)) {
+			$o->$a = [];
+		}
 		if ($isGet) {
-			$r = !$o->offsetExists($k) ? $d : $o->offsetGet($k);
+			$r = dfa($o->$a, $k, $d);
 		}
 		else {
-			$o->offsetSet($k, $v);
+			# 2022-10-18
+			# The previous code was:
+			# 		$prop =& $o->$a;
+			#		$prop[$k] = $v;
+			# The new code works correctly in PHP ≤ 8.2: https://3v4l.org/8agSI1
+			$o->{$a}[$k] = $v;
 			$r = $o;
 		}
 	}
 	else {
-		$a = '_' . __FUNCTION__; /** @var string $a */
-		/**
-		 * 2022-10-18
-		 * 1) Dynamic properties are deprecated since PHP 8.2:
-		 * https://php.net/manual/migration82.deprecated.php#migration82.deprecated.core.dynamic-properties
-		 * https://wiki.php.net/rfc/deprecate_dynamic_properties
-		 * 2) @see dfc()
-		 */
-		static $hasWeakMap; /** @var bool $hasWeakMap */
-		# 2024-01-10
-		# 1) The previous code: `@class_exists('WeakMap')`.
-		# 2) I changed the code by analogy with
-		# https://github.com/thehcginstitute-com/m1/blob/2024-01-10-2/app/code/local/Df/Core/lib/cache/dfc.php#L58-L62
-		if (!($hasWeakMap = !is_null($hasWeakMap) ? $hasWeakMap : class_exists('WeakMap', false))) {
-			if (!isset($o->$a)) {
-				$o->$a = [];
-			}
-			if ($isGet) {
-				$r = dfa($o->$a, $k, $d);
-			}
-			else {
-				# 2022-10-18
-				# The previous code was:
-				# 		$prop =& $o->$a;
-				#		$prop[$k] = $v;
-				# The new code works correctly in PHP ≤ 8.2: https://3v4l.org/8agSI1
-				$o->{$a}[$k] = $v;
-				$r = $o;
-			}
+		static $map; /** @var WeakMap $map */
+		# 2024-03-23
+		# "[IntelliJ IDEA] «'WeakMap' is available starting with 8.0 PHP version»":
+		# https://github.com/thehcginstitute-com/m1/issues/529
+		$map = $map ?: new WeakMap;
+		if (!$map->offsetExists($o)) {
+			$map[$o] = [];
+		}
+		# 2022-10-17 https://3v4l.org/6cVAu
+		$map2 =& $map[$o]; /** @var array(string => mixed) $map2 */
+		if (!isset($map2[$a])) {
+			$map2[$a] = [];
+		}
+		# 2022-10-18 https://3v4l.org/1tS4v
+		$prop =& $map2[$a]; /** array(string => mixed) $prop */
+		if ($isGet) {
+			$r = dfa($prop, $k, $d);
 		}
 		else {
-			static $map; /** @var WeakMap $map */
-			# 2024-03-23
-			# "[IntelliJ IDEA] «'WeakMap' is available starting with 8.0 PHP version»":
-			# https://github.com/thehcginstitute-com/m1/issues/529
-			$map = $map ?: new WeakMap;
-			if (!$map->offsetExists($o)) {
-				$map[$o] = [];
-			}
-			# 2022-10-17 https://3v4l.org/6cVAu
-			$map2 =& $map[$o]; /** @var array(string => mixed) $map2 */
-			if (!isset($map2[$a])) {
-				$map2[$a] = [];
-			}
-			# 2022-10-18 https://3v4l.org/1tS4v
-			$prop =& $map2[$a]; /** array(string => mixed) $prop */
-			if ($isGet) {
-				$r = dfa($prop, $k, $d);
-			}
-			else {
-				$prop[$k] = $v;
-				$r = $o;
-			}
+			$prop[$k] = $v;
+			$r = $o;
 		}
 	}
 	return $r;

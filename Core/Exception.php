@@ -175,6 +175,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * https://github.com/mage2pro/core/issues/168#user-content-returntypewillchange
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
+	 * @used-by \Dfe\FacebookLogin\Exception::message()
 	 * @used-by \Dfe\GoogleFont\Exception::message()
 	 * @param string $offset
 	 * @return mixed
