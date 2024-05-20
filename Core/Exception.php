@@ -28,35 +28,35 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Df\API\Response\Validator::__construct()
 	 * @used-by df_error_create()
 	 * @used-by self::wrap()
-	 * @param mixed ...$args
+	 * @param mixed ...$aa
 	 */
-	function __construct(...$args) {
-		$arg0 = dfa($args, 0); /** @var string|Phrase|E|array(string => mixed)|null $arg0 */
+	function __construct(...$aa) {
+		$a0 = dfa($aa, 0); /** @var string|Phrase|E|array(string => mixed)|null $a0 */
 		$prev = null; /** @var E|LE|null $prev */
 		$m = null;  /** @var Phrase|null $m */
 		# 2015-10-10
-		if (is_array($arg0)) {
-			$this->_data = $arg0;
+		if (is_array($a0)) {
+			$this->_data = $a0;
 		}
-		elseif ($arg0 instanceof Phrase) {
-			$m = $arg0;
+		elseif ($a0 instanceof Phrase) {
+			$m = $a0;
 		}
-		elseif (df_is_th($arg0)) {
-			$prev = df_th2x($arg0);
+		elseif (df_is_th($a0)) {
+			$prev = df_th2x($a0);
 		}
-		elseif (is_string($arg0)) {
-			$m = __($arg0);
+		elseif (is_string($a0)) {
+			$m = __($a0);
 		}
-		$arg1 = dfa($args, 1); /** @var int|string|E|Phrase|null $arg1 */
-		if (!is_null($arg1)) {
-			if (df_is_th($arg1)) {
-				$prev = $arg1;
+		$a1 = dfa($aa, 1); /** @var int|string|E|Phrase|null $a1 */
+		if (!is_null($a1)) {
+			if (df_is_th($a1)) {
+				$prev = $a1;
 			}
 			elseif (is_int($prev)) {
-				$this->_stackLevelsCountToSkip = $arg1;
+				$this->_stackLevelsCountToSkip = $a1;
 			}
-			elseif (is_string($arg1) || $arg1 instanceof Phrase) {
-				$this->comment((string)$arg1);
+			elseif (is_string($a1) || $a1 instanceof Phrase) {
+				$this->comment((string)$a1);
 			}
 		}
 		if (is_null($m)) {
