@@ -34,6 +34,7 @@ function df_abstract($caller):void {
  * @used-by df_assert_assoc()
  * @used-by df_assert_between()
  * @used-by df_assert_class_exists()
+ * @used-by df_assert_count()
  * @used-by df_assert_eq()
  * @used-by df_assert_gd()
  * @used-by df_assert_ge()

@@ -19,6 +19,14 @@ function df_assert_array(array $a):array {return $a;}
 function df_assert_assoc(array $a):array {return df_is_assoc($a) ? $a : df_error('The array should be associative.');}
 
 /**
+ * 2024-05-21 "Implement `df_assert_count()`": https://github.com/mage2pro/core/issues/380
+ * @see df_assert_eq()
+ */
+function df_assert_count($expected, array $a, $m = null):array {return $expected === ($v = count($a)) /** @var int $v */ ? $a :
+	df_error($m ?: "The array should have $expected} elements, but it has $v.", ['array' => $a])
+;}
+
+/**
  * 2017-01-14 Отныне функция возвращает $v: это позволяет нам значительно сократить код вызова функции.
  * @used-by df_assert_address_type()
  * @used-by df_date_from_timestamp_14()
