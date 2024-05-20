@@ -209,7 +209,7 @@ function df_error_create(...$aa):DFE {/** @var DFE $r */
 	# https://github.com/mage2pro/core/issues/375
 	$hasContext = 2 > $tailC && (is_null($a1) || is_array($a1) && df_is_assoc($a1)); /** @var bool $hasContext */
 	/** @var array(string => mixed)|null $context */
-	$context = !$hasContext ? null : df_eta($a1);  /** @var array(string => mixed)|null $context */
+	$context = !$hasContext ? [] : df_eta($a1);  /** @var array(string => mixed) $context */
 	if (df_is_th($a0)) {
 		df_assert($hasContext);
 		$r = DFE::wrap($a0, $context);
