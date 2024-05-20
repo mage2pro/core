@@ -207,7 +207,7 @@ function df_error_create(...$aa):DFE {/** @var DFE $r */
 	$a1 = df_first($tail); /** @var mixed|null|array(string => mixed) $a1 */
 	# 2024-05-20 "Provide an ability to specify a context for a `Df\Core\Exception` instance":
 	# https://github.com/mage2pro/core/issues/375
-	$hasContext = 2 > $tailC && (is_null($a1) || is_array($a1) && df_is_assoc($a1)); /** @var bool $hasContext */
+	$hasContext = 2 > $tailC && (is_null($a1) || df_is_assoc($a1)); /** @var bool $hasContext */
 	/** @var array(string => mixed)|null $context */
 	$context = !$hasContext ? [] : df_eta($a1);  /** @var array(string => mixed) $context */
 	if (df_is_th($a0)) {

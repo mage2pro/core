@@ -46,6 +46,7 @@ if (!function_exists('array_is_list')) {
  * 2015-02-07
  * 2017-10-29 It returns `true` for an empty array.
  * 2022-10-17 @uses array_is_list() has been added to PHP 8.1: https://php.net/manual/function.array-is-list.php
+ * 2024-05-20 "`df_is_assoc()` should accept a non-array argument": https://github.com/mage2pro/core/issues/378
  * @used-by df_assert_assoc()
  * @used-by df_call()
  * @used-by df_clean()
@@ -53,9 +54,9 @@ if (!function_exists('array_is_list')) {
  * @used-by df_filter_f()
  * @used-by df_ksort()
  * @used-by \Df\Xml\X::importArray()
- * @param array(int|string => mixed) $a
+ * @param array(int|string => mixed)|mixed $a
  */
-function df_is_assoc(array $a):bool {return !$a || !array_is_list($a);}
+function df_is_assoc($a):bool {return is_array($a) && (!$a || !array_is_list($a));}
 
 /**
  * 2023-07-25

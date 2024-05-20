@@ -15,7 +15,7 @@ use Closure as F;
  * @return mixed
  */
 function df_call($o, $m, array $p = []) {/** @var mixed $r */
-	if (is_array($o) && df_is_assoc($o)) {
+	if (df_is_assoc($o)) {
 		$r = dfa($o, $m);
 	}
 	elseif (!is_string($m)) {# $m — инлайновая функция
