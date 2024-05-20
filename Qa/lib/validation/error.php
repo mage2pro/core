@@ -211,9 +211,9 @@ function df_error_create(...$aa):DFE {/** @var DFE $r */
 		$a1 = df_first($tail);
 	}
 	else {
-		df_assert_eq(1, $tailC--);
+		df_assert_eq(0, $tailC++);
 		[$a0, $a1] = [null, $a0];
-		$tail = [];
+		$tail = [$a1];
 	}
 	$hasContext = 2 > $tailC && (is_null($a1) || df_is_assoc($a1)); /** @var bool $hasContext */
 	/** @var array(string => mixed)|null $context */
@@ -224,7 +224,7 @@ function df_error_create(...$aa):DFE {/** @var DFE $r */
 	}
 	else {
 		if (is_array($a0)) {
-			$a0 = implode("\n\n", $a0);
+			$a0 = df_cc_n($a0);
 		}
 		if (is_string($a0) && !$hasContext) {
 			$a0 = df_format($aa);

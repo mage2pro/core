@@ -32,6 +32,7 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
 /**
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_api_rr_failed()
+ * @used-by df_error_create()
  * @used-by df_fe_init()
  * @used-by df_kv()
  * @used-by df_log_l()
