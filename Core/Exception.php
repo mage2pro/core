@@ -208,6 +208,7 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * 2015-10-10
+	 * 2024-05-20 @deprecated It is unused.
 	 * @override
 	 * @see \ArrayAccess::offsetUnset()
 	 * @param string $offset
