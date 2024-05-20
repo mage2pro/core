@@ -76,6 +76,26 @@ class Exception extends LE implements \ArrayAccess {
 	final function comments():array {return $this->_comments;}
 
 	/**
+	 * 2014-05-20
+	 * 1) "Provide an ability to specify a context for a `Df\Core\Exception` instance":
+	 * https://github.com/mage2pro/core/issues/375
+	 * 2) I implemented it by analogy with @see \Df\Core\O::a()
+	 * @param string|string[] $k [optional]
+	 * @param string|null $d [optional]
+	 * @return array(string => mixed)|mixed|null
+	 */
+	final function context($k = '', $d = null) {return dfa($this->_context, $k, $d);}
+
+	/**
+	 * 2014-05-20
+	 * "Provide an ability to specify a context for a `Df\Core\Exception` instance":
+	 * https://github.com/mage2pro/core/issues/375
+	 * @used-by self::context()
+	 * @var array(string => mixed)
+	 */
+	private $_context;
+
+	/**
 	 * @used-by \Df\Qa\Failure\Exception::stackLevel()
 	 */
 	final function getStackLevelsCountToSkip():int {return $this->_stackLevelsCountToSkip;}
