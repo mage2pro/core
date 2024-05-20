@@ -200,27 +200,37 @@ function df_error(...$a):void {
  * @used-by \Df\API\Client::_p()
  * @param string|string[]|mixed|Th|Phrase|null $m [optional]
  */
-function df_error_create($m = null):DFE {return df_is_th($m) ? DFE::wrap($m) :
-	new DFE($m instanceof Phrase ? $m : (
-		/**
-		 * 2019-12-16
-		 * I have changed `!$m` to `is_null($m)`.
-		 * It passes an empty string ('') directly to @uses \Df\Core\Exception::__construct()
-		 * and it prevents @uses \Df\Core\Exception::__construct() from calling @see df_bt_log()
-		 * @see \Df\Core\Exception::__construct():
-		 *		if (is_null($m)) {
-		 *			$m = __($prev ? df_xts($prev) : 'No message');
-		 *			# 2017-02-20 To facilite the «No message» diagnostics.
-		 *			if (!$prev) {
-		 *				df_bt_log();
-		 *			}
-		 *		}
-		 */
-		is_null($m) ? null : (is_array($m) ? implode("\n\n", $m) : (
-			df_contains($m, '%1') ? __($m, ...df_tail(func_get_args())) : df_format(func_get_args())
-		))
-	))
-;}
+function df_error_create($m = null):DFE {/** @var DFE $r */
+	$aa = func_get_args(); /** @var mixed[] $aa */
+	$tail = df_tail($aa); /** @var mixed[] $tail */
+	$tailC = count($tail); /** @var int $tailC */
+	$tailF = df_first($tail); /** @var mixed|null|array(string => mixed) $tailF */
+	# 2024-05-20 "Provide an ability to specify a context for a `Df\Core\Exception` instance":
+	# https://github.com/mage2pro/core/issues/375
+	$hasContext = 2 > $tailC && (is_null($tailF) || is_array($tailF) && df_is_assoc($tailF)); /** @var bool $hasContext */
+	/** @var array(string => mixed)|null $context */
+	$context = !$hasContext ? null : df_eta($tailF);  /** @var array(string => mixed)|null $context */
+	if (df_is_th($m)) {
+		df_assert($hasContext);
+		$r = DFE::wrap($m, $context);
+	}
+	else {
+		if (is_array($m)) {
+			$m = implode("\n\n", $m);
+		}
+		if (is_string($m)) {
+			if (df_contains($m, '%1')) {
+				df_assert(!$hasContext);
+				$m = __($m, ...$tail);
+			}
+			elseif (!$hasContext) {
+				$m = df_format($aa);
+			}
+		}
+		$r = new DFE($m, !$hasContext ? [] : $context);
+	}
+	return $r;
+}
 
 /**
  * 2016-07-31
