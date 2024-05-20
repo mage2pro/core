@@ -46,7 +46,7 @@ function df_customer($c = null, $onE = null) {return df_try(function() use($c) {
 	!$c ? (
 		df_customer_session()->isLoggedIn()
 			? df_customer(df_customer_id())
-			: df_error('df_customer(): the argument is null and the visitor is anonymous.')
+			: df_error('df_customer(): the argument is `null` and the visitor is anonymous.')
 	) : ($c instanceof C ? $c : (
 		($id =
 			$c instanceof O ? $c->getCustomerId() : (
@@ -54,6 +54,6 @@ function df_customer($c = null, $onE = null) {return df_try(function() use($c) {
 			)
 		)
 			? df_customer_registry()->retrieve($id)
-			: df_error('df_customer(): the argument of type %s is unrecognizable.', df_type($c))
+			: df_error("df_customer(): unable to detect the customer's ID from the argument of type `%s`.", df_type($c))
 	))
 ;}, $onE);}
