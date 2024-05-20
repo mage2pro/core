@@ -198,10 +198,10 @@ function df_error(...$a):void {
  * @used-by df_error()
  * @used-by df_error_html()
  * @used-by \Df\API\Client::_p()
- * @param string|string[]|mixed|Th|Phrase|null $m [optional]
+ * param mixed ...$aa
  */
-function df_error_create($m = null):DFE {/** @var DFE $r */
-	$aa = func_get_args(); /** @var mixed[] $aa */
+function df_error_create(...$aa):DFE {/** @var DFE $r */
+	$a0 = dfa($aa, 0); /** @var string|string[]|mixed|Th|Phrase|null $a0 */
 	$tail = df_tail($aa); /** @var mixed[] $tail */
 	$tailC = count($tail); /** @var int $tailC */
 	$tailF = df_first($tail); /** @var mixed|null|array(string => mixed) $tailF */
@@ -210,18 +210,18 @@ function df_error_create($m = null):DFE {/** @var DFE $r */
 	$hasContext = 2 > $tailC && (is_null($tailF) || is_array($tailF) && df_is_assoc($tailF)); /** @var bool $hasContext */
 	/** @var array(string => mixed)|null $context */
 	$context = !$hasContext ? null : df_eta($tailF);  /** @var array(string => mixed)|null $context */
-	if (df_is_th($m)) {
+	if (df_is_th($a0)) {
 		df_assert($hasContext);
-		$r = DFE::wrap($m, $context);
+		$r = DFE::wrap($a0, $context);
 	}
 	else {
-		if (is_array($m)) {
-			$m = implode("\n\n", $m);
+		if (is_array($a0)) {
+			$a0 = implode("\n\n", $a0);
 		}
-		if (is_string($m) && !$hasContext) {
-			$m = df_format($aa);
+		if (is_string($a0) && !$hasContext) {
+			$a0 = df_format($aa);
 		}
-		$r = new DFE($m, !$hasContext ? [] : $context);
+		$r = new DFE($a0, !$hasContext ? [] : $context);
 	}
 	return $r;
 }
