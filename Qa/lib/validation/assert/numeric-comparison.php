@@ -20,6 +20,7 @@ function df_assert_between($v, $min, $max, bool $inclusive = true) {
 }
 
 /**
+ * @used-by df_error_create()
  * @used-by df_module_name_by_path()
  * @used-by df_vector_sum()
  * @used-by \Df\Qa\Trace\Frame::url()

@@ -195,6 +195,8 @@ function df_error(...$a):void {
 
 /**
  * 2016-07-31
+ * 2024-05-20 "Provide an ability to specify a context for a `Df\Core\Exception` instance":
+ * https://github.com/mage2pro/core/issues/375
  * @used-by df_error()
  * @used-by df_error_html()
  * @used-by \Df\API\Client::_p()
@@ -204,9 +206,15 @@ function df_error_create(...$aa):DFE {/** @var DFE $r */
 	$a0 = dfa($aa, 0); /** @var string|string[]|mixed|Th|Phrase|null $a0 */
 	$tail = df_tail($aa); /** @var mixed[] $tail */
 	$tailC = count($tail); /** @var int $tailC */
-	$a1 = df_first($tail); /** @var mixed|null|array(string => mixed) $a1 */
-	# 2024-05-20 "Provide an ability to specify a context for a `Df\Core\Exception` instance":
-	# https://github.com/mage2pro/core/issues/375
+	/** @var mixed|null|array(string => mixed) $a1 */
+	if (!df_is_assoc($a0)) {
+		$a1 = df_first($tail);
+	}
+	else {
+		df_assert_eq(1, $tailC--);
+		[$a0, $a1] = [null, $a0];
+		$tail = [];
+	}
 	$hasContext = 2 > $tailC && (is_null($a1) || df_is_assoc($a1)); /** @var bool $hasContext */
 	/** @var array(string => mixed)|null $context */
 	$context = !$hasContext ? [] : df_eta($a1);  /** @var array(string => mixed) $context */
