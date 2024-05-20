@@ -70,12 +70,6 @@ class Exception extends LE implements \ArrayAccess {
 	}
 
 	/**
-	 * @used-by self::__construct()
-	 * @param mixed ...$a
-	 */
-	final function comment(...$a):void {$this->_comments[]= df_format($a);}
-
-	/**
 	 * @used-by \Df\Qa\Failure\Exception::preface()
 	 * @return string[]
 	 */
@@ -241,6 +235,13 @@ class Exception extends LE implements \ArrayAccess {
 	protected function prev():E {return $this->getPrevious();}
 
 	/**
+	 * @used-by self::__construct()
+	 * @param mixed ...$a
+	 */
+	private function comment(...$a):void {$this->_comments[]= df_format($a);}
+
+	/**
+	 * @used-by self::comment()
 	 * @used-by self::comments()
 	 * @var string[]
 	 */
