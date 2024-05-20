@@ -229,7 +229,10 @@ function df_error_create(...$aa):DFE {/** @var DFE $r */
 		if (is_string($a0) && !$hasContext) {
 			$a0 = df_format($aa);
 		}
-		$r = new DFE($a0, !$hasContext ? [] : $context);
+		$r = new DFE($a0);
+		if ($hasContext) {
+			$r->context($context);
+		}
 	}
 	return $r;
 }

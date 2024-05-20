@@ -80,6 +80,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * 1) "Provide an ability to specify a context for a `Df\Core\Exception` instance":
 	 * https://github.com/mage2pro/core/issues/375
 	 * 2) I implemented it by analogy with @see \Df\Core\O::a()
+	 * @used-by df_error_create()
 	 * @used-by self::sentryContext()
 	 * @used-by \Df\Core\Exception::wrap()
 	 * @param string|string[] $k [optional]
