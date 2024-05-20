@@ -49,6 +49,7 @@ if (!function_exists('array_is_list')) {
  * @used-by df_assert_assoc()
  * @used-by df_call()
  * @used-by df_clean()
+ * @used-by df_error_create()
  * @used-by df_filter_f()
  * @used-by df_ksort()
  * @used-by \Df\Xml\X::importArray()

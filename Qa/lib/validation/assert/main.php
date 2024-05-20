@@ -25,6 +25,7 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by df_configurable_children()
  * @used-by df_date_from_timestamp_14()
  * @used-by df_dtss()
+ * @used-by df_error_create()
  * @used-by df_eta()
  * @used-by df_fe_fs()
  * @used-by df_float()

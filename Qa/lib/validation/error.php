@@ -218,14 +218,8 @@ function df_error_create($m = null):DFE {/** @var DFE $r */
 		if (is_array($m)) {
 			$m = implode("\n\n", $m);
 		}
-		if (is_string($m)) {
-			if (df_contains($m, '%1')) {
-				df_assert(!$hasContext);
-				$m = __($m, ...$tail);
-			}
-			elseif (!$hasContext) {
-				$m = df_format($aa);
-			}
+		if (is_string($m) && !$hasContext) {
+			$m = df_format($aa);
 		}
 		$r = new DFE($m, !$hasContext ? [] : $context);
 	}

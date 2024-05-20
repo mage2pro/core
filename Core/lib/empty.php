@@ -35,6 +35,7 @@ function df_est($v):bool {return df_es(df_trim($v));}
  * @used-by df_caller_entry()
  * @used-by df_caller_entry_m()
  * @used-by df_ci_get()
+ * @used-by df_error_create()
  * @used-by df_fe_fc()
  * @used-by df_fetch_one()
  * @used-by df_oi_add()
