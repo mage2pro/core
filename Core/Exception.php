@@ -303,18 +303,16 @@ class Exception extends LE implements \ArrayAccess {
 
 	/**
 	 * 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
-	 * 2024-05-20 "Provide an ability to specify a context for a `Df\Core\Exception` instance":
-	 * https://github.com/mage2pro/core/issues/375
 	 * @used-by df_error_create()
 	 * @used-by \Df\Qa\Failure\Exception::i()
 	 */
 	final static function wrap(Th $r, array $d = []):self {
-		if ($r instanceof self) {
-			$r->context($d);
+		if (!$r instanceof self) {
+			$r = new self($r);
 		}
-		else {
-			$r = new self($r, $d);
-		}
+		# 2024-05-20 "Provide an ability to specify a context for a `Df\Core\Exception` instance":
+		# https://github.com/mage2pro/core/issues/375
+		$r->context($d);
 		return $r;
 	}
 }
