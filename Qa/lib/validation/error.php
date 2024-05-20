@@ -206,16 +206,16 @@ function df_error_create(...$aa):DFE {/** @var DFE $r */
 	$a0 = dfa($aa, 0); /** @var string|string[]|mixed|Th|Phrase|null $a0 */
 	$tail = df_tail($aa); /** @var mixed[] $tail */
 	$tailC = count($tail); /** @var int $tailC */
-	/** @var mixed|null|array(string => mixed) $a1 */
+	/** @var mixed|null|array(string => mixed) $a1 */ /** @var bool $hasContext */
 	if (!df_is_assoc($a0)) {
 		$a1 = df_first($tail);
+		$hasContext = 2 > $tailC && (is_null($a1) || df_is_assoc($a1));
 	}
 	else {
-		df_assert_eq(0, $tailC++);
+		df_assert_eq(0, $tailC);
 		[$a0, $a1] = [null, $a0];
-		$tail = [$a1];
+		$hasContext = true;
 	}
-	$hasContext = 2 > $tailC && (is_null($a1) || df_is_assoc($a1)); /** @var bool $hasContext */
 	/** @var array(string => mixed)|null $context */
 	$context = !$hasContext ? [] : df_eta($a1);  /** @var array(string => mixed) $context */
 	if (df_is_th($a0)) {
