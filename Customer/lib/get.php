@@ -54,6 +54,9 @@ function df_customer($c = null, $onE = null) {return df_try(function() use($c) {
 			)
 		)
 			? df_customer_registry()->retrieve($id)
-			: df_error("df_customer(): unable to detect the customer's ID from the argument of type `%s`.", df_type($c))
+			# 2024-05-20
+			# "Provide an ability to specify a context for a `Df\Core\Exception` instance":
+			# https://github.com/mage2pro/core/issues/375
+			: df_error("Unable to detect the customer's ID", ['c' => $c])
 	))
 ;}, $onE);}
