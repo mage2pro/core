@@ -57,7 +57,7 @@ class Exception extends LE implements \ArrayAccess {
 				$this->comment((string)$a1);
 			}
 		}
-		if (is_null($m)) {
+		if (null == $m) {
 			$m = __($prev ? df_xts($prev) : 'No message');
 			# 2017-02-20 To facilite the «No message» diagnostics.
 			if (!$prev) {
