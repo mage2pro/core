@@ -10,6 +10,7 @@ function df_is_phrase($v):bool {return $v instanceof P;}
 
 /**
  * 2024-05-22 "Implement `df_is_phrase()`": https://github.com/mage2pro/core/issues/381
+ * @used-by \Df\Core\Exception::__construct()
  * @param mixed $v
  */
 function df_is_phrase_or_s($v):bool {return is_string($v) || df_is_phrase($v);}
