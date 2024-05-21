@@ -54,6 +54,14 @@ abstract class Validator extends Exception {
 	 * @used-by \Df\API\Exception::message()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::long()
 	 * @see \Dfe\Moip\API\Validator::long()
+	 * @see \Dfe\Qiwi\API\Validator::long()
+	 * @see \Dfe\Sift\API\Validator\Event::long()
+	 * @see \Dfe\Sift\API\Validator\GetDecisions::long()
+	 * @see \Dfe\Square\API\Validator::long()
+	 * @see \Dfe\TBCBank\API\Validator::long()
+	 * @see \Dfe\Vantiv\API\Validator::long()
+	 * @see \Inkifi\Mediaclip\API\Validator::long()
+	 * @see \Inkifi\Pwinty\API\Validator::long()
 	 */
 	function long():string {return df_json_encode($this->_r);}
 

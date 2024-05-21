@@ -14,16 +14,6 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @used-by \Df\API\Client::_p()
 	 * @see \Df\API\Exception\HTTP::long()
 	 * @see \Df\API\Response\Validator::long()
-	 * @see \Dfe\Dynamics365\API\Validator\JSON::long()
-	 * @see \Dfe\Moip\API\Validator::long()
-	 * @see \Dfe\Qiwi\API\Validator::long()
-	 * @see \Dfe\Sift\API\Validator\GetDecisions::long()
-	 * @see \Dfe\Sift\API\Validator\Event::long()
-	 * @see \Dfe\Square\API\Validator::long()
-	 * @see \Dfe\TBCBank\API\Validator::long()
-	 * @see \Dfe\Vantiv\API\Validator::long()
-	 * @see \Inkifi\Mediaclip\API\Validator::long()
-	 * @see \Inkifi\Pwinty\API\Validator::long()
 	 */
 	abstract function long():string;
 
