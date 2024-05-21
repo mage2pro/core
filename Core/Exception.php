@@ -13,10 +13,9 @@ use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`":
  * то ядро может показать её сообщение на экране, а в противном случае — не показать.
  * Бывает ещё, что в противном случае сообщение всё-таки показывается, но с другим форматированием.
  * @see \Df\API\Exception
- * @see \Dfe\GoogleFont\Exception
  * @see \Df\Payment\Exception
  * @see \Df\Payment\W\Exception\NotForUs
- * @see \Dfe\FacebookLogin\Exception
+ *
  */
 class Exception extends LE implements \ArrayAccess {
 	/**

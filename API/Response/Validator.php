@@ -3,16 +3,18 @@ namespace Df\API\Response;
 use Df\API\Exception;
 /**
  * 2017-07-05
- * @see \Dfe\ZohoBI\API\Validator
  * @see \Dfe\AlphaCommerceHub\API\Validator
  * @see \Dfe\Dynamics365\API\Validator\JSON
+ * @see \Dfe\FacebookLogin\ResponseValidator
+ * @see \Dfe\GoogleFont\ResponseValidator
  * @see \Dfe\Moip\API\Validator
  * @see \Dfe\Qiwi\API\Validator
- * @see \Dfe\Sift\API\Validator\GetDecisions
  * @see \Dfe\Sift\API\Validator\Event
+ * @see \Dfe\Sift\API\Validator\GetDecisions
  * @see \Dfe\Square\API\Validator
  * @see \Dfe\TBCBank\API\Validator
  * @see \Dfe\Vantiv\API\Validator
+ * @see \Dfe\ZohoBI\API\Validator
  * @see \Inkifi\Mediaclip\API\Validator
  * @see \Inkifi\Pwinty\API\Validator
  */
