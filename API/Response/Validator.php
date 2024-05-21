@@ -22,18 +22,18 @@ abstract class Validator extends Exception {
 	/**
 	 * 2017-07-06
 	 * @used-by \Df\API\Client::_p()
-	 * @see \Dfe\ZohoBI\API\Validator::valid()
 	 * @see \Dfe\AlphaCommerceHub\API\Validator::valid()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::valid()
+	 * @see \Dfe\FacebookLogin\ResponseValidator::valid()
 	 * @see \Dfe\Moip\API\Validator::valid()
 	 * @see \Dfe\Qiwi\API\Validator::valid()
 	 * @see \Dfe\Sift\API\Validator\Event::valid()
 	 * @see \Dfe\Square\API\Validator::valid()
 	 * @see \Dfe\TBCBank\API\Validator::valid()
 	 * @see \Dfe\Vantiv\API\Validator::valid()
+	 * @see \Dfe\ZohoBI\API\Validator::valid()
 	 * @see \Inkifi\Mediaclip\API\Validator::valid()
 	 * @see \Inkifi\Pwinty\API\Validator::valid()
-	 * @return bool
 	 */
 	abstract function valid():bool;
 
