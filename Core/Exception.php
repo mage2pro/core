@@ -53,7 +53,7 @@ class Exception extends LE implements \ArrayAccess {
 			elseif (is_int($prev)) {
 				$this->_stackLevelsCountToSkip = $a1;
 			}
-			elseif (is_string($a1) || $a1 instanceof Phrase) {
+			elseif (df_is_phrase_or_s($a1)) {
 				$this->comment((string)$a1);
 			}
 		}
