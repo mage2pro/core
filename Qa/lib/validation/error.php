@@ -201,11 +201,11 @@ function df_error(...$a):void {
  * @used-by df_error()
  * @used-by df_error_html()
  * @used-by \Df\API\Client::_p()
- * param mixed ...$aa
+ * @param mixed ...$a
  */
-function df_error_create(...$aa):DFE {/** @var DFE $r */
-	$a0 = dfa($aa, 0); /** @var string|string[]|mixed|Th|Phrase|null $a0 */
-	$tail = df_tail($aa); /** @var mixed[] $tail */
+function df_error_create(...$a):DFE {/** @var DFE $r */
+	$a0 = dfa($a, 0); /** @var string|string[]|mixed|Th|Phrase|null $a0 */
+	$tail = df_tail($a); /** @var mixed[] $tail */
 	$tailC = count($tail); /** @var int $tailC */
 	/** @var mixed|null|array(string => mixed) $a1 */ /** @var bool $hasContext */
 	if (!df_is_assoc($a0)) {
@@ -228,7 +228,7 @@ function df_error_create(...$aa):DFE {/** @var DFE $r */
 			$a0 = df_cc_n($a0);
 		}
 		if (is_string($a0) && !$hasContext) {
-			$a0 = df_format($aa);
+			$a0 = df_format($a);
 		}
 		$r = new DFE($a0);
 		if ($hasContext) {
