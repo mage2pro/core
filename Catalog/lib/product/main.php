@@ -1,6 +1,7 @@
 <?php
 use Magento\Catalog\Api\ProductRepositoryInterface as IProductRepository;
 use Magento\Catalog\Helper\Product as ProductH;
+use Magento\Catalog\Model\Product as P;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Catalog\Model\ResourceModel\Product as Res;
 use Magento\Catalog\Model\ResourceModel\Product\Action;
