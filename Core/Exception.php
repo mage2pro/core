@@ -36,7 +36,7 @@ class Exception extends LE implements \ArrayAccess {
 		if (is_array($a0)) {
 			$this->_data = $a0;
 		}
-		elseif ($a0 instanceof Phrase) {
+		elseif (df_is_phrase($a0)) {
 			$m = $a0;
 		}
 		elseif (df_is_th($a0)) {
