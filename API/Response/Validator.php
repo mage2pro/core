@@ -51,6 +51,7 @@ abstract class Validator extends Exception {
 	 * @override
 	 * @see \Df\API\Exception::long()
 	 * @used-by \Df\API\Client::_p()
+	 * @see \Dfe\Moip\API\Validator::long()
 	 */
 	function long():string {return df_json_encode($this->_r);}
 
