@@ -51,6 +51,7 @@ abstract class Validator extends Exception {
 	 * @override
 	 * @see \Df\API\Exception::long()
 	 * @used-by \Df\API\Client::_p()
+	 * @used-by \Df\API\Exception::message()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::long()
 	 * @see \Dfe\Moip\API\Validator::long()
 	 */
