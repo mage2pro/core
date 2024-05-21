@@ -9,6 +9,7 @@ namespace Df\API;
 abstract class Exception extends \Df\Core\Exception {
 	/**
 	 * 2017-07-09
+	 * @used-by self::message()
 	 * @used-by self::short()
 	 * @used-by \Df\API\Client::_p()
 	 * @see \Df\API\Exception\HTTP::long()
@@ -25,6 +26,14 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @see \Inkifi\Pwinty\API\Validator::long()
 	 */
 	abstract function long():string;
+
+	/**
+	 * 2024-05-22 "Remove `Df\Core\Exception::$_data`": https://github.com/mage2pro/core/issues/385
+	 * @override
+	 * @see \Df\Core\Exception::message()
+	 * @used-by df_xts()
+	 */
+	function message():string {return $this->long();}
 
 	/**
 	 * 2017-07-09
