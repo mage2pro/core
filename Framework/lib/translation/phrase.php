@@ -2,6 +2,7 @@
 use Magento\Framework\Phrase as P;
 /**
  * 2024-05-22 "Implement `df_is_phrase()`": https://github.com/mage2pro/core/issues/381
+ * @used-by df_is_phrase_or_s()
  * @param mixed $v
  */
 function df_is_phrase($v):bool {return $v instanceof P;}
