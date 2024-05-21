@@ -72,6 +72,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by df_error_create()
 	 * @used-by self::sentryContext()
 	 * @used-by \Df\Core\Exception::wrap()
+	 * @used-by \Df\Qa\Failure\Exception::postface()
 	 * @param string|string[] $k [optional]
 	 * @param string|null $d [optional]
 	 * @return array(string => mixed)|mixed|null
