@@ -61,9 +61,7 @@ class Responder {
 	 * @used-by \Df\Payment\W\Strategy::softFailure()
 	 * @param wResult|Phrase|string|null $v
 	 */
-	final function setSoftFailure($v):void {$this->set(
-		($v = is_string($v) ?  __($v) : $v) instanceof Phrase ? Text::i($v) : $v
-	);}
+	final function setSoftFailure($v):void {$this->set(df_is_phrase($v = is_string($v) ?  __($v) : $v) ? Text::i($v) : $v);}
 
 	/**
 	 * 2017-09-13

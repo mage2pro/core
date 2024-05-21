@@ -5,6 +5,7 @@ use Magento\Framework\Phrase as P;
  * @used-by df_is_phrase_or_s()
  * @used-by df_phrase()
  * @used-by \Df\Core\Exception::__construct()
+ * @used-by \Df\Payment\W\Responder::setSoftFailure()
  * @param mixed $v
  */
 function df_is_phrase($v):bool {return $v instanceof P;}
