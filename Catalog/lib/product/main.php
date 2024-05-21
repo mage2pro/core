@@ -38,7 +38,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @param int|string|null|bool|IStore $s [optional]
  * @throws NSE
  */
-function df_product($p, $s = false):P {return $p instanceof P ? $p : df_product_r()->getById(
+function df_product($p, $s = false):P {return df_is_p($p) ? $p : df_product_r()->getById(
 	/**
 	 * 2020-02-05
 	 * 1) I do not use @see \Magento\Sales\Model\Order\Item::getProduct()
