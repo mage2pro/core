@@ -9,6 +9,7 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
 use Magento\Quote\Model\Quote\Item as QI;
 use Magento\Sales\Model\Order\Item as OI;
 use Magento\Store\Api\Data\StoreInterface as IStore;
+
 /**
  * 2019-02-26
  * 2019-05-15 I have added the $s parameter: https://magento.stackexchange.com/a/177164
