@@ -19,7 +19,6 @@ function df_desc(string $s1, string $s2):string {return df_es($s1) ? $s2 : (df_e
 /**
  * @used-by df_checkout_error()
  * @used-by df_error_create()
- * @used-by \Df\Core\Exception::comment()
  * @used-by \Df\Payment\W\Exception::__construct()
  * @param mixed ...$a
  */

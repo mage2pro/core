@@ -65,12 +65,6 @@ class Exception extends LE implements \ArrayAccess {
 	}
 
 	/**
-	 * @used-by \Df\Qa\Failure\Exception::preface()
-	 * @return string[]
-	 */
-	final function comments():array {return $this->_comments;}
-
-	/**
 	 * 2014-05-20
 	 * 1) "Provide an ability to specify a context for a `Df\Core\Exception` instance":
 	 * https://github.com/mage2pro/core/issues/375
@@ -247,19 +241,6 @@ class Exception extends LE implements \ArrayAccess {
 	 * поэтому потомки не могут в комментариях PHPDoc указывать его тип: IntelliJ IDEA ругается.
 	 */
 	protected function prev():E {return $this->getPrevious();}
-
-	/**
-	 * @used-by self::__construct()
-	 * @param mixed ...$a
-	 */
-	private function comment(...$a):void {$this->_comments[]= df_format($a);}
-
-	/**
-	 * @used-by self::comment()
-	 * @used-by self::comments()
-	 * @var string[]
-	 */
-	private $_comments = [];
 
 	/**
 	 * 2014-05-20
