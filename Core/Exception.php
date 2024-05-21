@@ -9,8 +9,7 @@ use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`":
  * Унаследовал наш класс от @see \Magento\Framework\Exception\LocalizedException
  * вместо @see E, потому что во многих местах ядро анализирует тип исключительной ситуации,
  * и по разному её обрабатывает, в зависимости от типа.
- * В частности, если исключительная ситуация имеет тип
- * @see \Magento\Framework\Exception\LocalizedException
+ * В частности, если исключительная ситуация имеет тип @see \Magento\Framework\Exception\LocalizedException
  * то ядро может показать её сообщение на экране, а в противном случае — не показать.
  * Бывает ещё, что в противном случае сообщение всё-таки показывается, но с другим форматированием.
  * @see \Df\API\Exception
