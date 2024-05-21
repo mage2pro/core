@@ -21,7 +21,7 @@ use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`":
  */
 class Exception extends LE implements \ArrayAccess {
 	/**
-	 * Обратите внимание, что PHP разрешает сигнатуре конструктора класса-потомка
+	 * PHP разрешает сигнатуре конструктора класса-потомка
 	 * отличаться от сигнатуры конструктора класса родителя: http://3v4l.org/qQdJ3
 	 * @see \Df\API\Exception\HTTP::__construct()
 	 * @see \Df\API\Response\Validator::__construct()
