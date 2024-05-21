@@ -26,10 +26,10 @@ class Exception extends LE implements \ArrayAccess {
 	 * @see \Df\API\Response\Validator::__construct()
 	 * @used-by df_error_create()
 	 * @used-by self::wrap()
-	 * @param mixed ...$aa
+	 * @param mixed ...$a
 	 */
-	function __construct(...$aa) {
-		$a0 = dfa($aa, 0); /** @var string|Phrase|E|array(string => mixed)|null $a0 */
+	function __construct(...$a) {
+		$a0 = dfa($a, 0); /** @var string|Phrase|E|array(string => mixed)|null $a0 */
 		$prev = null; /** @var E|LE|null $prev */
 		$m = null;  /** @var Phrase|null $m */
 		# 2015-10-10
@@ -45,7 +45,7 @@ class Exception extends LE implements \ArrayAccess {
 		elseif (is_string($a0)) {
 			$m = __($a0);
 		}
-		$a1 = dfa($aa, 1); /** @var int|string|E|Phrase|null $a1 */
+		$a1 = dfa($a, 1); /** @var int|string|E|Phrase|null $a1 */
 		if (!is_null($a1)) {
 			if (df_is_th($a1)) {
 				$prev = $a1;
