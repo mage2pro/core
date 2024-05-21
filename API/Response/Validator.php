@@ -58,14 +58,12 @@ abstract class Validator extends Exception {
 	 * 2017-07-06
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
-	 * @used-by \Dfe\ZohoBI\API\Validator::message()
-	 * @used-by \Dfe\ZohoBI\API\Validator::rs()
-	 * @used-by \Dfe\ZohoBI\API\Validator::valid()
 	 * @used-by \Dfe\AlphaCommerceHub\API\Validator::result()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::long()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::message()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::short()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::valid()
+	 * @used-by \Dfe\FacebookLogin\ResponseValidator::error()
 	 * @used-by \Dfe\Moip\API\Validator::error()
 	 * @used-by \Dfe\Moip\API\Validator::errors()
 	 * @used-by \Dfe\Qiwi\API\Validator::code()
@@ -78,6 +76,9 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\TBCBank\API\Validator::long()
 	 * @used-by \Dfe\Vantiv\API\Validator::long()
 	 * @used-by \Dfe\Vantiv\API\Validator::valid()
+	 * @used-by \Dfe\ZohoBI\API\Validator::message()
+	 * @used-by \Dfe\ZohoBI\API\Validator::rs()
+	 * @used-by \Dfe\ZohoBI\API\Validator::valid()
 	 * @used-by \Inkifi\Pwinty\API\Validator::long()
 	 * @used-by \Inkifi\Pwinty\API\Validator::valid()
 	 * @return array(string => mixed)|string
