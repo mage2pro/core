@@ -2,6 +2,7 @@
 use Magento\Framework\Phrase as P;
 /**
  * 2024-05-22 "Implement `df_is_phrase()`": https://github.com/mage2pro/core/issues/381
+ * @used-by df_check_s()
  * @used-by df_is_phrase_or_s()
  * @used-by df_phrase()
  * @used-by \Df\Core\Exception::__construct()
