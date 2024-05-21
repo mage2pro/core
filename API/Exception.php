@@ -33,7 +33,7 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @see \Df\Core\Exception::message()
 	 * @used-by df_xts()
 	 */
-	function message():string {return $this->long();}
+	final function message():string {return $this->long();}
 
 	/**
 	 * 2017-07-09
