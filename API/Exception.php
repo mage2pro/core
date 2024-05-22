@@ -20,6 +20,7 @@ abstract class Exception extends \Df\Core\Exception {
 	/**
 	 * 2017-07-09
 	 * @used-by \Df\API\Client::_p()
+	 * @used-by \Df\API\Exception::message()
 	 * @see \Dfe\AlphaCommerceHub\API\Validator::short()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::short()
 	 * @see \Dfe\Sift\API\Validator\GetDecisions::short()
