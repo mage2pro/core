@@ -82,7 +82,7 @@ function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k,
  * @used-by \Df\Framework\Request::extra()
  * @used-by \Dfe\FacebookLogin\Customer::responseJson()
  * @used-by \Df\Payment\Charge::metadata()
- * @used-by \Dfe\GoogleFont\Exception::message()
+ * @used-by \Dfe\GoogleFont\ResponseValidator::short()
  * @used-by \Dfe\GoogleFont\Font\Variant\Preview\Params::fromRequest()
  * @used-by \Dfe\GoogleFont\Fonts::get()
  * @used-by \Dfe\GoogleFont\Fonts::responseA()

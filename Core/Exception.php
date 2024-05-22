@@ -177,7 +177,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * @override
 	 * @see \ArrayAccess::offsetGet()
 	 * @used-by \Dfe\FacebookLogin\Exception::message()
-	 * @used-by \Dfe\GoogleFont\Exception::message()
+	 * @used-by \Dfe\GoogleFont\ResponseValidator::short()
 	 * @param string $offset
 	 * @return mixed
 	 */

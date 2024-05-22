@@ -18,7 +18,7 @@
  * @used-by dfe_alphacommercehub_fix_amount_bug()
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Catalog\Model\Product::afterGetPreconfiguredValues() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/83)
  * @used-by \Df\Customer\AddAttribute\Customer::p()
- * @used-by \Dfe\GoogleFont\Exception::message()
+ * @used-by \Dfe\GoogleFont\ResponseValidator::short()
  * @used-by \Df\Payment\TM::response()
  * @used-by \Dfe\Color\Image::dist()
  * @used-by \Inkifi\Consolidation\Processor::pid()

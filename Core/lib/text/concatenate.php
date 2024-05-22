@@ -53,7 +53,7 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
  * @used-by \Df\Typography\Css::render()
  * @used-by \Dfe\AllPay\Block\Info\Barcode::paymentId()
  * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
- * @used-by \Dfe\GoogleFont\Exception::message()
+ * @used-by \Dfe\GoogleFont\ResponseValidator::short()
  * @used-by \Dfe\Klarna\Button::_toHtml()
  * @used-by \Dfe\Markdown\FormElement::css()
  * @used-by \Dfe\Sift\Test\CaseT\API\Account\Decisions::t01()
