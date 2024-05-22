@@ -42,6 +42,7 @@ abstract class Validator extends Exception {
 	 * 2017-07-06
 	 * @override
 	 * @see \Df\Core\Exception::__construct()
+	 * @used-by self::assert()
 	 * @used-by \Df\API\Client::_p()
 	 * @param array(string => mixed) $r
 	 */
@@ -52,13 +53,6 @@ abstract class Validator extends Exception {
 		# https://github.com/mage2pro/core/issues/375
 		$this->context($r);
 	}
-
-	/**
-	 * 2024-05-22
-	 * @used-by \Dfe\FacebookLogin\Customer::responseJson()
-	 * @throws self
-	 */
-	final function assert():void {df_assert($this->valid(), $this);}
 
 	/**
 	 * 2017-12-03
@@ -126,4 +120,14 @@ abstract class Validator extends Exception {
 	 * @var array(string => mixed)
 	 */
 	private $_r;
+
+	/**
+	 * 2024-05-22
+	 * @used-by \Dfe\FacebookLogin\Customer::responseJson()
+	 * @throws self
+	 */
+	final static function assert(array $r):void {
+		$i = new static($r); /** @var self $i */
+		df_assert($i->valid(), $i);
+	}
 }
