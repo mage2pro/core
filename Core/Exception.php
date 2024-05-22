@@ -3,7 +3,7 @@ namespace Df\Core;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Framework\Phrase;
 use \Exception as E;
-use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use \Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-07-31
  * Унаследовал наш класс от @see \Magento\Framework\Exception\LocalizedException
@@ -192,7 +192,7 @@ class Exception extends LE {
 	 * Метод @uses E::getPrevious() объявлен как final,
 	 * поэтому потомки не могут в комментариях PHPDoc указывать его тип: IntelliJ IDEA ругается.
 	 */
-	protected function prev():Th {return $this->getPrevious();}
+	protected function prev():T {return $this->getPrevious();}
 
 	/**
 	 * 2016-07-31
@@ -217,7 +217,7 @@ class Exception extends LE {
 	 * @used-by df_error_create()
 	 * @used-by \Df\Qa\Failure\Exception::i()
 	 */
-	final static function wrap(Th $r, array $d = []):self {
+	final static function wrap(T $r, array $d = []):self {
 		if (!$r instanceof self) {
 			$r = new self($r);
 		}
