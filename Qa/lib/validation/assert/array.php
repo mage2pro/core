@@ -20,6 +20,7 @@ function df_assert_assoc(array $a):array {return df_is_assoc($a) ? $a : df_error
 
 /**
  * 2024-05-21 "Implement `df_assert_count()`": https://github.com/mage2pro/core/issues/380
+ * 2024-05-23 @deprecated It is unused.
  * @see df_assert_eq()
  */
 function df_assert_count($expected, array $a, $m = null):array {/** @var int $v */ return $expected === ($v = count($a)) ? $a :
