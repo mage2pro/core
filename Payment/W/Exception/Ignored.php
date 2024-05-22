@@ -17,6 +17,7 @@ final class Ignored extends \Df\Payment\W\Exception {
 	 * 2017-03-11
 	 * @override
 	 * @see \Df\Core\Exception::message()
+	 * @used-by \Df\Core\Exception::throw_()
 	 * @used-by \Df\Payment\W\Action::ignoredLog()
 	 * @used-by \Df\Payment\W\Responder::ignored()
 	 */

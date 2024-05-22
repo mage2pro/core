@@ -78,6 +78,7 @@ abstract class Validator extends Exception {
 	 * @override
 	 * @see \Df\Core\Exception::message()
 	 * @used-by df_xts()
+	 * @used-by \Df\Core\Exception::throw_()
 	 */
 	final function message():string {return $this->short();}
 
