@@ -160,15 +160,6 @@ class Exception extends LE {
 	function messageD():string {return $this->message();}
 
 	/**
-	 * 2015-10-10
-	 * 2024-05-20 @deprecated It is unused.
-	 * @override
-	 * @see \ArrayAccess::offsetExists()
-	 * @param string $offset
-	 */
-	function offsetExists($offset):bool {return isset($this->_data[$offset]);}
-
-	/**
 	 * 2017-10-03
 	 * @used-by \Df\Sentry\Client::captureException()
 	 * @see \Df\PaypalClone\W\Exception\InvalidSignature::sentryType()
