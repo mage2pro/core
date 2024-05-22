@@ -70,6 +70,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * 2) I implemented it by analogy with @see \Df\Core\O::a()
 	 * @used-by df_error_create()
 	 * @used-by self::sentryContext()
+	 * @used-by \Df\API\Response\Validator::__construct()
 	 * @used-by \Df\Core\Exception::wrap()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
 	 * @param string|string[] $k [optional]
@@ -121,7 +122,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * По этой причине данный метод @see message(), несмотря на его некую громоздкость,
 	 * нам действительно нужен.
 	 * @used-by df_xts()
-	 * @see \Df\API\Exception::message()
+	 * @see \Df\API\Response\Validator::message()
 	 * @see \Df\Payment\W\Exception\Ignored::message()
 	 * @see \Dfe\Klarna\Exception::message()
 	 * @see \Dfe\Omise\Exception\Charge::message()

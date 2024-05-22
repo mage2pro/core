@@ -18,14 +18,6 @@ abstract class Exception extends \Df\Core\Exception {
 	abstract function long():string;
 
 	/**
-	 * 2024-05-22 "Remove `Df\Core\Exception::$_data`": https://github.com/mage2pro/core/issues/385
-	 * @override
-	 * @see \Df\Core\Exception::message()
-	 * @used-by df_xts()
-	 */
-	final function message():string {return $this->long();}
-
-	/**
 	 * 2017-07-09
 	 * @used-by \Df\API\Client::_p()
 	 * @see \Dfe\AlphaCommerceHub\API\Validator::short()

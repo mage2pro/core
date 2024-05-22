@@ -44,7 +44,13 @@ abstract class Validator extends Exception {
 	 * @used-by \Df\API\Client::_p()
 	 * @param array(string => mixed) $r
 	 */
-	final function __construct(array $r) {$this->_r = $r;}
+	final function __construct(array $r) {
+		$this->_r = $r;
+		# 2024-05-22
+		# "Provide an ability to specify a context for a `Df\Core\Exception` instance":
+		# https://github.com/mage2pro/core/issues/375
+		$this->context($r);
+	}
 
 	/**
 	 * 2017-12-03
@@ -66,6 +72,14 @@ abstract class Validator extends Exception {
 	function long():string {return df_json_encode($this->_r);}
 
 	/**
+	 * 2024-05-22 "Remove `Df\Core\Exception::$_data`": https://github.com/mage2pro/core/issues/385
+	 * @override
+	 * @see \Df\Core\Exception::message()
+	 * @used-by df_xts()
+	 */
+	final function message():string {return $this->short();}
+
+	/**
 	 * 2017-07-06
 	 * 2022-10-24
 	 * `mixed` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-mixed
@@ -74,7 +88,7 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::message()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::short()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::valid()
-	 * @used-by \Dfe\FacebookLogin\ResponseValidator::error()
+	 * @used-by \Dfe\FacebookLogin\ResponseValidator::valid()
 	 * @used-by \Dfe\Moip\API\Validator::error()
 	 * @used-by \Dfe\Moip\API\Validator::errors()
 	 * @used-by \Dfe\Qiwi\API\Validator::code()
