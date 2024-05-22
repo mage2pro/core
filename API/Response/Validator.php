@@ -92,6 +92,7 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::valid()
 	 * @used-by \Dfe\FacebookLogin\ResponseValidator::short()
 	 * @used-by \Dfe\FacebookLogin\ResponseValidator::valid()
+	 * @used-by \Dfe\GoogleFont\ResponseValidator::short()
 	 * @used-by \Dfe\GoogleFont\ResponseValidator::valid()
 	 * @used-by \Dfe\Moip\API\Validator::error()
 	 * @used-by \Dfe\Moip\API\Validator::errors()
