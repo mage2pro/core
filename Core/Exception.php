@@ -219,25 +219,20 @@ class Exception extends LE implements \ArrayAccess {
 	function sentryType():string {return get_class($this);}
 
 	/**
-	 * 2015-11-27
-	 * Мы не можем перекрыть метод @see \Exception::getMessage(), потому что он финальный.
-	 * С другой стороны, наш метод @see \Df\Core\Exception::message()
-	 * не будет понят стандартной средой,
-	 * и мы в стандартной среде не будем иметь диагностического сообщения вовсе.
-	 * Поэтому если мы сами не в состоянии обработать исключительную ситуацию,
-	 * то вызываем метод @see \Df\Core\Exception::standard().
-	 * Этот метод конвертирует исключительную ситуацию в стандартную,
-	 * и стандартная среда её успешно обработает.
-     * @used-by \Dfe\GoogleFont\Fonts::responseA()
-	 */
-	final function standard():E {return dfc($this, function() {return new E($this->message(), 0, $this);});}
-
-	/**
 	 * 2024-05-22 "Implement `Df\Core\Exception::throw_()`": https://github.com/mage2pro/core/issues/386
 	 * @see df_xts()
 	 * @throws self
 	 */
 	final function throw_():void {
+		/**
+		 * 2015-11-27
+		 * Мы не можем перекрыть метод @see \Exception::getMessage(), потому что он финальный.
+		 * С другой стороны, наш метод @see self::message()
+		 * не будет понят стандартной средой, и мы в стандартной среде не будем иметь диагностического сообщения вовсе.
+		 * 2024-05-22
+		 * Normally, we do not need because of @see \Df\Framework\Plugin\AppInterface::beforeCatchException()
+		 * But I preserved it for some extra cases.
+		 */
 		$this->message = $this->message();
 		throw $this;
 	}
