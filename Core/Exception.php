@@ -119,6 +119,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * 1) @see parent::$message (https://www.php.net/manual/en/class.exception.php#exception.props.message)
 	 * 2) https://3v4l.org/RSCUM
 	 * @used-by df_xts()
+	 * @used-by self::::throw_()
 	 * @see \Df\API\Response\Validator::message()
 	 * @see \Df\Payment\W\Exception\Ignored::message()
 	 * @see \Dfe\Klarna\Exception::message()
@@ -236,7 +237,8 @@ class Exception extends LE implements \ArrayAccess {
 	 * @throws self
 	 */
 	final function throw_():void {
-		$this->message = '';
+		$this->message = $this->message();
+		throw $this;
 	}
 
 	/**
