@@ -192,7 +192,7 @@ class Exception extends LE {
 	 * Метод @uses E::getPrevious() объявлен как final,
 	 * поэтому потомки не могут в комментариях PHPDoc указывать его тип: IntelliJ IDEA ругается.
 	 */
-	protected function prev():E {return $this->getPrevious();}
+	protected function prev():Th {return $this->getPrevious();}
 
 	/**
 	 * 2016-07-31
