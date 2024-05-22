@@ -115,6 +115,9 @@ class Exception extends LE implements \ArrayAccess {
 	 * получается объединением текстов элементом контейнера,
 	 * которые добавляются динамически, а не сразу в конструкторе).
 	 * По этой причине данный метод @see message(), несмотря на его некую громоздкость, нам действительно нужен.
+	 * 2024-05-22
+	 * 1) @see parent::$message (https://www.php.net/manual/en/class.exception.php#exception.props.message)
+	 * 2) https://3v4l.org/RSCUM
 	 * @used-by df_xts()
 	 * @see \Df\API\Response\Validator::message()
 	 * @see \Df\Payment\W\Exception\Ignored::message()
