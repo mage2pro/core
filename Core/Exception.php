@@ -233,6 +233,12 @@ class Exception extends LE implements \ArrayAccess {
 	final function standard():E {return dfc($this, function() {return new E($this->message(), 0, $this);});}
 
 	/**
+	 * 2024-05-22 "Implement `Df\Core\Exception::throw_()`": https://github.com/mage2pro/core/issues/386
+	 * @throws self
+	 */
+	final function throw_():void {}
+
+	/**
 	 * Цель этого метода — предоставить потомкам возможность
 	 * указывать тип предыдущей исключительной ситуации в комментарии PHPDoc для потомка.
 	 * Метод @uses E::getPrevious() объявлен как final,
