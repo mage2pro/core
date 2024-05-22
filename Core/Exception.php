@@ -169,14 +169,6 @@ class Exception extends LE {
 	function offsetExists($offset):bool {return isset($this->_data[$offset]);}
 
 	/**
-	 * 2017-01-09
-	 * @used-by df_sentry()
-	 * @see \Dfe\Omise\Exception\Charge::sentryContext()
-	 * @return array(string => mixed)
-	 */
-	function sentryContext():array {return ['extra' => $this->context()];}
-
-	/**
 	 * 2017-10-03
 	 * @used-by \Df\Sentry\Client::captureException()
 	 * @see \Df\PaypalClone\W\Exception\InvalidSignature::sentryType()
