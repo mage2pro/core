@@ -66,18 +66,18 @@ class Exception extends LE {
 
 	/**
 	 * 2014-05-20
-	 * 1) "Provide an ability to specify a context for a `Df\Core\Exception` instance":
-	 * https://github.com/mage2pro/core/issues/375
-	 * 2) I implemented it by analogy with @see \Df\Core\O::a()
+	 * "Provide an ability to specify a context for a `Df\Core\Exception` instance": https://github.com/mage2pro/core/issues/375
 	 * @used-by df_error_create()
+	 * @used-by df_sentry()
 	 * @used-by self::__construct()
-	 * @used-by self::sentryContext()
 	 * @used-by \Df\API\Response\Validator::__construct()
 	 * @used-by \Df\Core\Exception::wrap()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
+	 * @used-by \Dfe\Omise\Exception\Charge::context()
+	 * @see \Dfe\Omise\Exception\Charge::context()
 	 * @return self|array(string => mixed)
 	 */
-	final function context($v = DF_N) {return df_prop($this, $v, []);}
+	function context($v = DF_N) {return df_prop($this, $v, []);}
 
 	/**
 	 * @used-by \Df\Qa\Failure\Exception::stackLevel()
