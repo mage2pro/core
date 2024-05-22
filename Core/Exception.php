@@ -221,6 +221,7 @@ class Exception extends LE implements \ArrayAccess {
 	/**
 	 * 2024-05-22 "Implement `Df\Core\Exception::throw_()`": https://github.com/mage2pro/core/issues/386
 	 * @see df_xts()
+	 * @used-by df_error()
 	 * @throws self
 	 */
 	final function throw_():void {

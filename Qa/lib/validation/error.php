@@ -154,7 +154,8 @@ function df_abstract($caller):void {
  */
 function df_error(...$a):void {
 	df_header_utf();
-	throw df_error_create(...$a);
+	# 2024-05-22 "Implement `Df\Core\Exception::throw_()`": https://github.com/mage2pro/core/issues/386
+	df_error_create(...$a)->throw_();
 	/**
 	 * 2020-02-15
 	 * 1) "The Cron log (`magento.cron.log`) should contain a backtrace for every exception logged":
