@@ -53,6 +53,7 @@ if (!function_exists('array_is_list')) {
  * @used-by df_error_create()
  * @used-by df_filter_f()
  * @used-by df_ksort()
+ * @used-by \Df\Core\Exception::__construct()
  * @used-by \Df\Xml\X::importArray()
  * @param array(int|string => mixed)|mixed $a
  */

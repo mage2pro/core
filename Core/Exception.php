@@ -70,6 +70,7 @@ class Exception extends LE {
 	 * https://github.com/mage2pro/core/issues/375
 	 * 2) I implemented it by analogy with @see \Df\Core\O::a()
 	 * @used-by df_error_create()
+	 * @used-by self::__construct()
 	 * @used-by self::sentryContext()
 	 * @used-by \Df\API\Response\Validator::__construct()
 	 * @used-by \Df\Core\Exception::wrap()
