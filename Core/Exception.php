@@ -30,7 +30,13 @@ class Exception extends LE {
 		$a0 = dfa($a, 0); /** @var string|Phrase|E|array(string => mixed)|null $a0 */
 		$prev = null; /** @var E|LE|null $prev */
 		$m = null;  /** @var Phrase|null $m */
-		if (df_is_phrase($a0)) {
+		# 2024-05-22
+		# "Provide an ability to specify a context for a `Df\Core\Exception` instance":
+		# https://github.com/mage2pro/core/issues/375
+		if (df_is_assoc($a0)) {
+			$this->context($a0);
+		}
+		elseif (df_is_phrase($a0)) {
 			$m = $a0;
 		}
 		elseif (df_is_th($a0)) {
