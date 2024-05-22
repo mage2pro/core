@@ -16,7 +16,7 @@ use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`":
  * @see \Df\Payment\Exception
  * @see \Df\Payment\W\Exception\NotForUs
  */
-class Exception extends LE implements \ArrayAccess {
+class Exception extends LE {
 	/**
 	 * PHP разрешает сигнатуре конструктора класса-потомка
 	 * отличаться от сигнатуры конструктора класса родителя: http://3v4l.org/qQdJ3
@@ -30,11 +30,7 @@ class Exception extends LE implements \ArrayAccess {
 		$a0 = dfa($a, 0); /** @var string|Phrase|E|array(string => mixed)|null $a0 */
 		$prev = null; /** @var E|LE|null $prev */
 		$m = null;  /** @var Phrase|null $m */
-		# 2015-10-10
-		if (is_array($a0)) {
-			$this->_data = $a0;
-		}
-		elseif (df_is_phrase($a0)) {
+		if (df_is_phrase($a0)) {
 			$m = $a0;
 		}
 		elseif (df_is_th($a0)) {
