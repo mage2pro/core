@@ -2,7 +2,7 @@
 use Df\Core\Exception as DFE;
 use Magento\Framework\Exception\NotFoundException as NFE;
 use Magento\Framework\Phrase;
-use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-08-27
  * Параметр $caller нам реально нужен,
@@ -149,7 +149,7 @@ function df_abstract($caller):void {
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/catalog/issues/6)
- * @param string|string[]|mixed|Th|Phrase|null ...$a
+ * @param string|string[]|mixed|T|Phrase|null ...$a
  * @throws DFE
  */
 function df_error(...$a):void {
@@ -205,7 +205,7 @@ function df_error(...$a):void {
  * @param mixed ...$a
  */
 function df_error_create(...$a):DFE {/** @var DFE $r */
-	$a0 = dfa($a, 0); /** @var string|string[]|mixed|Th|Phrase|null $a0 */
+	$a0 = dfa($a, 0); /** @var string|string[]|mixed|T|Phrase|null $a0 */
 	$tail = df_tail($a); /** @var mixed[] $tail */
 	$tailC = count($tail); /** @var int $tailC */
 	/** @var mixed|null|array(string => mixed) $a1 */ /** @var bool $hasContext */
