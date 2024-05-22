@@ -15,7 +15,6 @@ use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`":
  * @see \Df\API\Exception
  * @see \Df\Payment\Exception
  * @see \Df\Payment\W\Exception\NotForUs
- *
  */
 class Exception extends LE implements \ArrayAccess {
 	/**
