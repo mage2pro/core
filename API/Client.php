@@ -403,8 +403,7 @@ abstract class Client {
 			$title = df_api_name($m = df_module_name($this)); /** @var string $m */ /** @var string $title */
 			$path = df_url_path($this->url()); /** @var string $path */
 			$e2 = df_error_create(
-				(!$path ? 'A' : "A `{$path}`")
-				. " {$title} API request has failed"
+				(!$path ? 'A' : "A `{$path}`") . " {$title} API request has failed"
 				. ($short ? ": «{$short}»" : ' without error messages') . ".\n"
 				. ($long === $short ? "Request:\n$req" : df_kv([
 					'The full error description' => $long, 'Request' => $req
