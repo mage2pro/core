@@ -70,7 +70,7 @@ function df_sentry($m, $v, array $extra = []):void {
 		];
 		# 2017-01-09
 		if ($v instanceof DFE) {
-			$context = dfa_merge_r($context, $v->sentryContext());
+			$context = dfa_merge_r($context, ['extra' => $v->context()]);
 		}
 		if ($isT) {
 			# 2016-12-22 https://docs.sentry.io/clients/php/usage/#reporting-exceptions
