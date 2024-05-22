@@ -230,7 +230,7 @@ class Exception extends LE implements \ArrayAccess {
 	 * и стандартная среда её успешно обработает.
      * @used-by \Dfe\GoogleFont\Fonts::responseA()
 	 */
-	function standard():E {return dfc($this, function() {return new E($this->message(), 0, $this);});}
+	final function standard():E {return dfc($this, function() {return new E($this->message(), 0, $this);});}
 
 	/**
 	 * Цель этого метода — предоставить потомкам возможность
