@@ -73,11 +73,9 @@ class Exception extends LE implements \ArrayAccess {
 	 * @used-by \Df\API\Response\Validator::__construct()
 	 * @used-by \Df\Core\Exception::wrap()
 	 * @used-by \Df\Qa\Failure\Exception::postface()
-	 * @param string|string[] $k [optional]
-	 * @param string|null $d [optional]
-	 * @return array(string => mixed)|mixed|null
+	 * @return self|array(string => mixed)
 	 */
-	final function context($k = '', $d = null) {return dfa($this->_context, $k, $d);}
+	final function context($v = DF_N) {return df_prop($this, $v, []);}
 
 	/**
 	 * @used-by \Df\Qa\Failure\Exception::stackLevel()
@@ -241,15 +239,6 @@ class Exception extends LE implements \ArrayAccess {
 	 * поэтому потомки не могут в комментариях PHPDoc указывать его тип: IntelliJ IDEA ругается.
 	 */
 	protected function prev():E {return $this->getPrevious();}
-
-	/**
-	 * 2014-05-20
-	 * "Provide an ability to specify a context for a `Df\Core\Exception` instance":
-	 * https://github.com/mage2pro/core/issues/375
-	 * @used-by self::context()
-	 * @var array(string => mixed)
-	 */
-	private $_context;
 
 	/**
 	 * 2015-10-10
