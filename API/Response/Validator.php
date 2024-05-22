@@ -124,6 +124,7 @@ abstract class Validator extends Exception {
 	/**
 	 * 2024-05-22
 	 * @used-by \Dfe\FacebookLogin\Customer::responseJson()
+	 * @used-by \Dfe\GoogleFont\Fonts::responseA()
 	 * @throws self
 	 */
 	final static function assert(array $r):void {
