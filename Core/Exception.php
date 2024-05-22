@@ -169,43 +169,6 @@ class Exception extends LE {
 	function offsetExists($offset):bool {return isset($this->_data[$offset]);}
 
 	/**
-	 * 2015-10-10
-	 * 2022-10-24
-	 * 1) `mixed` as a return type is not supported by PHP < 8:
-	 * https://github.com/mage2pro/core/issues/168#user-content-mixed
-	 * 2) `ReturnTypeWillChange` allows us to suppress the return type absence notice:
-	 * https://github.com/mage2pro/core/issues/168#user-content-absent-return-type-deprecation
-	 * https://github.com/mage2pro/core/issues/168#user-content-returntypewillchange
-	 * @override
-	 * @see \ArrayAccess::offsetGet()
-	 * @used-by \Dfe\FacebookLogin\Exception::message()
-	 * @used-by \Dfe\GoogleFont\ResponseValidator::short()
-	 * @param string $offset
-	 * @return mixed
-	 */
-	#[\ReturnTypeWillChange]
-	function offsetGet($offset) {return dfa($this->_data, $offset);}
-
-	/**
-	 * 2015-10-10
-	 * 2024-05-20 @deprecated It is unused.
-	 * @override
-	 * @see \ArrayAccess::offsetSet()
-	 * @param string $offset
-	 * @param mixed $value
-	 */
-	function offsetSet($offset, $value):void {$this->_data[$offset] = $value;}
-
-	/**
-	 * 2015-10-10
-	 * 2024-05-20 @deprecated It is unused.
-	 * @override
-	 * @see \ArrayAccess::offsetUnset()
-	 * @param string $offset
-	 */
-	function offsetUnset($offset):void {unset($this->_data[$offset]);}
-
-	/**
 	 * 2017-01-09
 	 * @used-by df_sentry()
 	 * @see \Dfe\Omise\Exception\Charge::sentryContext()
@@ -247,16 +210,6 @@ class Exception extends LE {
 	 * поэтому потомки не могут в комментариях PHPDoc указывать его тип: IntelliJ IDEA ругается.
 	 */
 	protected function prev():E {return $this->getPrevious();}
-
-	/**
-	 * 2015-10-10
-	 * @used-by self::__construct()
-	 * @used-by self::offsetExists()
-	 * @used-by self::offsetGet()
-	 * @used-by self::offsetUnset()
-	 * @var array(string => mixed)
-	 */
-	private $_data = [];
 
 	/**
 	 * 2016-07-31
