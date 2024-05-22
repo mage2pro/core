@@ -22,6 +22,8 @@ abstract class Exception extends \Df\Core\Exception {
 	 * @used-by \Df\API\Exception::message()
 	 * @see \Dfe\AlphaCommerceHub\API\Validator::short()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::short()
+	 * @see \Dfe\FacebookLogin\ResponseValidator::short()
+	 * @see \Dfe\GoogleFont\ResponseValidator::short()
 	 * @see \Dfe\Sift\API\Validator\GetDecisions::short()
 	 * @see \Dfe\Square\API\Validator::short()
 	 * @see \Dfe\ZohoBI\API\Validator::short()
