@@ -39,6 +39,7 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by dfaf()
  * @used-by dfp_oq()
  * @used-by dfr_prop()
+ * @used-by \Df\API\Response\Validator::assert()
  * @used-by \Df\Config\A::i()
  * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Framework\Form\Element\Fieldset::select()

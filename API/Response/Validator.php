@@ -21,6 +21,7 @@ use Df\API\Exception;
 abstract class Validator extends Exception {
 	/**
 	 * 2017-07-06
+	 * @used-by self::assert()
 	 * @used-by \Df\API\Client::_p()
 	 * @see \Dfe\AlphaCommerceHub\API\Validator::valid()
 	 * @see \Dfe\Dynamics365\API\Validator\JSON::valid()
@@ -51,6 +52,12 @@ abstract class Validator extends Exception {
 		# https://github.com/mage2pro/core/issues/375
 		$this->context($r);
 	}
+
+	/**
+	 * 2024-05-22
+	 * @throws self
+	 */
+	final function assert():void {df_assert($this->valid(), $this);}
 
 	/**
 	 * 2017-12-03
@@ -87,6 +94,7 @@ abstract class Validator extends Exception {
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::message()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::short()
 	 * @used-by \Dfe\Dynamics365\API\Validator\JSON::valid()
+	 * @used-by \Dfe\FacebookLogin\ResponseValidator::short()
 	 * @used-by \Dfe\FacebookLogin\ResponseValidator::valid()
 	 * @used-by \Dfe\Moip\API\Validator::error()
 	 * @used-by \Dfe\Moip\API\Validator::errors()
