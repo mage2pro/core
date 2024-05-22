@@ -65,7 +65,7 @@ class Exception extends LE {
 	}
 
 	/**
-	 * 2014-05-20
+	 * 2024-05-20
 	 * "Provide an ability to specify a context for a `Df\Core\Exception` instance": https://github.com/mage2pro/core/issues/375
 	 * @used-by df_error_create()
 	 * @used-by df_sentry()
