@@ -77,6 +77,7 @@ function df_th2x(T $t):X {return df_is_x($t) ? $t : new X(df_xts($t), $t->getCod
 function df_xf(T $t):T {while ($t->getPrevious()) {$t = $t->getPrevious();} return $t;}
 
 /**
+ * @see \Df\Core\Exception::throw_()
  * @used-by df_lx()
  * @used-by df_lxts()
  * @used-by df_message_error()
