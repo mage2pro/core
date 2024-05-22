@@ -55,6 +55,7 @@ abstract class Validator extends Exception {
 
 	/**
 	 * 2024-05-22
+	 * @used-by \Dfe\FacebookLogin\Customer::responseJson()
 	 * @throws self
 	 */
 	final function assert():void {df_assert($this->valid(), $this);}
