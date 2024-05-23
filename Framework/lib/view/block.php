@@ -80,7 +80,7 @@ function df_block($c, $data = [], string $t = '', array $vars = []):IB {
 function df_block_output($c, string $t = '', array $vars = [], array $d = []):string {return df_block(...(
 	!$t
 		? [$c, $d, null, $vars]
-		: [null, $d, df_asset_name(df_phtml_add_ext($t), df_contains($t, '::') ? null : df_module_name($c)), $vars]
+		: [null, $d, df_asset_name($t, df_contains($t, '::') ? null : df_module_name($c)), $vars]
 /**
  * @uses \Magento\Framework\View\Element\AbstractBlock::toHtml()
  * @uses \Magento\Framework\View\Element\BlockInterface::toHtml()
