@@ -78,7 +78,7 @@ function df_block($c, $data = [], string $t = '', array $vars = []) {
  * @param array $vars [optional]
  * @param array(string => mixed) $data [optional]
  */
-function df_block_output($c, string $t = '', array $vars = [], array $data = []):string {return !$t
-	? df_block($c, $data, null, $vars)->toHtml()
-	: df_block(null, $data, df_asset_name($t, df_contains($t, '::') ? null : df_module_name($c)), $vars)->toHtml()
+function df_block_output($c, string $t = '', array $vars = [], array $d = []):string {return !$t
+	? df_block($c, $d, null, $vars)->toHtml()
+	: df_block(null, $d, df_asset_name($t, df_contains($t, '::') ? null : df_module_name($c)), $vars)->toHtml()
 ;}
