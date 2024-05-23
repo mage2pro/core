@@ -8,7 +8,6 @@ use Magento\Framework\EntityManager\MetadataPool;
  * @used-by df_customer_att()
  * @used-by df_eav_type()
  * @used-by \Df\Customer\AddAttribute\Address::p()
- * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @used-by \Sharapov\Cabinetsbay\Setup\InstallData::install() (https://github.com/cabinetsbay/site/issues/98)
  */
 function df_eav_config():Config {return df_o(Config::class);}

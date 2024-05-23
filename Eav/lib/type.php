@@ -16,5 +16,6 @@ function df_eav_customer():T {return df_eav_type('customer');}
  * 2024-05-23 "Implement `df_eav_type()`": https://github.com/mage2pro/core/issues/388
  * @used-by df_eav_ca()
  * @used-by df_eav_customer()
+ * @used-by \Dfe\Markdown\DbRecord::__construct()
  */
 function df_eav_type(string $t):T {return df_eav_config()->getEntityType($t);}
