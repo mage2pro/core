@@ -29,6 +29,7 @@ function df_class_l($c):string {return df_last(df_explode_class($c));}
 /**
  * 2018-01-30
  * 2021-10-27 @deprecared It is unused.
+ * @used-by \CabinetsBay\Catalog\B\Featured::p() (https://github.com/cabinetsbay/catalog/issues/27)
  * @param string|object $c
  */
 function df_class_llc($c):string {return strtolower(df_class_l($c));}
