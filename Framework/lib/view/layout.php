@@ -11,7 +11,7 @@ use Magento\Framework\View\Model\Layout\Merge;
  * @used-by df_layout_update()
  * @used-by df_parent_name()
  * @used-by \KingPalm\B2B\Block\Registration::v()
- * @return L|IL
+ * @return IL|L
  */
 function df_layout():IL {return df_o(IL::class);}
 
