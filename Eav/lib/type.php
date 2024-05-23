@@ -19,7 +19,7 @@ function df_eav_ca():T {return df_eav_type(ICustomerAddressMetadata::ENTITY_TYPE
  * 2) The 'catalog_category' constant is also duplicated here:
  * @see \Magento\Catalog\Api\Data\CategoryAttributeInterface::ENTITY_TYPE_CODE
  * @see \Magento\MediaContentCatalog\Model\ResourceModel\GetAssetIdsByCategoryStore::ENTITY_TYPE
- * @used-by \Sharapov\Cabinetsbay\Plugin\Category\DataProvider::afterPrepareMeta() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by \CabinetsBay\Catalog\Plugin\Category\DataProvider::afterPrepareMeta() (https://github.com/cabinetsbay/site/issues/98)
  */
 function df_eav_category():T {return df_eav_type(Category::ENTITY);}
 
