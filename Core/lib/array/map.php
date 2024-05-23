@@ -133,6 +133,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, b
 
 /**
  * 2016-08-09 Функция принимает аргументы в любом порядке.
+ * @used-by df_category_dp_meta()
  * @used-by df_kv()
  * @used-by df_kv_table()
  * @used-by df_modules_my()
