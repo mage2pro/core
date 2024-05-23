@@ -36,7 +36,7 @@ function df_block($c, $data = [], string $t = '', array $vars = []) {
 	 * В Magento 1.x было не так:
 	 * https://github.com/OpenMage/magento-mirror/blob/1.9.3.1/app/code/core/Mage/Core/Model/Layout.php#L482-L491
 	 */
-	/** @var AbstractBlock|BlockInterface|Template $r */
+	/** @var AB|IB|Template $r */
 	$r = df_layout()->createBlock(
 		$c ?: (df_is_backend() ? BackendTemplate::class : Template::class), dfa($data, 'name'), ['data' => $data]
 	);
