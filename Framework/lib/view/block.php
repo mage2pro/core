@@ -40,10 +40,8 @@ function df_block($c, $data = [], string $t = '', array $vars = []):IB {
 	 * @var AB|IB|T|BackendT $r
 	 */
 	$r = df_layout()->createBlock($c ?: (df_is_backend() ? BackendT::class : T::class), dfa($data, 'name'), ['data' => $data]);
-	# 2019-06-11
-	if ($r instanceof T) {
-		# 2016-11-22
-		$r->assign($vars);
+	if ($r instanceof T) { # 2019-06-11
+		$r->assign($vars); # 2016-11-22
 	}
 	if ($t && $r instanceof T) {
 		$r->setTemplate(df_phtml_add_ext($t));
