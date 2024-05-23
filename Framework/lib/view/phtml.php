@@ -10,6 +10,7 @@ function df_is_phtml(string $f):bool {return df_ends_with($f, '.phtml');}
 /**
  * 2023-08-01
  * @used-by df_block()
+ * @used-by df_block_output()
  * @used-by df_phtml_exists()
  */
 function df_phtml_add_ext(string $f):string {return df_file_ext_add($f, 'phtml');}
