@@ -14,7 +14,11 @@ use Magento\Eav\Model\Entity\Type as T;
 function df_eav_ca():T {return df_eav_type(ICustomerAddressMetadata::ENTITY_TYPE_ADDRESS);}
 
 /**
- * 2024-05-23 "Implement `df_eav_category()`": https://github.com/mage2pro/core/issues/389
+ * 2024-05-23
+ * 1) "Implement `df_eav_category()`": https://github.com/mage2pro/core/issues/389
+ * 2) The 'catalog_category' constant is also duplicated here:
+ * @see \Magento\Catalog\Api\Data\CategoryAttributeInterface::ENTITY_TYPE_CODE
+ * @see \Magento\MediaContentCatalog\Model\ResourceModel\GetAssetIdsByCategoryStore::ENTITY_TYPE
  */
 function df_eav_category():T {return df_eav_type(Category::ENTITY);}
 
