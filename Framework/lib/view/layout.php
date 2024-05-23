@@ -13,7 +13,7 @@ use Magento\Framework\View\Model\Layout\Merge;
  * @used-by \KingPalm\B2B\Block\Registration::v()
  * @return Layout|ILayout
  */
-function df_layout() {return df_o(ILayout::class);}
+function df_layout():ILayout {return df_o(ILayout::class);}
 
 /**
  * 2017-10-16
