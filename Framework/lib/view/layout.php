@@ -1,9 +1,9 @@
 <?php
 use Df\Theme\Model\View\Design as DfDesign;
 use Magento\Framework\View\Element\AbstractBlock;
-use Magento\Framework\View\Layout;
+use Magento\Framework\View\Layout as L;
 use Magento\Framework\View\Layout\ProcessorInterface as IProcessor;
-use Magento\Framework\View\LayoutInterface as ILayout;
+use Magento\Framework\View\LayoutInterface as IL;
 use Magento\Framework\View\Model\Layout\Merge;
 
 /**
