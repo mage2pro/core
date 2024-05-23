@@ -1,8 +1,8 @@
 <?php
 use Df\Core\O;
 use Magento\Backend\Block\Template as BackendTemplate;
-use Magento\Framework\View\Element\AbstractBlock;
-use Magento\Framework\View\Element\BlockInterface;
+use Magento\Framework\View\Element\AbstractBlock as AB;
+use Magento\Framework\View\Element\BlockInterface as IB;
 use Magento\Framework\View\Element\Template;
 /**
  * @see df_cms_block_get()
@@ -20,7 +20,7 @@ use Magento\Framework\View\Element\Template;
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
  *		extract($dictionary, EXTR_SKIP);
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
- * @return AbstractBlock|BlockInterface|Template
+ * @return AB|IB|Template
  */
 function df_block($c, $data = [], string $t = '', array $vars = []) {
 	if (is_string($data)) {
