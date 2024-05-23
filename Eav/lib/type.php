@@ -1,6 +1,7 @@
 <?php
+use Magento\Catalog\Model\Category;
 use Magento\Customer\Api\AddressMetadataInterface as ICustomerAddressMetadata;
-use Magento\Customer\Model\Customer as C;
+use Magento\Customer\Model\Customer;
 use Magento\Eav\Model\Entity\Type as T;
 /**
  * 2019-03-06
@@ -15,7 +16,7 @@ function df_eav_ca():T {return df_eav_type(ICustomerAddressMetadata::ENTITY_TYPE
 /**
  * 2024-05-23 "Implement `df_eav_category()`": https://github.com/mage2pro/core/issues/389
  */
-function df_eav_category():T {return df_eav_type('catalog_category');}
+function df_eav_category():T {return df_eav_type(Category::ENTITY);}
 
 /**
  * 2015-10-12
@@ -25,7 +26,7 @@ function df_eav_category():T {return df_eav_type('catalog_category');}
  * @see \Magento\Customer\Api\CustomerMetadataManagementInterface::ENTITY_TYPE_CUSTOMER
  * @used-by df_customer_att()
  */
-function df_eav_customer():T {return df_eav_type(C::ENTITY);}
+function df_eav_customer():T {return df_eav_type(Customer::ENTITY);}
 
 /**
  * 2024-05-23 "Implement `df_eav_type()`": https://github.com/mage2pro/core/issues/388
