@@ -1,10 +1,15 @@
 <?php
 use Magento\Eav\Model\Entity\Type as T;
+use \Magento\Customer\Api\AddressMetadataInterface as ICustomerAddressMetadata;
 /**
  * 2019-03-06
  * @used-by \Df\Customer\AddAttribute\Address::p()
+ * 2024-05-23
+ * The 'customer_address' constant is also duplicated here:
+ * @see \Magento\Customer\Api\AddressMetadataManagementInterface::ENTITY_TYPE_ADDRESS
+ * @see \Magento\Customer\Model\Indexer\Address\AttributeProvider::ENTITY
  */
-function df_eav_ca():T {return df_eav_type('customer_address');}
+function df_eav_ca():T {return df_eav_type(ICustomerAddressMetadata::ENTITY_TYPE_ADDRESS);}
 
 /**
  * 2015-10-12
