@@ -1,6 +1,5 @@
 <?php
 use Magento\Customer\Api\AddressMetadataInterface as ICustomerAddressMetadata;
-use Magento\Customer\Api\CustomerMetadataInterface as ICustomerMetadata;
 use Magento\Customer\Model\Customer as C;
 use Magento\Eav\Model\Entity\Type as T;
 /**
