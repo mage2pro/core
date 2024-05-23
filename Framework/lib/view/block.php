@@ -1,9 +1,9 @@
 <?php
 use Df\Core\O;
-use Magento\Backend\Block\Template as BackendTemplate;
+use Magento\Backend\Block\Template as BackendT;
 use Magento\Framework\View\Element\AbstractBlock as AB;
 use Magento\Framework\View\Element\BlockInterface as IB;
-use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template as T;
 /**
  * @see df_cms_block_get()
  * @used-by df_block_output()
@@ -20,7 +20,7 @@ use Magento\Framework\View\Element\Template;
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
  *		extract($dictionary, EXTR_SKIP);
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
- * @return AB|IB|Template|BackendTemplate
+ * @return AB|IB|T|BackendT
  */
 function df_block($c, $data = [], string $t = '', array $vars = []) {
 	if (is_string($data)) {
@@ -35,19 +35,17 @@ function df_block($c, $data = [], string $t = '', array $vars = []) {
 	 * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/Layout/Generator/Block.php#L240
 	 * В Magento 1.x было не так:
 	 * https://github.com/OpenMage/magento-mirror/blob/1.9.3.1/app/code/core/Mage/Core/Model/Layout.php#L482-L491
-	 * @var AB|IB|Template|BackendTemplate $r
+	 * @var AB|IB|T|BackendT $r
 	 * @uses \Magento\Framework\View\Layout::createBlock()
 	 * @uses \Magento\Framework\View\LayoutInterface::createBlock()
 	 */
-	$r = df_layout()->createBlock(
-		$c ?: (df_is_backend() ? BackendTemplate::class : Template::class), dfa($data, 'name'), ['data' => $data]
-	);
+	$r = df_layout()->createBlock($c ?: (df_is_backend() ? BackendT::class : T::class), dfa($data, 'name'), ['data' => $data]);
 	# 2019-06-11
-	if ($r instanceof Template) {
+	if ($r instanceof T) {
 		# 2016-11-22
 		$r->assign($vars);
 	}
-	if ($t && $r instanceof Template) {
+	if ($t && $r instanceof T) {
 		$r->setTemplate(df_phtml_add_ext($t));
 	}
 	return $r;
