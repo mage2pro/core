@@ -6,7 +6,6 @@ use Magento\Framework\EntityManager\MetadataPool;
 /**
  * 2015-10-12
  * @used-by df_customer_att()
- * @used-by df_eav_customer()
  * @used-by df_eav_type()
  * @used-by \Df\Customer\AddAttribute\Address::p()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
