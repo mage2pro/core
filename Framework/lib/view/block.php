@@ -22,7 +22,7 @@ use Magento\Framework\View\Element\Template as T;
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
  * @return AB|IB|T|BackendT
  */
-function df_block($c, $data = [], string $t = '', array $vars = []) {
+function df_block($c, $data = [], string $t = '', array $vars = []):IB {
 	if (is_string($data)) {
 		$t = $data;
 		$data = [];
