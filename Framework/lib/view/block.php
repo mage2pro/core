@@ -62,6 +62,7 @@ function df_block($c, $data = [], string $t = '', array $vars = []) {
  * @see \Magento\Framework\View\TemplateEngine\Php::render()
  *		extract($dictionary, EXTR_SKIP);
  * https://github.com/magento/magento2/blob/2.1.2/lib/internal/Magento/Framework/View/TemplateEngine/Php.php#L58
+ * 2024-05-23 "Improve `df_block_output()`": https://github.com/mage2pro/core/issues/387
  * @see df_cms_block()
  * @used-by \Dfe\Facebook\I::init()
  * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
@@ -78,7 +79,8 @@ function df_block($c, $data = [], string $t = '', array $vars = []) {
  * @param array $vars [optional]
  * @param array(string => mixed) $data [optional]
  */
-function df_block_output($c, string $t = '', array $vars = [], array $d = []):string {return !$t
-	? df_block($c, $d, null, $vars)->toHtml()
-	: df_block(null, $d, df_asset_name($t, df_contains($t, '::') ? null : df_module_name($c)), $vars)->toHtml()
-;}
+function df_block_output($c, string $t = '', array $vars = [], array $d = []):string {return (
+	!$t
+		? df_block($c, $d, null, $vars)
+		: df_block(null, $d, df_asset_name($t, df_contains($t, '::') ? null : df_module_name($c)), $vars)
+)->toHtml();}
