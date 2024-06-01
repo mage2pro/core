@@ -81,12 +81,4 @@ class Wysiwyg extends AbstractBlock {
 		}
 		$l->addData(['after_element_html' => $e->getElementHtml(), 'value' => '']);
 	}
-
-	/**
-	 * 2024-06-01
-	 * @override
-	 * @see \Magento\Framework\View\Element\AbstractBlock::_toHtml()
-	 * @used-by \Magento\Framework\View\Element\AbstractBlock::_loadCache()
-	 */
-	final protected function _toHtml():string {return __METHOD__;}
 }
