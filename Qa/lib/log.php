@@ -21,6 +21,7 @@ use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by \Df\Qa\Failure::log()
  * @used-by \Df\Qa\Failure\Error::check()
  * @used-by \Df\Qa\Trace\Formatter::p()
+ * @used-by \Df\Widget\Plugin\Block\Adminhtml\Widget\Options::aroundAddFields() (https://github.com/mage2pro/core/issues/397)
  * @used-by \Df\Xml\X::addAttributes()
  * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
  * @used-by \Dfe\GoogleFont\Fonts\Png::url()
