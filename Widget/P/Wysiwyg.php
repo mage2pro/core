@@ -79,6 +79,7 @@ class Wysiwyg extends AbstractBlock {
 		if ($l['required']) {
 			$e->addClass('required-entry');
 		}
+		$l->addData(['after_element_html' => $e->getElementHtml(), 'value' => '']);
 	}
 
 	/**
