@@ -30,8 +30,9 @@ final class Latest {
 
 	/**
 	 * 2023-12-09
-	 * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
+	 * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun() (https://github.com/mage2pro/core/issues/397)
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
+	 * @used-by \Df\Widget\Plugin\Block\Adminhtml\Widget\Options::aroundAddFields()
 	 * @param T|Record $o
 	 */
 	static function register($o):void {self::$v = self::o($o)->id();}
