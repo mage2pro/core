@@ -76,6 +76,9 @@ class Wysiwyg extends AbstractBlock {
 			,'wysiwyg' => true
 		] + $l->getData()); /** @var Editor $e */
 		$e->setForm($l->getForm());
+		if ($l['required']) {
+			$e->addClass('required-entry');
+		}
 	}
 
 	/**
