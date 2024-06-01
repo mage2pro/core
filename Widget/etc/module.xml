@@ -8,6 +8,8 @@
 https://github.com/mage2pro/core/issues/392 -->
 	<module name='Df_Widget' setup_version='1.0.0'>
 		<sequence>
+<!-- 2024-06-01
+The module exists since Magento 2.0.0: https://github.com/magento/magento2/tree/2.0.0/app/code/Magento/Widget -->
 			<module name='Magento_Widget'/>
 			<module name='Df_Core'/>
 		</sequence>
