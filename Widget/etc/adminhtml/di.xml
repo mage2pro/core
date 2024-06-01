@@ -1,0 +1,10 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
+>
+<!-- 2024-06-01 "Log widget creation errors": https://github.com/mage2pro/core/issues/397 -->
+	<type name='Magento\Widget\Block\Adminhtml\Widget\Options'>
+		<plugin name='Df\Widget\Plugin\Block\Adminhtml\Widget\Options' type='Df\Widget\Plugin\Block\Adminhtml\Widget\Options'/>
+	</type>
+</config>
