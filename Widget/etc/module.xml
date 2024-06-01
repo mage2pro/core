@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='urn:magento:framework:Module/etc/module.xsd'
+>
+<!-- 2024-06-01
+"Implement an ability to use the built-in WYSIWYG editor as a CMS widget parameter":
+https://github.com/mage2pro/core/issues/392 -->
+	<module name='Df_Widget' setup_version='1.0.0'>
+		<sequence>
+			<module name='Magento_Widget'/>
+			<module name='Df_Core'/>
+		</sequence>
+	</module>
+</config>
