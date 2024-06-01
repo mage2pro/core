@@ -1,5 +1,6 @@
 <?php
 namespace Df\Widget\P;
+use Magento\Framework\Data\Form\Element\Editor;
 use Magento\Framework\Data\Form\Element\Label;
 use Magento\Framework\View\Element\AbstractBlock;
 /**
@@ -68,7 +69,10 @@ class Wysiwyg extends AbstractBlock {
 	 * 		}
 	 * https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/Widget/Model/Config/Converter.php#L136-L146
 	 */
-	final function prepareElementHtml(Label $l):void {}
+	final function prepareElementHtml(Label $l):void {
+		$e = df_new_omd(Editor::class, ['label' => ''] + $l->getData()); /** @var Editor $e */
+		$e->setForm($l->getForm());
+	}
 
 	/**
 	 * 2024-06-01
