@@ -1,5 +1,6 @@
 <?php
 namespace Df\Widget\P;
+use Magento\Framework\Data\Form\Element\Label;
 use Magento\Framework\View\Element\AbstractBlock;
 /**
  * 2024-06-01
@@ -53,8 +54,21 @@ class Wysiwyg extends AbstractBlock {
 	 * 			}
 	 * 		}
 	 * https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/Widget/Block/Adminhtml/Widget/Options.php#L209-L224
+	 * 3) @see \Magento\Widget\Model\Config\Converter::_convertParameter():
+	 * 		if ($xsiType == 'block') {
+	 * 			$parameter['type'] = 'label';
+	 * 			$parameter['@'] = [];
+	 * 			$parameter['@']['type'] = 'complex';
+	 * 			foreach ($source->childNodes as $blockSubNode) {
+	 * 				if ($blockSubNode->nodeName == 'block') {
+	 * 					$parameter['helper_block'] = $this->_convertBlock($blockSubNode);
+	 * 					break;
+	 * 				}
+	 * 			}
+	 * 		}
+	 * https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/Widget/Model/Config/Converter.php#L136-L146
 	 */
-	final function prepareElementHtml():void {}
+	final function prepareElementHtml(Label $l):void {}
 
 	/**
 	 * 2024-06-01
