@@ -70,7 +70,11 @@ class Wysiwyg extends AbstractBlock {
 	 * https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/Widget/Model/Config/Converter.php#L136-L146
 	 */
 	final function prepareElementHtml(Label $l):void {
-		$e = df_new_omd(Editor::class, ['label' => '', 'wysiwyg' => true] + $l->getData()); /** @var Editor $e */
+		$e = df_new_omd(Editor::class, [
+			'config' => df_wysiwyg_config()->getConfig(array_fill_keys(['add_images', 'add_variables', 'add_widgets'], false))
+			,'label' => ''
+			,'wysiwyg' => true
+		] + $l->getData()); /** @var Editor $e */
 		$e->setForm($l->getForm());
 	}
 
