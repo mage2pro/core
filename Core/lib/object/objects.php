@@ -175,6 +175,7 @@ function df_new_om(string $c, array $p = []) {return df_om()->create($c, $p);}
  * 2017-04-08
  * @used-by df_oq_sa()
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Api\Data\OrderInterface::afterGetPayment() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/29)
+ * @used-by \Df\Widget\P\Wysiwyg::prepareElementHtml() (https://github.com/mage2pro/core/issues/392)
  * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
  * @used-by \Doormall\Shipping\Method::collectRates()
  * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
