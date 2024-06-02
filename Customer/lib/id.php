@@ -13,12 +13,6 @@ use Magento\Customer\Model\Data\Customer as DC;
  * @used-by vendor/inkifi/mediaclip-legacy/view/frontend/templates/savedproject.phtml
  * @param C|DC|int|null $v [optional]
  */
-function df_customer_id($v = null):?int {return !$v && !df_is_backend() ? df_customer_session()->getId() : (
-	/**
-	 * 2024-06-02
-	 * 1) https://3v4l.org/Rq0u6
-	 * 2.1) @uses \Magento\Customer\Model\Customer::getId()
-	 * 2.2) @uses \Magento\Customer\Model\Data\Customer::getId()
-	 */
-	$v instanceof C || $v instanceof DC ? $v->getId() : $v
-);}
+function df_customer_id($v = null, $onE = null):?int {return df_try(function() use($v, $onE):?int {return
+	df_customer($v, $onE)->getId()
+;}, $onE);}
