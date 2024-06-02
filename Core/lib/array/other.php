@@ -30,7 +30,6 @@ function df_array($v):array {return is_array($v) ? $v : [$v];}
  */
 function dfa_combine_self(...$a):array {$a = df_args($a); return array_combine($a, $a);}
 
-
 /**
  * Алгоритм взят отсюда: https://php.net/manual/function.array-unshift.php#106570
  * 2022-10-31 @deprecated It is unused.
