@@ -8,7 +8,7 @@
  * http://stackoverflow.com/questions/5036504#comment19991540_5036538
  * http://www.php.net/manual/en/function.array-unique.php#70786
  * 2015-02-06
- * Обратите внимание, что т.к. алгоритм @see dfa_unique_fast() использует @uses array_flip(),
+ * Т.к. алгоритм @see dfa_unique_fast() использует @uses array_flip(),
  * то @see dfa_unique_fast() можно применять только в тех ситуациях,
  * когда массив содержит только строки и целые числа,
  * иначе вызов @uses array_flip() завершится сбоем уровня E_WARNING:
