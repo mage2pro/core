@@ -1,6 +1,9 @@
 <?php
 use Magento\Customer\Model\Customer as C;
 use Magento\Newsletter\Model\Subscriber as S;
+use Magento\Quote\Api\Data\CartInterface as IQ;
+use Magento\Quote\Model\Quote as Q;
+use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Model\Order as O;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\Website as W;
@@ -19,7 +22,15 @@ function df_subscriber($v = null, $w = null):S {
 	return !$v ? $r : (
 		df_is_email($v) ? $r->loadBySubscriberEmail($v, df_website_id($w)) : (
 			$v instanceof C ? $r->loadByCustomer(df_customer_id($v), $v->getWebsiteId()) : (
-				df_is_o($v) ? $r->loadBySubscriberEmail($v->getCustomerEmail(), df_website_id($v)) :
+				/**
+				 * 2024-06-02
+				 * 1.1) @uses \Magento\Quote\Model\Quote::getCustomerEmail()
+				 * 1.2) @uses \Magento\Sales\Api\Data\OrderInterface::getCustomerEmail()
+				 * 1.3) @uses \Magento\Sales\Model\Order::getCustomerEmail()
+				 * 1.4) @see \Magento\Quote\Api\Data\CartInterface does not have a method or a field for the customer's email.
+				 * 2) The customer's email can be absent in a quote.
+				 */
+				df_is_oq($v) ? $r->loadBySubscriberEmail($v->getCustomerEmail(), df_website_id($v)) :
 					df_error(['v' => $v])
 			)
 		)
