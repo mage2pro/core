@@ -32,25 +32,25 @@ use Magento\Sales\Model\Order as O;
  * @used-by \KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
  * @used-by \Stock2Shop\OrderExport\Payload::get()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
- * @param string|int|DC|C|null $c [optional]
+ * @param string|int|DC|C|null $v [optional]
  * @param Closure|bool|mixed $onE [optional]
  * @throws NoSuchEntityException|DFE
  */
-function df_customer($c = null, $onE = null):?C {return df_try(function() use($c) {return
+function df_customer($v = null, $onE = null):?C {return df_try(function() use($c) {return
 	/** @var int|string|null $id */
 	/**
 	 * 2016-08-22
 	 * I do not use @see \Magento\Customer\Model\Session::getCustomer()
 	 * because it does not use the customers repository, and loads a customer directly from the database.
 	 */
-	!$c ? (
+	!$v ? (
 		df_customer_session()->isLoggedIn()
 			? df_customer(df_customer_id())
 			: df_error('df_customer(): the argument is `null` and the visitor is anonymous.')
-	) : ($c instanceof C ? $c : (
+	) : ($v instanceof C ? $v : (
 		($id =
-			$c instanceof O ? $c->getCustomerId() : (
-				is_int($c) || is_string($c) ? $c : ($c instanceof DC ? $c->getId() : null)
+			$v instanceof O ? $v->getCustomerId() : (
+				is_int($v) || is_string($v) ? $v : ($v instanceof DC ? $v->getId() : null)
 			)
 		)
 			# 2024-06-02 "Improve `df_customer()`": https://github.com/mage2pro/core/issues/400
@@ -61,6 +61,6 @@ function df_customer($c = null, $onE = null):?C {return df_try(function() use($c
 			# 2024-05-20
 			# "Provide an ability to specify a context for a `Df\Core\Exception` instance":
 			# https://github.com/mage2pro/core/issues/375
-			: df_error("Unable to detect the customer's ID", ['c' => $c])
+			: df_error("Unable to detect the customer's ID", ['v' => $v])
 	))
 ;}, $onE);}
