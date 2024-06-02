@@ -13,6 +13,12 @@ function df_between($v, $min, $max, bool $inclusive = true):bool {return
 ;}
 
 /**
+ * 2024-06-02 "Implement `df_is_email()`": https://github.com/mage2pro/core/issues/398
+ * @param mixed $v
+ */
+function df_is_email($v):bool {return is_string($v) && df_contains($v, '@');}
+
+/**
  * We need `==` here, not `===`: https://php.net/manual/function.is-int.php#35820
  * @see \Df\Zf\Validate\IntT::isValid()
  * @used-by df_is_nat()
