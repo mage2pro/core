@@ -35,10 +35,9 @@ use Magento\Sales\Model\Order as O;
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @param string|int|DC|C|null $c [optional]
  * @param Closure|bool|mixed $onE [optional]
- * @return C|null
  * @throws NoSuchEntityException|DFE
  */
-function df_customer($c = null, $onE = null) {return df_try(function() use($c) {return
+function df_customer($c = null, $onE = null):?C {return df_try(function() use($c) {return
 	/** @var int|string|null $id */
 	/**
 	 * 2016-08-22
