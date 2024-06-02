@@ -1,7 +1,7 @@
 <?php
 /**
  * 2016-09-05
- * 2022-11-27 Added the df_nes() check.
+ * 2022-11-27 Added the @uses df_nes() check.
  * @see dfa_strict()
  * @used-by df_cfg_save()
  * @used-by df_url_bp()
