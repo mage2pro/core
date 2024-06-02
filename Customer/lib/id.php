@@ -11,14 +11,14 @@ use Magento\Customer\Model\Data\Customer as DC;
  * @used-by \Df\Customer\Plugin\Js\CustomerId::afterGetSectionData()
  * @used-by \Dfe\Sift\API\B\Event::p()
  * @used-by vendor/inkifi/mediaclip-legacy/view/frontend/templates/savedproject.phtml
- * @param C|DC|int|null $c [optional]
+ * @param C|DC|int|null $v [optional]
  */
-function df_customer_id($c = null):?int {return !$c && !df_is_backend() ? df_customer_session()->getId() : (
+function df_customer_id($v = null):?int {return !$v && !df_is_backend() ? df_customer_session()->getId() : (
 	/**
 	 * 2024-06-02
 	 * 1) https://3v4l.org/Rq0u6
 	 * 2.1) @uses \Magento\Customer\Model\Customer::getId()
 	 * 2.2) @uses \Magento\Customer\Model\Data\Customer::getId()
 	 */
-	$c instanceof C || $c instanceof DC ? $c->getId() : $c
+	$v instanceof C || $v instanceof DC ? $v->getId() : $v
 );}
