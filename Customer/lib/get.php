@@ -12,7 +12,8 @@ use Magento\Sales\Model\Order as O;
  * https://mage2.pro/t/1137
  * How to get a customer by his ID with the @see \Magento\Customer\Api\CustomerRepositoryInterface::getById()?
  * https://mage2.pro/t/1138
- * 2017-06-14 The $throw argument is not used for now.
+ * 2017-06-14 The $onE argument is not used for now.
+ * 2024-06-02 "Improve `df_customer()`": https://github.com/mage2pro/core/issues/400
  * @used-by df_ci_get()
  * @used-by df_ci_get()
  * @used-by df_ci_save()
