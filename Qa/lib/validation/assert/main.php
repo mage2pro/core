@@ -1,6 +1,7 @@
 <?php
 use Df\Core\Exception as DFE;
-use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use Magento\Framework\Phrase;
+use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2019-12-14
@@ -70,8 +71,8 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
  * @param mixed $cond
- * @param string|Th|array(string => mixed)|null $m [optional]
+ * @param string|string[]|array(string => mixed)|mixed|T|Phrase|null ...$a
  * @return mixed
  * @throws DFE
  */
-function df_assert($cond, $m = null) {return $cond ?: df_error($m);}
+function df_assert($cond, ...$a) {return $cond ?: df_error(...$a);}
