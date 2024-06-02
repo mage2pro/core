@@ -36,18 +36,31 @@ use Magento\Sales\Model\Order as O;
  * @param Closure|bool|mixed $onE [optional]
  * @throws NoSuchEntityException|DFE
  */
-function df_customer($v = null, $onE = null):?C {return df_try(function() use($v):?C {return
-	/** @var int|string|null $id */
-	/**
-	 * 2016-08-22
-	 * I do not use @see \Magento\Customer\Model\Session::getCustomer()
-	 * because it does not use the customers repository, and loads a customer directly from the database.
-	 */
-	!$v ? (
-		df_customer_session()->isLoggedIn()
-			? df_customer(df_customer_id())
-			: df_error('df_customer(): the argument is `null` and the visitor is anonymous.')
-	) : ($v instanceof C ? $v : (
+function df_customer($v = null, $onE = null):?C {return df_try(function() use($v):?C {/** @var ?C $r */
+	if ($v instanceof C) {
+		$r = $v;
+	}
+	elseif (!$v) {
+		df_assert(!df_is_backend());
+		$s = df_customer_session();
+		df_assert($s->isLoggedIn());
+		/**
+		 * 2016-08-22
+		 * I do not use @see \Magento\Customer\Model\Session::getCustomer()
+		 * because it does not use the customers repository, and loads a customer directly from the database.
+		 */
+		$r = df_customer($s->getId());
+	}
+	else {
+		$id = df_assert(
+			$v instanceof O ? $v->getCustomerId() : (
+				is_int($v) || is_string($v) ? $v : ($v instanceof DC ? $v->getId() : null)
+			)
+			# 2024-05-20
+			# "Provide an ability to specify a context for a `Df\Core\Exception` instance":
+			# https://github.com/mage2pro/core/issues/375
+			,df_error_create("Unable to detect the customer's ID", ['v' => $v])
+		);	/** @var int|string|null $id */
 		($id =
 			$v instanceof O ? $v->getCustomerId() : (
 				is_int($v) || is_string($v) ? $v : ($v instanceof DC ? $v->getId() : null)
@@ -62,5 +75,7 @@ function df_customer($v = null, $onE = null):?C {return df_try(function() use($v
 			# "Provide an ability to specify a context for a `Df\Core\Exception` instance":
 			# https://github.com/mage2pro/core/issues/375
 			: df_error("Unable to detect the customer's ID", ['v' => $v])
-	))
+		;
+	}
+	return $r;
 ;}, $onE);}
