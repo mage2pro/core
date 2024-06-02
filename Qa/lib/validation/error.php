@@ -150,7 +150,7 @@ function df_abstract($caller):void {
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
  * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/catalog/issues/6)
- * @param string|string[]|mixed|T|Phrase|null ...$a
+ * @param string|string[]|array(string => mixed)|mixed|T|Phrase|null ...$a
  * @throws DFE
  */
 function df_error(...$a):void {
