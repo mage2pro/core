@@ -62,12 +62,8 @@ function df_customer($v = null, $onE = null):?C {return df_try(function() use($v
 			# https://github.com/mage2pro/core/issues/375
 			,df_error_create("Unable to detect the customer's ID", ['v' => $v])
 		);	/** @var int|string|null $id */
-		$r = 			#
-			(df_is_email($id)
-				? df_customer_registry()->retrieveByEmail($id)
-				: df_customer_registry()->retrieve($id)
-			)
-		;
+		$rg = df_customer_registry();
+		$r = df_is_email($id) ? $rg->retrieveByEmail($id) : $rg->retrieve($id);
 	}
 	return $r;
 }, $onE);}
