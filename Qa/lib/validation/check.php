@@ -13,10 +13,13 @@ function df_between($v, $min, $max, bool $inclusive = true):bool {return
 ;}
 
 /**
- * 2024-06-02 "Implement `df_is_email()`": https://github.com/mage2pro/core/issues/398
+ * 2024-06-02
+ * 1) "Implement `df_is_email()`": https://github.com/mage2pro/core/issues/398
+ * 2.1) https://www.php.net/manual/filter.examples.validation.php
+ * 2.2) https://stackoverflow.com/a/12026863
  * @param mixed $v
  */
-function df_is_email($v):bool {return is_string($v) && df_contains($v, '@');}
+function df_is_email($v):bool {return !!filter_var($v, FILTER_VALIDATE_EMAIL);}
 
 /**
  * We need `==` here, not `===`: https://php.net/manual/function.is-int.php#35820
