@@ -32,3 +32,19 @@ function df_website($v = null):W {return $v instanceof Store ? $v->getWebsite() 
  * @throws NSE
  */
 function df_website_code($v = null):string {return df_website($v)->getCode();}
+
+/**
+ * 2024-06-02
+ * The $v argument could be one of:
+ * 		*) a website: W
+ * 		*) a store: Store
+ * 		*) a website's ID: int
+ * 		*) a website's code: string
+ * 		*) `null` or absent: the current website
+ * 		*) `true`: the default website
+ * @used-by df_subscriber()
+ * @param W|Store|int|string|null|bool $v [optional]
+ * @throws Exception
+ * @throws NSE
+ */
+function df_website_id($v = null):int {return df_website($v)->getId();}
