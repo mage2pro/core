@@ -2,9 +2,7 @@
 /**
  * Работает в разы быстрее, чем @see array_unique()
  * «Just found that array_keys(array_flip($array)); is amazingly faster than array_unique();.
-  * About 80% faster on 100 element array,
-  * 95% faster on 1000 element array
-  * and 99% faster on 10000+ element array.»
+ * About 80% faster on 100 element array, 95% faster on 1000 element array and 99% faster on 10000+ element array.»
  * http://stackoverflow.com/questions/5036504#comment19991540_5036538
  * http://www.php.net/manual/en/function.array-unique.php#70786
  * 2015-02-06
