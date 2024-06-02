@@ -62,11 +62,14 @@ function df_oqi_discount($i):float {return df_oqi_amount($i);}
 function df_oqi_discount_b($i):float {return df_oqi_amount($i);}
 
 /**
- * 2019-11-20 It returns a value for the whole row.
- * @used-by \Dfe\Vantiv\Charge::pCharge()
+ * 2017-04-20
+ * @used-by df_oqi_leafs()
+ * @used-by \Yaman\Ordermotion\Observer::BuildOrderDetail()
  * @param OI|QI $i
  */
-function df_oqi_tax($i):float {return df_oqi_amount($i);}
+function df_oqi_is_leaf($i):bool {return df_is_oi($i) ? !$i->getChildrenItems() : (
+	df_is_qi($i) ? !$i->getChildren() : df_error()
+);}
 
 /**
  * 2017-02-01
@@ -266,6 +269,13 @@ function df_oqi_roots_m($oq, Closure $f):array {return array_map($f, df_oqi_root
 function df_oqi_s($oq, string $sep = ', '):string {return df_ccc($sep, df_oqi_roots_m($oq,
 	function($i):string {/** @var OI|QI $i */return df_cc_s($i->getName(), 1 >= ($qty = df_oqi_qty($i)) ? null : "({$qty})");}
 ));}
+
+/**
+ * 2019-11-20 It returns a value for the whole row.
+ * @used-by \Dfe\Vantiv\Charge::pCharge()
+ * @param OI|QI $i
+ */
+function df_oqi_tax($i):float {return df_oqi_amount($i);}
 
 /**
  * 2017-03-06

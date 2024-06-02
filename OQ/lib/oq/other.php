@@ -161,16 +161,6 @@ function df_oq_shipping_desc($oq):float {return df_is_o($oq) ? $oq->getShippingD
 );}
 
 /**
- * 2017-04-20
- * @used-by df_oqi_leafs()
- * @used-by \Yaman\Ordermotion\Observer::BuildOrderDetail()
- * @param OI|QI $i
- */
-function df_oqi_is_leaf($i):bool {return df_is_oi($i) ? !$i->getChildrenItems() : (
-	df_is_qi($i) ? !$i->getChildren() : df_error()
-);}
-
-/**
  * 2017-03-19
  * @used-by \Df\Payment\Method::validate()
  * @used-by \Df\Payment\Operation::oq()
