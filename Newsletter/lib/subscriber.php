@@ -20,7 +20,7 @@ function df_subscriber($v = null, $w = null):S {
 	return !$v ? $r : (
 		df_is_email($v) ? $r->loadBySubscriberEmail($v, $wid) : (
 			$v instanceof C ? $r->loadByCustomer(df_customer_id($v), $wid) : (
-				df_is_o($v) ? $r->loadBySubscriberEmail($v, $wid) : df_error(['v' => $v])
+				df_is_o($v) ? $r->loadBySubscriberEmail($v->getCustomerEmail(), $wid) : df_error(['v' => $v])
 			)
 		)
 	);
