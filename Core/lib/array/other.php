@@ -173,8 +173,6 @@ function dfa_combine_self(...$a):array {$a = df_args($a); return array_combine($
  */
 function dfa_fill(int $startIndex, int $length, $v):array {return !$length ? [] : array_fill($startIndex, $length, $v);}
 
-
-
 /**
  * 2016-07-31
  * Возвращает повторяющиеся элементы исходного массива (не повторяя их). https://3v4l.org/YEf5r
