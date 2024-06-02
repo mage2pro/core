@@ -13,7 +13,6 @@ use Magento\Sales\Model\Order as O;
  * How to get a customer by his ID with the @see \Magento\Customer\Api\CustomerRepositoryInterface::getById()?
  * https://mage2.pro/t/1138
  * 2017-06-14 The $onE argument is not used for now.
- * 2024-06-02 "Improve `df_customer()`": https://github.com/mage2pro/core/issues/400
  * @used-by df_ci_get()
  * @used-by df_ci_get()
  * @used-by df_ci_save()
@@ -54,7 +53,11 @@ function df_customer($c = null, $onE = null):?C {return df_try(function() use($c
 				is_int($c) || is_string($c) ? $c : ($c instanceof DC ? $c->getId() : null)
 			)
 		)
-			? df_customer_registry()->retrieve($id)
+			# 2024-06-02 "Improve `df_customer()`": https://github.com/mage2pro/core/issues/400
+			? (df_is_email($id)
+				? df_customer_registry()->retrieveByEmail($id)
+				: df_customer_registry()->retrieve($id)
+			)
 			# 2024-05-20
 			# "Provide an ability to specify a context for a `Df\Core\Exception` instance":
 			# https://github.com/mage2pro/core/issues/375
