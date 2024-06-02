@@ -2,8 +2,10 @@
 use Df\Core\Exception as DFE;
 use Df\Quote\Model\Quote as DfQ;
 use Magento\Customer\Model\Customer as C;
+use Magento\Quote\Api\Data\CartInterface as IQ;
 use Magento\Quote\Model\Quote as Q;
 use Magento\Quote\Model\Quote\Address as QA;
+use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Model\Order as O;
 use Magento\Sales\Model\Order\Address as OA;
 
@@ -66,6 +68,18 @@ function df_oq_customer_name($oq):string {return dfcf(function($oq) {
 	# В данном случае функция вернёт просто «Guest».
 	return $r ?: (df_is_o($oq) ? $oq->getCustomerName() : (string)__('Guest'));
 }, [$oq]);}
+
+/**
+ * 2024-06-02
+ * 1.1) @uses \Magento\Quote\Model\Quote::getCustomerEmail()
+ * 1.2) @uses \Magento\Sales\Api\Data\OrderInterface::getCustomerEmail()
+ * 1.3) @uses \Magento\Sales\Model\Order::getCustomerEmail()
+ * 1.4) @see \Magento\Quote\Api\Data\CartInterface does not have a method or a field for the customer's email.
+ * 2) The customer's email can be absent in a quote.
+ * @used-by df_subscriber()
+ * @param O|IO|Q|IQ $oq
+ */
+function df_oq_email($oq):?string {return $oq->getCustomerEmail();}
 
 /**
  * 2018-11-14
