@@ -18,7 +18,7 @@ function df_subscriber($id = null, $w = null):S {
 	$wid = df_website_id($w); /** @var int $wid */
 	return !$id ? $r : (
 		df_is_email($id) ? $r->loadBySubscriberEmail($id, $wid) : (
-			$id instanceof C ? $r->loadByCustomer((int)$id->getId(), $wid) : df_error()
+			$id instanceof C ? $r->loadByCustomer($id->getId(), $wid) : df_error()
 		)
 	);
 }
