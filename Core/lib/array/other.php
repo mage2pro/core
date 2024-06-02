@@ -17,15 +17,6 @@ use Magento\Framework\DataObject as _DO;
 function df_array($v):array {return is_array($v) ? $v : [$v];}
 
 /**
- * 2015-12-30 Преобразует коллекцию или массив в карту.
- * @used-by df_mvars()
- * @used-by \Df\Config\A::get()
- * @param string|Closure $k
- * @param Traversable|array(int|string => _DO) $a
- */
-function df_index($k, $a):array {return array_combine(df_column($a, $k), df_ita($a));}
-
-/**
  * 2016-09-07
  * 2017-03-06 @uses mb_substr() корректно работает с $length = null.
  * 2022-11-23
