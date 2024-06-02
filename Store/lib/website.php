@@ -13,7 +13,7 @@ use Magento\Store\Model\Website as W;
  * 		*) `null` or absert: the current website
  * 		*) `true`: the default website
  * @used-by df_website_code()
- * @param W|S|int|string|null|bool $v [optional]
+ * @param W|O|S|int|string|null|bool $v [optional]
  * @throws NSE|Exception
  */
 function df_website($v = null):W {return $v instanceof S ? $v->getWebsite() : df_store_m()->getWebsite($v);}
@@ -28,7 +28,7 @@ function df_website($v = null):W {return $v instanceof S ? $v->getWebsite() : df
  * 		*) `null` or absent: the current website
  * 		*) `true`: the default website
  * @used-by df_msi_website2stockId()
- * @param W|S|int|string|null|bool $v [optional]
+ * @param W|O|S|int|string|null|bool $v [optional]
  * @throws Exception
  * @throws NSE
  */
@@ -44,7 +44,7 @@ function df_website_code($v = null):string {return df_website($v)->getCode();}
  * 		*) `null` or absent: the current website
  * 		*) `true`: the default website
  * @used-by df_subscriber()
- * @param W|S|int|string|null|bool $v [optional]
+ * @param W|O|S|int|string|null|bool $v [optional]
  * @throws Exception
  * @throws NSE
  */
