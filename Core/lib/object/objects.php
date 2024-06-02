@@ -140,6 +140,7 @@ function df_newa(string $c, string $expected = '', ...$a) {return df_ar(df_new($
  * @used-by df_region_name()
  * @used-by df_request_i()
  * @used-by df_review_summary()
+ * @used-by df_subscriber()
  * @used-by df_url_backend_new()
  * @used-by dfp_refund()
  * @used-by ikf_product_c()
