@@ -12,7 +12,9 @@ use Magento\Store\Model\Website as W;
  * @param W|O|S|int|string|null|bool $v [optional]
  * @throws NSE|Exception
  */
-function df_website($v = null):W {return $v instanceof S ? $v->getWebsite() : df_store_m()->getWebsite($v);}
+function df_website($v = null):W {return $v instanceof S ? $v->getWebsite() : (
+	df_is_o($v) ? $v->getStore()->getWebsite() : df_store_m()->getWebsite($v)
+);}
 
 /**
  * 2019-11-22
