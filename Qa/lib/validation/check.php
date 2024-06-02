@@ -17,6 +17,7 @@ function df_between($v, $min, $max, bool $inclusive = true):bool {return
  * 1) "Implement `df_is_email()`": https://github.com/mage2pro/core/issues/398
  * 2.1) https://www.php.net/manual/filter.examples.validation.php
  * 2.2) https://stackoverflow.com/a/12026863
+ * @used-by df_subscriber()
  * @used-by \Dfe\FacebookLogin\Customer::email()
  * @param mixed $v
  */
