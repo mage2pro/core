@@ -7,13 +7,10 @@
  * http://www.php.net/manual/en/function.array-unique.php#70786
  * 2015-02-06
  * Т.к. алгоритм @see dfa_unique_fast() использует @uses array_flip(),
- * то @see dfa_unique_fast() можно применять только в тех ситуациях,
- * когда массив содержит только строки и целые числа,
- * иначе вызов @uses array_flip() завершится сбоем уровня E_WARNING:
- * «array_flip(): Can only flip STRING and INTEGER values»
- * http://magento-forum.ru/topic/4695/
- * В реальной практике сбой случается, например, когда массив содержит значение null:
- * http://3v4l.org/bat52
+ * то @see dfa_unique_fast() можно применять только в тех ситуациях, когда массив содержит только строки и целые числа,
+ * иначе вызов @uses array_flip() завершится сбоем уровня E_WARNING: «array_flip(): Can only flip STRING and INTEGER values»
+ * https://magento-forum.ru/topic/4695
+ * В реальной практике сбой случается, например, когда массив содержит значение null: http://3v4l.org/bat52
  * Пример кода, приводящего к сбою: dfa_unique_fast(array(1, 2, 2, 3, null))
  * В то же время, несмотря на E_WARNING, метод всё-таки возвращает результат,
  * правда, без недопустимых значений:
