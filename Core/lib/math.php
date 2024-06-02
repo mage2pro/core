@@ -20,7 +20,7 @@ function df_round($v):int {return (int)round($v);}
 function df_vector_sum(array $a, $b):array {
 	$length = count($a); /** @var int $length */
 	if (!is_array($b)) {
-		$b = dfa_fill(0, $length, $b);
+		$b = array_fill(0, $length, $b);
 	}
 	else {
 		df_assert_eq($length, count($b));
