@@ -18,6 +18,7 @@ use Magento\Sales\Model\Order as O;
  * @used-by df_ci_get()
  * @used-by df_ci_save()
  * @used-by df_customer()
+ * @used-by df_customer_id()
  * @used-by df_sentry_m()
  * @used-by wolf_customer_get()
  * @used-by wolf_set()

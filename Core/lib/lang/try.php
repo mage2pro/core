@@ -10,6 +10,7 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by df_country_ctn()
  * @used-by df_currency_convert_safe()
  * @used-by df_customer()
+ * @used-by df_customer_id()
  * @used-by df_customer_group_name()
  * @used-by df_date_from_db()
  * @used-by df_gd()
