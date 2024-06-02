@@ -16,11 +16,11 @@ use Magento\Store\Model\Website as W;
  */
 function df_subscriber($v = null, $w = null):S {
 	$r = df_new_om(S::class); /** @var S $r */
-	$wid = df_website_id($w); /** @var int $wid */
 	return !$v ? $r : (
-		df_is_email($v) ? $r->loadBySubscriberEmail($v, $wid) : (
+		df_is_email($v) ? $r->loadBySubscriberEmail($v, df_website_id($w)) : (
 			$v instanceof C ? $r->loadByCustomer(df_customer_id($v), $v->getWebsiteId()) : (
-				df_is_o($v) ? $r->loadBySubscriberEmail($v->getCustomerEmail(), $wid) : df_error(['v' => $v])
+				df_is_o($v) ? $r->loadBySubscriberEmail($v->getCustomerEmail(), df_website_id($v)) :
+					df_error(['v' => $v])
 			)
 		)
 	);
