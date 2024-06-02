@@ -69,7 +69,7 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
  * @param mixed $cond
- * @param string|Th|null $m [optional]
+ * @param string|Th|array(string => mixed)|null $m [optional]
  * @return mixed
  * @throws DFE
  */
