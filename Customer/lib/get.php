@@ -36,7 +36,7 @@ use Magento\Sales\Model\Order as O;
  * @param Closure|bool|mixed $onE [optional]
  * @throws NoSuchEntityException|DFE
  */
-function df_customer($v = null, $onE = null):?C {return df_try(function() use($c) {return
+function df_customer($v = null, $onE = null):?C {return df_try(function() use($v) {return
 	/** @var int|string|null $id */
 	/**
 	 * 2016-08-22
