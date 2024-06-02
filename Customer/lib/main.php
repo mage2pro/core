@@ -28,6 +28,7 @@ function df_customer_backend_url($c) {return !$c ? null : df_url_backend_ns('cus
  * 2016-12-04
  * @used-by df_customer()
  * @used-by df_customer_is_need_confirm()
+ * @used-by df_subscriber()
  * @used-by \Df\Customer\Plugin\Js\CustomerId::afterGetSectionData()
  * @used-by \Dfe\Sift\API\B\Event::p()
  * @used-by vendor/inkifi/mediaclip-legacy/view/frontend/templates/savedproject.phtml
