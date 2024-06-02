@@ -35,6 +35,7 @@ function df_assert_oq($v) {return df_is_oq($v) ? $v : df_error('Expected an orde
  * @used-by df_order()
  * @used-by df_quote_id()
  * @used-by df_store()
+ * @used-by df_subscriber()
  * @used-by df_visitor()
  * @used-by dfp_due()
  * @used-by \Df\Payment\Operation::__construct()

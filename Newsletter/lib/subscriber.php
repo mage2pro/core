@@ -1,6 +1,7 @@
 <?php
 use Magento\Customer\Model\Customer as C;
 use Magento\Newsletter\Model\Subscriber as S;
+use Magento\Sales\Model\Order as O;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\Website as W;
 
@@ -10,15 +11,17 @@ use Magento\Store\Model\Website as W;
  * 2) https://3v4l.org/tIHdP
  * 3) "Port `df_subscriber()` from `thehcginstitute-com/m1`": https://github.com/mage2pro/core/issues/399
  * 4) @deprecated It is unused.
- * @param string|C|null $id [optional]
+ * @param string|C|O|null $v [optional]
  * @param W|Store|int|string|null|bool $w [optional]
  */
-function df_subscriber($id = null, $w = null):S {
+function df_subscriber($v = null, $w = null):S {
 	$r = df_new_om(S::class); /** @var S $r */
 	$wid = df_website_id($w); /** @var int $wid */
-	return !$id ? $r : (
-		df_is_email($id) ? $r->loadBySubscriberEmail($id, $wid) : (
-			$id instanceof C ? $r->loadByCustomer(df_customer_id($id), $wid) : df_error(['id' => $id])
+	return !$v ? $r : (
+		df_is_email($v) ? $r->loadBySubscriberEmail($v, $wid) : (
+			$v instanceof C ? $r->loadByCustomer(df_customer_id($v), $wid) : (
+				df_is_o($v) ? $r->loadBySubscriberEmail($v, $wid) : df_error(['v' => $v])
+			)
 		)
 	);
 }
