@@ -1,8 +1,4 @@
 <?php
-use Df\Config\ArrayItem as AI;
-use Df\Core\Exception as DFE;
-use Magento\Framework\DataObject as _DO;
-
 /**
  * @used-by df_con_hier_suf_ta()
  * @used-by df_explode_xpath()

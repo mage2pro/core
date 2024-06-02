@@ -1,4 +1,5 @@
 <?php
+use Magento\Framework\DataObject as _DO;
 /**
  * 2015-12-30 Преобразует коллекцию или массив в карту.
  * @used-by df_mvars()

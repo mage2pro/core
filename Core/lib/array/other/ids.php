@@ -1,4 +1,7 @@
 <?php
+use Df\Config\ArrayItem as AI;
+use Magento\Framework\DataObject as _DO;
+
 /**
  * 2016-07-31
  * @uses df_id()
