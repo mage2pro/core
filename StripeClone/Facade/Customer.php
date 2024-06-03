@@ -24,6 +24,7 @@ abstract class Customer extends \Df\Payment\Facade {
 	 * 2022-11-13
 	 * `object` as an argument type is not supported by PHP < 7.2:
 	 * https://github.com/mage2pro/core/issues/174#user-content-object
+	 * 2024-06-03 We need to support PHP ≥ 7.1.
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @see \Dfe\Moip\Facade\Customer::cardAdd()
 	 * @see \Dfe\Omise\Facade\Customer::cardAdd()
