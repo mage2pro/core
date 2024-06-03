@@ -63,6 +63,13 @@ function df_each(iterable $c, $f, ...$p):array {return df_map(function($v) use($
  * 2024-05-08
  * 1) `array_map([__CLASS__, 'f'], [1, 2, 3])` for a private `f` is allowed: https://3v4l.org/29Zim
  * 2) `is_callable([__CLASS__, 'f'])` for a private `f` is allowed too: https://3v4l.org/ctZJG
+ * 2024-06-03
+ * 1.1) "Use the `iterable` type": https://github.com/mage2pro/core/issues/403
+ * 1.2) `iterable` is supported by PHP ≥ 7.1: https://3v4l.org/qNX1j
+ * 1.3) https://php.net/manual/en/language.types.iterable.php
+ * 2) We still can not use «Union Types» (e.g. `callable|iterable`) because they require PHP ≥ 8 (we need to support PHP ≥ 7.1):
+ * 2.1) https://php.watch/versions/8.0/union-types
+ * 2.2) https://3v4l.org/AOWmO
  * @used-by df_clean_r()
  * @used-by df_db_credentials()
  * @used-by df_mail()
@@ -91,8 +98,8 @@ function df_each(iterable $c, $f, ...$p):array {return df_map(function($v) use($
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
- * @param array|callable|Traversable $a1
- * @param array|callable|Traversable $a2
+ * @param callable|iterable $a1
+ * @param callable|iterable $a2
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
  * @return array(int|string => mixed)
@@ -107,7 +114,7 @@ function df_map($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, b
 	# https://3v4l.org/3O92j
 	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
-	list($a, $f) = dfaf($a1, $a2); /** @var array|Traversable $a */ /** @var callable $f */
+	list($a, $f) = dfaf($a1, $a2); /** @var iterable $a */ /** @var callable $f */
 	/** @var array(int|string => mixed) $r */
 	if (!$pAppend && !$pPrepend && 0 === $keyPosition && !$returnKey) {
 		$r = array_map($f, df_ita($a));
