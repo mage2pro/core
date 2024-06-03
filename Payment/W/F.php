@@ -85,7 +85,7 @@ class F {
 	/**
 	 * 2017-03-15
 	 * 2022-11-10 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
-	 * 2024-06-03 We need to support PHP ≥ 7.1.
+	 * 2024-06-03 We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
 	 * @used-by self::event()
 	 * @used-by self::handler()
 	 * @param mixed ...$a

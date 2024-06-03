@@ -29,7 +29,7 @@ final class SourceFactory {
 	 * @see \Magento\Config\Model\Config\SourceFactory::create()
 	 * 2024-06-03
 	 * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
-	 * 2) We need to support PHP ≥ 7.1.
+	 * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
 	 * @return object
 	 */
 	function aroundCreate(Sb $sb, \Closure $f, string $c) {return df_class_my($c) ? new $c : $f($c);}

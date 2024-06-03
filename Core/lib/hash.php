@@ -33,7 +33,7 @@ function df_hash_a(array $a):string {
  * 2018-08-11 It would be better to use a more robust hashing solution for closures: https://stackoverflow.com/a/14620643
  * 2022-11-17
  * `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
- * 2024-06-03 We need to support PHP ≥ 7.1.
+ * 2024-06-03 We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @used-by df_hash_a()
  * @param object $o
  */

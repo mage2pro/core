@@ -1152,7 +1152,7 @@ abstract class Method implements ICached, INonInterceptable, MethodInterface {
 	 * 2022-11-17
 	 * `object` as an argument type is not supported by PHP < 7.2:
 	 * https://github.com/mage2pro/core/issues/174#user-content-object
-	 * 2024-06-03 We need to support PHP ≥ 7.1.
+	 * 2024-06-03 We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
 	 * @override
 	 * @see \Magento\Payment\Model\MethodInterface::initialize()
 	 * @param string $paymentAction

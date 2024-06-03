@@ -14,7 +14,7 @@ abstract class Preorder extends \Df\Payment\Facade {
 	/**
 	 * 2017-06-12
 	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
-	 * 2024-06-03 We need to support PHP ≥ 7.1.
+	 * 2024-06-03 We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Moip\Facade\Preorder::create()
 	 * @param array(string => mixed) $p
@@ -27,7 +27,7 @@ abstract class Preorder extends \Df\Payment\Facade {
 	 * 2022-11-17
 	 * `object` as an argument type is not supported by PHP < 7.2:
 	 * https://github.com/mage2pro/core/issues/174#user-content-object
-	 * 2024-06-03 We need to support PHP ≥ 7.1.
+	 * 2024-06-03 We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @see \Dfe\Moip\Facade\Preorder::id()
 	 * @param object $o

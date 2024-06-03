@@ -4,7 +4,7 @@ use Magento\Framework\DataObject as _DO;
 /**
  * 2024-06-03
  * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
- * 2) We need to support PHP ≥ 7.1.
+ * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @used-by df_sc()
  * @used-by \Df\Config\Backend\Serialized::processI()
  * @param string|null|array(string => mixed) $a2 [optional]
@@ -29,7 +29,7 @@ function df_ic(string $resultClass, $a2 = null, array $a3 = []) {
  * 2017-04-08
  * 2024-06-03
  * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
- * 2) We need to support PHP ≥ 7.1.
+ * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @used-by df_oq_sa()
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Api\Data\OrderInterface::afterGetPayment() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/29)
  * @used-by \Df\Widget\P\Wysiwyg::prepareElementHtml() (https://github.com/mage2pro/core/issues/392)
@@ -48,7 +48,7 @@ function df_new_omd(string $c, array $d = []) {return df_om()->create($c, ['data
  * 2015-03-23
  * 2024-06-03
  * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
- * 2) We need to support PHP ≥ 7.1.
+ * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @see df_ic()
  * @used-by \Dfe\GingerPaymentsBase\Settings::os()
  * @used-by \Df\Payment\Settings::_options()
@@ -74,7 +74,7 @@ function df_sc(string $resultClass, string $expectedClass = '', array $params = 
  * 		echo intval(isset($a->{'b'}));
  * 2022-11-17
  * `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
- * 2024-06-03 We need to support PHP ≥ 7.1.
+ * 2024-06-03 We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @see dfa()
  * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Df\StripeClone\Facade\Charge::cardData()
