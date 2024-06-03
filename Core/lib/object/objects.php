@@ -25,15 +25,6 @@ function df_ic(string $resultClass, $a2 = null, array $a3 = []) {
 }
 
 /**
- * 2016-09-05
- * @used-by df_cm_backend_url()
- * @used-by df_customer_backend_url()
- * @used-by df_order_backend_url()
- * @param object|int|string $o
- */
-function df_idn($o, bool $allowNull = false):int {return df_nat(df_id($o, $allowNull), $allowNull);}
-
-/**
  * 2017-01-12
  * 1) PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса: https://3v4l.org/U6TJR
  * Поэтому и создал эту небольшую функцию.

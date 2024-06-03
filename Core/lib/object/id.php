@@ -36,3 +36,12 @@ function df_id($o, bool $allowNull = false) {/** @var int|string|null $r */
 	df_assert($allowNull || $r);
 	return $r;
 }
+
+/**
+ * 2016-09-05
+ * @used-by df_cm_backend_url()
+ * @used-by df_customer_backend_url()
+ * @used-by df_order_backend_url()
+ * @param object|int|string $o
+ */
+function df_idn($o, bool $allowNull = false):int {return df_nat(df_id($o, $allowNull), $allowNull);}
