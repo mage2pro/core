@@ -11,6 +11,13 @@ use Df\Core\Exception as DFE;
  * 2) https://php.net/manual/language.types.iterable.php
  * https://php.net/manual/en/migration82.other-changes.php#migration82.other-changes.core
  * 3) Using `iterable` as an argument type requires PHP ≥ 7.1: https://3v4l.org/SNUMI
+ * 2024-06-03
+ * 1.1) "Use the `iterable` type": https://github.com/mage2pro/core/issues/403
+ * 1.2) `iterable` is supported by PHP ≥ 7.1: https://3v4l.org/qNX1j
+ * 1.3) https://php.net/manual/en/language.types.iterable.php
+ * 2) We still can not use «Union Types» (e.g. `callable|iterable`) because they require PHP ≥ 8 (we need to support PHP ≥ 7.1):
+ * 2.1) https://php.watch/versions/8.0/union-types
+ * 2.2) https://3v4l.org/AOWmO
  * @used-by df_bt_has()
  * @used-by df_ends_with()
  * @used-by df_find()
@@ -33,8 +40,8 @@ use Df\Core\Exception as DFE;
  * @used-by \Inkifi\Mediaclip\Event::_areAllOIAvailableForDownload()
  * @used-by \Inkifi\Mediaclip\Event::oi()
  * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
- * @param iterable|callable $a1
- * @param iterable|callable $a2
+ * @param callable|iterable $a1
+ * @param callable|iterable $a2
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
  * @return mixed|null
