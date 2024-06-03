@@ -85,6 +85,7 @@ function df_assert_class_exists(string $c, $m = null):string {
  * 2021-05-31 @deprecated It is unused.
  * 2022-11-26
  * `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
+ * 2024-06-03 We need to support PHP ≥ 7.1.
  * @param object $v
  */
 function df_is($v, string ...$cc):bool {return !!df_find($cc, function(string $c) use($v):bool {return $v instanceof $c;});}
