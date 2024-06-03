@@ -21,7 +21,7 @@ function dfaf($a, $b):array {
 	$cb = is_callable($b); /** @var bool $ca */
 	if (!$ca || !$cb) {
 		df_assert($ca || $cb);
-		$r = $ca ? [df_assert_traversable($b), $a] : [df_assert_traversable($a), $b];
+		$r = $ca ? [df_assert_iterable($b), $a] : [df_assert_iterable($a), $b];
 	}
 	else {
 		$ta = is_iterable($a); /** @var bool $ta */
