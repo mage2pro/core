@@ -2,6 +2,9 @@
 use Magento\Framework\DataObject as _DO;
 
 /**
+ * 2024-06-03
+ * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
+ * 2) We need to support PHP ≥ 7.1.
  * @used-by df_sc()
  * @used-by \Df\Config\Backend\Serialized::processI()
  * @param string|null|array(string => mixed) $a2 [optional]
