@@ -17,6 +17,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	/**
 	 * 2017-02-10
 	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
+	 * 2024-06-03 We need to support PHP ≥ 7.1.
 	 * @used-by \Df\StripeClone\Method::charge()
 	 * @see \Dfe\Moip\Facade\Charge::capturePreauthorized()
 	 * @see \Dfe\Omise\Facade\Charge::capturePreauthorized()
