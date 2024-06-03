@@ -10,8 +10,7 @@ use Magento\Framework\Model\AbstractModel as M;
  * https://github.com/CKOTech/checkout-php-library/blob/v1.2.4/com/checkout/ApiServices/Charges/ResponseModels/Charge.php?ts=4#L170-L173
  * По возможности, задействуем и сторонние реализации.
  * 2) К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
- * потому что наличие @see \Magento\Framework\DataObject::__call()
- * приводит к тому, что @see is_callable всегда возвращает true.
+ * потому что наличие @see \Magento\Framework\DataObject::__call() приводит к тому, что `is_callable` всегда возвращает `true`.
  * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
  * не гарантирует публичную доступность метода:
  * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
