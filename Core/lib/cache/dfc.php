@@ -28,7 +28,7 @@ use Df\Core\RAM;
  * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
  * @used-by \Df\Sso\Button::_prepareLayout()
- * ---
+ * 2024-06-03 We need to support PHP ≥ 7.1.
  * @see df_no_rec()
  * @see df_prop()
  * @see dfaoc()
