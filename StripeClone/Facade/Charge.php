@@ -87,6 +87,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	 * 2017-02-10 Метод должен вернуть библиотечный объект API платёжной системы.
 	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
 	 * 2022-12-19 The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
+	 * 2024-06-03 We need to support PHP ≥ 7.1.
 	 * @used-by \Df\StripeClone\Method::_refund()
 	 * @see \Dfe\Moip\Facade\Charge::refund()
 	 * @see \Dfe\Omise\Facade\Charge::refund()
