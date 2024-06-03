@@ -16,16 +16,13 @@ use Magento\Framework\Model\AbstractModel as M;
  * потому что он имеет доступность `private` или `protected`.
  * Пока эта проблема никак не решена.
  * 2016-09-05
- * Этот код прекрасно работает с объектами классов типа @see \Magento\Directory\Model\Currency
- * благодаря тому, что @uses \Magento\Framework\Model\AbstractModel::getId()
- * не просто тупо считывает значение поля id, а вызывает метод
- * @see \Magento\Framework\Model\AbstractModel::getIdFieldName()
- * который, в ссвою очередь, узнаёт имя идентифицирующего поля из своего ресурса:
+ * 1) Этот код прекрасно работает с объектами классов типа @see \Magento\Directory\Model\Currency
+ * благодаря тому, что @uses \Magento\Framework\Model\AbstractModel::getId() не просто тупо считывает значение поля id,
+ * а вызывает метод @see \Magento\Framework\Model\AbstractModel::getIdFieldName()
+ * который, в свою очередь, узнаёт имя идентифицирующего поля из своего ресурса:
  * @see \Magento\Framework\Model\AbstractModel::_init()
  * @see \Magento\Directory\Model\ResourceModel\Currency::_construct()
- *
- * @see df_hash_o() использует тот же алгоритм, но не вызывает @see df_id() ради ускорения.
- *
+ * 2) @see df_hash_o() использует тот же алгоритм, но не вызывает @see df_id() ради ускорения.
  * @used-by df_idn()
  * @used-by dfa_ids()
  * @see df_hash_o()
