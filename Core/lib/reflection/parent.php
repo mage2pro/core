@@ -6,6 +6,9 @@ use ReflectionMethod as RM;
  * 1) "Implement `df_call_parent()`": https://github.com/mage2pro/core/issues/298
  * 2) https://stackoverflow.com/a/50469869
  * 3) https://3v4l.org/usLci
+ * 2024-06-03
+ * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
+ * 2) We need to support PHP ≥ 7.1.
  * @see dfr_prop_get()
  * @see dfr_prop_set()
  * @used-by \Df\Framework\Config\Dom\L::init()
