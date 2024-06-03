@@ -17,7 +17,7 @@ use Magento\Framework\DataObject as _DO;
  * 2024-06-03
  * 1) "Use the `iterable` type": https://github.com/mage2pro/core/issues/403
  * 2) `iterable` is supported by PHP ≥ 7.1: https://3v4l.org/qNX1j
- * 3) https://php.net/manual/en/language.types.iterable.php 
+ * 3) https://php.net/manual/en/language.types.iterable.php
  * @used-by df_index()
  * @used-by df_product_images_additional()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()

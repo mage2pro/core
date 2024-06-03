@@ -34,7 +34,7 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 		 * (not handled by `__call`) methods.
 		 */
 		$methodExists = is_callable([$o, $m]) && method_exists($o, $m); /** @var bool $methodExists */
-		$callable = null; /** @var mixed $callable */
+		$callable = null; /** @var ?callable $callable */
 		if ($functionExists && !$methodExists) {
 			$callable = $m;
 			$p = array_merge([$o], $p);
