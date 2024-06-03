@@ -459,7 +459,7 @@ abstract class Client {
 	 * 2024-06-03
 	 * We still can not use «Union Types» (e.g. `callable|IFilter`) because they require PHP ≥ 8 (we need to support PHP ≥ 7.1):
 	 * https://php.watch/versions/8.0/union-types
-	 * https://3v4l.org/AOWmO 
+	 * https://3v4l.org/AOWmO
 	 * @deprecated It is unused.
 	 * @param callable|IFilter $f
 	 */

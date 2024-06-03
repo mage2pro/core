@@ -4,6 +4,9 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
 /**
  * 2017-03-28 If the function is called from a closure, then it will go up through the stask until it leaves all closures.
  * 2023-07-26 "Add the `$skip` optional parameter to `df_caller_entry()`": https://github.com/mage2pro/core/issues/281
+ * 2024-06-03
+ * 1) "Use the `callable` type": https://github.com/mage2pro/core/issues/404
+ * 2) `callable` can be nullable: https://github.com/mage2pro/core/issues/174#user-content-callable
  * @used-by df_caller_entry_m()
  * @used-by df_caller_f()
  * @used-by df_caller_m()
@@ -12,10 +15,9 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by df_sentry()
  * @used-by \Df\Framework\Log\Dispatcher::handle()
  * @param T|int|null|array(array(string => string|int)) $p [optional]
- * @param callable|null $f [optional]
  * @return array(string => string|int)
  */
-function df_caller_entry($p = 0, $f = null, array $skip = []):array {
+function df_caller_entry($p = 0, ?callable $f = null, array $skip = []):array {
 	/**
 	 * 2018-04-24
 	 * I do not understand why did I use `2 + $offset` here before.
