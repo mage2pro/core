@@ -105,13 +105,12 @@ function df_contains_ci(string $haystack, string $n):bool {return df_contains(mb
 function df_string($v):string {
 	if (is_object($v)) {
 		/**
+		 * 2016-09-04
 		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
-		 * потому что наличие @see \Magento\Framework\DataObject::__call()
-		 * приводит к тому, что @see is_callable всегда возвращает true.
-		 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
-		 * не гарантирует публичную доступность метода:
+		 * потому что наличие @see \Magento\Framework\DataObject::__call() приводит к тому, что `is_callable` всегда возвращает `true`.
+		 * @uses method_exists(), в отличие от `is_callable`, не гарантирует публичную доступность метода:
 		 * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
-		 * потому что он имеет доступность private или protected.
+		 * потому что он имеет доступность `private` или `protected`.
 		 * Пока эта проблема никак не решена.
 		 */
 		if (!method_exists($v, '__toString')) {
@@ -132,13 +131,12 @@ function df_string_debug($v):string {
 	$r = ''; /** @var string $r */
 	if (is_object($v)) {
 		/**
+		 * 2016-09-04
 		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
-		 * потому что наличие @see \Magento\Framework\DataObject::__call()
-		 * приводит к тому, что @see is_callable всегда возвращает true.
-		 * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
-		 * не гарантирует публичную доступность метода:
+		 * потому что наличие @see \Magento\Framework\DataObject::__call() приводит к тому, что `is_callable` всегда возвращает `true`.
+		 * @uses method_exists(), в отличие от `is_callable`, не гарантирует публичную доступность метода:
 		 * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
-		 * потому что он имеет доступность private или protected.
+		 * потому что он имеет доступность `private` или `protected`.
 		 * Пока эта проблема никак не решена.
 		 */
 		if (!method_exists($v, '__toString')) {
