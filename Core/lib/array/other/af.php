@@ -5,8 +5,8 @@
  * @used-by df_find()
  * @used-by df_map()
  * @used-by dfak_transform()
- * @param array|callable|Traversable $a
- * @param array|callable|Traversable $b
+ * @param iterable|callable $a
+ * @param iterable|callable $b
  * @return array(int|string => mixed)
  */
 function dfaf($a, $b):array {
