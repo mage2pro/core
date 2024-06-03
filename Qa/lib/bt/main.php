@@ -1,5 +1,5 @@
 <?php
-use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2021-10-04
@@ -10,7 +10,7 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by dfs_con()
  * @used-by \Df\Qa\Failure\Exception::trace()
  * @used-by \Df\Qa\Method::caller()
- * @param Th|int|null|array(array(string => string|int)) $p [optional]
+ * @param T|int|null|array(array(string => string|int)) $p [optional]
  * @return array(array(string => mixed))
  */
 function df_bt($p = 0, int $limit = 0):array {
@@ -39,7 +39,7 @@ function df_bt($p = 0, int $limit = 0):array {
  * 2020-05-25
  * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
  */
-function df_bt_has(string $c, string $m = '', Th $t = null):bool {
+function df_bt_has(string $c, string $m = '', ?T $t = null):bool {
 	list($c, $m) = $m ? [$c, $m] : explode('::', $c);
 	return !!df_find(function(array $i) use($c, $m) {return $c === dfa($i, 'class') && $m === dfa($i, 'function');}, df_bt($t));
 }
@@ -50,7 +50,7 @@ function df_bt_has(string $c, string $m = '', Th $t = null):bool {
  * @used-by df_bt_s()
  * @used-by df_caller_entry()
  * @used-by df_caller_module()
- * @param Th|int|null|array(array(string => string|int)) $p
- * @return Th|int
+ * @param T|int|null|array(array(string => string|int)) $p
+ * @return T|int
  */
 function df_bt_inc($p, int $o = 1) {return is_array($p) || df_is_th($p) ? $p : $o + $p;}
