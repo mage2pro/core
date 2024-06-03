@@ -9,11 +9,15 @@
  * а если у нас гарантирвоанно не @see Traversable, а ассоциативный массив,
  * то мы можем использовать array_filter вместо df_filter.
  * 2020-02-05 Now it correcly handles non-associative arrays.
+ * 2024-06-03
+ * 1) "Use the `iterable` type": https://github.com/mage2pro/core/issues/403
+ * 2) `iterable` is supported by PHP ≥ 7.1: https://3v4l.org/qNX1j
+ * 3) https://php.net/manual/en/language.types.iterable.php
  * @used-by df_clean_r()
  * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \TFC\Core\Plugin\Sales\Model\Order::afterGetParentItemsRandomCollection()
- * @param callable|array(int|string => mixed)|array[]Traversable $a1
- * @param callable|array(int|string => mixed)|array[]|Traversable $a2
+ * @param callable|iterable $a1
+ * @param callable|iterable $a2
  * @return array(int|string => mixed)
  */
 function df_filter($a1, $a2):array {return df_filter_f($a1, $a2, 'array_filter');}
