@@ -46,6 +46,9 @@ function df_new_omd(string $c, array $d = []) {return df_om()->create($c, ['data
 
 /**
  * 2015-03-23
+ * 2024-06-03
+ * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
+ * 2) We need to support PHP ≥ 7.1.
  * @see df_ic()
  * @used-by \Dfe\GingerPaymentsBase\Settings::os()
  * @used-by \Df\Payment\Settings::_options()
