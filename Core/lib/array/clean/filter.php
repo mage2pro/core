@@ -106,7 +106,7 @@ function df_filter_head($a1, $a2):array {return df_filter_f($a1, $a2, function(a
  * @param callable|iterable $a2
  * @return array(int|string => mixed)
  */
-function df_filter_tail($a1, $a2):array {return df_filter_f($a1, $a2, function(array $a, $f):array {
+function df_filter_tail($a1, $a2):array {return df_filter_f($a1, $a2, function(array $a, callable $f):array {
 	$r = [];
 	foreach ($a as $k => $v) {/** @var int|string $k */ /** @var mixed $v */
 		if (call_user_func($f, $v)) {
