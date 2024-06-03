@@ -59,7 +59,7 @@ function df_caller_entry_m($p = 0):array {return df_eta(df_caller_entry(df_bt_in
 		# 1) "«Module 'Monolog_Logger' is not correctly registered» in `lib/internal/Magento/Framework/Module/Dir.php:62`":
 		# https://github.com/mage2pro/core/issues/318
 		# 2) `Monolog_Logger` is not a Magento module, so I added `df_module_enabled()`.
-		&& df_module_enabled($c) /** @var string|null $c */
+		&& df_module_enabled($c) /** @var ?string $c */
 		# 2024-02-11
 		# 1) "`df_caller_entry_m()` should skip `Df\Framework\Log\Dispatcher`": https://github.com/mage2pro/core/issues/349
 		# 2) "`df_caller_entry_m()` should skip `Df\Framework\Log\*` classes": https://github.com/mage2pro/core/issues/350
