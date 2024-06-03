@@ -14,6 +14,10 @@ use Magento\Framework\DataObject as _DO;
  * Even in this case it differs from @see array_column():
  * array_column() misses the keys: https://3v4l.org/llMrL
  * df_column() preserves the keys.
+ * 2024-06-03
+ * 1) "Use the `iterable` type": https://github.com/mage2pro/core/issues/403
+ * 2) `iterable` is supported by PHP ≥ 7.1: https://3v4l.org/qNX1j
+ * 3) https://php.net/manual/en/language.types.iterable.php 
  * @used-by df_index()
  * @used-by df_product_images_additional()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
@@ -22,7 +26,7 @@ use Magento\Framework\DataObject as _DO;
  * @param string|null $fk [optional]
  * @return array(int|string => mixed)
  */
-function df_column($c, $fv, $fk = null):array {return df_map_kr($c, function($k, $v) use($fv, $fk) {return [
+function df_column(iterable $c, $fv, $fk = null):array {return df_map_kr($c, function($k, $v) use($fv, $fk):array {return [
 	!$fk ? $k : df_call($v, $fk), df_call($v, $fv)
 ];});}
 
