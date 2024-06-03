@@ -39,6 +39,9 @@ function dfr_prop_get($o, string $n) {return dfr_prop($o, $n)->getValue($o);}
 
 /**
  * 2023-08-01 "Implement `dfr_prop_set()`": https://github.com/mage2pro/core/issues/300
+ * 2024-06-03
+ * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
+ * 2) We need to support PHP ≥ 7.1.
  * @see df_call_parent()
  * @see dfr_prop_get()
  * @used-by \Df\Framework\Config\Dom\L::init()
