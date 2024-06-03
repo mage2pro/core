@@ -177,6 +177,7 @@ abstract class Charge extends \Df\Payment\Facade {
 	/**
 	 * 2017-06-13
 	 * 2022-11-12 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
+	 * 2024-06-03 We need to support PHP ≥ 7.1.
 	 * @final I do not use the PHP «final» keyword here to allow refine the return type using PHPDoc.
 	 * @used-by \Dfe\Moip\Facade\Charge::create()
 	 * @return object
