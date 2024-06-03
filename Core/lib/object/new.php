@@ -48,6 +48,9 @@ function df_newa(string $c, string $expected = '', ...$a) {return df_ar(df_new($
 /**
  * 2016-01-06
  * 2017-01-12 Use @see df_new() if you do not need Object Manager.
+ * 2024-06-03
+ * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
+ * 2) We need to support PHP ≥ 7.1.
  * @see df_new_omd()
  * @used-by df_category_c()
  * @used-by df_cms_blocks()

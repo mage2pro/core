@@ -1,7 +1,5 @@
 <?php
-use Df\Config\ArrayItem as AI;
 use Magento\Framework\DataObject as _DO;
-use Magento\Framework\Model\AbstractModel as M;
 
 /**
  * @used-by df_sc()
