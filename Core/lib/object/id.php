@@ -11,12 +11,10 @@ use Magento\Framework\Model\AbstractModel as M;
  * По возможности, задействуем и сторонние реализации.
  * 2) К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
  * потому что наличие @see \Magento\Framework\DataObject::__call() приводит к тому, что `is_callable` всегда возвращает `true`.
- * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
- * не гарантирует публичную доступность метода:
+ * @uses method_exists(), в отличие от `is_callable`, не гарантирует публичную доступность метода:
  * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
- * потому что он имеет доступность private или protected.
+ * потому что он имеет доступность `private` или `protected`.
  * Пока эта проблема никак не решена.
- *
  * 2016-09-05
  * Этот код прекрасно работает с объектами классов типа @see \Magento\Directory\Model\Currency
  * благодаря тому, что @uses \Magento\Framework\Model\AbstractModel::getId()
