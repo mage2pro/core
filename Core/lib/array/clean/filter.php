@@ -10,9 +10,12 @@
  * то мы можем использовать array_filter вместо df_filter.
  * 2020-02-05 Now it correcly handles non-associative arrays.
  * 2024-06-03
- * 1) "Use the `iterable` type": https://github.com/mage2pro/core/issues/403
- * 2) `iterable` is supported by PHP ≥ 7.1: https://3v4l.org/qNX1j
- * 3) https://php.net/manual/en/language.types.iterable.php
+ * 1.1) "Use the `iterable` type": https://github.com/mage2pro/core/issues/403
+ * 1.2) `iterable` is supported by PHP ≥ 7.1: https://3v4l.org/qNX1j
+ * 1.3) https://php.net/manual/en/language.types.iterable.php
+ * 2) We still can not use «Union Types» (e.g. `callable|iterable`) because they require PHP ≥ 8 (we need to support PHP ≥ 7.1):
+ * https://php.watch/versions/8.0/union-types
+ * https://3v4l.org/AOWmO
  * @used-by df_clean_r()
  * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \TFC\Core\Plugin\Sales\Model\Order::afterGetParentItemsRandomCollection()
