@@ -90,11 +90,18 @@ function dfak_transform($a1, $a2, bool $req = false):array {
  * 2020-02-04
  * It does not change keys of a non-associative array,
  * but it is applied recursively to nested arrays, so it could change keys their keys.
+ * 2024-06-03
+ * 1.1) "Use the `iterable` type": https://github.com/mage2pro/core/issues/403
+ * 1.2) `iterable` is supported by PHP ≥ 7.1: https://3v4l.org/qNX1j
+ * 1.3) https://php.net/manual/en/language.types.iterable.php
+ * 2) We still can not use «Union Types» (e.g. `callable|iterable`) because they require PHP ≥ 8 (we need to support PHP ≥ 7.1):
+ * 2.1) https://php.watch/versions/8.0/union-types
+ * 2.2) https://3v4l.org/AOWmO
  * @used-by dfa_key_case()
  * @used-by dfak_prefix()
  * @used-by dfak_transform()
- * @param array|callable|Traversable $a1
- * @param array|callable|Traversable $a2
+ * @param callable|iterable $a1
+ * @param callable|iterable $a2
  * @return array(string => mixed)
  */
 function dfak_transform_r($a1, $a2):array {return dfak_transform($a1, $a2, true);}
