@@ -5,12 +5,11 @@ use Magento\Framework\Model\AbstractModel as M;
 /**
  * 2016-08-24
  * 2016-09-04
- * Метод getId присутствует не только у потомков @see \Magento\Framework\Model\AbstractModel,
+ * 1) Метод getId присутствует не только у потомков @see \Magento\Framework\Model\AbstractModel,
  * но и у классов сторонних библиотек, например:
  * https://github.com/CKOTech/checkout-php-library/blob/v1.2.4/com/checkout/ApiServices/Charges/ResponseModels/Charge.php?ts=4#L170-L173
  * По возможности, задействуем и сторонние реализации.
- *
- * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
+ * 2) К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),
  * потому что наличие @see \Magento\Framework\DataObject::__call()
  * приводит к тому, что @see is_callable всегда возвращает true.
  * Обратите внимание, что @uses method_exists(), в отличие от @see is_callable(),
