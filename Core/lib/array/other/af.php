@@ -7,7 +7,7 @@
  * @used-by dfak_transform()
  * @param iterable|callable $a
  * @param iterable|callable $b
- * @return array(int|string => mixed)
+ * @return array(iterable|callable)
  */
 function dfaf($a, $b):array {
 	# 2020-02-15
