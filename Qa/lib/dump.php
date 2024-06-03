@@ -40,7 +40,6 @@ function df_dump_ds($v):string {return df_json_dont_sort(function() use($v):stri
  * @see df_dump()
  * @used-by df_ar()        
  * @used-by df_assert_gd()
- * @used-by df_assert_iterable()
  * @used-by df_oq_currency_c()
  * @used-by df_order()
  * @used-by df_result_s()

@@ -65,7 +65,6 @@ function df_check_s($v):bool {return is_string($v) || is_int($v) || is_null($v) 
 if (!function_exists('is_iterable')) {
 	/**
 	 * 2016-08-09 http://stackoverflow.com/questions/31701517#comment59189177_31701556
-	 * @used-by df_assert_iterable()
 	 * @used-by df_find()
 	 * @used-by dfaf()
 	 * @used-by \Df\Qa\Dumper::dumpObject()

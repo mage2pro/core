@@ -47,7 +47,6 @@ function df_abstract($caller):void {
  * @used-by df_assert_ne()
  * @used-by df_assert_nef()
  * @used-by df_assert_oq()
- * @used-by df_assert_iterable()
  * @used-by df_asset_url()
  * @used-by df_bool()
  * @used-by df_call()
