@@ -431,6 +431,10 @@ abstract class Client {
 
 	/**
 	 * 2017-10-08
+	 * 2024-06-03
+	 * We still can not use «Union Types» (e.g. `callable|IFilter`) because they require PHP ≥ 8 (we need to support PHP ≥ 7.1):
+	 * https://php.watch/versions/8.0/union-types
+	 * https://3v4l.org/AOWmO
 	 * @used-by self::resPath()
 	 * @used-by self::resStripRoot()
 	 * @param callable|IFilter $f
@@ -439,6 +443,10 @@ abstract class Client {
 
 	/**
 	 * 2017-10-08 Adds $f at the lowest priority (it will be applied after all other filters).
+	 * 2024-06-03
+	 * We still can not use «Union Types» (e.g. `callable|IFilter`) because they require PHP ≥ 8 (we need to support PHP ≥ 7.1):
+	 * https://php.watch/versions/8.0/union-types
+	 * https://3v4l.org/AOWmO
 	 * @deprecated It is unused.
 	 * @param callable|IFilter $f
 	 */
@@ -448,6 +456,10 @@ abstract class Client {
 
 	/**
 	 * 2017-07-07 Adds $f at the lowest priority (it will be applied after all other filters).
+	 * 2024-06-03
+	 * We still can not use «Union Types» (e.g. `callable|IFilter`) because they require PHP ≥ 8 (we need to support PHP ≥ 7.1):
+	 * https://php.watch/versions/8.0/union-types
+	 * https://3v4l.org/AOWmO 
 	 * @deprecated It is unused.
 	 * @param callable|IFilter $f
 	 */
