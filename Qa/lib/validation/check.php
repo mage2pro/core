@@ -60,16 +60,3 @@ function df_check_iso2($v):bool {return \Df\Zf\Validate\StringT\Iso2::s()->isVal
  * @param mixed $v
  */
 function df_check_s($v):bool {return is_string($v) || is_int($v) || is_null($v) || is_bool($v) || df_is_phrase($v);}
-
-/** 2022-10-15 @see is_iterable() has been added to PHP 7.1: https://php.net/manual/function.is-iterable.php */
-if (!function_exists('is_iterable')) {
-	/**
-	 * 2016-08-09 http://stackoverflow.com/questions/31701517#comment59189177_31701556
-	 * @used-by df_find()
-	 * @used-by dfaf()
-	 * @used-by \Df\Qa\Dumper::dumpObject()
-	 * @used-by \Df\Sentry\Extra::adjust()
-	 * @param mixed $v
-	 */
-	function is_iterable($v):bool {return is_array($v) || $v instanceof Traversable;}
-}
