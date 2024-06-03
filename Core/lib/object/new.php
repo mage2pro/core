@@ -1,4 +1,6 @@
 <?php
+use Magento\Framework\DataObject as _DO;
+
 /**
  * 2017-01-12
  * 1) PHP, к сожалению, не разрешает в выражении с new делать выражением имя класса: https://3v4l.org/U6TJR
@@ -42,3 +44,56 @@ function df_new(string $c, ...$a) {return new $c(...$a);}
  * @return object
  */
 function df_newa(string $c, string $expected = '', ...$a) {return df_ar(df_new($c, ...$a), $expected);}
+
+/**
+ * 2016-01-06
+ * 2017-01-12 Use @see df_new() if you do not need Object Manager.
+ * @see df_new_omd()
+ * @used-by df_category_c()
+ * @used-by df_cms_blocks()
+ * @used-by df_controller_raw()
+ * @used-by df_csv_o()
+ * @used-by df_currency()
+ * @used-by df_db_transaction()
+ * @used-by df_load()
+ * @used-by df_mail()
+ * @used-by df_mail_shipment()
+ * @used-by df_mvars()
+ * @used-by df_oi_load()
+ * @used-by df_order_c()
+ * @used-by df_package_new()
+ * @used-by df_pc()
+ * @used-by df_region_name()
+ * @used-by df_request_i()
+ * @used-by df_review_summary()
+ * @used-by df_subscriber()
+ * @used-by df_url_backend_new()
+ * @used-by dfp_refund()
+ * @used-by ikf_product_c()
+ * @used-by ikf_project()
+ * @used-by mc_h()
+ * @used-by \Df\Customer\AddAttribute\Address::p()
+ * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
+ * @used-by \Df\Directory\Model\Country::c()
+ * @used-by \Df\Framework\Log\Handler\Info::lb()
+ * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
+ * @used-by \Df\Framework\Upgrade::sEav()
+ * @used-by \Df\Payment\ConfigProvider::p()
+ * @used-by \Df\Sales\Model\Order\Payment::getInvoiceForTransactionId()
+ * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::addressConfig()
+ * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by \Df\Sso\CustomerReturn::register()
+ * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::aroundGetSequence()
+ * @used-by \Doormall\Shipping\Method::collectRates()
+ * @used-by \Frugue\Shipping\Method::collectRates()
+ * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
+ * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pShipment()
+ * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
+ * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
+ * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
+ * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer()
+ * @param array(string => mixed) $p [optional]
+ * @return _DO|object
+ */
+function df_new_om(string $c, array $p = []) {return df_om()->create($c, $p);}
