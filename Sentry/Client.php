@@ -380,7 +380,8 @@ final class Client {
 	 */
 	private function sanitize(array &$d):void {
 		foreach(['request', 'user', 'extra', ['contexts', 5]] as $k) {
-			list($k, $depth) = is_array($k) ? $k : [$k, 3];
+			# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+			[$k, $depth] = is_array($k) ? $k : [$k, 3];
 			if (!empty($d[$k])) {
 				$d[$k] = $this->serializer->serialize($d[$k], $depth);
 			}
