@@ -157,7 +157,8 @@ function df_scope_stores():array {
 	# https://3v4l.org/3O92j
 	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
-	list($t, $id) = df_scope(); /** @var int $id */ /** @var string $t */
+	# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+	[$t, $id] = df_scope(); /** @var int $id */ /** @var string $t */
 	return IScopeConfig::SCOPE_TYPE_DEFAULT === $t ? df_stores() : (
 		SS::SCOPE_STORES === $t ? [df_store($id)] : df_store_m()->getWebsite($id)->getStores()
 	);
