@@ -125,7 +125,8 @@ class Dispatcher extends _P {
 						# https://3v4l.org/3O92j
 						# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 						# https://stackoverflow.com/a/28233499
-						list($v, $extra) = [$args[1], $args[2]];
+						# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+						[$v, $extra] = [$args[1], $args[2]];
 						# 2023-12-08
 						# "Set a proper title instead of `[` for Sentry messages like
 						# «Unable to proceed: the maintenance mode is enabled»": https://github.com/mage2pro/core/issues/339
