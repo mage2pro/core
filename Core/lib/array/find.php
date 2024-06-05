@@ -56,7 +56,8 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, 
 	# https://3v4l.org/3O92j
 	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
-	list($a, $f) = dfaf($a1, $a2); /** @var iterable $a */ /** @var callable $f */
+	# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+	[$a, $f] = dfaf($a1, $a2); /** @var iterable $a */ /** @var callable $f */
 	$pAppend = df_array($pAppend); $pPrepend = df_array($pPrepend);
 	$r = null; /** @var mixed|null $r */
 	foreach ($a as $k => $v) {/** @var int|string $k */ /** @var mixed $v */ /** @var mixed[] $primaryArgument */
