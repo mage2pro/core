@@ -13,7 +13,8 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  */
 function df_assert_between($v, $min, $max, bool $inclusive = true) {
 	if (!df_between($v, $min, $max, $inclusive)) {
-		list($o1, $o2) = !$inclusive ? ['>', '<'] : ['≥', '≤']; /** @var string $o1 */ /** @var string $o2 */
+		# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+		[$o1, $o2] = !$inclusive ? ['>', '<'] : ['≥', '≤']; /** @var string $o1 */ /** @var string $o2 */
 		df_error("The value «{$v}» is not allowed. An allowed value should be $o1 $min and $o2 $max.");
 	}
 	return $v;
