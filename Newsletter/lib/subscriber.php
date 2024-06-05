@@ -1,9 +1,6 @@
 <?php
 use Magento\Customer\Model\Customer as C;
 use Magento\Newsletter\Model\Subscriber as S;
-use Magento\Quote\Api\Data\CartInterface as IQ;
-use Magento\Quote\Model\Quote as Q;
-use Magento\Sales\Api\Data\OrderInterface as IO;
 use Magento\Sales\Model\Order as O;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\Website as W;
