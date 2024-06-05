@@ -42,7 +42,8 @@ class Currency implements \Df\Framework\IValidator {
 		# https://3v4l.org/3O92j
 		# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 		# https://stackoverflow.com/a/28233499
-		list($whatToEnable, $whatToSet, $object) =
+		# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+		[$whatToEnable, $whatToSet, $object] =
 			1 === count($namesA)
 			? ["the {$namesS} currency", 'an exchange rate', 'it']
 			: ["at least one of the {$namesS} currencies", 'exchange rates', 'them']
