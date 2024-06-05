@@ -29,10 +29,12 @@ function df_pad(string $phrase, int $length, string $pattern = ' ', int $positio
 		/** @var int $left_pad */ /** @var int $right_pad */
 		switch ($position) {
 			case STR_PAD_RIGHT:
-				list($left_pad, $right_pad) = [0, $num_pad_chars];
+				# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+				[$left_pad, $right_pad] = [0, $num_pad_chars];
 				break;
 			case STR_PAD_LEFT:
-				list($left_pad, $right_pad) = [$num_pad_chars, 0];
+				# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+				[$left_pad, $right_pad] = [$num_pad_chars, 0];
 				break;
 			case STR_PAD_BOTH:
 				$left_pad = floor($num_pad_chars / 2);
