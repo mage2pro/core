@@ -46,6 +46,7 @@ function dfpex_from_doc(float $a, ...$args):float {
 	# https://3v4l.org/3O92j
 	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
-	list($m, $doc) = dfpex_args(...$args); /** @var M $m */ /** @var Q|O $doc */
+	# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+	[$m, $doc] = dfpex_args(...$args); /** @var M $m */ /** @var Q|O $doc */
 	return dfp_currency($m)->fromOrder($a, $doc);
 }
