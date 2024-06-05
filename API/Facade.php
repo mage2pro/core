@@ -158,7 +158,8 @@ abstract class Facade {
 		# https://3v4l.org/3O92j
 		# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 		# https://stackoverflow.com/a/28233499
-		list($id, $p) = is_array($p) ? [null, $p] : [$p, []]; /** @var int|string|null $id */
+		# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+		[$id, $p] = is_array($p) ? [null, $p] : [$p, []]; /** @var int|string|null $id */
 		/** @uses \Df\API\Client::__construct() */
 		$c = df_newa(df_con($this, 'API\\Client'), Client::class,
 			# 2022-11-17
