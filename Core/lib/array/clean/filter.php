@@ -51,7 +51,8 @@ function df_filter_f($a1, $a2, callable $fA):array {/** @var array $r */
 	# https://3v4l.org/3O92j
 	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
-	list($a, $fI) = dfaf($a1, $a2); /** @var iterable $a */ /** @var callable $fI */
+	# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+	[$a, $fI] = dfaf($a1, $a2); /** @var iterable $a */ /** @var callable $fI */
 	$a = df_ita($a);
 	$r = call_user_func($fA, $a, $fI);
 	/**
