@@ -74,7 +74,8 @@ final class PlaceOrderInternal {
 		# https://3v4l.org/3O92j
 		# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 		# https://stackoverflow.com/a/28233499
-		list($mc, $md) =
+		# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+		[$mc, $md] =
 			$isSpecific
 			? [$e->messageC(), df_tag_if($e->messageD(), $e->isMessageHtml(), 'pre')]
 			: [dfp_error_message(), df_xtsd($e)]
