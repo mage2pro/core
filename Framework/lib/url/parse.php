@@ -41,7 +41,8 @@ function df_url_bp(string $u):array {
 		# https://3v4l.org/3O92j
 		# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 		# https://stackoverflow.com/a/28233499
-		list($base, $path) = ['', $u];
+		# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+		[$base, $path] = ['', $u];
 	}
 	else {
 		$z = df_zuri($u); /** @var zUriH $z */
