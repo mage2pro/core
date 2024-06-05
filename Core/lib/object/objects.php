@@ -21,7 +21,8 @@ function df_ic(string $resultClass, $a2 = null, array $a3 = []) {
 	# https://3v4l.org/3O92j
 	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
-	list($expectedClass, $params) = is_array($a2) ? [null, $a2] : [$a2, $a3];
+	# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+	[$expectedClass, $params] = is_array($a2) ? [null, $a2] : [$a2, $a3];
 	return df_ar(new $resultClass($params), $expectedClass);
 }
 
