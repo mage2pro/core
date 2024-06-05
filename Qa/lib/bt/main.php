@@ -18,11 +18,12 @@ function df_bt($p = 0, int $limit = 0):array {
 		debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, !$limit ? 0 : 1 + $p + $limit)
 	);
 	# 2023-07-27 "Shift the `file` and `line` keys to an entry back in `df_bt()`": https://github.com/mage2pro/core/issues/283
-	list($f, $l) = ['', 0]; /** @var string $f */ /** @var int $l */
+	# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+	[$f, $l] = ['', 0]; /** @var string $f */ /** @var int $l */
 	foreach ($r as &$e) {/** @var array(string => int|string) $e */
-		list($f2, $l2) = [df_bt_entry_file($e), df_bt_entry_line($e)]; /** @var string $f2 */ /** @var int $l2 */
+		[$f2, $l2] = [df_bt_entry_file($e), df_bt_entry_line($e)]; /** @var string $f2 */ /** @var int $l2 */
 		$e = ['file' => $f, 'line' => $l] + $e;
-		list($f, $l) = [$f2, $l2];
+		[$f, $l] = [$f2, $l2];
 	}
 	/**
 	 * 2023-07-28 We skip the first entry: `df_bt`.
