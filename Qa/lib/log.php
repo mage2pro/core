@@ -67,7 +67,8 @@ function df_log($v, $m = null, array $d = [], string $suf = ''):void {
  */
 function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 	/** @var T|null $t */ /** @var array|string|mixed $d */ /** @var string $suf */ /** @var string $pref */
-	list($t, $d, $suf, $pref) = df_is_th($p2) ? [$p2, $p3, $p4, ''] : [null, $p2, df_ets($p3), $p4];
+	# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
+	[$t, $d, $suf, $pref] = df_is_th($p2) ? [$p2, $p3, $p4, ''] : [null, $p2, df_ets($p3), $p4];
 	$m = $m ?: ($t ? df_caller_module($t) : df_caller_module());
 	if (!$suf) {
 		# 2023-07-26
