@@ -122,8 +122,12 @@ function df_fetch_one(string $t, $cols, array $compare) {
 	 * 2016-03-01
 	 * @uses \Zend_Db_Adapter_Abstract::fetchOne() возвращает false при пустом результате запроса.
 	 * https://mage2.pro/t/853
+	 * 2024-06-08 I added `is_array($cols)`.
 	 */
-	return '*' !== $cols ? df_ftn(df_conn()->fetchOne($s)) : df_eta(df_conn()->fetchRow($s, [], \Zend_Db::FETCH_ASSOC));
+	return '*' === $cols || is_array($cols)
+		? df_eta(df_conn()->fetchRow($s, [], \Zend_Db::FETCH_ASSOC))
+		: df_ftn(df_conn()->fetchOne($s))
+	;
 }
 
 /**
