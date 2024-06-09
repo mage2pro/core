@@ -38,6 +38,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
 	private function getModuleComposerPackageParent(string $modulePath):Package {
+		$r = null; /** @var Package $r */
 		# 2024-06-09
 		# «$modulePath/..» means the parent directory:
 		# 		«Also look in parent directory of registered module directory to allow modules to follow the pds/skeleton standard
@@ -48,10 +49,11 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 		foreach ([$modulePath, "$modulePath/.."] as $p) /** @var string $p */
 			$rd = df_fs_rf()->create($p); {/** @var IRead|Read $rd */
 			if ($rd->isExist($f) && $rd->isReadable($f)) {
-				return df_package_new(json_decode($rd->readFile($f)));
+				$r = df_package_new(json_decode($rd->readFile($f)));
+				break;
 			}
 		}
-		return df_package_new(new \stdClass);
+		return $r ?: df_package_new(new \stdClass);
 	}
 
 	/**
