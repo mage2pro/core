@@ -15,7 +15,7 @@
  * @used-by \Df\Framework\Request::clean()
  * @used-by \Dfe\Markdown\Observer\Catalog\ControllerAction::processPost()
  * @param array(string => mixed) $a
- * @param string|string[] $k
+ * @param string|string[] ...$k
  * @return array(string => mixed)
  */
 function dfa_unset(array $a, ...$k):array {return array_diff_key($a, array_flip(df_args($k)));}
