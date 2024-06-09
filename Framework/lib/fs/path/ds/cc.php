@@ -31,7 +31,8 @@
  * @param string|string[] ...$a
  */
 function df_cc_path(...$a):string {
-	return implode('/', df_clean(dfa_flatten($a)));
+	$a = df_clean(dfa_flatten($a));
+	return implode('/', $a);
 }
 
 /**
