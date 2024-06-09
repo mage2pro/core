@@ -7,7 +7,7 @@ use Magento\Framework\Filesystem\Directory\ReadInterface as IRead;
 # 2016-09-03
 # Для устранения сбоя https://mage2.pro/t/2002
 # «Warning: file_get_contents(vendor/mage2pro/core/<...>/composer.json):
-# failed to open stream: No such file or directory in vendor/magento/module-sample-data/Model/ Dependency.php on line 109»
+# failed to open stream: No such file or directory in vendor/magento/module-sample-data/Model/Dependency.php on line 109»
 class Dependency extends \Magento\SampleData\Model\Dependency {
 	/**
 	 * 2020-06-16
