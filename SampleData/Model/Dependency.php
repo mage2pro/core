@@ -6,9 +6,9 @@ use Magento\Framework\Filesystem\Directory\Read;
 use Magento\Framework\Filesystem\Directory\ReadInterface as IRead;
 use stdClass as O;
 # 2016-09-03
-# Для устранения сбоя https://mage2.pro/t/2002
 # «Warning: file_get_contents(vendor/mage2pro/core/<...>/composer.json):
-# failed to open stream: No such file or directory in vendor/magento/module-sample-data/Model/Dependency.php on line 109»
+# failed to open stream: No such file or directory in vendor/magento/module-sample-data/Model/Dependency.php on line 109»:
+# https://mage2.pro/t/2002
 # 2024-06-09
 # 1) "Rework `Df\SampleData\Model\Dependency`": https://github.com/mage2pro/core/issues/411
 # 2) The «failed to open stream» bug has been fixed since Magento 2.2:
