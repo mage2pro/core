@@ -33,8 +33,11 @@
 function df_cc_path(...$a):string {
 	$a = df_clean(dfa_flatten($a));
 	$s = df_path_n(implode($a)); /** @var string $s */
-	$r = implode('/', df_trim_ds($a));
-	return (df_starts_with($s, '/') ? '/' : '') . $r . (df_ends_with($s, '/') && 1 < mb_strlen($s) ? '/' : '');
+	return
+		(df_starts_with($s, '/') ? '/' : '')
+		. implode('/', df_trim_ds($a)) 
+		. (df_ends_with($s, '/') && 1 < mb_strlen($s) ? '/' : '')
+	;
 }
 
 /**
