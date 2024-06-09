@@ -59,14 +59,15 @@ function df_img_resize(string $f, $w = null, $h = null):string {
 }
 
 /**
- * 2015-11-30                                      
+ * 2015-11-30
+ * 2024-06-09 "`df_media_path_absolute()` → `df_media_path_abs()`": https://github.com/mage2pro/core/issues/409
  * @used-by df_media_url2path()
  * @used-by \Dfe\GoogleFont\Fonts\Fs::absolute()
  * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_product_image_path2abs()
  */
-function df_media_path_absolute(string $p = ''):string {return df_sys_path_abs(DL::MEDIA, $p);}
+function df_media_path_abs(string $p = ''):string {return df_sys_path_abs(DL::MEDIA, $p);}
 
 /**
  * 2015-11-30 Левый «/» мы убираем.
@@ -101,7 +102,7 @@ function df_media_path2url(string $p = ''):string {return df_store()->getBaseUrl
  * @used-by df_product_image_path()
  * @see df_media_path2url()
  */
-function df_media_url2path(string $u = ''):string {return df_media_path_absolute(df_trim_text_left(
+function df_media_url2path(string $u = ''):string {return df_media_path_abs(df_trim_text_left(
 	$u, df_store()->getBaseUrl(U::URL_TYPE_MEDIA)
 ));}
 

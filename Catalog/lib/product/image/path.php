@@ -17,7 +17,7 @@ function df_product_image_path(P $p, string $type = '', array $attrs = []):strin
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @used-by \MageWorx\OptionFeatures\Helper\Data::getThumbImageUrl(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/46)
  * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
- * @see df_media_path_absolute()
+ * @see df_media_path_abs()
  */
 function df_product_image_path2abs(string $rel):string {return df_cc_path(df_product_images_path(), df_trim_ds_left($rel));}
 
@@ -49,7 +49,7 @@ function df_product_images_path_rel():string {return dfcf(function() {return df_
 /**
  * 2019-08-23
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
- * @see df_media_path_absolute()
+ * @see df_media_path_abs()
  */
 function df_product_image_tmp_path2abs(string $rel):string {return df_sys_path_abs(
 	DL::MEDIA, 'tmp/catalog/product/' . df_trim_ds_left($rel)
