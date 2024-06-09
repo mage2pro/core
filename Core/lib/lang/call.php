@@ -85,9 +85,9 @@ function df_call_a(callable $f, array $parentArgs, $pAppend = [], $pPrepend = []
 	 * 2016-11-13 We can not use @see df_args() here
 	 * 2019-06-05
 	 * The parent function could be called in 3 ways:
-	 * 1) With a single array argument.
-	 * 2) With a single scalar (non-array) argument.
-	 * 3) With multiple arguments.
+	 * 		1) With a single array argument.
+	 * 		2) With a single scalar (non-array) argument.
+	 * 		3) With multiple arguments.
 	 * `1 === count($parentArgs)` in the 1st and 2nd cases.
 	 *  1 <> count($parentArgs) in the 3rd case.
 	 * We should return an array in the 1st and 3rd cases, and a scalar result in the 2nd case.
