@@ -7,7 +7,7 @@
  * @used-by df_class_second_lc() 
  * @used-by df_explode_class_lc() 
  * @used-by df_explode_class_lc_camel()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  * @return string|string[]
  */
 function df_lcfirst(...$a) {return df_call_a(function(string $s):string {return
