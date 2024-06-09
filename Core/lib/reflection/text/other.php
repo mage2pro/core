@@ -18,7 +18,7 @@ function df_class_file($c):string {return df_path_n((new RC(df_cts(df_ctr($c))))
  * We can not declare the argument as `string ...$newSuffix` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_con_sibling()
  * @param string|object $c
- * @param string|string[] $newSuffix
+ * @param string|string[] ...$newSuffix
  */
 function df_class_replace_last($c, ...$newSuffix):string {return implode(df_cld($c), array_merge(
 	df_head(df_explode_class($c)), dfa_flatten($newSuffix)
