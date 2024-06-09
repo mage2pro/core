@@ -4,7 +4,7 @@ use Magento\Variable\Model\ResourceModel\Variable\Collection as VC;
 
 /**
  * 2024-01-02
- * @used-by df_mvar_n()
+ * @used-by df_mvar_name()
  * @return V|null
  */
 function df_mvar(string $c) {return dfa(df_mvars(), $c);}
@@ -13,10 +13,12 @@ function df_mvar(string $c) {return dfa(df_mvars(), $c);}
  * 2024-01-02
  * @used-by df_mvar_n()
  * @used-by \CabinetsBay\Catalog\B\Category::images() (https://github.com/cabinetsbay/catalog/issues/2)
- * @param string|string[] $c
+ * @param string|string[] ...$c
  * @return string|string[]
  */
-function df_mvar_n($c) {return is_array($c) ? df_map(__FUNCTION__, $c) : (!($v = df_mvar($c)) ? '' : $v->getName());}
+function df_mvar_name(...$c) {return df_call_a($c, function(string $c):string {return
+	!($v = df_mvar($c)) ? '' : $v->getName()
+;});}
 
 /**
  * 2024-01-02

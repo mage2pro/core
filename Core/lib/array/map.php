@@ -73,7 +73,6 @@ function df_each(iterable $c, $f, ...$p):array {return df_map(function($v) use($
  * @used-by df_clean_r()
  * @used-by df_db_credentials()
  * @used-by df_mail()
- * @used-by df_mvar_n()
  * @used-by df_prices()
  * @used-by df_qty()
  * @used-by df_trim_text_left()

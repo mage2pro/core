@@ -71,6 +71,7 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
  * @used-by df_html_b()
  * @used-by df_lcfirst()
  * @used-by df_link_inline()
+ * @used-by df_mvar_name()
  * @used-by df_strtolower()
  * @used-by df_strtoupper()
  * @used-by df_tab()
