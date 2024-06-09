@@ -69,8 +69,7 @@ final class PlaceOrder {
 	 * @throws CouldNotSave|LE
 	 */
 	private function p(bool $isGuest, $cartId, ...$a):string {
-		/** @var IGuest|Guest|IRegistered|Registered $saver */
-		$saver = df_o($isGuest ? IGuest::class : IRegistered::class);
+		$saver = df_o($isGuest ? IGuest::class : IRegistered::class); /** @var IGuest|Guest|IRegistered|Registered $saver */
 		$saver->savePaymentInformation($cartId, ...$a);
 		return PlaceOrderInternal::p($cartId, $isGuest);
 	}
