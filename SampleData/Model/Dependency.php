@@ -31,10 +31,6 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 
 	/**
 	 * 2016-09-03 «vendor/mage2pro/core/Backend/composer.json» => «vendor/mage2pro/core/composer.json»
-	 * 2020-06-15
-	 * The @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage() method became private
-	 * since 2017-03-23 by the following commit: https://github.com/magento/magento2/commit/29bc089e
-	 * This commit is applied to Magento ≥ 2.3.0.
 	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
 	 * @used-by self::getSuggestsFromModules()
 	 */
@@ -43,7 +39,10 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	;}
 
 	/**
-	 * 2020-06-16
+	 * 2020-06-15
+	 * The @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage() method became private
+	 * since 2017-03-23 by the following commit: https://github.com/magento/magento2/commit/29bc089e
+	 * This commit is applied to Magento ≥ 2.3.0.
 	 * 2024-06-09
 	 * It is identical to @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
 	 * https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/SampleData/Model/Dependency.php#L109-L134
