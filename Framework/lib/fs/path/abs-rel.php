@@ -54,6 +54,7 @@ function df_path_is_internal(string $p):bool {return df_es($p) || df_starts_with
 /**
  * 2015-12-06 It trims the ending «/».
  * @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() produces a result with a trailing «/».
+ * 2024-06-09 "`df_path_relative()` → `df_path_rel()`": https://github.com/mage2pro/core/issues/407
  * @used-by df_file_write()
  * @used-by df_media_path_relative()
  * @used-by df_module_name_by_path()
