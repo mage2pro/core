@@ -67,9 +67,7 @@ function df_assert_class_exists(string $c, $m = null):string {
  * 6.3) Даже при проверке на принадлежность одному классу код с @see df_is() получается короче, чем при применении `instanceof`
  * в том случае, когда мы не уверены, существует ли класс и загружен ли уже класс интерпретатором PHP.
  * Например, нам приходилось писать так:
- *		class_exists('Df_1C_Cml2Controller', $autoload = false)
- *	&&
- *		df_state()->getController() instanceof Df_1C_Cml2Controller
+ *		class_exists('Df_1C_Cml2Controller', $autoload = false) && df_state()->getController() instanceof Df_1C_Cml2Controller
  * Или так:
  *		$controllerClass = 'Df_1C_Cml2Controller';
  *		$result = df_state()->getController() instanceof $controllerClass;
