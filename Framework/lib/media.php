@@ -70,9 +70,10 @@ function df_media_path_absolute(string $p = ''):string {return df_sys_path_abs(D
 
 /**
  * 2015-11-30 Левый «/» мы убираем.
+ * 2024-06-09 "`df_media_path_relative()` → `df_media_path_rel()`": https://github.com/mage2pro/core/issues/408
  * @used-by df_media_path2url()
  */
-function df_media_path_relative(string $p):string {return df_path_rel($p, DL::MEDIA);}
+function df_media_path_rel(string $p):string {return df_path_rel($p, DL::MEDIA);}
 
 /**
  * 2015-11-30
@@ -93,7 +94,7 @@ function df_media_reader() {return df_sys_reader(DL::MEDIA);}
  * @see df_media_url2path()
  * @see df_product_image_url()
  */
-function df_media_path2url(string $p = ''):string {return df_store()->getBaseUrl(U::URL_TYPE_MEDIA) . df_media_path_relative($p);}
+function df_media_path2url(string $p = ''):string {return df_store()->getBaseUrl(U::URL_TYPE_MEDIA) . df_media_path_rel($p);}
 
 /**
  * 2019-09-20        
