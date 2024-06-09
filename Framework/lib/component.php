@@ -4,7 +4,6 @@ use Magento\Framework\Component\ComponentRegistrar as R;
 /**         
  * 2019-12-31
  * @used-by df_lib_path()
- * @used-by \Df\SampleData\Model\Dependency::getSuggestsFromModules()
  */
 function df_component_r():R {return df_o(R::class);}
 

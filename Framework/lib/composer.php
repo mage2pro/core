@@ -28,6 +28,7 @@ function df_core_version():string {return dfcf(function() {return df_package_ver
  * @used-by dfe_packages()
  * @used-by dfe_portal_module()
  * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
+ * @used-by \Df\SampleData\Model\Dependency::getSuggestsFromModules() (https://github.com/mage2pro/core/issues/411)
  * @param string|object|null $m [optional]
  * @param string|string[] $k [optional]
  * @param mixed|null $d [optional]

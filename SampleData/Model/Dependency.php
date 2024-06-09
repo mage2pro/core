@@ -34,7 +34,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 				$r += $suggest;
 			}
 		}
-		return $r;
+		return array_merge(df_map(df_modules(), function(string $m):array {return df_package($m, 'suggest', []);}));
 	}
 
 	/**
