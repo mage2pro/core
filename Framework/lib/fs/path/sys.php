@@ -15,8 +15,8 @@ use Magento\Framework\Filesystem\Directory\ReadInterface as IDirectoryRead;
  * @used-by df_product_images_path()
  * @used-by df_sync()
  */
-function df_sys_path_abs(string $p, string $suf = ''):string {return df_prepend(
-	df_trim_ds_left($suf), df_sys_reader($p)->getAbsolutePath()
+function df_sys_path_abs(string $type, string $suf = ''):string {return df_prepend(
+	df_trim_ds_left($suf), df_sys_reader($type)->getAbsolutePath()
 );}
 
 /**
