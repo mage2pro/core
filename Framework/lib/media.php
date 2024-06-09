@@ -81,7 +81,7 @@ function df_media_path_rel(string $p):string {return df_path_rel($p, DL::MEDIA);
  * 2020-12-13 @deprecated It is unused.
  * @return R|IR
  */
-function df_media_reader() {return df_sys_reader(DL::MEDIA);}
+function df_media_reader() {return df_sys_path_r(DL::MEDIA);}
 
 /**
  * 2015-12-01 https://mage2.pro/t/153

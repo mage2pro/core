@@ -9,7 +9,7 @@ use Magento\Framework\Filesystem\Directory\WriteInterface as IDirectoryWrite;
  * 2015-12-06 A @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() result ends with «/».
  * 2023-07-26
  * 1) "`df_path_absolute` → `df_sys_path_abs`": https://github.com/mage2pro/core/issues/272
- * 2) "`df_sys_reader()` can not be used with an arbitrary path
+ * 2) "`df_sys_path_r()` can not be used with an arbitrary path
  * because of `\Magento\Framework\Filesystem\DirectoryList::assertCode()`": https://github.com/mage2pro/core/issues/271
  * 3) "`df_path_absolute()` is wrongly implemented": https://github.com/mage2pro/core/issues/270
  * @see df_path_abs()
@@ -19,17 +19,18 @@ use Magento\Framework\Filesystem\Directory\WriteInterface as IDirectoryWrite;
  * @used-by df_sync()
  */
 function df_sys_path_abs(string $type, string $suf = ''):string {return df_prepend(
-	df_trim_ds_left($suf), df_sys_reader($type)->getAbsolutePath()
+	df_trim_ds_left($suf), df_sys_path_r($type)->getAbsolutePath()
 );}
 
 /**
  * 2015-11-30
  * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
  * 2023-07-26
- * `df_sys_reader()` can not be used with an arbitrary path
+ * `df_sys_path_r()` can not be used with an arbitrary path
  * because of @see \Magento\Framework\Filesystem\DirectoryList::assertCode()
  * https://github.com/mage2pro/core/issues/271
  * 2024-06-09
+ * 1) @see \Magento\Framework\Filesystem\DirectoryList::assertCode():
  * 		private function assertCode($code) {
  * 			if (!isset($this->directories[$code])) {
  * 				throw new \Magento\Framework\Exception\FileSystemException(
@@ -38,18 +39,19 @@ function df_sys_path_abs(string $type, string $suf = ''):string {return df_prepe
  * 			}
  * 		}
  * https://github.com/magento/magento2/blob/2.4.7/lib/internal/Magento/Framework/Filesystem/DirectoryList.php#L233-L247
+ * 2) "`df_sys_reader` → `df_sys_path_r`": https://github.com/mage2pro/core/issues/414
  * @used-by df_media_reader()
  * @used-by df_path_rel()
  * @used-by df_sys_path_abs()
  * @return DirectoryRead|IDirectoryRead
  */
-function df_sys_reader(string $type) {return df_fs()->getDirectoryRead($type);}
+function df_sys_path_r(string $type) {return df_fs()->getDirectoryRead($type);}
 
 /**
  * 2015-11-29
  * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
  * 2023-07-26
- * `df_sys_reader()` can not be used with an arbitrary path
+ * `df_sys_path_r()` can not be used with an arbitrary path
  * because of @see \Magento\Framework\Filesystem\DirectoryList::assertCode()
  * https://github.com/mage2pro/core/issues/271
  * 2024-06-09

@@ -14,7 +14,7 @@ function df_file():File {return df_o(File::class);}
 
 /**
  * 2015-11-29
- * @used-by df_sys_reader()
+ * @used-by df_sys_path_r()
  * @used-by df_fs_w()
  */
 function df_fs():Filesystem {return df_o(Filesystem::class);}

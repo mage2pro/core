@@ -26,7 +26,7 @@ function df_path_abs(string $p):string {
  * @used-by \Df\Sentry\Trace::info()
  */
 function df_path_rel(string $p, string $type = DL::ROOT):string {return df_trim_text_left(
-	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_sys_reader($type)->getAbsolutePath())
+	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_sys_path_r($type)->getAbsolutePath())
 );}
 
 /**
