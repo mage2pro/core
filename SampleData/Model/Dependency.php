@@ -37,15 +37,15 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 *
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
-	private function getModuleComposerPackageParent(string $moduleDir):Package {
+	private function getModuleComposerPackageParent(string $modulePath):Package {
 		# 2024-06-09
-		# «$moduleDir/..» means the parent directory:
+		# «$modulePath/..» means the parent directory:
 		# 		«Also look in parent directory of registered module directory to allow modules to follow the pds/skeleton standard
 		# 		and have their source code in a "src" subdirectory of the repository
 		# 		see: https://github.com/php-pds/skeleton»
 		# https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/SampleData/Model/Dependency.php#L119-L122
-		foreach ([$moduleDir, "$moduleDir/.."] as $dir)
-			$rd = df_fs_rf()->create($dir); {/** @var IRead|Read $rd */
+		foreach ([$modulePath, "$modulePath/.."] as $p) /** @var string $p */
+			$rd = df_fs_rf()->create($p); {/** @var IRead|Read $rd */
 			if ($rd->isExist('composer.json') && $rd->isReadable('composer.json')) {
 				return df_package_new(json_decode($rd->readFile('composer.json')));
 			}
