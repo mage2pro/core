@@ -75,5 +75,6 @@ function df_csv_pretty(...$a):string {return implode(', ', dfa_flatten($a));}
 /**
  * 2022-10-29 @deprecated It is unused.
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * @param string|string[] ...$a
  */
 function df_csv_pretty_quote(...$a):string {return df_csv_pretty(df_quote_russian(df_args($a)));}
