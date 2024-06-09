@@ -3,7 +3,7 @@
  * Заменяет все сиволы пути на /
  * 2021-12-17 https://3v4l.org/8iP17
  * @see df_path_n_real()
- * @used-by df_adjust_paths_in_message()
+ * @used-by df_path_rel_g()
  * @used-by df_bt_s()
  * @used-by df_class_file()
  * @used-by df_explode_path()

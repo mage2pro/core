@@ -136,7 +136,7 @@ final class Error extends \Df\Qa\Failure {
 	 * 2023-01-28 The stack trace returned by @see error_get_last() is chopped.
 	 * @used-by self::main()
 	 */
-	private static function msg():string {return df_adjust_paths_in_message(self::info('message'));}
+	private static function msg():string {return df_path_rel_g(self::info('message'));}
 
 	/**
 	 * @used-by self::isFatal()

@@ -107,7 +107,7 @@ function df_xf(T $t):T {while ($t->getPrevious()) {$t = $t->getPrevious();} retu
  * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param T|P|string $t
  */
-function df_xts($t):string {return df_adjust_paths_in_message(
+function df_xts($t):string {return df_path_rel_g(
 	!df_is_th($t) ? $t : ($t instanceof DFE ? $t->message() : $t->getMessage())
 );}
 
@@ -119,6 +119,6 @@ function df_xts($t):string {return df_adjust_paths_in_message(
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
  * @param T|string $t
  */
-function df_xtsd($t):string {return df_adjust_paths_in_message(
+function df_xtsd($t):string {return df_path_rel_g(
 	!df_is_th($t) ? $t : ($t instanceof DFE ? $t->messageD() : $t->getMessage())
 );}

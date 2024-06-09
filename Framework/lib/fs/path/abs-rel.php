@@ -6,11 +6,12 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
  * Удаляет из сообщений типа
  * «Warning: Division by zero in C:\work\mage2.pro\store\vendor\mage2pro\stripe\Method.php on line 207»
  * файловый путь до папки Magento.
+ * 2024-06-09 "`df_adjust_paths_in_message` → `df_path_rel_g`": https://github.com/mage2pro/core/issues/410
  * @used-by df_xts()
  * @used-by df_xtsd()
  * @used-by \Df\Qa\Failure\Error::msg()
  */
-function df_adjust_paths_in_message(string $m):string {
+function df_path_rel_g(string $m):string {
 	$bpLen = mb_strlen(BP); /** @var int $bpLen */
 	do {
 		$begin = mb_strpos($m, BP); /** @var int|false $begin */
