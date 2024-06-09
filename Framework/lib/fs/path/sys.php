@@ -46,14 +46,6 @@ function df_sys_path_abs(string $type, string $suf = ''):string {return df_prepe
 function df_sys_reader(string $type) {return df_fs()->getDirectoryRead($type);}
 
 /**
- * 2020-06-16
- * 2024-06-09
- * 1) @deprecated It is unused.
- * 2) Rework @see \Df\SampleData\Model\Dependency: https://github.com/mage2pro/core/issues/411
- */
-function df_fs_rf():DirectoryReadFactory {return df_o(DirectoryReadFactory::class);}
-
-/**
  * 2015-11-29
  * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
  * 2023-07-26

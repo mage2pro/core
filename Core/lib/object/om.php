@@ -45,7 +45,6 @@ function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_eav_config()
  * @used-by df_eav_setup()
  * @used-by df_file_resp()
- * @used-by df_fs_rf()
  * @used-by df_ie_store_r()
  * @used-by df_mail_tf()
  * @used-by df_message_m()
