@@ -9,6 +9,13 @@ use stdClass as O;
 # Для устранения сбоя https://mage2.pro/t/2002
 # «Warning: file_get_contents(vendor/mage2pro/core/<...>/composer.json):
 # failed to open stream: No such file or directory in vendor/magento/module-sample-data/Model/Dependency.php on line 109»
+# 2024-06-09
+# 1) The «failed to open stream» bug has been fixed since Magento 2.2:
+# 1.1) «Ensure composer.json exists»: https://github.com/magento/magento2/commit/6dd36ba2
+# 2) The parent implementation looks for `composer.json` in the parent directory of the module since Magento 2.3:
+# 2.1) «Look for composer.json in parent of registered module directory for sample data suggestions»:
+# https://github.com/magento/magento2/commit/29bc089e
+# 2.2) So my fix is not neeeded for Magento ≥ 2.3.
 class Dependency extends \Magento\SampleData\Model\Dependency {
 	/**
 	 * 2020-06-16
