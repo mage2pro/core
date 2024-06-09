@@ -20,7 +20,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	protected function getSuggestsFromModules():array {
 		$suggests = [];
 		foreach (df_component_r()->getPaths(R::MODULE) as $moduleDir) {
-			$package = $this->getModuleComposerPackageParent($this->mage2pro($moduleDir));
+			$package = $this->package($this->mage2pro($moduleDir));
 			$suggest = json_decode(json_encode($package->get('suggest')), true);
 			if (!empty($suggest)) {
 				$suggests += $suggest;
@@ -47,10 +47,10 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * 2024-06-09
 	 * It is identical to @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
 	 * https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/SampleData/Model/Dependency.php#L109-L134
-	 * @used-by self::package()
+	 * @used-by self::getSuggestsFromModules()
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
-	private function getModuleComposerPackageParent(string $modulePath):Package {return df_package_new(
+	private function package(string $modulePath):Package {return df_package_new(
 		# 2024-06-09
 		# «$modulePath/..» means the parent directory:
 		# 		«Also look in parent directory of registered module directory to allow modules to follow the pds/skeleton standard

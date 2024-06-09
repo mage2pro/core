@@ -34,7 +34,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Df\Payment\Info\Report::addAfter()
  * @used-by \Df\Payment\Method::amountFactor()
  * @used-by \Df\Payment\TM::confirmed()
- * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageParent()
+ * @used-by \Df\SampleData\Model\Dependency::package()
  * @used-by \Dfe\Stripe\Method::cardType()
  * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
  * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
