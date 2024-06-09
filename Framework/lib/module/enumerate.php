@@ -14,7 +14,7 @@ function df_modules():array {return df_module_list()->getNames();}
  * @return string[]
  */
 function df_modules_my():array {return dfcf(function() {return array_keys(array_filter(df_map_k(
-	df_map_r(df_module_list()->getNames(), function(string $m):array {return [$m,
+	df_map_r(df_modules(), function(string $m):array {return [$m,
 		df_starts_with($m, 'Magento_') ? [] : df_package($m, 'authors', [])
 	];})
 	,function(string $m, array $authors):bool {return
@@ -30,5 +30,5 @@ function df_modules_my():array {return dfcf(function() {return array_keys(array_
  * @return string[]
  */
 function df_modules_p(string $p):array {return dfcf(function($p) {return df_sort(array_filter(
-	df_module_list()->getNames(), function(string $m) use($p):bool {return df_starts_with($m, $p);}
+	df_modules(), function(string $m) use($p):bool {return df_starts_with($m, $p);}
 ));}, [$p]);}
