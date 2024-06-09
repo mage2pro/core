@@ -124,7 +124,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by \Inkifi\Map\HTML::tiles()
  * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
  * @used-by \KingPalm\B2B\Block\Registration::region()
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::title() (https://github.com/cabinetsbay/catalog/issues/22)
+ * @used-by \CabinetsBay\Catalog\B\Category::title() (https://github.com/cabinetsbay/catalog/issues/22)
  * @used-by \TFC\Core\B\Home\Slider::i() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \Verdepieno\Core\CustomerAddressForm::f()

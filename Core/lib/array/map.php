@@ -89,7 +89,7 @@ function df_each(iterable $c, $f, ...$p):array {return df_map(function($v) use($
  * @used-by \Inkifi\Mediaclip\API\Facade\Order\Item::files()
  * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by \Inkifi\Pwinty\Event::shipments()
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by \CabinetsBay\Catalog\B\Category::l3p() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Sharapov\Cabinetsbay\Setup\UpgradeData::p101() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()

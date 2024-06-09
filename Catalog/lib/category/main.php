@@ -17,7 +17,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::l3p() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by \CabinetsBay\Catalog\B\Category::l3p() (https://github.com/cabinetsbay/site/issues/98)
  * @param int|string|C $c
  * @param int|string|null|bool|IStore $s [optional]
  */

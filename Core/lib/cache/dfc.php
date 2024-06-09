@@ -33,7 +33,7 @@ use Df\Core\RAM;
  * @see df_prop()
  * @see dfaoc()
  * @used-by dfaoc()
- * @used-by \Sharapov\Cabinetsbay\Block\Category\View::title() (https://github.com/cabinetsbay/catalog/issues/22)
+ * @used-by \CabinetsBay\Catalog\B\Category::title() (https://github.com/cabinetsbay/catalog/issues/22)
  * @param object $o
  * @return mixed
  */
