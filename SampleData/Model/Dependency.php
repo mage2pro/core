@@ -37,24 +37,19 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 *
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
-	private function getModuleComposerPackageParent(string $modulePath):Package {
-		$r = null; /** @var Package $r */
+	private function getModuleComposerPackageParent(string $modulePath):Package {return df_package_new(
 		# 2024-06-09
 		# «$modulePath/..» means the parent directory:
 		# 		«Also look in parent directory of registered module directory to allow modules to follow the pds/skeleton standard
 		# 		and have their source code in a "src" subdirectory of the repository
 		# 		see: https://github.com/php-pds/skeleton»
 		# https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/SampleData/Model/Dependency.php#L119-L122
-		$f = 'composer.json'; /** @const string $f */
-		foreach ([$modulePath, "$modulePath/.."] as $p) {/** @var string $p */
+		df_find([$modulePath, "$modulePath/.."], function(string $p):?\stdClass {
 			$rd = df_fs_rf()->create($p); /** @var IRead|Read $rd */
-			if ($rd->isExist($f) && $rd->isReadable($f)) {
-				$r = df_package_new(json_decode($rd->readFile($f)));
-				break;
-			}
-		}
-		return $r ?: df_package_new(new \stdClass);
-	}
+			$f = 'composer.json'; /** @const string $f */
+			return $rd->isExist($f) && $rd->isReadable($f) ? json_decode($rd->readFile($f)) : null;
+		}) ?: new \stdClass
+	);}
 
 	/**
 	 * 2016-09-03 «vendor/mage2pro/core/Backend/composer.json» => «vendor/mage2pro/core/composer.json»
