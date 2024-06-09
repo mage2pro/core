@@ -7,7 +7,7 @@ use Df\Core\Html\Tag;
  * @param string|string[] ...$a
  * @return string|string[]
  */
-function df_html_b(...$a) {return df_call_a(function(string $s) {return df_tag('b', [], $s);}, $a);}
+function df_html_b(...$a) {return df_call_a($a, function(string $s) {return df_tag('b', [], $s);});}
 
 /**
  * 2015-10-27
