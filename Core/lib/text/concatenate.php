@@ -96,7 +96,7 @@ function df_cc_n(...$a):string {return df_ccc("\n", ...$a);}
  * @used-by app/code/WeltPixel/QuickCart/view/frontend/templates/checkout/cart/item/price/sidebar.phtml (https://github.com/cabinetsbay/site/issues/145)
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/Magento/Tax/item/price/unit.phtml (https://github.com/cabinetsbay/site/issues/143)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  */
 function df_cc_s(...$a):string {return df_ccc(' ', dfa_flatten($a));}
 
