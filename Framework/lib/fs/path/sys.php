@@ -55,6 +55,7 @@ function df_sys_path_r(string $type) {return df_fs()->getDirectoryRead($type);}
  * because of @see \Magento\Framework\Filesystem\DirectoryList::assertCode()
  * https://github.com/mage2pro/core/issues/271
  * 2024-06-09
+ * 1) @see \Magento\Framework\Filesystem\DirectoryList::assertCode():
  * 		private function assertCode($code) {
  * 			if (!isset($this->directories[$code])) {
  * 				throw new \Magento\Framework\Exception\FileSystemException(
@@ -63,9 +64,10 @@ function df_sys_path_r(string $type) {return df_fs()->getDirectoryRead($type);}
  * 			}
  * 		}
  * https://github.com/magento/magento2/blob/2.4.7/lib/internal/Magento/Framework/Filesystem/DirectoryList.php#L233-L247
+ * 2) "`df_fs_w` → `df_sys_path_w`": https://github.com/mage2pro/core/issues/415
  * @used-by df_file_write()
  * @used-by df_media_writer()
  * @used-by df_sync()
  * @return DirectoryWrite|IDirectoryWrite
  */
-function df_fs_w(string $type) {return df_fs()->getDirectoryWrite($type);}
+function df_sys_path_w(string $type) {return df_fs()->getDirectoryWrite($type);}

@@ -20,7 +20,7 @@ function df_sync($id, callable $job, float $interval = 0.1) { /** @var mixed $r 
 		$r = $job();
 	}
 	finally {
-		df_fs_w(DL::TMP)->delete($nameShort);
+		df_sys_path_w(DL::TMP)->delete($nameShort);
 	}
 	return $r;
 }

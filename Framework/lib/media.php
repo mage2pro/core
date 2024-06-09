@@ -112,7 +112,7 @@ function df_media_url2path(string $u = ''):string {return df_media_path_abs(df_t
  * @used-by df_img_resize()
  * @return W|IW
  */
-function df_media_writer() {return df_fs_w(DL::MEDIA);}
+function df_media_writer() {return df_sys_path_w(DL::MEDIA);}
 
 /**
  * 2020-12-13

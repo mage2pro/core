@@ -35,7 +35,7 @@ function df_file_write($p, string $contents, bool $append = false):void {
 	# https://stackoverflow.com/a/28233499
 	# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
 	[$type, $relative] = is_array($p) ? $p : [DL::ROOT, df_path_rel($p)];
-	$writer = df_fs_w($type); /** @var DirectoryWrite|IDirectoryWrite $writer */
+	$writer = df_sys_path_w($type); /** @var DirectoryWrite|IDirectoryWrite $writer */
 	# 2018-07-06
 	# «'w':	Open for writing only;
 	# 		place the file pointer at the beginning of the file and truncate the file to zero length.
