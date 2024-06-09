@@ -56,7 +56,7 @@ function df_remove_non_digits(string $s):string {return preg_replace('[\D]', '',
  * We can not declare the argument as `string ...$remove` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * @used-by df_phone_explode()
  * @used-by \Dfe\IPay88\Signer::adjust()
- * @param string|string[] $remove
+ * @param string|string[] ...$remove
  */
 function df_string_clean(string $s, ...$remove):string {return str_replace(dfa_flatten($remove), null, $s);}
 
