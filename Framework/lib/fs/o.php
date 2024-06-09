@@ -1,7 +1,6 @@
 <?php
 use Magento\Framework\App\Filesystem\DirectoryList as DL;
 use Magento\Framework\Filesystem;
-use Magento\Framework\Filesystem\Directory\ReadFactory as DirectoryReadFactory;
 use Magento\Framework\Filesystem\Io\File as File;
 use Magento\Framework\Filesystem\Io\Sftp;
 
@@ -26,13 +25,6 @@ function df_fs():Filesystem {return df_o(Filesystem::class);}
  * @used-by df_mkdir_log()
  */
 function df_fs_dl():DL {return df_o(DL::class);}
-
-/**
- * 2020-06-16
- * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageParent()
- */
-function df_fs_rf():DirectoryReadFactory {return df_o(DirectoryReadFactory::class);}
-
 
 /**
  * 2019-02-24

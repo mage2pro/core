@@ -1,5 +1,6 @@
 <?php
 use Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
+use Magento\Framework\Filesystem\Directory\ReadFactory as DirectoryReadFactory;
 use Magento\Framework\Filesystem\Directory\ReadInterface as IDirectoryRead;
 use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
 use Magento\Framework\Filesystem\Directory\WriteInterface as IDirectoryWrite;
@@ -43,6 +44,12 @@ function df_sys_path_abs(string $type, string $suf = ''):string {return df_prepe
  * @return DirectoryRead|IDirectoryRead
  */
 function df_sys_reader(string $type) {return df_fs()->getDirectoryRead($type);}
+
+/**
+ * 2020-06-16
+ * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageParent()
+ */
+function df_fs_rf():DirectoryReadFactory {return df_o(DirectoryReadFactory::class);}
 
 /**
  * 2015-11-29
