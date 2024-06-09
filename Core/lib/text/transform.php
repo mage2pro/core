@@ -18,7 +18,7 @@ function df_lcfirst(...$a) {return df_call_a(function(string $s):string {return
  * 2016-05-22
  * 2022-10-31 @deprecated It is unused.
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
- * @param string|string[] $a
+ * @param string|string[] ...$a
  * @return string|string[]
  */
 function df_strtolower(...$a) {return df_call_a(function(string $s):string {return mb_strtolower($s);}, $a);}
