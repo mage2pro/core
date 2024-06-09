@@ -56,7 +56,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @used-by self::getSuggestsFromModules()
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
-	private function package(string $modulePath):Package {return df_package_new(
+	private function package(string $path):Package {return df_package_new(
 		# 2024-06-09
 		# 1) «$modulePath/..» means the parent directory:
 		# 		«Also look in parent directory of registered module directory to allow modules to follow the pds/skeleton standard
@@ -66,7 +66,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 		# 2) The parent implementation looks for `composer.json` in the parent directory of the module since Magento 2.3:
 		# 2.1) «Look for composer.json in parent of registered module directory for sample data suggestions»:
 		# https://github.com/magento/magento2/commit/29bc089e
-		df_find([$modulePath, "$modulePath/.."], function(string $p):?O {
+		df_find([$path, "$path/.."], function(string $p):?O {
 			$rd = df_fs_rf()->create($p); /** @var IRead|Read $rd */ /** @const string $f */
 			return $rd->isExist($f = 'composer.json') && $rd->isReadable($f) ? json_decode($rd->readFile($f)) : null;
 		}) ?: new O
