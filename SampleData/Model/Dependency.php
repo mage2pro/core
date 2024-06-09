@@ -25,17 +25,9 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @used-by \Magento\SampleData\Model\Dependency::getSampleDataPackages()
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
-	protected function getSuggestsFromModules():array {
-		$r = []; /** @var array $r */
-		foreach (df_component_r()->getPaths(R::MODULE) as $path) {/** @var string $path */
-			$package = $this->package($path); /** @var Package $package */
-			$suggest = json_decode(json_encode($package->get('suggest')), true);
-			if (!empty($suggest)) {
-				$r += $suggest;
-			}
-		}
-		return array_merge(df_map(df_modules(), function(string $m):array {return df_package($m, 'suggest', []);}));
-	}
+	protected function getSuggestsFromModules():array {return array_merge(df_map(df_modules(), function(string $m):array {return
+		df_package($m, 'suggest', [])
+	;}));}
 
 	/**
 	 * 2020-06-15
