@@ -14,7 +14,7 @@
  * @see df_ejs()
  * @used-by cs_quote_description() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/107)
  * @used-by Dfe_Stripe/view/frontend/templates/multishipping.phtml
- * @param string|string[] $a
+ * @param string|string[] ...$a
  * @return string|string[]
  */
 function df_e(...$a) {return df_call_a(function(string $s):string {return htmlspecialchars(
