@@ -30,6 +30,21 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	}
 
 	/**
+	 * 2016-09-03 «vendor/mage2pro/core/Backend/composer.json» => «vendor/mage2pro/core/composer.json»
+	 * 2020-06-15
+	 * The @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage() method became private
+	 * since 2017-03-23 by the following commit: https://github.com/magento/magento2/commit/29bc089e
+	 * This commit is applied to Magento ≥ 2.3.0.
+	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
+	 * @used-by self::getSuggestsFromModules()
+	 */
+	private function getModuleComposerPackageMy(string $f):Package {return $this->getModuleComposerPackageParent(
+		false === strpos($f, 'mage2pro') || file_exists($f) ? $f : preg_replace(
+			'#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f)
+		)
+	);}
+
+	/**
 	 * 2020-06-16
 	 * 2024-06-09
 	 * It is identical to @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
@@ -48,20 +63,5 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 			$rd = df_fs_rf()->create($p); /** @var IRead|Read $rd */ /** @const string $f */
 			return $rd->isExist($f = 'composer.json') && $rd->isReadable($f) ? json_decode($rd->readFile($f)) : null;
 		}) ?: new O
-	);}
-
-	/**
-	 * 2016-09-03 «vendor/mage2pro/core/Backend/composer.json» => «vendor/mage2pro/core/composer.json»
-	 * 2020-06-15
-	 * The @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage() method became private
-	 * since 2017-03-23 by the following commit: https://github.com/magento/magento2/commit/29bc089e
-	 * This commit is applied to Magento ≥ 2.3.0.
-	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
-	 * @used-by self::getSuggestsFromModules()
-	 */
-	private function getModuleComposerPackageMy(string $f):Package {return $this->getModuleComposerPackageParent(
-		false === strpos($f, 'mage2pro') || file_exists($f) ? $f : preg_replace(
-			'#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f)
-		)
 	);}
 }
