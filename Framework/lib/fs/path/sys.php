@@ -23,7 +23,7 @@ function df_sys_path_abs(string $p, string $suf = ''):string {return df_prepend(
  * 2015-11-30
  * 2023-07-26
  * "`df_sys_reader()` can not be used with an arbitrary path
- *  because of `\Magento\Framework\Filesystem\DirectoryList::assertCode()`": https://github.com/mage2pro/core/issues/271
+ *  because of @see \Magento\Framework\Filesystem\DirectoryList::assertCode()": https://github.com/mage2pro/core/issues/271
  * @see \Magento\Framework\Filesystem\DirectoryList::assertCode()
  * @used-by df_media_reader()
  * @used-by df_path_rel()
