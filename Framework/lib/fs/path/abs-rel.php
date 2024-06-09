@@ -2,6 +2,44 @@
 use Magento\Framework\App\Filesystem\DirectoryList as DL;
 
 /**
+ * 2023-07-25 "`df_path_absolute()` is wrongly implemented": https://github.com/mage2pro/core/issues/270
+ * @see df_sys_path_abs()
+ * @used-by df_contents()
+ */
+function df_path_abs(string $p):string {
+	$bp = df_path_n(BP);
+	$p = df_path_n($p);
+	/** 2023-07-26 Similar to @see df_prepend() */
+	return df_starts_with($p, $bp) ? $p : df_cc_path($bp, df_trim_ds_left($p));
+}
+
+/**
+ * 2017-05-08
+ * 2024-06-09 It returns `true` if:
+ * 1) $p is empty
+ * 2) $p is absolute (not relative) and is inside the Magento installation directory.
+ * @used-by \Df\Framework\Plugin\Session\SessionManager::beforeStart()
+ * @used-by \Df\Sentry\Trace::info()
+ */
+function df_path_is_internal(string $p):bool {return df_es($p) || df_starts_with(df_path_n($p), df_path_n(BP));}
+
+/**
+ * 2015-12-06 It trims the ending «/».
+ * @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() produces a result with a trailing «/».
+ * 2024-06-09 "`df_path_relative()` → `df_path_rel()`": https://github.com/mage2pro/core/issues/407
+ * @used-by df_file_write()
+ * @used-by df_media_path_rel()
+ * @used-by df_module_name_by_path()
+ * @used-by df_product_images_path_rel()
+ * @used-by \Df\Qa\Failure\Error::preface()
+ * @used-by \Df\Qa\Trace\Frame::file()
+ * @used-by \Df\Sentry\Trace::info()
+ */
+function df_path_rel(string $p, string $type = DL::ROOT):string {return df_trim_text_left(
+	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_sys_reader($type)->getAbsolutePath())
+);}
+
+/**
  * 2016-12-23
  * Удаляет из сообщений типа
  * «Warning: Division by zero in C:\work\mage2.pro\store\vendor\mage2pro\stripe\Method.php on line 207»
@@ -32,38 +70,3 @@ function df_path_rel_g(string $m):string {
 	} while(true);
 	return $m;
 }
-
-/**
- * 2023-07-25 "`df_path_absolute()` is wrongly implemented": https://github.com/mage2pro/core/issues/270
- * @see df_sys_path_abs()
- * @used-by df_contents()
- */
-function df_path_abs(string $p):string {
-	$bp = df_path_n(BP);
-	$p = df_path_n($p);
-	/** 2023-07-26 Similar to @see df_prepend() */
-	return df_starts_with($p, $bp) ? $p : df_cc_path($bp, df_trim_ds_left($p));
-}
-
-/**
- * 2017-05-08
- * @used-by \Df\Framework\Plugin\Session\SessionManager::beforeStart()
- * @used-by \Df\Sentry\Trace::info()
- */
-function df_path_is_internal(string $p):bool {return df_es($p) || df_starts_with(df_path_n($p), df_path_n(BP));}
-
-/**
- * 2015-12-06 It trims the ending «/».
- * @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() produces a result with a trailing «/».
- * 2024-06-09 "`df_path_relative()` → `df_path_rel()`": https://github.com/mage2pro/core/issues/407
- * @used-by df_file_write()
- * @used-by df_media_path_rel()
- * @used-by df_module_name_by_path()
- * @used-by df_product_images_path_rel()
- * @used-by \Df\Qa\Failure\Error::preface()
- * @used-by \Df\Qa\Trace\Frame::file()
- * @used-by \Df\Sentry\Trace::info()
- */
-function df_path_rel(string $p, string $type = DL::ROOT):string {return df_trim_text_left(
-	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_sys_reader($type)->getAbsolutePath())
-);}
