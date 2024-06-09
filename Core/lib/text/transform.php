@@ -43,7 +43,7 @@ function df_strtoupper(...$a) {return df_call_a(function(string $s):string {retu
  * @used-by \Df\Config\Source\LetterCase::apply()
  * @used-by \Df\Qa\Trace\Frame::url()
  * @used-by \Dfe\TwoCheckout\LineItem::build()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  * @return string|string[]
  */
 function df_ucfirst(...$a) {return df_call_a(function(string $s):string {return
