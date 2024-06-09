@@ -25,7 +25,7 @@ function df_cc(string $glue, ...$a):string {return implode($glue, dfa_flatten($a
  * @used-by \Dfe\AllPay\Choice::title()
  * @used-by \Dfe\Square\API\Validator::short()
  * @used-by \Stock2Shop\OrderExport\Observer\OrderSaveAfter::execute()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  */
 function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
 
