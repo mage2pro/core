@@ -14,7 +14,7 @@ function df_c(...$a):string {return implode(dfa_flatten($a));}
  * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
  * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Dfe\Sift\API\Facade\GetDecisions::path()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  */
 function df_cc(string $glue, ...$a):string {return implode($glue, dfa_flatten($a));}
 
