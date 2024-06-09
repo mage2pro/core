@@ -12,7 +12,7 @@
  * @used-by df_path_is_internal()
  * @used-by df_path_rel()
  * @used-by df_product_image_url()
- * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageMy()
+ * @used-by \Df\SampleData\Model\Dependency::package()
  * @used-by \Df\Sentry\Client::needSkipFrame()
  * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()

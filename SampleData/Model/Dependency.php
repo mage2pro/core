@@ -20,7 +20,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	protected function getSuggestsFromModules():array {
 		$suggests = [];
 		foreach (df_component_r()->getPaths(R::MODULE) as $moduleDir) {
-			$package = $this->getModuleComposerPackageMy($moduleDir);
+			$package = $this->package($moduleDir);
 			$suggest = json_decode(json_encode($package->get('suggest')), true);
 			if (!empty($suggest)) {
 				$suggests += $suggest;
@@ -38,7 +38,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
 	 * @used-by self::getSuggestsFromModules()
 	 */
-	private function getModuleComposerPackageMy(string $f):Package {return $this->getModuleComposerPackageParent(
+	private function package(string $f):Package {return $this->getModuleComposerPackageParent(
 		false === strpos($f, 'mage2pro') || file_exists($f) ? $f : preg_replace(
 			'#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f)
 		)
@@ -49,7 +49,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * 2024-06-09
 	 * It is identical to @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
 	 * https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/SampleData/Model/Dependency.php#L109-L134
-	 * @used-by self::getModuleComposerPackageMy()
+	 * @used-by self::package()
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
 	private function getModuleComposerPackageParent(string $modulePath):Package {return df_package_new(
