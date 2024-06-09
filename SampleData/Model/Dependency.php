@@ -44,10 +44,11 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 		# 		and have their source code in a "src" subdirectory of the repository
 		# 		see: https://github.com/php-pds/skeleton»
 		# https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/SampleData/Model/Dependency.php#L119-L122
+		$f = 'composer.json'; /** @const string $f */
 		foreach ([$modulePath, "$modulePath/.."] as $p) /** @var string $p */
 			$rd = df_fs_rf()->create($p); {/** @var IRead|Read $rd */
-			if ($rd->isExist('composer.json') && $rd->isReadable('composer.json')) {
-				return df_package_new(json_decode($rd->readFile('composer.json')));
+			if ($rd->isExist($f) && $rd->isReadable($f)) {
+				return df_package_new(json_decode($rd->readFile($f)));
 			}
 		}
 		return df_package_new(new \stdClass);
