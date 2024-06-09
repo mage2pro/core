@@ -50,18 +50,18 @@ use Magento\Store\Model\Store;
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/shipping/sortshipping.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/home.phtml (https://github.com/cabinetsbay/core/issues/8)
  * @param string|string[] $k
- * @param null|string|int|ScopeA|Store|IConfigData|ConfigData|array(int|string) $scope [optional]
+ * @param null|string|int|ScopeA|Store|IConfigData|ConfigData|array(int|string) $s [optional]
  * @param mixed|callable $d [optional]
  * @return array|string|null|mixed
  */
-function df_cfg($k, $scope = null, $d = null) {
+function df_cfg($k, $s = null, $d = null) {
 	/** 2018-04-21 @used-by \Df\Shipping\Settings::enable() */
 	if (is_array($k)) {
 		$k = df_cc_path($k);
 	}
 	/** @var array|string|null|mixed $r */
-	$r = $scope instanceof IConfigData ? $scope->getValue($k) : df_cfg_m()->getValue($k, ...(
-		is_array($scope) ? [$scope[0], $scope[1]] : [SS::SCOPE_STORE, $scope])
+	$r = $s instanceof IConfigData ? $s->getValue($k) : df_cfg_m()->getValue($k, ...(
+		is_array($s) ? [$s[0], $s[1]] : [SS::SCOPE_STORE, $s])
 	);
 	return df_if(df_cfg_empty($r), $d, $r);
 }
