@@ -21,7 +21,7 @@ function df_html_b(...$a) {return df_call_a(function(string $s) {return df_tag('
  * @used-by \Dfe\Markdown\FormElement::css()
  * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
  * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  * @return string|string[]
  */
 function df_link_inline(...$a) {return df_call_a(function(string $res):string {return df_resource_inline(
