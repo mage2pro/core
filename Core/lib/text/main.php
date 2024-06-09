@@ -51,7 +51,7 @@ function df_bts_yn(bool $v):string {return $v ? 'yes' : 'no';}
  * @used-by \DxMoto\Core\Observer\CanLog::execute()
  * @used-by \RWCandy\Captcha\Assert::name()
  * @used-by \TFC\Core\Observer\CanLog::execute()
- * @param string|string[] $n
+ * @param string|string[] ...$n
  */
 function df_contains(string $haystack, ...$n):bool {/** @var bool $r */
 	# 2017-07-10 This branch is exclusively for optimization.
