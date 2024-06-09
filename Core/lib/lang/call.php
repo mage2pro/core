@@ -75,12 +75,12 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
  * @used-by df_ucfirst()
  * @used-by df_ucwords()
  * @used-by df_underscore_to_camel()
- * @param mixed[]|mixed[][] $parentArgs
+ * @param mixed[]|mixed[][] $a
  * @param mixed|mixed[] $pAppend [optional]
  * @param mixed|mixed[] $pPrepend [optional]
  * @return mixed|mixed[]
  */
-function df_call_a(callable $f, array $parentArgs, $pAppend = [], $pPrepend = [], int $keyPosition = 0) {
+function df_call_a(callable $f, array $a, $pAppend = [], $pPrepend = [], int $keyPosition = 0) {
 	/**
 	 * 2016-11-13 We can not use @see df_args() here
 	 * 2019-06-05
@@ -88,17 +88,17 @@ function df_call_a(callable $f, array $parentArgs, $pAppend = [], $pPrepend = []
 	 * 		1) With a single array argument.
 	 * 		2) With a single scalar (non-array) argument.
 	 * 		3) With multiple arguments.
-	 * `1 === count($parentArgs)` in the 1st and 2nd cases.
-	 *  1 <> count($parentArgs) in the 3rd case.
+	 * `1 === count($a)` in the 1st and 2nd cases.
+	 *  1 <> count($a) in the 3rd case.
 	 * We should return an array in the 1st and 3rd cases, and a scalar result in the 2nd case.
 	 */
-	if (1 === count($parentArgs)) {
-		$parentArgs = $parentArgs[0]; # 2019-06-05 It is the 1st or the 2nd case: a single argument (a scalar or an array).
+	if (1 === count($a)) {
+		$a = $a[0]; # 2019-06-05 It is the 1st or the 2nd case: a single argument (a scalar or an array).
 	}
 	return
-		!is_array($parentArgs) # 2019-06-05 It is the 2nd case: a single scalar (non-array) argument
-		? call_user_func_array($f, array_merge($pPrepend, [$parentArgs], $pAppend))
-		: df_map($f, $parentArgs, $pAppend, $pPrepend, $keyPosition
+		!is_array($a) # 2019-06-05 It is the 2nd case: a single scalar (non-array) argument
+		? call_user_func_array($f, array_merge($pPrepend, [$a], $pAppend))
+		: df_map($f, $a, $pAppend, $pPrepend, $keyPosition
 	);
 }
 
