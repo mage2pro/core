@@ -2,6 +2,8 @@
 use Magento\Framework\App\Filesystem\DirectoryList as DL;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\ReadFactory as DirectoryReadFactory;
+use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
+use Magento\Framework\Filesystem\Directory\WriteInterface as IDirectoryWrite;
 use Magento\Framework\Filesystem\Io\File as File;
 use Magento\Framework\Filesystem\Io\Sftp;
 
@@ -32,6 +34,17 @@ function df_fs_dl():DL {return df_o(DL::class);}
  * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageParent()
  */
 function df_fs_rf():DirectoryReadFactory {return df_o(DirectoryReadFactory::class);}
+
+/**
+ * 2015-11-29
+ * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
+ * @used-by df_file_write()
+ * @used-by df_media_writer()
+ * @used-by df_sync()
+ * @return DirectoryWrite|IDirectoryWrite
+ */
+function df_fs_w(string $type) {return df_fs()->getDirectoryWrite($type);}
+
 
 /**
  * 2019-02-24
