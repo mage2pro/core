@@ -30,7 +30,11 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 
 	/**
 	 * 2020-06-16
+	 * 2024-06-09
+	 * It is identical to @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
+	 * https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/SampleData/Model/Dependency.php#L109-L134
 	 * @used-by self::getModuleComposerPackageMy()
+	 *
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
 	private function getModuleComposerPackageParent(string $moduleDir):Package {
