@@ -28,7 +28,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	protected function getSuggestsFromModules():array {
 		$r = []; /** @var array $r */
 		foreach (df_component_r()->getPaths(R::MODULE) as $path) {/** @var string $path */
-			$package = $this->package($this->mage2pro($path)); /** @var Package $package */
+			$package = $this->package($path); /** @var Package $package */
 			$suggest = json_decode(json_encode($package->get('suggest')), true);
 			if (!empty($suggest)) {
 				$r += $suggest;
@@ -36,15 +36,6 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 		}
 		return $r;
 	}
-
-	/**
-	 * 2016-09-03 «vendor/mage2pro/core/Backend/composer.json» => «vendor/mage2pro/core/composer.json»
-	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
-	 * @used-by self::getSuggestsFromModules()
-	 */
-	private function mage2pro(string $f):string {return false === strpos($f, 'mage2pro') || file_exists($f) ? $f :
-		preg_replace('#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f))
-	;}
 
 	/**
 	 * 2020-06-15
@@ -67,6 +58,12 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 		# 2) The parent implementation looks for `composer.json` in the parent directory of the module since Magento 2.3:
 		# 2.1) «Look for composer.json in parent of registered module directory for sample data suggestions»:
 		# https://github.com/magento/magento2/commit/29bc089e
+		# 3) Previously, I had the code:
+		# 		private function mage2pro(string $f):string {return false === strpos($f, 'mage2pro') || file_exists($f) ? $f :
+		#			preg_replace('#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f))
+		#		;}
+		# https://github.com/mage2pro/core/blob/11.1.6/SampleData/Model/Dependency.php#L40-L47
+		# I do not need it anymore because of «$modulePath/..».
 		df_find([$path, "$path/.."], function(string $p):?O {
 			$rd = df_fs_rf()->create($p); /** @var IRead|Read $rd */ /** @const string $f */
 			return $rd->isExist($f = 'composer.json') && $rd->isReadable($f) ? json_decode($rd->readFile($f)) : null;
