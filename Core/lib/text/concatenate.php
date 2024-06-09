@@ -107,7 +107,6 @@ function df_cc_s(...$a):string {return df_ccc(' ', dfa_flatten($a));}
  * @used-by df_cc_br()
  * @used-by df_cc_method()
  * @used-by df_cc_n()
- * @used-by df_cc_path()
  * @used-by df_cc_s()
  * @used-by df_fe_init()
  * @used-by df_log_l()
