@@ -89,6 +89,7 @@ function df_cc_n(...$a):string {return df_ccc("\n", ...$a);}
  * @used-by df_path_abs()
  * @used-by df_product_image_path2abs()
  * @used-by df_replace_store_code_in_url()
+ * @used-by \CabinetsBay\Catalog\B\Category::images() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Df\API\Client::url()
  * @used-by \Df\API\Facade::path()
  * @used-by \Df\Config\Backend::value()
