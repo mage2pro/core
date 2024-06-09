@@ -54,7 +54,7 @@ function df_assert_class_exists(string $c, $m = null):string {
  * 1) Эта функция проверяет, принадлежит ли переменная $v хотя бы к одному из классов $class.
  * 2) Т.к. алгоритм функции использует стандартный оператор `instanceof`, то переменная $v может быть не только объектом,
  * а иметь произвольный тип: https://php.net/manual/language.operators.type.php#example-146
- * Если $variable не является объектом, то функция просто вернёт false.
+ * Если $v не является объектом, то функция просто вернёт `false`.
  *
  * Наша функция не загружает при этом $class в память интерпретатора PHP.
  * Если $class ещё не загружен в память интерпретатора PHP, то функция вернёт false.
@@ -85,6 +85,6 @@ function df_assert_class_exists(string $c, $m = null):string {
  * 2022-11-26
  * `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * 2024-06-03 We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
- * @param object $v
+ * @param object|mixed $v
  */
 function df_is($v, string ...$cc):bool {return !!df_find($cc, function(string $c) use($v):bool {return $v instanceof $c;});}
