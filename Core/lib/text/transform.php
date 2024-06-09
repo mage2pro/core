@@ -31,7 +31,7 @@ function df_strtolower(...$a) {return df_call_a($a, function(string $s):string {
  * @param string|string[] ...$a
  * @return string|string[]
  */
-function df_strtoupper(...$a) {return df_call_a(function(string $s):string {return mb_strtoupper($s);}, $a);}
+function df_strtoupper(...$a) {return df_call_a($a, function(string $s):string {return mb_strtoupper($s);});}
 
 /**
  * Эта функция умеет работать с UTF-8, в отличие от стандартной функции @see ucfirst()
