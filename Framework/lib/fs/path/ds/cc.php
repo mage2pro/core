@@ -33,7 +33,7 @@
 function df_cc_path(...$a):string {
 	$a = df_clean(dfa_flatten($a));
 	$s = implode($a); /** @var string $s */
-	//$a = df_trim_ds($a);
+	$a = df_trim_ds($a);
 	return implode('/', $a);
 }
 

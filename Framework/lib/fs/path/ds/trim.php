@@ -1,9 +1,12 @@
 <?php
 /**
  * 2016-10-14
+ * @used-by df_cc_path()
  * @used-by df_url_bp()
+ * @param string|string[] ...$a
+ * @return string|string[]
  */
-function df_trim_ds(string $p):string {return df_trim($p, '/\\');}
+function df_trim_ds(...$a) {return df_call_a(function(string $p):string {return df_trim($p, '/\\');}, $a);}
 
 /**
  * 2015-11-30

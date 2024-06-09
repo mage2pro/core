@@ -72,6 +72,7 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
  * @used-by df_strtolower()
  * @used-by df_strtoupper()
  * @used-by df_tab()
+ * @used-by df_trim_ds()
  * @used-by df_ucfirst()
  * @used-by df_ucwords()
  * @used-by df_underscore_to_camel()
