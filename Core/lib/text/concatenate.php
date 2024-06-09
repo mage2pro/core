@@ -77,7 +77,7 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
 function df_cc_n(...$a):string {return df_ccc("\n", ...$a);}
 
 /**
- * 2015-12-01 Отныне всегда используем / вместо DIRECTORY_SEPARATOR.
+ * 2015-12-01 Отныне всегда используем `/` вместо @see DIRECTORY_SEPARATOR
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
  * 2024-06-09 "`df_cc_path()` should trim `/` and `DS` for arguments": https://github.com/mage2pro/core/issues/406
  * @used-by df_config_e()
