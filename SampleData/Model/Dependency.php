@@ -20,7 +20,7 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	protected function getSuggestsFromModules():array {
 		$suggests = [];
 		foreach (df_component_r()->getPaths(R::MODULE) as $moduleDir) {
-			$package = $this->package($moduleDir);
+			$package = $this->getModuleComposerPackageParent($this->mage2pro($moduleDir));
 			$suggest = json_decode(json_encode($package->get('suggest')), true);
 			if (!empty($suggest)) {
 				$suggests += $suggest;
@@ -38,11 +38,9 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @see \Magento\SampleData\Model\Dependency::getModuleComposerPackage()
 	 * @used-by self::getSuggestsFromModules()
 	 */
-	private function package(string $f):Package {return $this->getModuleComposerPackageParent(
-		false === strpos($f, 'mage2pro') || file_exists($f) ? $f : preg_replace(
-			'#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f)
-		)
-	);}
+	private function mage2pro(string $f):string {return false === strpos($f, 'mage2pro') || file_exists($f) ? $f :
+		preg_replace('#/mage2pro/core/[^/]+/#', '/mage2pro/core/', df_path_n($f))
+	;}
 
 	/**
 	 * 2020-06-16
