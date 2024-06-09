@@ -11,7 +11,7 @@ use Magento\Framework\File\Csv;
  * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge()
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()
  * @used-by \Dfe\FacebookLogin\Customer::r()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  */
 function df_csv(...$a):string {return implode(',', df_args($a));}
 
