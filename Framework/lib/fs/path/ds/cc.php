@@ -35,7 +35,7 @@ function df_cc_path(...$a):string {
 	$s = df_path_n(implode($a)); /** @var string $s */
 	return
 		(df_starts_with($s, '/') ? '/' : '')
-		. implode('/', df_trim_ds($a)) 
+		. implode('/', df_trim_ds($a))
 		. (df_ends_with($s, '/') && 1 < mb_strlen($s) ? '/' : '')
 	;
 }
