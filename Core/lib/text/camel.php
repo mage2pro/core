@@ -51,7 +51,7 @@ function df_camel_to_underscore(...$a) {return df_call_a(function(string $s):str
  * @used-by df_api_name()
  * @used-by df_camel_to_underscore()
  * @used-by df_explode_class_camel()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  * @return string[]|string[][]
  */
 function df_explode_camel(...$a):array {return df_call_a(function(string $n):array {return preg_split(
