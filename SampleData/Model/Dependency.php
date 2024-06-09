@@ -46,8 +46,8 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 		# 		see: https://github.com/php-pds/skeleton»
 		# https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/SampleData/Model/Dependency.php#L119-L122
 		$f = 'composer.json'; /** @const string $f */
-		foreach ([$modulePath, "$modulePath/.."] as $p) /** @var string $p */
-			$rd = df_fs_rf()->create($p); {/** @var IRead|Read $rd */
+		foreach ([$modulePath, "$modulePath/.."] as $p) {/** @var string $p */
+			$rd = df_fs_rf()->create($p); /** @var IRead|Read $rd */
 			if ($rd->isExist($f) && $rd->isReadable($f)) {
 				$r = df_package_new(json_decode($rd->readFile($f)));
 				break;
