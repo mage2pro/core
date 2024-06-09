@@ -5,11 +5,10 @@ use Magento\Framework\Module\ModuleListInterface as IML;
 
 /**
  * 2017-04-01
- * @used-by df_modules_my()
- * @used-by df_modules_p()
+ * @used-by df_modules()
  * @return IML|ML
  */
-function df_module_list() {return df_o(IML::class);}
+function df_module_list():IML {return df_o(IML::class);}
 
 /**
  * 2019-11-21
