@@ -68,7 +68,7 @@ function df_csv_parse_int($s):array {return df_int(df_csv_parse($s));}
  * @used-by \Dfe\Geo\Client::all()
  * @used-by \Dfe\Moip\P\Reg::ga()
  * @used-by \Dfe\Sift\Payload\OQI::p()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  */
 function df_csv_pretty(...$a):string {return implode(', ', dfa_flatten($a));}
 
