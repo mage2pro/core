@@ -20,7 +20,6 @@ function df_module_enabled(string $m):bool {return df_module_m()->isEnabled(df_m
 
 /**
  * 2017-04-01
- * @used-by df_assert_module_enabled()
  * @used-by df_modules_my()
  * @used-by df_modules_p()
  * @return IML|ML
