@@ -59,7 +59,9 @@ function df_package($m = null, $k = '', $d = null) {
 
 /**
  * 2020-06-16
- * @used-by \Df\SampleData\Model\Dependency::package()
+ * 2024-06-09
+ * 1) @deprecated It is unused.
+ * 2) Rework @see \Df\SampleData\Model\Dependency: https://github.com/mage2pro/core/issues/411
  * @see \Magento\Framework\Config\Composer\Package::__construct()
  */
 function df_package_new(stdClass $json):Package {return df_new_om(Package::class, ['json' => $json]);}
