@@ -2,6 +2,7 @@
 namespace Df\SampleData\Model;
 use Magento\Framework\Component\ComponentRegistrar as R;
 use Magento\Framework\Config\Composer\Package;
+use Magento\Framework\Filesystem\Directory\Read;
 use Magento\Framework\Filesystem\Directory\ReadInterface as IRead;
 # 2016-09-03
 # Для устранения сбоя https://mage2.pro/t/2002
@@ -33,8 +34,8 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
 	private function getModuleComposerPackageParent(string $moduleDir):Package {
-		foreach ([$moduleDir, $moduleDir . DIRECTORY_SEPARATOR . '..'] as $dir) {/** @var IRead $directory */
-			$directory = df_fs_rf()->create($dir);
+		foreach ([$moduleDir, $moduleDir . DIRECTORY_SEPARATOR . '..'] as $dir)
+			$directory = df_fs_rf()->create($dir); {/** @var IRead|Read $directory */
 			if ($directory->isExist('composer.json') && $directory->isReadable('composer.json')) {
 				return df_package_new(json_decode($directory->readFile('composer.json')));
 			}
