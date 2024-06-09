@@ -21,10 +21,6 @@ function df_core_version():string {return dfcf(function() {return df_package_ver
  * 2) a class name: «A\B\C».
  * 3) an object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * 2024-06-09
- * "`df_package()` should look for `composer.json` in the parent directory for all packages (not only `mage2pro/*`),
- * similar to @see Magento\SampleData\Model\Dependency::getModuleComposerPackage() in Magento ≥ 2.3":
- * https://github.com/mage2pro/core/issues/412
  * @used-by df_modules_my()
  * @used-by df_package_name_l()
  * @used-by df_package_version()
@@ -40,18 +36,22 @@ function df_core_version():string {return dfcf(function() {return df_package_ver
 function df_package($m = null, $k = '', $d = null) {
 	static $cache; /** @var array(string => array(string => mixed)) $cache */
 	if (!isset($cache[$m = df_module_name($m)])) {
-		$packagePath = df_module_path($m); /** @var string $packagePath */
-		# 2017-01-10 All `Df_*` modules share the common `composer.json` located in the parent folder.
-		if (df_starts_with($m, 'Df_')) {
-			$packagePath = dirname($packagePath);
-		}
-		$filePath = "$packagePath/composer.json"; /** @var string $filePath */
-        # 2023-01-28
-        # 1) The `composer.json` file can be absent for a module, e.g.:
-        # https://github.com/elgentos/magento2-regenerate-catalog-urls/tree/0.2.14/Iazel/RegenProductUrl
-        # 2) "«Unable to read the file vendor/elgentos/regenerate-catalog-urls/Iazel/RegenProductUrl/composer.json»
-        # on `bin/magento setup:static-content:deploy`": https://github.com/tradefurniturecompany/site/issues/240
-		$cache[$m] = df_eta(df_json_decode(df_contents($filePath, '')));
+		/**
+		 * 2017-01-10 All `Df_*` modules share the common `composer.json` located in the parent folder.
+		 * 2023-01-28
+		 * 1) The `composer.json` file can be absent for a module, e.g.:
+		 * https://github.com/elgentos/magento2-regenerate-catalog-urls/tree/0.2.14/Iazel/RegenProductUrl
+		 * 2) "«Unable to read the file vendor/elgentos/regenerate-catalog-urls/Iazel/RegenProductUrl/composer.json»
+		 * on `bin/magento setup:static-content:deploy`": https://github.com/tradefurniturecompany/site/issues/240
+		 * 2024-06-09
+		 * 1) "`df_package()` should look for `composer.json` in the parent directory for all packages (not only `mage2pro/*`),
+		 * similar to @see Magento\SampleData\Model\Dependency::getModuleComposerPackage() in Magento ≥ 2.3":
+		 * https://github.com/mage2pro/core/issues/412
+		 * @var string $p
+		 */
+		$cache[$m] = df_find([$p = df_module_path($m), dirname($p)], function(string $p):array {return df_eta(df_json_decode(
+			df_contents("$p/composer.json", '')
+		));});
 	}
 	return dfa($cache[$m], $k, $d);
 }
