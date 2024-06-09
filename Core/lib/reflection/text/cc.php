@@ -10,7 +10,7 @@
  * @used-by \Df\Payment\W\F::c()
  * @used-by \Dfe\AllPay\Method::getInfoBlockType()
  * @used-by \Dfe\TwoCheckout\Handler::p()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  */
 function df_cc_class(...$a):string {return implode('\\', df_clean(dfa_flatten($a)));}
 
