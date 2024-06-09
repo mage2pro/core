@@ -21,6 +21,10 @@ function df_core_version():string {return dfcf(function() {return df_package_ver
  * 2) a class name: «A\B\C».
  * 3) an object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
+ * 2024-06-09
+ * "`df_package()` should look for `composer.json` in the parent directory for all packages (not only `mage2pro/*`),
+ * similar to @see Magento\SampleData\Model\Dependency::getModuleComposerPackage() in Magento ≥ 2.3":
+ * https://github.com/mage2pro/core/issues/412
  * @used-by df_modules_my()
  * @used-by df_package_name_l()
  * @used-by df_package_version()
