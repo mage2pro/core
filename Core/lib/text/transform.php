@@ -57,7 +57,7 @@ function df_ucfirst(...$a) {return df_call_a(function(string $s):string {return
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_ucfirst
  * @used-by \Df\Config\Source\LetterCase::apply()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  * @return string|string[]
  */
 function df_ucwords(...$a) {return df_call_a(function(string $s):string {return mb_convert_case(
