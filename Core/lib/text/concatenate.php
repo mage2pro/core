@@ -1,14 +1,14 @@
 <?php
 /**
  * 2016-10-17
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/view.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @param string|string[] ...$a
  */
 function df_c(...$a):string {return implode(dfa_flatten($a));}
 
 /**
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_ccc()
  * @used-by df_js_data()
  * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
@@ -20,7 +20,7 @@ function df_cc(string $glue, ...$a):string {return implode($glue, dfa_flatten($a
 
 /**
  * 2016-08-13
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @used-by \Df\Payment\Settings::messageFailure()
  * @used-by \Dfe\AllPay\Choice::title()
  * @used-by \Dfe\Square\API\Validator::short()
@@ -30,7 +30,7 @@ function df_cc(string $glue, ...$a):string {return implode($glue, dfa_flatten($a
 function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
 
 /**
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @used-by df_api_rr_failed()
  * @used-by df_error_create()
  * @used-by df_fe_init()
@@ -78,7 +78,7 @@ function df_cc_n(...$a):string {return df_ccc("\n", ...$a);}
 
 /**
  * 2016-08-10
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @used-by df_block_output()
  * @used-by df_cli_cmd()
  * @used-by df_log_l()
@@ -101,7 +101,7 @@ function df_cc_n(...$a):string {return df_ccc("\n", ...$a);}
 function df_cc_s(...$a):string {return df_ccc(' ', dfa_flatten($a));}
 
 /**
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_cc()
  * @used-by df_asset_name()
  * @used-by df_cc_br()

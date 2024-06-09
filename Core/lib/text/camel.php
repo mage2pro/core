@@ -1,7 +1,7 @@
 <?php
 /**
  * 2021-12-20
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_underscore_to_camel()
  * @used-by \TFC\GoogleShopping\Products::atts() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param string|string[] ...$a
@@ -47,7 +47,7 @@ function df_camel_to_underscore(...$a) {return df_call_a(function(string $s):str
  * Note 3.
  * Today I have changed «?=[A-Z0-9]» => «?=[A-Z0-9]», so now it handles the cases with digits, e.g.:
  * «Dynamics365» => [«Dynamics», «365»]
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @used-by df_api_name()
  * @used-by df_camel_to_underscore()
  * @used-by df_explode_class_camel()
@@ -62,7 +62,7 @@ function df_explode_camel(...$a):array {return df_call_a(function(string $n):arr
  * 2016-08-10
  * 		REFUND_ISSUED => RefundIssued
  * 		refund_issuED => RefundIssued
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_camel_to_underscore()
  * @used-by \Dfe\TwoCheckout\Handler::p()
  * @param string|string[] ...$a

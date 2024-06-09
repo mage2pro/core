@@ -1,7 +1,7 @@
 <?php
 /**
  * 2016-02-08 Применение @uses dfa_flatten() делает возможным вызовы типа: df_cc_class_uc('Aa', ['Bb', 'Cb']) => Aa\Bb\Cb
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_cc_class_uc()
  * @used-by df_cc_class_uc()
  * @used-by df_class_suffix()
@@ -18,7 +18,7 @@ function df_cc_class(...$a):string {return implode('\\', df_clean(dfa_flatten($a
  * 2016-03-25
  * Применение @uses dfa_flatten() делает возможным вызовы типа: `df_cc_class_uc('aa', ['bb', 'cc'])` => Aa\Bb\Cc
  * Мы используем это в модулях Stripe и Checkout.com.
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_cc_class()
  * @used-by df_con_hier_suf_ta()
  * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()

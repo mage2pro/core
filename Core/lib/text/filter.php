@@ -10,7 +10,7 @@
  * (в частности, в шаблонах *.phtml), поэтому, видимо, их устраивает режим  @see ENT_COMPAT.
  * Российская сборка Magento использует при формировании HTML одиночные кавычки, поэтому нам нужен режим @see ENT_QUOTES.
  * Это важно, например, в методе @used-by Df_Core_Model_Format_Html_Tag::getAttributeAsText()
- * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_ejs()
  * @used-by cs_quote_description() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/107)
  * @used-by Dfe_Stripe/view/frontend/templates/multishipping.phtml
@@ -53,7 +53,7 @@ function df_remove_non_digits(string $s):string {return preg_replace('[\D]', '',
  * «If replace has fewer values than search, then an empty string is used for the rest of replacement values.»
  * http://3v4l.org/9qvC4
  * 2022-11-26
- * We can not declare the argument as `string ...$remove` because such a syntax will reject arrays: https://3v4l.org/jFdPm
+ * We can not declare the argument as `string ...$remove` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @used-by df_phone_explode()
  * @used-by \Dfe\IPay88\Signer::adjust()
  * @param string|string[] ...$remove
