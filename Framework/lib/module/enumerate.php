@@ -1,6 +1,7 @@
 <?php
 /**
  * 2024-06-09 "Implement `df_modules()": https://github.com/mage2pro/core/issues/413
+ * @return string[]
  */
 function df_modules():array {return df_module_list()->getNames();}
 
