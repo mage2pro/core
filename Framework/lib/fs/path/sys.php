@@ -1,6 +1,8 @@
 <?php
 use Magento\Framework\Filesystem\Directory\Read as DirectoryRead;
 use Magento\Framework\Filesystem\Directory\ReadInterface as IDirectoryRead;
+use Magento\Framework\Filesystem\Directory\Write as DirectoryWrite;
+use Magento\Framework\Filesystem\Directory\WriteInterface as IDirectoryWrite;
 
 /**
  * 2015-12-06 A @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() result ends with «/».
@@ -21,9 +23,11 @@ function df_sys_path_abs(string $type, string $suf = ''):string {return df_prepe
 
 /**
  * 2015-11-30
+ * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
  * 2023-07-26
- * "`df_sys_reader()` can not be used with an arbitrary path
- *  because of @see \Magento\Framework\Filesystem\DirectoryList::assertCode()": https://github.com/mage2pro/core/issues/271
+ * `df_sys_reader()` can not be used with an arbitrary path
+ * because of @see \Magento\Framework\Filesystem\DirectoryList::assertCode()
+ * https://github.com/mage2pro/core/issues/271
  * 2024-06-09
  * 		private function assertCode($code) {
  * 			if (!isset($this->directories[$code])) {
@@ -39,3 +43,26 @@ function df_sys_path_abs(string $type, string $suf = ''):string {return df_prepe
  * @return DirectoryRead|IDirectoryRead
  */
 function df_sys_reader(string $type) {return df_fs()->getDirectoryRead($type);}
+
+/**
+ * 2015-11-29
+ * 2017-04-03 The possible directory types for filesystem operations: https://mage2.pro/t/3591
+ * 2023-07-26
+ * `df_sys_reader()` can not be used with an arbitrary path
+ * because of @see \Magento\Framework\Filesystem\DirectoryList::assertCode()
+ * https://github.com/mage2pro/core/issues/271
+ * 2024-06-09
+ * 		private function assertCode($code) {
+ * 			if (!isset($this->directories[$code])) {
+ * 				throw new \Magento\Framework\Exception\FileSystemException(
+ * 					new \Magento\Framework\Phrase('Unknown directory type: \'%1\'', [$code])
+ * 				);
+ * 			}
+ * 		}
+ * https://github.com/magento/magento2/blob/2.4.7/lib/internal/Magento/Framework/Filesystem/DirectoryList.php#L233-L247
+ * @used-by df_file_write()
+ * @used-by df_media_writer()
+ * @used-by df_sync()
+ * @return DirectoryWrite|IDirectoryWrite
+ */
+function df_fs_w(string $type) {return df_fs()->getDirectoryWrite($type);}
