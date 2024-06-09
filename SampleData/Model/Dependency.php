@@ -38,6 +38,12 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
 	private function getModuleComposerPackageParent(string $moduleDir):Package {
+		# 2024-06-09
+		# `$moduleDir . DS . '..'` means the parent directory:
+		# 		«Also look in parent directory of registered module directory to allow modules to follow the pds/skeleton standard
+		# 		and have their source code in a "src" subdirectory of the repository
+		# 		see: https://github.com/php-pds/skeleton»
+		# https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/SampleData/Model/Dependency.php#L119-L122
 		foreach ([$moduleDir, $moduleDir . DS . '..'] as $dir)
 			$rd = df_fs_rf()->create($dir); {/** @var IRead|Read $rd */
 			if ($rd->isExist('composer.json') && $rd->isReadable('composer.json')) {
