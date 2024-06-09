@@ -4,7 +4,7 @@ use Df\Core\Html\Tag;
  * 2016-11-13
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @used-by df_quote_russian()
- * @param string|string[] $a
+ * @param string|string[] ...$a
  * @return string|string[]
  */
 function df_html_b(...$a) {return df_call_a(function(string $s) {return df_tag('b', [], $s);}, $a);}
