@@ -19,8 +19,8 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 */
 	protected function getSuggestsFromModules():array {
 		$r = []; /** @var array $r */
-		foreach (df_component_r()->getPaths(R::MODULE) as $moduleDir) {
-			$package = $this->package($this->mage2pro($moduleDir));
+		foreach (df_component_r()->getPaths(R::MODULE) as $path) {/** @var string $path */
+			$package = $this->package($this->mage2pro($path));
 			$suggest = json_decode(json_encode($package->get('suggest')), true);
 			if (!empty($suggest)) {
 				$r += $suggest;
