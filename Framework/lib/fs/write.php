@@ -34,7 +34,7 @@ function df_file_write($p, string $contents, bool $append = false):void {
 	# https://php.net/manual/migration71.new-features.php#migration71.new-features.symmetric-array-destructuring
 	# https://stackoverflow.com/a/28233499
 	# 2024-06-06 "Use the «Symmetric array destructuring» PHP 7.1 feature": https://github.com/mage2pro/core/issues/379
-	[$type, $relative] = is_array($p) ? $p : [DL::ROOT, df_path_relative($p)];
+	[$type, $relative] = is_array($p) ? $p : [DL::ROOT, df_path_rel($p)];
 	$writer = df_fs_w($type); /** @var DirectoryWrite|IDirectoryWrite $writer */
 	# 2018-07-06
 	# «'w':	Open for writing only;

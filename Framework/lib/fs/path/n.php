@@ -10,7 +10,7 @@
  * @used-by df_file_name()
  * @used-by df_path_abs()
  * @used-by df_path_is_internal()
- * @used-by df_path_relative()
+ * @used-by df_path_rel()
  * @used-by df_product_image_url()
  * @used-by \Df\SampleData\Model\Dependency::getModuleComposerPackageMy()
  * @used-by \Df\Sentry\Client::needSkipFrame()

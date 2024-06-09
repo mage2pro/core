@@ -72,7 +72,7 @@ function df_media_path_absolute(string $p = ''):string {return df_sys_path_abs(D
  * 2015-11-30 Левый «/» мы убираем.
  * @used-by df_media_path2url()
  */
-function df_media_path_relative(string $p):string {return df_path_relative($p, DL::MEDIA);}
+function df_media_path_relative(string $p):string {return df_path_rel($p, DL::MEDIA);}
 
 /**
  * 2015-11-30

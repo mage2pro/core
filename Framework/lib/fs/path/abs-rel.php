@@ -62,6 +62,6 @@ function df_path_is_internal(string $p):bool {return df_es($p) || df_starts_with
  * @used-by \Df\Qa\Trace\Frame::file()
  * @used-by \Df\Sentry\Trace::info()
  */
-function df_path_relative(string $p, string $type = DL::ROOT):string {return df_trim_text_left(
+function df_path_rel(string $p, string $type = DL::ROOT):string {return df_trim_text_left(
 	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_sys_reader($type)->getAbsolutePath())
 );}

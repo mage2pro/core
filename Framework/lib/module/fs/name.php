@@ -91,7 +91,7 @@ function df_module_file_name($m, string $name, string $ext = '', $onE = true):st
  * @used-by df_caller_module()
  */
 function df_module_name_by_path(string $f):string {/** @var string $r */
-	$f = df_path_relative($f);
+	$f = df_path_rel($f);
 	$err = "Unable to detect a module for the file: `$f`"; /** @var string $err */
 	# 2024-03-10
 	# 1) "`df_module_name_by_path()` should properly handle `*.phtml` files in the `app/design` folder":

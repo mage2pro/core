@@ -18,7 +18,7 @@ final class Frame extends \Df\Core\O {
 	 *		"args": ["Df\\Framework\\Plugin\\App\\Router\\ActionList\\Interceptor"]
 	 *	},
 	 * 2) @see \Df\Qa\Trace::__construct()
-	 * 3) «Argument 1 passed to df_path_relative() must be of the type string, null given,
+	 * 3) «Argument 1 passed to df_path_rel() must be of the type string, null given,
 	 * called in vendor/mage2pro/core/Qa/Trace/Formatter.php on line 37»: https://github.com/mage2pro/core/issues/187
 	 * @see df_bt_entry_file()
 	 * @see \Df\Sentry\Trace::info()
@@ -27,7 +27,7 @@ final class Frame extends \Df\Core\O {
 	 * @used-by df_sentry()
 	 * @used-by \Df\Qa\Trace\Formatter::p()
 	 */
-	function file():string {return dfc($this, function() {return !($r = (string)$this['file'])? $r : df_path_relative($r);});}
+	function file():string {return dfc($this, function() {return !($r = (string)$this['file'])? $r : df_path_rel($r);});}
 
 	/**
 	 * 2023-07-30

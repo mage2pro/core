@@ -44,7 +44,7 @@ function df_product_images_path():string {return df_sys_path_abs(DL::MEDIA, 'cat
  * 2020-11-22 «pub/media/catalog/product»
  * @used-by \TFC\Image\Command\C3::p()
  */
-function df_product_images_path_rel():string {return dfcf(function() {return df_path_relative(df_product_images_path());});}
+function df_product_images_path_rel():string {return dfcf(function() {return df_path_rel(df_product_images_path());});}
 
 /**
  * 2019-08-23

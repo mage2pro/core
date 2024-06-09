@@ -26,7 +26,7 @@ function df_sys_path_abs(string $p, string $suf = ''):string {return df_prepend(
  *  because of `\Magento\Framework\Filesystem\DirectoryList::assertCode()`": https://github.com/mage2pro/core/issues/271
  * @see \Magento\Framework\Filesystem\DirectoryList::assertCode()
  * @used-by df_media_reader()
- * @used-by df_path_relative()
+ * @used-by df_path_rel()
  * @used-by df_sys_path_abs()
  * @return DirectoryRead|IDirectoryRead
  */
