@@ -39,9 +39,9 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 */
 	private function getModuleComposerPackageParent(string $moduleDir):Package {
 		foreach ([$moduleDir, $moduleDir . DS . '..'] as $dir)
-			$read = df_fs_rf()->create($dir); {/** @var IRead|Read $read */
-			if ($read->isExist('composer.json') && $read->isReadable('composer.json')) {
-				return df_package_new(json_decode($read->readFile('composer.json')));
+			$rd = df_fs_rf()->create($dir); {/** @var IRead|Read $rd */
+			if ($rd->isExist('composer.json') && $rd->isReadable('composer.json')) {
+				return df_package_new(json_decode($rd->readFile('composer.json')));
 			}
 		}
 		return df_package_new(new \stdClass);
