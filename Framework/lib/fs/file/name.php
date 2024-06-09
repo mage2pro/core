@@ -2,6 +2,7 @@
 /**
  * Возвращает неиспользуемое имя файла в заданной папке $directory по заданному шаблону $template.
  * Результатом всегда является непустая строка.
+ * @see df_fs_name()
  * @used-by df_report()
  */
 function df_file_name(string $directory, string $template, string $ds = '-'):string { /** @var string $r */

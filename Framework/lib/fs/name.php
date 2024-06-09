@@ -15,6 +15,7 @@
  * 		@see df_translit =>  allPay
  * 		@see df_translit_url => allPay
  * 		@see df_translit_url_lc => allpay
+ * @see df_file_name()
  */
 function df_fs_name(string $n, string $spaceSubstitute = '-'):string {
 	$n = str_replace(' ', $spaceSubstitute, $n);
