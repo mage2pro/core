@@ -21,7 +21,7 @@ function df_lcfirst(...$a) {return df_call_a(function(string $s):string {return
  * @param string|string[] ...$a
  * @return string|string[]
  */
-function df_strtolower(...$a) {return df_call_a(function(string $s):string {return mb_strtolower($s);}, $a);}
+function df_strtolower(...$a) {return df_call_a($a, function(string $s):string {return mb_strtolower($s);});}
 
 /**
  * 2016-05-19
