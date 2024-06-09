@@ -29,6 +29,7 @@ use Magento\Framework\DataObject as _DO;
  * @see df_clean_null()
  * @see df_clean_r()
  * @used-by df_cc_class()
+ * @used-by df_cc_path()
  * @used-by df_ccc()
  * @used-by df_clean_xml()
  * @used-by df_db_or()

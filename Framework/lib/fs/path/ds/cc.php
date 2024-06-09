@@ -30,7 +30,7 @@
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @param string|string[] $a
  */
-function df_cc_path(...$a):string {return df_ccc('/', dfa_flatten($a));}
+function df_cc_path(...$a):string {return implode('/', df_clean(dfa_flatten($a)));}
 
 /**
  * 2016-05-31
