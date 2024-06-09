@@ -14,16 +14,6 @@ function df_path_abs(string $p):string {
 }
 
 /**
- * 2017-05-08
- * 2024-06-09 It returns `true` if:
- * 1) $p is empty
- * 2) $p is absolute (not relative) and is inside the Magento installation directory.
- * @used-by \Df\Framework\Plugin\Session\SessionManager::beforeStart()
- * @used-by \Df\Sentry\Trace::info()
- */
-function df_path_is_internal(string $p):bool {return df_es($p) || df_starts_with(df_path_n($p), df_path_n(BP));}
-
-/**
  * 2015-12-06 It trims the ending «/».
  * @uses \Magento\Framework\Filesystem\Directory\Read::getAbsolutePath() produces a result with a trailing «/».
  * 2024-06-09 "`df_path_relative()` → `df_path_rel()`": https://github.com/mage2pro/core/issues/407
