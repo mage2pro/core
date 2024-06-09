@@ -59,7 +59,7 @@ function df_path_is_internal(string $p):bool {return df_es($p) || df_starts_with
  * @used-by df_module_name_by_path()
  * @used-by df_product_images_path_rel()
  * @used-by \Df\Qa\Failure\Error::preface()
- * @used-by \Df\Qa\Trace\Formatter::p()
+ * @used-by \Df\Qa\Trace\Frame::file()
  * @used-by \Df\Sentry\Trace::info()
  */
 function df_path_relative(string $p, string $type = DL::ROOT):string {return df_trim_text_left(
