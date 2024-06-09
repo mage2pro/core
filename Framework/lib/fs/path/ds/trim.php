@@ -6,7 +6,7 @@
  * @param string|string[] ...$a
  * @return string|string[]
  */
-function df_trim_ds(...$a) {return df_call_a(function(string $p):string {return df_trim($p, '/\\');}, $a);}
+function df_trim_ds(...$a) {return df_call_a($a, function(string $p):string {return df_trim($p, '/\\');});}
 
 /**
  * 2015-11-30
