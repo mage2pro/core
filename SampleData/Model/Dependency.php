@@ -18,15 +18,15 @@ class Dependency extends \Magento\SampleData\Model\Dependency {
 	 * @throws \Magento\Framework\Exception\FileSystemException
 	 */
 	protected function getSuggestsFromModules():array {
-		$suggests = [];
+		$r = []; /** @var array $r */
 		foreach (df_component_r()->getPaths(R::MODULE) as $moduleDir) {
 			$package = $this->package($this->mage2pro($moduleDir));
 			$suggest = json_decode(json_encode($package->get('suggest')), true);
 			if (!empty($suggest)) {
-				$suggests += $suggest;
+				$r += $suggest;
 			}
 		}
-		return $suggests;
+		return $r;
 	}
 
 	/**
