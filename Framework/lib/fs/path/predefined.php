@@ -47,7 +47,9 @@ function df_sys_reader(string $type) {return df_fs()->getDirectoryRead($type);}
 
 /**
  * 2020-06-16
- * @used-by \Df\SampleData\Model\Dependency::package()
+ * 2024-06-09
+ * 1) @deprecated It is unused.
+ * 2) Rework @see \Df\SampleData\Model\Dependency: https://github.com/mage2pro/core/issues/411
  */
 function df_fs_rf():DirectoryReadFactory {return df_o(DirectoryReadFactory::class);}
 
