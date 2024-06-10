@@ -192,7 +192,44 @@ function df_sort(array $a, $f = null, bool $isGet = false, string $l = ''):array
 function df_sort_a(array $a):array {asort($a); return $a;}
 
 /**
- * 2025-06-10 "Implement `df_sort_posix()`": https://github.com/mage2pro/core/issues/419
+ * 2025-06-10
+ * 1) "Implement `df_sort_posix()`": https://github.com/mage2pro/core/issues/419
+ * 2) "The gallery images on category pages should be ordered according to their file names":
+ * https://github.com/cabinetsbay/catalog/issues/28
+ * 3) The following code does not work correctly for an unknwon reason:
+ * 		$c = new Collator('');
+ * 		$a = ['3628/swuc_5_7.jpg', '3628/swuc_1_1.jpg', '3628/swuc_4.jpg', '3628/swuc_1.jpg'];
+ * 		$c->sort($a);
+ * https://3v4l.org/LlLrB
+ * It returns:
+ * 	Array (
+ * 		[0] => 3628/swuc_5_7.jpg
+ * 		[1] => 3628/swuc_1_1.jpg
+ * 		[2] => 3628/swuc_4.jpg
+ * 		[3] => 3628/swuc_1.jpg
+ * )
+ * 4) `echo intval(is_numeric('3628/swuc_5_7.jpg'));` returns `0`: https://3v4l.org/SDiX7
+ * 5) The code from 3 with @see Collator::SORT_STRING works almost correctly:
+ * 		$c = new Collator('');
+ * 		$a = ['3628/swuc_5_7.jpg', '3628/swuc_1_1.jpg', '3628/swuc_4.jpg', '3628/swuc_1.jpg'];
+ * 		$c->sort($a, Collator::SORT_STRING);
+ * 		echo locale_get_default() . "\n";
+ * 		print_r($a);
+ * 5.1) It works correctly on 3v4l.org:
+ * 	Array (
+ * 		[0] => 3628/swuc_1.jpg
+ * 		[1] => 3628/swuc_1_1.jpg
+ * 		[2] => 3628/swuc_4.jpg
+ * 		[3] => 3628/swuc_5_7.jpg
+ *	 )
+ * https://3v4l.org/RkBvh
+ * But it works just because 3v4l.org use the 'en_US_POSIX' locale:
+ * https://www.localeplanet.com/icu/en-US-POSIX/index.html
+ * https://superuser.com/questions/1519501
+ * @see df_sort_posix()
+ * 5.2) The first 2 elements of the test array are inverted with other locales, e.g.:
+ * 5.2.1) 'en_US': https://3v4l.org/FMcdf
+ * 5.2.2) 'root': https://3v4l.org/Cevuk
  * @used-by \CabinetsBay\Catalog\B\Category::images() (https://github.com/cabinetsbay/catalog/issues/28)
  * @param array(int|string => mixed) $a
  * @param Closure|string|null $f [optional]
