@@ -127,6 +127,11 @@ function df_sort(array $a, $f = null, bool $isGet = false, string $l = ''):array
 	$c = new Collator($l); /** @var Collator $c */
 	$isList = array_is_list($a); /** @var bool $isList */
 	if (!$f) {
+		/**
+		 * 2024-06-10
+		 * 1) "The gallery images on category pages should be ordered according to their file names":
+		 * https://github.com/cabinetsbay/catalog/issues/28
+		 */
 		$isList ? $c->sort($a) : $c->asort($a);
 	}
 	else {
