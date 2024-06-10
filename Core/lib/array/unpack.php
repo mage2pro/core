@@ -30,6 +30,7 @@ function df_arg(array $a) {return isset($a[0]) && !isset($a[1]) ? $a[0] : $a;}
  * @used-by df_csv()
  * @used-by df_csv_pretty_quote()
  * @used-by df_format()
+ * @used-by df_mvar_name()
  * @used-by dfa_combine_self()
  * @used-by dfa_unset()
  * @see dfa_unpack()

@@ -19,7 +19,7 @@ function df_mvar(string $c) {return dfa(df_mvars(), $c);}
  */
 function df_mvar_name(...$c) {
 	$r = df_call_a($c, function(string $c):string {return !($v = df_mvar($c)) ? '' : $v->getName();});
-	return !is_array($r) ? $r : array_combine($c, $r);
+	return !is_array($r) ? $r : array_combine(df_args($c), $r);
 }
 
 /**
