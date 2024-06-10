@@ -188,3 +188,11 @@ function df_sort(array $a, $f = null, bool $isGet = false, string $l = ''):array
  * @return array(int|string => mixed)
  */
 function df_sort_a(array $a):array {asort($a); return $a;}
+
+/**
+ * 2025-06-10 "Implement `df_sort_posix()`": https://github.com/mage2pro/core/issues/419
+ * @param array(int|string => mixed) $a
+ * @param Closure|string|null $f [optional]
+ * @return array(int|string => mixed)
+ */
+function df_sort_posix(array $a, $f = null, bool $isGet = false):array {return df_sort($a, $f, $isGet, 'en_US_POSIX');}
