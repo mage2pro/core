@@ -12,6 +12,7 @@
  * @used-by df_caller_c()
  * @used-by df_caller_entry()
  * @used-by df_error_create()
+ * @used-by df_sort()
  * @used-by df_store_code_from_url()
  * @used-by dfa_group()
  * @used-by dfa_try()

@@ -131,8 +131,23 @@ function df_sort(array $a, $f = null, bool $isGet = false, string $l = ''):array
 		 * 2024-06-10
 		 * 1) "The gallery images on category pages should be ordered according to their file names":
 		 * https://github.com/cabinetsbay/catalog/issues/28
+		 * 2) The following code does not work correctly for an unknwon reason:
+		 * 		$c = new Collator('');
+		 * 		$a = ['3628/swuc_5_7.jpg', '3628/swuc_1_1.jpg', '3628/swuc_4.jpg', '3628/swuc_1.jpg'];
+		 * 		$c->sort($a);
+		 * https://3v4l.org/LlLrB
+		 * It returns:
+		 * 	Array (
+		 * 		[0] => 3628/swuc_5_7.jpg
+		 * 		[1] => 3628/swuc_1_1.jpg
+		 * 		[2] => 3628/swuc_4.jpg
+		 * 		[3] => 3628/swuc_1.jpg
+		 * )
+		 * 3) `echo intval(is_numeric('3628/swuc_5_7.jpg'));` returns `0`: https://3v4l.org/SDiX7
+		 * 4) The code from 2 with @see Collator::SORT_STRING works correctly: https://3v4l.org/FMcdf
 		 */
-		$isList ? $c->sort($a) : $c->asort($a);
+		$mode = is_string(df_first($a)) ? Collator::SORT_STRING : Collator::SORT_REGULAR;
+		$isList ? $c->sort($a, $mode) : $c->asort($a, $mode);
 	}
 	else {
 		if ($isGet) {
