@@ -144,7 +144,21 @@ function df_sort(array $a, $f = null, bool $isGet = false, string $l = ''):array
 		 * 		[3] => 3628/swuc_1.jpg
 		 * )
 		 * 3) `echo intval(is_numeric('3628/swuc_5_7.jpg'));` returns `0`: https://3v4l.org/SDiX7
-		 * 4) The code from 2 with @see Collator::SORT_STRING works correctly: https://3v4l.org/FMcdf
+		 * 4) The code from 2 with @see Collator::SORT_STRING works almost correctly:
+		 * 		$c = new Collator('');
+		 * 		$a = ['3628/swuc_5_7.jpg', '3628/swuc_1_1.jpg', '3628/swuc_4.jpg', '3628/swuc_1.jpg'];
+		 * 		$c->sort($a, Collator::SORT_STRING);
+		 * 		echo locale_get_default() . "\n";
+		 * 		print_r($a);
+		 * 4.1) It works correctly on 3v4l.org:
+		 * 	Array (
+		 * 		[0] => 3628/swuc_1.jpg
+		 * 		[1] => 3628/swuc_1_1.jpg
+		 * 		[2] => 3628/swuc_4.jpg
+		 * 		[3] => 3628/swuc_5_7.jpg
+		 *	 )
+		 * https://3v4l.org/RkBvh
+		 *
 		 */
 		$mode = is_string(df_first($a)) ? Collator::SORT_STRING : Collator::SORT_REGULAR;
 		$isList ? $c->sort($a, $mode) : $c->asort($a, $mode);
