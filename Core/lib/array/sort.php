@@ -158,7 +158,12 @@ function df_sort(array $a, $f = null, bool $isGet = false, string $l = ''):array
 		 * 		[3] => 3628/swuc_5_7.jpg
 		 *	 )
 		 * https://3v4l.org/RkBvh
-		 *
+		 * But it works just because 3v4l.org use the 'en_US_POSIX' locale:
+		 * https://www.localeplanet.com/icu/en-US-POSIX/index.html
+		 * https://superuser.com/questions/1519501
+		 * 4.2) The first 2 elements of the test array are inverted with other locales, e.g.:
+		 * 4.2.1) 'en_US': https://3v4l.org/FMcdf
+		 * 4.2.2) 'root': https://3v4l.org/Cevuk
 		 */
 		$mode = is_string(df_first($a)) ? Collator::SORT_STRING : Collator::SORT_REGULAR;
 		$isList ? $c->sort($a, $mode) : $c->asort($a, $mode);
