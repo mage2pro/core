@@ -18,7 +18,6 @@ function df_category_ancestor_at_level(C $c, int $l) {return $l > ($l2 = df_cate
  * 2.1) Level 0: «Root Catalog» (undeletable, hidden in UI).
  * 2.2) Level 1: «Default Category» (undeletable, can be renamed).
  * @used-by cb_category_is_l2() (https://github.com/cabinetsbay/site/issues/98)
- * @used-by cb_category_is_l3() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by df_category_ancestor_at_level()
  * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/3)
  * @used-by \CabinetsBay\Catalog\B\Category::level() (https://github.com/cabinetsbay/site/issues/98)
