@@ -99,6 +99,7 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * 		@used-by df_oqi_leafs()
  * 		@used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @see df_ksort()
+ * @see df_sort_posix()
  * @used-by df_countries_options()
  * @used-by df_json_sort()
  * @used-by df_modules_p()
@@ -161,6 +162,7 @@ function df_sort(array $a, $f = null, bool $isGet = false, string $l = ''):array
 		 * But it works just because 3v4l.org use the 'en_US_POSIX' locale:
 		 * https://www.localeplanet.com/icu/en-US-POSIX/index.html
 		 * https://superuser.com/questions/1519501
+		 * @see df_sort_posix()
 		 * 4.2) The first 2 elements of the test array are inverted with other locales, e.g.:
 		 * 4.2.1) 'en_US': https://3v4l.org/FMcdf
 		 * 4.2.2) 'root': https://3v4l.org/Cevuk
