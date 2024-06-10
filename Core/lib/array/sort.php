@@ -104,6 +104,7 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * @used-by df_modules_p()
  * @used-by df_oqi_leafs()
  * @used-by df_sort_l()
+ * @used-by df_sort_posix()
  * @used-by df_zf_http_last_req()
  * @used-by dfe_portal_stripe_customers()
  * @used-by \Df\Config\Backend\ArrayT::processI()
@@ -115,7 +116,6 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * @used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Dfe\YandexKassa\Source\Option::map()
- * @used-by \CabinetsBay\Catalog\B\Category::images() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @param array(int|string => mixed) $a
@@ -191,6 +191,7 @@ function df_sort_a(array $a):array {asort($a); return $a;}
 
 /**
  * 2025-06-10 "Implement `df_sort_posix()`": https://github.com/mage2pro/core/issues/419
+ * @used-by \CabinetsBay\Catalog\B\Category::images() (https://github.com/cabinetsbay/catalog/issues/28)
  * @param array(int|string => mixed) $a
  * @param Closure|string|null $f [optional]
  * @return array(int|string => mixed)
