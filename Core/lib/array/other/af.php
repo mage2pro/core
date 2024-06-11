@@ -23,10 +23,8 @@ function dfaf($a, $b):array {
 	# 2.2) `array_map([__CLASS__, 'f'], [1, 2, 3])` for a private `f` is allowed too: https://3v4l.org/29Zim
 	# 2024-06-11 "Improve `dfaf()`": https://github.com/mage2pro/core/issues/421
 	$assert = function(bool $cond, string $m) use($a, $b):void {df_assert($cond, "dfaf(): $m.", ['a' => $a, 'b' => $b]);};
-	$ca = is_callable($a); /** @var bool $ca */
-	$cb = is_callable($b); /** @var bool $ca */
-	$ia = is_iterable($a); /** @var bool $ia */
-	$ib = is_iterable($b); /** @var bool $ib */
+	/** @var bool $ca */ /** @var bool $cb *//** @var bool $ia */ /** @var bool $ib */
+	[$ca, $cb, $ia, $ib] = [is_callable($a), is_callable($b), is_iterable($a), is_iterable($b)];
 	if ($ca && $cb) {
 		# 2024-06-11 `df_assert($ia xor $ib)` is shorter
 		$assert($ia || $ib, 'none of arguments are `iterable`');
