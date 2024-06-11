@@ -28,8 +28,8 @@ function dfaf($a, $b):array {
 	$ia = is_iterable($a); /** @var bool $ia */
 	$ib = is_iterable($b); /** @var bool $ib */
 	if ($ca && $cb) {
-		$assert(!$ia || !$ib, 'both arguments are `callable` and `iterable`');
 		$assert($ia || $ib, 'none of arguments are `iterable`');
+		$assert(!$ia || !$ib, 'both arguments are `callable` and `iterable`');
 		$r = $ia ? [$a, $b] : [$b, $a];
 	}
 	else {
