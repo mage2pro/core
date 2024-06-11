@@ -1,6 +1,6 @@
 <?php
 use Df\Theme\Model\View\Design as DfDesign;
-use Magento\Framework\View\Element\AbstractBlock;
+use Magento\Framework\View\Element\AbstractBlock as AB;
 use Magento\Framework\View\Layout as L;
 use Magento\Framework\View\Layout\ProcessorInterface as IProcessor;
 use Magento\Framework\View\LayoutInterface as IL;
@@ -34,9 +34,7 @@ function df_layout_update($onError = true) {return df_try(function() {
  * Наивное $e->getParentBlock()->getNameInLayout() некорректно,
  * потому что родительским элементом для $e может быть не только блок,
  * но и контейнер, и тогда $e->getParentBlock() вернёт false.
- * @param AbstractBlock|string $e
+ * @param AB|string $e
  * @return string|null
  */
-function df_parent_name($e) {return df_ftn(df_layout()->getParentName(
-	$e instanceof AbstractBlock ? $e->getNameInLayout() : $e
-));}
+function df_parent_name($e) {return df_ftn(df_layout()->getParentName($e instanceof AB ? $e->getNameInLayout() : $e));}
