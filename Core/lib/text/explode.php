@@ -44,6 +44,7 @@ function df_explode_path(string $p):array {return df_explode_xpath(df_path_n($p)
 
 /**
  * 2022-11-17
+ * @used-by df_body_class()
  * @used-by df_file_name()
  * @used-by df_magento_version_remote()
  * @used-by df_phone_explode()
