@@ -25,13 +25,13 @@ function dfaf($a, $b):array {
 		$r = $ca ? [df_assert_iterable($b), $a] : [df_assert_iterable($a), $b];
 	}
 	else {
-		$ta = is_iterable($a); /** @var bool $ta */
-		$tb = is_iterable($b); /** @var bool $tb */
-		if ($ta && $tb) {
+		$ia = is_iterable($a); /** @var bool $ita */
+		$ib = is_iterable($b); /** @var bool $ib */
+		if ($ia && $ib) {
 			df_error('dfaf(): both arguments are callable and traversable: %s and %s.', df_type($a), df_type($b));
 		}
-		df_assert($ta || $tb);
-		$r = $ta ? [$a, $b] : [$b, $a];
+		df_assert($ia || $ib);
+		$r = $ia ? [$a, $b] : [$b, $a];
 	}
 	return $r;
 }
