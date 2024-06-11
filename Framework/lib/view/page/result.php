@@ -12,7 +12,7 @@ use Magento\Framework\View\Result\Page as R;
  */
 function df_page_result(string $t = '', string ...$handles):R {
 	$r = df_page_factory()->create(false, df_clean(['template' => $t])); /** @var R $r */
-	foreach ($handles as $h) {
+	foreach ($handles as $h) {/** @var string $h */
 		$r->addHandle($h);
 	}
 	return $r;
