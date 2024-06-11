@@ -29,16 +29,12 @@ function dfaf($a, $b):array {
 	}
 	else {
 		# 2024-06-11 "Improve `dfaf()`": https://github.com/mage2pro/core/issues/421
-		/** @var E $eBoth */
-		$eBoth = df_error_create('dfaf(): both arguments are callable and traversable.', ['a' => $a, 'b' => $b]);
 		$ca = $a instanceof C;
 		$cb = $b instanceof C;
-		df_assert(!($ca && $cb));
+		df_assert(!($ca && $cb), 'dfaf(): both arguments are closures.', ['a' => $a, 'b' => $b]);
 		$ia = is_iterable($a); /** @var bool $ita */
 		$ib = is_iterable($b); /** @var bool $ib */
-		if ($ia && $ib) {
-			df_error($eBoth);
-		}
+		df_assert(!($ia && $ib), 'dfaf(): both arguments are callable and traversable.', ['a' => $a, 'b' => $b]);
 		df_assert($ia || $ib);
 		$r = $ia ? [$a, $b] : [$b, $a];
 	}

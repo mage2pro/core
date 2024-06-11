@@ -202,7 +202,6 @@ function df_error(...$a):void {
  * @used-by df_customer()
  * @used-by df_error()
  * @used-by df_error_html()
- * @used-by dfaf()
  * @used-by \Df\API\Client::_p()
  * @param mixed ...$a
  */
