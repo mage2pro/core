@@ -57,8 +57,8 @@ function df_contents(string $f, $onE = true, $rs = null):string {
 		function() use ($f, $rs):string {
 			return df_assert_ne(false, @file_get_contents($f, false, $rs));
 		}
-		,true !== $onE ? $onE : function() use ($f) {df_error(
-			'Unable to read the %s «%s».', df_is_url($f) ? 'URL' : 'file', $f
+		,true !== $onE ? $onE : function() use ($f, $isFile) {df_error(
+			'Unable to read the %s «%s».', $isFile ? 'file' : 'URL', $f
 		);}
 	);
 }
