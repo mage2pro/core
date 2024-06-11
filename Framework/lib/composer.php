@@ -48,15 +48,16 @@ function df_package($m = null, $k = '', $d = null) {
 		 * 1) "`df_package()` should look for `composer.json` in the parent directory for all packages (not only `mage2pro/*`),
 		 * similar to @see Magento\SampleData\Model\Dependency::getModuleComposerPackage() in Magento ≥ 2.3":
 		 * https://github.com/mage2pro/core/issues/412
+		 * 2024-06-11
+		 *  1) «Error happened during deploy process: Argument 1 passed to dfa() must be of the type array, null given,
+		 * called in vendor/mage2pro/core/Framework/lib/composer.php on line 57»: https://github.com/mage2pro/core/issues/423
+		 * 2) @uses df_find() can return `null`, so I added `df_eta` before it.
 		 * @var string $p
 		 */
-		$cache[$m] = df_find([$p = df_module_path($m), dirname($p)], function(string $p):array {return df_eta(df_json_decode(
+		$cache[$m] = df_eta(df_find([$p = df_module_path($m), dirname($p)], function(string $p):array {return df_eta(df_json_decode(
 			df_contents("$p/composer.json", '')
-		));});
+		));}));
 	}
-	/*if (null === $cache[$m]) {
-		xdebug_break();
-	}*/
 	return dfa($cache[$m], $k, $d);
 }
 
