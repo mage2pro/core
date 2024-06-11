@@ -28,7 +28,7 @@ function dfaf($a, $b):array {
 	$ia = is_iterable($a); /** @var bool $ia */
 	$ib = is_iterable($b); /** @var bool $ib */
 	if ($ca && $cb) {
-		# 2024-06 11 `df_assert($ia xor $ib)` is shorter
+		# 2024-06-11 `df_assert($ia xor $ib)` is shorter
 		$assert($ia || $ib, 'none of arguments are `iterable`');
 		$assert(!$ia || !$ib, 'both arguments are `callable` and `iterable`');
 		$r = $ia ? [$a, $b] : [$b, $a];
