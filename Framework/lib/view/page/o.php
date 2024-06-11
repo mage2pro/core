@@ -7,7 +7,6 @@ use Magento\Framework\View\Result\PageFactory as F;
  * @used-by df_body_class()
  * @used-by df_metadata()
  * @used-by df_page_title()
- * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/3)
  * @used-by \Df\Sso\Button::_prepareLayout()
  * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
  */
