@@ -54,6 +54,9 @@ function df_package($m = null, $k = '', $d = null) {
 			df_contents("$p/composer.json", '')
 		));});
 	}
+	if (null === $cache[$m]) {
+		xdebug_break();
+	}
 	return dfa($cache[$m], $k, $d);
 }
 

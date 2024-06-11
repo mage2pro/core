@@ -2,6 +2,7 @@
 /**
  * 2022-11-24
  * 2023-07-26 "Unify `df_contents` and `df_file_read`": https://github.com/mage2pro/core/issues/275
+ * 2024-06-11 "Improve `df_contents()`": https://github.com/mage2pro/core/issues/425
  * @used-by df_http_get()
  * @used-by df_intl_dic_write()
  * @used-by df_json_file_read()
@@ -52,7 +53,9 @@ function df_contents(string $f, $onE = true, $rs = null):string {
 		 * in vendor/mage2pro/core/Framework/lib/fs/contents.php on line 36»:
 		 * https://github.com/mage2pro/core/issues/230
 		 */
-		function() use ($f, $rs):string {return df_assert_ne(false, @file_get_contents($f, false, $rs));}
+		function() use ($f, $rs):string {
+			return df_assert_ne(false, @file_get_contents($f, false, $rs));
+		}
 		,true !== $onE ? $onE : function() use ($f) {df_error(
 			'Unable to read the %s «%s».', df_is_url($f) ? 'URL' : 'file', $f
 		);}
