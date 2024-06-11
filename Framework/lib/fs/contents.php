@@ -33,13 +33,13 @@ function df_contents(string $f, $onE = true, $rs = null):string {
 	 * I do not use @see is_file() because in can return `true` for an URL:
  	 * 		«As of PHP 5.0.0, this function can also be used with some URL wrappers»
 	 * https://www.php.net/manual/en/function.is-file.php#refsect1-function.is-file-notes
-	 * @var bool $isFile
+	 * @var bool $isURL
 	 */
-	if ($isFile = !df_is_url($f)) {
+	if (!($isURL = df_is_url($f))) {
 		$f = df_path_abs($f);
 	}
 	return df_try(
-		function() use ($f, $isFile, $rs):string {return df_assert_ne(false,
+		function() use ($f, $isURL, $rs):string {return df_assert_ne(false,
 			/**
 			 * 2015-11-27
 			 * Обратите внимание, что для использования @uses file_get_contents()
@@ -65,11 +65,12 @@ function df_contents(string $f, $onE = true, $rs = null):string {
 			 * 2) "«PHP Warning: file_get_contents(vendor/mage2pro/core/<…>/composer.json):
 			 * failed to open stream: No such file or directory in vendor/mage2pro/core/Framework/lib/fs/contents.php on line 55»
 			 * in the IntellliJ IDEA's console if xDebug is enabled": https://github.com/mage2pro/core/issues/424
+			 * 3) I use @uses is_file() to reject directories.
 			 */
-			$isFile && (!file_exists($f) || !is_file($f) || !is_readable($f)) ? false : @file_get_contents($f, false, $rs)
+			!$isURL && (!is_file($f) || !file_exists($f) || !is_readable($f)) ? false : @file_get_contents($f, false, $rs)
 		);}
-		,true !== $onE ? $onE : function() use ($f, $isFile) {df_error(
-			'Unable to read the %s «%s».', $isFile ? 'file' : 'URL', $f
+		,true !== $onE ? $onE : function() use ($f, $isURL) {df_error(
+			'Unable to read the %s «%s».', $isURL ? 'URL' : 'file', $f
 		);}
 	);
 }
