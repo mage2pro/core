@@ -3,7 +3,7 @@ use Closure as C;
 use Df\Core\Exception as E;
 
 /**
- * 2017-02-18 [array|callable, array|callable] => [array, callable]
+ * 2017-02-18 [iterable|callable, iterable|callable] => [iterable, callable]
  * @used-by df_call_a()
  * @used-by df_filter_f()
  * @used-by df_find()
