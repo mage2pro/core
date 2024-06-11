@@ -65,6 +65,7 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
  * https://github.com/mage2pro/core/issues/174#user-content-callable
  * 2024-06-10
  * "`df_call_a()` should accept the first 2 arguments in an arbitrary ordering": https://github.com/mage2pro/core/issues/417
+ * @used-by df_body_class()
  * @used-by df_camel_to_underscore()
  * @used-by df_e()
  * @used-by df_explode_camel()
