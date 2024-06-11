@@ -35,6 +35,5 @@ function df_layout_update($onError = true) {return df_try(function() {
  * потому что родительским элементом для $e может быть не только блок,
  * но и контейнер, и тогда $e->getParentBlock() вернёт false.
  * @param AB|string $e
- * @return string|null
  */
-function df_parent_name($e) {return df_ftn(df_layout()->getParentName($e instanceof AB ? $e->getNameInLayout() : $e));}
+function df_parent_name($e):?string {return df_ftn(df_layout()->getParentName($e instanceof AB ? $e->getNameInLayout() : $e));}
