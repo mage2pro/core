@@ -1,5 +1,5 @@
 <?php
-use Magento\Framework\View\Result\Page as ResultPage;
+use Magento\Framework\View\Result\Page as P;
 use Magento\Framework\View\Result\PageFactory as F;
 
 /**
@@ -11,9 +11,9 @@ use Magento\Framework\View\Result\PageFactory as F;
  * https://mage2.pro/t/3900
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
  */
-function df_page_result(string $template = '', string ...$handles):ResultPage {
+function df_page_result(string $template = '', string ...$handles):P {
 	$f = df_o(F::class);/** @var F $f */
-	$r = $f->create(false, df_clean(['template' => $template])); /** @var ResultPage $r */
+	$r = $f->create(false, df_clean(['template' => $template])); /** @var P $r */
 	foreach ($handles as $h) {
 		$r->addHandle($h);
 	}
