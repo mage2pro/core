@@ -25,13 +25,20 @@ function dfaf($a, $b):array {
 	$assert = function(bool $cond, string $m) use($a, $b):void {df_assert($cond, "dfaf(): $m.", ['a' => $a, 'b' => $b]);};
 	$ca = is_callable($a); /** @var bool $ca */
 	$cb = is_callable($b); /** @var bool $ca */
+	$ia = is_iterable($a); /** @var bool $ia */
+	$ib = is_iterable($b); /** @var bool $ib */
 	if (!$ca || !$cb) {
-		df_assert($ca || $cb);
-		$r = $ca ? [df_assert_iterable($b), $a] : [df_assert_iterable($a), $b];
+		$assert($ca || $cb, 'none of arguments are callable');
+		if ($ca) {
+			$assert($ib, '$a is `callable`, and $b is not `callable`, so $b must be `iterable`');
+			$r = [$b, $a];
+		}
+		else {
+			$assert($ia, '$b is `callable`, and $a is not `callable`, so $a must be `iterable`');
+			$r = [$a, $b];
+		}
 	}
 	else {
-		$ia = is_iterable($a); /** @var bool $ita */
-		$ib = is_iterable($b); /** @var bool $ib */
 		$assert(!($ia && $ib), 'both arguments are callable and traversable');
 		$assert($ia || $ib, 'none of arguments are traversable');
 		$r = $ia ? [$a, $b] : [$b, $a];

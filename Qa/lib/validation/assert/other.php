@@ -4,16 +4,6 @@ use Df\Qa\Method as Q;
 use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
- * 2016-08-09
- * 2024-06-03
- * 1) "Use the `iterable` type": https://github.com/mage2pro/core/issues/403
- * 2) `iterable` is supported by PHP ≥ 7.1: https://3v4l.org/qNX1j
- * 3) https://php.net/manual/en/language.types.iterable.php
- * @used-by dfaf()
- */
-function df_assert_iterable(iterable $v):iterable {return $v;}
-
-/**
  * 2017-01-14       
  * @used-by \Dfe\GoogleFont\Font\Variant\Preview::box()
  * @used-by \Dfe\GoogleFont\Fonts\Png::colorAllocateAlpha()
