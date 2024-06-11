@@ -28,7 +28,8 @@ function df_contents(string $f, $onE = true, $rs = null):string {
 	# 2) df_is_url('php://input') returns `true`:
 	# https://github.com/mage2pro/core/issues/277
 	# https://3v4l.org/mTt87
-	if (!df_is_url($f)) {
+	/** @var bool $isFile */
+	if ($isFile = !df_is_url($f)) {
 		$f = df_path_abs($f);
 	}
 	return df_try(
