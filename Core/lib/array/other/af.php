@@ -1,5 +1,6 @@
 <?php
 use Closure as C;
+use Df\Core\Exception as E;
 
 /**
  * 2017-02-18 [array|callable, array|callable] => [array, callable]
@@ -28,6 +29,7 @@ function dfaf($a, $b):array {
 	}
 	else {
 		# 2024-06-11 "Improve `dfaf()`": https://github.com/mage2pro/core/issues/421
+		/** @var E $eBoth */
 		$eBoth = df_error_create('dfaf(): both arguments are callable and traversable.', ['a' => $a, 'b' => $b]);
 		$ca = $a instanceof C;
 		$cb = $b instanceof C;
@@ -35,7 +37,7 @@ function dfaf($a, $b):array {
 		$ia = is_iterable($a); /** @var bool $ita */
 		$ib = is_iterable($b); /** @var bool $ib */
 		if ($ia && $ib) {
-			df_error('dfaf(): both arguments are callable and traversable.', ['a' => $a, 'b' => $b]);
+			df_error($eBoth);
 		}
 		df_assert($ia || $ib);
 		$r = $ia ? [$a, $b] : [$b, $a];
