@@ -44,6 +44,12 @@ function df_explode_path(string $p):array {return df_explode_xpath(df_path_n($p)
 
 /**
  * 2022-11-17
+ * 2024-06-11
+ * 1) "Improve `df_explode_space()`": https://github.com/mage2pro/core/issues/422
+ * 2) `print_r(explode('a', 'a'))` → ['', ''] https://3v4l.org/u8pGS
+ * «If separator values appear at the start or end of string,
+ * said values will be added as an empty array value either in the first or last position of the returned array respectively.»
+ * https://www.php.net/manual/en/function.explode.php#refsect1-function.explode-returnvalues
  * @used-by df_body_class()
  * @used-by df_file_name()
  * @used-by df_magento_version_remote()
