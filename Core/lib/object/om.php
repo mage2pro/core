@@ -54,6 +54,8 @@ function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_module_m()
  * @used-by df_msi_website2stockId()
  * @used-by df_no_dispatch()
+ * @used-by df_page_config()
+ * @used-by df_page_factory()
  * @used-by df_post_h()
  * @used-by df_product_action()
  * @used-by df_product_b()

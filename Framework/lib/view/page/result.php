@@ -1,6 +1,5 @@
 <?php
 use Magento\Framework\View\Result\Page as R;
-use Magento\Framework\View\Result\PageFactory as F;
 
 /**
  * 2017-05-05
@@ -11,9 +10,8 @@ use Magento\Framework\View\Result\PageFactory as F;
  * https://mage2.pro/t/3900
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
  */
-function df_page_result(string $template = '', string ...$handles):R {
-	$f = df_o(F::class);/** @var F $f */
-	$r = $f->create(false, df_clean(['template' => $template])); /** @var R $r */
+function df_page_result(string $t = '', string ...$handles):R {
+	$r = df_page_factory()->create(false, df_clean(['template' => $t])); /** @var R $r */
 	foreach ($handles as $h) {
 		$r->addHandle($h);
 	}
