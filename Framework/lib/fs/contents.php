@@ -23,12 +23,18 @@
  * @param ?resource $rs [optional]
  */
 function df_contents(string $f, $onE = true, $rs = null):string {
-	# 2023-07-26
-	# 1) "`df_contents()` should accept internal paths": https://github.com/mage2pro/core/issues/273
-	# 2) df_is_url('php://input') returns `true`:
-	# https://github.com/mage2pro/core/issues/277
-	# https://3v4l.org/mTt87
-	/** @var bool $isFile */
+	/**
+	 * 2023-07-26
+	 * 1) "`df_contents()` should accept internal paths": https://github.com/mage2pro/core/issues/273
+	 * 2) df_is_url('php://input') returns `true`:
+	 * https://github.com/mage2pro/core/issues/277
+	 * https://3v4l.org/mTt87
+	 * 2024-06-11
+	 * I do not use @see is_file() because in can return `true` for an URL:
+ 	 * 		«As of PHP 5.0.0, this function can also be used with some URL wrappers»
+	 * https://www.php.net/manual/en/function.is-file.php#refsect1-function.is-file-notes
+	 * @var bool $isFile
+	 */
 	if ($isFile = !df_is_url($f)) {
 		$f = df_path_abs($f);
 	}
