@@ -1,15 +1,19 @@
 <?php
 /**
- * 2024-06-11
- * 1) "Implement `df_body_class()`": https://github.com/mage2pro/core/issues/420
- * 2) @uses \Magento\Framework\View\Page\Config::addBodyClass() does not allow spaces:
- * 		$className = preg_replace('#[^a-z0-9-_]+#', '-', strtolower($className));
- * https://github.com/magento/magento2/blob/2.4.7/lib/internal/Magento/Framework/View/Page/Config.php#L548
+ * 2024-06-11 "Implement `df_body_class()`": https://github.com/mage2pro/core/issues/420
  * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/3)
  * @param string|string[] $c
  */
 function df_body_class(...$c):void {df_call_a($c, function(string $c):void {
-	df_page_config()->addBodyClass($c);
+	/**
+	 * 2024-06-10
+	 * @uses \Magento\Framework\View\Page\Config::addBodyClass() does not allow spaces:
+	 * 		$className = preg_replace('#[^a-z0-9-_]+#', '-', strtolower($className));
+	 * https://github.com/magento/magento2/blob/2.4.7/lib/internal/Magento/Framework/View/Page/Config.php#L548
+	 */
+	foreach (df_explode_space($c) as $i) {/** @var string $i */
+		df_page_config()->addBodyClass($i);
+	}
 });}
 
 /**
