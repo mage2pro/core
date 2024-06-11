@@ -1,5 +1,4 @@
 <?php
-use Magento\Framework\View\Page\Config;
 use Magento\Framework\View\Result\Page as ResultPage;
 use Magento\Framework\View\Result\PageFactory;
 /**
@@ -11,16 +10,6 @@ function df_metadata(string $k, string $v):void {
 		df_page_config()->setMetadata($k, $v);
 	}
 }
-
-/**
- * 2015-10-05
- * @used-by df_metadata()
- * @used-by df_page_title()
- * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/3)
- * @used-by \Df\Sso\Button::_prepareLayout()
- * @used-by \Inkifi\Core\Plugin\Catalog\Block\Product\View::afterSetLayout()
- */
-function df_page_config():Config {return df_o(Config::class);}
 
 /**
  * 2017-05-07
