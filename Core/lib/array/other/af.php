@@ -27,7 +27,12 @@ function dfaf($a, $b):array {
 	$cb = is_callable($b); /** @var bool $ca */
 	$ia = is_iterable($a); /** @var bool $ia */
 	$ib = is_iterable($b); /** @var bool $ib */
-	if (!$ca || !$cb) {
+	if ($ca && $cb) {
+		$assert(!($ia && $ib), 'both arguments are callable and traversable');
+		$assert($ia || $ib, 'none of arguments are traversable');
+		$r = $ia ? [$a, $b] : [$b, $a];
+	}
+	else {
 		$assert($ca || $cb, 'none of arguments are callable');
 		if ($ca) {
 			$assert($ib, '$a is `callable`, and $b is not `callable`, so $b must be `iterable`');
@@ -37,11 +42,6 @@ function dfaf($a, $b):array {
 			$assert($ia, '$b is `callable`, and $a is not `callable`, so $a must be `iterable`');
 			$r = [$a, $b];
 		}
-	}
-	else {
-		$assert(!($ia && $ib), 'both arguments are callable and traversable');
-		$assert($ia || $ib, 'none of arguments are traversable');
-		$r = $ia ? [$a, $b] : [$b, $a];
 	}
 	return $r;
 }
