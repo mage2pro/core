@@ -21,6 +21,8 @@ function dfaf($a, $b):array {
 	# 1) https://php.watch/versions/8.2/partially-supported-callable-deprecation
 	# 2.1) `is_callable([__CLASS__, 'f'])` for a private `f` is allowed: https://3v4l.org/ctZJG
 	# 2.2) `array_map([__CLASS__, 'f'], [1, 2, 3])` for a private `f` is allowed too: https://3v4l.org/29Zim
+	# 2024-06-11 "Improve `dfaf()`": https://github.com/mage2pro/core/issues/421
+	$assert = function(bool $cond, string $m) use($a, $b):void {df_assert($cond, "dfaf(): $m.", ['a' => $a, 'b' => $b]);};
 	$ca = is_callable($a); /** @var bool $ca */
 	$cb = is_callable($b); /** @var bool $ca */
 	if (!$ca || !$cb) {
@@ -28,14 +30,10 @@ function dfaf($a, $b):array {
 		$r = $ca ? [df_assert_iterable($b), $a] : [df_assert_iterable($a), $b];
 	}
 	else {
-		# 2024-06-11 "Improve `dfaf()`": https://github.com/mage2pro/core/issues/421
-		$ca = $a instanceof C;
-		$cb = $b instanceof C;
-		df_assert(!($ca && $cb), 'dfaf(): both arguments are closures.', ['a' => $a, 'b' => $b]);
 		$ia = is_iterable($a); /** @var bool $ita */
 		$ib = is_iterable($b); /** @var bool $ib */
-		df_assert(!($ia && $ib), 'dfaf(): both arguments are callable and traversable.', ['a' => $a, 'b' => $b]);
-		df_assert($ia || $ib);
+		$assert(!($ia && $ib), 'both arguments are callable and traversable');
+		$assert($ia || $ib, 'none of arguments are traversable');
 		$r = $ia ? [$a, $b] : [$b, $a];
 	}
 	return $r;
