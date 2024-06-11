@@ -39,7 +39,7 @@ function df_contents(string $f, $onE = true, $rs = null):string {
 		$f = df_path_abs($f);
 	}
 	return df_try(
-		function() use ($f, $isURL, $rs):string {return df_assert_ne(false,
+		function() use($f, $isURL, $rs):string {return df_assert_ne(false,
 			/**
 			 * 2015-11-27
 			 * Обратите внимание, что для использования @uses file_get_contents()
@@ -69,6 +69,8 @@ function df_contents(string $f, $onE = true, $rs = null):string {
 			 */
 			!$isURL && (!is_file($f) || !file_exists($f) || !is_readable($f)) ? false : @file_get_contents($f, false, $rs)
 		);}
-		,true !== $onE ? $onE : function() use ($f, $isURL) {df_error("Unable to read the %s «{$f}».", $isURL ? 'URL' : 'file');}
+		,true !== $onE ? $onE : function() use($f, $isURL):void {df_error(
+			"Unable to read the %s «{$f}».", $isURL ? 'URL' : 'file'
+		);}
 	);
 }
