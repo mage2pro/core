@@ -4,6 +4,7 @@ use Magento\Framework\View\Result\PageFactory as F;
 
 /**
  * 2015-10-05
+ * @used-by df_body_class()
  * @used-by df_metadata()
  * @used-by df_page_title()
  * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/3)

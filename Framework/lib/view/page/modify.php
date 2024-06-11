@@ -1,5 +1,10 @@
 <?php
 /**
+ * 2024-06-11 "Implement `df_body_class()`": https://github.com/mage2pro/core/issues/420
+ */
+function df_body_class(string $c):void {df_page_config()->addBodyClass($c);}
+
+/**
  * 2015-10-05
  * @used-by \Dfe\GoogleBackendLogin\Block\Metadata::_construct()
  */
