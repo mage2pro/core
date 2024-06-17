@@ -7,6 +7,7 @@
  *	return (false === $result) ? null : $result;
  * потому что если @uses reset() вернуло false, это не всегда означает сбой метода:
  * ведь первый элемент массива может быть равен false.
+ * 2024-06-18 "`df_first()` should accept `iterable` as its argument": https://github.com/mage2pro/core/issues/429
  * @see df_last()
  * @see df_tail()
  * @used-by df_caller_c()
@@ -33,7 +34,7 @@
  * @used-by frugue/core/view/frontend/templates/wishlist/item/column/image.phtml
  * @return mixed|null
  */
-function df_first(array $a) {return !$a ? null : reset($a);}
+function df_first(iterable $i) {return !($a = df_ita($i)) ? null : reset($a);}
 
 /**
  * 2019-08-21 https://php.net/manual/en/function.array-key-first.php
