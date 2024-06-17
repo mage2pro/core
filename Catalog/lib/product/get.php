@@ -46,3 +46,10 @@ function df_product($p, $s = false):P {return df_is_p($p) ? $p : df_product_r()-
 	,false === $s ? null : df_store_id(true === $s ? null : $s)
 	,true === $s
 );}
+
+/**
+ * 2018-06-04
+ * @see df_product()
+ * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
+ */
+function df_product_load(int $id):P {return df_product_r()->getById($id, false, null, true);}
