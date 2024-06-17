@@ -23,4 +23,4 @@ function df_category_ancestor_at_level(C $c, int $l) {return $l > ($l2 = df_cate
  * @used-by \CabinetsBay\Catalog\B\Category::level() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products.phtml (https://github.com/cabinetsbay/site/issues/98)
  */
-function df_category_level(C $c = null):int {return (int)($c ?: df_category_current())->getLevel();}
+function df_category_level(?C $c = null):int {return (int)($c ?: df_category_current())->getLevel();}
