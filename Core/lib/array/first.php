@@ -92,7 +92,4 @@ function df_first_key(array $a) {
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @return mixed|null
  */
-function df_last(iterable $i) {
-	$a = df_ita($i);
-	return !$a ? null : end($a);
-}
+function df_last(iterable $i) {return !($a = df_ita($i)) ? null : end($a);}
