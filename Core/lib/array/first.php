@@ -63,6 +63,7 @@ function df_first_key(array $a) {
  * потому что если @uses end() вернуло false, это не всегда означает сбой метода:
  * ведь последний элемент массива может быть равен false.
  * http://www.php.net/manual/en/function.end.php#107733
+ * 2024-06-18 "`df_last()` should accept `iterable` as its argument": https://github.com/mage2pro/core/issues/428
  * @see df_first()
  * @see df_tail()
  * @used-by df_class_l()
@@ -91,4 +92,7 @@ function df_first_key(array $a) {
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
  * @return mixed|null
  */
-function df_last(array $array) {return !$array ? null : end($array);}
+function df_last(iterable $i) {
+	$a = df_ita($i);
+	return !$a ? null : end($a);
+}

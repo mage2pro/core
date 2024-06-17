@@ -13,6 +13,7 @@
  * 3) https://php.net/manual/en/language.types.iterable.php
  * @used-by df_filter_f()
  * @used-by df_index()
+ * @used-by df_last() (https://github.com/mage2pro/core/issues/428)
  * @used-by df_map()
  * @used-by dfa_select_ordered()
  * @used-by dfak_transform()
