@@ -1,6 +1,5 @@
 <?php
 use Magento\Catalog\Model\Product as P;
-use Magento\Catalog\Model\ProductRepository;
 use Magento\Catalog\Model\ResourceModel\Product as Res;
 use Magento\Catalog\Model\ResourceModel\Product\Action;
 use Magento\Framework\Exception\NoSuchEntityException as NSE;
