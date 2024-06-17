@@ -1,5 +1,4 @@
 <?php
-use Magento\Catalog\Api\ProductRepositoryInterface as IProductRepository;
 use Magento\Catalog\Model\Product as P;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Catalog\Model\ResourceModel\Product as Res;
@@ -72,17 +71,6 @@ function df_product_id($p):int {return df_int(df_is_p($p) ? $p->getId() : $p);}
  * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
  */
 function df_product_load(int $id):P {return df_product_r()->getById($id, false, null, true);}
-
-/**
- * 2019-02-26                
- * @see df_category_r()
- * @used-by df_product()
- * @used-by df_product_load()
- * @used-by \CanadaSatellite\Theme\Plugin\Model\LinkManagement::aroundSaveChild(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/44)
- * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Controller\Adminhtml\Product\MassUpdateProducts::beforeExecute()
- * @return IProductRepository|ProductRepository
- */
-function df_product_r() {return df_o(IProductRepository::class);}
 
 /**
  * 2019-09-22
