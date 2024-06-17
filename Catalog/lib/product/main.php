@@ -1,6 +1,5 @@
 <?php
 use Magento\Catalog\Api\ProductRepositoryInterface as IProductRepository;
-use Magento\Catalog\Helper\Product as ProductH;
 use Magento\Catalog\Model\Product as P;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Catalog\Model\ResourceModel\Product as Res;
@@ -57,12 +56,6 @@ function df_product($p, $s = false):P {return df_is_p($p) ? $p : df_product_r()-
  * @used-by \Dfe\Color\Observer\ProductImportBunchSaveAfter::execute()
  */
 function df_product_action():Action {return df_o(Action::class);}
-
-/**
- * 2018-06-04
- * @used-by \Frugue\Configurable\Plugin\Swatches\Block\Product\Renderer\Configurable::aroundGetAllowProducts()
- */
-function df_product_h():ProductH {return df_o(ProductH::class);}
 
 /**             
  * 2019-11-18
