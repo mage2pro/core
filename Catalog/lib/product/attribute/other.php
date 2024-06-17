@@ -1,6 +1,5 @@
 <?php
 use Magento\Catalog\Model\Product as P;
-use Magento\Framework\Exception\NoSuchEntityException as NSE;
 
 /**
  * 2021-04-24
