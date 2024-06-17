@@ -90,6 +90,7 @@ function df_first_key(array $a) {
  * @used-by \Dfe\Stripe\W\Handler\Charge\Refunded::eTransId()
  * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products/not-empty.phtml (https://github.com/cabinetsbay/catalog/issues/38)
  * @return mixed|null
  */
 function df_last(iterable $i) {return !($a = df_ita($i)) ? null : end($a);}
