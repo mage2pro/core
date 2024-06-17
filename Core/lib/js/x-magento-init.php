@@ -13,8 +13,8 @@
  * @param string|object|null $m
  * @param array(string => mixed) $p [optional]
  */
-function df_js_x(string $selector, $m, string $s = '', array $p = []):string {return df_tag(
+function df_js_x(string $selector, $m, string $script = '', array $p = []):string {return df_tag(
 	'script', ['type' => 'text/x-magento-init'], df_json_encode([$selector => [
-		df_cc_path(is_null($m) ? null : df_module_name($m), $s ?: 'main') => $p
+		df_cc_path(is_null($m) ? null : df_module_name($m), $script ?: 'main') => $p
 	]])
 );}
