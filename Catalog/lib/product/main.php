@@ -1,6 +1,5 @@
 <?php
 use Magento\Catalog\Model\Product as P;
-use Magento\Catalog\Model\ResourceModel\Product as Res;
 use Magento\Catalog\Model\ResourceModel\Product\Action;
 
 /**
@@ -24,9 +23,3 @@ function df_product_id($p):int {return df_int(df_is_p($p) ? $p->getId() : $p);}
  * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
  */
 function df_product_load(int $id):P {return df_product_r()->getById($id, false, null, true);}
-
-/**
- * 2019-09-22
- * @used-by df_product_sku2id()
- */
-function df_product_res():Res {return df_o(Res::class);}

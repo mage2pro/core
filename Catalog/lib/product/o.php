@@ -2,6 +2,7 @@
 use Magento\Catalog\Api\ProductRepositoryInterface as IProductRepository;
 use Magento\Catalog\Helper\Product as ProductH;
 use Magento\Catalog\Model\ProductRepository;
+use Magento\Catalog\Model\ResourceModel\Product as Res;
 
 /**
  * 2018-06-04
@@ -19,3 +20,9 @@ function df_product_h():ProductH {return df_o(ProductH::class);}
  * @return IProductRepository|ProductRepository
  */
 function df_product_r() {return df_o(IProductRepository::class);}
+
+/**
+ * 2019-09-22
+ * @used-by df_product_sku2id()
+ */
+function df_product_res():Res {return df_o(Res::class);}
