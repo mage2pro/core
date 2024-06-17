@@ -18,10 +18,3 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 function df_category($c, $s = false):C {return $c instanceof C ? $c : df_category_r()->get(
 	$c, false === $s ? null : df_store_id(true === $s ? null : $s)
 );}
-
-/**
- * 2021-11-30 @deprecated It is unused.
- * @see df_product_id()
- * @param C|int $c
- */
-function df_category_id($c):int {return df_int($c instanceof C ? $c->getId() : $c);}
