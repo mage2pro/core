@@ -93,9 +93,10 @@ function df_each(iterable $c, $f, ...$p):array {return df_map(function($v) use($
  * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by \Wolf\Filter\Controller\Index\Change::execute()
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/view.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/catalog/issues/18)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/view.phtml (https://github.com/cabinetsbay/catalog/issues/18)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products/not-empty/ol.phtml (https://github.com/cabinetsbay/catalog/issues/38)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param callable|iterable $a1
  * @param callable|iterable $a2
