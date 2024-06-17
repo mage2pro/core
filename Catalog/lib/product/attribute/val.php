@@ -4,6 +4,7 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
 
 /**
  * 2020-01-31
+ * @see df_product_att_html()
  * @see \Magento\Catalog\Model\Product::getAttributeText()
  * @uses \Magento\Eav\Model\Entity\Attribute\Source\AbstractSource::getOptionText()
  * @used-by \Df\Catalog\Test\product\attribute::df_product_att_val()
