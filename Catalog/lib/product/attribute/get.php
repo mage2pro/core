@@ -8,7 +8,6 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
  * @used-by df_product_att_options()
  * @used-by df_product_att_val()
  * @param F|bool|mixed $onE [optional]
- * @return A|null
  * @throws NSE
  */
-function df_product_att(string $c, $onE = true) {return df_try(function() use($c) {return df_product_atts_r()->get($c);}, $onE);}
+function df_product_att(string $c, $onE = true):?A {return df_try(function() use($c) {return df_product_atts_r()->get($c);}, $onE);}
