@@ -69,7 +69,7 @@ function df_cc_br(...$a):string {return df_ccc("<br>", dfa_flatten($a));}
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l3/tabs/overview.phtml (https://github.com/cabinetsbay/catalog/issues/22)
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products/not-empty/ol.phtml (https://github.com/cabinetsbay/catalog/issues/38)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products/not-empty.phtml (https://github.com/cabinetsbay/catalog/issues/38)
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/Magento/Tax/item/price/unit.phtml (https://github.com/cabinetsbay/site/issues/143)
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/head.phtml (https://github.com/cabinetsbay/catalog/issues/39)
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml

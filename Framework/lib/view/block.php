@@ -75,7 +75,7 @@ function df_block($c, $data = [], string $t = '', array $vars = []):IB {
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/view.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products.phtml (https://github.com/cabinetsbay/catalog/issues/38)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products/not-empty.phtml (https://github.com/cabinetsbay/catalog/issues/38)
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products/not-empty/ol.phtml (https://github.com/cabinetsbay/catalog/issues/38)
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products/not-empty.phtml (https://github.com/cabinetsbay/catalog/issues/38)
  * @param string|object|null $c
  * @param array $vars [optional]
  * @param array(string => mixed) $data [optional]
