@@ -129,6 +129,7 @@ function df_fts($v) {return false === $v ? '' : $v;}
  * @used-by df_cfg_empty()
  * @used-by df_deployment_cfg()
  * @used-by df_float()
+ * @used-by df_js_x()
  * @used-by df_json_decode()
  * @used-by df_metadata()
  * @used-by df_oi()

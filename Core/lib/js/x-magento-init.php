@@ -15,6 +15,6 @@
  */
 function df_js_x(string $selector, $m, string $script = '', array $p = []):string {return df_tag(
 	'script', ['type' => 'text/x-magento-init'], df_json_encode([$selector => [
-		df_cc_path(null === $m ? '' : df_module_name($m), $script ?: 'main') => $p
+		df_cc_path(df_nes($m) ? '' : df_module_name($m), $script ?: 'main') => $p
 	]])
 );}
