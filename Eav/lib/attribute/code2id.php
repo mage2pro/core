@@ -1,6 +1,7 @@
 <?php
 /**
  * 2019-06-15
+ * @see df_product_sku2id()
  * @used-by df_customer_att_pos_set()
  * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
  * @see df_product_attrs_r()
