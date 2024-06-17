@@ -3,6 +3,13 @@ use Magento\Catalog\Api\ProductRepositoryInterface as IProductRepository;
 use Magento\Catalog\Helper\Product as ProductH;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Catalog\Model\ResourceModel\Product as Res;
+use Magento\Catalog\Model\ResourceModel\Product\Action;
+
+/**
+ * 2019-09-22 «Best way to update product's attribute value»: https://magento.stackexchange.com/a/157446
+ * @used-by \Dfe\Color\Observer\ProductImportBunchSaveAfter::execute()
+ */
+function df_product_action():Action {return df_o(Action::class);}
 
 /**
  * 2018-06-04

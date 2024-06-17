@@ -1,12 +1,5 @@
 <?php
 use Magento\Catalog\Model\Product as P;
-use Magento\Catalog\Model\ResourceModel\Product\Action;
-
-/**
- * 2019-09-22 «Best way to update product's attribute value»: https://magento.stackexchange.com/a/157446
- * @used-by \Dfe\Color\Observer\ProductImportBunchSaveAfter::execute()
- */
-function df_product_action():Action {return df_o(Action::class);}
 
 /**             
  * 2019-11-18
