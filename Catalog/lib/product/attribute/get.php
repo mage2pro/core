@@ -10,4 +10,6 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
  * @param F|bool|mixed $onE [optional]
  * @throws NSE
  */
-function df_product_att(string $c, $onE = true):?A {return df_try(function() use($c) {return df_product_atts_r()->get($c);}, $onE);}
+function df_product_att(string $c, $onE = true):?A {return df_try(
+	function() use($c):?A {return df_product_atts_r()->get($c);}, $onE
+);}
