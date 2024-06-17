@@ -1,7 +1,5 @@
 <?php
-use Magento\Catalog\Api\CategoryRepositoryInterface as ICategoryRepository;
 use Magento\Catalog\Model\Category as C;
-use Magento\Catalog\Model\CategoryRepository;
 use Magento\Catalog\Model\Product as P;
 use Magento\Quote\Model\Quote\Item as QI;
 use Magento\Sales\Model\Order\Item as OI;
@@ -42,11 +40,3 @@ function df_category_id($c):int {return df_int($c instanceof C ? $c->getId() : $
 function df_category_names($p, $s = false):array {return df_each(
 	df_product($p, $s)->getCategoryCollection()->addAttributeToSelect($k = 'name'), $k
 );}
-
-/**
- * 2019-09-08   
- * @see df_product_r()
- * @used-by df_category()
- * @return ICategoryRepository|CategoryRepository
- */
-function df_category_r() {return df_o(ICategoryRepository::class);}
