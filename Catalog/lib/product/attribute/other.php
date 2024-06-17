@@ -8,16 +8,6 @@ use Magento\Framework\Exception\NoSuchEntityException as NSE;
  */
 function df_product_att_changed(P $p, string $k):bool {return $p->getStoreId() ? !is_null($p[$k]) : $p->dataHasChangedFor($k);}
 
-/**      
- * 2019-10-22
- * @used-by df_product_att_options_m()
- * @used-by \Dfe\Color\Image::opts()
- * @return array(array(string => int|string))
- */
-function df_product_att_options(string $c):array {return dfcf(function($c) {return
-	df_product_att($c)->getSource()->getAllOptions(false)
-;}, [$c]);}
-
 /**
  * 2019-10-22
  * @used-by \Dfe\Color\Image::opts()
