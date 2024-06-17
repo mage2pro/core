@@ -9,6 +9,7 @@ function df_catalog_h():H {return df_o(H::class);}
 
 /**
  * 2020-10-30
+ * @used-by df_product_att_html()
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l3/tabs/overview.phtml (https://github.com/cabinetsbay/catalog/issues/22)
  * @used-by app/design/frontend/TradeFurnitureCompany/default/Magento_Catalog/templates/category/description.phtml
  */
