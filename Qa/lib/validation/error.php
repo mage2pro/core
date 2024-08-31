@@ -206,7 +206,7 @@ function df_error(...$a):void {
  * @param mixed ...$a
  */
 function df_error_create(...$a):DFE {/** @var DFE $r */
-	$a0 = dfa($a, 0); /** @var string|string[]|mixed|T|Phrase|null $a0 */
+	$a0 = dfa($a, 0); /** @var string|string[]|array(string => mixed)|mixed|T|Phrase|null $a0 */
 	$tail = df_tail($a); /** @var mixed[] $tail */
 	$tailC = count($tail); /** @var int $tailC */
 	/** @var mixed|null|array(string => mixed) $a1 */ /** @var bool $hasContext */
