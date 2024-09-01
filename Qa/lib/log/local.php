@@ -1,45 +1,6 @@
 <?php
 use Df\Qa\Failure\Exception as QE;
-use Magento\Framework\DataObject as _DO;
 use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
-/**
- * @used-by df_caller_m()
- * @used-by df_error()
- * @used-by ikf_endpoint()	inkifi.com
- * @used-by \Df\API\Client::_p()
- * @used-by \Df\Config\Backend::save()
- * @used-by \Df\Config\Backend\Serialized::processA()
- * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
- * @used-by \Df\Framework\Plugin\AppInterface::beforeCatchException() (https://github.com/mage2pro/core/issues/160)
- * @used-by \Df\Framework\Plugin\App\Response\HttpInterface::beforeSetBody()
- * @used-by \Df\OAuth\ReturnT::execute()
- * @used-by \Df\Payment\Method::action()
- * @used-by \Df\Payment\PlaceOrderInternal::message()
- * @used-by \Df\Payment\W\Action::execute()
- * @used-by \Df\Payment\W\Handler::log()
- * @used-by \Df\Paypal\Plugin\Model\Payflow\Service\Response\Validator\ResponseValidator::log()
- * @used-by \Df\Qa\Failure::log()
- * @used-by \Df\Qa\Failure\Error::check()
- * @used-by \Df\Qa\Trace\Formatter::p()
- * @used-by \Df\Widget\Plugin\Block\Adminhtml\Widget\Options::aroundAddFields() (https://github.com/mage2pro/core/issues/397)
- * @used-by \Df\Xml\X::addAttributes()
- * @used-by \Dfe\CheckoutCom\Response::getCaptureCharge()
- * @used-by \Dfe\GoogleFont\Fonts\Png::url()
- * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
- * @used-by \Dfe\GoogleFont\Fonts\Sprite::draw()
- * @used-by \Dfe\Sift\Controller\Index\Index::execute()
- *
- * @used-by \Dfe\Sift\Observer::f()
- * @param _DO|mixed[]|mixed|T $v
- * @param string|object|null $m [optional]
- */
-function df_log($v, $m = null, array $d = [], string $suf = ''):void {
-	$isT = df_is_th($v); /** @var bool $isT */
-	$m = $m ? df_module_name($m) : ($isT ? df_caller_module($v) : df_caller_module());
-	df_log_l($m, ...($isT ? [$v, $d] : [!$d ? $v : (dfa_merge_r($d, is_array($v) ? $v : ['message' => $v])), $suf]));
-	df_sentry($m, ...($isT || !is_array($v) ? [$v, $d] : ['', dfa_merge_r($d, $v)]));
-}
-
 /**
  * 2017-01-11
  * @used-by df_log()
@@ -97,39 +58,3 @@ function df_log_l($m, $p2, $p3 = [], string $p4 = ''):void {
 		)
 	);
 }
-
-/**
- * 2017-04-03
- * 2017-04-22
- * С не-строковым значением $m @uses \Magento\Framework\Filesystem\Driver\File::fileWrite() упадёт,
- * потому что там стоит код: $lenData = strlen($data);
- * 2018-07-06 The `$append` parameter has been added.
- * 2020-02-14 If $append is `true`, then $m will be written on a new line.
- * @used-by df_bt_log()
- * @used-by df_log_l()
- * @used-by \Df\Core\Text\Regex::throwInternalError()
- * @used-by \Df\Core\Text\Regex::throwNotMatch()
- * @used-by \Df\Qa\Failure\Error::log()
- * @used-by \Inkifi\Mediaclip\H\Logger::l()
- * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
- */
-function df_report(string $f, string $m, bool $append = false):void {
-	if (!df_es($m)) {
-		$f = df_file_ext_def($f, 'log');
-		$p = BP . '/var/log'; /** @var string $p */
-		df_file_write($append ? "$p/$f" : df_file_name($p, $f), $m, $append);
-	}
-}
-
-/**
- * 2020-01-31
- * 2023-07-19
- * «mb_strtolower(): Passing null to parameter #1 ($string) of type string is deprecated
- * in vendor/mage2pro/core/Qa/lib/log.php on line 122»: https://github.com/mage2pro/core/issues/233
- * @used-by df_log_l()
- * @used-by \Df\Framework\Log\Handler\Info::lb()
- * @param string|object|null $m [optional]
- */
-function df_report_prefix($m = null, string $pref = ''):string {return df_ccc('--',
-	mb_strtolower($pref), !$m ? null : df_module_name_lc($m, '-')
-);}

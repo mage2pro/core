@@ -78,7 +78,12 @@ final class Error extends \Df\Qa\Failure {
 		}
 		# 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 		catch (T $t) {
-			df_log($t);
+			try {df_log($t);}
+			# 2024-09-01
+			# "If `df_log()` fails in `Df\Qa\Failure\Error::check()`,
+			# then `Df\Qa\Failure\Error::check()` should try another method to log the problem":
+			# https://github.com/mage2pro/core/issues/431
+			catch (T $t) {\Mage::logExceptionOriginal($t);}
 		}
 	}
 
