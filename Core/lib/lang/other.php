@@ -1,5 +1,4 @@
 <?php
-use Df\Core\RAM;
 /**
  * 2017-02-07
  * @used-by df_lang_zh()
