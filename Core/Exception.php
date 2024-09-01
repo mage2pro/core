@@ -56,10 +56,15 @@ class Exception extends LE {
 		}
 		if (null == $m) {
 			$m = __($prev ? df_xts($prev) : 'No message');
-			# 2017-02-20 To faciliate the «No message» diagnostics.
-			if (!$prev) {
-				df_bt_log();
-			}
+			# 2024-09-01
+			# 1) "`Df\Core\Exception::__construct()` should log nothing because it could be called in not an error case
+			# (e.g., via a `df_try()` call)": https://github.com/mage2pro/core/issues/430
+			# 2) The previous code:
+			#	# 2017-02-20 To faciliate the «No message» diagnostics.
+			#	if (!$prev) {
+			#		df_bt_log();
+			#	}
+			# https://github.com/mage2pro/core/blob/11.3.0/Core/Exception.php#L59-L62
 		}
 		parent::__construct($m, $prev);
 	}
