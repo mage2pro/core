@@ -83,7 +83,7 @@ final class Error extends \Df\Qa\Failure {
 			# "If `df_log()` fails in `Df\Qa\Failure\Error::check()`,
 			# then `Df\Qa\Failure\Error::check()` should try another method to log the problem":
 			# https://github.com/mage2pro/core/issues/431
-			catch (T $t) {\Mage::logExceptionOriginal($t);}
+			catch (T $t) {df_logger()->critical($t);}
 		}
 	}
 
