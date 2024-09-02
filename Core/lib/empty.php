@@ -2,6 +2,7 @@
 /**
  * @see df_nes()
  * @used-by df_assert_sne()
+ * @used-by df_block_output()
  * @used-by df_desc()
  * @used-by df_leaf()
  * @used-by df_leaf_sne()
