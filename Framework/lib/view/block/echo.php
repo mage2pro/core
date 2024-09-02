@@ -13,8 +13,14 @@ use Closure as F;
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/view.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @param string|object|null $m
  */
-function df_block_echo($m = null, string $p = '', array $v = []):F {return function(string ...$tt) use($m, $p, $v):void {
-	df_map($tt, function(string $t) use($m, $p, $v):void {
-		echo df_block_output($m, df_cc_path($p, $t), $v);
-	});
-};}
+function df_block_echo($m = null, string $p = '', array $v = []):F {
+	# 2024-09-02
+	# 1) https://stackoverflow.com/a/7878017
+	# 2) https://3v4l.org/irLL7
+	$r =  function(string ...$tt) use($m, $p, &$r, $v):void {
+		df_map($tt, function(string $t) use($m, $p, $r, $v):void {
+			echo df_block_output($m, df_cc_path($p, $t), $v + ['echo' => $r]);
+		});
+	}; /** @var F $r */
+	return $r;
+}
