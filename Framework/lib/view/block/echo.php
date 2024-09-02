@@ -2,6 +2,7 @@
 use Closure as F;
 /**
  * 2024-09-02 "Implement `df_block_echo()`": https://github.com/mage2pro/core/issues/432
+ * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/view.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @param string|object|null $c
  */
