@@ -3,6 +3,7 @@
  * 2015-12-01 Отныне всегда используем `/` вместо @see DIRECTORY_SEPARATOR
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * 2024-06-09 "`df_cc_path()` should trim internal `/` and `DS` for arguments": https://github.com/mage2pro/core/issues/406
+ * @used-by df_block_echo()
  * @used-by df_config_e()
  * @used-by df_db_credentials()
  * @used-by df_fs_etc()

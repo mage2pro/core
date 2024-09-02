@@ -70,6 +70,7 @@ function df_each(iterable $c, $f, ...$p):array {return df_map(function($v) use($
  * 2) We still can not use «Union Types» (e.g. `callable|iterable`) because they require PHP ≥ 8 (we need to support PHP ≥ 7.1):
  * 2.1) https://php.watch/versions/8.0/union-types
  * 2.2) https://3v4l.org/AOWmO
+ * @used-by df_block_echo()
  * @used-by df_clean_r()
  * @used-by df_db_credentials()
  * @used-by df_mail()
@@ -95,7 +96,6 @@ function df_each(iterable $c, $f, ...$p):array {return df_map(function($v) use($
  * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L25
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l2/l3/filters.phtml (https://github.com/cabinetsbay/catalog/issues/18)
- * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/view.phtml (https://github.com/cabinetsbay/catalog/issues/18)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products/not-empty.phtml (https://github.com/cabinetsbay/catalog/issues/38)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @param callable|iterable $a1
