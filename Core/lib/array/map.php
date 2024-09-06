@@ -25,8 +25,8 @@ const DF_BEFORE = -1;
  * Эта функция аналогична методу @see \Magento\Framework\Data\Collection::walk(),
  * и даже может использоваться вместо @see \Magento\Framework\Data\Collection::walk(),
  * однако, в отличие от @see \Magento\Framework\Data\Collection::walk(),
- * она способна работать не только с коллекцией,
- * но также с массивом объектов и объектом, поддерживающим интерфейс @see Traversable.
+ * она способна работать не только с коллекцией, но также с массивом объектов и объектом,
+ * поддерживающим интерфейс @see Traversable
  * 2016-07-31 При вызове с 2-мя параметрами эта функция идентична функции @see df_column()
  * 2017-07-09
  * Now the function accepts an array as $object.
