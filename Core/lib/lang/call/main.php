@@ -20,7 +20,7 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 	elseif ($m instanceof Closure) {
 		# 2024-09-07
 		# $o is passed as the first argument for $m, because in this case $m is a «getter» closure.
-		# It is used by df_column() and df_each()
+		# It is used by df_column() and df_each().
 		$r = call_user_func_array($m, array_merge([$o], $p));
 	}
 	else {
@@ -39,6 +39,9 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 		$callable = null; /** @var ?callable $callable */
 		if ($functionExists && !$methodExists) {
 			$callable = $m;
+			# 2024-09-07
+			# $o is passed as the first argument for $m, because in this case $m is a name of a «getter» function.
+			# It is used by df_column() and df_each().
 			$p = array_merge([$o], $p);
 		}
 		elseif ($methodExists && !$functionExists) {
