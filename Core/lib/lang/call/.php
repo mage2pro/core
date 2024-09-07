@@ -1,5 +1,7 @@
 <?php
+use ReflectionFunction as RF;
 use ReflectionMethod as RM;
+use ReflectionParameter as RP;
 
 /**
  * 2015-12-30
@@ -37,13 +39,9 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 		 * 3) The conjunction of these 2 checks returns `true` only for publicly accessible and really exists
 		 * (not handled by `__call`) methods.
 		 */
-		if (is_callable([$o, $m]) && method_exists($o, $m)) {
+		/** @var bool $isMethod */
+		if ($isMethod = is_callable([$o, $m]) && method_exists($o, $m)) {
 			$callable = [$o, $m];
-			# 2024-09-07
-			# @todo "Provide an ability to pass named arguments to `df_call()`": https://github.com/mage2pro/core/issues/433
-			if (df_is_assoc($p)) {
-				$rm = new RM($o, $m); /** @var RM $rm */
-			}
 		}
 		elseif (function_exists($m)) {
 			$callable = $m;
@@ -53,7 +51,21 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 			$p = array_merge([$o], $p);
 		}
 		if ($callable) {
-			$r = call_user_func_array($callable, $p);
+			if (!df_is_assoc($p)) {
+				$r = call_user_func_array($callable, $p);
+			}
+			else {
+				# 2024-09-07
+				# 1) "Provide an ability to pass named arguments to `df_call()`": https://github.com/mage2pro/core/issues/433
+				# 2) https://www.php.net/manual/en/reflectionmethod.invokeargs.php#100041
+				$rfa = $isMethod ? new RM($o, $m) : new RF($m); /** @var RM|RF $rfa */
+				$r = $rfa->invoke(...array_merge(
+					$isMethod ? [$o] : []
+					,df_map($rfa->getParameters(), function(RP $rp) use($p) {return dfa(
+						$p, $rp->getName(), $rp->getDefaultValue()
+					);})
+				));
+			}
 		}
 		elseif (df_has_gd($o)) {
 			$r = dfad($o, $m);

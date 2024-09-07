@@ -16,6 +16,7 @@
  * @used-by df_bt_entry_func()
  * @used-by df_bt_entry_line()
  * @used-by df_bt_has()
+ * @used-by df_call()
  * @used-by df_category_dp_meta()
  * @used-by df_ci_get()
  * @used-by df_cli_argv()

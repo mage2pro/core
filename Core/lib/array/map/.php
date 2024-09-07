@@ -24,6 +24,7 @@ use Df\Core\Exception as DFE;
  * 2.1) https://php.watch/versions/8.0/union-types
  * 2.2) https://3v4l.org/AOWmO
  * @used-by df_block_echo()
+ * @used-by df_call()
  * @used-by df_clean_r()
  * @used-by df_db_credentials()
  * @used-by df_mail()
