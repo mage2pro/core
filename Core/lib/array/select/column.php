@@ -1,4 +1,6 @@
 <?php
+use Closure as F;
+
 /**
  * 2015-02-11
  * Аналог @see array_column() для коллекций.
@@ -17,8 +19,8 @@
  * @used-by df_product_images_additional()
  * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
  * @param Traversable|array(int|string => _DO|array(string => mixed)) $c
- * @param string|Closure $fv
- * @param string|Closure|null $fk [optional]
+ * @param string|F $fv
+ * @param string|F|null $fk [optional]
  * @return array(int|string => mixed)
  */
 function df_column(iterable $c, $fv, $fk = null):array {return df_map_kr($c, function($k, $v) use($fv, $fk):array {return [
