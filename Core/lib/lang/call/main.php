@@ -5,7 +5,7 @@ use Closure as F;
  * 2015-12-30
  * Унифицирует вызов калбэков:
  * позволяет в качестве $m передавать как строковое название метода,
- * так и анонимную функцию, которая в качестве аргумента получит $object.
+ * так и анонимную функцию, которая в качестве аргумента получит $o.
  * https://3v4l.org/pPGtA
  * 2017-07-09 Now the function can accept an array as $object.
  * 2024-09-06 "Provide an ability to pass named arguments to `df_call()`": https://github.com/mage2pro/core/issues/433
