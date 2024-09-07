@@ -20,7 +20,6 @@
  * 2.2) https://3v4l.org/AOWmO
  * @used-by df_category_names()
  * @used-by \Df\Config\Backend\ArrayT::processI()
- * @used-by \Df\Core\GlobalSingletonDestructor::process()
  * @param Traversable|array(int|string => _DO|array(string => mixed)) $c
  * @param string|callable $f
  * @param mixed ...$p
