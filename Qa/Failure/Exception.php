@@ -1,7 +1,7 @@
 <?php
 namespace Df\Qa\Failure;
 use Df\Core\Exception as DFE;
-use \Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
+use \Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 final class Exception extends \Df\Qa\Failure {
 	/**
 	 * @override
@@ -51,5 +51,5 @@ final class Exception extends \Df\Qa\Failure {
 	private $_e;
 
 	/** @used-by df_log_l() */
-	static function i(Th $th):self {$r = new self; $r->_e = DFE::wrap($th); return $r;}
+	static function i(T $t):self {$r = new self; $r->_e = DFE::wrap($t); return $r;}
 }
