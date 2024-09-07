@@ -24,4 +24,4 @@
  * @param string|callable $f
  * @param mixed ...$p
  */
-function df_each(iterable $c, $f, ...$p):array {return df_map(function($v) use($f, $p) {return df_call($v, $f, $p);}, $c);}
+function df_each(iterable $c, $f, ...$p):array {return df_map($c, function($v) use($f, $p) {return df_call($v, $f, $p);});}
