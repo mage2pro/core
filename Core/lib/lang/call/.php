@@ -37,6 +37,11 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 		 */
 		if (is_callable([$o, $m]) && method_exists($o, $m)) {
 			$callable = [$o, $m];
+			# 2024-09-07
+			# @todo "Provide an ability to pass named arguments to `df_call()`": https://github.com/mage2pro/core/issues/433
+			if (df_is_assoc($p)) {
+
+			}
 		}
 		elseif (function_exists($m)) {
 			$callable = $m;
