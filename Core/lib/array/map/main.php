@@ -2,25 +2,6 @@
 use Df\Core\Exception as DFE;
 
 /**
- * PHP supports global constants since 5.3:
- * http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
- * @used-by df_find()
- * @used-by df_map()
- */
-const DF_AFTER = 1;
-
-/**
- * PHP supports global constants since 5.3:
- * http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html#post1363452
- * @used-by df_find()
- * @used-by df_map()
- * @used-by df_map_k()
- * @used-by df_map_kr()
- * @used-by \Df\Payment\Method::amountFactor()
- */
-const DF_BEFORE = -1;
-
-/**
  * 2015-02-11
  * Эта функция аналогична @see array_map(), но обладает 3-мя дополнительными возможностями:
  * 1) её можно применять не только к массивам, но и к @see Traversable.
