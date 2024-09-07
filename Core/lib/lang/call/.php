@@ -6,27 +6,27 @@ use ReflectionParameter as RP;
 /**
  * 2015-12-30
  * Унифицирует вызов калбэков:
- * позволяет в качестве $m передавать как строковое название метода,
+ * позволяет в качестве $f передавать как строковое название метода,
  * так и анонимную функцию, которая в качестве аргумента получит $o.
  * https://3v4l.org/pPGtA
- * 2017-07-09 Now the function can accept an array as $object.
+ * 2017-07-09 Now the function can accept an array as $o.
  * 2024-09-06 "Provide an ability to pass named arguments to `df_call()`": https://github.com/mage2pro/core/issues/433
  * @used-by df_column()
  * @used-by df_each()
  * @used-by Mage_Core_Model_Layout::_generateAction() (https://github.com/thehcginstitute-com/m1/issues/676))
  * @param object|mixed|array $o
- * @param string|callable $m
+ * @param string|callable $f
  * @return mixed
  */
-function df_call($o, $m, array $p = []) {/** @var mixed $r */
+function df_call($o, $f, array $p = []) {/** @var mixed $r */
 	if (df_is_assoc($o)) {
-		$r = dfa($o, $m);
+		$r = dfa($o, $f);
 	}
-	elseif ($m instanceof Closure) {
+	elseif ($f instanceof Closure) {
 		# 2024-09-07
 		# $o is passed as the first argument for $m, because in this case $m is a «getter» closure.
 		# It is used by df_column() and df_each().
-		$r = call_user_func_array($m, array_merge([$o], $p));
+		$r = call_user_func_array($f, array_merge([$o], $p));
 	}
 	else {
 		$callable = null; /** @var ?callable $callable */
@@ -41,11 +41,11 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 		 * (not handled by `__call`) methods.
 		 */
 		/** @var bool $isMethod */
-		if ($isMethod = is_callable([$o, $m]) && method_exists($o, $m)) {
-			$callable = [$o, $m];
+		if ($isMethod = is_callable([$o, $f]) && method_exists($o, $f)) {
+			$callable = [$o, $f];
 		}
-		elseif (function_exists($m)) {
-			$callable = $m;
+		elseif (function_exists($f)) {
+			$callable = $f;
 			# 2024-09-07
 			# $o is passed as the first argument for $m, because in this case $m is a name of a «getter» function.
 			# It is used by df_column() and df_each().
@@ -59,7 +59,7 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 				# 2024-09-07
 				# 1) "Provide an ability to pass named arguments to `df_call()`": https://github.com/mage2pro/core/issues/433
 				# 2) https://www.php.net/manual/en/reflectionmethod.invokeargs.php#100041
-				$rfa = $isMethod ? new RM($o, $m) : new RF($m); /** @var RM|RF $rfa */
+				$rfa = $isMethod ? new RM($o, $f) : new RF($f); /** @var RM|RF $rfa */
 				$r = $rfa->invoke(...array_merge(
 					$isMethod ? [$o] : []
 					,df_map($rfa->getParameters(), function(RP $rp) use($p, $rfa, $isMethod) {return dfa($p, $rp->getName(),
@@ -80,10 +80,10 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 			}
 		}
 		elseif (df_has_gd($o)) {
-			$r = dfad($o, $m);
+			$r = dfad($o, $f);
 		}
 		else {
-			df_error("Unable to call «{$m}».");
+			df_error("Unable to call «{$f}».");
 		}
 	}
 	return $r;
