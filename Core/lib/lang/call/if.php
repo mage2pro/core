@@ -1,11 +1,10 @@
 <?php
 /**
  * 2016-02-09
- * https://3v4l.org/iUQGl
- *	 function a($b) {return is_callable($b);}
- *	 a(function() {return 0;}); возвращает true
- * https://3v4l.org/MfmCj
- *	is_callable('intval') возвращает true
+ * 2024-09-07
+ * The previous solution:
+ *        return is_callable($v) && !is_string($v) && !is_array($v) ? call_user_func_array($v, $a) : $v
+ * https://github.com/mage2pro/core/blob/11.3.8/Core/lib/lang/call/if.php#L19-L21
  * @used-by df_const()
  * @used-by df_if()
  * @used-by df_if1()
@@ -16,6 +15,4 @@
  * @param mixed ...$a [optional]
  * @return mixed
  */
-function df_call_if($v, ...$a) {return is_callable($v) && !is_string($v) && !is_array($v)
-	? call_user_func_array($v, $a) : $v
-;}
+function df_call_if($v, ...$a) {return $v instanceof Closure ? $v(...$a) : $v;}
