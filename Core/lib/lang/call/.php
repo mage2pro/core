@@ -72,7 +72,7 @@ function df_call($o, $f, array $p = []) {/** @var mixed $r */
 									"`df_call()`: the required argument `{$n}` of the `{$rfa->getName()}` %s is missed."
 									,$isMethod ? 'method' : 'function'
 								)
-								,$p
+								,['arguments' => $p]
 							);
 						}
 					);})
