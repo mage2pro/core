@@ -24,7 +24,7 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 		$r = call_user_func_array($m, array_merge([$o], $p));
 	}
 	else {
-		$functionExists = function_exists($m); /** @var bool $functionExists */
+		$callable = null; /** @var ?callable $callable */
 		/**
 		 * 2020-02-05
 		 * 1) @uses is_callable() always returns `true` for an object which the magic `__call` method
@@ -35,17 +35,15 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 		 * 3) The conjunction of these 2 checks returns `true` only for publicly accessible and really exists
 		 * (not handled by `__call`) methods.
 		 */
-		$methodExists = is_callable([$o, $m]) && method_exists($o, $m); /** @var bool $methodExists */
-		$callable = null; /** @var ?callable $callable */
-		if ($functionExists && !$methodExists) {
+		if (is_callable([$o, $m]) && method_exists($o, $m)) {
+			$callable = [$o, $m];
+		}
+		elseif (function_exists($m)) {
 			$callable = $m;
 			# 2024-09-07
 			# $o is passed as the first argument for $m, because in this case $m is a name of a «getter» function.
 			# It is used by df_column() and df_each().
 			$p = array_merge([$o], $p);
-		}
-		elseif ($methodExists && !$functionExists) {
-			$callable = [$o, $m];
 		}
 		if ($callable) {
 			$r = call_user_func_array($callable, $p);
@@ -53,11 +51,8 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 		elseif (df_has_gd($o)) {
 			$r = dfad($o, $m);
 		}
-		elseif (!$functionExists) {
-			df_error("Unable to call «{$m}».");
-		}
 		else {
-			df_error("An ambiguous name: «{$m}».");
+			df_error("Unable to call «{$m}».");
 		}
 	}
 	return $r;
