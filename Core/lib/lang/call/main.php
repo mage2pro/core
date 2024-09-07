@@ -18,6 +18,9 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 		$r = dfa($o, $m);
 	}
 	elseif ($m instanceof Closure) {
+		# 2024-09-07
+		# $o is passed as the first argument for $m, because in this case $m is a «getter» closure.
+		# It is used by df_column() and df_each()
 		$r = call_user_func_array($m, array_merge([$o], $p));
 	}
 	else {
