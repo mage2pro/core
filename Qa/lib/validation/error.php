@@ -223,7 +223,8 @@ function df_error_create(...$a):DFE {/** @var DFE $r */
 	$context = !$hasContext ? [] : df_eta($a1);  /** @var array(string => mixed) $context */
 	if (df_is_th($a0)) {
 		df_assert($hasContext);
-		$r = DFE::wrap($a0, $context);
+		$r = DFE::wrap($a0);
+		$r->context($context);
 	}
 	else {
 		if (is_array($a0)) {

@@ -222,13 +222,5 @@ class Exception extends LE {
 	 * @used-by df_error_create()
 	 * @used-by \Df\Qa\Failure\Exception::i()
 	 */
-	final static function wrap(T $r, array $d = []):self {
-		if (!$r instanceof self) {
-			$r = new self($r);
-		}
-		# 2024-05-20 "Provide an ability to specify a context for a `Df\Core\Exception` instance":
-		# https://github.com/mage2pro/core/issues/375
-		$r->context($d);
-		return $r;
-	}
+	final static function wrap(T $r):self {return $r instanceof self ? $r : new self($r);}
 }
