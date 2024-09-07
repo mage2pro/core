@@ -1,4 +1,6 @@
 <?php
+use ReflectionMethod as RM;
+
 /**
  * 2015-12-30
  * Унифицирует вызов калбэков:
@@ -40,7 +42,7 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 			# 2024-09-07
 			# @todo "Provide an ability to pass named arguments to `df_call()`": https://github.com/mage2pro/core/issues/433
 			if (df_is_assoc($p)) {
-
+				$rm = new RM($o, $m); /** @var RM $rm */
 			}
 		}
 		elseif (function_exists($m)) {
