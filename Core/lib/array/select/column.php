@@ -5,7 +5,7 @@
  * Ещё один аналог: @see \Magento\Framework\Data\Collection::getColumnValues(), но его результат — не ассоциативный.
  * 2016-07-31 При вызове с 2-мя параметрами эта функция идентична функции @see df_each()
  * 2017-07-09
- * Now the function accepts an array as $object.
+ * Now the function accepts an array as $c.
  * Even in this case it differs from @see array_column():
  * array_column() misses the keys: https://3v4l.org/llMrL
  * df_column() preserves the keys.
