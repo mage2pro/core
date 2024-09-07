@@ -1,6 +1,4 @@
 <?php
-use Closure as F;
-
 /**
  * 2015-12-30
  * Унифицирует вызов калбэков:
@@ -12,7 +10,7 @@ use Closure as F;
  * @used-by df_column()
  * @used-by df_each()
  * @param object|mixed|array $o
- * @param string|callable|F $m
+ * @param string|callable $m
  * @return mixed
  */
 function df_call($o, $m, array $p = []) {/** @var mixed $r */
