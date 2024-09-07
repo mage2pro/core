@@ -2,8 +2,7 @@
 /**
  * 2015-02-11
  * Аналог @see array_column() для коллекций.
- * Ещё один аналог: @see \Magento\Framework\Data\Collection::getColumnValues(),
- * но его результат — не ассоциативный.
+ * Ещё один аналог: @see \Magento\Framework\Data\Collection::getColumnValues(), но его результат — не ассоциативный.
  * 2016-07-31 При вызове с 2-мя параметрами эта функция идентична функции @see df_each()
  * 2017-07-09
  * Now the function accepts an array as $object.
