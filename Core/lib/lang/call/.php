@@ -61,8 +61,20 @@ function df_call($o, $m, array $p = []) {/** @var mixed $r */
 				$rfa = $isMethod ? new RM($o, $m) : new RF($m); /** @var RM|RF $rfa */
 				$r = $rfa->invoke(...array_merge(
 					$isMethod ? [$o] : []
-					,df_map($rfa->getParameters(), function(RP $rp) use($p) {return dfa(
-						$p, $rp->getName(), $rp->getDefaultValue()
+					,df_map($rfa->getParameters(), function(RP $rp) use($p, $rfa, $isMethod) {return dfa($p, $rp->getName(),
+						# 2024-09-07
+						# "`df_call()`: «Failed to retrieve the default value»":
+						# https://github.com/thehcginstitute-com/m1/issues/678
+						function() use($p, $rp, $rfa, $isMethod) {return $rp->isOptional() ? $rp->getDefaultValue() :
+							df_error(
+								sprintf(
+									"The `df_call()` call is invalid because the %s `{$rfa->getName()}`"
+									. " requires the `{$rp->getName()}` argument but it is not provided."
+									,$isMethod ? 'method' : 'function'
+								)
+								,$p
+							);
+						}
 					);})
 				));
 			}
