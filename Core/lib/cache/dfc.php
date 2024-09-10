@@ -55,6 +55,9 @@ function dfc($o, Closure $f, array $a = [], bool $unique = true, int $offset = 0
 	 * https://php.net/manual/migration82.deprecated.php#migration82.deprecated.core.dynamic-properties
 	 * https://wiki.php.net/rfc/deprecate_dynamic_properties
 	 * 2) @see df_prop_k()
+	 * 2024-09-10
+	 * 1) "The creation of dynamic properties is deprecated in PHP ≥ 8.2": https://df.tips/t/2360
+	 * 2) "Document the deprecation of dynamic properties in PHP ≥ 8.2": https://github.com/mage2pro/core/issues/434
 	 * @var mixed $r
 	 */
 	static $hasWeakMap; /** @var bool $hasWeakMap */

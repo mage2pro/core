@@ -41,10 +41,14 @@ final class L {
 			# 1) I have had a wrong code for 7 years:
 			#		$r->schema = $defaultSchema;
 			# https://github.com/mage2pro/core/blob/9.5.0/Framework/Config/Dom.php#L81
-			# 2) I have noticed the mistake only with PHH 8.2:
+			# 2) I have noticed the mistake only with PHP 8.2:
 			# "[PHP 8.2] «Creation of dynamic property DOMDocument::$schema is deprecated
 			# in vendor/mage2pro/core/Framework/Config/Dom.php on line 81»":
 			# https://github.com/mage2pro/core/issues/215
+			# 2024-09-10
+			# 1) The code before 2023-07-17 was wrong because it assigned $defaultSchema to `$r` instead of `$o`.
+			# 2) "The creation of dynamic properties is deprecated in PHP ≥ 8.2": https://df.tips/t/2360
+			# 3) "Document the deprecation of dynamic properties in PHP ≥ 8.2": https://github.com/mage2pro/core/issues/434
 			dfr_prop_set($o, 'schema', $defaultSchema);
 		}
 		return $r;
