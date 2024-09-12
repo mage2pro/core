@@ -100,6 +100,7 @@ function df_post_h():PostHelper {return df_o(PostHelper::class);}
  * @used-by df_order()
  * @used-by df_store()
  * @used-by \Alignet\Paymecheckout\Plugin\Magento\Framework\Session\SidResolver::aroundGetSid() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
+ * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
  * @used-by \Df\Backend\Model\Auth::loginByEmail()
  * @used-by \Df\Framework\Plugin\Data\Form\Element\Fieldset::beforeAddField()
