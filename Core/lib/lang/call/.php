@@ -1,9 +1,7 @@
 <?php
 use ReflectionFunction as RF;
 use ReflectionMethod as RM;
-use ReflectionNamedType as RNT; # 2024-09-21 https://www.php.net/manual/en/class.reflectionnamedtype.php
 use ReflectionParameter as RP;
-use ReflectionType as RT; # 2024-09-21 https://www.php.net/manual/en/class.reflectiontype.php
 
 /**
  * 2015-12-30
