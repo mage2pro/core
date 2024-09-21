@@ -3,12 +3,6 @@ use Df\Xml\X;
 use SimpleXMLElement as CX;
 
 /**
- * @deprecated It is unused.
- * @param bool|callable $default [optional]
- */
-function df_leaf_b(CX $e = null, $default = false):bool {return df_bool(df_leaf($e, $default));}
-
-/**
  * 2022-11-15 @deprecated It is unused.
  * @param string|mixed|null|callable $d [optional]
  * @return string|mixed|null
