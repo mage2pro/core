@@ -10,12 +10,6 @@ use SimpleXMLElement as CX;
 function df_leaf_child(CX $e, string $child, $d = null) {return df_leaf($e->{$child}, $d);}
 
 /**
- * 2015-08-16 Намеренно убрал параметр $default.
- * 2022-11-15 @deprecated It is unused.
- */
-function df_leaf_i(CX $e = null):int {return df_int(df_leaf($e));}
-
-/**
  * @used-by df_leaf_sne()
  * @used-by \Df\Xml\X::map()
  * @used-by \Df\Xml\X::xpathMap()
