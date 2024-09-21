@@ -5,7 +5,7 @@ use Magento\Framework\Simplexml\Element as MX;
 use \SimpleXMLElement as CX;
 use \Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 # 2024-09-22 "Refactor `Df\Xml\X`": https://github.com/mage2pro/core/issues/436
-final class X extends MX {
+final class G extends MX {
 	/** */
 	function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}
 
