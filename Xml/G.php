@@ -115,7 +115,7 @@ final class G extends MX {
 				$r .= df_cdata_raw_if_needed($value);
 			}
 			$r .= $nl;
-			foreach ($this->children() as $child) {/** @var X $child */
+			foreach ($this->children() as $child) {/** @var G $child */
 				$r .= $child->asNiceXml('', is_numeric($level) ? $level + 1 : true);
 			}
 			$r .= $pad . '</' . $this->getName() . '>' . $nl;
