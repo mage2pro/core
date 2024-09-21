@@ -25,7 +25,7 @@ function df_xml_parse($x, bool $throw = true):?X {/** @var ?X $r */
 		catch (\Throwable $th) {
 			if ($throw) {
 				df_error(
-					"При синтаксическом разборе документа XML произошёл сбой:\n"
+					"Failed to parse an XML document:\n"
 					. "«%s»\n"
 					. "********************\n"
 					. "%s\n"
