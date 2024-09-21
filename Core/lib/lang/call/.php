@@ -1,7 +1,9 @@
 <?php
 use ReflectionFunction as RF;
 use ReflectionMethod as RM;
+use ReflectionNamedType as RNT; # 2024-09-21 https://www.php.net/manual/en/class.reflectionnamedtype.php
 use ReflectionParameter as RP;
+use ReflectionType as RT; # 2024-09-21 https://www.php.net/manual/en/class.reflectiontype.php
 
 /**
  * 2015-12-30
@@ -62,20 +64,32 @@ function df_call($o, $f, array $p = []) {/** @var mixed $r */
 				$rfa = $isMethod ? new RM($o, $f) : new RF($f); /** @var RM|RF $rfa */
 				$r = $rfa->invoke(...array_merge(
 					$isMethod ? [$o] : []
-					,df_map($rfa->getParameters(), function(RP $rp) use($p, $rfa, $isMethod) {return dfa($p, $rp->getName(),
-						# 2024-09-07
-						# "`df_call()`: «Failed to retrieve the default value»":
-						# https://github.com/thehcginstitute-com/m1/issues/678
-						function(string $n) use($p, $rp, $rfa, $isMethod) {return $rp->isOptional() ? $rp->getDefaultValue() :
-							df_error(
-								sprintf(
-									"`df_call()`: the required argument `{$n}` of the `{$rfa->getName()}` %s is missed."
-									,$isMethod ? 'method' : 'function'
-								)
-								,['arguments' => $p]
-							);
+					,df_map($rfa->getParameters(), function(RP $rp) use($p, $rfa, $isMethod) {/** @var mixed $r */
+						/** @var string $n */
+						if (isset($p[$n = $rp->getName()])) {
+							$r = $p[$n];
+							# 2024-09-21
+							# 1) "`df_call()` should use `df_bool()` for `bool` arguments":
+							# https://github.com/mage2pro/core/issues/435
+							# 2) https://www.php.net/manual/en/reflectionparameter.gettype.php
+							# 3) https://www.php.net/manual/en/class.reflectionnamedtype.php
+							# 4) https://www.php.net/manual/en/reflectionnamedtype.getname.php#128874
+							if (($rt = $rp->getType()) instanceof RNT && 'bool' === $rt->getName()) {/** @var ?RT|?RNT $rt */
+								$r = df_bool($r);
+							};
 						}
-					);})
+						else {
+							# 2024-09-07
+							# "`df_call()`: «Failed to retrieve the default value»":
+							# https://github.com/thehcginstitute-com/m1/issues/678
+							$r = $rp->isOptional() ? $rp->getDefaultValue() : df_error(sprintf(
+								"`df_call()`: the required argument `{$n}` of the `{$rfa->getName()}` %s is missed."
+								,$isMethod ? 'method' : 'function'
+							)
+							,['arguments' => $p]);
+						}
+						return $r;
+					})
 				));
 			}
 		}

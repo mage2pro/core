@@ -1,5 +1,6 @@
 <?php
 /**
+ * @used-by df_call() (https://github.com/mage2pro/core/issues/435)
  * @used-by \Df\Config\Settings::b()
  * @used-by \Df\Framework\Form\Element\Checkbox::b()
  * @used-by \Df\Payment\Comment\Description::getCommentText()
