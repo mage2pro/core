@@ -1,5 +1,4 @@
 <?php
-use Df\Xml\X;
 use SimpleXMLElement as CX;
 /**
  * 2015-08-16 Намеренно убрал параметр $d.
