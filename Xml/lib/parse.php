@@ -12,7 +12,7 @@ use Throwable as T;
  * @used-by df_xml_x()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Dfe\SecurePay\Refund::process()
- * @param string|X $x
+ * @param X|string $x
  * @throws E
  */
 function df_xml_parse($x, bool $throw = true):?X {/** @var ?X $r */
