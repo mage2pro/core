@@ -51,7 +51,7 @@ use SimpleXMLElement as CX;
  * @used-by df_leaf_s()
  * @param string|null|callable $d [optional]
  */
-function df_leaf(CX $e = null, $d = null):?string {/** @var string $r */
+function df_leaf(CX $e = null, $d = null):?string {/** @var ?string $r */
 	/**
 	 * 2015-08-04
 	 * Нельзя здесь использовать !$e,
