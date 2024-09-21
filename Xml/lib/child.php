@@ -27,8 +27,7 @@ function df_xml_child(CX $e, string $name, bool $req = false):?CX { /** @var ?CX
 		 * Класс @see \SimpleXMLElement — вообще один из самых необычных классов PHP.
 		 */
 		df_assert_eq(1, count($childNodes));
-		$r = $childNodes[0];
-		df_assert($r instanceof CX);
+		df_assert(($r = $childNodes[0]) instanceof CX);
 	}
 	return $r;
 }
