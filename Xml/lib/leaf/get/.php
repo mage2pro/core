@@ -82,12 +82,10 @@ function df_leaf(CX $e = null, $d = null):?string {/** @var ?string $r */
 		$r = df_call_if($d);
 	}
 	elseif (df_es($r = (string)df_assert_leaf($e))) {
-		/**
-		 * 2015-09-25
-		 * Добавил данное условие, чтобы различать случай пустого узла и отсутствия узла.
-		 * Пример пустого узла: `<ru_RU></ru_RU>`.
-		 * Так вот, для пустого узла `empty($e)` вернёт `false`, а для отсутствующего узла — `true`.
-		 */
+		# 2015-09-25
+		# `empty($e)` returns:
+		# 		`true` for an absent node
+		# 		`false` for an empty node (`<tag></tag>` or `<tag/>`)
 		$r = df_if1(empty($e), $d, '');
 	}
 	return $r;
