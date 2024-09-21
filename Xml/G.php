@@ -208,9 +208,9 @@ final class G extends MX {
 	 * @param array(string => mixed) $array
 	 * @param string[]|bool $wrapInCData [optional]
 	 */
-	function importArray(array $array, $wrapInCData = []):X {
+	function importArray(array $array, $wrapInCData = []):G {
 		foreach ($array as $key => $v) { /** @var string $key */ /** @var mixed $v */
-			if ($v instanceof X) {
+			if ($v instanceof G) {
 				/**
 				 * 2016-08-31
 				 * Случай, который отсутствовал в Российской сборке Magento:
@@ -242,8 +242,8 @@ final class G extends MX {
 			elseif (!is_array($v)) {
 				$this->importString($key, $v, $wrapInCData);
 			}
-			elseif (df_is_assoc($v) || array_filter($v, function($i) {return $i instanceof X;})) {
-				/** @var X $childNode */
+			elseif (df_is_assoc($v) || array_filter($v, function($i) {return $i instanceof G;})) {
+				/** @var G $childNode */
 				$childNode =
 					$this->addChild(
 						/**
@@ -362,8 +362,8 @@ final class G extends MX {
 	 */
 	function map(string $path, string $keyName, string $valueName):array {
 		$r = []; /** @var array(string => string) $r */
-		$nodes = $this->xpathA($path); /** @var X[] $nodes */
-		foreach ($nodes as $node) {/** @var X $node */
+		$nodes = $this->xpathA($path); /** @var G[] $nodes */
+		foreach ($nodes as $node) {/** @var G $node */
 			$r[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
 		return $r;
@@ -374,7 +374,7 @@ final class G extends MX {
 	 * @override
 	 * @see \SimpleXMLElement::xpath()
 	 * @param string|string[] $p
-	 * @return X[]
+	 * @return G[]
 	 */
 	#[\ReturnTypeWillChange]
 	function xpath($p):array {
@@ -392,7 +392,7 @@ final class G extends MX {
 	 * @used-by self::map()
 	 * @used-by self::xpathMap()
 	 * @param string|string[] $path
-	 * @return X[]
+	 * @return G[]
 	 */
 	function xpathA($path):array {
 		if (1 < func_num_args()) {
@@ -421,8 +421,8 @@ final class G extends MX {
 	 */
 	function xpathMap(string $path, string $keyName, string $valueName):array {
 		$r = []; /** @var array(string => string) $r */
-		$nodes = $this->xpathA($path); /** @var X[] $nodes */
-		foreach ($nodes as $node) { /** @var X $node */
+		$nodes = $this->xpathA($path); /** @var G[] $nodes */
+		foreach ($nodes as $node) { /** @var G $node */
 			$r[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
 		}
 		return $r;
@@ -430,7 +430,7 @@ final class G extends MX {
 
 	/** @used-by self::importString() */
 	private function addChildText(string $tag, string $valueAsText):void {
-		$r = $this->addChild($tag); /** @var X $r */
+		$r = $this->addChild($tag); /** @var G $r */
 		/**
 		 * @uses CX::addChild() создаёт и возвращает не просто CX, как говорит документация, а объект класса родителя.
 		 * Поэтому в нашем случае addChild создаст объект E.
@@ -443,12 +443,12 @@ final class G extends MX {
 	 * @used-by self::addChildX()
 	 * @used-by self::importArray()
 	 */
-	private function addChildX(X $child):void {
-		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var X $childInThis */
+	private function addChildX(G $child):void {
+		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var G $childInThis */
 		foreach ($child->attributes() as $attr => $v) { /** @var string $name */ /** @var string $v */
 			$childInThis->addAttribute($attr, $v);
 		}
-		foreach ($child->children() as $childChild) { /** @var X $childChild */
+		foreach ($child->children() as $childChild) { /** @var G $childChild */
 			$childInThis->addChildX($childChild);
 		}
 	}
