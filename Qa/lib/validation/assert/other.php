@@ -9,7 +9,7 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by \Dfe\GoogleFont\Fonts\Png::colorAllocateAlpha()
  * @used-by \Dfe\GoogleFont\Fonts\Png::image()
  * @used-by \Dfe\GoogleFont\Fonts\Sprite::draw()
- * @used-by \Df\Xml\X::asXMLPart()
+ * @used-by \Df\Xml\G::asXMLPart()
  * @param mixed $v
  * @param string|Th $m [optional]
  * @return mixed
@@ -28,7 +28,7 @@ function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
  * @used-by \Df\Payment\W\Event::pid()
  * @used-by \Df\PaypalClone\Charge::p()
  * @used-by \Df\StripeClone\Payer::newCard()
- * @used-by \Df\Xml\X::addAttributes()
+ * @used-by \Df\Xml\G::addAttributes()
  * @used-by \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @throws DFE

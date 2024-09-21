@@ -5,7 +5,7 @@ use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": h
 /**
  * @used-by df_wishlist_item_candidates()
  * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
- * @used-by \Df\Xml\X::importArray()
+ * @used-by \Df\Xml\G::importArray()
  * @used-by \Dfe\FacebookLogin\Customer::responseJson()
  */
 function df_assert_array(array $a):array {return $a;}

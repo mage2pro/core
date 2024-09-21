@@ -46,7 +46,7 @@ function df_bts_yn(bool $v):string {return $v ? 'yes' : 'no';}
  * @used-by \Df\Cron\Model\LoggerHandler::p()
  * @used-by \Df\Framework\Config\Dom\L::validate()
  * @used-by \Df\Sentry\Trace::get_frame_context()
- * @used-by \Df\Xml\X::k()
+ * @used-by \Df\Xml\G::k()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::parse()
  * @used-by \DxMoto\Core\Observer\CanLog::execute()
  * @used-by \RWCandy\Captcha\Assert::name()
@@ -99,7 +99,7 @@ function df_contains_ci(string $haystack, string $n):bool {return df_contains(mb
  * Одна из таких функций — df_string.
  *          
  * @used-by df_type()
- * @used-by \Df\Xml\X::importString()
+ * @used-by \Df\Xml\G::importString()
  * @param mixed $v
  */
 function df_string($v):string {

@@ -1,6 +1,6 @@
 <?php
 use Df\Core\Exception as E;
-use Df\Xml\X;
+use Df\Xml\G;
 use SimpleXMLElement as SX;
 use Throwable as T;
 

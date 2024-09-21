@@ -1,5 +1,5 @@
 <?php
-use Df\Xml\X;
+use Df\Xml\G;
 
 /**
  * @see \Magento\Framework\Simplexml\Element::asNiceXml() не добавляет к документу заголовок XML: его надо добавить вручную.
