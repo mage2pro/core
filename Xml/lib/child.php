@@ -6,9 +6,9 @@ use SimpleXMLElement as CX;
  * @deprecated It is unused.
  * @throws E
  */
-function df_xml_child(CX $e, string $name, bool $req = false):?CX {
+function df_xml_child(CX $e, string $name, bool $req = false):?CX { /** @var ?CX  $r */
 	$childNodes = df_xml_children($e, $name, $req); /** @var CX[] $childNodes */
-	if (is_null($childNodes)) { /** @var CX|null $r */
+	if (is_null($childNodes)) {
 		$r = null;
 	}
 	else {
