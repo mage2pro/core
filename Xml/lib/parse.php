@@ -12,10 +12,9 @@ use Df\Xml\X;
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param string|X $x
- * @return X|null
  * @throws E
  */
-function df_xml_parse($x, bool $throw = true) {/** @var X $r */
+function df_xml_parse($x, bool $throw = true):?X {/** @var ?X $r */
 	if ($x instanceof X) {
 		$r = $x;
 	}
