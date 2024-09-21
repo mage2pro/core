@@ -60,7 +60,7 @@ function df_xml_children(CX $e, string $name, bool $req = false):?CX { /** @var 
 		$r = null;
 	}
 	else {
-		df_error("Требуемый узел «{$name}» отсутствует в документе:\n{xml}", ['{xml}' => df_xml_report($e)]);
+		df_error("The required node «{$name}» is absent in the XML document:\n{xml}", ['{xml}' => df_xml_report($e)]);
 	}
 	return $r;
 }
