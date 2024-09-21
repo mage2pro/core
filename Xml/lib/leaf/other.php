@@ -4,14 +4,6 @@ use Df\Xml\X;
 use SimpleXMLElement as CX;
 
 /**
- * @used-by df_leaf()
- * @throws E
- */
-function df_assert_leaf(CX $e):CX {return df_check_leaf($e) ? $e : df_error(
-	"Требуется лист XML, однако получена ветка XML:\n%s.", df_xml_report($e)
-);}
-
-/**
  * 2015-02-27
  * 1) Метод @see \SimpleXMLElement::count() появился только в PHP 5.3,
  * поэтому мы его не используем: https://php.net/manual/simplexmlelement.count.php

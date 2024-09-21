@@ -1,5 +1,4 @@
 <?php
-use Df\Core\Exception as E;
 use Df\Xml\X;
 use Magento\Framework\Simplexml\Element as MX;
 use SimpleXMLElement as CX;
@@ -11,20 +10,6 @@ use SimpleXMLElement as CX;
  * @used-by df_xml_g()
  */
 function df_xml_header(string $enc = 'UTF-8', string $v = '1.0'):string {return "<?xml version=\"$v\" encoding=\"$enc\"?>";}
-
-/**
- * @used-by \Dfe\SecurePay\Refund::process()
- * @used-by \Dfe\Vantiv\Charge::pCharge()
- * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t04()
- * @param array(string => string) $attr [optional]
- * @param array(string => mixed) $contents [optional]
- */
-function df_xml_node(string $tag, array $attr = [], array $contents = []):X {
-	$r = df_xml_parse("<{$tag}/>"); /** @var X $r */
-	$r->addAttributes($attr);
-	$r->importArray($contents);
-	return $r;
-}
 
 /**
  * 2016-09-01

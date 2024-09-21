@@ -49,3 +49,17 @@ function df_xml_g(string $tag, array $contents = [], array $atts = [], bool $ski
 	# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML: http://stackoverflow.com/a/10095901
 	return str_replace("\x0B", "&#x0B;", $skipHeader ? $x->asXMLPart() : df_cc_n($h, $x->asNiceXml()));
 }
+
+/**
+ * @used-by \Dfe\SecurePay\Refund::process()
+ * @used-by \Dfe\Vantiv\Charge::pCharge()
+ * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t04()
+ * @param array(string => string) $attr [optional]
+ * @param array(string => mixed) $contents [optional]
+ */
+function df_xml_node(string $tag, array $attr = [], array $contents = []):X {
+	$r = df_xml_parse("<{$tag}/>"); /** @var X $r */
+	$r->addAttributes($attr);
+	$r->importArray($contents);
+	return $r;
+}
