@@ -71,10 +71,7 @@ function df_call($o, $f, array $p = []) {/** @var mixed $r */
 							# 2024-09-21
 							# 1) "`df_call()` should use `df_bool()` for `bool` arguments":
 							# https://github.com/mage2pro/core/issues/435
-							# 2) https://www.php.net/manual/en/reflectionparameter.gettype.php
-							# 3) https://www.php.net/manual/en/class.reflectionnamedtype.php
-							# 4) https://www.php.net/manual/en/reflectionnamedtype.getname.php#128874
-							if (($rt = $rp->getType()) instanceof RNT && 'bool' === $rt->getName()) {/** @var ?RT|?RNT $rt */
+							if (dfr_param_is_bool($rp)) {
 								$r = df_bool($r);
 							};
 						}
