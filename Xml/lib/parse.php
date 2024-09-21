@@ -1,6 +1,7 @@
 <?php
 use Df\Core\Exception as E;
 use Df\Xml\X;
+use Throwable as T;
 
 /**
  * @used-by df_module_name_by_path()
@@ -22,7 +23,7 @@ function df_xml_parse($x, bool $throw = true):?X {/** @var ?X $r */
 		df_param_sne($x, 0);
 		$r = null;
 		try {$r = new X($x);}
-		catch (\Throwable $th) {
+		catch (T $t) {
 			if ($throw) {
 				df_error(
 					"Failed to parse an XML document:\n"
@@ -30,7 +31,7 @@ function df_xml_parse($x, bool $throw = true):?X {/** @var ?X $r */
 					. "********************\n"
 					. "%s\n"
 					. "********************\n"
-					, df_xts($th)
+					, df_xts($t)
 					, df_trim($x)
 				);
 			}
