@@ -87,7 +87,6 @@ function df_leaf(CX $e = null, $d = null):?string {/** @var ?string $r */
 		 * Добавил данное условие, чтобы различать случай пустого узла и отсутствия узла.
 		 * Пример пустого узла ru_RU:
 		 * <term>
-		 * 		<en_US>Order Total</en_US>
 		 * 		<ru_RU></ru_RU>
 		 * </term>
 		 * Так вот, для пустого узла empty($e) вернёт false,
