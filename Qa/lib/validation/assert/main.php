@@ -1,7 +1,5 @@
 <?php
 use Df\Core\Exception as DFE;
-use Magento\Framework\Phrase;
-use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 
 /**
  * 2019-12-14
@@ -37,7 +35,6 @@ use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by df_module_file_name()
  * @used-by df_oqi_amount()
  * @used-by df_oqi_amount()
- * @used-by df_xml_child()
  * @used-by dfaf()
  * @used-by dfp_oq()
  * @used-by dfr_prop()

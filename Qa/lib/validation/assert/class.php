@@ -10,6 +10,7 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by df_load()
  * @used-by df_newa()
  * @used-by df_trans()
+ * @used-by df_xml_child()
  * @used-by dfpex_args()
  * @used-by \Df\Payment\Choice::f()
  * @used-by \Df\Payment\Operation\Source\Creditmemo::cm()
