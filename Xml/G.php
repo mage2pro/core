@@ -70,28 +70,6 @@ final class G extends MX {
 	}
 
 	/**
-	 * Отличия от родительского метода:
-	 * 		1) гарантия, что результат — массив
-	 * 		2) кэширование результата
-	 * 2022-12-05: We do not need to check that the result is an array: https://3v4l.org/pBUvg
-	 * @override
-	 * @see \Magento\Framework\Simplexml\Element::asCanonicalArray()
-	 * @return array(string => mixed)
-	 */
-	function asCanonicalArray():array {
-		$_this = spl_object_hash($this); /** @var string $_this */
-		if (!isset(self::$_canonicalArray[$_this])) {
-			/**
-			 * @uses \Magento\Framework\Simplexml\Element::asCanonicalArray()
-			 * может возвращать строку в случае,
-			 * когда структура исходных данных не соответствует массиву.
-			 */
-			self::$_canonicalArray[$_this] = parent::asCanonicalArray();
-		}
-		return self::$_canonicalArray[$_this];
-	}
-
-	/**
 	 * 2016-09-01 Родительский метод задаёт вложенность тремя пробелами, а я предпочитаю символ табуляции.
 	 * 2022-12-20 We can not declare arguments types because they are undeclared in the overriden method.
 	 * @override
