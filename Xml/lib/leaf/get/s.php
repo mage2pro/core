@@ -17,7 +17,7 @@ function df_leaf_s(?CX $e = null, $d = ''):string {return (string)df_leaf($e, $d
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param string|callable $d [optional]
  */
-function df_leaf_sne(CX $e = null, $d = ''):string {/** @var string $r */
+function df_leaf_sne(?CX $e = null, $d = ''):string {/** @var string $r */
 	if (df_es($r = df_leaf_s($e, $d))) {
 		df_error('Лист дерева XML должен быть непуст, однако он пуст.');
 	}
