@@ -89,8 +89,7 @@ function df_leaf(CX $e = null, $d = null):?string {/** @var ?string $r */
 		 * <term>
 		 * 		<ru_RU></ru_RU>
 		 * </term>
-		 * Так вот, для пустого узла empty($e) вернёт false,
-		 * а для отсутствующего узла — true.
+		 * Так вот, для пустого узла `empty($e)` вернёт `false`, а для отсутствующего узла — `true`.
 		 */
 		$r = df_if1(empty($e), $d, '');
 	}
