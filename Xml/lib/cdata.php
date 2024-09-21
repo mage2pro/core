@@ -21,7 +21,7 @@ function df_cdata_raw_if_needed(string $s):string {return !df_needs_cdata($s) ? 
  * @used-by \Df\Xml\X::importString()
  */
 function df_needs_cdata(string $s):bool {
-	$s1 = htmlspecialchars_decode($s, ENT_XML1 | ENT_QUOTES);
-    $s2 = htmlspecialchars($s1, ENT_XML1 | ENT_NOQUOTES);
+	$s1 = htmlspecialchars_decode($s, ENT_XML1 | ENT_QUOTES); /** @var string $s1 */
+    $s2 = htmlspecialchars($s1, ENT_XML1 | ENT_NOQUOTES); /** @var string $s2 */
 	return $s !== $s2 && $s1 !== $s2;
 }
