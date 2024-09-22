@@ -84,9 +84,8 @@ final class G extends MX {
 	 * @override
 	 * @see \Magento\Framework\Simplexml\Element::descend()
 	 * @param string|string[] $p
-	 * @return X|null
 	 */
-	function descend($p) {return df_ftn(parent::descend($p));}
+	function descend($p):?self {return df_ftn(parent::descend($p));}
 
 	/**
 	 * @used-by df_xml_g()
