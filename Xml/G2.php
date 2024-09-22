@@ -19,6 +19,16 @@ final class G2 {
 	function addAttribute(string $k, string $v = '', string $ns = ''):void {$this->_x->addAttribute($this->k($k), $v, $ns);}
 
 	/**
+	 * 2021-12-16
+	 * https://stackoverflow.com/a/9391673
+	 * https://stackoverflow.com/a/43566078
+	 * https://stackoverflow.com/a/6928183
+	 * @used-by self::addAttribute()
+	 * @used-by self::addChild()
+	 */
+	private function k(string $s):string {return !df_contains($s, ':') ? $s : "xmlns:$s";}
+
+	/**
 	 * 2024-09-22
 	 * @used-by self::__construct()
 	 * @used-by self::addAttribute()
