@@ -14,6 +14,7 @@ use Df\Qa\Dumper;
  * @used-by df_kv()
  * @used-by df_kv_table()
  * @used-by df_sentry()
+ * @used-by df_sprintf_strict()
  * @used-by df_string()
  * @used-by df_type()
  * @used-by dfa_assert_keys()

@@ -98,7 +98,7 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
 					'df_sprintf_strict failed: «{message}».'
 					. "\nPattern: {$s}."
 					. "\nParameters:\n{params}."
-					,['{message}' => df_xts($th), '{params}' => print_r(df_tail($args), true)]
+					,['{message}' => df_xts($th), '{params}' => df_dump(df_tail($args))]
 				);
 			});
 		}
