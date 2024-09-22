@@ -69,9 +69,10 @@ final class Dumper {
 			if (df_is_stringable($o)) {
 				$r = sprintf("`$c::__toString()`: «%s»", $o);
 			}
-			# 2023-07-26 "`df_dump()` should handle `Traversable` similar to arrays": https://github.com/mage2pro/core/issues/253
-			/** @var array(string => mixed)|null $a */
 			$r = df_is_stringable($o) ? sprintf("`$c::__toString()`: «%s»", $o) : (
+				# 2023-07-26
+				# "`df_dump()` should handle `Traversable` similar to arrays": https://github.com/mage2pro/core/issues/253
+				/** @var array(string => mixed)|null $a */
 				is_null($a = df_has_gd($o) ? df_gd($o) : (is_iterable($o) ? df_ita($o) : null))
 					? sprintf("$c %s", df_json_encode_partial($o))
 					: sprintf("$c(\n%s\n)", df_tab_multiline($this->dumpArrayElements($a)))
