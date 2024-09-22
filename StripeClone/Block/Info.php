@@ -54,9 +54,7 @@ class Info extends \Df\Payment\Block\Info {
 		$r = is_array($r) ? $r : df_json_decode($r);
 		/** @var array(string => mixed) $r */ /** @var string $pathToCard */
 		if (!($r = dfa_deep($r, $pathToCard = fCharge::s($this->m())->pathToCard()))) {
-			df_error("Unable to extract the bank card data by path «{$pathToCard}» from the charge:\n%s",
-				df_json_encode($r)
-			);
+			df_error("Unable to extract the bank card data by path «{$pathToCard}» from the charge:\n%s", df_dump($r));
 		}
 		return $r;
 	}
