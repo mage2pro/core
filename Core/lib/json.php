@@ -152,7 +152,6 @@ function df_json_dont_sort(F $f) {/** @var mixed $r */
  * @used-by \Df\Security\BlackList::save()
  * @used-by \Df\Sentry\Client::encode()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
- * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
  * @used-by \Dfe\Color\Plugin\Swatches\Model\Swatch::beforeBeforeSave()
  * @used-by \Dfe\Dynamics365\API\Validator\JSON::long()
  * @used-by \Dfe\Moip\API\Validator::long()
