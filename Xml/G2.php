@@ -29,10 +29,9 @@ final class G2 {
 	 */
 	function addAttributes(array $aa):void {
 		foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
-			df_assert_stringable(
+			$this->addAttribute(df_assert_sne($k), df_assert_stringable(
 				$v, sprintf("The attribute «{$k}» has a non-`Strinable` type %s.", df_type($v)), ['attributes' => $aa]
-			);
-			$this->addAttribute(df_assert_sne($k), $v);
+			));
 		}
 	}
 
