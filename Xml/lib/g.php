@@ -57,7 +57,7 @@ function df_xml_g(string $tag, array $contents = [], array $atts = [], bool $ski
  * @param array(string => mixed) $contents [optional]
  */
 function df_xml_node(string $tag, array $attr = [], array $contents = []):X {
-	$r = df_xml_parse("<{$tag}/>"); /** @var X $r */
+	$r = df_xml_parse("<{$tag}/>"); /** @var G $r */
 	$r->addAttributes($attr);
 	$r->importArray($contents);
 	return $r;
