@@ -39,55 +39,6 @@ final class G2 {
 	}
 
 	/**
-	 * @uses \SimpleXMLElement::addChild() создаёт и возвращает не просто SimpleXMLElement, как говорит документация,
-	 * а объект класса родителя.
-	 * 2022-11-15
-	 * 1) `static` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-static
-	 * 2) We can not declare the $name argument type with PHP < 8: https://3v4l.org/ptpUM
-	 * @used-by self::addChildText()
-	 * @used-by self::addChildX()
-	 * @used-by self::importArray()
-	 * @used-by self::importString()
-	 * @throws E
-	 */
-	private function addChild(string $k, string $v = '', string $ns = ''):self {/** @var self $r */
-		try {$r = new self($this->_x->addChild($this->k($k), $v, $ns));}
-		catch (T $t) {df_error("Tag <{$k}>. Value: «{$v}». Error: «%s».", df_xts($t));}
-		return $r;
-	}
-
-	/** @used-by self::importString() */
-	private function addChildText(string $tag, string $valueAsText):void {
-		$r = $this->addChild($tag); /** @var self $r */
-		$r->cdata($valueAsText);
-	}
-
-	/**
-	 * 2016-08-31 http://stackoverflow.com/a/11727581
-	 * @used-by self::addChildX()
-	 * @used-by self::importArray()
-	 */
-	private function addChildX(G $child):void {
-		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var self $childInThis */
-		foreach ($child->attributes() as $attr => $v) { /** @var string $name */ /** @var string $v */
-			$childInThis->addAttribute($attr, $v);
-		}
-		foreach ($child->children() as $childChild) { /** @var G $childChild */
-			$childInThis->addChildX($childChild);
-		}
-	}
-
-	/**
-	 * http://stackoverflow.com/a/6260295
-	 * @used-by self::addChildText()
-	 * @used-by self::importString()
-	 */
-	private function cdata(string $s):void {
-		$e = dom_import_simplexml($this->_x); /** @var \DOMElement $e */
-		$e->appendChild($e->ownerDocument->createCDATASection($s));
-	}
-
-	/**
 	 * @used-by df_xml_node()
 	 * @used-by self::importArray()
 	 * @param array(string => mixed) $array
@@ -227,6 +178,55 @@ final class G2 {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @uses \SimpleXMLElement::addChild() создаёт и возвращает не просто SimpleXMLElement, как говорит документация,
+	 * а объект класса родителя.
+	 * 2022-11-15
+	 * 1) `static` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-static
+	 * 2) We can not declare the $name argument type with PHP < 8: https://3v4l.org/ptpUM
+	 * @used-by self::addChildText()
+	 * @used-by self::addChildX()
+	 * @used-by self::importArray()
+	 * @used-by self::importString()
+	 * @throws E
+	 */
+	private function addChild(string $k, string $v = '', string $ns = ''):self {/** @var self $r */
+		try {$r = new self($this->_x->addChild($this->k($k), $v, $ns));}
+		catch (T $t) {df_error("Tag <{$k}>. Value: «{$v}». Error: «%s».", df_xts($t));}
+		return $r;
+	}
+
+	/** @used-by self::importString() */
+	private function addChildText(string $tag, string $valueAsText):void {
+		$r = $this->addChild($tag); /** @var self $r */
+		$r->cdata($valueAsText);
+	}
+
+	/**
+	 * 2016-08-31 http://stackoverflow.com/a/11727581
+	 * @used-by self::addChildX()
+	 * @used-by self::importArray()
+	 */
+	private function addChildX(G $child):void {
+		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var self $childInThis */
+		foreach ($child->attributes() as $attr => $v) { /** @var string $name */ /** @var string $v */
+			$childInThis->addAttribute($attr, $v);
+		}
+		foreach ($child->children() as $childChild) { /** @var G $childChild */
+			$childInThis->addChildX($childChild);
+		}
+	}
+
+	/**
+	 * http://stackoverflow.com/a/6260295
+	 * @used-by self::addChildText()
+	 * @used-by self::importString()
+	 */
+	private function cdata(string $s):void {
+		$e = dom_import_simplexml($this->_x); /** @var \DOMElement $e */
+		$e->appendChild($e->ownerDocument->createCDATASection($s));
 	}
 
 	/**

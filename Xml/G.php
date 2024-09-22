@@ -7,9 +7,6 @@ use \Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`":
 # 2024-09-22 "Refactor `Df\Xml\X`": https://github.com/mage2pro/core/issues/436
 /** @used-by df_xml_x() */
 final class G extends MX {
-	/** */
-	function __destruct() {unset(self::$_canonicalArray[spl_object_hash($this)]);}
-
 	/**
 	 * 2021-12-13
 	 * https://php.net/manual/en/simplexmlelement.addattribute.php
@@ -318,11 +315,4 @@ final class G extends MX {
 	 * @used-by self::markAsCData()
 	 */
 	private static function marker():Marker {static $r; return $r ?: $r = new Marker('[[', ']]');}
-
-	/**
-	 * @used-by self::__destruct()
-	 * @used-by self::asCanonicalArray()
-	 * @var array(string => array(string => mixed))
-	 */
-	private static $_canonicalArray = [];
 }
