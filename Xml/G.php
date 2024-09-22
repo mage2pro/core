@@ -325,11 +325,11 @@ final class G {
 	/**
 	 * 2024-09-22
 	 * @used-by self::__construct()
+	 * @used-by self::__toString()
 	 * @used-by self::addAttribute()
 	 * @used-by self::addChild()
 	 * @used-by self::cdata()
 	 * @used-by self::importString()
-	 * @used-by self::x()
 	 * @var X
 	 */
 	private $_x;
