@@ -315,6 +315,18 @@ final class G {
 	const CONTENT = '_content';
 
 	/**
+	 * @used-by df_xml_go()
+	 * @param array(string => string) $attr [optional]
+	 * @param array(string => mixed) $contents [optional]
+	 */
+	static function i(string $tag, array $attr = [], array $contents = []):self {
+		$r = new self(df_xml_x("<{$tag}/>")); /** @var G $r */
+		$r->addAttributes($attr);
+		$r->importArray($contents);
+		return $r;
+	}
+
+	/**
 	 * Убрал df_param_s и df_result_s для ускорения работы модуля Яндекс.Маркет
 	 * @used-by df_cdata()
 	 */
