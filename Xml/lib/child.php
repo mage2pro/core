@@ -34,12 +34,11 @@ function df_xml_child(CX $e, string $name, bool $req = false):?CX { /** @var ?CX
 
 /**
  * @used-by df_xml_child()
- * @return CX|null
  * @throws E
  */
-function df_xml_children(CX $e, string $name, bool $req = false):?CX { /** @var ?CX $r */
+function df_xml_children(CX $x, string $name, bool $req = false):?CX { /** @var ?CX $r */
 	df_param_sne($name, 0);
-	if (df_xml_exists_child($e, $name)) {
+	if (df_xml_exists_child($x, $name)) {
 		/**
 		 * Обратите внимание, что если мы имеем структуру:
 		 *	<dictionary>
@@ -54,13 +53,13 @@ function df_xml_children(CX $e, string $name, bool $req = false):?CX { /** @var 
 		 * http://stackoverflow.com/a/16100099
 		 * Класс @see \SimpleXMLElement — вообще один из самых необычных классов PHP.
 		 */
-		$r = $e->{$name};
+		$r = $x->{$name};
 	}
 	elseif (!$req) {
 		$r = null;
 	}
 	else {
-		df_error("The required node «{$name}» is absent in the XML document:\n{xml}", ['{xml}' => df_xml_report($e)]);
+		df_error("The required node «{$name}» is absent in the XML document:\n{xml}", ['{xml}' => df_xml_s($x)]);
 	}
 	return $r;
 }
