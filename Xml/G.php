@@ -7,7 +7,7 @@ use \Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
 # 2024-09-22
 # 1) "Refactor `Df\Xml\X`": https://github.com/mage2pro/core/issues/436
 # 2) "Refactor the `Df_Xml` module": https://github.com/mage2pro/core/issues/437
-final class G2 {
+final class G {
 	/**
 	 * 2024-09-22
 	 * @used-by self::addChild()

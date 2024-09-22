@@ -19,7 +19,7 @@
  * @used-by \Df\Cron\Model\LoggerHandler::p()
  * @used-by \Df\Framework\Config\Dom\L::validate()
  * @used-by \Df\Sentry\Trace::get_frame_context()
- * @used-by \Df\Xml\G2::k()
+ * @used-by \Df\Xml\G::k()
  * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::parse()
  * @used-by \DxMoto\Core\Observer\CanLog::execute()
  * @used-by \RWCandy\Captcha\Assert::name()

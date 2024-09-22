@@ -48,7 +48,7 @@ use Df\Core\Exception as DFE;
  * @used-by \Df\Qa\Trace\Frame::url()
  * @used-by \Df\StripeClone\Payer::newCard()
  * @used-by \Df\Typography\Font::validate()
- * @used-by \Df\Xml\G2::addAttributes()
+ * @used-by \Df\Xml\G::addAttributes()
  * @used-by \Dfe\AllPay\InstallmentSales\Plan\Entity::validate()
  * @used-by \Dfe\AllPay\Total\Quote::collect()
  * @used-by \Dfe\AllPay\Total\Quote::iiAdd()

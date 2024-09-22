@@ -1,5 +1,5 @@
 <?php
-use Df\Xml\G2 as G;
+use Df\Xml\G as G;
 
 /**
  * @see df_needs_cdata()
@@ -18,7 +18,7 @@ function df_cdata_raw_if_needed(string $s):string {return !df_needs_cdata($s) ? 
  * 2021-12-12 https://3v4l.org/3SDsT
  * @see df_cdata()
  * @used-by df_cdata_raw_if_needed()
- * @used-by \Df\Xml\G2::importString()
+ * @used-by \Df\Xml\G::importString()
  */
 function df_needs_cdata(string $s):bool {
 	$s1 = htmlspecialchars_decode($s, ENT_XML1 | ENT_QUOTES); /** @var string $s1 */

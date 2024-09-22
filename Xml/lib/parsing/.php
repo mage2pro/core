@@ -16,7 +16,7 @@ use Throwable as T;
  * @used-by df_xml_parse_a()
  * @used-by df_xml_prettify()
  * @used-by df_xml_x()
- * @used-by \Df\Xml\G2::__construct()
+ * @used-by \Df\Xml\G::__construct()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param X|string $x

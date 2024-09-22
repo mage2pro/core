@@ -20,7 +20,7 @@
  * @used-by \Df\Payment\W\Exception\Ignored::message()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Typography\Css::rule()
- * @used-by \Df\Xml\G2::importString()
+ * @used-by \Df\Xml\G::importString()
  * @param mixed $v
  */
 function df_es($v):bool {return '' === $v;}
@@ -52,7 +52,7 @@ function df_est($v):bool {return df_es(df_trim($v));}
  * @used-by \Df\Config\Backend\Serialized::valueUnserialize()
  * @used-by \Df\Config\Settings::json()
  * @used-by \Df\Directory\FE\Country::getValues()
- * @used-by \Df\Xml\G2::importString()
+ * @used-by \Df\Xml\G::importString()
  * @used-by \Dfe\AllPay\Total\Quote::iiAdd()
  * @used-by \Dfe\AllPay\Total\Quote::iiGet()
  * @used-by \Dfe\CheckoutCom\Method::disableEvent()

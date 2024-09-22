@@ -10,7 +10,7 @@
  * @used-by df_result_s()
  * @used-by dfaf()
  * @used-by dfpex_args()
- * @used-by \Df\Xml\G2::addAttributes()
+ * @used-by \Df\Xml\G::addAttributes()
  * @param mixed $v
  */
 function df_type($v):string {return is_object($v) ? sprintf('an object: `%s`', get_class($v), df_dump($v)) : (is_array($v)
