@@ -75,7 +75,7 @@ final class G extends MX {
 	 * @param array(string => mixed) $array
 	 * @param string[]|bool $wrapInCData [optional]
 	 */
-	function importArray(array $array, $wrapInCData = []):self {
+	function importArray(array $array, $wrapInCData = []):void {
 		foreach ($array as $key => $v) { /** @var string $key */ /** @var mixed $v */
 			if ($v instanceof G) {
 				/**
@@ -209,7 +209,6 @@ final class G extends MX {
 				}
 			}
 		}
-		return $this;
 	}
 
 	/** @used-by self::importString() */
