@@ -287,6 +287,12 @@ final class G2 {
 	 */
 	private $_x;
 
+	/** @used-by self::importArray() */
+	const ATTR = '_attr';
+
+	/** @used-by self::importArray() */
+	const CONTENT = '_content';
+
 	/**
 	 * 2021-12-12
 	 * @used-by self::importString()
