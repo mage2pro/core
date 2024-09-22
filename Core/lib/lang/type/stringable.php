@@ -1,6 +1,7 @@
 <?php
 /**
  * 2024-09-22 PHP ≥ 8 has the @see Stringable interface: https://www.php.net/manual/en/class.stringable.php
+ * @used-by df_assert_stringable()
  */
 function df_is_stringable($v):bool {return !is_array($v) &&
 	/**

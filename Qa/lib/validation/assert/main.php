@@ -17,6 +17,7 @@ use Df\Core\Exception as DFE;
  * 2024-06-02 "Improve `df_assert()`": https://github.com/mage2pro/core/issues/401
  * @used-by df_assert_module_enabled()
  * @used-by df_assert_qty_supported()
+ * @used-by df_assert_stringable()
  * @used-by df_call_parent()
  * @used-by df_caller_m()
  * @used-by df_caller_mf()
@@ -70,7 +71,7 @@ use Df\Core\Exception as DFE;
  * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @used-by \RWCandy\Captcha\Observer\CustomerSaveBefore::execute()
  * @param mixed $cond
- * @param string|string[]|array(string => mixed)|mixed|T|Phrase|null ...$a
+ * @param string|string[]|array(string => mixed)|mixed|T|null ...$a
  * @return mixed
  * @throws DFE
  */
