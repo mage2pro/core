@@ -21,17 +21,8 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 		/** @var string $nl */ /** @var string $pad */
 		[$nl, $pad] = !$level ? ['', ''] : ["\n", str_pad('', $level * 1, "\t", STR_PAD_LEFT)];
 		$r = "$pad<{$x->getName()}";
-		$attributes = $x->attributes();
-		if ($attributes) {
-			foreach ($attributes as $key => $value) {
-				$r .= ' ' . $key . '="' . str_replace('"', '\"', (string)$value) . '"';
-			}
-		}
-		$attributes = $x->attributes('xsi', true);
-		if ($attributes) {
-			foreach ($attributes as $key => $value) {
-				$r .= ' xsi:' . $key . '="' . str_replace('"', '\"', (string)$value) . '"';
-			}
+		foreach (df_eta($x->attributes('xsi', true)) as $k => $v) {
+			$r .= ' xsi:' . $k . '="' . str_replace('"', '\"', (string)$v) . '"';
 		}
 		if ($x->hasChildren()) {
 			$r .= '>';
