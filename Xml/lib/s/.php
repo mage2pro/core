@@ -38,7 +38,7 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 				 * The previous code was: `$this->xmlentities($xs)`
 				 * @see \Magento\Framework\Simplexml\Element::xmlentities()
 				 */
-				: '>' . df_cdata_raw_if_needed($xs) . $nl "</{$x->getName()}>$nl"
+				: '>' . df_cdata_raw_if_needed($xs) . "</{$x->getName()}>$nl"
 			;
 		}
 		else {
