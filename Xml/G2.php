@@ -307,6 +307,12 @@ final class G2 {
 	const CONTENT = '_content';
 
 	/**
+	 * Убрал df_param_s и df_result_s для ускорения работы модуля Яндекс.Маркет
+	 * @used-by df_cdata()
+	 */
+	static function markAsCData(string $s):string {return self::marker()->mark($s);}
+
+	/**
 	 * 2021-12-12
 	 * @used-by self::importString()
 	 * @used-by self::markAsCData()

@@ -10,7 +10,7 @@ final class Marker {
 
 	/**
 	 * 2021-12-12
-	 * @used-by \Df\Xml\G::markAsCData()
+	 * @used-by \Df\Xml\G2::markAsCData()
 	 */
 	function mark(string $s):string {return $this->_begin . $s . $this->_end;}
 
