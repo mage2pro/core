@@ -37,6 +37,16 @@ final class G2 {
 	}
 
 	/**
+	 * http://stackoverflow.com/a/6260295
+	 * @used-by self::addChildText()
+	 * @used-by self::importString()
+	 */
+	private function cdata(string $s):void {
+		$e = dom_import_simplexml($this); /** @var \DOMElement $e */
+		$e->appendChild($e->ownerDocument->createCDATASection($s));
+	}
+
+	/**
 	 * @used-by self::importArray()
 	 * @param mixed $v
 	 * @param string[]|bool $wrapInCData [optional]
