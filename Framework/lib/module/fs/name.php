@@ -1,6 +1,6 @@
 <?php
 use Closure as F;
-use Df\Xml\G as G;
+use Df\Xml\G;
 use Magento\Framework\Module\Dir;
 
 /**
