@@ -1,5 +1,6 @@
 <?php
 namespace Df\Xml;
+use Df\Core\Exception as E;
 use Df\Core\Text\Marker;
 use \SimpleXMLElement as X;
 use \Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
@@ -47,6 +48,7 @@ final class G2 {
 	 * @used-by self::addChildX()
 	 * @used-by self::importArray()
 	 * @used-by self::importString()
+	 * @throws E
 	 */
 	private function addChild(string $k, string $v = '', string $ns = ''):self {/** @var self $r */
 		try {$r = new self($this->_x->addChild($this->k($k), $v, $ns));}
