@@ -111,7 +111,6 @@ final class G extends MX {
 				$this->importString($key, $v, $wrapInCData);
 			}
 			elseif (df_is_assoc($v) || array_filter($v, function($i) {return $i instanceof G;})) {
-				/** @var G $childNode */
 				$childNode =
 					$this->addChild(
 						/**
@@ -121,7 +120,7 @@ final class G extends MX {
 						 */
 						$key
 					)
-				;
+				; /** @var self $childNode */
 				$childData = $v; /** @var array|null $childData */
 				# Данный программный код позволяет импортировать атрибуты тэгов
 				/** @var array(string => string)|null $attributes $attributes */
