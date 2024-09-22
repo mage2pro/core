@@ -76,7 +76,7 @@ final class G extends MX {
 	 * @see \Magento\Framework\Simplexml\Element::asNiceXml()
 	 * @used-by df_xml_g()
 	 * @used-by df_xml_prettify()
-	 * @used-by df_xml_report()
+	 * @used-by df_xml_s()
 	 * @used-by self::asNiceXml()
 	 * @param string $filename [optional]
 	 * @param int $level  [optional]
