@@ -45,6 +45,7 @@ function df_dump_ds($v):string {return df_json_dont_sort(function() use($v):stri
  * @used-by df_result_s()
  * @used-by dfaf()
  * @used-by dfpex_args()
+ * @used-by \Df\Xml\G2::addAttributes()
  * @param mixed $v
  */
 function df_type($v):string {return is_object($v) ? sprintf('an object: `%s`', get_class($v), df_dump($v)) : (is_array($v)
