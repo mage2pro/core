@@ -1,6 +1,7 @@
 <?php
 /**
  * 2024-09-22
+ * @used-by \Df\Core\Html\Tag::content()
  * @used-by \Df\Core\Text\Regex::isSubjectMultiline()
  * @used-by \Df\Qa\Dumper::dumpObject()
  */

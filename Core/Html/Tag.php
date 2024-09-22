@@ -51,7 +51,7 @@ final class Tag {
 	/** @used-by self::render() */
 	private function content():string {return dfc($this, function() {
 		$c = df_trim(df_cc_n($this->_content), "\n"); /** @var string $c */
-		return $this->tagIs('pre', 'code') || !df_contains($c, "\n") ? $c : "\n" . df_tab_multiline($c) . "\n";
+		return $this->tagIs('pre', 'code') || !df_is_multiline($c) ? $c : "\n" . df_tab_multiline($c) . "\n";
 	});}
 	
 	/** @used-by self::render() */
