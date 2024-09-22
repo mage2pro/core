@@ -297,6 +297,8 @@ final class G2 {
 	 * 2024-09-22
 	 * @used-by self::__construct()
 	 * @used-by self::addAttribute()
+	 * @used-by self::addChild()
+	 * @used-by self::cdata()
 	 * @used-by self::importString()
 	 * @var X
 	 */
