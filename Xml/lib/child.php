@@ -1,13 +1,13 @@
 <?php
 use Df\Core\Exception as E;
-use SimpleXMLElement as CX;
+use SimpleXMLElement as X;
 
 /**
  * @deprecated It is unused.
  * @throws E
  */
-function df_xml_child(CX $e, string $name, bool $req = false):?CX { /** @var ?CX  $r */
-	$childNodes = df_xml_children($e, $name, $req); /** @var CX[] $childNodes */
+function df_xml_child(X $e, string $name, bool $req = false):?X { /** @var ?X  $r */
+	$childNodes = df_xml_children($e, $name, $req); /** @var X[] $childNodes */
 	if (is_null($childNodes)) {
 		$r = null;
 	}
@@ -27,7 +27,7 @@ function df_xml_child(CX $e, string $name, bool $req = false):?CX { /** @var ?CX
 		 * Класс @see \SimpleXMLElement — вообще один из самых необычных классов PHP.
 		 */
 		df_assert_eq(1, count($childNodes));
-		$r = df_ar($childNodes[0], CX::class);
+		$r = df_ar($childNodes[0], X::class);
 	}
 	return $r;
 }
@@ -36,7 +36,7 @@ function df_xml_child(CX $e, string $name, bool $req = false):?CX { /** @var ?CX
  * @used-by df_xml_child()
  * @throws E
  */
-function df_xml_children(CX $x, string $name, bool $req = false):?CX { /** @var ?CX $r */
+function df_xml_children(X $x, string $name, bool $req = false):?X { /** @var ?X $r */
 	df_param_sne($name, 0);
 	if (df_xml_exists_child($x, $name)) {
 		/**
