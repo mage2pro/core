@@ -16,7 +16,6 @@
  * @used-by df_mvar_name()
  * @used-by df_strtolower()
  * @used-by df_strtoupper()
- * @used-by df_tab()
  * @used-by df_trim_ds()
  * @used-by df_ucfirst()
  * @used-by df_ucwords()

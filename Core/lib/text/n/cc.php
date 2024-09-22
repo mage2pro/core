@@ -7,7 +7,7 @@
  * @used-by df_kv()
  * @used-by df_log_l()
  * @used-by df_tag_list()
- * @used-by df_tab_multiline()
+ * @used-by df_tab()
  * @used-by df_xml_g()
  * @used-by df_xml_prettify()
  * @used-by df_zf_http_last_req()

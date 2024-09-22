@@ -30,6 +30,7 @@ use Df\Core\Exception as DFE;
  * @used-by df_mail()
  * @used-by df_prices()
  * @used-by df_qty()
+ * @used-by df_tab()
  * @used-by df_trim_text_left()
  * @used-by ikf_api_oi()
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Catalog\Model\Product::afterGetPreconfiguredValues() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/83)
