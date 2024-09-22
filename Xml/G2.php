@@ -23,11 +23,11 @@ final class G2 {
 	 * @used-by self::importArray()
 	 * @param array(string => string) $atts
 	 */
-	function addAttributes(array $atts):void {
-		foreach ($atts as $k => $v) {/** @var string $k */ /** @var mixed $v */
+	function addAttributes(array $aa):void {
+		foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
 			df_assert_sne($k);
 			if (is_object($v) || is_array($v)) {
-				df_error("«{$k}» should be a string, but it is %s.", df_type($v));
+				df_error("The value of «{$k}» should be a string, but it is %s.", df_type($v), ['attributes' => $aa]);
 			}
 			$this->addAttribute($k, $v);
 		}

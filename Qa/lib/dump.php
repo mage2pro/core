@@ -47,8 +47,8 @@ function df_dump_ds($v):string {return df_json_dont_sort(function() use($v):stri
  * @used-by dfpex_args()
  * @param mixed $v
  */
-function df_type($v):string {return is_object($v) ? sprintf('an object: %s', get_class($v), df_dump($v)) : (is_array($v)
-	? (10 < ($c = count($v)) ? "«an array of $c elements»" : 'an array: ' . df_dump($v))
+function df_type($v):string {return is_object($v) ? sprintf('an object: `%s`', get_class($v), df_dump($v)) : (is_array($v)
+	? (10 < ($c = count($v)) ? "an array of $c elements" : 'an array: ' . df_dump($v))
 	/** 2020-02-04 We should not use @see df_desc() here */
 	: (is_null($v) ? '`null`' : sprintf('«%s» (%s)', df_string($v), gettype($v)))
 );}
