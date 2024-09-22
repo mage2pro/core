@@ -27,7 +27,7 @@ final class G2 {
 		foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
 			df_assert_sne($k);
 			if (is_object($v) || is_array($v)) {
-				df_error("The value of «{$k}» should be a string, but it is %s.", df_type($v), ['attributes' => $aa]);
+				df_error("The attribute «{$k}» has a value of a forbidden type %s.", df_type($v), ['attributes' => $aa]);
 			}
 			$this->addAttribute($k, $v);
 		}
