@@ -94,7 +94,7 @@ final class G extends MX {
 	 * @param array(string => mixed) $array
 	 * @param string[]|bool $wrapInCData [optional]
 	 */
-	function importArray(array $array, $wrapInCData = []):G {
+	function importArray(array $array, $wrapInCData = []):self {
 		foreach ($array as $key => $v) { /** @var string $key */ /** @var mixed $v */
 			if ($v instanceof G) {
 				/**
