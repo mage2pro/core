@@ -196,9 +196,9 @@ final class G2 {
 	}
 
 	/** @used-by self::importString() */
-	private function addChildText(string $tag, string $valueAsText):void {
+	private function addChildText(string $tag, string $vs):void {
 		$r = $this->addChild($tag); /** @var self $r */
-		$r->cdata($valueAsText);
+		$r->cdata($vs);
 	}
 
 	/**
