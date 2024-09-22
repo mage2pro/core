@@ -2,6 +2,7 @@
 use Df\Core\Exception as DFE;
 /**
  * 2024-09-22
+ * @used-by df_string()
  * @param string|string[]|array(string => mixed)|mixed|T|null ...$a
  * @return mixed
  * @throws DFE
