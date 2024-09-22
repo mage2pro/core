@@ -10,7 +10,7 @@ function df_cdata(string $s):string {return X::markAsCData($s);}
 
 /**
  * 2021-12-16
- * @used-by \Df\Xml\G::asNiceXml()
+ * @used-by df_xml_s()
  */
 function df_cdata_raw_if_needed(string $s):string {return !df_needs_cdata($s) ? $s : "<![CDATA[$s]]>";}
 
