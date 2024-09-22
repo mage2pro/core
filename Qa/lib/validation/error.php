@@ -131,7 +131,6 @@ function df_abstract($caller):void {
  * @used-by \Df\Shipping\Method::s()
  * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
  * @used-by \Df\StripeClone\Facade\Charge::cardData()
- * @used-by \Df\Xml\G::addAttributes()
  * @used-by \Df\Xml\G::addChild()
  * @used-by \Df\Xml\G::importString()
  * @used-by \Dfe\AmazonLogin\Customer::validate()

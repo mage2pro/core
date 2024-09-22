@@ -26,17 +26,14 @@ final class G extends MX {
 	#[\Override] /** @see \SimpleXMLElement::addAttribute() */
 	function addAttribute($k, $v = null, $ns = null):void {parent::addAttribute($this->k($k), $v, $ns);}
 
-	function addAttributes(array $atts):void {
-		foreach ($atts as $k => $v) {/** @var string $k */ /** @var mixed $v */
-			df_assert_sne($k);
-			if (is_object($v) || is_array($v)) {
-				df_log($atts);
-				df_error(
-					"«{$k}» should be a string, but it is %s."
-					,is_object($v) ? sprintf('an object of the class `%s`', get_class($v)) : 'an array'
-				);
-			}
-			$this->addAttribute($k, $v);
+	function addAttributes(array $aa):void {
+		foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
+			df_assert_stringable(
+				$v
+				,sprintf("The attribute «{$k}» has a not-`Strinable` type %s.", df_type($v))
+				,['attributes' => $aa]
+			);
+			$this->addAttribute(df_assert_sne($k), $v);
 		}
 	}
 
