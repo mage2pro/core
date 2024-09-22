@@ -18,6 +18,7 @@
  * @used-by \Df\Framework\W\Result\Json::prepare()
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @used-by \Df\Xml\G::importString()
+ * @used-by \Df\Xml\G2::importString()
  * @param mixed $v
  */
 function df_string($v):string {return df_dump(strval(df_assert_stringable($v)));}
