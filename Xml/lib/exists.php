@@ -1,5 +1,5 @@
 <?php
-use SimpleXMLElement as CX;
+use SimpleXMLElement as X;
 
 /**
  * 2015-02-27
@@ -31,10 +31,10 @@ use SimpleXMLElement as CX;
  *
  * @used-by df_check_leaf()
  */
-function df_xml_exists(?CX $e = null):bool {return !empty($e);}
+function df_xml_exists(?X $e = null):bool {return !empty($e);}
 
 /**
  * http://stackoverflow.com/questions/1560827#comment20135428_1562158
  * @used-by df_xml_children()
  */
-function df_xml_exists_child(CX $e, string $child):bool {return isset($e->{$child});}
+function df_xml_exists_child(X $e, string $child):bool {return isset($e->{$child});}
