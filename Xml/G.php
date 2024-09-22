@@ -60,10 +60,9 @@ final class G extends MX {
 	 * @param string $name
 	 * @param string|null $value [optional]
 	 * @param string|null $namespace [optional]
-	 * @return CX
 	 */
 	#[\ReturnTypeWillChange]
-	function addChild($name, $value = null, $namespace = null):CX {/** @var CX $r */
+	function addChild($name, $value = null, $namespace = null):?CX {/** @var CX $r */
 		try {$r = parent::addChild($this->k($name), $value, $namespace);}
 		catch (Th $th) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_xts($th));}
 		return $r;
