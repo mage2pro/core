@@ -53,8 +53,6 @@ final class G extends MX {
 	 * 2022-11-15
 	 * 1) `static` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-static
 	 * 2) We can not declare the $name argument type with PHP < 8: https://3v4l.org/ptpUM
-	 * @override
-	 * @see \SimpleXMLElement::addChild()
 	 * @used-by self::addChildText()
 	 * @used-by self::addChildX()
 	 * @used-by self::importArray()
@@ -63,6 +61,7 @@ final class G extends MX {
 	 * @param string|null $value [optional]
 	 * @param string|null $namespace [optional]
 	 */
+	#[\Override] /** @see \SimpleXMLElement::addChild() */
 	#[\ReturnTypeWillChange]
 	function addChild($name, $value = null, $namespace = null):self {/** @var self $r */
 		try {$r = parent::addChild($this->k($name), $value, $namespace);}
