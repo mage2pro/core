@@ -275,7 +275,7 @@ final class G extends MX {
 			? ($kIsEmpty ? $this->cdata($vAsString) : $this->addChildText($kAsString, $vAsString))
 			: (
 				$kIsEmpty
-				? $this->setValue($vAsString)
+				? $this[0] = $vAsString # http://stackoverflow.com/a/3153704
 				: $this->addChild(
 					$kAsString
 					/**
@@ -299,13 +299,6 @@ final class G extends MX {
 	 * @used-by self::addChild()
 	 */
 	private function k(string $s):string {return !df_contains($s, ':') ? $s : "xmlns:$s";}
-
-	/**
-	 * http://stackoverflow.com/a/3153704
-	 * @used-by self::importString()
-	 * @param mixed $v
-	 */
-	private function setValue($v):void {$this[0] = $v;}
 
 	/** @used-by self::importArray() */
 	const ATTR = '_attr';
