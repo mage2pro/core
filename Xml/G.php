@@ -274,29 +274,6 @@ final class G extends MX {
 		return parent::xpath($path);
 	}
 
-	/**
-	 * 2015-08-08
-	 * Преобразует структуру вида:
-	 *	<СтавкиНалогов>
-	 *		<СтавкаНалога>
-	 *			<Наименование>НДС</Наименование>
-	 *			<Ставка>10</Ставка>
-	 *		</СтавкаНалога>
-	 *	</СтавкиНалогов>
-	 * в массив array('НДС' => '10')
-	 * 2022-10-25 @deprecated It is unused.
-	 * @see self::map()
-	 * @return array(string => string)
-	 */
-	function xpathMap(string $path, string $keyName, string $valueName):array {
-		$r = []; /** @var array(string => string) $r */
-		$nodes = $this->xpathA($path); /** @var G[] $nodes */
-		foreach ($nodes as $node) { /** @var G $node */
-			$r[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
-		}
-		return $r;
-	}
-
 	/** @used-by self::importString() */
 	private function addChildText(string $tag, string $valueAsText):void {
 		$r = $this->addChild($tag); /** @var G $r */

@@ -5,7 +5,6 @@ use SimpleXMLElement as CX;
 /**
  * @used-by df_leaf_sne()
  * @used-by \Df\Xml\G::map()
- * @used-by \Df\Xml\G::xpathMap()
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @param string|callable $d [optional]
  */
