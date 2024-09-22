@@ -1,6 +1,6 @@
 <?php
 use Magento\Framework\Simplexml\Element as MX;
-use SimpleXMLElement as CX;
+use SimpleXMLElement as X;
 
 /**
  * 2016-09-01 The result does not include the XML header. @see df_xml_header()
@@ -11,7 +11,7 @@ use SimpleXMLElement as CX;
  * @used-by df_xml_parse_header()
  * @used-by df_xml_prettify()
  * @used-by df_xml_s()
- * @param CX|MX|string $x
+ * @param X|MX|string $x
  */
 function df_xml_s($x, int $level = 0):string {/** @var string $r */
 	if (is_string($x)) {
@@ -22,7 +22,7 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 		[$nl, $pad] = !$level ? ['', ''] : ["\n", str_pad('', $level * 1, "\t", STR_PAD_LEFT)];
 		$r = "$pad<{$x->getName()}";
 		# 2024-09-22 https://www.php.net/manual/en/simplexmlelement.attributes.php
-		if ($aa = $x->attributes('xsi', true)) { /** @var ?CX $aa */
+		if ($aa = $x->attributes('xsi', true)) { /** @var ?X $aa */
 			foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
 				$v = str_replace('"', '\"', (string)$v);
 				$r .= " xsi:$k=\"$v\"";
@@ -52,7 +52,7 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 				$r .= df_cdata_raw_if_needed($xs);
 			}
 			$r .= $nl;
-			foreach ($x->children() as $child) {/** @var CX $child */
+			foreach ($x->children() as $child) {/** @var X $child */
 				$r .= df_xml_s($child, ++$level);
 			}
 			$r .= "$pad</{$x->getName()}>$nl";
@@ -71,7 +71,7 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
  * Новый алгоритм взят отсюда: http://stackoverflow.com/a/5947858
  * 2024-09-22 @deprecated
  */
-function df_xml_s_simple(CX $x):string {
+function df_xml_s_simple(X $x):string {
 	$dom = dom_import_simplexml($x); /** @var \DOMElement $dom */
 	/**
 	 * 2021-12-13
