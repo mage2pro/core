@@ -11,23 +11,6 @@ use Df\Core\Helper\Text as T;
 const DF_THIN_SPACE = ' ';
 
 /**
- * @see df_bts_yn()
- * @used-by \Df\Qa\Dumper::dump()
- * @used-by \Dfe\AlphaCommerceHub\Method::charge()
- * @used-by \Dfe\Vantiv\Charge::pCharge()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
- */
-function df_bts(bool $v):string {return $v ? 'true' : 'false';}
-
-/**
- * 2017-11-08
- * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
- * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
- * @see df_bts()
- */
-function df_bts_yn(bool $v):string {return $v ? 'yes' : 'no';}
-
-/**
  * Я так понимаю, здесь безопасно использовать @uses strpos вместо @see mb_strpos() даже для UTF-8.
  * http://stackoverflow.com/questions/13913411/mb-strpos-vs-strpos-whats-the-difference
  * 2015-04-17 Добавлена возможность указывать в качестве $needle массив.

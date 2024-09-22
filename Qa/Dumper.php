@@ -66,6 +66,9 @@ final class Dumper {
 		}
 		else {
 			$this->_dumped[$hash] = true;
+			if (df_is_stringable($o)) {
+				$v = strval($o); /** @var string $v */
+			}
 			$r = df_is_stringable($o) ? sprintf("`$c::__toString()`: «%s»", $o) : (
 				# 2023-07-26
 				# "`df_dump()` should handle `Traversable` similar to arrays": https://github.com/mage2pro/core/issues/253
