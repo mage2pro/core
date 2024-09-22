@@ -215,23 +215,6 @@ final class G extends MX {
 		return $this;
 	}
 
-	/**
-	 * 2022-12-05: We do not need to check that the result is an array: https://3v4l.org/pBUvg
-	 * @used-by self::map()
-	 * @param string|string[] $path
-	 * @return G[]
-	 */
-	function xpathA($path):array {
-		if (1 < func_num_args()) {
-			$path = df_cc_path(func_get_args());
-		}
-		elseif (is_array($path)) {
-			$path = df_cc_path($path);
-		}
-		df_param_sne($path, 0);
-		return parent::xpath($path);
-	}
-
 	/** @used-by self::importString() */
 	private function addChildText(string $tag, string $valueAsText):void {
 		$r = $this->addChild($tag); /** @var G $r */
