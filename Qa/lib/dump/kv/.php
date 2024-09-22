@@ -2,6 +2,7 @@
 /**
  * 2017-07-09
  * @see df_dump()
+ * @see df_kv_table()
  * @used-by df_api_rr_failed()
  * @used-by \Df\API\Client::p()
  * @used-by \Df\Qa\Failure\Error::preface()
