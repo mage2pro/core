@@ -43,11 +43,11 @@ use Df\Xml\G;
  */
 function df_xml_g(string $tag, array $contents = [], array $atts = [], bool $skipHeader = false):string {
 	$h = $skipHeader ? '' : df_xml_header(); /** @var string $h */
-	$x = df_xml_parse(df_cc_n($h, "<{$tag}/>")); /** @var X $x */
-	$x->addAttributes($atts);
-	$x->importArray($contents);
+	$g = df_xml_parse(df_cc_n($h, "<{$tag}/>")); /** @var G $g */
+	$g->addAttributes($atts);
+	$g->importArray($contents);
 	# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML: http://stackoverflow.com/a/10095901
-	return str_replace("\x0B", "&#x0B;", $skipHeader ? $x->asXMLPart() : df_cc_n($h, $x->asNiceXml()));
+	return str_replace("\x0B", "&#x0B;", $skipHeader ? $g->asXMLPart() : df_cc_n($h, df_xml_s($g)));
 }
 
 /**
