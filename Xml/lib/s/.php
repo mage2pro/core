@@ -31,17 +31,15 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 		$xs = trim((string)$x); /** @var string $xs */
 		$isEmpty = df_es($xs); /** @var bool $isEmpty */
 		if (!$x->hasChildren()) {
-			if ($isEmpty) {
-				$r .= '/>' . $nl;
-			}
-			else {
+			$r .= $isEmpty
+				? '/>' . $nl
 				/**
 				 * 2021-12-16
 				 * The previous code was: `$this->xmlentities($xs)`
 				 * @see \Magento\Framework\Simplexml\Element::xmlentities()
 				 */
-				$r .= '>' . df_cdata_raw_if_needed($xs) . '</' . $x->getName() . '>' . $nl;
-			}
+				: '>' . df_cdata_raw_if_needed($xs) . $nl "</{$x->getName()}>$nl"
+			;
 		}
 		else {
 			$r .= '>';
