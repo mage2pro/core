@@ -22,12 +22,6 @@ function df_e(...$a) {return df_call_a(function(string $s):string {return htmlsp
 );}, $a);}
 
 /**
- * http://darklaunch.com/2009/05/06/php-normalize-newlines-line-endings-crlf-cr-lf-unix-windows-mac
- * @used-by df_explode_n()
- */
-function df_normalize(string $s):string {return strtr($s, ["\r\n" => "\n", "\r" => "\n"]);}
-
-/**
  * 2017-04-22
  * «+79.6-2» => «7962»
  * http://stackoverflow.com/a/35619532
