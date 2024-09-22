@@ -8,7 +8,7 @@ final class Dumper {
 	 * @param mixed $v
 	 */
 	function dump($v):string {return is_object($v) ? $this->dumpObject($v) : (
-		is_array($v) ? $this->dumpArray($v) : (is_bool($v) ? df_bts($v) : (is_string($v) ? $v : print_r($v, true)))
+		is_array($v) ? $this->dumpArray($v) : (is_bool($v) ? df_bts($v) : (is_string($v) ? $this->dumpS($v) : print_r($v, true)))
 	);}
 
 	/** @used-by self::dump() */
@@ -82,6 +82,12 @@ final class Dumper {
 		}
 		return $r;
 	}
+
+	/**
+	 * 2024-09-23
+	 * @used-by self::dump()
+	 */
+	private function dumpS(string $s):string {return !df_check_json($r = df_trim(df_normalize($s))) ? $r : df_json_prettify($r);}
 
 	/**
 	 * @used-by self::dumpObject()

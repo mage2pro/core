@@ -8,6 +8,7 @@ use Df\Core\Json as J;
  * Но оно меня не устроило. И без собаки будет Warning.
  * @used-by df_check_json_complex()
  * @used-by \Df\API\Client::_p()
+ * @used-by \Df\Qa\Dumper::dumpS()
  * @param mixed $v
  */
 function df_check_json($v):bool {return !is_null(@json_decode($v));}
@@ -199,6 +200,7 @@ function df_json_file_read(string $p) {return df_json_decode(df_contents($p));}
 /**
  * 2017-07-05
  * @used-by \Df\API\Client::_p()
+ * @used-by \Df\Qa\Dumper::dumpS()
  * @param string|array(string => mixed) $j
  */
 function df_json_prettify($j):string {return df_json_encode(df_json_decode($j));}

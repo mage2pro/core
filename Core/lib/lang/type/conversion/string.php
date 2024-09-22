@@ -19,4 +19,4 @@
  * @used-by \Df\Xml\G::importString()
  * @param mixed $v
  */
-function df_string($v):string {return df_trim(df_normalize(strval(df_assert_stringable($v))));}
+function df_string($v):string {return df_dump(strval(df_assert_stringable($v)));}

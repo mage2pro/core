@@ -42,6 +42,7 @@ function df_chop(string $s, int $max = 0):string {return !$max || (mb_strlen($s 
  * @used-by \Df\Config\Source\LetterCase::apply()
  * @used-by \Df\Core\Html\Tag::content()
  * @used-by \Df\Framework\Form\Element::uidSt()
+ * @used-by \Df\Qa\Dumper::dumpS()
  * @used-by \Df\Qa\Failure::sections()
  * @used-by \Dfe\Portal\Block\Content::getTemplate()
  * @used-by \Dfe\Portal\Controller\Index\Index::execute()
