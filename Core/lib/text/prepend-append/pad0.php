@@ -6,4 +6,4 @@
  * http://stackoverflow.com/a/1699980
  * @used-by df_rgb2hex()
  */
-function df_pad0(int $count, string $s):string {return str_pad($s, $count, '0', STR_PAD_LEFT);}
+function df_pad0(int $count, string $s):string {return df_pad($s, $count, '0', STR_PAD_LEFT);}
