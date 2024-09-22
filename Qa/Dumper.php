@@ -60,12 +60,12 @@ final class Dumper {
 	 */
 	private function dumpObject($o):string {/** @var string $r */
 		/** @var string $hash */
+		$c = get_class($o); /** @var string $c */
 		if (isset($this->_dumped[$hash = spl_object_hash($o)])) {
-			$r = sprintf('[recursion: %s]', get_class($o));
+			$r = "[recursion: $c]";
 		}
 		else {
 			$this->_dumped[$hash] = true;
-			$c = get_class($o); /** @var string $c */
 			$r = df_is_stringable($o) ? sprintf("`$c::__toString()`: «%s»", $o) : (
 				# 2023-07-26
 				# "`df_dump()` should handle `Traversable` similar to arrays": https://github.com/mage2pro/core/issues/253
