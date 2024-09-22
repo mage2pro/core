@@ -20,7 +20,7 @@
  * @used-by \Df\Payment\W\Exception\Ignored::message()
  * @used-by \Df\Payment\W\Handler::log()
  * @used-by \Df\Typography\Css::rule()
- * @used-by \Df\Xml\G::importString()
+ * @used-by \Df\Xml\G2::importString()
  * @param mixed $v
  */
 function df_es($v):bool {return '' === $v;}
