@@ -29,7 +29,6 @@ final class G extends MX {
 	function addAttributes(array $atts):void {
 		foreach ($atts as $k => $v) {/** @var string $k */ /** @var mixed $v */
 			df_assert_sne($k);
-			# убрал strval($v) для ускорения системы
 			if (is_object($v) || is_array($v)) {
 				df_log($atts);
 				df_error(
@@ -39,7 +38,7 @@ final class G extends MX {
 			}
 			$this->addAttribute($k, $v);
 		}
-	}	
+	}
 
 	/**
 	 * @uses \SimpleXMLElement::addChild() создаёт и возвращает не просто SimpleXMLElement, как говорит документация,

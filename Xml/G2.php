@@ -26,7 +26,6 @@ final class G2 {
 	function addAttributes(array $atts):void {
 		foreach ($atts as $k => $v) {/** @var string $k */ /** @var mixed $v */
 			df_assert_sne($k);
-			# убрал strval($v) для ускорения системы
 			if (is_object($v) || is_array($v)) {
 				df_log($atts);
 				df_error(
