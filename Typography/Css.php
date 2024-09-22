@@ -8,7 +8,7 @@ final class Css extends \Df\Core\O {
 	 * @used-by \Dfe\Frontend\Block\ProductView\Css::customCss()
 	 */
 	function render():string {return df_cc_n(df_map_k($this->_blocks, function(string $selector, array $rules) {return sprintf(
-		"{$selector} {\n%s\n}", df_tab_multiline(df_cc_n($rules))
+		"{$selector} {\n%s\n}", df_cc_n(df_tab($rules))
 	);}));}
 
 	/**
