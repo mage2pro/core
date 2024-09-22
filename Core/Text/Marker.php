@@ -16,14 +16,12 @@ final class Marker {
 
 	/**
 	 * 2021-12-12
-	 * @used-by \Df\Xml\G::importString()
 	 * @used-by \Df\Xml\G2::importString()
 	 */
 	function marked(string $s):string {return df_starts_with($s, $this->_begin) && df_ends_with($s, $this->_end);}
 
 	/**
 	 * 2021-12-12
-	 * @used-by \Df\Xml\G::importString()
 	 * @used-by \Df\Xml\G2::importString()
 	 */
 	function unmark(string $s):string {return df_trim_text_left_right($s, $this->_begin, $this->_end);}
