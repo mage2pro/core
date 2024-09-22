@@ -9,7 +9,7 @@ use Df\Xml\G;
  * @param array(string => string) $attr [optional]
  * @param array(string => mixed) $contents [optional]
  */
-function df_xml_g_node(string $tag, array $attr = [], array $contents = []):G {
+function df_xml_go(string $tag, array $attr = [], array $contents = []):G {
 	$r = new G(df_xml_x("<{$tag}/>")); /** @var G $r */
 	$r->addAttributes($attr);
 	$r->importArray($contents);

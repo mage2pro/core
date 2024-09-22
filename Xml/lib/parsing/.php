@@ -7,7 +7,7 @@ use Throwable as T;
 /**
  * 2024-09-22 "Refactor the `Df_Xml` module": https://github.com/mage2pro/core/issues/437
  * @used-by df_module_name_by_path()
- * @used-by df_xml_g_node()
+ * @used-by df_xml_go()
  * @used-by df_xml_parse_a()
  * @used-by df_xml_prettify()
  * @used-by df_xml_x()

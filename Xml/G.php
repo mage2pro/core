@@ -10,7 +10,7 @@ use \Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
 final class G {
 	/**
 	 * 2024-09-22
-	 * @used-by df_xml_g_node()
+	 * @used-by df_xml_go()
 	 * @used-by self::addChild()
 	 * @param X|string $x
 	 */
@@ -24,7 +24,7 @@ final class G {
 	function addAttribute(string $k, string $v = '', string $ns = ''):void {$this->_x->addAttribute($this->k($k), $v, $ns);}
 
 	/**
-	 * @used-by df_xml_g_node()
+	 * @used-by df_xml_go()
 	 * @used-by self::importArray()
 	 * @param array(string => string) $atts
 	 */
@@ -37,7 +37,7 @@ final class G {
 	}
 
 	/**
-	 * @used-by df_xml_g_node()
+	 * @used-by df_xml_go()
 	 * @used-by self::importArray()
 	 * @param array(string => mixed) $array
 	 * @param string[]|bool $wrapInCData [optional]
@@ -49,8 +49,8 @@ final class G {
 				 * 2016-08-31
 				 * Случай, который отсутствовал в Российской сборке Magento:
 				 *	'Payment' => [
-				 *		df_xml_g_node('TxnList', ['count' => 1], [
-				 *			df_xml_g_node('Txn', ['ID' => 1], [
+				 *		df_xml_go('TxnList', ['count' => 1], [
+				 *			df_xml_go('Txn', ['ID' => 1], [
 				 *				'amount' => 200
 				 *				,'purchaseOrderNo' => 'test'
 				 *				,'txnID' => '009887'
