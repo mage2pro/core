@@ -2,7 +2,6 @@
 use Df\Xml\G;
 
 /**
- * @see \Magento\Framework\Simplexml\Element::asNiceXml() не добавляет к документу заголовок XML: его надо добавить вручную.
  * 2015-02-27
  * Для конвертации объекта класса @see SimpleXMLElement в строку
  * надо использовать именно метод @uses SimpleXMLElement::asXML(),

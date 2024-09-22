@@ -3,8 +3,7 @@ use Magento\Framework\Simplexml\Element as MX;
 use SimpleXMLElement as CX;
 
 /**
- * 2016-09-01
- * The result does not include the XML header. @see df_xml_header()
+ * 2016-09-01 The result does not include the XML header. @see df_xml_header()
  * @see \Magento\Framework\Simplexml\Element::asNiceXml()
  * @used-by df_assert_leaf()
  * @used-by df_xml_children()
