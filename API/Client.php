@@ -413,9 +413,7 @@ abstract class Client {
 			$e2 = df_error_create(
 				(!$path ? 'A' : "A `{$path}`") . " {$title} API request has failed"
 				. ($short ? ": «{$short}»" : ' without error messages') . ".\n"
-				. ($long === $short ? "Request:\n$req" : df_kv([
-					'The full error description' => $long, 'Request' => $req
-				]))
+				. ($long === $short ? "Request:\n$req" : df_kv(['The full error description' => $long, 'Request' => $req]))
 			); /** @var DFE $e2 */
 			if (!$this->_silent) {
 				df_log_l($m, $e2);
