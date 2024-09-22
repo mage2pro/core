@@ -12,6 +12,7 @@
  * 6) Поэтому для функций, которые могут привести к `E_RECOVERABLE_ERROR`, пишем обёртки,
  * которые вместо `E_RECOVERABLE_ERROR` возбуждают исключительную ситуацию.
  * 7) Одна из таких функций — df_string.
+ * @see df_dump()
  * @used-by df_type()
  * @used-by \Df\Xml\G::importString()
  * @param mixed $v
