@@ -15,7 +15,8 @@
  * @see df_dump()
  * @see df_is_stringable()
  * @used-by df_type()
+ * @used-by \Df\Qa\Dumper::dumpObject()
  * @used-by \Df\Xml\G::importString()
  * @param mixed $v
  */
-function df_string($v):string {return strval(df_assert_stringable($v));}
+function df_string($v):string {return df_trim(df_normalize(strval(df_assert_stringable($v))));}

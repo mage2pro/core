@@ -35,6 +35,7 @@ function df_chop(string $s, int $max = 0):string {return !$max || (mb_strlen($s 
  * @used-by df_explode_n()
  * @used-by df_explode_space()
  * @used-by df_parse_colon()
+ * @used-by df_string()
  * @used-by df_trim()
  * @used-by df_trim_ds()
  * @used-by df_xml_x()

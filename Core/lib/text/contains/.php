@@ -8,6 +8,7 @@
  * @used-by df_block_output()
  * @used-by df_bt_filter_head()
  * @used-by df_is_bin_magento()
+ * @used-by df_is_multiline()
  * @used-by df_request_ua()
  * @used-by df_rp_has()
  * @used-by ikf_ite()
