@@ -68,26 +68,6 @@ final class G extends MX {
 		catch (Th $th) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_xts($th));}
 		return $r;
 	}
-
-	/**
-	 * 2015-02-27
-	 * Возвращает документ XML в виде текста без заголовка XML.
-	 * Раньше алгоритм был таким:
-	 * 		str_replace('<?xml version="1.0"?>', '', $this->asXML());
-	 * Однако этот алгоритм неверен: ведь в заголовке XML может присутствовать указание кодировки, например:
-	 * 		<?xml version='1.0' encoding='utf-8'?>
-	 * Новый алгоритм взят отсюда: http://stackoverflow.com/a/5947858
-	 * @used-by df_xml_g()
-	 */
-	function asXMLPart():string {
-		$dom = dom_import_simplexml($this); /** @var \DOMElement $dom */
-		/**
-		 * 2021-12-13
-		 * @uses \DOMDocument::saveXML() can return `false`:
-		 * https://php.net/manual/domdocument.savexml.php#refsect1-domdocument.savexml-returnvalues
-		 */
-		return df_assert_nef($dom->ownerDocument->saveXML($dom->ownerDocument->documentElement));
-	}
 	
 	/**
 	 * 1) Этот метод отличается от родительского только возвращением null вместо false в случае отсутствия значения.
