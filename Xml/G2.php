@@ -25,13 +25,12 @@ final class G2 {
 	 */
 	function addAttributes(array $aa):void {
 		foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
-			df_assert_sne($k);
 			df_assert(
 				!is_object($v) && !is_array($v)
 				, sprintf("The attribute «{$k}» has a value of a forbidden type %s.", df_type($v))
 				, ['attributes' => $aa]
 			);
-			$this->addAttribute($k, $v);
+			$this->addAttribute(df_assert_sne($k), $v);
 		}
 	}
 
