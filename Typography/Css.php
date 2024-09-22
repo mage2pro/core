@@ -7,11 +7,9 @@ final class Css extends \Df\Core\O {
 	 * @used-by \Df\Typography\Font::css()
 	 * @used-by \Dfe\Frontend\Block\ProductView\Css::customCss()
 	 */
-	function render():string {return df_cc_n(df_map_k($this->_blocks, function(string $selector, array $rules) {
-		/** @var string[] $rules */
-		$rulesS = df_tab_multiline(df_cc_n($rules)); /** @var string $rulesS */
-		return "{$selector} {\n{$rulesS}\n}";
-	}));}
+	function render():string {return df_cc_n(df_map_k($this->_blocks, function(string $selector, array $rules) {return sprintf(
+		"{$selector} {\n%s\n}", df_tab_multiline(df_cc_n($rules))
+	);}));}
 
 	/**
 	 * 2015-12-16
