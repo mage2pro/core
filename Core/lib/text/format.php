@@ -42,36 +42,6 @@ function df_format(...$a):string { /** @var string $r */
 }
 
 /**
- * 2017-07-09
- * @see df_dump()
- * @used-by df_api_rr_failed()
- * @used-by \Df\API\Client::p()
- * @used-by \Df\Qa\Failure\Error::preface()
- * @used-by \Df\Sentry\Client::send_http()
- * @param array(string => string) $a
- */
-function df_kv(array $a, int $pad = 0):string {return df_cc_n(df_map_k(df_clean($a), function($k, $v) use($pad) {return
-	(!$pad ? "$k: " : df_pad("$k:", $pad)) . (df_is_stringable($v) ? $v : df_json_encode($v))
-;}));}
-
-/**
- * 2019-06-13   
- * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
- * @param array(string => string) $a
- */
-function df_kv_table(array $a):string {return df_tag('table', [], df_map_k(
-	df_clean($a), function($k, $v) {return
-		df_tag('tr', [], [
-			df_tag('td', [], $k)
-			,df_tag('td', [],
-				is_array($v) || (is_object($v) && !method_exists($v, '__toString'))
-					? "\n" . df_json_encode($v) : $v					
-			)
-		])
-	;}
-));}
-
-/**
  * @used-by df_format()
  * @param string|mixed[] $s
  * @throws Th
