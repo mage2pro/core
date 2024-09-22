@@ -48,9 +48,9 @@ final class G2 {
 	 * @used-by self::importArray()
 	 * @used-by self::importString()
 	 */
-	private function addChild(string $name, string $value = '', string $namespace = ''):self {/** @var self $r */
-		try {$r = new self($this->_x->addChild($this->k($name), $value, $namespace));}
-		catch (T $t) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_xts($t));}
+	private function addChild(string $k, string $v = '', string $ns = ''):self {/** @var self $r */
+		try {$r = new self($this->_x->addChild($this->k($k), $v, $ns));}
+		catch (T $t) {df_error("Tag <{$k}>. Value: «{$v}». Error: «%s».", df_xts($t));}
 		return $r;
 	}
 
