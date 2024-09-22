@@ -63,6 +63,21 @@ final class G2 {
 	}
 
 	/**
+	 * 2016-08-31 http://stackoverflow.com/a/11727581
+	 * @used-by self::addChildX()
+	 * @used-by self::importArray()
+	 */
+	private function addChildX(G $child):void {
+		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var G $childInThis */
+		foreach ($child->attributes() as $attr => $v) { /** @var string $name */ /** @var string $v */
+			$childInThis->addAttribute($attr, $v);
+		}
+		foreach ($child->children() as $childChild) { /** @var G $childChild */
+			$childInThis->addChildX($childChild);
+		}
+	}
+
+	/**
 	 * http://stackoverflow.com/a/6260295
 	 * @used-by self::addChildText()
 	 * @used-by self::importString()
