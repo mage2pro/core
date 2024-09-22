@@ -44,20 +44,5 @@ function df_xml_g(string $tag, array $contents = [], array $atts = [], bool $ski
 	# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML: http://stackoverflow.com/a/10095901
 	"\x0B", "&#x0B;",
 		# 2024-09-22 The result of `df_xml_s()` does not include the XML header.
-		df_cc_n($skipHeader ? '' : df_xml_header(), df_xml_s(df_xml_node($tag, $contents, $atts)))
+		df_cc_n($skipHeader ? '' : df_xml_header(), df_xml_s(df_xml_g_node($tag, $contents, $atts)))
 );}
-
-/**
- * @used-by df_xml_g()
- * @used-by \Dfe\SecurePay\Refund::process()
- * @used-by \Dfe\Vantiv\Charge::pCharge()
- * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t04()
- * @param array(string => string) $attr [optional]
- * @param array(string => mixed) $contents [optional]
- */
-function df_xml_node(string $tag, array $attr = [], array $contents = []):G {
-	$r = df_xml_x("<{$tag}/>"); /** @var G $r */
-	$r->addAttributes($attr);
-	$r->importArray($contents);
-	return $r;
-}
