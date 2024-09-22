@@ -6,7 +6,7 @@ use Df\Xml\G;
  * @used-by df_clean_xml()
  * @used-by \Dfe\SecurePay\Refund::process()
  */
-function df_cdata(string $s):string {return X::markAsCData($s);}
+function df_cdata(string $s):string {return G::markAsCData($s);}
 
 /**
  * 2021-12-16
