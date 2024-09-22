@@ -68,6 +68,7 @@
  * @used-by \Df\Sentry\Client::capture()
  * @used-by \Df\Sentry\Client::get_http_data()
  * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by \Df\Xml\G2::importArray()
  * @used-by \Dfe\AlphaCommerceHub\W\Event::providerRespL()
  * @used-by \Dfe\AmazonLogin\Customer::res()
  * @used-by \Dfe\CheckoutCom\Source\Prefill::config()
