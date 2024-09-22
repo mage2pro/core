@@ -112,7 +112,7 @@ final class G2 {
 			elseif (!is_array($v)) {
 				$this->importString($key, $v, $wrapInCData);
 			}
-			elseif (df_is_assoc($v) || array_filter($v, function($i) {return $i instanceof G;})) {
+			elseif (df_is_assoc($v) || array_filter($v, function($i) {return $i instanceof self;})) {
 				$childNode =
 					$this->addChild(
 						/**
