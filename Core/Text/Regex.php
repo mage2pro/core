@@ -180,8 +180,7 @@ final class Regex extends \Df\Core\O {
 		}
 		elseif (!$this->isSubjectTooLongToReport()) {
 			$m =
-				"При применении регулярного выражения «{$this->getPattern()}»"
-				." произошёл сбой{$errorCodeForUser}."
+				"При применении регулярного выражения «{$this->getPattern()}» произошёл сбой{$errorCodeForUser}."
 				."\nТекст, к которому применялось регулярное выражение:"
 				."\nНАЧАЛО ТЕКСТА:\n{$this->getSubject()}\nКОНЕЦ ТЕКСТА"
 			;
@@ -189,8 +188,7 @@ final class Regex extends \Df\Core\O {
 		else {
 			df_report($this->getReportFileName(), $this->getSubject());
 			$m =
-				"При применении регулярного выражения «{$this->getPattern()}»"
-				." произошёл сбой{$errorCodeForUser}."
+				"При применении регулярного выражения «{$this->getPattern()}» произошёл сбой{$errorCodeForUser}."
 				."\nТекст, к которому применялось регулярное выражение,"
 				." смотрите в файле {$this->getReportFilePath()}."
 				."\nПервые {$this->getSubjectMaxLinesToReport()} строк текста:"
