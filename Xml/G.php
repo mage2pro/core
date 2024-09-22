@@ -9,26 +9,56 @@ use \Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
 # 2) "Refactor the `Df_Xml` module": https://github.com/mage2pro/core/issues/437
 final class G {
 	/**
-	 * 2024-09-22
+	 * 2024-09-23
+	 * @used-by df_xml_g()
+	 */
+	function x():X {return $this->_x;}
+
+	/** @used-by self::importArray() */
+	const ATTR = '_attr';
+
+	/** @used-by self::importArray() */
+	const CONTENT = '_content';
+
+	/**
 	 * @used-by df_xml_go()
+	 * @param array(string => string) $attr [optional]
+	 * @param array(string => mixed) $contents [optional]
+	 */
+	static function i(string $tag, array $attr = [], array $contents = []):self {
+		$r = new self(df_xml_x("<{$tag}/>")); /** @var G $r */
+		$r->addAttributes($attr);
+		$r->importArray($contents);
+		return $r;
+	}
+
+	/**
+	 * Убрал df_param_s и df_result_s для ускорения работы модуля Яндекс.Маркет
+	 * @used-by df_cdata()
+	 */
+	static function markAsCData(string $s):string {return self::marker()->mark($s);}
+
+	/**
+	 * 2024-09-22
+	 * @used-by self::i()
 	 * @used-by self::addChild()
 	 * @param X|string $x
 	 */
-	function __construct($x) {$this->_x = df_xml_x($x);}
+	private function __construct($x) {$this->_x = df_xml_x($x);}
 
 	/**
 	 * 2021-12-13
 	 * @used-by self::addAttributes()
 	 * @used-by self::addChildX()
 	 */
-	function addAttribute(string $k, string $v = '', string $ns = ''):void {$this->_x->addAttribute($this->k($k), $v, $ns);}
+	private function addAttribute(string $k, string $v = '', string $ns = ''):void {$this->_x->addAttribute($this->k($k), $v, $ns);}
 
 	/**
-	 * @used-by df_xml_go()
+	 * @used-by self::i()
 	 * @used-by self::importArray()
 	 * @param array(string => string) $atts
 	 */
-	function addAttributes(array $aa):void {
+	private function addAttributes(array $aa):void {
 		foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
 			$this->addAttribute(df_assert_sne($k), df_assert_stringable(
 				$v, sprintf("The attribute «{$k}» has a non-`Strinable` type %s.", df_type($v)), ['attributes' => $aa]
@@ -37,12 +67,12 @@ final class G {
 	}
 
 	/**
-	 * @used-by df_xml_go()
+	 * @used-by self::i()
 	 * @used-by self::importArray()
 	 * @param array(string => mixed) $array
 	 * @param string[]|bool $wrapInCData [optional]
 	 */
-	function importArray(array $array, $wrapInCData = []):void {
+	private function importArray(array $array, $wrapInCData = []):void {
 		foreach ($array as $key => $v) { /** @var string $key */ /** @var mixed $v */
 			if ($v instanceof self) {
 				/**
@@ -179,12 +209,6 @@ final class G {
 	}
 
 	/**
-	 * 2024-09-23
-	 * @used-by df_xml_g()
-	 */
-	function x():X {return $this->_x;}
-
-	/**
 	 * @uses \SimpleXMLElement::addChild() создаёт и возвращает не просто SimpleXMLElement, как говорит документация,
 	 * а объект класса родителя.
 	 * 2022-11-15
@@ -307,30 +331,6 @@ final class G {
 	 * @var X
 	 */
 	private $_x;
-
-	/** @used-by self::importArray() */
-	const ATTR = '_attr';
-
-	/** @used-by self::importArray() */
-	const CONTENT = '_content';
-
-	/**
-	 * @used-by df_xml_go()
-	 * @param array(string => string) $attr [optional]
-	 * @param array(string => mixed) $contents [optional]
-	 */
-	static function i(string $tag, array $attr = [], array $contents = []):self {
-		$r = new self(df_xml_x("<{$tag}/>")); /** @var G $r */
-		$r->addAttributes($attr);
-		$r->importArray($contents);
-		return $r;
-	}
-
-	/**
-	 * Убрал df_param_s и df_result_s для ускорения работы модуля Яндекс.Маркет
-	 * @used-by df_cdata()
-	 */
-	static function markAsCData(string $s):string {return self::marker()->mark($s);}
 
 	/**
 	 * 2021-12-12
