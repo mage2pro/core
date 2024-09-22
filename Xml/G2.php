@@ -208,11 +208,11 @@ final class G2 {
 	 */
 	private function addChildX(X $x):void {
 		$g = $this->addChild($x->getName(), (string)$x); /** @var self $g */
-		foreach ($x->attributes() as $attr => $v) { /** @var string $name */ /** @var string $v */
-			$g->addAttribute($attr, $v);
+		foreach ($x->attributes() as $k => $v) { /** @var string $k */ /** @var string $v */
+			$g->addAttribute($k, $v);
 		}
-		foreach ($x->children() as $childChild) { /** @var G $childChild */
-			$g->addChildX($childChild);
+		foreach ($x->children() as $xc) { /** @var X $xc */
+			$g->addChildX($xc);
 		}
 	}
 
