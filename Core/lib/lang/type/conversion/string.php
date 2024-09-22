@@ -17,7 +17,6 @@
  * @used-by df_type()
  * @used-by \Df\Framework\W\Result\Json::prepare()
  * @used-by \Df\Qa\Dumper::dumpObject()
- * @used-by \Df\Xml\G::importString()
  * @used-by \Df\Xml\G2::importString()
  * @param mixed $v
  */
