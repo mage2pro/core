@@ -46,7 +46,7 @@ final class G2 {
 		# '' означает, что метод `importString` не должен создавать дочерний тэг `$k`,
 		# а должен добавить текст в качестве единственного содержимого текущего тэга.
 		$kIsEmpty = df_es($k); /** @var bool $kIsEmpty */
-		$kAsString = $kIsEmpty ? $this->getName() : $k; /** @var string $kAsString */
+		$kAsString = $kIsEmpty ? $this->_x->getName() : $k; /** @var string $kAsString */
 		$vIsString = is_string($v); /** @var bool $vIsString */
 		$vAsString = ''; /** @var string $vAsString */
 		try {$vAsString = $vIsString ? $v : df_string($v);}
@@ -103,6 +103,7 @@ final class G2 {
 	 * 2024-09-22
 	 * @used-by self::__construct()
 	 * @used-by self::addAttribute()
+	 * @used-by self::importString()
 	 * @var X
 	 */
 	private $_x;
