@@ -27,11 +27,7 @@ final class G2 {
 		foreach ($atts as $k => $v) {/** @var string $k */ /** @var mixed $v */
 			df_assert_sne($k);
 			if (is_object($v) || is_array($v)) {
-				df_log($atts);
-				df_error(
-					"«{$k}» should be a string, but it is %s."
-					,is_object($v) ? sprintf('an object of the class `%s`', get_class($v)) : 'an array'
-				);
+				df_error("«{$k}» should be a string, but it is %s.", df_type($v));
 			}
 			$this->addAttribute($k, $v);
 		}
