@@ -69,24 +69,6 @@ final class G extends MX {
 		catch (Th $th) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_xts($th));}
 		return $r;
 	}
-	
-	/**
-	 * 1) Этот метод отличается от родительского только возвращением null вместо false в случае отсутствия значения.
-	 * Мы можем так делать, потому что родительский класс сам внутри себя не использует метод descend
-	 * (и, соответственно, не полагается на возвращение значения false).
-	 * 2) Интерпретатор PHP не разрешает присваивать полям объектов класса CX (и его наследников) значения сложных типов.
-	 * Такое присваивание приводит к сбою: «Warning: It is not yet possible to assign complex types to attributes».
-	 * По этой причине не используем кэширование результата.
-	 * 3) В комментарии к свойству @see \Magento\Framework\Simplexml\Element::$_parent
-	 * дана рекомендация использования функции @see spl_object_hash(), однако это слишком сложно,
-	 * и неочевидно, ускорит ли работу системы (также могут быть проблемы с расходом оперативной памяти).
-	 * 2022-11-15 @deprecated It is unused.
-	 * 2022-11-26 We can not declare the $path argument type because it is undeclared in the overriden method.
-	 * @override
-	 * @see \Magento\Framework\Simplexml\Element::descend()
-	 * @param string|string[] $p
-	 */
-	function descend($p):?self {return df_ftn(parent::descend($p));}
 
 	/**
 	 * @used-by df_xml_g()

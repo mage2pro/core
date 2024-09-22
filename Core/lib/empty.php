@@ -107,7 +107,6 @@ function df_fnes($v):bool {return is_null($v) || '' === $v || false === $v;}
 /**
  * @used-by df_fetch_one()
  * @used-by df_parent_name()
- * @used-by \Df\Xml\G::descend()
  * @used-by \Dfe\Stripe\Init\Action::need3DS()
  * @param mixed|false $v
  * @return mixed|null
