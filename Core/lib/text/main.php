@@ -24,7 +24,6 @@ function df_strings_are_equal_ci(string $s1, string $s2):bool {return 0 === strc
  * @used-by df_quote_double()
  * @used-by df_quote_russian()
  * @used-by df_quote_single()
- * @used-by \Df\Core\Text\Regex::isSubjectMultiline()
  */
 function df_t():T {return T::s();}
 

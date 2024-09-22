@@ -1,9 +1,6 @@
 <?php
 namespace Df\Core\Helper;
 final class Text {
-	/** @used-by \Df\Core\Text\Regex::isSubjectMultiline() */
-	function isMultiline(string $s):bool {return df_contains($s, "\n") || df_contains($s, "\r");}
-
 	/**
 	 * @used-by df_quote_double()
 	 * @used-by df_quote_russian()

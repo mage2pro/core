@@ -129,9 +129,7 @@ final class Regex extends \Df\Core\O {
 	 * @used-by self::throwInternalError()
 	 * @used-by self::throwNotMatch()
 	 */
-	private function isSubjectMultiline():bool {return dfc($this, function() {return df_t()->isMultiline(
-		$this->getSubject()
-	);});}
+	private function isSubjectMultiline():bool {return dfc($this, function() {return df_is_multiline($this->getSubject());});}
 
 	/**
 	 * @used-by self::getSubjectReportPart()
