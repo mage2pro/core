@@ -4,6 +4,7 @@ use Df\Qa\Dumper;
  * We do not use @uses \Df\Qa\Dumper as a singleton
  * because @see \Df\Qa\Dumper::dumpObject()
  * uses the @see \Df\Qa\Dumper::$_dumped property to avoid a recursion.
+ * @see df_kv()
  * @see df_string()
  * @see df_type()
  * @used-by df_assert_eq()
