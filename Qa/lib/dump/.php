@@ -19,6 +19,7 @@ use Df\Qa\Dumper;
  * @used-by dfa_assert_keys()
  * @used-by dfc()
  * @used-by dfs_con()
+ * @used-by \Df\API\Client::_p()
  * @used-by \Df\Framework\Form\Element\Text::getValue()
  * @used-by \Df\Sentry\Client::capture()
  * @used-by \Df\Sentry\Extra::adjust()

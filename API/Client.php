@@ -389,8 +389,7 @@ abstract class Client {
 				$path = df_url_path($this->url()); /** @var string $path */
 				df_log(
 					(!$path ? 'A' : "A `{$path}`") . " {$title} API request has succeeded\n"
-					. "Request:\n$req\nResponse:\n"
-					. (!df_check_json($resBody) ? $resBody : df_json_prettify($resBody))
+					. "Request:\n$req\nResponse:\n" . df_dump($resBody)
 					, $m
 				);
 			}
