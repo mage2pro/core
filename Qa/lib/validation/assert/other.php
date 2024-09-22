@@ -29,7 +29,7 @@ function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
  * @used-by \Df\Payment\W\Event::pid()
  * @used-by \Df\PaypalClone\Charge::p()
  * @used-by \Df\StripeClone\Payer::newCard()
- * @used-by \Df\Xml\G::addAttributes()
+ * @used-by \Df\Xml\G2::addAttributes()
  * @used-by \Dfe\Stripe\Controller\CustomerReturn\Index::isSuccess()
  * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
  * @throws DFE
