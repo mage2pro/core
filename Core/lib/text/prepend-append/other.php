@@ -65,13 +65,3 @@ function df_pad0(int $length, string $number):string {return str_pad($number, $l
  * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetElementHtml()
  */
 function df_prepend(string $s, string $head):string {return df_starts_with($s, $head) ? $s : $head . $s;}
-
-/**
- * @used-by \Df\Core\Html\Tag::content()
- * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
- * @used-by \Df\Qa\Dumper::dumpArray()
- * @used-by \Df\Qa\Dumper::dumpObject()
- * @used-by \Df\Qa\Dumper::dumpObject()
- * @used-by \Df\Typography\Css::render()
- */
-function df_tab_multiline(string $s):string {return df_cc_n(df_tab(df_explode_n($s)));}

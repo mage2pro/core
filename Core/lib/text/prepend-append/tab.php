@@ -6,3 +6,13 @@
  * @return string|string[]|array(string => string)
  */
 function df_tab(...$a) {return df_call_a($a, function(string $s):string {return "\t" . $s;});}
+
+/**
+ * @used-by \Df\Core\Html\Tag::content()
+ * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
+ * @used-by \Df\Qa\Dumper::dumpArray()
+ * @used-by \Df\Qa\Dumper::dumpObject()
+ * @used-by \Df\Qa\Dumper::dumpObject()
+ * @used-by \Df\Typography\Css::render()
+ */
+function df_tab_multiline(string $s):string {return df_cc_n(df_tab(df_explode_n($s)));}
