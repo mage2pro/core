@@ -1,5 +1,6 @@
 <?php
 namespace Df\Xml;
+use Df\Core\Text\Marker;
 use \SimpleXMLElement as X;
 use \Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 # 2024-09-22
@@ -107,4 +108,11 @@ final class G2 {
 	 * @var X
 	 */
 	private $_x;
+
+	/**
+	 * 2021-12-12
+	 * @used-by self::importString()
+	 * @used-by self::markAsCData()
+	 */
+	private static function marker():Marker {static $r; return $r ?: $r = new Marker('[[', ']]');}
 }
