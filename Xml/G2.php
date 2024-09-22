@@ -105,7 +105,7 @@ final class G2 {
 			? ($kIsEmpty ? $this->cdata($vAsString) : $this->addChildText($kAsString, $vAsString))
 			: (
 				$kIsEmpty
-				? $this->setValue($vAsString)
+				? $this->_x[0] = $vAsString # http://stackoverflow.com/a/3153704
 				: $this->addChild(
 					$kAsString
 					/**
@@ -129,13 +129,6 @@ final class G2 {
 	 * @used-by self::addChild()
 	 */
 	private function k(string $s):string {return !df_contains($s, ':') ? $s : "xmlns:$s";}
-
-	/**
-	 * http://stackoverflow.com/a/3153704
-	 * @used-by self::importString()
-	 * @param mixed $v
-	 */
-	private function setValue($v):void {$this->_x[0] = $v;}
 
 	/**
 	 * 2024-09-22
