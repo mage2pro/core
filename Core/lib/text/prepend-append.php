@@ -7,12 +7,6 @@
 function df_append(string $s, string $tail):string {return df_ends_with($s, $tail) ? $s : $s . $tail;}
 
 /**
- * 2015-12-25
- * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
- */
-function df_n_prepend(string $s):string {return df_es($s) ? $s : "\n$s";}
-
-/**
  * Аналог @see str_pad() для Unicode: http://stackoverflow.com/a/14773638
  * @used-by df_kv()
  * @used-by \Dfe\Moip\CardFormatter::label()
