@@ -132,8 +132,6 @@ function df_json_dont_sort(F $f) {/** @var mixed $r */
  * @used-by df_js_x()
  * @used-by df_json_encode_partial()
  * @used-by df_json_prettify()
- * @used-by df_kv()
- * @used-by df_kv_table()
  * @used-by df_oi_add()
  * @used-by df_widget()
  * @used-by dfp_container_add()

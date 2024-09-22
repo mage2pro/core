@@ -11,6 +11,8 @@ use Df\Qa\Dumper;
  * @used-by df_bool()
  * @used-by df_caller_m()
  * @used-by df_dump_ds()
+ * @used-by df_kv()
+ * @used-by df_kv_table()
  * @used-by df_sentry()
  * @used-by df_type()
  * @used-by dfa_assert_keys()

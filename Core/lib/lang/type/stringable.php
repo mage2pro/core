@@ -4,8 +4,6 @@
  * @see df_is_complex()
  * @see df_string()
  * @used-by df_assert_stringable()
- * @used-by df_kv()
- * @used-by df_kv_table()
  */
 function df_is_stringable($v):bool {return !is_array($v) &&
 	/**
