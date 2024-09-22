@@ -17,10 +17,8 @@
  * @param mixed $v
  */
 function df_string($v):string {
-	if (is_array($v)) {
-		df_error('The developer wrongly treats an array as a string.');
-	}
-	elseif (is_object($v)) {
+	df_assert(!is_array($v), 'The developer wrongly treats an array as a string.');
+	if (is_object($v)) {
 		/**
 		 * 2016-09-04
 		 * К сожалению, нельзя здесь для проверки публичности метода использовать @see is_callable(),

@@ -35,6 +35,7 @@ use Df\Core\Exception as DFE;
  * @used-by df_module_file_name()
  * @used-by df_oqi_amount()
  * @used-by df_oqi_amount()
+ * @used-by df_string()
  * @used-by dfaf()
  * @used-by dfp_oq()
  * @used-by dfr_prop()
