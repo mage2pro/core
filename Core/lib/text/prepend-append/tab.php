@@ -8,8 +8,8 @@
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @used-by \Df\Typography\Css::render()
- * @param string|string[] $v
+ * @param string|iterable $v
  */
-function df_tab($v):string {return !is_array($v) ? df_tab(df_explode_n($v)) :
+function df_tab($v):string {return !is_iterable($v) ? df_tab(df_explode_n($v)) :
 	df_cc_n(df_map($v, function(string $s):string {return "\t$s";}))
 ;}
