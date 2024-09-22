@@ -28,8 +28,7 @@ final class G2 {
 			df_assert_sne($k);
 			df_assert(
 				!is_object($v) && !is_array($v)
-				, "The attribute «{$k}» has a value of a forbidden type %s."
-				, df_type($v)
+				, sprintf("The attribute «{$k}» has a value of a forbidden type %s.", df_type($v))
 				, ['attributes' => $aa]
 			);
 			$this->addAttribute($k, $v);
