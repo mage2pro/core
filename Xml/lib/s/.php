@@ -21,9 +21,14 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 		/** @var string $nl */ /** @var string $pad */
 		[$nl, $pad] = !$level ? ['', ''] : ["\n", str_pad('', $level * 1, "\t", STR_PAD_LEFT)];
 		$r = "$pad<{$x->getName()}";
-		foreach (df_eta($x->attributes('xsi', true)) as $k => $v) {
-			$r .= ' xsi:' . $k . '="' . str_replace('"', '\"', (string)$v) . '"';
-		}
+		# 2024-09-22 https://www.php.net/manual/en/simplexmlelement.attributes.php
+		if ($aa = $x->attributes('xsi', true)) { /** @var ?CX $aa */
+			foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
+				$v = str_replace('"', '\"', (string)$v);
+				$r .= " xsi:$k=\"$v\"";
+			}
+		};
+
 		if ($x->hasChildren()) {
 			$r .= '>';
 			$value = trim((string)$x);
