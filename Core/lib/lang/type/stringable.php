@@ -2,6 +2,7 @@
 /**
  * 2024-09-22 PHP ≥ 8 has the @see Stringable interface: https://www.php.net/manual/en/class.stringable.php
  * @see df_is_complex()
+ * @see df_string()
  * @used-by df_assert_stringable()
  * @used-by df_kv()
  * @used-by df_kv_table()

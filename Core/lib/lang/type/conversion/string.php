@@ -13,6 +13,7 @@
  * которые вместо `E_RECOVERABLE_ERROR` возбуждают исключительную ситуацию.
  * 7) Одна из таких функций — df_string.
  * @see df_dump()
+ * @see df_is_stringable()
  * @used-by df_type()
  * @used-by \Df\Xml\G::importString()
  * @param mixed $v
