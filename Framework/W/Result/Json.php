@@ -36,5 +36,5 @@ class Json extends Text {
 	 * @used-by \Df\Framework\W\Result\Text::i()
 	 * @param string|object|mixed[] $s
 	 */
-	final protected function prepare($s):string {return !is_array($s) && !is_object($s) ? $s : df_json_encode($s);}
+	final protected function prepare($s):string {return df_is_stringable($s) ? df_string($s) : df_json_encode($s);}
 }

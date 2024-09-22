@@ -15,6 +15,7 @@
  * @see df_dump()
  * @see df_is_stringable()
  * @used-by df_type()
+ * @used-by \Df\Framework\W\Result\Json::prepare()
  * @used-by \Df\Qa\Dumper::dumpObject()
  * @used-by \Df\Xml\G::importString()
  * @param mixed $v
