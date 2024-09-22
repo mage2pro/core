@@ -1,4 +1,5 @@
 <?php
+use Closure as F;
 use Df\Core\Exception as E;
 use Df\Xml\G;
 use SimpleXMLElement as X;
@@ -19,22 +20,22 @@ use Throwable as T;
  * @used-by \Dfe\Robokassa\Api\Options::p()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param X|string $x
- * @return ?G|?X
+ * @param F|T|bool|mixed $onE
+ * @return G|X
  * @throws E
  */
-function df_xml_x($x, bool $throw = true):?X {/** @var ?X $r */
+function df_xml_x($x, $onE = true):X {/** @var G|X $r */
 	if ($x instanceof X) {
 		$r = $x;
 	}
 	else {
-		df_param_sne($x, 0);
-		$r = null;
-		try {$r = new G($x);}
-		catch (T $t) {
-			if ($throw) {
-				df_error("Failed to parse XML: «%s».\nXML:\n%s", df_xts($t), df_trim($x));
-			}
-		}
+		;
+		$r = df_try(
+			function() use($x) {return new G(df_assert_sne($x, 0));}
+			, true !== $onE ? $onE : function(T $t) use($x):E {return df_error_create(
+				"Failed to parse XML: «%s».\nXML:\n%s", df_xts($t), df_trim($x)
+			);}
+		);
 	}
 	return $r;
 }

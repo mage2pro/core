@@ -23,6 +23,7 @@ function df_assert_nef($v, $m = null) {return false !== $v ? $v : df_error($m ?:
  * @used-by df_currency_base()
  * @used-by df_file_name()
  * @used-by df_json_decode()
+ * @used-by df_xml_x()
  * @used-by \CanadaSatellite\Bambora\Action\Authorize::p() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \CanadaSatellite\Bambora\Action\_Void::p() (canadasatellite.ca, https://github.com/canadasatellite-ca/bambora/issues/1)
  * @used-by \Df\Payment\W\Event::pid()
