@@ -207,12 +207,12 @@ final class G2 {
 	 * @used-by self::importArray()
 	 */
 	private function addChildX(X $x):void {
-		$childInThis = $this->addChild($x->getName(), (string)$x); /** @var self $childInThis */
+		$g = $this->addChild($x->getName(), (string)$x); /** @var self $g */
 		foreach ($x->attributes() as $attr => $v) { /** @var string $name */ /** @var string $v */
-			$childInThis->addAttribute($attr, $v);
+			$g->addAttribute($attr, $v);
 		}
 		foreach ($x->children() as $childChild) { /** @var G $childChild */
-			$childInThis->addChildX($childChild);
+			$g->addChildX($childChild);
 		}
 	}
 
