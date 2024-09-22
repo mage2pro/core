@@ -131,6 +131,13 @@ final class G2 {
 	private function k(string $s):string {return !df_contains($s, ':') ? $s : "xmlns:$s";}
 
 	/**
+	 * http://stackoverflow.com/a/3153704
+	 * @used-by self::importString()
+	 * @param mixed $v
+	 */
+	private function setValue($v):void {$this->_x[0] = $v;}
+
+	/**
 	 * 2024-09-22
 	 * @used-by self::__construct()
 	 * @used-by self::addAttribute()

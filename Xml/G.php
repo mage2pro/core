@@ -305,7 +305,7 @@ final class G extends MX {
 	 * @used-by self::importString()
 	 * @param mixed $v
 	 */
-	private function setValue($v):self {$this[0] = $v; return $v;}
+	private function setValue($v):void {$this[0] = $v;}
 
 	/** @used-by self::importArray() */
 	const ATTR = '_attr';
