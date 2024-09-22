@@ -24,18 +24,9 @@ use Throwable as T;
  * @return G|X
  * @throws E
  */
-function df_xml_x($x, $onE = true):X {/** @var G|X $r */
-	if ($x instanceof X) {
-		$r = $x;
-	}
-	else {
-		;
-		$r = df_try(
-			function() use($x) {return new G(df_assert_sne($x, 0));}
-			, true !== $onE ? $onE : function(T $t) use($x):E {return df_error_create(
-				"Failed to parse XML: «%s».\nXML:\n%s", df_xts($t), df_trim($x)
-			);}
-		);
-	}
-	return $r;
-}
+function df_xml_x($x, $onE = true):X {return $x instanceof X ? $x : df_try(
+	function() use($x) {return new G(df_assert_sne($x, 0));}
+	, true !== $onE ? $onE : function(T $t) use($x):E {return df_error_create(
+		"Failed to parse XML: «%s».\nXML:\n%s", df_xts($t), df_trim($x)
+	);}
+);}
