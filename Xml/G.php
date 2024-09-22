@@ -67,7 +67,7 @@ final class G extends MX {
 	 */
 	function importArray(array $array, $wrapInCData = []):void {
 		foreach ($array as $key => $v) { /** @var string $key */ /** @var mixed $v */
-			if ($v instanceof G) {
+			if ($v instanceof self) {
 				/**
 				 * 2016-08-31
 				 * Случай, который отсутствовал в Российской сборке Magento:

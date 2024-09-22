@@ -73,6 +73,148 @@ final class G2 {
 	}
 
 	/**
+	 * @used-by df_xml_node()
+	 * @used-by self::importArray()
+	 * @param array(string => mixed) $array
+	 * @param string[]|bool $wrapInCData [optional]
+	 */
+	function importArray(array $array, $wrapInCData = []):void {
+		foreach ($array as $key => $v) { /** @var string $key */ /** @var mixed $v */
+			if ($v instanceof self) {
+				/**
+				 * 2016-08-31
+				 * Случай, который отсутствовал в Российской сборке Magento:
+				 *	'Payment' => [
+				 *		df_xml_node('TxnList', ['count' => 1], [
+				 *			df_xml_node('Txn', ['ID' => 1], [
+				 *				'amount' => 200
+				 *				,'purchaseOrderNo' => 'test'
+				 *				,'txnID' => '009887'
+				 *				,'txnSource' => 23
+				 *				,'txnType' => 4
+				 *			])
+				 *		])
+				 *	]
+				 *	<Payment>
+				 *		<TxnList count="1">
+				 *			<Txn ID="1">
+				 *				<txnType>4</txnType>
+				 *				<txnSource>23</txnSource>
+				 *				<amount>200</amount>
+				 *				<purchaseOrderNo>test</purchaseOrderNo>
+				 *				<txnID>009887</txnID>
+				 *			</Txn>
+				 *		</TxnList>
+				 *	</Payment>
+				 */
+				$this->addChildX($v);
+			}
+			elseif (!is_array($v)) {
+				$this->importString($key, $v, $wrapInCData);
+			}
+			elseif (df_is_assoc($v) || array_filter($v, function($i) {return $i instanceof G;})) {
+				$childNode =
+					$this->addChild(
+						/**
+						 * Раньше тут стояло df_string($key)
+						 * Для ускорения модуля Яндекс.Маркет @see df_string() убрал.
+						 * Вроде ничего не ломается.
+						 */
+						$key
+					)
+				; /** @var self $childNode */
+				$childData = $v; /** @var array|null $childData */
+				# Данный программный код позволяет импортировать атрибуты тэгов
+				/** @var array(string => string)|null $attributes $attributes */
+				$attributes = dfa($v, self::ATTR);
+				if (!is_null($attributes)) {
+					$childNode->addAttributes(df_assert_array($attributes));
+					# Если $v содержит атрибуты,
+					# то дочерние значения должны содержаться не непосредственно в $v, а в подмассиве с ключём self::CONTENT.
+					$childData = dfa($v, self::CONTENT);
+				}
+				if (!is_null($childData)) {
+					/**
+					 * $childData запросто может не быть массивом.
+					 * Например, в такой ситуации:
+					 *	(
+					 *		[_attributes] => Array
+					 *			(
+					 *				[Код] => 796
+					 *				[НаименованиеПолное] => Штука
+					 *				[МеждународноеСокращение] => PCE
+					 *			)
+					 *		[_value] => шт
+					 *	)
+					 * Здесь $childData — это «шт».
+					 */
+					if (is_array($childData)) {
+						$childNode->importArray($childData, $wrapInCData);
+					}
+					else {
+						# '' означает, что метод importString() не должен создавать дочерний тэг $key,
+						# а должен добавить текст в качестве единственного содержимого текущего тэга.
+						$childNode->importString('', $childData, $wrapInCData);
+					}
+				}
+			}
+			else {
+				# Данный код позволяет импортировать структуры с повторяющимися тегами.
+				# Например, нам надо сформировать такой документ:
+				#	<АдресРегистрации>
+				#		<АдресноеПоле>
+				#			<Тип>Почтовый индекс</Тип>
+				#			<Значение>127238</Значение>
+				#		</АдресноеПоле>
+				#		<АдресноеПоле>
+				#			<Тип>Улица</Тип>
+				#			<Значение>Красная Площадь</Значение>
+				#		</АдресноеПоле>
+				#	</АдресРегистрации>
+				#
+				# Для этого мы вызываем:
+				#
+				#	$this->getDocument()
+				#		->importArray(
+				#			array(
+				#				'АдресРегистрации' =>
+				#					array(
+				#						'АдресноеПоле' =>
+				#							array(
+				#								array(
+				#									'Тип' => 'Почтовый индекс'
+				#									,'Значение' => '127238'
+				#								)
+				#								,array(
+				#									'Тип' => 'Улица'
+				#									,'Значение' => 'Красная Площадь'
+				#								)
+				#							)
+				#					)
+				#			)
+				#		)
+				#	;
+				foreach ($v as $vItem) {
+					/** @var array(string => mixed)|string $vItem */
+					/**
+					 * 2015-01-20
+					 * Обратите внимание, что $vItem может быть не только массивом, но и строкой.
+					 * Например, такая структура:
+					 *	<Группы>
+					 *		<Ид>1</Ид>
+					 *		<Ид>1</Ид>
+					 *		<Ид>1</Ид>
+					 *	</Группы>
+					 * кодируется так:
+					 * array('Группы' => array('Ид' => array(1, 2, 3)))
+					 */
+					$this->importArray([$key => $vItem], $wrapInCData);
+				}
+			}
+		}
+	}
+
+	/**
 	 * @used-by self::importArray()
 	 * @param mixed $v
 	 * @param string[]|bool $wrapInCData [optional]
