@@ -217,7 +217,7 @@ final class G extends MX {
 	 * @used-by self::importArray()
 	 */
 	private function addChildX(G $child):void {
-		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var G $childInThis */
+		$childInThis = $this->addChild($child->getName(), (string)$child); /** @var self $childInThis */
 		foreach ($child->attributes() as $attr => $v) { /** @var string $name */ /** @var string $v */
 			$childInThis->addAttribute($attr, $v);
 		}
