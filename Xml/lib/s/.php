@@ -20,7 +20,7 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 	else {
 		/** @var string $nl */ /** @var string $pad */
 		[$nl, $pad] = !$level ? ['', ''] : ["\n", str_pad('', $level * 1, "\t", STR_PAD_LEFT)];
-		$r = $pad . '<' . $x->getName(); /** @var string $r */
+		$r = "$pad<{$x->getName()}";
 		$attributes = $x->attributes();
 		if ($attributes) {
 			foreach ($attributes as $key => $value) {
