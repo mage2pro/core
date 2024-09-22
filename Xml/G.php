@@ -214,7 +214,7 @@ final class G extends MX {
 
 	/** @used-by self::importString() */
 	private function addChildText(string $tag, string $valueAsText):void {
-		$r = $this->addChild($tag); /** @var G $r */
+		$r = $this->addChild($tag); /** @var self $r */
 		/**
 		 * @uses CX::addChild() создаёт и возвращает не просто CX, как говорит документация, а объект класса родителя.
 		 * Поэтому в нашем случае addChild создаст объект E.
