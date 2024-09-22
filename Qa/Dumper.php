@@ -59,8 +59,8 @@ final class Dumper {
 	 * @param object $o
 	 */
 	private function dumpObject($o):string {/** @var string $r */
-		$hash = spl_object_hash($o); /** @var string $hash */
-		if (isset($this->_dumped[$hash])) {
+		/** @var string $hash */
+		if (isset($this->_dumped[$hash = spl_object_hash($o)])) {
 			$r = sprintf('[recursion: %s]', get_class($o));
 		}
 		else {
@@ -74,7 +74,7 @@ final class Dumper {
 				# "`df_dump()` should handle `Traversable` similar to arrays": https://github.com/mage2pro/core/issues/253
 				/** @var array(string => mixed)|null $a */
 				is_null($a = df_has_gd($o) ? df_gd($o) : (is_iterable($o) ? df_ita($o) : null))
-					? sprintf("$c %s", df_json_encode_partial($o))
+					? sprintf("$c: %s", df_json_encode_partial($o))
 					: sprintf("$c(\n%s\n)", df_tab_multiline($this->dumpArrayElements($a)))
 			);
 		}
