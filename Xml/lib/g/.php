@@ -46,6 +46,7 @@ function df_xml_g(string $tag, array $contents = [], array $atts = [], bool $ski
 	$g->addAttributes($atts);
 	$g->importArray($contents);
 	# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML: http://stackoverflow.com/a/10095901
+	# 2024-09-22 The result of `df_xml_s()` does not include the XML header.
 	return str_replace("\x0B", "&#x0B;", df_cc_n($skipHeader ? '' : $h, df_xml_s($g)));
 }
 
