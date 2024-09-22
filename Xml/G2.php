@@ -189,11 +189,10 @@ final class G2 {
 	 * @used-by self::importString()
 	 * @throws E
 	 */
-	private function addChild(string $k, string $v = '', string $ns = ''):self {/** @var self $r */
-		try {$r = new self($this->_x->addChild($this->k($k), $v, $ns));}
-		catch (T $t) {df_error("Tag <{$k}>. Value: «{$v}». Error: «%s».", df_xts($t));}
-		return $r;
-	}
+	private function addChild(string $k, string $v = '', string $ns = ''):self {return df_try(
+		function() use($k, $v, $ns):self {return new self($this->_x->addChild($this->k($k), $v, $ns));}
+		,function(T $t) use($k, $v):void {df_error("Tag <{$k}>. Value: «{$v}». Error: «%s».", df_xts($t));}
+	);}
 
 	/** @used-by self::importString() */
 	private function addChildText(string $tag, string $s):void {

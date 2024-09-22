@@ -93,6 +93,7 @@ function df_xf(T $t):T {while ($t->getPrevious()) {$t = $t->getPrevious();} retu
  * @used-by \Df\Payment\W\Handler::handle()
  * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Df\Xml\G::addChild()
+ * @used-by \Df\Xml\G2::addChild()
  * @used-by \Df\Xml\G::importString()
  * @used-by \Dfe\CheckoutCom\Handler::p()
  * @used-by \Dfe\GoogleFont\Font\Variant\Preview::box()

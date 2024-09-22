@@ -31,6 +31,7 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by \Df\Qa\Trace\Formatter::p()
  * @used-by \Df\Qa\Trace\Frame::methodR()
  * @used-by \Df\Theme\Controller\Result\MessagePlugin::getCookiesMessages()
+ * @used-by \Df\Xml\G2::addChild()
  * @used-by \Dfe\CheckoutCom\Method::leh()
  * @used-by \Dfe\GoogleFont\Font\Variant\Preview::box()
  * @used-by \Dfe\GoogleFont\Fonts\Png::url()
