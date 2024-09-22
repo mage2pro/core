@@ -40,17 +40,15 @@ use Df\Xml\G;
  * @param array(string => mixed) $contents [optional]
  * @param array(string => mixed) $p [optional]
  */
-function df_xml_g(string $tag, array $contents = [], array $atts = [], bool $skipHeader = false):string {
-	$h = $skipHeader ? '' : df_xml_header(); /** @var string $h */
-	$g = df_xml_x("$h\n<{$tag}/>"); /** @var G $g */
-	$g->addAttributes($atts);
-	$g->importArray($contents);
+function df_xml_g(string $tag, array $contents = [], array $atts = [], bool $skipHeader = false):string {return str_replace(
 	# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML: http://stackoverflow.com/a/10095901
-	# 2024-09-22 The result of `df_xml_s()` does not include the XML header.
-	return str_replace("\x0B", "&#x0B;", df_cc_n($skipHeader ? '' : $h, df_xml_s($g)));
-}
+	"\x0B", "&#x0B;",
+		# 2024-09-22 The result of `df_xml_s()` does not include the XML header.
+		df_cc_n($skipHeader ? '' : df_xml_header(), df_xml_s(df_xml_node($tag, $contents, $atts)))
+);}
 
 /**
+ * @used-by df_xml_g()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @used-by \Dfe\Vantiv\Charge::pCharge()
  * @used-by \Dfe\Vantiv\Test\CaseT\Charge::t04()

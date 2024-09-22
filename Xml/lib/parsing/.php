@@ -11,7 +11,6 @@ use Throwable as T;
  * 		$x unchanged if $x is @see X
  * 2) "Refactor the `Df_Xml` module": https://github.com/mage2pro/core/issues/437
  * @used-by df_module_name_by_path()
- * @used-by df_xml_g()
  * @used-by df_xml_node()
  * @used-by df_xml_parse_a()
  * @used-by df_xml_prettify()

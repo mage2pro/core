@@ -28,7 +28,6 @@ final class G extends MX {
 	function addAttribute($k, $v = null, $ns = null):void {parent::addAttribute($this->k($k), $v, $ns);}
 
 	/**
-	 * @used-by df_xml_g()
 	 * @used-by df_xml_node()
 	 * @used-by self::importArray()
 	 * @param array(string => string) $atts
@@ -72,7 +71,6 @@ final class G extends MX {
 	}
 
 	/**
-	 * @used-by df_xml_g()
 	 * @used-by df_xml_node()
 	 * @used-by self::importArray()
 	 * @param array(string => mixed) $array
