@@ -46,6 +46,6 @@ function df_xml_parse_header($x) {return df_preg_match('#^<\?xml.*\?>#', df_xml_
  * 2016-09-01
  * 2021-12-02 @deprecated It is unused.
  * @see df_xml_s()
- * @param string|X $x
+ * @param G|string $x
  */
-function df_xml_x($x):X {return $x instanceof X ? $x : df_xml_parse($x);}
+function df_xml_x($x):X {return $x instanceof G ? $x : df_xml_parse($x);}
