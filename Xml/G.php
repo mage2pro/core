@@ -48,6 +48,8 @@ final class G extends MX {
 	}
 
 	/**
+	 * @uses \SimpleXMLElement::addChild() создаёт и возвращает не просто SimpleXMLElement, как говорит документация,
+	 * а объект класса родителя.
 	 * 2022-11-15
 	 * 1) `static` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-static
 	 * 2) We can not declare the $name argument type with PHP < 8: https://3v4l.org/ptpUM
@@ -62,7 +64,7 @@ final class G extends MX {
 	 * @param string|null $namespace [optional]
 	 */
 	#[\ReturnTypeWillChange]
-	function addChild($name, $value = null, $namespace = null):?CX {/** @var CX $r */
+	function addChild($name, $value = null, $namespace = null):self {/** @var self $r */
 		try {$r = parent::addChild($this->k($name), $value, $namespace);}
 		catch (Th $th) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_xts($th));}
 		return $r;
