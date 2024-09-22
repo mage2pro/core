@@ -56,13 +56,23 @@ final class G2 {
 		return $r;
 	}
 
+	/** @used-by self::importString() */
+	private function addChildText(string $tag, string $valueAsText):void {
+		$r = $this->addChild($tag); /** @var self $r */
+		/**
+		 * @uses CX::addChild() создаёт и возвращает не просто CX, как говорит документация, а объект класса родителя.
+		 * Поэтому в нашем случае addChild создаст объект E.
+		 */
+		$r->cdata($valueAsText);
+	}
+
 	/**
 	 * http://stackoverflow.com/a/6260295
 	 * @used-by self::addChildText()
 	 * @used-by self::importString()
 	 */
 	private function cdata(string $s):void {
-		$e = dom_import_simplexml($this); /** @var \DOMElement $e */
+		$e = dom_import_simplexml($this->_x); /** @var \DOMElement $e */
 		$e->appendChild($e->ownerDocument->createCDATASection($s));
 	}
 
