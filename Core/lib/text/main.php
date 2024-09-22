@@ -11,12 +11,6 @@ use Df\Core\Helper\Text as T;
 const DF_THIN_SPACE = ' ';
 
 /**
- * 2015-08-24
- * 2022-10-31 @deprecated It is unused.
- */
-function df_contains_ci(string $haystack, string $n):bool {return df_contains(mb_strtoupper($haystack), mb_strtoupper($n));}
-
-/**
  * https://php.net/manual/function.str-split.php#107658
  * 2022-10-31 @deprecated It is unused.
  * @return string[]
