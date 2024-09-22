@@ -15,7 +15,7 @@ function df_param_iso2(string $v, int $ord, int $sl = 0):string {return Q::asser
  * @used-by df_eav_update()
  * @used-by df_fs_delete()
  * @used-by df_xml_children()
- * @used-by df_xml_parse()
+ * @used-by df_xml_x()
  * @used-by dfa_deep()
  * @used-by dfa_deep_unset()
  * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()

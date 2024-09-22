@@ -83,7 +83,7 @@ function df_xf(T $t):T {while ($t->getPrevious()) {$t = $t->getPrevious();} retu
  * @used-by df_message_error()
  * @used-by df_sprintf_strict()
  * @used-by df_th2x()
- * @used-by df_xml_parse()
+ * @used-by df_xml_x()
  * @used-by \Df\API\Client::_p()
  * @used-by \Df\Core\Exception::__construct()
  * @used-by \Df\Config\Source\API::exception()

@@ -16,7 +16,7 @@ use Throwable as T;
  * @param X|string $x
  * @throws E
  */
-function df_xml_parse($x, bool $throw = true):?X {/** @var ?X $r */
+function df_xml_x($x, bool $throw = true):?X {/** @var ?X $r */
 	if ($x instanceof X) {
 		$r = $x;
 	}
@@ -32,11 +32,3 @@ function df_xml_parse($x, bool $throw = true):?X {/** @var ?X $r */
 	}
 	return $r;
 }
-
-/**
- * 2016-09-01
- * 2021-12-02 @deprecated It is unused.
- * @see df_xml_s()
- * @param G|string $x
- */
-function df_xml_x($x):X {return $x instanceof G ? $x : df_xml_parse($x);}

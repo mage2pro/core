@@ -30,4 +30,4 @@ use Throwable as T;
  * @return array(string => mixed)
  * @throws E
  */
-function df_xml_parse_a($x):array {return df_xml_parse($x)->asArray();}
+function df_xml_parse_a($x):array {return df_xml_x($x)->asArray();}

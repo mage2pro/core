@@ -42,7 +42,7 @@ use Df\Xml\G;
  */
 function df_xml_g(string $tag, array $contents = [], array $atts = [], bool $skipHeader = false):string {
 	$h = $skipHeader ? '' : df_xml_header(); /** @var string $h */
-	$g = df_xml_parse("$h\n<{$tag}/>"); /** @var G $g */
+	$g = df_xml_x("$h\n<{$tag}/>"); /** @var G $g */
 	$g->addAttributes($atts);
 	$g->importArray($contents);
 	# Символ 0xB (вертикальная табуляция) допустим в UTF-8, но недопустим в XML: http://stackoverflow.com/a/10095901
@@ -57,7 +57,7 @@ function df_xml_g(string $tag, array $contents = [], array $atts = [], bool $ski
  * @param array(string => mixed) $contents [optional]
  */
 function df_xml_node(string $tag, array $attr = [], array $contents = []):G {
-	$r = df_xml_parse("<{$tag}/>"); /** @var G $r */
+	$r = df_xml_x("<{$tag}/>"); /** @var G $r */
 	$r->addAttributes($attr);
 	$r->importArray($contents);
 	return $r;
