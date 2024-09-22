@@ -216,29 +216,6 @@ final class G extends MX {
 	}
 
 	/**
-	 * 2015-08-08
-	 * Преобразует структуру вида:
-	 *	<СтавкиНалогов>
-	 *		<СтавкаНалога>
-	 *			<Наименование>НДС</Наименование>
-	 *			<Ставка>10</Ставка>
-	 *		</СтавкаНалога>
-	 *	</СтавкиНалогов>
-	 * в массив array('НДС' => '10')
-	 * 2022-10-25 @deprecated It is unused.
-	 * @see self::xpathMap()
-	 * @return array(string => string)
-	 */
-	function map(string $path, string $keyName, string $valueName):array {
-		$r = []; /** @var array(string => string) $r */
-		$nodes = $this->xpathA($path); /** @var G[] $nodes */
-		foreach ($nodes as $node) {/** @var G $node */
-			$r[df_leaf_sne($node->{$keyName})] = df_leaf_s($node->{$valueName});
-		}
-		return $r;
-	}
-
-	/**
 	 * 2022-11-15 @deprecated It is unused.
 	 * @override
 	 * @see \SimpleXMLElement::xpath()
@@ -259,7 +236,6 @@ final class G extends MX {
 	/**
 	 * 2022-12-05: We do not need to check that the result is an array: https://3v4l.org/pBUvg
 	 * @used-by self::map()
-	 * @used-by self::xpathMap()
 	 * @param string|string[] $path
 	 * @return G[]
 	 */
