@@ -28,17 +28,16 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 				$r .= " xsi:$k=\"$v\"";
 			}
 		};
-
 		if ($x->hasChildren()) {
 			$r .= '>';
-			$value = trim((string)$x);
-			if (strlen($value)) {
+			$xs = trim((string)$x);
+			if (strlen($xs)) {
 				/**
 				 * 2021-12-16
-				 * The previous code was: `$this->xmlentities($value)`
+				 * The previous code was: `$this->xmlentities($xs)`
 				 * @see \Magento\Framework\Simplexml\Element::xmlentities()
 				 */
-				$r .= df_cdata_raw_if_needed($value);
+				$r .= df_cdata_raw_if_needed($xs);
 			}
 			$r .= $nl;
 			foreach ($x->children() as $child) {/** @var CX $child */
@@ -47,14 +46,14 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 			$r .= $pad . '</' . $x->getName() . '>' . $nl;
 		}
 		else {
-			$value = (string)$x;
-			if (strlen($value)) {
+			$xs = (string)$x;
+			if (strlen($xs)) {
 				/**
 				 * 2021-12-16
-				 * The previous code was: `$this->xmlentities($value)`
+				 * The previous code was: `$this->xmlentities($xs)`
 				 * @see \Magento\Framework\Simplexml\Element::xmlentities()
 				 */
-				$r .= '>' . df_cdata_raw_if_needed($value) . '</' . $x->getName() . '>' . $nl;
+				$r .= '>' . df_cdata_raw_if_needed($xs) . '</' . $x->getName() . '>' . $nl;
 			}
 			else {
 				$r .= '/>' . $nl;
