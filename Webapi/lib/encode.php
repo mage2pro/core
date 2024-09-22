@@ -47,6 +47,6 @@
  *
  * @used-by \Df\Payment\PlaceOrderInternal::p()
  * @param mixed $v
- * @return string|int|float|bool
+ * @return string|int|float|bool|Stringable
  */
-function dfw_encode($v) {return is_null($v) ? '' : (is_array($v) || is_object($v) ? df_json_encode($v) : $v);}
+function dfw_encode($v) {return is_null($v) ? '' : (df_is_stringable($v) ? $v : df_json_encode($v));}
