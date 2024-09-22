@@ -17,19 +17,4 @@
  * @used-by \Df\Xml\G::importString()
  * @param mixed $v
  */
-function df_string($v):string {
-	df_assert(!is_array($v), 'The developer wrongly treats an array as a string.');
-	/**
-	 * 2016-09-04
-	 * К сожалению, нельзя здесь для проверки публичности метода `__toString()` использовать @see is_callable(),
-	 * потому что наличие @see \Magento\Framework\DataObject::__call() приводит к тому, что `is_callable` всегда возвращает `true`.
-	 * @uses method_exists(), в отличие от `is_callable`, не гарантирует публичную доступность метода:
-	 * т.е. метод может у класса быть, но вызывать его всё равно извне класса нельзя,
-	 * потому что он имеет доступность `private` или `protected`.
-	 * Пока эта проблема никак не решена.
-	 */
-	df_assert(!is_object($v) || method_exists($v, '__toString'),
-		'The developer wrongly treats an object of the class `%s` as a string.', get_class($v)
-	);
-	return strval($v);
-}
+function df_string($v):string {return strval(df_assert_stringable($v));}
