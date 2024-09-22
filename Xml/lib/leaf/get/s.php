@@ -12,7 +12,6 @@ function df_leaf_s(?CX $e = null, $d = ''):string {return (string)df_leaf($e, $d
 
 /**
  * @used-by \Df\Xml\G::map()
- * @used-by \Df\Xml\G::xpathMap()
  * @used-by \Dfe\SecurePay\Refund::process()
  * @param string|callable $d [optional]
  */
