@@ -10,9 +10,11 @@ use \Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
 final class G {
 	/**
 	 * 2024-09-23
+	 * @override
+	 * @see Stringable::__toString()
 	 * @used-by df_xml_g()
 	 */
-	function x():X {return $this->_x;}
+	function __toString():string {return df_xml_s($this->_x);}
 
 	/** @used-by self::importArray() */
 	const ATTR = '_attr';
