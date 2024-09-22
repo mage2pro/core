@@ -26,11 +26,6 @@ final class G extends MX {
 	#[\Override] /** @see \SimpleXMLElement::addAttribute() */
 	function addAttribute($k, $v = null, $ns = null):void {parent::addAttribute($this->k($k), $v, $ns);}
 
-	/**
-	 * @used-by df_xml_node()
-	 * @used-by self::importArray()
-	 * @param array(string => string) $atts
-	 */
 	function addAttributes(array $atts):void {
 		foreach ($atts as $k => $v) {/** @var string $k */ /** @var mixed $v */
 			df_assert_sne($k);
@@ -38,13 +33,13 @@ final class G extends MX {
 			if (is_object($v) || is_array($v)) {
 				df_log($atts);
 				df_error(
-					"Значение поля «{$k}» должно быть строкой, однако является %s."
-					,is_object($v) ? sprintf('объектом класса %s', get_class($v)) : 'массивом'
+					"«{$k}» should be a string, but it is %s."
+					,is_object($v) ? sprintf('an object of the class `%s`', get_class($v)) : 'an array'
 				);
 			}
 			$this->addAttribute($k, $v);
 		}
-	}
+	}	
 
 	/**
 	 * @uses \SimpleXMLElement::addChild() создаёт и возвращает не просто SimpleXMLElement, как говорит документация,

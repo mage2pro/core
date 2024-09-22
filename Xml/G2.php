@@ -19,6 +19,26 @@ final class G2 {
 	function addAttribute(string $k, string $v = '', string $ns = ''):void {$this->_x->addAttribute($this->k($k), $v, $ns);}
 
 	/**
+	 * @used-by df_xml_node()
+	 * @used-by self::importArray()
+	 * @param array(string => string) $atts
+	 */
+	function addAttributes(array $atts):void {
+		foreach ($atts as $k => $v) {/** @var string $k */ /** @var mixed $v */
+			df_assert_sne($k);
+			# убрал strval($v) для ускорения системы
+			if (is_object($v) || is_array($v)) {
+				df_log($atts);
+				df_error(
+					"«{$k}» should be a string, but it is %s."
+					,is_object($v) ? sprintf('an object of the class `%s`', get_class($v)) : 'an array'
+				);
+			}
+			$this->addAttribute($k, $v);
+		}
+	}
+
+	/**
 	 * 2021-12-16
 	 * https://stackoverflow.com/a/9391673
 	 * https://stackoverflow.com/a/43566078
