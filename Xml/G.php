@@ -216,24 +216,6 @@ final class G extends MX {
 	}
 
 	/**
-	 * 2022-11-15 @deprecated It is unused.
-	 * @override
-	 * @see \SimpleXMLElement::xpath()
-	 * @param string|string[] $p
-	 * @return G[]
-	 */
-	#[\ReturnTypeWillChange]
-	function xpath($p):array {
-		if (1 < func_num_args()) {
-			$p = df_cc_path(func_get_args());
-		}
-		elseif (is_array($p)) {
-			$p = df_cc_path($p);
-		}
-		return parent::xpath(df_param_sne($p, 0));
-	}
-
-	/**
 	 * 2022-12-05: We do not need to check that the result is an array: https://3v4l.org/pBUvg
 	 * @used-by self::map()
 	 * @param string|string[] $path

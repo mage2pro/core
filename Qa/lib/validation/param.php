@@ -20,8 +20,6 @@ function df_param_iso2(string $v, int $ord, int $sl = 0):string {return Q::asser
  * @used-by dfa_deep_unset()
  * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
  * @used-by \Df\Payment\W\Nav::e2i()
- * @used-by \Df\Xml\G::xpath()
- * @used-by \Df\Xml\G::xpathA()
  * @used-by \Dfe\AllPay\W\Event::tl_()
  * @used-by \Dfe\Markdown\DbRecord::__construct()
  * @throws DFE
