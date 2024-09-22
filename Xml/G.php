@@ -179,6 +179,12 @@ final class G {
 	}
 
 	/**
+	 * 2024-09-23
+	 * @used-by df_xml_g()
+	 */
+	function x():X {return $this->_x;}
+
+	/**
 	 * @uses \SimpleXMLElement::addChild() создаёт и возвращает не просто SimpleXMLElement, как говорит документация,
 	 * а объект класса родителя.
 	 * 2022-11-15
@@ -297,6 +303,7 @@ final class G {
 	 * @used-by self::addChild()
 	 * @used-by self::cdata()
 	 * @used-by self::importString()
+	 * @used-by self::x()
 	 * @var X
 	 */
 	private $_x;
