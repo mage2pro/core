@@ -4,6 +4,7 @@
  * @see df_is_complex()
  * @see df_string()
  * @used-by df_assert_stringable()
+ * @used-by \Df\Qa\Dumper::dumpObject()
  */
 function df_is_stringable($v):bool {return !is_array($v) &&
 	/**
