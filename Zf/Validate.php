@@ -31,7 +31,7 @@ abstract class Validate implements \Zend_Validate_Interface {
 	 */
 	final function message():string {$v = $this->v(); return is_null($v)
 		? "Got `NULL` instead of {$this->expected()}."
-		: sprintf("Unable to recognize the value «%s» of type «%s» as {$this->expected()}.", df_string_debug($v), gettype($v))
+		: sprintf("Unable to recognize the value «%s» of type «%s» as {$this->expected()}.", df_dump($v), gettype($v))
 	;}
 
 	/**

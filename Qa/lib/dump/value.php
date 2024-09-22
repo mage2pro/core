@@ -17,6 +17,7 @@ use Df\Qa\Dumper;
  * @used-by \Df\Framework\Form\Element\Text::getValue()
  * @used-by \Df\Sentry\Client::capture()
  * @used-by \Df\Sentry\Extra::adjust()
+ * @used-by \Df\Zf\Validate::message()
  * @used-by \Dfe\Dynamics365\Test\OAuth::discovery()
  * @used-by \Dfe\Geo\Test\Basic::t01()
  * @used-by \Dfe\Portal\Test\Basic::t01()
