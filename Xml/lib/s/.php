@@ -28,10 +28,24 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 				$r .= " xsi:$k=\"$v\"";
 			}
 		};
-		if ($x->hasChildren()) {
+		$xs = trim((string)$x); /** @var string $xs */
+		$isEmpty = df_es($xs); /** @var bool $isEmpty */
+		if (!$x->hasChildren()) {
+			if ($isEmpty) {
+				$r .= '/>' . $nl;
+			}
+			else {
+				/**
+				 * 2021-12-16
+				 * The previous code was: `$this->xmlentities($xs)`
+				 * @see \Magento\Framework\Simplexml\Element::xmlentities()
+				 */
+				$r .= '>' . df_cdata_raw_if_needed($xs) . '</' . $x->getName() . '>' . $nl;
+			}
+		}
+		else {
 			$r .= '>';
-			$xs = trim((string)$x);
-			if (strlen($xs)) {
+			if (!$isEmpty) {
 				/**
 				 * 2021-12-16
 				 * The previous code was: `$this->xmlentities($xs)`
@@ -41,26 +55,9 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 			}
 			$r .= $nl;
 			foreach ($x->children() as $child) {/** @var CX $child */
-				$r .= $child->asNiceXml('', is_numeric($level) ? $level + 1 : true);
+				$r .= df_xml_s($child, ++$level);
 			}
-			$r .= $pad . '</' . $x->getName() . '>' . $nl;
-		}
-		else {
-			$xs = (string)$x;
-			if (strlen($xs)) {
-				/**
-				 * 2021-12-16
-				 * The previous code was: `$this->xmlentities($xs)`
-				 * @see \Magento\Framework\Simplexml\Element::xmlentities()
-				 */
-				$r .= '>' . df_cdata_raw_if_needed($xs) . '</' . $x->getName() . '>' . $nl;
-			}
-			else {
-				$r .= '/>' . $nl;
-			}
-		}
-		if ((0 === $level || false === $level) && !empty($filename)) {
-			file_put_contents($filename, $r);
+			$r .= "$pad</{$x->getName()}>$nl";
 		}
 	}
 	return $r;
