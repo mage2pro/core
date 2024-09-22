@@ -9,6 +9,7 @@ use \Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
 final class G2 {
 	/**
 	 * 2024-09-22
+	 * @used-by self::addChild()
 	 * @param X|string $x
 	 */
 	function __construct($x) {$this->_x = df_xml_x($x);}
@@ -34,6 +35,23 @@ final class G2 {
 			);
 			$this->addAttribute(df_assert_sne($k), $v);
 		}
+	}
+
+	/**
+	 * @uses \SimpleXMLElement::addChild() создаёт и возвращает не просто SimpleXMLElement, как говорит документация,
+	 * а объект класса родителя.
+	 * 2022-11-15
+	 * 1) `static` as a return type is not supported by PHP < 8: https://github.com/mage2pro/core/issues/168#user-content-static
+	 * 2) We can not declare the $name argument type with PHP < 8: https://3v4l.org/ptpUM
+	 * @used-by self::addChildText()
+	 * @used-by self::addChildX()
+	 * @used-by self::importArray()
+	 * @used-by self::importString()
+	 */
+	private function addChild(string $name, string $value = '', string $namespace = ''):self {/** @var self $r */
+		try {$r = new self($this->_x->addChild($this->k($name), $value, $namespace));}
+		catch (T $t) {df_error("Tag <{$name}>. Value: «{$value}». Error: «%s».", df_xts($t));}
+		return $r;
 	}
 
 	/**
