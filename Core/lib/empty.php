@@ -11,6 +11,7 @@
  * @used-by df_path_is_internal()
  * @used-by df_report()
  * @used-by df_result_sne()
+ * @used-by df_xml_s()
  * @used-by sift_prefix()
  * @used-by \Df\Config\Backend\Checkbox::dfSaveBefore()
  * @used-by \Df\Framework\Form\Element\Fieldset::color()
