@@ -28,7 +28,7 @@ final class G {
 	 * @param array(string => mixed) $contents [optional]
 	 */
 	static function i(string $tag, array $attr = [], array $contents = []):self {
-		$r = new self(df_xml_x("<{$tag}/>")); /** @var G $r */
+		$r = new self(df_xml_x("<{$tag}/>")); /** @var self $r */
 		$r->addAttributes($attr);
 		$r->importArray($contents);
 		return $r;
