@@ -31,6 +31,7 @@ use SimpleXMLElement as X;
  * https://www.php.net/manual/en/language.types.boolean.php#language.types.boolean.casting
  * https://archive.is/FcCfj#selection-1353.0-1355.60
  * @used-by df_xml_is_leaf()
+ * @used-by \Df\Xml\A::p()
  */
 function df_xml_empty(?X $x):bool {return empty($x);}
 
