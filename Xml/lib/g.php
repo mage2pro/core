@@ -1,6 +1,4 @@
 <?php
-use Df\Xml\G;
-
 /**
  * 2015-02-27
  * Для конвертации объекта класса @see SimpleXMLElement в строку
