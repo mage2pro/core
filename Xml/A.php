@@ -13,12 +13,8 @@ final class A {
 		$r = [];
 		# 2024-09-23 https://www.php.net/manual/en/simplexmlelement.attributes.php
 		/** @var ?X  $aa */
-		if ($aa = $x->attributes()) {
-			foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
-				if ($v) {
-					$r['@'][$k] = (string)$v;
-				}
-			}
+		if ($aa = self::atts($x)) {
+			$r['@'] = $aa;
 		}
 		if ($x->hasChildren()) {
 			foreach ($x->children() as $k => $c) {/** @var X $c */
@@ -37,6 +33,7 @@ final class A {
 	/**
 	 * 2024-09-23
 	 * @used-by self::p()
+	 * @return array(string => string)
 	 */
 	private static function atts(X $x):array {
 		$r = []; /** @var array(string => string) $r */
