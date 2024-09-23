@@ -35,7 +35,7 @@ function df_xml_child(X $x, string $name, bool $req = false):?X { /** @var ?X $r
  */
 function df_xml_children(X $x, string $name, bool $req = false):?X { /** @var ?X $r */
 	df_param_sne($name, 0);
-	if (df_xml_exists_child($x, $name)) {
+	if (df_xml_empty_child($x, $name)) {
 		/**
 		 * Обратите внимание, что если мы имеем структуру:
 		 *	<dictionary>
