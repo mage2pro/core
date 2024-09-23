@@ -21,6 +21,11 @@ final class A {
 			}
 		}
 		elseif (!$r) {
+			/**
+			 * 2024-09-24
+			 * $x is a node without attributes and children.
+			 * @see df_xml_empty()
+			 */
 			$r = (string)$x;
 		}
 		else {
