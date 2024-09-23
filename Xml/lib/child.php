@@ -33,6 +33,7 @@ function df_xml_child(X $x, string $name, bool $req = false):?X { /** @var ?X $r
 }
 
 /**
+ * 2024-09-24 @deprecated It is unused.
  * @used-by df_xml_child()
  * @throws E
  */
