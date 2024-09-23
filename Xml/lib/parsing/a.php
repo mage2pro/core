@@ -1,8 +1,6 @@
 <?php
 use Df\Core\Exception as E;
-use Df\Xml\G;
-use SimpleXMLElement as SX;
-use Throwable as T;
+use SimpleXMLElement as X;
 
 /**
  * 2018-12-19
@@ -26,7 +24,7 @@ use Throwable as T;
  * 		<...>
  *	}
  * @used-by \Dfe\Vantiv\API\Client::_construct()
- * @param string|X $x
+ * @param X|string $x
  * @return array(string => mixed)
  * @throws E
  */
