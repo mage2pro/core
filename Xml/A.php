@@ -21,8 +21,7 @@ final class A {
 				}
 				else {
 					$cs = (string)$c; /** @var string $cs */
-					$aa = df_xml_atts($c); /** @var array(string => string)  $aa */
-					$v = !$aa ? $cs : [0 => $cs] + $aa;
+					$v = !($aa = df_xml_atts($c)) ? $cs : ([0 => $cs] + $aa); /** @var array(string => string)  $aa */
 				}
 				$r[$k] = $v;
 			}
