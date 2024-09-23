@@ -45,7 +45,7 @@ function df_xml2a($x):array {
 			$r[$k] = df_xml2a($c);
 		}
 	}
-	elseif (empty($r)) {
+	elseif (!$r) {
 		$r = (string)$x;
 	}
 	else {
