@@ -22,7 +22,9 @@ use SimpleXMLElement as X;
  * 6) Эту особенность использует алгоритм @see df_xml_is_leaf():
  * 		return !df_xml_exists($e) || !count($e->children());
  * 2024-09-24
- * 1) «When converting to `bool`, the following values are considered `false`:
+ * 1) «A variable is considered empty if it does not exist or if its value equals `false`.»
+ * https://www.php.net/manual/en/function.empty.php
+ * 2) «When converting to `bool`, the following values are considered `false`:
  * 		*) Internal objects that overload their casting behaviour to `bool`.
  * 		For example: `SimpleXML` objects created from empty elements without attributes.»
  * https://www.php.net/manual/en/language.types.boolean.php#language.types.boolean.casting
