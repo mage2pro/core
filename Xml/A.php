@@ -51,7 +51,7 @@ final class A {
 				 * https://www.php.net/manual/en/simplexmlelement.current.php
 				 */
 				if ($v) {
-					$r['@'][$k] = (string)$v;
+					$r[$k] = (string)$v;
 				}
 			}
 		}
