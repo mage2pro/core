@@ -30,27 +30,27 @@ use SimpleXMLElement as X;
  */
 function df_xml2a($x):array {
 	$x = df_xml_x($x);
-	$result = [];
+	$r = [];
 	// add attributes
 	foreach ($x->attributes() as $attributeName => $attribute) {
 		if ($attribute) {
-			$result['@'][$attributeName] = (string)$attribute;
+			$r['@'][$attributeName] = (string)$attribute;
 		}
 	}
 	// add children values
 	if ($x->hasChildren()) {
 		foreach ($x->children() as $childName => $child) {
-			$result[$childName] = df_xml2a($child);
+			$r[$childName] = df_xml2a($child);
 		}
 	}
 	else {
-		if (empty($result)) {
+		if (empty($r)) {
 			// return as string, if nothing was found
-			$result = (string)$x;
+			$r = (string)$x;
 		} else {
 			// value has zero key element
-			$result[0] = (string)$x;
+			$r[0] = (string)$x;
 		}
 	}
-	return $result;
+	return $r;
 }
