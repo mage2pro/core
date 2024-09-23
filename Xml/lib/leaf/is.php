@@ -28,4 +28,4 @@ use SimpleXMLElement as X;
  * @see \SimpleXMLElement — самый загадочный класс PHP.
  * @used-by df_xml_assert_leaf()
  */
-function df_xml_is_leaf(X $x):bool {return !df_xml_empty($x) || !$x->children()->count();}
+function df_xml_is_leaf(X $x):bool {return !df_xml_exists($x) || !$x->children()->count();}
