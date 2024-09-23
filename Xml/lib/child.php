@@ -7,8 +7,8 @@ use SimpleXMLElement as X;
  * @throws E
  */
 function df_xml_child(X $x, string $name, bool $req = false):?X { /** @var ?X $r */
-	$childNodes = df_xml_children($x, $name, $req); /** @var X[] $childNodes */
-	if (is_null($childNodes)) {
+	$cc = df_xml_children($x, $name, $req); /** @var ?X $cc */
+	if (is_null($cc)) {
 		$r = null;
 	}
 	else {
