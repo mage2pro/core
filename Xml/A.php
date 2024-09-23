@@ -11,7 +11,7 @@ final class A {
 	static function p($x):array {
 		$x = df_xml_x($x);
 		$r = [];
-		if ($aa = self::atts($x)) { /** @var array(string => string)  $aa */
+		if ($aa = df_xml_atts($x)) { /** @var array(string => string)  $aa */
 			$r['@'] = $aa;
 		}
 		if ($x->hasChildren()) {
@@ -27,13 +27,4 @@ final class A {
 		}
 		return $r;
 	}
-
-	/**
-	 * 2024-09-23 https://www.php.net/manual/en/simplexmlelement.attributes.php
-	 * @used-by self::p()
-	 * @return array(string => string)
-	 */
-	private static function atts(X $x):array {/** @var ?X  $aa */ return !($aa = $x->attributes()) ? [] : df_clean_r(
-		df_map($aa, function(?X $v):?string {return !$v ? null : (string)$v;})
-	);}
 }
