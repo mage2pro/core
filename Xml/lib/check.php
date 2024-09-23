@@ -8,4 +8,4 @@
  * @used-by \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
  * @param mixed $v
  */
-function df_check_xml($v):bool {return is_string($v) && df_starts_with($v, '<?xml');}
+function df_is_xml($v):bool {return is_string($v) && df_starts_with($v, '<?xml');}
