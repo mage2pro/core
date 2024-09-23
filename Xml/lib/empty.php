@@ -18,9 +18,9 @@ use SimpleXMLElement as X;
  *				<Количество>147</Количество>
  *			</Склад>
  *		</Остаток>
- * Если здесь сделать xpath `Остаток/Склад/Количество`, то для узла «147» @see df_xml_exists($e) вернёт `false`.
+ * Если здесь сделать xpath `Остаток/Склад/Количество`, то для узла «147» @see df_xml_empty($e) вернёт `true`.
  * 6) Эту особенность использует алгоритм @see df_xml_is_leaf():
- * 		return !df_xml_exists($e) || !count($e->children());
+ * 		return df_xml_empty($e) || !count($e->children());
  * 2024-09-24
  * 1) «A variable is considered empty if it does not exist or if its value equals `false`.»
  * https://www.php.net/manual/en/function.empty.php
@@ -32,7 +32,7 @@ use SimpleXMLElement as X;
  * https://archive.is/FcCfj#selection-1353.0-1355.60
  * @used-by df_xml_is_leaf()
  */
-function df_xml_exists(?X $x):bool {return !empty($x);}
+function df_xml_empty(?X $x):bool {return empty($x);}
 
 /**
  * http://stackoverflow.com/questions/1560827#comment20135428_1562158
