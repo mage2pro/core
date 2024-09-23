@@ -1,6 +1,5 @@
 <?php
 use Df\Core\Text\Marker as M;
-use Df\Xml\G;
 
 /**
  * @see df_needs_cdata()
