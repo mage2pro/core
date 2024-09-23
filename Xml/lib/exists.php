@@ -31,7 +31,7 @@ use SimpleXMLElement as X;
  *
  * @used-by df_xml_is_leaf()
  */
-function df_xml_exists(?X $e = null):bool {return !empty($e);}
+function df_xml_exists(?X $x = null):bool {return !empty($x);}
 
 /**
  * http://stackoverflow.com/questions/1560827#comment20135428_1562158
