@@ -7,5 +7,5 @@ use SimpleXMLElement as X;
  * @return array(string => string)
  */
 function df_xml_atts(X $x):array {/** @var ?X  $aa */ return !($aa = $x->attributes()) ? [] : df_clean_r(
-	df_map($aa, function(?X $v):string {return (string)$v;})
+	df_map($aa, function(?X $v):string {return strval($v);})
 );}
