@@ -81,7 +81,7 @@ function df_leaf(?CX $e = null, $d = null):?string {/** @var ?string $r */
 	if (is_null($e)) {
 		$r = df_call_if($d);
 	}
-	elseif (df_es($r = (string)df_assert_leaf($e))) {
+	elseif (df_es($r = (string)df_xml_assert_leaf($e))) {
 		# 2015-09-25
 		# `empty($e)` returns:
 		# 		`true` for an absent node

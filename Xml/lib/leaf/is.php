@@ -26,6 +26,6 @@ use SimpleXMLElement as X;
  * https://php.net/manual/simplexmlelement.count.php
  * Однако @uses count() почему-то работает для него.
  * @see \SimpleXMLElement — самый загадочный класс PHP.
- * @used-by df_assert_leaf()
+ * @used-by df_xml_assert_leaf()
  */
 function df_xml_is_leaf(X $x):bool {return !df_xml_exists($x) || !$x->children()->count();}

@@ -42,7 +42,7 @@ function df_abstract($caller):void {
  * @used-by df_assert_https()
  * @used-by df_assert_in()
  * @used-by df_assert_le()
- * @used-by df_assert_leaf()
+ * @used-by df_xml_assert_leaf()
  * @used-by df_assert_lt()
  * @used-by df_assert_ne()
  * @used-by df_assert_nef()
