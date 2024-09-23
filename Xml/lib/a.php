@@ -1,5 +1,5 @@
 <?php
-use Df\Core\Exception as E;
+use Df\Xml\A;
 use SimpleXMLElement as X;
 
 /**
@@ -26,59 +26,5 @@ use SimpleXMLElement as X;
  * @used-by \Dfe\Vantiv\API\Client::_construct()
  * @param X|string $x
  * @return array(string => mixed)
- * @throws E
  */
-function df_xml2a($x):array {return df_xml2as($x);}
-
-/**
- * 2018-12-19
- * @see \Magento\Framework\Simplexml\Element::asArray() returns XML tag's attributes
- * inside an `@` key, e.g:
- *	<authorizationResponse reportGroup="1272532" customerId="admin@mage2.pro">
- *		<litleTxnId>82924701437133501</litleTxnId>
- *		<orderId>f838868475</orderId>
- *		<response>000</response>
- *		<...>
- *	</authorizationResponse>
- * will be converted to:
- * 	{
- *		"@": {
- *			"customerId": "admin@mage2.pro",
- *			"reportGroup": "1272532"
- *		},
- *		"litleTxnId": "82924701437133501",
- *		"orderId": "f838868475",
- *		"response": "000",
- * 		<...>
- *	}
- * @used-by df_xml2a()
- * @used-by df_xml2as()
- * @param X|string $x
- * @return array(string => mixed)|string
- * @throws E
- */
-function df_xml2as($x) {
-	$x = df_xml_x($x);
-	$r = [];
-	# 2024-09-23 https://www.php.net/manual/en/simplexmlelement.attributes.php
-	/** @var ?X  $aa */
-	if ($aa = $x->attributes()) {
-		foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
-			if ($v) {
-				$r['@'][$k] = (string)$v;
-			}
-		}
-	}
-	if ($x->hasChildren()) {
-		foreach ($x->children() as $k => $c) {/** @var X $c */
-			$r[$k] = df_xml2as($c);
-		}
-	}
-	elseif (!$r) {
-		$r = (string)$x;
-	}
-	else {
-		$r[0] = (string)$x;
-	}
-	return $r;
-}
+function df_xml2a($x):array {return A::p($x);}
