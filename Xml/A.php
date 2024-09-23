@@ -33,4 +33,28 @@ final class A {
 		}
 		return $r;
 	}
+
+	/**
+	 * 2024-09-23
+	 * @used-by self::p()
+	 */
+	private static function atts(X $x):array {
+		$r = []; /** @var array(string => string) $r */
+		# 2024-09-23 https://www.php.net/manual/en/simplexmlelement.attributes.php
+		/** @var ?X  $aa */
+		if ($aa = $x->attributes()) {
+			foreach ($aa as $k => $v) {/** @var string $k */
+				/**
+				 * 2024-09-23
+				 * @var ?X $v
+				 * @see \SimpleXMLElement::current()
+				 * https://www.php.net/manual/en/simplexmlelement.current.php
+				 */
+				if ($v) {
+					$r['@'][$k] = (string)$v;
+				}
+			}
+		}
+		return $r;
+	}
 }
