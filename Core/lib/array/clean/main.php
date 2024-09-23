@@ -132,6 +132,7 @@ function df_clean_null(array $r):array {return array_filter($r, function($v) {re
  * @used-by df_clean()
  * @used-by df_clean_r()
  * @used-by \Df\Core\Html\Tag::__construct()
+ * @used-by \Df\Xml\A::atts()
  * @used-by \Dfe\Sift\API\Client::_construct()
  */
 function df_clean_r(array $r, array $k = [], bool $req = true):array {/** @var mixed[] $r */

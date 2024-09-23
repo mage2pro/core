@@ -33,7 +33,7 @@ final class A {
 	 * @used-by self::p()
 	 * @return array(string => string)
 	 */
-	private static function atts(X $x):array {/** @var ?X  $aa */ return !($aa = $x->attributes()) ? [] : df_clean_null(
+	private static function atts(X $x):array {/** @var ?X  $aa */ return !($aa = $x->attributes()) ? [] : df_clean_r(
 		df_map($aa, function(?X $v):?string {return !$v ? null : (string)$v;})
 	);}
 }
