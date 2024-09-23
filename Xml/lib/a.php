@@ -4,7 +4,7 @@ use SimpleXMLElement as X;
 
 /**
  * 2018-12-19
- * @uses \Magento\Framework\Simplexml\Element::asArray() returns XML tag's attributes
+ * @see \Magento\Framework\Simplexml\Element::asArray() returns XML tag's attributes
  * inside an `@` key, e.g:
  *	<authorizationResponse reportGroup="1272532" customerId="admin@mage2.pro">
  *		<litleTxnId>82924701437133501</litleTxnId>
@@ -31,9 +31,13 @@ use SimpleXMLElement as X;
 function df_xml2a($x):array {
 	$x = df_xml_x($x);
 	$r = [];
-	foreach ($x->attributes() as $k => $v) {/** @var string $k */ /** @var mixed $v */
-		if ($v) {
-			$r['@'][$k] = (string)$v;
+	# 2024-09-23 https://www.php.net/manual/en/simplexmlelement.attributes.php
+	/** @var ?X  $aa */
+	if ($aa = $x->attributes()) {
+		foreach ($aa as $k => $v) {/** @var string $k */ /** @var mixed $v */
+			if ($v) {
+				$r['@'][$k] = (string)$v;
+			}
 		}
 	}
 	if ($x->hasChildren()) {
