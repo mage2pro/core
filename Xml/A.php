@@ -16,7 +16,7 @@ final class A {
 		}
 		if ($x->hasChildren()) {
 			foreach ($x->children() as $k => $c) {/** @var X $c */ /** @var string|array $v */
-				if ($c->hasChildren($c)) {
+				if ($c->hasChildren()) {
 					$v = self::p($c);
 				}
 				else {
