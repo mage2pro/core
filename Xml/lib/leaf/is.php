@@ -26,6 +26,20 @@ use SimpleXMLElement as X;
  * https://php.net/manual/simplexmlelement.count.php
  * Однако @uses count() почему-то работает для него.
  * @see \SimpleXMLElement — самый загадочный класс PHP.
+ * 2024-09-24
+ * 1) «A variable is considered empty if it does not exist or if its value equals `false`.»
+ * https://www.php.net/manual/en/function.empty.php
+ * https://archive.is/8HRC5#selection-995.60-1001.5
+ * 2) «When converting to `bool`, the following values are considered `false`:
+ * 		*) Internal objects that overload their casting behaviour to `bool`.
+ * 		For example: `SimpleXML` objects created from empty elements without attributes.»
+ * https://www.php.net/manual/en/language.types.boolean.php#language.types.boolean.casting
+ * https://archive.is/FcCfj#selection-1353.0-1355.60
+ * 3) Even if a node has attributes, but does not have a content, `empty($x)` returns `true` for it:
+ * 3.1) https://3v4l.org/h7hRH
+ * 3.2) https://3v4l.org/YM3I8
+ * 3.3) https://3v4l.org/2vaHf
+ * 3.4) https://stackoverflow.com/questions/1560827#comment74422321_5344560
  * @used-by df_xml_assert_leaf()
  */
-function df_xml_is_leaf(X $x):bool {return df_xml_empty($x) || !$x->children()->count();}
+function df_xml_is_leaf(X $x):bool {return empty($x) || !$x->children()->count();}
