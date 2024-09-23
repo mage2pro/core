@@ -19,6 +19,7 @@ function dfaf($a, $b):array {
 	# 2.1) `is_callable([__CLASS__, 'f'])` for a private `f` is allowed: https://3v4l.org/ctZJG
 	# 2.2) `array_map([__CLASS__, 'f'], [1, 2, 3])` for a private `f` is allowed too: https://3v4l.org/29Zim
 	# 2024-06-11 "Improve `dfaf()`": https://github.com/mage2pro/core/issues/421
+	# 2024-09-24 `is_callable(__METHOD__)` returns `true`: https://3v4l.org/KVX07
 	$assert = function(bool $cond, string $m) use($a, $b):void {df_assert($cond, "dfaf(): $m.", ['a' => $a, 'b' => $b]);};
 	/** @var bool $ca */ /** @var bool $cb *//** @var bool $ia */ /** @var bool $ib */
 	[$ca, $cb, $ia, $ib] = [is_callable($a), is_callable($b), is_iterable($a), is_iterable($b)];

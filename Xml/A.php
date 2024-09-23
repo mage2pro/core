@@ -9,24 +9,16 @@ final class A {
 	 * @param X|string $x
 	 * @return string|array(string => mixed)
 	 */
-	static function p($x) {
+	static function p($x) {/** @var string|array(string => mixed) $r */
 		if (df_xml_empty($x = df_xml_x($x))) {
 			# 2024-09-24 $x is a node without attributes and children. E.g: a text node.
 			$r = (string)$x;
 		}
 		else {
-			$r = [];
-			if ($aa = df_xml_atts($x)) { /** @var array(string => string)  $aa */
-				$r['@'] = $aa;
-			}
-			if (!$x->hasChildren()) {
-				$r[0] = (string)$x;
-			}
-			else {
-				foreach ($x->children() as $k => $c) {/** @var X $c */
-					$r[$k] = self::p($c);
-				}
-			}
+			$r =
+				(!($aa = df_xml_atts($x)) ? [] : ['@' => $aa])
+				+ (!$x->hasChildren() ? [0 => (string)$x] : df_map(__METHOD__, $x->children()))
+			;
 		}
 		return $r;
 	}
