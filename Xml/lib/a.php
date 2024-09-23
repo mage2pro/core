@@ -27,4 +27,4 @@ use SimpleXMLElement as X;
  * @param X|string $x
  * @return array(string => mixed)
  */
-function df_xml2a($x):array {return A::p($x);}
+function df_xml2a($x):array {return is_array($r = A::p($x)) ? $r : [];}
