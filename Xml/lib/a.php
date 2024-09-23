@@ -31,10 +31,9 @@ use SimpleXMLElement as X;
 function df_xml2a($x):array {
 	$x = df_xml_x($x);
 	$r = [];
-	// add attributes
-	foreach ($x->attributes() as $attributeName => $attribute) {
-		if ($attribute) {
-			$r['@'][$attributeName] = (string)$attribute;
+	foreach ($x->attributes() as $k => $v) {/** @var string $k */ /** @var mixed $v */
+		if ($v) {
+			$r['@'][$k] = (string)$v;
 		}
 	}
 	// add children values
