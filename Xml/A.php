@@ -15,8 +15,16 @@ final class A {
 			$r['@'] = $aa;
 		}
 		if ($x->hasChildren()) {
-			foreach ($x->children() as $k => $c) {/** @var X $c */
-				$r[$k] = self::p($c);
+			foreach ($x->children() as $k => $c) {/** @var X $c */ /** @var string|array $v */
+				if ($c->hasChildren($c)) {
+					$v = self::p($c);
+				}
+				else {
+					$cs = (string)$c; /** @var string $cs */
+					$aa = df_xml_atts($c); /** @var array(string => string)  $aa */
+					$v = !$aa ? $cs : [0 => $cs] + $aa;
+				}
+				$r[$k] = $v;
 			}
 		}
 		elseif (!$r) {
@@ -27,4 +35,9 @@ final class A {
 		}
 		return $r;
 	}
+
+	/**
+	 * 2024-09-23
+	 */
+	private static function isText(X $x):bool {return !df_xml_atts($x) && (!$x->hasChildren() || !count($x->children()));}
 }
