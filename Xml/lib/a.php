@@ -36,7 +36,6 @@ function df_xml2a($x):array {
 			$r['@'][$k] = (string)$v;
 		}
 	}
-	// add children values
 	if ($x->hasChildren()) {
 		foreach ($x->children() as $k => $c) {/** @var X $c */
 			$r[$k] = df_xml2a($c);
