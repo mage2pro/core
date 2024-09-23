@@ -24,10 +24,12 @@ use SimpleXMLElement as X;
  * 2024-09-24
  * 1) «A variable is considered empty if it does not exist or if its value equals `false`.»
  * https://www.php.net/manual/en/function.empty.php
+ * https://archive.is/8HRC5#selection-995.60-1001.5
  * 2) «When converting to `bool`, the following values are considered `false`:
  * 		*) Internal objects that overload their casting behaviour to `bool`.
  * 		For example: `SimpleXML` objects created from empty elements without attributes.»
  * https://www.php.net/manual/en/language.types.boolean.php#language.types.boolean.casting
+ * https://archive.is/FcCfj#selection-1353.0-1355.60
  * @used-by df_xml_is_leaf()
  */
 function df_xml_exists(?X $x):bool {return !empty($x);}
