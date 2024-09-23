@@ -4,7 +4,7 @@ namespace Df\Core\Text;
 final class Marker {
 	/**
 	 * 2021-12-12
-	 * @used-by \Df\Xml\G::marker()
+	 * @used-by df_cdata_m()
 	 */
 	function __construct(string $begin, string $end) {$this->_begin = $begin; $this->_end = $end;}
 

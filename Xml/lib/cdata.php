@@ -1,4 +1,5 @@
 <?php
+use Df\Core\Text\Marker as M;
 use Df\Xml\G;
 
 /**
@@ -7,6 +8,12 @@ use Df\Xml\G;
  * @used-by \Dfe\SecurePay\Refund::process()
  */
 function df_cdata(string $s):string {return G::markAsCData($s);}
+
+/**
+ * 2024-09-24
+ * @used-by \Df\Xml\G::importString()
+ */
+function df_cdata_m():M {return dfcf(function():M {return new M('[[', ']]');});}
 
 /**
  * 2021-12-16

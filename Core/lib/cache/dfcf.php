@@ -29,6 +29,7 @@ use Df\Core\RAM;
  * @used-by df_are_customers_global()
  * @used-by df_cache_get_simple()
  * @used-by df_category_children_map()
+ * @used-by df_cdata_m()
  * @used-by df_cli_user()
  * @used-by df_con_s()
  * @used-by df_core_version()

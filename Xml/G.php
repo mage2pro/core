@@ -1,7 +1,6 @@
 <?php
 namespace Df\Xml;
 use Df\Core\Exception as E;
-use Df\Core\Text\Marker;
 use \SimpleXMLElement as X;
 use \Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 # 2024-09-22
@@ -33,12 +32,6 @@ final class G {
 		$r->importArray($contents);
 		return $r;
 	}
-
-	/**
-	 * Убрал df_param_s и df_result_s для ускорения работы модуля Яндекс.Маркет
-	 * @used-by df_cdata()
-	 */
-	static function markAsCData(string $s):string {return self::marker()->mark($s);}
 
 	/**
 	 * 2024-09-22
@@ -289,8 +282,8 @@ final class G {
 			 * Обратите внимание, что нам нужно выполнить проверку на синтаксис df_cdata ([[]])
 			 * даже при $needWrapInCData = true, потому что маркеры [[ и ]] из данных надо удалять.
 			 */
-			if (self::marker()->marked($vAsString)) {
-				$vAsString = self::marker()->unmark($vAsString);
+			if (df_cdata_m()->marked($vAsString)) {
+				$vAsString = df_cdata_m()->unmark($vAsString);
 				$needWrapInCData = true;
 			}
 			$needWrapInCData = $needWrapInCData || in_array($kAsString, $wrapInCData) || df_needs_cdata($vAsString);
@@ -335,11 +328,4 @@ final class G {
 	 * @var X
 	 */
 	private $_x;
-
-	/**
-	 * 2021-12-12
-	 * @used-by self::importString()
-	 * @used-by self::markAsCData()
-	 */
-	private static function marker():Marker {static $r; return $r ?: $r = new Marker('[[', ']]');}
 }
