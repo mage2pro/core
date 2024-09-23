@@ -38,18 +38,15 @@ function df_xml2a($x):array {
 	}
 	// add children values
 	if ($x->hasChildren()) {
-		foreach ($x->children() as $childName => $child) {
-			$r[$childName] = df_xml2a($child);
+		foreach ($x->children() as $k => $c) {/** @var X $c */
+			$r[$k] = df_xml2a($c);
 		}
 	}
+	elseif (empty($r)) {
+		$r = (string)$x;
+	}
 	else {
-		if (empty($r)) {
-			// return as string, if nothing was found
-			$r = (string)$x;
-		} else {
-			// value has zero key element
-			$r[0] = (string)$x;
-		}
+		$r[0] = (string)$x;
 	}
 	return $r;
 }
