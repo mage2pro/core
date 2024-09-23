@@ -3,7 +3,6 @@ use SimpleXMLElement as X;
 
 /**
  * 2024-09-23 https://www.php.net/manual/en/simplexmlelement.attributes.php
- * @used-by \Df\Xml\A::isText()
  * @used-by \Df\Xml\A::p()
  * @return array(string => string)
  */
