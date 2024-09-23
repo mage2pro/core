@@ -37,6 +37,7 @@ use Df\Core\Exception as DFE;
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Catalog\Model\Product::afterGetPreconfiguredValues() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/83)
  * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Model\Order::afterCanInvoice() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/256)
  * @used-by \Df\Payment\ConfigProvider\GlobalT::icons()
+ * @used-by \Df\Xml\A::p()
  * @used-by \Dfe\Color\Image::probabilities()
  * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @used-by \Dfe\Sift\Payload\OQI::p()
