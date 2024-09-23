@@ -7,10 +7,11 @@ use Df\Xml\G;
  * @used-by df_clean_xml()
  * @used-by \Dfe\SecurePay\Refund::process()
  */
-function df_cdata(string $s):string {return G::markAsCData($s);}
+function df_cdata(string $s):string {return df_cdata_m()->mark($s);}
 
 /**
  * 2024-09-24
+ * @used-by df_cdata()
  * @used-by \Df\Xml\G::importString()
  */
 function df_cdata_m():M {return dfcf(function():M {return new M('[[', ']]');});}
