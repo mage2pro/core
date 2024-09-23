@@ -53,7 +53,9 @@ final class G {
 	 * @used-by self::addAttributes()
 	 * @used-by self::addChildX()
 	 */
-	private function addAttribute(string $k, string $v = '', string $ns = ''):void {$this->_x->addAttribute($this->k($k), $v, $ns);}
+	private function addAttribute(string $k, string $v = '', string $ns = ''):void {
+		$this->_x->addAttribute($this->k($k), $v, $ns);
+	}
 
 	/**
 	 * @used-by self::i()
