@@ -1,5 +1,5 @@
 <?php
-use SimpleXMLElement as CX;
+use SimpleXMLElement as X;
 
 /**
  * 2015-02-27
@@ -28,4 +28,4 @@ use SimpleXMLElement as CX;
  * @see \SimpleXMLElement — самый загадочный класс PHP.
  * @used-by df_assert_leaf()
  */
-function df_check_leaf(CX $e):bool {return !df_xml_exists($e) || !$e->children()->count();}
+function df_check_leaf(X $x):bool {return !df_xml_exists($x) || !$x->children()->count();}
