@@ -26,10 +26,10 @@ use SimpleXMLElement as X;
  * Если здесь сделать xpath Остаток/Склад/Количество,
  * то для узла «147» @see df_xml_exists($e) вернёт false.
  *
- * Обратите внимание, что эту особенность использует алгоритм @see df_check_leaf():
+ * Обратите внимание, что эту особенность использует алгоритм @see df_xml_is_leaf():
  * return !df_xml_exists($e) || !count($e->children());
  *
- * @used-by df_check_leaf()
+ * @used-by df_xml_is_leaf()
  */
 function df_xml_exists(?X $e = null):bool {return !empty($e);}
 
