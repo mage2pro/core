@@ -1,5 +1,5 @@
 <?php
-use Df\Xml\G as G;
+use Df\Xml\G;
 
 /**
  * @see df_needs_cdata()
