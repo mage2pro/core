@@ -47,9 +47,9 @@ function df_db_drop_pk(string $t):void {df_conn()->dropIndex(df_table($t), df_co
  * @used-by df_fetch_col_max()
  * @used-by df_fetch_one()
  * @used-by df_trans_by_payment()
- * @used-by \Aheadworks\AdvancedReviews\Model\ResourceModel\Indexer\Statistics::getSelectForStatisticsData() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
- * @used-by \Df\Sso\CustomerReturn::mc()
- * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
+ * @used-by Aheadworks\AdvancedReviews\Model\ResourceModel\Indexer\Statistics::getSelectForStatisticsData() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
+ * @used-by Df\Sso\CustomerReturn::mc()
+ * @used-by Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
  * @param string|Entity|array(string => string) $t
  * @param string|string[] $cols [optional]
  * @param string|null $schema [optional]
