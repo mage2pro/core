@@ -7,10 +7,10 @@ use Magento\Sales\Model\Order as O;
 /**
  * 2017-10-12               
  * @used-by dfpex_from_doc()
- * @used-by \Df\Payment\ConfigProvider::currency()
- * @used-by \Df\Payment\Method::cPayment()
- * @used-by \Df\Payment\Method::isAvailable()
- * @used-by \Df\Payment\Operation\Source::currencyC()
+ * @used-by Df\Payment\ConfigProvider::currency()
+ * @used-by Df\Payment\Method::cPayment()
+ * @used-by Df\Payment\Method::isAvailable()
+ * @used-by Df\Payment\Operation\Source::currencyC()
  * @param string|object $m
  */
 function dfp_currency($m):C {return C::f($m);}
@@ -34,7 +34,7 @@ function dfpex_args($a0, $a1 = null):array {return ($a1
  * 2017-04-08
  * Converts $a from a sales document currency to the payment currency.
  * The payment currency is usually set here: «Mage2.PRO» → «Payment» → <...> → «Payment Currency».
- * @used-by \Df\Payment\Operation\Source::cFromDoc()
+ * @used-by Df\Payment\Operation\Source::cFromDoc()
  * @param mixed ...$args
  */
 function dfpex_from_doc(float $a, ...$args):float {
