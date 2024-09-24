@@ -11,8 +11,8 @@ use Closure as F;
  * 2) A class name: «A\B\C».
  * 3) An object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @used-by \Dfe\PostFinance\W\Event::optionTitle()
- * @used-by \Dfe\Qiwi\API\Validator::codes()
+ * @used-by Dfe\PostFinance\W\Event::optionTitle()
+ * @used-by Dfe\Qiwi\API\Validator::codes()
  * @param string|object|null $m
  * @param F|bool|mixed $onE [optional]
  * @return array(string => mixed)
@@ -30,7 +30,7 @@ function df_module_csv2($m, string $name, $onE = true):array {return df_module_f
  * 2) A class name: «A\B\C».
  * 3) An object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
+ * @used-by Dfe\Sift\PM\FE::onFormInitialized()
  * @param string|object|null $m
  * @param F|bool|mixed $onE [optional]
  * @return array(string => mixed)
@@ -78,13 +78,13 @@ function df_module_file_read($m, string $name, string $ext, F $parser, $onE = tr
  * @used-by df_currency_nums()
  * @used-by df_sentry_m()
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/settings.phtml
- * @used-by \Df\PaypalClone\W\Event::statusT()
- * @used-by \Dfe\AllPay\W\Event::tlByCode()
- * @used-by \Dfe\CheckoutCom\Source\Prefill::config()
- * @used-by \Dfe\IPay88\Source\Option::all()
- * @used-by \Dfe\IPay88\Source\Option::map()
- * @used-by \Dfe\YandexKassa\Source\Option::map()
- * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
+ * @used-by Df\PaypalClone\W\Event::statusT()
+ * @used-by Dfe\AllPay\W\Event::tlByCode()
+ * @used-by Dfe\CheckoutCom\Source\Prefill::config()
+ * @used-by Dfe\IPay88\Source\Option::all()
+ * @used-by Dfe\IPay88\Source\Option::map()
+ * @used-by Dfe\YandexKassa\Source\Option::map()
+ * @used-by TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @param string|object|null $m
  * @param F|bool|mixed $onE [optional]
  * @return array(string => mixed)
