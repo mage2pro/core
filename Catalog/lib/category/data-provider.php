@@ -8,7 +8,7 @@ use Magento\Catalog\Model\Category\DataProvider as DP;
  * 3.1) https://github.com/magento/magento2/blob/2.4.7/app/code/Magento/Catalog/view/adminhtml/ui_component/category_form.xml#L38-L43
  * 3.2) @see \Magento\Catalog\Model\Category\DataProvider::__construct()
  * 3.3) https://github.com/mage2pro/core/issues/390
- * @used-by \CabinetsBay\Catalog\Plugin\Category\DataProvider::afterPrepareMeta() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by CabinetsBay\Catalog\Plugin\Category\DataProvider::afterPrepareMeta() (https://github.com/cabinetsbay/site/issues/98)
  * @param array(string => mixed) $r
  * @param string[] $atts
  */
