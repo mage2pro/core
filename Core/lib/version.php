@@ -20,9 +20,9 @@ use Magento\Framework\App\ProductMetadataInterface as IMetadata;
  * @used-by df_magento_version_ge()
  * @used-by df_sentry()
  * @used-by df_sentry_m()
- * @used-by \Df\Qa\Trace\Frame::url()
- * @used-by \Dfe\CheckoutCom\Charge::pMetadata()
- * @used-by \Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
+ * @used-by Df\Qa\Trace\Frame::url()
+ * @used-by Dfe\CheckoutCom\Charge::pMetadata()
+ * @used-by Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
  */
 function df_magento_version():string {return dfcf(function() {
 	/** @var string $r */
@@ -77,7 +77,7 @@ function df_magento_version():string {return dfcf(function() {
 
 /**
  * 2016-08-24
- * @used-by \Df\Intl\Js::_toHtml()
+ * @used-by Df\Intl\Js::_toHtml()
  */
 function df_magento_version_ge(string $v):bool {return version_compare(df_magento_version(), $v, 'ge');}
 
