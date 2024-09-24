@@ -36,10 +36,10 @@
  * оказывается ассоциированным с неким конкретным элементом HTML:
  * этим данный способ инициализации отличается от способа функции @see df_js(),
  * которая не привязывает код JavaScript браузерного компонента ни к какому элементу HTML.
- * @used-by \Df\Sso\Button\Js::attributes()
- * @used-by \Dfe\Klarna\Button::_toHtml()
- * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
- * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
+ * @used-by Df\Sso\Button\Js::attributes()
+ * @used-by Dfe\Klarna\Button::_toHtml()
+ * @used-by Dfe\Stripe\Block\Multishipping::_toHtml()
+ * @used-by KingPalm\B2B\Block\Registration::_toHtml()
  * @param string|object|null $m
  * $m could be:
  * 1) A module name: «A_B»
@@ -55,7 +55,7 @@ function df_widget($m, $s = null, array $p = []):array {return ['data-mage-init'
 	 * 2019-11-13
 	 * I intentionally use `!is_null($s)` instead of `$s ?:`.
 	 * 1) `is_null($s)` means that $s should be `main`.
-	 * it is @used-by \KingPalm\B2B\Block\Registration::_toHtml():
+	 * it is @used-by KingPalm\B2B\Block\Registration::_toHtml():
 	 * https://github.com/kingpalm-com/b2b/blob/1.6.1/Block/Registration.php#L43
 	 * 2) `'' === $s` means that $s should not be added to the result at all.
 	 */
