@@ -4,7 +4,7 @@ use Magento\Framework\App\Filesystem\DirectoryList as DL;
  * 2015-12-06
  * 2022-11-23 `callable` as an argument type is supported by PHP ≥ 5.4:
  * https://github.com/mage2pro/core/issues/174#user-content-callable
- * @used-by \Dfe\GoogleFont\Controller\Index\Index::execute()
+ * @used-by Dfe\GoogleFont\Controller\Index\Index::execute()
  * @param string|object $id
  * @return mixed
  */
