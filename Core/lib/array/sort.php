@@ -7,10 +7,10 @@
  * @used-by df_ksort_r()
  * @used-by df_stores()
  * @used-by df_trd_set()
- * @used-by \Df\Qa\Dumper::dumpArrayElements()
- * @used-by \Dfe\Dynamics365\API\Facade::p()
- * @used-by \Dfe\Qiwi\Signer::sign()
- * @used-by \Dfe\Robokassa\Api\Options::p()
+ * @used-by Df\Qa\Dumper::dumpArrayElements()
+ * @used-by Dfe\Dynamics365\API\Facade::p()
+ * @used-by Dfe\Qiwi\Signer::sign()
+ * @used-by Dfe\Robokassa\Api\Options::p()
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
  */
@@ -94,10 +94,10 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * 3) $isGet = true in:
  * 		@used-by df_oqi_leafs()
  * 		@used-by dfe_portal_stripe_customers()
- * 		@used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
+ * 		@used-by Dfe\Oro\Test\Basic::t02_orders_stripe()
  * 4) $l is used in:
  * 		@used-by df_oqi_leafs()
- * 		@used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
+ * 		@used-by Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
  * @see df_ksort()
  * @see df_sort_posix()
  * @used-by df_countries_options()
@@ -108,17 +108,17 @@ function df_ksort_r_ci(array $a):array {return array_is_list($a)
  * @used-by df_sort_posix()
  * @used-by df_zf_http_last_req()
  * @used-by dfe_portal_stripe_customers()
- * @used-by \Df\Config\Backend\ArrayT::processI()
- * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
- * @used-by \Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()
- * @used-by \Df\Payment\Info\Report::sort()
- * @used-by \Df\Payment\TM::tResponses()
- * @used-by \Dfe\Color\Image::probabilities()
- * @used-by \Dfe\Oro\Test\Basic::t02_orders_stripe()
- * @used-by \Dfe\Robokassa\Api\Options::p()
- * @used-by \Dfe\YandexKassa\Source\Option::map()
- * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
- * @used-by \Wolf\Filter\Controller\Index\Change::execute()
+ * @used-by Df\Config\Backend\ArrayT::processI()
+ * @used-by Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
+ * @used-by Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()
+ * @used-by Df\Payment\Info\Report::sort()
+ * @used-by Df\Payment\TM::tResponses()
+ * @used-by Dfe\Color\Image::probabilities()
+ * @used-by Dfe\Oro\Test\Basic::t02_orders_stripe()
+ * @used-by Dfe\Robokassa\Api\Options::p()
+ * @used-by Dfe\YandexKassa\Source\Option::map()
+ * @used-by Wolf\Filter\Block\Navigation::hDropdowns()
+ * @used-by Wolf\Filter\Controller\Index\Change::execute()
  * @param array(int|string => mixed) $a
  * @param Closure|string|null $f [optional]
  * @return array(int|string => mixed)
@@ -185,7 +185,7 @@ function df_sort(array $a, $f = null, bool $isGet = false, string $l = ''):array
 
 /**
  * 2018-05-21
- * @used-by \Df\Config\Source\Block::map()
+ * @used-by Df\Config\Source\Block::map()
  * @param array(int|string => mixed) $a
  * @return array(int|string => mixed)
  */
@@ -230,7 +230,7 @@ function df_sort_a(array $a):array {asort($a); return $a;}
  * 5.2) The first 2 elements of the test array are inverted with other locales, e.g.:
  * 5.2.1) 'en_US': https://3v4l.org/FMcdf
  * 5.2.2) 'root': https://3v4l.org/Cevuk
- * @used-by \CabinetsBay\Catalog\B\Category::images() (https://github.com/cabinetsbay/catalog/issues/28)
+ * @used-by CabinetsBay\Catalog\B\Category::images() (https://github.com/cabinetsbay/catalog/issues/28)
  * @param array(int|string => mixed) $a
  * @param Closure|string|null $f [optional]
  * @return array(int|string => mixed)
