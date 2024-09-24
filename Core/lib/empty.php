@@ -5,7 +5,6 @@
  * @used-by df_block_output()
  * @used-by df_desc()
  * @used-by df_leaf()
- * @used-by df_leaf_sne()
  * @used-by df_n_prepend()
  * @used-by df_param_sne()
  * @used-by df_path_is_internal()

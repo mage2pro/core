@@ -45,7 +45,6 @@ use SimpleXMLElement as X;
  * (если лист отсутствует, то @see df_config_node() вернёт null)
  *
  * @used-by df_leaf_child()
- * @used-by df_leaf_i()
  * @used-by df_leaf_s()
  * @param string|null|callable $d [optional]
  */
