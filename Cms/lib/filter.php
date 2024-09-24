@@ -18,6 +18,6 @@ function df_cms_filter_block(string $s):string {return df_cms_filter_provider()-
 /**
  * 2024-03-25
  * @see df_cms_filter_block()
- * @used-by \CabinetsBay\Catalog\B\Category::l3a() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by CabinetsBay\Catalog\B\Category::l3a() (https://github.com/cabinetsbay/site/issues/98)
  */
 function df_cms_filter_page(string $s):string {return df_cms_filter_provider()->getPageFilter()->filter($s);}
