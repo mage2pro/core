@@ -20,14 +20,14 @@ use Magento\Framework\Data\Form\Element\AbstractElement as AE;
  * "font-src fonts.gstatic.com data: 'self' 'unsafe-inline'"»: https://github.com/mage2pro/core/issues/320
  * 2.2) https://github.com/mage2pro/core/blob/10.2.9/Framework/etc/csp_whitelist.xml#L8-L16
  * @used-by df_fa_link()
- * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\ArrayT::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Font::onFormInitialized()
  */
 function df_fa():string {return 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css';}
 
 /**
  * 2016-11-30  
- * @used-by \Df\Sso\Button::loggedOut()
+ * @used-by Df\Sso\Button::loggedOut()
  */
 function df_fa_link():string {return df_link_inline(df_fa());}
 
@@ -80,10 +80,10 @@ function df_fa_link():string {return df_link_inline(df_fa());}
  * @used-by df_fe_fc_b()
  * @used-by df_fe_fc_csv()
  * @used-by df_fe_fc_i()
- * @used-by \Df\Framework\Form\Element\Fieldset::fc()
- * @used-by \Df\Framework\Form\Element\Url::url()
- * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
- * @used-by \Df\Sso\FE\CustomerReturn::url()
+ * @used-by Df\Framework\Form\Element\Fieldset::fc()
+ * @used-by Df\Framework\Form\Element\Url::url()
+ * @used-by Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
+ * @used-by Df\Sso\FE\CustomerReturn::url()
  * @param AE|E $e
  * @param string|null|callable $d [optional]
  * @return string|null|array(string => mixed)
@@ -92,7 +92,7 @@ function df_fe_fc(AE $e, string $k = '', $d = null) {return dfa(df_eta(df_fe_top
 
 /**
  * 2016-05-30
- * @used-by \Df\Framework\Form\Element\Multiselect::ordered()
+ * @used-by Df\Framework\Form\Element\Multiselect::ordered()
  * @param AE|E $e
  * @param bool|null|callable $d [optional]
  */
@@ -100,7 +100,7 @@ function df_fe_fc_b(AE $e, string $key, $d = false):bool {return df_bool(df_fe_f
 
 /**
  * 2016-11-13
- * @used-by \Df\Directory\FE\Dropdown::dfValues()
+ * @used-by Df\Directory\FE\Dropdown::dfValues()
  * @param AE|E $e
  * @param int|null|callable $d [optional]
  * @return string[]
@@ -129,25 +129,25 @@ function df_fe_fs(AE $e):FS {
 
 /**
  * 2015-11-28
- * @used-by \Df\Directory\FE\Dropdown::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Color::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Fieldset::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\GoogleFont::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Multiselect::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Number::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Quantity::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
- * @used-by \Df\Framework\Form\Element\Select2\Number::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Table::onFormInitialized()
- * @used-by \Df\OAuth\FE\Button::onFormInitialized()
- * @used-by \Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
- * @used-by \Dfe\CurrencyFormat\FE::onFormInitialized()
- * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
- * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
- * @used-by \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
- * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
+ * @used-by Df\Directory\FE\Dropdown::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\ArrayT::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Color::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Fieldset::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Font::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\GoogleFont::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Multiselect::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Number::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Quantity::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Select2::setRenderer()
+ * @used-by Df\Framework\Form\Element\Select2\Number::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Table::onFormInitialized()
+ * @used-by Df\OAuth\FE\Button::onFormInitialized()
+ * @used-by Dfe\AllPay\InstallmentSales\Plan\FE::onFormInitialized()
+ * @used-by Dfe\CurrencyFormat\FE::onFormInitialized()
+ * @used-by Dfe\Dynamics365\Button::onFormInitialized()
+ * @used-by Dfe\Moip\FE\Webhooks::onFormInitialized()
+ * @used-by Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
+ * @used-by Dfe\Sift\PM\FE::onFormInitialized()
  * @param AE|E $e
  * @param string|object|null $class [optional]
  * $class could be:
@@ -211,7 +211,7 @@ function df_fe_init(AE $e, $class = null, $css = [], array $params = [], $path =
 	/**
 	 * 2016-03-08
 	 * Отныне getBeforeElementHtml() будет гарантированно вызываться благодаря
-	 * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetElementHtml()
+	 * @used-by Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetElementHtml()
 	 * 2017-08-10
 	 * I have removed @see df_clean() for $params.
 	 * The previous edition: https://github.com/mage2pro/core/blob/2.10.11/Framework/lib/form.php#L177
@@ -227,8 +227,8 @@ function df_fe_init(AE $e, $class = null, $css = [], array $params = [], $path =
  * 2017-04-23
  * Добавил поддержку вложенных групп.
  * Теперь алгоритм поднимается по иерархии групп, пока не встретит тег «dfExtension».
- * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
- * @used-by \Df\Framework\Form\Element\Url::m()
+ * @used-by Df\Config\Fieldset::_getHeaderCommentHtml()
+ * @used-by Df\Framework\Form\Element\Url::m()
  * @param AE|E $e
  * @return string|null
  * @throws DFE
@@ -244,7 +244,7 @@ function df_fe_m(AE $e, bool $throw = true) {  /** @var string|null $r */
 
 /**
  * 2016-08-10 «groups[all_pay][groups][installment_sales][fields][plans][template][months]» => «months»
- * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
+ * @used-by Df\Framework\Form\Element\Select2::setRenderer()
  */
 function df_fe_name_short(string $full):string {return df_last(df_clean(df_explode_multiple(['[', ']'], $full)));}
 
@@ -259,7 +259,7 @@ function df_fe_sibling(AE $e, string $n) {return $e->getForm()->getElement(
 
 /**
  * 2017-08-10
- * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
+ * @used-by Dfe\Moip\FE\Webhooks::onFormInitialized()
  * @return mixed
  */
 function df_fe_sibling_v(AE $e, string $n) {return df_fe_sibling($e, $n)['value'];}
@@ -284,8 +284,8 @@ function df_fe_uid(AE $e, string $suffix = ''):array {return ['data-ui-id' => E:
 
 /**
  * 2016-01-08
- * @used-by \Df\Framework\Form\Element\Checkbox::getElementHtml()
- * @used-by \Dfe\Markdown\FormElement::componentHtml()
+ * @used-by Df\Framework\Form\Element\Checkbox::getElementHtml()
+ * @used-by Dfe\Markdown\FormElement::componentHtml()
  * @return array(string => string)
  */
 function df_fe_attrs(AE $e, string $uidSuffix = ''):array {return
@@ -294,9 +294,9 @@ function df_fe_attrs(AE $e, string $uidSuffix = ''):array {return
 
 /**
  * 2015-12-14
- * @used-by \Df\Framework\Form\Element\ArrayT::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Fieldset::hide()
- * @used-by \Df\Framework\Form\Element\Font::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\ArrayT::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Fieldset::hide()
+ * @used-by Df\Framework\Form\Element\Font::onFormInitialized()
  * @param AE|E $e
  */
 function df_hide(AE $e):void {$e->setContainerClass('df-hidden');}
