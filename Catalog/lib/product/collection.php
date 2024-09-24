@@ -9,8 +9,8 @@ use Magento\Catalog\Model\ResourceModel\Product\Collection as C;
  * @see df_category_c()
  * @used-by df_product_c()
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L17
- * @used-by \TFC\Image\Command\C3::pc()
- * @used-by \TFC\Image\Command\C3::pcL()
+ * @used-by TFC\Image\Command\C3::pc()
+ * @used-by TFC\Image\Command\C3::pcL()
  */
 function df_pc():C {return df_new_om(C::class);}
 
@@ -92,6 +92,6 @@ function df_pc_preserve_absent_f(F $f) {
  * 2019-09-18
  * 2020-11-23 @deprecated
  * @see df_category_c()
- * @used-by \BlushMe\Checkout\Block\Extra::items()
+ * @used-by BlushMe\Checkout\Block\Extra::items()
  */
 function df_product_c():C {return df_pc();}
