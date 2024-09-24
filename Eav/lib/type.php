@@ -5,7 +5,7 @@ use Magento\Customer\Model\Customer;
 use Magento\Eav\Model\Entity\Type as T;
 /**
  * 2019-03-06
- * @used-by \Df\Customer\AddAttribute\Address::p()
+ * @used-by Df\Customer\AddAttribute\Address::p()
  * 2024-05-23
  * The 'customer_address' constant is also duplicated here:
  * @see \Magento\Customer\Api\AddressMetadataManagementInterface::ENTITY_TYPE_ADDRESS
@@ -19,7 +19,7 @@ function df_eav_ca():T {return df_eav_type(ICustomerAddressMetadata::ENTITY_TYPE
  * 2) The 'catalog_category' constant is also duplicated here:
  * @see \Magento\Catalog\Api\Data\CategoryAttributeInterface::ENTITY_TYPE_CODE
  * @see \Magento\MediaContentCatalog\Model\ResourceModel\GetAssetIdsByCategoryStore::ENTITY_TYPE
- * @used-by \CabinetsBay\Catalog\Plugin\Category\DataProvider::afterPrepareMeta() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by CabinetsBay\Catalog\Plugin\Category\DataProvider::afterPrepareMeta() (https://github.com/cabinetsbay/site/issues/98)
  */
 function df_eav_category():T {return df_eav_type(Category::ENTITY);}
 
@@ -38,6 +38,6 @@ function df_eav_customer():T {return df_eav_type(Customer::ENTITY);}
  * @used-by df_eav_ca()
  * @used-by df_eav_category()
  * @used-by df_eav_customer()
- * @used-by \Dfe\Markdown\DbRecord::__construct()
+ * @used-by Dfe\Markdown\DbRecord::__construct()
  */
 function df_eav_type(string $t):T {return df_eav_config()->getEntityType($t);}
