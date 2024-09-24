@@ -13,9 +13,9 @@
  * @used-by df_path_rel()
  * @used-by df_path_rel_g()
  * @used-by df_product_image_url()
- * @used-by \Df\Sentry\Client::needSkipFrame()
- * @used-by \Dfe\Color\Observer\ProductSaveBefore::execute()
- * @used-by \KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
+ * @used-by Df\Sentry\Client::needSkipFrame()
+ * @used-by Dfe\Color\Observer\ProductSaveBefore::execute()
+ * @used-by KingPalm\Core\Plugin\Aitoc\OrdersExportImport\Model\Processor\Config\ExportConfigMapper::aroundToConfig()
  */
 function df_path_n(string $p):string {return str_replace(['\/', '\\'], '/', $p);}
 
@@ -23,6 +23,6 @@ function df_path_n(string $p):string {return str_replace(['\/', '\\'], '/', $p);
  * 2016-12-30 It replaces all path delimiters with @uses DS
  * 2021-12-17 https://3v4l.org/OGUh6
  * @see df_path_n()
- * @used-by \Df\Payment\W\Reader::testData()
+ * @used-by Df\Payment\W\Reader::testData()
  */
 function df_path_n_real(string $p):string {return str_replace(['\/', '\\', '/'], DS, $p);}
