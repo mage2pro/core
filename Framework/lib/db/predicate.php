@@ -1,7 +1,7 @@
 <?php
 /**
  * 2016-12-01
- * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by Df\Sso\CustomerReturn::mc()
  * @param string|array(string|mixed)|null ...$cs
  */
 function df_db_or(...$cs):string {return implode(' OR ', array_map(function($c) {return implode(
