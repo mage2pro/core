@@ -3,7 +3,7 @@
  * 2021-12-20
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_underscore_to_camel()
- * @used-by \TFC\GoogleShopping\Products::atts() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
+ * @used-by TFC\GoogleShopping\Products::atts() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param string|string[] ...$a
  * @return string|string[]
  */
@@ -64,7 +64,7 @@ function df_explode_camel(...$a):array {return df_call_a(function(string $n):arr
  * 		refund_issuED => RefundIssued
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_camel_to_underscore()
- * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @used-by Dfe\TwoCheckout\Handler::p()
  * @param string|string[] ...$a
  * @return string|string[]
  */
