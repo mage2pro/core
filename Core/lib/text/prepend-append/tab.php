@@ -2,12 +2,12 @@
 /**
  * 2022-11-26, 2024-09-23
  * @used-by df_tab()
- * @used-by \Df\Core\Html\Tag::content()
- * @used-by \Df\Core\Html\Tag::openTagWithAttributesAsText()
- * @used-by \Df\Qa\Dumper::dumpArray()
- * @used-by \Df\Qa\Dumper::dumpObject()
- * @used-by \Df\Qa\Dumper::dumpObject()
- * @used-by \Df\Typography\Css::render()
+ * @used-by Df\Core\Html\Tag::content()
+ * @used-by Df\Core\Html\Tag::openTagWithAttributesAsText()
+ * @used-by Df\Qa\Dumper::dumpArray()
+ * @used-by Df\Qa\Dumper::dumpObject()
+ * @used-by Df\Qa\Dumper::dumpObject()
+ * @used-by Df\Typography\Css::render()
  * @param string|iterable $v
  */
 function df_tab($v):string {return !is_iterable($v) ? df_tab(df_explode_n($v)) :
