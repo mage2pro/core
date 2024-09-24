@@ -15,7 +15,7 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by dfp_sentry_tags()
  * @used-by dfpm_title()
  * @used-by dfps()
- * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
+ * @used-by Df\Payment\Observer\FormatTransactionId::execute()
  * @param IM|II|OP|QP|T|object|string|O|null $v
  */
 function dfp_my($v):bool {return $v && dfpm($v) instanceof M;}
@@ -30,23 +30,23 @@ function dfp_my($v):bool {return $v && dfpm($v) instanceof M;}
  * @used-by dfpm_title()
  * @used-by dfpmq()
  * @used-by dfps()
- * @used-by \Df\Payment\Choice::f()
- * @used-by \Df\Payment\Currency::f()
- * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
- * @used-by \Df\Payment\Observer\FormatTransactionId::execute()
- * @used-by \Df\Payment\PlaceOrderInternal::s()
- * @used-by \Df\Payment\TestCase::m()
- * @used-by \Df\Payment\Url::f()
- * @used-by \Df\Payment\W\Action::execute()
- * @used-by \Df\Payment\W\F::s()
- * @used-by \Df\Payment\W\Handler::m()
- * @used-by \Dfe\AlphaCommerceHub\API\Client::urlBase()
- * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action()
- * @used-by \Dfe\Stripe\P\_3DS::p()
- * @used-by \Dfe\Stripe\P\Address::p()
- * @used-by \Dfe\TBCBank\Charge::p()
- * @used-by \Dfe\Vantiv\Charge::p()
+ * @used-by Df\Payment\Choice::f()
+ * @used-by Df\Payment\Currency::f()
+ * @used-by Df\Payment\Observer\DataProvider\SearchResult::execute()
+ * @used-by Df\Payment\Observer\FormatTransactionId::execute()
+ * @used-by Df\Payment\PlaceOrderInternal::s()
+ * @used-by Df\Payment\TestCase::m()
+ * @used-by Df\Payment\Url::f()
+ * @used-by Df\Payment\W\Action::execute()
+ * @used-by Df\Payment\W\F::s()
+ * @used-by Df\Payment\W\Handler::m()
+ * @used-by Dfe\AlphaCommerceHub\API\Client::urlBase()
+ * @used-by Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+ * @used-by Dfe\CheckoutCom\Handler\CustomerReturn::action()
+ * @used-by Dfe\Stripe\P\_3DS::p()
+ * @used-by Dfe\Stripe\P\Address::p()
+ * @used-by Dfe\TBCBank\Charge::p()
+ * @used-by Dfe\Vantiv\Charge::p()
  * При вызове с параметром в виде произвольного объекта, имени класса или модуля
  * функция будет использовать ТЕКУЩУЮ КОРЗИНУ в качестве II.
  * Будьте осторожны с этим в тех сценариях, когда текущей корзины нет.
@@ -96,8 +96,8 @@ function dfpm(...$args) {return dfcf(function(...$args) {
  * (как минимум — в developer mode), даже если его раньше не было.
  * 2) У нас потомки Method объявлены как final.
  * @used-by dfpm()
- * @used-by \Df\Payment\Block\Info::checkoutSuccess()
- * @used-by \Df\Payment\Method::sg()
+ * @used-by Df\Payment\Block\Info::checkoutSuccess()
+ * @used-by Df\Payment\Method::sg()
  * @param string|object $c
  */
 function dfpm_c($c, bool $allowAbstract = false):string {return dfcf(function($c, $allowAbstract = false) {return
@@ -124,7 +124,7 @@ function dfpm_code($c):string {return dfcf(function($c) {return dfpm_call_s($c, 
 /**
  * 2016-08-25 Without the «dfe_» prefix.
  * @uses \Df\Payment\Method::codeS()
- * @used-by \Df\Payment\Settings::prefix()
+ * @used-by Df\Payment\Settings::prefix()
  * @param string|object $c
  */
 function dfpm_code_short($c):string {return df_trim_text_left(dfpm_code($c), 'dfe_');}
@@ -133,18 +133,18 @@ function dfpm_code_short($c):string {return df_trim_text_left(dfpm_code($c), 'df
  * 2016-12-22
  * @used-by dfp_report()
  * @used-by dfp_sentry_tags()
- * @used-by \Df\Payment\Comment\Description::locations()
- * @used-by \Df\Payment\Settings::titleB()
- * @used-by \Df\Payment\W\Action::notImplemented()
- * @used-by \Df\Payment\W\Exception::mTitle()
- * @used-by \Df\Payment\W\Handler::log()
+ * @used-by Df\Payment\Comment\Description::locations()
+ * @used-by Df\Payment\Settings::titleB()
+ * @used-by Df\Payment\W\Action::notImplemented()
+ * @used-by Df\Payment\W\Exception::mTitle()
+ * @used-by Df\Payment\W\Handler::log()
  * @param string|object $c
  */
 function dfpm_title($c):string {/** @var IM|M $m */ return dfp_my($m = dfpm($c)) ? $m->titleB() : df_module_name($m);}
 
 /**
  * 2017-03-30
- * @used-by \Df\Payment\ConfigProvider::m()
+ * @used-by Df\Payment\ConfigProvider::m()
  * @param IM|II|OP|QP|O|Q|T|object|string|null $c
  * @param mixed $s
  */
