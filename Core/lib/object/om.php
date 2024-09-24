@@ -14,7 +14,7 @@ function df_ctr(string $c):string {return df_vtr(df_om_config()->getPreference($
 
 /**
  * 2017-03-20
- * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()
+ * @used-by Df\Framework\Plugin\App\Router\ActionList::aroundGet()
  */
 function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
 
@@ -72,16 +72,16 @@ function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_stock_h()
  * @used-by df_url_finder()
  * @used-by df_url_h()
- * @used-by \Df\Core\Session::st()
- * @used-by \Df\Customer\Plugin\Js\CustomerId::afterGetSectionData()
- * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
- * @used-by \Dfe\KlarnaC\OL::fetch()
- * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
- * @used-by \Hotlink\Framework\Model\Schedule\Cron\Config\Plugin::afterGetJobs() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/site/issues/127)
- * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
- * @used-by \Mageplaza\Blog\Controller\Router::match() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/190)
- * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
- * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
+ * @used-by Df\Core\Session::st()
+ * @used-by Df\Customer\Plugin\Js\CustomerId::afterGetSectionData()
+ * @used-by Df\Payment\Settings::applicableForQuoteByCountry()
+ * @used-by Dfe\KlarnaC\OL::fetch()
+ * @used-by Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
+ * @used-by Hotlink\Framework\Model\Schedule\Cron\Config\Plugin::afterGetJobs() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/site/issues/127)
+ * @used-by Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
+ * @used-by Mageplaza\Blog\Controller\Router::match() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/190)
+ * @used-by SayItWithAGift\Options\Frontend::_toHtml()
+ * @used-by Wolf\Filter\Block\Navigation::selectedPath()
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L20
  * @used-by app/code/WeltPixel/QuickCart/view/frontend/templates/checkout/cart/item/price/sidebar.phtml (https://github.com/cabinetsbay/site/issues/145)
  * @return mixed
@@ -93,7 +93,7 @@ function df_o(string $t) {return dfcf(function(string $t) {return df_om()->get($
  * @used-by df_cms_block_r()
  * @used-by df_ic()
  * @used-by df_o()
- * @used-by \Df\Payment\ConfigProvider::p()
+ * @used-by Df\Payment\ConfigProvider::p()
  * @return OM|IOM
  */
 function df_om() {return OM::getInstance();}
@@ -102,7 +102,7 @@ function df_om() {return OM::getInstance();}
  * 2016-05-06
  * @used-by df_class_exists()
  * @used-by df_virtual_types()
- * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()
+ * @used-by Df\Framework\Plugin\App\Router\ActionList::aroundGet()
  * @return IConfig|Config|Compiled|Developer
  */
 function df_om_config() {return df_o(IConfig::class);}
@@ -110,7 +110,7 @@ function df_om_config() {return df_o(IConfig::class);}
 /**
  * 2017-03-20
  * @used-by df_ctr()
- * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()
+ * @used-by Df\Framework\Plugin\App\Router\ActionList::aroundGet()
  */
 function df_vtr(string $c):string {return df_om_config()->getInstanceType($c);}
 
