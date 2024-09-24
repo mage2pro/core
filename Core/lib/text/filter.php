@@ -40,7 +40,7 @@ function df_remove_non_digits(string $s):string {return preg_replace('[\D]', '',
  * 2022-11-26
  * We can not declare the argument as `string ...$remove` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @used-by df_phone_explode()
- * @used-by \Dfe\IPay88\Signer::adjust()
+ * @used-by Dfe\IPay88\Signer::adjust()
  * @param string|string[] ...$remove
  */
 function df_string_clean(string $s, ...$remove):string {return str_replace(dfa_flatten($remove), null, $s);}
@@ -88,9 +88,9 @@ function df_string_clean(string $s, ...$remove):string {return str_replace(dfa_f
  * I have adapted an implementation from here: https://stackoverflow.com/questions/3371697#comment63507856_3371773
  *
  * @used-by df_translit_url()
- * @used-by \Dfe\AlphaCommerceHub\Charge::textFilter()
- * @used-by \Dfe\AlphaCommerceHub\Charge::textFilterStreet()
- * @used-by \Dfe\Stripe\Block\Multishipping::cardholder()
- * @used-by \Dfe\TBCBank\Charge::textFilter()
+ * @used-by Dfe\AlphaCommerceHub\Charge::textFilter()
+ * @used-by Dfe\AlphaCommerceHub\Charge::textFilterStreet()
+ * @used-by Dfe\Stripe\Block\Multishipping::cardholder()
+ * @used-by Dfe\TBCBank\Charge::textFilter()
  */
 function df_translit(string $s):string {return transliterator_transliterate('Any-Latin; Latin-ASCII', $s);}
