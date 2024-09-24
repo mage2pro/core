@@ -5,7 +5,7 @@ use Magento\Shipping\Model\Carrier\AbstractCarrierInterface as IM;
 /**
  * 2018-04-21
  * @used-by dfss()
- * @used-by \Df\Shipping\ConfigProvider::m()
+ * @used-by Df\Shipping\ConfigProvider::m()
  * @param mixed ...$args
  * @return M|IM
  */
@@ -35,7 +35,7 @@ function dfsm(...$args) {return dfcf(function(...$args) {
  * (как минимум — в developer mode), даже если его раньше не было.
  * 2) У нас потомки Method объявлены как final.
  * @used-by dspm()
- * @used-by \Df\Shipping\Method::sg()
+ * @used-by Df\Shipping\Method::sg()
  * @param string|object $c
  */
 function dfsm_c($c, bool $allowAbstract = false):string {return dfcf(function($c, $allowAbstract = false) {return
@@ -54,7 +54,7 @@ function dfsm_call_s($c, string $method, ...$params) {return df_con_s($c, 'Metho
 /**
  * 2018-04-21
  * @used-by dfsm_code_short()
- * @used-by \Df\Shipping\Settings::enable()
+ * @used-by Df\Shipping\Settings::enable()
  * @uses \Df\Shipping\Method::codeS()
  * @param string|object $c
  */
@@ -62,7 +62,7 @@ function dfsm_code($c):string {return dfcf(function($c) {return dfsm_call_s($c, 
 
 /**
  * 2018-04-21 Без префикса «dfe_»
- * @used-by \Df\Shipping\Settings::prefix()
+ * @used-by Df\Shipping\Settings::prefix()
  * @uses \Df\Shipping\Method::codeS()
  * @param string|object $c
  */
