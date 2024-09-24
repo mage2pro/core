@@ -21,9 +21,9 @@ function df_path_abs(string $p):string {
  * @used-by df_media_path_rel()
  * @used-by df_module_name_by_path()
  * @used-by df_product_images_path_rel()
- * @used-by \Df\Qa\Failure\Error::preface()
- * @used-by \Df\Qa\Trace\Frame::file()
- * @used-by \Df\Sentry\Trace::info()
+ * @used-by Df\Qa\Failure\Error::preface()
+ * @used-by Df\Qa\Trace\Frame::file()
+ * @used-by Df\Sentry\Trace::info()
  */
 function df_path_rel(string $p, string $type = DL::ROOT):string {return df_trim_text_left(
 	df_trim_ds_left(df_path_n($p)), df_trim_ds_left(df_sys_path_r($type)->getAbsolutePath())
@@ -37,7 +37,7 @@ function df_path_rel(string $p, string $type = DL::ROOT):string {return df_trim_
  * 2024-06-09 "`df_adjust_paths_in_message` → `df_path_rel_g`": https://github.com/mage2pro/core/issues/410
  * @used-by df_xts()
  * @used-by df_xtsd()
- * @used-by \Df\Qa\Failure\Error::msg()
+ * @used-by Df\Qa\Failure\Error::msg()
  */
 function df_path_rel_g(string $m):string {
 	$bpLen = mb_strlen(BP); /** @var int $bpLen */
