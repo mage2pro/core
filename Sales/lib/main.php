@@ -9,8 +9,8 @@
  * The plugin detected only the order transactional email sending process.
  * The new solution detects all the sales transactional email sending processes:
  * for orders, invoices, credit memos, etc.
- * @used-by \Df\Payment\Block\Info::_toHtml()
- * @used-by \Dfe\Moip\CardFormatter::label()
+ * @used-by Df\Payment\Block\Info::_toHtml()
+ * @used-by Dfe\Moip\CardFormatter::label()
  */
 function df_sales_email_sending():bool {return !!df_find(function(array $i) {return df_contains(
 	dfa($i, 'class'), 'EmailSender', 'Email\Sender'
@@ -25,10 +25,10 @@ function df_sales_entity_type_index(string $t) {return array_search($t, array_va
 /**
  * 2016-01-11
  * @used-by df_sales_entity_type_index()
- * @used-by \Dfe\SalesSequence\Config\Affix\Element::rows()
- * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
- * @used-by \Dfe\SalesSequence\Config\Next\Backend::nextNumbersFromDb()
- * @used-by \Dfe\SalesSequence\Config\Next\Element::columns()
+ * @used-by Dfe\SalesSequence\Config\Affix\Element::rows()
+ * @used-by Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
+ * @used-by Dfe\SalesSequence\Config\Next\Backend::nextNumbersFromDb()
+ * @used-by Dfe\SalesSequence\Config\Next\Element::columns()
  * @return array(string => string)
  */
 function df_sales_entity_types():array {return [
