@@ -13,8 +13,8 @@
  * @see df_args()
  * @see dfa_unpack()
  * @used-by df_contains()
- * @used-by \Df\Payment\TM::req()
- * @used-by \Dfe\CheckoutCom\Response::a()
+ * @used-by Df\Payment\TM::req()
+ * @used-by Dfe\CheckoutCom\Response::a()
  * @return mixed|mixed[]
  */
 function df_arg(array $a) {return isset($a[0]) && !isset($a[1]) ? $a[0] : $a;}
