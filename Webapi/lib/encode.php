@@ -45,7 +45,7 @@
  * Замечание №4.
  * int, float, bool пока намеренно не трогаю, но и не использую пока нигде.
  *
- * @used-by \Df\Payment\PlaceOrderInternal::p()
+ * @used-by Df\Payment\PlaceOrderInternal::p()
  * @param mixed $v
  * @return string|int|float|bool|Stringable
  */
