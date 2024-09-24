@@ -15,8 +15,8 @@ use Magento\Sales\Model\ResourceModel\Order\Status\History\Collection as HC;
  * you should use @see df_mail_order() instead of @see df_mail_invoice()
  * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
  * @used-by dfp_mail()
- * @used-by \Df\Payment\W\Strategy\CapturePreauthorized::_handle()
- * @used-by \Dfe\CheckoutCom\Handler\Charge\Captured::process()
+ * @used-by Df\Payment\W\Strategy\CapturePreauthorized::_handle()
+ * @used-by Dfe\CheckoutCom\Handler\Charge\Captured::process()
  * @throws ME
  */
 function df_mail_invoice(I $i):void {
@@ -33,7 +33,7 @@ function df_mail_invoice(I $i):void {
  * you should use @see df_mail_order() instead of @see df_mail_invoice()
  * What is the difference between InvoiceSender and OrderSender? https://mage2.pro/t/1872
  * @used-by dfp_mail()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by Dfe\CheckoutCom\Handler\CustomerReturn::p()
  * @throws ME
  */
 function df_mail_order(O $o):void {
@@ -47,7 +47,7 @@ function df_mail_order(O $o):void {
  * @see \Magento\Shipping\Model\ShipmentNotifier
  * @see \Magento\Sales\Model\AbstractNotifier::notify()
  * @see df_mail_order()
- * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by Inkifi\Pwinty\Controller\Index\Index::execute()
  * @throws ME
  */
 function df_mail_shipment(Shipment $sh):void {
