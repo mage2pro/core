@@ -29,7 +29,7 @@ function df_date_create(int ...$a):ZD {
 }
 
 /**
- * @used-by \Df\Payment\Operation::customerDob()
+ * @used-by Df\Payment\Operation::customerDob()
  * @see df_date_to_db()
  * @return ZD|null
  * @throws Th
@@ -103,8 +103,8 @@ function df_date_min(ZD $d1, ZD $d2):ZD {return df_date_lt($d1, $d2) ? $d1 : $d2
 
 /**
  * 2016-07-20
- * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
- * @used-by \Dfe\AllPay\W\Event::time()
+ * @used-by Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @used-by Dfe\AllPay\W\Event::time()
  * @param string|null $fmt [optional]
  * @return ZD|null
  * @throws Th
@@ -174,7 +174,7 @@ function df_day_of_week_as_digit(ZD $date = null):int {return df_nat0(df_date($d
 
 /**
  * 2016-07-19
- * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()
+ * @used-by Dfe\AllPay\W\Event\Offline::expirationS()
  * @param ZD|int|null $d
  * @return int|null
  */
@@ -206,10 +206,10 @@ function df_days_off($s = null):array {return dfcf(function($s = null) {return d
  * @used-by df_date_from_timestamp_14()
  * @used-by df_dtss()
  * @used-by df_file_name()
- * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
- * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()
- * @used-by \Dfe\Vantiv\Charge::pCharge()
- * @used-by \TFC\GoogleShopping\Result::contents() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
+ * @used-by Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @used-by Dfe\AllPay\W\Event\Offline::expirationS()
+ * @used-by Dfe\Vantiv\Charge::pCharge()
+ * @used-by TFC\GoogleShopping\Result::contents() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/1)
  * @param string|null $fmt [optional]
  * @param Zend_Locale|string|null $l [optional]
  */
@@ -255,8 +255,8 @@ function df_is_day_off(ZD $d, $s = null):bool {return in_array(df_day_of_week_as
  * 2018-11-13
  * @see df_hour()
  * @see df_year()
- * @used-by \Df\StripeClone\Facade\Card::isActive()
- * @used-by \Dfe\TBCBank\Test\CaseT\Regular::t04()
+ * @used-by Df\StripeClone\Facade\Card::isActive()
+ * @used-by Dfe\TBCBank\Test\CaseT\Regular::t04()
  */
 function df_month(ZD $d = null):int {return df_nat0(df_date($d)->toString(ZD::MONTH, 'iso'));}
 
@@ -266,15 +266,15 @@ function df_month(ZD $d = null):int {return df_nat0(df_date($d)->toString(ZD::MO
  * 1) «DateTime::__construct(): Passing null to parameter #1 ($datetime) of type string is deprecated»:
  * https://github.com/mage2pro/core/issues/241
  * 2) The 2nd parameter (timezone) can be `null`: https://3v4l.org/m76dH
- * @used-by \Dfe\AllPay\Charge::pCharge()
- * @used-by \Dfe\CheckoutCom\Charge::pMetadata()
+ * @used-by Dfe\AllPay\Charge::pCharge()
+ * @used-by Dfe\CheckoutCom\Charge::pMetadata()
  * @param string|null $tz [optional]
  */
 function df_now(string $fmt, $tz = null):string {return (new DT('', !$tz ? null : new DTZ($tz)))->format($fmt);}
 
 /**
  * 2016-07-19 Портировал из Российской сборки Magento.  
- * @used-by \Df\Config\Source\WaitPeriodType::calculate()
+ * @used-by Df\Config\Source\WaitPeriodType::calculate()
  * @param null|string|int|ScopeA|Store $store [optional]
  */
 function df_num_calendar_days_by_num_working_days(ZD $startDate, int $numWorkingDays, $store = null):int {
@@ -300,7 +300,7 @@ function df_num_calendar_days_by_num_working_days(ZD $startDate, int $numWorking
 /**
  * 2016-07-19 Портировал из Российской сборки Magento.
  * @used-by df_days_left()
- * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @used-by Df\Sales\Observer\OrderPlaceAfter::execute()
  */
 function df_num_days(ZD $d1 = null, ZD $d2 = null):int {
 	$d1 = df_date($d1);
@@ -321,9 +321,9 @@ function df_num_days(ZD $d1 = null, ZD $d2 = null):int {
 /**
  * 2015-04-07
  * @used-by df_tomorrow()
- * @used-by \Dfe\Moip\P\Charge::p()
- * @used-by \Dfe\Moip\Test\CaseT\Payment\Boleto::pPayment()
- * @used-by \Dfe\Moip\Test\CaseT\Payment\OnlineBanking::pPayment()
+ * @used-by Dfe\Moip\P\Charge::p()
+ * @used-by Dfe\Moip\Test\CaseT\Payment\Boleto::pPayment()
+ * @used-by Dfe\Moip\Test\CaseT\Payment\OnlineBanking::pPayment()
  */
 function df_today_add(int $add):ZD {return df_date_reset_time(ZD::now()->addDay($add));}
 
@@ -343,8 +343,8 @@ function df_tomorrow():ZD {return df_today_add(1);}
  * 2018-11-13
  * @see df_hour()
  * @see df_month()
- * @used-by \Df\StripeClone\Facade\Card::isActive()
- * @used-by \Dfe\TBCBank\Test\CaseT\Regular::t04()
+ * @used-by Df\StripeClone\Facade\Card::isActive()
+ * @used-by Dfe\TBCBank\Test\CaseT\Regular::t04()
  */
 function df_year(ZD $date = null):int {return df_nat0(df_date($date)->toString(ZD::YEAR, 'iso'));}
 
