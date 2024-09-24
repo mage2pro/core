@@ -4,9 +4,9 @@ use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": h
 
 /**
  * @used-by df_wishlist_item_candidates()
- * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
- * @used-by \Df\Xml\G::importArray()
- * @used-by \Dfe\FacebookLogin\Customer::responseJson()
+ * @used-by Dfe\GoogleFont\Fonts\Sprite::datumPoints()
+ * @used-by Df\Xml\G::importArray()
+ * @used-by Dfe\FacebookLogin\Customer::responseJson()
  */
 function df_assert_array(array $a):array {return $a;}
 
@@ -31,8 +31,8 @@ function df_assert_count($expected, array $a, $m = null):array {/** @var int $v 
  * 2017-01-14 Отныне функция возвращает $v: это позволяет нам значительно сократить код вызова функции.
  * @used-by df_assert_address_type()
  * @used-by df_date_from_timestamp_14()
- * @used-by \Dfe\Zoho\App::title()
- * @used-by \Dfe\Omise\W\Event\Charge\Complete::isPending()
+ * @used-by Dfe\Zoho\App::title()
+ * @used-by Dfe\Omise\W\Event\Charge\Complete::isPending()
  * @param string|float|int|bool|null $v
  * @param array(string|float|int|bool|null) $a
  * @param string|T $m [optional]
