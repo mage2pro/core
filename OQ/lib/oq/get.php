@@ -14,8 +14,8 @@ use Magento\Sales\Model\Order\Address as OA;
  * "Improve @see \Magento\Payment\Model\Checks\CanUseForCountry:
  * it should give priority to the shipping country over the billing country for my modules":
  * https://github.com/mage2pro/core/issues/62
- * @used-by \Df\Payment\Plugin\Model\Checks\CanUseForCountry::aroundIsApplicable()
- * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
+ * @used-by Df\Payment\Plugin\Model\Checks\CanUseForCountry::aroundIsApplicable()
+ * @used-by Df\Payment\Settings::applicableForQuoteByCountry()
  * @param O|Q $oq
  */
 function df_oq_country_sb($oq):string {return DfQ::runOnFreshAC(function() use($oq) {return
@@ -28,10 +28,10 @@ function df_oq_country_sb($oq):string {return DfQ::runOnFreshAC(function() use($
 /**
  * 2016-11-15
  * @used-by df_oqi_currency_c()
- * @used-by \Df\Payment\Currency::fromOrder()
- * @used-by \Df\Payment\Currency::oq()
- * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Part::amount()
- * @used-by \Dfe\Moip\Test\Order::amount()
+ * @used-by Df\Payment\Currency::fromOrder()
+ * @used-by Df\Payment\Currency::oq()
+ * @used-by Dfe\Klarna\Api\Checkout\V2\Charge\Part::amount()
+ * @used-by Dfe\Moip\Test\Order::amount()
  * @param O|Q $oq
  * @throws DFE
  */
@@ -43,7 +43,7 @@ function df_oq_currency_c($oq):string {return df_is_o($oq) ? $oq->getOrderCurren
 
 /**
  * 2016-03-09
- * @used-by \Df\Payment\Operation\Source::customerName()
+ * @used-by Df\Payment\Operation\Source::customerName()
  * @param O|Q $oq
  */
 function df_oq_customer_name($oq):string {return dfcf(function($oq) {
@@ -83,7 +83,7 @@ function df_oq_email($oq):?string {return $oq->getCustomerEmail();}
 
 /**
  * 2018-11-14
- * @used-by \Df\Payment\Metadata::vars()
+ * @used-by Df\Payment\Metadata::vars()
  * @param O|Q $oq
  */
 function df_oq_iid($oq):string {/** @var string $r */
@@ -112,8 +112,8 @@ function df_oq_iid($oq):string {/** @var string $r */
  * https://en.wikipedia.org/wiki/Null_object_pattern
  * An empty order address can be detected by a `null`-response on
  * @see \Magento\Sales\Model\Order\Address::getParentId()
- * @used-by \Df\Payment\Operation\Source::addressS()
- * @used-by \Dfe\Stripe\Init\Action::need3DS()
+ * @used-by Df\Payment\Operation\Source::addressS()
+ * @used-by Dfe\Stripe\Init\Action::need3DS()
  * @param O|Q $oq
  * @return OA|QA|null
  */
@@ -142,7 +142,7 @@ function df_oq_sa($oq, bool $empty = false) {/** @var OA|QA|null $r */
 
 /**
  * 2017-04-20
- * @used-by \Dfe\Moip\P\Preorder::pAmount()
+ * @used-by Dfe\Moip\P\Preorder::pAmount()
  * @param O|Q $oq
  */
 function df_oq_shipping_amount($oq):float {return df_is_o($oq) ? $oq->getShippingAmount() : (
@@ -151,7 +151,7 @@ function df_oq_shipping_amount($oq):float {return df_is_o($oq) ? $oq->getShippin
 
 /**
  * 2017-04-20
- * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Shipping::p()
+ * @used-by Dfe\Klarna\Api\Checkout\V2\Charge\Shipping::p()
  * @param O|Q $oq
  */
 function df_oq_shipping_desc($oq):float {return df_is_o($oq) ? $oq->getShippingDescription() : (
