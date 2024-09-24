@@ -7,9 +7,9 @@ use Magento\Framework\View\Element\Template as T;
 /**
  * @see df_cms_block_get()
  * @used-by df_block_output()
- * @used-by \BlushMe\Checkout\Block\Extra\Item::part()
- * @used-by \Dfe\Dynamics365\Button::getElementHtml()
- * @used-by \Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
+ * @used-by BlushMe\Checkout\Block\Extra\Item::part()
+ * @used-by Dfe\Dynamics365\Button::getElementHtml()
+ * @used-by Dfe\Klarna\Observer\ShortcutButtonsContainer::execute()
  * @param string|O|null $c
  * 2015-12-14
  * $c может быть как объектом, так и строкой: https://3v4l.org/udMMH
