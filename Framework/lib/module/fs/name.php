@@ -43,8 +43,8 @@ use SimpleXMLElement as X;
  * @used-by df_module_path()
  * @used-by df_module_path_etc()
  * @used-by df_test_file()
- * @used-by \Df\Intl\Js::_toHtml()
- * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
+ * @used-by Df\Intl\Js::_toHtml()
+ * @used-by Dfe\Vantiv\Test\CaseT\Charge::req()
  * @param string|object|null $m
  * @throws InvalidArgumentException
  */
