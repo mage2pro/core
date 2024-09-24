@@ -2,10 +2,10 @@
 use Magento\Config\Model\Config\Source\Yesno as YN;
 /**
  * 2015-12-28 Преобразует при необходимости простой одномерный массив в список опций.
- * @used-by \Df\Framework\Form\Element\Fieldset::select()
- * @used-by \Df\Framework\Form\Element\Select\Range::getValues()
- * @used-by \KingPalm\B2B\Block\Registration::region()
- * @used-by \KingPalm\B2B\Block\Registration::select() 
+ * @used-by Df\Framework\Form\Element\Fieldset::select()
+ * @used-by Df\Framework\Form\Element\Select\Range::getValues()
+ * @used-by KingPalm\B2B\Block\Registration::region()
+ * @used-by KingPalm\B2B\Block\Registration::select() 
  * @param string[] $a
  * @return array(array(string => string|int))
  */
@@ -17,9 +17,9 @@ function df_a_to_options(array $a):array {return is_null($f = df_first($a)) || i
  * 2018-01-29
  * @see df_option_0()
  * @used-by df_option_0()
- * @used-by \Df\Config\Source\API::map()
- * @used-by \Df\Config\Source\Block::map()
- * @used-by \Dfe\ZohoCRM\Source\Domain::map()
+ * @used-by Df\Config\Source\API::map()
+ * @used-by Df\Config\Source\Block::map()
+ * @used-by Dfe\ZohoCRM\Source\Domain::map()
  * @param array(string => string) $tail
  * @return array(int => string)
  */
@@ -41,9 +41,9 @@ function df_map_to_options(array $m):array {return array_map('df_option', array_
 
 /**
  * 2015-11-13 Делает то же, что и @see df_map_to_options(), но дополнительно локализует значения label'.
- * @used-by \Df\Config\Source::toOptionArray()
- * @used-by \Df\Directory\FE\Currency::getValues()
- * @used-by \Dfe\Frontend\ConfigSource\Visibility\Product\VD::toOptionArray()  
+ * @used-by Df\Config\Source::toOptionArray()
+ * @used-by Df\Directory\FE\Currency::getValues()
+ * @used-by Dfe\Frontend\ConfigSource\Visibility\Product\VD::toOptionArray()  
  * @uses df_option()
  * @param array(string|int => string) $m
  * @return array(array(string => string|int))
@@ -73,7 +73,7 @@ function df_option($v, string $l):array {return ['label' => $l, 'value' => $v];}
 /**
  * 2020-02-02
  * @see df_map_0()
- * @used-by \Df\Framework\Form\Element\Fieldset::select()
+ * @used-by Df\Framework\Form\Element\Fieldset::select()
  * @param array(array(string => string)) $tail
  * @param string|null $l [optional]
  * @return array(int => string)
@@ -107,8 +107,8 @@ function df_options_to_map(array $options):array {return array_column($options, 
 
 /**
  * 2015-11-17
- * @used-by \Df\Config\Source\EnableYN::toOptionArray()
- * @used-by \Df\Framework\Form\Element\Fieldset::yesNo()
+ * @used-by Df\Config\Source\EnableYN::toOptionArray()
+ * @used-by Df\Framework\Form\Element\Fieldset::yesNo()
  * @return array(array(string => string|int))
  */
 function df_yes_no():array {/** @var YN $o */$o = df_o(YN::class); return $o->toOptionArray();}
