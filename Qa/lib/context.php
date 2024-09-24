@@ -2,7 +2,7 @@
 /**
  * 2020-09-25
  * @used-by df_log_l()
- * @used-by \Df\Qa\Failure\Error::preface()
+ * @used-by Df\Qa\Failure\Error::preface()
  * @return array(string => mixed)
  */
 function df_context():array {return
