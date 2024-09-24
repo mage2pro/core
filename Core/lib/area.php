@@ -24,13 +24,13 @@ function df_area_code($onE = null) {return df_try(function() {return df_app_stat
  * @used-by df_is_backend()
  * @used-by df_is_frontend()
  * @used-by df_is_rest()
- * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  */
 function df_area_code_is(string ...$v):bool {return in_array(df_area_code(), $v);}
 
 /**
  * 2019-06-21
- * @used-by \KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
+ * @used-by KingPalm\B2B\Setup\V140\MoveDataToAddress::p()
  */
 function df_area_code_set_b():void {df_app_state()->setAreaCode(A::AREA_ADMINHTML);}
 
@@ -46,7 +46,7 @@ function df_area_code_set_d():void {df_area_code() || df_area_code_set_f();}
 /**
  * 2019-06-21
  * @used-by df_area_code_set_d()
- * @used-by \Df\Core\TestCase::setUp()
+ * @used-by Df\Core\TestCase::setUp()
  */
 function df_area_code_set_f():void {df_app_state()->setAreaCode(A::AREA_FRONTEND);}
 
@@ -78,16 +78,16 @@ function df_area_code_set_f():void {df_app_state()->setAreaCode(A::AREA_FRONTEND
  * @used-by df_product_current()
  * @used-by df_session()
  * @used-by df_store()
- * @used-by \Df\Config\Settings::scope()
- * @used-by \Df\Framework\Form\Element\Fieldset::addField()
- * @used-by \Dfe\GingerPaymentsBase\Block\Info::msgUnconfirmed()
- * @used-by \Df\Payment\Block\Info::getIsSecureMode()
- * @used-by \Df\Payment\Block\Info::getTemplate()
- * @used-by \Df\Payment\Method::getFormBlockType()
- * @used-by \Df\Payment\Method::getTitle()
- * @used-by \Df\Payment\Method::isAvailable()
- * @used-by \Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
- * @used-by \Dfe\Sift\Observer::f()
+ * @used-by Df\Config\Settings::scope()
+ * @used-by Df\Framework\Form\Element\Fieldset::addField()
+ * @used-by Dfe\GingerPaymentsBase\Block\Info::msgUnconfirmed()
+ * @used-by Df\Payment\Block\Info::getIsSecureMode()
+ * @used-by Df\Payment\Block\Info::getTemplate()
+ * @used-by Df\Payment\Method::getFormBlockType()
+ * @used-by Df\Payment\Method::getTitle()
+ * @used-by Df\Payment\Method::isAvailable()
+ * @used-by Df\Sales\Plugin\Model\Order\Address\Renderer::aroundFormat()
+ * @used-by Dfe\Sift\Observer::f()
  */
 function df_is_backend():bool {return df_area_code_is(A::AREA_ADMINHTML) || df_is_ajax() && df_backend_user();}
 
