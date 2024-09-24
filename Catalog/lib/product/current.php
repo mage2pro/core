@@ -18,7 +18,7 @@ function df_product_current($onError = null) {return df_try(function() {return
 
 /**
  * 2019-11-15
- * @used-by \Dfe\Markdown\Modifier::modifyData()
+ * @used-by Dfe\Markdown\Modifier::modifyData()
  * @return int|null
  */
 function df_product_current_id() {return !($p = df_product_current() /** @var P $p */) ? null : $p->getId();}
