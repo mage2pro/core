@@ -13,8 +13,8 @@ function df_sales_seq_m():Manager {return df_o(Manager::class);}
 /**
  * 2016-01-26
  * @used-by df_sales_seq_next()
- * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
- * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::aroundGetSequence()
+ * @used-by Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
+ * @used-by Dfe\SalesSequence\Plugin\Model\Manager::aroundGetSequence()
  * @param int|string|null|bool|StoreInterface $s [optional]
  * @return MetaM|Meta
  */
@@ -42,7 +42,7 @@ function df_sales_seq_meta(string $entityType, $s = null) {return dfcf(function(
  * Наша функция не имеет сторонних эффектов.
  * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/SalesSequence/Model/Sequence.php#L83
  * https://github.com/magento/magento2/blob/d50ee54/app/code/Magento/SalesSequence/Setup/InstallSchema.php#L123-L129
- * @used-by \Dfe\SalesSequence\Config\Next\Backend::nextNumbersFromDb()
+ * @used-by Dfe\SalesSequence\Config\Next\Backend::nextNumbersFromDb()
  * @param string $entityTypeCode
  * @param int|string|null|bool|StoreInterface $store [optional]
  */
