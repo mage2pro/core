@@ -7,7 +7,7 @@ use Magento\User\Model\User;
 
 /**
  * 2016-01-07
- * @used-by \Dfe\GoogleBackendLogin\Plugin\Backend\App\AbstractAction::beforeDispatch()
+ * @used-by Dfe\GoogleBackendLogin\Plugin\Backend\App\AbstractAction::beforeDispatch()
  */
 function df_backend_auth():Auth {return df_o(Auth::class);}
 
@@ -25,7 +25,7 @@ function df_backend_session():SessionB {return df_o(SessionB::class);}
  * Если мы не в административной части, то df_backend_session()->getUser() просто вернёт null.
  * @used-by df_is_backend()
  * @used-by df_sentry_m()
- * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
+ * @used-by MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @return User|null
  */
 function df_backend_user() {return
@@ -39,7 +39,7 @@ function df_backend_user() {return
 
 /**
  * 2020-02-11
- * @used-by \Dfe\Sift\Session::get()
+ * @used-by Dfe\Sift\Session::get()
  * @return SessionC|DfSessionC|SessionB
  */
 function df_session() {return df_is_backend() ? df_backend_session() : df_customer_session();}
