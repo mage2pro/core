@@ -21,8 +21,8 @@ function df_oq($i) {return df_is_oq($i) ? $i : (df_is_oi($i) ? $i->getOrder() : 
 
 /**
  * 2017-03-19
- * @used-by \Df\Payment\Method::validate()
- * @used-by \Df\Payment\Operation::oq()
+ * @used-by Df\Payment\Method::validate()
+ * @used-by Df\Payment\Operation::oq()
  * @param II|OP|QP $p
  * @return O|Q
  * @throws DFE
