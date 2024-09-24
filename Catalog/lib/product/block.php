@@ -10,6 +10,6 @@ function df_product_b():B {return df_o(B::class);}
 
 /**
  * 2020-10-28
- * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
+ * @used-by TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
  */
 function df_product_gallery_b():G {return df_o(G::class);}
