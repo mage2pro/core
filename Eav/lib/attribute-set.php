@@ -15,7 +15,7 @@ function df_att_set($a) {return $a instanceof IAS ? $a : df_att_set_r()->get(df_
 /**
  * 2019-09-04
  * @used-by ikf_is_mediaclip_product()
- * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
+ * @used-by Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @param IAS|_AS|P|int $a
  */
 function df_att_set_name($a):string {return df_att_set($a)->getAttributeSetName();}
