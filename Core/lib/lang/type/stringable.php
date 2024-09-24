@@ -4,8 +4,8 @@
  * @see df_string()
  * @used-by df_assert_stringable()
  * @used-by dfw_encode()
- * @used-by \Df\Framework\W\Result\Json::prepare()
- * @used-by \Df\Qa\Dumper::dumpObject()
+ * @used-by Df\Framework\W\Result\Json::prepare()
+ * @used-by Df\Qa\Dumper::dumpObject()
  */
 function df_is_stringable($v):bool {return !is_array($v) &&
 	/**
