@@ -35,7 +35,7 @@ function df_is_sales_doc($v):bool {return df_is_oq($v) || df_is_credit_memo($v) 
 /**
  * 2020-03-13
  * @see df_oq()
- * @used-by \Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems() tradefurniturecompany.co.uk
+ * @used-by Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems() tradefurniturecompany.co.uk
  * @param C|CI|I|II|O|OI|Q|QI $v
  * @return C|I|O|Q
  */
