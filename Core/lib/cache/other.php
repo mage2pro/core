@@ -23,14 +23,14 @@ function df_cache_enabled(string $type):bool {
  * 2022-11-23 `callable` as an argument type is supported by PHP ≥ 5.4:
  * https://github.com/mage2pro/core/issues/174#user-content-callable
  * @used-by dfe_portal_stripe_customers()
- * @used-by \Df\API\Client::p()
- * @used-by \Dfe\GingerPaymentsBase\Api::idealBanks()
- * @used-by \Dfe\GoogleFont\Controller\Index\Index::execute()
- * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
- * @used-by \Dfe\Robokassa\Api\Options::p()
- * @used-by \Doormall\Shipping\Partner\Entity::locations()
- * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
- * @used-by \Wolf\Filter\Controller\Index\Change::execute()
+ * @used-by Df\API\Client::p()
+ * @used-by Dfe\GingerPaymentsBase\Api::idealBanks()
+ * @used-by Dfe\GoogleFont\Controller\Index\Index::execute()
+ * @used-by Df\Payment\Observer\DataProvider\SearchResult::execute()
+ * @used-by Dfe\Robokassa\Api\Options::p()
+ * @used-by Doormall\Shipping\Partner\Entity::locations()
+ * @used-by Wolf\Filter\Block\Navigation::hDropdowns()
+ * @used-by Wolf\Filter\Controller\Index\Change::execute()
  * @param string|string[] $k
  * @param string[] $tags [optional]
  * @param mixed ...$args [optional]
@@ -68,8 +68,8 @@ function df_cache_get_simple($k, callable $f, array $tags = [], ...$args) {retur
 
 /**
  * 2015-08-13
- * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
- * @used-by \Dfe\Color\Image::dominant()
+ * @used-by Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @used-by Dfe\Color\Image::dominant()
  * @return string|false
  */
 function df_cache_load(string $key) {return df_cache()->load($key);}
@@ -78,8 +78,8 @@ function df_cache_load(string $key) {return df_cache()->load($key);}
  * 2016-07-18
  * 2017-02-01 It will cache forever if $lifeTime is null: https://mage2.pro/t/2584
  * @used-by df_cache_get_simple()
- * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
- * @used-by \Dfe\Color\Image::dominant()
+ * @used-by Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @used-by Dfe\Color\Image::dominant()
  * @param mixed $data
  * @param string[] $tags [optional]
  * @param int|null $lifeTime [optional]
