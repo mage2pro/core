@@ -4,7 +4,7 @@ use Magento\Store\App\Response\Redirect as ResponseRedirect;
 
 /**
  * 2017-11-17
- * @used-by \Df\Payment\W\Action::execute()
+ * @used-by Df\Payment\W\Action::execute()
  */
 function df_is_redirect():bool {return df_response()->isRedirect();}
 
@@ -55,19 +55,19 @@ function df_redirect(string $path, array $p = []) {
 
 /**
  * 2019-11-21
- * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
+ * @used-by RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  */
 function df_redirect_back():void {df_response()->setRedirect(df_response_redirect()->getRefererUrl());}
 
 /**
  * 2020-05-27
- * @used-by \BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
+ * @used-by BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
  */
 function df_redirect_to_checkout():void {df_redirect('checkout');}
 
 /**
  * 2020-10-20
- * @used-by \BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
+ * @used-by BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
  */
 function df_redirect_to_home():void {df_redirect('/');}
 
@@ -83,10 +83,10 @@ function df_redirect_to_home():void {df_redirect('/');}
  * https://mail.google.com/mail/u/0/#inbox/FMfcgxwChSGRJmWZrRBLWpcnXKbQZvjw
  * So I have reverted the code for `df_redirect_to_payment`,
  * but preserved it for @see df_redirect_to_success()
- * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
- * @used-by \Df\Payment\CustomerReturn::execute()
- * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
- * @used-by \TFC\Realex\Redirector::restoreQuote() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
+ * @used-by Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
+ * @used-by Df\Payment\CustomerReturn::execute()
+ * @used-by Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by TFC\Realex\Redirector::restoreQuote() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
  */
 function df_redirect_to_payment():void {df_redirect('checkout', ['_fragment' => 'payment']);}
 
@@ -95,9 +95,9 @@ function df_redirect_to_payment():void {df_redirect('checkout', ['_fragment' => 
  * 2018-12-17
  * I have added the @uses df_order_last() condition
  * because otherwise the Yandex.Kassa payment module does not return a proper response to PSP.
- * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
- * @used-by \Df\Payment\CustomerReturn::execute()
- * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
+ * @used-by Df\Payment\CustomerReturn::execute()
+ * @used-by Df\Payment\W\Strategy\ConfirmPending::_handle()
  */
 function df_redirect_to_success():void {df_order_last(false) ? df_redirect('checkout/onepage/success') : null;}
 
