@@ -1,5 +1,4 @@
 <?php
-use Magento\Framework\Phrase as P;
 /**
  * 2015-09-29
  * @used-by df_map_to_options_t()
