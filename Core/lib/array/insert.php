@@ -8,8 +8,8 @@
  * 2016-11-23
  * Достоинство этой функции перед @uses array_splice() ещё и в отсутствии требования передачи первого параметра по ссылке.
  * 2016-11-24 Отныне функция правильно работает с ассоциативными массивами.
- * @used-by \Df\Sso\Source\Button\Type\UNL::map()
- * @used-by \Dfe\SecurePay\Signer::sign()
+ * @used-by Df\Sso\Source\Button\Type\UNL::map()
+ * @used-by Dfe\SecurePay\Signer::sign()
  * @param mixed|mixed[] $add
  */
 function dfa_insert(array $a, int $pos, $add):array {
