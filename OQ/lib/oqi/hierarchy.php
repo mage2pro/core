@@ -7,7 +7,7 @@ use Magento\Sales\Model\Order\Item as OI;
 /**
  * 2017-04-20
  * @used-by df_oqi_leafs()
- * @used-by \Yaman\Ordermotion\Observer::BuildOrderDetail()
+ * @used-by Yaman\Ordermotion\Observer::BuildOrderDetail()
  * @param OI|QI $i
  */
 function df_oqi_is_leaf($i):bool {return df_is_oi($i) ? !$i->getChildrenItems() : (
@@ -36,12 +36,12 @@ function df_oqi_is_leaf($i):bool {return df_is_oi($i) ? !$i->getChildrenItems() 
  *
  * 2022-11-22 $locale используется для упорядочивания элементов.
  *
- * @used-by \Df\Payment\Operation::oiLeafs()
- * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
- * @used-by \Dfe\Moip\Test\Order::pItems()
- * @used-by \Dfe\Sift\Observer\Sales\OrderPlaceAfter::execute()
- * @used-by \Inkifi\Consolidation\Processor::pids()
- * @used-by \Stock2Shop\OrderExport\Payload::items()
+ * @used-by Df\Payment\Operation::oiLeafs()
+ * @used-by Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
+ * @used-by Dfe\Moip\Test\Order::pItems()
+ * @used-by Dfe\Sift\Observer\Sales\OrderPlaceAfter::execute()
+ * @used-by Inkifi\Consolidation\Processor::pids()
+ * @used-by Stock2Shop\OrderExport\Payload::items()
  * @param O|Q $oq
  * @return array(int => mixed)|OI[]|QI[]
  */
@@ -98,8 +98,8 @@ function df_oqi_roots_m($oq, Closure $f):array {return array_map($f, df_oqi_root
  * @used-by df_oqi_tax_percent()
  * @used-by df_oqi_url()
  * @used-by omx_parse_sku()
- * @used-by \Dfe\TwoCheckout\LineItem\Product::options()
- * @used-by \Yaman\Ordermotion\Observer::BuildOrderDetail()
+ * @used-by Dfe\TwoCheckout\LineItem\Product::options()
+ * @used-by Yaman\Ordermotion\Observer::BuildOrderDetail()
  * @param OI|QI $i
  * @return OI|QI
  */
