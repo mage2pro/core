@@ -20,7 +20,7 @@ function df_domain(string $u, bool $www = false, $throw = true) {return
 
 /**
  * 2016-05-31
- * @used-by \Dfe\Amazon\FE\JsOrigin::url()
+ * @used-by Dfe\Amazon\FE\JsOrigin::url()
  */
 function df_url_base(string $u):string {return df_first(df_url_bp($u));}
 
@@ -57,9 +57,9 @@ function df_url_bp(string $u):array {
  * 2020-01-19 The previous (also working) solution was `df_last(df_url_bp($u))`.
  * @see df_url_bp()
  * @used-by df_store_code_from_url()
- * @used-by \Df\API\Client::_p()
- * @used-by \Wolf\Filter\Block\Navigation::selectedPath()
- * @used-by \Frugue\Store\Plugin\UrlRewrite\Model\StoreSwitcher\RewriteUrl::aroundSwitch()
+ * @used-by Df\API\Client::_p()
+ * @used-by Wolf\Filter\Block\Navigation::selectedPath()
+ * @used-by Frugue\Store\Plugin\UrlRewrite\Model\StoreSwitcher\RewriteUrl::aroundSwitch()
  */
 function df_url_path(string $u):string {return df_trim_ds(df_request_i($u)->getPathInfo());}
 
@@ -87,7 +87,7 @@ function df_url_trim_index(string $u):string {
  * 2016-05-30
  * @used-by df_domain()
  * @used-by df_replace_store_code_in_url()
- * @used-by \Dfe\FacebookLogin\Customer::requestBasic()
+ * @used-by Dfe\FacebookLogin\Customer::requestBasic()
  * @param F|bool|mixed $throw [optional]
  * @return zUri|zUriH|mixed
  * @throws Th|zUriE
