@@ -4,7 +4,7 @@
  * @used-by df_asset_create()
  * @used-by df_file_ext_def()
  * @used-by df_img_is_jpeg()
- * @used-by \TFC\Image\Command\C1::scan()
+ * @used-by TFC\Image\Command\C1::scan()
  */
 function df_file_ext(string $f):string {return pathinfo($f, PATHINFO_EXTENSION);}
 
