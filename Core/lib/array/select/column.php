@@ -15,7 +15,7 @@
  * 3) https://php.net/manual/en/language.types.iterable.php
  * @used-by df_index()
  * @used-by df_product_images_additional()
- * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
+ * @used-by Wolf\Filter\Block\Navigation::hDropdowns()
  * @param Traversable|array(int|string => _DO|array(string => mixed)) $c
  * @param string|callable $fv
  * @param string|callable|null $fk [optional]
