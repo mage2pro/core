@@ -7,9 +7,9 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by df_locale()
  * @used-by df_replace_store_code_in_url()
  * @used-by df_store_code_from_url()
- * @used-by \Df\OAuth\FE\Button::onFormInitialized()
- * @used-by \Df\Sentry\Client::get_http_data()
- * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
+ * @used-by Df\OAuth\FE\Button::onFormInitialized()
+ * @used-by Df\Sentry\Client::get_http_data()
+ * @used-by Dfe\BlackbaudNetCommunity\Url::get()
  */
 function df_current_url():string {return df_url_o()->getCurrentUrl();}
 
@@ -25,9 +25,9 @@ function df_current_url():string {return df_url_o()->getCurrentUrl();}
  * @used-by df_sentry()
  * @used-by dfe_modules_log()
  * @used-by dfp_refund()
- * @used-by \Df\Payment\Metadata::vars()
- * @used-by \Dfe\Dynamics365\API\Client::headers()
- * @used-by \Dfe\Vantiv\Charge::pCharge()
+ * @used-by Df\Payment\Metadata::vars()
+ * @used-by Dfe\Dynamics365\API\Client::headers()
+ * @used-by Dfe\Vantiv\Charge::pCharge()
  * @param int|string|null|bool|IStore $s [optional]
  * @return string|null
  */
