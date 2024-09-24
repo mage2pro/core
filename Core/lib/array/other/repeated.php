@@ -10,6 +10,6 @@
  * formerly array has been copied and non-unique elements have been removed (without packing the array afterwards),
  * but now a new array is built by adding the unique elements. This can result in different numeric indexes.
  * https://php.net/manual/function.array-unique.php#refsect1-function.array-unique-changelog
- * @used-by \Df\Config\Backend\ArrayT::processI()
+ * @used-by Df\Config\Backend\ArrayT::processI()
  */
 function dfa_repeated(array $a):array {return array_values(array_unique(array_diff_key($a, array_unique($a))));}
