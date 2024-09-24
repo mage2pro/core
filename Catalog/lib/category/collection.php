@@ -35,7 +35,7 @@ function df_category_children($c, $a = '*'):CC {return
 
 /**
  * 2021-11-30
- * @used-by \TFC\GoogleShopping\Att\Brand::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/8)
+ * @used-by TFC\GoogleShopping\Att\Brand::v() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/8)
  * @param C|int $c
  * @return array(int => string)
  */
