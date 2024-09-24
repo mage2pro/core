@@ -34,7 +34,7 @@ function dfr_prop($o, string $n):RP {
  * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @see df_call_parent()
  * @see dfr_prop_set()
- * @used-by \Df\Framework\Config\Dom\L::init()
+ * @used-by Df\Framework\Config\Dom\L::init()
  * @param object $o
  * @return mixed
  */
@@ -47,7 +47,7 @@ function dfr_prop_get($o, string $n) {return dfr_prop($o, $n)->getValue($o);}
  * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @see df_call_parent()
  * @see dfr_prop_get()
- * @used-by \Df\Framework\Config\Dom\L::init()
+ * @used-by Df\Framework\Config\Dom\L::init()
  * @param object $o
  * @param mixed $v
  */
