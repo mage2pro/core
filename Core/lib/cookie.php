@@ -43,7 +43,7 @@ function df_cookie_metadata_standard():PublicCookieMetadata {
  * 2016-12-02
  * 1) Устанавливает куку, которая будет доступна из JavaScript.
  * 2) Cookie vs Session: http://stackoverflow.com/questions/6253633
- * @used-by \Dfe\AmazonLogin\Controller\Index\Index::postProcess()
+ * @used-by Dfe\AmazonLogin\Controller\Index\Index::postProcess()
  */
 function df_cookie_set_js(string $k, string $v):void {df_cookie_m()->setPublicCookie($k, $v, df_cookie_metadata_standard());}
 
