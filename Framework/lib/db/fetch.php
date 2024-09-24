@@ -24,8 +24,8 @@ function df_fetch(string $t, $cols = '*', $compareK = null, $compareV = null):ar
 /**
  * 2015-04-13
  * @used-by df_fetch_col_int()
- * @used-by \Df\Customer\AddAttribute\Customer::p()
- * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
+ * @used-by Df\Customer\AddAttribute\Customer::p()
+ * @used-by Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
  * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int[]|string[]
@@ -48,7 +48,7 @@ function df_fetch_col(string $t, string $col, $compareK = null, $compareV = null
  * 2015-04-13
  * @used-by df_att_code2id()
  * @used-by df_fetch_col_int_unique()
- * @used-by \Mangoit\MediaclipHub\Model\ResourceModel\Modules::idByCode()
+ * @used-by Mangoit\MediaclipHub\Model\ResourceModel\Modules::idByCode()
  * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int[]|string[]
@@ -72,7 +72,7 @@ function df_fetch_col_int_unique(string $t, string $cSelect, $compareK = null, $
 /**
  * 2016-01-26 «How to get the maximum value of a database table's column programmatically»: https://mage2.pro/t/557
  * @used-by df_customer_att_pos_next()
- * @used-by \Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
+ * @used-by Dfe\SalesSequence\Config\Next\Backend::updateNextNumber()
  * @param string|null|array(string => mixed) $compareK [optional]
  * @param int|string|int[]|string[]|null $compareV [optional]
  * @return int|float
@@ -105,10 +105,10 @@ function df_fetch_col_max(string $t, string $col, $compareK = null, $compareV = 
 /**
  * 2015-11-03
  * @used-by df_fetch_one_int()
- * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
- * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
- * @used-by \Dfe\Markdown\DbRecord::__construct()
- * @used-by \Inkifi\Consolidation\Processor::mcid()
+ * @used-by Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
+ * @used-by Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
+ * @used-by Dfe\Markdown\DbRecord::__construct()
+ * @used-by Inkifi\Consolidation\Processor::mcid()
  * @param string|string[] $cols
  * @param array(string => string) $compare
  * @return string|null|array(string => mixed)
@@ -132,8 +132,8 @@ function df_fetch_one(string $t, $cols, array $compare) {
 
 /**
  * 2015-11-03
- * @used-by \Dfe\Markdown\DbRecord::__construct()
- * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
+ * @used-by Dfe\Markdown\DbRecord::__construct()
+ * @used-by Mineralair\Core\Controller\Modal\Index::execute()
  * @param array(string => string) $compare
  * @return int|null
  */
