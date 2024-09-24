@@ -18,9 +18,9 @@ use Magento\Framework\Filesystem\File\WriteInterface as IFileWrite;
  * 2020-02-14 If $append is `true`, then $contents will be written on a new line.
  * @used-by df_report()
  * @used-by df_sync()
- * @used-by \Dfe\GoogleFont\Font\Variant::ttfPath()
- * @used-by \Dfe\GoogleFont\Fonts\Png::create()
- * @used-by \Dfe\GoogleFont\Fonts\Sprite::draw()
+ * @used-by Dfe\GoogleFont\Font\Variant::ttfPath()
+ * @used-by Dfe\GoogleFont\Fonts\Png::create()
+ * @used-by Dfe\GoogleFont\Fonts\Sprite::draw()
  * @param string|string[] $p
  */
 function df_file_write($p, string $contents, bool $append = false):void {
