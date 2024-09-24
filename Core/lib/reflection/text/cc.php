@@ -7,9 +7,9 @@
  * @used-by df_class_suffix()
  * @used-by df_con_hier_suf()
  * @used-by df_con_hier_suf_ta()
- * @used-by \Df\Payment\W\F::c()
- * @used-by \Dfe\AllPay\Method::getInfoBlockType()
- * @used-by \Dfe\TwoCheckout\Handler::p()
+ * @used-by Df\Payment\W\F::c()
+ * @used-by Dfe\AllPay\Method::getInfoBlockType()
+ * @used-by Dfe\TwoCheckout\Handler::p()
  * @param string|string[] ...$a
  */
 function df_cc_class(...$a):string {return implode('\\', df_clean(dfa_flatten($a)));}
@@ -21,10 +21,10 @@ function df_cc_class(...$a):string {return implode('\\', df_clean(dfa_flatten($a
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @see df_cc_class()
  * @used-by df_con_hier_suf_ta()
- * @used-by \Df\Framework\Plugin\App\Router\ActionList::aroundGet()
- * @used-by \Df\Payment\W\F::try_()
- * @used-by \Dfe\CheckoutCom\Handler::p()
- * @used-by \Dfe\Moip\Method::getInfoBlockType()
+ * @used-by Df\Framework\Plugin\App\Router\ActionList::aroundGet()
+ * @used-by Df\Payment\W\F::try_()
+ * @used-by Dfe\CheckoutCom\Handler::p()
+ * @used-by Dfe\Moip\Method::getInfoBlockType()
  * @param string|string[] ...$a
  */
 function df_cc_class_uc(...$a):string {return df_cc_class(df_ucfirst(dfa_flatten($a)));}
@@ -34,7 +34,7 @@ function df_cc_class_uc(...$a):string {return df_cc_class(df_ucfirst(dfa_flatten
  * @used-by df_caller_m()
  * @used-by df_caller_mf()
  * @used-by df_rest_action()
- * @used-by \Df\Qa\Trace\Frame::method()
+ * @used-by Df\Qa\Trace\Frame::method()
  * @param string|object|null|array(object|string)|array(string = string) $a1
  * @param string|null $a2 [optional]
  */
