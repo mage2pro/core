@@ -16,9 +16,9 @@ function df_currencies_codes_allowed($s = null):array {return df_store($s)->getA
 
 /**
  * 2016-09-05
- * @used-by \Df\Directory\FE\Currency::map()
- * @used-by \Df\Payment\Currency::fromBase()
- * @used-by \PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
+ * @used-by Df\Directory\FE\Currency::map()
+ * @used-by Df\Payment\Currency::fromBase()
+ * @used-by PPCs\Core\Plugin\Iksanika\Stockmanage\Block\Adminhtml\Product\Grid::aroundAddColumn()
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  */
 function df_currency_base_c($s = null):string {return df_currency_base($s)->getCode();}
@@ -37,7 +37,7 @@ function df_currency_code($c = ''):string {return df_currency($c)->getCode();}
  * В отличие от @see df_currency_base_с() здесь мы вынуждены использовать не $scope, а $store,
  * потому что учётную валюту можно просто считать из настроек,
  * а текущая валюта может меняться динамически (в том числе посетителем магазина и сессией).
- * @used-by \Df\Directory\FE\Currency::map()
+ * @used-by Df\Directory\FE\Currency::map()
  * @param int|string|null|bool|StoreInterface $s [optional]
  */
 function df_currency_current_c($s = null):string {return df_currency_current($s)->getCode();}
@@ -48,8 +48,8 @@ function df_currency_current_c($s = null):string {return df_currency_current($s)
  * https://en.wikipedia.org/wiki/ISO_4217#Active_codes
  * I use the database from the `sokil/php-isocodes` library:
  * https://github.com/sokil/php-isocodes/blob/8cd8c1f0/databases/iso_4217.json
- * @used-by \Dfe\TBCBank\Charge::common()
- * @used-by \Dfe\TBCBank\Facade\Charge::capturePreauthorized()
+ * @used-by Dfe\TBCBank\Charge::common()
+ * @used-by Dfe\TBCBank\Facade\Charge::capturePreauthorized()
  * @param C|string $c [optional]
  */
 function df_currency_num($c = ''):string {return dfa(df_currency_nums(), df_currency_code($c));}
