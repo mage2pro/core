@@ -32,7 +32,7 @@ use Magento\Framework\Webapi\Rest\Response as RestResponse;
  * @used-by df_response_code()
  * @used-by df_response_content_type()
  * @used-by df_router_redirect()
- * @used-by \Df\Framework\App\Action\Image::execute()
+ * @used-by Df\Framework\App\Action\Image::execute()
  * @param IResult|wResult|IResponse|HttpResponse|null $r [optional]
  * @return IResponse|IHttpResponse|HttpResponse|IResult|wResult
  */
@@ -94,8 +94,8 @@ function df_response_ar($a1 = null, $a2 = null):array {return
 
 /**
  * 2015-12-09
- * @used-by \Df\Framework\App\Action\Image::execute()
- * @used-by \Dfe\GoogleFont\Controller\Index\Index::execute()
+ * @used-by Df\Framework\App\Action\Image::execute()
+ * @used-by Dfe\GoogleFont\Controller\Index\Index::execute()
  */
 function df_response_cache_max():void {df_response_headers([
 	'Cache-Control' => 'max-age=315360000'
@@ -111,9 +111,9 @@ function df_response_cache_max():void {df_response_headers([
 /**
  * I pass the 3rd argument ($replace = true) to @uses \Magento\Framework\HTTP\PhpEnvironment\Response::setHeader()
  * because the `Content-Type` headed can be already set.
- * @used-by \Df\Framework\App\Action\Image::execute()
- * @used-by \Df\Framework\W\Result\Text::render()
- * @used-by \Df\Framework\W\Result\Xml::render()
+ * @used-by Df\Framework\App\Action\Image::execute()
+ * @used-by Df\Framework\W\Result\Text::render()
+ * @used-by Df\Framework\W\Result\Xml::render()
  * @param IResult|wResult|IHttpResponse|HttpResponse|null $r [optional]
  */
 function df_response_content_type(string $t, $r = null):void {df_response($r)->setHeader('Content-Type', $t, true);}
@@ -123,7 +123,7 @@ function df_response_content_type(string $t, $r = null):void {df_response($r)->s
  * 2017-02-01
  * @used-by df_response_cache_max()
  * @used-by df_response_sign()
- * @used-by \Df\Framework\App\Action\Image::execute()
+ * @used-by Df\Framework\App\Action\Image::execute()
  * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a1 [optional]
  * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a2 [optional]
  * @return IResult|wResult|IHttpResponse|HttpResponse
@@ -146,8 +146,8 @@ function df_response_headers($a1 = null, $a2 = null) {
 
 /**
  * 2017-02-01
- * @used-by \Df\Core\Controller\Index\Index::execute()
- * @used-by \Df\Payment\W\Action::execute()
+ * @used-by Df\Core\Controller\Index\Index::execute()
+ * @used-by Df\Payment\W\Action::execute()
  * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a1 [optional]
  * @param IResult|wResult|IHttpResponse|HttpResponse|null|array(string => string) $a2 [optional]
  * @return IResult|wResult|IHttpResponse|HttpResponse
