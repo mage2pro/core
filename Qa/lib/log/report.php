@@ -8,11 +8,11 @@
  * 2020-02-14 If $append is `true`, then $m will be written on a new line.
  * @used-by df_bt_log()
  * @used-by df_log_l()
- * @used-by \Df\Core\Text\Regex::throwInternalError()
- * @used-by \Df\Core\Text\Regex::throwNotMatch()
- * @used-by \Df\Qa\Failure\Error::log()
- * @used-by \Inkifi\Mediaclip\H\Logger::l()
- * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by Df\Core\Text\Regex::throwInternalError()
+ * @used-by Df\Core\Text\Regex::throwNotMatch()
+ * @used-by Df\Qa\Failure\Error::log()
+ * @used-by Inkifi\Mediaclip\H\Logger::l()
+ * @used-by Inkifi\Pwinty\Controller\Index\Index::execute()
  */
 function df_report(string $f, string $m, bool $append = false):void {
 	if (!df_es($m)) {
@@ -28,7 +28,7 @@ function df_report(string $f, string $m, bool $append = false):void {
  * «mb_strtolower(): Passing null to parameter #1 ($string) of type string is deprecated
  * in vendor/mage2pro/core/Qa/lib/log.php on line 122»: https://github.com/mage2pro/core/issues/233
  * @used-by df_log_l()
- * @used-by \Df\Framework\Log\Handler\Info::lb()
+ * @used-by Df\Framework\Log\Handler\Info::lb()
  * @param string|object|null $m [optional]
  */
 function df_report_prefix($m = null, string $pref = ''):string {return df_ccc('--',
