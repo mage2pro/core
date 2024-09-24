@@ -14,7 +14,7 @@ function dfe_modules():array {return df_modules_p('Dfe_');}
  * Возвращает массив вида ['AllPay 1.5.3' => [информация из локального composer.json]].
  * Ключи массива не содержат приставку «Dfe_».
  * @used-by dfe_modules_log()
- * @used-by \Df\Core\Controller\Index\Index::execute()
+ * @used-by Df\Core\Controller\Index\Index::execute()
  * @return array(string => array)
  */
 function dfe_modules_info():array {return dfcf(function() {return df_map_kr(dfe_packages(), function($m, $p) {return [
@@ -23,7 +23,7 @@ function dfe_modules_info():array {return dfcf(function() {return df_map_kr(dfe_
 
 /**
  * 2017-04-01
- * @used-by \Df\Sales\Observer\OrderPlaceAfter::execute()
+ * @used-by Df\Sales\Observer\OrderPlaceAfter::execute()
  */
 function dfe_modules_log():void {df_sentry(null
 	,sprintf('%s: %s', df_domain_current(), df_csv_pretty(array_keys(dfe_modules_info())))
