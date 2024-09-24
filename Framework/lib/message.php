@@ -20,10 +20,10 @@ function df_message_add(string $s, string $type):void {df_message_m()->addMessag
 
 /**
  * 2016-08-02
- * @used-by \Df\Config\Backend::save()
- * @used-by \Df\Config\Backend\Serialized::processA()
- * @used-by \Df\OAuth\ReturnT::execute()
- * @used-by \RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
+ * @used-by Df\Config\Backend::save()
+ * @used-by Df\Config\Backend\Serialized::processA()
+ * @used-by Df\OAuth\ReturnT::execute()
+ * @used-by RWCandy\Captcha\Observer\CustomerAccountCreatePost::execute()
  * @param string|P|Th $m
  */
 function df_message_error($m):void {df_message_add(df_xts($m), IM::TYPE_ERROR);}
@@ -37,12 +37,12 @@ function df_message_m() {return df_o(IMM::class);}
 
 /**
  * 2018-05-11
- * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
+ * @used-by MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  */
 function df_message_notice(string $m):void {df_message_add($m, IM::TYPE_NOTICE);}
 
 /**
  * 2016-12-04
- * @used-by \Df\Sso\CustomerReturn::_execute()
+ * @used-by Df\Sso\CustomerReturn::_execute()
  */
 function df_message_success(string $m):void {df_message_add($m, IM::TYPE_SUCCESS);}
