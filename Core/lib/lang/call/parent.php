@@ -11,8 +11,8 @@ use ReflectionMethod as RM;
  * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @see dfr_prop_get()
  * @see dfr_prop_set()
- * @used-by \Df\Framework\Config\Dom\L::init()
- * @used-by \Df\Framework\Config\Dom\L::validate()
+ * @used-by Df\Framework\Config\Dom\L::init()
+ * @used-by Df\Framework\Config\Dom\L::validate()
  * @param object $o
  * @return mixed
  */
