@@ -23,12 +23,12 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @see df_product_load()
  * @used-by df_category_names()
  * @used-by ikf_product_printer()
- * @used-by \Dfe\Sift\Payload\OQI::p()
- * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::product()
- * @used-by \Inkifi\Mediaclip\Event::product()
- * @used-by \Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
- * @used-by \Inkifi\Mediaclip\T\CaseT\Product::t02()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
+ * @used-by Dfe\Sift\Payload\OQI::p()
+ * @used-by Inkifi\Mediaclip\API\Entity\Order\Item::product()
+ * @used-by Inkifi\Mediaclip\Event::product()
+ * @used-by Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
+ * @used-by Inkifi\Mediaclip\T\CaseT\Product::t02()
+ * @used-by Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @param int|string|P|OI|QI $p
  * @param int|string|null|bool|IStore $s [optional]
  * @throws NSE
@@ -50,6 +50,6 @@ function df_product($p, $s = false):P {return df_is_p($p) ? $p : df_product_r()-
 /**
  * 2018-06-04
  * @see df_product()
- * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
+ * @used-by Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
  */
 function df_product_load(int $id):P {return df_product_r()->getById($id, false, null, true);}
