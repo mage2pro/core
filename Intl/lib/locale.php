@@ -9,39 +9,39 @@ use Magento\Framework\Locale\ResolverInterface as IResolver;
  * 2017-09-03  
  * @used-by df_lang_ru()
  * @used-by df_lang_zh()
- * @used-by \Dfe\AlphaCommerceHub\Charge::pCharge() 
- * @used-by \Frugue\Store\Block\Switcher::map()
+ * @used-by Dfe\AlphaCommerceHub\Charge::pCharge() 
+ * @used-by Frugue\Store\Block\Switcher::map()
  */
 function df_lang(string $locale = ''):string {return substr(df_locale($locale), 0, 2);}
 
 /**            
  * 2017-04-15 
  * @used-by df_lang_ru_en() 
- * @used-by \Df\Config\Source\EnableYN::toOptionArray()
+ * @used-by Df\Config\Source\EnableYN::toOptionArray()
  * @param mixed ...$a
  */
 function df_lang_ru(...$a):string {return df_b($a, 'ru' === df_lang());}
 
 /**               
  * 2017-09-03    
- * @used-by \Dfe\Qiwi\API\Validator::codes()
- * @used-by \Dfe\Robokassa\Api\Options::p()
- * @used-by \Dfe\Robokassa\Charge::pCharge()
- * @used-by \Dfe\YandexKassa\Source\Option::map()
+ * @used-by Dfe\Qiwi\API\Validator::codes()
+ * @used-by Dfe\Robokassa\Api\Options::p()
+ * @used-by Dfe\Robokassa\Charge::pCharge()
+ * @used-by Dfe\YandexKassa\Source\Option::map()
  */
 function df_lang_ru_en():string {return df_lang_ru('ru', 'en');}
 
 /**
  * 2018-04-21
  * @used-by df_lang_zh_en()
- * @used-by \Doormall\Shipping\Partner\Entity::title()
+ * @used-by Doormall\Shipping\Partner\Entity::title()
  * @param mixed ...$a
  */
 function df_lang_zh(...$a):string {return df_b($a, 'zh' === df_lang());}
 
 /**
  * 2018-04-24
- * @used-by \Doormall\Shipping\Partner\Entity::locations()
+ * @used-by Doormall\Shipping\Partner\Entity::locations()
  */
 function df_lang_zh_en():string {return df_lang_zh('zh', 'en');}
 
@@ -52,10 +52,10 @@ function df_lang_zh_en():string {return df_lang_zh('zh', 'en');}
  * @used-by df_intl_dic_path()
  * @used-by df_lang()
  * @used-by df_lang_ru()  
- * @used-by \Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
- * @used-by \Df\Intl\Js::_toHtml()
- * @used-by \Dfe\CurrencyFormat\O::postProcess()
- * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
+ * @used-by Df\Directory\Model\ResourceModel\Country\Collection::mapFromCodeToName()
+ * @used-by Df\Intl\Js::_toHtml()
+ * @used-by Dfe\CurrencyFormat\O::postProcess()
+ * @used-by Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
  */
 function df_locale(string $l = ''):string {/** @var string $r */
 	if ($l) {
@@ -104,17 +104,17 @@ function df_locale(string $l = ''):string {/** @var string $r */
  * Some contries has multiple locales (e.g., Finland has the «fi_FI» and «sv_FI» locales).
  * The function returns the default locale: «FI» => «fi_FI».
  * @used-by df_currency_by_country_c()
- * @used-by \Df\Payment\Charge::locale()
- * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
- * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::locale()
+ * @used-by Df\Payment\Charge::locale()
+ * @used-by Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
+ * @used-by Dfe\Klarna\Api\Checkout\V2\Charge::locale()
  * @param string|Country $c
  */
 function df_locale_by_country($c):string {return \Zend_Locale::getLocaleToTerritory(df_country_code($c));}
 
 /**
  * 2016-09-06
- * @used-by \Df\Payment\ConfigProvider::config()
- * @used-by \Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
+ * @used-by Df\Payment\ConfigProvider::config()
+ * @used-by Dfe\CurrencyFormat\Plugin\Catalog\Controller\Adminhtml\Product\Initialization\Helper\AttributeFilter::beforePrepareProductAttributes()
  * @return IFormat|Format
  */
 function df_locale_f() {return df_o(IFormat::class);}
