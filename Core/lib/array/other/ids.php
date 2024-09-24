@@ -9,7 +9,7 @@ use Magento\Framework\DataObject as _DO;
  * 2) `iterable` is supported by PHP ≥ 7.1: https://3v4l.org/qNX1j
  * 3) https://php.net/manual/en/language.types.iterable.php
  * @uses df_id()
- * @used-by \Df\Config\Backend\ArrayT::processI()
+ * @used-by Df\Config\Backend\ArrayT::processI()
  * @param Traversable|array(int|string => _DO|AI) $c
  * @return int[]|string[]
  */
