@@ -8,8 +8,8 @@ use Magento\Framework\Mail\TemplateInterface as ITemplate;
 use Magento\Framework\Mail\TransportInterface as ITransport;
 /**
  * 2019-06-13
- * @used-by \KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
- * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
+ * @used-by KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
+ * @used-by KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @param string|string[] $to
  */
 function df_mail($to, string $subject, string $body):void {
@@ -28,7 +28,7 @@ function df_mail($to, string $subject, string $body):void {
 
 /**
  * 2019-06-20
- * @used-by \KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
+ * @used-by KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
  * @return Template|ITemplate
  */
 function df_mail_t(int $id) {return df_mail_tf()->get($id);}
