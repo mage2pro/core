@@ -88,4 +88,4 @@ function df_float_positive($v, bool $allow0 = false, bool $throw = true) {/** @v
  * @param mixed $v
  * @throws DFE
  */
-function df_float_positive0($v):float {return df_float_positive($v, $allow0 = true);}
+function df_float_positive0($v):float {return df_float_positive($v, true);}
