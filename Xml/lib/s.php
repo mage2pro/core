@@ -4,7 +4,6 @@ use SimpleXMLElement as X;
 
 /**
  * 2016-09-01 The result does not include the XML header. @see df_xml_header()
- * @see \Magento\Framework\Simplexml\Element::asNiceXml()
  * @used-by df_xml_assert_leaf()
  * @used-by df_xml_children()
  * @used-by df_xml_parse_header()
@@ -18,6 +17,37 @@ function df_xml_s($x, int $level = 0):string {/** @var string $r */
 		$r = $x;
 	}
 	else {
+		/**
+		 * 2015-02-27
+		 * Для конвертации объекта класса @see SimpleXMLElement в строку
+		 * надо использовать именно метод @uses SimpleXMLElement::asXML(),
+		 * а не @see SimpleXMLElement::__toString() или оператор (string)$this.
+		 * @see SimpleXMLElement::__toString() и (string)$this
+		 * возвращают непустую строку только для концевых узлов (листьев дерева XML).
+		 * Пример:
+		 *	<?xml version='1.0' encoding='utf-8'?>
+		 *		<menu>
+		 *			<product>
+		 *				<cms>
+		 *					<class>aaa</class>
+		 *					<weight>1</weight>
+		 *				</cms>
+		 *				<test>
+		 *					<class>bbb</class>
+		 *					<weight>2</weight>
+		 *				</test>
+		 *			</product>
+		 *		</menu>
+		 * Здесь для $e1 = $xml->{'product'}->{'cms'}->{'class'}
+		 * мы можем использовать $e1->__toString() и (string)$e1.
+		 * http://3v4l.org/rAq3F
+		 * Однако для $e2 = $xml->{'product'}->{'cms'}
+		 * мы не можем использовать $e2->__toString() и (string)$e2,
+		 * потому что узел «cms» не является концевым узлом (листом дерева XML): http://3v4l.org/Pkj37
+		 * Более того, метод @see SimpleXMLElement::__toString() отсутствует в PHP версий 5.2.17 и ниже:
+		 * http://3v4l.org/Wiia2#v500
+		 * @see \Magento\Framework\Simplexml\Element::asNiceXml()
+		 */
 		/** @var string $nl */ /** @var string $pad */
 		[$nl, $pad] = !$level ? ['', ''] : ["\n", str_pad('', $level * 1, "\t", STR_PAD_LEFT)];
 		$r = "$pad<{$x->getName()}";
