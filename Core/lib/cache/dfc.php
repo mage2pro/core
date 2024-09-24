@@ -25,15 +25,15 @@ use Df\Core\RAM;
  * Today I have noticed that you can use a void-result $f with dfc(): https://3v4l.org/CYJ1X
  * So I removed df_once().
  * 3) The methods which use dfc() with a void-result $f:
- * @used-by \Df\Framework\Form\Element\Select2::setRenderer()
- * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
- * @used-by \Df\Sso\Button::_prepareLayout()
+ * @used-by Df\Framework\Form\Element\Select2::setRenderer()
+ * @used-by Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterSetForm()
+ * @used-by Df\Sso\Button::_prepareLayout()
  * 2024-06-03 We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @see df_no_rec()
  * @see df_prop()
  * @see dfaoc()
  * @used-by dfaoc()
- * @used-by \CabinetsBay\Catalog\B\Category::title() (https://github.com/cabinetsbay/catalog/issues/22)
+ * @used-by CabinetsBay\Catalog\B\Category::title() (https://github.com/cabinetsbay/catalog/issues/22)
  * @param object $o
  * @return mixed
  */
