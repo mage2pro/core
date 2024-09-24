@@ -9,7 +9,7 @@ use Magento\Framework\DataObject as _DO;
  * 2016-08-23 Если значением ключа в $info будет null, то предыдущий ключ удалится: @see dfa_merge_r()
  * @see dfp_add_info()
  * @used-by df_ci_save()
- * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
+ * @used-by Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
  * @param _DO|C $c
  * @param array(string => mixed) $info
  */
@@ -25,10 +25,10 @@ function df_ci_add(_DO $c, array $info):void {
  * (Stripe, Omise, Paymill, Square, TBC Bank), чтобы при повторных платежах покупатель мог использовать
  * ранее уже использованные им банковские карты без повторного ввода их реквизитов.
  * @used-by df_ci_add()
- * @used-by \Df\Payment\Block\Info::ci()
- * @used-by \Df\StripeClone\ConfigProvider::cards()
- * @used-by \Df\StripeClone\Payer::customerIdSaved()
- * @used-by \Dfe\Stripe\Method::cardType()
+ * @used-by Df\Payment\Block\Info::ci()
+ * @used-by Df\StripeClone\ConfigProvider::cards()
+ * @used-by Df\StripeClone\Payer::customerIdSaved()
+ * @used-by Dfe\Stripe\Method::cardType()
  * @param string|object|null $m [optional]
  * @param _DO|C|null $c [optional]
  * @return string|array(string => mixed)|null
@@ -51,9 +51,9 @@ function df_ci_get($m = null, _DO $c = null) {
  * На сегодняшний день мы сохраняем для покупателя его идентификаторы в различных платёжных системах
  * (Omise, Paymill, Square, Stripe), чтобы при повторных платежах покупатель мог использовать
  * ранее уже использованные им банковские карты без повторного ввода их реквизитов.
- * @used-by \Df\StripeClone\ConfigProvider::cards()
- * @used-by \Df\StripeClone\Payer::newCard()
- * @used-by \Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
+ * @used-by Df\StripeClone\ConfigProvider::cards()
+ * @used-by Df\StripeClone\Payer::newCard()
+ * @used-by Dfe\TBCBank\W\Strategy\ConfirmPending::onSuccess()
  * @param string|object $m
  * @param mixed|null $info
  */
