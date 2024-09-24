@@ -7,7 +7,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 /**
  * 2020-02-05
  * @see df_store_names()
- * @used-by \Dfe\Sift\Payload\OQI::p()
+ * @used-by Dfe\Sift\Payload\OQI::p()
  * @param int|string|P|OI|QI $p
  * @param int|string|null|bool|IStore $s [optional]
  * @return string[]
