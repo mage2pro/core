@@ -15,6 +15,6 @@ function df_tax_rate(float $withTax, float $withoutTax):float {return !$withoutT
 
 /**
  * 2017-09-30
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by Dfe\YandexKassa\Charge::pTaxLeafs()
  */
 function df_tax_rate_shipping(O $o):float {return df_tax_rate($o->getShippingInclTax(), $o->getShippingAmount());}
