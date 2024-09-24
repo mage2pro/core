@@ -26,7 +26,7 @@ function df_check_https(string $u):bool {return df_starts_with(strtolower($u), '
  * https://github.com/zendframework/zf1/blob/release-1.12.16/library/Zend/Uri.php#L100
  * $scheme = strtolower($uri[0]);
  * @used-by df_assert_https()
- * @used-by \Df\Framework\Form\Element\Url::messageForOthers()
+ * @used-by Df\Framework\Form\Element\Url::messageForOthers()
  */
 function df_check_https_strict(string $u):bool {return 'https' === df_zuri($u)->getScheme();}
 
@@ -59,9 +59,9 @@ function df_is_url_absolute(string $u):bool {return df_starts_with($u, ['http', 
  * Use @see df_rp_has() instead.
  * @see df_action_has()
  * @see df_action_is()
- * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @used-by \Magenest\QuickBooksDesktop\Observer\Adminhtml\Customer\Update::execute()
- * @used-by \Magenest\QuickBooksDesktop\Observer\Customer\Address::execute()
- * @used-by \Magenest\QuickBooksDesktop\Observer\Customer\Edit::execute()
+ * @used-by Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by Magenest\QuickBooksDesktop\Observer\Adminhtml\Customer\Update::execute()
+ * @used-by Magenest\QuickBooksDesktop\Observer\Customer\Address::execute()
+ * @used-by Magenest\QuickBooksDesktop\Observer\Customer\Edit::execute()
  */
 function df_url_path_contains(string $s):bool {return df_rp_has($s);}
