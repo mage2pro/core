@@ -6,10 +6,10 @@ use Magento\Store\Model\Store;
  * 2016-08-27
  * @used-by df_webhook()
  * @used-by dfp_url_customer_return()
- * @used-by \Df\Framework\Form\Element\Url::routePath()
- * @used-by \Df\Sso\Button\Js::attributes()
- * @used-by \Df\Sso\FE\CustomerReturn::url()
- * @used-by \Dfe\BlackbaudNetCommunity\Url::get()
+ * @used-by Df\Framework\Form\Element\Url::routePath()
+ * @used-by Df\Sso\Button\Js::attributes()
+ * @used-by Df\Sso\FE\CustomerReturn::url()
+ * @used-by Dfe\BlackbaudNetCommunity\Url::get()
  * @param string|object|null $m
  * $m could be:
  * 		1) A module name: «A_B»
@@ -33,9 +33,9 @@ function df_route($m, string $path = '', bool $backend = false):string {
  * https://magento.stackexchange.com/a/201787
  * https://github.com/inkifi/map/blob/0.0.4/view/frontend/templates/index/section/2/cities.phtml#L4
  * @used-by df_url_checkout_success()
- * @used-by \Df\OAuth\ReturnT::redirectUrl()
- * @used-by \Frugue\Shipping\Header::_toHtml()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
+ * @used-by Df\OAuth\ReturnT::redirectUrl()
+ * @used-by Frugue\Shipping\Header::_toHtml()
+ * @used-by Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param array(string => mixed) $p [optional]
  */
@@ -50,7 +50,7 @@ function df_url(string $path = '', array $p = []):string {return df_url_o()->get
  * Свежие верии Magento 2 из-за своего некорректного кэширования игнорируют _nosecret,
  * поэтому используем @uses df_url_backend_new()       
  * @used-by df_url_backend_ns()
- * @used-by \Df\Framework\Validator\Currency::message()
+ * @used-by Df\Framework\Validator\Currency::message()
  * @param array(string => mixed) $p [optional]
  */
 function df_url_backend(string $path = '', array $p = []):string {return df_url_trim_index(df_url_backend_new()->getUrl(
@@ -62,8 +62,8 @@ function df_url_backend(string $path = '', array $p = []):string {return df_url_
  * @used-by df_customer_backend_url()
  * @used-by df_order_backend_url()
  * @used-by dfe_modules_log() 
- * @used-by \Df\OAuth\App::pCommon()
- * @used-by \Df\Sso\FE\CustomerReturn::url()
+ * @used-by Df\OAuth\App::pCommon()
+ * @used-by Df\Sso\FE\CustomerReturn::url()
  * @used-by df_cm_backend_url()
  * @param array(string => mixed) $p [optional]
  */
@@ -75,8 +75,8 @@ function df_url_backend_ns(string $path = '', array $p = []):string {return df_u
  * 2016-12-01 On the frontend side, the @see df_url() behaves identical to df_url_frontend()
  * @used-by df_router_redirect()
  * @used-by df_webhook()
- * @used-by \Df\Sso\FE\CustomerReturn::url()
- * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by Df\Sso\FE\CustomerReturn::url()
+ * @used-by Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @param array(string => mixed) $p [optional]
  * @param Store|int|string|null $store [optional]
  */
@@ -87,7 +87,7 @@ function df_url_frontend(string $path = '', array $p = [], $store = null):string
 /**
  * 2017-01-22
  * @used-by dfp_url_api()
- * @used-by \Inkifi\Pwinty\API\Client::urlBase()
+ * @used-by Inkifi\Pwinty\API\Client::urlBase()
  * @param string[] $names
  * @param mixed ...$args [optional]
  */
@@ -110,10 +110,10 @@ function df_url_staged(bool $test, string $tmpl, array $names, ...$args):string 
  * Не пойму, зачем. В нелокальном сценарии слеш не добавляется.
  * @used-by dfp_url_customer_return_remote()
  * @used-by dfp_url_customer_return_remote_f()
- * @used-by \Df\Framework\Form\Element\Url::url()
- * @used-by \Df\Payment\Charge::callback()
- * @used-by \Dfe\Moip\Backend\Enable::dfSaveAfter()
- * @used-by \Dfe\Moip\Test\CaseT\Notification::create()
+ * @used-by Df\Framework\Form\Element\Url::url()
+ * @used-by Df\Payment\Charge::callback()
+ * @used-by Dfe\Moip\Backend\Enable::dfSaveAfter()
+ * @used-by Dfe\Moip\Test\CaseT\Notification::create()
  * @param string|object|null $m
  * $m could be:
  * 1) A module name: «A_B»
