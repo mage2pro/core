@@ -9,7 +9,7 @@
  * @used-by df_interceptor()
  * @used-by df_module_name()
  * @used-by dfsm_code()
- * @used-by \Df\Payment\Method::getInfoBlockType()
+ * @used-by Df\Payment\Method::getInfoBlockType()
  * @param string|object $c
  */
 function df_cts($c, string $del = '\\'):string {/** @var string $r */
