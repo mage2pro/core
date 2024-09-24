@@ -44,7 +44,6 @@ use SimpleXMLElement as X;
  * без дополнительных проверок, имеется ли в наличии запрашиваемый лист дерева XML
  * (если лист отсутствует, то @see df_config_node() вернёт null)
  *
- * @used-by df_leaf_child()
  * @param string|null|callable $d [optional]
  */
 function df_leaf(?X $x, $d = null):?string {/** @var ?string $r */
