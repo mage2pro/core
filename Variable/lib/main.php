@@ -13,7 +13,7 @@ function df_mvar(string $c) {return dfa(df_mvars(), $c);}
  * 2024-01-02
  * 2024-06-10 If $c is an array, then the `df_mvar_name()` result uses $c as keys.
  * @used-by df_mvar_n()
- * @used-by \CabinetsBay\Catalog\B\Category::images() (https://github.com/cabinetsbay/catalog/issues/2)
+ * @used-by CabinetsBay\Catalog\B\Category::images() (https://github.com/cabinetsbay/catalog/issues/2)
  * @param string|string[] ...$c
  * @return string|string[]
  */
