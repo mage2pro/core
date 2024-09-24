@@ -33,8 +33,8 @@ function df_is_dev():bool {return State::MODE_DEVELOPER === df_app_state()->getM
  * 2016-05-15 http://stackoverflow.com/a/2053295
  * 2017-06-09 It intentionally returns false in the CLI mode.
  * @used-by df_my_local()
- * @used-by \Frugue\Shipping\Header::_toHtml()
- * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by Frugue\Shipping\Header::_toHtml()
+ * @used-by Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  */
 function df_is_localhost():bool {return in_array(dfa($_SERVER, 'REMOTE_ADDR', []), ['127.0.0.1', '::1']);}
 
@@ -47,10 +47,10 @@ function df_is_windows():bool {return dfcf(function() {return 'WIN' === strtoupp
 /**
  * 2017-04-17
  * @used-by df_my_local()
- * @used-by \Df\PaypalClone\W\Exception\InvalidSignature::message()
- * @used-by \KingPalm\B2B\Block\Registration::_toHtml()   
- * @used-by \KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
- * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
+ * @used-by Df\PaypalClone\W\Exception\InvalidSignature::message()
+ * @used-by KingPalm\B2B\Block\Registration::_toHtml()   
+ * @used-by KingPalm\B2B\Observer\AdminhtmlCustomerPrepareSave::execute()
+ * @used-by KingPalm\B2B\Observer\RegisterSuccess::execute()
  */
 function df_my():bool {return isset($_SERVER['DF_DEVELOPER']);}
 
@@ -58,11 +58,11 @@ function df_my():bool {return isset($_SERVER['DF_DEVELOPER']);}
  * 2017-06-09 «dfediuk» is the CLI user name on my localhost. 
  * @used-by df_webhook()
  * @used-by ikf_endpoint()	inkifi.com
- * @used-by \Df\Cron\Model\LoggerHandler::p()
- * @used-by \Dfe\Sift\Controller\Index\Index::execute()
- * @used-by \Inkifi\Pwinty\Event::s()
- * @used-by \Magento\Framework\View\Asset\Bundle::fillContent() (Frugue)
- * @used-by \Mangoit\MediaclipHub\Model\Orders::byOId()
+ * @used-by Df\Cron\Model\LoggerHandler::p()
+ * @used-by Dfe\Sift\Controller\Index\Index::execute()
+ * @used-by Inkifi\Pwinty\Event::s()
+ * @used-by Magento\Framework\View\Asset\Bundle::fillContent() (Frugue)
+ * @used-by Mangoit\MediaclipHub\Model\Orders::byOId()
  */
 function df_my_local():bool {return dfcf(function() {return
 	df_my() && (df_is_localhost() || 'dfediuk' === dfa($_SERVER, 'USERNAME'))
