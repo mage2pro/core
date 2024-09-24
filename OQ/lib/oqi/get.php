@@ -26,17 +26,17 @@ function df_oqi_amount($i):float {
 
 /**              
  * 2020-01-31     
- * @used-by \Dfe\Sift\Payload\OQI::p()
+ * @used-by Dfe\Sift\Payload\OQI::p()
  * @param OI|QI $i
  */
 function df_oqi_currency_c($i):string {return df_oq_currency_c(df_oq($i));}
 
 /**
  * 2017-06-09
- * @used-by \Dfe\Moip\P\Preorder::pItems()
- * @used-by \Dfe\Moip\Test\Order::pItems()
- * @used-by \Dfe\YandexKassa\Charge::pLoan()
- * @used-by \Dfe\YandexKassa\Charge::pTax()
+ * @used-by Dfe\Moip\P\Preorder::pItems()
+ * @used-by Dfe\Moip\Test\Order::pItems()
+ * @used-by Dfe\YandexKassa\Charge::pLoan()
+ * @used-by Dfe\YandexKassa\Charge::pTax()
  * @param OI|QI $i
  */
 function df_oqi_desc($i, int $max = 0):string {
@@ -48,7 +48,7 @@ function df_oqi_desc($i, int $max = 0):string {
  * 2019-11-20 It returns a value for the whole row.
  * @see df_oqi_discount_b()
  * @used-by df_oqi_price()
- * @used-by \Dfe\Vantiv\Charge::pCharge()
+ * @used-by Dfe\Vantiv\Charge::pCharge()
  * @param OI|QI $i
  */
 function df_oqi_discount($i):float {return df_oqi_amount($i);}
@@ -63,10 +63,10 @@ function df_oqi_discount_b($i):float {return df_oqi_amount($i);}
 
 /**
  * 2017-02-01
- * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
- * @used-by \Dfe\CheckoutCom\Charge::cProduct()
- * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
- * @used-by \Stock2Shop\OrderExport\Payload::items()
+ * @used-by Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
+ * @used-by Dfe\CheckoutCom\Charge::cProduct()
+ * @used-by Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
+ * @used-by Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
  */
 function df_oqi_image($i):string {return df_product_image_url($i->getProduct());}
@@ -109,7 +109,7 @@ function df_oqi_image($i):string {return df_product_image_url($i->getProduct());
  * $afterDiscount = false: the functon will return a result BEFORE discounts subtraction.
  * $afterDiscount = true: the functon will return a result AFTER discounts subtraction.
  * For now, I use $afterDiscount = true only for Yandex.Market:
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by Dfe\YandexKassa\Charge::pTaxLeafs()
  * Yandex.Kassa does not provide a possibility to specify the shopping cart discounts in a separayte row,
  * so I use $afterDiscount = true.
  *
@@ -117,15 +117,15 @@ function df_oqi_image($i):string {return df_product_image_url($i->getProduct());
  * @used-by df_oqi_tax_rate()
  * @used-by df_oqi_total()
  * @used-by omx_price()
- * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
- * @used-by \Dfe\CheckoutCom\Charge::cProduct()
- * @used-by \Dfe\Moip\P\Preorder::pItems()
- * @used-by \Dfe\Sift\Payload\OQI::p()
- * @used-by \Dfe\TwoCheckout\LineItem\Product::price()
- * @used-by \Dfe\Vantiv\Charge::pCharge()
- * @used-by \Dfe\YandexKassa\Charge::pLoan()
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
- * @used-by \Stock2Shop\OrderExport\Payload::items()
+ * @used-by Dfe\AlphaCommerceHub\Charge::pOrderItems()
+ * @used-by Dfe\CheckoutCom\Charge::cProduct()
+ * @used-by Dfe\Moip\P\Preorder::pItems()
+ * @used-by Dfe\Sift\Payload\OQI::p()
+ * @used-by Dfe\TwoCheckout\LineItem\Product::price()
+ * @used-by Dfe\Vantiv\Charge::pCharge()
+ * @used-by Dfe\YandexKassa\Charge::pLoan()
+ * @used-by Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
  */
 function df_oqi_price($i, bool $withTax = false, bool $withDiscount = false):float {/** @var float $r */
@@ -151,17 +151,17 @@ function df_oqi_price($i, bool $withTax = false, bool $withDiscount = false):flo
  * @used-by df_oqi_is_leaf()                           
  * @used-by df_oqi_price()
  * @used-by df_oqi_s()
- * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
- * @used-by \Dfe\AlphaCommerceHub\Charge::pOrderItems()
- * @used-by \Dfe\CheckoutCom\Charge::cProduct()
- * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
- * @used-by \Dfe\Moip\P\Preorder::pItems()
- * @used-by \Dfe\Sift\Payload\OQI::p()
- * @used-by \Dfe\TwoCheckout\LineItem\Product::build()
- * @used-by \Dfe\YandexKassa\Charge::pLoan()
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
- * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
- * @used-by \Stock2Shop\OrderExport\Payload::items()
+ * @used-by Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
+ * @used-by Dfe\AlphaCommerceHub\Charge::pOrderItems()
+ * @used-by Dfe\CheckoutCom\Charge::cProduct()
+ * @used-by Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
+ * @used-by Dfe\Moip\P\Preorder::pItems()
+ * @used-by Dfe\Sift\Payload\OQI::p()
+ * @used-by Dfe\TwoCheckout\LineItem\Product::build()
+ * @used-by Dfe\YandexKassa\Charge::pLoan()
+ * @used-by Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by Inkifi\Pwinty\AvailableForDownload::images()
+ * @used-by Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
  */
 function df_oqi_qty($i):int {return intval(df_is_oi($i) ? $i->getQtyOrdered() : (df_is_qi($i) ? $i->getQty() : df_error()));}
@@ -174,9 +174,9 @@ function df_oqi_qty($i):int {return intval(df_is_oi($i) ? $i->getQtyOrdered() : 
  * Простые варианты игнорируем (у них имена типа «New Very Prive-36-Almond»,
  * а нам удобнее видеть имена простыми, как у настраиваемого товара: «New Very Prive»).
  * 2016-07-04 Добавил параметр $sep для модуля AllPay, где разделителем должен быть символ #.
- * @used-by \Df\Payment\Metadata::vars()
- * @used-by \Dfe\AllPay\Charge::pCharge()
- * @used-by \Dfe\IPay88\Charge::pCharge()
+ * @used-by Df\Payment\Metadata::vars()
+ * @used-by Dfe\AllPay\Charge::pCharge()
+ * @used-by Dfe\IPay88\Charge::pCharge()
  * @param O|Q $oq
  */
 function df_oqi_s($oq, string $sep = ', '):string {return df_ccc($sep, df_oqi_roots_m($oq,
@@ -185,7 +185,7 @@ function df_oqi_s($oq, string $sep = ', '):string {return df_ccc($sep, df_oqi_ro
 
 /**
  * 2019-11-20 It returns a value for the whole row.
- * @used-by \Dfe\Vantiv\Charge::pCharge()
+ * @used-by Dfe\Vantiv\Charge::pCharge()
  * @param OI|QI $i
  */
 function df_oqi_tax($i):float {return df_oqi_amount($i);}
@@ -198,9 +198,9 @@ function df_oqi_tax($i):float {return df_oqi_amount($i);}
  * 2017-09-30
  * @todo Why do not just use \Magento\Sales\Model\Order\Item::getTaxPercent()?
  * I use it for Yandex.Kassa: @see \Dfe\YandexKassa\Charge::pTax()
- * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
- * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
- * @used-by \Stock2Shop\OrderExport\Payload::items()
+ * @used-by Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
+ * @used-by Dfe\Klarna\Api\Checkout\V2\Charge\Products::p()
+ * @used-by Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
  * @return float|int
  */
@@ -211,7 +211,7 @@ function df_oqi_tax_rate($i, bool $asInteger = false) {
 
 /**
  * 2017-09-30
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by Dfe\YandexKassa\Charge::pTaxLeafs()
  * The `tax_percent` field is not filled for configurable children, that is why we use @uses df_oqi_top()
  * @param OI|QI $i
  */
@@ -219,7 +219,7 @@ function df_oqi_tax_percent($i):float {return floatval(df_oqi_top($i)->getTaxPer
 
 /**
  * 2018-12-19
- * @used-by \Dfe\Vantiv\Charge::pCharge()
+ * @used-by Dfe\Vantiv\Charge::pCharge()
  * @param OI|QI $i
  */
 function df_oqi_total($i, bool $withTax = false, bool $withDiscount = false):float {return
@@ -228,10 +228,10 @@ function df_oqi_total($i, bool $withTax = false, bool $withDiscount = false):flo
 
 /**
  * 2017-02-01
- * @used-by \Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
- * @used-by \Dfe\AllPay\Charge::productUrls()
- * @used-by \Dfe\CheckoutCom\Charge::cProduct()
- * @used-by \Stock2Shop\OrderExport\Payload::items()
+ * @used-by Dfe\GingerPaymentsBase\Charge::pOrderLines_products()
+ * @used-by Dfe\AllPay\Charge::productUrls()
+ * @used-by Dfe\CheckoutCom\Charge::cProduct()
+ * @used-by Stock2Shop\OrderExport\Payload::items()
  * @param OI|QI $i
  */
 function df_oqi_url($i):string {return df_oqi_top($i)->getProduct()->getProductUrl();}
