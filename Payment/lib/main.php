@@ -17,15 +17,15 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * @used-by df_trans_is_test()
  * @used-by dfp_iia()
  * @used-by dfpm()
- * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
- * @used-by \Df\Payment\Choice::f()
- * @used-by \Df\Payment\Method::getInfoInstance()
- * @used-by \Df\Payment\Operation\Source\Quote::ii()
- * @used-by \Df\Payment\PlaceOrderInternal::s()
- * @used-by \Df\Payment\W\Nav::op()
- * @used-by \Df\Sales\Block\Order\Total::op()
- * @used-by \Dfe\AllPay\Total\Quote::collect()
- * @used-by \Dfe\Sift\Test\CaseT\PayPal::t01()
+ * @used-by Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
+ * @used-by Df\Payment\Choice::f()
+ * @used-by Df\Payment\Method::getInfoInstance()
+ * @used-by Df\Payment\Operation\Source\Quote::ii()
+ * @used-by Df\Payment\PlaceOrderInternal::s()
+ * @used-by Df\Payment\W\Nav::op()
+ * @used-by Df\Sales\Block\Order\Total::op()
+ * @used-by Dfe\AllPay\Total\Quote::collect()
+ * @used-by Dfe\Sift\Test\CaseT\PayPal::t01()
  * @param II|OP|QP|O|Q|T|IM|M|int|string $v
  * @return II|OP|QP|null
  */
@@ -41,18 +41,18 @@ function dfp($v) {return $v instanceof II ? $v : ($v instanceof IM ? $v->getInfo
  * 2017-03-26
  * Вызов этой функции приводит к добавлению транзакции типа $action:
  * https://github.com/mage2pro/core/blob/2.4.2/Payment/W/Nav.php#L100-L114
- * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
- * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::action()
+ * @used-by Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by Dfe\CheckoutCom\Handler\CustomerReturn::action()
  */
 function dfp_action(OP $p, string $action):void {DfOP::action($p, $action);}
 
 /**
  * 2016-05-20
  * @see df_ci_add()
- * @used-by \Df\Payment\Method::iiaAdd()  
- * @used-by \Df\Payment\Observer\Multishipping::execute()
- * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
+ * @used-by Df\Payment\Method::iiaAdd()  
+ * @used-by Df\Payment\Observer\Multishipping::execute()
+ * @used-by Dfe\Stripe\W\Strategy\Charge3DS::_handle()
  * @param II|OP|QP $p
  * @param array(string => string) $info
  */
@@ -70,7 +70,7 @@ function dfp_add_info(II $p, array $info):void {
  * если возврат был инициирован на стороне Magento, то мы запоминаем посредством dfp_container_add()
  * его идентификатор, чтобы когда платёжная система сообщит нам о нашем же возврате через webhook,
  * мы знали, что этот возврат мы уже обрабатывали и не обрабатывали бы его повторно:
- * @used-by \Df\StripeClone\Method::_refund()
+ * @used-by Df\StripeClone\Method::_refund()
  * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/Method.php?ts=4#L262-L273
  * @param II|OP|QP $p
  */
@@ -94,7 +94,7 @@ function dfp_container_get(II $p, string $k):array {/** @var string $j */ return
 
 /**
  * 2017-01-19
- * @used-by \Df\Payment\W\Strategy\Refund::_handle()
+ * @used-by Df\Payment\W\Strategy\Refund::_handle()
  * https://github.com/mage2pro/core/blob/1.12.16/StripeClone/WebhookStrategy/Charge/Refunded.php?ts=4#L21-L23
  * @param II|OP|QP $p
  */
@@ -103,13 +103,13 @@ function dfp_container_has(II $p, string $k, string $v):bool {return in_array($v
 /**
  * 2016-08-08
  * @used-by dfp_is_test()
- * @used-by \Df\Payment\Block\Info::iia()
- * @used-by \Df\Payment\Method::iia()
- * @used-by \Df\Payment\PlaceOrderInternal::_place()
- * @used-by \Df\Payment\Token::get()
- * @used-by \Dfe\AllPay\Total\Quote::collect()
- * @used-by \Dfe\Sift\Payload\Payment\PayPal::p()
- * @used-by \Dfe\Sift\Test\CaseT\PayPal::t01()
+ * @used-by Df\Payment\Block\Info::iia()
+ * @used-by Df\Payment\Method::iia()
+ * @used-by Df\Payment\PlaceOrderInternal::_place()
+ * @used-by Df\Payment\Token::get()
+ * @used-by Dfe\AllPay\Total\Quote::collect()
+ * @used-by Dfe\Sift\Payload\Payment\PayPal::p()
+ * @used-by Dfe\Sift\Test\CaseT\PayPal::t01()
  * @param II|OP|QP|O|Q|IM|M $p
  * @param mixed ...$k [optional]
  * @return mixed|array(string => mixed)
@@ -125,7 +125,7 @@ function dfp_is_test(II $p):bool {return dfp_iia($p, M::II__TEST);}
 
 /**
  * 2016-08-26
- * @used-by \Dfe\SecurePay\Method::amountFormat()
+ * @used-by Dfe\SecurePay\Method::amountFormat()
  * @param float|int|string $a
  */
 function dfp_last2($a):string {return substr(strval(round(100 * df_float($a))), -2);}
@@ -150,11 +150,11 @@ function dfp_last2($a):string {return substr(strval(round(100 * df_float($a))), 
  * 2017-03-17
  * Если не указать $p = null, то null не будет допустимым аргументом для $p: https://3v4l.org/mW5Lm
  * А если указать — то будет: https://3v4l.org/1d6Gq
- * @used-by \Df\Payment\W\Nav::op()
- * @used-by \Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @used-by \Dfe\Stripe\W\Strategy\Charge3DS::_handle()
- * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::op()
+ * @used-by Df\Payment\W\Nav::op()
+ * @used-by Dfe\CheckoutCom\Handler\Charge::paymentByTxnId()
+ * @used-by Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by Dfe\Stripe\W\Strategy\Charge3DS::_handle()
+ * @used-by Dfe\TwoCheckout\Handler\RefundIssued::op()
  * @see \Df\Payment\Method::action()
  * @param II|OP|QP|null $p [optional]
  * @return II|OP|QP|null
