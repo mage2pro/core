@@ -15,7 +15,7 @@
  * 		@see df_translit_url => allPay
  * 		@see df_translit_url_lc => allpay
  * @used-by df_translit_url_lc()
- * @used-by \Df\Sentry\Client::tags()
+ * @used-by Df\Sentry\Client::tags()
  */
 function df_translit_url(string $s):string {return trim(preg_replace('#[^0-9a-z]+#i', '-', df_translit($s)), '-');}
 
