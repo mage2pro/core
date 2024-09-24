@@ -24,11 +24,11 @@ use Magento\Store\Model\Store;
  * https://github.com/magento/magento2/blob/2.1.9/app/code/Magento/Store/Model/ScopeInterface.php#L8-L21
  * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Store/Model/ScopeInterface.php#L18
  * @used-by df_scope_stores()
- * @used-by \Df\Config\Comment::sibling()
- * @used-by \Df\Config\Settings::scope()
- * @used-by \Df\Config\Source::sibling()
- * @used-by \Df\OAuth\Settings::authenticatedB()
- * @used-by \Dfe\Dynamics365\Button::onFormInitialized()
+ * @used-by Df\Config\Comment::sibling()
+ * @used-by Df\Config\Settings::scope()
+ * @used-by Df\Config\Source::sibling()
+ * @used-by Df\OAuth\Settings::authenticatedB()
+ * @used-by Dfe\Dynamics365\Button::onFormInitialized()
  * @return array(string, int)
  */
 function df_scope():array {
@@ -105,9 +105,9 @@ function df_scope():array {
  * The @see \Magento\Store\Model\ScopeInterface::SCOPE_STORE constant exists in all the Magento 2 versions:
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L17
  * @used-by df_store_code()
- * @used-by \Df\Config\Settings::_a()
- * @used-by \Df\Config\Settings::_font()
- * @used-by \Df\Config\Settings::_matrix()
+ * @used-by Df\Config\Settings::_a()
+ * @used-by Df\Config\Settings::_font()
+ * @used-by Df\Config\Settings::_matrix()
  * @param null|string|int|ScopeA|Store $s [optional]
  */
 function df_scope_code($s = null, string $type = SS::SCOPE_STORE):string {
