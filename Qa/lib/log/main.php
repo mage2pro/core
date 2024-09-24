@@ -26,7 +26,6 @@ use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
  * @used-by \Dfe\GoogleFont\Fonts\Sprite::draw()
  * @used-by \Dfe\Sift\Controller\Index\Index::execute()
- *
  * @used-by \Dfe\Sift\Observer::f()
  * @param _DO|mixed[]|mixed|T $v
  * @param string|object|null $m [optional]
