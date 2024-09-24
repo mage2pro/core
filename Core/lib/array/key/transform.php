@@ -28,7 +28,7 @@ function dfa_key_case(array $a, int $c):array {return dfak_transform_r($a, funct
 
 /**
  * 2017-09-03
- * @used-by \Dfe\Qiwi\API\Validator::codes()
+ * @used-by Dfe\Qiwi\API\Validator::codes()
  * @uses df_int()
  * @see df_int_simple()
  * @param array(int|string => mixed) $a
@@ -41,7 +41,7 @@ function dfa_key_int(array $a):array {return dfak_transform($a, 'df_int');}
  * 2020-02-04
  * It does not change keys of a non-associative array,
  * but it is applied recursively to nested arrays, so it could change keys their keys.
- * @used-by \Dfe\Sift\API\Client::_construct()
+ * @used-by Dfe\Sift\API\Client::_construct()
  * @param array(string => mixed) $a
  * @return array(string => mixed)
  */
@@ -60,10 +60,10 @@ function dfak_prefix(array $a, string $p, bool $req = false):array {return dfak_
  * @used-by dfak_prefix()
  * @used-by dfak_transform()
  * @used-by dfak_transform_r()
- * @used-by \Df\Framework\Request::extra()
- * @used-by \Df\Sentry\Client::tags()
- * @used-by \Df\Sentry\Extra::adjust()
- * @used-by \Dfe\YandexKassa\Charge::pLoan()
+ * @used-by Df\Framework\Request::extra()
+ * @used-by Df\Sentry\Client::tags()
+ * @used-by Df\Sentry\Extra::adjust()
+ * @used-by Dfe\YandexKassa\Charge::pLoan()
  * @param iterable|callable $a1
  * @param iterable|callable $a2
  * @return array(string => mixed)
@@ -109,7 +109,7 @@ function dfak_transform_r($a1, $a2):array {return dfak_transform($a1, $a2, true)
 
 /**
  * 2017-02-01
- * @used-by \Dfe\PostFinance\Signer::sign()
+ * @used-by Dfe\PostFinance\Signer::sign()
  * @param array(string => mixed) $a
  * @return array(string => mixed)
  */
