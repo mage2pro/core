@@ -61,8 +61,8 @@ function dfa_merge_numeric(array $r, array $b):array {
  * @used-by df_log_l()
  * @used-by df_oi_add()
  * @used-by df_sentry()
- * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
- * @used-by \Dfe\TBCBank\Test\CaseT\Regular::t02()
+ * @used-by Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+ * @used-by Dfe\TBCBank\Test\CaseT\Regular::t02()
  * @param array(string => mixed) $old
  * @param array(string => mixed) $new
  * @return array(string => mixed)
