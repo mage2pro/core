@@ -3,7 +3,7 @@ use SimpleXMLElement as X;
 
 /**
  * 2016-09-01
- * @used-by \Dfe\SecurePay\Refund::process()
+ * @used-by Dfe\SecurePay\Refund::process()
  * The output of @uses df_xml_s() does not include the XML header.
  * @param X|string $x
  */
