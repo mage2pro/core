@@ -5,21 +5,21 @@ use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": 
  * 2020-02-04
  * @used-by dfp_card_format_last4()
  * @used-by dfp_methods()
- * @used-by \Df\Config\Source\LetterCase::map()
- * @used-by \Dfe\GoogleFont\Font\Variant\Preview::text()
- * @used-by \Dfe\ZohoBI\Source\Organization::fetch()
- * @used-by \Dfe\AllPay\Block\Info\BankCard::eci()
- * @used-by \Dfe\AllPay\W\Event\Offline::expirationS()
- * @used-by \Dfe\CheckoutCom\Response::messageC()
- * @used-by \Dfe\Sift\Payload\Promotion\Discount::desc()
- * @used-by \Dfe\Stripe\Facade\Charge::refundAdjustments()
+ * @used-by Df\Config\Source\LetterCase::map()
+ * @used-by Dfe\GoogleFont\Font\Variant\Preview::text()
+ * @used-by Dfe\ZohoBI\Source\Organization::fetch()
+ * @used-by Dfe\AllPay\Block\Info\BankCard::eci()
+ * @used-by Dfe\AllPay\W\Event\Offline::expirationS()
+ * @used-by Dfe\CheckoutCom\Response::messageC()
+ * @used-by Dfe\Sift\Payload\Promotion\Discount::desc()
+ * @used-by Dfe\Stripe\Facade\Charge::refundAdjustments()
  */
 function df_desc(string $s1, string $s2):string {return df_es($s1) ? $s2 : (df_es($s2) || $s2 === $s1 ? $s1 : "$s1 ($s2)");}
 
 /**
  * @used-by df_checkout_error()
  * @used-by df_error_create()
- * @used-by \Df\Payment\W\Exception::__construct()
+ * @used-by Df\Payment\W\Exception::__construct()
  * @param mixed ...$a
  */
 function df_format(...$a):string { /** @var string $r */
@@ -110,10 +110,10 @@ function df_sprintf_strict($s):string {/** @var string $r */ /** @var mixed[] $a
  * 2016-03-09 Замещает переменные в тексте.
  * 2016-08-07 Сегодня разработал аналогичные функции для JavaScript: df.string.template() и df.t().
  * @used-by df_file_name()
- * @used-by \Dfe\GingerPaymentsBase\Block\Info::btInstructions()
- * @used-by \Df\Payment\Charge::text()
- * @used-by \Df\Payment\Settings::messageFailure()
- * @used-by \Dfe\SalesSequence\Plugin\Model\Manager::affix()
+ * @used-by Dfe\GingerPaymentsBase\Block\Info::btInstructions()
+ * @used-by Df\Payment\Charge::text()
+ * @used-by Df\Payment\Settings::messageFailure()
+ * @used-by Dfe\SalesSequence\Plugin\Model\Manager::affix()
  * @param array(string => string) $variables
  * @param string|callable|null $onUnknown
  */
