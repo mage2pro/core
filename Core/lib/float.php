@@ -11,22 +11,22 @@
  * https://3v4l.org/AUTCA
  * @used-by dff_2f()
  * @used-by dff_2i()
- * @used-by \Dfe\Qiwi\Method::amountFormat()
- * @used-by \Dfe\Robokassa\Method::amountFormat()
- * @used-by \Dfe\SecurePay\Charge::amountFormat()
- * @used-by \Dfe\TwoCheckout\Method::amountFormat()
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
- * @used-by \Dfe\YandexKassa\Method::amountFormat()
- * @used-by \TFC\Core\B\Checkout\Success::_toHtml() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/42)
- * @used-by \TFC\GoogleShopping\Att\Price::format() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/6)
+ * @used-by Dfe\Qiwi\Method::amountFormat()
+ * @used-by Dfe\Robokassa\Method::amountFormat()
+ * @used-by Dfe\SecurePay\Charge::amountFormat()
+ * @used-by Dfe\TwoCheckout\Method::amountFormat()
+ * @used-by Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by Dfe\YandexKassa\Method::amountFormat()
+ * @used-by TFC\Core\B\Checkout\Success::_toHtml() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/42)
+ * @used-by TFC\GoogleShopping\Att\Price::format() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/google-shopping/issues/6)
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L33
  */
 function dff_2(float $v, int $prec = 2):string {return number_format($v, $prec, '.', '');}
 
 /**
  * 2016-09-08
- * @used-by \Dfe\Color\Image::labels()
- * @used-by \TFC\Core\Plugin\Paypal\Model\Cart::aroundGetAmounts()
+ * @used-by Dfe\Color\Image::labels()
+ * @used-by TFC\Core\Plugin\Paypal\Model\Cart::aroundGetAmounts()
  * @param float|int|string $v
  */
 function dff_2f($v):float {return floatval(dff_2(floatval($v)));}
@@ -37,7 +37,7 @@ function dff_2f($v):float {return floatval(dff_2(floatval($v)));}
  * 3.333 => 3.33
  * 3.300 => 3.30
  * https://3v4l.org/AUTCA
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
+ * @used-by Dfe\YandexKassa\Charge::pTaxLeaf()
  * @param int|float $v
  */
 function dff_2i($v, int $prec = 2):string {return is_int($v) ? (string)$v : dff_2($v, $prec);}
@@ -66,11 +66,11 @@ function dff_chop0($v):string {
  * The order's grand total is 3000.00. The calculated grand total from tax data is 2999.80.»
  * https://github.com/mage2pro/yandex-kassa/issues/2
  * I use deviation of 0.1% of $a.
- * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Model\Order::afterCanInvoice() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/256)
- * @used-by \Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems()	tradefurniturecompany.co.uk
- * @used-by \Dfe\Vantiv\Charge::pCharge()
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeafs()
+ * @used-by CanadaSatellite\Core\Plugin\Magento\Sales\Model\Order::afterCanInvoice() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/256)
+ * @used-by Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems()	tradefurniturecompany.co.uk
+ * @used-by Dfe\Vantiv\Charge::pCharge()
+ * @used-by Dfe\YandexKassa\Charge::pTaxLeaf()
+ * @used-by Dfe\YandexKassa\Charge::pTaxLeafs()
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L30
  * @param float|string|int $a
  * @param float|string|int $b
@@ -87,12 +87,12 @@ function dff_eq($a, $b):bool {return dff_eq0(floatval($a) - floatval($b), .001 *
  * By default, 0.1% deviation is allowed.
  * @used-by dff_eq()
  * @used-by dfp_refund()
- * @used-by \Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems()	tradefurniturecompany.co.uk
- * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
- * @used-by \Dfe\Color\Image::labels()
- * @used-by \Dfe\TwoCheckout\Charge::lineItems()
- * @used-by \Dfe\TwoCheckout\Method::_refund()
- * @used-by \Dfe\YandexKassa\Charge::pTaxLeaf()
- * @used-by \TFC\Core\Plugin\Paypal\Model\Cart::aroundGetAmounts()
+ * @used-by Customweb\RealexCw\Helper\InvoiceItem::getInvoiceItems()	tradefurniturecompany.co.uk
+ * @used-by Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
+ * @used-by Dfe\Color\Image::labels()
+ * @used-by Dfe\TwoCheckout\Charge::lineItems()
+ * @used-by Dfe\TwoCheckout\Method::_refund()
+ * @used-by Dfe\YandexKassa\Charge::pTaxLeaf()
+ * @used-by TFC\Core\Plugin\Paypal\Model\Cart::aroundGetAmounts()
  */
 function dff_eq0(float $a, float $deviation = .001):bool {return abs($a) < $deviation;}
