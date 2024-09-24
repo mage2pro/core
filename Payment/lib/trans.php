@@ -11,7 +11,7 @@ use Magento\Sales\Model\Order\Payment\Transaction\Repository as TR;
  * 2017-01-05 Для загрузки транзакции по «txn_id» используйте @see df_transx()
  * @used-by df_trans_is_my()
  * @used-by df_trans_is_test()
- * @used-by \Df\Payment\Test\trans::t01()
+ * @used-by Df\Payment\Test\trans::t01()
  * @param T|int|null $t
  * @throws DFE
  * @return T|null
@@ -24,7 +24,7 @@ function df_trans($t = null, bool $throw = true) {/** @var T|int|null $r */
 /**
  * 2016-07-28
  * @see dfp()
- * @used-by \Df\Payment\TM::tReq()
+ * @used-by Df\Payment\TM::tReq()
  * @param OP|int $p
  * @return T|null
  */
@@ -56,8 +56,8 @@ function df_trans_current() {return df_registry('current_transaction');}
 
 /**
  * 2016-08-19
- * @used-by \Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail\Grid::beforeAddColumn()
- * @used-by \Df\Sales\Plugin\Helper\Admin::aroundEscapeHtmlWithLinks()
+ * @used-by Df\Sales\Plugin\Block\Adminhtml\Transactions\Detail\Grid::beforeAddColumn()
+ * @used-by Df\Sales\Plugin\Helper\Admin::aroundEscapeHtmlWithLinks()
  */
 function df_trans_is_my(T $t = null):bool {return dfp_my(df_trans($t, false));}
 
@@ -85,8 +85,8 @@ function df_trans_r():TR {return df_o(TR::class);}
  * @see \Magento\Sales\Model\ResourceModel\Order\Payment\Transaction::loadObjectByTxnId()
  * @see \Magento\Sales\Model\ResourceModel\Order\Payment\Transaction::_getLoadByUniqueKeySelect()
  * 2) Для загрузки транзакции по целочисленному идентификатору используйте @see df_trans()
- * @used-by \Df\Payment\W\Nav::parent()
- * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::op()
+ * @used-by Df\Payment\W\Nav::parent()
+ * @used-by Dfe\TwoCheckout\Handler\RefundIssued::op()
  * @throws DFE
  */
 function df_transx(string $txnId, bool $throw = true):T {return dfcf(function($txnId, $throw = true) {return df_load(
