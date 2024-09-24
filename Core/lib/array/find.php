@@ -30,16 +30,16 @@ use Df\Core\Exception as DFE;
  * @used-by dfa_has_objects()
  * @used-by ikf_oi_pid()
  * @used-by mnr_recurring()
- * @used-by \Df\Framework\Plugin\View\Layout::afterIsCacheable()
- * @used-by \Df\Payment\Info\Report::addAfter()
- * @used-by \Df\Payment\Method::amountFactor()
- * @used-by \Df\Payment\TM::confirmed()
- * @used-by \Dfe\Stripe\Method::cardType()
- * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
- * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
- * @used-by \Inkifi\Mediaclip\Event::_areAllOIAvailableForDownload()
- * @used-by \Inkifi\Mediaclip\Event::oi()
- * @used-by \TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
+ * @used-by Df\Framework\Plugin\View\Layout::afterIsCacheable()
+ * @used-by Df\Payment\Info\Report::addAfter()
+ * @used-by Df\Payment\Method::amountFactor()
+ * @used-by Df\Payment\TM::confirmed()
+ * @used-by Dfe\Stripe\Method::cardType()
+ * @used-by Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
+ * @used-by Inkifi\Mediaclip\API\Entity\Order\Item::mProduct()
+ * @used-by Inkifi\Mediaclip\Event::_areAllOIAvailableForDownload()
+ * @used-by Inkifi\Mediaclip\Event::oi()
+ * @used-by TFC\Core\Plugin\Catalog\Block\Product\View\GalleryOptions::afterGetOptionsJson()
  * @param callable|iterable $a1
  * @param callable|iterable $a2
  * @param mixed|mixed[] $pAppend [optional]
@@ -94,7 +94,7 @@ function df_find($a1, $a2, $pAppend = [], $pPrepend = [], int $keyPosition = 0, 
 /**
  * 2020-04-25
  * @used-by dfa_r()
- * @used-by \VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
+ * @used-by VegAndTheCity\Core\Plugin\Mageplaza\Search\Helper\Data::afterGetProducts()
  * @param mixed $d [optional]
  * @return mixed|null
  */
