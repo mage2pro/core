@@ -10,7 +10,7 @@ use SimpleXMLElement as X;
  * @used-by df_xml_parse_header()
  * @used-by df_xml_prettify()
  * @used-by df_xml_s()
- * @used-by \Df\Xml\G::__toString()
+ * @used-by Df\Xml\G::__toString()
  * @param X|MX|string $x
  */
 function df_xml_s($x, int $level = 0):string {/** @var string $r */
