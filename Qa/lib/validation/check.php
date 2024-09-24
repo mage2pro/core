@@ -2,8 +2,8 @@
 /**
  * 2021-03-22
  * @used-by df_assert_between()
- * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Api\Data\OrderInterface::afterGetPayment() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/29)
- * @used-by \Mageplaza\Blog\Controller\Router::match() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/190)
+ * @used-by CanadaSatellite\Core\Plugin\Magento\Sales\Api\Data\OrderInterface::afterGetPayment() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/29)
+ * @used-by Mageplaza\Blog\Controller\Router::match() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/190)
  * @param int|string $v
  * @param int|float|null $min
  * @param int|float|null $max
@@ -19,7 +19,7 @@ function df_between($v, $min, $max, bool $inclusive = true):bool {return
  * 2.2) https://stackoverflow.com/a/12026863
  * @used-by df_customer()
  * @used-by df_subscriber()
- * @used-by \Dfe\FacebookLogin\Customer::email()
+ * @used-by Dfe\FacebookLogin\Customer::email()
  * @param mixed $v
  */
 function df_is_email($v):bool {return !!filter_var($v, FILTER_VALIDATE_EMAIL);}
@@ -28,7 +28,7 @@ function df_is_email($v):bool {return !!filter_var($v, FILTER_VALIDATE_EMAIL);}
  * We need `==` here, not `===`: https://php.net/manual/function.is-int.php#35820
  * @see \Df\Zf\Validate\StringT\IntT::isValid()
  * @used-by df_is_nat()
- * @used-by \Df\Core\Text\Regex::matchInt()
+ * @used-by Df\Core\Text\Regex::matchInt()
  * @param mixed $v
  */
 function df_is_int($v):bool {return is_numeric($v) && ($v == (int)$v);}
@@ -37,7 +37,7 @@ function df_is_int($v):bool {return is_numeric($v) && ($v == (int)$v);}
  * 2020-02-03
  * @see df_nat()
  * @used-by dfp()
- * @used-by \Dfe\AllPay\Method::plan()
+ * @used-by Dfe\AllPay\Method::plan()
  * @param mixed $v
  */
 function df_is_nat($v):bool {return df_is_int($v) && 0 < $v;}
