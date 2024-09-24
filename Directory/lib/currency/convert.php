@@ -24,9 +24,9 @@ use Magento\Store\Model\Store;
  * @uses \Magento\Directory\Model\Currency::convert() прекрасно понимает нулевой $to:
  * https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Directory/Model/Currency.php#L216-L217
  *
- * @used-by \Df\Payment\Currency::toBase()
- * @used-by \Df\Payment\Currency::toOrder()
- * @used-by \MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
+ * @used-by Df\Payment\Currency::toBase()
+ * @used-by Df\Payment\Currency::toOrder()
+ * @used-by MageSuper\Casat\Observer\ProductSaveBefore::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/73)
  * @param C|string|null $from [optional]
  * @param C|string|null $to [optional]
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
@@ -37,8 +37,8 @@ function df_currency_convert(float $a, $from = null, $to = null, $s = null):floa
 
 /**
  * 2017-04-15
- * @used-by \Dfe\Stripe\Method::minimumAmount()
- * @used-by \Dfe\TwoCheckout\Method::minimumAmount()
+ * @used-by Dfe\Stripe\Method::minimumAmount()
+ * @used-by Dfe\TwoCheckout\Method::minimumAmount()
  * @param C|string|null $from [optional]
  * @param C|string|null $to [optional]
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
@@ -58,7 +58,7 @@ function df_currency_convert_from_base(float $a, $to, $s = null):float {return d
 /**
  * 2016-09-05
  * @used-by df_currency_convert()
- * @used-by \Frugue\Shipping\Method::collectRates()
+ * @used-by Frugue\Shipping\Method::collectRates()
  * @param C|string|null $from
  * @param null|string|int|ScopeA|Store|ConfigData|IConfigData $s [optional]
  */
@@ -68,13 +68,13 @@ function df_currency_convert_to_base(float $a, $from, $s = null):float {return $
  * 2016-06-30
  * «How to programmatically check whether a currency is allowed and has an exchange rate to the base currency?»
  * https://mage2.pro/t/1832
- * @used-by \Df\Framework\Validator\Currency::check()
+ * @used-by Df\Framework\Validator\Currency::check()
  * @param int|string|null|bool|StoreInterface $s [optional]
  */
 function df_currency_has_rate(string $iso3, $s = null):bool {return !!dfa(df_currencies_ctn($s), $iso3);}
 
 /**
  * 2016-08-08
- * @used-by \Dfe\AllPay\ConfigProvider::config()
+ * @used-by Dfe\AllPay\ConfigProvider::config()
  */
 function df_currency_rate_to_current():float {return df_currency_base()->getRate(df_currency_current());}
