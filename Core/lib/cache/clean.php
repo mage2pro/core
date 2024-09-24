@@ -4,8 +4,8 @@ use Magento\Framework\Cache\FrontendInterface as IFrontend;
 /**
  * 2017-06-30 «How does `Flush Cache Storage` work?» https://mage2.pro/t/4118
  * @see \Magento\Backend\Controller\Adminhtml\Cache\FlushAll::execute()
- * @used-by \Df\OAuth\App::getAndSaveTheRefreshToken()
- * @used-by \Dfe\Moip\Backend\Enable::dfSaveAfter()
+ * @used-by Df\OAuth\App::getAndSaveTheRefreshToken()
+ * @used-by Dfe\Moip\Backend\Enable::dfSaveAfter()
  */
 function df_cache_clean():void {
 	df_map(function(IFrontend $f) {$f->getBackend()->clean();}, df_cache_pool());
@@ -23,7 +23,7 @@ function df_cache_clean():void {
  * 2017-06-30 «How does `Flush Cache Storage` work?» https://mage2.pro/t/4118
  * @see \Magento\Backend\Controller\Adminhtml\Cache\FlushAll::execute()
  * @uses \Magento\Framework\App\Cache\TypeList::cleanType()
- * @used-by \Df\API\Client::p()
+ * @used-by Df\API\Client::p()
  */
 function df_cache_clean_tag(string $tag):void {
 	df_cache()->clean([$tag]);
