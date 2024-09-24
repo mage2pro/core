@@ -1,17 +1,17 @@
 <?php
 /**
  * 2019-03-27
- * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/3)
- * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
+ * @used-by CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/3)
+ * @used-by Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
  */
 function df_is_catalog_product_list():bool {return df_handle('catalog_category_view');}
 
 /**
  * 2019-03-27
- * @used-by \CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/47)
- * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
- * @used-by \Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
- * @used-by \TFC\Core\Plugin\Theme\Block\Html\Breadcrumbs::aroundAddCrumb()
+ * @used-by CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/47)
+ * @used-by Dfe\Frontend\Block\ProductView\Css::_toHtml()
+ * @used-by Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
+ * @used-by TFC\Core\Plugin\Theme\Block\Html\Breadcrumbs::aroundAddCrumb()
  */
 function df_is_catalog_product_view():bool {return df_handle('catalog_product_view');}
 
@@ -30,9 +30,9 @@ function df_is_catalog_product_view():bool {return df_handle('catalog_product_vi
  * https://github.com/mage2pro/stripe/issues/57
  * @see df_is_checkout_multishipping()
  * @used-by mnr_recurring()
- * @used-by \Df\Payment\ConfigProvider::getConfig()
- * @used-by \Df\Payment\ConfigProvider\GlobalT::getConfig()
- * @used-by \Df\Shipping\ConfigProvider::getConfig()
+ * @used-by Df\Payment\ConfigProvider::getConfig()
+ * @used-by Df\Payment\ConfigProvider\GlobalT::getConfig()
+ * @used-by Df\Shipping\ConfigProvider::getConfig()
  */
 function df_is_checkout():bool {return
 	df_is_checkout_multishipping()
@@ -50,8 +50,8 @@ function df_is_checkout():bool {return
  * df_handle_prefix('multishipping_checkout') is wrong here
  * because it does not work before the layout initialization.
  * @used-by df_is_checkout()
- * @used-by \Df\Payment\Block\Info::_toHtml()
- * @used-by \Df\Payment\Observer\Multishipping::execute()
+ * @used-by Df\Payment\Block\Info::_toHtml()
+ * @used-by Df\Payment\Observer\Multishipping::execute()
  */
 function df_is_checkout_multishipping():bool {return df_action_prefix('multishipping_checkout');}
 
@@ -61,14 +61,14 @@ function df_is_checkout_multishipping():bool {return df_action_prefix('multiship
  * @todo May be we should use @see df_action() here?
  * @see  df_is_checkout_multishipping()
  * How to detect the «checkout success» page programmatically in PHP? https://mage2.pro/t/3562
- * @used-by \Df\Payment\Block\Info::_toHtml()
+ * @used-by Df\Payment\Block\Info::_toHtml()
  */
 function df_is_checkout_success():bool {return df_handle('checkout_onepage_success');}
 
 /**
  * 2018-11-23
- * @used-by \Frugue\Core\Plugin\Framework\App\PageCache\Kernel()
- * @used-by \Magento\RequireJs\Model\FileManager::createBundleJsPool() (Frugue)
+ * @used-by Frugue\Core\Plugin\Framework\App\PageCache\Kernel()
+ * @used-by Magento\RequireJs\Model\FileManager::createBundleJsPool() (Frugue)
  */
 function df_is_home():bool {return df_handle('cms_index_index');}
 
@@ -77,7 +77,7 @@ function df_is_home():bool {return df_handle('cms_index_index');}
  * 2017-08-28
  * @todo May be we should use @see df_action() here?
  * @see df_is_checkout_multishipping()
- * @used-by \Df\Sso\Css::isAccConfirmation()
+ * @used-by Df\Sso\Css::isAccConfirmation()
  */
 function df_is_login():bool {return df_handle('customer_account_login');}
 
@@ -103,6 +103,6 @@ function df_is_reg():bool {return df_handle('customer_account_create');}
  * It can be related to the following Moip issue:
  * "«Please set your Moip private key in the Magento backend» even if the Moip private key is set"
  * https://github.com/mage2pro/moip/issues/22
- * @used-by \Df\Config\Settings::scope()
+ * @used-by Df\Config\Settings::scope()
  */
 function df_is_system_config():bool {return df_action_prefix('adminhtml_system_config');}
