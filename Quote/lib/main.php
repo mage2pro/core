@@ -16,14 +16,14 @@ use Magento\Sales\Api\Data\OrderInterface as IO;
  * @used-by df_quote_id()
  * @used-by mnr_recurring_filter()
  * @used-by mnr_recurring_has()
- * @used-by \BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
- * @used-by \Df\Payment\ConfigProvider::config()
- * @used-by \Df\Payment\Method::getInfoInstance()
- * @used-by \Df\Payment\Settings::applicableForQuoteByCountry()
- * @used-by \Df\Payment\Settings::applicableForQuoteByMinMaxTotal()
- * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
- * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
- * @used-by \Yaman\Ordermotion\ItemBuilder\SpecialOffer::p()
+ * @used-by BlushMe\Checkout\Observer\ControllerActionPredispatch\CheckoutCartIndex::execute()
+ * @used-by Df\Payment\ConfigProvider::config()
+ * @used-by Df\Payment\Method::getInfoInstance()
+ * @used-by Df\Payment\Settings::applicableForQuoteByCountry()
+ * @used-by Df\Payment\Settings::applicableForQuoteByMinMaxTotal()
+ * @used-by Dfe\Stripe\Block\Multishipping::_toHtml()
+ * @used-by Mineralair\Core\Controller\Modal\Index::execute()
+ * @used-by Yaman\Ordermotion\ItemBuilder\SpecialOffer::p()
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/128)
  * @param IQ|Q|IO|int|null $q [optional]
  * @return IQ|Q
@@ -35,7 +35,7 @@ function df_quote($q = null) {return $q instanceof IQ ? $q : (
 
 /**
  * 2021-05-26
- * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
+ * @used-by Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  */
 function df_quote_customer_m():CustomerM {return df_o(CustomerM::class);}
 
@@ -50,7 +50,7 @@ function df_quote_id($q = null):int {return !$q ? df_quote()->getId() : (
 
 /**         
  * 2017-03-20
- * @used-by \Df\Payment\PlaceOrderInternal::_place()
+ * @used-by Df\Payment\PlaceOrderInternal::_place()
  * @return IQM|QM
  */
 function df_quote_m() {return df_o(IQM::class);}
@@ -58,7 +58,7 @@ function df_quote_m() {return df_o(IQM::class);}
 /**
  * 2016-07-18
  * @used-by df_quote()
- * @used-by \Doormall\Shipping\Plugin\Checkout\Api\ShippingInformationManagementInterface::beforeSaveAddressInformation()
+ * @used-by Doormall\Shipping\Plugin\Checkout\Api\ShippingInformationManagementInterface::beforeSaveAddressInformation()
  * @return IQR|QR
  */
 function df_quote_r() {return df_o(IQR::class);}
