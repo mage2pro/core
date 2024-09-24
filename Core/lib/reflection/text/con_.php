@@ -13,7 +13,7 @@ use Df\Core\R\ConT;
  * 1) a class name: «A\B\C».
  * 2) an object. It is reduced to case 1 via @see get_class()
  * @used-by dfs_con()
- * @used-by \Df\Framework\Mail\TransportObserver::execute()
+ * @used-by Df\Framework\Mail\TransportObserver::execute()
  * @param string|string[] $suf
  * @return string|null
  */
@@ -58,18 +58,18 @@ function df_con_child($c, $suf, string $def = '', bool $throw = true) {return Co
  * 2017-02-11 Отныне функция позволяет в качестве $def передавать интерфейс: @see df_class_suffix()
  * @used-by dfpm_c()
  * @used-by dfsm_c()
- * @used-by \Df\API\Facade::p()
- * @used-by \Dfe\GingerPaymentsBase\Settings::os()
- * @used-by \Df\Payment\Currency::f()
- * @used-by \Df\Payment\Facade::s()
- * @used-by \Df\PaypalClone\Charge::p()
- * @used-by \Df\Sso\Button::s()
- * @used-by \Df\Sso\CustomerReturn::c()
- * @used-by \Df\StripeClone\Facade\Card::create()
- * @used-by \Df\StripeClone\P\Charge::sn()
- * @used-by \Df\StripeClone\P\Preorder::request()
- * @used-by \Df\StripeClone\P\Reg::request()
- * @used-by \Dfe\Zoho\API\Client::i()
+ * @used-by Df\API\Facade::p()
+ * @used-by Dfe\GingerPaymentsBase\Settings::os()
+ * @used-by Df\Payment\Currency::f()
+ * @used-by Df\Payment\Facade::s()
+ * @used-by Df\PaypalClone\Charge::p()
+ * @used-by Df\Sso\Button::s()
+ * @used-by Df\Sso\CustomerReturn::c()
+ * @used-by Df\StripeClone\Facade\Card::create()
+ * @used-by Df\StripeClone\P\Charge::sn()
+ * @used-by Df\StripeClone\P\Preorder::request()
+ * @used-by Df\StripeClone\P\Reg::request()
+ * @used-by Dfe\Zoho\API\Client::i()
  * @param object|string $c
  * @return string|null
  */
@@ -81,16 +81,16 @@ function df_con_heir($c, string $def) {return df_ar(df_con(df_module_name_c($c),
  * а затем спускается по иерархии наследования для $c,
  * и так до тех пор, пока не найдёт в папке предка класс с суффиксом, как у $ar.
  * 2017-02-11 Отныне функция позволяет в качестве $ar передавать интерфейс: @see df_class_suffix()
- * @used-by \Df\Config\Settings::convention()
- * @used-by \Df\Payment\Choice::f()
- * @used-by \Df\Payment\Init\Action::sg()
- * @used-by \Df\Payment\Method::getFormBlockType()
- * @used-by \Df\Payment\Method::getInfoBlockType()
- * @used-by \Df\Payment\Method::s()
- * @used-by \Df\Payment\Url::f()
- * @used-by \Df\Payment\W\F::__construct()
- * @used-by \Df\Payment\W\F::s()
- * @used-by \Df\Shipping\Method::s()
+ * @used-by Df\Config\Settings::convention()
+ * @used-by Df\Payment\Choice::f()
+ * @used-by Df\Payment\Init\Action::sg()
+ * @used-by Df\Payment\Method::getFormBlockType()
+ * @used-by Df\Payment\Method::getInfoBlockType()
+ * @used-by Df\Payment\Method::s()
+ * @used-by Df\Payment\Url::f()
+ * @used-by Df\Payment\W\F::__construct()
+ * @used-by Df\Payment\W\F::s()
+ * @used-by Df\Shipping\Method::s()
  * @param object|string $c
  * @return string|null
  * @throws DFE
@@ -128,8 +128,8 @@ function df_con_hier_suf($c, string $suf, bool $throw = true) {/** @var string|n
 
 /**
  * 2017-03-20 Сначала проходит по иерархии суффиксов, и лишь затем — по иерархии наследования.
- * @used-by \Df\Payment\W\F::tryTA()
- * @used-by \Df\PaypalClone\Signer::_sign()
+ * @used-by Df\Payment\W\F::tryTA()
+ * @used-by Df\PaypalClone\Signer::_sign()
  * @param object|string $c
  * @param string|string[] $sufBase
  * @param string|string[] $ta
@@ -157,7 +157,7 @@ function df_con_hier_suf_ta($c, $sufBase, $ta, bool $throw = true) {
  * 2016-08-29
  * @used-by dfpm_call_s()
  * @used-by dfsm_call_s()
- * @used-by \Df\StripeClone\Method::chargeNew()
+ * @used-by Df\StripeClone\Method::chargeNew()
  * @param string|object $c
  * @param string|string[] $suffix
  * @return mixed
@@ -189,7 +189,7 @@ function df_con_s($c, $suffix, string $method, array $params = []) {return dfcf(
  * df_con_sibling($this, 'Webhook\Report', \Df\Payment\Xxx\Yyy)
  * 		работает точно так же, но запись длиннее
  * 		+ не проверяет, что результат имеет класс \Df\Payment\Xxx\Yyy или его потомка.
- * @used-by \Df\Payment\W\Handler::exceptionC()
+ * @used-by Df\Payment\W\Handler::exceptionC()
  * @param object|string $c
  * @param string|string[] $nameLast
  * @return string|null
