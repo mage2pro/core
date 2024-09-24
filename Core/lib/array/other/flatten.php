@@ -19,8 +19,8 @@
  * @used-by df_mail()
  * @used-by df_string_clean()
  * @used-by dfa_unpack()
- * @used-by \Df\Payment\Block\Info::rPDF()
- * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
+ * @used-by Df\Payment\Block\Info::rPDF()
+ * @used-by Inkifi\Pwinty\AvailableForDownload::_p()
  */
 function dfa_flatten(array $a):array {
 	$r = []; /** @var mixed[] $r */
