@@ -26,7 +26,7 @@ function df_img_adapter_f():FAdapter {return df_o(FAdapter::class);}
 
 /**
  * 2020-12-13
- * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
+ * @used-by TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  */
 function df_img_is_jpeg(string $f):bool {return in_array(strtolower(df_file_ext($f)), ['jpg', 'jpeg']);}
 
@@ -62,8 +62,8 @@ function df_img_resize(string $f, $w = null, $h = null):string {
  * 2015-11-30
  * 2024-06-09 "`df_media_path_absolute()` → `df_media_path_abs()`": https://github.com/mage2pro/core/issues/409
  * @used-by df_media_url2path()
- * @used-by \Dfe\GoogleFont\Fonts\Fs::absolute()
- * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
+ * @used-by Dfe\GoogleFont\Fonts\Fs::absolute()
+ * @used-by TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @see df_product_image_path2abs()
  */
@@ -86,9 +86,9 @@ function df_media_reader() {return df_sys_path_r(DL::MEDIA);}
 /**
  * 2015-12-01 https://mage2.pro/t/153
  * @used-by df_img_resize()
- * @used-by \Dfe\GoogleFont\Fonts\Png::url()
- * @used-by \Dfe\Markdown\FormElement::config()
- * @used-by \TemplateMonster\FilmSlider\Block\Widget\FilmSlider::addUrl() (frugue.com)
+ * @used-by Dfe\GoogleFont\Fonts\Png::url()
+ * @used-by Dfe\Markdown\FormElement::config()
+ * @used-by TemplateMonster\FilmSlider\Block\Widget\FilmSlider::addUrl() (frugue.com)
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l3/tabs/overview.phtml (https://github.com/cabinetsbay/catalog/issues/22)
  * @used-by app/design/frontend/TradeFurnitureCompany/default/Magento_Theme/templates/finance.phtml (tradefurniturecompany.co.uk)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
@@ -120,7 +120,7 @@ function df_media_writer() {return df_sys_path_w(DL::MEDIA);}
  * in the @see \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch() context
  * because the @see \Magento\Framework\App\Request\Http singleton is not yet initialized there.
  * 2) The `/pub` can be absent (it depends on the webserver settings).
- * @used-by \TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
+ * @used-by TFC\Core\Plugin\MediaStorage\App\Media::aroundLaunch()
  */
 function df_strip_media_from_request_uri():string {return
 	df_trim_text_left(df_trim_text_left(dfa($_SERVER, 'REQUEST_URI'), '/pub'), '/' . DL::MEDIA . '/')
