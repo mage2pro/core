@@ -41,8 +41,8 @@ function df_cld($c):string {return df_contains(df_cts($c) , '\\') ? '\\' : '_';}
  * 2016-08-10
  * @uses defined() не реагирует на методы класса, в том числе на статические,
  * поэтому нам использовать эту функию безопасно: https://3v4l.org/9RBfr
- * @used-by \Df\Config\O::ct()
- * @used-by \Df\Payment\Method::codeS()
+ * @used-by Df\Config\O::ct()
+ * @used-by Df\Payment\Method::codeS()
  * @param string|object $c
  * @param mixed|callable $def [optional]
  * @return mixed
