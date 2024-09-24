@@ -11,10 +11,10 @@
  * A service account uses an OAuth 2.0 flow that does not require human authorization.
  * Instead, it uses a key file that only your application can access.»
  * https://developers.google.com/shopping-content/guides/how-tos/service-accounts
- * @used-by \Dfe\Color\Image::__construct()
- * @used-by \TFC\Image\Command\C1::p()
- * @used-by \TFC\Image\Command\C2::p()
- * @used-by \TFC\Image\Command\C3::p()
+ * @used-by Dfe\Color\Image::__construct()
+ * @used-by TFC\Image\Command\C1::p()
+ * @used-by TFC\Image\Command\C2::p()
+ * @used-by TFC\Image\Command\C3::p()
  */
 function df_google_init_service_account():void {dfcf(function() {putenv(
 	# 2019-08-21
