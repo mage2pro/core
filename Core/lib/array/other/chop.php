@@ -7,7 +7,7 @@
  * If $length is NULL, then @uses mb_substr() returns all characters to the end of the string.
  * https://3v4l.org/ijD3V
  * 2022-11-26 That is why I use @uses df_etn().
- * @used-by \Df\Payment\Charge::metadata()
+ * @used-by Df\Payment\Charge::metadata()
  * @param string[] $a
  * @return string[]
  */
