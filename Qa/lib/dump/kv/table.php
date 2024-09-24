@@ -2,7 +2,7 @@
 /**
  * 2019-06-13
  * @see df_kv()
- * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
+ * @used-by KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @param array(string => string) $a
  */
 function df_kv_table(array $a):string {return df_tag('table', [], df_map_k(
