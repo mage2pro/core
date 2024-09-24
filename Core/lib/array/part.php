@@ -4,9 +4,9 @@
  * Отсекает последний элемент массива и возвращает «голову» (массив оставшихся элементов).
  * Похожая системная функция @see array_pop() возвращает отсечённый последний элемент.
  * Противоположная системная функция @see df_tail() отсекает первый элемент массива.
- * @used-by \Df\Config\Comment::groupPath()
- * @used-by \Df\Config\Source::sibling()
- * @used-by \Mineralair\Core\Controller\Modal\Index::execute()
+ * @used-by Df\Config\Comment::groupPath()
+ * @used-by Df\Config\Source::sibling()
+ * @used-by Mineralair\Core\Controller\Modal\Index::execute()
  */
 function df_head(array $a):array {return array_slice($a, 0, -1);}
 
@@ -16,7 +16,7 @@ function df_head(array $a):array {return array_slice($a, 0, -1);}
  * so I convert `0` and other empty values to `null`.
  * @used-by df_bt()
  * @used-by df_product_images_additional()
- * @used-by \Df\Qa\Trace\Frame::url()
+ * @used-by Df\Qa\Trace\Frame::url()
  */
 function df_slice(array $a, int $offset, int $length = 0):array {return array_slice($a, $offset, df_etn($length));}
 
@@ -28,8 +28,8 @@ function df_slice(array $a, int $offset, int $length = 0):array {return array_sl
  * @used-by df_error_create()
  * @used-by df_sprintf_strict()
  * @used-by df_zf_http_last_req()
- * @used-by \Df\Core\Text\Regex::match()
- * @used-by \Doormall\Shipping\Partner\Entity::locations()
+ * @used-by Df\Core\Text\Regex::match()
+ * @used-by Doormall\Shipping\Partner\Entity::locations()
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l3/tabs.phtml (https://github.com/cabinetsbay/catalog/issues/10)
  */
 function df_tail(array $a):array {return array_slice($a, 1);}
