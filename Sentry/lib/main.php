@@ -15,18 +15,18 @@ use Throwable as T; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by df_log()
  * @used-by dfe_modules_log()
  * @used-by dfp_report()
- * @used-by \Df\API\Client::_p()
- * @used-by \Df\Framework\Log\Dispatcher::handle()
- * @used-by \Df\Payment\Method::action()
- * @used-by \Df\Payment\W\Action::ignoredLog()
- * @used-by \Df\Payment\W\Handler::log()
- * @used-by \Dfe\CheckoutCom\Handler::p()
- * @used-by \Dfe\CheckoutCom\Method::leh()
- * @used-by \Dfe\Dynamics365\API\Facade::p()
- * @used-by \Dfe\TwoCheckout\Handler::p()
- * @used-by \Inkifi\Pwinty\AvailableForDownload::_p()
- * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
+ * @used-by Df\API\Client::_p()
+ * @used-by Df\Framework\Log\Dispatcher::handle()
+ * @used-by Df\Payment\Method::action()
+ * @used-by Df\Payment\W\Action::ignoredLog()
+ * @used-by Df\Payment\W\Handler::log()
+ * @used-by Dfe\CheckoutCom\Handler::p()
+ * @used-by Dfe\CheckoutCom\Method::leh()
+ * @used-by Dfe\Dynamics365\API\Facade::p()
+ * @used-by Dfe\TwoCheckout\Handler::p()
+ * @used-by Inkifi\Pwinty\AvailableForDownload::_p()
+ * @used-by Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @param string|object|null $m
  * @param _DO|mixed[]|mixed|T $v
  * @param array(string => mixed) $extra [optional]
@@ -94,7 +94,7 @@ function df_sentry($m, $v, array $extra = []):void {
 			 * «The record severity. Defaults to error.»
 			 * https://docs.sentry.io/clientdev/attributes/#optional-attributes
 			 *
-			 * @used-by \Df\Sentry\Client::capture():
+			 * @used-by Df\Sentry\Client::capture():
 			 *	if (!isset($data['level'])) {
 			 *		$data['level'] = self::ERROR;
 			 *	}
@@ -119,18 +119,18 @@ function df_sentry($m, $v, array $extra = []):void {
  * 2.2) A class name: «A\B\C».
  * 2.3) An object: it comes down to the case 2 via @see get_class()
  * 2.4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @used-by \Auctane\Api\Model\Action\Export::_getBillingInfo() (caremax.com.au, https://github.com/caremax-com-au/site/issues/1)
- * @used-by \Auctane\Api\Model\Action\Export::writeOrderXml() (caremax.com.au, https://github.com/caremax-com-au/site/issues/1)
- * @used-by \Dfe\GingerPaymentsBase\Init\Action::req()
- * @used-by \Df\Payment\W\Reader::error()
- * @used-by \Df\StripeClone\Method::charge()
- * @used-by \Df\StripeClone\Method::chargeNew()
- * @used-by \Dfe\AlphaCommerceHub\Method::charge()
- * @used-by \Dfe\Qiwi\Init\Action::req()
- * @used-by \Dfe\Stripe\Init\Action::redirectUrl()
- * @used-by \Dfe\TwoCheckout\Method::charge()
- * @used-by \Inkifi\Pwinty\Controller\Index\Index::execute()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
+ * @used-by Auctane\Api\Model\Action\Export::_getBillingInfo() (caremax.com.au, https://github.com/caremax-com-au/site/issues/1)
+ * @used-by Auctane\Api\Model\Action\Export::writeOrderXml() (caremax.com.au, https://github.com/caremax-com-au/site/issues/1)
+ * @used-by Dfe\GingerPaymentsBase\Init\Action::req()
+ * @used-by Df\Payment\W\Reader::error()
+ * @used-by Df\StripeClone\Method::charge()
+ * @used-by Df\StripeClone\Method::chargeNew()
+ * @used-by Dfe\AlphaCommerceHub\Method::charge()
+ * @used-by Dfe\Qiwi\Init\Action::req()
+ * @used-by Dfe\Stripe\Init\Action::redirectUrl()
+ * @used-by Dfe\TwoCheckout\Method::charge()
+ * @used-by Inkifi\Pwinty\Controller\Index\Index::execute()
+ * @used-by Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @param string|object|null $m
  * @param mixed ...$v
  */
@@ -138,7 +138,7 @@ function df_sentry_extra($m, ...$v):void {df_sentry_m($m)->extra(!$v ? $v : (is_
 
 /**
  * 2019-05-20
- * @used-by \Inkifi\Pwinty\AvailableForDownload::images()
+ * @used-by Inkifi\Pwinty\AvailableForDownload::images()
  * @param mixed $v
  */
 function df_sentry_extra_f($v):void {df_sentry_m(df_caller_c())->extra([df_caller_m() => $v]);}
@@ -155,8 +155,8 @@ function df_sentry_extra_f($v):void {df_sentry_m(df_caller_c())->extra([df_calle
  * @used-by df_sentry_extra_f()
  * @used-by df_sentry_m()
  * @used-by df_sentry_tags()
- * @used-by \Df\Payment\W\Handler::log()
- * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
+ * @used-by Df\Payment\W\Handler::log()
+ * @used-by Dfe\CheckoutCom\Controller\Index\Index::webhook()
  * @param string|object|null $m
  */
 function df_sentry_m($m):Sentry {return dfcf(function(string $m):Sentry {
@@ -200,7 +200,7 @@ function df_sentry_module($m = null):string {return !$m ? 'Df_Core' : df_module_
  * 2) A class name: «A\B\C».
  * 3) An object: it comes down to the case 2 via @see get_class()
  * 4) `null`: it comes down to the case 1 with the «Df_Core» module name.
- * @used-by \Df\Payment\Method::action()
+ * @used-by Df\Payment\Method::action()
  * @param string|object|null $m
  * @param array(string => mixed) $a
  */
