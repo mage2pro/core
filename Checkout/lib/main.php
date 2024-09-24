@@ -10,7 +10,7 @@ use Magento\Checkout\Model\Session;
 use Magento\Sales\Model\Order as O;
 /**
  * 2019-04-17
- * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
+ * @used-by Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
  */
 function df_cart():Cart {return df_o(Cart::class);}
 
@@ -24,14 +24,14 @@ function df_cart_h():CartH {return df_o(CartH::class);}
  * 2016-07-14
  * 2022-11-17 PHP allows to declare a type before `...`: https://github.com/mage2pro/core/issues/174#user-content-...
  * @used-by dfp_error()
- * @used-by \Df\Payment\CustomerReturn::execute()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by Df\Payment\CustomerReturn::execute()
+ * @used-by Dfe\CheckoutCom\Handler\CustomerReturn::p()
  */
 function df_checkout_error(string ...$a):void {df_checkout_message(df_format($a), false);}
 
 /**
  * 2021-05-26
- * @used-by \Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
+ * @used-by Interactivated\Quotecheckout\Controller\Index\Updateordermethod::execute() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  */
 function df_checkout_h():DataH {return df_o(DataH::class);}
 
@@ -49,16 +49,16 @@ function df_checkout_message(string $s, bool $success):void {
  * 2016-05-06
  * @used-by df_order_last()
  * @used-by df_quote()
- * @used-by \Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
- * @used-by \Df\Payment\Block\Info::ii()
- * @used-by \Df\Payment\CustomerReturn::execute()
- * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
- * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @used-by \PPCs\Core\Plugin\Checkout\Controller\Onepage\Success::beforeDispatch()
- * @used-by \TFC\Realex\Redirector::is() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
- * @used-by \TFC\Realex\Redirector::restoreQuote() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
- * @used-by \TFC\Realex\Redirector::set() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
+ * @used-by Df\Customer\Observer\CopyFieldset\OrderAddressToCustomer::execute()
+ * @used-by Df\Payment\Block\Info::ii()
+ * @used-by Df\Payment\CustomerReturn::execute()
+ * @used-by Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+ * @used-by Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by PPCs\Core\Plugin\Checkout\Controller\Onepage\Success::beforeDispatch()
+ * @used-by TFC\Realex\Redirector::is() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
+ * @used-by TFC\Realex\Redirector::restoreQuote() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
+ * @used-by TFC\Realex\Redirector::set() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
  * @return Session|DfSession
  */
 function df_checkout_session() {return df_o(Session::class);}
@@ -67,11 +67,11 @@ function df_checkout_session() {return df_o(Session::class);}
  * 2018-10-06
  * @used-by df_redirect_to_payment()
  * @used-by df_redirect_to_success()
- * @used-by \Df\Payment\Block\Info::ii()
- * @used-by \Df\Payment\W\Action::execute()
- * @used-by \Dfe\AlphaCommerceHub\W\Reader::reqFilter()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
- * @used-by \TFC\Core\B\Checkout\Success::_toHtml() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/42)
+ * @used-by Df\Payment\Block\Info::ii()
+ * @used-by Df\Payment\W\Action::execute()
+ * @used-by Dfe\AlphaCommerceHub\W\Reader::reqFilter()
+ * @used-by Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by TFC\Core\B\Checkout\Success::_toHtml() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/42)
  * @return O|null
  * @throws DFE
  */
