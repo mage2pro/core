@@ -10,7 +10,7 @@ function df_modules():array {return df_module_list()->getNames();}
 /**
  * 2020-04-16
  * @see dfe_modules()
- * @used-by \Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()
+ * @used-by Df\Framework\Plugin\Css\PreProcessor\File\FileList\Collator::afterCollate()
  * @return string[]
  */
 function df_modules_my():array {return dfcf(function() {return array_keys(array_filter(df_map_k(
