@@ -39,8 +39,8 @@ function df_currencies_options(array $keys = [], $s = null):array {return dfcf(f
 
 /**
  * 2016-06-30 «How to programmatically get a currency's name by its ISO code?» https://mage2.pro/t/1833
- * @used-by \Df\Payment\ConfigProvider::config()
- * @used-by \Dfe\AlphaCommerceHub\W\Event::currencyName()
+ * @used-by Df\Payment\ConfigProvider::config()
+ * @used-by Dfe\AlphaCommerceHub\W\Event::currencyName()
  * @param string|C|string[]|C[]|null $c [optional]
  * @return string|string[]
  */
