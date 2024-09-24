@@ -23,7 +23,7 @@ use SimpleXMLElement as X;
  *		"response": "000",
  * 		<...>
  *	}
- * @used-by \Dfe\Vantiv\API\Client::_construct()
+ * @used-by Dfe\Vantiv\API\Client::_construct()
  * @param X|string $x
  * @return array(string => mixed)
  */
