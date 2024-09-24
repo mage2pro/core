@@ -3,7 +3,7 @@
 /**
  * 2024-05-08 "Implement `df_assert_module_enabled()`": https://github.com/mage2pro/core/issues/367
  * @used-by df_module_name_by_path()
- * @used-by \Sharapov\Cabinetsbay\Setup\InstallData::install() (https://github.com/cabinetsbay/site/issues/98)
+ * @used-by Sharapov\Cabinetsbay\Setup\InstallData::install() (https://github.com/cabinetsbay/site/issues/98)
  */
 function df_assert_module_enabled(string $m):string {return df_assert(df_module_enabled($m), "The `{$m}` module must be enabled.");}
 
