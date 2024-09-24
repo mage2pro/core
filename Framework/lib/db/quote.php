@@ -8,7 +8,7 @@ function df_db_quote($v):string {return df_conn()->quoteIdentifier($v);}
 
 /**
  * @used-by df_db_or()
- * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by Df\Sso\CustomerReturn::mc()
  * @param string $text
  * @param mixed $value
  * @param string|null $type [optional]
