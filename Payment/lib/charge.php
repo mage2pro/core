@@ -10,11 +10,11 @@ use Magento\Sales\Model\ResourceModel\Order\Invoice\Collection as IC;
  * By analogy with @see \Magento\Sales\Model\Order\Payment::processAction()
  * https://github.com/magento/magento2/blob/2.1.5/app/code/Magento/Sales/Model/Order/Payment.php#L420-L424
  * The result is in the order/payment currency.
- * @used-by \Df\Payment\Operation\Source\Order::amount()
- * @used-by \Df\Payment\Operation\Source\Quote::amount()
- * @used-by \Df\StripeClone\Method::charge()
- * @used-by \Dfe\AlphaCommerceHub\Method::charge()
- * @used-by \Dfe\CheckoutCom\Method::capturePreauthorized()
+ * @used-by Df\Payment\Operation\Source\Order::amount()
+ * @used-by Df\Payment\Operation\Source\Quote::amount()
+ * @used-by Df\StripeClone\Method::charge()
+ * @used-by Dfe\AlphaCommerceHub\Method::charge()
+ * @used-by Dfe\CheckoutCom\Method::capturePreauthorized()
  * @param O|Q|I|CM|null $d [optional]
  */
 function dfp_due(M $m, $d = null):float {
