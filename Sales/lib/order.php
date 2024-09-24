@@ -17,25 +17,25 @@ use Magento\Sales\Model\OrderRepository;
  * @used-by df_oi_get()
  * @used-by df_oi_save()
  * @used-by dfp_refund()
- * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
- * @used-by \CanadaSatellite\Core\Plugin\MageWorx\OrderEditor\Block\Adminhtml\Sales\Order\Edit\Wrapper::aroundGetTemplate() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/237)
- * @used-by \Df\Payment\Method::o()
- * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
- * @used-by \Df\Payment\Operation::o()
- * @used-by \Df\Payment\Operation\Source\Order::oq()
- * @used-by \Df\Payment\PlaceOrderInternal::_place()
- * @used-by \Df\Payment\TM::confirmed()
- * @used-by \Df\Payment\W\Handler::o()
- * @used-by \Df\Sales\Model\Order\Payment::processActionS()
- * @used-by \Dfe\CheckoutCom\Handler\Charge::o()
- * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::o()
- * @used-by \Inkifi\Mediaclip\Event::o()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Get::t01()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t01()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t03()
+ * @used-by Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
+ * @used-by CanadaSatellite\Core\Plugin\MageWorx\OrderEditor\Block\Adminhtml\Sales\Order\Edit\Wrapper::aroundGetTemplate() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/237)
+ * @used-by Df\Payment\Method::o()
+ * @used-by Df\Payment\Observer\DataProvider\SearchResult::execute()
+ * @used-by Df\Payment\Operation::o()
+ * @used-by Df\Payment\Operation\Source\Order::oq()
+ * @used-by Df\Payment\PlaceOrderInternal::_place()
+ * @used-by Df\Payment\TM::confirmed()
+ * @used-by Df\Payment\W\Handler::o()
+ * @used-by Df\Sales\Model\Order\Payment::processActionS()
+ * @used-by Dfe\CheckoutCom\Handler\Charge::o()
+ * @used-by Dfe\TwoCheckout\Handler\RefundIssued::o()
+ * @used-by Inkifi\Mediaclip\Event::o()
+ * @used-by Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
+ * @used-by Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
+ * @used-by Inkifi\Pwinty\T\CaseT\V30\Order\Get::t01()
+ * @used-by Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t01()
+ * @used-by Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t02()
+ * @used-by Inkifi\Pwinty\T\CaseT\V30\Order\Validate::t03()
  * @param int|O|OP|null $o [optional]
  * @throws InputException|LE|NoSuchEntityException
  */
@@ -78,7 +78,7 @@ function df_order_by_payment(OP $p) {return dfcf(function(OP $p) {
 	}
 	/**
 	 * 2016-03-26
-	 * Очень важно! Иначе order создаст свой экземпляр payment: @used-by \Magento\Sales\Model\Order::getPayment()
+	 * Очень важно! Иначе order создаст свой экземпляр payment: @used-by Magento\Sales\Model\Order::getPayment()
 	 */
 	$r[IO::PAYMENT] = $p;
 	return $r;
@@ -109,7 +109,7 @@ function df_order_r() {return df_o(IOrderRepository::class);}
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Model/Order.php#L1191-L1206
  * Поэтому сначала смотрим, имеется ли у заказа способ доставки,
  * вызывая @uses \Magento\Sales\Model\Order::getShippingMethod() с параметром $asObject = false
- * @used-by \Dfe\Stripe\P\Address::p()
+ * @used-by Dfe\Stripe\P\Address::p()
  */
 function df_order_shipping_title(O $o):string {return /** @var string $c */
 	!$o->getShippingMethod() || !($c = $o->getShippingMethod(true)['method']) ? '' :
@@ -118,8 +118,8 @@ function df_order_shipping_title(O $o):string {return /** @var string $c */
 
 /**
  * 2017-03-18
- * @used-by \Df\Payment\Observer\VoidT::execute()
- * @used-by \Df\Sales\Model\Order\Payment::processActionS()
- * @used-by \Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
+ * @used-by Df\Payment\Observer\VoidT::execute()
+ * @used-by Df\Sales\Model\Order\Payment::processActionS()
+ * @used-by Df\Sales\Plugin\Model\ResourceModel\Order\Handler\State::aroundCheck()
  */
 function df_order_ds(string $s):string {return df_order_config()->getStateDefaultStatus($s);}
