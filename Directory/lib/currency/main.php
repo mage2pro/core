@@ -28,8 +28,8 @@ function df_currency($c = ''):C {return !$c ? df_currency_base() : ($c instanceo
  * @used-by df_currency()
  * @used-by df_currency_convert_from_base()
  * @used-by df_currency_convert_to_base()
- * @used-by \Df\Payment\Currency::rateToPayment()
- * @used-by \Df\Payment\Currency::toBase()
+ * @used-by Df\Payment\Currency::rateToPayment()
+ * @used-by Df\Payment\Currency::toBase()
  * @param ScopeA|Store|ConfigData|IConfigData|O|Q|array(int|string)|null|string|int $s [optional]
  */
 function df_currency_base($s = null):C {return df_currency(df_assert_sne(df_cfg(
@@ -40,9 +40,9 @@ function df_currency_base($s = null):C {return df_currency(df_assert_sne(df_cfg(
  * 2017-01-29
  * «How to get the currency code for a country with PHP?» https://mage2.pro/t/2552
  * http://stackoverflow.com/a/31755693
- * @used-by \Df\Directory\Test\currency::t01()
- * @used-by \Dfe\Klarna\Api\Checkout\V2\Charge::currency()
- * @used-by \Dfe\Stripe\FE\Currency::currency()
+ * @used-by Df\Directory\Test\currency::t01()
+ * @used-by Dfe\Klarna\Api\Checkout\V2\Charge::currency()
+ * @used-by Dfe\Stripe\FE\Currency::currency()
  * @param string|Country $c
  */
 function df_currency_by_country_c($c):string {return dfcf(function($c) {return
