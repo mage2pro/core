@@ -5,8 +5,8 @@ use Df\Core\Helper\Text as T;
  * 1) IntelliJ IDEA этого не показывает, но пробел здесь не обычный, а узкий: https://en.wikipedia.org/wiki/Thin_space
  * 2) Глобальные константы появились в PHP 5.3:
  * http://www.codingforums.com/php/303927-unexpected-t_const-php-version-5-2-17-a.html
- * @used-by \Dfe\CurrencyFormat\O::options()
- * @used-by \Dfe\CurrencyFormat\O::thousandsSeparator()
+ * @used-by Dfe\CurrencyFormat\O::options()
+ * @used-by Dfe\CurrencyFormat\O::thousandsSeparator()
  */
 const DF_THIN_SPACE = ' ';
 
@@ -17,7 +17,7 @@ const DF_THIN_SPACE = ' ';
  */
 function df_string_split(string $s):array {return preg_split("//u", $s, -1, PREG_SPLIT_NO_EMPTY);}
 
-/** @used-by \Df\PaypalClone\W\Event::validate() */
+/** @used-by Df\PaypalClone\W\Event::validate() */
 function df_strings_are_equal_ci(string $s1, string $s2):bool {return 0 === strcmp(mb_strtolower($s1), mb_strtolower($s2));}
 
 /**
@@ -29,24 +29,24 @@ function df_t():T {return T::s();}
 
 /**
  * 2016-07-05 $length - это длина уникальной части, без учёта $prefix.
- * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
- * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
- * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
- * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
- * @used-by \Df\Framework\Form\Element\Multiselect::getElementHtml()
- * @used-by \Df\Sso\Button::attributes()
- * @used-by \Dfe\Moip\P\Reg::p()
- * @used-by \Dfe\Moip\Test\CaseT\Customer::pCustomer()
- * @used-by \Dfe\Moip\Test\CaseT\Notification::create()
- * @used-by \Dfe\Moip\Test\Order::pOrder()
- * @used-by \Dfe\Omise\Test\Customer::tRetrieveNonExistent()
- * @used-by \Dfe\SecurePay\Refund::process()
- * @used-by \Dfe\Sift\Session::get()
- * @used-by \Dfe\TBCBank\Charge::pCharge()
- * @used-by \Dfe\TBCBank\Test\CaseT\Regular::transId()
- * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
- * @used-by \Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
+ * @used-by Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
+ * @used-by Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
+ * @used-by Df\Core\Test\lib\DbColumn::df_db_column_rename()
+ * @used-by Df\Core\Test\lib\DbColumn::df_db_column_rename()
+ * @used-by Df\Framework\Form\Element\Multiselect::getElementHtml()
+ * @used-by Df\Sso\Button::attributes()
+ * @used-by Dfe\Moip\P\Reg::p()
+ * @used-by Dfe\Moip\Test\CaseT\Customer::pCustomer()
+ * @used-by Dfe\Moip\Test\CaseT\Notification::create()
+ * @used-by Dfe\Moip\Test\Order::pOrder()
+ * @used-by Dfe\Omise\Test\Customer::tRetrieveNonExistent()
+ * @used-by Dfe\SecurePay\Refund::process()
+ * @used-by Dfe\Sift\Session::get()
+ * @used-by Dfe\TBCBank\Charge::pCharge()
+ * @used-by Dfe\TBCBank\Test\CaseT\Regular::transId()
+ * @used-by Dfe\Vantiv\Test\CaseT\Charge::req()
+ * @used-by Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t01()
+ * @used-by Inkifi\Pwinty\T\CaseT\V30\Order\AddImage::t02()
  */
 function df_uid(int $length = 0, string $prefix = ''):string {
 	# Важно использовать $more_entropy = true, потому что иначе на быстрых серверах
