@@ -20,9 +20,9 @@ function df_asset():Repository {return df_o(Repository::class);}
  * instance of Magento\Framework\View\Asset\Remote returned»: https://github.com/mage2pro/core/issues/214
  * @used-by df_asset_exists()
  * @used-by df_resource_inline()
- * @used-by \Dfe\Phone\Js::_toHtml()
- * @used-by \Dfe\Customer\Block::_toHtml()
- * @used-by \Dfe\Moip\ConfigProvider::config()
+ * @used-by Dfe\Phone\Js::_toHtml()
+ * @used-by Dfe\Customer\Block::_toHtml()
+ * @used-by Dfe\Moip\ConfigProvider::config()
  * @return IAsset|File|Remote
  */
 function df_asset_create(string $u):IAsset {$a = df_asset(); return !df_is_url_absolute($u)
@@ -51,12 +51,12 @@ function df_asset_exists(string $name, string $m = '', string $ext = ''):bool {r
  * @used-by df_asset_exists()
  * @used-by df_block_output()
  * @used-by df_fe_init()
- * @used-by \BlushMe\Checkout\Block\Extra::getTemplate()
- * @used-by \BlushMe\Checkout\Block\Extra\Item::getTemplate()
- * @used-by \Dfe\Klarna\Button::_toHtml()
- * @used-by \Dfe\Portal\Block::m()
- * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
- * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
+ * @used-by BlushMe\Checkout\Block\Extra::getTemplate()
+ * @used-by BlushMe\Checkout\Block\Extra\Item::getTemplate()
+ * @used-by Dfe\Klarna\Button::_toHtml()
+ * @used-by Dfe\Portal\Block::m()
+ * @used-by Dfe\Stripe\Block\Multishipping::_toHtml()
+ * @used-by SayItWithAGift\Options\Frontend::_toHtml()
  * @param string|object|null $m [optional]
  */
 function df_asset_name(string $name = '', $m = null, string $ext = ''):string {return df_ccc(
@@ -72,21 +72,21 @@ function df_asset_source():Source {return df_o(Source::class);}
 
 /**
  * 2016-09-06
- * @used-by \Df\Framework\Form\Element\Color::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\GoogleFont::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Multiselect::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Select2::onFormInitialized()
- * @used-by \Df\Framework\Form\Element\Table::onFormInitialized()
- * @used-by \Dfe\Markdown\FormElement::css()
- * @used-by \Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Color::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\GoogleFont::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Multiselect::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Select2::onFormInitialized()
+ * @used-by Df\Framework\Form\Element\Table::onFormInitialized()
+ * @used-by Dfe\Markdown\FormElement::css()
+ * @used-by Dfe\SalesSequence\Config\Matrix\Element::onFormInitialized()
  */
 function df_asset_third_party(string $localPath):string {return "Df_Core::thirdParty/$localPath";}
 
 /**
  * 2019-02-11 $n: 'AllesWunder_Core::i/aw-logo.png'
- * @used-by \Df\Payment\BankCardNetworks::url()
- * @used-by \Inkifi\Map\HTML::tiles()
- * @used-by \TFC\Core\B\Home\Slider::i()
+ * @used-by Df\Payment\BankCardNetworks::url()
+ * @used-by Inkifi\Map\HTML::tiles()
+ * @used-by TFC\Core\B\Home\Slider::i()
  * @used-by vendor/alleswunder/core/view/frontend/templates/aw-logo.phtml
  * @used-by vendor/inkifi/map/view/frontend/templates/index.phtml
  * @param bool|Closure|mixed $onE [optional]
