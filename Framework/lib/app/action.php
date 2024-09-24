@@ -10,7 +10,7 @@ use Df\Core\Exception as DFE;
  * @see \Magento\Framework\HTTP\PhpEnvironment\Request::setControllerName()
  * In this case, use @see df_rp_has().
  * @see df_rp_has()
- * @used-by \Dfe\AllPay\W\Event\Offline::ttCurrent()
+ * @used-by Dfe\AllPay\W\Event\Offline::ttCurrent()
  */
 function df_action_has(string $s):bool {return df_contains(df_action_name(), $s);}
 
@@ -18,11 +18,11 @@ function df_action_has(string $s):bool {return df_contains(df_action_name(), $s)
  * 2016-01-07
  * @see df_rp_has()
  * @used-by df_config_field()
- * @used-by \Dfe\Markdown\Modifier::modifyData()
- * @used-by \Inkifi\Consolidation\Plugin\Backend\Block\Widget\Button\Toolbar::beforePushButtons()
- * @used-by \SayItWithAGift\Core\Plugin\Newsletter\Model\Subscriber::beforePrepare()
- * @used-by \TFC\Realex\Observer\Predispatch\Arrival::execute() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
- * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
+ * @used-by Dfe\Markdown\Modifier::modifyData()
+ * @used-by Inkifi\Consolidation\Plugin\Backend\Block\Widget\Button\Toolbar::beforePushButtons()
+ * @used-by SayItWithAGift\Core\Plugin\Newsletter\Model\Subscriber::beforePrepare()
+ * @used-by TFC\Realex\Observer\Predispatch\Arrival::execute() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/realex/issues/1)
+ * @used-by Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  */
 function df_action_is(string ...$a):bool {return ($n = df_action_name()) && in_array($n, dfa_flatten($a));}
@@ -39,8 +39,8 @@ function df_action_is(string ...$a):bool {return ($n = df_action_name()) && in_a
  * @used-by df_action_has()
  * @used-by df_action_is()
  * @used-by df_sentry()
- * @used-by \Dfe\Markdown\CatalogAction::entityType()
- * @used-by \Dfe\Markdown\FormElement::config()
+ * @used-by Dfe\Markdown\CatalogAction::entityType()
+ * @used-by Dfe\Markdown\FormElement::config()
  * @return string|null
  * @throws DFE
  */
@@ -54,7 +54,7 @@ function df_action_name() {return df_is_cli() ? null : df_assert_ne('__', df_req
  * @used-by df_is_checkout()
  * @used-by df_is_checkout_multishipping()
  * @used-by df_is_system_config()
- * @used-by \DxMoto\Core\Plugin\Amasty\Finder\Observer\LayoutRender::aroundExecute()
+ * @used-by DxMoto\Core\Plugin\Amasty\Finder\Observer\LayoutRender::aroundExecute()
  * @param string|string[] $p
  */
 function df_action_prefix($p):bool {return df_starts_with(df_action_name(), $p);}
@@ -67,7 +67,7 @@ function df_action_prefix($p):bool {return df_starts_with(df_action_name(), $p);
  * «Return value of df_referer() must be of the type string, null returned»: https://github.com/mage2pro/core/issues/177
  * @used-by df_context()
  * @used-by df_referer_ends_with()
- * @used-by \CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
+ * @used-by CanadaSatellite\Core\Plugin\Magento\Framework\App\Http::aroundLaunch() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/72)
  * @used-by https://github.com/royalwholesalecandy/core/issues/58#issuecomment-569049731
  */
 function df_referer():string {return dfa($_SERVER, 'HTTP_REFERER', '');}
@@ -75,7 +75,7 @@ function df_referer():string {return dfa($_SERVER, 'HTTP_REFERER', '');}
 /**
  * 2019-11-04
  * @see df_redirect_back()
- * @used-by \PPCs\Core\Plugin\Amazon\Payment\Observer\AddAmazonButton::aroundExecute()
- * @used-by \PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer()
+ * @used-by PPCs\Core\Plugin\Amazon\Payment\Observer\AddAmazonButton::aroundExecute()
+ * @used-by PPCs\Core\Plugin\Quote\Model\QuoteRepository::aroundGetActiveForCustomer()
  */
 function df_referer_ends_with(string $s):bool {return df_ends_with(df_referer(), $s);}
