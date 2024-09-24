@@ -14,13 +14,13 @@ function df_html_b(...$a) {return df_call_a($a, function(string $s) {return df_t
  * 2022-11-26 We can not declare the argument as `string ...$a` because such a syntax rejects arrays: https://3v4l.org/jFdPm
  * @used-by df_fa_link()
  * @used-by df_fe_init()
- * @used-by \Dfe\Phone\Js::_toHtml()
- * @used-by \Dfe\Customer\Block::_toHtml()
- * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
- * @used-by \Dfe\Klarna\Button::_toHtml()
- * @used-by \Dfe\Markdown\FormElement::css()
- * @used-by \Dfe\Stripe\Block\Multishipping::_toHtml()
- * @used-by \SayItWithAGift\Options\Frontend::_toHtml()
+ * @used-by Dfe\Phone\Js::_toHtml()
+ * @used-by Dfe\Customer\Block::_toHtml()
+ * @used-by Dfe\Frontend\Block\ProductView\Css::_toHtml()
+ * @used-by Dfe\Klarna\Button::_toHtml()
+ * @used-by Dfe\Markdown\FormElement::css()
+ * @used-by Dfe\Stripe\Block\Multishipping::_toHtml()
+ * @used-by SayItWithAGift\Options\Frontend::_toHtml()
  * @param string|string[] ...$a
  * @return string|string[]
  */
@@ -55,16 +55,16 @@ function df_resource_inline(string $u, Closure $f):string {
  * 2015-12-21
  * 2015-12-25: Пустой тег style приводит к белому экрану в Chrome: <style type='text/css'/>.
  * @used-by df_style_inline_hide()
- * @used-by \Df\Sso\Button::loggedOut()
- * @used-by \Dfe\Frontend\Block\ProductView\Css::_toHtml()
+ * @used-by Df\Sso\Button::loggedOut()
+ * @used-by Dfe\Frontend\Block\ProductView\Css::_toHtml()
  */
 function df_style_inline(string $css):string {return !$css ? '' : df_tag('style', ['type' => 'text/css'], $css);}
 
 /**
  * 2016-12-04
- * @used-by \Df\Sso\Css::_toHtml()
- * @used-by \Df\Sso\Css::_toHtml()
- * @used-by \Frugue\Shipping\Header::_toHtml()
+ * @used-by Df\Sso\Css::_toHtml()
+ * @used-by Df\Sso\Css::_toHtml()
+ * @used-by Frugue\Shipping\Header::_toHtml()
  */
 function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_inline(
 	df_csv_pretty($s) . ' {display: none !important;}'
@@ -89,46 +89,46 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by df_tag_ab()
  * @used-by df_tag_if()
  * @used-by df_tag_list()
- * @used-by \AlbumEnvy\Popup\Content::_toHtml()
- * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
- * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::inner1()
- * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::innerRow()
- * @used-by \Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::note()
- * @used-by \Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
- * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
- * @used-by \Df\Config\Plugin\Block\System\Config\Form\Fieldset::aroundRender()
- * @used-by \Df\Framework\Console\Command::execute()
- * @used-by \Df\Framework\Form\Element\Checkbox::getElementHtml()
- * @used-by \Df\Framework\Form\Element\Renderer\Inline::render()
- * @used-by \Df\Framework\Form\Element\Url::getElementHtml()
- * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::aroundGetLabelHtml()
- * @used-by \Dfe\GingerPaymentsBase\Block\Info::btInstructions()
- * @used-by \Df\Payment\Block\Info::msgUnconfirmed()
- * @used-by \Df\Payment\Block\Info::rBackend()
- * @used-by \Df\Payment\Block\Info::rCheckoutSuccess()
- * @used-by \Df\Payment\Block\Info::rCustomerAccount()
- * @used-by \Df\Payment\Block\Info::rTable()
- * @used-by \Df\Payment\Block\Info::rUnconfirmed()
- * @used-by \Df\Sso\Button::loggedOut()
- * @used-by \Dfe\Klarna\Button::_toHtml()
- * @used-by \Dfe\Logo\Frontend::_toHtml()
- * @used-by \Dfe\Logo\Plugin\Catalog\Block\Product\View\Options::aroundGetOptionHtml()
- * @used-by \Dfe\Markdown\FormElement::componentHtml()
- * @used-by \Dfe\Moip\CardFormatter::label()
- * @used-by \Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
- * @used-by \Dfe\Moip\FE\Webhooks::getElementHtml()
- * @used-by \Dfe\Portal\Block::img()
- * @used-by \Dfe\PostFinance\Block\Info::prepare()
- * @used-by \Dfe\Stripe\Block\Form::_toHtml()
- * @used-by \Frugue\Shipping\Header::_toHtml()
- * @used-by \Inkifi\Map\HTML::tiles()
- * @used-by \KingPalm\B2B\Block\Registration::_toHtml()
- * @used-by \KingPalm\B2B\Block\Registration::region()
- * @used-by \CabinetsBay\Catalog\B\Category::title() (https://github.com/cabinetsbay/catalog/issues/22)
- * @used-by \TFC\Core\B\Home\Slider::i() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
- * @used-by \TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
- * @used-by \Verdepieno\Core\CustomerAddressForm::f()
- * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
+ * @used-by AlbumEnvy\Popup\Content::_toHtml()
+ * @used-by Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::_render()
+ * @used-by Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::inner1()
+ * @used-by Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::innerRow()
+ * @used-by Df\Backend\Block\Widget\Form\Renderer\Fieldset\Element::note()
+ * @used-by Df\Backend\Block\Widget\Grid\Column\Renderer\Text::render()
+ * @used-by Df\Config\Fieldset::_getHeaderCommentHtml()
+ * @used-by Df\Config\Plugin\Block\System\Config\Form\Fieldset::aroundRender()
+ * @used-by Df\Framework\Console\Command::execute()
+ * @used-by Df\Framework\Form\Element\Checkbox::getElementHtml()
+ * @used-by Df\Framework\Form\Element\Renderer\Inline::render()
+ * @used-by Df\Framework\Form\Element\Url::getElementHtml()
+ * @used-by Df\Framework\Plugin\Data\Form\Element\AbstractElement::aroundGetLabelHtml()
+ * @used-by Dfe\GingerPaymentsBase\Block\Info::btInstructions()
+ * @used-by Df\Payment\Block\Info::msgUnconfirmed()
+ * @used-by Df\Payment\Block\Info::rBackend()
+ * @used-by Df\Payment\Block\Info::rCheckoutSuccess()
+ * @used-by Df\Payment\Block\Info::rCustomerAccount()
+ * @used-by Df\Payment\Block\Info::rTable()
+ * @used-by Df\Payment\Block\Info::rUnconfirmed()
+ * @used-by Df\Sso\Button::loggedOut()
+ * @used-by Dfe\Klarna\Button::_toHtml()
+ * @used-by Dfe\Logo\Frontend::_toHtml()
+ * @used-by Dfe\Logo\Plugin\Catalog\Block\Product\View\Options::aroundGetOptionHtml()
+ * @used-by Dfe\Markdown\FormElement::componentHtml()
+ * @used-by Dfe\Moip\CardFormatter::label()
+ * @used-by Dfe\Moip\Block\Info\Boleto::rCustomerAccount()
+ * @used-by Dfe\Moip\FE\Webhooks::getElementHtml()
+ * @used-by Dfe\Portal\Block::img()
+ * @used-by Dfe\PostFinance\Block\Info::prepare()
+ * @used-by Dfe\Stripe\Block\Form::_toHtml()
+ * @used-by Frugue\Shipping\Header::_toHtml()
+ * @used-by Inkifi\Map\HTML::tiles()
+ * @used-by KingPalm\B2B\Block\Registration::_toHtml()
+ * @used-by KingPalm\B2B\Block\Registration::region()
+ * @used-by CabinetsBay\Catalog\B\Category::title() (https://github.com/cabinetsbay/catalog/issues/22)
+ * @used-by TFC\Core\B\Home\Slider::i() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
+ * @used-by TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
+ * @used-by Verdepieno\Core\CustomerAddressForm::f()
+ * @used-by Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by app/code/WeltPixel/QuickCart/view/frontend/templates/checkout/cart/item/price/sidebar.phtml (https://github.com/cabinetsbay/site/issues/145)
  * @used-by https://github.com/tradefurniturecompany/report/blob/1.0.3/view/frontend/templates/index.phtml#L31
  * @used-by vendor/cabinetsbay/core/view/frontend/templates/Magento/Tax/item/price/unit.phtml (https://github.com/cabinetsbay/site/issues/143)
@@ -149,21 +149,21 @@ function df_tag(string $tag, $attrs = [], $content = '', $multiline = null):stri
 
 /**
  * 2016-11-17
- * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
- * @used-by \Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
- * @used-by \Dfe\Moip\Block\Info\Boleto::prepare()
- * @used-by \Dfe\TwoCheckout\Block\Info::prepare()
+ * @used-by Df\Config\Fieldset::_getHeaderCommentHtml()
+ * @used-by Dfe\AllPay\Block\Info\BankCard::allpayAuthCode()
+ * @used-by Dfe\Moip\Block\Info\Boleto::prepare()
+ * @used-by Dfe\TwoCheckout\Block\Info::prepare()
  */
 function df_tag_ab(string $s, string $u):string {return df_tag('a', ['href' => $u, 'target' => '_blank'], $s);}
 
 /**
  * 2016-10-24
  * @used-by df_tag_if_ne()
- * @used-by \Df\Payment\Comment\Description::a()
- * @used-by \Df\Payment\Method::tidFormat()
- * @used-by \Df\Payment\PlaceOrderInternal::message()
- * @used-by \Df\Sso\Button::_toHtml()
- * @used-by \Df\Sso\Button::loggedOut()
+ * @used-by Df\Payment\Comment\Description::a()
+ * @used-by Df\Payment\Method::tidFormat()
+ * @used-by Df\Payment\PlaceOrderInternal::message()
+ * @used-by Df\Sso\Button::_toHtml()
+ * @used-by Df\Sso\Button::loggedOut()
  * @param string|array(string => string|string[]|int|null) $attrs [optional]
  */
 function df_tag_if(string $s, bool $cond, string $tag, $attrs = []):string {return !$cond ? $s : df_tag($tag, $attrs, $s);}
@@ -176,7 +176,7 @@ function df_tag_if(string $s, bool $cond, string $tag, $attrs = []):string {retu
 function df_tag_if_ne(string $s, string $tag, $attrs = []):string {return df_tag_if($s, !df_est($s), $tag, $attrs);}
 
 /**
- * @used-by \Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
+ * @used-by Df\Framework\Plugin\Data\Form\Element\AbstractElement::afterGetComment()
  * @param string[] $items
  * @param string|null $cssList [optional]
  * @param string|null $cssItem [optional]
