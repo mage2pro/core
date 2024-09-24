@@ -18,7 +18,7 @@ use Magento\Customer\Model\Session;
 function df_customer_am() {return df_o(IAM::class);}
 
 /**
- * @used-by \Df\Sso\CustomerReturn::register()
+ * @used-by Df\Sso\CustomerReturn::register()
  * @return GroupManagementInterface|GroupManagement
  */
 function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
@@ -26,15 +26,15 @@ function df_customer_group_m() {return df_o(GroupManagementInterface::class);}
 /**
  * 2016-04-05
  * @used-by df_customer()
- * @used-by \Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
- * @used-by \Df\Sso\CustomerReturn::mc()
- * @used-by \Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
+ * @used-by Df\Customer\Plugin\Model\ResourceModel\AddressRepository::aroundSave()
+ * @used-by Df\Sso\CustomerReturn::mc()
+ * @used-by Dfe\Customer\Plugin\Customer\Model\ResourceModel\AddressRepository::aroundSave()
  */
 function df_customer_registry():CustomerRegistry {return df_o(CustomerRegistry::class);}
 
 /**
  * 2021-05-07
- * @used-by \Df\Quote\Plugin\Model\QuoteAddressValidator::doValidate()
+ * @used-by Df\Quote\Plugin\Model\QuoteAddressValidator::doValidate()
  * @return IRep|Rep
  */
 function df_customer_rep() {return df_o(IRep::class);}
@@ -42,8 +42,8 @@ function df_customer_rep() {return df_o(IRep::class);}
 /**
  * 2016-12-01
  * @used-by wolf_set()
- * @used-by \Df\Sso\CustomerReturn::mc()
- * @used-by \Wolf\Filter\Observer\ControllerActionPredispatch::execute()
+ * @used-by Df\Sso\CustomerReturn::mc()
+ * @used-by Wolf\Filter\Observer\ControllerActionPredispatch::execute()
  */
 function df_customer_resource():CR {return df_o(CR::class);}
 
@@ -55,12 +55,12 @@ function df_customer_resource():CR {return df_o(CR::class);}
  * @used-by df_session()
  * @used-by wolf_sess_get()
  * @used-by wolf_set()
- * @used-by \Df\Sso\Css::isAccConfirmation()
- * @used-by \Df\Sso\Css::isRegCompletion()
- * @used-by \Df\Sso\CustomerReturn::_execute()
- * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @used-by \Inkifi\Mediaclip\Price::get()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
+ * @used-by Df\Sso\Css::isAccConfirmation()
+ * @used-by Df\Sso\Css::isRegCompletion()
+ * @used-by Df\Sso\CustomerReturn::_execute()
+ * @used-by Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by Inkifi\Mediaclip\Price::get()
+ * @used-by Mangoit\MediaclipHub\Controller\Index\RenewMediaclipToken::execute()
  * @return Session|DfSession
  */
 function df_customer_session() {return df_o(Session::class);}
