@@ -7,7 +7,7 @@ use Magento\Framework\DataObject as _DO;
  * 2018-05-01
  * @see df_ci_add()
  * @used-by df_oi_save()
- * @used-by \Doormall\Shipping\Observer\QuoteSubmitBefore::execute()
+ * @used-by Doormall\Shipping\Observer\QuoteSubmitBefore::execute()
  * @param array(string => mixed) $info
  */
 function df_oi_add(_DO $o, array $info):void {
@@ -18,7 +18,7 @@ function df_oi_add(_DO $o, array $info):void {
  * 2018-05-01
  * @see df_ci_get()
  * @used-by df_oi_add()
- * @used-by \Doormall\Shipping\Plugin\Sales\Model\Order::afterGetShippingDescription()
+ * @used-by Doormall\Shipping\Plugin\Sales\Model\Order::afterGetShippingDescription()
  * @param string|object|null $m [optional]
  * @return string|array(string => mixed)|null
  */
