@@ -48,7 +48,7 @@ function df_is_bin_magento():bool {return df_ends_with(df_cli_script(), 'bin/mag
  * @used-by df_header_utf()
  * @used-by df_sentry_m()
  * @used-by df_webserver()
- * @used-by \Df\Sentry\Client::__construct()
- * @used-by \Df\Sentry\Client::capture()
+ * @used-by Df\Sentry\Client::__construct()
+ * @used-by Df\Sentry\Client::capture()
  */
 function df_is_cli():bool {return 'cli' === php_sapi_name();}
