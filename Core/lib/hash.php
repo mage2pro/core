@@ -10,8 +10,8 @@ use Magento\Framework\Model\AbstractModel as M;
  * @used-by df_hash_a()
  * @used-by dfc()
  * @used-by dfcf()
- * @used-by \Df\API\Client::p()
- * @used-by \Df\Payment\Block\Info::getCacheKeyInfo()
+ * @used-by Df\API\Client::p()
+ * @used-by Df\Payment\Block\Info::getCacheKeyInfo()
  */
 function df_hash_a(array $a):string {
 	$resultA = []; /** @var string[] $resultA */
