@@ -19,7 +19,7 @@
  * 2.1) https://php.watch/versions/8.0/union-types
  * 2.2) https://3v4l.org/AOWmO
  * @used-by df_category_names()
- * @used-by \Df\Config\Backend\ArrayT::processI()
+ * @used-by Df\Config\Backend\ArrayT::processI()
  * @param Traversable|array(int|string => _DO|array(string => mixed)) $c
  * @param string|callable $f
  * @param mixed ...$p
