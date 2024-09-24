@@ -30,7 +30,7 @@ function df_oi_r() {return df_o(IOIR::class);}
 
 /**
  * 2019-02-24
- * @used-by \Inkifi\Mediaclip\API\Entity\Order\Item::oic()
- * @used-by \Inkifi\Mediaclip\Event::oi()
+ * @used-by Inkifi\Mediaclip\API\Entity\Order\Item::oic()
+ * @used-by Inkifi\Mediaclip\Event::oi()
  */
 function df_oic():OIC {return df_new_om(OIC::class);}
