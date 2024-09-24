@@ -10,6 +10,6 @@ function df_cms_block_r():BR {return df_o(BR::class);}
 
 /**
  * 2018-05-21
- * @used-by \Df\Config\Source\Block::map()
+ * @used-by Df\Config\Source\Block::map()
  */
 function df_cms_blocks():C {return df_new_om(C::class);}
