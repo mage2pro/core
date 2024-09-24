@@ -4,7 +4,6 @@ use Df\Zf\Validate\StringT\FloatT;
 
 /**
  * @used-by df_float_positive()
- * @used-by df_leaf_f()
  * @used-by dff_chop0()
  * @used-by dfp_last2()
  * @used-by \Dfe\CurrencyConvert\Ecb::_convert()
