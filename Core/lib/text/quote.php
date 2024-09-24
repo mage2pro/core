@@ -11,8 +11,8 @@ function df_quote_double($s) {return df_t()->quote($s, T::QUOTE__DOUBLE);}
 
 /**
  * @used-by df_csv_pretty_quote()
- * @used-by \Df\Config\Backend::label()
- * @used-by \Df\Framework\Validator\Currency::message()
+ * @used-by Df\Config\Backend::label()
+ * @used-by Df\Framework\Validator\Currency::message()
  * @param string|string[]|P|P[] $s
  * @return string|string[]
  */
@@ -20,8 +20,8 @@ function df_quote_russian($s) {return df_t()->quote($s, T::QUOTE__RUSSIAN);}
 
 /**
  * @used-by df_ejs()
- * @used-by \Df\Typography\Font::css()
- * @used-by \Dfe\Frontend\Block\ProductView\Css::customCss()
+ * @used-by Df\Typography\Font::css()
+ * @used-by Dfe\Frontend\Block\ProductView\Css::customCss()
  * @param string|string[]|P|P[] $s
  * @return string|string[]
  */
