@@ -25,7 +25,7 @@ function dfp_methods():array {return dfcf(function() {return df_map_k(function($
  * 		<...>
  *	]
  * @see dfp_methods()
- * @used-by \Dfe\Sift\PM\FE::onFormInitialized()
+ * @used-by Dfe\Sift\PM\FE::onFormInitialized()
  * @return array(array(string => string))
  */
 function dfp_methods_o():array {return df_map_to_options(dfp_methods());}
