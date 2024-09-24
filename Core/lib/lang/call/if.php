@@ -9,7 +9,6 @@
  * @used-by df_if()
  * @used-by df_if1()
  * @used-by df_if2()
- * @used-by df_leaf()
  * @used-by dfa()
  * @param mixed|callable $v
  * @param mixed ...$a [optional]

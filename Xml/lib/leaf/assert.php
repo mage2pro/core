@@ -3,7 +3,6 @@ use Df\Core\Exception as E;
 use SimpleXMLElement as X;
 
 /**
- * @used-by df_leaf()
  * @throws E
  */
 function df_xml_assert_leaf(X $x):X {return df_xml_is_leaf($x) ? $x : df_error(

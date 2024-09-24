@@ -10,7 +10,6 @@ function df_if(bool $cond, $onTrue, $onFalse = null) {return $cond ? df_call_if(
 
 /**
  * 2016-02-09 Осуществляет ленивое ветвление только для первой ветки.
- * @used-by df_leaf()
  * @used-by df_request()
  * @param mixed|callable $onTrue
  * @param mixed|null $onFalse [optional]
