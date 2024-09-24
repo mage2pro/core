@@ -4,7 +4,7 @@ use Magento\Customer\Model\Customer as C;
 
 /**
  * 2016-12-01
- * @used-by \Df\Sso\CustomerReturn::mc()
+ * @used-by Df\Sso\CustomerReturn::mc()
  */
 function df_are_customers_global():bool {return dfcf(function() {
 	$share = df_o(Share::class); /** @var Share $share */
@@ -13,7 +13,7 @@ function df_are_customers_global():bool {return dfcf(function() {
 
 /**
  * 2016-08-24 By analogy with @see \Magento\Backend\Block\Dashboard\Tab\Customers\Newest::getRowUrl()
- * @used-by \Dfe\Stripe\P\Reg::p()
+ * @used-by Dfe\Stripe\P\Reg::p()
  * @see df_order_backend_url()
  * @see df_cm_backend_url()
  * @param C|int|null $c
