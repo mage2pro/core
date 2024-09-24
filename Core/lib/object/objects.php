@@ -6,7 +6,7 @@ use Magento\Framework\DataObject as _DO;
  * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @used-by df_sc()
- * @used-by \Df\Config\Backend\Serialized::processI()
+ * @used-by Df\Config\Backend\Serialized::processI()
  * @param string|null|array(string => mixed) $a2 [optional]
  * @param array(string => mixed) $a3 [optional]
  * @return _DO|object
@@ -32,14 +32,14 @@ function df_ic(string $resultClass, $a2 = null, array $a3 = []) {
  * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @used-by df_oq_sa()
- * @used-by \CanadaSatellite\Core\Plugin\Magento\Sales\Api\Data\OrderInterface::afterGetPayment() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/29)
- * @used-by \Df\Widget\P\Wysiwyg::prepareElementHtml() (https://github.com/mage2pro/core/issues/392)
- * @used-by \Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
- * @used-by \Doormall\Shipping\Method::collectRates()
- * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
- * @used-by \Frugue\Shipping\Method::collectRates()
- * @used-by \KingPalm\B2B\Block\Registration::e()
- * @used-by \KingPalm\B2B\Block\Registration::form()
+ * @used-by CanadaSatellite\Core\Plugin\Magento\Sales\Api\Data\OrderInterface::afterGetPayment() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/29)
+ * @used-by Df\Widget\P\Wysiwyg::prepareElementHtml() (https://github.com/mage2pro/core/issues/392)
+ * @used-by Dfe\Markdown\Plugin\Ui\Component\Form\Element\Wysiwyg::beforePrepare()
+ * @used-by Doormall\Shipping\Method::collectRates()
+ * @used-by Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
+ * @used-by Frugue\Shipping\Method::collectRates()
+ * @used-by KingPalm\B2B\Block\Registration::e()
+ * @used-by KingPalm\B2B\Block\Registration::form()
  * @param array(string => mixed) $d [optional]
  * @return _DO|object
  */
@@ -51,8 +51,8 @@ function df_new_omd(string $c, array $d = []) {return df_om()->create($c, ['data
  * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @see df_ic()
- * @used-by \Dfe\GingerPaymentsBase\Settings::os()
- * @used-by \Df\Payment\Settings::_options()
+ * @used-by Dfe\GingerPaymentsBase\Settings::os()
+ * @used-by Df\Payment\Settings::_options()
  * @param array(string => mixed) $params [optional]
  * @return _DO|object
  */
@@ -77,9 +77,9 @@ function df_sc(string $resultClass, string $expectedClass = '', array $params = 
  * `object` as an argument type is not supported by PHP < 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * 2024-06-03 We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
  * @see dfa()
- * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
- * @used-by \Df\StripeClone\Facade\Charge::cardData()
- * @used-by \MageSuper\Faq\Observer\CheckRecaptcha3::execute() (canadasatellite.ca)
+ * @used-by Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
+ * @used-by Df\StripeClone\Facade\Charge::cardData()
+ * @used-by MageSuper\Faq\Observer\CheckRecaptcha3::execute() (canadasatellite.ca)
  * @param object $o
  * @param string|int $k
  * @param mixed|callable|null $d [optional]
@@ -98,8 +98,8 @@ function dfo($o, $k, $d = null) {return
  * The result should be a descendant of the $owner, and should exist (it is not defaulted to $owner).
  * 2022-10-31 `object` as a return type is not supported by PHP < 7.2: https://3v4l.org/dAmcs
  * @used-by df_oauth_app()
- * @used-by \Dfe\Zoho\App::s()
- * @used-by \Dfe\ZohoBI\API\Facade::s()
+ * @used-by Dfe\Zoho\App::s()
+ * @used-by Dfe\ZohoBI\API\Facade::s()
  * @param string|object $caller
  * @return object
  */
