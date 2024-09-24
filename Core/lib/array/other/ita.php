@@ -18,6 +18,6 @@
  * @used-by df_map()
  * @used-by dfa_select_ordered()
  * @used-by dfak_transform()
- * @used-by \Df\Qa\Dumper::dumpObject()
+ * @used-by Df\Qa\Dumper::dumpObject()
  */
 function df_ita(iterable $i):array {return is_array($i) ? $i : iterator_to_array($i);}
