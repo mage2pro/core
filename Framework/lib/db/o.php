@@ -13,9 +13,9 @@ function df_db_resource():R {return df_o(R::class);}
 
 /**
  * 2016-03-26
- * @used-by \Df\Payment\W\Strategy\CapturePreauthorized::_handle()
- * @used-by \Dfe\CheckoutCom\Handler\Charge\Captured::process()
- * @used-by \Dfe\CheckoutCom\Handler\CustomerReturn::p()
+ * @used-by Df\Payment\W\Strategy\CapturePreauthorized::_handle()
+ * @used-by Dfe\CheckoutCom\Handler\Charge\Captured::process()
+ * @used-by Dfe\CheckoutCom\Handler\CustomerReturn::p()
  */
 function df_db_transaction():Transaction {return df_new_om(Transaction::class);}
 
