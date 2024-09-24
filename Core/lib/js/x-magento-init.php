@@ -7,7 +7,7 @@
  * 		3) An object: it comes down to the case 2 via @see get_class()
  * 		4) `null`.
  * @used-by df_js()
- * @used-by \KingPalm\B2B\Block\RegionJS\Frontend::_toHtml()
+ * @used-by KingPalm\B2B\Block\RegionJS\Frontend::_toHtml()
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/products/not-empty.phtml (https://github.com/cabinetsbay/catalog/issues/38)
  * @used-by vendor/kingpalm/adult/view/frontend/templates/popup.phtml
  * @see df_widget()
