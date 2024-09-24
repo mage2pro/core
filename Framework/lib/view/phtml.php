@@ -3,7 +3,7 @@ use Magento\Framework\View\Design\FileResolution\Fallback\TemplateFile as Resolv
 /**
  * 2023-08-01
  * @used-by df_bt_entry_is_phtml()
- * @used-by \Df\Qa\Trace\Frame::isPHTML()
+ * @used-by Df\Qa\Trace\Frame::isPHTML()
  */
 function df_is_phtml(string $f):bool {return df_ends_with($f, '.phtml');}
 
@@ -16,7 +16,7 @@ function df_phtml_add_ext(string $f):string {return df_file_ext_add($f, 'phtml')
 
 /**
  * 2017-05-11
- * @used-by \Dfe\Portal\Router::match()
+ * @used-by Dfe\Portal\Router::match()
  * @param string|object $m
  */
 function df_phtml_exists(string $path, $m):bool {
