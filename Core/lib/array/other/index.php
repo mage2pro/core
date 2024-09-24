@@ -8,7 +8,7 @@ use Magento\Framework\DataObject as _DO;
  * 3) https://php.net/manual/en/language.types.iterable.php
  * https://3v4l.org/AOWmO
  * @used-by df_mvars()
- * @used-by \Df\Config\A::get()
+ * @used-by Df\Config\A::get()
  * @param string|Closure $k
  * @param Traversable|array(int|string => _DO) $a
  */
