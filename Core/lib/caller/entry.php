@@ -13,7 +13,7 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by df_caller_mf()
  * @used-by df_log_l()
  * @used-by df_sentry()
- * @used-by \Df\Framework\Log\Dispatcher::handle()
+ * @used-by Df\Framework\Log\Dispatcher::handle()
  * @param T|int|null|array(array(string => string|int)) $p [optional]
  * @return array(string => string|int)
  */
