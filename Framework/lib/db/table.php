@@ -15,12 +15,12 @@
  * @used-by df_next_increment_set()
  * @used-by df_table_delete()
  * @used-by df_table_exists()
- * @used-by \Aheadworks\AdvancedReviews\Model\ResourceModel\Indexer\Statistics::getSelectForStatisticsData() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
- * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
- * @used-by \Df\Customer\AddAttribute\Customer::p()
- * @used-by \Df\InventoryCatalog\Plugin\Model\ResourceModel\AddStockDataToCollection::aroundExecute()
- * @used-by \Dfe\Markdown\DbRecord::__construct()
- * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
+ * @used-by Aheadworks\AdvancedReviews\Model\ResourceModel\Indexer\Statistics::getSelectForStatisticsData() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/81)
+ * @used-by Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
+ * @used-by Df\Customer\AddAttribute\Customer::p()
+ * @used-by Df\InventoryCatalog\Plugin\Model\ResourceModel\AddStockDataToCollection::aroundExecute()
+ * @used-by Dfe\Markdown\DbRecord::__construct()
+ * @used-by KingPalm\B2B\Setup\UpgradeData::_process()
  * @param string|string[] $n
  */
 function df_table($n):string {return dfcf(function($n) {return df_db_resource()->getTableName($n);}, [$n]);}
