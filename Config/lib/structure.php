@@ -42,11 +42,11 @@ function df_config_e($path, bool $throw = true, string $expectedClass = '') { /*
 /**
  * 2015-11-14
  * 2017-06-29
- * В контексте @used-by \Df\Config\Backend::fc() при загрузке настроек эта функция работает правильно,
+ * В контексте @used-by Df\Config\Backend::fc() при загрузке настроек эта функция работает правильно,
  * проверил в отладчике.
  * @used-by df_config_field_path()
- * @used-by \Df\Config\Backend::fc()
- * @used-by \Df\Config\Source::f()
+ * @used-by Df\Config\Backend::fc()
+ * @used-by Df\Config\Source::f()
  * @param V|null $v [optional]
  */
 function df_config_field(V $v = null):F {/** @var F $r */
@@ -135,7 +135,7 @@ function df_config_field(V $v = null):F {/** @var F $r */
  * 1) "@uses \Magento\Config\Model\Config\Structure\AbstractElement::getPath()
  * ignores a custom `config_path` value": https://mage2.pro/t/5148
  * 2) @uses df_config_field() returns a flyweight: https://en.wikipedia.org/wiki/Flyweight_pattern
- * @used-by \Df\Config\Comment::groupPath()
+ * @used-by Df\Config\Comment::groupPath()
  */
 function df_config_field_path():string {
 	$f = df_config_field(); /** @var F $f */
@@ -144,7 +144,7 @@ function df_config_field_path():string {
 
 /**
  * 2016-08-02
- * @used-by \Df\Payment\Comment\Description::locations()
+ * @used-by Df\Payment\Comment\Description::locations()
  * @return Group|null
  */
 function df_config_group(string $path, bool $throw = true) {return df_config_e($path, $throw, Group::class);}
@@ -159,13 +159,13 @@ function df_config_section(string $path, bool $throw = true) {return df_config_e
 /**
  * 2016-08-02 By analogy with @see \Magento\Config\Block\System\Config\Form::__construct()
  * @used-by df_config_e()
- * @used-by \Df\Config\Backend::label()
- * @used-by \Df\Config\Model\Config\Structure::tab()
+ * @used-by Df\Config\Backend::label()
+ * @used-by Df\Config\Model\Config\Structure::tab()
  */
 function df_config_structure():Structure {return df_o(Structure::class);}
 
 /**
  * 2016-08-02
- * @used-by \Df\Config\Backend::label()
+ * @used-by Df\Config\Backend::label()
  */
 function df_config_tab_label(Section $s):string {return DfStructure::tab($s->getData()['tab'], 'label');}
