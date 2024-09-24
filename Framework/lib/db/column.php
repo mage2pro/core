@@ -26,13 +26,13 @@ use Df\Framework\DB\ColumnType as T;
  * @used-by df_dbc_ca()
  * @used-by df_dbc_oa()
  * @used-by df_dbc_oa()
- * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
- * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
- * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
- * @used-by \Dfe\Color\Setup\UpgradeSchema::_process()
- * @used-by \Dfe\Markdown\Setup\UpgradeSchema::_process()
- * @used-by \Inkifi\Pwinty\Setup\UpgradeSchema::_process()
- * @used-by \Verdepieno\Core\Setup\UpgradeSchema::_process()
+ * @used-by Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
+ * @used-by Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
+ * @used-by Df\Core\Test\lib\DbColumn::df_db_column_rename()
+ * @used-by Dfe\Color\Setup\UpgradeSchema::_process()
+ * @used-by Dfe\Markdown\Setup\UpgradeSchema::_process()
+ * @used-by Inkifi\Pwinty\Setup\UpgradeSchema::_process()
+ * @used-by Verdepieno\Core\Setup\UpgradeSchema::_process()
  * @param string|null|array(string => mixed) $dfn [optional]
  */
 function df_db_column_add(string $t, string $name, $dfn = null):void {
@@ -65,10 +65,10 @@ function df_db_column_add(string $t, string $name, $dfn = null):void {
  * 2016-11-04
  * «How to delete (drop) a column from a database table?» https://mage2.pro/t/562
  * The function does nothing if the $column column is absent in the $t.
- * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
- * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
- * @used-by \Df\Core\Test\lib\DbColumn::df_db_column_rename()
- * @used-by \KingPalm\B2B\Setup\UpgradeSchema::_process()
+ * @used-by Df\Core\Test\lib\DbColumn::df_db_column_add_drop()
+ * @used-by Df\Core\Test\lib\DbColumn::df_db_column_add_drop_2()
+ * @used-by Df\Core\Test\lib\DbColumn::df_db_column_rename()
+ * @used-by KingPalm\B2B\Setup\UpgradeSchema::_process()
  */
 function df_db_column_drop(string $t, string $c):void {
 	/**
