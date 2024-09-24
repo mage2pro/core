@@ -3,7 +3,7 @@
  * Аналог @see str_pad() для Unicode: http://stackoverflow.com/a/14773638
  * @used-by df_kv()
  * @used-by df_pad0()
- * @used-by \Dfe\Moip\CardFormatter::label()
+ * @used-by Dfe\Moip\CardFormatter::label()
  */
 function df_pad(string $phrase, int $length, string $pattern = ' ', int $position = STR_PAD_RIGHT):string {/** @var string $r */
 	$encoding = 'UTF-8'; /** @var string $encoding */
