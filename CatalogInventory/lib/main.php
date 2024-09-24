@@ -9,7 +9,7 @@ use Magento\InventorySalesApi\Api\GetProductSalableQtyInterface as IQty;
 /**
  * 2019-11-18
  * It returns a float value, not an integer one.
- * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
+ * @used-by Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
  * @param P|int $p
  */
 function df_qty($p):float {
@@ -30,14 +30,14 @@ function df_qty($p):float {
 
 /**
  * 2020-06-05
- * @used-by \BlushMe\Checkout\Block\Extra::items()
+ * @used-by BlushMe\Checkout\Block\Extra::items()
  */
 function df_stock_h():StockH {return df_o(StockH::class);}
 
 /**
  * 2018-06-04
  * @used-by df_qty()
- * @used-by \Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
+ * @used-by Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
  * @return IStockRegistry|StockRegistry
  */
 function df_stock_r() {return df_o(IStockRegistry::class);}
