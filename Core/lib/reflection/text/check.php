@@ -11,8 +11,8 @@ use ReflectionClass as RC;
  * @used-by df_assert_class_exists()
  * @used-by df_catalog_locator_exists()
  * @used-by df_con_hier_suf()
- * @used-by \Df\Core\R\ConT::generic()
- * @used-by \Df\Payment\W\F::c()
+ * @used-by Df\Core\R\ConT::generic()
+ * @used-by Df\Payment\W\F::c()
  */
 function df_class_exists(string $c):bool {$c = df_ctr($c); return @class_exists($c);}
 
@@ -21,7 +21,7 @@ function df_class_exists(string $c):bool {$c = df_ctr($c); return @class_exists(
  * 2016-10-20
  * Making $c optional leads to the error «get_class() called without object from outside a class»: https://3v4l.org/k6Hd5
  * https://3v4l.org/k6Hd5
- * @used-by \Df\Config\Plugin\Model\Config\SourceFactory::aroundCreate()
+ * @used-by Df\Config\Plugin\Model\Config\SourceFactory::aroundCreate()
  * @param string|object $c
  */
 function df_class_my($c):bool {return in_array(df_class_f($c), ['Df', 'Dfe', 'Dfr']);}
@@ -29,7 +29,7 @@ function df_class_my($c):bool {return in_array(df_class_f($c), ['Df', 'Dfe', 'Df
 /**
  * 2017-01-11 http://stackoverflow.com/a/666701
  * @used-by df_con_hier_suf()
- * @used-by \Df\Core\R\ConT::generic()
- * @used-by \Df\Payment\W\F::i()
+ * @used-by Df\Core\R\ConT::generic()
+ * @used-by Df\Payment\W\F::i()
  */
 function df_is_abstract(string $c):bool {df_param_sne($c, 0); return (new RC(df_ctr($c)))->isAbstract();}
