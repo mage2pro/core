@@ -8,7 +8,7 @@ use Magento\Theme\Model\View\Design;
 /**
  * 2016-11-29
  * @used-by df_theme()
- * @used-by \Wolf\Filter\Block\Navigation::getCacheKeyInfo()
+ * @used-by Wolf\Filter\Block\Navigation::getCacheKeyInfo()
  * @return IDesign|Design
  */
 function df_design() {return df_o(IDesign::class);}
