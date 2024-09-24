@@ -32,7 +32,7 @@ function df_assert_oq($v) {return df_is_oq($v) ? $v : df_error('Expected an orde
  * @used-by df_visitor()
  * @used-by df_website()
  * @used-by dfp_due()
- * @used-by \Df\Payment\Operation::__construct()
+ * @used-by Df\Payment\Operation::__construct()
  * @param mixed $v
  */
 function df_is_o($v):bool {return $v instanceof IO;}
@@ -76,7 +76,7 @@ function df_is_oqi($v):bool {return df_is_oi($v) || df_is_qi($v);}
  * @used-by df_oq_sa()
  * @used-by df_quote_id()
  * @used-by dfp_due()
- * @used-by \Df\Quote\Model\Quote::runOnFreshAC()
+ * @used-by Df\Quote\Model\Quote::runOnFreshAC()
  * @param mixed $v
  */
 function df_is_q($v):bool {return $v instanceof IQ;}
