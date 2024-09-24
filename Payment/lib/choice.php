@@ -9,8 +9,8 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
 
 /**
  * 2017-04-17
- * @used-by \Df\Payment\Block\Info::choice()
- * @used-by \Df\Payment\Observer\DataProvider\SearchResult::execute()
+ * @used-by Df\Payment\Block\Info::choice()
+ * @used-by Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @param II|OP|QP|O|Q|T $op
  */
 function dfp_choice($op):Choice {return Choice::f($op);}
