@@ -12,13 +12,13 @@
  * @used-by df_package()
  * @used-by df_request_body()
  * @used-by df_test_file_l()
- * @used-by \Dfe\CheckoutCom\Controller\Index\Index::webhook()
- * @used-by \Dfe\Color\Image::dominant()
- * @used-by \Dfe\GoogleFont\Font\Variant::ttfPath()
- * @used-by \Dfe\GoogleFont\Fonts\Png::contents()
- * @used-by \Dfe\GoogleFont\Fonts\Sprite::datumPoints()
- * @used-by \Dfe\Salesforce\Test\Basic::t02_the_latest_version()
- * @used-by \Dfe\Vantiv\Test\CaseT\Charge::req()
+ * @used-by Dfe\CheckoutCom\Controller\Index\Index::webhook()
+ * @used-by Dfe\Color\Image::dominant()
+ * @used-by Dfe\GoogleFont\Font\Variant::ttfPath()
+ * @used-by Dfe\GoogleFont\Fonts\Png::contents()
+ * @used-by Dfe\GoogleFont\Fonts\Sprite::datumPoints()
+ * @used-by Dfe\Salesforce\Test\Basic::t02_the_latest_version()
+ * @used-by Dfe\Vantiv\Test\CaseT\Charge::req()
  * @param Closure|bool|mixed $onE [optional]
  * @param ?resource $rs [optional]
  */
