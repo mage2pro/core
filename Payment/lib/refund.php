@@ -17,9 +17,9 @@ use Magento\Sales\Model\Service\CreditmemoService as CMS;
  * нерабочий: «Invalid method Magento\Sales\Model\Order\Creditmemo::register»
  * https://mage2.pro/t/1029
  * Поэтому делаю по аналогии с @see \Magento\Sales\Controller\Adminhtml\Order\Creditmemo\Save::execute()
- * @used-by \Df\Payment\W\Strategy\Refund::_handle()
- * @used-by \Dfe\CheckoutCom\Handler\Charge\Refunded::process()
- * @used-by \Dfe\TwoCheckout\Handler\RefundIssued::process()
+ * @used-by Df\Payment\W\Strategy\Refund::_handle()
+ * @used-by Dfe\CheckoutCom\Handler\Charge\Refunded::process()
+ * @used-by Dfe\TwoCheckout\Handler\RefundIssued::process()
  * @param string|int|float|null $a [optional]	 в валюте заказа (платежа), в формате платёжной системы (копейках).
  * @return int|null
  */
@@ -46,15 +46,15 @@ function dfp_refund(P $p, string $tid, $a = null) {
 			 * 2016-05-23
 			 * https://mage2.pro/tags/credit-memo-adjustment
 			 * Стек вызова:
-			 * 1) @used-by \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoader::load()
+			 * 1) @used-by Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoader::load()
 			 * https://github.com/magento/magento2/blob/b366da/app/code/Magento/Sales/Controller/Adminhtml/Order/CreditmemoLoader.php#L186
-			 * 2) @used-by \Magento\Sales\Model\Order\CreditmemoFactory::createByInvoice()
+			 * 2) @used-by Magento\Sales\Model\Order\CreditmemoFactory::createByInvoice()
 			 * https://github.com/magento/magento2/blob/b366da/app/code/Magento/Sales/Model/Order/CreditmemoFactory.php#L155
-			 * 3) @used-by \Magento\Sales\Model\Order\CreditmemoFactory::initData()
+			 * 3) @used-by Magento\Sales\Model\Order\CreditmemoFactory::initData()
 			 * https://github.com/magento/magento2/blob/b366da/app/code/Magento/Sales/Model/Order/CreditmemoFactory.php#L244-L246
 			 * 2017-01-18
 			 * Значение должно быть в базовой валюте!
-			 * @used-by \Magento\Sales\Model\Order\Creditmemo::setAdjustmentNegative()
+			 * @used-by Magento\Sales\Model\Order\Creditmemo::setAdjustmentNegative()
 			 * Стек вызовов смотрите выше.
 			 */
 			$cml->setCreditmemo([
@@ -83,7 +83,7 @@ function dfp_refund(P $p, string $tid, $a = null) {
 	 * Первой мыслью была установка заказу флага ForcedCanCreditmemo:
 	 * 	$o->setForcedCanCreditmemo(false);
 	 * Этот флаг проверяется в методе
-	 * @used-by \Magento\Sales\Model\Order::canCreditmemo(),
+	 * @used-by Magento\Sales\Model\Order::canCreditmemo(),
 	 * который, в свою очередь, вызывается из
 	 * @see \Magento\Sales\Controller\Adminhtml\Order\CreditmemoLoader::_canCreditmemo()
 	 * И когда этот флаг установлен в false, то @see dfp_refund() ничего делать не будет.
