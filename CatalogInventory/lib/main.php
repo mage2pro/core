@@ -7,8 +7,7 @@ use Magento\InventorySales\Model\GetProductSalableQty as Qty;
 use Magento\InventorySalesApi\Api\GetProductSalableQtyInterface as IQty;
 
 /**
- * 2019-11-18
- * It returns a float value, not an integer one.
+ * 2019-11-18 It returns a float value, not an integer one.
  * @used-by Frugue\Configurable\Plugin\ConfigurableProduct\Helper\Data::aroundGetOptions()
  * @param P|int $p
  */
