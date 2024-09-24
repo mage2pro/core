@@ -20,7 +20,7 @@ function df_test_file_l($m, string $localPath = ''):string {return df_contents(d
 
 /**
  * 2016-11-21
- * @used-by \Dfe\BlackbaudNetCommunity\Customer::p()
+ * @used-by Dfe\BlackbaudNetCommunity\Customer::p()
  * @param string|object $m
  * @return array(string => string|array)
  */
