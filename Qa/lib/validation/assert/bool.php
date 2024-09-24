@@ -1,13 +1,13 @@
 <?php
 /**
  * @used-by df_call() (https://github.com/mage2pro/core/issues/435)
- * @used-by \Df\Config\Settings::b()
- * @used-by \Df\Framework\Form\Element\Checkbox::b()
- * @used-by \Df\Payment\Comment\Description::getCommentText()
- * @used-by \Df\Payment\Comment\Description::locations()
- * @used-by \Df\Shipping\Settings::enable()
- * @used-by \Dfe\Moip\FE\Webhooks::onFormInitialized()
- * @used-by \Dfe\YandexKassa\Source\Option::map()
+ * @used-by Df\Config\Settings::b()
+ * @used-by Df\Framework\Form\Element\Checkbox::b()
+ * @used-by Df\Payment\Comment\Description::getCommentText()
+ * @used-by Df\Payment\Comment\Description::locations()
+ * @used-by Df\Shipping\Settings::enable()
+ * @used-by Dfe\Moip\FE\Webhooks::onFormInitialized()
+ * @used-by Dfe\YandexKassa\Source\Option::map()
  * @param mixed $v
  */
 function df_bool($v):bool {
