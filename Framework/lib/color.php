@@ -3,7 +3,7 @@
  * 2019-08-21
  * 1) https://stackoverflow.com/a/15202130
  * 2) A $hex: «#ff9900».
- * @used-by \Dfe\Color\Image::palette()
+ * @used-by Dfe\Color\Image::palette()
  * @return int[]
  */
 function df_hex2rgb(string $hex):array {return sscanf($hex, "#%02x%02x%02x");}
