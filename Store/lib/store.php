@@ -44,13 +44,13 @@ use Magento\Store\Model\StoreResolver;
  * @used-by df_store_url()
  * @used-by df_url_frontend()
  * @used-by ikf_pw_api()
- * @used-by \Df\API\Client::__construct()
- * @used-by \Df\API\Facade::__construct()
- * @used-by \Df\API\Facade::s()
- * @used-by \Df\Config\Settings::s()
- * @used-by \Dfe\Markdown\DbRecord::__construct()
- * @used-by \Dfe\Robokassa\Api\Options::map()
- * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
+ * @used-by Df\API\Client::__construct()
+ * @used-by Df\API\Facade::__construct()
+ * @used-by Df\API\Facade::s()
+ * @used-by Df\Config\Settings::s()
+ * @used-by Dfe\Markdown\DbRecord::__construct()
+ * @used-by Dfe\Robokassa\Api\Options::map()
+ * @used-by Wolf\Filter\Block\Navigation::hDropdowns()
  * @param int|string|null|bool|IStore|O $v [optional]
  * @return IStore|Store
  * @throws NSE|Exception
@@ -78,10 +78,10 @@ function df_store($v = null) {/** @var string|null $c */return
  * 2016-01-30
  * @used-by df_replace_store_code_in_url()
  * @used-by df_sentry()
- * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
- * @used-by \Frugue\Shipping\Header::_toHtml()
- * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
- * @used-by \Frugue\Store\Switcher::params()
+ * @used-by Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
+ * @used-by Frugue\Shipping\Header::_toHtml()
+ * @used-by Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by Frugue\Store\Switcher::params()
  * @param null|string|int|IScope $s [optional]
  */
 function df_store_code($s = null):string {return df_scope_code($s);}
@@ -109,17 +109,17 @@ function df_store_country($store = null):Country {return df_country(df_store($st
  * 2016-01-11
  * @used-by df_category()
  * @used-by df_product()
- * @used-by \Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
- * @used-by \TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
- * @used-by \Wolf\Filter\Block\Navigation::hDropdowns()
+ * @used-by Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
+ * @used-by TFC\Core\Router::match() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/40)
+ * @used-by Wolf\Filter\Block\Navigation::hDropdowns()
  * @param int|string|null|bool|IStore $store [optional]
  */
 function df_store_id($store = null):int {return df_store($store)->getId();}
 
 /**
  * 2016-01-11
- * @used-by \Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
- * @used-by \Dfe\SalesSequence\Config\Next\Backend::nextNumbersFromDb()
+ * @used-by Dfe\SalesSequence\Config\Next\Backend::afterCommitCallback()
+ * @used-by Dfe\SalesSequence\Config\Next\Backend::nextNumbersFromDb()
  * @return int[]
  */
 function df_store_ids(bool $withDefault = false):array {return array_keys(df_stores($withDefault));}
@@ -138,7 +138,7 @@ function df_store_m() {return df_o(IStoreManager::class);}
  * 2016-01-11
  * @see df_store_codes()  
  * @see df_category_names()
- * @used-by \Dfe\SalesSequence\Config\Next\Element::rows()
+ * @used-by Dfe\SalesSequence\Config\Next\Element::rows()
  * @return string[]
  */
 function df_store_names(bool $withDefault = false, bool $codeKey = false):array {return array_map(
@@ -155,7 +155,7 @@ function df_store_url($s, string $type):string {return df_store($s)->getBaseUrl(
 
 /**
  * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
- * @used-by \Df\Payment\Metadata::vars()
+ * @used-by Df\Payment\Metadata::vars()
  * @param int|string|null|bool|IStore $s [optional]
  */
 function df_store_url_link($s = null):string {return df_store_url($s, U::URL_TYPE_LINK);}
