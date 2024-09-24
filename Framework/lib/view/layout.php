@@ -10,7 +10,7 @@ use Magento\Framework\View\Model\Layout\Merge;
  * @used-by df_block()
  * @used-by df_layout_update()
  * @used-by df_parent_name()
- * @used-by \KingPalm\B2B\Block\Registration::v()
+ * @used-by KingPalm\B2B\Block\Registration::v()
  * @return IL|L
  */
 function df_layout():IL {return df_o(IL::class);}
@@ -18,7 +18,7 @@ function df_layout():IL {return df_o(IL::class);}
 /**
  * 2017-10-16
  * @used-by df_handles()
- * @used-by \Df\Framework\Plugin\App\Action\AbstractAction::beforeExecute() 
+ * @used-by Df\Framework\Plugin\App\Action\AbstractAction::beforeExecute() 
  * @param Closure|bool|mixed $onError [optional]
  * @return IProcessor|Merge
  */
