@@ -17,7 +17,7 @@ function df_customer_group($v):G {return $v instanceof G ? $v : df_customer_grou
 
 /**
  * 2020-02-06
- * @used-by \Dfe\Sift\Payload\LoginOrRegister::p()
+ * @used-by Dfe\Sift\Payload\LoginOrRegister::p()
  * @param C|G|int $v 
  * @param F|bool|string $onE [optional]
  * @throws NSE
