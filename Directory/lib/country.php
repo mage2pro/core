@@ -35,7 +35,7 @@ function df_countries_ctn(string $locale = ''):array {return df_countries()->map
 
 /**
  * 2017-01-21
- * @used-by \Df\Directory\FE\Country::getValues()
+ * @used-by Df\Directory\FE\Country::getValues()
  * В отличие от @see df_currencies_options(), здесь мы не используем параметр $store,
  * потому что пока мы используем нащу функцию не для получения списка стран,
  * доступных покупателю, а для получения списка стран, доступных магазину.
@@ -60,15 +60,15 @@ function df_country($c, bool $throw = true) {return $c instanceof C ? $c : dfcf(
 
 /**
  * 2016-05-20 Конвертирует 2-символьный код страны (например, «RU») в 3-символьный («RUS»).
- * @used-by \Dfe\TwoCheckout\Address::countryIso3()
- * @used-by \Dfe\Moip\P\Reg::pShippingAddress()
- * @used-by \Dfe\Moip\Test\Data::address()
+ * @used-by Dfe\TwoCheckout\Address::countryIso3()
+ * @used-by Dfe\Moip\P\Reg::pShippingAddress()
+ * @used-by Dfe\Moip\Test\Data::address()
  */
 function df_country_2_to_3(string $iso2):string {return df_result_sne(dfa(CC::s()->mapFrom2To3(), $iso2));}
 
 /**
  * 2016-05-20 Конвертирует 3-символьный код страны (например, «RUS») в двухсимвольный («RU»).
- * @used-by \Dfe\Moip\Facade\Card::country()
+ * @used-by Dfe\Moip\Facade\Card::country()
  */
 function df_country_3_to_2(string $iso3):string {return df_result_sne(dfa(CC::s()->mapFrom3To2(), $iso3));}
 
@@ -81,8 +81,8 @@ function df_country_code($c):string {return df_country($c)->getIso2Code();}
 
 /**
  * 2015-12-28
- * @used-by \Dfe\Phone\Js::_toHtml()
- * @used-by \Dfe\Customer\Block::_toHtml()
+ * @used-by Dfe\Phone\Js::_toHtml()
+ * @used-by Dfe\Customer\Block::_toHtml()
  * @param int|string|null|bool|IStore $s [optional]
  * @return string[]
  */
@@ -92,11 +92,11 @@ function df_country_codes_allowed($s = null):array {return df_csv_parse(df_cfg('
  * 2016-05-20
  * It returns the country name name for an ISO 3166-1 alpha-2 2-characher code and locale
  * (or the default system locale) given: https://ru.wikipedia.org/wiki/ISO_3166-1
- * @used-by \Df\StripeClone\CardFormatter::country()
- * @used-by \Dfe\AlphaCommerceHub\Block\Info::prepare()
- * @used-by \Dfe\IPay88\Block\Info::prepare()
- * @used-by \Dfe\Klarna\Test\Charge::t01()
- * @used-by \KingPalm\B2B\Observer\RegisterSuccess::execute()
+ * @used-by Df\StripeClone\CardFormatter::country()
+ * @used-by Dfe\AlphaCommerceHub\Block\Info::prepare()
+ * @used-by Dfe\IPay88\Block\Info::prepare()
+ * @used-by Dfe\Klarna\Test\Charge::t01()
+ * @used-by KingPalm\B2B\Observer\RegisterSuccess::execute()
  * @param F|bool|mixed $onE [optional]
  */
 function df_country_ctn(string $c, $onE = true):string {return df_try(function() use($c):string {
@@ -108,10 +108,10 @@ function df_country_ctn(string $c, $onE = true):string {return df_try(function()
  * 2018-04-13
  * https://gist.github.com/henrik/1688572#gistcomment-2397203
  * https://github.com/mage2pro/frugue.com/issues/2
- * @used-by \Frugue\Shipping\Header::_toHtml()
- * @used-by \Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
- * @used-by \Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
- * @used-by \Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
+ * @used-by Frugue\Shipping\Header::_toHtml()
+ * @used-by Frugue\Core\Plugin\Directory\Model\Resource\Country\Collection::aroundLoadByStore()
+ * @used-by Frugue\Core\Plugin\Sales\Model\Quote::afterGetAddressesCollection()
+ * @used-by Frugue\Store\Plugin\Framework\App\FrontControllerInterface::aroundDispatch()
  * @return string[]|bool
  */
 function df_eu(string $c = '') {
