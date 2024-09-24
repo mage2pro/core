@@ -27,7 +27,7 @@ function df_address_owner($a) {return df_is_ca($a) ? $a->getCustomer() : (
 
 /**
  * 2016-04-04  
- * @used-by \Dfe\Customer\Plugin\Customer\Model\Address\AbstractAddress::afterValidate()
+ * @used-by Dfe\Customer\Plugin\Customer\Model\Address\AbstractAddress::afterValidate()
  * @param AA|CA|QA|OA $a
  * @return StoreInterface|Store
  */
