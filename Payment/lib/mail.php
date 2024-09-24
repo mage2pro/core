@@ -22,9 +22,9 @@ use Magento\Sales\Model\Order as O;
  * В этом случае счёта ещё нет ($this->capture() выше не выполнялось), и отсылаем покупателю письмо с заказом.
  * 2) Когда платёжная система уведомляет нас о приходе оплаты.
  * В этом случае счёт уже присутствует, и отсылаем покупателю письмо со счётом.
- * @used-by \Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
- * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
- * @used-by \Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by Alignet\Paymecheckout\Controller\Classic\Response::execute() (innomuebles.com, https://github.com/innomuebles/m2/issues/11)
+ * @used-by Df\Payment\W\Strategy\ConfirmPending::_handle()
+ * @used-by Df\Payment\W\Strategy\ConfirmPending::_handle()
  */
 function dfp_mail(O $o):void {
 	/**
