@@ -19,7 +19,7 @@ function df_if1(bool $cond, $onTrue, $onFalse = null) {return $cond ? df_call_if
 
 /**
  * 2016-02-09 Осуществляет ленивое ветвление только для второй ветки.
- * @used-by \Df\Config\Settings::p()
+ * @used-by Df\Config\Settings::p()
  * @param mixed $onTrue
  * @param mixed|null|callable $onFalse [optional]
  * @return mixed
