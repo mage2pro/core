@@ -35,16 +35,16 @@ use Magento\Store\Model\Store;
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Store/Model/ScopeInterface.php#L17
  * @used-by df_mail()
  * @used-by ikf_ite()
- * @used-by \BlushMe\Checkout\Block\Extra::items()
- * @used-by \CanadaSatellite\Core\Plugin\Cart2Quote\DeskEmail\Observer\Frontend\SaveMessageAfterObserver::beforeExecute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/54)
- * @used-by \CanadaSatellite\Core\Plugin\Magento\Rss\Controller\Feed::beforeExecute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
- * @used-by \CanadaSatellite\Core\Plugin\Mageplaza\Blog\Helper\Data::afterGetBlogUrl() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
- * @used-by \Df\AdobeStockImageAdminUi\Plugin\Model\Listing\DataProvider::aroundGetData()
- * @used-by \Df\Config\Comment::sibling()
- * @used-by \Df\Config\Source::sibling()
- * @used-by \Df\Security\BlackList::load()
- * @used-by \Df\Shipping\Settings::enable()
- * @used-by \Dfe\Portal\Block\Content::getTemplate()
+ * @used-by BlushMe\Checkout\Block\Extra::items()
+ * @used-by CanadaSatellite\Core\Plugin\Cart2Quote\DeskEmail\Observer\Frontend\SaveMessageAfterObserver::beforeExecute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/54)
+ * @used-by CanadaSatellite\Core\Plugin\Magento\Rss\Controller\Feed::beforeExecute(canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
+ * @used-by CanadaSatellite\Core\Plugin\Mageplaza\Blog\Helper\Data::afterGetBlogUrl() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/43)
+ * @used-by Df\AdobeStockImageAdminUi\Plugin\Model\Listing\DataProvider::aroundGetData()
+ * @used-by Df\Config\Comment::sibling()
+ * @used-by Df\Config\Source::sibling()
+ * @used-by Df\Security\BlackList::load()
+ * @used-by Df\Shipping\Settings::enable()
+ * @used-by Dfe\Portal\Block\Content::getTemplate()
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing/sortbilling.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/shipping/sortshipping.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
@@ -55,7 +55,7 @@ use Magento\Store\Model\Store;
  * @return array|string|null|mixed
  */
 function df_cfg($k, $s = null, $d = null) {
-	/** 2018-04-21 @used-by \Df\Shipping\Settings::enable() */
+	/** 2018-04-21 @used-by Df\Shipping\Settings::enable() */
 	if (is_array($k)) {
 		$k = df_cc_path($k);
 	}
@@ -121,7 +121,7 @@ function df_cfg_r():RConfig {return df_o(RConfig::class);}
  * @see \Magento\Store\Model\ScopeInterface::SCOPE_WEBSITES
  * @see df_cfg_delete()
  * @used-by df_cfg_save_cc()
- * @used-by \Dfe\Dynamics365\Settings\General\OAuth::refreshTokenSave()
+ * @used-by Dfe\Dynamics365\Settings\General\OAuth::refreshTokenSave()
  */
 function df_cfg_save(string $path, string $v, string $scope = 'default', int $scopeId = 0):void {df_cfg_r()->saveConfig(
 	$path, $v, dftr($scope, [SS::SCOPE_WEBSITE => SS::SCOPE_WEBSITES, SS::SCOPE_STORE => SS::SCOPE_STORES]), $scopeId
@@ -133,7 +133,7 @@ function df_cfg_save(string $path, string $v, string $scope = 'default', int $sc
  * A $path: «web/unsecure/base_url».
  * A $scope: «default», «websites», «website», «stores», «store».
  * A $scopeId: «0».
- * @used-by \Df\Security\BlackList::save()
+ * @used-by Df\Security\BlackList::save()
  * @param string $path
  */
 function df_cfg_save_cc(string $path, string $v, string $scope = 'default', int $scopeId = 0):void {
@@ -143,11 +143,11 @@ function df_cfg_save_cc(string $path, string $v, string $scope = 'default', int 
 
 /**
  * 2018-01-28
- * @used-by \Df\Core\TestCase::s()
- * @used-by \Df\Sso\CustomerReturn::execute()
- * @used-by \Dfe\Zoho\API\Client::ss()
- * @used-by \Dfe\Zoho\App::ss()
- * @used-by \Df\Framework\Mail\TransportObserver::execute()
+ * @used-by Df\Core\TestCase::s()
+ * @used-by Df\Sso\CustomerReturn::execute()
+ * @used-by Dfe\Zoho\API\Client::ss()
+ * @used-by Dfe\Zoho\App::ss()
+ * @used-by Df\Framework\Mail\TransportObserver::execute()
  * @param object|string $m
  */
 function dfs($m):Settings {return Settings::convention(df_module_name_c($m));}
