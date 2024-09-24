@@ -1,5 +1,5 @@
 <?php
-use SimpleXMLElement as CX;
+use SimpleXMLElement as X;
 
 /**
  * 2015-02-27
@@ -51,7 +51,7 @@ use SimpleXMLElement as CX;
  * @used-by df_leaf_s()
  * @param string|null|callable $d [optional]
  */
-function df_leaf(?CX $e = null, $d = null):?string {/** @var ?string $r */
+function df_leaf(?X $x, $d = null):?string {/** @var ?string $r */
 	/**
 	 * 2015-08-04
 	 * Нельзя здесь использовать !$e,
@@ -78,15 +78,15 @@ function df_leaf(?CX $e = null, $d = null):?string {/** @var ?string $r */
 	 * хотя в данном случае $e является полноценным объектом @see \SimpleXMLElement
 	 * и (string)$e возвращает «147».
 	 */
-	if (is_null($e)) {
+	if (is_null($x)) {
 		$r = df_call_if($d);
 	}
-	elseif (df_es($r = (string)df_xml_assert_leaf($e))) {
+	elseif (df_es($r = (string)df_xml_assert_leaf($x))) {
 		# 2015-09-25
 		# `empty($e)` returns:
 		# 		`true` for an absent node
 		# 		`false` for an empty node (`<tag></tag>` or `<tag/>`)
-		$r = df_if1(empty($e), $d, '');
+		$r = df_if1(empty($x), $d, '');
 	}
 	return $r;
 }
