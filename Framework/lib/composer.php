@@ -6,10 +6,10 @@ use Magento\Framework\Config\Composer\Package;
  * @used-by df_context()
  * @used-by df_sentry()
  * @used-by df_sentry_m()
- * @used-by \Df\Qa\Trace\Frame::url()
- * @used-by \Df\Sentry\Client::capture()
- * @used-by \Df\Sentry\Client::getUserAgent()
- * @used-by \Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
+ * @used-by Df\Qa\Trace\Frame::url()
+ * @used-by Df\Sentry\Client::capture()
+ * @used-by Df\Sentry\Client::getUserAgent()
+ * @used-by Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
  */
 function df_core_version():string {return dfcf(function() {return df_package_version('Df_Core');});}
 
@@ -27,8 +27,8 @@ function df_core_version():string {return dfcf(function() {return df_package_ver
  * @used-by dfe_modules_info()
  * @used-by dfe_packages()
  * @used-by dfe_portal_module()
- * @used-by \Df\Config\Fieldset::_getHeaderCommentHtml()
- * @used-by \Df\SampleData\Model\Dependency::getSuggestsFromModules() (https://github.com/mage2pro/core/issues/411)
+ * @used-by Df\Config\Fieldset::_getHeaderCommentHtml()
+ * @used-by Df\SampleData\Model\Dependency::getSuggestsFromModules() (https://github.com/mage2pro/core/issues/411)
  * @param string|object|null $m [optional]
  * @param string|string[] $k [optional]
  * @param mixed|null $d [optional]
@@ -88,9 +88,9 @@ function df_package_name_l($m = null) {return df_last(explode('/', df_package($m
  * @used-by df_sentry()
  * @used-by df_sentry_m() 
  * @used-by dfp_sentry_tags()
- * @used-by \Df\Payment\Method::action()
- * @used-by \Df\Sentry\Client::version()
- * @used-by \Dfe\CheckoutCom\Charge::metaData()
+ * @used-by Df\Payment\Method::action()
+ * @used-by Df\Sentry\Client::version()
+ * @used-by Dfe\CheckoutCom\Charge::metaData()
  * @param string|object|null $m [optional]
  * @return string|null
  */
