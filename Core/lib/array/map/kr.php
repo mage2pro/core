@@ -11,12 +11,12 @@ use Df\Core\Exception as DFE;
  * 2.1) https://php.watch/versions/8.0/union-types
  * 2.2) https://3v4l.org/AOWmO
  * @used-by dfak_transform()
- * @used-by \Df\Config\Source\Block::map()
- * @used-by \Df\Core\Text\Regex::getErrorCodeMap()
- * @used-by \Dfe\Color\Image::labels()
- * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
- * @used-by \Dfe\Robokassa\Api\Options::p()
- * @used-by \Doormall\Shipping\Partner\Entity::locations()
+ * @used-by Df\Config\Source\Block::map()
+ * @used-by Df\Core\Text\Regex::getErrorCodeMap()
+ * @used-by Dfe\Color\Image::labels()
+ * @used-by Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
+ * @used-by Dfe\Robokassa\Api\Options::p()
+ * @used-by Doormall\Shipping\Partner\Entity::locations()
  * @param callable|iterable $a1
  * @param callable|iterable $a2
  * @return array(int|string => mixed)
