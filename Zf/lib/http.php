@@ -4,10 +4,10 @@ use Zend_Http_Client as C;
  * 2017-07-16
  * @used-by df_github_request()
  * @used-by df_oro_get_list()
- * @used-by \Df\OAuth\App::requestToken()
- * @used-by \Dfe\BlackbaudNetCommunity\Url::check()
- * @used-by \Dfe\Dynamics365\Test\OAuth::discovery()
- * @used-by \Dfe\SecurePay\Refund::process()
+ * @used-by Df\OAuth\App::requestToken()
+ * @used-by Dfe\BlackbaudNetCommunity\Url::check()
+ * @used-by Dfe\Dynamics365\Test\OAuth::discovery()
+ * @used-by Dfe\SecurePay\Refund::process()
  * @param array(string => mixed)|null $config [optional]
  */
 function df_zf_http(string $url, array $config = []):C {
@@ -28,7 +28,7 @@ function df_zf_http(string $url, array $config = []):C {
 
 /**
  * 2017-07-01
- * @used-by \Dfe\Dynamics365\API\Facade::p()
+ * @used-by Dfe\Dynamics365\API\Facade::p()
  */
 function df_zf_http_last_req(C $c):string {
 	$s = $c->getLastRequest(); /** @var string $s */
