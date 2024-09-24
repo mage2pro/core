@@ -7,8 +7,8 @@ use Magento\Customer\Model\Data\Customer as DC;
  * 2024-06-02 "Improve `df_customer_id()`": https://github.com/mage2pro/core/issues/402
  * @used-by df_customer_is_need_confirm()
  * @used-by df_subscriber()
- * @used-by \Df\Customer\Plugin\Js\CustomerId::afterGetSectionData()
- * @used-by \Dfe\Sift\API\B\Event::p()
+ * @used-by Df\Customer\Plugin\Js\CustomerId::afterGetSectionData()
+ * @used-by Dfe\Sift\API\B\Event::p()
  * @used-by vendor/inkifi/mediaclip-legacy/view/frontend/templates/savedproject.phtml
  * @param C|DC|int|null $v [optional]
  */
