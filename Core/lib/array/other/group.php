@@ -2,7 +2,7 @@
 /**
  * 2018-04-24
  * 2024-04-08 I added the `is_null($k)` case: https://github.com/thehcginstitute-com/m1/issues/551
- * @used-by \Doormall\Shipping\Partner\Entity::locations()
+ * @used-by Doormall\Shipping\Partner\Entity::locations()
  * @param array(int|string => mixed) $a
  * @param string|int|null $k
  * @return array(int|string => array(int|string => mixed))
