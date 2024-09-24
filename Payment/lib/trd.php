@@ -8,11 +8,11 @@ use Magento\Sales\Model\Order\Payment\Transaction as T;
  * 2017-10-10
  * I have added @uses df_eta() to support the legacy Square transactions
  * (before the `Df_StripeClone` module usage): @see \Dfe\Square\Block\Info::prepare()
- * @used-by \Dfe\GingerPaymentsBase\Method::transUrl()
- * @used-by \Df\Payment\TM::req()
- * @used-by \Df\Payment\TM::res0()
- * @used-by \Df\Payment\TM::responses()
- * @used-by \Dfe\SecurePay\Signer\Response::values()
+ * @used-by Dfe\GingerPaymentsBase\Method::transUrl()
+ * @used-by Df\Payment\TM::req()
+ * @used-by Df\Payment\TM::res0()
+ * @used-by Df\Payment\TM::responses()
+ * @used-by Dfe\SecurePay\Signer\Response::values()
  * @param mixed|null $d [optional]
  * @return array(string => mixed)|mixed
  */
@@ -25,8 +25,8 @@ function df_trd(T $t, string $k = '', $d = null):array {return dfa(
  * @see \Magento\Sales\Block\Adminhtml\Transactions\Detail\Grid::getTransactionAdditionalInfo()
  * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
  * https://github.com/magento/magento2/blob/2.0.0/app/code/Magento/Sales/Block/Adminhtml/Transactions/Detail/Grid.php#L112-L125
- * @used-by \Df\Payment\Method::iiaSetTRR()
- * @used-by \Df\Payment\W\Nav::op()
+ * @used-by Df\Payment\Method::iiaSetTRR()
+ * @used-by Df\Payment\W\Nav::op()
  * @param II|OP|QP|null $p
  * @param array(string => mixed) $v
  */
