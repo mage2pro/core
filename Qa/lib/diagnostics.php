@@ -4,8 +4,8 @@ function df_break(bool $cond = true):void {$cond && function_exists('xdebug_brea
 
 /**
  * 2017-01-25
- * @used-by \Dfe\CheckoutCom\Charge::metaData()
- * @used-by \Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
+ * @used-by Dfe\CheckoutCom\Charge::metaData()
+ * @used-by Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
  * «How to detect the current web server programmatically?» https://mage2.pro/t/2523
  * http://serverfault.com/a/164159
  * @return string|string[]
