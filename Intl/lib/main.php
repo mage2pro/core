@@ -11,7 +11,7 @@ function df_intl_dic_path($m, string $l = '', string $folder = ''):string {retur
 /**
  * 2017-06-14 How to parse a CSV file? https://mage2.pro/t/4063  
  * @see df_module_csv2()
- * @used-by \Df\Intl\Js::_toHtml()
+ * @used-by Df\Intl\Js::_toHtml()
  * @param string|object $m
  * @return array(string => string)|mixed
  */
