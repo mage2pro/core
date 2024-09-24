@@ -5,7 +5,7 @@ use \Magento\Framework\App\Cache\Type\Config as TConfig;
 
 /**
  * 2021-09-22
- * @used-by \Df\Directory\Plugin\Model\Currency::afterSaveRates()
+ * @used-by Df\Directory\Plugin\Model\Currency::afterSaveRates()
  */
 function df_cache_clean_blocks():void {df_cache_clean_type(TBlock::TYPE_IDENTIFIER);}
 
@@ -17,7 +17,7 @@ function df_cache_clean_cfg():void {df_cache_clean_type(TConfig::TYPE_IDENTIFIER
 
 /**
  * 2021-09-22
- * @used-by \Df\Directory\Plugin\Model\Currency::afterSaveRates()
+ * @used-by Df\Directory\Plugin\Model\Currency::afterSaveRates()
  */
 function df_cache_clean_pages():void {df_cache_clean_type(TPage::TYPE_IDENTIFIER);}
 
