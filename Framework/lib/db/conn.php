@@ -28,13 +28,13 @@ use Magento\Framework\DB\Adapter\Pdo\Mysql;
  * @used-by df_table_delete()
  * @used-by df_table_exists()
  * @used-by df_trans_by_payment()
- * @used-by \Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
- * @used-by \Df\Customer\AddAttribute\Customer::p()
- * @used-by \Df\Sso\CustomerReturn::mc()
- * @used-by \Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
- * @used-by \Dfe\Markdown\DbRecord::save()
- * @used-by \Inkifi\Consolidation\Processor::updateDb()
- * @used-by \KingPalm\B2B\Setup\UpgradeData::_process()
+ * @used-by Alignet\Paymecheckout\Model\Client\Classic\Order\DataGetter::userCodePayme() (innomuebles.com, https://github.com/innomuebles/m2/issues/17)
+ * @used-by Df\Customer\AddAttribute\Customer::p()
+ * @used-by Df\Sso\CustomerReturn::mc()
+ * @used-by Dfe\Color\Plugin\Swatches\Block\Adminhtml\Attribute\Edit\Options\Visual::afterGetJsonConfig()
+ * @used-by Dfe\Markdown\DbRecord::save()
+ * @used-by Inkifi\Consolidation\Processor::updateDb()
+ * @used-by KingPalm\B2B\Setup\UpgradeData::_process()
  * @return IAdapter|Mysql
  */
 function df_conn(string $n = RC::DEFAULT_CONNECTION):IAdapter {return df_db_resource()->getConnection($n);}
@@ -42,7 +42,7 @@ function df_conn(string $n = RC::DEFAULT_CONNECTION):IAdapter {return df_db_reso
 /**
  * 2020-11-22
  * 2022-11-23 @see \Magento\Framework\App\ResourceConnection::DEFAULT_CONNECTION
- * @used-by \TFC\Image\Command\C3::p()
+ * @used-by TFC\Image\Command\C3::p()
  * @return mixed
  */
 function df_with_conn(string $connectionName, F $f) {
