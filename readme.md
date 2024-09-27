@@ -6,3 +6,7 @@ You will benefit from it if you operate an information system based on Magento /
 - a backend information system for trading on marketplaces
 - a B2B information system
 - a corporate information system (e.g. ERP)
+## What will it do for me?
+It serves 2 main purposes: 
+- It improves the quality of Magento / Adobe Commerce based information systems.
+- It makes extending the functionality of Magento / Adobe Commerce based information systems easier. 
