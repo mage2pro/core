@@ -10,3 +10,9 @@ You will benefit from it if you operate an information system based on Magento /
 It serves 2 main purposes: 
 - It improves the quality of Magento / Adobe Commerce based information systems.
 - It makes extending the functionality of Magento / Adobe Commerce based information systems easier. 
+## How will it improve the quality of my information system?
+`mage2pro/core` significantly enhances the self-diagnostic capabilities of Magento / Adobe Commerce.  
+`mage2pro/core` catches every failure of Magento / Adobe Commerce, comprehensively explains them, and carefully stores the reports for further analysis by your programmers.  
+The `mage2pro/core` reports are in no way comparable to the traditional Magento / Adobe Commerce `system.log` and `exception.log` files.  
+By using `mage2pro/core`, you will significantly reduce the time and money spent on troubleshooting Magento / Adobe Commerce failures, making your system more efficient and cost-effective.  
+`mage2pro/core` will inform you about important problems that the original Magento / Adobe Commerce sometimes ignores (e.g., your customers' problems when paying in your store: this is the most obvious case where you lose money).
