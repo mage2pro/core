@@ -1,16 +1,16 @@
 `mage2pro/core` is a unique middleware that bridges the gap between the out-of-box [Magento](https://github.com/magento/magento2) / [Adobe Commerce](https://business.adobe.com/products/magento/magento-commerce.html) software and the needs of real-world information systems.   
 It is the main result of my everyday work with Magento / Adobe Commerce for 14.5 years, since 2010.
-## Do I need it?
+## Do you need it?
 You will benefit from it if you operate an information system based on Magento / Adobe Commerce: 
 - an online store 
 - a backend information system for trading on marketplaces
 - a B2B information system
 - a corporate information system (e.g. ERP)
-## What will it do for me?
+## What will it do for you?
 It serves 2 main purposes: 
 - It improves the quality of Magento / Adobe Commerce based information systems.
 - It makes extending the functionality of Magento / Adobe Commerce based information systems easier. 
-## How will it improve the quality of my information system?
+## How will it improve the quality of your information system?
 `mage2pro/core` significantly enhances the self-diagnostic capabilities of Magento / Adobe Commerce.  
 `mage2pro/core` catches every failure of Magento / Adobe Commerce, comprehensively explains them, and carefully stores the reports for further analysis by your programmers.  
 The `mage2pro/core` reports are in no way comparable to the traditional Magento / Adobe Commerce `system.log` and `exception.log` files.  
