@@ -22,4 +22,4 @@ I have been programming Magento / Adobe Commerce every day since 2010.
 Every day, when I solve a new task I have not done before, I store my solution in the software library of `mage2pro/core`.  
 The library contains all my experience with Magento / Adobe Commerce.  
 My solutions have been rigorously tested in numerous information systems based on Magento / Adobe Commerce.  
-By leveraging the `mage2pro/core` library, your programmers can access solutions that are usually superior to what they can develop themselves (and even more so find on StackOverflow or generate via ChatGPT).
+By leveraging the `mage2pro/core` library, your programmers can access solutions that are usually superior to what they can develop themselves (and even more so find on StackOverflow).
