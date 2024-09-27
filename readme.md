@@ -16,3 +16,10 @@ It serves 2 main purposes:
 The `mage2pro/core` reports are in no way comparable to the traditional Magento / Adobe Commerce `system.log` and `exception.log` files.  
 By using `mage2pro/core`, you will significantly reduce the time and money spent on troubleshooting Magento / Adobe Commerce failures, making your system more efficient and cost-effective.  
 `mage2pro/core` will inform you about important problems that the original Magento / Adobe Commerce sometimes ignores (e.g., your customers' problems when paying in your store: this is the most obvious case where you lose money).
+
+## How will `mage2pro/core` make the expansion of the functionality of my information system easier?
+I have been programming Magento / Adobe Commerce every day since 2010.  
+Every day, when I encounter a new task I have not done before, I store my solution in the software library of `mage2pro/core`.  
+`mage2pro/core` contains all my experience with Magento / Adobe Commerce.  
+My solutions have been rigorously tested in numerous information systems based on Magento / Adobe Commerce.  
+By leveraging the `mage2pro/core` library, your programmers can access solutions that are usually superior to what they can develop themselves (and even more so find on StackOverflow or generate via ChatGPT).
