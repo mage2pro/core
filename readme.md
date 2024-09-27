@@ -20,6 +20,6 @@ By using `mage2pro/core`, you will significantly reduce the time and money spent
 ## How will it make the extension of my system's functionality easier?
 I have been programming Magento / Adobe Commerce every day since 2010.  
 Every day, when I solve a new task I have not done before, I store my solution in the software library of `mage2pro/core`.  
-`mage2pro/core` contains all my experience with Magento / Adobe Commerce.  
+The library contains all my experience with Magento / Adobe Commerce.  
 My solutions have been rigorously tested in numerous information systems based on Magento / Adobe Commerce.  
 By leveraging the `mage2pro/core` library, your programmers can access solutions that are usually superior to what they can develop themselves (and even more so find on StackOverflow or generate via ChatGPT).
