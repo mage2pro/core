@@ -1,6 +1,5 @@
 <?php
 namespace Df\Framework\Log\Handler;
-use Monolog\Logger as L;
 # 2023-12-09
 # "Prevent logging of «Unable to proceed: the maintenance mode is enabled»":
 # https://github.com/mage2pro/core/issues/341
