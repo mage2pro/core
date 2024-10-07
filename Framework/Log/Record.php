@@ -59,6 +59,7 @@ final class Record {
 	 * @used-by \Df\Framework\Log\Handler\JsMap::_p()
 	 * @used-by \Df\Framework\Log\Handler\Maintenance::_p()
 	 * @used-by \Df\Framework\Log\Handler\PayPal::_p()
+	 * @used-by \Df\Framework\Log\Handler\ReCaptcha::_p()
 	 * @used-by \Df\Framework\Log\Latest\Record::id()
 	 * @param string|string[]|null $s [optional]
 	 * @return string|bool
