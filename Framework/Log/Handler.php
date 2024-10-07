@@ -21,6 +21,7 @@ abstract class Handler {
 	 * @see \Df\Framework\Log\Handler\JsMap::_p()
 	 * @see \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @see \Df\Framework\Log\Handler\PayPal::_p()
+	 * @see \Df\Framework\Log\Handler\ReCaptcha::_p()
 	 */
 	abstract protected function _p():bool;
 
