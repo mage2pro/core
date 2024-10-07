@@ -34,6 +34,7 @@ abstract class Handler {
 	 * @used-by \Df\Framework\Log\Handler\Maintenance::_p()
 	 * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @used-by \Df\Framework\Log\Handler\PayPal::_p()
+	 * @used-by \Df\Framework\Log\Handler\ReCaptcha::_p()
 	 */
 	final protected function r():Record {return $this->_r;}
 
