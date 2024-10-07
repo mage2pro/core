@@ -66,6 +66,7 @@ class Dispatcher extends _P {
 			|| NoSuchEntityH::p($rc)
 			|| MaintenanceH::p($rc)
 			|| PayPalH::p($rc)
+			|| ReCaptchaH::p($rc)
 		)) {
 			# 2020-08-30
 			# "Provide an ability to third-party modules to prevent a message to be logged to `system.log`":
