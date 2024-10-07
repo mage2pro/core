@@ -1,6 +1,5 @@
 <?php
 namespace Df\Framework\Log\Handler;
-use Monolog\Logger as L;
 # 2024-10-07 "Avoid logging «Can not resolve reCAPTCHA parameter» errors of bots": https://github.com/mage2pro/core/issues/443
 final class ReCaptcha extends \Df\Framework\Log\Handler {
 	/**
