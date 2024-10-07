@@ -8,6 +8,7 @@ use Df\Framework\Log\Handler\JsMap as JsMapH;
 use Df\Framework\Log\Handler\Maintenance as MaintenanceH;
 use Df\Framework\Log\Handler\NoSuchEntity as NoSuchEntityH;
 use Df\Framework\Log\Handler\PayPal as PayPalH;
+use Df\Framework\Log\Handler\ReCaptcha as ReCaptchaH;
 use Magento\Framework\App\Bootstrap as B;
 use Magento\Framework\DataObject as O;
 use Magento\Framework\Logger\Handler\System as _P;
