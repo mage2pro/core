@@ -20,6 +20,7 @@ final class Record {
 	/**
 	 * 2021-09-08
 	 * @used-by self::ef()
+	 * @used-by self::emsg()
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
 	 * @used-by \Df\Framework\Log\Handler\NoSuchEntity::_p()
 	 * @param string|null $e [optional]
@@ -36,6 +37,12 @@ final class Record {
 	 * @return E|null
 	 */
 	function ef() {return !($e = $this->e()) ? null : df_xf($e);}
+
+	/**
+	 * 2024-10-07
+	 * @used-by \Df\Framework\Log\Handler\ReCaptcha::_p()
+	 */
+	function emsg(string $s):bool {return ($e = $this->e()) && ($s === df_xts($e)); /** @var E|null $e */}
 
 	/**
 	 * 2023-08-01
@@ -59,7 +66,6 @@ final class Record {
 	 * @used-by \Df\Framework\Log\Handler\JsMap::_p()
 	 * @used-by \Df\Framework\Log\Handler\Maintenance::_p()
 	 * @used-by \Df\Framework\Log\Handler\PayPal::_p()
-	 * @used-by \Df\Framework\Log\Handler\ReCaptcha::_p()
 	 * @used-by \Df\Framework\Log\Latest\Record::id()
 	 * @param string|string[]|null $s [optional]
 	 * @return string|bool

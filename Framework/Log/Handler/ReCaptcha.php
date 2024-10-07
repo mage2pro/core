@@ -8,5 +8,5 @@ final class ReCaptcha extends \Df\Framework\Log\Handler {
 	 * @used-by \Df\Framework\Log\Handler::p()
 	 */
 	#[\Override] /** @see \Df\Framework\Log\Handler::_p() */
-	protected function _p():bool {return $this->r()->msg('Can not resolve reCAPTCHA parameter');}
+	protected function _p():bool {return $this->r()->emsg('Can not resolve reCAPTCHA parameter');}
 }

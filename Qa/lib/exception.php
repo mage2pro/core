@@ -89,6 +89,7 @@ function df_xf(T $t):T {while ($t->getPrevious()) {$t = $t->getPrevious();} retu
  * @used-by \Df\Config\Source\API::exception()
  * @used-by \Df\Cron\Plugin\Console\Command\CronCommand::aroundRun()
  * @used-by \Df\Framework\Console\Command::execute()
+ * @used-by \Df\Framework\Log\Record::emsg()
  * @used-by \Df\Payment\PlaceOrderInternal::message()
  * @used-by \Df\Payment\W\Handler::handle()
  * @used-by \Df\Qa\Trace\Formatter::p()
