@@ -9,6 +9,7 @@ namespace Df\Framework\Log;
  * @see \Df\Framework\Log\Handler\Maintenance
  * @see \Df\Framework\Log\Handler\NoSuchEntity
  * @see \Df\Framework\Log\Handler\PayPal
+ * @see \Df\Framework\Log\Handler\ReCaptcha
  */
 abstract class Handler {
 	/**
