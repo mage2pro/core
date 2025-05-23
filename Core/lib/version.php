@@ -25,14 +25,22 @@ use Magento\Framework\App\ProductMetadataInterface as IMetadata;
  * @used-by Dfe\Klarna\Api\Checkout\V3\UserAgent::__construct()
  */
 function df_magento_version():string {return dfcf(function() {
-	/** @var string $r */
+	$r = df_magento_version_m()->getVersion(); /** @var string $r */
 	if (
+		/**
+		 * 2025-05-03
+		 * 1) @uses \Composer\Package\RootPackage::DEFAULT_PRETTY_VERSION is absent when using Composer 1.
+		 * 2) "«Undefined class constant 'DEFAULT_PRETTY_VERSION'
+		 * in vendor/mage2pro/core/Core/lib/version.php:35» in Magento 2.4.1":
+		 * https://github.com/mage2pro/core/issues/445
+		 */
+		defined('ROOT::DEFAULT_PRETTY_VERSION')
 		/**
 		 * 2023-07-21
 		 * "\Magento\Framework\App\ProductMetadata::getVersion() returns «1.0.0+no-version-set»
 		 * in Magento2.4.7-beta1 installed via Git": https://github.com/mage2pro/core/issues/229
 		 */
-		ROOT::DEFAULT_PRETTY_VERSION === ($r = df_magento_version_m()->getVersion())
+		&& ROOT::DEFAULT_PRETTY_VERSION === $r
 		/**
 		 * 2023-07-23
 		 * 1) @uses \Composer\InstalledVersions::getRootPackage():
