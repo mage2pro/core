@@ -11,6 +11,7 @@ use ReflectionClass as RC;
  * @used-by df_assert_class_exists()
  * @used-by df_catalog_locator_exists()
  * @used-by df_con_hier_suf()
+ * @used-by vendor/mage2pro/core/Variable/Model/Config/Structure/Dom.php
  * @used-by Df\Core\R\ConT::generic()
  * @used-by Df\Payment\W\F::c()
  */

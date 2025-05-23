@@ -1,5 +1,6 @@
 <?php
 namespace Df\Variable\Model\Config\Structure;
+use Magento\Variable\Model\Config\Structure\Dom as _P;
 /**
  * 2023-07-31
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation
@@ -19,5 +20,11 @@ namespace Df\Variable\Model\Config\Structure;
  * 3) The `Magento_Variable` module exists in Magento since 2.0.0:
  * https://github.com/magento/magento2/tree/2.0.0/app/code/Magento/Variable
  * So I can implement a fix similar to https://github.com/mage2pro/core/blob/10.1.6/Config/etc/di.xml#L14-L28
+ * 2025-05-23
+ * "«Class 'Magento\Variable\Model\Config\Structure\Dom' not found
+ * in vendor/mage2pro/core/Variable/Model/Config/Structure/Dom.php:23» in Magento 2.4.1":
+ * https://github.com/mage2pro/core/issues/444
  */
-class Dom extends \Magento\Variable\Model\Config\Structure\Dom {use \Df\Framework\Config\Dom\T;}
+if (df_class_exists(_P::class)) {
+	class Dom extends _P {use \Df\Framework\Config\Dom\T;}
+}
