@@ -11,9 +11,9 @@ use ReflectionClass as RC;
  * @used-by df_assert_class_exists()
  * @used-by df_catalog_locator_exists()
  * @used-by df_con_hier_suf()
- * @used-by vendor/mage2pro/core/Variable/Model/Config/Structure/Dom.php
  * @used-by Df\Core\R\ConT::generic()
  * @used-by Df\Payment\W\F::c()
+ * @used-by Df\Variable\Model\Config\Structure\Dom
  */
 function df_class_exists(string $c):bool {$c = df_ctr($c); return @class_exists($c);}
 

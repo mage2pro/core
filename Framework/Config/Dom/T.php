@@ -4,7 +4,7 @@ use \DOMDocument as Doc;
 /**
  * 2023-08-01
  * @used-by \Df\Framework\Config\Dom
- * @used-by \Df\Variable\Model\Config\Structure\Dom()
+ * @used-by \Df\Variable\Model\Config\Structure\Dom
  */
 trait T {
 	/**

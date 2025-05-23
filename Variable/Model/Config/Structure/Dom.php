@@ -28,3 +28,8 @@ use Magento\Variable\Model\Config\Structure\Dom as _P;
 if (df_class_exists(_P::class)) {
 	class Dom extends _P {use \Df\Framework\Config\Dom\T;}
 }
+# 2025-05-23
+# «Class \Df\Variable\Model\Config\Structure\Dom does not exist»: https://github.com/mage2pro/core/issues/446
+else {
+	class Dom extends \Magento\Framework\Config\Dom {use \Df\Framework\Config\Dom\T;}
+}
