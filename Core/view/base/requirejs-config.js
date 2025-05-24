@@ -20,6 +20,7 @@ var config = {paths: {
 	 * https://github.com/mage2pro/core/issues/37#issuecomment-337537967
 	 */
 	,'df-unorm': 'Df_Core/thirdParty/unorm'
+	,'Df_Core/ColorPicker': 'Df_Core/thirdParty/ColorPicker/main'
 	,'Df_Core/Handsontable': 'Df_Core/thirdParty/Handsontable/main'
 	,'Df_Core/HighlightJs': 'Df_Core/thirdParty/HighlightJs/main'
 	,'Df_Core/Mask': 'Df_Core/thirdParty/Mask/main'
