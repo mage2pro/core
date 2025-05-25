@@ -49,7 +49,13 @@ final class Fieldset extends Sb implements \Magento\Framework\ObjectManager\Noni
 		 * https://github.com/mage2pro/currency-format/blob/1.0.24/etc/adminhtml/system.xml#L40-L51
 		 */
 		if (!in_array(get_class($sb), [df_interceptor(Sb::class), df_interceptor(F::class)])) {
-			$r = $f($e);
+			/**
+			 * 2025-05-25
+			 * 1) @see \Magento\PaymentServicesDashboard\Block\Adminhtml\System\Config\MagentoPaymentsRedirect::render() (from `magento/payment-services`) returns `null`.
+			 * 2) «Df\Config\Plugin\Block\System\Config\Form\Fieldset::aroundRender():
+			 * Return value must be of type string, null returned»: https://github.com/mage2pro/core/issues/451
+			 */
+			$r = (string)$f($e);
 		}
 		else {
 			$sb->setElement($e);
@@ -63,6 +69,9 @@ final class Fieldset extends Sb implements \Magento\Framework\ObjectManager\Noni
 				);
 			}
 			$r .= $sb->_getFooterHtml($e);
+		}
+		if (is_null($r)) {
+			xdebug_break();
 		}
 		return $r;
 	}
