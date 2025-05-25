@@ -28,6 +28,7 @@ function df_cache_enabled(string $type):bool {
  * @used-by Dfe\GoogleFont\Controller\Index\Index::execute()
  * @used-by Df\Payment\Observer\DataProvider\SearchResult::execute()
  * @used-by Dfe\Robokassa\Api\Options::p()
+ * @used-by Dfe\ZoomVe\OriginCityLocator::d() (https://github.com/mage2pro/zoom-ve/issues/7)
  * @used-by Doormall\Shipping\Partner\Entity::locations()
  * @used-by Wolf\Filter\Block\Navigation::hDropdowns()
  * @used-by Wolf\Filter\Controller\Index\Change::execute()

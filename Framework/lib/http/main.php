@@ -80,6 +80,7 @@ function df_http_get(string $url, array $query = [], int $timeout = 0, $onE = tr
  * @used-by Dfe\GoogleBackendLogin\Plugin\Backend\App\AbstractAction::beforeDispatch()
  * @used-by Dfe\Paymill\Test\CaseT::token()
  * @used-by Dfe\Salesforce\Test\Basic::t02_the_latest_version()
+ * @used-by Dfe\ZoomVe\OriginCityLocator::d() (https://github.com/mage2pro/zoom-ve/issues/7)
  * @param array(string => string) $query [optional]
  * @param Closure|bool|mixed $onE [optional]
  * @return array(string => mixed)

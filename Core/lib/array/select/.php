@@ -75,6 +75,7 @@
  * @used-by Dfe\CurrencyFormat\O::postProcess()
  * @used-by Dfe\TwoCheckout\Handler\RefundIssued::process()
  * @used-by Dfe\TwoCheckout\Method::charge()
+ * @used-by Dfe\ZoomVe\OriginCityLocator::d() (https://github.com/mage2pro/zoom-ve/issues/7)
  * @used-by DxMoto\Core\Observer\CanLog::execute()
  * @used-by Mageside\CanadaPostShipping\Model\Carrier::_doRatesRequest() (canadasatellite.ca)
  * @used-by Mangoit\MediaclipHub\Helper\Data::getMediaClipProjects()
