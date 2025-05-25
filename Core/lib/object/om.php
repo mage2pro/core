@@ -72,6 +72,7 @@ function df_is_virtual(string $c):bool {return !!dfa(df_virtual_types(), $c);}
  * @used-by df_stock_h()
  * @used-by df_url_finder()
  * @used-by df_url_h()
+ * @used-by dfe_zv_cfg() (https://github.com/mage2pro/zoom-ve/issues/2)
  * @used-by Df\Core\Session::st()
  * @used-by Df\Customer\Plugin\Js\CustomerId::afterGetSectionData()
  * @used-by Df\Payment\Settings::applicableForQuoteByCountry()
