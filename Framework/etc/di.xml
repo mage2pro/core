@@ -141,6 +141,17 @@ on bin/magento product:bundle:resave": https://github.com/canadasatellite-ca/sit
 	<type name='Magento\Framework\EntityManager\TypeResolver'>
 		<plugin name='Df\Framework\Plugin\EntityManager\TypeResolver' type='Df\Framework\Plugin\EntityManager\TypeResolver'/>
 	</type>
+<!-- 2025-05-25
+"The `VES` (Venezuelan Bolívar) currency is absent in Magento": https://github.com/mage2pro/core/issues/454 -->
+	<type name='Magento\Framework\Locale\ConfigInterface'>
+		<arguments>
+			<argument name='data' xsi:type='array'>
+				<item name='allowedCurrencies' xsi:type="array">
+					<item name='VES' xsi:type='string'>VES</item>
+				</item>
+			</argument>
+		</arguments>
+	</type>
 	<type name='Magento\Framework\Logger\Monolog'>
 		<arguments>
 			<argument name='handlers' xsi:type='array'>
