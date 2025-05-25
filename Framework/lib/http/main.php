@@ -67,7 +67,7 @@ function df_http_context():Context {return df_o(Context::class);}
 function df_http_get(string $url, array $query = [], int $timeout = 0, $onE = true):string {return df_contents(
 	!$query ? $url : $url . '?' . http_build_query($query)
 	,$onE
-	,stream_context_create(['http' => df_clean(['ignore_errors' => true, 'timeout' => $timeout])])
+	,stream_context_create(['http' => df_clean(['ignore_errors' => true, 'timeout' => $timeout], 0)])
 );}
 
 /**
