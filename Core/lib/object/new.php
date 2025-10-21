@@ -71,7 +71,6 @@ function df_newa(string $c, string $expected = '', ...$a) {return df_ar(df_new($
  * @used-by df_review_summary()
  * @used-by df_subscriber()
  * @used-by df_url_backend_new()
- * @used-by dfe_alignet_cl() (https://github.com/mage2pro/alignet/issues/9)
  * @used-by dfp_refund()
  * @used-by ikf_product_c()
  * @used-by ikf_project()
