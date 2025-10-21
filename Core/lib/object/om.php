@@ -93,6 +93,7 @@ function df_o(string $t) {return dfcf(function(string $t) {return df_om()->get($
  * 2015-08-13
  * @used-by df_cms_block_r()
  * @used-by df_ic()
+ * @used-by df_new_om()
  * @used-by df_o()
  * @used-by Df\Payment\ConfigProvider::p()
  * @return OM|IOM
