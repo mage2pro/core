@@ -7,6 +7,7 @@ use Throwable as Th; # 2023-08-03 "Treat `\Throwable` similar to `\Exception`": 
  * @used-by df_con_heir()
  * @used-by df_con_hier()
  * @used-by df_eav_update()
+ * @used-by df_ic()
  * @used-by df_load()
  * @used-by df_newa()
  * @used-by df_trans()
