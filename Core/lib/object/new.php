@@ -51,7 +51,6 @@ function df_newa(string $c, string $expected = '', ...$a) {return df_ar(df_new($
  * 2024-06-03
  * 1) The `object` type requires PHP ≥ 7.2: https://github.com/mage2pro/core/issues/174#user-content-object
  * 2) We need to support PHP ≥ 7.1: https://github.com/mage2pro/core/issues/368
- * @see df_new_omd()
  * @used-by df_category_c()
  * @used-by df_cms_blocks()
  * @used-by df_controller_raw()
@@ -62,6 +61,7 @@ function df_newa(string $c, string $expected = '', ...$a) {return df_ar(df_new($
  * @used-by df_mail()
  * @used-by df_mail_shipment()
  * @used-by df_mvars()
+ * @used-by df_new_omd()
  * @used-by df_oi_load()
  * @used-by df_order_c()
  * @used-by df_package_new()
@@ -118,4 +118,4 @@ function df_new_om(string $c, array $p = []) {return df_om()->create($c, $p);}
  * @param array(string => mixed) $d [optional]
  * @return _DO|object
  */
-function df_new_omd(string $c, array $d = []) {return df_om()->create($c, ['data' => $d]);}
+function df_new_omd(string $c, array $d = []) {return df_new_om($c, ['data' => $d]);}
