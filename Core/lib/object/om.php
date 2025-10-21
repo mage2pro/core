@@ -95,7 +95,6 @@ function df_o(string $t) {return dfcf(function(string $t) {return df_om()->get($
  * @used-by df_ic()
  * @used-by df_new_om()
  * @used-by df_o()
- * @used-by Df\Payment\ConfigProvider::p()
  * @return OM|IOM
  */
 function df_om() {return OM::getInstance();}
