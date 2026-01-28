@@ -12,6 +12,7 @@ use Df\Framework\Log\Handler\ReCaptcha as ReCaptchaH;
 use Magento\Framework\App\Bootstrap as B;
 use Magento\Framework\DataObject as O;
 use Magento\Framework\Logger\Handler\System as _P;
+use Monolog\LogRecord as MR;
 use Monolog\Logger as L;
 use Psr\Log\LoggerInterface as IL;
 use \Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
@@ -46,12 +47,18 @@ class Dispatcher extends _P {
 	 * must be compatible with Monolog\Handler\AbstractProcessingHandler::handle(array $record): bool» in Magento 2.4.3":
 	 * https://github.com/mage2pro/core/issues/166
 	 * 2) @see \Df\Cron\Model\LoggerHandler::handle()
+	 * 2026-01-28
+	 * "«Declaration of Df\Framework\Log\Dispatcher::handle(array $d): bool
+	 * must be compatible with
+	 * Monolog\Handler\AbstractProcessingHandler::handle(Monolog\LogRecord $record): bool»
+	 * in Magento 2.4.8-p3": https://github.com/mage2pro/core/issues/463
 	 * @override
 	 * @see \Monolog\Handler\AbstractProcessingHandler::handle()
-	 * @param array(string => mixed) $d
+	 * @param MR|array(string => mixed) $d
 	 */
-	function handle(array $d):bool {/** @var bool $r */
+	function handle($d):bool {/** @var bool $r */
 		$rc = new Record($d); /** @var Record $rc */
+		$d = $rc->a();
 		$willHandledLater = false; /** @var bool $willHandledLater */
 		if (!($r =
 			# 2024-03-04
