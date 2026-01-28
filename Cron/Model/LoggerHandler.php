@@ -1,6 +1,7 @@
 <?php
 namespace Df\Cron\Model;
 use Magento\Framework\Logger\Handler\Base as _P;
+use Monolog\LogRecord as R;
 /**
  * 2020-02-08
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
@@ -23,18 +24,18 @@ class LoggerHandler extends _P {
 	 * https://github.com/mage2pro/core/issues/462
 	 * @override
 	 * @see \Monolog\Handler\AbstractProcessingHandler::handle()
-	 * @param array(string => mixed) $d
+	 * @param R|array(string => mixed) $d
 	 */
-	function handle(array $d):bool {return self::p($d) || parent::handle($d);}
+	function handle($d):bool {return self::p($d) || parent::handle($d);}
 
 	/**
 	 * 2020-02-08
 	 * @used-by self::handle()
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
-	 * @param array(string => mixed) $d
+	 * @param R|array(string => mixed) $d
 	 */
-	final static function p(array $d):bool {
-		$m = dfa($d, 'message'); /** @var string $m */
+	final static function p($d):bool {
+		$m = is_array($d) ? dfa($d, 'message') : $d['message']; /** @var string $m */
 		return
 			# 2020-10-22
 			# "Prevent Magento from logging «Could not acquire lock for cron group» messages":
