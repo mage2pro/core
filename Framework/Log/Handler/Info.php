@@ -15,7 +15,7 @@ final class Info extends \Df\Framework\Log\Handler {
 	 */
 	protected function _p():bool {/** @var bool $r */
 		if ($r = L::INFO >= $this->r()->level()) {
-			self::lb()->handle($this->r()->a());
+			self::lb()->handle($this->r()->source());
 		}
 		return $r;
 	}

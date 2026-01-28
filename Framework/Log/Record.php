@@ -11,10 +11,17 @@ final class Record {
 	 * @used-by \Df\Framework\Log\Dispatcher::handle()
 	 * @param MR|array(string => mixed) $d
 	 */
-	function __construct($d) {$this->_d = new O(is_array($d) ? $d : $d->toArray());}
+	function __construct($d) {
+		if (df_class_exists(MR::class) && $d instanceof MR) {
+			$this->_source = $d;
+			$d = $d->toArray();
+		}
+		$this->_d = new O($d);
+	}
 
 	/**
 	 * 2024-02-11
+	 * @used-by self::source()
 	 * @used-by \Df\Framework\Log\Handler\Info::_p()
 	 */
 	function a():array {return $this->_d->a();}
@@ -79,6 +86,13 @@ final class Record {
 	}
 
 	/**
+	 * 2026-01-28
+	 * @used-by \Df\Framework\Log\Handler\Info::_p()
+	 * @return MR|array(string => mixed)
+	 */
+	function source() {return $this->_source ?: $this->a();}
+
+	/**
 	 * 2021-09-08
 	 * @used-by self::e()
 	 * @used-by self::extra()
@@ -96,4 +110,11 @@ final class Record {
 	 * @var O
 	 */
 	private $_d;
+	/**
+	 * 2026-01-28
+	 * @used-by self::__construct()
+	 * @used-by self::source()
+	 * @var ?MR
+	 */
+	private $_source;
 }
