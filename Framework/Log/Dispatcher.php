@@ -58,7 +58,6 @@ class Dispatcher extends _P {
 	 */
 	function handle($d):bool {/** @var bool $r */
 		$rc = new Record($d); /** @var Record $rc */
-		$d = $rc->a();
 		$willHandledLater = false; /** @var bool $willHandledLater */
 		if (!($r =
 			# 2024-03-04
@@ -81,7 +80,7 @@ class Dispatcher extends _P {
 			# 2020-10-04
 			# https://github.com/tradefurniturecompany/core/blob/0.3.1/etc/frontend/events.xml#L6-L12
 			# https://github.com/tradefurniturecompany/core/blob/0.3.1/Observer/CanLog.php#L23-L34
-			df_dispatch('df_can_log', [self::P_MESSAGE => $d, self::P_RESULT => ($o = new O)]); /** @var O $o */
+			df_dispatch('df_can_log', [self::P_MESSAGE => $rc->a(), self::P_RESULT => ($o = new O)]); /** @var O $o */
 			if (!($r = !!$o[self::V_SKIP])) {
 				$e = df_caller_entry(0, function(array $e) {return
 					!($c = dfa($e, 'class'))
@@ -116,7 +115,7 @@ class Dispatcher extends _P {
 					&& !InfoH::p($rc)
 				) {
 					$ef = $rc->ef(); /** @var Th|null $ef */
-					$args = [null, $ef ?: $d, $ef ? $rc->extra() : []]; /** @var mixed  $args */
+					$args = [null, $ef ?: $rc->a(), $ef ? $rc->extra() : []]; /** @var mixed  $args */
 					# 2023-07-25
 					# I intentionally do not pass these messages to Sentry
 					# because I afraid that they could be too numerous in some third-party websites.
