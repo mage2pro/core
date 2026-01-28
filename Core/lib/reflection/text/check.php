@@ -12,6 +12,7 @@ use ReflectionClass as RC;
  * @used-by df_catalog_locator_exists()
  * @used-by df_con_hier_suf()
  * @used-by Df\Core\R\ConT::generic()
+ * @used-by Df\Framework\Log\Record::__construct()
  * @used-by Df\Payment\W\F::c()
  * @used-by Df\Variable\Model\Config\Structure\Dom
  */
