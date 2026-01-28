@@ -5,7 +5,7 @@ use Magento\Framework\Logger\Handler\Base as _P;
  * 2020-02-08
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation.
  * "The https://github.com/royalwholesalecandy/core/issues/57 solution works with Magento 2.2.5,
- * but does not work with Magento 2.3.2.":
+ * but does not work with Magento 2.3.2":
  * https://github.com/tradefurniturecompany/core/issues/25#issuecomment-58373497
  */
 class LoggerHandler extends _P {
