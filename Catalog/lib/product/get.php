@@ -28,6 +28,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @used-by Inkifi\Mediaclip\Event::product()
  * @used-by Inkifi\Mediaclip\H\AvailableForDownload\Pureprint::pOI()
  * @used-by Inkifi\Mediaclip\T\CaseT\Product::t02()
+ * @used-by Its\Addfee\Model\Total\Fee::getFinalFeeAmount() (https://github.com/keyclampstore-com/m/issues/4)
  * @used-by Mangoit\MediaclipHub\Controller\Index\GetPriceEndpoint::execute()
  * @param int|string|P|OI|QI $p
  * @param int|string|null|bool|IStore $s [optional]
