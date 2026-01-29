@@ -45,6 +45,7 @@ use Magento\Store\Model\Store;
  * @used-by Df\Security\BlackList::load()
  * @used-by Df\Shipping\Settings::enable()
  * @used-by Dfe\Portal\Block\Content::getTemplate()
+ * @used-by Its\Addfee\Model\Total\Fee::getFinalFeeAmount() (https://github.com/keyclampstore-com/m/issues/4)
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/billing/sortbilling.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
  * @used-by app/code/Interactivated/Quotecheckout/view/frontend/templates/dashboard/onepage/shipping/sortshipping.phtml (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/116)
