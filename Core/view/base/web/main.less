@@ -22,7 +22,11 @@
 // 2015-12-31
 // «The frontend product view undesirably wraps 5-digit prices with a space as a thousand separator»:
 // https://mage2.pro/t/369
-body.catalog-product-view .product-info-main .price-box {width: 50%;}
+// 2026-01-30
+// The previous code:
+// 		body.catalog-product-view .product-info-main .price-box {width: 50%;}
+// It broke the prices appearance in Magento 2.4.8-p3 in keyclampstore.com:
+// https://github.com/keyclampstore-com/m/issues/31
 // 2017-03-25
 div.df-payment-info {
 	.df-unconfirmed {
