@@ -31,6 +31,12 @@ final class PlaceOrder {
 	 * 2023-01-28
 	 * «Method's return type must be specified using @return annotation. See Df\Payment\PlaceOrder::guest()»
 	 * on `bin/magento setup:upgrade`: https://github.com/mage2pro/core/issues/179
+	 * 2026-02-02
+	 * "`Magento\Framework\Reflection\TypeProcessor::getParamDocBlockTag()` incorrectly assumes
+	 * that every parameter of a Web API exposed method has a `@param` comment in PHPDoc":
+	 * https://github.com/mage2pro/core/issues/464
+	 * @param string $cartId
+	 * @param string $email
 	 * @param IQP|QP $qp
 	 * @param IQA|QA|null $ba
 	 * 2017-04-04 Важно возвращать именно string: @see dfw_encode()
@@ -46,6 +52,11 @@ final class PlaceOrder {
 	 * 2023-01-28
 	 * «Method's return type must be specified using @return annotation» on `bin/magento setup:upgrade`:
 	 * https://github.com/mage2pro/core/issues/179
+	 * 2026-02-02
+	 * "`Magento\Framework\Reflection\TypeProcessor::getParamDocBlockTag()` incorrectly assumes
+	 * that every parameter of a Web API exposed method has a `@param` comment in PHPDoc":
+	 * https://github.com/mage2pro/core/issues/464
+	 * @param string $cartId
 	 * @param IQP|QP $qp
 	 * @param IQA|QA|null $ba
 	 * @throws CouldNotSave|LE
