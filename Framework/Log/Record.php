@@ -73,6 +73,7 @@ final class Record {
 
 	/**
 	 * 2021-09-08
+	 * @see self::emsg()
 	 * @used-by \Df\Cron\Model\LoggerHandler::p()
 	 * @used-by \Df\Framework\Log\Handler\BrokenReference::_p()
 	 * @used-by \Df\Framework\Log\Handler\Cookie::_p()
