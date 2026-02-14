@@ -19,6 +19,7 @@ use Throwable as T; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": h
  * @used-by df_xtsd()
  * @used-by Df\Core\Exception::__construct()
  * @used-by Dfe\YandexKassa\W\Responder::error()
+ * @used-by \Df\Framework\Log\Record::e()
  */
 function df_is_th($v):bool {return $v instanceof T;}
 
