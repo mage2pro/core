@@ -37,6 +37,13 @@ final class Record {
 	 */
 	function e($e = null) {
 		$r = $this->d('context/exception'); /** @var E|string|null $r */
+		/**
+		 * 2026-02-14
+		 * 1) «df_xf(): Argument #1 ($t) must be of type Throwable, string given,
+		 * called in vendor/mage2pro/core/Framework/Log/Record.php on line 48»
+		 * on `/rest/default/V1/carts/mine/payment-information` in Magento 2.4.8-p3:
+		 * https://github.com/mage2pro/core/issues/465
+		 */
 		return !$r || !$e ? $r : $r instanceof $e;
 	}
 
