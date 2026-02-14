@@ -52,7 +52,9 @@ final class Record {
 	 * @see self::msg()
 	 * @used-by \Df\Framework\Log\Handler\ReCaptcha::_p()
 	 */
-	function emsg(string $s):bool {return ($e = $this->e()) && df_starts_with(df_xts($e), $s); /** @var E|null $e */}
+	function emsg(string $s):bool {return
+		($e = $this->e()) && df_starts_with(df_xts($e), $s) /** @var E|null $e */
+	;}
 
 	/**
 	 * 2023-08-01
