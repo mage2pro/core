@@ -55,7 +55,7 @@ final class Record {
 		 * 		]
 		 * );
 		 */
-		return !$r || !$e ? $r : $r instanceof $e;
+		return !df_is_th($r) ? null : (!$e ? $r : $r instanceof $e);
 	}
 
 	/**
