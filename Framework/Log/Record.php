@@ -43,6 +43,17 @@ final class Record {
 		 * called in vendor/mage2pro/core/Framework/Log/Record.php on line 48»
 		 * on `/rest/default/V1/carts/mine/payment-information` in Magento 2.4.8-p3:
 		 * https://github.com/mage2pro/core/issues/465
+		 * 2) `context/exception` could be a `string` in Magento ≥ 2.4.7-beta2:
+		 * 2.1) https://github.com/magento/magento2/commit/adfbda3a
+		 * 2.2) https://github.com/magento/magento2/blob/2.4.8-p3/app/code/Magento/Checkout/Model/PaymentInformationManagement.php#L162
+		 * 2.3) @see \Magento\Checkout\Model\PaymentInformationManagement::savePaymentInformationAndPlaceOrder()
+		 * $this->logger->critical(
+		 * 		'Placing an Order failed (reason: '.  $e->getMessage() .')', [
+		 * 			'quote_id' => $cartId,
+		 * 			'exception' => (string)$e,
+		 * 			'is_guest_checkout' => false
+		 * 		]
+		 * );
 		 */
 		return !$r || !$e ? $r : $r instanceof $e;
 	}
