@@ -36,7 +36,7 @@ final class Record {
 	 * @return E|null|bool
 	 */
 	function e($e = null) {
-		$r = $this->d('context/exception'); /** @var E|null $r */
+		$r = $this->d('context/exception'); /** @var E|string|null $r */
 		return !$r || !$e ? $r : $r instanceof $e;
 	}
 
