@@ -41,6 +41,6 @@ function df_page_title(string $s):void {df_page_config()->getTitle()->set($s);}
  * 2) "Replace `INDEX` with `NOINDEX` in the `<meta name='robots' content='INDEX,FOLLOW'/>` tag
  * on `catalogsearch/result` pages": https://github.com/national-glass-partitions/core/issues/2
  * @used-by CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/site/issues/98)
- * @used-by NGP\Core\Observer\LayoutLoadBefore::execute() (https://github.com/national-glass-partitions/core/issues/2)
+ * @used-by NGP\Core\Observer\LayoutGenerateBlocksAfter::execute() (https://github.com/national-glass-partitions/core/issues/2)
  */
 function df_robots_no_index():void {df_page_config()->setRobots('NOINDEX,FOLLOW');}
