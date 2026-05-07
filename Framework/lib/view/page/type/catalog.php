@@ -1,5 +1,15 @@
 <?php
 /**
+ * 2026-05-07
+ * 1) "Replace `INDEX` with `NOINDEX` in the `<meta name='robots' content='INDEX,FOLLOW'/>` tag
+ * on layered navigation pages": https://github.com/national-glass-partitions/core/issues/1
+ * 2) https://github.com/magento/magento2/blob/2.4.9-beta1/app/code/Magento/LayeredNavigation/README.md?plain=1#L21
+ * @used-by NGP\Core\Observer\LayoutLoadBefore::execute() (https://github.com/national-glass-partitions/core/issues/1)
+ */
+function df_is_catalog_layered_view():bool {return df_handle('catalog_category_view_type_layered');}
+
+
+/**
  * 2019-03-27
  * @used-by CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/3)
  * @used-by Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
