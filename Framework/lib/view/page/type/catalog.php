@@ -14,3 +14,11 @@ function df_is_catalog_product_list():bool {return df_handle('catalog_category_v
  * @used-by TFC\Core\Plugin\Theme\Block\Html\Breadcrumbs::aroundAddCrumb()
  */
 function df_is_catalog_product_view():bool {return df_handle('catalog_product_view');}
+
+/**
+ * 2026-05-07
+ * "Replace `INDEX` with `NOINDEX` in the `<meta name='robots' content='INDEX,FOLLOW'/>` tag
+ * on `catalogsearch/result` pages": https://github.com/national-glass-partitions/core/issues/2
+ * @used-by NGP\Core\Observer\LayoutLoadBefore::execute() (https://github.com/national-glass-partitions/core/issues/2)
+ */
+function df_is_catalog_search_result():bool {return df_handle('catalogsearch_result_index');}
