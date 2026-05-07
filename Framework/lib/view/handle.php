@@ -1,6 +1,7 @@
 <?php
 /**
  * 2016-08-24
+ * @used-by df_is_catalog_layered_view()
  * @used-by df_is_catalog_product_list()
  * @used-by df_is_catalog_product_view()
  * @used-by df_is_checkout_success()
