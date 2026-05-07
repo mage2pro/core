@@ -4,6 +4,7 @@
  * @used-by df_is_catalog_layered_view()
  * @used-by df_is_catalog_product_list()
  * @used-by df_is_catalog_product_view()
+ * @used-by df_is_catalog_search_result()
  * @used-by df_is_checkout_success()
  * @used-by df_is_home()
  * @used-by df_is_login()
