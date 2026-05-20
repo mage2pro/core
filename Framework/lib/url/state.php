@@ -16,7 +16,7 @@ function df_current_url():string {return df_url_o()->getCurrentUrl();}
 /**
  * 2016-03-09
  * I have ported it from my «Russian Magento» product for Magento 1.x: http://magento-forum.ru
- * @uses df_store_url_web() returns an empty string
+ * @uses df_store_url_raw() returns an empty string
  * if the store's root URL is absent in the Magento database.
  * 2017-03-15
  * It returns null only if the both conditions are true:
@@ -32,7 +32,7 @@ function df_current_url():string {return df_url_o()->getCurrentUrl();}
  * @return string|null
  */
 function df_domain_current($s = null, bool $www = false) {return dfcf(function($s = null, bool $www = false) {return
-	!($base = df_store_url_web($s)) || !($r = df_domain($base, false)) ? null : (
+	!($base = df_store_url_raw($s)) || !($r = df_domain($base, false)) ? null : (
 		$www ? $r : df_trim_text_left($r, 'www.')
 	)
 ;}, func_get_args());}

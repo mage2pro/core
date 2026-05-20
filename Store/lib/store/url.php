@@ -9,7 +9,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @see \Magento\Framework\UrlInterface::URL_TYPE_LINK
  * and @see \Magento\Framework\UrlInterface::URL_TYPE_WEB
  * cases.
- * @used-by df_store_url_web()
+ * @used-by df_store_url_raw()
  * @used-by Df\Payment\Metadata::vars()
  * @param int|string|null|bool|IStore $s [optional]
  */
@@ -22,4 +22,4 @@ function df_store_url($s = null, string $t = U::URL_TYPE_LINK):string {return df
  * @used-by df_domain_current()
  * @param int|string|null|bool|IStore $s [optional]
  */
-function df_store_url_web($s = null):string {return df_store_url($s, U::URL_TYPE_WEB);}
+function df_store_url_raw($s = null):string {return df_store_url($s, U::URL_TYPE_WEB);}
