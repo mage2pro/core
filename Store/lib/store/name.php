@@ -3,6 +3,7 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 /**
  * 2026-05-20
  * @used-by df_store_names()
+ * @used-by vendor/ngp/core/view/frontend/templates/Magento/Theme/html/header/logo.phtml (https://github.com/national-glass-partitions/core/issues/7)
  * @param int|string|null|bool|IStore $store [optional]
  */
 function df_store_name($s = null):string {return df_store($s)->getName();}
