@@ -125,6 +125,7 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by KingPalm\B2B\Block\Registration::_toHtml()
  * @used-by KingPalm\B2B\Block\Registration::region()
  * @used-by CabinetsBay\Catalog\B\Category::title() (https://github.com/cabinetsbay/catalog/issues/22)
+ * @used-by \NGP\Core\B\Logo\Text::_toHtml() (https://github.com/national-glass-partitions/core/issues/7)
  * @used-by TFC\Core\B\Home\Slider::i() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by Verdepieno\Core\CustomerAddressForm::f()
