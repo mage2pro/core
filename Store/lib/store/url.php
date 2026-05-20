@@ -19,6 +19,11 @@ function df_store_url($s = null, string $t = U::URL_TYPE_LINK):string {return df
 
 /**
  * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
+ * 2026-05-20
+ * Unlike the @see \Magento\Framework\UrlInterface::URL_TYPE_LINK case,
+ * @suses \Magento\Framework\UrlInterface::URL_TYPE_WEB skips the 2 post-processings:
+ * @see \Magento\Store\Model\Store::_updatePathUseRewrites()
+ * @see \Magento\Store\Model\Store::_updatePathUseStoreView()
  * @used-by df_domain_current()
  * @param int|string|null|bool|IStore $s [optional]
  */
