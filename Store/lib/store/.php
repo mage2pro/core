@@ -135,30 +135,6 @@ function df_store_ids(bool $withDefault = false):array {return array_keys(df_sto
 function df_store_m() {return df_o(IStoreManager::class);}
 
 /**
- * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
- * @used-by df_store_url_link()
- * @used-by df_store_url_web()
- * @param int|string|null|bool|IStore $s [optional]
- */
-function df_store_url($s = null, string $t = U::URL_TYPE_LINK):string {return df_store($s)->getBaseUrl(
-	$t
-);}
-
-/**
- * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
- * @used-by Df\Payment\Metadata::vars()
- * @param int|string|null|bool|IStore $s [optional]
- */
-function df_store_url_link($s = null):string {return df_store_url($s, U::URL_TYPE_LINK);}
-
-/**
- * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
- * @used-by df_domain_current()
- * @param int|string|null|bool|IStore $s [optional]
- */
-function df_store_url_web($s = null):string {return df_store_url($s, U::URL_TYPE_WEB);}
-
-/**
  * 2016-01-11
  * 2016-01-29
  * Добавил @uses df_ksort(), потому что иначе порядок элементов различается
