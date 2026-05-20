@@ -2,6 +2,7 @@
 use Magento\Store\Api\Data\StoreInterface as IStore;
 /**
  * 2026-05-20
+ * @used-by df_store_names()
  * @param int|string|null|bool|IStore $store [optional]
  */
 function df_store_name($s = null):string {return df_store($s)->getName();}
@@ -14,5 +15,6 @@ function df_store_name($s = null):string {return df_store($s)->getName();}
  * @return string[]
  */
 function df_store_names(bool $withDefault = false, bool $codeKey = false):array {return array_map(
-	function(IStore $s) {return $s->getName();}, df_stores($withDefault, $codeKey)
+	/** @uses df_store_name() */
+	'df_store_name', df_stores($withDefault, $codeKey)
 );}
