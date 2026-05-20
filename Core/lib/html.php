@@ -72,7 +72,10 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
 
 /**
  * 2015-04-16
- * From now on you can pass an array as an attribute's value: @see \Df\Core\Html\Tag::getAttributeAsText()
+ * From now on you can pass an array as an attribute's value: @param string|array(string => string|string[]|int|null) $attrs [optional]
+ * @param string|string[] $content [optional]
+ * @param bool|null $multiline [optional]
+ *@see \Df\Core\Html\Tag::getAttributeAsText()
  * It can be useful for attrivutes like `class`.
  * 2016-05-30 From now on $attrs could be a string. It is the same as ['class' => $attrs].
  * @used-by cs_quote_description() (canadasatellite.ca, https://github.com/canadasatellite-ca/site/issues/107)
@@ -125,7 +128,6 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by KingPalm\B2B\Block\Registration::_toHtml()
  * @used-by KingPalm\B2B\Block\Registration::region()
  * @used-by CabinetsBay\Catalog\B\Category::title() (https://github.com/cabinetsbay/catalog/issues/22)
- * @used-by \NGP\Core\B\Logo\Text::_toHtml() (https://github.com/national-glass-partitions/core/issues/7)
  * @used-by TFC\Core\B\Home\Slider::i() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by TFC\Core\B\Home\Slider::p() (tradefurniturecompany.co.uk, https://github.com/tradefurniturecompany/core/issues/43)
  * @used-by Verdepieno\Core\CustomerAddressForm::f()
@@ -138,10 +140,8 @@ function df_style_inline_hide(string ...$s):string {return !$s ? '' : df_style_i
  * @used-by vendor/cabinetsbay/catalog/view/frontend/templates/category/l3/tabs/overview.phtml (https://github.com/cabinetsbay/catalog/issues/22)
  * @used-by vendor/mage2pro/color/view/frontend/templates/index.phtml
  * @used-by vendor/mage2pro/portal-stripe/view/frontend/templates/page/customers.phtml
+ * @used-by vendor/ngp/core/view/frontend/templates/Magento/Theme/html/header/logo.phtml (https://github.com/national-glass-partitions/core/issues/7)
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/selected_car_onsearchresultpage.phtml
- * @param string|array(string => string|string[]|int|null) $attrs [optional]
- * @param string|string[] $content [optional]
- * @param bool|null $multiline [optional]
  */
 function df_tag(string $tag, $attrs = [], $content = '', $multiline = null):string {
 	$t = new Tag($tag, is_array($attrs) ? $attrs : ['class' => $attrs], $content, $multiline); /** @vat Tag $t */
