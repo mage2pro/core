@@ -89,6 +89,7 @@ function df_asset_third_party(string $localPath):string {return "Df_Core::thirdP
  * @used-by TFC\Core\B\Home\Slider::i()
  * @used-by vendor/alleswunder/core/view/frontend/templates/aw-logo.phtml
  * @used-by vendor/inkifi/map/view/frontend/templates/index.phtml
+ * @used-by vendor/ngp/core/view/frontend/templates/Magento/Theme/html/header/logo.phtml (https://github.com/national-glass-partitions/core/issues/7)
  * @param bool|Closure|mixed $onE [optional]
  * @return string|null
  * @throws DFE
