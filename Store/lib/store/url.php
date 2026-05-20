@@ -9,6 +9,10 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
  * @see \Magento\Framework\UrlInterface::URL_TYPE_LINK
  * and @see \Magento\Framework\UrlInterface::URL_TYPE_WEB
  * cases.
+ * 2) With empty parameters, it is identical to:
+ * 2.1) @see df_url()
+ * 2.2) @see df_url_backend() on the backend.
+ * 2.3) @see df_url_frontend() on the frontend.
  * @used-by df_store_url_raw()
  * @used-by Df\Payment\Metadata::vars()
  * @param int|string|null|bool|IStore $s [optional]
