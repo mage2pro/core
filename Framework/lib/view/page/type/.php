@@ -2,6 +2,7 @@
 /**
  * 2018-11-23
  * @used-by Frugue\Core\Plugin\Framework\App\PageCache\Kernel()
+ * @used-by vendor/ngp/core/view/frontend/templates/Magento/Theme/html/header/logo.phtml (https://github.com/national-glass-partitions/core/issues/7)
  * @used-by Magento\RequireJs\Model\FileManager::createBundleJsPool() (Frugue)
  */
 function df_is_home():bool {return df_handle('cms_index_index');}
