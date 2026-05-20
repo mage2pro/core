@@ -81,6 +81,8 @@ function df_url_backend_ns(string $path = '', array $p = []):string {return df_u
  * 2015-11-28
  * 2016-12-01 If $path is null, '', or '/', then the function will return the frontend root URL.
  * 2016-12-01 On the frontend side, the @see df_url() behaves identical to df_url_frontend()
+ * 2026-05-20 The result contains the trailing slash.
+ * @used-by df_url_checkout_success()
  * @used-by df_router_redirect()
  * @used-by df_webhook()
  * @used-by Df\Sso\FE\CustomerReturn::url()
