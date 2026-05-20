@@ -4,6 +4,11 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 
 /**
  * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
+ * 2026-05-20
+ * 1) The result contains the trailing slash in either
+ * @see \Magento\Framework\UrlInterface::URL_TYPE_LINK
+ * and @see \Magento\Framework\UrlInterface::URL_TYPE_WEB
+ * cases.
  * @used-by df_store_url_web()
  * @used-by Df\Payment\Metadata::vars()
  * @param int|string|null|bool|IStore $s [optional]
