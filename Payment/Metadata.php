@@ -43,6 +43,6 @@ final class Metadata extends \Df\Config\Source {
 		,df_oqi_s($oq)
 		,df_domain_current($s)
 		,$s->getFrontendName()
-		,df_store_url_link($s)
+		,df_store_url($s)
 	]);}
 }

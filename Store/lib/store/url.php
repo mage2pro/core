@@ -4,20 +4,13 @@ use Magento\Store\Api\Data\StoreInterface as IStore;
 
 /**
  * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
- * @used-by df_store_url_link()
  * @used-by df_store_url_web()
+ * @used-by Df\Payment\Metadata::vars()
  * @param int|string|null|bool|IStore $s [optional]
  */
 function df_store_url($s = null, string $t = U::URL_TYPE_LINK):string {return df_store($s)->getBaseUrl(
 	$t
 );}
-
-/**
- * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
- * @used-by Df\Payment\Metadata::vars()
- * @param int|string|null|bool|IStore $s [optional]
- */
-function df_store_url_link($s = null):string {return df_store_url($s, U::URL_TYPE_LINK);}
 
 /**
  * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
