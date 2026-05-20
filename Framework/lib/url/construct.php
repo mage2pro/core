@@ -42,6 +42,7 @@ function df_route($m, string $path = '', bool $backend = false):string {
  * @used-by Df\OAuth\ReturnT::redirectUrl()
  * @used-by Frugue\Shipping\Header::_toHtml()
  * @used-by Mangoit\MediaclipHub\Controller\Index\AddToCart::execute()
+ * @used-by vendor/ngp/core/view/frontend/templates/Magento/Theme/html/header/logo.phtml (https://github.com/national-glass-partitions/core/issues/7)
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param array(string => mixed) $p [optional]
  */
