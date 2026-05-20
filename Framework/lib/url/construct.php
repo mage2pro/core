@@ -39,7 +39,9 @@ function df_route($m, string $path = '', bool $backend = false):string {
  * @used-by vendor/wolfautoparts.com/filter/view/frontend/templates/sidebar.phtml
  * @param array(string => mixed) $p [optional]
  */
-function df_url(string $path = '', array $p = []):string {return df_url_o()->getUrl($path, df_nosid() + $p);}
+function df_url(string $path = '', array $p = []):string {return df_url_o()->getUrl(
+	$path, df_nosid() + $p
+);}
 
 /**
  * 2015-11-28
