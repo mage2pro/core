@@ -135,17 +135,6 @@ function df_store_ids(bool $withDefault = false):array {return array_keys(df_sto
 function df_store_m() {return df_o(IStoreManager::class);}
 
 /**
- * 2016-01-11
- * @see df_store_codes()  
- * @see df_category_names()
- * @used-by Dfe\SalesSequence\Config\Next\Element::rows()
- * @return string[]
- */
-function df_store_names(bool $withDefault = false, bool $codeKey = false):array {return array_map(
-	function(IStore $store) {return $store->getName();}, df_stores($withDefault, $codeKey)
-);}
-
-/**
  * 2017-03-15 Returns an empty string if the store's root URL is absent in the Magento database.
  * @used-by df_store_url_link()
  * @used-by df_store_url_web()
