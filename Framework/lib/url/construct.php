@@ -33,10 +33,11 @@ function df_route($m, string $path = '', bool $backend = false):string {
  * https://magento.stackexchange.com/a/201787
  * https://github.com/inkifi/map/blob/0.0.4/view/frontend/templates/index/section/2/cities.phtml#L4
  * 2026-05-20
- * 1) With empty parameters, it is identical to:
- * 1.1) @see df_store_url()
- * 1.2) @see df_url_backend() on the backend.
- * 1.3) @see df_url_frontend() on the frontend.
+ * 1) The result contains the trailing slash.
+ * 2) With empty parameters, it is identical to:
+ * 2.1) @see df_store_url()
+ * 2.2) @see df_url_backend() on the backend.
+ * 2.3) @see df_url_frontend() on the frontend.
  * @used-by df_url_checkout_success()
  * @used-by Df\OAuth\ReturnT::redirectUrl()
  * @used-by Frugue\Shipping\Header::_toHtml()
