@@ -55,9 +55,9 @@ function df_url(string $path = '', array $p = []):string {return df_url_o()->get
  * @used-by Df\Framework\Validator\Currency::message()
  * @param array(string => mixed) $p [optional]
  */
-function df_url_backend(string $path = '', array $p = []):string {return df_url_trim_index(df_url_backend_new()->getUrl(
-	$path, df_nosid() + $p
-));}
+function df_url_backend(string $path = '', array $p = []):string {return df_url_trim_index(
+	df_url_backend_new()->getUrl($path, df_nosid() + $p)
+);}
 
 /**
  * 2016-08-24
