@@ -56,7 +56,8 @@ function df_caller_entry_m($p = 0):array {return df_eta(df_caller_entry(df_bt_in
 	# https://github.com/mage2pro/core/issues/259
 	($c = df_bt_entry_class($e))
 		# 2023-08-05
-		# 1) "«Module 'Monolog_Logger' is not correctly registered» in `lib/internal/Magento/Framework/Module/Dir.php:62`":
+		# 1) "«Module 'Monolog_Logger' is not correctly registered»
+		# in `lib/internal/Magento/Framework/Module/Dir.php:62`":
 		# https://github.com/mage2pro/core/issues/318
 		# 2) `Monolog_Logger` is not a Magento module, so I added `df_module_enabled()`.
 		&& df_module_enabled($c) /** @var ?string $c */
