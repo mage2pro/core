@@ -40,6 +40,8 @@ function df_page_title(string $s):void {df_page_config()->getTitle()->set($s);}
  * on layered navigation pages": https://github.com/national-glass-partitions/core/issues/1
  * 2) "Replace `INDEX` with `NOINDEX` in the `<meta name='robots' content='INDEX,FOLLOW'/>` tag
  * on `catalogsearch/result` pages": https://github.com/national-glass-partitions/core/issues/2
+ * 2026-06-01
+ * 1) https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/robots
  * @used-by CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by NGP\Core\Observer\LayoutGenerateBlocksAfter::execute() (https://github.com/national-glass-partitions/core/issues/2)
  */
