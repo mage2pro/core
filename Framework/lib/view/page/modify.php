@@ -44,6 +44,8 @@ function df_page_title(string $s):void {df_page_config()->getTitle()->set($s);}
  * 1) https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/robots
  * 2) «Robots Exclusion Protocol»: https://datatracker.ietf.org/doc/html/rfc9309
  * 3) https://developers.google.com/search/docs/crawling-indexing
+ * 4.1) «Prevent crawling of faceted navigation URLs»: https://developers.google.com/crawling/docs/faceted-navigation#prevent-crawling-of-faceted-navigation-urls
+ * 4.2) https://gemini.google.com/share/97e354b689b2
  * @used-by CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by NGP\Core\Observer\LayoutGenerateBlocksAfter::execute() (https://github.com/national-glass-partitions/core/issues/2)
  */
