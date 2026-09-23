@@ -1,4 +1,6 @@
 <?php
+use Magento\Catalog\Model\Product\ProductList\Toolbar as T;
+
 /**
  * 2026-05-07
  * @used-by df_is_catalog_product_list_filtered()
@@ -11,6 +13,20 @@ function df_is_catalog_layered_view():bool {return df_handle('catalog_category_v
  * @used-by Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
  */
 function df_is_catalog_product_list():bool {return df_handle('catalog_category_view');}
+
+/**
+ * 2026-09-23
+ * @used-by TacticalExpressions\Core\Observer\LayoutGenerateBlocksAfter::execute() (https://github.com/tactical-expressions/core/issues/1)
+ */
+function df_is_catalog_product_list_adjusted_by_toolbar():bool {return
+	 df_is_catalog_product_list() && df_clean(df_request([
+		 T::DIRECTION_PARAM_NAME
+		 ,T::LIMIT_PARAM_NAME
+		 ,T::MODE_PARAM_NAME
+		 ,T::ORDER_PARAM_NAME
+		 ,T::PAGE_PARM_NAME
+	 ]))
+;}
 
 /**
  * 2026-05-07
