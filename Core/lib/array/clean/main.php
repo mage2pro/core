@@ -36,6 +36,7 @@ use Magento\Framework\DataObject as _DO;
  * @used-by df_explode_space() (https://github.com/mage2pro/core/issues/422)
  * @used-by df_fe_name_short()
  * @used-by df_http_get()
+ * @used-by df_is_catalog_product_list_adjusted_by_toolbar()
  * @used-by df_kv()
  * @used-by df_kv_table()
  * @used-by df_oro_get_list()

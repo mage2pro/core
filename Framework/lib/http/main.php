@@ -97,6 +97,7 @@ function df_http_json(string $url, array $query = [], int $timeout = 0, $onE = t
 function df_post_h():PostHelper {return df_o(PostHelper::class);}
 
 /**
+ * @used-by df_is_catalog_product_list_adjusted_by_toolbar()
  * @used-by df_scope()
  * @used-by df_order()
  * @used-by df_store()

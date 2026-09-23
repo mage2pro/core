@@ -44,9 +44,8 @@ function df_page_title(string $s):void {df_page_config()->getTitle()->set($s);}
  * 1) https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/robots
  * 2) «Robots Exclusion Protocol»: https://datatracker.ietf.org/doc/html/rfc9309
  * 3) https://developers.google.com/search/docs/crawling-indexing
- * 4) @todo "Replace `<meta name='robots' content='NOINDEX,FOLLOW'/>` with `robots.txt` rules":
- * https://github.com/national-glass-partitions/core/issues/11
  * @used-by CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/site/issues/98)
  * @used-by NGP\Core\Observer\LayoutGenerateBlocksAfter::execute() (https://github.com/national-glass-partitions/core/issues/2)
+ * @used-by TacticalExpressions\Core\Observer\LayoutGenerateBlocksAfter::execute() (https://github.com/tactical-expressions/core/issues/1)
  */
 function df_robots_no_index():void {df_page_config()->setRobots('NOINDEX,FOLLOW');}

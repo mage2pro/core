@@ -9,6 +9,7 @@ function df_is_catalog_layered_view():bool {return df_handle('catalog_category_v
 
 /**
  * 2019-03-27
+ * @used-by df_is_catalog_product_list_adjusted_by_toolbar()
  * @used-by CabinetsBay\Catalog\Observer\LayoutLoadBefore::execute() (https://github.com/cabinetsbay/catalog/issues/3)
  * @used-by Frugue\Core\Plugin\Swatches\Helper\Media::afterGetImageConfig()
  */
@@ -35,6 +36,7 @@ function df_is_catalog_product_list_adjusted_by_toolbar():bool {return
  * on layered navigation pages": https://github.com/national-glass-partitions/core/issues/1
  * 2.2) https://github.com/magento/magento2/blob/2.4.9-beta1/app/code/Magento/LayeredNavigation/README.md?plain=1#L21
  * @used-by NGP\Core\Observer\LayoutGenerateBlocksAfter::execute() (https://github.com/national-glass-partitions/core/issues/1)
+ * @used-by TacticalExpressions\Core\Observer\LayoutGenerateBlocksAfter::execute() (https://github.com/tactical-expressions/core/issues/1)
  */
 function df_is_catalog_product_list_filtered():bool {return
 	df_is_catalog_layered_view() && df_catalog_layer()->getState()->getFilters()
@@ -55,5 +57,6 @@ function df_is_catalog_product_view():bool {return df_handle('catalog_product_vi
  * on `catalogsearch/result` pages": https://github.com/national-glass-partitions/core/issues/2
  * 2) https://github.com/magento/magento2/blob/2.4.9-beta1/app/code/Magento/LayeredNavigation/README.md?plain=1#L23
  * @used-by NGP\Core\Observer\LayoutGenerateBlocksAfter::execute() (https://github.com/national-glass-partitions/core/issues/2)
+ * @used-by TacticalExpressions\Core\Observer\LayoutGenerateBlocksAfter::execute() (https://github.com/tactical-expressions/core/issues/1)
  */
 function df_is_catalog_search_result():bool {return df_handle('catalogsearch_result_index');}
