@@ -24,7 +24,6 @@ function df_is_catalog_product_list_adjusted_by_toolbar():bool {return
 		 ,T::LIMIT_PARAM_NAME
 		 ,T::MODE_PARAM_NAME
 		 ,T::ORDER_PARAM_NAME
-		 ,T::PAGE_PARM_NAME
 	 ]))
 ;}
 
